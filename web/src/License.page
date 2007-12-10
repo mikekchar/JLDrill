@@ -1,0 +1,22 @@
+---
+title: License
+inMenu: true
+---
+
+h2. JDrill License
+
+JLDrill - A program to drill various aspects of the Japanese Language
+
+Copyright (C) 2005  Mike Charlton
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+"GNU General Public License":http://www.gnu.org/licenses/gpl.html
+ for more details.
+

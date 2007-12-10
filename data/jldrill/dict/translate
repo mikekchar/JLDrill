@@ -1,0 +1,4 @@
+#!/bin/bash
+
+grep $1 edict.utf | grep \(P\)
+

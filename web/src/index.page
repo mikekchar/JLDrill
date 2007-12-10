@@ -1,0 +1,88 @@
+---
+title: Home
+inMenu: true
+directoryName: Home
+---
+h2. Welcome to JLDrill
+
+JLDrill is a program for helping people drill various aspects of the
+Japanese language. Current features include a kana drill, a vocabulary
+drill and a dictionary cross reference tool.  The current version
+is only useful for short term acquisition.  It does not have a
+proper scheduling algorithm for long term retention.
+
+I have changed the scope of JLDrill since the last time I was working
+on it.  Originally it was to be a collection of Japanese language
+drill.  Now, after 2 years of playing with other software I have
+a better idea of what I find useful.  Subsequent releases of JLDrill
+will be geared towards creating one particular solution for helping
+people learn Japanese.
+
+This is what the application looks like right now.
+
+<a href="images/QuizAnswer.png"><img src="images/QuizAnswer-mini.png" alt="JLDrill screenshot" /></a>
+
+WARNING: This is alpha software.  That means that I think it is good
+enough for someone to use and get a benefit out of it.  But it is
+far from finished.  Please report any bugs you find.  Also feel free
+to request features that you would like.
+
+NOTE: JLDrill will be undergoing some significant changes in the
+near future (see news).  Check back later to see what's up.
+
+
+h2. News
+
+Sunday, Nov 11 2007.
+
+* Added some significant improvements to the CVS version.  If you
+  load the dictionary it now warns you if the current item is not
+  in the dictionary.  It also displays some of the EDict language
+  part indicators.  Finally, the parsing of Edict files has been
+  substantially improved.  It now parses tags correctly almost
+  all the time.
+
+Friday, Nov 2 2007.
+
+* お久しぶりね.  What happened here?  No updates for 2 years.
+  Well, as it turns out, I wasn't happy with the scheduling algorithm.
+  At the time I was just starting to learn about spaced repetition
+  and I didn't know how to implement it.  In the end I started
+  using Mnemosyne for my daily review.  It took me 2 years to figure
+  out what I wanted to do.  Now I'm ready to make some significant
+  changes.  
+
+Tuesday, Jan 29 2006.
+
+* New CVS update.  This is a performance improvement for reading the
+  edict dictionary.  It should load 2-3x faster now.  Version 0.2.0 is
+  a little late (been studying Japanese too much ;-) ).  Expect it in
+  the next week or two.
+
+Monday, Dec 19 2005.
+
+* Updated the usage instructions for Windows to better reflect how to
+  start the application.  If you were having troubles before, see the
+  Usage page.
+
+Saturday, Dec 17 2005.
+
+* Version 0.1.0 is released!  This is the first public release of JLDrill.  
+
+Friday, Dec 16 2005.
+
+* Lots of updates.  All functionality required for the first alpha
+release is completed.  Just need to finish the documentation.
+Hopefully it will all be done tonight.
+
+Monday, Dec 5 2005.
+
+* New look web page thanks to "Webgen":http://webgen.rubyforge.org
+Yes, it's still ugly (that's not Webgen's fault...).  I thought I'd
+get cute with the colours, and well... graphic designer I am not.
+
+* New icon for JLDrill (look to the left of the title)
+Umm... see the point above about me not being a graphic designer?  If
+you want to help and you don't know how to program, here's your
+chance!  I've done the basics, <strong>please</strong> make it not
+ugly.

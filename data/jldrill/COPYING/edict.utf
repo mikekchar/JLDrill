@@ -1,0 +1,28 @@
+This package uses the EDICT files. These files are the
+property of the  Electronic Dictionary Research and Development Group
+at Monash University, and are used in conformance with the Group's
+licence. 
+
+Links: 
+
+EDICT: http://www.csse.monash.edu.au/~jwb/edict.html
+Electronic Dictionary Research 
+    and Development Group: http://www.csse.monash.edu.au/groups/edrdg/
+License: http://www.csse.monash.edu.au/groups/edrdg/licence.html
+
+The license file is also provided in this directory under the fil
+edrdg_license.html.
+
+The documentation for edict is provided in the doc/edict_doc.html file.
+
+I think this is what I'm required to say.  However, let me say a few
+words more.  The people at the Electronic Dictionary Research and
+Development Group at Monash University have provided an amazing
+resource here.  In the days where University funding has diminished
+and groups are looking to squeeze as much money as possible out of
+people, they have unselfishly allowed access to this huge body of
+work.  The EDICT project is simply amazing.  My hat is off to them.
+Without their work, not only would JLDrill be impossible, but also
+scores of other great language software would be gone.
+
+Thank you!

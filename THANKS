@@ -1,0 +1,12 @@
+The following people have helped (knowingly or unknowingly) in the
+development of JLDrill:
+
+Nicholas Doyle: Initial Pre-alpha testing
+Mathieu Blondel (author of Nihongo Benkyo): Design discussions, and I
+stole make_release.sh from him.
+Jim Breem: For compiling and making available EDICT, without which a
+drill program would be impossible.
+Thierry Bezecourt: For compiling and making available the JLPT
+vocabulary files.  This saved me *much* time
+Don Kelly: For encouraging me to look at Ruby.
+ 

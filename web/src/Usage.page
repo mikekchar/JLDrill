@@ -1,0 +1,221 @@
+---
+title: Usage
+inMenu: true
+---
+h2. Usage
+
+After installing, on a GNU/Linux, BSD, or Un*x system type
+<pre>
+    jldrill
+</pre>
+from the command line prompt.
+
+On Windows you will have to do a little more.  You will have to navigate
+to the ruby binary directory to run jldrill.  Usually this will be:
+
+<pre>
+    cd c:\ruby\bin
+    ruby jldrill
+</pre>
+
+h2. Main Window
+
+This is what you see when you first start JLDrill.
+
+<a href="images/Start.png"><img src="images/Start-mini.png" alt="JLDrill Starting Screen." /></a>
+
+There's not much to do until you load a drill file.
+
+h2. Selecting a Drill File
+
+You may open a drill file by clicking the "Open" button on the tool
+bar.  You may also access this functionality by pressing Ctrl-O, or
+selecting File/Open from the menu bar.  After doing so you will be
+presented with the file open dialog.
+
+<a href="images/OpenQuiz.png"><img src="images/OpenQuiz-mini.png" alt="Quiz File Open Dialog." /></a>
+
+There are many drill files available.  They include hiragana, katakana
+and JLPT vocabulary levels 1-4.  JLDrill will automatically choose the
+directory that contains the default drill files.
+
+Note: The JLPT files currently have several problems with the translations.
+Please cross reference any words (the Ctrl-X function) that you are
+unfamiliar with. You can help: If you fix any translations, please
+send them to me so that everyone can benefit.
+
+h2. Conducting the Quiz
+
+After loading the quiz file you will be presented with your first
+question.  This will be shown in the top pane of the main window.
+
+<a href="images/Quiz.png"><img src="images/Quiz-mini.png" alt="Quiz Word is Displayed." /></a>
+
+Note: Currently you will be shown the kanji and the reading for
+vocabulary in the question pane.  Eventually you will be able to drill
+on the meanings and kanji alone.  Also, for some words in the JLPT
+drills there is no kanji because it is not part of the curriculum for
+that level.  In it's place will be a hint about what word it is
+talking about.
+
+I stole the idea for the UI from PyJFlash which I thought had a simple
+but ingenious system.  What you do is guess the answer to the
+question.  You do this to yourself without inputting anything into the
+computer.  Then you click on the "Check" button (or "Z" key on the
+keyboard) to see if you were right.
+
+<a href="images/QuizAnswer.png"><img src="images/QuizAnswer-mini.png" alt="Quiz Answer is Displayed." /></a>
+
+If you were right in your guess, you click on "Correct" ("C" on the
+keyboard).  Otherwise you click on "Incorrect" ("X" on the keyboard).
+After replying you will be presented with a new question.  If this
+seems like a rather simplistic way of doing things, you are right.
+What struck me about conducting the quiz this way is that there is a
+minimum of UI to get in your way.  The drills can go very quickly.
+
+h2. Measuring Your Progress
+
+The status of the quiz is displayed at the bottom screen and will look
+something like: 
+
+<a href="images/Status.png"><img src="images/Status-mini.png" alt="Quiz Status." /></a>
+
+First, the * on the left hand side means that the quiz has not been
+saved yet.  As you progress through the quiz, it keeps track of your
+progress.  If you save the file (and hence your progress), the * will
+disappear. 
+
+Following the modification indicator is the name of the quiz.
+Currently this is just the file name of the dictionary that was used
+to generate the quiz.  In this case, the quiz was generated from the JLPT 4
+vocabulary file.  
+
+Then you are shown the number of words in each proficiency category.
+There are 5 categories: Unseen, Poor, Fair, Good and Excellent.  In
+this case 504 words haven't been seen by you yet (Unseen).  1 word requires
+much repetition (Poor), 9 require repetition but are OK (Fair), 77
+only need to be repeated occasionally (Good) and 50 will be shown
+rarely (Excellent).
+
+The R(2,10) requires some explanation.  R means that new
+vocabulary will be presented randomly.  Some quizes have a set
+introduction order (like the Hiragana quiz).  The R will be missing in
+that case.  Others (like this JLPT quiz) will give you new vocabulary
+in a random order.
+
+(2,10) is a reference to parameters in the training aglorithm.  It
+indicates the speed at which new vocabulary will be introducted.
+
+
+h2. Training Algorithm
+
+In the example, 2 is the number of times you have to get the word
+correct before it will be "promoted" into the next higher slot.  So
+once you get it right 2 times in a row, it will be moved from Poor to
+Fair.  After 2 more times it will be moved to Good.  Finally, 2 more
+times and it will be moved to Excellent.  If you ever get the word
+wrong, it will be moved back to poor.
+
+Depending on how well you know the word, it will be quizzed more or
+less often.  Words in the poor category will be displayed 53% (8/15)
+of the time, Fair 27% (4/15) of the time, good 13% (2/15) of the time
+and excellent 7% (1/15) of the time.  
+
+The 10 in the status line indicates the threshold for introducing new
+words.  You are considered to know the word if it is in either the
+good or excellent category.  As long as the words in the poor and fair
+categories total less than 10, you will get new vocabulary.  That way
+your pool of lesser known words is always at least 10 words.  
+
+You can adjust these two parameters to fit your learning style.  If
+it takes you more repetition to remember words, you can set the first
+parameter to 3 or even 4.  Adjusting the second parameter will allow
+you to quiz a more narrow or wide range of words.  These can set
+this from the quiz preferences (Ctrl-P or Quiz/Preferences from the menu).
+
+<a href="images/Options.png"><img src="images/Options-mini.png" alt="Quiz Options." /></a>
+
+h2. Saving Your Progress
+
+Remember to save your drill before you quit.  That way it will pick up
+where you left off last time.  The first time you load a drill, you
+might want to use the "Save As" entry from the menu bar (File/Save As, or
+Ctrl-A) to save your drill under a different name.  This will allow
+you to keep the original file unchanged.
+
+At any time you can save the current file (using File/Save from the
+menu, Ctrl-S, or clicking on the Toolbar).  If you quit the
+application, or open up another drill, JLDrill will always ask you if
+you want to save your file.
+
+h2. Non-Drill Features
+
+<strong>Reference Dictionary</strong>.  This feature is useful in case
+you want to check that the translation in the drill is correct.  It
+allows you to cross reference the word against a dictionary
+and edit it if necessary. 
+
+Note: The JLPT files are known to have some inappropriate or incorrect
+translations. This is very much a work in progress.  Please cross
+reference any words that you don't know.  If you find errors, please
+submit them back to me.
+
+You can load a reference dictionary by pressing Ctrl-D (or selecting
+File/Load Reference Dictionary from the menu)  The reference
+dictionary distributed with JLDrill is the EDICT dictionary from
+Monash University.  Note that it takes a long time (23 seconds on my
+machine) to load the edict library.  A window with a progress bar will
+be shown.  You are able to continue drilling while the dictionary is
+loading, though.
+
+After the Reference Dictionary has been loaded, you can cross
+reference the currently quizzed word by pressing Ctrl-X (or selecting
+Vocab/XReference from the menu).  This will bring up an incredibly
+ugly display with the Word on the left hand side, a table of
+candidates on the bottom and space for a selected word on the right
+hand side.  
+
+<a href="images/XReference.png"><img src="images/XReference-mini.png" alt="Cross Reference with Dictionary." /></a>
+
+Currently, the dictionary lookup is by reading alone.  A kanji lookup
+is also planned.  All you do is select one of the words at the bottom and
+cut and past information between the reference word and the drill
+word.   When you press OK, the new information will be added to the
+drill.
+
+Important: Remember to save the drill file afterwards so that the edit
+is saved with the drill.
+
+<strong>Display</strong> word.  You can display the details of a
+word that you are drilling.  Just press D (or select Vocab/Display
+from the menu).  You can edit this word if you want from here.
+
+<a href="images/View.png"><img src="images/View-mini.png" alt="View/Edit the Vocabulary." /></a>
+
+<strong>Show all</strong>. Will show a table of all the words in the
+drill.
+
+<a href="images/AllVocab.png"><img src="images/AllVocab-mini.png" alt="View All the Vocabulary." /></a>
+
+<strong>Reset</strong>.  You can reset the drill so
+that all the words are Unseen again.  Press Ctrl-R or select
+Drill/Reset from the menu to do this.
+
+<strong>Info</strong>. Show information about the current drill.
+This is just information that the drill author wants to show.  It
+might contain copyright information or other interesting things.
+Pressing Ctrl-I or selecting Drill/Info from the menu will display
+this dialog.
+
+<strong>Create a new Drill</strong>.  You can create a new drill by
+importing any UTF8 encoded EDict file.  Just open the file (JLDrill
+will automatically recognize the file type) and then save it to
+another name. Going up one directory from the quizes, you will find a
+director called "dict". In this directory you will find the files that
+generated the drill.  Additionally you will find the Mainichi Shinbun
+Frequency files.  Finally you will also find the whole edict.utf file
+in case you want to drill yourself on all 120,000 words in the
+dictionary. 
+
+That's it.  Hope you find it useful. Please see the Planned Features
+to see what's coming up next.

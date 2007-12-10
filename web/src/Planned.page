@@ -1,0 +1,46 @@
+---
+title: Planned Features
+inMenu: true
+---
+
+h2. Features Planned for 0.2.0
+
+* Make it more obvious when items are not the same as
+in the dictionary. Status: Done in CVS but ugly.
+
+* Indicators which show you some of the relevant EDICT
+tags for the word. Status: Done in CVS
+
+* Version 0.1.0 only quizes you on the Kanji (or an optional hint)
+together with reading.  Version 0.2.0 will start quizing you on the
+definitions and let you guess the reading as you get to know the
+vocabulary better.  Then as you get a lot better, it quizes you on the
+kanji.  Status: Experimental Implementation Done in CVS version.
+
+* Speed up Dictionary reading.  Status: 2-3X improvement in CVS
+version.  But it's still a bit slow (23 seconds on my machine).
+
+* Drill construction tool.  At the moment, if you want to write a
+new drill you have to use a text editor to create either a UTF8 Edict
+file, or a JLDrill file (whose format is currently undocumented).
+Ideally one would search the reference dictionary and then insert new
+vocabulary into the drill.  Also you must be able to order the
+vocabulary in the drill. Status: Abandoned 
+
+* Kanji only drills.  Status: Abandoned
+
+h2. Planned for 0.3.0
+
+* Leitner system for long term retention.
+
+* Use current drill as short term aquisition and schedule items
+so that the user can have a consistent length for review.
+
+* Improve JLPT 4 and 3 vocab so that they are correct.
+
+* Improve the code and create a full test suite.
+
+h2. Long term improvements:
+
+* Easier install and run for Windows
+* Leitner style flash card system

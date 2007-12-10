@@ -1,0 +1,43 @@
+---
+title: Download/Install
+inMenu: true
+---
+
+h2. Installation Instructions
+
+The current stable release of JLDrill is 0.1.0.
+
+It can be obtained at
+"JLDrill's RubyForge Project Page":http://rubyforge.org/projects/jldrill 
+
+Once you have downloaded the package, decompress it.  Then as root (on
+Linux, et al) or a user with administrative privaledges (on Windows)
+execute the setup.rb script.  It's most useful to do this using a
+command line shell, but you should be able to do it from your
+graphical file browser as well.
+
+Go into the top directory.  Then type:
+<pre>
+ ($ su)
+  # ruby setup.rb
+</pre>
+
+This simple step installs this program under the default
+location of Ruby libraries.  You can also install files into
+your favorite directory by supplying setup.rb some options.
+Try 
+
+<pre>
+  ruby setup.rb --help
+</pre>
+
+NOTE TO DEVELOPERS: The test facility in setup.rb seems to be broken
+(at least on my machine).  To run the tests, go into the test
+directory and run 
+<pre> 
+  ruby testSuite.rb 
+</pre> 
+
+You must install the software in order to run the tests.
+
+Please see the Usage page for instructions on how to run the software.

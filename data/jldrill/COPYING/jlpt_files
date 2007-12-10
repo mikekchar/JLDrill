@@ -1,0 +1,42 @@
+This software contains the JLPT files from Thierry Bézecourt.  Here is
+the original copyright notification.
+
+# JLPT vocabulary, level 4-1
+# Copyright (C) 2001 Thierry Bézecourt (http://www.thbz.org)
+# License information: 
+
+# You can use this file freely in a non-commercial way. If you plan to
+# make it available publicly in a book, a software or whatever medium,
+# whether freely or not, you must include the first two lines of this
+# file (the copyright information) and tell me about it by sending an
+# e-mail to kanjimots@thbz.org. Thanks.
+
+I was worried about distributing these files with a GPL licensed
+application.  Because the application might get distributed in a
+"commercial" setting, I was afraid that I might be in violation of the
+license.  So I subsequently asked for a modification the to license.
+Here is the response:
+
+Hi Mike,
+
+Thanks for your e-mail. I'm glad you found these files useful. As a matter of
+fact, when I made these files, I thought little about licensing issues and
+"prohibited" a commercial use with no particular reason. Now I know a little
+more about these issues and think there is no reason to prohibit it. I am happy
+when I receive an e-mail from people who say there are using these files in
+Japanese-related software but I don't really care whether that software is
+commercial or not. So I have decided to change the header of these files and
+only ask the user to include somewhere a mention of the source (i.e me or my
+Web site). You can use these files as you like (GPL or other).
+
+Cheers,
+
+Thierry
+
+This is a really amazing response from a great guy.  The JLPT files
+represent quite a large amount of work and I am extremely grateful to
+be allowed to use them in JLDrill.  I have noticed some applications
+in the past using these files without attribution and it's very sad.
+PLEASE if you use these files, comply with Thierry's request.  All he
+wants is to be recognized for the work that he's put in and to be
+given the pleasure of knowing his effort is being used by people.  

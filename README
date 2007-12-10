@@ -1,0 +1,133 @@
+JLDrill README
+==============
+
+  JLDrill is a program for helping people drill various aspects of the
+  Japanese language. Current features include a kana drill, a vocabulary
+  drill and a dictionary cross reference tool.
+
+  JLDrill is currently undergoing some change.  At one point I wanted
+  it to be a collection of Japanese language drills.  However, I've
+  decided to do something different.  After the release of 0.2.0
+  I will modify JLDrill to be more of a tool for implementing a
+  single method of study.  There will be many parts to the tool but
+  they will work together.
+
+  This release just has a few improvements over the 0.1.0.  It is
+  extremely useful for doing short term vocabulary acquisition.  It is
+  not really appropriate for long term review.  Long term review will
+  be top priority for 0.3.0.  If you are looking for a long term
+  review aide, I recommend waiting for 0.3.0, or checking out other
+  tools like Mnemosyne (http://mnemosyne-proj.sourceforge.net/).
+
+  WARNING: This is alpha software.  That means that I think it is good
+  enough for someone to use and get a benefit out of it.  But it is
+  far from finished.  Please report any bugs you find.  Also feel free
+  to request features that you would like.
+
+  Other Warning: I haven't tested Windows installation for 0.2.0.  But
+  I can't see why it wouldn't work.  Since this is really an interim
+  release I would rather work on 0.3.0 than make sure.  Feel free to
+  send a bug report if it doesn't work, though.	
+
+Requirements
+------------
+
+  * Ruby 1.8
+  * GTK+ 2.6 or higher
+  * Ruby-Gnome2
+  
+  JLDrill has been tested on both GNU/Linux (Debian) and Windows.
+  If you wish to help create a version of JLDrill to run on a specific
+  platform, please contact me.
+
+Install
+-------
+
+  First install the prerequisites listed above.  To do so:
+
+  Windows -
+
+    (Note: These instructions haven't been tested yet.  Try them out
+     and tell me if they are right!)
+ 
+    You will probably want to install Ruby using the "One Click Ruby
+    Installer".   It is available at:
+
+      http://rubyinstaller.rubyforge.org/wiki/wiki.pl
+
+    Once that is installed, you will need to install GTK2 and
+    Ruby-Gnome2.  Detailed instructions on doing this are available
+    at: 
+    
+	  http://ruby-gnome2.sourceforge.jp/hiki.cgi?Install+Guide+for+Windows
+
+    At this point, please follow the common installation instructions
+    following the Linux section
+
+  GNU/Linux, BSD, Un*x, etc -
+
+    (Note: These instructions haven't been tested yet.  Try them out
+     and tell me if they are right!)
+ 
+	The easiest way to install the prerequisites is to find the packages
+    for your distribution.  However, if you'd rather roll your own
+    solution,  You can find Ruby at:
+ 
+      http://www.ruby-lang.org/en/
+
+    GTK+ 2.6 at:
+
+      http://www.gtk.org/
+
+    And Ruby-Gnome2 install guides at:
+
+      http://ruby-gnome2.sourceforge.jp/hiki.cgi?Install+Guide
+
+    
+  Now that you have the prerequisites installed, De-compress the archive
+  and enter its top directory.  As root (on Linux, et al) or a user
+  with administrative privaledges (on Windows) execute the setup.rb
+  script.  It's most useful to do this using a command line shell, but
+  you should be able to do it from your graphical file browser as
+  well.
+
+  On Linux, et al from bash:
+
+   ($ su)
+    # ruby setup.rb
+
+  This simple step installs this program under the default
+  location of Ruby libraries.  You can also install files into
+  your favorite directory by supplying setup.rb some options.
+  Try "ruby setup.rb --help".
+
+  NOTE TO DEVELOPERS: The test facility in setup.rb seems to be broken
+  (at least on my machine).  To run the tests, go into the test
+  directory and run
+
+    ruby testSuite.rb
+
+  You must install the software first in order to run the tests.
+
+Usage
+-----
+
+  Type
+
+    jldrill
+
+  From a command line prompt (sorry it probably won't work from your
+  file browser on Windows at the moment).  Many more instructions are
+  available on the web page.
+
+  Please see index.html in the web/output directory for usage
+  instructions. 
+
+License
+-------
+
+  JLDrill is licensed under the GNU General Public License (GPL)  Please see
+  the COPYING File for more details.
+
+
+Mike Charlton <mikekchar@gmail.com>

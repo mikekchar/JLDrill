@@ -1,0 +1,26 @@
+index.page:
+  orderInfo: 1
+
+License.page:
+  orderInfo: 2
+
+Requirements.page:
+  orderInfo: 3
+
+Install.page:
+  orderInfo: 4
+
+Usage.page:
+  orderInfo: 5
+
+Planned.page:
+  orderInfo: 6
+
+Acknowledgements.page:
+  orderInfo: 7
+
+Starting.page:
+  orderInfo: 8
+
+Discuss.page:
+  orderInfo: 9
