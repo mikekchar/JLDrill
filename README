@@ -1,5 +1,4 @@
-JLDrill README
-==============
+JLDrill - Japanese Language Drill program
 
   JLDrill is a program for helping people drill various aspects of the
   Japanese language. Current features include a kana drill, a vocabulary
@@ -30,7 +29,6 @@ JLDrill README
   send a bug report if it doesn't work, though.	
 
 Requirements
-------------
 
   * Ruby 1.8
   * GTK+ 2.6 or higher
@@ -41,7 +39,6 @@ Requirements
   platform, please contact me.
 
 Install
--------
 
   First install the prerequisites listed above.  To do so:
 
@@ -110,7 +107,6 @@ Install
   You must install the software first in order to run the tests.
 
 Usage
------
 
   Type
 
@@ -124,7 +120,6 @@ Usage
   instructions. 
 
 License
--------
 
   JLDrill is licensed under the GNU General Public License (GPL)  Please see
   the COPYING File for more details.
