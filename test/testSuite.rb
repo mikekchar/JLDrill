@@ -1,4 +1,4 @@
-#! /usr/bin/ruby -KO
+#! /usr/bin/ruby -KOI../lib
 
 #    JLDrill - A program to drill various aspects of the Japanese Language
 #    Copyright (C) 2005  Mike Charlton
