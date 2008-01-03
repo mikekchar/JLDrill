@@ -28,14 +28,6 @@ module JLDrill
 			end
 		end
 		
-		# Remove a View from this View.
-		def removeView(view)
-			myWidget = getWidget()
-			if !myWidget.nil?
-				# FIXME: Remove the widget
-			end
-		end
-		
 		# Open the View.  Probably means to display it to the user.
 		# It's actual use is dependent upon the concrete class.
 		# Concrete classes should override this method
@@ -53,7 +45,6 @@ module JLDrill
 		# determine what is the main Widget and return it here.
 		# Concrete classes should override this method
 		def getWidget
-			return nil
 		end
 	end
 

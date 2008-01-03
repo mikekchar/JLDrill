@@ -1,3 +1,4 @@
+require 'MainWindowView'
 
 module JLDrill
 
@@ -14,10 +15,9 @@ module JLDrill
 			# Nothing to do
 		end
 		
-		# I have no views yet, but when I do I will need to do
-		# something like this:
-#		def createMainWindowView(context)
-#			MainWindowView.new(context)
-#		end
+		# Create a MainWindow View
+		def createMainWindowView(context)
+			MainWindowView.new(context)
+		end
 	end
 end

@@ -6,7 +6,7 @@ require 'rake/rdoctask'
 files = FileList['lib/jldrill/*_spec.rb','lib/jldrill/Gtk/*_spec.rb']
 # This just makes sure that spec is looking in the right directories for
 # the source.
-ruby_opts = ["-I./lib/jldrill"]
+ruby_opts = ["-KO", "-I./lib/jldrill"]
 
 
 task :default => [:rcov, :rdoc]

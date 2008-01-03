@@ -545,7 +545,7 @@ class Main < Gtk::Window
     authors = ["Mike Charlton"]
     license = %Q[
     JLDrill - Super Drill Program for Learning Japanese
-    Copyright (C) 2005  Mike Charlton
+    Copyright (C) 2005-2007  Mike Charlton
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
