@@ -287,9 +287,9 @@ class Main < Gtk::Window
       if((!@edict.nil?) && (!@quiz.vocab.nil?)) 
       	# If the exact entry exists in the dictionary
       	if(@edict.include?(@quiz.vocab))
-      		status += " ------- OK"
+      		status += " -- OK"
       	else
-      		status += " ------ DIFFERS FROM DICTIONARY ENTRIES!"
+      		status += " -- XX"
       	end
       end
       @statusbar.push(0, status)

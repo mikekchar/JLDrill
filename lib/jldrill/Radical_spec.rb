@@ -67,19 +67,26 @@ $ ｜ 1
 作咋搾昨柵窄策錯冊撒散珊刺嗣師獅児爾璽軸雫湿篠朱殊珠種腫収州修洲繍酬重粛
 ]
 			file = RadKFile.fromString(fileString)
-			file.contents.size.should be(2)
-			file.contents[0].radical.should be_eql("一")
-			file.contents[0].strokes.should be(1)
-			file.contents[0].contents.size.should be(72)
-			file.contents[1].radical.should be_eql("｜")
-			file.contents[1].strokes.should be(1)
-			file.contents[1].contents.size.should be(108)
+			file.size.should be(2)
+			file[0].radical.should be_eql("一")
+			file[0].strokes.should be(1)
+			file[0].contents.size.should be(72)
+			file[1].radical.should be_eql("｜")
+			file[1].strokes.should be(1)
+			file[1].contents.size.should be(108)
 		end
 
 		it "should be able to parse a file on disk" do
 			file = RadKFile.open("data/jldrill/dict/radkfile.utf")
 			file.should_not be(nil)
-			file.contents.size.should be(248)
+			file.size.should be(248)
+			radicals = file.radicals("一")
+			radicals.size.should be(1)
+			radicals.should include("一")
+			radicals = file.radicals("酒")
+			radicals.size.should be(2)
+			radicals.should include("汁")
+			radicals.should include("酉")
 		end
 
 	end	

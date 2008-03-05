@@ -45,7 +45,7 @@ module JLDrill
 		
 		def RadKComment.parse(string)
 			comment = nil
-			re = Regexp.new('^#(.*)\n', nil, 'U')
+			re = Regexp.new('^#(.*)\n?', nil, 'U')
 			if string =~ re
 				contents = $1
 				comment = RadKComment.new(contents)
@@ -54,13 +54,8 @@ module JLDrill
 		end
 	end
 
-	class RadKFile
-		attr_reader :contents
+	class RadKFile < Array
 	
-		def initialize
-			@contents = []
-		end
-		
 		def RadKFile.fromString(string)
 			file = RadKFile.new
 			current = nil
@@ -84,12 +79,22 @@ module JLDrill
 				entry = RadKEntry.parse(string)
 				if(!entry.nil?)
 					current = entry
-					@contents.push(entry)
+					self.push(entry)
 				else
 					current.add(current.parseContents(string)) unless current.nil?
 				end
 			end
 			current
+		end
+		
+		def radicals(character)
+			retVal = []
+			self.each do |entry|
+				if entry.contents.include?(character)
+					retVal.push(entry.radical)
+				end
+			end
+			retVal
 		end
 	end
 end

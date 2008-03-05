@@ -59,7 +59,7 @@ end
 class Quiz
 
   attr_reader :savename, :randomOrder, :promoteThresh, :introThresh, :updated,
-  :vocab, :length, :info, :name
+  :vocab, :length, :info, :name, :currentLevel
   attr_writer :savename, :updated, :info, :name
 
   def initialize()
@@ -86,6 +86,11 @@ class Quiz
     @promoteThresh = 2
     @introThresh = 10
 
+    @oldThresh = 90
+    @oldCorrect = 0
+    @oldIncorrect = 0
+    @lastEstimate = 0
+    
     @readingDrill = Proc.new{kanji + hint + reading}
     @readingAnswer = Proc.new{definitions}
     @kanjiDrill = Proc.new{kanji}
@@ -248,10 +253,12 @@ class Quiz
   def status
     retVal = ""
     if(@updated) then retVal += "* " else retVal += "  " end
-    retVal += @name + ": "
-    retVal += "Unseen: #{@bins[0].length} Poor: #{@bins[1].length} "
-    retVal += "Fair: #{@bins[2].length} "
-    retVal += "Good: #{@bins[3].length} Excellent: #{@bins[4].length}"
+    retVal += @name + ": Level "
+    retVal += "U: #{@bins[0].length} P: #{@bins[1].length} "
+    retVal += "F: #{@bins[2].length} "
+    retVal += "G: #{@bins[3].length} E: #{@bins[4].length}"
+    retVal += " Current: #{@bin} "
+    retVal += " Known: #{@lastEstimate}%"
     retVal += " - "
     if(@randomOrder) then retVal += "R" end
     retVal += "(#{@promoteThresh},#{@introThresh})"
@@ -262,16 +269,57 @@ class Quiz
     status
   end
 
-  def getBin
-    if(((@bins[1].length + @bins[2].length) < @introThresh) && 
-         (@bins[0].length > 0))
-      @bin = 0
+  def underIntroThreshold
+    ((@bins[1].length + @bins[2].length) < @introThresh) && 
+         ((@bins[0].length > 0) || (@bins[4].length > 0))
+  end
+  
+  def reEstimate
+    if @oldIncorrect == 0
+      if @oldCorrect == 0
+        # Always review old items at the start
+        inst = 0
+      else
+        inst = 100
+      end
     else
-      @bin = case rand(15)
-            when 0..7 then 1
-            when 8..11 then 2
-            when 12..13 then 3
-            else 4
+        total = @oldCorrect + @oldIncorrect
+        inst = ((@oldCorrect * 100) / total).to_i
+    end
+    hop = ((inst - @lastEstimate) * 0.3).to_i
+    retVal = @lastEstimate + hop
+    if (retVal > 100) then retVal = 100 end
+    if (retVal < 0) then retVal = 0 end
+    @lastEstimate = retVal
+  end
+  
+  def getBin
+    if underIntroThreshold
+      # >5 to avoid a bug where it constantly loops around picking
+      # the same item.  This will ensure the the "review" has some
+      # variety.
+      if @bins[4].length > 5
+         if @lastEstimate < @oldThresh
+            # Keep drawing old ones until we hit our learning threshold
+            @bin = 4
+         else
+            # Always test old ones 10% if the time
+            if rand(10) > 8
+                @bin = 4
+            else
+                @bin = 0
+            end          
+         end
+      else
+        # We don't have any old values, so just introduce new ones
+        @bin = 0
+      end
+    else
+      # Otherwise quiz one that has already been introduced.
+      @bin = case rand(7)
+            when 0..3 then 1
+            when 4..5 then 2
+            else 3
             end
     end
   end
@@ -406,7 +454,19 @@ class Quiz
     end
   end
   
+  def adjustQuizOld(good)
+    if(@bin == 4)
+      if good
+        @oldCorrect += 1
+      else
+        @oldIncorrect += 1
+      end
+      reEstimate
+    end
+  end
+  
   def correct
+    adjustQuizOld(true)
     if(@vocab)
       @vocab.score += 1
       if(@vocab.score >= @promoteThresh)
@@ -417,6 +477,7 @@ class Quiz
   end
 
   def incorrect
+    adjustQuizOld(false)
     if(@vocab)
       demote(@currentLevel)
       @updated = true

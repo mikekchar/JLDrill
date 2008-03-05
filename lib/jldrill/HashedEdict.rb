@@ -25,6 +25,8 @@ require 'jldrill/Vocabulary'
 
 class HashedEdict < Edict
 
+  KEY_RE = /^(.)/mu
+
   def initialize(file)
     super(file)
     @hash = {}
@@ -38,7 +40,7 @@ class HashedEdict < Edict
   def findKey(string)
     retVal = "None"
     if string
-      if string =~ /^(.)/mu then retVal = $1 end
+      if string =~ KEY_RE then retVal = $1 end
     end
     return retVal
   end

@@ -24,6 +24,9 @@ require "jldrill/Vocabulary"
 # dictionary.
 class EdictDefinition
 
+  DEFINITION_RE = /^(\(\S*\))\s?(.*)/
+  SEPARATOR_RE = /\)|,/
+
   attr_reader :types, :value
 	
   def initialize(string)
@@ -34,11 +37,11 @@ class EdictDefinition
 
   def parse(definition)
     types = []
-    while definition =~ /^(\(\S*\))\s?(.*)/
+    while definition =~ DEFINITION_RE
       definition = $2
         
       typestring = $1
-	  types += typestring.delete("(").split(/\)|,/)
+	  types += typestring.delete("(").split(SEPARATOR_RE)
     end
     @value = definition
     @types = types
@@ -94,6 +97,8 @@ end
 
 class EdictMeaning
 
+  SENSE_RE = /\(\d+\)\s?/
+
   attr_reader :senses
 
   def initialize(string)
@@ -103,7 +108,7 @@ class EdictMeaning
 
   def getSenses(string)
     retVal = []
-    senses = string.split(/\(\d+\)\s?/)
+    senses = string.split(SENSE_RE)
     i = 1
     senses.each do |sense|
       es = EdictSense.new(sense, i)
@@ -152,6 +157,10 @@ end
 
 class Edict
 
+  LINE_RE = /^([^\[]*)\s+(\[(.*)\]\s+)?\/(([^\/]*\/)+)\s*$/
+  KANA_RE = /（(.*)）/
+  COMMENT_RE = /^\#/
+
   attr_reader :file
 
   def initialize(file)
@@ -189,13 +198,13 @@ class Edict
 
   def parse(line, position)
     retVal = false
-    if line =~ /^([^\[]*)\s+(\[(.*)\]\s+)?\/(([^\/]*\/)+)\s*$/
+    if line =~ LINE_RE
       kanji = $1
       kana = $3
       english = EdictMeaning.new($4)
 
       # Hack for JLPT files
-      if kana =~ /（(.*)）/
+      if kana =~ KANA_RE
         kana = nil
         hint = $1
       end
@@ -225,7 +234,7 @@ class Edict
         progress.call(total / size)
       end
       report += 1
-      unless line =~ /^\#/
+      unless line =~ COMMENT_RE
         if parse(line, i)
           i += 1
         end

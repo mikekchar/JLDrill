@@ -1,6 +1,7 @@
 require 'rake'
 require 'spec/rake/spectask'
 require 'rake/rdoctask'
+require 'rake/testtask'
 
 
 files = FileList['lib/jldrill/*_spec.rb','lib/jldrill/Gtk/*_spec.rb']
@@ -26,10 +27,10 @@ Spec::Rake::SpecTask.new(:rcov) do |t|
 	t.ruby_opts = ruby_opts
 end
 
-# Run the rspec tests and if successful, run Heckle
-Spec::Rake::SpecTask.new(:heckle) do |t|
-	t.spec_files = files
-	t.spec_opts = ["--heckle JLDrill"]
+# Rake task to run the application that's in the development
+# directory (rather than one that might be installed somewhere else).
+Rake::TestTask.new(:run) do |t|
+	t.test_files = FileList['bin/jldrill']
 	t.ruby_opts = ruby_opts
 end
 

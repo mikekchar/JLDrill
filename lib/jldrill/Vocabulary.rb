@@ -21,6 +21,16 @@
 
 class Vocabulary
 
+      KANJI_RE = /^Kanji: (.*)/
+      HINT_RE = /^Hint: (.*)/
+      READING_RE = /^Reading: (.*)/
+      DEFINITIONS_RE = /^Definitions: (.*)/
+      MARKERS_RE = /^Markers: (.*)/
+      SCORE_RE = /^Score: (.*)/
+      BIN_RE = /^Bin: (.*)/
+      LEVEL_RE = /^Level: (.*)/
+      POSITION_RE = /^Position: (.*)/
+
   attr_reader :kanji, :reading, :hint, :score, :bin, :level, :position
   attr_writer :kanji, :reading, :hint, :score, :bin, :level, :position
 
@@ -106,15 +116,15 @@ class Vocabulary
   def parse(string)
     string.split("/").each { |part|
       case part
-      when /^Kanji: (.*)/ then @kanji = $1
-      when /^Hint: (.*)/ then @hint = $1
-      when /^Reading: (.*)/ then @reading = $1
-      when /^Definitions: (.*)/ then @definitions = $1.to_s.split(",")
-      when /^Markers: (.*)/ then @markers = $1.to_s.split(",")
-      when /^Score: (.*)/ then @score = $1.to_i
-      when /^Bin: (.*)/ then @bin = $1.to_i
-      when /^Level: (.*)/ then @level = $1.to_i
-      when /^Position: (.*)/ then @position = $1.to_i
+      when KANJI_RE then @kanji = $1
+      when HINT_RE then @hint = $1
+      when READING_RE then @reading = $1
+      when DEFINITIONS_RE then @definitions = $1.to_s.split(",")
+      when MARKERS_RE then @markers = $1.to_s.split(",")
+      when SCORE_RE then @score = $1.to_i
+      when BIN_RE then @bin = $1.to_i
+      when LEVEL_RE then @level = $1.to_i
+      when POSITION_RE then @position = $1.to_i
       else # Just chuck anything we don't understand
       end
     }
