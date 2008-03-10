@@ -89,18 +89,17 @@ module JLDrill
 			file[1].radicals.should include("口")
 			# I don't know why this is in the list, but it actually is.  It's not a bug.
 			file[1].radicals.should include("刈")
-			file[1].to_s.should be_eql("唖 Gr: * 又 (一, ｜, 刈, 口): mute, dumb")
-			file.to_s.should be_eql("亜 Gr: 8 ｜ (一, ｜, 口): Asia, rank next, come after, -ous\n唖 Gr: * 又 (一, ｜, 刈, 口): mute, dumb\n娃 Gr: * 土 (土, 女): beautiful\n阿 Gr: 9 虍 (亅, 口, 阡): Africa, flatter, fawn upon, corner, nook, recess")
+			file[1].to_s.should be_eql("唖 Gr: * * (一, ｜, 刈, 口): mute, dumb")
+			file.to_s.should be_eql("亜 Gr: 8 * (一, ｜, 口): Asia, rank next, come after, -ous\n唖 Gr: * * (一, ｜, 刈, 口): mute, dumb\n娃 Gr: * * (土, 女): beautiful\n阿 Gr: 9 * (亅, 口, 阡): Africa, flatter, fawn upon, corner, nook, recess")
 		end
 
 		it "should be able to parse a file on disk" do
-			file = KanjidicFile.open("data/jldrill/dict/kanjidic.utf", RadKFile.open("data/jldrill/dict/radkfile.utf"))
-			file.should_not be(nil)
-			file.size.should be(6355)
-			file2 = file.select do |entry|
-				entry.grade == 1
-			end
-			print file2.to_s + "\n"
+#			file = KanjidicFile.open("data/jldrill/dict/kanjidic.utf", RadKFile.open("data/jldrill/dict/radkfile.utf"))
+#			file.should_not be(nil)
+#			file.size.should be(6355)
+#			file2 = file.select do |entry|
+#				entry.grade == 1
+#			end
 		end
 
 	end
