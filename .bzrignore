@@ -1,0 +1,9 @@
+CVS
+coverage
+test_results.html
+doc
+InstalledFiles
+web/output
+.bzrignore
+.config
+pkg
