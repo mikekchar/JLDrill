@@ -1,5 +1,5 @@
-require 'MainWindowView'
-require 'Gtk/Widget'
+require 'jldrill/MainWindowView'
+require 'jldrill/Gtk/Widget'
 require 'gtk2'
 
 module JLDrill::Gtk

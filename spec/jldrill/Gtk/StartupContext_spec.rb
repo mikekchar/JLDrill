@@ -1,5 +1,5 @@
-require 'Gtk/StartupContext'
-require 'Gtk/MainWindowView'
+require 'jldrill/Gtk/StartupContext'
+require 'jldrill/Gtk/MainWindowView'
 
 module JLDrill::Gtk
 

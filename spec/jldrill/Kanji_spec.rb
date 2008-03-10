@@ -1,5 +1,5 @@
-require 'Kanji'
-require 'Radical'
+require 'jldrill/Kanji'
+require 'jldrill/Radical'
 
 module JLDrill
 

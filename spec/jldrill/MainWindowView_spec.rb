@@ -1,5 +1,5 @@
-require 'MainWindowView'
-require 'ViewFactory'
+require 'jldrill/MainWindowView'
+require 'jldrill/ViewFactory'
 
 module JLDrill
 

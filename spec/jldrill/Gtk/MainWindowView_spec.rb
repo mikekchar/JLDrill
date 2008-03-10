@@ -1,4 +1,4 @@
-require 'Gtk/MainWindowView.rb'
+require 'jldrill/Gtk/MainWindowView.rb'
 
 module JLDrill::Gtk 
 

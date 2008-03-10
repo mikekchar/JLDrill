@@ -1,4 +1,4 @@
-require 'Gtk/Widget.rb'
+require 'jldrill/Gtk/Widget.rb'
 
 module JLDrill:Gtk 
 

@@ -1,5 +1,5 @@
-require 'MainContext'
-require 'Gtk/ViewFactory'
+require 'jldrill/MainContext'
+require 'jldrill/Gtk/ViewFactory'
 require 'gtk2'
 
 module JLDrill::Gtk

@@ -342,8 +342,8 @@ class Main < Gtk::Window
       
       if dialog.run == Gtk::Dialog::RESPONSE_ACCEPT
         @currentDir = dialog.current_folder
-        @quiz = Quiz.new()
-        if Quiz.drillFile?(dialog.filename)
+        @quiz = JLDrill::Quiz.new()
+        if JLDrill::Quiz.drillFile?(dialog.filename)
           @quiz.load(dialog.filename)
         else
           dict = Edict.new(dialog.filename)

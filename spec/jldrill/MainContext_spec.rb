@@ -1,5 +1,5 @@
-require 'MainContext'
-require 'ViewFactory'
+require 'jldrill/MainContext'
+require 'jldrill/ViewFactory'
 
 module JLDrill
 

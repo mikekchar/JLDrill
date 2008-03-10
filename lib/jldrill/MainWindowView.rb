@@ -1,4 +1,4 @@
-require 'View'
+require 'jldrill/View'
 
 module JLDrill
 

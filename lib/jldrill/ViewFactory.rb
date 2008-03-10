@@ -1,4 +1,4 @@
-require 'MainWindowView'
+require 'jldrill/MainWindowView'
 
 module JLDrill
 

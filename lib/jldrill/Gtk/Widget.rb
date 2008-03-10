@@ -1,4 +1,4 @@
-require 'Widget'
+require 'jldrill/Widget'
 require 'gtk2'
 
 module JLDrill::Gtk

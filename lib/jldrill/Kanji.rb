@@ -1,4 +1,4 @@
-require 'Radical'
+require 'jldrill/Radical'
 
 module JLDrill
 

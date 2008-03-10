@@ -20,63 +20,64 @@ require 'jldrill/Vocabulary'
 require 'jldrill/Edict'
 require 'jldrill/Bin'
 
-class Quiz
+module JLDrill
+    class Quiz
 
-  attr_reader :savename, :randomOrder, :promoteThresh, :introThresh, :updated,
-  :vocab, :length, :info, :name, :currentLevel
-  attr_writer :savename, :updated, :info, :name
+    attr_reader :savename, :randomOrder, :promoteThresh, :introThresh, :updated,
+                :vocab, :length, :info, :name, :currentLevel
+    attr_writer :savename, :updated, :info, :name
 
-  def initialize()
-    @updated = false
-    @name = ""
-    @savename = ""
-    @vocab = nil
-    @last = nil
-    @bins = []
-    @bins.push(Bin.new("Unseen"))
-    @bins.push(Bin.new("Poor"))
-    @bins.push(Bin.new("Fair"))
-    @bins.push(Bin.new("Good"))
-    @bins.push(Bin.new("Excellent"))
-    @bin = 0
-    @index = 0
-    @length = 0
-    @currentDrill = nil
-    @currentAnswer = nil
-    @currentLevel = 0
-    @info = ""
+    def initialize()
+        @updated = false
+        @name = ""
+        @savename = ""
+        @vocab = nil
+        @last = nil
+        @bins = []
+        @bins.push(Bin.new("Unseen"))
+        @bins.push(Bin.new("Poor"))
+        @bins.push(Bin.new("Fair"))
+        @bins.push(Bin.new("Good"))
+        @bins.push(Bin.new("Excellent"))
+        @bin = 0
+        @index = 0
+        @length = 0
+        @currentDrill = nil
+        @currentAnswer = nil
+        @currentLevel = 0
+        @info = ""
 
-    @randomOrder = false
-    @promoteThresh = 2
-    @introThresh = 10
+        @randomOrder = false
+        @promoteThresh = 2
+        @introThresh = 10
 
-    @oldThresh = 90
-    @oldCorrect = 0
-    @oldIncorrect = 0
-    @lastEstimate = 0
+        @oldThresh = 90
+        @oldCorrect = 0
+        @oldIncorrect = 0
+        @lastEstimate = 0
     
-    @readingDrill = Proc.new{kanji + hint + reading}
-    @readingAnswer = Proc.new{definitions}
-    @kanjiDrill = Proc.new{kanji}
-    @kanjiAnswer = Proc.new{hint + reading + definitions}
-    @meaningDrill = Proc.new{definitions}
-    @meaningAnswer = Proc.new{kanji + hint + reading}
-  end
+        @readingDrill = Proc.new{kanji + hint + reading}
+        @readingAnswer = Proc.new{definitions}
+        @kanjiDrill = Proc.new{kanji}
+        @kanjiAnswer = Proc.new{hint + reading + definitions}
+        @meaningDrill = Proc.new{definitions}
+        @meaningAnswer = Proc.new{kanji + hint + reading}
+    end
 
-  def randomOrder=(value)
-    @randomOrder = value
-    @updated = true
-  end
+    def randomOrder=(value)
+        @randomOrder = value
+        @updated = true
+    end
 
-  def promoteThresh=(value)
-    @promoteThresh = value
-    @updated = true
-  end
+    def promoteThresh=(value)
+        @promoteThresh = value
+        @updated = true
+    end
 
-  def introThresh=(value)
-    @introThresh = value
-    @updated = true
-  end
+    def introThresh=(value)
+        @introThresh = value
+        @updated = true
+    end
 
   def vocab=(vocab)
     if vocab
@@ -553,5 +554,5 @@ class Quiz
 
     return text
   end
-
+end
 end

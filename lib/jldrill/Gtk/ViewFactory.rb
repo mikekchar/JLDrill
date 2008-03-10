@@ -1,4 +1,4 @@
-require 'Gtk/MainWindowView'
+require 'jldrill/Gtk/MainWindowView'
 
 module JLDrill::Gtk
 
