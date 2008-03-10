@@ -18,43 +18,7 @@
 
 require 'jldrill/Vocabulary'
 require 'jldrill/Edict'
-
-class Bin
-  attr_reader :name
-
-  def initialize(name)
-    @name = name
-    @contents = []
-  end
-
-  def length()
-    return @contents.length
-  end
-
-  def [](index)
-    return @contents[index]
-  end
-
-  def push(vocab)
-    @contents.push(vocab)
-  end
-
-  def delete_at(index)
-    @contents.delete_at(index)
-  end
-
-  def each(&block)
-    @contents.each { |vocab|
-      block.call(vocab)
-    }
-  end
-
-  def sort!(&block)
-    @contents.sort! { |x,y|
-      block.call(x,y)
-    }
-  end
-end
+require 'jldrill/Bin'
 
 class Quiz
 

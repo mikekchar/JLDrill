@@ -46,6 +46,13 @@ class Vocabulary
     @level = 0
     @position = position
   end
+  
+  # Create a new vocaublary item by parsing the string passed in.
+  def Vocabulary.create(string)
+    retVal = Vocabulary.new
+    retVal.parse(string)
+    retVal
+  end
 
   def set(vocab)
     @kanji = vocab.kanji
