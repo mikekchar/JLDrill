@@ -2,7 +2,7 @@ require 'jldrill/Quiz'
 
 module JLDrill
 
-	describe Bin do
+	describe Quiz do
 	
 		before(:each) do
         	@fileString = %Q[0.2.0-LDRILL-SAVE Testfile
@@ -23,16 +23,17 @@ Excellent
 		    @quiz = Quiz.new
 		end
 
-		it "should have the five bins" do
+		it "should have the contents" do
 		    @quiz.should_not be_nil
 		    
-		    @quiz.bins.should_not be_nil
-		    @quiz.bins.length.should be(5)
-		    @quiz.bins[0].name.should be_eql("Unseen")
-		    @quiz.bins[1].name.should be_eql("Poor")
-		    @quiz.bins[2].name.should be_eql("Fair")
-		    @quiz.bins[3].name.should be_eql("Good")
-		    @quiz.bins[4].name.should be_eql("Excellent")
+		    @quiz.contents.should_not be_nil
+		    @quiz.contents.bins.length.should be(5)
+		    @quiz.contents.bins[0].name.should be_eql("Unseen")
+		    @quiz.contents.bins[1].name.should be_eql("Poor")
+		    @quiz.contents.bins[2].name.should be_eql("Fair")
+		    @quiz.contents.bins[3].name.should be_eql("Good")
+		    @quiz.contents.bins[4].name.should be_eql("Excellent")
+		    @quiz.contents.to_s.should be_eql("Unseen\nPoor\nFair\nGood\nExcellent\n")
 		end
 		
 		it "should have quiz options initialized" do
@@ -61,17 +62,18 @@ Excellent
 		end
 		
 		it "should load a file from memory" do
+		    @quiz.loadFromString("none", @fileString)
 		    @quiz.loadFromString("none", @fileString).should be(true)
 		    @quiz.savename.should be_eql("none")
 		    @quiz.name.should be_eql("Testfile")
 		    @quiz.options.randomOrder.should be(true)
 		    @quiz.options.promoteThresh.should be(4)
 		    @quiz.options.introThresh.should be(17)
-		    @quiz.bins[0].length.should be(1)
-		    @quiz.bins[1].length.should be(0)
-		    @quiz.bins[2].length.should be(1)
-		    @quiz.bins[3].length.should be(0)
-		    @quiz.bins[4].length.should be(2)
+		    @quiz.contents.bins[0].length.should be(1)
+		    @quiz.contents.bins[1].length.should be(0)
+		    @quiz.contents.bins[2].length.should be(1)
+		    @quiz.contents.bins[3].length.should be(0)
+		    @quiz.contents.bins[4].length.should be(2)
 		end
 		
 		it "should save a file to a string" do

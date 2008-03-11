@@ -89,35 +89,101 @@ module JLDrill
             end
         end
 
+        class Contents
+            attr_reader :quiz, :bins
+        
+            def initialize(quiz)
+                @quiz = quiz
+                @bins = []
+                @bins.push(Bin.new("Unseen"))
+                @bins.push(Bin.new("Poor"))
+                @bins.push(Bin.new("Fair"))
+                @bins.push(Bin.new("Good"))
+                @bins.push(Bin.new("Excellent"))
+                @parsingBin = 0
+            end
+            
+            def update
+                @quiz.update
+            end
+            
+            def length
+                total = 0
+                @bins.each do |bin|
+                    total += bin.length
+                end
+                total
+            end
+
+            def add(vocab, bin)
+                if !vocab.nil? && vocab.valid
+                    vocab.score = 0
+                    if vocab.position == -1
+                        vocab.position = length 
+                    end
+                    vocab.bin = bin
+                    @bins[bin].push(vocab)
+                    update
+                end
+            end
+
+            def parseVocab(line)
+                vocab = Vocabulary.create(line)
+                add(vocab, @parsingBin)
+            end
+
+            def parseLine(line)
+                parsed = true
+                case line
+                    when /^Unseen/ then @parsingBin = 0
+                    when /^Poor/ then @parsingBin = 1
+                    when /^Fair/ then @parsingBin = 2
+                    when /^Good/ then @parsingBin = 3
+                    when /^Excellent/ then @parsingBin = 4
+                    when /^\// 
+                        parseVocab(line)
+                    else
+                        parsed = false
+                end
+                parsed
+            end
+
+            def to_s
+                retVal = ""
+                @bins.each do |bin|
+                    retVal += bin.to_s
+                end
+                retVal
+            end
+            
+        end
+        
         attr_reader :savename,  
                     :updated, :vocab, :length, :info, :name, :currentLevel,
-                    :bins, :options 
+                    :contents, :options 
         attr_writer :savename, :updated, :info, :name
 
         def initialize()
             @updated = false
             @name = ""
             @savename = ""
+            
+            @options = Options.new(self)
+            @contents = Contents.new(self)            
+            
             @vocab = nil
             @last = nil
-            @options = Options.new(self)
-            @bins = []
-            @bins.push(Bin.new("Unseen"))
-            @bins.push(Bin.new("Poor"))
-            @bins.push(Bin.new("Fair"))
-            @bins.push(Bin.new("Good"))
-            @bins.push(Bin.new("Excellent"))
             @bin = 0
             @index = 0
-            @length = 0
-            @currentDrill = nil
-            @currentAnswer = nil
-            @currentLevel = 0
             @info = ""
 
             @oldCorrect = 0
             @oldIncorrect = 0
             @lastEstimate = 0
+
+            @currentDrill = nil
+            @currentAnswer = nil
+            @currentLevel = 0
         
             @readingDrill = Proc.new{kanji + hint + reading}
             @readingAnswer = Proc.new{definitions}
@@ -131,40 +197,19 @@ module JLDrill
             @updated = true
         end
 
-        def vocab=(vocab)
-            if vocab
-                if @vocab
-                    @vocab.set(vocab)
-                else
-                    # this is a bit wierd, but I'm not sure what else to do
-                    addVocab(vocab)
-                end
-                @updated = true
-            end
-        end
-
-        def addVocab(vocab, bin=0)
-            if vocab 
-                if vocab.valid
-                    vocab.score = 0
-                if vocab.position == -1 then vocab.position = @length end
-                    @vocab = vocab
-                    @bin = bin
-                    @index = @bins[@bin].length
-                    @bins[@bin].push vocab
-                    @length += 1
-                    @updated = true
-                end
-            end
-        end
-
-        def binsToString
-            retVal = ""
-            @bins.each do |bin|
-                retVal += bin.to_s
-            end
-            retVal
-        end
+# If you see this here, please erase it.  I meant to do it,
+# but obviously forgot.
+#        def vocab=(vocab)
+#            if vocab
+#                if @vocab
+#                    @vocab.set(vocab)
+#                else
+#                    # this is a bit wierd, but I'm not sure what else to do
+#                    addVocab(vocab)
+#                end
+#                @updated = true
+#            end
+#        end
 
         def saveToString
             retVal = ""
@@ -173,14 +218,14 @@ module JLDrill
                 retVal += "# " + line + "\n"
             }
             retVal += @options.to_s
-            retVal += binsToString
+            retVal += @contents.to_s
             @updated = false
             retVal
         end
 
         def save
             retVal = false
-            if (@savename != "") && (@length != 0) && @updated
+            if (@savename != "") && (contents.length != 0) && @updated
                 saveFile = File.new(@savename, "w")
                 if saveFile
                     saveFile.print(saveToString)
@@ -219,26 +264,14 @@ module JLDrill
             return retVal
         end
 
-        def parseVocab(line)
-            vocab = Vocabulary.create(line)
-            addVocab(vocab, @bin)
-        end
-
         def parseLine(line)
             if !@options.parseLine(line)
-                case line
-                    when /^(\d+\.\d+\.\d+)?-?LDRILL-SAVE (.*)/ then @name = $2
-                    when /^\#[ ]?(.*)/ then @info += $1 + "\n"
-                    when /^Unseen/ then @bin = 0
-                    when /^Poor/ then @bin = 1
-                    when /^Fair/ then @bin = 2
-                    when /^Good/ then @bin = 3
-                    when /^Excellent/ then @bin = 4
-                    when /^\// 
-                        parseVocab(line)
-                        # set the bin for older file imports
-                        @vocab.bin = @bin
-                    else # ignore stuff we don't understand
+                if !@contents.parseLine(line)
+                    case line
+                        when /^(\d+\.\d+\.\d+)?-?LDRILL-SAVE (.*)/ then @name = $2
+                        when /^\#[ ]?(.*)/ then @info += $1 + "\n"
+                        else # ignore stuff we don't understand
+                    end
                 end
             end
         end
@@ -253,7 +286,7 @@ module JLDrill
                 IO.foreach(file) do |line|
                     parseLine(line)
                 end
-                retVal = @length > 0
+                retVal = @contents.length > 0
             end
             return retVal
         end
@@ -268,18 +301,16 @@ module JLDrill
                 parseLine(line)
             end
             
-            @length > 0
+            @contents.length > 0
         end
 
         def loadFromDict(dict)
             if dict
                 initialize()
                 @name = dict.shortFile
-                @length = 0
                 dict.eachVocab do |vocab|
-                    addVocab(vocab, 0)
+                    contents.add(vocab, 0)
                 end
-                @updated = true
             end
         end    
 
@@ -287,14 +318,14 @@ module JLDrill
             retVal = ""
             if(@updated) then retVal += "* " else retVal += "  " end
             retVal += @name + ": Level "
-            retVal += "U: #{@bins[0].length} P: #{@bins[1].length} "
-            retVal += "F: #{@bins[2].length} "
-            retVal += "G: #{@bins[3].length} E: #{@bins[4].length}"
+            retVal += "U: #{@contents.bins[0].length} P: #{@contents.bins[1].length} "
+            retVal += "F: #{@contents.bins[2].length} "
+            retVal += "G: #{@contents.bins[3].length} E: #{@contents.bins[4].length}"
             retVal += " Current: #{@bin} "
             retVal += " Known: #{@lastEstimate}%"
             retVal += " - "
-            if(@randomOrder) then retVal += "R" end
-            retVal += "(#{@promoteThresh},#{@introThresh})"
+            if(@options.randomOrder) then retVal += "R" end
+            retVal += "(#{@options.promoteThresh},#{@options.introThresh})"
             return retVal
         end
 
@@ -303,8 +334,8 @@ module JLDrill
         end
 
         def underIntroThreshold
-            ((@bins[1].length + @bins[2].length) < @introThresh) && 
-                ((@bins[0].length > 0) || (@bins[4].length > 0))
+            ((@contents.bins[1].length + @contents.bins[2].length) < @options.introThresh) && 
+                ((@contents.bins[0].length > 0) || (@contents.bins[4].length > 0))
         end
   
         def reEstimate
@@ -331,8 +362,8 @@ module JLDrill
                 # >5 to avoid a bug where it constantly loops around picking
                 # the same item.  This will ensure the the "review" has some
                 # variety.
-                if @bins[4].length > 5
-                    if @lastEstimate < @oldThresh
+                if @contents.bins[4].length > 5
+                    if @lastEstimate < @options.oldThresh
                         # Keep drawing old ones until we hit our learning threshold
                         @bin = 4
                     else
@@ -358,31 +389,31 @@ module JLDrill
         end
 
         def getVocab
-            if(@length == 0)
+            if(@contents.length == 0)
                 return nil
             end
 
             getBin
-            getBin until @bins[@bin].length > 0
+            getBin until @contents.bins[@bin].length > 0
 
-            if((!@randomOrder) && (@bin == 0))
+            if((!@options.randomOrder) && (@bin == 0))
                 @index = 0
             else
-                @index = rand(@bins[@bin].length)
+                @index = rand(@contents.bins[@bin].length)
             end
 
-            @vocab = @bins[@bin][@index] 
+            @vocab = @contents.bins[@bin][@index] 
             if @bin == 0 then promote end
             return @vocab
         end
 
         def randomVocab!
-            if(@length == 0)
+            if(@contents.length == 0)
                 return
             end
 
             getVocab
-            if(@length > 1)
+            if(@contents.length > 1)
                 # Don't show the same item twice in a row
                 getVocab until @vocab != @last
             end
@@ -391,19 +422,19 @@ module JLDrill
 
         def allVocab
             retVal = []
-            @bins[0].each {|vocab|
+            @contents.bins[0].each {|vocab|
                 retVal.push(vocab)
             }
-            @bins[1].each {|vocab|
+            @contents.bins[1].each {|vocab|
                 retVal.push(vocab)
             }
-            @bins[2].each {|vocab|
+            @contents.bins[2].each {|vocab|
                 retVal.push(vocab)
             }
-            @bins[3].each {|vocab|
+            @contents.bins[3].each {|vocab|
                 retVal.push(vocab)
             }
-            @bins[4].each {|vocab|
+            @contents.bins[4].each {|vocab|
                 retVal.push(vocab)
             }
 
@@ -414,46 +445,46 @@ module JLDrill
 
         # Resets the quiz back to it's original state
         def reset
-            @bins[0].each {|vocab|
+            @contents.bins[0].each {|vocab|
                 vocab.score = 0
                 vocab.bin = 0
             }
-            @bins[1].each {|vocab|
+            @contents.bins[1].each {|vocab|
                 vocab.score = 0
                 vocab.bin = 0
-                @bins[0].push(vocab)
+                @contents.bins[0].push(vocab)
             }
-            @bins[2].each {|vocab|
+            @contents.bins[2].each {|vocab|
                 vocab.score = 0
                 vocab.bin = 0
-                @bins[0].push(vocab)
+                @contents.bins[0].push(vocab)
             }
-            @bins[3].each {|vocab|
+            @contents.bins[3].each {|vocab|
                 vocab.score = 0
                 vocab.bin = 0
-                @bins[0].push(vocab)
+                @contents.bins[0].push(vocab)
             }
             @bins[4].each {|vocab|
                 vocab.score = 0
                 vocab.bin = 0
-                @bins[0].push(vocab)
+                @contents.bins[0].push(vocab)
             }
-            @bins[1] = []
-            @bins[2] = []
-            @bins[3] = []
-            @bins[1] = []
-            @bins[0].sort! { |x,y| x.position <=> y.position }
+            @contents.bins[1] = []
+            @contents.bins[2] = []
+            @contents.bins[3] = []
+            @contents.bins[1] = []
+            @contents.bins[0].sort! { |x,y| x.position <=> y.position }
             @updated = true
         end
 
         def moveToBin(bin)
             if @vocab && bin < 5
-                @bins[@bin].delete_at(@index)
+                @contents.bins[@bin].delete_at(@index)
                 @bin = bin
                 @vocab.score = 0
                 @vocab.bin = @bin
-                @bins[@bin].push(@vocab)
-                @index = @bins[@bin].length - 1
+                @contents.bins[@bin].push(@vocab)
+                @index = @contents.bins[@bin].length - 1
                 @updated = true
             end
         end
@@ -501,7 +532,7 @@ module JLDrill
             adjustQuizOld(true)
             if(@vocab)
                 @vocab.score += 1
-                if(@vocab.score >= @promoteThresh)
+                if(@vocab.score >= @options.promoteThresh)
                     promote
                 end
                 @updated = true
