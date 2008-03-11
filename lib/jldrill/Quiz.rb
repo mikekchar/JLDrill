@@ -23,8 +23,75 @@ require 'jldrill/Bin'
 module JLDrill
     class Quiz
 
-        attr_reader :savename, :randomOrder, :promoteThresh, :introThresh, 
-                    :updated, :vocab, :length, :info, :name, :currentLevel
+        class Options
+            attr_reader :randomOrder, :promoteThresh, :introThresh, :oldThresh
+
+            RANDOM_ORDER_RE = /^Random Order/
+            PROMOTE_THRESH_RE = /^Promotion Threshold: (.*)/
+            INTRO_THRESH_RE = /^Introduction Threshold: (.*)/
+            OLD_THRESH_RE = /^Old Threshold: (.*)/
+            
+            def initialize(quiz)
+                @quiz = quiz
+                @randomOrder = false
+                @promoteThresh = 2
+                @introThresh = 10
+                @oldThresh = 90
+            end
+            
+            def update
+                @quiz.update
+            end
+
+            def randomOrder=(value)
+                @randomOrder = value
+                update
+            end
+
+            def promoteThresh=(value)
+                @promoteThresh = value
+                update
+            end
+
+            def introThresh=(value)
+                @introThresh = value
+                update
+            end
+
+            def oldThresh=(value)
+                @oldThresh = value
+                update
+            end
+            
+            def parseLine(line)
+                parsed = true
+                case line
+                    when RANDOM_ORDER_RE
+                        self.randomOrder = true
+                    when PROMOTE_THRESH_RE
+                        self.promoteThresh = $1.to_i
+                    when INTRO_THRESH_RE 
+                        self.introThresh = $1.to_i
+                    else
+                        parsed = false
+                end
+                parsed
+            end
+            
+            def to_s
+                retVal = ""
+                if(@randomOrder)
+                    retVal += "Random Order\n"
+                end
+                retVal += "Promotion Threshold: #{@promoteThresh}\n"
+                retVal += "Introduction Threshold: #{@introThresh}\n"
+                retVal
+            end
+        end
+
+        attr_reader :savename,  
+                    :updated, :vocab, :length, :info, :name, :currentLevel,
+                    :bins, :options 
         attr_writer :savename, :updated, :info, :name
 
         def initialize()
@@ -33,6 +100,7 @@ module JLDrill
             @savename = ""
             @vocab = nil
             @last = nil
+            @options = Options.new(self)
             @bins = []
             @bins.push(Bin.new("Unseen"))
             @bins.push(Bin.new("Poor"))
@@ -47,11 +115,6 @@ module JLDrill
             @currentLevel = 0
             @info = ""
 
-            @randomOrder = false
-            @promoteThresh = 2
-            @introThresh = 10
-
-            @oldThresh = 90
             @oldCorrect = 0
             @oldIncorrect = 0
             @lastEstimate = 0
@@ -64,18 +127,7 @@ module JLDrill
             @meaningAnswer = Proc.new{kanji + hint + reading}
         end
 
-        def randomOrder=(value)
-            @randomOrder = value
-            @updated = true
-        end
-
-        def promoteThresh=(value)
-            @promoteThresh = value
-            @updated = true
-        end
-
-        def introThresh=(value)
-            @introThresh = value
+        def update
             @updated = true
         end
 
@@ -106,38 +158,39 @@ module JLDrill
             end
         end
 
+        def binsToString
+            retVal = ""
+            @bins.each do |bin|
+                retVal += bin.to_s
+            end
+            retVal
+        end
+
+        def saveToString
+            retVal = ""
+            retVal += "0.2.0-LDRILL-SAVE #{@name}\n"
+            @info.split("\n").each { |line|
+                retVal += "# " + line + "\n"
+            }
+            retVal += @options.to_s
+            retVal += binsToString
+            @updated = false
+            retVal
+        end
+
         def save
             retVal = false
             if (@savename != "") && (@length != 0) && @updated
                 saveFile = File.new(@savename, "w")
                 if saveFile
-                    saveFile.print("0.2.0-LDRILL-SAVE #{@name}\n")
-                    @info.split("\n").each { |line|
-                        saveFile.print("# " + line + "\n")
-                    }
-                    if(@randomOrder)
-                        saveFile.print("Random Order\n")
-                    end
-                    saveFile.print("Promotion Threshold: #{@promoteThresh}\n")
-                    saveFile.print("Introduction Threshold: #{@introThresh}\n")
-                    saveFile.print("Unseen\n")
-                    @bins[0].each { |vocab| saveFile.print(vocab.to_s) }
-                    saveFile.print("Poor\n")
-                    @bins[1].each { |vocab| saveFile.print(vocab.to_s) }
-                    saveFile.print("Fair\n")
-                    @bins[2].each { |vocab| saveFile.print(vocab.to_s) }
-                    saveFile.print("Good\n")
-                    @bins[3].each { |vocab| saveFile.print(vocab.to_s) }
-                    saveFile.print("Excellent\n")
-                    @bins[4].each { |vocab| saveFile.print(vocab.to_s) }
+                    saveFile.print(saveToString)
                     saveFile.close
-                    @updated = false
                     retVal = true
                 end
             end
             return retVal
         end
-
+        
         def export(filename)
             saveFile = File.new(filename, "w")
             if saveFile
@@ -167,9 +220,27 @@ module JLDrill
         end
 
         def parseVocab(line)
-            vocab = Vocabulary.new()
-            vocab.parse(line)
+            vocab = Vocabulary.create(line)
             addVocab(vocab, @bin)
+        end
+
+        def parseLine(line)
+            if !@options.parseLine(line)
+                case line
+                    when /^(\d+\.\d+\.\d+)?-?LDRILL-SAVE (.*)/ then @name = $2
+                    when /^\#[ ]?(.*)/ then @info += $1 + "\n"
+                    when /^Unseen/ then @bin = 0
+                    when /^Poor/ then @bin = 1
+                    when /^Fair/ then @bin = 2
+                    when /^Good/ then @bin = 3
+                    when /^Excellent/ then @bin = 4
+                    when /^\// 
+                        parseVocab(line)
+                        # set the bin for older file imports
+                        @vocab.bin = @bin
+                    else # ignore stuff we don't understand
+                end
+            end
         end
 
         def load(file)
@@ -179,28 +250,25 @@ module JLDrill
                 initialize()
                 @savename = file
                 @bin = 0
-                IO.foreach(file) { |line|
-                    case line
-                        when /^(\d+\.\d+\.\d+)?-?LDRILL-SAVE (.*)/ then @name = $2
-                        when /^\#[ ]?(.*)/ then @info += $1 + "\n"
-                        when /^Random Order/ then @randomOrder = true
-                        when /^Promotion Threshold: (.*)/ then @promoteThresh = $1.to_i
-                        when /^Introduction Threshold: (.*)/ then @intoThresh = $1.to_i
-                        when /^Unseen/ then @bin = 0
-                        when /^Poor/ then @bin = 1
-                        when /^Fair/ then @bin = 2
-                        when /^Good/ then @bin = 3
-                        when /^Excellent/ then @bin = 4
-                        when /^\// 
-                            parseVocab(line)
-                            # set the bin for older file imports
-                            @vocab.bin = @bin
-                        else # ignore stuff we don't understand
-                    end
-                }
+                IO.foreach(file) do |line|
+                    parseLine(line)
+                end
                 retVal = @length > 0
             end
             return retVal
+        end
+
+        def loadFromString(name, string)
+            initialize()
+            
+            @savename = name
+            @bin = 0
+            
+            string.each_line do |line|
+                parseLine(line)
+            end
+            
+            @length > 0
         end
 
         def loadFromDict(dict)

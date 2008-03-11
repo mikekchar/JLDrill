@@ -71,7 +71,7 @@ module JLDrill
    
         # Returns a string containing all the vocabulary strings in the bin     
         def to_s
-            @contents.join
+            @name + "\n" + @contents.join
         end
     end
 end
