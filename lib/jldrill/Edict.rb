@@ -188,14 +188,6 @@ class Edict
     end
   end
 
-  def parseCSV(line, position)
-    vocab = Vocabulary.new()
-    vocab.parseCSV(line)
-    vocab.position = position
-    add(vocab)
-    return true
-  end
-
   def parse(line, position)
     retVal = false
     if line =~ LINE_RE
@@ -272,24 +264,6 @@ class Edict
       }
     end
     return result
-  end
-
-  def saveCSV(filename)
-    puts("saveCSV")
-    saveFile = File.new(filename, "w")
-    if saveFile
-      @vocab.each { |word|
-        saveFile.print(word.to_csv + "\n")
-      }
-      saveFile.close()
-    end
-  end
-
-  def to_csv()
-    retVal = ""
-    @vocab.each { |word|
-      retVal += word.to_csv + "\n"
-    }
   end
 
   def to_s()

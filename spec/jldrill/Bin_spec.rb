@@ -22,11 +22,12 @@ module JLDrill
                 @vocab[i].to_s.should be_eql(@strings[i] + "\n")
             end
             
-		    @bin = Bin.new("My name")
+		    @bin = Bin.new("My name", 42)
 		end
 
-		it "should have a name when constructed" do
+		it "should have a name and number when constructed" do
 		    @bin.name.should be_eql("My name")
+		    @bin.number.should be(42)
 		end
 		
 		# Pushes item on the end of bin and tests to make sure that
@@ -35,6 +36,8 @@ module JLDrill
 		    @bin[pos].should be_nil
 		    @bin.length.should be(pos)
 		    @bin.push(item)
+		    item.status.bin.should be(@bin.number)
+		    item.status.index.should be(pos)
 		    @bin.length.should be(pos + 1)
 		    @bin[pos].should_not be_nil
 		    @bin[pos].to_s.should be_eql(item.to_s)
@@ -93,14 +96,42 @@ module JLDrill
 		    test_push(@vocab.length - 1, @vocab[0])
 		    test_isOriginal?.should be(false)
 		    @bin.sort! do |x, y|
-		        x.position <=> y.position
+		        x.status.position <=> y.status.position
 		    end
 		    test_isOriginal?.should be(true)
 		end
 		
 		it "should output itself in save format" do
+		# Note the bin number has changed
+		contentsString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 42/Level: 0/Position: 1/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 42/Level: 0/Position: 2/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 42/Level: 0/Position: 3/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 42/Level: 0/Position: 4/]
 		    test_pushAll
-		    @bin.to_s.should be_eql("My name\n" + @fileString + "\n")
+		    @bin.to_s.should be_eql("My name\n" + contentsString + "\n")
+		end
+		
+		it "should be able to create a copy of it's contents" do
+		    test_pushAll
+		    i = -1
+		    @bin.cloneContents.all? do |vocab|
+		        i += 1
+		        vocab == @bin[i]
+		    end.should be(true)
+		    @bin.cloneContents.should_not be(@bin.contents) 
+		end
+		
+		it "should be able to replace it's contents array" do
+		# Note the bin number has changed
+		contentsString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 2/Level: 0/Position: 1/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 2/Level: 0/Position: 2/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 2/Level: 0/Position: 3/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 2/Level: 0/Position: 4/
+]
+		    test_pushAll
+	        bin2 = Bin.new("number2", 2)
+	        bin2.contents = @bin.cloneContents
+	        bin2.to_s.should be_eql("number2\n" + contentsString)
 		end
 	end
 

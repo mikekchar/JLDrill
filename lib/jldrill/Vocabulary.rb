@@ -16,6 +16,8 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
+require "jldrill/VocabularyStatus"
+
 # Class file for Japanese vocabulary
 # Currently geared towards edict, but that might change
 
@@ -26,25 +28,17 @@ class Vocabulary
       READING_RE = /^Reading: (.*)/
       DEFINITIONS_RE = /^Definitions: (.*)/
       MARKERS_RE = /^Markers: (.*)/
-      SCORE_RE = /^Score: (.*)/
-      BIN_RE = /^Bin: (.*)/
-      LEVEL_RE = /^Level: (.*)/
-      POSITION_RE = /^Position: (.*)/
 
-  attr_reader :kanji, :reading, :hint, :score, :bin, :level, :position
-  attr_writer :kanji, :reading, :hint, :score, :bin, :level, :position
+  attr_reader :kanji, :reading, :hint, :status
+  attr_writer :kanji, :reading, :hint
 
-  def initialize(kanji=nil, reading=nil, 
-                 definitions=nil, markers=nil, hint=nil, position=-1)
-    @kanji = kanji
-    @reading = reading
-    @definitions = definitions
-    @markers = markers
-    @hint = hint
-    @score = 0
-    @bin = 0
-    @level = 0
-    @position = position
+  def initialize
+    @kanji = nil
+    @reading = nil
+    @definitions = nil
+    @markers = nil
+    @hint = nil
+    @status = JLDrill::VocabularyStatus.new(self)
   end
   
   # Create a new vocaublary item by parsing the string passed in.
@@ -54,21 +48,9 @@ class Vocabulary
     retVal
   end
 
-  def set(vocab)
-    @kanji = vocab.kanji
-    @reading = vocab.reading
-    self.definitions = vocab.definitions
-    self.markers = vocab.markers
-    @hint = vocab.hint
-    @score = vocab.score
-    @bin = vocab.bin
-    @level = vocab.level
-    @position = vocab.position
-    if @kanji && (@kanji == "") then @kanji = nil end
-    if @reading && (@reading == "") then @reading = nil end
-    if @hint && (@hint == "") then @hint = nil end
-  end
-
+  # True if the two vocabulary are discussing the same word
+  # This does *not* compare the hint, score, or position
+  # since they do not affect the meaning of the word.
   def eql?(y)
     retVal = false
     if y != nil
@@ -77,118 +59,100 @@ class Vocabulary
       retVal &= @reading == y.reading
       retVal &= self.definitions == y.definitions
       retVal &= self.markers == y.markers
-      
-      # Decided not to check hint because Edict files don't have
-      # hints.  Also, it's probably the right thing to do since
-      # the hint doesn't affect if it's the same vocabulary
-      
-      # We won't test for score and position since they are artifacts
-      # of the quiz (hint, hint)
     end
     return retVal
   end
 
+  # True if the two vocabulary are discussing the same word
+  # This does *not* compare the hint, score, or position
+  # since they do not affect the meaning of the word.
   def ==(y)
     return eql?(y)
   end
-
+  
+  # splits the string on commas and destroys and leading space
+  def Vocabulary.splitCommas(string)
+    array = string.split(",")
+    array.each do |item|
+        item.strip!
+    end
+    array
+  end
+  
+  # Join the array into a string with ", " in between each item.
+  # if the array is empty or nil, print ""
+  def Vocabulary.joinCommas(array)
+    if !array.nil?
+      return array.join(", ")
+    else
+      return ""
+    end
+  end
+  
+  # Returns a string containing the definitions separated
+  # by commas
   def definitions
-    if @definitions
-      return @definitions.join(", ")
-    else
-      return ""
-    end
+    Vocabulary.joinCommas(@definitions)    
   end
 
+  # Assigns the definitions from a string of comma separated
+  # definitions
   def definitions=(string)
-    @definitions = string.split(", ")
+    @definitions = Vocabulary.splitCommas(string)
   end
 
+  # Returns a string containing the markers separated
+  # by commas
   def markers
-    if @markers
-      return @markers.join(", ")
-    else
-      return ""
-    end
+    Vocabulary.joinCommas(@markers)    
   end
 
+  # Returns a string containing the markers separated
+  # by commas
   def markers=(string)
-    @markers = string.split(", ")
+    @markers = Vocabulary.splitCommas(string)
   end
 
-  def valid
-    return (@definitions && (@definitions.length > 0) && @reading)
+  # Returns true if the vocabulary contains at least one
+  # definition and a reading
+  def valid?
+    return (!@definitions.nil? && (@definitions.length > 0) && !@reading.nil?)
   end
 
+  # Parses a vocabulary value in save format.
   def parse(string)
-    string.split("/").each { |part|
+    string.split("/").each do |part|
       case part
-      when KANJI_RE then @kanji = $1
-      when HINT_RE then @hint = $1
-      when READING_RE then @reading = $1
-      when DEFINITIONS_RE then @definitions = $1.to_s.split(",")
-      when MARKERS_RE then @markers = $1.to_s.split(",")
-      when SCORE_RE then @score = $1.to_i
-      when BIN_RE then @bin = $1.to_i
-      when LEVEL_RE then @level = $1.to_i
-      when POSITION_RE then @position = $1.to_i
-      else # Just chuck anything we don't understand
+        when KANJI_RE
+          @kanji = $1
+        when HINT_RE 
+          @hint = $1
+        when READING_RE 
+          @reading = $1
+        when DEFINITIONS_RE 
+          self.definitions = $1
+        when MARKERS_RE
+          self.markers = $1
+        else # Maybe it's the status, if not ignore it
+          @status.parse(part)
       end
-    }
+    end
   end
 
-  def to_csv
-    retVal = ""
-    if @kanji
-      retVal += @kanji
-    end
-    retVal += ","
-    if @hint
-      retVal += @hint
-    end
-    retVal += ","
-    retVal += @reading
-    retVal += ","
-    retVal += @definitions.join("/")
-    retVal += ","
-    retVal += @markers.join("/")
-    return retVal
-  end
-
+  # Outputs to tab separated values.  This is primarily for
+  # outputing the data for other quiz programs.  There are only 3 fields.
+  # kanji    reading    (markers) definitions
+  # The markers and definitions are merged into one field.
   def to_tsv
     retVal = ""
     if @kanji
       retVal += @kanji
     end
-    retVal += "\t"
-    retVal += @reading
-    retVal += "\t("
-    retVal += markers
-    retVal += ") "
-    retVal += definitions
+    retVal += "\t" + @reading + "\t(" + markers + ") " + definitions
     return retVal
   end
 
-
-  def parseCSV(string)
-    fields = string.split(",")
-    if fields.length == 5
-      if fields[0] == ""
-        @kanji = nil
-      else
-        @kanji = fields[0]
-      end
-      if fields[1] == ""
-        @hint = nil
-      else
-        @kanji = fields[1]
-      end
-      @reading = fields[2]
-      @definitions = fields[3].split("/")
-      @markers = fields[4].split("/")
-    end
-  end
-
+  # Output the vocabulary as a string in save file format
   def to_s
     retVal = ""
     if @kanji
@@ -205,11 +169,10 @@ class Vocabulary
     if @markers && (not @markers.empty?)
       retVal += "/Markers: #{@markers.join(",")}"
     end
-
-    retVal += "/Score: #{@score}"
-    retVal += "/Bin: #{@bin}"
-    retVal += "/Level: #{@level}"
-    retVal += "/Position: #{@position}/\n"
+    
+    retVal += @status.to_s
+    
+    retVal += "/\n"
 
     return retVal
   end

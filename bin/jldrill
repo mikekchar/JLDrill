@@ -450,11 +450,11 @@ class Main < Gtk::Window
 
       
       random = Gtk::CheckButton.new("Introduce new items in random order")
-      random.active = @quiz.randomOrder
+      random.active = @quiz.options.randomOrder
       promote = Gtk::HScale.new(1,10,1)
-      promote.value = @quiz.promoteThresh
+      promote.value = @quiz.options.promoteThresh
       intro = Gtk::HScale.new(1,100,1)
-      intro.value = @quiz.introThresh
+      intro.value = @quiz.options.introThresh
 
       dialog.vbox.add(random)
       dialog.vbox.add(Gtk::Label.new("Promote item after x correct"))
@@ -465,9 +465,9 @@ class Main < Gtk::Window
       dialog.show_all
 
       if dialog.run == Gtk::Dialog::RESPONSE_ACCEPT
-        @quiz.randomOrder = random.active?
-        @quiz.introThresh = intro.value.to_i
-        @quiz.promoteThresh = promote.value.to_i
+        @quiz.options.randomOrder = random.active?
+        @quiz.options.introThresh = intro.value.to_i
+        @quiz.options.promoteThresh = promote.value.to_i
       end
       dialog.destroy
       updateStatus

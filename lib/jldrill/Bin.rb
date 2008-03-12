@@ -18,12 +18,16 @@
 
 module JLDrill
     # Holds a group of vocabulary items that are at the same level.
+    # Note that the index of the item is updated when the item is *referenced*
+    # from the bin using []  Therefore DO NOT reference
+    # the contents directly using @contents!!!
     class Bin
-        attr_reader :name
+        attr_reader :name, :number, :contents
 
         # Create a new bin and call it name
-        def initialize(name)
+        def initialize(name, number)
             @name = name
+            @number = number
             @contents = []
         end
 
@@ -34,31 +38,50 @@ module JLDrill
 
         # Returns the vocabulary at the index specified
         def [](index)
-            return @contents[index]
+            vocab = @contents[index]
+            vocab.status.index = index unless vocab.nil?
+            vocab
         end
 
         # Pushes a vocabulary to the end of the bin
+        # Also sets the bin number of the vocab
         def push(vocab)
+            vocab.status.bin = @number
+            vocab.status.index = @contents.length
             @contents.push(vocab)
         end
 
         # Deletes the vocabulary at the specified index
         def delete_at(index)
+            @contents[index].status.index = nil unless @contents[index].nil?
             @contents.delete_at(index)
         end
 
         # Calls a block for each vocabulary in the bin
         def each(&block)
+            i = 0
             @contents.each do |vocab|
-              block.call(vocab)
+                vocab.status.index = i
+                i += 1
+                block.call(vocab)
             end
         end
 
         # Calls a block for each vocabulary in the bin, stopping if the
         # block returns false.  Returns true if all iterations return true.
         def all?(&block)
+            i = 0
             @contents.all? do |vocab|
+                vocab.status.index = i
+                i += 1
                 block.call(vocab)
+            end
+        end
+
+        # Update the indeces of all the vocab entries in the bin.
+        def updateIndeces
+            # each() already updates it, so all we have to do it reference them
+            self.each do |vocab|
             end
         end
 
@@ -66,6 +89,23 @@ module JLDrill
         def sort!(&block)
             @contents.sort! do |x,y|
               block.call(x,y)
+            end
+            updateIndeces
+        end
+   
+        # Make a copy of the contents.  Note that the items in the contents are
+        # *the same* objects.  It's only the array which is new.
+        def cloneContents
+            Array.new(@contents)
+        end
+   
+        # Set the contents array to the value specified.  Also set the bin
+        # number correctly
+        def contents=(array)
+            @contents = array
+            # This will also update the indeces
+            self.each do |vocab|
+                vocab.status.bin = @number
             end
         end
    

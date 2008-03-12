@@ -80,6 +80,44 @@ Excellent
 		    @quiz.loadFromString("none", @fileString)
 		    @quiz.saveToString.should be_eql(@fileString)
 		end
-		
+	
+	    it "should be able to get a list of all the vocab" do
+        	vocabString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 2/Level: 0/Position: 2/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 4/Level: 0/Position: 3/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 4/Level: 0/Position: 4/
+]
+	        @quiz.loadFromString("none", @fileString)
+	        @quiz.allVocab.join.should be_eql(vocabString)
+	    end
+	    
+	    it "should be able to reset the contents" do
+	        # Note this vocabString is different from the previous test in that
+	        # the bins are all set to 0
+        	vocabString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 3/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 0/Level: 0/Position: 4/
+]
+	        @quiz.loadFromString("none", @fileString)
+	        @quiz.reset
+	        @quiz.contents.bins[0].length.should be(4)
+	        @quiz.contents.bins[1].length.should be(0)
+	        @quiz.contents.bins[2].length.should be(0)
+	        @quiz.contents.bins[3].length.should be(0)
+	        @quiz.contents.bins[4].length.should be(0)
+	        @quiz.contents.bins[0].contents.join.should be_eql(vocabString)
+	    end
+	    
+	    it "should be able to move an item from one bin to the other" do
+	        @quiz.loadFromString("none", @fileString)
+	        @quiz.vocab = @quiz.contents.bins[0][0]
+	        @quiz.bin = 0
+	        @quiz.moveToBin(4)
+	        @quiz.contents.bins[0].length.should be(0)
+	        @quiz.contents.bins[4].length.should be(3)
+	        @quiz.contents.bins[4][2].to_s.should be_eql("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 0/Position: 1/\n")
+	        @quiz.vocab.should be_equal(@quiz.contents.bins[4][2])
+	    end
     end
 end
