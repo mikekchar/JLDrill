@@ -112,7 +112,6 @@ Excellent
 	    it "should be able to move an item from one bin to the other" do
 	        @quiz.loadFromString("none", @fileString)
 	        vocab = @quiz.contents.bins[0][0]
-	        @quiz.bin = 0
 	        @quiz.moveToBin(vocab, 4)
 	        @quiz.contents.bins[0].length.should be(0)
 	        @quiz.contents.bins[4].length.should be(3)

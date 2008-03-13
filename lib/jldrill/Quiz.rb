@@ -204,8 +204,8 @@ module JLDrill
         
         attr_reader :savename,  
                     :updated, :length, :info, :name, :currentLevel,
-                    :contents, :options, :bin
-        attr_writer :savename, :updated, :info, :name, :bin
+                    :contents, :options
+        attr_writer :savename, :updated, :info, :name
 
         def initialize()
             @updated = false
@@ -216,7 +216,6 @@ module JLDrill
             @contents = Contents.new(self)            
             
             @last = nil
-            @bin = 0
 
             @oldCorrect = 0
             @oldIncorrect = 0
@@ -230,6 +229,14 @@ module JLDrill
             retVal = nil
             if !@currentProblem.nil?
                 retVal = @currentProblem.vocab
+            end
+            retVal
+        end
+
+        def bin
+            retVal = nil
+            if !@currentProblem.nil?
+                retVal = @currentProblem.vocab.status.bin
             end
             retVal
         end
@@ -266,7 +273,7 @@ module JLDrill
         def export(filename)
             saveFile = File.new(filename, "w")
             if saveFile
-                @bins[4].each { |word|
+                @contents.bins[4].each { |word|
                     saveFile.print(word.to_tsv + "\n")
                 }
                 saveFile.close()
@@ -309,7 +316,6 @@ module JLDrill
             if file != ""
                 initialize()
                 @savename = file
-                @bin = 0
                 IO.foreach(file) do |line|
                     parseLine(line)
                 end
@@ -322,7 +328,6 @@ module JLDrill
             initialize()
             
             @savename = name
-            @bin = 0
             
             string.each_line do |line|
                 parseLine(line)
@@ -348,7 +353,9 @@ module JLDrill
             retVal += "U: #{@contents.bins[0].length} P: #{@contents.bins[1].length} "
             retVal += "F: #{@contents.bins[2].length} "
             retVal += "G: #{@contents.bins[3].length} E: #{@contents.bins[4].length}"
-            retVal += " Current: #{@bin} "
+            if !@currentProblem.nil?
+                retVal += " Current: #{@currentProblem.vocab.status.bin} "
+            end
             retVal += " Known: #{@lastEstimate}%"
             retVal += " - "
             if(@options.randomOrder) then retVal += "R" end
@@ -398,34 +405,36 @@ module JLDrill
         end
         
         def getBin
+            retVal = 0
             if (@contents.bins[4].length == @contents.length)
-                @bin = 4
+                retVal = 4
             elsif (@contents.bins[0].length == 0)
                 if underIntroThresh && underReviewThresh && 
                     (@contents.bins[4].length > 5)
-                    @bin = 4
+                    retVal = 4
                 else
-                    @bin = randomBin(1, 3)
+                    retVal = randomBin(1, 3)
                 end
             else
                 if underIntroThresh
                     if underReviewThresh && (@contents.bins[4].length > 5)
-                        @bin = 4
+                        retVal = 4
                     else
                         if @contents.bins[4].length > 5
                             if rand(10) > 8
-                                @bin = 4
+                                retVal = 4
                             else
-                                @bin = 0
+                                retVal = 0
                             end
                         else
-                            @bin = 0
+                            retVal = 0
                         end
                     end
                 else
-                    @bin = randomBin(1, 3)
+                    retVal = randomBin(1, 3)
                 end
             end
+            retVal
         end
 
         def getVocab
@@ -434,9 +443,9 @@ module JLDrill
             end
 
             deadThresh = 10
-            getBin
-            until (@contents.bins[@bin].length > 0) || (deadThresh == 0)
-                getBin
+            bin = getBin
+            until (@contents.bins[bin].length > 0) || (deadThresh == 0)
+                bin = getBin
                 deadThresh -= 1
             end
             if (deadThresh == 0)
@@ -444,14 +453,14 @@ module JLDrill
                 print status + "\n"
             end
 
-            if((!@options.randomOrder) && (@bin == 0))
+            if((!@options.randomOrder) && (bin == 0))
                 index = 0
             else
-                index = rand(@contents.bins[@bin].length)
+                index = rand(@contents.bins[bin].length)
             end
 
-            vocab = @contents.bins[@bin][index] 
-            if @bin == 0 then promote(vocab) end
+            vocab = @contents.bins[bin][index] 
+            if bin == 0 then promote(vocab) end
             return vocab
         end
 
@@ -490,7 +499,6 @@ module JLDrill
         # Move the specified vocab to the specified bin
         def moveToBin(vocab, bin)
             @contents.moveToBin(vocab, bin)
-            @bin = bin
         end
 
         def promote(vocab)
@@ -522,7 +530,7 @@ module JLDrill
         end
   
         def adjustQuizOld(good)
-            if(@bin == 4)
+            if(@currentProblem.vocab.status.bin == 4)
                 if good
                     @oldCorrect += 1
                 else
