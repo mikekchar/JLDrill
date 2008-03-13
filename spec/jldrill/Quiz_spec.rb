@@ -119,5 +119,115 @@ Excellent
 	        @quiz.contents.bins[4][2].to_s.should be_eql("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 0/Position: 1/\n")
 	        @quiz.vocab.should be_equal(@quiz.contents.bins[4][2])
 	    end
+	    
+        def test_problem(question, problem)
+	        question.should be_eql(problem.question)
+	        
+	        @quiz.currentDrill.should be_eql(problem.question)
+	        @quiz.currentAnswer.should be_eql(problem.answer)
+	        @quiz.answer.should be_eql(problem.answer)
+        end
+
+	    def test_binOne(question)
+            # bin 1 items will always be reading problems
+            # because the level will always be 0
+            @quiz.vocab.status.level.should be(0)
+            test_problem(question, ReadingProblem.new(@quiz.vocab)) 
+	    end
+
+	    def test_binTwo(question)
+            # The quiz depends on the level
+            case @quiz.currentLevel
+                when 0
+                    test_problem(question, ReadingProblem.new(@quiz.vocab)) 
+                when 1
+                    test_problem(question, MeaningProblem.new(@quiz.vocab)) 
+                when 2
+                    if(!@quiz.vocab.kanji.nil?)
+                        test_problem(question, KanjiProblem.new(@quiz.vocab))
+                    else
+                        test_problem(question, ReadingProblem.new(@quiz.vocab)) 
+                    end
+            else
+	             # This shouldn't ever happen.  Blow up.
+	             true.should be(false) 
+            end                
+	    end
+	    
+	    def test_drill
+	        binZeroSize = @quiz.contents.bins[0].length
+	        question = @quiz.drill
+	        if (binZeroSize - 1) == @quiz.contents.bins[0].length
+	            # it was a bin 0 item which was promoted
+	            @quiz.vocab.status.bin.should be(1)
+                test_binOne(question)
+	        elsif @quiz.vocab.status.bin == 1
+	            test_binOne(question)
+	        elsif @quiz.vocab.status.bin == 2
+	            test_binTwo(question)
+	        elsif @quiz.vocab.status.bin == 3
+	            test_binTwo(question)
+	        elsif @quiz.vocab.status.bin == 4
+	            test_binTwo(question)
+	        else
+	             # This shouldn't ever happen.  Blow up.
+	             true.should be(false) 
+	        end 
+	    end
+
+        def test_correct
+            bin = @quiz.vocab.status.bin
+            vocab = @quiz.vocab
+#            if (bin == 2 && vocab.status.level == 2)
+#                @quiz.should_receive(:moveToBin).with(bin + 1) {
+#                    @quiz.contents.moveToBin(vocab, bin + 1)
+#                }
+#            end
+#            if (bin != 2)
+#                @quiz.should_receive(:moveToBin).with(bin + 1) {
+#                    @quiz.contents.moveToBin(vocab, bin + 1)
+#                }
+#            end
+            @quiz.correct
+        end
+	    
+	    it "should be able to create a new Problem" do
+	    	@quiz.loadFromString("none", @fileString)
+	    	@quiz.options.randomOrder = false
+	    	@quiz.options.promoteThresh = 1
+	        @quiz.reset
+	        # Non random should pick the first object in the first bin
+	        vocab = @quiz.contents.bins[0][0]
+	        @quiz.contents.bins[0].length.should be(4)
+	        @quiz.contents.bins[1].length.should be(0)
+	        question = @quiz.drill
+            test_problem(question, ReadingProblem.new(@quiz.vocab)) 
+	        
+	        # item gets promoted to the first bin immediately
+	        @quiz.contents.bins[0].length.should be(3)
+	        @quiz.contents.bins[1].length.should be(1)
+	        @quiz.bin.should be(1)
+	        @quiz.vocab.should be_equal(vocab)
+
+            # Threshold is 1, so a correct answer should promote
+            test_correct
+        end
+        
+        it "should eventually promote all items to bin 4" do
+	    	@quiz.loadFromString("none", @fileString)
+	    	@quiz.options.randomOrder = false
+	    	@quiz.options.promoteThresh = 1
+	        @quiz.reset
+
+            # Because we don't test level 4 items until we get 5 of them,
+            # this should take exactly 16 iterations
+            i = 0
+            until (@quiz.contents.bins[4].length == 4) || (i > 20) do
+                i += 1
+                test_drill
+                test_correct
+            end
+            i.should be(20)
+        end
     end
 end

@@ -203,7 +203,7 @@ module JLDrill
         
         attr_reader :savename,  
                     :updated, :vocab, :length, :info, :name, :currentLevel,
-                    :contents, :options 
+                    :contents, :options, :bin
         attr_writer :savename, :updated, :info, :name, :vocab, :bin
 
         def initialize()
@@ -226,12 +226,12 @@ module JLDrill
             @currentAnswer = nil
             @currentLevel = 0
         
-            @readingDrill = Proc.new{kanji + hint + reading}
+            @readingDrill = Proc.new{kanji + reading + hint}
             @readingAnswer = Proc.new{definitions}
             @kanjiDrill = Proc.new{kanji}
-            @kanjiAnswer = Proc.new{hint + reading + definitions}
+            @kanjiAnswer = Proc.new{reading + definitions + hint}
             @meaningDrill = Proc.new{definitions}
-            @meaningAnswer = Proc.new{kanji + hint + reading}
+            @meaningAnswer = Proc.new{kanji + reading + hint}
         end
 
         def update
@@ -360,11 +360,6 @@ module JLDrill
             status
         end
 
-        def underIntroThreshold
-            ((@contents.bins[1].length + @contents.bins[2].length) < @options.introThresh) && 
-                ((@contents.bins[0].length > 0) || (@contents.bins[4].length > 0))
-        end
-  
         def reEstimate
             if @oldIncorrect == 0
                 if @oldCorrect == 0
@@ -383,34 +378,52 @@ module JLDrill
             if (retVal < 0) then retVal = 0 end
             @lastEstimate = retVal
         end
+        
+        def underIntroThresh
+            (@contents.bins[1].length + @contents.bins[2].length) < @options.introThresh
+        end
   
+        def underReviewThresh
+            @lastEstimate < @options.oldThresh
+        end
+        
+        def randomBin(from, to)
+            if from >= to
+                return to
+            elsif (@contents.bins[from].length == 0) || (rand(2) == 0)
+                return randomBin(from + 1, to)
+            else
+                return from
+            end
+        end
+        
         def getBin
-            if underIntroThreshold
-                # >5 to avoid a bug where it constantly loops around picking
-                # the same item.  This will ensure the the "review" has some
-                # variety.
-                if @contents.bins[4].length > 5
-                    if @lastEstimate < @options.oldThresh
-                        # Keep drawing old ones until we hit our learning threshold
-                        @bin = 4
-                    else
-                        # Always test old ones 10% if the time
-                        if rand(10) > 8
-                            @bin = 4
-                        else
-                            @bin = 0
-                        end          
-                    end
+            if (@contents.bins[4].length == @contents.length)
+                @bin = 4
+            elsif (@contents.bins[0].length == 0)
+                if underIntroThresh && underReviewThresh && 
+                    (@contents.bins[4].length > 5)
+                    @bin = 4
                 else
-                    # We don't have any old values, so just introduce new ones
-                    @bin = 0
+                    @bin = randomBin(1, 3)
                 end
             else
-                # Otherwise quiz one that has already been introduced.
-                @bin = case rand(7)
-                    when 0..3 then 1
-                    when 4..5 then 2
-                    else 3
+                if underIntroThresh
+                    if underReviewThresh && (@contents.bins[4].length > 5)
+                        @bin = 4
+                    else
+                        if @contents.bins[4].length > 5
+                            if rand(10) > 8
+                                @bin = 4
+                            else
+                                @bin = 0
+                            end
+                        else
+                            @bin = 0
+                        end
+                    end
+                else
+                    @bin = randomBin(1, 3)
                 end
             end
         end
@@ -420,8 +433,16 @@ module JLDrill
                 return nil
             end
 
+            deadThresh = 10
             getBin
-            getBin until @contents.bins[@bin].length > 0
+            until (@contents.bins[@bin].length > 0) || (deadThresh == 0)
+                getBin
+                deadThresh -= 1
+            end
+            if (deadThresh == 0)
+                print "Warning: Deadlock broken in getVocab\n"
+                print status + "\n"
+            end
 
             if((!@options.randomOrder) && (@bin == 0))
                 index = 0
@@ -448,7 +469,8 @@ module JLDrill
                     deadThresh -= 1 
                 end
                 if (deadThresh == 0)
-                    print "Warning: Deadlock broken in randomVocab!"
+                    print "Warning: Deadlock broken in randomVocab!\n"
+                    print status + "\n"
                 end
             end
             @last = @vocab
@@ -617,7 +639,7 @@ module JLDrill
 
             if @vocab
                 if @vocab.hint
-                    text += @vocab.hint + "\n"
+                    text += "\nHint: " + @vocab.hint + "\n"
                 end
             end
 
