@@ -2,10 +2,11 @@ module JLDrill
 
     # Represents a single question/answer pair in a quiz
     class Problem
-        attr_reader :vocab
+        attr_reader :vocab, :level
         
         def initialize(vocab)
             @vocab = vocab
+            @level = -1
         end
 
         def kanji
@@ -45,6 +46,11 @@ module JLDrill
     # The first kind of Problem shown.  It lets you read it in Japanese and
     # guess the English
     class ReadingProblem < Problem
+        def initialize(vocab)
+            super(vocab)
+            @level = 0
+        end
+    
         def question
             kanji + reading + hint
         end    
@@ -56,6 +62,11 @@ module JLDrill
     
     # Test your kanji reading.  Read the kanji and guess the reading and definitions
     class KanjiProblem < Problem
+        def initialize(vocab)
+            super(vocab)
+            @level = 2
+        end
+    
         def question
             kanji
         end
@@ -67,6 +78,12 @@ module JLDrill
     
     # Shows you the English and you guess the kanji and reading
     class MeaningProblem < Problem
+        def initialize(vocab)
+            super(vocab)
+            @level = 1
+        end
+    
+
         def question
             definitions
         end

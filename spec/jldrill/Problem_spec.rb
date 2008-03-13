@@ -60,6 +60,7 @@ module JLDrill
 		    @vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem = ReadingProblem.new(@vocab)
             @problem.should_not be_nil
+		    @problem.level.should be(0)
             @problem.question.should be_eql("会う\nあう\n\nHint: No hints\n")
             @problem.answer.should be_eql("to meet, to interview\n")
         end
@@ -71,6 +72,7 @@ module JLDrill
 		    @vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem = KanjiProblem.new(@vocab)
             @problem.should_not be_nil
+		    @problem.level.should be(2)
             @problem.question.should be_eql("会う\n")
             @problem.answer.should be_eql("あう\nto meet, to interview\n\nHint: No hints\n")
         end
@@ -82,6 +84,7 @@ module JLDrill
 		    @vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem = MeaningProblem.new(@vocab)
             @problem.should_not be_nil
+		    @problem.level.should be(1)
             @problem.question.should be_eql("to meet, to interview\n")
             @problem.answer.should be_eql("会う\nあう\n\nHint: No hints\n")
         end

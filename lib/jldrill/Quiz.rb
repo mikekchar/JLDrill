@@ -203,7 +203,7 @@ module JLDrill
         end
         
         attr_reader :savename,  
-                    :updated, :length, :info, :name, :currentLevel,
+                    :updated, :length, :info, :name, 
                     :contents, :options
         attr_writer :savename, :updated, :info, :name
 
@@ -214,15 +214,13 @@ module JLDrill
             @info = ""
             @options = Options.new(self)
             @contents = Contents.new(self)            
+            @currentProblem = nil
             
             @last = nil
 
             @oldCorrect = 0
             @oldIncorrect = 0
             @lastEstimate = 0
-
-            @currentProblem = nil
-            @currentLevel = 0
         end
 
         def vocab
@@ -237,6 +235,14 @@ module JLDrill
             retVal = nil
             if !@currentProblem.nil?
                 retVal = @currentProblem.vocab.status.bin
+            end
+            retVal
+        end
+
+        def currentLevel
+            retVal = nil
+            if !@currentProblem.nil?
+                retVal = @currentProblem.level
             end
             retVal
         end
@@ -555,7 +561,7 @@ module JLDrill
         def incorrect
             adjustQuizOld(false)
             if(@currentProblem.vocab)
-                demote(@currentProblem.vocab, @currentLevel)
+                demote(@currentProblem.vocab, @currentProblem.level)
                 @updated = true
             end
         end
@@ -568,17 +574,17 @@ module JLDrill
             # this enforces introduction of the material in the "fair" bin.
 
             if vocab.status.bin == 2 || vocab.status.level == 0
-                @currentLevel = vocab.status.level
+                level = vocab.status.level
             else
                 if vocab.kanji == nil
                     # Don't try to drill kanji if there isn't any
-                    @currentLevel = rand(1)
+                    level = rand(1)
                 else
-                    @currentLevel = rand(vocab.status.level)
+                    level = rand(vocab.status.level)
                 end
             end
 
-            case @currentLevel
+            case level
                 when 0
                     @currentProblem = ReadingProblem.new(vocab)
                 when 1
