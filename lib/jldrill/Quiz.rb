@@ -19,6 +19,7 @@
 require 'jldrill/Vocabulary'
 require 'jldrill/Edict'
 require 'jldrill/Bin'
+require 'jldrill/Problem'
 
 module JLDrill
     class Quiz
@@ -202,9 +203,9 @@ module JLDrill
         end
         
         attr_reader :savename,  
-                    :updated, :vocab, :length, :info, :name, :currentLevel,
+                    :updated, :length, :info, :name, :currentLevel,
                     :contents, :options, :bin
-        attr_writer :savename, :updated, :info, :name, :vocab, :bin
+        attr_writer :savename, :updated, :info, :name, :bin
 
         def initialize()
             @updated = false
@@ -214,7 +215,6 @@ module JLDrill
             @options = Options.new(self)
             @contents = Contents.new(self)            
             
-            @vocab = nil
             @last = nil
             @bin = 0
 
@@ -222,16 +222,16 @@ module JLDrill
             @oldIncorrect = 0
             @lastEstimate = 0
 
-            @currentDrill = nil
-            @currentAnswer = nil
+            @currentProblem = nil
             @currentLevel = 0
-        
-            @readingDrill = Proc.new{kanji + reading + hint}
-            @readingAnswer = Proc.new{definitions}
-            @kanjiDrill = Proc.new{kanji}
-            @kanjiAnswer = Proc.new{reading + definitions + hint}
-            @meaningDrill = Proc.new{definitions}
-            @meaningAnswer = Proc.new{kanji + reading + hint}
+        end
+
+        def vocab
+            retVal = nil
+            if !@currentProblem.nil?
+                retVal = @currentProblem.vocab
+            end
+            retVal
         end
 
         def update
@@ -450,30 +450,31 @@ module JLDrill
                 index = rand(@contents.bins[@bin].length)
             end
 
-            @vocab = @contents.bins[@bin][index] 
-            if @bin == 0 then promote end
-            return @vocab
+            vocab = @contents.bins[@bin][index] 
+            if @bin == 0 then promote(vocab) end
+            return vocab
         end
 
-        def randomVocab!
+        def getUniqueVocab
             if(@contents.length == 0)
                 return
             end
 
-            getVocab
+            vocab = getVocab
             deadThresh = 10
             if(@contents.length > 1)
                 # Don't show the same item twice in a row
-                until (@vocab != @last) || (deadThresh == 0)
-                    getVocab
+                until (vocab != @last) || (deadThresh == 0)
+                    vocab = getVocab
                     deadThresh -= 1 
                 end
                 if (deadThresh == 0)
-                    print "Warning: Deadlock broken in randomVocab!\n"
+                    print "Warning: Deadlock broken in getUniqueVocab\n"
                     print status + "\n"
                 end
             end
-            @last = @vocab
+            @last = vocab
+            vocab
         end
 
         # Get an array containing all the vocabulary in the quiz
@@ -486,36 +487,36 @@ module JLDrill
             @contents.reset
         end
 
-        # Move the current vocabular to the specified bin
-        def moveToBin(bin)
-            @contents.moveToBin(@vocab, bin)
+        # Move the specified vocab to the specified bin
+        def moveToBin(vocab, bin)
+            @contents.moveToBin(vocab, bin)
             @bin = bin
         end
 
-        def promote
-            if !@vocab.nil? && (@vocab.status.bin + 1 < @contents.bins.length) 
-                if @vocab.status.bin != 2 || @vocab.status.level == 2
-                    moveToBin(@vocab.status.bin + 1)
+        def promote(vocab)
+            if !vocab.nil? && (vocab.status.bin + 1 < @contents.bins.length) 
+                if vocab.status.bin != 2 || vocab.status.level == 2
+                    moveToBin(vocab, vocab.status.bin + 1)
                 else
-                    if @vocab.kanji
-                        @vocab.status.level += 1
+                    if !vocab.kanji.nil?
+                        vocab.status.level += 1
                     else
-                        @vocab.status.level = 2
+                        vocab.status.level = 2
                     end
                 end
             end
         end
 
-        def demote(level=0)
-            if @vocab
+        def demote(vocab, level=0)
+            if vocab
                 # Reset the level and bin to the one that
                 # the user failed on.
  
-                @vocab.status.level = level
+                vocab.status.level = level
                 if level == 0
-                    moveToBin(1)
+                    moveToBin(vocab, 1)
                 else
-                    moveToBin(2)
+                    moveToBin(vocab, 2)
                 end
             end
         end
@@ -532,11 +533,12 @@ module JLDrill
         end
   
         def correct
+            vocab = @currentProblem.vocab
             adjustQuizOld(true)
-            if(@vocab)
-                @vocab.status.score += 1
-                if(@vocab.status.score >= @options.promoteThresh)
-                    promote
+            if(vocab)
+                vocab.status.score += 1
+                if(vocab.status.score >= @options.promoteThresh)
+                    promote(vocab)
                 end
                 @updated = true
             end
@@ -544,117 +546,57 @@ module JLDrill
 
         def incorrect
             adjustQuizOld(false)
-            if(@vocab)
-                demote(@currentLevel)
+            if(@currentProblem.vocab)
+                demote(@currentProblem.vocab, @currentLevel)
                 @updated = true
             end
         end
 
         def drill()
-            randomVocab!
+            vocab = getUniqueVocab
     
             # Kind of screwy logic...  In the "fair" bin, only drill
             # at the current level.  At other levels, drill at a random levels
             # this enforces introduction of the material in the "fair" bin.
 
-            if @vocab.status.bin == 2 || @vocab.status.level == 0
-                @currentLevel = @vocab.status.level
+            if vocab.status.bin == 2 || vocab.status.level == 0
+                @currentLevel = vocab.status.level
             else
-                if @vocab.kanji == nil
+                if vocab.kanji == nil
                     # Don't try to drill kanji if there isn't any
                     @currentLevel = rand(1)
                 else
-                    @currentLevel = rand(@vocab.status.level)
+                    @currentLevel = rand(vocab.status.level)
                 end
             end
 
             case @currentLevel
                 when 0
-                    @currentDrill = @readingDrill
-                    @currentAnswer = @readingAnswer
+                    @currentProblem = ReadingProblem.new(vocab)
                 when 1
-                    @currentDrill = @meaningDrill
-                    @currentAnswer = @meaningAnswer
+                    @currentProblem = MeaningProblem.new(vocab)
                 when 2
-                    if @vocab.kanji
-                        @currentDrill = @kanjiDrill
-                        @currentAnswer = @kanjiAnswer
+                    if vocab.kanji
+                        @currentProblem = KanjiProblem.new(vocab)
                     else
-                        @currentDrill = @meaningDrill
-                        @currentAnswer = @meaningAnswer
+                        @currentProblem = MeaningProblem.new(vocab)
                     end
             end        
 
-            return @currentDrill.call
+            return @currentProblem.question
         end
 
         def answer()
-            text = ""
-
-            text = @currentAnswer.call
-
-            return text
+            @currentProblem.answer
         end
 
         def currentDrill
-            text = ""
-            if @currentDrill
-                text = @currentDrill.call
-            end
-            return text
+            @currentProblem.question
         end
 
         def currentAnswer
-            text = ""
-            if @currentAnswer
-                text = @currentAnswer.call
-            end
-            return text
+            @currentProblem.answer
         end
-
-        def kanji
-            text = ""
-
-            if @vocab
-                if @vocab.kanji
-                    text = @vocab.kanji + "\n"
-                end
-            end
-
-            return text
-        end
-
-        def reading
-            text = ""
-
-            if @vocab
-                text = @vocab.reading + "\n"
-            end
-
-            return text
-        end
-
-        def hint
-            text = ""
-
-            if @vocab
-                if @vocab.hint
-                    text += "\nHint: " + @vocab.hint + "\n"
-                end
-            end
-
-            return text
-        end
-
-        def definitions
-            text = ""
-
-            if @vocab
-                text = @vocab.definitions + "\n"
-            end
-
-            return text
-        end
-        
+     
     end
 end

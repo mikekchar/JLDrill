@@ -111,13 +111,13 @@ Excellent
 	    
 	    it "should be able to move an item from one bin to the other" do
 	        @quiz.loadFromString("none", @fileString)
-	        @quiz.vocab = @quiz.contents.bins[0][0]
+	        vocab = @quiz.contents.bins[0][0]
 	        @quiz.bin = 0
-	        @quiz.moveToBin(4)
+	        @quiz.moveToBin(vocab, 4)
 	        @quiz.contents.bins[0].length.should be(0)
 	        @quiz.contents.bins[4].length.should be(3)
 	        @quiz.contents.bins[4][2].to_s.should be_eql("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 0/Position: 1/\n")
-	        @quiz.vocab.should be_equal(@quiz.contents.bins[4][2])
+	        vocab.should be_equal(@quiz.contents.bins[4][2])
 	    end
 	    
         def test_problem(question, problem)
@@ -176,18 +176,6 @@ Excellent
 	    end
 
         def test_correct
-            bin = @quiz.vocab.status.bin
-            vocab = @quiz.vocab
-#            if (bin == 2 && vocab.status.level == 2)
-#                @quiz.should_receive(:moveToBin).with(bin + 1) {
-#                    @quiz.contents.moveToBin(vocab, bin + 1)
-#                }
-#            end
-#            if (bin != 2)
-#                @quiz.should_receive(:moveToBin).with(bin + 1) {
-#                    @quiz.contents.moveToBin(vocab, bin + 1)
-#                }
-#            end
             @quiz.correct
         end
 	    
@@ -220,7 +208,7 @@ Excellent
 	        @quiz.reset
 
             # Because we don't test level 4 items until we get 5 of them,
-            # this should take exactly 16 iterations
+            # this should take exactly 20 iterations
             i = 0
             until (@quiz.contents.bins[4].length == 4) || (i > 20) do
                 i += 1
