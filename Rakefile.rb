@@ -40,7 +40,8 @@ end
 Spec::Rake::SpecTask.new(:rcov) do |t|
 	t.spec_files = spec_files
 	t.rcov = true
-	t.rcov_opts = ["--exclude rspec", "--exclude rcov", "--exclude syntax"]
+	t.rcov_opts = ["--exclude rspec", "--exclude rcov", "--exclude syntax",
+	    "--exclude _spec", "--exclude /lib/Context/"]
 	t.spec_opts = ["--format html:test_results.html"]
 	t.ruby_opts = ruby_opts
 end
@@ -86,12 +87,19 @@ gem_spec = Gem::Specification.new do |s|
 	#### Load-time details: library and application (you will need one or both).
 
     # Use these for libraries.
+
 	s.require_path = 'lib'
 
 	# Use these for applications.
+
 	s.bindir = "bin"
 	s.executables = ["jldrill"]
 	s.default_executable = "jldrill"
+	
+	#### Dependencies
+    
+    s.add_dependency('context', '>=0.0.1')
+
 
     #### Documentation and testing.
 
