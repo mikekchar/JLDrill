@@ -1,4 +1,4 @@
-require 'jldrill/Problem'
+require 'jldrill/model/Problem'
 
 module JLDrill
 

@@ -16,7 +16,7 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
-require "jldrill/VocabularyStatus"
+require "jldrill/model/VocabularyStatus"
 
 # Class file for Japanese vocabulary
 # Currently geared towards edict, but that might change

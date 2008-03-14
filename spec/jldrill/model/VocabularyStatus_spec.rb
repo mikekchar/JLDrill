@@ -1,5 +1,5 @@
-require 'jldrill/Bin'
-require 'jldrill/VocabularyStatus'
+require 'jldrill/model/Bin'
+require 'jldrill/model/VocabularyStatus'
 
 module JLDrill
 

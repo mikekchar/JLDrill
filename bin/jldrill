@@ -19,15 +19,15 @@
 
 
 require 'gtk2'
-require 'jldrill/Edict'
-require 'jldrill/HashedEdict'
-require 'jldrill/Vocabulary'
-require 'jldrill/Quiz'
-require 'jldrill/GtkDisplayView'
-require 'jldrill/GtkXRefView'
-require 'jldrill/GtkVocabTable'
-require 'jldrill/GtkIndicatorBox'
-require 'jldrill/GtkEnterFilename'
+require 'jldrill/model/Edict'
+require 'jldrill/model/HashedEdict'
+require 'jldrill/model/Vocabulary'
+require 'jldrill/model/Quiz'
+require 'jldrill/oldUI/GtkDisplayView'
+require 'jldrill/oldUI/GtkXRefView'
+require 'jldrill/oldUI/GtkVocabTable'
+require 'jldrill/oldUI/GtkIndicatorBox'
+require 'jldrill/oldUI/GtkEnterFilename'
 require 'jldrill/Version'
 
 

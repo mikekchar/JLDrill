@@ -16,8 +16,8 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
-require 'jldrill/Edict'
-require 'jldrill/Vocabulary'
+require 'jldrill/model/Edict'
+require 'jldrill/model/Vocabulary'
 
 # Just like an Edict, only hashed on the first character of the
 # reading so that we can search it faster.  Note, it's dead slow

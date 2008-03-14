@@ -18,7 +18,7 @@
 # Contains code necessary to read in an EDict file
 # Also will parse hacked up JLPT Edict files
 
-require "jldrill/Vocabulary"
+require "jldrill/model/Vocabulary"
 
 # 2 helper classes for parsing the english meanings in
 # dictionary.

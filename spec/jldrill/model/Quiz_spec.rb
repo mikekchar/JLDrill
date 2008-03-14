@@ -1,4 +1,4 @@
-require 'jldrill/Quiz'
+require 'jldrill/model/Quiz'
 
 module JLDrill
 

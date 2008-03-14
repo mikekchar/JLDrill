@@ -16,10 +16,10 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
-require 'jldrill/Vocabulary'
-require 'jldrill/Edict'
-require 'jldrill/Bin'
-require 'jldrill/Problem'
+require 'jldrill/model/Vocabulary'
+require 'jldrill/model/Edict'
+require 'jldrill/model/Bin'
+require 'jldrill/model/Problem'
 
 module JLDrill
     class Quiz

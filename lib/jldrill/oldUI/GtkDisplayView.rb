@@ -17,8 +17,8 @@
 
 
 require 'gtk2'
-require 'jldrill/Vocabulary'
-require 'jldrill/GtkVocabView'
+require 'jldrill/model/Vocabulary'
+require 'jldrill/oldUI/GtkVocabView'
 
 class GtkDisplayView < Gtk::Dialog
 

@@ -17,7 +17,7 @@
 
 
 require 'gtk2'
-require 'jldrill/Vocabulary'
+require 'jldrill/model/Vocabulary'
 
 class GtkVocabTable < Gtk::ScrolledWindow
 
