@@ -16,16 +16,15 @@ require 'jldrill/Version'
 
 module JLDrill::Gtk
 
-
-  module Config
-    if !Gem.datadir("jldrill").nil?
-        # Use the data directory in the Gem if it is available
-        DATA_DIR = Gem.datadir("jldrill")
-    else
-        # Otherwise hope there is a data dir in current directory
-        DATA_DIR = 'data/jldrill'
+    module Config
+        if !Gem.datadir("jldrill").nil?
+            # Use the data directory in the Gem if it is available
+            DATA_DIR = Gem.datadir("jldrill")
+        else
+            # Otherwise hope there is a data dir in current directory
+            DATA_DIR = 'data/jldrill'
+        end
     end
-  end
 
 
 	class MainWindowView < JLDrill::MainWindowView
@@ -36,421 +35,390 @@ module JLDrill::Gtk
 				@view = view
 				connectSignals unless @view.nil?
 
-    @edict = nil
-    @vocab = nil
-    @resultDisplayed = false
-    @quiz = nil
+                @edict = nil
+                @vocab = nil
+                @resultDisplayed = false
+                @quiz = nil
     
-    @currentDir = File.join(JLDrill::Gtk::Config::DATA_DIR, "quiz") 
-    @icon = Gdk::Pixbuf.new(File.join(JLDrill::Gtk::Config::DATA_DIR, "icon.png"))
+                @currentDir = File.join(JLDrill::Gtk::Config::DATA_DIR, "quiz") 
+                @icon = Gdk::Pixbuf.new(File.join(JLDrill::Gtk::Config::DATA_DIR, "icon.png"))
     
-    set_icon(@icon)
+                set_icon(@icon)
 
-    ## Layout everything in a vertical table
-    table = Gtk::Table.new(1, 5, false)
-    add(table)
+                ## Layout everything in a vertical table
+                table = Gtk::Table.new(1, 5, false)
+                add(table)
 
-    menu = createMenu
-    table.attach(menu.get_widget('<main>'),
-                 # X direction            # Y direction
-                 0, 1,                    0, 1,
-                 Gtk::EXPAND | Gtk::FILL, 0,
-                 0,                       0)
+                menu = createMenu
+                table.attach(menu.get_widget('<main>'),
+                             # X direction            # Y direction
+                             0, 1,                    0, 1,
+                             Gtk::EXPAND | Gtk::FILL, 0,
+                             0,                       0)
 
-    toolbar = createToolbar
-    table.attach(toolbar,
-                 # X direction            # Y direction
-                 0, 1,                    1, 2,
-                 Gtk::EXPAND | Gtk::FILL, 0,
-                 0,                       0)
+                toolbar = createToolbar
+                table.attach(toolbar,
+                             # X direction            # Y direction
+                             0, 1,                    1, 2,
+                             Gtk::EXPAND | Gtk::FILL, 0,
+                             0,                       0)
 
+	            ## Create indicators
+	            @indicatorBox = GtkIndicatorBox.new
+	            table.attach(@indicatorBox,
+                             # X direction            # Y direction
+                             0, 1,                    2, 3,
+                             Gtk::EXPAND | Gtk::FILL, 0,
+                             0,                       0)
+	            @indicatorBox.show_all
 
-	## Create indicators
-	@indicatorBox = GtkIndicatorBox.new
-	table.attach(@indicatorBox,
-                 # X direction            # Y direction
-                 0, 1,                    2, 3,
-                 Gtk::EXPAND | Gtk::FILL, 0,
-                 0,                       0)
-	@indicatorBox.show_all
-
-    vpaned = Gtk::VPaned.new
-    vpaned.set_border_width(5)
-    table.attach(vpaned,
-                 # X direction            # Y direction
-                 0, 1,                    3, 4,
-                 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
-                 0,                       0)
-
-
-    ## Create document
-    sw = Gtk::ScrolledWindow.new
-    sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
-    sw.shadow_type = Gtk::SHADOW_IN
-    vpaned.add1(sw)
-
-    contents = Gtk::TextView.new
-    contents.wrap_mode = Gtk::TextTag::WRAP_WORD
-    contents.editable = false
-    contents.cursor_visible = false
-    sw.add(contents)
-    @qbuffer = contents.buffer
-    @qbuffer.create_tag("kanji", 
-                       "size" => 20 * Pango::SCALE,
-                       "justification" => Gtk::JUSTIFY_CENTER,
-                       "foreground" => "blue");
-
-    ## Create document
-    sw = Gtk::ScrolledWindow.new
-    sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
-    sw.shadow_type = Gtk::SHADOW_IN
-    vpaned.add2(sw)
-
-    contents = Gtk::TextView.new
-    contents.wrap_mode = Gtk::TextTag::WRAP_WORD
-    contents.editable = false
-    contents.cursor_visible = false
-    sw.add(contents)
-    @abuffer = contents.buffer
-    @abuffer.create_tag("kanji", 
-                       "size" => 20 * Pango::SCALE,
-                       "justification" => Gtk::JUSTIFY_CENTER,
-                       "foreground" => "blue");
-    vpaned.show_all
+                vpaned = Gtk::VPaned.new
+                vpaned.set_border_width(5)
+                table.attach(vpaned,
+                             # X direction            # Y direction
+                             0, 1,                    3, 4,
+                             Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
+                             0,                       0)
 
 
-    ## Create statusbar
-    @statusbar = Gtk::Statusbar.new
-    table.attach(@statusbar,
-                 # X direction            # Y direction
-                 0, 1,                    4, 5,
-                 Gtk::EXPAND | Gtk::FILL, 0,
-                 0,                       0)
-    updateStatus
+                ## Create document
+                sw = Gtk::ScrolledWindow.new
+                sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
+                sw.shadow_type = Gtk::SHADOW_IN
+                vpaned.add1(sw)
 
+                contents = Gtk::TextView.new
+                contents.wrap_mode = Gtk::TextTag::WRAP_WORD
+                contents.editable = false
+                contents.cursor_visible = false
+                sw.add(contents)
+                @qbuffer = contents.buffer
+                @qbuffer.create_tag("kanji", 
+                                   "size" => 20 * Pango::SCALE,
+                                   "justification" => Gtk::JUSTIFY_CENTER,
+                                   "foreground" => "blue");
+
+                ## Create document
+                sw = Gtk::ScrolledWindow.new
+                sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
+                sw.shadow_type = Gtk::SHADOW_IN
+                vpaned.add2(sw)
+
+                contents = Gtk::TextView.new
+                contents.wrap_mode = Gtk::TextTag::WRAP_WORD
+                contents.editable = false
+                contents.cursor_visible = false
+                sw.add(contents)
+                @abuffer = contents.buffer
+                @abuffer.create_tag("kanji", 
+                                   "size" => 20 * Pango::SCALE,
+                                   "justification" => Gtk::JUSTIFY_CENTER,
+                                   "foreground" => "blue");
+                vpaned.show_all
+
+
+                ## Create statusbar
+                @statusbar = Gtk::Statusbar.new
+                table.attach(@statusbar,
+                             # X direction            # Y direction
+                             0, 1,                    4, 5,
+                             Gtk::EXPAND | Gtk::FILL, 0,
+                             0,                       0)
+                updateStatus
 			end
 
-  def createMenu
-    ## Create the menubar
-    accel_group = Gtk::AccelGroup.new
-    add_accel_group(accel_group)
-    
-    menu = Gtk::ItemFactory.new(Gtk::ItemFactory::TYPE_MENU_BAR,
-                                        '<main>', accel_group)
+            def createMenu
+                ## Create the menubar
+                accel_group = Gtk::AccelGroup.new
+                add_accel_group(accel_group)
+                
+                menu = Gtk::ItemFactory.new(Gtk::ItemFactory::TYPE_MENU_BAR,
+                                                    '<main>', accel_group)
+                
+                # create menu items
+                menu_items = [
+                    ["/_File"],
+                    ["/File/_Save",
+                    "<StockItem>", "<control>S", Gtk::Stock::SAVE, Proc.new{save}],
+                    ["/File/Save _As...",
+                    "<StockItem>", "<control>A", Gtk::Stock::SAVE, Proc.new{saveAs}],
+                    ["/File/_Export...",
+                    "<Item>", "<control>E", nil, Proc.new{export}],
+                    ["/File/_Open...",
+                    "<StockItem>", "<control>O", Gtk::Stock::OPEN, Proc.new{open}],
+                    ["/File/Load Reference _Dictionary...",
+                    "<Item>", "<control>D", nil, 
+                        Proc.new{
+                            dictDir = File.join(JLDrill::Gtk::Config::DATA_DIR, "dict")
+                            filename = File.join(dictDir, "edict.utf")
+                            loadReference(filename)
+                        }],
+                    ["/File/_Quit",
+                    "<StockItem>", "<control>Q", Gtk::Stock::QUIT, Proc.new{quit}],
 
-    
+                    ["/_Drill"],
+                    ["/Drill/_Info...",
+                        "<Item>", "<control>I", nil, Proc.new{info}],
+                    ["/Drill/_Check",
+                    "<Item>", "Z", nil, Proc.new{check}],
+                    ["/Drill/_Incorrect",
+                    "<Item>", "X", nil, Proc.new{incorrect}],
+                    ["/Drill/_Correct",
+                    "<Item>", "C", nil, Proc.new{correct}],
+                    ["/Drill/Show _All...",
+                    "<Item>", "<control>T", nil, Proc.new{vocabTable}],
+                    ["/Drill/_Preferences",
+                    "<StockItem>", "<control>P", Gtk::Stock::PREFERENCES, Proc.new{options}],
+                    ["/Drill/_Reset",
+                    "<Item>", "<control>R", nil, Proc.new{resetQuiz}],
 
-    # create menu items
-    menu_items = [
-      ["/_File"],
-      ["/File/_Save",
-        "<StockItem>", "<control>S", Gtk::Stock::SAVE, Proc.new{save}],
-      ["/File/Save _As...",
-        "<StockItem>", "<control>A", Gtk::Stock::SAVE, Proc.new{saveAs}],
-      ["/File/_Export...",
-        "<Item>", "<control>E", nil, Proc.new{export}],
-      ["/File/_Open...",
-        "<StockItem>", "<control>O", Gtk::Stock::OPEN, Proc.new{open}],
-      ["/File/Load Reference _Dictionary...",
-        "<Item>", "<control>D", nil, 
-        Proc.new{
-#          filename = loadReferenceDialog()
-          dictDir = File.join(JLDrill::Gtk::Config::DATA_DIR, "dict")
-          filename = File.join(dictDir, "edict.utf")
-          loadReference(filename)
-        }],
-      ["/File/_Quit",
-        "<StockItem>", "<control>Q", Gtk::Stock::QUIT, Proc.new{quit}],
+                    ["/_Vocab"],
+                    ["/Vocab/_Display...",
+                    "<Item>", "D", nil, Proc.new{displayVocab}],
+                    ["/Vocab/_XReference...",
+                    "<Item>", "<control>X", nil, Proc.new{xReference}],
 
-      ["/_Drill"],
-	  ["/Drill/_Info...",
-        "<Item>", "<control>I", nil, Proc.new{info}],
-      ["/Drill/_Check",
-        "<Item>", "Z", nil, Proc.new{check}],
-      ["/Drill/_Incorrect",
-        "<Item>", "X", nil, Proc.new{incorrect}],
-      ["/Drill/_Correct",
-        "<Item>", "C", nil, Proc.new{correct}],
-      ["/Drill/Show _All...",
-        "<Item>", "<control>T", nil, Proc.new{vocabTable}],
-      ["/Drill/_Preferences",
-        "<StockItem>", "<control>P", Gtk::Stock::PREFERENCES, Proc.new{options}],
-      ["/Drill/_Reset",
-        "<Item>", "<control>R", nil, Proc.new{resetQuiz}],
+                    ["/_Help"],
+                    ["/Help/Ac_knowledgements...",
+                    "<Item>", "<control>K", nil, Proc.new{ack}],
+                    ["/Help/_About...", 
+                    "<Item>", "?", nil, Proc.new{about}],
+                ]
+                menu.create_items(menu_items)
 
-      ["/_Vocab"],
-      ["/Vocab/_Display...",
-        "<Item>", "D", nil, Proc.new{displayVocab}],
-      ["/Vocab/_XReference...",
-        "<Item>", "<control>X", nil, Proc.new{xReference}],
+                return menu
+            end
 
-      ["/_Help"],
-      ["/Help/Ac_knowledgements...",
-        "<Item>", "<control>K", nil, Proc.new{ack}],
-      ["/Help/_About...", 
-        "<Item>", "?", nil, Proc.new{about}],
-    ]
-    menu.create_items(menu_items)
+            def createToolbar
+                ## Create the toolbar
+                toolbar = Gtk::Toolbar.new
 
-    return menu
-  end
-
-  def createToolbar
-    ## Create the toolbar
-    toolbar = Gtk::Toolbar.new
-
-    checkImage = Gtk::Image.new(Gtk::Stock::SPELL_CHECK,
-                           Gtk::IconSize::SMALL_TOOLBAR)
-    incorrectImage = Gtk::Image.new(Gtk::Stock::NO, 
-                               Gtk::IconSize::SMALL_TOOLBAR)
-    correctImage = Gtk::Image.new(Gtk::Stock::YES, 
-                             Gtk::IconSize::SMALL_TOOLBAR)
+                checkImage = Gtk::Image.new(Gtk::Stock::SPELL_CHECK,
+                                       Gtk::IconSize::SMALL_TOOLBAR)
+                incorrectImage = Gtk::Image.new(Gtk::Stock::NO, 
+                                           Gtk::IconSize::SMALL_TOOLBAR)
+                correctImage = Gtk::Image.new(Gtk::Stock::YES, 
+                                         Gtk::IconSize::SMALL_TOOLBAR)
 
 
 
-    # toolbar.set_toolbar_style(Gtk::Toolbar::BOTH)
-    toolbar.append(Gtk::Stock::SAVE,
-                   "Save a Drill file"
-                   ) do save end
-    toolbar.append(Gtk::Stock::OPEN,
-                   "Open a Edict file"
-                   ) do open end
-    toolbar.append(Gtk::Stock::QUIT,
-                   "Quit GTK LDrill"
-                   ) do quit end
-    toolbar.append_space
-    toolbar.append("Check (Z)", "Check",
-                   "Check the result", checkImage
-                   ) do check end
-    toolbar.append("Incorrect (X)", "Incorrect",
-                   "Answer was incorrect", incorrectImage
-                   ) do incorrect end
-    toolbar.append("Correct (C)", "Correct",
-                   "Answer was correct", correctImage
-                   ) do correct end
+                # toolbar.set_toolbar_style(Gtk::Toolbar::BOTH)
+                toolbar.append(Gtk::Stock::SAVE,
+                               "Save a Drill file"
+                               ) do save end
+                toolbar.append(Gtk::Stock::OPEN,
+                               "Open a Edict file"
+                               ) do open end
+                toolbar.append(Gtk::Stock::QUIT,
+                               "Quit GTK LDrill"
+                               ) do quit end
+                toolbar.append_space
+                toolbar.append("Check (Z)", "Check",
+                               "Check the result", checkImage
+                               ) do check end
+                toolbar.append("Incorrect (X)", "Incorrect",
+                               "Answer was incorrect", incorrectImage
+                               ) do incorrect end
+                toolbar.append("Correct (C)", "Correct",
+                               "Answer was correct", correctImage
+                               ) do correct end
 
-    return toolbar
-  end
+                return toolbar
+            end
 
-  def info()
-    if @quiz
-      dialog = Gtk::Dialog.new("Quiz Info",
-                               self,
-                               Gtk::Dialog::DESTROY_WITH_PARENT,
-                               [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
+            def info()
+                if @quiz
+                    dialog = Gtk::Dialog.new("Quiz Info",
+                                            self,
+                                            Gtk::Dialog::DESTROY_WITH_PARENT,
+                                            [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
 
-      sw = Gtk::ScrolledWindow.new
-      sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
-      sw.shadow_type = Gtk::SHADOW_IN
-      dialog.vbox.add(sw)
-      
-      contents = Gtk::TextView.new
-      contents.wrap_mode = Gtk::TextTag::WRAP_WORD
-      contents.editable = false
-      contents.cursor_visible = false
-      sw.add(contents)
-      dialog.set_default_size(640, 360)
+                    sw = Gtk::ScrolledWindow.new
+                    sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
+                    sw.shadow_type = Gtk::SHADOW_IN
+                    dialog.vbox.add(sw)
+                    
+                    contents = Gtk::TextView.new
+                    contents.wrap_mode = Gtk::TextTag::WRAP_WORD
+                    contents.editable = false
+                    contents.cursor_visible = false
+                    sw.add(contents)
+                    dialog.set_default_size(640, 360)
 
-      contents.buffer.text = "Created from dictionary: " + @quiz.name + "\n\n"
-      contents.buffer.text += @quiz.info
+                    contents.buffer.text = "Created from dictionary: " + @quiz.name + "\n\n"
+                    contents.buffer.text += @quiz.info
 
-      dialog.show_all
+                    dialog.show_all
 
-      dialog.run { |response|
-        case response
-        when Gtk::Dialog::RESPONSE_ACCEPT then # Do nothing
-        end
-        dialog.destroy
-      }
-    end
-  end
+                    dialog.run { |response|
+                        case response
+                        when Gtk::Dialog::RESPONSE_ACCEPT then # Do nothing
+                        end
+                        dialog.destroy
+                    }
+                end
+            end
 
-  def updateStatus()
-    @statusbar.pop(0)
-    if(!@quiz)
-      @statusbar.push(0, "No Quiz Loaded -- Select Open")
-    else
-      status = @quiz.status
-      if((!@edict.nil?) && (!@quiz.vocab.nil?)) 
-      	# If the exact entry exists in the dictionary
-      	if(@edict.include?(@quiz.vocab))
-      		status += " -- OK"
-      	else
-      		status += " -- XX"
-      	end
-      end
-      @statusbar.push(0, status)
-    end
-  end
+            def updateStatus()
+                @statusbar.pop(0)
+                if(!@quiz)
+                    @statusbar.push(0, "No Quiz Loaded -- Select Open")
+                else
+                    status = @quiz.status
+                    if((!@edict.nil?) && (!@quiz.vocab.nil?)) 
+                        # If the exact entry exists in the dictionary
+                        if(@edict.include?(@quiz.vocab))
+                            status += " -- OK"
+                        else
+                            status += " -- XX"
+                        end
+                    end
+                    @statusbar.push(0, status)
+                end
+            end
 
-  def printQuestion(text)
-    if @qbuffer
-      @qbuffer.text = ""
-      @abuffer.text = ""
-      @qbuffer.insert(@qbuffer.start_iter, text, "kanji")
-      if !@quiz.vocab.nil?
-      	@indicatorBox.set(@quiz.vocab)
-      end
-      updateStatus
-    end
-  end
+            def printQuestion(text)
+                if @qbuffer
+                    @qbuffer.text = ""
+                    @abuffer.text = ""
+                    @qbuffer.insert(@qbuffer.start_iter, text, "kanji")
+                    if !@quiz.vocab.nil?
+                        @indicatorBox.set(@quiz.vocab)
+                    end
+                    updateStatus
+                end
+            end
 
-  def printAnswer(text)
-    if @abuffer
-      @abuffer.text = ""
-      @abuffer.insert(@abuffer.start_iter, text, "kanji")
-      updateStatus
-    end
-  end      
+            def printAnswer(text)
+                if @abuffer
+                    @abuffer.text = ""
+                    @abuffer.insert(@abuffer.start_iter, text, "kanji")
+                    updateStatus
+                end
+            end      
 
-  def open()
-    if(promptSave())
-      dialog = Gtk::FileChooserDialog.new("Open File",
-                                          self,
-                                          Gtk::FileChooser::ACTION_OPEN,
-                                          nil,
-                                          [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
-                                          [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT])
+            def open()
+                if(promptSave())
+                    dialog = Gtk::FileChooserDialog.new("Open File",  self,
+                        Gtk::FileChooser::ACTION_OPEN, nil,
+                        [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
+                        [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT])
 
-      dialog.current_folder = @currentDir
-      
-      if dialog.run == Gtk::Dialog::RESPONSE_ACCEPT
-        @currentDir = dialog.current_folder
-        @quiz = JLDrill::Quiz.new()
-        if JLDrill::Quiz.drillFile?(dialog.filename)
-          @quiz.load(dialog.filename)
-        else
-          dict = Edict.new(dialog.filename)
-          dict.read
-          @quiz.loadFromDict(dict)
-        end
-        printQuestion(@quiz.drill)
-      end
-      dialog.destroy
-      updateStatus
-    end
-  end
+                    dialog.current_folder = @currentDir
+                    
+                    if dialog.run == Gtk::Dialog::RESPONSE_ACCEPT
+                        @currentDir = dialog.current_folder
+                        @quiz = JLDrill::Quiz.new()
+                        if JLDrill::Quiz.drillFile?(dialog.filename)
+                            @quiz.load(dialog.filename)
+                        else
+                            dict = Edict.new(dialog.filename)
+                            dict.read
+                            @quiz.loadFromDict(dict)
+                        end
+                        printQuestion(@quiz.drill)
+                    end
+                    dialog.destroy
+                    updateStatus
+                end
+            end
 
-  # Not currently used
-  def loadReferenceDialog()
-    filename = ""
-    dialog = Gtk::FileChooserDialog.new("Load Reference Library",
-                                        self,
-                                        Gtk::FileChooser::ACTION_OPEN,
-                                        nil,
-                                        [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
-                                        [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT])
+            def loadReference(filename)
+                if @edict == nil && filename != ""
+                    window = Gtk::Window.new("Loading Dictionary")
+                    window.set_transient_for(self)
+                    window.window_position = Gtk::Window::POS_CENTER_ON_PARENT
+                    vbox = Gtk::VBox.new()
+                    window.add(vbox)
 
-    dialog.current_folder = @currentDir
-    
-    response = dialog.run 
-    if response == Gtk::Dialog::RESPONSE_ACCEPT
-      @currentDir = dialog.current_folder
-      filename = dialog.filename
-    end
-    dialog.destroy
-    return filename
-  end
+                    progress = Gtk::ProgressBar.new()
+                    vbox.add(progress)
+                    window.show_all
+                    @edict = HashedEdict.new(filename)
 
-  def loadReference(filename)
-    if @edict == nil && filename != ""
-      window = Gtk::Window.new("Loading Dictionary")
-      window.set_transient_for(self)
-      window.window_position = Gtk::Window::POS_CENTER_ON_PARENT
-      vbox = Gtk::VBox.new()
-      window.add(vbox)
+                    Thread.new() {
+                    @edict.read { |fraction|
+                        progress.fraction = fraction
+                    }
+                    updateStatus
+                    window.destroy()
+                    }
+                end
+            end
 
-      progress = Gtk::ProgressBar.new()
-      vbox.add(progress)
-      window.show_all
-      @edict = HashedEdict.new(filename)
-
-      Thread.new() {
-        @edict.read { |fraction|
-          progress.fraction = fraction
-        }
-        updateStatus
-        window.destroy()
-      }
-    end
-  end
-
-  def export()
-    if @quiz
-      dialog = GtkEnterFilename.new(@currentDir, self)
-    
-      savename = dialog.run 
-      dialog.destroy
-      if savename != ""
-        @quiz.export(savename)
-      end
-    end
-  end
+            def export()
+                if @quiz
+                    dialog = GtkEnterFilename.new(@currentDir, self)
+                
+                    savename = dialog.run 
+                    dialog.destroy
+                    if savename != ""
+                    @quiz.export(savename)
+                    end
+                end
+            end
   
-  def saveAs()
-  	if @quiz
-  	  dialog = GtkEnterFilename.new(@currentDir, self)
-  	  savename = dialog.run
-  	  if dialog.resp == Gtk::Dialog::RESPONSE_ACCEPT
-  	    @currentDir = dialog.current_folder
-  	  end
-  	  dialog.destroy
-  	  if savename != ""
-  	    @quiz.savename = savename
-  	    @quiz.save
-  	    updateStatus
-  	  end
-  	end
-  end
+            def saveAs()
+            	if @quiz
+            	    dialog = GtkEnterFilename.new(@currentDir, self)
+            	    savename = dialog.run
+            	    if dialog.resp == Gtk::Dialog::RESPONSE_ACCEPT
+            	        @currentDir = dialog.current_folder
+                    end
+                    dialog.destroy
+                    if savename != ""
+                        @quiz.savename = savename
+                        @quiz.save
+                        updateStatus
+                    end
+                end
+            end
 
-  def save(newFile=false)
-    if @quiz
-      if @quiz.savename == ""
-      	saveAs()
-      else
-        @quiz.save
-        updateStatus
-      end
-    end
-  end
+            def save(newFile=false)
+                if @quiz
+                    if @quiz.savename == ""
+                    	saveAs()
+                    else
+                    @quiz.save
+                    updateStatus
+                    end
+                end
+            end
 
-  def options()
-    if @quiz
-      dialog = Gtk::Dialog.new("Drill Options",
-                               self,
-                               Gtk::Dialog::DESTROY_WITH_PARENT,
-                               [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
-                               [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
+            def options()
+                if @quiz
+                    dialog = Gtk::Dialog.new("Drill Options", self,
+                        Gtk::Dialog::DESTROY_WITH_PARENT,
+                        [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
+                        [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
+                    
+                    random = Gtk::CheckButton.new("Introduce new items in random order")
+                    random.active = @quiz.options.randomOrder
+                    promote = Gtk::HScale.new(1,10,1)
+                    promote.value = @quiz.options.promoteThresh
+                    intro = Gtk::HScale.new(1,100,1)
+                    intro.value = @quiz.options.introThresh
 
-      
-      random = Gtk::CheckButton.new("Introduce new items in random order")
-      random.active = @quiz.options.randomOrder
-      promote = Gtk::HScale.new(1,10,1)
-      promote.value = @quiz.options.promoteThresh
-      intro = Gtk::HScale.new(1,100,1)
-      intro.value = @quiz.options.introThresh
+                    dialog.vbox.add(random)
+                    dialog.vbox.add(Gtk::Label.new("Promote item after x correct"))
+                    dialog.vbox.add(promote)
+                    dialog.vbox.add(Gtk::Label.new("Max actively learning items"))
+                    dialog.vbox.add(intro)  
 
-      dialog.vbox.add(random)
-      dialog.vbox.add(Gtk::Label.new("Promote item after x correct"))
-      dialog.vbox.add(promote)
-      dialog.vbox.add(Gtk::Label.new("Max actively learning items"))
-      dialog.vbox.add(intro)  
+                    dialog.show_all
 
-      dialog.show_all
+                    if dialog.run == Gtk::Dialog::RESPONSE_ACCEPT
+                        @quiz.options.randomOrder = random.active?
+                        @quiz.options.introThresh = intro.value.to_i
+                        @quiz.options.promoteThresh = promote.value.to_i
+                    end
+                    dialog.destroy
+                    updateStatus
+                end
+            end
 
-      if dialog.run == Gtk::Dialog::RESPONSE_ACCEPT
-        @quiz.options.randomOrder = random.active?
-        @quiz.options.introThresh = intro.value.to_i
-        @quiz.options.promoteThresh = promote.value.to_i
-      end
-      dialog.destroy
-      updateStatus
-    end
-  end
-
-  def ack()
-    acks = %Q[
-    Acknowledgements
+            def ack()
+                acks = %Q[Acknowledgements
 
     This program could not have been written if it were not for the
     contribution that others have made.  Normally JLDrill will be distributed
@@ -493,46 +461,44 @@ module JLDrill::Gtk
       application. 
 ]
 
-      dialog = Gtk::Dialog.new("Acknowledgements",
-                               self,
-                               Gtk::Dialog::DESTROY_WITH_PARENT,
-                               [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
+                dialog = Gtk::Dialog.new("Acknowledgements", self,
+                    Gtk::Dialog::DESTROY_WITH_PARENT,
+                    [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
 
-      sw = Gtk::ScrolledWindow.new
-      sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
-      sw.shadow_type = Gtk::SHADOW_IN
-      dialog.vbox.add(sw)
-      
-      contents = Gtk::TextView.new
-      contents.wrap_mode = Gtk::TextTag::WRAP_WORD
-      contents.editable = false
-      contents.cursor_visible = false
-      sw.add(contents)
-      dialog.set_default_size(640, 360)
+                sw = Gtk::ScrolledWindow.new
+                sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
+                sw.shadow_type = Gtk::SHADOW_IN
+                dialog.vbox.add(sw)
+                
+                contents = Gtk::TextView.new
+                contents.wrap_mode = Gtk::TextTag::WRAP_WORD
+                contents.editable = false
+                contents.cursor_visible = false
+                sw.add(contents)
+                dialog.set_default_size(640, 360)
 
-      contents.buffer.text = acks
+                contents.buffer.text = acks
 
-      dialog.show_all
+                dialog.show_all
 
-      dialog.run { |response|
-        case response
-        when Gtk::Dialog::RESPONSE_ACCEPT then # Do nothing
-        end
-        dialog.destroy
-      }
+                dialog.run { |response|
+                    case response
+                        when Gtk::Dialog::RESPONSE_ACCEPT then # Do nothing
+                    end
+                    dialog.destroy
+                }
 
-  end
+            end
 
-  def about()
-    unless Gtk.check_version?(2, 6, 0)
-      puts "This application requires GTK+ 2.6.0 or later"
-      return
-    end
+            def about()
+                unless Gtk.check_version?(2, 6, 0)
+                    puts "This application requires GTK+ 2.6.0 or later"
+                    return
+                end
 
-    authors = ["Mike Charlton"]
-    license = %Q[
-    JLDrill - Super Drill Program for Learning Japanese
-    Copyright (C) 2005-2007  Mike Charlton
+                authors = ["Mike Charlton"]
+                license = %Q[JLDrill - Drill Program for Learning Japanese
+Copyright (C) 2005-2007  Mike Charlton
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -549,144 +515,146 @@ module JLDrill::Gtk
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ]
 
-      Gtk::AboutDialog.show(self,
-			    :name => "GTK LDrill",
-			    :version => JLDrill::VERSION,
-			    :copyright => "(C) 2005 Mike Charlton",
-			    :license => license,
-			    :comments => "Super Drill Program for Learning Japanese.",
-                :website => "http://jldrill.rubyforge.org",
-                :logo => self.icon,
-			    :authors => authors)
-  end
+                Gtk::AboutDialog.show(self,
+        			    :name => "GTK LDrill",
+        			    :version => JLDrill::VERSION,
+        			    :copyright => "(C) 2005 Mike Charlton",
+        			    :license => license,
+        			    :comments => "Super Drill Program for Learning Japanese.",
+                        :website => "http://jldrill.rubyforge.org",
+                        :logo => self.icon,
+        			    :authors => authors)
+            end
 
-  # Returns false if cancel was chosen
-  def promptSave()
-    retVal = true
+            # Returns false if cancel was chosen
+            def promptSave()
+                retVal = true
 
-    if @quiz && @quiz.updated
-      dialog = Gtk::Dialog.new("Unsaved Changes",
-                               self,
-                               Gtk::Dialog::DESTROY_WITH_PARENT,
-                               [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
-                               [Gtk::Stock::NO, Gtk::Dialog::RESPONSE_NO],
-                               [Gtk::Stock::YES, Gtk::Dialog::RESPONSE_YES])
+                if @quiz && @quiz.updated
+                    dialog = Gtk::Dialog.new("Unsaved Changes", self,
+                        Gtk::Dialog::DESTROY_WITH_PARENT,
+                        [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
+                        [Gtk::Stock::NO, Gtk::Dialog::RESPONSE_NO],
+                        [Gtk::Stock::YES, Gtk::Dialog::RESPONSE_YES])
 
-      dialog.vbox.add(Gtk::Label.new("You have unsaved changes."));
-      dialog.vbox.add(Gtk::Label.new("Do you want to save first?"));
-      dialog.show_all
+                    dialog.vbox.add(Gtk::Label.new("You have unsaved changes."));
+                    dialog.vbox.add(Gtk::Label.new("Do you want to save first?"));
+                    dialog.show_all
 
-      dialog.run { |response|
-        case response
-        when Gtk::Dialog::RESPONSE_YES then save
-        when Gtk::Dialog::RESPONSE_NO then # Do nothing
-        else retVal = false
-        end
-        dialog.destroy
-      }
-      
-    end
+                    dialog.run { |response|
+                        case response
+                            when Gtk::Dialog::RESPONSE_YES
+                                save
+                            when Gtk::Dialog::RESPONSE_NO 
+                                # Do nothing
+                        else 
+                            retVal = false
+                        end
+                        dialog.destroy
+                    }
+                    
+                end
 
-    return retVal
-  end
+                return retVal
+            end
 
-  def quit()
-    closeView
-  end
+            def quit()
+                closeView
+            end
 
-  def vocabTable
-    if @quiz
-      dialog = Gtk::Dialog.new("All Vocabulary",
-                               self,
-                               Gtk::Dialog::DESTROY_WITH_PARENT,
-                               [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
+            def vocabTable
+                if @quiz
+                    dialog = Gtk::Dialog.new("All Vocabulary", self,
+                        Gtk::Dialog::DESTROY_WITH_PARENT,
+                        [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
 
-      candView = GtkVocabTable.new(@quiz.allVocab) { |vocab|
-      }
-      dialog.vbox.add(candView);
-      dialog.set_default_size(450, 300)
+                    candView = GtkVocabTable.new(@quiz.allVocab) { |vocab|
+                    }
+                    dialog.vbox.add(candView);
+                    dialog.set_default_size(450, 300)
 
-      dialog.show_all
+                    dialog.show_all
 
-      dialog.run { |response|
-        case response
-        when Gtk::Dialog::RESPONSE_ACCEPT then # Do nothing
-        end
-        dialog.destroy
-      }
-    end
-  end
+                    dialog.run { |response|
+                        case response
+                            when Gtk::Dialog::RESPONSE_ACCEPT
+                                # Do nothing
+                        end
+                        dialog.destroy
+                    }
+                end
+            end
 
-  def displayVocab
-    if @quiz && @quiz.vocab
-      dialog = GtkDisplayView.new(@quiz.vocab, self)
-      dialog.show_all
+            def displayVocab
+                if @quiz && @quiz.vocab
+                    dialog = GtkDisplayView.new(@quiz.vocab, self)
+                    dialog.show_all
 
-      dialog.run { |response|
-        if response == Gtk::Dialog::RESPONSE_ACCEPT 
-          newVocab = dialog.getVocab 
-          if newVocab != nil
-            @quiz.vocab = newVocab
-            redraw
-          end
-        end
-        dialog.destroy
-      }
-    end
-  end
+                    dialog.run { |response|
+                        if response == Gtk::Dialog::RESPONSE_ACCEPT 
+                            newVocab = dialog.getVocab 
+                            if newVocab != nil
+                                @quiz.vocab = newVocab
+                                redraw
+                            end
+                        end
+                        dialog.destroy
+                    }
+                end
+            end
 
-  def xReference
-    if @edict && @quiz && @quiz.vocab
-      dialog = GtkXRefView.new(@quiz.vocab, self,
-                               @edict.search(@quiz.vocab.reading))
-      dialog.show_all
+            def xReference
+                if @edict && @quiz && @quiz.vocab
+                    dialog = GtkXRefView.new(@quiz.vocab, self,
+                                            @edict.search(@quiz.vocab.reading))
+                    dialog.show_all
 
-      dialog.run { |response|
-        if response == Gtk::Dialog::RESPONSE_ACCEPT 
-          newVocab = dialog.getVocab 
-          if newVocab != nil
-            @quiz.vocab = newVocab
-            redraw
-          end
-        end
-        dialog.destroy
-      }
-    end
-  end
+                    dialog.run { |response|
+                        if response == Gtk::Dialog::RESPONSE_ACCEPT 
+                            newVocab = dialog.getVocab 
+                            if newVocab != nil
+                                @quiz.vocab = newVocab
+                                redraw
+                            end
+                        end
+                        dialog.destroy
+                    }
+                end
+            end
 
-  def redraw
-    if @quiz
-      printQuestion(@quiz.currentDrill)
-      printAnswer(@quiz.currentAnswer)
-    end
-  end
+            def redraw
+                if @quiz
+                    printQuestion(@quiz.currentDrill)
+                    printAnswer(@quiz.currentAnswer)
+                end
+            end
 
-  def resetQuiz
-    if @quiz
-      @quiz.reset
-      updateStatus
-    end
-  end
+            def resetQuiz
+                if @quiz
+                    @quiz.reset
+                    updateStatus
+                end
+            end
 
-  def check()
-    if(@quiz)
-      printAnswer(@quiz.answer)
-    end
-  end
+            def check()
+                if(@quiz)
+                    printAnswer(@quiz.answer)
+                end
+            end
 
-  def correct()
-    if(@quiz)
-      @quiz.correct
-      printQuestion(@quiz.drill)
-    end
-  end
+            def correct()
+                if(@quiz)
+                    @quiz.correct
+                    printQuestion(@quiz.drill)
+                end
+            end
 
-  def incorrect()
-    if(@quiz)
-      @quiz.incorrect
-      printQuestion(@quiz.drill)
-    end
-  end
+            def incorrect()
+                if(@quiz)
+                    @quiz.incorrect
+                    printQuestion(@quiz.drill)
+                end
+            end
 			
 			def connectSignals
 			    signal_connect('delete_event') do
