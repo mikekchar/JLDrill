@@ -337,11 +337,11 @@ module JLDrill::Gtk
                     @edict = HashedEdict.new(filename)
 
                     Thread.new() {
-                    @edict.read { |fraction|
-                        progress.fraction = fraction
-                    }
-                    updateStatus
-                    window.destroy()
+                        @edict.read { |fraction|
+                            progress.fraction = fraction
+                        }
+                        updateStatus
+                        window.destroy()
                     }
                 end
             end
