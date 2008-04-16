@@ -161,11 +161,17 @@ class Edict
   KANA_RE = /（(.*)）/
   COMMENT_RE = /^\#/
 
-  attr_reader :file
-
-  def initialize(file)
+  def initialize(file=nil)
     @file = file
     @vocab = []
+  end
+
+  def file=(filename)
+    @file = filename
+  end
+  
+  def file
+    @file
   end
 
   def eachVocab
@@ -207,13 +213,14 @@ class Edict
       end
 
       add(Vocabulary.new(kanji, kana, english.definitions,
-                  english.types, hint, position))
+                  english.types, hint))
       retVal = true
     end             
     return retVal                        
   end
 
   def read(&progress)
+    if(@file.nil?) then return false end
     i = 0
     size = File.size(@file).to_f
     total = 0.to_f
@@ -232,6 +239,7 @@ class Edict
         end
       end
     }
+    true
   end
 
   def shortFile

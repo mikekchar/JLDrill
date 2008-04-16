@@ -2,15 +2,20 @@ require 'Context/Context'
 require 'Context/Key'
 require 'Context/ViewFactory'
 require 'jldrill/views/MainWindowView'
+require 'jldrill/model/HashedEdict'
 
 module JLDrill
 
 	class MainContext < Context::Context
+	
+	    attr_reader :loadReferenceContext, :reference
 		
 		def initialize(viewFactory)
 			super(viewFactory)
 			@mainWindowView = viewFactory.MainWindowView.new(self)
 			@mainView = @mainWindowView
+			@loadReferenceContext = LoadReferenceContext.new(viewFactory)
+			@reference = HashedEdict.new
 		end
 		
 		def enter(parent)

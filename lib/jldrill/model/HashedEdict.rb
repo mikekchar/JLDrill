@@ -27,7 +27,7 @@ class HashedEdict < Edict
 
   KEY_RE = /^(.)/mu
 
-  def initialize(file)
+  def initialize(file=nil)
     super(file)
     @hash = {}
     @size = 0

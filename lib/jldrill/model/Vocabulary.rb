@@ -32,13 +32,15 @@ class Vocabulary
   attr_reader :kanji, :reading, :hint, :status
   attr_writer :kanji, :reading, :hint
 
-  def initialize
-    @kanji = nil
-    @reading = nil
-    @definitions = nil
-    @markers = nil
-    @hint = nil
+  def initialize(kanji=nil, reading=nil, definitions=nil, 
+                    markers=nil, hint=nil, position=nil)
+    @kanji = kanji
+    @reading = reading
+    @definitions = definitions
+    @markers = markers
+    @hint = hint
     @status = JLDrill::VocabularyStatus.new(self)
+    if !position.nil? then @status.position = position end
   end
   
   # Create a new vocaublary item by parsing the string passed in.
@@ -164,7 +166,9 @@ class Vocabulary
     end
 
     retVal += "/Reading: #{@reading}"
-    retVal += "/Definitions: #{@definitions.join(",")}"
+    if (!@definitions.nil?) && (!@definitions.empty?)
+        retVal += "/Definitions: #{@definitions.join(",")}"
+    end
 
     if @markers && (not @markers.empty?)
       retVal += "/Markers: #{@markers.join(",")}"

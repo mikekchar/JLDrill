@@ -30,6 +30,9 @@ module JLDrill::Gtk
 	class MainWindowView < JLDrill::MainWindowView
 	
 		class MainWindow < Gtk::Window
+		
+		    attr_reader :accelGroup
+		
 			def initialize(view)
 				super('JLDrill')
 				@view = view
@@ -129,11 +132,11 @@ module JLDrill::Gtk
 
             def createMenu
                 ## Create the menubar
-                accel_group = Gtk::AccelGroup.new
-                add_accel_group(accel_group)
+                @accelGroup = Gtk::AccelGroup.new
+                add_accel_group(@accelGroup)
                 
                 menu = Gtk::ItemFactory.new(Gtk::ItemFactory::TYPE_MENU_BAR,
-                                                    '<main>', accel_group)
+                                                    '<main>', @accelGroup)
                 
                 # create menu items
                 menu_items = [
@@ -694,5 +697,27 @@ Copyright (C) 2005-2007  Mike Charlton
 		def emitDestroyEvent
 			@mainWindow.signal_emit("destroy")
 		end
+		
+		def accelEntry(key)
+		    @mainWindow.accelGroup.query(key.getGtkKeyval, key.getGtkState)
+		end
+		
+		def accelDefined?(key)
+		    return !accelEntry(key).nil?
+		end
+		
+		# Runs the proc associated with the key in the AccelGroup.
+		# Returns true if it could find it, false if it couldn't
+		def runAccel(key)
+		    success = false
+		    entry = accelEntry(key)
+		    if !entry.nil?  && (entry.size > 0)
+		        if !entry[0].closure.nil?
+#		            print entry[0].closure.class.instance_methods.join("\n")
+		            success = true
+		        end 
+		    end
+		    success
+		end    
 	end
 end
