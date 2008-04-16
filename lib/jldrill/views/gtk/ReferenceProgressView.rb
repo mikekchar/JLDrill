@@ -25,7 +25,7 @@ module JLDrill::Gtk
 		    def open(parentWindow)
 		        set_transient_for(parentWindow)
 		        window_position = Gtk::Window::POS_CENTER_ON_PARENT
-                window.show_all
+                show_all
             end		    
 		    
 		    def close
@@ -42,7 +42,7 @@ module JLDrill::Gtk
 		end
 		
 		def open
-			@progressWindow.open(context.parent.mainView.getWidget)
+			@progressWindow.open(context.parent.mainView.getWidget.delegate)
 		end
 		
 		def close

@@ -9,5 +9,13 @@ module JLDrill
 		def close
 			@context.close
 		end
+		
+		def loadReference
+		    @context.loadReference
+		end
+		
+		def edict
+		    @context.reference
+		end
 	end
 end

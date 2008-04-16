@@ -31,5 +31,9 @@ module JLDrill
 		def close
 			exit
 		end
+		
+		def loadReference
+		    @loadReferenceContext.enter(self)
+		end
     end
 end

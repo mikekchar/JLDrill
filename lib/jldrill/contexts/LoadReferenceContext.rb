@@ -18,17 +18,19 @@ module JLDrill
 		end
 		
 		def enter(parent)
-			super(parent)
 			if (!parent.nil?) && (parent.class.public_method_defined?(:reference))
     			@reference = parent.reference
-    			@reference.file = @filename
-    			Thread.new() {
-                    @reference.read { |fraction|
-                        @mainView.update(fraction)
+    			if(!@reference.loaded?)
+        			super(parent)
+        			@reference.file = @filename
+        			Thread.new() {
+                        @reference.read { |fraction|
+                            @mainView.update(fraction)
+                        }
+                        exit
                     }
-                    exit
-                }
-    		end
+        		end
+            end
 		end
 		
 		def exit

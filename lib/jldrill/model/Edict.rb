@@ -164,6 +164,7 @@ class Edict
   def initialize(file=nil)
     @file = file
     @vocab = []
+    @loaded = false
   end
 
   def file=(filename)
@@ -172,6 +173,10 @@ class Edict
   
   def file
     @file
+  end
+
+  def loaded?
+    @loaded
   end
 
   def eachVocab
@@ -239,7 +244,7 @@ class Edict
         end
       end
     }
-    true
+    @loaded = true
   end
 
   def shortFile

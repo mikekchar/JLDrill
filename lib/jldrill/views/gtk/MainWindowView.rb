@@ -38,7 +38,6 @@ module JLDrill::Gtk
 				@view = view
 				connectSignals unless @view.nil?
 
-                @edict = nil
                 @vocab = nil
                 @resultDisplayed = false
                 @quiz = nil
@@ -152,9 +151,7 @@ module JLDrill::Gtk
                     ["/File/Load Reference _Dictionary...",
                     "<Item>", "<control>D", nil, 
                         Proc.new{
-                            dictDir = File.join(JLDrill::Gtk::Config::DATA_DIR, "dict")
-                            filename = File.join(dictDir, "edict.utf")
-                            loadReference(filename)
+                            loadReference
                         }],
                     ["/File/_Quit",
                     "<StockItem>", "<control>Q", Gtk::Stock::QUIT, Proc.new{quit}],
@@ -268,9 +265,9 @@ module JLDrill::Gtk
                     @statusbar.push(0, "No Quiz Loaded -- Select Open")
                 else
                     status = @quiz.status
-                    if((!@edict.nil?) && (!@quiz.vocab.nil?)) 
+                    if((@view.edict.loaded?) && (!@quiz.vocab.nil?)) 
                         # If the exact entry exists in the dictionary
-                        if(@edict.include?(@quiz.vocab))
+                        if(@view.edict.include?(@quiz.vocab))
                             status += " -- OK"
                         else
                             status += " -- XX"
@@ -326,27 +323,8 @@ module JLDrill::Gtk
                 end
             end
 
-            def loadReference(filename)
-                if @edict == nil && filename != ""
-                    window = Gtk::Window.new("Loading Dictionary")
-                    window.set_transient_for(self)
-                    window.window_position = Gtk::Window::POS_CENTER_ON_PARENT
-                    vbox = Gtk::VBox.new()
-                    window.add(vbox)
-
-                    progress = Gtk::ProgressBar.new()
-                    vbox.add(progress)
-                    window.show_all
-                    @edict = HashedEdict.new(filename)
-
-                    Thread.new() {
-                        @edict.read { |fraction|
-                            progress.fraction = fraction
-                        }
-                        updateStatus
-                        window.destroy()
-                    }
-                end
+            def loadReference()
+                @view.loadReference
             end
 
             def export()
@@ -607,9 +585,9 @@ Copyright (C) 2005-2007  Mike Charlton
             end
 
             def xReference
-                if @edict && @quiz && @quiz.vocab
+                if @view.edict.loaded? && @quiz && @quiz.vocab
                     dialog = GtkXRefView.new(@quiz.vocab, self,
-                                            @edict.search(@quiz.vocab.reading))
+                                            @view.edict.search(@quiz.vocab.reading))
                     dialog.show_all
 
                     dialog.run { |response|
@@ -719,5 +697,27 @@ Copyright (C) 2005-2007  Mike Charlton
 		    end
 		    success
 		end    
+		
+		# Override these so I don't try to swallow windows.  This
+		# should be replaced by a strategy for adding views.
+		
+		def addView(view)
+		    widget = view.getWidget
+		    if !widget.delegate.class.ancestors.include?(Gtk::Window)
+		        super(view)
+		    else
+		        view.open
+		    end
+		end
+
+		def removeView(view)
+		    widget = view.getWidget
+		    if !widget.delegate.class.ancestors.include?(Gtk::Window)
+		        super(view)
+		    else
+		        view.close
+		    end
+		end
+
 	end
 end

@@ -21,17 +21,17 @@ module JLDrill::Gtk
 			@view.open
 		end
 		
-		it "should add widgets from another view when added" do
+		it "should open views that contain Gtk::Windows rather than add them" do
 			newContext = mock("Gtk::MainContext")
 			newView = JLDrill::Gtk::MainWindowView.new(newContext)
-			@view.getWidget().should_receive(:add).with(newView.getWidget)
+			newView.should_receive(:open)
 			@view.addView(newView)
 		end
 
-        it "should remove widgets from another view when removed" do
+        it "should close views that contain Gtk::Windows rather than remove them" do
 			oldContext = mock("Gtk::MainContext")
 			oldView = JLDrill::Gtk::MainWindowView.new(oldContext)
-			@view.getWidget().should_receive(:remove).with(oldView.getWidget)
+			oldView.should_receive(:close)
 			@view.removeView(oldView)
 		end
             
