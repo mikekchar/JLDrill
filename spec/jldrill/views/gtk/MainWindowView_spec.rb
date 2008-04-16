@@ -1,6 +1,7 @@
 require 'Context/ViewFactory'
 require 'jldrill/contexts/MainContext'
 require 'jldrill/views/gtk/MainWindowView'
+require 'jldrill/views/gtk/ReferenceProgressView'
 
 module JLDrill::Gtk
 

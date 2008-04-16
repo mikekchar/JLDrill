@@ -1,6 +1,7 @@
 require 'Context/Context'
 require 'Context/ViewFactory'
 require 'jldrill/model/Config'
+require 'jldrill/views/ReferenceProgressView'
 
 module JLDrill
 
@@ -10,8 +11,7 @@ module JLDrill
 		
 		def initialize(viewFactory)
 			super(viewFactory)
-#			@mainWindowView = viewFactory.MainWindowView.new(self)
-			@mainView = nil
+			@mainView = viewFactory.ReferenceProgressView.new(self)
 			dictDir = File.join(Config::DATA_DIR, "dict")
             @filename = File.join(dictDir, "edict.utf")
             @reference = nil
@@ -22,15 +22,18 @@ module JLDrill
 			if (!parent.nil?) && (parent.class.public_method_defined?(:reference))
     			@reference = parent.reference
     			@reference.file = @filename
-    			@reference.read
+    			Thread.new() {
+                    @reference.read { |fraction|
+                        @mainView.update(fraction)
+                    }
+                    exit
+                }
     		end
 		end
 		
 		def exit
-		end
-				
-		def close
-			exit
+		    @mainView.close
+		    super(exit)
 		end
     end
 end

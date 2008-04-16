@@ -27,5 +27,9 @@ module JLDrill
             @context.reference.should be(@main.reference)
             @context.reference.file.should be(@context.filename)
         end
+        
+        it "should have a view" do
+            @context.mainView.should_not be_nil
+        end
 	end
 end
