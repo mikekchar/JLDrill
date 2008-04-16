@@ -3,6 +3,7 @@ require 'Context/Key'
 require 'Context/ViewFactory'
 require 'jldrill/views/MainWindowView'
 require 'jldrill/model/HashedEdict'
+require 'jldrill/contexts/LoadReferenceContext'
 
 module JLDrill
 
