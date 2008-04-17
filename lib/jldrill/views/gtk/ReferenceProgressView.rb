@@ -8,6 +8,8 @@ module JLDrill::Gtk
 	
 		class ProgressWindow < Gtk::Window
 		
+		    attr_reader :progress
+		
 		    def initialize(view)
 		        @view = view
 		        super("Loading Dictionary")
