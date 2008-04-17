@@ -38,7 +38,6 @@ module JLDrill::Gtk
 				@view = view
 				connectSignals unless @view.nil?
 
-                @vocab = nil
                 @resultDisplayed = false
                 @quiz = nil
     
@@ -575,7 +574,7 @@ Copyright (C) 2005-2007  Mike Charlton
                         if response == Gtk::Dialog::RESPONSE_ACCEPT 
                             newVocab = dialog.getVocab 
                             if newVocab != nil
-                                @quiz.vocab = newVocab
+                                @quiz.currentProblem.vocab = newVocab
                                 redraw
                             end
                         end
@@ -594,7 +593,7 @@ Copyright (C) 2005-2007  Mike Charlton
                         if response == Gtk::Dialog::RESPONSE_ACCEPT 
                             newVocab = dialog.getVocab 
                             if newVocab != nil
-                                @quiz.vocab = newVocab
+                                @quiz.currentProblem.vocab = newVocab
                                 redraw
                             end
                         end

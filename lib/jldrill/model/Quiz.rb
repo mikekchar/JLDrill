@@ -204,7 +204,7 @@ module JLDrill
         
         attr_reader :savename,  
                     :updated, :length, :info, :name, 
-                    :contents, :options
+                    :contents, :options, :currentProblem
         attr_writer :savename, :updated, :info, :name
 
         def initialize()

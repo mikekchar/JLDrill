@@ -66,10 +66,20 @@ class Vocabulary
   end
 
   # True if the two vocabulary are discussing the same word
-  # This does *not* compare the hint, score, or position
+  # This does *not* compare the hint or status
   # since they do not affect the meaning of the word.
   def ==(y)
     return eql?(y)
+  end
+
+  # Assign the contents of vocab to this object.
+  # NOTE: It does *not* assign status
+  def assign(vocab)
+    @kanji = vocab.kanji
+    @reading = vocab.reading
+    @definitions = Vocabulary.splitCommas(vocab.definitions)
+    @markers = Vocabulary.splitCommas(vocab.markers)
+    @hint = vocab.hint
   end
   
   # splits the string on commas and destroys and leading space

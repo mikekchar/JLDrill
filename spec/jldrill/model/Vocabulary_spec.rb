@@ -63,6 +63,18 @@ module JLDrill
             v.to_s.should be_eql(@strings[0] + "\n")
         end
        
+       it "should be able to assign the contents of one Vocabulary to another" do
+            v1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
+            v1.should be_valid
+            v2 = Vocabulary.create("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 1/Level: 2/Position: 2/")
+            v2.should be_valid
+            v1.should_not be_eql(v2)
+            v1.assign(v2)
+            v1.should be_eql(v2)
+            v1.status.bin.should be(0)
+            v1.status.level.should be(0)
+            v1.status.position.should be(1)
+       end
 	end
 
 end

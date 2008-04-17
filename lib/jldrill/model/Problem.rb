@@ -40,6 +40,10 @@ module JLDrill
                 ""
             end
         end
+        
+        def vocab=(vocab)
+            @vocab.assign(vocab)
+        end
 
     end
     
