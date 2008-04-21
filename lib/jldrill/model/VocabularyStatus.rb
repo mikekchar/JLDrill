@@ -18,9 +18,10 @@ module JLDrill
         BIN_RE = /^Bin: (.*)/
         LEVEL_RE = /^Level: (.*)/
         POSITION_RE = /^Position: (.*)/
+        LASTREVIEWED_RE = /^LastReviewed: (.*)/
 
-        attr_reader :score, :bin, :level, :position, :index
-        attr_writer :score, :bin, :level, :position, :index
+        attr_reader :score, :bin, :level, :position, :index, :lastReviewed
+        attr_writer :score, :bin, :level, :position, :index, :lastReviewed
 
 
         def initialize(vocab)
@@ -29,6 +30,7 @@ module JLDrill
             @bin = 0
             @level = 0
             @position = 0
+            @lastReviewed = nil
             @index = nil
         end
         
@@ -44,15 +46,38 @@ module JLDrill
                     @level = $1.to_i
                 when POSITION_RE 
                     @position = $1.to_i
+                when LASTREVIEWED_RE
+                    @lastReviewed = Time.at($1.to_i)
             else # Not something we understand
                 parsed = false
             end
             parsed
         end
         
+        # Updates the status for the lastReviewed to be now.
+        # Returns the time that it set.
+        def markReviewed
+            @lastReviewed = Time::now
+        end
+   
+        # Returns true if the item has been marked reviewed at least once
+        def reviewed?
+            !@lastReviewed.nil?
+        end
+           
+        # Resets the status  
+        def reset
+            @lastReviewed = nil
+            @score = 0
+        end
+        
         def to_s
-            "/Score: #{@score}" + "/Bin: #{@bin}" + "/Level: #{@level}" +
+            retVal = "/Score: #{@score}" + "/Bin: #{@bin}" + "/Level: #{@level}" +
                 "/Position: #{@position}"
+            if !@lastReviewed.nil?
+                retVal += "/LastReviewed: #{@lastReviewed.to_i}"
+            end
+            retVal
         end
     end
 end

@@ -22,7 +22,7 @@ module JLDrill
         it "should load the parents reference dictionary on entry" do
             @context.reference.should be(nil)
             @main.reference.should_not be(nil)
-            @main.reference.should_receive(:read)
+            @context.should_receive(:loadInBackground)
             @context.enter(@main)
             @context.reference.should be(@main.reference)
             @context.reference.file.should be(@context.filename)

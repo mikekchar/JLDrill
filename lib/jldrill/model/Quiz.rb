@@ -168,7 +168,7 @@ module JLDrill
                     @bins[i].contents = []
                 end
                 @bins[0].each do |vocab|
-                    vocab.status.score = 0
+                    vocab.status.reset
                 end
                 @bins[0].sort! { |x,y| x.status.position <=> y.status.position }
                 update
@@ -550,6 +550,7 @@ module JLDrill
             vocab = @currentProblem.vocab
             adjustQuizOld(true)
             if(vocab)
+                vocab.status.markReviewed
                 vocab.status.score += 1
                 if(vocab.status.score >= @options.promoteThresh)
                     promote(vocab)
@@ -561,6 +562,7 @@ module JLDrill
         def incorrect
             adjustQuizOld(false)
             if(@currentProblem.vocab)
+                vocab.status.markReviewed
                 demote(@currentProblem.vocab, @currentProblem.level)
                 @updated = true
             end

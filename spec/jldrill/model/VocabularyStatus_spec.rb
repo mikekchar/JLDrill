@@ -23,7 +23,26 @@ module JLDrill
                 @vocab[i].to_s.should be_eql(@strings[i] + "\n")
             end
 		end
+		
+		it "should be able to set a lastReviewed time on the object" do
+		    @vocab[1].status.reviewed?.should be(false)
+		    time = @vocab[1].status.markReviewed
+		    time.should_not be_nil
+		    @vocab[1].status.reviewed?.should be(true)
+		end
     
+        it "should be able to write the last reviewed time to file" do
+            @vocab[1].to_s.should be_eql(@strings[1] + "\n")
+            time = @vocab[1].status.markReviewed
+            @vocab[1].to_s.should be_eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/LastReviewed: " + time.to_i.to_s + "/\n")
+        end
+        
+        it "should be able to parse the information in the file" do
+            @vocab[1].to_s.should be_eql(@strings[1] + "\n")
+            time = @vocab[1].status.markReviewed
+            newVocab = Vocabulary.create(@vocab[1].to_s)
+            newVocab.status.lastReviewed.to_i.should be_eql(@vocab[1].status.lastReviewed.to_i)
+        end
 	end
 
 end

@@ -178,11 +178,19 @@ Excellent
             @quiz.correct
         end
 	    
-	    it "should be able to create a new Problem" do
+        def test_incorrect
+            @quiz.incorrect
+        end
+	    
+	    def test_initializeQuiz
 	    	@quiz.loadFromString("none", @fileString)
 	    	@quiz.options.randomOrder = false
 	    	@quiz.options.promoteThresh = 1
-	        @quiz.reset
+	        @quiz.reset	    
+	    end
+	    
+	    it "should be able to create a new Problem" do
+	        test_initializeQuiz
 	        # Non random should pick the first object in the first bin
 	        vocab = @quiz.contents.bins[0][0]
 	        @quiz.contents.bins[0].length.should be(4)
@@ -201,11 +209,8 @@ Excellent
         end
         
         it "should eventually promote all items to bin 4" do
-	    	@quiz.loadFromString("none", @fileString)
-	    	@quiz.options.randomOrder = false
-	    	@quiz.options.promoteThresh = 1
-	        @quiz.reset
-
+            test_initializeQuiz
+            
             # Because we don't test level 4 items until we get 5 of them,
             # this should take exactly 20 iterations
             i = 0
@@ -215,6 +220,24 @@ Excellent
                 test_correct
             end
             i.should be(20)
+        end
+        
+        it "should update the last reviewed status when the answer is made" do
+            test_initializeQuiz
+            test_drill
+            @quiz.vocab.status.lastReviewed.should be_nil
+            test_correct
+            test1 = @quiz.vocab
+            test1.status.lastReviewed.should_not be_nil
+            # should get a new one
+            test_drill
+            test2 = @quiz.vocab
+            test2.status.lastReviewed.should be_nil
+            test_incorrect
+            @quiz.vocab.status.lastReviewed.should_not be_nil
+            @quiz.reset
+            test1.status.lastReviewed.should be_nil
+            test2.status.lastReviewed.should be_nil
         end
     end
 end

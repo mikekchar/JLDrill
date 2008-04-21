@@ -74,6 +74,11 @@ module JLDrill
             v1.status.bin.should be(0)
             v1.status.level.should be(0)
             v1.status.position.should be(1)
+            v3 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
+            v3.hint.should be_nil
+            v1.hint.should_not be_nil
+            v1.assign(v3)
+            v1.hint.should be_nil
        end
 	end
 

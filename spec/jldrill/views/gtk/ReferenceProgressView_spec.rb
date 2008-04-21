@@ -23,6 +23,7 @@ module JLDrill::Gtk
             mainViewWidget = @main.mainView.getWidget
 			@view.progressWindow.should_receive(:set_transient_for).with(mainViewWidget.delegate)
 			@view.progressWindow.should_receive(:show_all)
+			@context.should_receive(:loadInBackground)
             @context.enter(@main)
 		end
 	
