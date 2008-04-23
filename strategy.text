@@ -1,0 +1,51 @@
+The main scheduling algorithm requires 2 things.  A function
+review?(x,t) which determines if we must review an item given x
+previous successes and a time lapse of t since the last review.  We
+also want a function priority(x,t) which will return a number
+indicating how beneficial it is to review this item now.  This will be
+used to order the items to review.
+
+It is tempting to create a function fail_prob(x,t) which returns the
+probability that we will fail the review for the item.  However, this
+is very difficult because estimating the curve for forgetting is
+dependent upon many things.  Also the curve itself has a strange
+distribution.
+
+But we don't really need such precise information.  Mainly we just
+need to create a threshold that works most of the time.  And since
+precise ordering is not necessary (it doesn't matter if I review
+things in the right order -- just that I have a gross understanding of
+the importance of the review and get the order mostly right).
+
+Since we are unlikely to review items *too* outside the desired time,
+we can easily restrict ourselves to modeling that part of the curve.
+If we restrict ourselves to a small enough section of the curve, then
+we can approximate it to a straight line.  Things to one side of the
+modelled section really have no need to be reviewed (it is too short),
+or they desparately need to be reviewed (it was too long).  For these
+items the order is mostly irrelevant.
+
+
+Interval size = target wait time / 4
+
+The target wait time for each level begins at: x^2, where x is the
+number of previous successes.
+
+
+An esitmate is made of the probability in the interval:
+
+Ep = sum(correct)/total, using only items that were reviewed in the
+interval.
+
+Interval is moved left or right (and expanded or contracted) depending
+on how close the estimate is.
+
+Items that have waited longer than the *middle* of the interval should
+be reviewed.
+
+Items that are outside the interval either don't need to be reviewed,
+or desparately need to be reviewed depending on which side of the
+interval they are on.
+
+Items are ranked: by distance to middle of the interval / interval
+size.

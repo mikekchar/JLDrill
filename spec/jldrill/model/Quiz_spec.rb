@@ -136,7 +136,7 @@ Excellent
 	    end
 
         def test_level(question)
-            case @quiz.currentLevel
+            case @quiz.currentProblem.requestedLevel
                 when 0
                     test_problem(question, ReadingProblem.new(@quiz.vocab)) 
                 when 1
@@ -166,6 +166,10 @@ Excellent
 	    end
 
 	    def test_binFour(question)
+	        # Since it's random, this might not always be hit.  But
+	        # if this test fails, it's definitely a bug!
+	        @quiz.currentProblem.requestedLevel.should_not be(0)
+	        
             # The quiz depends on the level
             test_level(question)
             # Level 4 items have consecutive of at least one

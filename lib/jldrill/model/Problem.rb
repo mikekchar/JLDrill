@@ -2,11 +2,13 @@ module JLDrill
 
     # Represents a single question/answer pair in a quiz
     class Problem
-        attr_reader :vocab, :level
+        attr_reader :vocab, :level, :requestedLevel
+        attr_writer :requestedLevel
         
         def initialize(vocab)
             @vocab = vocab
             @level = -1
+            @requestedLevel = -1
         end
 
         def kanji
