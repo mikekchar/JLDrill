@@ -11,14 +11,14 @@ Random Order
 Promotion Threshold: 4
 Introduction Threshold: 17
 Unseen
-/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/
+/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/
 Poor
 Fair
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 2/Level: 0/Position: 2/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 2/Level: 0/Position: 2/Consecutive: 0/
 Good
 Excellent
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 4/Level: 0/Position: 3/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 4/Level: 0/Position: 4/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 4/Level: 0/Position: 3/Consecutive: 1/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 4/Level: 0/Position: 4/Consecutive: 1/
 ]
 		    @quiz = Quiz.new
 		end
@@ -82,10 +82,10 @@ Excellent
 		end
 	
 	    it "should be able to get a list of all the vocab" do
-        	vocabString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 2/Level: 0/Position: 2/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 4/Level: 0/Position: 3/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 4/Level: 0/Position: 4/
+        	vocabString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 2/Level: 0/Position: 2/Consecutive: 0/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 4/Level: 0/Position: 3/Consecutive: 1/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 4/Level: 0/Position: 4/Consecutive: 1/
 ]
 	        @quiz.loadFromString("none", @fileString)
 	        @quiz.allVocab.join.should be_eql(vocabString)
@@ -94,10 +94,10 @@ Excellent
 	    it "should be able to reset the contents" do
 	        # Note this vocabString is different from the previous test in that
 	        # the bins are all set to 0
-        	vocabString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 3/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 0/Level: 0/Position: 4/
+        	vocabString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 0/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 3/Consecutive: 0/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 0/Level: 0/Position: 4/Consecutive: 0/
 ]
 	        @quiz.loadFromString("none", @fileString)
 	        @quiz.reset
@@ -115,7 +115,7 @@ Excellent
 	        @quiz.moveToBin(vocab, 4)
 	        @quiz.contents.bins[0].length.should be(0)
 	        @quiz.contents.bins[4].length.should be(3)
-	        @quiz.contents.bins[4][2].to_s.should be_eql("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 0/Position: 1/\n")
+	        @quiz.contents.bins[4][2].to_s.should be_eql("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 0/Position: 1/Consecutive: 0/\n")
 	        vocab.should be_equal(@quiz.contents.bins[4][2])
 	    end
 	    
@@ -131,11 +131,11 @@ Excellent
             # bin 1 items will always be reading problems
             # because the level will always be 0
             @quiz.vocab.status.level.should be(0)
-            test_problem(question, ReadingProblem.new(@quiz.vocab)) 
+            test_problem(question, ReadingProblem.new(@quiz.vocab))
+            @quiz.vocab.status.consecutive.should be(0)
 	    end
 
-	    def test_binTwo(question)
-            # The quiz depends on the level
+        def test_level(question)
             case @quiz.currentLevel
                 when 0
                     test_problem(question, ReadingProblem.new(@quiz.vocab)) 
@@ -151,6 +151,25 @@ Excellent
 	             # This shouldn't ever happen.  Blow up.
 	             true.should be(false) 
             end                
+        end
+        
+	    def test_binTwo(question)
+            # The quiz depends on the level
+            test_level(question)
+            @quiz.vocab.status.consecutive.should be(0)
+	    end
+
+	    def test_binThree(question)
+            # The quiz depends on the level
+            test_level(question)
+            @quiz.vocab.status.consecutive.should be(0)
+	    end
+
+	    def test_binFour(question)
+            # The quiz depends on the level
+            test_level(question)
+            # Level 4 items have consecutive of at least one
+            @quiz.vocab.status.consecutive.should_not be(0)
 	    end
 	    
 	    def test_drill
@@ -165,9 +184,9 @@ Excellent
 	        elsif @quiz.vocab.status.bin == 2
 	            test_binTwo(question)
 	        elsif @quiz.vocab.status.bin == 3
-	            test_binTwo(question)
+	            test_binThree(question)
 	        elsif @quiz.vocab.status.bin == 4
-	            test_binTwo(question)
+	            test_binFour(question)
 	        else
 	             # This shouldn't ever happen.  Blow up.
 	             true.should be(false) 
@@ -175,11 +194,19 @@ Excellent
 	    end
 
         def test_correct
+            consecutive = @quiz.vocab.status.consecutive
             @quiz.correct
+            bin = @quiz.vocab.status.bin
+            if bin == 4
+                @quiz.vocab.status.consecutive.should be_eql(consecutive + 1)
+            else
+                @quiz.vocab.status.consecutive.should be(0)
+            end
         end
 	    
         def test_incorrect
             @quiz.incorrect
+            @quiz.vocab.status.consecutive.should be(0)
         end
 	    
 	    def test_initializeQuiz
@@ -238,6 +265,15 @@ Excellent
             @quiz.reset
             test1.status.lastReviewed.should be_nil
             test2.status.lastReviewed.should be_nil
+        end
+        
+        it "should update the status correctly for bin 4 items" do
+	        @quiz.loadFromString("none", @fileString)
+	        vocab = @quiz.contents.bins[4][0]
+	        vocab.should_not be_nil
+            @quiz.currentProblem = MeaningProblem.new(vocab)
+            test_correct
+            test_incorrect            
         end
     end
 end

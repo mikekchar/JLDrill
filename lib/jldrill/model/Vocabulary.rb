@@ -75,11 +75,43 @@ class Vocabulary
   # Assign the contents of vocab to this object.
   # NOTE: It does *not* assign status
   def assign(vocab)
-    @kanji = vocab.kanji
-    @reading = vocab.reading
-    @definitions = Vocabulary.splitCommas(vocab.definitions)
-    @markers = Vocabulary.splitCommas(vocab.markers)
-    @hint = vocab.hint
+    self.kanji= vocab.kanji
+    self.reading= vocab.reading
+    self.definitions= vocab.definitions
+    self.markers= vocab.markers
+    self.hint= vocab.hint
+  end
+  
+  def notEmpty(string)
+    if (!string.nil? && !string.empty?)
+        string
+    else
+        nil
+    end
+  end
+  
+  def hasKanji?
+    !@kanji.nil?
+  end
+  
+  def kanji=(string)
+    @kanji = notEmpty(string)
+  end
+    
+  def hasReading?
+    !@reading.nil?
+  end
+
+  def reading=(string)
+    @reading = notEmpty(string)
+  end
+  
+  def hasHint?
+    !@hint.nil?
+  end
+
+  def hint=(string)
+    @hint = notEmpty(string)
   end
   
   # splits the string on commas and destroys and leading space
@@ -110,7 +142,16 @@ class Vocabulary
   # Assigns the definitions from a string of comma separated
   # definitions
   def definitions=(string)
-    @definitions = Vocabulary.splitCommas(string)
+    if (!string.nil? && !string.empty?)
+        @definitions = Vocabulary.splitCommas(string)
+    else
+        @definitions = nil
+    end
+  end
+  
+  # Returns true if there are definitions set on the Vocabulary
+  def hasDefinitions?
+    !@definitions.nil?
   end
 
   # Returns a string containing the markers separated
@@ -119,10 +160,19 @@ class Vocabulary
     Vocabulary.joinCommas(@markers)    
   end
 
-  # Returns a string containing the markers separated
-  # by commas
+  # Assigns the definitions from a string of comma separated
+  # definitions
   def markers=(string)
-    @markers = Vocabulary.splitCommas(string)
+    if (!string.nil? && !string.empty?)
+        @markers = Vocabulary.splitCommas(string)
+    else
+        @markers = nil
+    end
+  end
+  
+  # Returns true if there are definitions set on the Vocabulary
+  def hasMarkers?
+    !@markers.nil?
   end
 
   # Returns true if the vocabulary contains at least one
@@ -150,7 +200,7 @@ class Vocabulary
       end
     end
   end
-
+  
   # Outputs to tab separated values.  This is primarily for
   # outputing the data for other quiz programs.  There are only 3 fields.
   # kanji    reading    (markers) definitions

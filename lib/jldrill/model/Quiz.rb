@@ -205,7 +205,7 @@ module JLDrill
         attr_reader :savename,  
                     :updated, :length, :info, :name, 
                     :contents, :options, :currentProblem
-        attr_writer :savename, :updated, :info, :name
+        attr_writer :savename, :updated, :info, :name, :currentProblem
 
         def initialize()
             @updated = false
@@ -555,6 +555,9 @@ module JLDrill
                 if(vocab.status.score >= @options.promoteThresh)
                     promote(vocab)
                 end
+                if vocab.status.bin == 4
+                    vocab.status.consecutive += 1
+                end
                 @updated = true
             end
         end
@@ -564,6 +567,7 @@ module JLDrill
             if(@currentProblem.vocab)
                 vocab.status.markReviewed
                 demote(@currentProblem.vocab, @currentProblem.level)
+                vocab.status.consecutive = 0
                 @updated = true
             end
         end

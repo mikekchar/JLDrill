@@ -19,9 +19,12 @@ module JLDrill
         LEVEL_RE = /^Level: (.*)/
         POSITION_RE = /^Position: (.*)/
         LASTREVIEWED_RE = /^LastReviewed: (.*)/
+        CONSECUTIVE_RE = /^Consecutive: (.*)/
 
-        attr_reader :score, :bin, :level, :position, :index, :lastReviewed
-        attr_writer :score, :bin, :level, :position, :index, :lastReviewed
+        attr_reader :score, :bin, :level, :position, :index, 
+                        :lastReviewed, :consecutive
+        attr_writer :score, :bin, :level, :position, :index, 
+                        :lastReviewed, :consecutive
 
 
         def initialize(vocab)
@@ -29,6 +32,7 @@ module JLDrill
             @score = 0
             @bin = 0
             @level = 0
+            @consecutive = 0
             @position = 0
             @lastReviewed = nil
             @index = nil
@@ -48,6 +52,8 @@ module JLDrill
                     @position = $1.to_i
                 when LASTREVIEWED_RE
                     @lastReviewed = Time.at($1.to_i)
+                when CONSECUTIVE_RE 
+                    @consecutive = $1.to_i
             else # Not something we understand
                 parsed = false
             end
@@ -69,6 +75,7 @@ module JLDrill
         def reset
             @lastReviewed = nil
             @score = 0
+            @consecutive = 0
         end
         
         def to_s
@@ -76,6 +83,9 @@ module JLDrill
                 "/Position: #{@position}"
             if !@lastReviewed.nil?
                 retVal += "/LastReviewed: #{@lastReviewed.to_i}"
+            end
+            if !@consecutive.nil?
+                retVal += "/Consecutive: #{@consecutive.to_i}"
             end
             retVal
         end

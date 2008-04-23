@@ -6,10 +6,10 @@ module JLDrill
 	describe Vocabulary do
 	
 		before(:each) do
-        	@fileString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/
-/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 3/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 0/Level: 0/Position: 4/]
+        	@fileString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/
+/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 0/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 3/Consecutive: 0/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 0/Level: 0/Position: 4/Consecutive: 0/]
             @strings = @fileString.split("\n")
             @strings.length.should be(4)
             @vocab = []
@@ -29,10 +29,10 @@ module JLDrill
             @vocab.each do |v|
                 v.should be_valid
             end
-            v2 = Vocabulary.create("/Kanji: 会う/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
+            v2 = Vocabulary.create("/Kanji: 会う/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/")
             v2.should_not be_nil
             v2.should_not be_valid
-            v3 = Vocabulary.create("/Kanji: 会う/Reading: あう/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
+            v3 = Vocabulary.create("/Kanji: 会う/Reading: あう/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/")
             v3.should_not be_nil
             v3.should_not be_valid
         end
@@ -79,7 +79,65 @@ module JLDrill
             v1.hint.should_not be_nil
             v1.assign(v3)
             v1.hint.should be_nil
-       end
+        end
+       
+       
+        it "should be able to set definitions and markers" do
+            v1 = Vocabulary.new
+            v1.should_not be_hasDefinitions
+            v1.should_not be_hasMarkers
+            v1.definitions = "one, two, three"
+            v1.should be_hasDefinitions
+            v1.definitions.should be_eql("one, two, three")
+            v1.markers = "one, two, three"
+            v1.should be_hasMarkers
+            v1.markers.should be_eql("one, two, three")
+        end
+        
+        it "should set definitions and markers to nil if empty" do
+            v1 = Vocabulary.new
+            v1.should_not be_hasDefinitions
+            v1.definitions = ""        
+            v1.should_not be_hasDefinitions
+            v1.should_not be_hasMarkers
+            v1.markers = ""        
+            v1.should_not be_hasMarkers
+            v2 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions:/Markers:/Score: 0/Bin: 0/Level: 0/Position: 1/")
+            v2.should_not be_hasDefinitions
+            v2.should_not be_hasMarkers
+        end
+        
+        it "should be able to set kanji, reading and hint" do
+            v1 = Vocabulary.new
+            v1.should_not be_hasKanji
+            v1.kanji = "test"        
+            v1.should be_hasKanji
+            v1.kanji.should be_eql("test")
+            v1 = Vocabulary.new
+            v1.should_not be_hasReading
+            v1.reading = "test"        
+            v1.should be_hasReading
+            v1.reading.should be_eql("test")
+            v1 = Vocabulary.new
+            v1.should_not be_hasHint
+            v1.hint = "test"        
+            v1.should be_hasHint
+            v1.hint.should be_eql("test")
+        end
+        
+        it "should set kanji, reading and hint to nil if empty" do
+            v1 = Vocabulary.new
+            v1.should_not be_hasKanji
+            v1.kanji = ""        
+            v1.should_not be_hasKanji
+            v1.should_not be_hasReading
+            v1.kanji = ""        
+            v1.should_not be_hasReading
+            v1 = Vocabulary.new
+            v1.should_not be_hasHint
+            v1.kanji = ""        
+            v1.should_not be_hasHint
+        end        
 	end
 
 end
