@@ -575,13 +575,13 @@ module JLDrill
                 level = vocab.status.level
             elsif vocab.status.bin == 4
                 # Don't drill reading in the excellent bin
-                level = rand(1) + 1
+                level = rand(2) + 1
             else
                 if vocab.kanji == nil
                     # Don't try to drill kanji if there isn't any
-                    level = rand(1)
+                    level = rand(2)
                 else
-                    level = rand(vocab.status.level)
+                    level = rand(vocab.status.level + 1)
                 end
             end
 
