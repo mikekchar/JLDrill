@@ -20,11 +20,14 @@ module JLDrill
         POSITION_RE = /^Position: (.*)/
         LASTREVIEWED_RE = /^LastReviewed: (.*)/
         CONSECUTIVE_RE = /^Consecutive: (.*)/
+        SCHEDULEDTIME_RE = /^ScheduledTime: (.*)/
+        
+        SECONDS_PER_DAY = 60 * 60 * 24
 
         attr_reader :score, :bin, :level, :position, :index, 
-                        :lastReviewed, :consecutive
+                        :lastReviewed, :consecutive, :scheduledTime
         attr_writer :score, :bin, :level, :position, :index, 
-                        :lastReviewed, :consecutive
+                        :lastReviewed, :consecutive, :scheduledTime
 
 
         def initialize(vocab)
@@ -35,6 +38,7 @@ module JLDrill
             @consecutive = 0
             @position = 0
             @lastReviewed = nil
+            @scheduledTime = nil
             @index = nil
         end
         
@@ -54,6 +58,8 @@ module JLDrill
                     @lastReviewed = Time.at($1.to_i)
                 when CONSECUTIVE_RE 
                     @consecutive = $1.to_i
+                when SCHEDULEDTIME_RE
+                    @scheduledTime = Time.at($1.to_i)
             else # Not something we understand
                 parsed = false
             end
@@ -78,14 +84,38 @@ module JLDrill
             @consecutive = 0
         end
         
+        def scheduled?
+            !@scheduledTime.nil?
+        end
+        
+        def schedule
+            if !reviewed?
+                @scheduledTime = Time::now + SECONDS_PER_DAY
+            else
+                elapsed = Time::now - @lastReviewed
+                @scheduledTime = Time::now + (2 * elapsed)
+            end
+        end
+        
+        def scheduledTime
+            if !scheduled?
+                0
+            else
+                @scheduledTime
+            end
+        end
+        
         def to_s
             retVal = "/Score: #{@score}" + "/Bin: #{@bin}" + "/Level: #{@level}" +
                 "/Position: #{@position}"
-            if !@lastReviewed.nil?
+            if reviewed?
                 retVal += "/LastReviewed: #{@lastReviewed.to_i}"
             end
             if !@consecutive.nil?
                 retVal += "/Consecutive: #{@consecutive.to_i}"
+            end
+            if scheduled?
+                retVal += "/ScheduledTime: #{@scheduledTime.to_i}"
             end
             retVal
         end

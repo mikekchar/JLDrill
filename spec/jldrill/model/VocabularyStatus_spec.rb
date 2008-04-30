@@ -49,6 +49,46 @@ module JLDrill
             @vocab[1].status.consecutive = 2
             @vocab[1].to_s.should be_eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 2/\n")
         end
+
+        it "should be able to set the scheduled time" do
+		    @vocab[1].status.scheduled?.should be(false)
+		    time = @vocab[1].status.schedule
+		    time.should_not be_nil
+		    @vocab[1].status.scheduled?.should be(true)
+        end
+
+        it "should schedule new items to 1 day" do
+		    @vocab[1].status.scheduled?.should be(false)
+		    time = @vocab[1].status.schedule
+		    time.should_not be_nil
+		    @vocab[1].status.scheduled?.should be(true)
+		    @vocab[1].status.scheduledTime.to_i.should be_eql(Time::now.to_i + (60*60*24))
+        end
+        
+        it "should schedule old items to twice their elapsed time" do
+            # Set reviewed time to yesterday
+            @vocab[1].status.lastReviewed = Time::now - (60*60*24)
+		    @vocab[1].status.scheduled?.should be(false)
+		    time = @vocab[1].status.schedule
+		    time.should_not be_nil
+		    @vocab[1].status.scheduled?.should be(true)
+		    # Should be scheduled for 2 days from now
+		    @vocab[1].status.scheduledTime.to_i.should be_eql(Time::now.to_i + (2*60*60*24))            
+        end
+
+        it "should be able to write scheduledTime to file" do
+            @vocab[1].to_s.should be_eql(@strings[1] + "\n")
+            time = @vocab[1].status.schedule
+            @vocab[1].to_s.should be_eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 0/ScheduledTime: " + time.to_i.to_s + "/\n")
+        end
+
+        it "should be able to parse the schedule information in the file" do
+            @vocab[1].to_s.should be_eql(@strings[1] + "\n")
+            time = @vocab[1].status.schedule
+            newVocab = Vocabulary.create(@vocab[1].to_s)
+            newVocab.status.scheduledTime.to_i.should be_eql(time.to_i)
+        end
+
 	end
 
 end

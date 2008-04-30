@@ -451,7 +451,7 @@ module JLDrill
                 print status + "\n"
             end
 
-            if((!@options.randomOrder) && (bin == 0))
+            if((!@options.randomOrder) && (bin == 0)) || (bin == 4)
                 index = 0
             else
                 index = rand(@contents.bins[bin].length)
@@ -549,6 +549,9 @@ module JLDrill
                 end
                 if vocab.status.bin == 4
                     vocab.status.consecutive += 1
+                    @contents.bins[4].sort! do |x, y|
+                        x.status.scheduledTime <=> y.status.scheduledTime
+                    end
                 end
                 @updated = true
             end
