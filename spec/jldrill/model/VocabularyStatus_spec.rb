@@ -52,6 +52,7 @@ module JLDrill
 
         it "should be able to set the scheduled time" do
 		    @vocab[1].status.scheduled?.should be(false)
+		    @vocab[1].status.scheduledTime.to_i.should be_eql(Time::at(0).to_i)
 		    time = @vocab[1].status.schedule
 		    time.should_not be_nil
 		    @vocab[1].status.scheduled?.should be(true)
@@ -88,6 +89,15 @@ module JLDrill
             newVocab = Vocabulary.create(@vocab[1].to_s)
             newVocab.status.scheduledTime.to_i.should be_eql(time.to_i)
         end
+        
+        it "should be able to clear the schedule" do
+		    @vocab[1].status.scheduled?.should be(false)
+		    time = @vocab[1].status.schedule
+		    time.should_not be_nil
+		    @vocab[1].status.scheduled?.should be(true)
+		    @vocab[1].status.unschedule
+		    @vocab[1].status.scheduled?.should be(false)
+        end            
 
 	end
 

@@ -542,6 +542,7 @@ module JLDrill
             vocab = @currentProblem.vocab
             adjustQuizOld(true)
             if(vocab)
+                vocab.status.schedule
                 vocab.status.markReviewed
                 vocab.status.score += 1
                 if(vocab.status.score >= @options.promoteThresh)
@@ -560,6 +561,7 @@ module JLDrill
         def incorrect
             adjustQuizOld(false)
             if(@currentProblem.vocab)
+                vocab.status.unschedule
                 vocab.status.markReviewed
                 demote(@currentProblem.vocab, @currentProblem.level)
                 vocab.status.consecutive = 0

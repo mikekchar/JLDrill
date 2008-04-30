@@ -97,9 +97,13 @@ module JLDrill
             end
         end
         
+        def unschedule
+            @scheduledTime = nil
+        end
+        
         def scheduledTime
             if !scheduled?
-                0
+                Time::at(0)
             else
                 @scheduledTime
             end
