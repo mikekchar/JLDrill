@@ -169,17 +169,13 @@ module JLDrill
         def status
             retVal = ""
             if(@updated) then retVal += "* " else retVal += "  " end
-            retVal += @name + ": Level "
-            retVal += "U: #{@contents.bins[0].length} P: #{@contents.bins[1].length} "
-            retVal += "F: #{@contents.bins[2].length} "
-            retVal += "G: #{@contents.bins[3].length} E: #{@contents.bins[4].length}"
+            retVal += @name + ": "
+            retVal += @contents.status + " "
             if !@currentProblem.nil?
-                retVal += " Current: #{@currentProblem.vocab.status.bin} "
+                retVal += @currentProblem.status + " "
             end
-            retVal += " Known: #{@lastEstimate}%"
-            retVal += " - "
-            if(@options.randomOrder) then retVal += "R" end
-            retVal += "(#{@options.promoteThresh},#{@options.introThresh})"
+            retVal += "Known: #{@lastEstimate}%" + " "
+            retVal += "- " + @options.status
             return retVal
         end
 

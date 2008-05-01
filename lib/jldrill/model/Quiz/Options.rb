@@ -57,6 +57,14 @@ module JLDrill
             parsed
         end
         
+        # Return a string showing the current state of the options
+        def status
+            retVal = ""
+            if(@randomOrder) then retVal += "R" end
+            retVal += "(#{@promoteThresh},#{@introThresh})"
+            retVal
+        end
+        
         def to_s
             retVal = ""
             if(@randomOrder)

@@ -47,6 +47,11 @@ module JLDrill
             @vocab.assign(vocab)
         end
 
+        # Return a string showing what bin this problem is from
+        def status
+            "Current: #{@vocab.status.bin}"
+        end
+        
     end
     
     # The first kind of Problem shown.  It lets you read it in Japanese and
