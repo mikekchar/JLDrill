@@ -19,10 +19,7 @@ pkg_files = FileList[
 ]
 
 spec_files = FileList[
-	'spec/jldrill/contexts/*_spec.rb',
-	'spec/jldrill/model/*_spec.rb',
-	'spec/jldrill/views/*_spec.rb',
-	'spec/jldrill/views/gtk/*_spec.rb'
+	'spec/**/*_spec.rb'
 ]
 
 # This just makes sure that spec is looking in the right directories for
