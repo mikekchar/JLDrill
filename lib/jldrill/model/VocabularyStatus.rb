@@ -84,10 +84,12 @@ module JLDrill
             @consecutive = 0
         end
         
+        # Returns true if the item has been scheduled for review
         def scheduled?
             !@scheduledTime.nil?
         end
         
+        # Schedule the item for review
         def schedule
             if !reviewed?
                 @scheduledTime = Time::now + SECONDS_PER_DAY
@@ -97,10 +99,12 @@ module JLDrill
             end
         end
         
+        # Remove review schedule for the item
         def unschedule
             @scheduledTime = nil
         end
         
+        # Return the time at which the item is scheduled for review
         def scheduledTime
             if !scheduled?
                 Time::at(0)
