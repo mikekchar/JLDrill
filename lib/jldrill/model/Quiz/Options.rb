@@ -3,12 +3,14 @@ module JLDrill
 
     # Options for the standard quiz.
     class Options
-        attr_reader :randomOrder, :promoteThresh, :introThresh, :oldThresh
+        attr_reader :randomOrder, :promoteThresh, :introThresh, :oldThresh,
+                        :strategyVersion
 
         RANDOM_ORDER_RE = /^Random Order/
         PROMOTE_THRESH_RE = /^Promotion Threshold: (.*)/
         INTRO_THRESH_RE = /^Introduction Threshold: (.*)/
         OLD_THRESH_RE = /^Old Threshold: (.*)/
+        STRATEGY_VERSION_RE = /^Strategy Version: (.*)/
             
         def initialize(quiz)
             @quiz = quiz
@@ -16,12 +18,24 @@ module JLDrill
             @promoteThresh = 2
             @introThresh = 10
             @oldThresh = 90
+            @strategyVersion = 0
         end
             
         def update
-            @quiz.update
+            @quiz.update unless @quiz.nil?
         end
-
+        
+        # Assigns all the options from one to the other, but
+        # does *keeps the same quiz*
+        def assign(options)
+            @randomOrder = options.randomOrder
+            @promoteThresh = options.promoteThresh
+            @introThresh = options.introThresh
+            @oldThresh = options.oldThresh
+            @strategyVersion = options.strategyVersion
+            update
+        end
+        
         def randomOrder=(value)
             @randomOrder = value
             update
@@ -41,6 +55,11 @@ module JLDrill
             @oldThresh = value
             update
         end
+
+        def strategyVersion=(value)
+            @strategyVersion = value
+            update
+        end
             
         def parseLine(line)
             parsed = true
@@ -51,6 +70,8 @@ module JLDrill
                     self.promoteThresh = $1.to_i
                 when INTRO_THRESH_RE 
                     self.introThresh = $1.to_i
+                when STRATEGY_VERSION_RE 
+                    self.strategyVersion = $1.to_i
                 else
                     parsed = false
             end
@@ -59,7 +80,7 @@ module JLDrill
         
         # Return a string showing the current state of the options
         def status
-            retVal = ""
+            retVal = @strategyVersion.to_s
             if(@randomOrder) then retVal += "R" end
             retVal += "(#{@promoteThresh},#{@introThresh})"
             retVal
@@ -72,6 +93,7 @@ module JLDrill
             end
             retVal += "Promotion Threshold: #{@promoteThresh}\n"
             retVal += "Introduction Threshold: #{@introThresh}\n"
+            retVal += "Strategy Version: #{@strategyVersion}\n"
             retVal
         end
     end

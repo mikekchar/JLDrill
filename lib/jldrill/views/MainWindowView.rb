@@ -17,5 +17,13 @@ module JLDrill
 		def edict
 		    @context.reference
 		end
+		
+		def quiz
+		    @context.quiz
+		end
+
+		def quiz=(aQuiz)
+		    @context.quiz = aQuiz
+		end
 	end
 end

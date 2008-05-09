@@ -11,7 +11,7 @@ module JLDrill::Gtk
 		before(:each) do
 		    factory = Context::ViewFactory.new(JLDrill::Gtk)
 		    @main = JLDrill::MainContext.new(factory)
-			@context = JLDrill::LoadReferenceContext.new(factory)
+			@context = @main.loadReferenceContext
 			@view = @context.mainView
 		end
 

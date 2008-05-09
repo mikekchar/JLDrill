@@ -39,7 +39,6 @@ module JLDrill::Gtk
 				connectSignals unless @view.nil?
 
                 @resultDisplayed = false
-                @quiz = nil
     
                 @currentDir = File.join(JLDrill::Gtk::Config::DATA_DIR, "quiz") 
                 @icon = Gdk::Pixbuf.new(File.join(JLDrill::Gtk::Config::DATA_DIR, "icon.png"))
@@ -226,7 +225,7 @@ module JLDrill::Gtk
             end
 
             def info()
-                if @quiz
+                if @view.quiz
                     dialog = Gtk::Dialog.new("Quiz Info",
                                             self,
                                             Gtk::Dialog::DESTROY_WITH_PARENT,
@@ -244,8 +243,8 @@ module JLDrill::Gtk
                     sw.add(contents)
                     dialog.set_default_size(640, 360)
 
-                    contents.buffer.text = "Created from dictionary: " + @quiz.name + "\n\n"
-                    contents.buffer.text += @quiz.info
+                    contents.buffer.text = "Created from dictionary: " + @view.quiz.name + "\n\n"
+                    contents.buffer.text += @view.quiz.info
 
                     dialog.show_all
 
@@ -260,13 +259,13 @@ module JLDrill::Gtk
 
             def updateStatus()
                 @statusbar.pop(0)
-                if(!@quiz)
+                if(!@view.quiz)
                     @statusbar.push(0, "No Quiz Loaded -- Select Open")
                 else
-                    status = @quiz.status
-                    if((@view.edict.loaded?) && (!@quiz.vocab.nil?)) 
+                    status = @view.quiz.status
+                    if((@view.edict.loaded?) && (!@view.quiz.vocab.nil?)) 
                         # If the exact entry exists in the dictionary
-                        if(@view.edict.include?(@quiz.vocab))
+                        if(@view.edict.include?(@view.quiz.vocab))
                             status += " -- OK"
                         else
                             status += " -- XX"
@@ -281,8 +280,8 @@ module JLDrill::Gtk
                     @qbuffer.text = ""
                     @abuffer.text = ""
                     @qbuffer.insert(@qbuffer.start_iter, text, "kanji")
-                    if !@quiz.vocab.nil?
-                        @indicatorBox.set(@quiz.vocab)
+                    if !@view.quiz.vocab.nil?
+                        @indicatorBox.set(@view.quiz.vocab)
                     end
                     updateStatus
                 end
@@ -307,15 +306,15 @@ module JLDrill::Gtk
                     
                     if dialog.run == Gtk::Dialog::RESPONSE_ACCEPT
                         @currentDir = dialog.current_folder
-                        @quiz = JLDrill::Quiz.new()
+                        @view.quiz = JLDrill::Quiz.new()
                         if JLDrill::Quiz.drillFile?(dialog.filename)
-                            @quiz.load(dialog.filename)
+                            @view.quiz.load(dialog.filename)
                         else
                             dict = Edict.new(dialog.filename)
                             dict.read
-                            @quiz.loadFromDict(dict)
+                            @view.quiz.loadFromDict(dict)
                         end
-                        printQuestion(@quiz.drill)
+                        printQuestion(@view.quiz.drill)
                     end
                     dialog.destroy
                     updateStatus
@@ -327,19 +326,19 @@ module JLDrill::Gtk
             end
 
             def export()
-                if @quiz
+                if @view.quiz
                     dialog = GtkEnterFilename.new(@currentDir, self)
                 
                     savename = dialog.run 
                     dialog.destroy
                     if savename != ""
-                    @quiz.export(savename)
+                    @view.quiz.export(savename)
                     end
                 end
             end
   
             def saveAs()
-            	if @quiz
+            	if @view.quiz
             	    dialog = GtkEnterFilename.new(@currentDir, self)
             	    savename = dialog.run
             	    if dialog.resp == Gtk::Dialog::RESPONSE_ACCEPT
@@ -347,37 +346,37 @@ module JLDrill::Gtk
                     end
                     dialog.destroy
                     if savename != ""
-                        @quiz.savename = savename
-                        @quiz.save
+                        @view.quiz.savename = savename
+                        @view.quiz.save
                         updateStatus
                     end
                 end
             end
 
             def save(newFile=false)
-                if @quiz
-                    if @quiz.savename == ""
+                if @view.quiz
+                    if @view.quiz.savename == ""
                     	saveAs()
                     else
-                    @quiz.save
+                    @view.quiz.save
                     updateStatus
                     end
                 end
             end
 
             def options()
-                if @quiz
+                if @view.quiz
                     dialog = Gtk::Dialog.new("Drill Options", self,
                         Gtk::Dialog::DESTROY_WITH_PARENT,
                         [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
                         [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
                     
                     random = Gtk::CheckButton.new("Introduce new items in random order")
-                    random.active = @quiz.options.randomOrder
+                    random.active = @view.quiz.options.randomOrder
                     promote = Gtk::HScale.new(1,10,1)
-                    promote.value = @quiz.options.promoteThresh
+                    promote.value = @view.quiz.options.promoteThresh
                     intro = Gtk::HScale.new(1,100,1)
-                    intro.value = @quiz.options.introThresh
+                    intro.value = @view.quiz.options.introThresh
 
                     dialog.vbox.add(random)
                     dialog.vbox.add(Gtk::Label.new("Promote item after x correct"))
@@ -388,9 +387,9 @@ module JLDrill::Gtk
                     dialog.show_all
 
                     if dialog.run == Gtk::Dialog::RESPONSE_ACCEPT
-                        @quiz.options.randomOrder = random.active?
-                        @quiz.options.introThresh = intro.value.to_i
-                        @quiz.options.promoteThresh = promote.value.to_i
+                        @view.quiz.options.randomOrder = random.active?
+                        @view.quiz.options.introThresh = intro.value.to_i
+                        @view.quiz.options.promoteThresh = promote.value.to_i
                     end
                     dialog.destroy
                     updateStatus
@@ -510,7 +509,7 @@ Copyright (C) 2005-2007  Mike Charlton
             def promptSave()
                 retVal = true
 
-                if @quiz && @quiz.updated
+                if @view.quiz && @view.quiz.updated
                     dialog = Gtk::Dialog.new("Unsaved Changes", self,
                         Gtk::Dialog::DESTROY_WITH_PARENT,
                         [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
@@ -543,12 +542,12 @@ Copyright (C) 2005-2007  Mike Charlton
             end
 
             def vocabTable
-                if @quiz
+                if @view.quiz
                     dialog = Gtk::Dialog.new("All Vocabulary", self,
                         Gtk::Dialog::DESTROY_WITH_PARENT,
                         [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
 
-                    candView = GtkVocabTable.new(@quiz.allVocab) { |vocab|
+                    candView = GtkVocabTable.new(@view.quiz.allVocab) { |vocab|
                     }
                     dialog.vbox.add(candView);
                     dialog.set_default_size(450, 300)
@@ -566,15 +565,15 @@ Copyright (C) 2005-2007  Mike Charlton
             end
 
             def displayVocab
-                if @quiz && @quiz.vocab
-                    dialog = GtkDisplayView.new(@quiz.vocab, self)
+                if @view.quiz && @view.quiz.vocab
+                    dialog = GtkDisplayView.new(@view.quiz.vocab, self)
                     dialog.show_all
 
                     dialog.run { |response|
                         if response == Gtk::Dialog::RESPONSE_ACCEPT 
                             newVocab = dialog.getVocab 
                             if newVocab != nil
-                                @quiz.currentProblem.vocab = newVocab
+                                @view.quiz.currentProblem.vocab = newVocab
                                 redraw
                             end
                         end
@@ -584,16 +583,16 @@ Copyright (C) 2005-2007  Mike Charlton
             end
 
             def xReference
-                if @view.edict.loaded? && @quiz && @quiz.vocab
-                    dialog = GtkXRefView.new(@quiz.vocab, self,
-                                            @view.edict.search(@quiz.vocab.reading))
+                if @view.edict.loaded? && @view.quiz && @view.quiz.vocab
+                    dialog = GtkXRefView.new(@view.quiz.vocab, self,
+                                            @view.edict.search(@view.quiz.vocab.reading))
                     dialog.show_all
 
                     dialog.run { |response|
                         if response == Gtk::Dialog::RESPONSE_ACCEPT 
                             newVocab = dialog.getVocab 
                             if newVocab != nil
-                                @quiz.currentProblem.vocab = newVocab
+                                @view.quiz.currentProblem.vocab = newVocab
                                 redraw
                             end
                         end
@@ -603,36 +602,36 @@ Copyright (C) 2005-2007  Mike Charlton
             end
 
             def redraw
-                if @quiz
-                    printQuestion(@quiz.currentDrill)
-                    printAnswer(@quiz.currentAnswer)
+                if @view.quiz
+                    printQuestion(@view.quiz.currentDrill)
+                    printAnswer(@view.quiz.currentAnswer)
                 end
             end
 
             def resetQuiz
-                if @quiz
-                    @quiz.reset
+                if @view.quiz
+                    @view.quiz.reset
                     updateStatus
                 end
             end
 
             def check()
-                if(@quiz)
-                    printAnswer(@quiz.answer)
+                if(@view.quiz)
+                    printAnswer(@view.quiz.answer)
                 end
             end
 
             def correct()
-                if(@quiz)
-                    @quiz.correct
-                    printQuestion(@quiz.drill)
+                if(@view.quiz)
+                    @view.quiz.correct
+                    printQuestion(@view.quiz.drill)
                 end
             end
 
             def incorrect()
-                if(@quiz)
-                    @quiz.incorrect
-                    printQuestion(@quiz.drill)
+                if(@view.quiz)
+                    @view.quiz.incorrect
+                    printQuestion(@view.quiz.drill)
                 end
             end
 			
@@ -661,6 +660,7 @@ Copyright (C) 2005-2007  Mike Charlton
 			@mainWindow = MainWindow.new(self)
 			@mainWindow.set_default_size(600, 400)
 			@widget = Context::Gtk::Widget.new(@mainWindow)
+			@widget.isAMainWindow
 		end
 		
 		def open
@@ -705,6 +705,7 @@ Copyright (C) 2005-2007  Mike Charlton
 		    if !widget.delegate.class.ancestors.include?(Gtk::Window)
 		        super(view)
 		    else
+		        widget.mainWindow = self.getWidget.mainWindow
 		        view.open
 		    end
 		end
@@ -714,6 +715,7 @@ Copyright (C) 2005-2007  Mike Charlton
 		    if !widget.delegate.class.ancestors.include?(Gtk::Window)
 		        super(view)
 		    else
+		        self.getWidget.mainWindow = nil
 		        view.close
 		    end
 		end

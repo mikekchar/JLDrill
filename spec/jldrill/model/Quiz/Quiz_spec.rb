@@ -10,6 +10,7 @@ module JLDrill
 Random Order
 Promotion Threshold: 4
 Introduction Threshold: 17
+Strategy Version: 0
 Unseen
 /Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/
 Poor

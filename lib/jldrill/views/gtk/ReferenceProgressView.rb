@@ -4,7 +4,7 @@ require 'gtk2'
 
 module JLDrill::Gtk
 
-	class ReferenceProgressView < JLDrill::MainWindowView
+	class ReferenceProgressView < JLDrill::ReferenceProgressView
 	
 		class ProgressWindow < Gtk::Window
 		
@@ -24,8 +24,8 @@ module JLDrill::Gtk
 		        @progress.fraction = fraction
 		    end
 		    
-		    def open(parentWindow)
-		        set_transient_for(parentWindow)
+		    def open
+		        set_transient_for(@view.getWidget.mainWindow)
 		        window_position = Gtk::Window::POS_CENTER_ON_PARENT
                 show_all
             end		    
@@ -44,7 +44,7 @@ module JLDrill::Gtk
 		end
 		
 		def open
-			@progressWindow.open(context.parent.mainView.getWidget.delegate)
+			@progressWindow.open
 		end
 		
 		def close
