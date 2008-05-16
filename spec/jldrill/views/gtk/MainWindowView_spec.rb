@@ -21,20 +21,6 @@ module JLDrill::Gtk
 			@view.mainWindow.should_receive(:show_all)
 			@view.open
 		end
-		
-		it "should open views that contain Gtk::Windows rather than add them" do
-			newContext = JLDrill::MainContext.new(Context::ViewFactory.new(JLDrill::Gtk))
-			newView = newContext.mainView
-			newView.should_receive(:open)
-			@view.addView(newView)
-		end
-
-        it "should close views that contain Gtk::Windows rather than remove them" do
-			oldContext = JLDrill::MainContext.new(Context::ViewFactory.new(JLDrill::Gtk))
-			oldView = oldContext.mainView
-			oldView.should_receive(:close)
-			@view.removeView(oldView)
-		end
             
 		it "should react to destroy signals" do
 			@view.should_receive(:close)

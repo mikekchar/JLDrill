@@ -10,22 +10,31 @@ module JLDrill
 		
 		def initialize(viewFactory)
 			super(viewFactory)
-			@mainView = viewFactory.OptionsView.new(self)
 			@quiz = nil
 		end
 		
+		def createViews
+    		@mainView = @viewFactory.OptionsView.new(self)
+        end
+        
+        def destroyViews
+            @mainView = nil
+        end		    
+		
 		def enter(parent)
 			if (!parent.nil?) && (parent.class.public_method_defined?(:quiz))
+       			super(parent)
     			@quiz = parent.quiz
     			@mainView.update(@quiz.options)
-       			super(parent)
+    			@mainView.run
             end
 		end
 		
 		def exit
-		    @mainView.close
-		    options.assign(@mainView.options)
-		    super(exit)
+		    if @mainView.optionsSet?
+		        @quiz.options.assign(@mainView.options)
+		    end
+		    super
 		end
     end
 end

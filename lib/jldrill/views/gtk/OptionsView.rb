@@ -17,7 +17,6 @@ module JLDrill::Gtk
                 @random = Gtk::CheckButton.new("Introduce new items in random order")
                 @promote = Gtk::HScale.new(1,10,1)
                 @intro = Gtk::HScale.new(1,100,1)
-                @optionsSet = false
 
                 self.vbox.add(@random)
                 self.vbox.add(Gtk::Label.new("Promote item after x correct"))
@@ -35,12 +34,18 @@ module JLDrill::Gtk
 		    def open
 		        set_transient_for(@view.getWidget.mainWindow)
                 show_all
-                if run == Gtk::Dialog::RESPONSE_ACCEPT
-                    @optionsSet = true
-                end
-                close
             end		    
-		    
+		   
+		    def execute
+                if run == Gtk::Dialog::RESPONSE_ACCEPT
+                    @view.optionsSet = true
+                    @view.options.randomOrder = @random.active?
+                    @view.options.promoteThresh = @promote.value
+                    @view.options.introThresh = @intro.value
+                end
+                @view.exit
+            end
+             
 		    def close
 		        destroy
 		    end
@@ -51,7 +56,7 @@ module JLDrill::Gtk
 		def initialize(context)
 			super(context)
 			@optionsWindow = OptionsWindow.new(self)
-			@widget = Context::Gtk::Widget.new(@progressWindow)
+			@widget = Context::Gtk::Widget.new(@optionsWindow)
 		end
 		
 		def open
@@ -61,7 +66,11 @@ module JLDrill::Gtk
 		def close
 		    @optionsWindow.close
 		end
-				
+		
+		def run
+		    @optionsWindow.execute
+		end
+		
 		def update(options)
 		    super(options)
 		    @optionsWindow.update(options)

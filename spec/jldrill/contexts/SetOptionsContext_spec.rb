@@ -9,23 +9,48 @@ module JLDrill
 		before(:each) do
 			@main = MainContext.new(Context::ViewFactory.new(JLDrill))
 			@context = @main.setOptionsContext
-		end
+			@context.createViews
+			@view = @context.mainView
+			
+    		def @context.createViews
+	    	    # Use the previously set View
+    		end
 
+		end
+		
         it "should be created by the main context" do
             @main.setOptionsContext.should_not be_nil
         end
-
         
-        it "should have a view" do
-            @context.mainView.should_not be_nil
-        end
-        
-        it "should update with the parent's quiz" do
+        it "should update the view with the parent's quiz options on entry" do
             @context.quiz.should be(nil)
             @main.quiz = Quiz.new
             @main.quiz.should_not be(nil)
-            @context.mainView.should_receive(:update).with(@main.quiz.options)
+            @view.should_receive(:update).with(@main.quiz.options)
             @context.enter(@main)
         end
+        
+        it "should update the parent's quiz options with the views options on exit" do
+            @context.quiz.should be(nil)
+            @main.quiz = Quiz.new
+            @main.quiz.should_not be(nil)
+            @main.quiz.options.should_receive(:assign).with(@view.options)
+            # Pretend that the options got set
+            @view.optionsSet = true
+            @context.enter(@main)
+            # Note: enter automatically calls exit            
+        end
+
+        it "should not update the parent's quiz options when cancelled" do
+            @context.quiz.should be(nil)
+            @main.quiz = Quiz.new
+            @main.quiz.should_not be(nil)
+            @main.quiz.options.should_not_receive(:assign)
+            # Pretend that the options did not get set
+            @view.optionsSet = false
+            @context.enter(@main)
+            # Note: enter automatically calls exit            
+        end
+        
 	end
 end

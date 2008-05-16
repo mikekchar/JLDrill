@@ -40,5 +40,9 @@ module JLDrill
 		def loadReference
 		    @loadReferenceContext.enter(self)
 		end
+		
+		def setOptions
+		    @setOptionsContext.enter(self)
+		end
     end
 end

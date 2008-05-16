@@ -365,35 +365,7 @@ module JLDrill::Gtk
             end
 
             def options()
-                if @view.quiz
-                    dialog = Gtk::Dialog.new("Drill Options", self,
-                        Gtk::Dialog::DESTROY_WITH_PARENT,
-                        [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
-                        [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
-                    
-                    random = Gtk::CheckButton.new("Introduce new items in random order")
-                    random.active = @view.quiz.options.randomOrder
-                    promote = Gtk::HScale.new(1,10,1)
-                    promote.value = @view.quiz.options.promoteThresh
-                    intro = Gtk::HScale.new(1,100,1)
-                    intro.value = @view.quiz.options.introThresh
-
-                    dialog.vbox.add(random)
-                    dialog.vbox.add(Gtk::Label.new("Promote item after x correct"))
-                    dialog.vbox.add(promote)
-                    dialog.vbox.add(Gtk::Label.new("Max actively learning items"))
-                    dialog.vbox.add(intro)  
-
-                    dialog.show_all
-
-                    if dialog.run == Gtk::Dialog::RESPONSE_ACCEPT
-                        @view.quiz.options.randomOrder = random.active?
-                        @view.quiz.options.introThresh = intro.value.to_i
-                        @view.quiz.options.promoteThresh = promote.value.to_i
-                    end
-                    dialog.destroy
-                    updateStatus
-                end
+                @view.setOptions
             end
 
             def ack()
@@ -697,28 +669,5 @@ Copyright (C) 2005-2007  Mike Charlton
 		    success
 		end    
 		
-		# Override these so I don't try to swallow windows.  This
-		# should be replaced by a strategy for adding views.
-		
-		def addView(view)
-		    widget = view.getWidget
-		    if !widget.delegate.class.ancestors.include?(Gtk::Window)
-		        super(view)
-		    else
-		        widget.mainWindow = self.getWidget.mainWindow
-		        view.open
-		    end
-		end
-
-		def removeView(view)
-		    widget = view.getWidget
-		    if !widget.delegate.class.ancestors.include?(Gtk::Window)
-		        super(view)
-		    else
-		        self.getWidget.mainWindow = nil
-		        view.close
-		    end
-		end
-
 	end
 end

@@ -18,6 +18,10 @@ module JLDrill
 		    @context.reference
 		end
 		
+		def setOptions
+		    @context.setOptions
+		end
+		
 		def quiz
 		    @context.quiz
 		end
