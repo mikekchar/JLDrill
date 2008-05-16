@@ -56,16 +56,24 @@ module JLDrill::Gtk
 		it "should open a options window transient on the main window when opened" do
             @main.quiz = JLDrill::Quiz.new
             view = test_getViewForEnter
-			view.should_receive(:exit)
             @context.enter(@main)
 		end
-	
-        it "should destroy the progress window when closed" do
-            view = @context.peakAtView
-            view.optionsWindow.should_receive(:destroy)
-            view.close
+
+        it "should automatically exit the context after entry" do
+            @main.quiz = JLDrill::Quiz.new
+            view = test_getViewForEnter
+            @context.should_receive(:exit)
+            @context.enter(@main)
         end
-        
+
+		it "should destroy the options Window when it closes" do
+            @main.quiz = JLDrill::Quiz.new
+            view = test_getViewForEnter
+			view.optionsWindow.should_receive(:destroy)
+			# Note: The context automatically exits after entry
+            @context.enter(@main)
+		end
+
         it "should be able to run twice" do
             @main.quiz = JLDrill::Quiz.new
             view = test_getViewForEnter

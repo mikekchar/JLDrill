@@ -23,16 +23,6 @@ module JLDrill::Gtk
 		    def update(fraction)
 		        @progress.fraction = fraction
 		    end
-		    
-		    def open
-		        set_transient_for(@view.getWidget.mainWindow)
-		        window_position = Gtk::Window::POS_CENTER_ON_PARENT
-                show_all
-            end		    
-		    
-		    def close
-		        destroy
-		    end
         end
     
         attr_reader :progressWindow
@@ -43,14 +33,6 @@ module JLDrill::Gtk
 			@widget = Context::Gtk::Widget.new(@progressWindow)
 		end
 		
-		def open
-			@progressWindow.open
-		end
-		
-		def close
-		    @progressWindow.close
-		end
-				
 		def getWidget
 			@widget
 		end

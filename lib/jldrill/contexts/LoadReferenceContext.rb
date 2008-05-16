@@ -38,8 +38,7 @@ module JLDrill
 		end
 		
 		def exit
-		    @mainView.close
-		    super(exit)
+		    super
 		end
     end
 end

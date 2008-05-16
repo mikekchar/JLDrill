@@ -33,9 +33,14 @@ module JLDrill::Gtk
 	        @view.update(fraction)
 	    end
 	
-        it "should destroy the progress window when closed" do
+        it "should destroy the progress window when context exited" do
+            mainViewWidget = @main.mainView.getWidget
+			@view.progressWindow.should_receive(:set_transient_for).with(mainViewWidget.delegate)
+			@view.progressWindow.should_receive(:show_all)
+			@context.should_receive(:loadInBackground)
+            @context.enter(@main)
             @view.progressWindow.should_receive(:destroy)
-            @view.close
+            @context.exit
         end
         
 	end

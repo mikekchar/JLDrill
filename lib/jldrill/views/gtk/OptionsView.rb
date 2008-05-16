@@ -31,11 +31,6 @@ module JLDrill::Gtk
                 @intro.value = options.introThresh
             end
 
-		    def open
-		        set_transient_for(@view.getWidget.mainWindow)
-                show_all
-            end		    
-		   
 		    def execute
                 if run == Gtk::Dialog::RESPONSE_ACCEPT
                     @view.optionsSet = true
@@ -45,10 +40,6 @@ module JLDrill::Gtk
                 end
                 @view.exit
             end
-             
-		    def close
-		        destroy
-		    end
         end
     
         attr_reader :optionsWindow
@@ -57,14 +48,6 @@ module JLDrill::Gtk
 			super(context)
 			@optionsWindow = OptionsWindow.new(self)
 			@widget = Context::Gtk::Widget.new(@optionsWindow)
-		end
-		
-		def open
-			@optionsWindow.open
-		end
-		
-		def close
-		    @optionsWindow.close
 		end
 		
 		def run
