@@ -36,7 +36,7 @@ module JLDrill
         end
 
         def definitions
-            if !@vocab.definitions.nil?
+            if @vocab.definitions != ""
                 @vocab.definitions + "\n"
             else
                 ""

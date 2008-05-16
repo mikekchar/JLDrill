@@ -52,6 +52,28 @@ module JLDrill
             @problem1.definitions.should be_eql("to meet, to interview\n")
         end
         
+        it "should have and empty string if the reading isn't set" do
+		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
+		    @problem1 = Problem.new(@vocab1)
+            @problem1.should_not be_nil
+            @problem1.reading.should be_eql("")
+        end
+
+        it "should have and empty string if the definitions aren't set" do
+		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
+		    @problem1 = Problem.new(@vocab1)
+            @problem1.should_not be_nil
+            @problem1.definitions.should be_eql("")
+        end
+        
+        it "should be able to assign a vocab" do
+		    @vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
+            @problem1 = Problem.new(@vocab1)
+		    @vocab2 = Vocabulary.create("/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
+            @problem1.vocab = @vocab2
+            @problem1.vocab.should be_eql(@vocab2)
+        end
+        
     end
 
 	describe ReadingProblem do
