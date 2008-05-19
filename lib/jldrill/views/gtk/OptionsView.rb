@@ -7,6 +7,7 @@ module JLDrill::Gtk
 	class OptionsView < JLDrill::OptionsView
 	
 		class OptionsWindow < Gtk::Dialog
+		    attr_reader :random, :promote, :intro
 		
 		    def initialize(view)
 		        @view = view
