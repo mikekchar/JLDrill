@@ -113,7 +113,7 @@ Excellent
 	    it "should be able to move an item from one bin to the other" do
 	        @quiz.loadFromString("none", @fileString)
 	        vocab = @quiz.contents.bins[0][0]
-	        @quiz.moveToBin(vocab, 4)
+	        @quiz.strategy.moveToBin(vocab, 4)
 	        @quiz.contents.bins[0].length.should be(0)
 	        @quiz.contents.bins[4].length.should be(3)
 	        @quiz.contents.bins[4][2].to_s.should be_eql("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 0/Position: 1/Consecutive: 0/\n")

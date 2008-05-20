@@ -5,8 +5,8 @@ module JLDrill
 	describe Strategy do
 	
 	    before(:each) do
-	        @quiz = mock("Quiz")
-	        @strategy = Strategy.new(@quiz)
+	        @quiz = Quiz.new
+	        @strategy = @quiz.strategy
 	    end
 	    
 	    it "should be able to return the status" do
@@ -26,6 +26,10 @@ module JLDrill
 	        @strategy.stats.accuracy.should be(100)
 	        @strategy.incorrect
 	        @strategy.stats.accuracy.should be(50)	        
+	    end
+	    
+	    it "should use the contents from the quiz" do
+	        @strategy.contents.should be(@quiz.contents)
 	    end
     end
 end
