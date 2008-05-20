@@ -21,6 +21,7 @@ require 'jldrill/model/Edict'
 require 'jldrill/model/Problem'
 require 'jldrill/model/Quiz/Options'
 require 'jldrill/model/Quiz/Contents'
+require 'jldrill/model/Quiz/Strategy'
 
 module JLDrill
     class Quiz
@@ -35,14 +36,11 @@ module JLDrill
             @savename = ""
             @info = ""
             @options = Options.new(self)
-            @contents = Contents.new(self)            
+            @contents = Contents.new(self)
+            @strategy = Strategy.new(self)            
             @currentProblem = nil
             
             @last = nil
-
-            @oldCorrect = 0
-            @oldIncorrect = 0
-            @lastEstimate = 0
         end
 
         def vocab
@@ -174,7 +172,7 @@ module JLDrill
             if !@currentProblem.nil?
                 retVal += @currentProblem.status + " "
             end
-            retVal += "Known: #{@lastEstimate}%" + " "
+            retVal += @strategy.status + " "
             retVal += "- " + @options.status
             return retVal
         end
@@ -183,31 +181,13 @@ module JLDrill
             status
         end
 
-        def reEstimate
-            if @oldIncorrect == 0
-                if @oldCorrect == 0
-                    # Always review old items at the start
-                    inst = 0
-                else
-                    inst = 100
-                end
-            else
-                total = @oldCorrect + @oldIncorrect
-                inst = ((@oldCorrect * 100) / total).to_i
-            end
-            hop = ((inst - @lastEstimate) * 0.3).to_i
-            retVal = @lastEstimate + hop
-            if (retVal > 100) then retVal = 100 end
-            if (retVal < 0) then retVal = 0 end
-            @lastEstimate = retVal
-        end
         
         def underIntroThresh
             (@contents.bins[1].length + @contents.bins[2].length) < @options.introThresh
         end
   
         def underReviewThresh
-            @lastEstimate < @options.oldThresh
+            @strategy.stats.estimate < @options.oldThresh
         end
         
         def randomBin(from, to)
@@ -347,12 +327,11 @@ module JLDrill
   
         def adjustQuizOld(good)
             if(@currentProblem.vocab.status.bin == 4)
-                if good
-                    @oldCorrect += 1
+                if(good)
+                    @strategy.correct
                 else
-                    @oldIncorrect += 1
+                    @strategy.incorrect
                 end
-                reEstimate
             end
         end
   

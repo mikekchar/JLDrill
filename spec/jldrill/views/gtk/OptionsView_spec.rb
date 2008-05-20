@@ -123,6 +123,10 @@ module JLDrill::Gtk
         it "should be able to set the Intro Threshold option" do
             test_setValue("introThresh", 10, 20)
         end
+
+        it "should be able to set the Strategy Version option" do
+            test_setValue("strategyVersion", 0, 1)
+        end
         
 	end
 end
