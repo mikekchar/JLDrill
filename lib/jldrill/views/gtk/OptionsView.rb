@@ -7,7 +7,6 @@ module JLDrill::Gtk
 	class OptionsView < JLDrill::OptionsView
 	
 		class OptionsWindow < Gtk::Dialog
-		    attr_reader :random, :promote, :intro
 		
 		    def initialize(view)
 		        @view = view
@@ -15,29 +14,57 @@ module JLDrill::Gtk
                         Gtk::Dialog::DESTROY_WITH_PARENT,
                         [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
                         [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
-                @random = Gtk::CheckButton.new("Introduce new items in random order")
-                @promote = Gtk::HScale.new(1,10,1)
-                @intro = Gtk::HScale.new(1,100,1)
+                @randomOrder = Gtk::CheckButton.new("Introduce new items in random order")
+                @promoteThresh = Gtk::HScale.new(1,10,1)
+                @introThresh = Gtk::HScale.new(1,100,1)
 
-                self.vbox.add(@random)
+                self.vbox.add(@randomOrder)
                 self.vbox.add(Gtk::Label.new("Promote item after x correct"))
-                self.vbox.add(@promote)
+                self.vbox.add(@promoteThresh)
                 self.vbox.add(Gtk::Label.new("Max actively learning items"))
-                self.vbox.add(@intro)  
+                self.vbox.add(@introThresh)  
 		    end
 		    
-		    def update(options)
-                @random.active = options.randomOrder
-                @promote.value = options.promoteThresh
-                @intro.value = options.introThresh
+		    def randomOrder=(value)
+		        @randomOrder.active = value
+		    end
+		    
+		    def randomOrder
+		        @randomOrder.active?
+		    end
+
+		    def promoteThresh=(value)
+		        @promoteThresh.value = value
+		    end
+
+		    def promoteThresh
+		        @promoteThresh.value.to_i
+		    end
+
+		    def introThresh=(value)
+		        @introThresh.value = value
+		    end
+
+		    def introThresh
+		        @introThresh.value.to_i
+		    end
+
+		    def updateFromViewData
+                randomOrder = @view.options.randomOrder
+                promoteThresh = @view.options.promoteThresh
+                introThresh = @view.options.introThresh
+            end
+            
+            def setViewData
+                @view.optionsSet = true
+                @view.options.randomOrder = randomOrder
+                @view.options.promoteThresh = promoteThresh
+                @view.options.introThresh = introThresh
             end
 
 		    def execute
                 if run == Gtk::Dialog::RESPONSE_ACCEPT
-                    @view.optionsSet = true
-                    @view.options.randomOrder = @random.active?
-                    @view.options.promoteThresh = @promote.value
-                    @view.options.introThresh = @intro.value
+                    setViewData
                 end
                 @view.exit
             end
@@ -57,7 +84,7 @@ module JLDrill::Gtk
 		
 		def update(options)
 		    super(options)
-		    @optionsWindow.update(options)
+		    @optionsWindow.updateFromViewData
 		end
 		
 		def getWidget

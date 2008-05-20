@@ -101,15 +101,27 @@ module JLDrill::Gtk
             @context.enter(@main)
         end
         
-        it "should be able to set the Random Order option" do
-            @main.quiz.options.randomOrder.should be(false)
+        def test_setValue(valueString, default, target)
+            eval("@main.quiz.options." + valueString).should be(default)
             view = test_getViewForEnter
             override_method(view.optionsWindow, :run) do
-                view.optionsWindow.random.active = true
+                eval("view.optionsWindow." + valueString + " = " + target.to_s)
                 Gtk::Dialog::RESPONSE_ACCEPT
             end
             @context.enter(@main)
-            @context.quiz.options.randomOrder.should be(true)            
+            eval("@main.quiz.options." + valueString).should be(target)
+        end
+        
+        it "should be able to set the Random Order option" do
+            test_setValue("randomOrder", false, true)
+        end
+
+        it "should be able to set the Promote Threshold option" do
+            test_setValue("promoteThresh", 2, 1)
+        end
+
+        it "should be able to set the Intro Threshold option" do
+            test_setValue("introThresh", 10, 20)
         end
         
 	end
