@@ -31,5 +31,16 @@ module JLDrill
 		    @parent.should_receive(:exit)
 		    @context.close
 		end
+		
+		it "should enter the loadReferenceContext when loading the reference" do
+		    @context.loadReferenceContext.should_receive(:enter).with(@context)
+		    @context.loadReference
+		end
+
+		it "should enter the setOptionsContext when setting the options" do
+		    @context.setOptionsContext.should_receive(:enter).with(@context)
+		    @context.setOptions
+		end
+
 	end
 end
