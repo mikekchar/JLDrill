@@ -1,4 +1,7 @@
 require 'jldrill/model/Quiz/Strategy'
+require 'jldrill/model/Quiz/Contents'
+require 'jldrill/model/Vocabulary'
+require 'jldrill/model/Problem'
 
 module JLDrill
 
@@ -6,6 +9,9 @@ module JLDrill
 	
 	    before(:each) do
 	        @quiz = Quiz.new
+	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/")
+	        @quiz.contents.add(vocab, 4)
+	        @quiz.currentProblem = ReadingProblem.new(vocab)
 	        @strategy = @quiz.strategy
 	    end
 	    
@@ -14,13 +20,15 @@ module JLDrill
 	        @strategy.status.should be_eql("Known: 0%")
 	    end
 	    
-	    it "should increment the statistics if correct" do
+	    it "should increment the statistics if correct in bin 4" do
+	        @quiz.vocab.status.bin.should be(4)
 	        @strategy.stats.accuracy.should be(0)
 	        @strategy.correct
 	        @strategy.stats.accuracy.should be(100)
 	    end
 
-	    it "should decrement the statistics if incorrect" do
+	    it "should decrement the statistics if incorrect in bin 4" do
+	        @quiz.vocab.status.bin.should be(4)
 	        @strategy.stats.accuracy.should be(0)
 	        @strategy.correct
 	        @strategy.stats.accuracy.should be(100)

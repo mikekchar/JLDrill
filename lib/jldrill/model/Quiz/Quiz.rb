@@ -192,82 +192,18 @@ module JLDrill
             @contents.reset
         end
   
-        def adjustQuizOld(good)
-            if(@currentProblem.vocab.status.bin == 4)
-                if(good)
-                    @strategy.correct
-                else
-                    @strategy.incorrect
-                end
-            end
-        end
-  
-        def correct
-            vocab = @currentProblem.vocab
-            adjustQuizOld(true)
-            if(vocab)
-                vocab.status.schedule
-                vocab.status.markReviewed
-                vocab.status.score += 1
-                if(vocab.status.score >= @options.promoteThresh)
-                    @strategy.promote(vocab)
-                end
-                if vocab.status.bin == 4
-                    vocab.status.consecutive += 1
-                    @contents.bins[4].sort! do |x, y|
-                        x.status.scheduledTime <=> y.status.scheduledTime
-                    end
-                end
-                @updated = true
-            end
-        end
-
         def incorrect
-            adjustQuizOld(false)
-            if(@currentProblem.vocab)
-                vocab.status.unschedule
-                vocab.status.markReviewed
-                @strategy.demote(@currentProblem.vocab, @currentProblem.level)
-                vocab.status.consecutive = 0
-                @updated = true
-            end
+            @strategy.incorrect
+        end
+        
+        def correct
+            @strategy.correct
         end
 
         def drill()
             vocab = @strategy.getUniqueVocab
-    
-            # Kind of screwy logic...  In the "fair" bin, only drill
-            # at the current level.  At other levels, drill at a random levels
-            # this enforces introduction of the material in the "fair" bin.
-
-            if vocab.status.bin == 2 || vocab.status.level == 0
-                level = vocab.status.level
-            elsif vocab.status.bin == 4
-                # Don't drill reading in the excellent bin
-                level = rand(2) + 1
-            else
-                if vocab.kanji == nil
-                    # Don't try to drill kanji if there isn't any
-                    level = rand(2)
-                else
-                    level = rand(vocab.status.level + 1)
-                end
-            end
-
-            case level
-                when 0
-                    @currentProblem = ReadingProblem.new(vocab)
-                when 1
-                    @currentProblem = MeaningProblem.new(vocab)
-                when 2
-                    if vocab.kanji
-                        @currentProblem = KanjiProblem.new(vocab)
-                    else
-                        @currentProblem = ReadingProblem.new(vocab)
-                    end
-            end
-            @currentProblem.requestedLevel = level
-
+            @currentProblem = @strategy.createProblem(vocab)
+            
             return @currentProblem.question
         end
 

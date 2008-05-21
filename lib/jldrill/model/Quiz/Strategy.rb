@@ -16,14 +16,6 @@ module JLDrill
             "Known: #{@stats.estimate}%"
         end
 
-        def correct
-            @stats.correct
-        end
-        
-        def incorrect
-            @stats.incorrect
-        end
-        
         def contents
             @quiz.contents
         end
@@ -129,6 +121,40 @@ module JLDrill
             vocab
         end
         
+        def createProblem(vocab)
+            # Kind of screwy logic...  In the "fair" bin, only drill
+            # at the current level.  At other levels, drill at a random levels
+            # this enforces introduction of the material in the "fair" bin.
+            if vocab.status.bin == 2 || vocab.status.level == 0
+                level = vocab.status.level
+            elsif vocab.status.bin == 4
+                # Don't drill reading in the excellent bin
+                level = rand(2) + 1
+            else
+                if vocab.kanji == nil
+                    # Don't try to drill kanji if there isn't any
+                    level = rand(2)
+                else
+                    level = rand(vocab.status.level + 1)
+                end
+            end
+
+            case level
+                when 0
+                    problem = ReadingProblem.new(vocab)
+                when 1
+                    problem = MeaningProblem.new(vocab)
+                when 2
+                    if vocab.kanji
+                        problem = KanjiProblem.new(vocab)
+                    else
+                        problem = ReadingProblem.new(vocab)
+                    end
+            end
+            problem.requestedLevel = level
+            problem
+        end
+        
         # Move the specified vocab to the specified bin
         def moveToBin(vocab, bin)
             contents.moveToBin(vocab, bin)
@@ -162,6 +188,46 @@ module JLDrill
             end
         end
 
-    
+        def adjustQuizOld(good)
+            if(@quiz.currentProblem.vocab.status.bin == 4)
+                if(good)
+                    @stats.correct
+                else
+                    @stats.incorrect
+                end
+            end
+        end
+  
+        def correct
+            vocab = @quiz.currentProblem.vocab
+            adjustQuizOld(true)
+            if(vocab)
+                vocab.status.schedule
+                vocab.status.markReviewed
+                vocab.status.score += 1
+                if(vocab.status.score >= @quiz.options.promoteThresh)
+                    promote(vocab)
+                end
+                if vocab.status.bin == 4
+                    vocab.status.consecutive += 1
+                    contents.bins[4].sort! do |x, y|
+                        x.status.scheduledTime <=> y.status.scheduledTime
+                    end
+                end
+                @quiz.update
+            end
+        end
+
+        def incorrect
+            vocab = @quiz.currentProblem.vocab
+            adjustQuizOld(false)
+            if(vocab)
+                vocab.status.unschedule
+                vocab.status.markReviewed
+                demote(@quiz.currentProblem.vocab, @quiz.currentProblem.level)
+                vocab.status.consecutive = 0
+                @quiz.update
+            end
+        end
     end
 end
