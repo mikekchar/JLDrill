@@ -1,4 +1,4 @@
-require 'Context/ViewFactory'
+require 'Context/Bridge'
 require 'jldrill/contexts/SetOptionsContext'
 require 'jldrill/views/gtk/OptionsView'
 require 'jldrill/contexts/MainContext'
@@ -11,8 +11,8 @@ module JLDrill::Gtk
 	describe OptionsView do
 
 		before(:each) do
-		    factory = Context::ViewFactory.new(JLDrill::Gtk)
-		    @main = JLDrill::MainContext.new(factory)
+		    bridge = Context::Bridge.new(JLDrill::Gtk)
+		    @main = JLDrill::MainContext.new(bridge)
             @main.quiz = JLDrill::Quiz.new
 			@context = @main.setOptionsContext
 

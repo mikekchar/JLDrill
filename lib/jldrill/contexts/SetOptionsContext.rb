@@ -1,5 +1,5 @@
 require 'Context/Context'
-require 'Context/ViewFactory'
+require 'Context/Bridge'
 require 'jldrill/views/OptionsView'
 
 module JLDrill
@@ -8,13 +8,13 @@ module JLDrill
 		
 	    attr_reader :filename, :quiz
 		
-		def initialize(viewFactory)
-			super(viewFactory)
+		def initialize(viewBridge)
+			super(viewBridge)
 			@quiz = nil
 		end
 		
 		def createViews
-    		@mainView = @viewFactory.OptionsView.new(self)
+    		@mainView = @viewBridge.OptionsView.new(self)
         end
         
         def destroyViews

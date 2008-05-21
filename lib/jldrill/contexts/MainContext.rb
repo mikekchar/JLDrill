@@ -1,6 +1,6 @@
 require 'Context/Context'
 require 'Context/Key'
-require 'Context/ViewFactory'
+require 'Context/Bridge'
 require 'jldrill/views/MainWindowView'
 require 'jldrill/model/HashedEdict'
 require 'jldrill/contexts/LoadReferenceContext'
@@ -14,12 +14,12 @@ module JLDrill
 	                :reference, :quiz
 	    attr_writer :quiz
 		
-		def initialize(viewFactory)
-			super(viewFactory)
-			@mainWindowView = viewFactory.MainWindowView.new(self)
+		def initialize(viewBridge)
+			super(viewBridge)
+			@mainWindowView = viewBridge.MainWindowView.new(self)
 			@mainView = @mainWindowView
-			@loadReferenceContext = LoadReferenceContext.new(viewFactory)
-			@setOptionsContext = SetOptionsContext.new(viewFactory)
+			@loadReferenceContext = LoadReferenceContext.new(viewBridge)
+			@setOptionsContext = SetOptionsContext.new(viewBridge)
 			@reference = HashedEdict.new
 			@quiz = nil
 		end

@@ -1,12 +1,12 @@
 require 'jldrill/contexts/LoadReferenceContext'
-require 'Context/ViewFactory'
+require 'Context/Bridge'
 
 module JLDrill
 
 	describe LoadReferenceContext do
 
 		before(:each) do
-			@main = MainContext.new(Context::ViewFactory.new(JLDrill))
+			@main = MainContext.new(Context::Bridge.new(JLDrill))
 			@context = @main.loadReferenceContext
 		end
 

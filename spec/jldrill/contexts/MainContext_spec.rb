@@ -1,12 +1,12 @@
 require 'jldrill/contexts/MainContext'
-require 'Context/ViewFactory'
+require 'Context/Bridge'
 
 module JLDrill
 
 	describe MainContext do
 
 		before(:each) do
-			@context = MainContext.new(Context::ViewFactory.new(JLDrill))
+			@context = MainContext.new(Context::Bridge.new(JLDrill))
 		end
 
         def test_openMainView

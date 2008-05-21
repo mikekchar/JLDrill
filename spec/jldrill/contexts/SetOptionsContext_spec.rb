@@ -1,5 +1,5 @@
 require 'jldrill/contexts/SetOptionsContext'
-require 'Context/ViewFactory'
+require 'Context/Bridge'
 require 'jldrill/model/Quiz/Quiz'
 
 module JLDrill
@@ -7,7 +7,7 @@ module JLDrill
 	describe SetOptionsContext do
 
 		before(:each) do
-			@main = MainContext.new(Context::ViewFactory.new(JLDrill))
+			@main = MainContext.new(Context::Bridge.new(JLDrill))
 			@context = @main.setOptionsContext
 			@context.createViews
 			@view = @context.mainView

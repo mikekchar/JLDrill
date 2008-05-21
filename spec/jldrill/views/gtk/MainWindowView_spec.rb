@@ -1,4 +1,4 @@
-require 'Context/ViewFactory'
+require 'Context/Bridge'
 require 'jldrill/contexts/MainContext'
 require 'jldrill/views/gtk/MainWindowView'
 require 'jldrill/views/gtk/ReferenceProgressView'
@@ -9,7 +9,7 @@ module JLDrill::Gtk
 	describe MainWindowView do
 
 		before(:each) do
-			@context = JLDrill::MainContext.new(Context::ViewFactory.new(JLDrill::Gtk))
+			@context = JLDrill::MainContext.new(Context::Bridge.new(JLDrill::Gtk))
 			@view = @context.mainView
 		end
 

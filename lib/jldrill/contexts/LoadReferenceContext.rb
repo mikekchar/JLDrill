@@ -1,5 +1,5 @@
 require 'Context/Context'
-require 'Context/ViewFactory'
+require 'Context/Bridge'
 require 'jldrill/model/Config'
 require 'jldrill/views/ReferenceProgressView'
 
@@ -9,9 +9,9 @@ module JLDrill
 		
 	    attr_reader :filename, :reference
 		
-		def initialize(viewFactory)
-			super(viewFactory)
-			@mainView = viewFactory.ReferenceProgressView.new(self)
+		def initialize(viewBridge)
+			super(viewBridge)
+			@mainView = viewBridge.ReferenceProgressView.new(self)
 			dictDir = File.join(Config::DATA_DIR, "dict")
             @filename = File.join(dictDir, "edict.utf")
             @reference = nil
