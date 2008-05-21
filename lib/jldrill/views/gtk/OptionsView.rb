@@ -61,18 +61,18 @@ module JLDrill::Gtk
 		    end
 
 		    def updateFromViewData
-                randomOrder = @view.options.randomOrder
-                promoteThresh = @view.options.promoteThresh
-                introThresh = @view.options.introThresh
-                strategyVersion = @view.options.strategyVersion
+                self.randomOrder = @view.options.randomOrder
+                self.promoteThresh = @view.options.promoteThresh
+                self.introThresh = @view.options.introThresh
+                self.strategyVersion = @view.options.strategyVersion
             end
             
             def setViewData
                 @view.optionsSet = true
-                @view.options.randomOrder = randomOrder
-                @view.options.promoteThresh = promoteThresh
-                @view.options.introThresh = introThresh
-                @view.options.strategyVersion = strategyVersion
+                @view.options.randomOrder = self.randomOrder
+                @view.options.promoteThresh = self.promoteThresh
+                @view.options.introThresh = self.introThresh
+                @view.options.strategyVersion = self.strategyVersion
             end
 
 		    def execute

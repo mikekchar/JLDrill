@@ -63,10 +63,31 @@ module JLDrill::Gtk
 	    end
 	    	
 		it "should set the options on OK" do
+		    @main.quiz.options.randomOrder = true
+		    @main.quiz.options.promoteThresh = 3
+		    @main.quiz.options.introThresh = 20
+		    @main.quiz.options.strategyVersion = 1
             view = test_getViewForEnter
-            test_runOK(view)
-            @main.quiz.options.should_receive(:assign).with(view.options)
+            correct = false
+            override_method(view.optionsWindow, :run) do
+                if (view.optionsWindow.randomOrder &&
+        		    view.optionsWindow.promoteThresh == 3 &&
+        		    view.optionsWindow.introThresh == 20 &&
+    		        view.optionsWindow.strategyVersion == 1)
+    		        correct = true
+    		    end
+    		    view.optionsWindow.randomOrder = false
+    		    view.optionsWindow.promoteThresh = 4
+    		    view.optionsWindow.introThresh = 15
+    		    view.optionsWindow.strategyVersion = 0
+                Gtk::Dialog::RESPONSE_ACCEPT
+            end	    
             @context.enter(@main)
+            correct.should be(true)
+		    @main.quiz.options.randomOrder.should be(false)
+		    @main.quiz.options.promoteThresh.should be(4)
+		    @main.quiz.options.introThresh.should be(15)
+		    @main.quiz.options.strategyVersion.should be(0)
 		end
 				
 		it "should open a options window transient on the main window when opened" do
