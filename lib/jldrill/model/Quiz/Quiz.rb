@@ -17,7 +17,7 @@
 
 
 require 'jldrill/model/Vocabulary'
-require 'jldrill/model/Edict'
+require 'jldrill/model/Edict/Edict'
 require 'jldrill/model/Problem'
 require 'jldrill/model/Quiz/Options'
 require 'jldrill/model/Quiz/Contents'

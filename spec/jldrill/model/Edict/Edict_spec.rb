@@ -1,4 +1,4 @@
-require 'jldrill/model/Edict'
+require 'jldrill/model/Edict/Edict'
 
 module JLDrill
 

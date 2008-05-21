@@ -3,7 +3,7 @@ require 'Context/Gtk/Widget'
 require 'jldrill/views/MainWindowView'
 require 'gtk2'
 
-require 'jldrill/model/Edict'
+require 'jldrill/model/Edict/Edict'
 require 'jldrill/model/HashedEdict'
 require 'jldrill/model/Vocabulary'
 require 'jldrill/model/Quiz/Quiz'
