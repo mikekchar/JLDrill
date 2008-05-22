@@ -19,99 +19,26 @@
 # Also will parse hacked up JLPT Edict files
 
 require "jldrill/model/Vocabulary"
+require "jldrill/model/Edict/Usage"
 
-# 2 helper classes for parsing the english meanings in
-# dictionary.
-class EdictDefinition
-
-  DEFINITION_RE = /^(\(\S*\))\s?(.*)/
-  SEPARATOR_RE = /\)|,/
-
-  attr_reader :types, :value
-	
-  def initialize(string)
-    @value = ""
-    @types = []
-    parse(string)
-  end
-
-  def parse(definition)
-    types = []
-    while definition =~ DEFINITION_RE
-      definition = $2
-        
-      typestring = $1
-	  types += typestring.delete("(").split(SEPARATOR_RE)
-    end
-    @value = definition
-    @types = types
-  end
-  
-  def to_s
-  	retVal = ""
-  	if @types.size > 0
-  		retVal += "(" + @types.join(", ") + ") "
-  	end
-  	retVal += @value
-  	retVal
-  end
-end
-
-class EdictSense
-
-	attr_reader :index
-
-	def initialize(string, index)
-		@definitions = []
-		@index = index
-		parse(string)
-	end
-	
-	def parse(string)
-		string.split("/").each do |definition|
-			defn = EdictDefinition.new(definition)
-			@definitions.push(defn)
-		end
-	end
-	
-	def types
-		retVal = []
-		@definitions.each do |defn|
-			retVal += defn.types
-		end
-		retVal
-	end
-
-	def definitions
-		retVal = []
-		@definitions.each do |defn|
-			retVal.push defn.value unless defn.value == ""
-		end
-		retVal
-	end
-	
-	def to_s
-		"[" + index.to_s + "] " + @definitions.join("/")
-	end
-end
 
 class EdictMeaning
 
-  SENSE_RE = /\(\d+\)\s?/
+  USAGE_RE = /\(\d+\)\s?/
 
-  attr_reader :senses
+  attr_reader :usages
 
   def initialize(string)
     @types = []
-    @senses = getSenses(string)
+    @usages = getUsages(string)
   end
 
-  def getSenses(string)
+  def getUsages(string)
     retVal = []
-    senses = string.split(SENSE_RE)
+    usages = string.split(USAGE_RE)
     i = 1
-    senses.each do |sense|
-      es = EdictSense.new(sense, i)
+    usages.each do |usage|
+      es = JLDrill::Usage.create(usage, i)
       if(es.definitions.empty?)
         # Hack to get the tags at the beginning of the meaning
       	@types += es.types
@@ -126,19 +53,19 @@ class EdictMeaning
   def types
     retVal = []
     retVal += @types
-    @senses.each do |sense|
-    	retVal += sense.types
+    @usages.each do |usage|
+    	retVal += usage.types
     end
     retVal
   end
 
   def definitions
     retVal = []
-    printSenses = @senses.size > 1
-  	@senses.each do |sense|
-  		defs = sense.definitions
-  		if printSenses && !defs[0].nil?
-  			defs[0] = "[" + sense.index.to_s + "] " + defs[0]
+    printUsages = @usages.size > 1
+  	@usages.each do |usage|
+  		defs = usage.definitions
+  		if printUsages && !defs[0].nil?
+  			defs[0] = "[" + usage.index.to_s + "] " + defs[0]
   		end
   		retVal += defs
   	end
@@ -150,7 +77,7 @@ class EdictMeaning
   	if types.size > 0
   		retVal += "(" + types.join(",") + ") "
   	end
-  	retVal += @senses.join("/") + "\n"
+  	retVal += @usages.join("/") + "\n"
     retVal
   end
 end
