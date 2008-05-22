@@ -15,12 +15,14 @@ module JLDrill
 	        usage.definitions.size.should be(1)
 	        usage.index.should be(0)
 	        usage.definitions[0].should be_eql("fun")
+	        usage.types.size.should be(0)
 
 	        usage = Usage.create("fun/silly")
 	        usage.definitions.size.should be(2)
 	        usage.index.should be(0)
 	        usage.definitions[0].should be_eql("fun")
 	        usage.definitions[1].should be_eql("silly")
+	        usage.types.size.should be(0)
 
 	        usage = Usage.create("(n)fun/(n,suf)(P) silly billy thingy/wow", 2)
 	        usage.definitions.size.should be(3)
@@ -28,6 +30,11 @@ module JLDrill
 	        usage.definitions[0].should be_eql("fun")
 	        usage.definitions[1].should be_eql("silly billy thingy")
 	        usage.definitions[2].should be_eql("wow")
+	        usage.types.size.should be(4)
+	        usage.types[0].should be_eql("n")
+	        usage.types[1].should be_eql("n")
+	        usage.types[2].should be_eql("suf")
+	        usage.types[3].should be_eql("P")
 	    end
 	    
 	    it "should be able to output the edict usage again" do
