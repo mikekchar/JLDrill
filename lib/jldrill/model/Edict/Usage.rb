@@ -6,7 +6,7 @@ module JLDrill
     # for the word.  It also holds an index number for the usage.
     class Usage
 
-    	attr_reader :index
+    	attr_reader :index, :types, :definitions
     	attr_writer :index
 
     	def initialize
@@ -29,7 +29,7 @@ module JLDrill
     	end
     	
     	# Returns all the types in the definitions
-    	def types
+    	def allTypes
     		retVal = []
     		@definitions.each do |defn|
     			retVal += defn.types
@@ -38,7 +38,7 @@ module JLDrill
     	end
 
          # Returns all the values for the definitions
-    	def definitions
+    	def allDefinitions
     		retVal = []
     		@definitions.each do |defn|
     			retVal.push defn.value unless defn.value == ""

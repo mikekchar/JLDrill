@@ -19,68 +19,7 @@
 # Also will parse hacked up JLPT Edict files
 
 require "jldrill/model/Vocabulary"
-require "jldrill/model/Edict/Usage"
-
-
-class EdictMeaning
-
-  USAGE_RE = /\(\d+\)\s?/
-
-  attr_reader :usages
-
-  def initialize(string)
-    @types = []
-    @usages = getUsages(string)
-  end
-
-  def getUsages(string)
-    retVal = []
-    usages = string.split(USAGE_RE)
-    i = 1
-    usages.each do |usage|
-      es = JLDrill::Usage.create(usage, i)
-      if(es.definitions.empty?)
-        # Hack to get the tags at the beginning of the meaning
-      	@types += es.types
-      else
-      	retVal.push(es)
-      	i += 1
-      end
-    end
-    retVal
-  end
-
-  def types
-    retVal = []
-    retVal += @types
-    @usages.each do |usage|
-    	retVal += usage.types
-    end
-    retVal
-  end
-
-  def definitions
-    retVal = []
-    printUsages = @usages.size > 1
-  	@usages.each do |usage|
-  		defs = usage.definitions
-  		if printUsages && !defs[0].nil?
-  			defs[0] = "[" + usage.index.to_s + "] " + defs[0]
-  		end
-  		retVal += defs
-  	end
-  	retVal
-  end
-
-  def to_s
-  	retVal = ""
-  	if types.size > 0
-  		retVal += "(" + types.join(",") + ") "
-  	end
-  	retVal += @usages.join("/") + "\n"
-    retVal
-  end
-end
+require "jldrill/model/Edict/Meaning"
 
 class Edict
 
@@ -131,7 +70,7 @@ class Edict
     if line =~ LINE_RE
       kanji = $1
       kana = $3
-      english = EdictMeaning.new($4)
+      english = JLDrill::Meaning.create($4)
 
       # Hack for JLPT files
       if kana =~ KANA_RE
@@ -144,8 +83,8 @@ class Edict
         kanji = nil
       end
 
-      add(Vocabulary.new(kanji, kana, english.definitions,
-                  english.types, hint))
+      add(Vocabulary.new(kanji, kana, english.allDefinitions,
+                  english.allTypes, hint))
       retVal = true
     end             
     return retVal                        

@@ -1,3 +1,5 @@
+require "jldrill/model/Edict/GrammarType"
+
 module JLDrill
 
     # Holds a definition for an Edict entry.  Each definition
@@ -23,15 +25,19 @@ module JLDrill
         end
 
         def parse(string)
-            types = []
+            @types = []
             while string =~ DEFINITION_RE
+        	    types = GrammarType.create($1)
+        	    if(types.empty?)
+        	        # There were no types in the parenthesis, so it must
+        	        # be part of the definition.
+        	        @value += $1 + " "
+        	    else
+        	        @types += types
+        	    end
                 string = $2
-                
-                typestring = $1
-        	    types += typestring.delete("(").split(SEPARATOR_RE)
             end
-            @value = string
-            @types = types
+            @value += string
         end
         
         def eql?(definition)

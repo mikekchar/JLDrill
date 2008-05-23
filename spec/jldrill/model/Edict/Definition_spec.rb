@@ -26,24 +26,24 @@ module JLDrill
 	    end
 
 	    it "should be able to parse Edict definitions with many types" do
-	        string = "(exp,n,funny)holy cow"
+	        string = "(exp,n,suf)holy cow"
 	        defn = Definition.create(string)
 	        defn.value.should be_eql("holy cow")
 	        defn.types.size.should be(3)
 	        defn.types[0].should be_eql("exp")
 	        defn.types[1].should be_eql("n")
-   	        defn.types[2].should be_eql("funny")
+   	        defn.types[2].should be_eql("suf")
 	    end
 
 	    it "should pick up multiple sets of types" do
-	        string = "(exp,n,funny)(This)holy cow"
+	        string = "(exp,n,suf)(uK)holy cow"
 	        defn = Definition.create(string)
 	        defn.value.should be_eql("holy cow")
 	        defn.types.size.should be(4)
 	        defn.types[0].should be_eql("exp")
 	        defn.types[1].should be_eql("n")
-   	        defn.types[2].should be_eql("funny")
-   	        defn.types[3].should be_eql("This")
+   	        defn.types[2].should be_eql("suf")
+   	        defn.types[3].should be_eql("uK")
 	    end
 	    
 	    it "should be able to match equivalence" do
@@ -53,9 +53,23 @@ module JLDrill
 	        Definition.create("(suf)fun").should_not be_eql(Definition.create("fun"))
 	        Definition.create("(suf)fun").should be_eql(Definition.create("(suf)fun"))
 	        Definition.create("(suf,P)fun").should_not be_eql(Definition.create("(suf)fun"))
-	        Definition.create("(suf,P)fun").should_not be_eql(Definition.create("(suf,P,B)fun"))
-	        Definition.create("(suf,P,B)fun").should be_eql(Definition.create("(suf,P,B)fun"))
+	        Definition.create("(suf,P)fun").should_not be_eql(Definition.create("(suf,P,uk)fun"))
+	        Definition.create("(suf,P,uk)fun").should be_eql(Definition.create("(suf,P,uk)fun"))
 	    end
+	    
+	    it "should be able to handle parenthesis" do
+	        defn = Definition.create("(usually) eats grass")
+	        # It isn't one of the normal tags
+	        defn.types.size.should be(0)
+	        defn.value.should be_eql("(usually) eats grass")
+	    end
+
+        it "should be able to handle special language tags" do
+            defn = Definition.create("(de:) part time job")
+            defn.types.size.should be(1)
+            defn.types[0].should be_eql("de:")
+            defn.value.should be_eql("part time job")
+        end
 
         # For profiling	    
 #	    it "should be fast" do
