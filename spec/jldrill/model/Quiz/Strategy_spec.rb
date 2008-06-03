@@ -94,8 +94,42 @@ module JLDrill
 	        @strategy.demote(vocab)
 	        vocab.status.bin.should be(1)
 	        vocab.status.level.should be(0)
-
 	    end
-
+	    
+	    it "should be able to create problems of the correct level" do
+	        vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 1/Level: 0/Position: 1/")
+            vocab2 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 2/Level: 1/Position: 2/")
+            vocab3 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 3/Level: 2/Position: 3/")
+            
+            problem1 = @strategy.createProblem(vocab1)
+            problem2 = @strategy.createProblem(vocab2)
+            problem3 = @strategy.createProblem(vocab3)
+            problem1.should be_a_kind_of(ReadingProblem)
+            problem2.should be_a_kind_of(MeaningProblem)
+            problem3.should be_a_kind_of(KanjiProblem)
+	    end
+    
+        it "should create MeaningProblems and KanjiProblems equally in bin 4" do
+            vocab4 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 2/Position: 4/")
+            meaning = 0
+            kanji = 0
+            error = false
+            0.upto(99) do
+                problem4= @strategy.createProblem(vocab4)
+                if problem4.class == MeaningProblem
+                    meaning += 1
+                elsif problem4.class == KanjiProblem
+                    kanji += 1
+                else
+                    error = true
+                end
+            end
+            error.should_not be(true)
+            rate = ((meaning * 100) / (meaning + kanji)).to_i
+            # I suppose this might fail sometime.  But it's very unlikely
+            # since we are using a straight random.  If it fails often
+            # then there is definitely a problem.
+            rate.should be_close(50, 10)
+        end
     end
 end
