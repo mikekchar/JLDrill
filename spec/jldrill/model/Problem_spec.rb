@@ -73,7 +73,48 @@ module JLDrill
             @problem1.vocab = @vocab2
             @problem1.vocab.should be_eql(@vocab2)
         end
+
+        it "should create a ReadingProblem for level 0" do
+            vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 1/Level: 0/Position: 1/")
+            problem1 = Problem.create(0, vocab1)
+            problem1.should be_a_kind_of(ReadingProblem)
+        end        
+
+        it "should create a MeaningProblem for level 1" do
+            vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 2/Level: 1/Position: 1/")
+            problem1 = Problem.create(1, vocab1)
+            problem1.should be_a_kind_of(MeaningProblem)
+        end        
+
+        it "should create a KanjiProblem for level 2" do
+            vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 3/Level: 2/Position: 1/")
+            problem1 = Problem.create(2, vocab1)
+            problem1.should be_a_kind_of(KanjiProblem)
+        end        
+
+        it "should create a MeaningProblem for level 2 if there is no kanji" do
+            vocab1 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 2/Position: 1/")
+            problem1 = Problem.create(2, vocab1)
+            problem1.should be_a_kind_of(MeaningProblem)
+        end        
+
+        it "should create a ReadingProblem for unknown levels" do
+            vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
+            problem1 = Problem.create(-1, vocab1)
+            problem1.should be_a_kind_of(ReadingProblem)
+        end        
         
+        it "should print the status correctly" do
+            problem1 = Problem.create(0, Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 1/Level: 0/Position: 1/"))
+            problem2 = Problem.create(0, Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 2/Level: 0/Position: 1/"))
+            problem3 = Problem.create(0, Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 3/Level: 0/Position: 1/"))
+            problem4 = Problem.create(0, Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 0/Position: 1/"))
+            problem1.status.should be_eql("Current: 1")
+            problem2.status.should be_eql("Current: 2")
+            problem3.status.should be_eql("Current: 3")
+            problem4.status.should be_eql("Current: 4")
+        end
+
     end
 
 	describe ReadingProblem do

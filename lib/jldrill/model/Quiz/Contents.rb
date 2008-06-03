@@ -97,6 +97,11 @@ module JLDrill
             end
         end
         
+        # Returns the number of items in the working set (bins 1-3)
+        def workingSetSize
+            @bins[1].length + @bins[2].length + @bins[3].length
+        end
+        
         # Return a string containing the length of all the bins
         def status
             retVal = "Level "

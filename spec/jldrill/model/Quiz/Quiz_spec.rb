@@ -244,14 +244,14 @@ Excellent
             test_initializeQuiz
             
             # Because we don't test level 4 items until we get 5 of them,
-            # this should take exactly 20 iterations
+            # this should take exactly 12 iterations
             i = 0
-            until (@quiz.contents.bins[4].length == 4) || (i > 20) do
+            until (@quiz.contents.bins[4].length == 4) || (i > 16) do
                 i += 1
                 test_drill
                 test_correct
             end
-            i.should be(20)
+            i.should be(12)
         end
         
         it "should update the last reviewed status when the answer is made" do

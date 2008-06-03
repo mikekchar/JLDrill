@@ -19,10 +19,9 @@ module JLDrill
         def contents
             @quiz.contents
         end
-        
                 
         def underIntroThresh
-            (contents.bins[1].length + contents.bins[2].length) < @quiz.options.introThresh
+            contents.workingSetSize < @quiz.options.introThresh
         end
   
         def underReviewThresh
@@ -141,37 +140,14 @@ module JLDrill
         end
         
         def createProblem(vocab)
-            # Kind of screwy logic...  In the "fair" bin, only drill
-            # at the current level.  At other levels, drill at a random levels
-            # this enforces introduction of the material in the "fair" bin.
-            if vocab.status.bin == 2 || vocab.status.level == 0
-                level = vocab.status.level
-            elsif vocab.status.bin == 4
-                # Don't drill reading in the excellent bin
+            # Drill at random levels in bin 4, but don't drill reading
+            if vocab.status.bin == 4
                 level = rand(2) + 1
             else
-                if vocab.kanji == nil
-                    # Don't try to drill kanji if there isn't any
-                    level = rand(2)
-                else
-                    level = rand(vocab.status.level + 1)
-                end
+                # Otherwise drill for the specific bin
+                level = vocab.status.bin - 1
             end
-
-            case level
-                when 0
-                    problem = ReadingProblem.new(vocab)
-                when 1
-                    problem = MeaningProblem.new(vocab)
-                when 2
-                    if vocab.kanji
-                        problem = KanjiProblem.new(vocab)
-                    else
-                        problem = ReadingProblem.new(vocab)
-                    end
-            end
-            problem.requestedLevel = level
-            problem
+            Problem.create(level, vocab)
         end
         
         # Move the specified vocab to the specified bin
@@ -181,15 +157,8 @@ module JLDrill
 
         def promote(vocab)
             if !vocab.nil? && (vocab.status.bin + 1 < contents.bins.length) 
-                if vocab.status.bin != 2 || vocab.status.level == 2
-                    moveToBin(vocab, vocab.status.bin + 1)
-                else
-                    if !vocab.kanji.nil?
-                        vocab.status.level += 1
-                    else
-                        vocab.status.level = 2
-                    end
-                end
+                moveToBin(vocab, vocab.status.bin + 1)
+                vocab.status.level = vocab.status.bin - 1 unless vocab.status.bin - 1 > 2
             end
         end
 

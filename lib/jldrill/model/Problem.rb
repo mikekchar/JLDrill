@@ -10,6 +10,25 @@ module JLDrill
             @level = -1
             @requestedLevel = -1
         end
+        
+        def Problem.create(level, vocab)
+            case level
+                when 0
+                    problem = ReadingProblem.new(vocab)
+                when 1
+                    problem = MeaningProblem.new(vocab)
+                when 2
+                    if vocab.kanji
+                        problem = KanjiProblem.new(vocab)
+                    else
+                        problem = MeaningProblem.new(vocab)
+                    end
+                else
+                   problem = ReadingProblem.new(vocab)
+             end
+            problem.requestedLevel = level
+            problem
+        end
 
         def kanji
             if !@vocab.kanji.nil?
