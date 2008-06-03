@@ -2,21 +2,44 @@ module JLDrill
 
     # Statistics for a quiz session
     class Statistics
-        attr_reader :estimate
+        attr_reader :estimate, :lastTen
     
         def initialize
             @estimate = 0
             @correct = 0
             @incorrect = 0
+            @lastTen = []
+        end
+        
+        def record(bool)
+            @lastTen.push(bool)
+            while @lastTen.size > 10
+                @lastTen.delete_at(0)
+            end
+        end
+        
+        def recentAccuracy
+            retVal = 0
+            if @lastTen.size > 0
+                0.upto(@lastTen.size) do |i|
+                    if @lastTen[i]
+                        retVal += 1
+                    end
+                end
+                retVal = (retVal * 100 / @lastTen.size).to_i
+            end
+            retVal
         end
         
         def correct
             @correct += 1
+            record(true)
             reEstimate
         end
 
         def incorrect
             @incorrect += 1
+            record(false)
             reEstimate
         end
         
@@ -49,7 +72,7 @@ module JLDrill
         
         # Generates an estimate of the % accuracy in an integer
         def reEstimate
-            hop = ((accuracy - @estimate) * 0.3).to_i
+            hop = ((recentAccuracy - @estimate) * 0.3).to_i
             retVal = @estimate + hop
             if (retVal > 100) then retVal = 100 end
             if (retVal < 0) then retVal = 0 end

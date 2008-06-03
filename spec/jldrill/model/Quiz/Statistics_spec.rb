@@ -34,5 +34,29 @@ module JLDrill
     	        @statistics.estimate.should be(results[i])
     	    end
 	    end
+	    
+	    it "should keep track of the last ten responses" do
+	        @statistics.lastTen.size.should be(0)
+	        @statistics.correct
+	        @statistics.lastTen.size.should be(1)
+	        @statistics.lastTen[0].should be(true)
+	        @statistics.incorrect
+	        @statistics.lastTen.size.should be(2)
+	        @statistics.lastTen[1].should be(false)
+	        0.upto(20) do
+	            @statistics.correct
+	        end
+	        @statistics.lastTen.size.should be(10)
+	    end
+	    
+	    it "should keep track of the recent (up to 10 items) accuracy" do
+	        @statistics.recentAccuracy.should be(0)
+	        @statistics.correct
+	        @statistics.recentAccuracy.should be(100)
+	        @statistics.incorrect
+	        @statistics.recentAccuracy.should be(50)
+	        @statistics.correct
+	        @statistics.recentAccuracy.should be(66)
+	    end
     end
 end

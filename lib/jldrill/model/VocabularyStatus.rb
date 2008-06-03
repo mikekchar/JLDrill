@@ -25,9 +25,11 @@ module JLDrill
         SECONDS_PER_DAY = 60 * 60 * 24
 
         attr_reader :score, :bin, :level, :position, :index, 
-                        :lastReviewed, :consecutive, :scheduledTime
+                        :lastReviewed, :consecutive, :scheduledTime,
+                        :seen
         attr_writer :score, :bin, :level, :position, :index, 
-                        :lastReviewed, :consecutive, :scheduledTime
+                        :lastReviewed, :consecutive, :scheduledTime,
+                        :seen
 
 
         def initialize(vocab)
@@ -39,6 +41,7 @@ module JLDrill
             @position = 0
             @lastReviewed = nil
             @scheduledTime = nil
+            @seen = false
             @index = nil
         end
         

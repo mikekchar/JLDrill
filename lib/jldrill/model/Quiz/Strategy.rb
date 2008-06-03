@@ -72,6 +72,22 @@ module JLDrill
             retVal
         end
 
+        def unseen?(bin, index)
+            !contents.bins[bin][index].status.seen
+        end
+        
+        def findUnseen(bin)
+            index = 0
+            # find the first one that hasn't been seen yet
+            while (index < contents.bins[bin].length) && !unseen?(bin, index)
+                index += 1
+            end
+            
+            # wrap to the first item if they have all been seen
+            if (index >= contents.bins[bin].length) then index = 0 end
+            index
+        end
+        
         def getVocab
             if(contents.length == 0)
                 return nil
@@ -88,8 +104,11 @@ module JLDrill
                 print status + "\n"
             end
 
-            if((!@quiz.options.randomOrder) && (bin == 0)) || (bin == 4)
+            if((!@quiz.options.randomOrder) && (bin == 0))
                 index = 0
+            elsif (bin == 4)
+                index = findUnseen(bin)
+                contents.bins[bin][index].status.seen = true
             else
                 index = rand(contents.bins[bin].length)
             end
@@ -174,16 +193,15 @@ module JLDrill
             end
         end
 
-        def demote(vocab, level=0)
+        def demote(vocab)
             if vocab
-                # Reset the level and bin to the one that
-                # the user failed on.
- 
-                vocab.status.level = level
-                if level == 0
+                vocab.status.level = 0
+                if (vocab.status.bin != 0)
                     moveToBin(vocab, 1)
                 else
-                    moveToBin(vocab, 2)
+                	# Demoting bin 0 items is non-sensical, but it should do
+	                # something sensible anyway.
+                    moveToBin(vocab, 0)
                 end
             end
         end
@@ -224,7 +242,7 @@ module JLDrill
             if(vocab)
                 vocab.status.unschedule
                 vocab.status.markReviewed
-                demote(@quiz.currentProblem.vocab, @quiz.currentProblem.level)
+                demote(@quiz.currentProblem.vocab)
                 vocab.status.consecutive = 0
                 @quiz.update
             end
