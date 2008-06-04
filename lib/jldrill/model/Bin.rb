@@ -109,6 +109,11 @@ module JLDrill
             end
         end
    
+        # Returns true if the bin is empty
+        def empty?
+            @contents.empty?
+        end
+        
         # Returns a string containing all the vocabulary strings in the bin     
         def to_s
             @name + "\n" + @contents.join

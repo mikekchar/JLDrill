@@ -114,7 +114,7 @@ module JLDrill
             meaning = 0
             kanji = 0
             error = false
-            0.upto(99) do
+            0.upto(999) do
                 problem4= @strategy.createProblem(vocab4)
                 if problem4.class == MeaningProblem
                     meaning += 1
@@ -127,9 +127,76 @@ module JLDrill
             error.should_not be(true)
             rate = ((meaning * 100) / (meaning + kanji)).to_i
             # I suppose this might fail sometime.  But it's very unlikely
-            # since we are using a straight random.  If it fails often
+            # since we have 1000 trials.  If it fails often
             # then there is definitely a problem.
             rate.should be_close(50, 10)
         end
+
+        it "should return -1 when asked to pick from empty bins" do
+	        @strategy.randomBin(1..2).should be(-1)                    
+        end
+        
+        it "should return -1 when asked to pick from an empty range of bins" do
+	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+	        @quiz.contents.add(vocab, 1)            
+	        @quiz.contents.add(vocab, 2)
+	        @strategy.randomBin(2..1).should be(-1)
+        end
+
+        it "should not pick empty bins" do
+	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+	        @quiz.contents.add(vocab, 1)
+	        @quiz.contents.bins[0].empty?.should be(true)
+	        @quiz.contents.bins[1].empty?.should be(false)
+	        @quiz.contents.bins[2].empty?.should be(true)
+	        @strategy.randomBin(0..1).should be(1)
+	        @strategy.randomBin(1..2).should be(1)
+        end
+
+        it "should pick full bins 50% of the time" do
+	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+	        @quiz.contents.add(vocab, 1)
+	        # bin 4 already has an item
+	        sizes = [0,0,0,0,0]
+	        0.upto(999) do
+    	        sizes[@strategy.randomBin(0..4)] += 1
+    	    end
+    	    sizes[0].should be(0)
+    	    sizes[2].should be(0)
+    	    sizes[3].should be(0)
+    	    # This can potentially fail, but it's unlikely since we
+    	    # have a large number of trials
+    	    percent = (sizes[1] * 100) / (sizes[1] + sizes[4])
+    	    percent.should be_close(50, 5)
+        end
+        
+        it "should pick full bins in a binary decreasing fashion" do
+	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+	        @quiz.contents.add(vocab, 0)
+	        @quiz.contents.add(vocab, 1)
+	        @quiz.contents.add(vocab, 2)
+	        @quiz.contents.add(vocab, 3)
+	        # bin 4 already has an item
+	        sizes = [0,0,0,0,0]
+	        0.upto(999) do
+    	        sizes[@strategy.randomBin(0..4)] += 1
+    	    end
+    	    # This can potentially fail, but it's unlikely since we
+    	    # have a large number of trials
+    	    total = sizes[0] + sizes[1] + sizes[2] + sizes[3] + sizes[4]
+    	    percent = [0,0,0,0,0]
+    	    percent[0] = (sizes[0] * 100) / total
+    	    percent[1] = (sizes[1] * 100) / total
+    	    percent[2] = (sizes[2] * 100) / total
+    	    percent[3] = (sizes[3] * 100) / total
+    	    percent[4] = (sizes[4] * 100) / total
+    	    percent[0].should be_close(50, 5)
+    	    percent[1].should be_close(25, 5)
+    	    percent[2].should be_close(12, 5)
+    	    percent[3].should be_close(6, 5)
+    	    percent[4].should be_close(6, 5)
+        end
+
+
     end
 end

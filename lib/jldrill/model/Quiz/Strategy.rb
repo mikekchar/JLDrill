@@ -16,25 +16,52 @@ module JLDrill
             "Known: #{@stats.estimate}%"
         end
 
+        # Returns the contents (i.e. the set of vocabulary) for the quiz
         def contents
             @quiz.contents
         end
-                
+        
+        # Returns true if the working set is not full
         def underIntroThresh
             contents.workingSetSize < @quiz.options.introThresh
         end
   
+        # Returns true if the bin 4 items still need review
         def underReviewThresh
             @stats.estimate < @quiz.options.oldThresh
         end
         
-        def randomBin(from, to)
-            if from >= to
-                return to
-            elsif (contents.bins[from].length == 0) || (rand(2) == 0)
-                return randomBin(from + 1, to)
+        # Return a random bin (that has contents) between
+        # bins *from* and *to*.  The first bin has a 50% chance
+        # of being chosen.  The subsequent ones are 25%, 12.5%
+        # 6.25% etc...  The last 2 bins have the same chance
+        # of being chosen.  The percentages are only for bins
+        # with contents.  Returns -1 if the range contains
+        # no items.
+        def randomBin(range)
+            # If this range has no items at all, return -1
+            if contents.rangeEmpty?(range)
+                return -1
+            end
+            
+            # In lisp car is the first item in the list
+            # cdr is the rest of the list.  Since this is a lispish
+            # algorithm, I'm using the same words.
+            car = range.begin
+            cdr = (range.begin + 1)..(range.end)
+            
+            # if one or the other of car or cdr have no items in them,
+            # then return the one that has items
+            if contents.rangeEmpty?(cdr)
+                return car
+            elsif contents.bins[car].empty?
+                return randomBin(cdr)
+                
+            # otherwise return car 50% of the time and cdr 50% of the time
+            elsif rand(2) == 0
+                return car
             else
-                return from
+                return randomBin(cdr)
             end
         end
         
@@ -47,7 +74,7 @@ module JLDrill
                     (contents.bins[4].length > 5)
                     retVal = 4
                 else
-                    retVal = randomBin(1, 3)
+                    retVal = randomBin(1..3)
                 end
             else
                 if underIntroThresh
@@ -65,7 +92,7 @@ module JLDrill
                         end
                     end
                 else
-                    retVal = randomBin(1, 3)
+                    retVal = randomBin(1..3)
                 end
             end
             retVal

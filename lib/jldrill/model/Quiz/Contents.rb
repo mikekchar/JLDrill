@@ -102,6 +102,16 @@ module JLDrill
             @bins[1].length + @bins[2].length + @bins[3].length
         end
         
+        # Returns false if any of the bins in the range have
+        # items in them
+        def rangeEmpty?(range)
+            a = range.to_a
+            hasItems = a.any? do |bin|
+                !@bins[bin].empty?
+            end
+            !hasItems
+        end
+        
         # Return a string containing the length of all the bins
         def status
             retVal = "Level "

@@ -133,6 +133,13 @@ module JLDrill
 	        bin2.contents = @bin.cloneContents
 	        bin2.to_s.should be_eql("number2\n" + contentsString)
 		end
+		
+		it "should indicate if the bin is empty" do
+		    bin = Bin.new("yeah", 3)
+		    bin.empty?.should be(true)
+		    test_pushAll
+		    @bin.empty?.should be(false)
+		end
 	end
 
 end
