@@ -105,8 +105,8 @@ module JLDrill
             problem2 = @strategy.createProblem(vocab2)
             problem3 = @strategy.createProblem(vocab3)
             problem1.should be_a_kind_of(ReadingProblem)
-            problem2.should be_a_kind_of(MeaningProblem)
-            problem3.should be_a_kind_of(KanjiProblem)
+            problem2.should be_a_kind_of(KanjiProblem)
+            problem3.should be_a_kind_of(MeaningProblem)
 	    end
     
         it "should create MeaningProblems and KanjiProblems equally in bin 4" do

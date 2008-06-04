@@ -201,7 +201,7 @@ module JLDrill
         end
 
         def drill()
-            vocab = @strategy.getUniqueVocab
+            vocab = @strategy.getVocab
             @currentProblem = @strategy.createProblem(vocab)
             
             return @currentProblem.question

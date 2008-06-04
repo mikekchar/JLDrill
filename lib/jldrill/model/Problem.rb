@@ -16,13 +16,13 @@ module JLDrill
                 when 0
                     problem = ReadingProblem.new(vocab)
                 when 1
-                    problem = MeaningProblem.new(vocab)
-                when 2
                     if vocab.kanji
                         problem = KanjiProblem.new(vocab)
                     else
                         problem = MeaningProblem.new(vocab)
                     end
+                when 2
+                    problem = MeaningProblem.new(vocab)
                 else
                    problem = ReadingProblem.new(vocab)
              end

@@ -129,10 +129,20 @@ module JLDrill
             return workingSetBin
         end
 
+        # Returns true if the item has been seen before
         def unseen?(bin, index)
             !contents.bins[bin][index].status.seen
         end
         
+        # Set all items in the bin as unseen
+        def setUnseen(bin)
+            contents.bins[bin].each do |vocab|
+                vocab.status.seen = false
+            end
+        end        
+        
+        # Return the index of the first item in the bin that hasn't been
+        # seen yet.
         def findUnseen(bin)
             index = 0
             # find the first one that hasn't been seen yet
@@ -140,8 +150,11 @@ module JLDrill
                 index += 1
             end
             
-            # wrap to the first item if they have all been seen
-            if (index >= contents.bins[bin].length) then index = 0 end
+            # wrap to the first item if they have all been seen and clear
+            # the seen status
+            if (index >= contents.bins[bin].length) 
+                index = 0
+            end
             index
         end
         
@@ -151,41 +164,18 @@ module JLDrill
                 return nil
             end
 
-            if((!@quiz.options.randomOrder) && (bin == 0))
-                index = 0
-            elsif (bin == 4)
-                index = findUnseen(bin)
-                contents.bins[bin][index].status.seen = true
-            else
+            if((@quiz.options.randomOrder) && (bin == 0))
                 index = rand(contents.bins[bin].length)
+            else
+                index = findUnseen(bin)
             end
+            contents.bins[bin][index].status.seen = true
 
             vocab = contents.bins[bin][index] 
             if bin == 0 then promote(vocab) end
             return vocab
         end
 
-        def getUniqueVocab
-            if(contents.length == 0)
-                return
-            end
-
-            vocab = getVocab
-            deadThresh = 10
-            if(contents.length > 1)
-                # Don't show the same item twice in a row
-                until (vocab != @last) || (deadThresh == 0)
-                    vocab = getVocab
-                    deadThresh -= 1 
-                end
-                if (deadThresh == 0)
-                    print "Warning: Deadlock broken in getUniqueVocab\n"
-                    print status + "\n"
-                end
-            end
-            @last = vocab
-            vocab
-        end
         
         def createProblem(vocab)
             # Drill at random levels in bin 4, but don't drill reading

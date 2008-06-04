@@ -141,13 +141,13 @@ Excellent
                 when 0
                     test_problem(question, ReadingProblem.new(@quiz.vocab)) 
                 when 1
-                    test_problem(question, MeaningProblem.new(@quiz.vocab)) 
-                when 2
                     if(!@quiz.vocab.kanji.nil?)
                         test_problem(question, KanjiProblem.new(@quiz.vocab))
                     else
                         test_problem(question, ReadingProblem.new(@quiz.vocab)) 
                     end
+                when 2
+                    test_problem(question, MeaningProblem.new(@quiz.vocab)) 
             else
 	             # This shouldn't ever happen.  Blow up.
 	             true.should be(false) 

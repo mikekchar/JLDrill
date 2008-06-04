@@ -80,21 +80,21 @@ module JLDrill
             problem1.should be_a_kind_of(ReadingProblem)
         end        
 
-        it "should create a MeaningProblem for level 1" do
+        it "should create a KanjiProblem for level 1" do
             vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 2/Level: 1/Position: 1/")
             problem1 = Problem.create(1, vocab1)
-            problem1.should be_a_kind_of(MeaningProblem)
-        end        
-
-        it "should create a KanjiProblem for level 2" do
-            vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 3/Level: 2/Position: 1/")
-            problem1 = Problem.create(2, vocab1)
             problem1.should be_a_kind_of(KanjiProblem)
         end        
 
-        it "should create a MeaningProblem for level 2 if there is no kanji" do
-            vocab1 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 2/Position: 1/")
+        it "should create a MeaningProblem for level 2" do
+            vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 3/Level: 2/Position: 1/")
             problem1 = Problem.create(2, vocab1)
+            problem1.should be_a_kind_of(MeaningProblem)
+        end        
+
+        it "should create a MeaningProblem for level 1 if there is no kanji" do
+            vocab1 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 2/Position: 1/")
+            problem1 = Problem.create(1, vocab1)
             problem1.should be_a_kind_of(MeaningProblem)
         end        
 
