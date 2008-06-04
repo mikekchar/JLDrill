@@ -20,31 +20,76 @@ module JLDrill
         def contents
             @quiz.contents
         end
+
+        # Returns the bin number of the new set
+        def newSetBin
+            0
+        end
+        
+        # Returns true if there are no items in the new set
+        def newSetEmpty?
+            contents.bins[0].empty?
+        end
+        
+        # Returns a random, non-empty bin in the working set
+        def workingSetBin
+            randomBin(1..3)
+        end
+        
+        # Returns true if there are no items in the working set
+        def workingSetEmpty?
+            contents.rangeEmpty?(1..3)
+        end
+        
+        # Returns the number of items in the working set
+        def workingSetSize
+            contents.bins[1].length + contents.bins[2].length + contents.bins[3].length
+        end
         
         # Returns true if the working set is not full
-        def underIntroThresh
-            contents.workingSetSize < @quiz.options.introThresh
-        end
-  
-        # Returns true if the bin 4 items still need review
-        def underReviewThresh
-            @stats.estimate < @quiz.options.oldThresh
+        def workingSetFull?
+             workingSetSize >= @quiz.options.introThresh
         end
         
-        # Return a random bin (that has contents) between
-        # bins *from* and *to*.  The first bin has a 50% chance
-        # of being chosen.  The subsequent ones are 25%, 12.5%
-        # 6.25% etc...  The last 2 bins have the same chance
-        # of being chosen.  The percentages are only for bins
-        # with contents.  Returns -1 if the range contains
-        # no items.
+        # returns the bin number of the review set
+        def reviewSetBin
+            4
+        end
+        
+        # Returns the number of items in the review set
+        def reviewSetSize
+            @quiz.contents.bins[4].length
+        end
+        
+        # Returns true if at least one working set full of
+        # items have been promoted to the review set, and
+        # the review set is not known to the required
+        # level.
+        # Note: if the new set and the working set are
+        # both empty, this will always return true.
+        def shouldReview?
+            # if we only have review set items, then return true
+            if  newSetEmpty? && workingSetEmpty?
+                return true
+            end
+            
+            (@stats.estimate < @quiz.options.oldThresh) &&
+                (reviewSetSize >= @quiz.options.introThresh)
+        end
+        
+        # Return a random bin (that has contents) in the range.
+        # The first bin has a 50% chance of being chosen.  
+        # The subsequent ones are 25%, 12.5%, 6.25% etc...  
+        # The last 2 bins have the same chance of being chosen.
+        # The percentages are only for bins with contents.  
+        # Returns -1 if the range contains no items.
         def randomBin(range)
             # If this range has no items at all, return -1
             if contents.rangeEmpty?(range)
                 return -1
             end
             
-            # In lisp car is the first item in the list
+            # In lisp, car is the first item in the list
             # cdr is the rest of the list.  Since this is a lispish
             # algorithm, I'm using the same words.
             car = range.begin
@@ -65,37 +110,23 @@ module JLDrill
             end
         end
         
+        # Pick a bin that has contents.  Try to keep the working set
+        # full either by reviewing items in the review set, or by
+        # adding items from the new set.
         def getBin
-            retVal = 0
-            if (contents.bins[4].length == contents.length)
-                retVal = 4
-            elsif (contents.bins[0].length == 0)
-                if underIntroThresh && underReviewThresh && 
-                    (contents.bins[4].length > 5)
-                    retVal = 4
-                else
-                    retVal = randomBin(1..3)
-                end
-            else
-                if underIntroThresh
-                    if underReviewThresh && (contents.bins[4].length > 5)
-                        retVal = 4
-                    else
-                        if contents.bins[4].length > 5
-                            if rand(10) > 8
-                                retVal = 4
-                            else
-                                retVal = 0
-                            end
-                        else
-                            retVal = 0
-                        end
-                    end
-                else
-                    retVal = randomBin(1..3)
+            if contents.empty?
+                return -1
+            end
+            
+            if !workingSetFull?
+                if shouldReview?
+                    return reviewSetBin
+                elsif !newSetEmpty?
+                    return newSetBin
                 end
             end
-            retVal
+            
+            return workingSetBin
         end
 
         def unseen?(bin, index)
@@ -115,19 +146,9 @@ module JLDrill
         end
         
         def getVocab
-            if(contents.length == 0)
-                return nil
-            end
-
-            deadThresh = 10
             bin = getBin
-            until (contents.bins[bin].length > 0) || (deadThresh == 0)
-                bin = getBin
-                deadThresh -= 1
-            end
-            if (deadThresh == 0)
-                print "Warning: Deadlock broken in getVocab\n"
-                print status + "\n"
+            if bin == -1
+                return nil
             end
 
             if((!@quiz.options.randomOrder) && (bin == 0))

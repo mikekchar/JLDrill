@@ -196,7 +196,90 @@ module JLDrill
     	    percent[3].should be_close(6, 5)
     	    percent[4].should be_close(6, 5)
         end
+        
+        it "should be able to tell if the working set is full" do
+            @quiz.options.introThresh = 5
+            @strategy.workingSetFull?.should be(false)
+            vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+	        @quiz.contents.add(vocab, 1)
+            @strategy.workingSetFull?.should be(false)
+	        @quiz.contents.add(vocab, 2)
+            @strategy.workingSetFull?.should be(false)
+	        @quiz.contents.add(vocab, 3)
+            @strategy.workingSetFull?.should be(false)
+	        @quiz.contents.add(vocab, 2)
+            @strategy.workingSetFull?.should be(false)
+            0.upto(10) do
+    	        @quiz.contents.add(vocab, 0)
+    	        @quiz.contents.add(vocab, 4)
+    	    end
+            @strategy.workingSetFull?.should be(false)
+	        @quiz.contents.add(vocab, 1)
+            @strategy.workingSetFull?.should be(true)
+        end
+        
+        it "should be able to tell if the review set needs reviewing" do
+            @quiz.options.introThresh = 5
+            # There are only review set items.  So we should review.
+            @strategy.shouldReview?.should be(true)
+            
+            vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+	        @quiz.contents.add(vocab, 1)
+            # Now there is a working set item, and we don't have enough items
+            # in the review set, so we should not review
+            @strategy.shouldReview?.should be(false)
+            # Make a total of 5 items in the review set
+            0.upto(3) do
+              @quiz.contents.add(vocab, 4)
+            end
+            # We have enough items, and we haven't learned the review items
+            # to the required level, so we should review
+            @strategy.shouldReview?.should be(true)
+            0.upto(9) do
+                @strategy.stats.correct
+            end
+            # Now we know the items well enough, so we shouldn't review
+            @strategy.shouldReview?.should be(false)                        
+        end
+        
+        it "should be able to pick a bin with contents if possible" do
+            quiz = Quiz.new
+            strategy = quiz.strategy
+            quiz.options.introThresh = 5
+            
+            # We don't have any items, so getBin should fail
+            strategy.getBin.should be(-1)
+            vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+	        quiz.contents.add(vocab, 0)
+	        
+	        # We have only have an item in the new set
+	        strategy.getBin.should be(0)
+	        
+	        # Move the item to the working set
+	        strategy.promote(vocab)
+	        strategy.getBin.should be(1)
 
-
+	        quiz.contents.add(vocab, 0)
+            # Now we have an item in the new set and an item in the working set
+            # It should give us the new set since the working set isn't full	        
+	        strategy.getBin.should be(0)
+	        
+	        # We don't have enough items in the review set, so sill we should
+	        # get the new set
+	        strategy.getBin.should be(0)
+	        
+            0.upto(5) do
+                quiz.contents.add(vocab,4)
+            end
+            # Now we have enough items in the review set, so we should get it
+	        strategy.getBin.should be(4)
+	        
+            0.upto(4) do
+                quiz.contents.add(vocab,1)
+            end
+	        # Now the working set is full
+	        strategy.getBin.should be(1)
+        end
+        
     end
 end

@@ -243,8 +243,8 @@ Excellent
         it "should eventually promote all items to bin 4" do
             test_initializeQuiz
             
-            # Because we don't test level 4 items until we get 5 of them,
-            # this should take exactly 12 iterations
+            # Because we don't test level 4 items until we get one working set 
+            # of them, this should take exactly 12 iterations
             i = 0
             until (@quiz.contents.bins[4].length == 4) || (i > 16) do
                 i += 1

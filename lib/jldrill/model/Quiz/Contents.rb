@@ -96,10 +96,13 @@ module JLDrill
                 update
             end
         end
-        
-        # Returns the number of items in the working set (bins 1-3)
-        def workingSetSize
-            @bins[1].length + @bins[2].length + @bins[3].length
+
+        # Returns true if all of the bins are empty
+        def empty?
+            retVal = @bins.all? do |bin|
+                bin.empty?
+            end
+            retVal
         end
         
         # Returns false if any of the bins in the range have
