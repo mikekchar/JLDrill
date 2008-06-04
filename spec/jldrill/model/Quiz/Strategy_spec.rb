@@ -143,8 +143,9 @@ module JLDrill
 	        @strategy.randomBin(2..1).should be(-1)
         end
 
-        it "should not pick empty bins" do
+        it "should not pick empty bins even if it was the last item" do
 	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+	        @last = vocab
 	        @quiz.contents.add(vocab, 1)
 	        @quiz.contents.bins[0].empty?.should be(true)
 	        @quiz.contents.bins[1].empty?.should be(false)
@@ -153,36 +154,39 @@ module JLDrill
 	        @strategy.randomBin(1..2).should be(1)
         end
 
-        it "should pick full bins 50% of the time" do
+        it "should alternate between 2 full bins" do
 	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
-	        @quiz.contents.add(vocab, 1)
+	        @quiz.contents.add(vocab, 0)
 	        # bin 4 already has an item
 	        sizes = [0,0,0,0,0]
-	        0.upto(999) do
-    	        sizes[@strategy.randomBin(0..4)] += 1
+	        0.upto(29) do
+	            bin = @strategy.randomBin(0..4)
+    	        sizes[bin] += 1
+    	        @strategy.last = @quiz.contents.bins[bin][0]
     	    end
-    	    sizes[0].should be(0)
+    	    sizes[1].should be(0)
     	    sizes[2].should be(0)
     	    sizes[3].should be(0)
-    	    # This can potentially fail, but it's unlikely since we
-    	    # have a large number of trials
-    	    percent = (sizes[1] * 100) / (sizes[1] + sizes[4])
-    	    percent.should be_close(50, 5)
+    	    sizes[0].should be(15)
+    	    sizes[4].should be(15)
         end
         
         it "should pick full bins in a binary decreasing fashion" do
 	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
 	        @quiz.contents.add(vocab, 0)
+	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
 	        @quiz.contents.add(vocab, 1)
+	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
 	        @quiz.contents.add(vocab, 2)
+	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
 	        @quiz.contents.add(vocab, 3)
 	        # bin 4 already has an item
 	        sizes = [0,0,0,0,0]
 	        0.upto(999) do
-    	        sizes[@strategy.randomBin(0..4)] += 1
+	            bin = @strategy.randomBin(0..4)
+    	        sizes[bin] += 1
+    	        @strategy.last = @quiz.contents.bins[bin][0]
     	    end
-    	    # This can potentially fail, but it's unlikely since we
-    	    # have a large number of trials
     	    total = sizes[0] + sizes[1] + sizes[2] + sizes[3] + sizes[4]
     	    percent = [0,0,0,0,0]
     	    percent[0] = (sizes[0] * 100) / total

@@ -4,11 +4,13 @@ module JLDrill
 
     # Strategy for a quiz
     class Strategy
-        attr_reader :stats
+        attr_reader :stats, :last
+        attr_writer :last
     
         def initialize(quiz)
             @quiz = quiz
             @stats = Statistics.new
+            @last = nil
         end
         
         # Returns a string showing the status of the quiz with this strategy
@@ -94,19 +96,40 @@ module JLDrill
             # algorithm, I'm using the same words.
             car = range.begin
             cdr = (range.begin + 1)..(range.end)
-            
+
+            # We want to avoid the bin that the last item was in,
+            # thereby alternating between lesser known and
+            # better known items.  First we see if the last item
+            # was in cdr or car.
+            inCdr = false
+            inCar = false
+            if !@last.nil?
+                inCar = @last.status.bin == car
+                inCdr = cdr.find do |x|
+                    x == @last.status.bin
+                end
+            end
+                        
             # if one or the other of car or cdr have no items in them,
             # then return the one that has items
             if contents.rangeEmpty?(cdr)
                 return car
             elsif contents.bins[car].empty?
                 return randomBin(cdr)
-                
-            # otherwise return car 50% of the time and cdr 50% of the time
-            elsif rand(2) == 0
+            
+            # Try to avoid the last item picked, but give preference for car
+            elsif inCdr
                 return car
-            else
+            elsif inCar
                 return randomBin(cdr)
+            
+            # If the last item was neither in cdr or car, pick it randomly
+            else
+                if rand(2) == 0
+                    return car
+                else
+                    return randomBin(cdr)
+                end
             end
         end
         
@@ -171,7 +194,8 @@ module JLDrill
             end
             contents.bins[bin][index].status.seen = true
 
-            vocab = contents.bins[bin][index] 
+            vocab = contents.bins[bin][index]
+            @last = vocab 
             if bin == 0 then promote(vocab) end
             return vocab
         end
