@@ -274,6 +274,7 @@ module JLDrill
             if(vocab)
                 vocab.status.unschedule
                 vocab.status.markReviewed
+                vocab.status.score = 0
                 demote(@quiz.currentProblem.vocab)
                 vocab.status.consecutive = 0
                 @quiz.update
