@@ -255,6 +255,7 @@ module JLDrill
                 vocab.status.markReviewed
                 vocab.status.score += 1
                 if(vocab.status.score >= @quiz.options.promoteThresh)
+                    vocab.status.score = 0
                     promote(vocab)
                 end
                 if vocab.status.bin == 4

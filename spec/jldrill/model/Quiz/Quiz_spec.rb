@@ -246,12 +246,27 @@ Excellent
             # Because we don't test level 4 items until we get one working set 
             # of them, this should take exactly 12 iterations
             i = 0
-            until (@quiz.contents.bins[4].length == 4) || (i > 16) do
+            until (@quiz.contents.bins[4].length == 4) || (i > 12) do
                 i += 1
                 test_drill
                 test_correct
             end
             i.should be(12)
+        end
+
+        it "should use the promote threshold when promoting" do
+            test_initializeQuiz
+            @quiz.options.promoteThresh = 2
+            
+            # Because we don't test level 4 items until we get one working set 
+            # of them, this should take exactly 24 iterations
+            i = 0
+            until (@quiz.contents.bins[4].length == 4) || (i > 24) do
+                i += 1
+                test_drill
+                test_correct
+            end
+            i.should be(24)
         end
         
         it "should update the last reviewed status when the answer is made" do
