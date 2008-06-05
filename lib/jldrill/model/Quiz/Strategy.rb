@@ -177,6 +177,7 @@ module JLDrill
             # the seen status
             if (index >= contents.bins[bin].length) 
                 index = 0
+                setUnseen(bin)
             end
             index
         end

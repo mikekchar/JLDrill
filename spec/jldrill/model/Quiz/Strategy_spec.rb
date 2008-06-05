@@ -46,7 +46,7 @@ module JLDrill
     	        vocab
         end
 	    
-	    it "should only pick unseen items in bin 4" do
+	    it "should only pick unseen items" do
 	        1.upto(9) do |i|
 	            test_addVocab(4, i)
     	    end
@@ -60,6 +60,10 @@ module JLDrill
             end
             # When they are all seen, it should wrap
     	    @strategy.findUnseen(4).should be(0)
+    	    # And set all the rest to unseen
+    	    @quiz.contents.bins[4].contents[1..9].all? do |vocab|
+    	        vocab.status.seen == false
+    	    end.should be(true)
 	    end
 	    
 	    it "should demote bin 0 items to bin 0 and reset the level to 0" do
