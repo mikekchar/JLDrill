@@ -58,5 +58,69 @@ module JLDrill
 	        @statistics.correct
 	        @statistics.recentAccuracy.should be(66)
 	    end
+	    
+	    def test_Rand(percent)
+	        rand(99) + 1 < percent
+	    end
+	    
+	    def test_numTrials(percent, requiredConfidence, trials)
+	        @statistics.resetConfidence
+	        i = 0
+	        finished = false
+	        while (i < trials) && !finished do
+	            if test_Rand(percent)
+    	            @statistics.correct
+    	        else
+    	            @statistics.incorrect
+    	        end
+    	        i += 1
+    	        finished = (@statistics.confidence > requiredConfidence)
+	        end
+	        i
+	    end
+	    
+	    def test_averageTrials(percent, requiredConfidence, trials)
+	        total = 0
+	        # Probably this should be more than 30 since we are waiting
+	        # for an event (Poisson distribution?)  But the tests are
+	        # already too slow, and the results are pretty clear anyway.
+	        1.upto(30) do
+	            total += test_numTrials(percent, requiredConfidence, trials)
+	        end
+	        total / 30
+	    end
+	    
+        # This shows the approximate distribution of average number
+        # of trials before getting to 90% confidence.  They are actually
+        # crowded a bit to the right hand side (i.e., the numbers are lower
+        # than they really are) because I give up after going 50 trials
+        # without getting to 90%.  Since I average it over 30 times, doing
+        # more makes the tests too slow.  But if you are interested, you
+        # can check it out (setting tt to 1000 is a good indication).
+        #
+        # The bottom line is that if your actual percentage is 90+, then
+        # it takes between 7-17 trials to get to 90% confidence.  If the
+        # actual percentage is 80%, it actually seems to take about 50
+        # trials on average to get to 90% confidence (try it with larger
+        # tt to see this). At 70% or less, you are unlikely to get to 90% 
+        # confidence at all (more than 300 trials on average).
+        #
+        # So as far as I'm concerned, the algorithm is working well.
+	    it "should calculate the confidence that the probability is > 90" do
+	        (@statistics.confidence > 0).should be(true)
+	        rc = 0.90  # Required Confidence
+	        tt = 50    # Total trials
+	        test_averageTrials(0, rc, tt).should be(50)
+	        test_averageTrials(10, rc, tt).should be_close(50, 3)
+	        test_averageTrials(20, rc, tt).should be_close(50, 3)
+	        test_averageTrials(30, rc, tt).should be_close(50, 3)
+	        test_averageTrials(40, rc, tt).should be_close(50, 3)
+	        test_averageTrials(50, rc, tt).should be_close(50, 5)
+	        test_averageTrials(60, rc, tt).should be_close(50, 7)
+	        test_averageTrials(70, rc, tt).should be_close(45, 9)
+	        test_averageTrials(80, rc, tt).should be_close(27, 7)
+	        test_averageTrials(90, rc, tt).should be_close(12, 5)
+	        test_averageTrials(100, rc, tt).should be(7)
+	    end
     end
 end
