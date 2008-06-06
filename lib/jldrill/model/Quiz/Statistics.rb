@@ -4,6 +4,8 @@ module JLDrill
     class Statistics
         attr_reader :estimate, :lastTen, :confidence
     
+        MINIMUM_CONFIDENCE = 0.009
+        
         def initialize
             @estimate = 0
             @correct = 0
@@ -140,10 +142,13 @@ module JLDrill
             end
             pE = (0.45 * (1.0 - @confidence)) + (0.95 * @confidence)
             @confidence = (pEH * @confidence) / pE
+            if @confidence < MINIMUM_CONFIDENCE
+                @confidence = MINIMUM_CONFIDENCE
+            end
         end
         
         def resetConfidence
-            @confidence = 0.05
+            @confidence = MINIMUM_CONFIDENCE
         end
 
     end

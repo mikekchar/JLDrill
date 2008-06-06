@@ -15,7 +15,7 @@ module JLDrill
         
         # Returns a string showing the status of the quiz with this strategy
         def status
-            "Known: #{@stats.estimate}%"
+            "Known: #{(@stats.confidence * 100).to_i}%"
         end
 
         # Returns the contents (i.e. the set of vocabulary) for the quiz
@@ -75,7 +75,7 @@ module JLDrill
                 return true
             end
             
-            (@stats.estimate < @quiz.options.oldThresh) &&
+            ((@stats.confidence * 100).to_i < @quiz.options.oldThresh) &&
                 (reviewSetSize >= @quiz.options.introThresh)
         end
         

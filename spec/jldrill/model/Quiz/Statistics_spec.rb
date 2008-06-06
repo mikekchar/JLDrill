@@ -99,7 +99,7 @@ module JLDrill
         # can check it out (setting tt to 1000 is a good indication).
         #
         # The bottom line is that if your actual percentage is 90+, then
-        # it takes between 7-17 trials to get to 90% confidence.  If the
+        # it takes between 10-20 trials to get to 90% confidence.  If the
         # actual percentage is 80%, it actually seems to take about 50
         # trials on average to get to 90% confidence (try it with larger
         # tt to see this). At 70% or less, you are unlikely to get to 90% 
@@ -117,10 +117,10 @@ module JLDrill
 	        test_averageTrials(40, rc, tt).should be_close(50, 3)
 	        test_averageTrials(50, rc, tt).should be_close(50, 5)
 	        test_averageTrials(60, rc, tt).should be_close(50, 7)
-	        test_averageTrials(70, rc, tt).should be_close(45, 9)
-	        test_averageTrials(80, rc, tt).should be_close(27, 7)
-	        test_averageTrials(90, rc, tt).should be_close(12, 5)
-	        test_averageTrials(100, rc, tt).should be(7)
+	        test_averageTrials(70, rc, tt).should be_close(50, 9)
+	        test_averageTrials(80, rc, tt).should be_close(30, 7)
+	        test_averageTrials(90, rc, tt).should be_close(15, 5)
+	        test_averageTrials(100, rc, tt).should be(10)
 	    end
     end
 end
