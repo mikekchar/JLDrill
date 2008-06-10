@@ -58,23 +58,35 @@ module JLDrill
 		    @vocab[1].status.scheduled?.should be(true)
         end
 
-        it "should schedule new items to 1 day" do
+        it "should schedule new items to maximum value by default" do
 		    @vocab[1].status.scheduled?.should be(false)
 		    time = @vocab[1].status.schedule
 		    time.should_not be_nil
 		    @vocab[1].status.scheduled?.should be(true)
-		    @vocab[1].status.scheduledTime.to_i.should be_eql(Time::now.to_i + (60*60*24))
+		    @vocab[1].status.scheduledTime.to_i.should be_eql(Time::now.to_i + days(5))
         end
         
         it "should schedule old items to twice their elapsed time" do
-            # Set reviewed time to yesterday
-            @vocab[1].status.lastReviewed = Time::now - (60*60*24)
+            # Set reviewed time to 3 days ago
+            @vocab[1].status.lastReviewed = Time::now - days(3)
 		    @vocab[1].status.scheduled?.should be(false)
 		    time = @vocab[1].status.schedule
 		    time.should_not be_nil
 		    @vocab[1].status.scheduled?.should be(true)
-		    # Should be scheduled for 2 days from now
-		    @vocab[1].status.scheduledTime.to_i.should be_eql(Time::now.to_i + (2*60*60*24))            
+		    # Should be scheduled for 6 days from now
+		    @vocab[1].status.scheduledTime.to_i.should be_eql(Time::now.to_i + days(6))            
+        end
+        
+        it "should set a minimum schedule equal to firstInterval" do
+            # Set reviewed time to 1 day ago
+            @vocab[1].status.lastReviewed = Time::now - days(1)
+		    @vocab[1].status.scheduled?.should be(false)
+		    time = @vocab[1].status.schedule
+		    time.should_not be_nil
+		    @vocab[1].status.scheduled?.should be(true)
+		    # Instead of 2 days it will be 5 because that is the minumum for
+		    # an item that has no incorrect.
+		    @vocab[1].status.scheduledTime.to_i.should be_eql(Time::now.to_i + days(5))            
         end
 
         it "should be able to write scheduledTime to file" do
@@ -97,8 +109,55 @@ module JLDrill
 		    @vocab[1].status.scheduled?.should be(true)
 		    @vocab[1].status.unschedule
 		    @vocab[1].status.scheduled?.should be(false)
-        end            
+        end
 
+        it "should keep track of the number of times incorrect" do
+            @vocab[1].status.numIncorrect.should be(0)
+            1.upto(10) do
+                @vocab[1].status.incorrect
+            end
+            @vocab[1].status.numIncorrect.should be(10)
+        end
+
+        it "should keep a difficulty level equal to the number of times it was incorrect the last time it was in the working set" do
+            @vocab[1].status.difficulty.should be_eql(@vocab[1].status.numIncorrect)
+            1.upto(10) do
+                @vocab[1].status.incorrect
+            end
+            @vocab[1].status.difficulty.should be_eql(@vocab[1].status.numIncorrect)
+        end
+        
+        def days(n)
+            return 60 * 60 * 24 * n
+        end
+        
+        it "should choose the longest first interval with 0 difficulty" do
+            @vocab[1].status.numIncorrect = 0
+            @vocab[1].status.difficulty.should be(0)
+            @vocab[1].status.firstInterval.should be(days(5))
+        end
+        
+        it "should decrement first interval by 10 percent from difficulty 1 to 10, down to 1 day" do
+            1.upto(10) do |i|
+                @vocab[1].status.numIncorrect = i
+                @vocab[1].status.difficulty.should be(i)
+                int = days(1) + (days(4) * (1.0 - (i.to_f / 10.0))).to_i
+                @vocab[1].status.firstInterval.should be(int)
+            end
+        
+        end
+
+        it "should decrement first interval from 1 day approaching 0 days as difficulty increases from 10" do
+            last = days(1)
+            11.upto(100) do |i|
+                @vocab[1].status.numIncorrect = i
+                @vocab[1].status.difficulty.should be(i)
+                (last > @vocab[1].status.firstInterval).should be(true)
+                last = @vocab[1].status.firstInterval
+                (last > 0).should be(true)
+            end            
+        end
+        
 	end
 
 end

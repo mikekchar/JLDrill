@@ -23,13 +23,14 @@ module JLDrill
         SCHEDULEDTIME_RE = /^ScheduledTime: (.*)/
         
         SECONDS_PER_DAY = 60 * 60 * 24
+        MAX_ADDITIONAL_TIME = 4 * SECONDS_PER_DAY
 
         attr_reader :score, :bin, :level, :position, :index, 
                         :lastReviewed, :consecutive, :scheduledTime,
-                        :seen
+                        :seen, :numIncorrect
         attr_writer :score, :bin, :level, :position, :index, 
                         :lastReviewed, :consecutive, :scheduledTime,
-                        :seen
+                        :seen, :numIncorrect
 
 
         def initialize(vocab)
@@ -43,6 +44,7 @@ module JLDrill
             @scheduledTime = nil
             @seen = false
             @index = nil
+            @numIncorrect = 0
         end
         
         # Parses a vocabulary value in save format.
@@ -85,6 +87,7 @@ module JLDrill
             @lastReviewed = nil
             @score = 0
             @consecutive = 0
+            @numIncorrect = 0
         end
         
         # Returns true if the item has been scheduled for review
@@ -94,12 +97,15 @@ module JLDrill
         
         # Schedule the item for review
         def schedule
-            if !reviewed?
-                @scheduledTime = Time::now + SECONDS_PER_DAY
-            else
+            @scheduledTime = Time::now + firstInterval
+
+            if reviewed?
                 elapsed = Time::now - @lastReviewed
-                @scheduledTime = Time::now + (2 * elapsed)
+                if (2 * elapsed) > firstInterval
+                    @scheduledTime = Time::now + (2 * elapsed)
+                end
             end
+            @scheduledTime
         end
         
         # Remove review schedule for the item
@@ -116,6 +122,28 @@ module JLDrill
             end
         end
         
+        def firstInterval
+            if difficulty <= 10
+                SECONDS_PER_DAY +
+                    (MAX_ADDITIONAL_TIME * (1.0 - (difficulty.to_f / 10.0))).to_i
+            else
+                scale = difficulty - 10
+                current = 0.0
+                1.upto(scale) do |x|
+                    current = current + (1 - current).to_f / 10.0
+                end
+                (SECONDS_PER_DAY * (1.0 - current)).to_i
+            end
+        end
+        
+        def difficulty
+            @numIncorrect
+        end
+        
+        def incorrect
+            @numIncorrect += 1
+        end
+            
         def to_s
             retVal = "/Score: #{@score}" + "/Bin: #{@bin}" + "/Level: #{@level}" +
                 "/Position: #{@position}"

@@ -117,7 +117,7 @@ module JLDrill
 	        test_averageTrials(40, rc, tt).should be_close(50, 3)
 	        test_averageTrials(50, rc, tt).should be_close(50, 5)
 	        test_averageTrials(60, rc, tt).should be_close(50, 7)
-	        test_averageTrials(70, rc, tt).should be_close(50, 9)
+	        test_averageTrials(70, rc, tt).should be_close(42, 8)
 	        test_averageTrials(80, rc, tt).should be_close(30, 7)
 	        test_averageTrials(90, rc, tt).should be_close(15, 5)
 	        test_averageTrials(100, rc, tt).should be(10)
