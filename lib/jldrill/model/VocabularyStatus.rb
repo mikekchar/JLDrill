@@ -21,6 +21,7 @@ module JLDrill
         LASTREVIEWED_RE = /^LastReviewed: (.*)/
         CONSECUTIVE_RE = /^Consecutive: (.*)/
         SCHEDULEDTIME_RE = /^ScheduledTime: (.*)/
+        DIFFICULTY_RE = /^Difficulty: (.*)/
         
         SECONDS_PER_DAY = 60 * 60 * 24
         MAX_ADDITIONAL_TIME = 4 * SECONDS_PER_DAY
@@ -65,6 +66,8 @@ module JLDrill
                     @consecutive = $1.to_i
                 when SCHEDULEDTIME_RE
                     @scheduledTime = Time.at($1.to_i)
+                when DIFFICULTY_RE
+                    @numIncorrect = $1.to_i
             else # Not something we understand
                 parsed = false
             end
@@ -156,6 +159,7 @@ module JLDrill
             if scheduled?
                 retVal += "/ScheduledTime: #{@scheduledTime.to_i}"
             end
+            retVal += "/Difficulty: #{difficulty}"
             retVal
         end
     end
