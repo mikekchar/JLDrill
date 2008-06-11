@@ -140,6 +140,7 @@ module JLDrill
                 end
                 retVal = @contents.length > 0
             end
+            @contents.debug_printSchedule
             return retVal
         end
 

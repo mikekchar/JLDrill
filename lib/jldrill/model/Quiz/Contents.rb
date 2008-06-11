@@ -105,6 +105,48 @@ module JLDrill
             retVal
         end
         
+        # Returns the number of unseen items in the range of bins
+        def numUnseen(range)
+            total = 0
+            range.each do |i|
+                total += @bins[i].numUnseen
+            end
+            total
+        end
+        
+        # returns true if there are bins in the specified range
+        def includesRange?(range)
+            !(range.begin < 0 || range.end > 4)
+        end
+        
+        # Returns the nth unseen item in the range of contents, or nil if there
+        # aren't any unseen items
+        def findUnseen(n, range)
+            total = numUnseen(range)
+            if n > total || !includesRange?(range)
+                return nil
+            end
+            
+            i = range.end
+            prev = total
+            while (prev = (prev - @bins[i].numUnseen)) > n
+                i -= 1 
+            end
+            
+            @bins[i].findUnseen(n - prev)
+        end
+
+        # Returns false if any of the bins in the range have
+        # unseen items in them
+        def rangeAllSeen?(range)
+            a = range.to_a
+            seen = a.all? do |bin|
+                @bins[bin].allSeen?
+            end
+            seen
+        end
+
+        
         # Returns false if any of the bins in the range have
         # items in them
         def rangeEmpty?(range)
@@ -122,6 +164,16 @@ module JLDrill
             retVal += "F: #{@bins[2].length} "
             retVal += "G: #{@bins[3].length} E: #{bins[4].length}"
             retVal
+        end
+        
+        def debug_printSchedule
+            print "DEBUG OUTPUT: Contents.debug_printSchidule -- DELETE ME!!!\n"
+            @bins[4].each do |vocab|
+                if !vocab.kanji.nil?
+                    print "#{vocab.kanji} "
+                end
+                print "#{vocab.reading} #{vocab.status.scheduledTime}\n"
+            end
         end
 
         def to_s

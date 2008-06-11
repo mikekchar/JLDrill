@@ -135,6 +135,82 @@ module JLDrill
 		    test_pushAll
 		    @bin.empty?.should be(false)
 		end
+		
+		it "should indicate if all the items in the bin have been seen" do
+		    bin = Bin.new("hi", 4)
+		    bin.empty?.should be(true)
+		    bin.allSeen?.should be(true)
+		    test_pushAll
+		    @bin.allSeen?.should be(false)
+		    @bin.each do |vocab|
+		        vocab.status.seen = true
+		    end
+		    @bin.allSeen?.should be(true)
+		end
+
+        it "should be able to find the first unseen item" do
+            bin = Bin.new("hi", 4)
+            bin.empty?.should be(true)
+            bin.firstUnseen.should be(-1)
+		    test_pushAll
+		    
+		    @bin.firstUnseen.should be(0)
+		    @bin.contents[0].status.seen = true
+		    @bin.contents[1].status.seen = true
+		    @bin.firstUnseen.should be(2)
+		    @bin.each do |vocab|
+		        vocab.status.seen = true
+		    end
+            @bin.firstUnseen.should be(-1)
+        end
+        
+        it "should be able to set all the items to unseen" do
+            # First test the corner case of an empty bin
+            bin = Bin.new("hi", 4)
+            bin.empty?.should be(true)
+            bin.firstUnseen.should be(-1)
+            bin.setUnseen
+            bin.empty?.should be(true)
+            bin.firstUnseen.should be(-1)
+            bin.allSeen?.should be(true)
+           
+		    test_pushAll
+            @bin.firstUnseen.should be(0)
+		    @bin.each do |vocab|
+		        vocab.status.seen = true
+		    end
+            @bin.firstUnseen.should be(-1)
+            @bin.setUnseen
+            @bin.firstUnseen.should be(0)
+        end
+        
+        it "should be able to count the number of unseen items" do
+            bin = Bin.new("hi", 4)
+            bin.empty?.should be(true)
+            bin.numUnseen.should be(0)
+
+		    test_pushAll
+		    total = 4
+            @bin.numUnseen.should be(total)
+            @bin.each do |vocab|
+                vocab.status.seen = true
+                total -= 1
+                @bin.numUnseen.should be(total)
+            end
+        end
+        
+        it "should be able to find the nth unseen item in the bin" do
+            bin = Bin.new("hi", 4)
+            bin.empty?.should be(true)
+            bin.findUnseen(0).should be_nil
+
+		    test_pushAll
+		    @bin[0].status.seen = true
+		    @bin[2].status.seen = true
+		    @bin.findUnseen(0).should be_eql(@bin[1])
+		    @bin.findUnseen(1).should be_eql(@bin[3])
+        end
+
 	end
 
 end

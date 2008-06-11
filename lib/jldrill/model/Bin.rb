@@ -55,6 +55,9 @@ module JLDrill
         def delete_at(index)
             @contents[index].status.index = nil unless @contents[index].nil?
             @contents.delete_at(index)
+            index.upto(@contents.length - 1) do |i|
+                @contents[i].status.index = i
+            end
         end
 
         # Calls a block for each vocabulary in the bin
@@ -113,7 +116,63 @@ module JLDrill
         def empty?
             @contents.empty?
         end
+
+        # Returns the number of unseen items in the bin
+        def numUnseen
+            total = 0
+            @contents.each do |vocab|
+                total += 1 if !vocab.status.seen
+            end
+            total
+        end
         
+        # Returns true if all the items in the bin have been seen
+        def allSeen?
+            @contents.all? do |vocab|
+                vocab.status.seen?
+            end
+        end
+        
+        # Return the index of the first item in the bin that hasn't been
+        # seen yet.  Returns -1 if there are no unseen items
+        def firstUnseen
+            index = 0
+            # find the first one that hasn't been seen yet
+            while (index < length) && @contents[index].status.seen?
+                index += 1
+            end
+            
+            if index >= length
+                index = -1
+            end
+            index
+        end
+        
+        # Return the nth unseen item in the bin
+        def findUnseen(n)
+            retVal = nil
+            if n < numUnseen
+                i = 0
+                0.upto(n) do |m|
+                    while @contents[i].status.seen
+                        i += 1
+                    end
+                    if m != n
+                        i += 1
+                    end
+                end
+                retVal = @contents[i]
+            end
+            retVal
+        end
+
+        # Sets the status of each item in the been to unseen
+        def setUnseen
+            @contents.each do |vocab|
+                vocab.status.seen = false
+            end
+        end
+
         # Returns a string containing all the vocabulary strings in the bin     
         def to_s
             @name + "\n" + @contents.join

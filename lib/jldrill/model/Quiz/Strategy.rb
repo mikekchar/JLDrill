@@ -33,9 +33,13 @@ module JLDrill
             contents.bins[0].empty?
         end
         
+        def workingSetRange
+            1..3
+        end
+        
         # Returns a random, non-empty bin in the working set
         def workingSetBin
-            randomBin(1..3)
+            randomBin(workingSetRange)
         end
         
         # Returns true if there are no items in the working set
@@ -60,7 +64,7 @@ module JLDrill
         
         # Returns the number of items in the review set
         def reviewSetSize
-            @quiz.contents.bins[4].length
+            @quiz.contents.bins[reviewSetBin].length
         end
         
         # Returns true if at least one working set full of
@@ -152,52 +156,88 @@ module JLDrill
             return workingSetBin
         end
 
-        # Returns true if the item has been seen before
-        def unseen?(bin, index)
-            !contents.bins[bin][index].status.seen
-        end
-        
-        # Set all items in the bin as unseen
-        def setUnseen(bin)
-            contents.bins[bin].each do |vocab|
-                vocab.status.seen = false
-            end
-        end        
-        
-        # Return the index of the first item in the bin that hasn't been
-        # seen yet.
-        def findUnseen(bin)
-            index = 0
-            # find the first one that hasn't been seen yet
-            while (index < contents.bins[bin].length) && !unseen?(bin, index)
-                index += 1
-            end
-            
-            # wrap to the first item if they have all been seen and clear
-            # the seen status
-            if (index >= contents.bins[bin].length) 
-                index = 0
-                setUnseen(bin)
-            end
-            index
-        end
-        
-        def getVocab
-            bin = getBin
-            if bin == -1
+        def getVocabFromBin
+            if contents.empty?
                 return nil
             end
 
-            if((@quiz.options.randomOrder) && (bin == 0))
-                index = rand(contents.bins[bin].length)
-            else
-                index = findUnseen(bin)
+            if !workingSetFull?
+                if shouldReview?
+                    return getReviewItem
+                elsif !newSetEmpty?
+                    return getNewItem
+                end
             end
-            contents.bins[bin][index].status.seen = true
+            
+            return getWorkingItem
+        end
+        
+        # Return the index of the first item in the bin that hasn't been
+        # seen yet.  If they have all been seen, reset the bin
+        def findUnseen(binNum)
+            bin = contents.bins[binNum]
+            if bin.empty?
+                return -1
+            end
 
-            vocab = contents.bins[bin][index]
+            if bin.allSeen?
+                bin.setUnseen
+            end
+            bin.firstUnseen            
+        end
+        
+        # Returns a random unseen item.  Return nil if the range is empty.
+        # Resets the seen status if all the items are already seen.
+        def randomUnseen(range)
+            if contents.rangeEmpty?(range)
+                return nil
+            end
+            if contents.rangeAllSeen?(range)
+                range.to_a.each do |bin|
+                    contents.bins[bin].setUnseen
+                end
+            end
+            index = rand(contents.numUnseen(range))
+            vocab = contents.findUnseen(index, range)
+            vocab
+        end
+        
+        def getNewItem
+            if @quiz.options.randomOrder
+                index = rand(contents.bins[newSetBin].length)
+            else
+                index = findUnseen(newSetBin)
+            end
+            if !(index == -1)
+                vocab = contents.bins[newSetBin][index]
+                promote(vocab)
+                vocab
+            else
+                nil
+            end
+        end
+        
+        def getReviewItem
+            index = findUnseen(reviewSetBin)
+            if !(index == -1)
+                contents.bins[reviewSetBin][index]
+            else
+                nil
+            end
+        end
+        
+        def getWorkingItem
+            randomUnseen(workingSetRange)
+        end
+        
+        def getVocab
+            vocab = getVocabFromBin
+            if vocab.nil?
+                return nil
+            end
+
+            vocab.status.seen = true
             @last = vocab 
-            if bin == 0 then promote(vocab) end
             return vocab
         end
 

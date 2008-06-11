@@ -90,6 +90,7 @@ module JLDrill
             @lastReviewed = nil
             @score = 0
             @consecutive = 0
+            @seen = false
             @numIncorrect = 0
         end
         
@@ -147,6 +148,10 @@ module JLDrill
             @numIncorrect += 1
         end
             
+        def seen?
+            @seen
+        end
+        
         def to_s
             retVal = "/Score: #{@score}" + "/Bin: #{@bin}" + "/Level: #{@level}" +
                 "/Position: #{@position}"
