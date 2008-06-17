@@ -104,7 +104,7 @@ module JLDrill
             @scheduledTime = Time::now + firstInterval
 
             if reviewed?
-                elapsed = Time::now - @lastReviewed
+                elapsed = Time::now.to_i - @lastReviewed.to_i
                 if (2 * elapsed) > firstInterval
                     @scheduledTime = Time::now + (2 * elapsed)
                 end
@@ -150,6 +150,14 @@ module JLDrill
             
         def seen?
             @seen
+        end
+        
+        def scheduleDuration
+            retVal = 0
+            if scheduled?
+                retVal = @scheduledTime.to_i - @lastReviewed.to_i
+            end
+            retVal
         end
         
         def to_s

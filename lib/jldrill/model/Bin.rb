@@ -172,6 +172,30 @@ module JLDrill
                 vocab.status.seen = false
             end
         end
+        
+        def averageDuration(consecutive)
+            total = 0
+            num = 0
+            @contents.each do |vocab|
+                if vocab.status.consecutive == consecutive
+                    total += vocab.status.scheduleDuration
+                    num += 1
+                end
+            end
+            if num == 0
+                0
+            else
+                total.to_f / num.to_f / (60 * 60 * 24)
+            end
+        end
+        
+        def debug_printAverageDurations
+            print "DEBUG: Bin.debug_printAverageDurations -- DELETE ME!!!"
+            0.upto(9) do |i|
+                print "Consecutive #{i}: #{averageDuration(i)}\n"
+            end
+            print "\n"
+        end
 
         # Returns a string containing all the vocabulary strings in the bin     
         def to_s

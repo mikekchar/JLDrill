@@ -172,8 +172,9 @@ module JLDrill
                 if !vocab.kanji.nil?
                     print "#{vocab.kanji} "
                 end
-                print "#{vocab.reading} #{vocab.status.scheduledTime}\n"
+                print "#{vocab.reading} #{vocab.status.lastReviewed} #{vocab.status.scheduledTime} #{vocab.status.scheduleDuration}\n"
             end
+            @bins[4].debug_printAverageDurations
         end
 
         def to_s

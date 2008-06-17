@@ -289,5 +289,33 @@ module JLDrill
 	        strategy.getBin.should be(1)
         end
         
+        it "should increment the vocabulary's difficulty when an item is incorrect" do
+	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 3/Level: 0/Position: -1/Consecutive: 0/")
+	        @quiz.contents.add(vocab, 3)
+	        @quiz.currentProblem = @strategy.createProblem(vocab)
+	        vocab.status.difficulty.should be(0)
+	        @strategy.incorrect
+	        vocab.status.difficulty.should be(1)
+        end
+        
+        it "should reset the difficulty when the vocab is demoted from the 4th bin" do
+            @quiz.options.promoteThresh = 1
+	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 1/Level: 0/Position: -1/Consecutive: 0/")
+	        @quiz.contents.add(vocab, 1)
+	        @quiz.currentProblem = @strategy.createProblem(vocab)
+	        @strategy.incorrect
+	        @strategy.incorrect
+	        @strategy.incorrect
+            vocab.status.bin.should be(1)	        
+	        vocab.status.difficulty.should be(3)
+	        @strategy.correct
+	        @strategy.correct
+	        @strategy.correct
+            vocab.status.bin.should be(4)	        
+	        vocab.status.difficulty.should be(3)
+	        @strategy.incorrect
+            vocab.status.bin.should be(1)	        	        
+	        vocab.status.difficulty.should be(0)        
+        end
     end
 end
