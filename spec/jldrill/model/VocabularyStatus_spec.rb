@@ -137,19 +137,22 @@ module JLDrill
             @vocab[1].status.firstInterval.should be(days(5))
         end
         
-        it "should decrement first interval by 10 percent from difficulty 1 to 10, down to 1 day" do
-            1.upto(10) do |i|
+        it "should decrement first interval by 20 percent from difficulty 1 to 5, down to 1 day" do
+            1.upto(5) do |i|
                 @vocab[1].status.numIncorrect = i
                 @vocab[1].status.difficulty.should be(i)
-                int = days(1) + (days(4) * (1.0 - (i.to_f / 10.0))).to_i
+                int = days(1) + (days(4) * (1.0 - (i.to_f / 5.0))).to_i
                 @vocab[1].status.firstInterval.should be(int)
             end
         
         end
 
-        it "should decrement first interval from 1 day approaching 0 days as difficulty increases from 10" do
+        it "should decrement first interval from 1 day approaching 0 days as difficulty increases from 6" do
             last = days(1)
-            11.upto(100) do |i|
+            # Note, if you make the number too big, it will actually hit zero
+            # due to rounding errors.  So if you alter the algorithm remember
+            # to adjust the maximum number so that it stays just above zero.
+            6.upto(50) do |i|
                 @vocab[1].status.numIncorrect = i
                 @vocab[1].status.difficulty.should be(i)
                 (last > @vocab[1].status.firstInterval).should be(true)

@@ -127,11 +127,11 @@ module JLDrill
         end
         
         def firstInterval
-            if difficulty <= 10
+            if difficulty <= 5
                 SECONDS_PER_DAY +
-                    (MAX_ADDITIONAL_TIME * (1.0 - (difficulty.to_f / 10.0))).to_i
+                    (MAX_ADDITIONAL_TIME * (1.0 - (difficulty.to_f / 5.0))).to_i
             else
-                scale = difficulty - 10
+                scale = difficulty - 5
                 current = 0.0
                 1.upto(scale) do |x|
                     current = current + (1 - current).to_f / 10.0
