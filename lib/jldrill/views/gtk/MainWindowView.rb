@@ -157,6 +157,8 @@ module JLDrill::Gtk
                     ["/_Drill"],
                     ["/Drill/_Info...",
                         "<Item>", "<control>I", nil, Proc.new{info}],
+                    ["/Drill/_Statistics...",
+                        "<Item>", "#", nil, Proc.new{statistics}],
                     ["/Drill/_Check",
                     "<Item>", "Z", nil, Proc.new{check}],
                     ["/Drill/_Incorrect",
@@ -255,6 +257,10 @@ module JLDrill::Gtk
                         dialog.destroy
                     }
                 end
+            end
+            
+            def statistics
+                @view.showStatistics
             end
 
             def updateStatus()

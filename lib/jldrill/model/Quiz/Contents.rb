@@ -174,6 +174,7 @@ module JLDrill
                 end
                 print "#{vocab.reading} #{vocab.status.lastReviewed} #{vocab.status.scheduledTime} #{vocab.status.scheduleDuration}\n"
             end
+            print "\n"
             @bins[4].debug_printAverageDurations
         end
 

@@ -14,6 +14,10 @@ module JLDrill
 		    @context.loadReference
 		end
 		
+		def showStatistics
+		    @context.showStatistics
+		end
+		
 		def edict
 		    @context.reference
 		end

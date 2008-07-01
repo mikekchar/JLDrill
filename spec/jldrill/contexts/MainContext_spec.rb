@@ -41,6 +41,11 @@ module JLDrill
 		    @context.setOptionsContext.should_receive(:enter).with(@context)
 		    @context.setOptions
 		end
+		
+		it "should enter the showStatisticsContext when showing statistics" do
+		    @context.showStatisticsContext.should_receive(:enter).with(@context)
+		    @context.showStatistics
+		end
 
 	end
 end

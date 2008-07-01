@@ -5,13 +5,14 @@ require 'jldrill/views/MainWindowView'
 require 'jldrill/model/HashedEdict'
 require 'jldrill/contexts/LoadReferenceContext'
 require 'jldrill/contexts/SetOptionsContext'
+require 'jldrill/contexts/ShowStatisticsContext'
 
 module JLDrill
 
 	class MainContext < Context::Context
 	
 	    attr_reader :loadReferenceContext, :setOptionsContext, 
-	                :reference, :quiz
+	                :showStatisticsContext, :reference, :quiz
 	    attr_writer :quiz
 		
 		def initialize(viewBridge)
@@ -20,6 +21,7 @@ module JLDrill
 			@mainView = @mainWindowView
 			@loadReferenceContext = LoadReferenceContext.new(viewBridge)
 			@setOptionsContext = SetOptionsContext.new(viewBridge)
+			@showStatisticsContext = ShowStatisticsContext.new(viewBridge)
 			@reference = HashedEdict.new
 			@quiz = nil
 		end
@@ -38,11 +40,15 @@ module JLDrill
 		end
 		
 		def loadReference
-		    @loadReferenceContext.enter(self)
+		    @loadReferenceContext.enter(self) unless @loadReferenceContext.isEntered?
 		end
 		
 		def setOptions
-		    @setOptionsContext.enter(self)
+		    @setOptionsContext.enter(self) unless @setOptionsContext.isEntered?
+		end
+		
+		def showStatistics
+		    @showStatisticsContext.enter(self) unless @showStatisticsContext.isEntered?
 		end
     end
 end

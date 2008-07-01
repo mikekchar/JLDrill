@@ -166,7 +166,7 @@ module JLDrill
             retVal
         end
 
-        # Sets the status of each item in the been to unseen
+        # Sets the status of each item in the bin to unseen
         def setUnseen
             @contents.each do |vocab|
                 vocab.status.seen = false
@@ -183,15 +183,16 @@ module JLDrill
                 end
             end
             if num == 0
-                0
+                "0 Trials: 0"
             else
-                total.to_f / num.to_f / (60 * 60 * 24)
+                average = total.to_f / num.to_f / (60 * 60 * 24).to_f
+                average.to_s + " Trials: #{num}" 
             end
         end
         
         def debug_printAverageDurations
-            print "DEBUG: Bin.debug_printAverageDurations -- DELETE ME!!!"
-            0.upto(9) do |i|
+            print "DEBUG: Bin.debug_printAverageDurations -- DELETE ME!!!\n"
+            1.upto(9) do |i|
                 print "Consecutive #{i}: #{averageDuration(i)}\n"
             end
             print "\n"
