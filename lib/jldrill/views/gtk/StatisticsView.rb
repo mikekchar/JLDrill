@@ -45,7 +45,7 @@ module JLDrill::Gtk
 		def emitDestroyEvent
 			@statisticsWindow.signal_emit("destroy")
 		end
-		
+
     end   
 end
 

@@ -3,6 +3,8 @@ require 'jldrill/contexts/ShowStatisticsContext'
 require 'jldrill/views/gtk/StatisticsView'
 require 'jldrill/contexts/MainContext'
 require 'jldrill/views/gtk/MainWindowView'
+require 'jldrill/model/Quiz/Quiz'
+
 
 module JLDrill::Gtk
 
@@ -11,6 +13,7 @@ module JLDrill::Gtk
 		before(:each) do
 		    bridge = Context::Bridge.new(JLDrill::Gtk)
 		    @main = JLDrill::MainContext.new(bridge)
+		    @main.quiz = JLDrill::Quiz.new
 			@context = @main.showStatisticsContext
 			@context.createViews
 			@view = @context.mainView

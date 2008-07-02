@@ -21,8 +21,13 @@ module JLDrill
             @mainView = nil
         end		    
 		
+		def hasQuiz?(parent)
+		    !parent.nil? && parent.class.public_method_defined?(:quiz) &&
+		        !parent.quiz.nil?
+		end
+		
 		def enter(parent)
-			if (!parent.nil?) && (parent.class.public_method_defined?(:quiz))
+			if hasQuiz?(parent)
        			super(parent)
     			@quiz = parent.quiz
     			@mainView.update(@quiz.options)

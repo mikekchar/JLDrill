@@ -1,5 +1,6 @@
 require 'jldrill/contexts/ShowStatisticsContext'
 require 'Context/Bridge'
+require 'jldrill/model/Quiz/Quiz'
 
 module JLDrill
 
@@ -7,6 +8,7 @@ module JLDrill
 
 		before(:each) do
 			@main = MainContext.new(Context::Bridge.new(JLDrill))
+			@main.quiz = Quiz.new
 			@context = @main.showStatisticsContext
 			@context.createViews
 			@view = @context.mainView
@@ -25,20 +27,25 @@ module JLDrill
         end
         
         it "should not be able to create the context twice at once" do
-            def @context.enter(parent)
-                super(parent)
-                if @numTimesEntered.nil?
-                    @numTimesEntered = 1
-                else
-                    @numTimesEntered += 1
-                end
-            end
-            def @context.numTimesEntered
-                @numTimesEntered
-            end
+            @main.mainView.should_receive("addView").exactly(1).times
             @main.showStatistics
             @main.showStatistics
-            @context.numTimesEntered.should be(1)
         end
+        
+        it "should not show statistics if there is no quiz" do
+            @main.mainView.should_not_receive(:addView)
+            # 3 cases: No parent context, parent doesn't have quiz, parent's quiz is nil
+            @context.enter(nil)
+            @context.enter(Context::Context.new(mock("ViewBridge")))
+            @main.quiz = nil
+            @context.enter(@main)
+        end
+        
+        it "should update the view with the parent's quiz statistics on entry" do
+            @view.should_receive(:update).with(@main.quiz)
+            @context.enter(@main)
+        end
+
+
 	end
 end

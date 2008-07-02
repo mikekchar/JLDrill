@@ -52,5 +52,13 @@ module JLDrill
             # Note: enter automatically calls exit            
         end
         
+        it "should not run the options dialog if there is no quiz" do
+            @view.should_not_receive(:run)
+            # 3 cases: No parent context, parent doesn't have quiz, parent's quiz is nil
+            @context.enter(nil)
+            @context.enter(Context::Context.new(mock("ViewBridge")))
+            @main.quiz = nil
+            @context.enter(@main)
+        end
 	end
 end

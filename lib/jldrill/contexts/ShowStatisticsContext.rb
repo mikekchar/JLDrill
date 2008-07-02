@@ -16,9 +16,17 @@ module JLDrill
         def destroyViews
             @mainView = nil
         end		    
+
+		def hasQuiz?(parent)
+		    !parent.nil? && parent.class.public_method_defined?(:quiz) &&
+		        !parent.quiz.nil?
+		end
 		
 		def enter(parent)
-		    super(parent)
+		    if hasQuiz?(parent)
+    		    super(parent)
+    		    @mainView.update(parent.quiz)
+    		end
 		end
 		
 		def exit

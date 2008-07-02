@@ -1,6 +1,7 @@
 require 'jldrill/views/StatisticsView'
 require 'Context/Bridge'
 require 'jldrill/contexts/ShowStatisticsContext'
+require 'jldrill/model/Quiz/Quiz'
 
 
 module JLDrill
@@ -14,7 +15,10 @@ module JLDrill
 	    end
 	    
         it "should be able to update the statistics in the view" do
-            # Please implement
+            quiz = Quiz.new
+            @view.quiz.should be_nil
+            @view.update(quiz)
+            @view.quiz.should be(quiz)
         end
         
         it "should exit the context when the view is closed" do
