@@ -167,14 +167,6 @@ module JLDrill
         end
         
         def debug_printSchedule
-            print "DEBUG OUTPUT: Contents.debug_printSchidule -- DELETE ME!!!\n"
-            @bins[4].each do |vocab|
-                if !vocab.kanji.nil?
-                    print "#{vocab.kanji} "
-                end
-                print "#{vocab.reading} #{vocab.status.lastReviewed} #{vocab.status.scheduledTime} #{vocab.status.scheduleDuration}\n"
-            end
-            print "\n"
             @bins[4].debug_printAverageDurations
         end
 
