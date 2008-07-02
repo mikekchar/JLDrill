@@ -173,6 +173,26 @@ module JLDrill
             end
         end
         
+        def numOverdue
+            total = 0
+            @contents.each do |vocab|
+                if vocab.status.overdue?
+                    total += 1
+                end
+            end
+            total
+        end
+        
+        def numScheduledOn(day)
+            total = 0
+            @contents.each do |vocab|
+                if vocab.status.scheduledOn?(day)
+                    total += 1
+                end
+            end
+            total
+        end
+        
         def averageDuration(consecutive)
             total = 0
             num = 0

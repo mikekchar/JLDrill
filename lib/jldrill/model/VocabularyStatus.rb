@@ -160,6 +160,22 @@ module JLDrill
             retVal
         end
         
+        # Returns true if the item is overdue to be reviewed
+        def overdue?
+            @scheduledTime.to_i < Time::now.to_i
+        end
+        
+        # Returns true if the item is scheduled on the specified day.
+        # 0 is today, 1 is tomorrow, 2 is the day after, etc.  Uses the
+        # date, not 24 hour time period (i.e., if it's 11pm, then a
+        # item scheduled in 2 hours is tomorrow).
+        def scheduledOn?(day)
+            target = Time::now + (SECONDS_PER_DAY * day)
+            @scheduledTime.day == target.day && 
+                @scheduledTime.month == target.month &&
+                @scheduledTime.year == target.year
+        end
+        
         def to_s
             retVal = "/Score: #{@score}" + "/Bin: #{@bin}" + "/Level: #{@level}" +
                 "/Position: #{@position}"

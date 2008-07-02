@@ -137,7 +137,8 @@ module JLDrill
             v1.should_not be_hasHint
             v1.kanji = ""        
             v1.should_not be_hasHint
-        end        
+        end     
+           
 	end
 
 end

@@ -161,6 +161,30 @@ module JLDrill
             end            
         end
         
+        it "should be able to tell if an item is overdue to be reviewed" do
+            @vocab[1].status.scheduledTime = Time::now - VocabularyStatus::SECONDS_PER_DAY
+            @vocab[1].status.overdue?.should be(true)
+            @vocab[1].status.scheduledTime = Time::now + VocabularyStatus::SECONDS_PER_DAY
+            @vocab[1].status.overdue?.should be(false)            
+            @vocab[1].status.scheduledTime = Time::now
+            @vocab[1].status.overdue?.should be(false)            
+        end
+        
+        it "should be able to tell which day an item is scheduled for" do
+            @vocab[1].status.scheduledTime = Time::now
+            @vocab[1].status.scheduledOn?(0).should be(true)
+            @vocab[1].status.scheduledOn?(1).should be(false)
+            hoursToMidnight = 24 - @vocab[1].status.scheduledTime.hour
+            @vocab[1].status.scheduledTime += hoursToMidnight * 60 * 60
+            @vocab[1].status.scheduledOn?(0).should be(false)
+            @vocab[1].status.scheduledOn?(1).should be(true)
+            @vocab[1].status.scheduledOn?(2).should be(false)
+            @vocab[1].status.scheduledTime += 24 * 60 * 60
+            @vocab[1].status.scheduledOn?(0).should be(false)
+            @vocab[1].status.scheduledOn?(1).should be(false)
+            @vocab[1].status.scheduledOn?(2).should be(true)
+            @vocab[1].status.scheduledOn?(3).should be(false)
+        end
 	end
 
 end
