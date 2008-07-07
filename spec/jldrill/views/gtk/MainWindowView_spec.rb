@@ -49,6 +49,12 @@ module JLDrill::Gtk
 #            controlD = Context::Gtk::Key.new(Context::Key::Modifier.CONTROL, 'd')
 #            @view.runAccel(controlD).should be(true)
         end
+        
+        it "should be able to processes special characters in the answer string" do
+            @view.mainWindow.processString("This is a test\\n").should be_eql("This is a test\n")
+            # Shouldn't break on quotes
+            @view.mainWindow.processString("This is a \"test\"\\n").should be_eql("This is a \"test\"\n")
+        end
 		
 	end
 end

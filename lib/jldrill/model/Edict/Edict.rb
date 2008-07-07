@@ -86,6 +86,8 @@ class Edict
       add(Vocabulary.new(kanji, kana, english.allDefinitions,
                   english.allTypes, hint))
       retVal = true
+    else
+        print "Warning: Could not parse - #{line}\n"
     end             
     return retVal                        
   end

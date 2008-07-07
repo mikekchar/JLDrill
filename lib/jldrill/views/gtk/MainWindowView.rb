@@ -281,11 +281,15 @@ module JLDrill::Gtk
                 end
             end
 
+            def processString(text)
+                eval("\"#{text.gsub(/["]/, "\\\"")}\"")
+            end
+
             def printQuestion(text)
                 if @qbuffer
                     @qbuffer.text = ""
                     @abuffer.text = ""
-                    @qbuffer.insert(@qbuffer.start_iter, text, "kanji")
+                    @qbuffer.insert(@qbuffer.start_iter, processString(text), "kanji")
                     if !@view.quiz.vocab.nil?
                         @indicatorBox.set(@view.quiz.vocab)
                     end
@@ -296,7 +300,8 @@ module JLDrill::Gtk
             def printAnswer(text)
                 if @abuffer
                     @abuffer.text = ""
-                    @abuffer.insert(@abuffer.start_iter, text, "kanji")
+                    pText = eval("\"#{text}\"")
+                    @abuffer.insert(@abuffer.start_iter, processString(text), "kanji")
                     updateStatus
                 end
             end      
