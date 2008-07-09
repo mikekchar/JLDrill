@@ -69,6 +69,10 @@ module JLDrill::Gtk
                             "160 - 320 days", "320+ days"]
                 @durationTable = StatisticsTable.new(labels)
                 hbox.add(@durationTable)
+                labels = [" Level 1 ", " Level 2 ", " Level 3 ", " Level 4 ",
+                            " Level 5 ", " Level 6 ", " Level 7 ", " Level 8 "]
+                @accuracyTable = StatisticsTable.new(labels)
+                hbox.add(@accuracyTable)
 		    end  
 		          		    
 		    def connectSignals
@@ -112,6 +116,17 @@ module JLDrill::Gtk
                 end
                 @durationTable.values[7].text = (bin.length - total).to_s
             end
+            
+            def updateAccuracy(statistics)
+                0.upto(7) do |i|
+                    acc = statistics.levels[i].accuracy
+                    if !acc.nil?
+                        @accuracyTable.values[i].text = acc.to_s
+                    else
+                        @accuracyTable.values[i].text = " - "
+                    end
+                end
+            end
         end
     
         attr_reader :statisticsWindow
@@ -134,6 +149,7 @@ module JLDrill::Gtk
 		    super(quiz)
 		    @statisticsWindow.updateSchedule(quiz.contents.bins[4])
 		    @statisticsWindow.updateDuration(quiz.contents.bins[4])
+		    @statisticsWindow.updateAccuracy(quiz.strategy.stats)
 		end
 
     end   

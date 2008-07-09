@@ -1,8 +1,36 @@
+require 'jldrill/model/Vocabulary'
+require 'jldrill/model/VocabularyStatus'
+
 module JLDrill
 
     # Statistics for a quiz session
     class Statistics
-        attr_reader :estimate, :lastTen, :confidence
+    
+        class LevelStats
+            def initialize
+                @num = 0
+                @correct = 0
+            end
+            
+            def correct
+                @correct += 1
+                @num += 1
+            end
+            
+            def incorrect
+                @num += 1
+            end
+            
+            def accuracy
+                if @num > 0
+                    ((@correct.to_f / @num.to_f) * 100).to_i
+                else
+                    nil
+                end
+            end
+        end
+    
+        attr_reader :estimate, :lastTen, :confidence, :levels
     
         MINIMUM_CONFIDENCE = 0.009
         
@@ -11,6 +39,10 @@ module JLDrill
             @correct = 0
             @incorrect = 0
             @lastTen = []
+            @levels = []
+            1.upto(8) do
+                @levels.push(LevelStats.new)
+            end 
             resetConfidence
         end
         
@@ -34,8 +66,20 @@ module JLDrill
             retVal
         end
         
+        def getLevel(level)
+            if level >= 1 && level <= 8
+                @levels[level - 1]
+            else
+                nil
+            end
+        end
+        
         def correct(vocab)
             @correct += 1
+            level = getLevel(vocab.status.consecutive)
+            if !level.nil?
+                level.correct
+            end
             record(true)
             reEstimate
             calculateConfidence(true)
@@ -43,6 +87,10 @@ module JLDrill
 
         def incorrect(vocab)
             @incorrect += 1
+            level = getLevel(vocab.status.consecutive)
+            if !level.nil?
+                level.incorrect
+            end
             record(false)
             reEstimate
             calculateConfidence(false)
