@@ -34,14 +34,14 @@ module JLDrill
             retVal
         end
         
-        def correct
+        def correct(vocab)
             @correct += 1
             record(true)
             reEstimate
             calculateConfidence(true)
         end
 
-        def incorrect
+        def incorrect(vocab)
             @incorrect += 1
             record(false)
             reEstimate

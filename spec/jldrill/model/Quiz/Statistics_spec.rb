@@ -1,4 +1,5 @@
 require 'jldrill/model/Quiz/Statistics'
+require 'jldrill/model/Vocabulary'
 
 module JLDrill
 
@@ -20,42 +21,46 @@ module JLDrill
 	    end
 	    
 	    it "should set the accuracy correctly" do
+	        vocab = Vocabulary.new
 	        @statistics.accuracy.should be(0)
-	        @statistics.correct 
+	        @statistics.correct(vocab)
 	        @statistics.accuracy.should be(100)
-	        @statistics.incorrect
+	        @statistics.incorrect(vocab)
 	        @statistics.accuracy.should be(50)
 	    end
 	    
 	    it "should slowly move the estimate towards 100" do
+	        vocab = Vocabulary.new
 	        results = [30, 51, 65, 75, 82, 87, 90, 93]
 	        0.upto(7) do |i|
-    	        @statistics.correct
+    	        @statistics.correct(vocab)
     	        @statistics.estimate.should be(results[i])
     	    end
 	    end
 	    
 	    it "should keep track of the last ten responses" do
+	        vocab = Vocabulary.new
 	        @statistics.lastTen.size.should be(0)
-	        @statistics.correct
+	        @statistics.correct(vocab)
 	        @statistics.lastTen.size.should be(1)
 	        @statistics.lastTen[0].should be(true)
-	        @statistics.incorrect
+	        @statistics.incorrect(vocab)
 	        @statistics.lastTen.size.should be(2)
 	        @statistics.lastTen[1].should be(false)
 	        0.upto(20) do
-	            @statistics.correct
+	            @statistics.correct(vocab)
 	        end
 	        @statistics.lastTen.size.should be(10)
 	    end
 	    
 	    it "should keep track of the recent (up to 10 items) accuracy" do
+	        vocab = Vocabulary.new
 	        @statistics.recentAccuracy.should be(0)
-	        @statistics.correct
+	        @statistics.correct(vocab)
 	        @statistics.recentAccuracy.should be(100)
-	        @statistics.incorrect
+	        @statistics.incorrect(vocab)
 	        @statistics.recentAccuracy.should be(50)
-	        @statistics.correct
+	        @statistics.correct(vocab)
 	        @statistics.recentAccuracy.should be(66)
 	    end
 	    
@@ -64,14 +69,15 @@ module JLDrill
 	    end
 	    
 	    def test_numTrials(percent, requiredConfidence, trials)
+	        vocab = Vocabulary.new
 	        @statistics.resetConfidence
 	        i = 0
 	        finished = false
 	        while (i < trials) && !finished do
 	            if test_Rand(percent)
-    	            @statistics.correct
+    	            @statistics.correct(vocab)
     	        else
-    	            @statistics.incorrect
+    	            @statistics.incorrect(vocab)
     	        end
     	        i += 1
     	        finished = (@statistics.confidence > requiredConfidence)

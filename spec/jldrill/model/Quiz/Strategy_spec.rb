@@ -244,7 +244,7 @@ module JLDrill
             # to the required level, so we should review
             @strategy.shouldReview?.should be(true)
             0.upto(9) do
-                @strategy.stats.correct
+                @strategy.stats.correct(vocab)
             end
             # Now we know the items well enough, so we shouldn't review
             @strategy.shouldReview?.should be(false)                        

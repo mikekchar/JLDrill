@@ -283,19 +283,19 @@ module JLDrill
             end
         end
 
-        def adjustQuizOld(good)
-            if(@quiz.currentProblem.vocab.status.bin == 4)
+        def collectStatistics(vocab, good)
+            if(vocab.status.bin == 4)
                 if(good)
-                    @stats.correct
+                    @stats.correct(vocab)
                 else
-                    @stats.incorrect
+                    @stats.incorrect(vocab)
                 end
             end
         end
   
         def correct
             vocab = @quiz.currentProblem.vocab
-            adjustQuizOld(true)
+            collectStatistics(vocab, true)
             if(vocab)
                 vocab.status.schedule
                 vocab.status.markReviewed
@@ -316,7 +316,7 @@ module JLDrill
 
         def incorrect
             vocab = @quiz.currentProblem.vocab
-            adjustQuizOld(false)
+            collectStatistics(vocab, false)
             if(vocab)
                 vocab.status.unschedule
                 vocab.status.markReviewed
