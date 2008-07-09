@@ -185,6 +185,25 @@ module JLDrill
             @vocab[1].status.scheduledOn?(2).should be(true)
             @vocab[1].status.scheduledOn?(3).should be(false)
         end
+        
+        it "should be able to tell if an item is scheduled in a range" do
+            @vocab[1].status.scheduleDuration = 0
+            @vocab[1].status.durationWithin?(0..5).should be(true)
+            @vocab[1].status.durationWithin?(1..5).should be(false)
+
+            @vocab[1].status.scheduleDuration = 1
+            @vocab[1].status.durationWithin?(0..5).should be(true)
+            @vocab[1].status.durationWithin?(1..5).should be(false)
+
+            @vocab[1].status.scheduleDuration = 24 * 60 * 60
+            # Does not include the end point
+            @vocab[1].status.durationWithin?(0..1).should be(false)
+            @vocab[1].status.durationWithin?(1..2).should be(true)
+            @vocab[1].status.scheduleDuration += 1
+            @vocab[1].status.durationWithin?(0..1).should be(false)
+            @vocab[1].status.durationWithin?(0..2).should be(true)            
+            @vocab[1].status.durationWithin?(1..2).should be(true)            
+        end
 	end
 
 end

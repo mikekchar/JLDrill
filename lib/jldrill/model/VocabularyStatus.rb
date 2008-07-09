@@ -152,12 +152,21 @@ module JLDrill
             @seen
         end
         
+        # Return the total number of seconds that the item from the
+        # last reviewed time to the scheduled time
         def scheduleDuration
             retVal = 0
             if scheduled?
                 retVal = @scheduledTime.to_i - @lastReviewed.to_i
             end
             retVal
+        end
+        
+        def scheduleDuration=(seconds)
+            if !reviewed?
+                markReviewed
+            end
+            @scheduledTime = @lastReviewed + seconds
         end
         
         # Returns true if the item is overdue to be reviewed
@@ -174,6 +183,16 @@ module JLDrill
             @scheduledTime.day == target.day && 
                 @scheduledTime.month == target.month &&
                 @scheduledTime.year == target.year
+        end
+        
+        # Returns true if the item has a schedule duration in the range of days
+        # supplied.  Unlike scheduledOn?, this uses a 24 hour time period for
+        # each day.  The range does *not* include the end point.  Note that
+        # 1..1, etc will always return false.
+        def durationWithin?(range)
+            low = SECONDS_PER_DAY * range.begin
+            high = SECONDS_PER_DAY * range.end
+            scheduleDuration >= low && scheduleDuration < high
         end
         
         def to_s

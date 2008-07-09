@@ -57,13 +57,18 @@ module JLDrill::Gtk
 		        super("Statistics")
    				connectSignals unless @view.nil?
 
-                vbox = Gtk::VBox.new()
-                add(vbox)
+                hbox = Gtk::HBox.new()
+                add(hbox)
                 ## Layout everything in a vertical table
                 labels = ["Overdue", "Today", "  Tomorrow  ", "2 Days",
                             "3 Days", "4 Days", "5 Days", "6 Days"]
-                @table = StatisticsTable.new(labels)
-                vbox.add(@table)
+                @scheduleTable = StatisticsTable.new(labels)
+                hbox.add(@scheduleTable)
+                labels = [" Less than 5 days ", "5 - 10 days", "10 - 20 days", 
+                            "20 - 40 days", "40 - 80 days", "80 - 160 days", 
+                            "160 - 320 days", "320+ days"]
+                @durationTable = StatisticsTable.new(labels)
+                hbox.add(@durationTable)
 		    end  
 		          		    
 		    def connectSignals
@@ -78,10 +83,34 @@ module JLDrill::Gtk
 			end
 
             def updateSchedule(bin)
-                @table.values[0].text = bin.numOverdue.to_s
-                0.upto(5) do |i|
-                    @table.values[i+1].text = bin.numScheduledOn(i).to_s
+                @scheduleTable.values[0].text = bin.numOverdue.to_s
+                0.upto(6) do |i|
+                    @scheduleTable.values[i+1].text = bin.numScheduledOn(i).to_s
                 end
+            end
+            
+            def findRange(level)
+                low = 0
+                high = 5
+                1.upto(level) do
+                    if low == 0
+                        low = 5
+                    else
+                        low = low * 2
+                    end
+                    high = low * 2
+                end
+                low..high
+            end
+            
+            def updateDuration(bin)
+                total = 0
+                0.upto(6) do |i|
+                    num = bin.numDurationWithin(findRange(i))
+                    @durationTable.values[i].text = num.to_s
+                    total += num
+                end
+                @durationTable.values[7].text = (bin.length - total).to_s
             end
         end
     
@@ -104,6 +133,7 @@ module JLDrill::Gtk
 		def update(quiz)
 		    super(quiz)
 		    @statisticsWindow.updateSchedule(quiz.contents.bins[4])
+		    @statisticsWindow.updateDuration(quiz.contents.bins[4])
 		end
 
     end   

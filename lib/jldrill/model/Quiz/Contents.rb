@@ -166,10 +166,6 @@ module JLDrill
             retVal
         end
         
-        def debug_printSchedule
-            @bins[4].debug_printAverageDurations
-        end
-
         def to_s
             retVal = ""
             @bins.each do |bin|
