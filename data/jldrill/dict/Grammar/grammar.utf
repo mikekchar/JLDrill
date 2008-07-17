@@ -131,6 +131,7 @@
 ある /(v5r-i) (uk) to be/to have/(P)/
 買う [かう] /(v5u) to buy/(P)/
 居る [いる] /(v1) (uk) (hum) to be (animate)/to exist/(P)/
+お金 [おかね] /(n) money/(P)/
 アリスは食べる。 /Alice eats./
 ジムが遊ぶ。 /Jim is the one that plays./
 ボブもする。 /Bob also does./
@@ -470,8 +471,8 @@
 料理 [りょうり] /(n,vs) cooking/cookery/cuisine/(P)/
 済みません [すみません] /(exp) (uk) sorry/excuse me/(P)/
 一寸 [ちょっと] /(ateji) (adv,int) (1) (uk) just a minute/short time/just a little/(2) somewhat/easily/readily/rather/(P)/
-お腹 [おなか] /一杯 [いっぱい] /(adj-na,adv,n) (1) cup of ../drink/(2) full/(3) to the utmost/up to (one's income)/(a) lot of/much/(P)/
-(n) stomach/(P)/
+お腹 [おなか] /(n) stomach/(P)/
+一杯 [いっぱい] /(adj-na,adv,n) (1) cup of ../drink/(2) full/(3) to the utmost/up to (one's income)/(a) lot of/much/(P)/
 本当 [ほんとう] /(adj-na,n) truth/reality/(P)/
 そんな /(adj-na,adj-pn,adv,n) such/like that/that sort of/(P)/
 こんな /(adj-na,adj-pn,adv,n) such/like this/(P)/
@@ -513,7 +514,7 @@
 そんなのは、あるの？ /Does it have something like that?/
 昨日何を食べたか忘れた。 /It forgot what it are yesterday./
 彼は何を言ったかわからない。 /It doesn't understand what he said./
-先生が学校に行ったか教えない？ /Won't you inform me whether the teacher went to school?
+先生が学校に行ったか教えない？ /Won't you inform me whether the teacher went to school?/
 先生が学校に行ったかどうか知らない。 /It doesn't know whether or not the teacher went to school./
 先生が学校に行ったか行かなかったか知らない。 /It doesn't know whether the teacher went to school or didn't./
 誰かがおいしいクッキーを全部食べた。 /Someone ate all the delicous cookies./
@@ -524,3 +525,71 @@
 友達はいつも遅れる。 /The friend is always late./
 ここにあるレストランはどれもおいしくない。 /Of all the restaurants here, none of them are tasty./
 今週末は、どこにも行かなかった。 /This weekend it went nowhere./
+この質問の答えは、誰でも分かる。 /Everybody understands the answer to this question./
+昼ご飯は、どこでもいいです。 /About lunch, anywhere is good./
+あの人は、本当に何でも食べる。 /That person really eats anything./
+一般的 [いっぱんてき] /(adj-na) popular/typical/general/(P)/
+狭い [せまい] /(adj) narrow/confined/small/(P)/
+彼女 [かのじょ] /(n) (1) she/(2) girl friend/sweetheart/(P)/
+金持ち [かねもち] /(n) rich man/(P)/
+魅力的 [みりょくてき] /(adj-na) charming/fascinating/
+食堂 [しょくどう] /(n) cafeteria/dining hall/(P)/
+昼寝 [ひるね] /(n,vs) nap (afternoon)/siesta/(P)/
+パーティー /(n) party/(P)/
+プレゼント /(n) present/gift/(P)/
+徐徐 [そろそろ] /(n) gradually/steadily/quietly/slowly/soon/(P)/
+失礼 [しつれい] /(n,vs,adj-na,exp) (1) discourtesy/impoliteness/(2) Excuse me/Goodbye/(P)/
+穏やか [おだやか] /(adj-na,n) calm/gentle/quiet/(P)/
+運動 [うんどう] /(n,vs) motion/exercise/(P)/
+痩せる [やせる] /(v1) to become thin/to lose weight/to reduce (one's) weight/to slim/(P)/
+デパート /(n) (abbr) department store/(P)/
+欲しい [ほしい] /(adj) wanted/wished for/in need of/desired/(P)/
+聞く [きく] /(v5k) (1) to hear/to listen/(2) to ask/(P)/
+暇 [ひま] /(adj-na,n) (1) free time/leisure/leave/spare time/(2) farewell/
+年上 [としうえ] /(n) older/senior/(P)/
+優しい [やさしい] /(adj) tender/kind/gentle/graceful/affectionate/amiable/suave/(P)/
+簡単 [かんたん] /(adj-na,n) simple/(P)/
+難しい [むずかしい] /(adj) difficult/(P)/
+私の部屋は、きれいで、静かで、とても好き。 /My room is clean, quiet and I like it a lot./
+彼女は、学生じゃなくて、先生だ。 /Shis is not a student, she is a tacher./
+田中さんは、お金持ちで、かっこよくて、魅力的ですね。 /Tanaka san is rich, handsome, and charming, isn't he?/
+食べて /It eats... (て form)/
+行って /It goes... (て form)/
+して /It does... (て form)/
+遊んで /It plays... (て form)/
+飲んで /It drinks... (て form)/
+食べなくて /It doesn't eat... (て form)/
+行かなくて /It doesn't go... (て form)/
+しなくて /It doesn't do... (て form)/
+遊ばなくて /It doesn't play... (て form)/
+飲まなくて /It doesn't drink... (て form)/
+食堂に行って、昼ご飯を食べて、昼寝をする。 /It will go to cafeteria, eat lunch, and take a nap./
+食堂に行って、昼ご飯を食べて、昼寝をした。 /It went to cafeteria, ate lunch, and took a nap./
+時間がありまして、映画を見ました。 /There was time and it watched a movie./
+時間がなかったからパーティーに行きませんでした。 /There was no time so it didn't go to the party. /
+友達からプレゼントが来た。 /The present came from a friend./
+友達だからプレゼントが来た。 /Because it is a friend, a present came./
+田中さん：どうしてパーティーに行きませんでしたか。\n山田さん：時間がなかったからです。 /Tanaka san: Why didn't you go to the party? (polite)\nYamada san: Because I didn't have time. (polite)/
+一郎：パーティーに行かなかったの？\n直子：うん、時間がなかったから。 /Ichiro: You didn't go to the party? (explanation)\nYeah, because I didn't have time./
+（１）　時間がなかった。\n（２）　だからパーティーに行かなかったの？ /(1) I didn't have time. (explanation)\n(2) Is that why you didn't go to the party?/
+私は学生なので、お金がないんです。 /Because I'm a student, I have no money. (explaining)/
+ここは静かなので、とても穏やかです。 /It is very calm here because it is quiet. (explaining)/
+なので、友達に会う時間がない。 /That's why there is no time to meet the friend. (explaining)/
+時間がなかったんでパーティーに行かなかった。 /It didn't go to the party because there was no time. (explaining, contracted)/
+ここは静かなんで、とても穏やかです。 /It is very calm here because it is quiet. (explaining, contracted)/
+なんで、友達に会う時間がない。 /That's why there's no time to meet friend. (explaining, contracted)/
+毎日運動したのに、全然痩せなかった。 /Despite exercising every day, it didn't get thinner. /
+学生なのに、彼女は勉強しない。 /Despite being a student, she does not study./
+デパートに行きましたが、何も欲しくなかったです。 /It went to the department store, but there was nothing it wanted./
+友達に聞いたけど、知らなかった。 /It asked a friend, but it didn't know./
+今日は暇だけど、明日は忙しい。 /It is free today, but will be busy tomorrow./
+だけど、彼がまだ好きなの。 /That may be so, but it still likes him (feminine, explaining)/
+デパートに行きましたが、いい物がたくさんありました。 /It went to the department store and there was a lot of good stuff./
+マトリックスを見たけど、面白かった。 /It watched the "Matrix" and it was interesting./
+どうして友達じゃないんですか？\n先生だし、年上だし・・・。 /Why isn't it a friend? (explanation, polite)\nIt's the teacher and they are older.../
+どうして彼が好きなの？\n優しいし、かっこいいし、面白いから。 /Why does it like him? (explanation)\nBecause he's kind, attractive, and interesting (among other things)./
+映画を見たり、本を読んだり、昼寝したりする。 /It does things like watch movies, read books, and take naps, etc./
+この大学の授業は簡単だったり、難しかったりする。 /This college's classes are sometimes easy, sometimes difficult, etc./
+映画を見たり、本を読んだりした。 /It did things like watch movies, and read books, etc./
+映画を見たり、本を読んだりしない。 /It doesn't do things like watch movies and read books, etc./
+映画を見たり、本を読んだりしなかった。 /It didn't do things like watch movies and read books, etc./
