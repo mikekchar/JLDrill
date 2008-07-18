@@ -16,7 +16,7 @@ module JLDrill
 		def createViews
     		@mainView = @viewBridge.OptionsView.new(self)
         end
-        
+
         def destroyViews
             @mainView = nil
         end		    

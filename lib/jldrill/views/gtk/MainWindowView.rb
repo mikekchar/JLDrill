@@ -16,17 +16,6 @@ require 'jldrill/Version'
 
 module JLDrill::Gtk
 
-    module Config
-        if !Gem.datadir("jldrill").nil?
-            # Use the data directory in the Gem if it is available
-            DATA_DIR = Gem.datadir("jldrill")
-        else
-            # Otherwise hope there is a data dir in current directory
-            DATA_DIR = 'data/jldrill'
-        end
-    end
-
-
 	class MainWindowView < JLDrill::MainWindowView
 	
 		class MainWindow < Gtk::Window
@@ -40,8 +29,8 @@ module JLDrill::Gtk
 
                 @resultDisplayed = false
     
-                @currentDir = File.join(JLDrill::Gtk::Config::DATA_DIR, "quiz") 
-                @icon = Gdk::Pixbuf.new(File.join(JLDrill::Gtk::Config::DATA_DIR, "icon.png"))
+                @currentDir = File.join(JLDrill::Config::DATA_DIR, "quiz") 
+                @icon = Gdk::Pixbuf.new(File.join(JLDrill::Config::DATA_DIR, "icon.png"))
     
                 set_icon(@icon)
 
@@ -146,6 +135,11 @@ module JLDrill::Gtk
                     "<Item>", "<control>E", nil, Proc.new{export}],
                     ["/File/_Open...",
                     "<StockItem>", "<control>O", Gtk::Stock::OPEN, Proc.new{open}],
+					["/File/A_ppend...",
+					"<Item>", "control>P", nil,
+					    Proc.new {
+						    append
+						}],
                     ["/File/Load Reference _Dictionary...",
                     "<Item>", "<control>D", nil, 
                         Proc.new{
@@ -307,29 +301,13 @@ module JLDrill::Gtk
             end      
 
             def open()
-                if(promptSave())
-                    dialog = Gtk::FileChooserDialog.new("Open File",  self,
-                        Gtk::FileChooser::ACTION_OPEN, nil,
-                        [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
-                        [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT])
-
-                    dialog.current_folder = @currentDir
-                    
-                    if dialog.run == Gtk::Dialog::RESPONSE_ACCEPT
-                        @currentDir = dialog.current_folder
-                        @view.quiz = JLDrill::Quiz.new()
-                        if JLDrill::Quiz.drillFile?(dialog.filename)
-                            @view.quiz.load(dialog.filename)
-                        else
-                            dict = Edict.new(dialog.filename)
-                            dict.read
-                            @view.quiz.loadFromDict(dict)
-                        end
-                        printQuestion(@view.quiz.drill)
-                    end
-                    dialog.destroy
-                    updateStatus
+                if promptSave
+                    @view.openFile
                 end
+            end
+
+            def append
+                @view.append
             end
 
             def loadReference()
@@ -678,7 +656,12 @@ Copyright (C) 2005-2007  Mike Charlton
 		        end 
 		    end
 		    success
-		end    
+		end  
+		
+		def displayQuestion(question)
+		    @mainWindow.printQuestion(question)
+		    @mainWindow.updateStatus
+		end  
 		
 	end
 end

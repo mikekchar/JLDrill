@@ -46,6 +46,36 @@ module JLDrill
 		    @context.showStatisticsContext.should_receive(:enter).with(@context)
 		    @context.showStatistics
 		end
+		
+		it "should not try to open files if it doesn't get a filename" do
+		    @context.getFilenameContext.should_receive(:enter).with(@context).and_return(nil)
+		    @context.quiz.should_not_receive(:load)
+		    @context.quiz.should_not_receive(:loadFromDict)
+		    @context.mainView.should_not_receive(:displayQuestion)
+		    @context.openFile
+		end
+		
+		it "should load drill files as drill files" do
+		    filename = "data/jldrill/quiz/katakana.jldrill"
+		    @context.getFilenameContext.should_receive(:enter).with(@context).and_return(filename)
+		    @context.quiz.should_receive(:load).with(filename)
+		    # Because the quiz hasn't actually been loaded, we need to fake the
+		    # drill here.
+		    @context.quiz.should_receive(:drill).and_return("Fake")
+		    @context.mainView.should_receive(:displayQuestion).with("Fake")
+		    @context.openFile
+		end
+		
+		it "should try to load any other file as an edict file" do
+		    filename = "data/jldrill/dict/Kana/katakana.utf"
+		    @context.getFilenameContext.should_receive(:enter).with(@context).and_return(filename)
+		    @context.quiz.should_receive(:loadFromDict)
+		    # Because the dict hasn't actually been loaded, we need to fake the
+		    # drill here.
+		    @context.quiz.should_receive(:drill).and_return("Fake")
+		    @context.mainView.should_receive(:displayQuestion).with("Fake")
+		    @context.openFile
+		end
 
 	end
 end

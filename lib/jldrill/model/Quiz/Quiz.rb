@@ -43,7 +43,7 @@ module JLDrill
             
             @last = nil
         end
-
+        
         def vocab
             retVal = nil
             if !@currentProblem.nil?

@@ -2,17 +2,20 @@ require 'Context/Context'
 require 'Context/Key'
 require 'Context/Bridge'
 require 'jldrill/views/MainWindowView'
+require 'jldrill/model/Edict/Edict'
 require 'jldrill/model/HashedEdict'
 require 'jldrill/contexts/LoadReferenceContext'
 require 'jldrill/contexts/SetOptionsContext'
 require 'jldrill/contexts/ShowStatisticsContext'
+require 'jldrill/contexts/GetFilenameContext'
 
 module JLDrill
 
 	class MainContext < Context::Context
 	
 	    attr_reader :loadReferenceContext, :setOptionsContext, 
-	                :showStatisticsContext, :reference, :quiz
+	                :showStatisticsContext, :getFilenameContext, 
+	                :reference, :quiz
 	    attr_writer :quiz
 		
 		def initialize(viewBridge)
@@ -22,8 +25,10 @@ module JLDrill
 			@loadReferenceContext = LoadReferenceContext.new(viewBridge)
 			@setOptionsContext = SetOptionsContext.new(viewBridge)
 			@showStatisticsContext = ShowStatisticsContext.new(viewBridge)
+			@getFilenameContext = GetFilenameContext.new(viewBridge)
+			@getFilenameContext.directory = File.join(JLDrill::Config::DATA_DIR, "quiz")
 			@reference = HashedEdict.new
-			@quiz = nil
+			@quiz = Quiz.new
 		end
 		
 		def enter(parent)
@@ -37,6 +42,18 @@ module JLDrill
 				
 		def close
 			exit
+		end
+		
+		def openFile
+		    filename = @getFilenameContext.enter(self)
+		    if !filename.nil?
+                if JLDrill::Quiz.drillFile?(filename)
+                    @quiz.load(filename)
+                else
+                    @quiz.loadFromDict(Edict.new(filename).read)
+                end
+                @mainWindowView.displayQuestion(@quiz.drill)
+            end
 		end
 		
 		def loadReference

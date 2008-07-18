@@ -18,9 +18,21 @@ module JLDrill
 		    @context.showStatistics
 		end
 		
+		def openFile
+		    @context.openFile
+		end
+		
 		def edict
 		    @context.reference
 		end
+
+        def append
+            # Add code here
+        end
+        
+        def displayQuestion(question)
+            # Should be overridden by the concrete class.
+        end
 		
 		def setOptions
 		    @context.setOptions
