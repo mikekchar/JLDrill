@@ -294,7 +294,6 @@ module JLDrill::Gtk
             def printAnswer(text)
                 if @abuffer
                     @abuffer.text = ""
-                    pText = eval("\"#{text}\"")
                     @abuffer.insert(@abuffer.start_iter, processString(text), "kanji")
                     updateStatus
                 end
