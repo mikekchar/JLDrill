@@ -164,6 +164,13 @@ module JLDrill
                 end
             end
         end    
+        
+        # Append any new items in the quiz to this quiz
+        # Note: Does not add items that are already existing.
+        #       nor does it update the status of existing items
+        def append(quiz)
+            @contents.addContents(quiz.contents)
+        end
 
         def status
             retVal = ""

@@ -26,8 +26,8 @@ module JLDrill
 		    @context.reference
 		end
 
-        def append
-            # Add code here
+        def appendFile
+            @context.appendFile
         end
         
         def displayQuestion(question)

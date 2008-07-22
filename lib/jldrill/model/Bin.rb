@@ -50,7 +50,7 @@ module JLDrill
             vocab.status.index = @contents.length
             @contents.push(vocab)
         end
-
+        
         # Deletes the vocabulary at the specified index
         def delete_at(index)
             @contents[index].status.index = nil unless @contents[index].nil?
@@ -201,6 +201,12 @@ module JLDrill
                 end
             end
             total
+        end
+
+        def exists?(vocab)
+            !@contents.find do |x|
+                vocab.eql?(x)
+            end.nil?
         end
 
         # Returns a string containing all the vocabulary strings in the bin     

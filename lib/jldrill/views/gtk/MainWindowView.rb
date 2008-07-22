@@ -136,9 +136,9 @@ module JLDrill::Gtk
                     ["/File/_Open...",
                     "<StockItem>", "<control>O", Gtk::Stock::OPEN, Proc.new{open}],
 					["/File/A_ppend...",
-					"<Item>", "control>P", nil,
+					"<Item>", "<control>P", nil,
 					    Proc.new {
-						    append
+						    appendFile
 						}],
                     ["/File/Load Reference _Dictionary...",
                     "<Item>", "<control>D", nil, 
@@ -306,8 +306,8 @@ module JLDrill::Gtk
                 end
             end
 
-            def append
-                @view.append
+            def appendFile
+                @view.appendFile
             end
 
             def loadReference()

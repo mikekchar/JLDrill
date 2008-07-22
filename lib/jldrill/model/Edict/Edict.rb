@@ -113,6 +113,7 @@ class Edict
       end
     }
     @loaded = true
+    self
   end
 
   def shortFile

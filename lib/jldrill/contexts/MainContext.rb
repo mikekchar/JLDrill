@@ -44,16 +44,31 @@ module JLDrill
 			exit
 		end
 		
-		def openFile
+		def loadQuiz(quiz)
 		    filename = @getFilenameContext.enter(self)
 		    if !filename.nil?
                 if JLDrill::Quiz.drillFile?(filename)
-                    @quiz.load(filename)
+                    quiz.load(filename)
                 else
-                    @quiz.loadFromDict(Edict.new(filename).read)
+                    quiz.loadFromDict(Edict.new(filename).read)
                 end
+                true
+            else
+                false
+            end
+		end
+		
+		def openFile
+		    if loadQuiz(@quiz)
                 @mainWindowView.displayQuestion(@quiz.drill)
             end
+		end
+		
+		def appendFile
+		    newQuiz = Quiz.new
+		    if loadQuiz(newQuiz)
+                @quiz.append(newQuiz)
+		    end
 		end
 		
 		def loadReference

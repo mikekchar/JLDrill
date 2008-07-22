@@ -16,5 +16,16 @@ module JLDrill
 	        @context.should_receive(:showStatistics)
 	        @view.showStatistics
         end
+
+	    it "should contact the context in order to open files" do
+	        @context.should_receive(:openFile)
+	        @view.openFile
+        end
+        
+        it "should contact the context in order to append files" do
+	        @context.should_receive(:appendFile)
+	        @view.appendFile
+        end
+
     end
 end

@@ -50,8 +50,15 @@ class Vocabulary
     retVal
   end
 
+    # Returns a deep copy of this item.  Note: Does *not* copy parameters
+    # that are not saveable.  This is because of my cheezy implementation.
+    def clone
+        print "Got here\n"
+        Vocabulary.create(self.to_s)
+    end
+
   # True if the two vocabulary are discussing the same word
-  # This does *not* compare the hint, score, or position
+  # This does *not* compare the hint, status
   # since they do not affect the meaning of the word.
   def eql?(y)
     retVal = false

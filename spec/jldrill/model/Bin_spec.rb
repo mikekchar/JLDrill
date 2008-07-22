@@ -210,7 +210,13 @@ module JLDrill
 		    @bin.findUnseen(0).should be_eql(@bin[1])
 		    @bin.findUnseen(1).should be_eql(@bin[3])
         end
-
+        
+        it "should be able to tell if an item exists in the bin" do
+            test_pushAll
+            @bin.exists?(@bin[0]).should be(true)
+            @bin.exists?(Vocabulary.create("/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 3/")).should be(false)
+        end
+        
 	end
 
 end

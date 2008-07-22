@@ -16,8 +16,6 @@ module JLDrill
 	        @quiz.contents.rangeEmpty?(4..4).should be(false)
         end
                 
-        # Do I really use this functionality???
-        # FIXME
         it "should add items to the last position if the position is set to -1" do
         	vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 0/Position: -1/Consecutive: 0/")
 	        @quiz.contents.add(vocab, 4)
@@ -85,6 +83,52 @@ module JLDrill
             @quiz.contents.bins[1][3].status.seen = true
     	    @quiz.contents.findUnseen(12, 1..3).should be_eql(@quiz.contents.bins[3][3])
     	    @quiz.contents.findUnseen(15, 1..3).should be_nil
+	    end
+	    
+	    def test_loadItems
+    	    fileString = %Q[0.2.0-LDRILL-SAVE jlpt-voc-2-extra.utf
+Unseen
+/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 3/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 0/Difficulty: 3/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 3/Consecutive: 0/Difficulty: 3/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 0/Level: 0/Position: 4/Consecutive: 1/Difficulty: 3/]
+            @quiz.loadFromString("testFile", fileString)
+            @quiz.contents.length.should be(4)
+	    end
+	    
+	    it "should be able to add items to the contents only if they dont already exist" do
+	        test_loadItems
+            existingVocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 3/")
+            @quiz.contents.addUniquely(existingVocab).should be(false)
+            newVocab = Vocabulary.create("/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 3/")
+            @quiz.contents.addUniquely(newVocab).should be(true)
+            newVocab.status.position.should be(4)
+	    end
+	    
+	    it "should be able to add the contents from another quiz to this one" do
+	        test_loadItems
+	        quiz2 = Quiz.new
+
+    	    fileString = %Q[0.2.0-LDRILL-SAVE jlpt-voc-2-extra.utf
+Unseen
+/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 3/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 0/Difficulty: 3/
+Poor
+Fair
+/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Score: 0/Bin: 2/Level: 1/Position: 3/Consecutive: 0/Difficulty: 3/
+Good
+Excellent
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 3/Level: 0/Position: 4/Consecutive: 0/Difficulty: 3/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 3/Level: 0/Position: 5/Consecutive: 1/Difficulty: 3/]
+            quiz2.loadFromString("testFile", fileString)
+            quiz2.contents.length.should be(5)
+	        quiz2.contents.bins[2][0].kanji.should be_eql("雨")
+	        quiz2.contents.bins[2][0].status.position.should be(3)
+	        
+	        @quiz.contents.addContents(quiz2.contents)
+	        @quiz.contents.length.should be(5)
+	        @quiz.contents.bins[2][0].kanji.should be_eql("雨")
+	        @quiz.contents.bins[2][0].status.position.should be(4)
 	    end
 
     end

@@ -17,7 +17,7 @@ module JLDrill::Gtk
 		        super("Open File", nil,
 				        Gtk::FileChooser::ACTION_OPEN, nil,
 				        [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
-				        [Gtk::Stock::SAVE, Gtk::Dialog::RESPONSE_ACCEPT])
+				        [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT])
 	        end
 	        
 	        # The following 2 routines are only here because I couldn't

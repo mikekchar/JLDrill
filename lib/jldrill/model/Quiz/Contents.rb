@@ -44,6 +44,51 @@ module JLDrill
                 update
             end
         end
+        
+        # Returns true if the vocabulary exists already in the contents
+        def exists?(vocab)
+            @bins.any? do |bin|
+                bin.exists?(vocab)
+            end
+        end
+        
+        # Adds a vocabulary to the contents only if it doesn't already
+        # exist.  It places it in the bin specified in the vocab.  It
+        # also sets it's position to the end contents.
+        def addUniquely(vocab)
+            if !exists?(vocab)
+                vocab.status.position = -1
+                add(vocab, vocab.status.bin)
+                true
+            else
+                false
+            end
+        end
+
+        # Goes through each of the items in the contents by position.
+        # This is going to be very slow, so don't use it unless you
+        # really have to.
+        def eachByPosition(&block)
+            tempArray = []
+            @bins.each do |bin|
+                bin.each do |vocab|
+                    tempArray.push(vocab)
+                end
+            end
+            tempArray.sort! do |x, y|
+                x.status.position <=> y.status.position
+            end
+            tempArray.each(&block)
+        end
+        
+        # Add the contents from another quiz to this one.  Only
+        # adds the items that doen't already exists.  Sets the positions
+        # of the new items to the end of this contents.
+        def addContents(contents)
+            contents.eachByPosition do |vocab|
+                self.addUniquely(vocab)
+            end
+        end
 
         def parseVocab(line)
             vocab = Vocabulary.create(line)
@@ -146,7 +191,6 @@ module JLDrill
             seen
         end
 
-        
         # Returns false if any of the bins in the range have
         # items in them
         def rangeEmpty?(range)
