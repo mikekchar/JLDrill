@@ -15,7 +15,16 @@ module JLDrill
         
         # Returns a string showing the status of the quiz with this strategy
         def status
-            "Known: #{(@stats.confidence * 100).to_i}%"
+            if shouldReview?
+                retVal = "Known: #{@stats.recentAccuracy}%"
+                if @stats.inTargetZone?
+                    retVal += " Conf: #{(@stats.confidence * 100).to_i}%"
+                    retVal += " Left: #{(10 - @stats.timesInTargetZone)}"
+                end
+            else
+                retVal = "New Items"
+            end
+            retVal
         end
 
         # Returns the contents (i.e. the set of vocabulary) for the quiz
@@ -67,6 +76,18 @@ module JLDrill
             @quiz.contents.bins[reviewSetBin].length
         end
         
+        # Returns true is the working set has been
+        # reviewed enough that it is considered to be
+        # known.  This happens when we have reviewed
+        # ten items while in the target zone.
+        # The target zone occurs when in the last 10
+        # items, we have a 90% success rate or when
+        # we have a 90% confidence that the the items
+        # have a 90% chance of success.
+        def workingSetKnown?
+            !(10 - @stats.timesInTargetZone > 0)        
+        end
+        
         # Returns true if at least one working set full of
         # items have been promoted to the review set, and
         # the review set is not known to the required
@@ -79,8 +100,7 @@ module JLDrill
                 return true
             end
             
-            ((@stats.confidence * 100).to_i < @quiz.options.oldThresh) &&
-                (reviewSetSize >= @quiz.options.introThresh)
+            !workingSetKnown? && (reviewSetSize >= @quiz.options.introThresh)
         end
         
         # Return a random bin (that has contents) in the range.

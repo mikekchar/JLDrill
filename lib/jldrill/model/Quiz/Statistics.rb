@@ -30,7 +30,8 @@ module JLDrill
             end
         end
     
-        attr_reader :estimate, :lastTen, :confidence, :levels
+        attr_reader :estimate, :lastTen, :confidence, :levels, 
+                        :timesInTargetZone
     
         MINIMUM_CONFIDENCE = 0.009
         
@@ -39,6 +40,8 @@ module JLDrill
             @correct = 0
             @incorrect = 0
             @lastTen = []
+            @inTargetZone = false
+            @timesInTargetZone = 0
             @levels = []
             1.upto(8) do
                 @levels.push(LevelStats.new)
@@ -50,6 +53,11 @@ module JLDrill
             @lastTen.push(bool)
             while @lastTen.size > 10
                 @lastTen.delete_at(0)
+            end
+            if inTargetZone?
+                @timesInTargetZone += 1
+            else
+                @timesInTargetZone = 0
             end
         end
         
@@ -64,6 +72,19 @@ module JLDrill
                 retVal = (retVal * 100 / @lastTen.size).to_i
             end
             retVal
+        end
+        
+        def inTargetZone?
+            if !@inTargetZone
+                if recentAccuracy >= 90
+                    @inTargetZone = true
+                end
+            else
+                if (recentAccuracy < 90) && (@confidence < 90)
+                    @inTargetZone = false
+                end
+            end
+            return @inTargetZone
         end
         
         def getLevel(level)
