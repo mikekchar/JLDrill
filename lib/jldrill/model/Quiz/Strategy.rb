@@ -95,8 +95,9 @@ module JLDrill
         # Note: if the new set and the working set are
         # both empty, this will always return true.
         def shouldReview?
-            # if we only have review set items, then return true
-            if  newSetEmpty? && workingSetEmpty?
+            # if we only have review set items, or we are in review mode
+            # then return true
+            if  (newSetEmpty? && workingSetEmpty?) || (@quiz.options.reviewMode)
                 return true
             end
             

@@ -52,6 +52,9 @@ module JLDrill
                 else
                     quiz.loadFromDict(Edict.new(filename).read)
                 end
+                if quiz = @quiz
+                    @mainWindowView.updateQuiz
+                end
                 true
             else
                 false
@@ -81,6 +84,10 @@ module JLDrill
 		
 		def showStatistics
 		    @showStatisticsContext.enter(self) unless @showStatisticsContext.isEntered?
+		end
+		
+		def setReviewMode(bool)
+		    @quiz.options.reviewMode = bool unless @quiz.nil?
 		end
     end
 end

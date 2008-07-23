@@ -45,5 +45,13 @@ module JLDrill
 		def quiz=(aQuiz)
 		    @context.quiz = aQuiz
 		end
+		
+		def setReviewMode(bool)
+		    @context.setReviewMode(bool)
+		end
+		
+		def updateQuiz
+		    # Do work in the concrete class
+		end
 	end
 end

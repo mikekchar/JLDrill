@@ -18,6 +18,29 @@ module JLDrill::Gtk
 
 	class MainWindowView < JLDrill::MainWindowView
 	
+	    class ReviewModeButton < Gtk::ToggleButton
+	        def initialize(view)
+	            super('Review Mode')
+	            @view = view
+	            connectSignals unless @view.nil?
+	            set_active(false)
+	        end
+	        
+	        def connectSignals
+				signal_connect('toggled') do
+					changeMode
+				end
+	        end
+	        
+	        def changeMode
+	            @view.setReviewMode(active?)
+	        end
+	        
+	        def update
+	            set_active(@view.quiz.options.reviewMode)
+	        end
+	    end
+	
 		class MainWindow < Gtk::Window
 		
 		    attr_reader :accelGroup
@@ -33,6 +56,9 @@ module JLDrill::Gtk
                 @icon = Gdk::Pixbuf.new(File.join(JLDrill::Config::DATA_DIR, "icon.png"))
     
                 set_icon(@icon)
+
+                                         
+                @reviewModeButton = ReviewModeButton.new(@view)
 
                 ## Layout everything in a vertical table
                 table = Gtk::Table.new(1, 5, false)
@@ -194,8 +220,6 @@ module JLDrill::Gtk
                 correctImage = Gtk::Image.new(Gtk::Stock::YES, 
                                          Gtk::IconSize::SMALL_TOOLBAR)
 
-
-
                 # toolbar.set_toolbar_style(Gtk::Toolbar::BOTH)
                 toolbar.append(Gtk::Stock::SAVE,
                                "Save a Drill file"
@@ -216,6 +240,8 @@ module JLDrill::Gtk
                 toolbar.append("Correct (C)", "Correct",
                                "Answer was correct", correctImage
                                ) do correct end
+                toolbar.append_space                               
+                toolbar.append(@reviewModeButton)
 
                 return toolbar
             end
@@ -611,6 +637,10 @@ Copyright (C) 2005-2007  Mike Charlton
 				    @view.close
 				end
 			end
+			
+			def updateQuiz
+			    @reviewModeButton.update
+			end
         end
 		
 		attr_reader :mainWindow
@@ -660,7 +690,11 @@ Copyright (C) 2005-2007  Mike Charlton
 		def displayQuestion(question)
 		    @mainWindow.printQuestion(question)
 		    @mainWindow.updateStatus
-		end  
+		end
+		
+		def updateQuiz
+		    @mainWindow.updateQuiz
+		end
 		
 	end
 end

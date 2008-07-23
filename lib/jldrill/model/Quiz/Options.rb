@@ -4,7 +4,7 @@ module JLDrill
     # Options for the standard quiz.
     class Options
         attr_reader :randomOrder, :promoteThresh, :introThresh, :oldThresh,
-                        :strategyVersion
+                        :strategyVersion, :reviewMode
 
         RANDOM_ORDER_RE = /^Random Order/
         PROMOTE_THRESH_RE = /^Promotion Threshold: (.*)/
@@ -19,6 +19,7 @@ module JLDrill
             @introThresh = 10
             @oldThresh = 90
             @strategyVersion = 0
+            @reviewMode = false
         end
             
         def update
@@ -59,6 +60,12 @@ module JLDrill
         def strategyVersion=(value)
             @strategyVersion = value
             update
+        end
+
+        # Note: Review Mode isn't saved, so this doesn't trigger an
+        #       update in the quiz.        
+        def reviewMode=(value)
+            @reviewMode = value
         end
             
         def parseLine(line)
