@@ -30,6 +30,10 @@ module JLDrill
             @context.appendFile
         end
         
+        def findInReference
+            @context.findInReference
+        end
+        
         def displayQuestion(question)
             # Should be overridden by the concrete class.
         end

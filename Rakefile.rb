@@ -19,12 +19,13 @@ pkg_files = FileList[
 ]
 
 spec_files = FileList[
-	'spec/**/*_spec.rb'
+	'spec/**/*_spec.rb',
+	'spec/**/*_story.rb'
 ]
 
 # This just makes sure that spec is looking in the right directories for
 # the source.
-ruby_opts = ["-KO", "-I./lib"]
+ruby_opts = ["-KO", "-I./lib", "-I./spec"]
 
 
 task :default => [:rcov, :rdoc]
@@ -40,7 +41,7 @@ Spec::Rake::SpecTask.new(:rcov) do |t|
 	t.spec_files = spec_files
 	t.rcov = true
 	t.rcov_opts = ["--exclude rspec", "--exclude rcov", "--exclude syntax",
-	    "--exclude _spec", "--exclude /lib/Context/"]
+	    "--exclude _spec", "--exclude /lib/Context/", "--exclude _story"]
 	t.spec_opts = ["--format html:test_results.html"]
 	t.ruby_opts = ruby_opts
 end
@@ -60,7 +61,7 @@ rd = Rake::RDocTask.new(:rdoc) do |t|
 		'--main' << 'README' <<
 		'--title' <<  'JLDrill -- Japanese Language Drill program' 
 	t.rdoc_files.include('README', 'COPYING', 'THANKS', 'data/jldrill/COPYING')
-	t.rdoc_files.include('lib/**/*.rb')
+	t.rdoc_files.include('lib/**/*.rb', 'spec/**/*_story.rb')
 end
 
 # Build tar, zip and gem files.

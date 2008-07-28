@@ -89,5 +89,9 @@ module JLDrill
 		def setReviewMode(bool)
 		    @quiz.options.reviewMode = bool unless @quiz.nil?
 		end
+		
+		def findInReference
+		    # TBD
+		end
     end
 end
