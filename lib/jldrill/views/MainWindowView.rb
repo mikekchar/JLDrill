@@ -30,8 +30,8 @@ module JLDrill
             @context.appendFile
         end
         
-        def findInReference
-            @context.findInReference
+        def addNewVocabulary
+            @context.addNewVocabulary
         end
         
         def displayQuestion(question)

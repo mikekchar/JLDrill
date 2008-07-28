@@ -1,4 +1,6 @@
-require 'jldrill/stories/StorySpec'
+require 'jldrill/spec/StorySpec'
+require 'jldrill/contexts/MainContext'
+require 'jldrill/views/MainWindowView'
 
 module JLDrill::Stories
 
@@ -8,9 +10,16 @@ module JLDrill::Stories
         # There is a control on the MainWindowView that,
         # when selected, allows the user to add a new Vocabulary
         # to the Quiz.
-        def s1_MainWindowViewControl 
+        def s1_MainWindowViewControl
             describe spec_name("Main Window View Control") do
-                it "is not implemented yet."
+                it "should contact the main context when the user tries to add a Vocabulary" do
+                    @context = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
+                    @view = JLDrill::MainWindowView.new(@context)
+                    @context.should_receive(:addNewVocabulary)
+                    @view.addNewVocabulary
+                end
+                
+                it "should have a test for selecting the GTK control but it's not feasible right now"
             end
         end
 

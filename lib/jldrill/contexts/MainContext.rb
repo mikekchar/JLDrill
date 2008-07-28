@@ -90,7 +90,7 @@ module JLDrill
 		    @quiz.options.reviewMode = bool unless @quiz.nil?
 		end
 		
-		def findInReference
+		def addNewVocabulary
 		    # TBD
 		end
     end

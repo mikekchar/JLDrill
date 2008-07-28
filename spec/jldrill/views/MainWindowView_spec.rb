@@ -27,10 +27,5 @@ module JLDrill
 	        @view.appendFile
         end
         
-        it "should contact the context in order to find words in the reference" do
-	        @context.should_receive(:findInReference)
-	        @view.findInReference
-        end
-
     end
 end

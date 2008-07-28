@@ -198,9 +198,9 @@ module JLDrill::Gtk
                     ["/Vocab/_XReference...",
                     "<Item>", "<control>X", nil, Proc.new{xReference}],
                     
-                    ["/_Reference"],
-                    ["/Reference/_Find...",
-                    "<Item>", "<control>F", Gtk::Stock::FIND, Proc.new{find}],
+                    ["/_Edit"],
+                    ["/Edit/_Add...",
+                    "<Item>", "+", nil, Proc.new{addNewVocabulary}],
 
                     ["/_Help"],
                     ["/Help/Ac_knowledgements...",
@@ -591,8 +591,8 @@ Copyright (C) 2005-2007  Mike Charlton
                 end
             end
 
-            def find
-                @view.findInReference
+            def addNewVocabulary
+                @view.addNewVocabulary
             end
 
             def redraw

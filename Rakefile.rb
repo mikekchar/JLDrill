@@ -25,7 +25,7 @@ spec_files = FileList[
 
 # This just makes sure that spec is looking in the right directories for
 # the source.
-ruby_opts = ["-KO", "-I./lib", "-I./spec"]
+ruby_opts = ["-KO", "-I./lib"]
 
 
 task :default => [:rcov, :rdoc]
