@@ -21,108 +21,138 @@ require 'jldrill/model/Vocabulary'
 
 class GtkVocabView < Gtk::VBox
 
-  def initialize(vocab)
-    super()
-    pack_start(createField("Kanji: ", vocab.kanji), true, false, 5)
-    pack_start(createField("Hint: ", vocab.hint), true, false, 5)
-    pack_start(createField("Reading: ", vocab.reading), true, false, 5)
-    pack_start(createBox("Meanings: ", vocab.definitions), true, true, 5)
-    pack_start(createBox("Markers: ", vocab.markers), true, true, 5)
-  end
-
-  def getVocab
-    vocab = Vocabulary.new
-    vocab.kanji = getField(0)
-    vocab.hint = getField(1)
-    vocab.reading = getField(2)
-    vocab.definitions = getBox(3)
-    vocab.markers = getBox(4)
-    return vocab
-  end
-
-  def setVocab(vocab)
-    if vocab
-      setField(0, vocab.kanji)
-      setField(1, vocab.hint)
-      setField(2, vocab.reading)
-      setBox(3, vocab.definitions)
-      setBox(4, vocab.markers)
+    def initialize(vocab)
+        super()
+        @kanjiField = createField("Kanji: ", vocab.kanji)
+        @hintField = createField("Hint: ", vocab.hint)
+        @readingField = createField("Reading: ", vocab.reading)
+        @definitionsBox = createBox("Definitions: ", vocab.definitions)
+        @markersBox = createBox("Markers: ", vocab.markers)
+        
+        pack_start(@kanjiField, true, false, 5)
+        pack_start(@hintField, true, false, 5)
+        pack_start(@readingField, true, false, 5)
+        pack_start(@definitionsBox, true, true, 5)
+        pack_start(@markersBox, true, true, 5)
     end
-  end
-
-  def setField(index, string)
-    if string == nil
-      string = ""
+  
+    def kanjiWidget
+        @kanjiField.children[1]
     end
-    if(children[index])
-      children[index].children[1].text = string
+
+    def hintWidget
+        @hintField.children[1]
     end
-  end
 
-  def getField(index)
-    retVal = ""
-    if(children[index])
-      retVal = children[index].children[1].text
+    def readingWidget
+        @readingField.children[1]
     end
-    return retVal
-  end
 
-  def setBox(index, string)
-    if string == nil
-      string = ""
+    def definitionsWidget
+        @definitionsBox.children[1].children[0].children[0]
     end
-    if(children[index])
-      children[index].children[1].children[0].children[0].buffer.text = string
+
+    def markersWidget
+        @markersBox.children[1].children[0].children[0]
     end
-  end
 
-  def getBox(index)
-    retVal = ""
-    if(children[index])
-      retVal = children[index].children[1].children[0].children[0].buffer.text
+    def kanji
+        kanjiWidget.text
     end
-    return retVal
-  end
 
-  def createField(label, value)
+    def kanji=(string)
+        kanjiWidget.text=(string)
+    end
 
-    if !label then label = "" end
-    if !value then value = "" end
+    def hint
+        hintWidget.text
+    end
 
-    hbox = Gtk::HBox.new()
-    hbox.pack_start(Gtk::Label.new(label), false, false, 0)
-    entry = Gtk::Entry.new
-    entry.editable = true
-    entry.text = value
-    hbox.pack_start(entry, true, true, 0)
-    return hbox
-  end
+    def hint=(string)
+        hintWidget.text=(string)
+    end
 
-  def createBox(label, value)
+    def reading
+        readingWidget.text
+    end
 
-    if !label then label = "" end
-    if !value then value = "" end
+    def reading=(string)
+        readingWidget.text=(string)
+    end
 
-    hbox = Gtk::HBox.new()
-    alignment1 = Gtk::Alignment.new(0,0,0,0.5)
-    alignment1.add(Gtk::Label.new(label))
-    hbox.pack_start(alignment1, false, false, 0)
+    def definitions
+        definitionsWidget.buffer.text
+    end
 
-    entry = Gtk::ScrolledWindow.new
-    entry.shadow_type = Gtk::SHADOW_IN
-    entry.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
-    contents = Gtk::TextView.new
-    contents.wrap_mode = Gtk::TextTag::WRAP_WORD
-    contents.editable = true
-    contents.cursor_visible = true
-    entry.add(contents)
-    contents.buffer.text = value
+    def definitions=(string)
+        definitionsWidget.buffer.text=(string)
+    end
 
-    alignment2 = Gtk::Alignment.new(0,0.5,1,1)
-    alignment2.add(entry)
+    def markers
+        markersWidget.buffer.text
+    end
 
-    hbox.pack_start(alignment2, true, true, 0)
-    return hbox
-  end
+    def markers=(string)
+        markersWidget.buffer.text=(string)
+    end
+
+    def getVocab
+        vocab = Vocabulary.new
+        vocab.kanji = kanji
+        vocab.hint = hint
+        vocab.reading = reading
+        vocab.definitions = definitions
+        vocab.markers = markers
+        return vocab
+    end
+
+    def setVocab(vocab)
+        if vocab
+            vocab = vocab.kanji
+            vocab = vocab.hint
+            vocab = vocab.reading
+            vocab = vocab.definitions
+            vocab = vocab.markers
+        end
+    end
+
+    def createField(label, value)
+        if !label then label = "" end
+        if !value then value = "" end
+
+        hbox = Gtk::HBox.new()
+        hbox.pack_start(Gtk::Label.new(label), false, false, 0)
+        entry = Gtk::Entry.new
+        entry.editable = true
+        entry.text = value
+        hbox.pack_start(entry, true, true, 0)
+        return hbox
+    end
+
+    def createBox(label, value)
+        if !label then label = "" end
+        if !value then value = "" end
+
+        hbox = Gtk::HBox.new()
+        alignment1 = Gtk::Alignment.new(0,0,0,0.5)
+        alignment1.add(Gtk::Label.new(label))
+        hbox.pack_start(alignment1, false, false, 0)
+
+        entry = Gtk::ScrolledWindow.new
+        entry.shadow_type = Gtk::SHADOW_IN
+        entry.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
+        contents = Gtk::TextView.new
+        contents.wrap_mode = Gtk::TextTag::WRAP_WORD
+        contents.editable = true
+        contents.cursor_visible = true
+        entry.add(contents)
+        contents.buffer.text = value
+
+        alignment2 = Gtk::Alignment.new(0,0.5,1,1)
+        alignment2.add(entry)
+
+        hbox.pack_start(alignment2, true, true, 0)
+        return hbox
+    end
 
 end

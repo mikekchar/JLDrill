@@ -1,6 +1,9 @@
 require 'jldrill/spec/StorySpec'
 require 'jldrill/contexts/MainContext'
+require 'jldrill/contexts/AddNewVocabularyContext'
 require 'jldrill/views/MainWindowView'
+require 'jldrill/views/VocabularyView'
+require 'jldrill/views/gtk/VocabularyView'
 
 module JLDrill::Stories
 
@@ -13,24 +16,75 @@ module JLDrill::Stories
         def s1_MainWindowViewControl
             describe spec_name("Main Window View Control") do
                 it "should contact the main context when the user tries to add a Vocabulary" do
-                    @context = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
-                    @view = JLDrill::MainWindowView.new(@context)
-                    @context.should_receive(:addNewVocabulary)
-                    @view.addNewVocabulary
+                    context = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
+                    view = JLDrill::MainWindowView.new(context)
+                    context.should_receive(:addNewVocabulary)
+                    view.addNewVocabulary
                 end
                 
                 it "should have a test for selecting the GTK control but it's not feasible right now"
             end
         end
 
-        # The user enters a Context called AddNewVocabularyContext
-        # which allows them to enter the reading for a Vocabulary.
+        # The user enters a Context called AddNewVocabularyContext.
         # The Context contains a View which allows each part of
         # a Vocabulary to be edited (kanji, reading,
         # definitions, markers, hint).
         def s2_EnterAddNewVocabularyContext
             describe spec_name("Enter AddNewVocabularyContext") do
-                it "is not implemented yet."
+                it "should have an AddNewVocabularyContext" do
+                    main = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
+                    context = main.addNewVocabularyContext
+                    context.should_not be_nil                    
+                end
+                
+                it "should enter the AddNewVocabularyContext when instructed" do
+                    main = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
+                    context = main.addNewVocabularyContext
+                    context.should_receive(:enter).with(main)
+                    main.addNewVocabulary
+                end
+                
+                it "should have a view for a Vocabulary when the context is entered" do
+                    main = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
+                    context = main.addNewVocabularyContext
+                    context.enter(main)
+                    view = context.mainView
+                    view.should_not be_nil
+                    view.vocabulary.should_not be_nil                    
+                end
+                
+                it "should have a GTK view that allows editing of the Vocabulary" do
+                    main = JLDrill::MainContext.new(Context::Bridge.new(JLDrill::Gtk))
+                    context = main.addNewVocabularyContext
+                    context.enter(main)
+                    view = context.mainView
+                    view.should_not be_nil
+                    view.vocabularyWindow.getVocab.should be_eql(view.vocabulary)
+                    kanjiString = "会う"
+                    hintString = "No hints!"
+                    readingString = "あう"
+                    definitionsString = "to meet, to interview"
+                    markersString = "v5u, P"
+                    vocabString = "/Kanji: #{kanjiString}/" +
+                        "Hint: #{hintString}/" +
+                        "Reading: #{readingString}/" +
+                        "Definitions: #{definitionsString}/" +
+                        "Markers: #{markersString}/"
+                    testVocab = Vocabulary.create(vocabString)
+                    view.vocabularyWindow.kanji = kanjiString
+                    view.vocabularyWindow.kanji.should be_eql(kanjiString)
+                    view.vocabularyWindow.hint = hintString
+                    view.vocabularyWindow.hint.should be_eql(hintString)
+                    view.vocabularyWindow.reading = readingString
+                    view.vocabularyWindow.reading.should be_eql(readingString)
+                    view.vocabularyWindow.definitions = definitionsString
+                    view.vocabularyWindow.definitions.should be_eql(definitionsString)
+                    view.vocabularyWindow.markers = markersString
+                    view.vocabularyWindow.markers.should be_eql(markersString)
+                    
+                    view.vocabularyWindow.getVocab.should be_eql(testVocab)
+                end
             end
         end
         

@@ -8,13 +8,15 @@ require 'jldrill/contexts/LoadReferenceContext'
 require 'jldrill/contexts/SetOptionsContext'
 require 'jldrill/contexts/ShowStatisticsContext'
 require 'jldrill/contexts/GetFilenameContext'
+require 'jldrill/contexts/AddNewVocabularyContext'
 
 module JLDrill
 
 	class MainContext < Context::Context
 	
 	    attr_reader :loadReferenceContext, :setOptionsContext, 
-	                :showStatisticsContext, :getFilenameContext, 
+	                :showStatisticsContext, :getFilenameContext,
+	                :addNewVocabularyContext, 
 	                :reference, :quiz
 	    attr_writer :quiz
 		
@@ -27,6 +29,7 @@ module JLDrill
 			@showStatisticsContext = ShowStatisticsContext.new(viewBridge)
 			@getFilenameContext = GetFilenameContext.new(viewBridge)
 			@getFilenameContext.directory = File.join(JLDrill::Config::DATA_DIR, "quiz")
+			@addNewVocabularyContext = AddNewVocabularyContext.new(viewBridge)
 			@reference = HashedEdict.new
 			@quiz = Quiz.new
 		end
@@ -91,7 +94,7 @@ module JLDrill
 		end
 		
 		def addNewVocabulary
-		    # TBD
+		    @addNewVocabularyContext.enter(self) unless @addNewVocabularyContext.isEntered?
 		end
     end
 end
