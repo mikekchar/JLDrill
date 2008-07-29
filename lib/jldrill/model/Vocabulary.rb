@@ -182,10 +182,16 @@ class Vocabulary
     !@markers.nil?
   end
 
-  # Returns true if the vocabulary contains at least one
-  # definition and a reading
+  # Returns true if the vocabulary contains a reading and either at least one
+  # definition exists or kanji exists.
   def valid?
-    return (!@definitions.nil? && (@definitions.length > 0) && !@reading.nil?)
+    retVal = false
+    if !@reading.nil? 
+        if (!@definitions.nil? && (@definitions.length > 0) || !@kanji.nil?)
+            retVal = true
+        end
+    end
+    retVal
   end
 
   # Parses a vocabulary value in save format.

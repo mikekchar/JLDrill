@@ -34,7 +34,10 @@ module JLDrill
             v2.should_not be_valid
             v3 = Vocabulary.create("/Kanji: 会う/Reading: あう/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/")
             v3.should_not be_nil
-            v3.should_not be_valid
+            v3.should be_valid
+            v4 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/")
+            v4.should_not be_nil
+            v4.should be_valid
         end
         
         it "should be able to save itself as a tab separated value" do

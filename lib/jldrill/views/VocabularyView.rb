@@ -14,9 +14,14 @@ module JLDrill
 		    super
 		end
 		
-		def exit
-		    super
+		def close
+		    @context.exit
 		end
 
+        def addVocabulary
+            if @vocabulary.valid?
+                @context.addVocabulary(@vocabulary)
+            end
+        end
 	end
 end

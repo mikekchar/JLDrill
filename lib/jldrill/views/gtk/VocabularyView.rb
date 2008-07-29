@@ -13,8 +13,20 @@ module JLDrill::Gtk
 	            super("Add")
 	            @vocabView = GtkVocabView.new(@view.vocabulary)
 	            self.add(@vocabView)
-	            show_all
+	            connectSignals
 	        end
+	        
+	        def connectSignals
+			    signal_connect('delete_event') do
+                    # Request that the destroy signal be sent
+                    false
+                end
+
+				signal_connect('destroy') do
+					@view.close
+				end
+			end
+
 	        
 	        def kanji
 	            @vocabView.kanji
@@ -73,6 +85,11 @@ module JLDrill::Gtk
 		def getWidget
 			@widget
 		end
+		
+		def emitDestroyEvent
+			@vocabularyWindow.signal_emit("destroy")
+		end
+
     end
     
 end

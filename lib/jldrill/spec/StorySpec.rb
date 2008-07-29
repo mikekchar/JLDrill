@@ -16,12 +16,11 @@
 # All of the methods beginning with s[some number]_
 # (i.e., s1_, s2_, s101_, etc) will be run.
 class StorySpec
-    def spec_name(string)
-        self.class.name.to_s + " - " + string
-    end
+    class << self        
+        def spec_name(string)
+            self.class.name.to_s + " - " + string
+        end
 
-    class << self
-        
         def run_specs
             obj = self.new
             obj.methods.each do |method|

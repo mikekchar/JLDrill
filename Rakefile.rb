@@ -61,7 +61,7 @@ rd = Rake::RDocTask.new(:rdoc) do |t|
 		'--main' << 'README' <<
 		'--title' <<  'JLDrill -- Japanese Language Drill program' 
 	t.rdoc_files.include('README', 'COPYING', 'THANKS', 'data/jldrill/COPYING')
-	t.rdoc_files.include('lib/**/*.rb', 'spec/**/*_story.rb')
+	t.rdoc_files.include('lib/**/*.rb')
 end
 
 # Build tar, zip and gem files.

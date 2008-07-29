@@ -26,7 +26,7 @@ require 'jldrill/model/Quiz/Strategy'
 module JLDrill
     class Quiz
         attr_reader :savename,  
-                    :updated, :length, :info, :name, 
+                    :updated, :info, :name, 
                     :contents, :options, :currentProblem,
                     :strategy
         attr_writer :savename, :updated, :info, :name, :currentProblem
@@ -42,6 +42,14 @@ module JLDrill
             @currentProblem = nil
             
             @last = nil
+        end
+        
+        def length
+            @contents.length
+        end
+        
+        def size
+            length
         end
         
         def vocab
@@ -170,6 +178,10 @@ module JLDrill
         #       nor does it update the status of existing items
         def append(quiz)
             @contents.addContents(quiz.contents)
+        end
+        
+        def appendVocab(vocab)
+            @contents.addUniquely(vocab)
         end
 
         def status

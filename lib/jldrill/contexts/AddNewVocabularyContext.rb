@@ -24,5 +24,11 @@ module JLDrill
 		def exit
 		    super
 		end
+		
+		def addVocabulary(vocab)
+		    if !@parent.nil? && !@parent.quiz.nil?
+    		    @parent.quiz.appendVocab(vocab)
+    		end
+		end
     end
 end
