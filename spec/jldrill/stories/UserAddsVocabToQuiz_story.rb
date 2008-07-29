@@ -173,7 +173,17 @@ module JLDrill
             Story.shutdown            
         end
         
-        it "should have a button on the Gtk window for adding the vocab"
+        it "should have a button on the Gtk window for adding the vocab" do
+            Story.setupGtk
+            Story.view.vocabulary.reading = "あう"
+            Story.view.vocabulary.definitions = "to meet"
+            Story.view.vocabulary.should be_valid
+            Story.view.should_receive(:addVocabulary)
+            Story.view.emitAddButtonClickedEvent
+            Story.shutdown
+        end
+        
+        it "should update the status on the Gtk main window when the vocab has been added"
         
         it "should make the addition button inactive if the vocabulary is invalid"
          
@@ -181,16 +191,19 @@ module JLDrill
 
     # When a Vocabulary has been added to the Quiz, the fields
     # in the edit box are cleared.
-    describe Story.stepName("User Adds Vocab To Quiz - Clears Fields When Vocabulary Added") do
-        it "is not implemented yet."
+    describe Story.stepName("Clears Fields When Vocabulary Added") do
+        it "should clear the fields in the Gtk window when an item has been added"
     end
 
     # If the new Vocabulary already exists in the Quiz, the user
-    # is prompted if they really want to add the vocabulary.  If
-    # they don't, the Vocabulary is not added, but the fields
-    # in the edit box are not cleared.
+    # is informed that the item was not added because it already exists.  
+    # The fields in the edit box are not cleared.
     describe Story.stepName("Doesn't Add Same Vocabulary Twice") do
-        it "is not implemented yet."
+        it "it should refuse to add an item that already exists"
+        
+        it "should inform the user that the item hasn't been added"
+        
+        it "should not clear the fields in the Gtk window"
     end
 
 end

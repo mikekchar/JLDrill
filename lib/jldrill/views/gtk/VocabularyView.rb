@@ -8,11 +8,17 @@ module JLDrill::Gtk
 	class VocabularyView < JLDrill::VocabularyView
 	
 	    class VocabularyWindow < Gtk::Window
+	        attr_reader :addButton
+	    
 	        def initialize(view)
 	            @view = view
 	            super("Add")
+	            @vbox = Gtk::VBox.new
+	            self.add(@vbox)
 	            @vocabView = GtkVocabView.new(@view.vocabulary)
-	            self.add(@vocabView)
+	            @vbox.add(@vocabView)
+	            @addButton = Gtk::Button.new("Add")
+	            @vbox.add(@addButton)
 	            connectSignals
 	        end
 	        
@@ -25,9 +31,12 @@ module JLDrill::Gtk
 				signal_connect('destroy') do
 					@view.close
 				end
+				
+				addButton.signal_connect('clicked') do
+				    @view.addVocabulary
+				end
 			end
 
-	        
 	        def kanji
 	            @vocabView.kanji
 	        end
@@ -71,6 +80,10 @@ module JLDrill::Gtk
             def getVocab
                 @vocabView.getVocab
             end
+            
+            def update(vocab)
+                @vocabView.setVocab(vocab)
+            end
     
 	    end
 	
@@ -89,6 +102,22 @@ module JLDrill::Gtk
 		def emitDestroyEvent
 			@vocabularyWindow.signal_emit("destroy")
 		end
+
+        def emitAddButtonClickedEvent
+            @vocabularyWindow.addButton.clicked
+        end
+        
+        # Returns true if the vocabulary has been added
+        def addVocabulary
+            @vocabulary = @vocabularyWindow.getVocab
+            if super
+                @vocab = Vocabulary.new
+                @vocabularyWindow.update(@vocab)
+                true
+            else
+                false
+            end
+        end
 
     end
     

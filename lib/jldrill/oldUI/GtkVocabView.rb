@@ -61,7 +61,8 @@ class GtkVocabView < Gtk::VBox
     end
 
     def kanji=(string)
-        kanjiWidget.text=(string)
+        if string.nil? then string = "" end
+        kanjiWidget.set_text(string)
     end
 
     def hint
@@ -69,7 +70,8 @@ class GtkVocabView < Gtk::VBox
     end
 
     def hint=(string)
-        hintWidget.text=(string)
+        if string.nil? then string = "" end
+        hintWidget.set_text(string)
     end
 
     def reading
@@ -77,7 +79,8 @@ class GtkVocabView < Gtk::VBox
     end
 
     def reading=(string)
-        readingWidget.text=(string)
+        if string.nil? then string = "" end
+        readingWidget.set_text(string)
     end
 
     def definitions
@@ -85,7 +88,8 @@ class GtkVocabView < Gtk::VBox
     end
 
     def definitions=(string)
-        definitionsWidget.buffer.text=(string)
+        if string.nil? then string = "" end
+        definitionsWidget.buffer.set_text(string)
     end
 
     def markers
@@ -93,7 +97,8 @@ class GtkVocabView < Gtk::VBox
     end
 
     def markers=(string)
-        markersWidget.buffer.text=(string)
+        if string.nil? then string = "" end
+        markersWidget.buffer.set_text(string)
     end
 
     def getVocab
@@ -108,11 +113,11 @@ class GtkVocabView < Gtk::VBox
 
     def setVocab(vocab)
         if vocab
-            vocab = vocab.kanji
-            vocab = vocab.hint
-            vocab = vocab.reading
-            vocab = vocab.definitions
-            vocab = vocab.markers
+            self.kanji = vocab.kanji
+            self.hint = vocab.hint
+            self.reading = vocab.reading
+            self.definitions = vocab.definitions
+            self.markers = vocab.markers
         end
     end
 

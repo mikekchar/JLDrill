@@ -18,9 +18,13 @@ module JLDrill
 		    @context.exit
 		end
 
+        # Returns true if the vocabulary has been added
         def addVocabulary
             if @vocabulary.valid?
                 @context.addVocabulary(@vocabulary)
+                true
+            else
+                false
             end
         end
 	end
