@@ -308,6 +308,7 @@ module JLDrill::Gtk
             end
 
             def updateStatus()
+                @view.updateQuizStatus
                 @statusbar.pop(0)
                 if(!@view.quiz)
                     @statusbar.push(0, "No Quiz Loaded -- Select Open")

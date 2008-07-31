@@ -230,7 +230,15 @@ module JLDrill::UserAddsVocabToQuiz
             Story.shutdown
         end
         
-        it "should update the status on the Gtk main window when the vocab has been added"
+        it "should update the status on the Gtk main window when the vocab has been added" do
+            Story.setupGtk
+            Story.view.vocabularyWindow.reading = "あう"
+            Story.view.vocabularyWindow.definitions = "to meet"
+            Story.view.vocabularyWindow.getVocab.should be_valid
+            Story.mainContext.displayQuizStatusContext.should_receive(:update)
+            Story.view.addVocabulary
+            Story.shutdown
+        end
         
         it "should make the addition button inactive if the vocabulary is invalid"
          

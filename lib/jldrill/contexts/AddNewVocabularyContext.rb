@@ -29,6 +29,7 @@ module JLDrill
 		def addVocabulary(vocab)
 		    if !@parent.nil? && !@parent.quiz.nil?
     		    @parent.quiz.appendVocab(vocab)
+    		    @parent.updateQuizStatus
     		end
 		end
     end

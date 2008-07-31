@@ -3,8 +3,7 @@ require 'jldrill/views/MainWindowView'
 require 'jldrill/views/gtk/MainWindowView'
 require 'jldrill/views/QuizStatusView'
 require 'jldrill/views/gtk/QuizStatusView'
-require 'Context/Context'
-require 'Context/View'
+require 'jldrill/spec/Fakes'
 
 # The status of the quiz is displayed in the main view
 #
@@ -21,23 +20,6 @@ module JLDrill::QuizStatusIsDisplayed
 
     class StoryMemento
    
-        class StupidView < Context::View
-            def initialize(context)
-                super(context)
-                @widget = Widget.new(nil)
-            end
-
-            def getWidget
-                return @widget
-            end            
-        end
-   
-        class App < Context::Context
-            def intitialize(bridge)
-                super(bridge)
-                @mainView = View.new
-            end
-        end
         
         attr_reader :storyName, :mainContext, :mainView, :context, :view
     
@@ -60,20 +42,20 @@ module JLDrill::QuizStatusIsDisplayed
     
         # Some useful routines
         def setupAbstract
-            @app = App.new(nil)
+            @app = JLDrill::Fakes::App.new(nil)
             @mainContext = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
+            @mainContext.enter(@app)
             @mainView = @mainContext.mainView
             @context = @mainContext.displayQuizStatusContext
-            @mainContext.enter(@app)
             @view = @context.mainView
         end
         
         def setupGtk
-            @app = App.new(nil)
+            @app = JLDrill::Fakes::App.new(nil)
             @mainContext = JLDrill::MainContext.new(Context::Bridge.new(JLDrill::Gtk))
+            @mainContext.enter(@app)
             @mainView = @mainContext.mainView
             @context = @mainContext.displayQuizStatusContext
-            @mainContext.enter(@app)
             @view = @context.mainView
         end
         
@@ -148,6 +130,17 @@ module JLDrill::QuizStatusIsDisplayed
             Story.setupGtk
             status = Story.mainContext.quiz.status
             Story.view.quizStatusBar.text.should be_eql(status)
+            Story.shutdown
+        end
+        
+        # This is a bit of a hack to make it work like it did before.  Really the
+        # context should observe the quiz and update itself at the right times.
+        # However, in the interim we will use the same mechanism that the legacy
+        # code did.
+        it "should update the status whenever the main view updates the status" do
+            Story.setupGtk
+            Story.context.should_receive(:update)
+            Story.mainView.mainWindow.updateStatus
             Story.shutdown
         end
     end    

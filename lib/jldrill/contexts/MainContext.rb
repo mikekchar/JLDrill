@@ -107,5 +107,9 @@ module JLDrill
 		def addNewVocabulary
 		    @addNewVocabularyContext.enter(self) unless @addNewVocabularyContext.isEntered?
 		end
+		
+		def updateQuizStatus
+		    @displayQuizStatusContext.update
+		end
     end
 end

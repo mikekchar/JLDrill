@@ -20,11 +20,15 @@ module JLDrill
 		
 		def enter(parent)
 		    super(parent)
-		    @mainView.update(parent.quiz)
+		    update
 		end
 		
 		def exit
 		    super
+		end
+		
+		def update
+		    @mainView.update(parent.quiz) unless parent.nil?
 		end
 		
     end
