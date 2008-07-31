@@ -47,16 +47,7 @@ module JLDrill::Gtk
 			@story.view.getWidget.should_not be_nil
 			@story.shutdown
 		end
-				
-		it "should show the widgets when opened" do
-            app = JLDrill::Fakes::App.new(nil)
-            context = JLDrill::MainContext.new(Context::Bridge.new(JLDrill::Gtk))
-            view = context.peekAtView
-            view.mainWindow.should_receive(:show_all)
-            context.enter(app)
-            view.close
-		end
-            
+
 		it "should react to destroy signals" do
 		    @story.setup
 			@story.view.should_receive(:close) do

@@ -22,3 +22,12 @@ module JLDrill::Fakes
         end
     end
 end
+
+module Context::Gtk
+
+    # Hopefully this will turn off the drawing of the widgets in the tests
+    def Widget::inTests
+        true
+    end
+
+end
