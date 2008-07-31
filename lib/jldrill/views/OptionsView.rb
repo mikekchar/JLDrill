@@ -10,6 +10,10 @@ module JLDrill
 			@options = Options.new(nil)
 		end
 
+        def destroy
+            # Only in concrete class
+        end
+
 		def optionsSet=(bool)
 		    @optionsSet = bool
 		end

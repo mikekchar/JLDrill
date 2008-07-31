@@ -37,6 +37,10 @@ module JLDrill::Gtk
 			@widget
 		end
 		
+		def destroy
+		    @progressWindow.destroy
+		end
+		
 		def update(fraction)
 		    @progressWindow.update(fraction)
 		end

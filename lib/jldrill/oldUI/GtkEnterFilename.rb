@@ -23,7 +23,6 @@ class GtkEnterFilename < Gtk::FileChooserDialog
 	attr_reader :resp
 
 	def initialize(directory,mainWindow)
-		current_folder = directory
 		super("Save File",
 				mainWindow,
 				Gtk::FileChooser::ACTION_SAVE,
@@ -31,6 +30,11 @@ class GtkEnterFilename < Gtk::FileChooserDialog
 				[Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
 				[Gtk::Stock::SAVE, Gtk::Dialog::RESPONSE_ACCEPT])
 		@resp = Gtk::Dialog::RESPONSE_CANCEL
+		        self.current_folder = "/home/mike/Desktop"
+				print self.filename
+				print "\n"
+				print self.current_folder
+				print "\n"
 	end
 	
 	def run

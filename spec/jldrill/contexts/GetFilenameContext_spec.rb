@@ -8,6 +8,7 @@ module JLDrill
 
 		before(:each) do
 			@main = MainContext.new(Context::Bridge.new(JLDrill))
+			@main.createViews
 			@context = @main.getFilenameContext
 			@context.createViews
 			@view = @context.mainView

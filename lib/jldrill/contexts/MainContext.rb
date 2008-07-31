@@ -9,6 +9,7 @@ require 'jldrill/contexts/SetOptionsContext'
 require 'jldrill/contexts/ShowStatisticsContext'
 require 'jldrill/contexts/GetFilenameContext'
 require 'jldrill/contexts/AddNewVocabularyContext'
+require 'jldrill/contexts/DisplayQuizStatusContext'
 
 module JLDrill
 
@@ -16,37 +17,47 @@ module JLDrill
 	
 	    attr_reader :loadReferenceContext, :setOptionsContext, 
 	                :showStatisticsContext, :getFilenameContext,
-	                :addNewVocabularyContext, 
+	                :addNewVocabularyContext, :displayQuizStatusContext,
 	                :reference, :quiz
 	    attr_writer :quiz
 		
 		def initialize(viewBridge)
 			super(viewBridge)
-			@mainWindowView = viewBridge.MainWindowView.new(self)
-			@mainView = @mainWindowView
 			@loadReferenceContext = LoadReferenceContext.new(viewBridge)
 			@setOptionsContext = SetOptionsContext.new(viewBridge)
 			@showStatisticsContext = ShowStatisticsContext.new(viewBridge)
 			@getFilenameContext = GetFilenameContext.new(viewBridge)
 			@getFilenameContext.directory = File.join(JLDrill::Config::DATA_DIR, "quiz")
 			@addNewVocabularyContext = AddNewVocabularyContext.new(viewBridge)
+			@displayQuizStatusContext = DisplayQuizStatusContext.new(viewBridge)
 			@reference = HashedEdict.new
 			@quiz = Quiz.new
 		end
 		
-		def enter(parent)
-			super(parent)
-			@mainWindowView.open 
+		def createViews
+			@mainWindowView = @viewBridge.MainWindowView.new(self)
+			@mainView = @mainWindowView		    
 		end
 		
+		def destroyViews
+		    @mainWindowView.destroy unless @mainWindowView.nil?
+		    @mainWindowView = nil
+		    @mainView = nil
+		end
+
+		def enter(parent)
+			super(parent)
+			@mainView.open
+			# The quiz status is always displayed
+			@displayQuizStatusContext.enter(self)
+		end
+				
 		def exit
+			super
+		    @displayQuizStatusContext.exit 
 			@parent.exit
 		end
 				
-		def close
-			exit
-		end
-		
 		def loadQuiz(quiz)
 		    filename = @getFilenameContext.enter(self)
 		    if !filename.nil?

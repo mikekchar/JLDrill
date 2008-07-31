@@ -43,10 +43,11 @@ module JLDrill::Gtk
 	
 		class MainWindow < Gtk::Window
 		
-		    attr_reader :accelGroup
+		    attr_reader :accelGroup, :mainTable
 		
 			def initialize(view)
 				super('JLDrill')
+				@closed = false
 				@view = view
 				connectSignals unless @view.nil?
 
@@ -61,18 +62,18 @@ module JLDrill::Gtk
                 @reviewModeButton = ReviewModeButton.new(@view)
 
                 ## Layout everything in a vertical table
-                table = Gtk::Table.new(1, 5, false)
-                add(table)
+                @mainTable = Gtk::Table.new(1, 5, false)
+                add(@mainTable, true)
 
                 menu = createMenu
-                table.attach(menu.get_widget('<main>'),
+                @mainTable.attach(menu.get_widget('<main>'),
                              # X direction            # Y direction
                              0, 1,                    0, 1,
                              Gtk::EXPAND | Gtk::FILL, 0,
                              0,                       0)
 
                 toolbar = createToolbar
-                table.attach(toolbar,
+                @mainTable.attach(toolbar,
                              # X direction            # Y direction
                              0, 1,                    1, 2,
                              Gtk::EXPAND | Gtk::FILL, 0,
@@ -80,7 +81,7 @@ module JLDrill::Gtk
 
 	            ## Create indicators
 	            @indicatorBox = GtkIndicatorBox.new
-	            table.attach(@indicatorBox,
+	            @mainTable.attach(@indicatorBox,
                              # X direction            # Y direction
                              0, 1,                    2, 3,
                              Gtk::EXPAND | Gtk::FILL, 0,
@@ -89,7 +90,7 @@ module JLDrill::Gtk
 
                 vpaned = Gtk::VPaned.new
                 vpaned.set_border_width(5)
-                table.attach(vpaned,
+                @mainTable.attach(vpaned,
                              # X direction            # Y direction
                              0, 1,                    3, 4,
                              Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
@@ -134,7 +135,7 @@ module JLDrill::Gtk
 
                 ## Create statusbar
                 @statusbar = Gtk::Statusbar.new
-                table.attach(@statusbar,
+                @mainTable.attach(@statusbar,
                              # X direction            # Y direction
                              0, 1,                    4, 5,
                              Gtk::EXPAND | Gtk::FILL, 0,
@@ -142,6 +143,25 @@ module JLDrill::Gtk
                 updateStatus
 			end
 
+            def add(widget, orig=false)
+                if orig
+                    # Hack to be able to use the super's add method
+                    super(widget)
+                else
+                    size = @mainTable.n_rows
+                    @mainTable.resize(1, size + 1)
+                    @mainTable.attach(widget,
+                                 # X direction            # Y direction
+                                 0, 1,                    size, size + 1,
+                                 Gtk::EXPAND | Gtk::FILL, 0,
+                                 0,                       0)
+                end
+            end
+            
+            def remove(widget)
+                # Don't do it because tables can't remove things
+            end
+            
             def createMenu
                 ## Create the menubar
                 @accelGroup = Gtk::AccelGroup.new
@@ -636,8 +656,15 @@ Copyright (C) 2005-2007  Mike Charlton
                 end
 
 				signal_connect('destroy') do
-					closeView
+				    if !@closed
+    					closeView
+    			    end
 				end
+			end
+			
+			def explicitDestroy
+			    @closed = true
+			    self.destroy
 			end
 			
 			def closeView
@@ -661,14 +688,14 @@ Copyright (C) 2005-2007  Mike Charlton
 			@widget.isAMainWindow
 		end
 		
-		def open
-			@mainWindow.show_all
-		end
-				
 		def getWidget
 			@widget
 		end
 		
+		def destroy
+		    @mainWindow.explicitDestroy
+		end
+
 		def emitDestroyEvent
 			@mainWindow.signal_emit("destroy")
 		end

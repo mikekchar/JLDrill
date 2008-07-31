@@ -17,6 +17,10 @@ module JLDrill
 		def close
 		    @context.exit
 		end
+		
+		def destroy
+		    # Only for the concrete class
+		end
 
         # Returns true if the vocabulary has been added
         def addVocabulary

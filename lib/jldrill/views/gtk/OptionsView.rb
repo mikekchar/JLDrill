@@ -60,11 +60,15 @@ module JLDrill::Gtk
 		        @strategyVersion.value.to_i
 		    end
 
+            def set(options)
+                self.randomOrder = options.randomOrder
+                self.promoteThresh = options.promoteThresh
+                self.introThresh = options.introThresh
+                self.strategyVersion = options.strategyVersion
+            end
+
 		    def updateFromViewData
-                self.randomOrder = @view.options.randomOrder
-                self.promoteThresh = @view.options.promoteThresh
-                self.introThresh = @view.options.introThresh
-                self.strategyVersion = @view.options.strategyVersion
+		        set(@view.options)
             end
             
             def setViewData
@@ -74,7 +78,7 @@ module JLDrill::Gtk
                 @view.options.introThresh = self.introThresh
                 @view.options.strategyVersion = self.strategyVersion
             end
-
+            
 		    def execute
                 if run == Gtk::Dialog::RESPONSE_ACCEPT
                     setViewData
@@ -93,6 +97,10 @@ module JLDrill::Gtk
 		
 		def run
 		    @optionsWindow.execute
+		end
+		
+		def destroy
+		    @optionsWindow.destroy
 		end
 		
 		def update(options)

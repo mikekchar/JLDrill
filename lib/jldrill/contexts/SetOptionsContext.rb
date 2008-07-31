@@ -18,6 +18,7 @@ module JLDrill
         end
 
         def destroyViews
+            @mainView.destroy
             @mainView = nil
         end		    
 		

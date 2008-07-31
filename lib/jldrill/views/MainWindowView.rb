@@ -7,7 +7,11 @@ module JLDrill
 		end
 		
 		def close
-			@context.close
+			@context.exit
+		end
+		
+		def destroy
+		    # Nothing to be done in the abstract class
 		end
 		
 		def loadReference

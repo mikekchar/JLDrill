@@ -31,6 +31,7 @@ module JLDrill
 
 		before(:each) do
 			@main = MainContext.new(Context::Bridge.new(JLDrill))
+			@main.createViews
 			@context = @main.loadReferenceContext
 			Thread.reset
 		end
@@ -78,12 +79,8 @@ module JLDrill
             def reference.read(&block)
                 block.call(10)
             end
-            @context.mainView.should_receive(:update)
+            @context.peekAtView.should_receive(:update)
             @context.enter(@main)            
-        end
-
-        it "should have a view" do
-            @context.mainView.should_not be_nil
         end
         
 	end

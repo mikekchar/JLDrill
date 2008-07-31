@@ -20,6 +20,7 @@ module JLDrill
         end
 
         def destroyViews
+            @mainView.destroy if !@mainView.nil?
             @mainView = nil
         end		    
 		

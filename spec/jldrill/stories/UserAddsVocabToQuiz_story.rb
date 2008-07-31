@@ -1,17 +1,51 @@
 require 'jldrill/contexts/MainContext'
 require 'jldrill/contexts/AddNewVocabularyContext'
 require 'jldrill/views/MainWindowView'
+require 'jldrill/views/gtk/MainWindowView'
+require 'jldrill/views/gtk/QuizStatusView'
 require 'jldrill/views/VocabularyView'
 require 'jldrill/views/gtk/VocabularyView'
+require 'jldrill/spec/Fakes'
 
-module JLDrill
+# The user adds a new Vocabulary to the Quiz
+#
+# 1. There is a control on the MainWindowView that,
+#    when selected, allows the user to add a new Vocabulary
+#    to the Quiz.
+#
+# 2. The user enters a Context called AddNewVocabularyContext.
+#    The Context contains a View which allows each part of
+#    a Vocabulary to be edited (kanji, reading,
+#    definitions, markers, hint).
+#
+# 3. The user can exit the AddNewVocabularyContext at any time.
+#
+# 4. If the fields create a valid vocabulary, 
+#    the user may add the data as a new Vocabulary in their Quiz.
+#    A valid vocabulary is one that has a reading and one or both
+#    of a kanji and definitions.
+#    The Vocabulary will be put in Bin 0 (Unseen) and the position
+#    will be set to the last in the Quiz.
+#
+# 5. When a Vocabulary has been added to the Quiz, the fields
+#    in the edit box are cleared.
+#
+# 6. If the new Vocabulary already exists in the Quiz, the user
+#    is informed that the item was not added because it already exists.  
+#    The fields in the edit box are not cleared.
+#
+module JLDrill::UserAddsVocabToQuiz
 
-    # The user adds a new Vocabulary to the Quiz
-    class UserAddsVocabToQuiz
+    class StoryMemento
         attr_reader :storyName, :mainContext, :mainView, :context, :view
     
         def initialize
             @storyName = "User Adds Vocab To Quiz"
+            restart
+        end
+        
+        def restart
+            @app = nil
             @mainContext = nil
             @mainView = nil
             @context = nil
@@ -24,7 +58,9 @@ module JLDrill
     
         # Some useful routines
         def setupAbstract
+            @app = JLDrill::Fakes::App.new(nil)
             @mainContext = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
+            @mainContext.enter(@app)
             @mainView = @mainContext.mainView
             @context = @mainContext.addNewVocabularyContext
             @context.enter(@mainContext)
@@ -32,7 +68,9 @@ module JLDrill
         end
         
         def setupGtk
+            @app = JLDrill::Fakes::App.new(nil)
             @mainContext = JLDrill::MainContext.new(Context::Bridge.new(JLDrill::Gtk))
+            @mainContext.enter(@app)
             @mainView = @mainContext.mainView
             @context = @mainContext.addNewVocabularyContext
             @context.enter(@mainContext)
@@ -42,16 +80,17 @@ module JLDrill
         # This is very important to call when using setupGtk because otherwise
         # you will leave windows hanging open.
         def shutdown
-           @view.close unless @view.nil?
+            @view.close unless @view.nil?
+            @mainView.close unless @mainView.nil?
+            restart
         end
     end
     
-    Story = UserAddsVocabToQuiz.new
+    Story = StoryMemento.new
+
+###########################################
     
-    # There is a control on the MainWindowView that,
-    # when selected, allows the user to add a new Vocabulary
-    # to the Quiz.
-    describe Story.stepName("Main Window View Control") do
+    describe Story.stepName("There is a control on the main window view for adding new items") do
         it "should contact the main context when the user tries to add a Vocabulary" do
             Story.setupAbstract
             Story.mainContext.should_receive(:addNewVocabulary)
@@ -61,11 +100,9 @@ module JLDrill
         it "should have a test for selecting the GTK control but it's not feasible right now"
     end
 
-    # The user enters a Context called AddNewVocabularyContext.
-    # The Context contains a View which allows each part of
-    # a Vocabulary to be edited (kanji, reading,
-    # definitions, markers, hint).
-    describe Story.stepName("Enter AddNewVocabularyContext") do
+###########################################
+
+    describe Story.stepName("The user enters AddNewVocabularyContext") do
         it "should have an AddNewVocabularyContext" do
             main = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
             context = main.addNewVocabularyContext
@@ -117,31 +154,41 @@ module JLDrill
             Story.shutdown
         end
     end
+
+###########################################
     
-    # The user can exit the AddNewVocabularyContext at any time.
-    describe Story.stepName("User Can Exit Context Any Time") do
+    describe Story.stepName("The user can exit the context at any time") do
+
+        # This step is difficult since we can't call Story.shutdown because
+        # the important cleanup methods are mocked.  I try as best as I
+        # can to clean up by hand.
+    
         it "should exit the context when the view is closed" do
             Story.setupAbstract
+            # We really should try to clean up here, but I can't think
+            # of a way to do it since Story.context#exit is already mocked.
+            # What we really need to do is call Context#exit, but I can't.
             Story.context.should_receive(:exit)
             Story.view.close
-            # We aren't doing shutdown here because this is what we're testing
+            # Clean up the memento
+            Story.restart
         end
         
         it "should exit the view when the Gtk window is destroyed" do
             Story.setupGtk
-            Story.view.should_receive(:close)
+            Story.view.should_receive(:close) do 
+                Story.context.exit
+            end
             Story.view.emitDestroyEvent
-            # We aren't doing shutdown here because this is what we're testing
+            Story.mainView.close
+            # Clean up the memento
+            Story.restart
         end
     end
 
-    # If the fields create a valid vocabulary, 
-    # the user may add the data as a new Vocabulary in their Quiz.
-    # A valid vocabulary is one that has a reading and one or both
-    # of a kanji and definitions.
-    # The Vocabulary will be put in Bin 0 (Unseen) and the position
-    # will be set to the last in the Quiz.
-    describe Story.stepName("User Adds New Vocabulary To Quiz") do
+###########################################
+    
+    describe Story.stepName("The user chooses to add the entered Vocabulary") do
         it "should be able to add the view's Vocabulary to the Quiz" do
             Story.setupAbstract
             Story.view.vocabulary.reading = "あう"
@@ -160,7 +207,7 @@ module JLDrill
             Story.shutdown           
         end
         
-        it "should be able to add vocabulary to the parent's quiz" do
+        it "should add the vocabulary to the parent context's quiz" do
             Story.setupAbstract
             Story.view.vocabulary.reading = "あう"
             Story.view.vocabulary.definitions = "to meet"
@@ -189,16 +236,15 @@ module JLDrill
          
     end
 
-    # When a Vocabulary has been added to the Quiz, the fields
-    # in the edit box are cleared.
-    describe Story.stepName("Clears Fields When Vocabulary Added") do
+###########################################
+    
+    describe Story.stepName("The fields in the view are cleared when a Vocabulary is added") do
         it "should clear the fields in the Gtk window when an item has been added"
     end
 
-    # If the new Vocabulary already exists in the Quiz, the user
-    # is informed that the item was not added because it already exists.  
-    # The fields in the edit box are not cleared.
-    describe Story.stepName("Doesn't Add Same Vocabulary Twice") do
+###########################################
+    
+    describe Story.stepName("Doesn't add the same Vocabulary twice") do
         it "it should refuse to add an item that already exists"
         
         it "should inform the user that the item hasn't been added"

@@ -12,6 +12,7 @@ module JLDrill::Gtk
 	    
 	        def initialize(view)
 	            @view = view
+	            @closed = false
 	            super("Add")
 	            @vbox = Gtk::VBox.new
 	            self.add(@vbox)
@@ -29,12 +30,19 @@ module JLDrill::Gtk
                 end
 
 				signal_connect('destroy') do
-					@view.close
+				    if !@closed
+    					@view.close
+    			    end
 				end
 				
 				addButton.signal_connect('clicked') do
 				    @view.addVocabulary
 				end
+			end
+			
+			def explicitDestroy
+			    @closed = true
+			    self.destroy
 			end
 
 	        def kanji
@@ -98,6 +106,10 @@ module JLDrill::Gtk
 		def getWidget
 			@widget
 		end
+
+        def destroy
+            @vocabularyWindow.explicitDestroy
+        end
 		
 		def emitDestroyEvent
 			@vocabularyWindow.signal_emit("destroy")

@@ -11,12 +11,20 @@ module JLDrill
 		
 		def initialize(viewBridge)
 			super(viewBridge)
-			@mainView = viewBridge.ReferenceProgressView.new(self)
 			dictDir = File.join(Config::DATA_DIR, "dict")
             @filename = File.join(dictDir, "edict.utf")
             @reference = nil
 		end
 		
+		def createViews
+			@mainView = @viewBridge.ReferenceProgressView.new(self)
+        end
+        
+        def destroyViews
+            @mainView.destroy
+            @mainView = nil
+        end
+        		
 		def loadInBackground
    			Thread.new() do
                 @reference.read do |fraction|

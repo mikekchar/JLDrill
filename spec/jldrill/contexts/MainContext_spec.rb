@@ -1,5 +1,6 @@
 require 'jldrill/contexts/MainContext'
 require 'Context/Bridge'
+require 'jldrill/spec/Fakes'
 
 module JLDrill
 
@@ -10,10 +11,9 @@ module JLDrill
 		end
 
         def test_openMainView
-		    @parent = mock("App")
-		    @parent.should_receive(:addView)
-		    @context.mainView.should_receive(:open)
-		    @context.enter(@parent)        
+		    @parent = JLDrill::Fakes::App.new(nil)
+		    @context.enter(@parent) 
+		    @context.mainView.should_not be_nil       
         end
 		
 		it "should open the main view when it is entered" do
@@ -26,12 +26,6 @@ module JLDrill
 		    @context.exit
 		end
 
-		it "should exit the App when it is closed" do
-            test_openMainView
-		    @parent.should_receive(:exit)
-		    @context.close
-		end
-		
 		it "should enter the loadReferenceContext when loading the reference" do
 		    @context.loadReferenceContext.should_receive(:enter).with(@context)
 		    @context.loadReference
@@ -48,6 +42,7 @@ module JLDrill
 		end
 		
 		it "should not try to open files if it doesn't get a filename" do
+		    test_openMainView
 		    @context.getFilenameContext.should_receive(:enter).with(@context).and_return(nil)
 		    @context.quiz.should_not_receive(:load)
 		    @context.quiz.should_not_receive(:loadFromDict)
@@ -56,6 +51,7 @@ module JLDrill
 		end
 		
 		it "should load drill files as drill files" do
+		    test_openMainView
 		    filename = "data/jldrill/quiz/katakana.jldrill"
 		    @context.getFilenameContext.should_receive(:enter).with(@context).and_return(filename)
 		    @context.quiz.should_receive(:load).with(filename)
@@ -67,6 +63,7 @@ module JLDrill
 		end
 		
 		it "should try to load any other file as an edict file" do
+		    test_openMainView
 		    filename = "data/jldrill/dict/Kana/katakana.utf"
 		    @context.getFilenameContext.should_receive(:enter).with(@context).and_return(filename)
 		    @context.quiz.should_receive(:loadFromDict)

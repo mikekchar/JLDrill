@@ -21,6 +21,26 @@ module JLDrill
             @strategyVersion = 0
             @reviewMode = false
         end
+        
+        def clone
+            retVal = Options.new(@quiz)
+            retVal.randomOrder = @randomOrder
+            retVal.promoteThresh = @promoteThresh
+            retVal.introThresh = @introThresh
+            retVal.oldThresh = @oldThresh
+            retVal.strategyVersion = @strategyVersion
+            retVal.reviewMode = @reviewMode
+            retVal
+        end
+        
+        def eql?(options)
+            options.randomOrder == @randomOrder &&
+            options.promoteThresh == @promoteThresh &&
+            options.introThresh == @introThresh &&
+            options.oldThresh == @oldThresh &&
+            options.strategyVersion == @strategyVersion &&
+            options.reviewMode == @reviewMode
+        end
             
         def update
             @quiz.update unless @quiz.nil?

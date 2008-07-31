@@ -8,6 +8,7 @@ module JLDrill
 
 		before(:each) do
 			@main = MainContext.new(Context::Bridge.new(JLDrill))
+			@main.createViews
 			@main.quiz = Quiz.new
 			@context = @main.showStatisticsContext
 			@context.createViews

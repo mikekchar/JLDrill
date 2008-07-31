@@ -4,10 +4,10 @@ module JLDrill
         def Config::getDataDir
             if !Gem.datadir("jldrill").nil?
                 # Use the data directory in the Gem if it is available
-                Gem.datadir("jldrill")
+                File.expand_path(Gem.datadir("jldrill"))
             else
                 # Otherwise hope there is a data dir in current directory
-                'data/jldrill'
+                File.expand_path('data/jldrill')
             end
         end
     

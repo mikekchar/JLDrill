@@ -10,33 +10,64 @@ module JLDrill::Gtk
 
 	describe StatisticsView do
 
-		before(:each) do
-		    bridge = Context::Bridge.new(JLDrill::Gtk)
-		    @main = JLDrill::MainContext.new(bridge)
-		    @main.quiz = JLDrill::Quiz.new
-			@context = @main.showStatisticsContext
-			@context.createViews
-			@view = @context.mainView
-			
-    		def @context.createViews
-	    	    # Use the previously set View
-    		end
-		end
+		class StatisticsViewStoryMemento
+            attr_reader :mainContext, :mainView, :context, :view
+        
+            def initialize
+                restart
+            end
+            
+            def restart
+                @app = nil
+                @mainContext = nil
+                @mainView = nil
+                @context = nil
+                @view = nil
+            end
+            
+            # Some useful routines
+            def setup
+                @app = JLDrill::Fakes::App.new(nil)
+                @mainContext = JLDrill::MainContext.new(Context::Bridge.new(JLDrill::Gtk))
+                @mainContext.enter(@app)
+                @mainView = @mainContext.mainView
+                @context = @mainContext.showStatisticsContext
+                @view = @context.peekAtView
+                @context.enter(@mainContext)
+            end
+ 
+            # Useful for shutting down when you are testing the view's response
+            # to destroy messages.           
+            def clearView
+                @view = nil
+            end
+            
+            def getNewView
+                @view = @context.peekAtView
+            end
+            
+            # This is very important to call when using setup because otherwise
+            # you will leave windows hanging open.
+            def shutdown
+                @view.close unless @view.nil?
+                @mainView.close unless @mainView.nil?
+                restart
+            end
+        end
+        
+        before(:all) do
+            @story = StatisticsViewStoryMemento.new
+        end
 
-		it "should have a widget when initialized" do
-			@view.getWidget.should_not be_nil
-		end
-				
-		it "should open a window transient on the main window when opened" do
-            mainViewWidget = @main.mainView.getWidget
-			@view.statisticsWindow.should_receive(:set_transient_for).with(mainViewWidget.delegate)
-			@view.statisticsWindow.should_receive(:show_all)
-            @context.enter(@main)
-		end
-	
         it "should close the view when the window is destroyed" do
-            @view.should_receive(:close)
-            @view.emitDestroyEvent
+            @story.setup
+            @story.view.should_receive(:close) do
+                @story.view.statisticsWindow.destroy
+            end
+            @story.view.emitDestroyEvent
+            @story.clearView
+            @story.context.exit
+            @story.shutdown
         end
         
 	end

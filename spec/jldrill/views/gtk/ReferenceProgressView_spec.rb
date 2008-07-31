@@ -8,39 +8,66 @@ module JLDrill::Gtk
 
 	describe ReferenceProgressView do
 
-		before(:each) do
-		    bridge = Context::Bridge.new(JLDrill::Gtk)
-		    @main = JLDrill::MainContext.new(bridge)
-			@context = @main.loadReferenceContext
-			@view = @context.mainView
-		end
+		class ReferenceProgressViewStoryMemento
+            attr_reader :mainContext, :mainView, :context, :view
+        
+            def initialize
+                restart
+            end
+            
+            def restart
+                @app = nil
+                @mainContext = nil
+                @mainView = nil
+                @context = nil
+                @view = nil
+            end
+            
+            # Some useful routines
+            def setup
+                @app = JLDrill::Fakes::App.new(nil)
+                @mainContext = JLDrill::MainContext.new(Context::Bridge.new(JLDrill::Gtk))
+                @mainContext.enter(@app)
+                @mainView = @mainContext.mainView
+                @context = @mainContext.loadReferenceContext
+                @view = @context.peekAtView
+			    @context.should_receive(:loadInBackground)
+                @context.enter(@mainContext)
+            end
+            
+            def getNewView
+                @view = @context.peekAtView
+            end
+            
+            # This is very important to call when using setup because otherwise
+            # you will leave windows hanging open.
+            def shutdown
+                @view.close unless @view.nil?
+                @mainView.close unless @mainView.nil?
+                restart
+            end
+        end
+        
+        before(:all) do
+            @story = ReferenceProgressViewStoryMemento.new
+        end
 
-		it "should have a widget when initialized" do
-			@view.getWidget.should_not be_nil
-		end
-				
-		it "should open a progress transient on the main window when opened" do
-            mainViewWidget = @main.mainView.getWidget
-			@view.progressWindow.should_receive(:set_transient_for).with(mainViewWidget.delegate)
-			@view.progressWindow.should_receive(:show_all)
-			@context.should_receive(:loadInBackground)
-            @context.enter(@main)
-		end
-	
 	    it "should update the progress bar when updated" do
+	        @story.setup
 	        fraction = 0.57
-	        @view.progressWindow.progress.should_receive(:fraction=).with(fraction)
-	        @view.update(fraction)
+	        @story.view.progressWindow.progress.should_receive(:fraction=).with(fraction)
+	        @story.view.update(fraction)
+	        @story.context.exit
+	        @story.shutdown
 	    end
 	
         it "should destroy the progress window when context exited" do
-            mainViewWidget = @main.mainView.getWidget
-			@view.progressWindow.should_receive(:set_transient_for).with(mainViewWidget.delegate)
-			@view.progressWindow.should_receive(:show_all)
-			@context.should_receive(:loadInBackground)
-            @context.enter(@main)
-            @view.progressWindow.should_receive(:destroy)
-            @context.exit
+            @story.setup
+            @story.view.should_receive(:destroy) do
+                @story.view.progressWindow.destroy
+            end
+            @story.context.exit
+            @story.shutdown
         end
         
 	end

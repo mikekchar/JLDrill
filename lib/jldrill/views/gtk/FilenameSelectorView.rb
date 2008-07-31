@@ -1,6 +1,7 @@
 require 'Context/Gtk/Widget'
 require 'jldrill/views/FilenameSelectorView'
 require 'gtk2'
+require 'jldrill/model/Config'
 
 module JLDrill::Gtk
 
@@ -52,6 +53,10 @@ module JLDrill::Gtk
 		def getWidget
 			@widget
 		end
+
+        def destroy
+            @selectorWindow.destroy
+        end
 
         def run
             @selectorWindow.current_folder = @directory unless @directory.nil?

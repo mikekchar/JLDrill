@@ -11,6 +11,10 @@ module JLDrill
 			@directory = nil
 		end
 		
+		def destroy
+		    # Only in the concrete class
+		end
+		
 		def run
 		    # Override in the concrete class
 		end
