@@ -15,5 +15,9 @@ module JLDrill
 		def update(quiz)
 		    # Should be overridden in the concrete class
 		end	
+		
+		def vocabVerified(quiz, bool)
+		    # Sould be overridden in the concrete class
+		end
 	end
 end

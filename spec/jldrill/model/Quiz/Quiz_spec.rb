@@ -295,19 +295,20 @@ Excellent
             test_correct
             test_incorrect            
         end
-        
-        it "should allow objects to subscribe to status updates" do
-            @quiz.subscriberList.should be_empty
-            subscriber = mock("Subscriber")
-            @quiz.subscribe(subscriber)
-            @quiz.subscriberList.size.should be(1)
-        end
-        
+
         it "should notify subscribers of updates" do
             subscriber = mock("Subscriber")
             @quiz.subscribe(subscriber)
             subscriber.should_receive(:quizUpdated)
             @quiz.update
+        end
+        
+        it "should notify subscribers when a new problem has been created" do
+            test_initializeQuiz
+            subscriber = mock("Subscriber")
+            @quiz.publisher.subscribe(subscriber, "newProblem")
+            subscriber.should_receive(:newProblemUpdated)
+            @quiz.drill
         end
     end
 end

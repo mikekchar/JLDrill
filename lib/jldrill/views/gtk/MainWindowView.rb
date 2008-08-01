@@ -86,7 +86,6 @@ module JLDrill::Gtk
                              0, 1,                    2, 3,
                              Gtk::EXPAND | Gtk::FILL, 0,
                              0,                       0)
-	            @indicatorBox.show_all
 
                 vpaned = Gtk::VPaned.new
                 vpaned.set_border_width(5)
@@ -130,17 +129,6 @@ module JLDrill::Gtk
                                    "size" => 20 * Pango::SCALE,
                                    "justification" => Gtk::JUSTIFY_CENTER,
                                    "foreground" => "blue");
-                vpaned.show_all
-
-
-                ## Create statusbar
-                @statusbar = Gtk::Statusbar.new
-                @mainTable.attach(@statusbar,
-                             # X direction            # Y direction
-                             0, 1,                    4, 5,
-                             Gtk::EXPAND | Gtk::FILL, 0,
-                             0,                       0)
-                updateStatus
 			end
 
             def add(widget, orig=false)
@@ -307,24 +295,6 @@ module JLDrill::Gtk
                 @view.showStatistics
             end
 
-            def updateStatus()
-                @statusbar.pop(0)
-                if(!@view.quiz)
-                    @statusbar.push(0, "No Quiz Loaded -- Select Open")
-                else
-                    status = @view.quiz.status
-                    if((@view.edict.loaded?) && (!@view.quiz.vocab.nil?)) 
-                        # If the exact entry exists in the dictionary
-                        if(@view.edict.include?(@view.quiz.vocab))
-                            status += " -- OK"
-                        else
-                            status += " -- XX"
-                        end
-                    end
-                    @statusbar.push(0, status)
-                end
-            end
-
             def processString(text)
                 eval("\"#{text.gsub(/["]/, "\\\"")}\"")
             end
@@ -337,7 +307,6 @@ module JLDrill::Gtk
                     if !@view.quiz.vocab.nil?
                         @indicatorBox.set(@view.quiz.vocab)
                     end
-                    updateStatus
                 end
             end
 
@@ -345,7 +314,6 @@ module JLDrill::Gtk
                 if @abuffer
                     @abuffer.text = ""
                     @abuffer.insert(@abuffer.start_iter, processString(text), "kanji")
-                    updateStatus
                 end
             end      
 
@@ -386,7 +354,6 @@ module JLDrill::Gtk
                     if savename != ""
                         @view.quiz.savename = savename
                         @view.quiz.save
-                        updateStatus
                     end
                 end
             end
@@ -397,7 +364,6 @@ module JLDrill::Gtk
                     	saveAs()
                     else
                     @view.quiz.save
-                    updateStatus
                     end
                 end
             end
@@ -589,6 +555,7 @@ Copyright (C) 2005-2007  Mike Charlton
                         end
                         dialog.destroy
                     }
+                    @view.updateCurrentProblemStatus
                 end
             end
 
@@ -608,6 +575,7 @@ Copyright (C) 2005-2007  Mike Charlton
                         end
                         dialog.destroy
                     }
+                    @view.updateCurrentProblemStatus
                 end
             end
 
@@ -625,7 +593,6 @@ Copyright (C) 2005-2007  Mike Charlton
             def resetQuiz
                 if @view.quiz
                     @view.quiz.reset
-                    updateStatus
                 end
             end
 
@@ -724,12 +691,11 @@ Copyright (C) 2005-2007  Mike Charlton
 		
 		def displayQuestion(question)
 		    @mainWindow.printQuestion(question)
-		    @mainWindow.updateStatus
 		end
 		
 		def updateQuiz
 		    @mainWindow.updateQuiz
 		end
-		
+				
 	end
 end

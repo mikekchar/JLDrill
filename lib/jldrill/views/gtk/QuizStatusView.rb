@@ -13,7 +13,7 @@ module JLDrill::Gtk
 	        def initialize(view)
 	            @view = view
 	            super()
-	            text = ""
+	            @text = ""
 	            @id = get_context_id("Update quiz status")
 	        end
 	        
@@ -31,15 +31,33 @@ module JLDrill::Gtk
 			super(context)
 			@quizStatusBar = QuizStatusBar.new(self)
 			@widget = Context::Gtk::Widget.new(@quizStatusBar)
+			@verified = nil
 		end
 		
 		def getWidget
 			@widget
 		end
 		
-		def update(quiz)
-		    @quizStatusBar.update(quiz.status)
+		def verifiedTag
+		    retVal = ""
+		    if !@verified.nil?
+		        if @verified
+		            retVal = " -- OK"
+		        else
+		            retVal = " -- XX"
+		        end
+		    end
+		    retVal
 		end
+		
+		def update(quiz)
+		    @quizStatusBar.update(quiz.status + verifiedTag)
+		end
+		
+		def vocabVerified(quiz, bool)
+		    @verified = bool
+		    update(quiz)
+        end
     end
     
 end

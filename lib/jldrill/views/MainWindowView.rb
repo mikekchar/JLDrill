@@ -62,5 +62,9 @@ module JLDrill
 		    # Do work in the concrete class
 		end
 		
+		def updateCurrentProblemStatus
+		    @context.updateNewProblemStatus
+		end
+		
 	end
 end

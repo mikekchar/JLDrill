@@ -22,13 +22,14 @@ require 'jldrill/model/Problem'
 require 'jldrill/model/Quiz/Options'
 require 'jldrill/model/Quiz/Contents'
 require 'jldrill/model/Quiz/Strategy'
+require 'jldrill/model/Publisher'
 
 module JLDrill
     class Quiz
         attr_reader :savename,  
                     :needsSave, :info, :name, 
                     :contents, :options, :currentProblem,
-                    :strategy, :subscriberList
+                    :strategy, :publisher
         attr_writer :savename, :info, :name, :currentProblem
 
         def initialize()
@@ -40,7 +41,7 @@ module JLDrill
             @contents = Contents.new(self)
             @strategy = Strategy.new(self)            
             @currentProblem = nil
-            @subscriberList = []
+            @publisher = Publisher.new(self)
             @blockUpdates = false
             
             @last = nil
@@ -71,14 +72,18 @@ module JLDrill
         end
 
         def subscribe(subscriber)
-            @subscriberList.push(subscriber)
+            @publisher.subscribe(subscriber, "quiz")
         end
      
         def update
             if !@blockUpdates
-                @subscriberList.each do |subscriber|
-                    subscriber.quizUpdated
-                end
+                @publisher.update("quiz")
+            end
+        end
+        
+        def updateNewProblem
+            if !@blockUpdates
+                @publisher.update("newProblem")
             end
         end
 
@@ -166,10 +171,10 @@ module JLDrill
             # Don't update the status while we're loading the file
             blockUpdates
             if file != ""
-                # Save the subscriberList so that we continue to get updates
-                subscribers = @subscriberList
+                # Save the publisher so that we continue to get updates
+                publisher = @publisher
                 initialize()
-                @subscriberList = subscribers
+                @publisher = publisher
                 @savename = file
                 IO.foreach(file) do |line|
                     parseLine(line)
@@ -269,6 +274,7 @@ module JLDrill
             vocab = @strategy.getVocab
             @currentProblem = @strategy.createProblem(vocab)
             update
+            updateNewProblem
             return @currentProblem.question
         end
 

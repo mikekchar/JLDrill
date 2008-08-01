@@ -46,6 +46,7 @@ module JLDrill
 		end
 		
 		def exit
+		    @parent.updateNewProblemStatus
 		    super
 		end
     end

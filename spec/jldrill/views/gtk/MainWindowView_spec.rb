@@ -67,10 +67,10 @@ module JLDrill::Gtk
         
         it "should be able to add items to the end of the window" do
             @story.setup
-            @story.view.mainWindow.mainTable.n_rows.should be(6)
+            @story.view.mainWindow.mainTable.n_rows.should be(5)
             sb = Gtk::Statusbar.new
             @story.view.mainWindow.add(sb)
-            @story.view.mainWindow.mainTable.n_rows.should be(7)            
+            @story.view.mainWindow.mainTable.n_rows.should be(6)            
             @story.shutdown
         end
         
@@ -78,12 +78,12 @@ module JLDrill::Gtk
             # OK.  This sucks, but the Gtk::Table has no way to
             # remove items (i.e., I shouldn't use it -- FIXME!!!)
             @story.setup
-            @story.view.mainWindow.mainTable.n_rows.should be(6)
+            @story.view.mainWindow.mainTable.n_rows.should be(5)
             sb = Gtk::Statusbar.new
             @story.view.mainWindow.add(sb)
-            @story.view.mainWindow.mainTable.n_rows.should be(7)
+            @story.view.mainWindow.mainTable.n_rows.should be(6)
             @story.view.mainWindow.remove(sb)                    
-            @story.view.mainWindow.mainTable.n_rows.should be(7)
+            @story.view.mainWindow.mainTable.n_rows.should be(6)
             @story.shutdown
         end
         
