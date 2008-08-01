@@ -62,8 +62,5 @@ module JLDrill
 		    # Do work in the concrete class
 		end
 		
-		def updateQuizStatus
-		    @context.updateQuizStatus
-		end
 	end
 end

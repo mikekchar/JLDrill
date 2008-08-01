@@ -109,7 +109,7 @@ module JLDrill
 		end
 		
 		def updateQuizStatus
-		    @displayQuizStatusContext.update
+		    @displayQuizStatusContext.quizUpdated
 		end
     end
 end

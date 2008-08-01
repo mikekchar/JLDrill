@@ -18,8 +18,8 @@ module JLDrill
             @parsingBin = 0
         end
         
-        def update
-            @quiz.update
+        def saveNeeded
+            @quiz.setNeedsSave(true)
         end
         
         def addBin(name)
@@ -41,7 +41,7 @@ module JLDrill
                     vocab.status.position = length 
                 end
                 @bins[bin].push(vocab)
-                update
+                saveNeeded
             end
         end
         
@@ -130,7 +130,7 @@ module JLDrill
                 vocab.status.reset
             end
             @bins[0].sort! { |x,y| x.status.position <=> y.status.position }
-            update
+            saveNeeded
         end
 
         # Move the specified vocab to the specified bin
@@ -138,7 +138,7 @@ module JLDrill
             if !vocab.nil?
                 @bins[vocab.status.bin].delete_at(vocab.status.index)
                 @bins[bin].push(vocab)
-                update
+                saveNeeded
             end
         end
 

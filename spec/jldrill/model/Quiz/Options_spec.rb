@@ -11,14 +11,14 @@ module JLDrill
 	    
 	    def test_changeOption(optionString, originalValue, newValue)
 		    eval("@options.#{optionString}").should be(originalValue)
-	        @quiz.should_receive(:update)
+	        @quiz.should_receive(:setNeedsSave).with(true)
 		    eval("@options.#{optionString} = #{newValue}")
 		    eval("@options.#{optionString}").should be(newValue)
 		end
 		
 		def test_parseOption(parseString, optionString, originalValue, newValue)
 		    eval("@options.#{optionString}").should be(originalValue)
-	        @quiz.should_receive(:update)
+	        @quiz.should_receive(:setNeedsSave).with(true)
 		    eval("@options.parseLine(\"#{parseString}\")")
 		    eval("@options.#{optionString}").should be(newValue)
 		end
@@ -60,7 +60,7 @@ module JLDrill
 	    end
 
 	    it "should be able to write out the options" do
-	        @quiz.should_receive(:update).exactly(4).times
+	        @quiz.should_receive(:setNeedsSave).with(true).exactly(4).times
 	        @options.randomOrder = true
 	        @options.promoteThresh = 1
 	        @options.introThresh = 20
@@ -70,7 +70,7 @@ module JLDrill
 	    end
 	    
 	    it "should be able to assign the options to another options object" do
-	        @quiz.should_receive(:update).exactly(4).times
+	        @quiz.should_receive(:setNeedsSave).with(true).exactly(4).times
 	        @options.randomOrder = true
 	        @options.promoteThresh = 1
 	        @options.introThresh = 20

@@ -133,15 +133,12 @@ module JLDrill::QuizStatusIsDisplayed
             Story.shutdown
         end
         
-        # This is a bit of a hack to make it work like it did before.  Really the
-        # context should observe the quiz and update itself at the right times.
-        # However, in the interim we will use the same mechanism that the legacy
-        # code did.
-        it "should update the status whenever the main view updates the status" do
-            Story.setupGtk
-            Story.context.should_receive(:update)
-            Story.mainView.mainWindow.updateStatus
+        it "should receive updates when the quiz status changes" do
+            Story.setupAbstract
+            Story.context.should_receive(:quizUpdated)
+            Story.mainContext.quiz.update
             Story.shutdown
         end
+        
     end    
 end

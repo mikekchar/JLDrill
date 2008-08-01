@@ -20,16 +20,17 @@ module JLDrill
 		
 		def enter(parent)
 		    super(parent)
-		    update
+		    quizUpdated
+		    @parent.quiz.subscribe(self)
 		end
 		
 		def exit
 		    super
 		end
 		
-		def update
-		    @mainView.update(parent.quiz) unless parent.nil?
+		def quizUpdated
+		    @mainView.update(@parent.quiz) unless @parent.nil?
 		end
-		
+				
     end
 end

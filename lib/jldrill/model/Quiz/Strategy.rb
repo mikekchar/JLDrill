@@ -331,7 +331,7 @@ module JLDrill
                         x.status.scheduledTime <=> y.status.scheduledTime
                     end
                 end
-                @quiz.update
+                @quiz.setNeedsSave(true)
             end
         end
 
@@ -345,7 +345,7 @@ module JLDrill
                 vocab.status.incorrect
                 demote(@quiz.currentProblem.vocab)
                 vocab.status.consecutive = 0
-                @quiz.update
+                @quiz.setNeedsSave(true)
             end
         end
     end

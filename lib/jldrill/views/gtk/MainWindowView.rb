@@ -308,7 +308,6 @@ module JLDrill::Gtk
             end
 
             def updateStatus()
-                @view.updateQuizStatus
                 @statusbar.pop(0)
                 if(!@view.quiz)
                     @statusbar.push(0, "No Quiz Loaded -- Select Open")
@@ -520,7 +519,7 @@ Copyright (C) 2005-2007  Mike Charlton
             def promptSave()
                 retVal = true
 
-                if @view.quiz && @view.quiz.updated
+                if @view.quiz && @view.quiz.needsSave
                     dialog = Gtk::Dialog.new("Unsaved Changes", self,
                         Gtk::Dialog::DESTROY_WITH_PARENT,
                         [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],

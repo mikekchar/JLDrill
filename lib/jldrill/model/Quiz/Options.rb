@@ -42,50 +42,65 @@ module JLDrill
             options.reviewMode == @reviewMode
         end
             
-        def update
+        def saveNeeded
+            @quiz.setNeedsSave(true) unless @quiz.nil?
+        end
+        
+        def modifiedButNoSaveNeeded
             @quiz.update unless @quiz.nil?
         end
         
         # Assigns all the options from one to the other, but
         # does *keeps the same quiz*
         def assign(options)
-            @randomOrder = options.randomOrder
-            @promoteThresh = options.promoteThresh
-            @introThresh = options.introThresh
-            @oldThresh = options.oldThresh
-            @strategyVersion = options.strategyVersion
-            update
+            self.randomOrder = options.randomOrder
+            self.promoteThresh = options.promoteThresh
+            self.introThresh = options.introThresh
+            self.oldThresh = options.oldThresh
+            self.strategyVersion = options.strategyVersion
         end
         
         def randomOrder=(value)
-            @randomOrder = value
-            update
+            if @randomOrder != value
+                @randomOrder = value
+                saveNeeded
+            end
         end
 
         def promoteThresh=(value)
-            @promoteThresh = value
-            update
+            if @promoteThresh != value
+                @promoteThresh = value
+                saveNeeded
+            end
         end
 
         def introThresh=(value)
-            @introThresh = value
-            update
+            if @introThresh != value
+                @introThresh = value
+                saveNeeded
+            end
         end
 
         def oldThresh=(value)
-            @oldThresh = value
-            update
+            if @oldThresh != value
+                @oldThresh = value
+                saveNeeded
+            end
         end
 
         def strategyVersion=(value)
-            @strategyVersion = value
-            update
+            if @strategyVersion != value
+                @strategyVersion = value
+                saveNeeded
+            end
         end
 
-        # Note: Review Mode isn't saved, so this doesn't trigger an
-        #       update in the quiz.        
+        # Note: Review Mode isn't saved so no save needed    
         def reviewMode=(value)
-            @reviewMode = value
+            if @reviewMode != value
+                @reviewMode = value
+                modifiedButNoSaveNeeded
+            end
         end
             
         def parseLine(line)

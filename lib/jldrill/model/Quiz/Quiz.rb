@@ -26,13 +26,13 @@ require 'jldrill/model/Quiz/Strategy'
 module JLDrill
     class Quiz
         attr_reader :savename,  
-                    :updated, :info, :name, 
+                    :needsSave, :info, :name, 
                     :contents, :options, :currentProblem,
-                    :strategy
-        attr_writer :savename, :updated, :info, :name, :currentProblem
+                    :strategy, :subscriberList
+        attr_writer :savename, :info, :name, :currentProblem
 
         def initialize()
-            @updated = false
+            @needsSave = false
             @name = ""
             @savename = ""
             @info = ""
@@ -40,6 +40,8 @@ module JLDrill
             @contents = Contents.new(self)
             @strategy = Strategy.new(self)            
             @currentProblem = nil
+            @subscriberList = []
+            @blockUpdates = false
             
             @last = nil
         end
@@ -68,8 +70,29 @@ module JLDrill
             retVal
         end
 
+        def subscribe(subscriber)
+            @subscriberList.push(subscriber)
+        end
+     
         def update
-            @updated = true
+            if !@blockUpdates
+                @subscriberList.each do |subscriber|
+                    subscriber.quizUpdated
+                end
+            end
+        end
+
+        def setNeedsSave(bool)
+            @needsSave = bool
+            update
+        end
+        
+        def blockUpdates
+            @blockUpdates = true
+        end
+        
+        def unblockUpdates
+            @blockUpdates = false
         end
 
         def saveToString
@@ -80,17 +103,17 @@ module JLDrill
             }
             retVal += @options.to_s
             retVal += @contents.to_s
-            @updated = false
             retVal
         end
 
         def save
             retVal = false
-            if (@savename != "") && (contents.length != 0) && @updated
+            if (@savename != "") && (contents.length != 0) && @needsSave
                 saveFile = File.new(@savename, "w")
                 if saveFile
                     saveFile.print(saveToString)
                     saveFile.close
+                    setNeedsSave(false)
                     retVal = true
                 end
             end
@@ -140,14 +163,22 @@ module JLDrill
         def load(file)
             retVal = false
 
+            # Don't update the status while we're loading the file
+            blockUpdates
             if file != ""
+                # Save the subscriberList so that we continue to get updates
+                subscribers = @subscriberList
                 initialize()
+                @subscriberList = subscribers
                 @savename = file
                 IO.foreach(file) do |line|
                     parseLine(line)
                 end
                 retVal = @contents.length > 0
             end
+            # Update status again
+            unblockUpdates
+            setNeedsSave(false)
             return retVal
         end
 
@@ -156,20 +187,30 @@ module JLDrill
             
             @savename = name
             
+            # Don't update the status while we're loading the file
+            blockUpdates
             string.each_line do |line|
                 parseLine(line)
             end
+            # Update status again
+            unblockUpdates
             
+            setNeedsSave(true)
             @contents.length > 0
         end
 
         def loadFromDict(dict)
             if dict
+                # Don't update the status while we're loading the file
+                blockUpdates
                 initialize()
                 @name = dict.shortFile
                 dict.eachVocab do |vocab|
                     contents.add(vocab, 0)
                 end
+                # Update status again
+                unblockUpdates
+                setNeedsSave(true)
             end
         end    
         
@@ -177,7 +218,12 @@ module JLDrill
         # Note: Does not add items that are already existing.
         #       nor does it update the status of existing items
         def append(quiz)
+            # Don't update the status while we're appending the file
+            blockUpdates
             @contents.addContents(quiz.contents)
+            # Update status again
+            unblockUpdates
+            update
         end
         
         def appendVocab(vocab)
@@ -186,7 +232,7 @@ module JLDrill
 
         def status
             retVal = ""
-            if(@updated) then retVal += "* " else retVal += "  " end
+            if(@needsSave) then retVal += "* " else retVal += "  " end
             retVal += @name + ": "
             retVal += @contents.status + " "
             if !@currentProblem.nil?
@@ -222,7 +268,7 @@ module JLDrill
         def drill()
             vocab = @strategy.getVocab
             @currentProblem = @strategy.createProblem(vocab)
-            
+            update
             return @currentProblem.question
         end
 
@@ -237,6 +283,6 @@ module JLDrill
         def currentAnswer
             @currentProblem.answer
         end
-     
+        
     end
 end

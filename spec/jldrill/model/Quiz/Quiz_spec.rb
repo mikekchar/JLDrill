@@ -46,16 +46,16 @@ Excellent
 		end
 		
 		def test_changeOption(optionString, originalValue, newValue)
-		    @quiz.updated.should be(false)
+		    @quiz.needsSave.should be(false)
 		    eval("@quiz.options.#{optionString}").should be(originalValue)
 		    eval("@quiz.options.#{optionString} = #{newValue}")
 		    eval("@quiz.options.#{optionString}").should be(newValue)
-		    @quiz.updated.should be(true)
-		    @quiz.updated = false
-		    @quiz.updated.should be(false)
+		    @quiz.needsSave.should be(true)
+		    @quiz.setNeedsSave(false)
+		    @quiz.needsSave.should be(false)
 		end
 		
-		it "should set the quiz to updated when the options are changed" do
+		it "should set the quiz to needsSave when the options are changed" do
 		    test_changeOption("randomOrder", false, true)
 		    test_changeOption("promoteThresh", 2, 4)
 		    test_changeOption("introThresh", 10, 5)
@@ -294,6 +294,20 @@ Excellent
             @quiz.currentProblem = MeaningProblem.new(vocab)
             test_correct
             test_incorrect            
+        end
+        
+        it "should allow objects to subscribe to status updates" do
+            @quiz.subscriberList.should be_empty
+            subscriber = mock("Subscriber")
+            @quiz.subscribe(subscriber)
+            @quiz.subscriberList.size.should be(1)
+        end
+        
+        it "should notify subscribers of updates" do
+            subscriber = mock("Subscriber")
+            @quiz.subscribe(subscriber)
+            subscriber.should_receive(:quizUpdated)
+            @quiz.update
         end
     end
 end
