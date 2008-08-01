@@ -31,5 +31,9 @@ module JLDrill
                 false
             end
         end
+        
+        def search(reading)
+            @context.search(reading)
+        end
 	end
 end

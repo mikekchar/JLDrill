@@ -32,5 +32,13 @@ module JLDrill
     		    @parent.updateQuizStatus
     		end
 		end
+		
+		def search(reading)
+		    if !@parent.nil? && !@parent.reference.nil?
+		        @parent.reference.search(reading)
+		    else
+		        []
+		    end
+		end
     end
 end

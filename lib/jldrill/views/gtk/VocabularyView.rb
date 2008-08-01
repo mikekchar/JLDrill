@@ -1,6 +1,7 @@
 require 'Context/Gtk/Widget'
 require 'jldrill/views/VocabularyView'
 require 'jldrill/oldUI/GtkVocabView.rb'
+require 'jldrill/oldUI/GtkVocabTable.rb'
 require 'gtk2'
 
 module JLDrill::Gtk
@@ -18,8 +19,13 @@ module JLDrill::Gtk
 	            self.add(@vbox)
 	            @vocabView = GtkVocabView.new(@view.vocabulary)
 	            @vbox.add(@vocabView)
+	            @searchTable = nil
+	            @buttons = Gtk::HBox.new
+	            @searchButton = Gtk::Button.new("Search")
 	            @addButton = Gtk::Button.new("Add")
-	            @vbox.add(@addButton)
+	            @buttons.add(@searchButton)
+	            @buttons.add(@addButton)
+	            @vbox.add(@buttons)
 	            connectSignals
 	        end
 	        
@@ -35,8 +41,20 @@ module JLDrill::Gtk
     			    end
 				end
 				
-				addButton.signal_connect('clicked') do
+				@addButton.signal_connect('clicked') do
 				    @view.addVocabulary
+				end
+				
+				@searchButton.signal_connect('clicked') do
+				    if !@searchTable.nil?
+				        @vbox.remove(@searchTable)
+				    end
+				    candidates = @view.search(reading)
+				    @searchTable = GtkVocabTable.new(candidates) do |vocab|
+				        update(vocab)
+				    end
+				    @vbox.add(@searchTable)
+				    @vbox.show_all
 				end
 			end
 			
