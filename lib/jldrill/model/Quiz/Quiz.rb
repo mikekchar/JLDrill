@@ -165,16 +165,20 @@ module JLDrill
             end
         end
 
+        def setup
+            # Save the publisher so that we continue to get updates
+            publisher = @publisher
+            initialize()
+            @publisher = publisher
+        end
+
         def load(file)
             retVal = false
 
             # Don't update the status while we're loading the file
             blockUpdates
             if file != ""
-                # Save the publisher so that we continue to get updates
-                publisher = @publisher
-                initialize()
-                @publisher = publisher
+                setup
                 @savename = file
                 IO.foreach(file) do |line|
                     parseLine(line)
@@ -188,7 +192,7 @@ module JLDrill
         end
 
         def loadFromString(name, string)
-            initialize()
+            setup
             
             @savename = name
             
@@ -208,7 +212,7 @@ module JLDrill
             if dict
                 # Don't update the status while we're loading the file
                 blockUpdates
-                initialize()
+                setup
                 @name = dict.shortFile
                 dict.eachVocab do |vocab|
                     contents.add(vocab, 0)

@@ -9,25 +9,43 @@ module JLDrill::Gtk
 	
 	    class StatisticsTable < Gtk::Table
 	        attr_reader :values
-	        
-	        def initialize(entries)
-	            super(2, entries.size, false)
+
+	        def initialize(entries, width=1)
+	            super(width, entries.size, false)
+	            @columns = width
 	            @values = addEntries(entries)
 	        end
-	    
+
 		    def addEntries(entries)
 		        values = makeValues(entries.size)
 		        entries.each_index do |i|
 		            addLabel(entries[i], i)
-		            addValue(values[i], i)
+		            if @columns > 1
+		                0.upto(@columns - 1) do |j|
+		                    addValue(values[j][i], i, j+1)
+		                end
+		            else
+    		            addValue(values[i], i)
+    		        end
 		        end
 		        values
 		    end
 
 		    def makeValues(num)
-		        retVal = []
-		        0.upto(num) do
-		            retVal.push(Gtk::Label.new("0"))
+   		        retVal = []
+		        if @columns > 1
+    		        0.upto(@columns - 1) do
+    		            retVal.push([])
+    		        end
+    		    end
+		        0.upto(num) do |i|
+		            if @columns > 1
+		                0.upto(@columns - 1) do |j|
+		                    retVal[j].push(Gtk::Label.new("0"))
+		                end
+		            else
+    		            retVal.push(Gtk::Label.new("0"))
+    		        end
 		        end
 		        retVal
 		    end
@@ -41,10 +59,10 @@ module JLDrill::Gtk
                        0,                       0)
 		    end
 		    
-		    def addValue(value, row)
+		    def addValue(value, row, column=1)
                 attach(value,
                        # X direction            # Y direction
-                       1, 2,                    row, row + 1,
+                       column, column + 1,                    row, row + 1,
                        Gtk::EXPAND | Gtk::FILL, 0,
                        0,                       0)
 		    end
@@ -71,7 +89,7 @@ module JLDrill::Gtk
                 hbox.add(@durationTable)
                 labels = [" Level 1 ", " Level 2 ", " Level 3 ", " Level 4 ",
                             " Level 5 ", " Level 6 ", " Level 7 ", " Level 8 "]
-                @accuracyTable = StatisticsTable.new(labels)
+                @accuracyTable = StatisticsTable.new(labels, 2)
                 hbox.add(@accuracyTable)
 		    end  
 		          		    
@@ -121,9 +139,11 @@ module JLDrill::Gtk
                 0.upto(7) do |i|
                     acc = statistics.levels[i].accuracy
                     if !acc.nil?
-                        @accuracyTable.values[i].text = acc.to_s
+                        @accuracyTable.values[0][i].text = acc.to_s + "% "
+                        @accuracyTable.values[1][i].text = statistics.levels[i].total.to_s
                     else
-                        @accuracyTable.values[i].text = " - "
+                        @accuracyTable.values[0][i].text = " - "
+                        @accuracyTable.values[1][i].text = " - "
                     end
                 end
             end

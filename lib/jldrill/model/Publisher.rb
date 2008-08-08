@@ -20,6 +20,13 @@ module JLDrill
             end
         end
         
+        def unsubscribe(target, stream)
+            if @streamSubscribers.has_key?(stream)
+                targets = @streamSubscribers[stream]
+                targets.delete(target)
+            end
+        end
+        
         def update(stream)
             if @streamSubscribers.has_key?(stream)
                 @streamSubscribers[stream].each do |subscriber|

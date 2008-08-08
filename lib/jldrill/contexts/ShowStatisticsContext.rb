@@ -26,11 +26,17 @@ module JLDrill
 		    if hasQuiz?(parent)
     		    super(parent)
     		    @mainView.update(parent.quiz)
+    		    @parent.quiz.publisher.subscribe(self, "newProblem")
     		end
 		end
 		
 		def exit
+		    @parent.quiz.publisher.unsubscribe(self, "newProblem")
 		    super
+		end
+		
+		def newProblemUpdated(quiz)
+		    @mainView.update(parent.quiz) unless @mainView.nil?
 		end
     end
 end

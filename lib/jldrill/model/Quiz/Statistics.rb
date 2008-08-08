@@ -21,6 +21,10 @@ module JLDrill
                 @num += 1
             end
             
+            def total
+                @num
+            end
+            
             def accuracy
                 if @num > 0
                     ((@correct.to_f / @num.to_f) * 100).to_i
