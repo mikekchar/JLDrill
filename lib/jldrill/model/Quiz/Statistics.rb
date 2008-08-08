@@ -33,10 +33,37 @@ module JLDrill
                 end
             end
         end
+
+        class StatsTimer
+            attr_reader :total, :startedAt
+        
+            def initialize
+                @total = 0
+                @startedAt = nil
+            end
+            
+            def start
+                stop
+                @startedAt = Time.now
+            end
+
+            def running?
+                !@startedAt.nil?
+            end
+                        
+            def stop
+                if running?
+                    @total += Time.now.to_i - @startedAt.to_i
+                    @startedAt = nil
+                end
+            end
+        end
     
         attr_reader :estimate, :lastTen, :confidence, :levels, 
-                        :timesInTargetZone
+                        :timesInTargetZone, :learned, :reviewed
     
+        attr_writer :learned, :reviewed
+        
         MINIMUM_CONFIDENCE = 0.009
         
         def initialize
@@ -49,8 +76,13 @@ module JLDrill
             @levels = []
             1.upto(8) do
                 @levels.push(LevelStats.new)
-            end 
-            resetConfidence
+            end
+            @learned = 0
+            @reviewed = 0
+            @reviewTimer = StatsTimer.new
+            @learnTimer = StatsTimer.new
+            @currentTimer = nil
+            resetConfidence 
         end
         
         def record(bool)
@@ -224,5 +256,56 @@ module JLDrill
             @confidence = MINIMUM_CONFIDENCE
         end
 
+        def startTimer(isReview)
+            if !@currentTimer.nil?
+                @currentTimer.stop
+            end
+            if isReview
+                @currentTimer = @reviewTimer
+            else
+                @currentTimer = @learnTimer
+            end
+            @currentTimer.start
+        end
+
+        def learnTime
+            @learnTimer.total
+        end
+        
+        def reviewTime
+            @reviewTimer.total
+        end
+        
+        def roundToOneDecimal(value)
+            value = value * 10.0
+            value = value.round
+            value = value.to_f / 10.0
+            value
+        end
+
+        def learnPace
+            if @learned > 0
+                roundToOneDecimal(learnTime.to_f / @learned.to_f)
+            else
+                0.0
+            end
+        end
+
+        def reviewPace
+            if @reviewed > 0
+                roundToOneDecimal(reviewTime.to_f / @reviewed.to_f)
+            else
+                0.0
+            end
+        end
+        
+        def learnTimePercent
+            total = learnPace + reviewPace
+            if total > 0
+                ((learnPace * 100) / total).to_i
+            else
+                0
+            end
+        end
     end
 end

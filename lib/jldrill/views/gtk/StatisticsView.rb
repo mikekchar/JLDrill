@@ -91,6 +91,11 @@ module JLDrill::Gtk
                             " Level 5 ", " Level 6 ", " Level 7 ", " Level 8 "]
                 @accuracyTable = StatisticsTable.new(labels, 2)
                 hbox.add(@accuracyTable)
+                labels = ["Reviewed", "Learned", " Time to review ", 
+                            "Time to learn", "Total Accuracy", " Learn Time % ", 
+                            " ", " "]
+                @rateTable = StatisticsTable.new(labels)
+                hbox.add(@rateTable)
 		    end  
 		          		    
 		    def connectSignals
@@ -147,6 +152,17 @@ module JLDrill::Gtk
                     end
                 end
             end
+            
+            def updateRate(statistics)
+                @rateTable.values[0].text = statistics.reviewed.to_s 
+                @rateTable.values[1].text = statistics.learned.to_s
+                @rateTable.values[2].text = statistics.reviewPace.to_s + "s "
+                @rateTable.values[3].text = statistics.learnPace.to_s + "s "
+                @rateTable.values[4].text = statistics.accuracy.to_s + "% "
+                @rateTable.values[5].text = statistics.learnTimePercent.to_s + "% "
+                @rateTable.values[6].text = "    "
+                @rateTable.values[7].text = "    "
+            end
         end
     
         attr_reader :statisticsWindow
@@ -170,6 +186,7 @@ module JLDrill::Gtk
 		    @statisticsWindow.updateSchedule(quiz.contents.bins[4])
 		    @statisticsWindow.updateDuration(quiz.contents.bins[4])
 		    @statisticsWindow.updateAccuracy(quiz.strategy.stats)
+		    @statisticsWindow.updateRate(quiz.strategy.stats)
 		end
 
     end   

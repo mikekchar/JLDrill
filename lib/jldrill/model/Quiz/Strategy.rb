@@ -271,6 +271,7 @@ module JLDrill
                 # Otherwise drill for the specific bin
                 level = vocab.status.bin - 1
             end
+            @stats.startTimer(vocab.status.bin == 4)
             Problem.create(level, vocab)
         end
         
@@ -280,9 +281,14 @@ module JLDrill
         end
 
         def promote(vocab)
-            if !vocab.nil? && (vocab.status.bin + 1 < contents.bins.length) 
-                moveToBin(vocab, vocab.status.bin + 1)
-                vocab.status.level = vocab.status.bin - 1 unless vocab.status.bin - 1 > 2
+            if !vocab.nil?
+                if (vocab.status.bin + 1 < contents.bins.length)
+                    if (vocab.status.bin + 1) == 4
+                        @stats.learned += 1
+                    end 
+                    moveToBin(vocab, vocab.status.bin + 1)
+                    vocab.status.level = vocab.status.bin - 1 unless vocab.status.bin - 1 > 2
+                end
             end
         end
 
@@ -306,6 +312,7 @@ module JLDrill
 
         def collectStatistics(vocab, good)
             if(vocab.status.bin == 4)
+                @stats.reviewed += 1
                 if(good)
                     @stats.correct(vocab)
                 else
