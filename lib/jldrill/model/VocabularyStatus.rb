@@ -99,17 +99,28 @@ module JLDrill
             !@scheduledTime.nil?
         end
         
+        def calculateNewSchedule
+            start = Time::now
+            interval = firstInterval()
+            if bin == 4
+                if scheduled? && (start.to_i < @scheduledTime.to_i)
+                    start = @scheduledTime
+                end
+
+                if reviewed?
+                    elapsed = Time::now.to_i - @lastReviewed.to_i
+                    if (2 * elapsed) > interval
+                        interval = 2 * elapsed
+                    end
+                end
+            end            
+            start + interval
+        end
+        
         # Schedule the item for review
         def schedule
-            @scheduledTime = Time::now + firstInterval
-
-            if reviewed?
-                elapsed = Time::now.to_i - @lastReviewed.to_i
-                if (2 * elapsed) > firstInterval
-                    @scheduledTime = Time::now + (2 * elapsed)
-                end
-            end
-            @scheduledTime
+            @scheduledTime = calculateNewSchedule
+            return @scheduledTime
         end
         
         # Remove review schedule for the item
@@ -152,6 +163,12 @@ module JLDrill
             @seen
         end
         
+        def potentialScheduleInDays
+            seconds = calculateNewSchedule.to_i - Time::now.to_i
+            days = (seconds * 10 / SECONDS_PER_DAY).to_f / 10
+            return days
+        end
+        
         # Return the total number of seconds that the item from the
         # last reviewed time to the scheduled time
         def scheduleDuration
@@ -174,9 +191,20 @@ module JLDrill
             @scheduledTime.to_i < Time::now.to_i
         end
         
+        # Returns true if the item was reviewed on the specified day.
+        # 0 is today, -1 is yesterday, -2 is the day before, etc.  Uses the
+        # date, not 24 hour time period (i.e., if it's 1am, then an
+        # item reviewed 2 hours ago is yesterday).
+        def reviewedOn?(day)
+            target = Time::now + (SECONDS_PER_DAY * day)
+            @lastReviewed.day == target.day && 
+                @lastReviewed.month == target.month &&
+                @lastReviewed.year == target.year
+        end
+        
         # Returns true if the item is scheduled on the specified day.
         # 0 is today, 1 is tomorrow, 2 is the day after, etc.  Uses the
-        # date, not 24 hour time period (i.e., if it's 11pm, then a
+        # date, not 24 hour time period (i.e., if it's 11pm, then an
         # item scheduled in 2 hours is tomorrow).
         def scheduledOn?(day)
             target = Time::now + (SECONDS_PER_DAY * day)
@@ -193,6 +221,20 @@ module JLDrill
             low = SECONDS_PER_DAY * range.begin
             high = SECONDS_PER_DAY * range.end
             scheduleDuration >= low && scheduleDuration < high
+        end
+        
+        def reviewedDate
+            retVal = ""
+            if reviewed?
+                if reviewedOn?(0)
+                    retVal = "Today"
+                elsif reviewedOn?(-1)
+                    retVal = "Yesterday"
+                else
+                    retVal = @lastReviewed.strftime("%x")
+                end
+            end
+            retVal
         end
         
         def to_s

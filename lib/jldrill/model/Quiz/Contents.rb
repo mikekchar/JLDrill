@@ -203,8 +203,7 @@ module JLDrill
         
         # Return a string containing the length of all the bins
         def status
-            retVal = "Level "
-            retVal += "U: #{@bins[0].length} P: #{@bins[1].length} "
+            retVal = "U: #{@bins[0].length} P: #{@bins[1].length} "
             retVal += "F: #{@bins[2].length} "
             retVal += "G: #{@bins[3].length} E: #{bins[4].length}"
             retVal

@@ -109,10 +109,10 @@ module JLDrill
             problem2 = Problem.create(0, Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 2/Level: 0/Position: 1/"))
             problem3 = Problem.create(0, Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 3/Level: 0/Position: 1/"))
             problem4 = Problem.create(0, Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 0/Position: 1/"))
-            problem1.status.should be_eql("Current: 1")
-            problem2.status.should be_eql("Current: 2")
-            problem3.status.should be_eql("Current: 3")
-            problem4.status.should be_eql("Current: 4")
+            problem1.status.should be_eql("     Bin 1, --> 5.0 days")
+            problem2.status.should be_eql("     Bin 2, --> 5.0 days")
+            problem3.status.should be_eql("     Bin 3, --> 5.0 days")
+            problem4.status.should be_eql("     +0, --> 5.0 days")
         end
 
     end

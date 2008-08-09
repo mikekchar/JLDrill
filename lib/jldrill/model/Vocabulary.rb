@@ -53,7 +53,6 @@ class Vocabulary
     # Returns a deep copy of this item.  Note: Does *not* copy parameters
     # that are not saveable.  This is because of my cheezy implementation.
     def clone
-        print "Got here\n"
         Vocabulary.create(self.to_s)
     end
 

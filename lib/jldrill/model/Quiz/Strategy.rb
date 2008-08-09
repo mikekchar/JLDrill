@@ -16,10 +16,9 @@ module JLDrill
         # Returns a string showing the status of the quiz with this strategy
         def status
             if shouldReview?
-                retVal = "Known: #{@stats.recentAccuracy}%"
+                retVal = "     #{@stats.recentAccuracy}%"
                 if @stats.inTargetZone?
-                    retVal += " Conf: #{(@stats.confidence * 100).to_i}%"
-                    retVal += " Left: #{(10 - @stats.timesInTargetZone)}"
+                    retVal += " - #{(10 - @stats.timesInTargetZone)}"
                 end
             else
                 retVal = "New Items"

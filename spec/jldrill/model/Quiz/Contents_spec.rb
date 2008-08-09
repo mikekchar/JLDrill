@@ -31,7 +31,7 @@ module JLDrill
         	        sizes[bin] = size
         	    end
     	    end
-    	    @quiz.contents.status.should be_eql("Level U: #{sizes[0]} P: #{sizes[1]} F: #{sizes[2]} G: #{sizes[3]} E: #{sizes[4]}")
+    	    @quiz.contents.status.should be_eql("U: #{sizes[0]} P: #{sizes[1]} F: #{sizes[2]} G: #{sizes[3]} E: #{sizes[4]}")
 	    end
 	    
 	    def countSizes(sizes, range)

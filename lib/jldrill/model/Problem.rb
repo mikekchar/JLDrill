@@ -68,7 +68,16 @@ module JLDrill
 
         # Return a string showing what bin this problem is from
         def status
-            "Current: #{@vocab.status.bin}"
+            retVal = "     "
+            if @vocab.status.bin < 4
+                retVal += "Bin #{@vocab.status.bin}, "
+            else
+                retVal += "+#{@vocab.status.consecutive}, "
+                if @vocab.status.reviewed?
+                    retVal += "Last #{@vocab.status.reviewedDate}, "
+                end
+            end
+            retVal += "--> #{@vocab.status.potentialScheduleInDays} days"
         end
         
     end

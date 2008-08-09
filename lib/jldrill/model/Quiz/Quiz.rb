@@ -242,13 +242,11 @@ module JLDrill
         def status
             retVal = ""
             if(@needsSave) then retVal += "* " else retVal += "  " end
-            retVal += @name + ": "
             retVal += @contents.status + " "
             if !@currentProblem.nil?
                 retVal += @currentProblem.status + " "
             end
-            retVal += @strategy.status + " "
-            retVal += "- " + @options.status
+            retVal += @strategy.status
             return retVal
         end
 

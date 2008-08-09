@@ -17,7 +17,7 @@ module JLDrill
 	    
 	    it "should be able to return the status" do
 	        @strategy.status.should_not be_nil
-	        @strategy.status.should be_eql("Known: 0%")
+	        @strategy.status.should be_eql("     0%")
 	    end
 	    
 	    it "should increment the statistics if correct in bin 4" do

@@ -9,7 +9,7 @@ module JLDrill
         	@fileString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 0/
 /Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 0/Difficulty: 0/
 /Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 3/Consecutive: 0/Difficulty: 0/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 0/Level: 0/Position: 4/Consecutive: 0/Difficulty: 7/]
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 4/Level: 0/Position: 4/Consecutive: 1/Difficulty: 7/]
             @strings = @fileString.split("\n")
             @strings.length.should be(4)
             @vocab = []
@@ -25,10 +25,10 @@ module JLDrill
 		end
 		
 		it "should be able to set a lastReviewed time on the object" do
-		    @vocab[1].status.reviewed?.should be(false)
-		    time = @vocab[1].status.markReviewed
+		    @vocab[3].status.reviewed?.should be(false)
+		    time = @vocab[3].status.markReviewed
 		    time.should_not be_nil
-		    @vocab[1].status.reviewed?.should be(true)
+		    @vocab[3].status.reviewed?.should be(true)
 		end
     
         it "should be able to write the last reviewed time to file" do
@@ -51,11 +51,11 @@ module JLDrill
         end
 
         it "should be able to set the scheduled time" do
-		    @vocab[1].status.scheduled?.should be(false)
-		    @vocab[1].status.scheduledTime.to_i.should be_eql(Time::at(0).to_i)
-		    time = @vocab[1].status.schedule
+		    @vocab[3].status.scheduled?.should be(false)
+		    @vocab[3].status.scheduledTime.to_i.should be_eql(Time::at(0).to_i)
+		    time = @vocab[3].status.schedule
 		    time.should_not be_nil
-		    @vocab[1].status.scheduled?.should be(true)
+		    @vocab[3].status.scheduled?.should be(true)
         end
 
         it "should schedule new items to maximum value by default" do
@@ -68,25 +68,26 @@ module JLDrill
         
         it "should schedule old items to twice their elapsed time" do
             # Set reviewed time to 3 days ago
-            @vocab[1].status.lastReviewed = Time::now - days(3)
-		    @vocab[1].status.scheduled?.should be(false)
-		    time = @vocab[1].status.schedule
+            @vocab[3].status.lastReviewed = Time::now - days(3)
+		    @vocab[3].status.scheduled?.should be(false)
+		    time = @vocab[3].status.schedule
 		    time.should_not be_nil
-		    @vocab[1].status.scheduled?.should be(true)
+		    @vocab[3].status.scheduled?.should be(true)
 		    # Should be scheduled for 6 days from now
-		    @vocab[1].status.scheduledTime.to_i.should be_eql(Time::now.to_i + days(6))            
+		    @vocab[3].status.scheduledTime.to_i.should be_eql(Time::now.to_i + days(6))            
         end
         
         it "should set a minimum schedule equal to firstInterval" do
             # Set reviewed time to 1 day ago
-            @vocab[1].status.lastReviewed = Time::now - days(1)
-		    @vocab[1].status.scheduled?.should be(false)
-		    time = @vocab[1].status.schedule
+            @vocab[3].status.lastReviewed = Time::now - days(1)
+		    @vocab[3].status.scheduled?.should be(false)
+		    @vocab[3].status.numIncorrect = 0
+		    time = @vocab[3].status.schedule
 		    time.should_not be_nil
-		    @vocab[1].status.scheduled?.should be(true)
+		    @vocab[3].status.scheduled?.should be(true)
 		    # Instead of 2 days it will be 5 because that is the minumum for
 		    # an item that has no incorrect.
-		    @vocab[1].status.scheduledTime.to_i.should be_eql(Time::now.to_i + days(5))            
+		    @vocab[3].status.scheduledTime.to_i.should be_eql(Time::now.to_i + days(5))            
         end
 
         it "should be able to write scheduledTime to file" do
@@ -203,6 +204,13 @@ module JLDrill
             @vocab[1].status.durationWithin?(0..1).should be(false)
             @vocab[1].status.durationWithin?(0..2).should be(true)            
             @vocab[1].status.durationWithin?(1..2).should be(true)            
+        end
+        
+        it "should be able to show the reviewed date" do
+            @vocab[3].status.lastReviewed = Time::now
+            @vocab[3].status.reviewedDate.should be_eql("Today")
+            @vocab[3].status.lastReviewed = Time::now - days(1)
+            @vocab[3].status.reviewedDate.should be_eql("Yesterday")
         end
 	end
 
