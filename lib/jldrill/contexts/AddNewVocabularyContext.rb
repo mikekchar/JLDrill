@@ -35,7 +35,9 @@ module JLDrill
 		
 		def search(reading)
 		    if !@parent.nil? && !@parent.reference.nil?
-		        @parent.reference.search(reading)
+		        @parent.reference.search(reading).sort! do |x,y|
+		            x.reading <=> y.reading
+		        end
 		    else
 		        []
 		    end
