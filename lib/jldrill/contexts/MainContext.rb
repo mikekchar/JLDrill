@@ -77,7 +77,8 @@ module JLDrill
 		
 		def openFile
 		    if loadQuiz(@quiz)
-                @mainWindowView.displayQuestion(@quiz.drill)
+		        @quiz.drill
+                @mainWindowView.displayQuestion
             end
 		end
 		

@@ -79,6 +79,38 @@ module JLDrill
             end
             retVal += "--> #{@vocab.status.potentialScheduleInDays} days"
         end
+
+        def questionKanji
+            ""
+        end
+
+        def questionReading
+            ""
+        end
+        
+        def questionDefinitions
+            ""
+        end
+        
+        def questionHint
+            ""
+        end
+
+        def answerKanji
+            ""
+        end
+
+        def answerReading
+            ""
+        end
+        
+        def answerDefinitions
+            ""
+        end
+        
+        def answerHint
+            ""
+        end
         
     end
     
@@ -96,7 +128,24 @@ module JLDrill
 
         def answer
             definitions
-        end    
+        end
+        
+        def questionKanji
+            kanji
+        end
+
+        def questionReading
+            reading
+        end
+        
+        def questionHint
+            hint
+        end
+        
+        def answerDefinitions
+            definitions
+        end
+
     end
     
     # Test your kanji reading.  Read the kanji and guess the reading and definitions
@@ -112,6 +161,22 @@ module JLDrill
         
         def answer
             reading + definitions + hint
+        end
+        
+        def questionKanji
+            kanji
+        end
+        
+        def answerReading
+            reading
+        end
+        
+        def answerDefinitions
+            definitions
+        end
+        
+        def answerHint
+            hint
         end
     end
     
@@ -129,6 +194,22 @@ module JLDrill
         
         def answer
             kanji + reading + hint
+        end
+        
+        def questionDefinitions
+            definitions
+        end
+        
+        def answerKanji
+            kanji
+        end
+        
+        def answerReading
+            reading
+        end
+        
+        def answerHint
+            hint
         end
     end
 

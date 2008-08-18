@@ -21,7 +21,7 @@ module JLDrill
                     retVal += " - #{(10 - @stats.timesInTargetZone)}"
                 end
             else
-                retVal = "New Items"
+                retVal = "     New Items"
             end
             retVal
         end

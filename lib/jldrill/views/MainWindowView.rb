@@ -38,7 +38,7 @@ module JLDrill
             @context.addNewVocabulary
         end
         
-        def displayQuestion(question)
+        def displayQuestion
             # Should be overridden by the concrete class.
         end
 		

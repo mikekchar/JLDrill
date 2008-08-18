@@ -89,6 +89,7 @@ module JLDrill::Gtk
 
                 vpaned = Gtk::VPaned.new
                 vpaned.set_border_width(5)
+                vpaned.set_position(125)
                 @mainTable.attach(vpaned,
                              # X direction            # Y direction
                              0, 1,                    3, 4,
@@ -109,9 +110,23 @@ module JLDrill::Gtk
                 sw.add(contents)
                 @qbuffer = contents.buffer
                 @qbuffer.create_tag("kanji", 
+                                   "size" => 40 * Pango::SCALE,
+                                   "justification" => Gtk::JUSTIFY_CENTER,
+                                   "family" => "Times")
+                @qbuffer.create_tag("reading", 
                                    "size" => 20 * Pango::SCALE,
                                    "justification" => Gtk::JUSTIFY_CENTER,
-                                   "foreground" => "blue");
+                                   "family" => "Times",
+                                   "foreground" => "blue")
+                @qbuffer.create_tag("definition", 
+                                   "size" => 16 * Pango::SCALE,
+                                   "justification" => Gtk::JUSTIFY_CENTER,
+                                   "family" => "Sans")
+                @qbuffer.create_tag("hint", 
+                                   "size" => 14 * Pango::SCALE,
+                                   "justification" => Gtk::JUSTIFY_CENTER,
+                                   "family" => "Sans",
+                                   "foreground" => "red")
 
                 ## Create document
                 sw = Gtk::ScrolledWindow.new
@@ -126,9 +141,23 @@ module JLDrill::Gtk
                 sw.add(contents)
                 @abuffer = contents.buffer
                 @abuffer.create_tag("kanji", 
+                                   "size" => 40 * Pango::SCALE,
+                                   "justification" => Gtk::JUSTIFY_CENTER,
+                                   "family" => "Times")
+                @abuffer.create_tag("reading", 
                                    "size" => 20 * Pango::SCALE,
                                    "justification" => Gtk::JUSTIFY_CENTER,
-                                   "foreground" => "blue");
+                                   "family" => "Times",
+                                   "foreground" => "blue")
+                @abuffer.create_tag("definition", 
+                                   "size" => 16 * Pango::SCALE,
+                                   "justification" => Gtk::JUSTIFY_CENTER,
+                                   "family" => "Sans")
+                @abuffer.create_tag("hint", 
+                                   "size" => 14 * Pango::SCALE,
+                                   "justification" => Gtk::JUSTIFY_CENTER,
+                                   "family" => "Sans",
+                                   "foreground" => "red")
 			end
 
             def add(widget, orig=false)
@@ -299,21 +328,39 @@ module JLDrill::Gtk
                 eval("\"#{text.gsub(/["]/, "\\\"")}\"")
             end
 
-            def printQuestion(text)
+            def printQuestion
                 if @qbuffer
+                    problem = @view.quiz.currentProblem
                     @qbuffer.text = ""
                     @abuffer.text = ""
-                    @qbuffer.insert(@qbuffer.start_iter, processString(text), "kanji")
+                    @qbuffer.insert(@qbuffer.end_iter, processString(problem.questionKanji), "kanji")
+                    if problem.kanji == ""
+                        readingStyle = "kanji"
+                    else
+                        readingStyle = "reading"
+                    end
+                    @qbuffer.insert(@qbuffer.end_iter, processString(problem.questionReading), readingStyle)
+                    @qbuffer.insert(@qbuffer.end_iter, processString(problem.questionDefinitions), "definition")
+                    @qbuffer.insert(@qbuffer.end_iter, processString(problem.questionHint), "hint")
                     if !@view.quiz.vocab.nil?
                         @indicatorBox.set(@view.quiz.vocab)
                     end
                 end
             end
 
-            def printAnswer(text)
+            def printAnswer
                 if @abuffer
+                    problem = @view.quiz.currentProblem
                     @abuffer.text = ""
-                    @abuffer.insert(@abuffer.start_iter, processString(text), "kanji")
+                    @abuffer.insert(@abuffer.end_iter, processString(problem.answerKanji), "kanji")
+                    if problem.kanji == ""
+                        readingStyle = "kanji"
+                    else
+                        readingStyle = "reading"
+                    end
+                    @abuffer.insert(@abuffer.end_iter, processString(problem.answerReading), readingStyle)
+                    @abuffer.insert(@abuffer.end_iter, processString(problem.answerDefinitions), "definition")
+                    @abuffer.insert(@abuffer.end_iter, processString(problem.answerHint), "hint")
                 end
             end      
 
@@ -585,8 +632,8 @@ Copyright (C) 2005-2007  Mike Charlton
 
             def redraw
                 if @view.quiz
-                    printQuestion(@view.quiz.currentDrill)
-                    printAnswer(@view.quiz.currentAnswer)
+                    printQuestion
+                    printAnswer
                 end
             end
 
@@ -598,21 +645,23 @@ Copyright (C) 2005-2007  Mike Charlton
 
             def check()
                 if(@view.quiz)
-                    printAnswer(@view.quiz.answer)
+                    printAnswer
                 end
             end
 
             def correct()
                 if(@view.quiz)
                     @view.quiz.correct
-                    printQuestion(@view.quiz.drill)
+                    @view.quiz.drill
+                    printQuestion
                 end
             end
 
             def incorrect()
                 if(@view.quiz)
                     @view.quiz.incorrect
-                    printQuestion(@view.quiz.drill)
+                    @view.quiz.drill
+                    printQuestion
                 end
             end
 			
@@ -689,8 +738,8 @@ Copyright (C) 2005-2007  Mike Charlton
 		    success
 		end  
 		
-		def displayQuestion(question)
-		    @mainWindow.printQuestion(question)
+		def displayQuestion
+		    @mainWindow.printQuestion
 		end
 		
 		def updateQuiz

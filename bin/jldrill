@@ -6,6 +6,6 @@ begin
 	require_all 'jldrill/views/gtk/*.rb'
 end
 
-anjin = Context::Gtk::App.new(JLDrill::Gtk, JLDrill::MainContext)
-anjin.enter
+jldrill = Context::Gtk::App.new(JLDrill::Gtk, JLDrill::MainContext)
+jldrill.enter
 
