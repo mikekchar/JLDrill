@@ -107,14 +107,15 @@ module JLDrill::Gtk
                 contents.wrap_mode = Gtk::TextTag::WRAP_WORD
                 contents.editable = false
                 contents.cursor_visible = false
+                contents.set_pixels_above_lines(5)
                 sw.add(contents)
                 @qbuffer = contents.buffer
                 @qbuffer.create_tag("kanji", 
-                                   "size" => 40 * Pango::SCALE,
+                                   "size" => 36 * Pango::SCALE,
                                    "justification" => Gtk::JUSTIFY_CENTER,
                                    "family" => "Times")
                 @qbuffer.create_tag("reading", 
-                                   "size" => 20 * Pango::SCALE,
+                                   "size" => 18 * Pango::SCALE,
                                    "justification" => Gtk::JUSTIFY_CENTER,
                                    "family" => "Times",
                                    "foreground" => "blue")
@@ -138,14 +139,15 @@ module JLDrill::Gtk
                 contents.wrap_mode = Gtk::TextTag::WRAP_WORD
                 contents.editable = false
                 contents.cursor_visible = false
+                contents.set_pixels_above_lines(5)
                 sw.add(contents)
                 @abuffer = contents.buffer
                 @abuffer.create_tag("kanji", 
-                                   "size" => 40 * Pango::SCALE,
+                                   "size" => 36 * Pango::SCALE,
                                    "justification" => Gtk::JUSTIFY_CENTER,
                                    "family" => "Times")
                 @abuffer.create_tag("reading", 
-                                   "size" => 20 * Pango::SCALE,
+                                   "size" => 18 * Pango::SCALE,
                                    "justification" => Gtk::JUSTIFY_CENTER,
                                    "family" => "Times",
                                    "foreground" => "blue")

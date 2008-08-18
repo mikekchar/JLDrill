@@ -48,7 +48,7 @@ module JLDrill
 
         def hint
             if !@vocab.hint.nil?
-                "\nHint: " + @vocab.hint + "\n"
+                "Hint: " + @vocab.hint
             else
                 ""
             end
