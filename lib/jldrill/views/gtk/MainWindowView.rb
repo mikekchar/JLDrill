@@ -49,7 +49,6 @@ module JLDrill::Gtk
 				super('JLDrill')
 				@closed = false
 				@view = view
-				connectSignals unless @view.nil?
 
                 @resultDisplayed = false
     
@@ -103,13 +102,13 @@ module JLDrill::Gtk
                 sw.shadow_type = Gtk::SHADOW_IN
                 vpaned.add1(sw)
 
-                contents = Gtk::TextView.new
-                contents.wrap_mode = Gtk::TextTag::WRAP_WORD
-                contents.editable = false
-                contents.cursor_visible = false
-                contents.set_pixels_above_lines(5)
-                sw.add(contents)
-                @qbuffer = contents.buffer
+                @qcontents = Gtk::TextView.new
+                @qcontents.wrap_mode = Gtk::TextTag::WRAP_WORD
+                @qcontents.editable = false
+                @qcontents.cursor_visible = false
+                @qcontents.set_pixels_above_lines(5)
+                sw.add(@qcontents)
+                @qbuffer = @qcontents.buffer
                 @qbuffer.create_tag("kanji", 
                                    "size" => 36 * Pango::SCALE,
                                    "justification" => Gtk::JUSTIFY_CENTER,
@@ -135,13 +134,13 @@ module JLDrill::Gtk
                 sw.shadow_type = Gtk::SHADOW_IN
                 vpaned.add2(sw)
 
-                contents = Gtk::TextView.new
-                contents.wrap_mode = Gtk::TextTag::WRAP_WORD
-                contents.editable = false
-                contents.cursor_visible = false
-                contents.set_pixels_above_lines(5)
-                sw.add(contents)
-                @abuffer = contents.buffer
+                @acontents = Gtk::TextView.new
+                @acontents.wrap_mode = Gtk::TextTag::WRAP_WORD
+                @acontents.editable = false
+                @acontents.cursor_visible = false
+                @acontents.set_pixels_above_lines(5)
+                sw.add(@acontents)
+                @abuffer = @acontents.buffer
                 @abuffer.create_tag("kanji", 
                                    "size" => 36 * Pango::SCALE,
                                    "justification" => Gtk::JUSTIFY_CENTER,
@@ -160,6 +159,8 @@ module JLDrill::Gtk
                                    "justification" => Gtk::JUSTIFY_CENTER,
                                    "family" => "Sans",
                                    "foreground" => "red")
+
+				connectSignals unless @view.nil?
 			end
 
             def add(widget, orig=false)
@@ -668,6 +669,10 @@ Copyright (C) 2005-2007  Mike Charlton
             end
 			
 			def connectSignals
+	            @qcontents.add_events(Gdk::Event::POINTER_MOTION_MASK)
+	            @qcontents.add_events(Gdk::Event::LEAVE_NOTIFY_MASK)
+	            @acontents.add_events(Gdk::Event::POINTER_MOTION_MASK)
+	            @acontents.add_events(Gdk::Event::LEAVE_NOTIFY_MASK)
 			    signal_connect('delete_event') do
                     # Request that the destroy signal be sent
                     false
@@ -678,6 +683,23 @@ Copyright (C) 2005-2007  Mike Charlton
     					closeView
     			    end
 				end
+				
+        		@qcontents.signal_connect('motion_notify_event') do |widget, motion|
+				    characterPopup(widget, motion.window, motion.x, motion.y)
+				end
+
+        		@acontents.signal_connect('motion_notify_event') do |widget, motion|
+				    characterPopup(widget, motion.window, motion.x, motion.y)
+				end
+
+        		@qcontents.signal_connect('leave_notify_event') do |widget, event|
+				    closePopup
+				end
+
+        		@acontents.signal_connect('leave_notify_event') do |widget, event|
+				    closePopup
+				end
+
 			end
 			
 			def explicitDestroy
@@ -693,6 +715,34 @@ Copyright (C) 2005-2007  Mike Charlton
 			
 			def updateQuiz
 			    @reviewModeButton.update
+			end
+			
+			def closePopup
+			    if !@popup.nil?
+			        @popup.destroy
+			        @popup = nil
+			        @popupChar = nil
+			    end
+			end
+			
+			def characterPopup(widget, window, x, y)
+                closePopup
+			    coords = widget.window_to_buffer_coords(widget.get_window_type(window), x, y)
+			    iter, trailing = widget.get_iter_at_position(coords[0], coords[1])
+			    char = iter.char
+		        pos = widget.get_iter_location(iter)
+			    if (coords[0] > pos.x) && (coords[0] < pos.x + pos.width) &&
+			      char != "" && !(char =~ /[a-zA-Z0-9 \s]/)
+			        @popup = Gtk::Window.new(Gtk::Window::POPUP)
+			        @popup.set_default_size(100,100)
+			        @popup.set_transient_for(self)
+			        @popup.set_destroy_with_parent(true)
+			        @popup.set_window_position(Gtk::Window::POS_NONE)
+			        label = Gtk::Label.new(char)
+			        @popup.add(label)
+			        @popup.move(0, 100)
+			        @popup.show_all
+			    end
 			end
         end
 		
