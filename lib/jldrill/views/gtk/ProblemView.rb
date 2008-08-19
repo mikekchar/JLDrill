@@ -127,6 +127,8 @@ module JLDrill::Gtk
 			super(context)
 			@problemWindow = ProblemWindow.new(self)
 			@widget = Context::Gtk::Widget.new(@problemWindow)
+			@widget.expandWidth = true
+			@widget.expandHeight = true
 		end
 		
 		def getWidget

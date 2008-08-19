@@ -40,7 +40,8 @@ module JLDrill::Gtk
 		    @story.start
             @story.view.mainWindow.mainTable.n_rows.should be(4)
             sb = Gtk::Statusbar.new
-            @story.view.mainWindow.add(sb)
+            widget = Context::Gtk::Widget.new(sb)
+            @story.view.mainWindow.add(widget)
             @story.view.mainWindow.mainTable.n_rows.should be(5)            
             @story.shutdown
         end
@@ -52,7 +53,8 @@ module JLDrill::Gtk
 		    @story.start
             @story.view.mainWindow.mainTable.n_rows.should be(4)
             sb = Gtk::Statusbar.new
-            @story.view.mainWindow.add(sb)
+            widget = Context::Gtk::Widget.new(sb)
+            @story.view.mainWindow.add(widget)
             @story.view.mainWindow.mainTable.n_rows.should be(5)
             @story.view.mainWindow.remove(sb)                    
             @story.view.mainWindow.mainTable.n_rows.should be(5)

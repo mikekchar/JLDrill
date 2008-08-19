@@ -89,11 +89,21 @@ module JLDrill::Gtk
                 else
                     size = @mainTable.n_rows
                     @mainTable.resize(1, size + 1)
-                    @mainTable.attach(widget,
-                                 # X direction            # Y direction
-                                 0, 1,                    size, size + 1,
-                                 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
-                                 0,                       0)
+                    if widget.expandWidth
+                        xOptions = Gtk::EXPAND | Gtk::FILL
+                    else
+                        xOptions = 0
+                    end
+                    if widget.expandHeight
+                        yOptions = Gtk::EXPAND | Gtk::FILL
+                    else
+                        yOptions = 0
+                    end
+                    @mainTable.attach(widget.delegate,
+                                 # X direction   # Y direction
+                                 0, 1,           size, size + 1,
+                                 xOptions,       yOptions,
+                                 0,              0)
                 end
             end
             
@@ -659,6 +669,17 @@ Copyright (C) 2005-2007  Mike Charlton
 			@mainWindow.set_default_size(600, 400)
 			@widget = Context::Gtk::Widget.new(@mainWindow)
 			@widget.isAMainWindow
+			def @widget.add(widget)
+       		    if !widget.delegate.class.ancestors.include?(Gtk::Window)
+        		    widget.mainWindow = @mainWindow
+        			@delegate.add(widget)
+        			if !Context::Gtk::Widget.inTests
+                		@delegate.show_all
+                    end
+        	    else
+        	        super
+        	    end
+			end
 #			kanjiFile = JLDrill::Config::getDataDir + "/dict/kanjidic.utf"
 #			radicalFile = JLDrill::Config::getDataDir + "/dict/radkfile.utf"
 #			@kanjiDic = JLDrill::KanjidicFile.open(kanjiFile, JLDrill::RadKFile.open(radicalFile))
