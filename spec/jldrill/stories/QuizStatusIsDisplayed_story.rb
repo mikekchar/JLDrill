@@ -1,6 +1,3 @@
-require 'jldrill/contexts/MainContext'
-require 'jldrill/views/MainWindowView'
-require 'jldrill/views/gtk/MainWindowView'
 require 'jldrill/views/QuizStatusView'
 require 'jldrill/views/gtk/QuizStatusView'
 require 'jldrill/spec/StoryMemento'

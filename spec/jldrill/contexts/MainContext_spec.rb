@@ -58,7 +58,6 @@ module JLDrill
 		    # Because the quiz hasn't actually been loaded, we need to fake the
 		    # drill here.
 		    @context.quiz.should_receive(:drill).and_return("Fake")
-		    @context.mainView.should_receive(:displayQuestion)
 		    @context.openFile
 		end
 		
@@ -70,7 +69,6 @@ module JLDrill
 		    # Because the dict hasn't actually been loaded, we need to fake the
 		    # drill here.
 		    @context.quiz.should_receive(:drill).and_return("Fake")
-		    @context.mainView.should_receive(:displayQuestion)
 		    @context.openFile
 		end
 

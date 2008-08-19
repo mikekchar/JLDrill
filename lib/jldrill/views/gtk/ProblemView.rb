@@ -1,0 +1,135 @@
+require 'Context/Gtk/Widget'
+require 'jldrill/views/ProblemView'
+require 'gtk2'
+
+module JLDrill::Gtk
+
+	class ProblemView < JLDrill::ProblemView
+
+        class InfoPane < Gtk::ScrolledWindow
+            def initialize
+                super
+                self.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
+                self.shadow_type = Gtk::SHADOW_IN
+                @contents = Gtk::TextView.new
+                @contents.wrap_mode = Gtk::TextTag::WRAP_WORD
+                @contents.editable = false
+                @contents.cursor_visible = false
+                @contents.set_pixels_above_lines(5)
+                self.add(@contents)
+                @buffer = @contents.buffer
+                createTags
+            end
+            
+            def createTags
+                @buffer.create_tag("kanji", 
+                                   "size" => 36 * Pango::SCALE,
+                                   "justification" => Gtk::JUSTIFY_CENTER,
+                                   "family" => "Times")
+                @buffer.create_tag("reading", 
+                                   "size" => 18 * Pango::SCALE,
+                                   "justification" => Gtk::JUSTIFY_CENTER,
+                                   "family" => "Times",
+                                   "foreground" => "blue")
+                @buffer.create_tag("definition", 
+                                   "size" => 16 * Pango::SCALE,
+                                   "justification" => Gtk::JUSTIFY_CENTER,
+                                   "family" => "Sans")
+                @buffer.create_tag("hint", 
+                                   "size" => 14 * Pango::SCALE,
+                                   "justification" => Gtk::JUSTIFY_CENTER,
+                                   "family" => "Sans",
+                                   "foreground" => "red")
+            end
+
+            def processString(text)
+                eval("\"#{text.gsub(/["]/, "\\\"")}\"")
+            end
+            
+            def clear
+                @buffer.text = ""
+            end
+            
+            def showQuestion(problem)
+                clear
+                if !problem.nil?
+                    @buffer.insert(@buffer.end_iter, processString(problem.questionKanji), "kanji")
+                    if problem.kanji == ""
+                        readingStyle = "kanji"
+                    else
+                        readingStyle = "reading"
+                    end
+                    @buffer.insert(@buffer.end_iter, processString(problem.questionReading), readingStyle)
+                    @buffer.insert(@buffer.end_iter, processString(problem.questionDefinitions), "definition")
+                    @buffer.insert(@buffer.end_iter, processString(problem.questionHint), "hint")
+                end
+            end
+
+            def showAnswer(problem)
+                clear
+                if !problem.nil?
+                    @buffer.insert(@buffer.end_iter, processString(problem.answerKanji), "kanji")
+                    if problem.kanji == ""
+                        readingStyle = "kanji"
+                    else
+                        readingStyle = "reading"
+                    end
+                    @buffer.insert(@buffer.end_iter, processString(problem.answerReading), readingStyle)
+                    @buffer.insert(@buffer.end_iter, processString(problem.answerDefinitions), "definition")
+                    @buffer.insert(@buffer.end_iter, processString(problem.answerHint), "hint")
+                end
+            end
+        end
+	
+	    class ProblemWindow < Gtk::VPaned
+	        attr_reader :question, :answer
+
+	        def initialize(view)
+	            @view = view
+	            super()
+                self.set_border_width(5)
+                self.set_position(125)
+                @question = InfoPane.new
+                @answer = InfoPane.new
+                @problem = nil
+                self.pack1(@question, true, true)
+                self.pack2(@answer, true, true)
+	        end
+	        
+	        def newProblem(problem)
+	            @problem = problem
+	            @answer.clear
+	            @question.showQuestion(problem)
+	        end
+	        
+	        def showAnswer
+	            if !@problem.nil?
+    	            @answer.showAnswer(@problem)
+    	        end
+	        end
+	        
+	    end
+	
+        attr_reader :problemWindow
+        	
+		def initialize(context)
+			super(context)
+			@problemWindow = ProblemWindow.new(self)
+			@widget = Context::Gtk::Widget.new(@problemWindow)
+		end
+		
+		def getWidget
+			@widget
+		end
+		
+		def newProblem(problem)
+		    @problemWindow.newProblem(problem)
+		end
+		
+		def showAnswer
+		    @problemWindow.showAnswer
+		end
+    end
+    
+end
+

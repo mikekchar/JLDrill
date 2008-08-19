@@ -35,15 +35,6 @@ module JLDrill::Gtk
 			@story.restart
 		end
  
-        it "should be able to processes special characters in the answer string" do
-            @story.setup(JLDrill::Gtk)
-		    @story.start
-            @story.view.mainWindow.processString("This is a test\\n").should be_eql("This is a test\n")
-            # Shouldn't break on quotes
-            @story.view.mainWindow.processString("This is a \"test\"\\n").should be_eql("This is a \"test\"\n")
-            @story.shutdown
-        end
-        
         it "should be able to add items to the end of the window" do
             @story.setup(JLDrill::Gtk)
 		    @story.start

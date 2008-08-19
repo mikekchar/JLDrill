@@ -10,6 +10,7 @@ require 'jldrill/contexts/ShowStatisticsContext'
 require 'jldrill/contexts/GetFilenameContext'
 require 'jldrill/contexts/AddNewVocabularyContext'
 require 'jldrill/contexts/DisplayQuizStatusContext'
+require 'jldrill/contexts/DisplayProblemContext'
 
 module JLDrill
 
@@ -18,6 +19,7 @@ module JLDrill
 	    attr_reader :loadReferenceContext, :setOptionsContext, 
 	                :showStatisticsContext, :getFilenameContext,
 	                :addNewVocabularyContext, :displayQuizStatusContext,
+	                :displayProblemContext,
 	                :reference, :quiz
 	    attr_writer :quiz
 		
@@ -30,6 +32,7 @@ module JLDrill
 			@getFilenameContext.directory = File.join(JLDrill::Config::DATA_DIR, "quiz")
 			@addNewVocabularyContext = AddNewVocabularyContext.new(viewBridge)
 			@displayQuizStatusContext = DisplayQuizStatusContext.new(viewBridge)
+			@displayProblemContext = DisplayProblemContext.new(viewBridge)
 			@reference = HashedEdict.new
 			@quiz = Quiz.new
 		end
@@ -49,12 +52,14 @@ module JLDrill
 			super(parent)
 			@mainView.open
 			# The quiz status is always displayed
+			@displayProblemContext.enter(self)
 			@displayQuizStatusContext.enter(self)
 		end
 				
 		def exit
 			super
 		    @displayQuizStatusContext.exit 
+		    @displayProblemContext.exit 
 			@parent.exit
 		end
 				
@@ -78,7 +83,6 @@ module JLDrill
 		def openFile
 		    if loadQuiz(@quiz)
 		        @quiz.drill
-                @mainWindowView.displayQuestion
             end
 		end
 		
@@ -115,6 +119,10 @@ module JLDrill
 		
 		def updateNewProblemStatus
 		    @displayQuizStatusContext.newProblemUpdated(@quiz) if @displayQuizStatusContext.isEntered?
+		end
+		
+		def showAnswer
+		    @displayProblemContext.showAnswer if @displayProblemContext.isEntered?
 		end
     end
 end

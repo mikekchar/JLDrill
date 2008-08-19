@@ -63,7 +63,7 @@ module JLDrill::Gtk
                 @reviewModeButton = ReviewModeButton.new(@view)
 
                 ## Layout everything in a vertical table
-                @mainTable = Gtk::Table.new(1, 5, false)
+                @mainTable = Gtk::Table.new(1, 3, false)
                 add(@mainTable, true)
 
                 menu = createMenu
@@ -87,81 +87,6 @@ module JLDrill::Gtk
                              0, 1,                    2, 3,
                              Gtk::EXPAND | Gtk::FILL, 0,
                              0,                       0)
-
-                vpaned = Gtk::VPaned.new
-                vpaned.set_border_width(5)
-                vpaned.set_position(125)
-                @mainTable.attach(vpaned,
-                             # X direction            # Y direction
-                             0, 1,                    3, 4,
-                             Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
-                             0,                       0)
-
-
-                ## Create document
-                sw = Gtk::ScrolledWindow.new
-                sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
-                sw.shadow_type = Gtk::SHADOW_IN
-                vpaned.add1(sw)
-
-                @qcontents = Gtk::TextView.new
-                @qcontents.wrap_mode = Gtk::TextTag::WRAP_WORD
-                @qcontents.editable = false
-                @qcontents.cursor_visible = false
-                @qcontents.set_pixels_above_lines(5)
-                sw.add(@qcontents)
-                @qbuffer = @qcontents.buffer
-                @qbuffer.create_tag("kanji", 
-                                   "size" => 36 * Pango::SCALE,
-                                   "justification" => Gtk::JUSTIFY_CENTER,
-                                   "family" => "Times")
-                @qbuffer.create_tag("reading", 
-                                   "size" => 18 * Pango::SCALE,
-                                   "justification" => Gtk::JUSTIFY_CENTER,
-                                   "family" => "Times",
-                                   "foreground" => "blue")
-                @qbuffer.create_tag("definition", 
-                                   "size" => 16 * Pango::SCALE,
-                                   "justification" => Gtk::JUSTIFY_CENTER,
-                                   "family" => "Sans")
-                @qbuffer.create_tag("hint", 
-                                   "size" => 14 * Pango::SCALE,
-                                   "justification" => Gtk::JUSTIFY_CENTER,
-                                   "family" => "Sans",
-                                   "foreground" => "red")
-
-                ## Create document
-                sw = Gtk::ScrolledWindow.new
-                sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
-                sw.shadow_type = Gtk::SHADOW_IN
-                vpaned.add2(sw)
-
-                @acontents = Gtk::TextView.new
-                @acontents.wrap_mode = Gtk::TextTag::WRAP_WORD
-                @acontents.editable = false
-                @acontents.cursor_visible = false
-                @acontents.set_pixels_above_lines(5)
-                sw.add(@acontents)
-                @abuffer = @acontents.buffer
-                @abuffer.create_tag("kanji", 
-                                   "size" => 36 * Pango::SCALE,
-                                   "justification" => Gtk::JUSTIFY_CENTER,
-                                   "family" => "Times")
-                @abuffer.create_tag("reading", 
-                                   "size" => 18 * Pango::SCALE,
-                                   "justification" => Gtk::JUSTIFY_CENTER,
-                                   "family" => "Times",
-                                   "foreground" => "blue")
-                @abuffer.create_tag("definition", 
-                                   "size" => 16 * Pango::SCALE,
-                                   "justification" => Gtk::JUSTIFY_CENTER,
-                                   "family" => "Sans")
-                @abuffer.create_tag("hint", 
-                                   "size" => 14 * Pango::SCALE,
-                                   "justification" => Gtk::JUSTIFY_CENTER,
-                                   "family" => "Sans",
-                                   "foreground" => "red")
-
 				connectSignals unless @view.nil?
 			end
 
@@ -175,7 +100,7 @@ module JLDrill::Gtk
                     @mainTable.attach(widget,
                                  # X direction            # Y direction
                                  0, 1,                    size, size + 1,
-                                 Gtk::EXPAND | Gtk::FILL, 0,
+                                 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
                                  0,                       0)
                 end
             end
@@ -328,46 +253,6 @@ module JLDrill::Gtk
             def statistics
                 @view.showStatistics
             end
-
-            def processString(text)
-                eval("\"#{text.gsub(/["]/, "\\\"")}\"")
-            end
-
-            def printQuestion
-                if @qbuffer
-                    problem = @view.quiz.currentProblem
-                    @qbuffer.text = ""
-                    @abuffer.text = ""
-                    @qbuffer.insert(@qbuffer.end_iter, processString(problem.questionKanji), "kanji")
-                    if problem.kanji == ""
-                        readingStyle = "kanji"
-                    else
-                        readingStyle = "reading"
-                    end
-                    @qbuffer.insert(@qbuffer.end_iter, processString(problem.questionReading), readingStyle)
-                    @qbuffer.insert(@qbuffer.end_iter, processString(problem.questionDefinitions), "definition")
-                    @qbuffer.insert(@qbuffer.end_iter, processString(problem.questionHint), "hint")
-                    if !@view.quiz.vocab.nil?
-                        @indicatorBox.set(@view.quiz.vocab)
-                    end
-                end
-            end
-
-            def printAnswer
-                if @abuffer
-                    problem = @view.quiz.currentProblem
-                    @abuffer.text = ""
-                    @abuffer.insert(@abuffer.end_iter, processString(problem.answerKanji), "kanji")
-                    if problem.kanji == ""
-                        readingStyle = "kanji"
-                    else
-                        readingStyle = "reading"
-                    end
-                    @abuffer.insert(@abuffer.end_iter, processString(problem.answerReading), readingStyle)
-                    @abuffer.insert(@abuffer.end_iter, processString(problem.answerDefinitions), "definition")
-                    @abuffer.insert(@abuffer.end_iter, processString(problem.answerHint), "hint")
-                end
-            end      
 
             def open()
                 if promptSave
@@ -602,7 +487,6 @@ Copyright (C) 2005-2007  Mike Charlton
                             newVocab = dialog.getVocab 
                             if newVocab != nil
                                 @view.quiz.currentProblem.vocab = newVocab
-                                redraw
                             end
                         end
                         dialog.destroy
@@ -622,7 +506,6 @@ Copyright (C) 2005-2007  Mike Charlton
                             newVocab = dialog.getVocab 
                             if newVocab != nil
                                 @view.quiz.currentProblem.vocab = newVocab
-                                redraw
                             end
                         end
                         dialog.destroy
@@ -635,13 +518,6 @@ Copyright (C) 2005-2007  Mike Charlton
                 @view.addNewVocabulary
             end
 
-            def redraw
-                if @view.quiz
-                    printQuestion
-                    printAnswer
-                end
-            end
-
             def resetQuiz
                 if @view.quiz
                     @view.quiz.reset
@@ -650,7 +526,7 @@ Copyright (C) 2005-2007  Mike Charlton
 
             def check()
                 if(@view.quiz)
-                    printAnswer
+                    @view.showAnswer
                 end
             end
 
@@ -658,7 +534,6 @@ Copyright (C) 2005-2007  Mike Charlton
                 if(@view.quiz)
                     @view.quiz.correct
                     @view.quiz.drill
-                    printQuestion
                 end
             end
 
@@ -666,15 +541,14 @@ Copyright (C) 2005-2007  Mike Charlton
                 if(@view.quiz)
                     @view.quiz.incorrect
                     @view.quiz.drill
-                    printQuestion
                 end
             end
 			
 			def connectSignals
-	            @qcontents.add_events(Gdk::Event::POINTER_MOTION_MASK)
-	            @qcontents.add_events(Gdk::Event::LEAVE_NOTIFY_MASK)
-	            @acontents.add_events(Gdk::Event::POINTER_MOTION_MASK)
-	            @acontents.add_events(Gdk::Event::LEAVE_NOTIFY_MASK)
+#	            @qcontents.add_events(Gdk::Event::POINTER_MOTION_MASK)
+#	            @qcontents.add_events(Gdk::Event::LEAVE_NOTIFY_MASK)
+#	            @acontents.add_events(Gdk::Event::POINTER_MOTION_MASK)
+#	            @acontents.add_events(Gdk::Event::LEAVE_NOTIFY_MASK)
 			    signal_connect('delete_event') do
                     # Request that the destroy signal be sent
                     false
@@ -686,21 +560,21 @@ Copyright (C) 2005-2007  Mike Charlton
     			    end
 				end
 				
-        		@qcontents.signal_connect('motion_notify_event') do |widget, motion|
-				    characterPopup(widget, motion.window, motion.x, motion.y)
-				end
+#        		@qcontents.signal_connect('motion_notify_event') do |widget, motion|
+#				    characterPopup(widget, motion.window, motion.x, motion.y)
+#				end
 
-        		@acontents.signal_connect('motion_notify_event') do |widget, motion|
-				    characterPopup(widget, motion.window, motion.x, motion.y)
-				end
+#        		@acontents.signal_connect('motion_notify_event') do |widget, motion|
+#				    characterPopup(widget, motion.window, motion.x, motion.y)
+#				end
 
-        		@qcontents.signal_connect('leave_notify_event') do |widget, event|
-				    closePopup
-				end
+#        		@qcontents.signal_connect('leave_notify_event') do |widget, event|
+#				    closePopup
+#				end
 
-        		@acontents.signal_connect('leave_notify_event') do |widget, event|
-				    closePopup
-				end
+#        		@acontents.signal_connect('leave_notify_event') do |widget, event|
+#				    closePopup
+#				end
 
 			end
 			
@@ -825,16 +699,11 @@ Copyright (C) 2005-2007  Mike Charlton
 		    entry = accelEntry(key)
 		    if !entry.nil?  && (entry.size > 0)
 		        if !entry[0].closure.nil?
-#		            print entry[0].closure.class.instance_methods.join("\n")
 		            success = true
 		        end 
 		    end
 		    success
 		end  
-		
-		def displayQuestion
-		    @mainWindow.printQuestion
-		end
 		
 		def updateQuiz
 		    @mainWindow.updateQuiz

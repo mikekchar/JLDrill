@@ -1,7 +1,4 @@
-require 'jldrill/contexts/MainContext'
 require 'jldrill/contexts/AddNewVocabularyContext'
-require 'jldrill/views/MainWindowView'
-require 'jldrill/views/gtk/MainWindowView'
 require 'jldrill/views/gtk/QuizStatusView'
 require 'jldrill/views/VocabularyView'
 require 'jldrill/views/gtk/VocabularyView'

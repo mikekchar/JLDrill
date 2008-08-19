@@ -38,10 +38,6 @@ module JLDrill
             @context.addNewVocabulary
         end
         
-        def displayQuestion
-            # Should be overridden by the concrete class.
-        end
-		
 		def setOptions
 		    @context.setOptions
 		end
@@ -64,6 +60,10 @@ module JLDrill
 		
 		def updateCurrentProblemStatus
 		    @context.updateNewProblemStatus
+		end
+		
+		def showAnswer
+		    @context.showAnswer
 		end
 		
 	end
