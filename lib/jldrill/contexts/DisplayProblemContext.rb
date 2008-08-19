@@ -30,8 +30,14 @@ module JLDrill
 		end
 
 		def quizUpdated(quiz)
-		    # This forces a redraw of the current problem
-		    @mainView.newProblem(quiz.currentProblem)
+		    if quiz.currentProblem.nil?
+		        if quiz.length != 0
+		            quiz.drill
+		        end
+            else
+    		    # This forces a redraw of the current problem
+    		    @mainView.newProblem(quiz.currentProblem)
+    		end
 		end
 		
 		def newProblemUpdated(quiz)

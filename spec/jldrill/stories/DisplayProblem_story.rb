@@ -50,14 +50,24 @@ module JLDrill::QuestionAndAnswerAreDisplayed
             Story.view.should_not be_nil
             Story.shutdown
         end
-        
-        it "should be able to processes special characters in the answer string" do
-            Story.setup(JLDrill::Gtk)
-		    Story.start
-            Story.view.problemWindow.question.processString("This is a test\\n").should be_eql("This is a test\n")
-            # Shouldn't break on quotes
-            Story.view.problemWindow.question.processString("This is a \"test\"\\n").should be_eql("This is a \"test\"\n")
-            Story.shutdown
+    end
+            
+###########################################
+    describe Story.stepName("The panes process special characters") do
+
+        # Note: I moved this functionality into Vocabulary    
+        it "should be able to insert carriage returns" do
+            vocab = Vocabulary.new()
+            vocab.reading = "This is a test\\n"
+		    vocab.reading.should be_eql("This is a test\n")
+		    vocab.reading = "This is a test\n"
+		    vocab.reading.should be_eql("This is a test\n")
+        end
+		    
+        it "should be able to insert quotes" do
+            vocab = Vocabulary.new()
+		    vocab.reading = "This is a \"test\""
+		    vocab.reading.should be_eql("This is a \"test\"")
         end
         
     end

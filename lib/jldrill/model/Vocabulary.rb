@@ -29,8 +29,7 @@ class Vocabulary
       DEFINITIONS_RE = /^Definitions: (.*)/
       MARKERS_RE = /^Markers: (.*)/
 
-  attr_reader :kanji, :reading, :hint, :status
-  attr_writer :kanji, :reading, :hint
+  attr_reader :status
 
   def initialize(kanji=nil, reading=nil, definitions=nil, 
                     markers=nil, hint=nil, position=nil)
@@ -88,6 +87,22 @@ class Vocabulary
     self.hint= vocab.hint
   end
   
+  # Unquote some things
+  def processOutput(text)
+    if text.nil?
+        return nil
+    end
+    eval("\"#{text.gsub(/["]/, "\\\"")}\"")
+  end
+
+  def processInput(text)
+    if text.nil?
+        return nil
+    end
+    text = text.gsub(/[\n]/, "\\n")
+    text
+  end
+
   def notEmpty(string)
     if (!string.nil? && !string.empty?)
         string
@@ -101,7 +116,11 @@ class Vocabulary
   end
   
   def kanji=(string)
-    @kanji = notEmpty(string)
+    @kanji = notEmpty(processInput(string))
+  end
+
+  def kanji
+    processOutput(@kanji)
   end
     
   def hasReading?
@@ -109,15 +128,23 @@ class Vocabulary
   end
 
   def reading=(string)
-    @reading = notEmpty(string)
+    @reading = notEmpty(processInput(string))
   end
   
+  def reading
+    processOutput(@reading)
+  end
+
   def hasHint?
     !@hint.nil?
   end
 
   def hint=(string)
-    @hint = notEmpty(string)
+    @hint = notEmpty(processInput(string))
+  end
+
+  def hint
+    processOutput(@hint)
   end
   
   # splits the string on commas and destroys and leading space
@@ -138,16 +165,17 @@ class Vocabulary
       return ""
     end
   end
-  
+    
   # Returns a string containing the definitions separated
   # by commas
   def definitions
-    Vocabulary.joinCommas(@definitions)    
+    processOutput(Vocabulary.joinCommas(@definitions))    
   end
 
   # Assigns the definitions from a string of comma separated
   # definitions
   def definitions=(string)
+    string = processInput(string)
     if (!string.nil? && !string.empty?)
         @definitions = Vocabulary.splitCommas(string)
     else
@@ -163,12 +191,13 @@ class Vocabulary
   # Returns a string containing the markers separated
   # by commas
   def markers
-    Vocabulary.joinCommas(@markers)    
+    processOutput(Vocabulary.joinCommas(@markers))
   end
 
   # Assigns the definitions from a string of comma separated
   # definitions
   def markers=(string)
+    string = processInput(string)
     if (!string.nil? && !string.empty?)
         @markers = Vocabulary.splitCommas(string)
     else

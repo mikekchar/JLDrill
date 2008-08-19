@@ -20,7 +20,7 @@ module JLDrill
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem1 = Problem.new(@vocab1, @quiz)
             @problem1.should_not be_nil
-            @problem1.kanji.should be_eql("会う\n")
+            @problem1.kanji.should be_eql("会う")
 
 		    @vocab2 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem2 = Problem.new(@vocab2, @quiz)
@@ -44,14 +44,14 @@ module JLDrill
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem1 = Problem.new(@vocab1, @quiz)
             @problem1.should_not be_nil
-            @problem1.reading.should be_eql("あう\n")
+            @problem1.reading.should be_eql("あう")
         end
 
         it "should give a string representation of the Definitions" do
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem1 = Problem.new(@vocab1, @quiz)
             @problem1.should_not be_nil
-            @problem1.definitions.should be_eql("to meet, to interview\n")
+            @problem1.definitions.should be_eql("to meet, to interview")
         end
         
         it "should have and empty string if the reading isn't set" do
@@ -126,7 +126,7 @@ module JLDrill
 		    @problem = ReadingProblem.new(@vocab, @quiz)
             @problem.should_not be_nil
 		    @problem.level.should be(0)
-            @problem.question.should be_eql("会う\nあう\nHint: No hints")
+            @problem.question.should be_eql("会う\nあう\nHint: No hints\n")
             @problem.answer.should be_eql("to meet, to interview\n")
         end
     end
@@ -139,7 +139,7 @@ module JLDrill
             @problem.should_not be_nil
 		    @problem.level.should be(2)
             @problem.question.should be_eql("会う\n")
-            @problem.answer.should be_eql("あう\nto meet, to interview\nHint: No hints")
+            @problem.answer.should be_eql("あう\nto meet, to interview\nHint: No hints\n")
         end
     end
 
@@ -151,7 +151,7 @@ module JLDrill
             @problem.should_not be_nil
 		    @problem.level.should be(1)
             @problem.question.should be_eql("to meet, to interview\n")
-            @problem.answer.should be_eql("会う\nあう\nHint: No hints")
+            @problem.answer.should be_eql("会う\nあう\nHint: No hints\n")
         end
     end
 end

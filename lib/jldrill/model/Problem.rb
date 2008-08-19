@@ -10,6 +10,8 @@ module JLDrill
             @level = -1
             @requestedLevel = -1
             @quiz = quiz
+            @questionParts = []
+            @answerParts = []
         end
         
         def Problem.create(level, vocab, quiz)
@@ -33,7 +35,7 @@ module JLDrill
 
         def kanji
             if !@vocab.kanji.nil?
-                @vocab.kanji + "\n"
+                @vocab.kanji
             else
                 ""
             end
@@ -41,7 +43,7 @@ module JLDrill
 
         def reading
             if !@vocab.reading.nil?
-                @vocab.reading + "\n"
+                @vocab.reading
             else
                 ""
             end
@@ -57,7 +59,7 @@ module JLDrill
 
         def definitions
             if @vocab.definitions != ""
-                @vocab.definitions + "\n"
+                @vocab.definitions
             else
                 ""
             end
@@ -82,36 +84,41 @@ module JLDrill
             retVal += "--> #{@vocab.status.potentialScheduleInDays} days"
         end
 
-        def questionKanji
-            ""
+        def evaluateAttribute(name)
+            eval("self." + name)
         end
 
-        def questionReading
-            ""
+        def evaluateParts(parts)
+            retVal = ""
+            parts.each do |part|
+                retVal += evaluateAttribute(part) + "\n"
+            end
+            retVal
         end
         
-        def questionDefinitions
-            ""
-        end
-        
-        def questionHint
-            ""
+        def publishParts(parts, target)
+            parts.each do |part|
+                value = evaluateAttribute(part)
+                if value != ""
+                    eval("target.publish_" + part + "(value)")
+                end
+            end
         end
 
-        def answerKanji
-            ""
+        def question
+            evaluateParts(@questionParts)
         end
 
-        def answerReading
-            ""
+        def answer
+            evaluateParts(@answerParts)
         end
         
-        def answerDefinitions
-            ""
+        def publishQuestion(target)
+            publishParts(@questionParts, target)
         end
-        
-        def answerHint
-            ""
+
+        def publishAnswer(target)
+            publishParts(@answerParts, target)
         end
         
     end
@@ -122,32 +129,9 @@ module JLDrill
         def initialize(vocab, quiz)
             super(vocab, quiz)
             @level = 0
+            @questionParts = ["kanji", "reading", "hint"]
+            @answerParts = ["definitions"]
         end
-    
-        def question
-            kanji + reading + hint
-        end    
-
-        def answer
-            definitions
-        end
-        
-        def questionKanji
-            kanji
-        end
-
-        def questionReading
-            reading
-        end
-        
-        def questionHint
-            hint
-        end
-        
-        def answerDefinitions
-            definitions
-        end
-
     end
     
     # Test your kanji reading.  Read the kanji and guess the reading and definitions
@@ -155,30 +139,8 @@ module JLDrill
         def initialize(vocab, quiz)
             super(vocab, quiz)
             @level = 2
-        end
-    
-        def question
-            kanji
-        end
-        
-        def answer
-            reading + definitions + hint
-        end
-        
-        def questionKanji
-            kanji
-        end
-        
-        def answerReading
-            reading
-        end
-        
-        def answerDefinitions
-            definitions
-        end
-        
-        def answerHint
-            hint
+            @questionParts = ["kanji"]
+            @answerParts = ["reading", "definitions", "hint"]
         end
     end
     
@@ -187,31 +149,8 @@ module JLDrill
         def initialize(vocab, quiz)
             super(vocab, quiz)
             @level = 1
-        end
-    
-
-        def question
-            definitions
-        end
-        
-        def answer
-            kanji + reading + hint
-        end
-        
-        def questionDefinitions
-            definitions
-        end
-        
-        def answerKanji
-            kanji
-        end
-        
-        def answerReading
-            reading
-        end
-        
-        def answerHint
-            hint
+            @questionParts = ["definitions"]
+            @answerParts = ["kanji", "reading", "hint"]
         end
     end
 

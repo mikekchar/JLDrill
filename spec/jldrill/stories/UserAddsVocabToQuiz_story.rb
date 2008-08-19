@@ -158,8 +158,11 @@ module JLDrill::UserAddsVocabToQuiz
             Story.mainContext.quiz.size.should be(0)
             Story.view.addVocabulary
             Story.mainContext.quiz.size.should be(1)
-            Story.mainContext.quiz.contents.bins[0][0].should_not be_nil
-            Story.mainContext.quiz.contents.bins[0][0].status.position.should be(0)
+            # Adding the vocabulary to an empty quiz triggers the
+            # quiz to be drilled.  This automatically moves the item
+            # from bin 0 to bin 1.
+            Story.mainContext.quiz.contents.bins[1][0].should_not be_nil
+            Story.mainContext.quiz.contents.bins[1][0].status.position.should be(0)
             Story.shutdown            
         end
         

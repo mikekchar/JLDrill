@@ -19,6 +19,7 @@ module JLDrill::Gtk
                 @contents.set_pixels_above_lines(5)
                 self.add(@contents)
                 @buffer = @contents.buffer
+                @hasKanji = true
                 createTags
             end
             
@@ -32,7 +33,7 @@ module JLDrill::Gtk
                                    "justification" => Gtk::JUSTIFY_CENTER,
                                    "family" => "Times",
                                    "foreground" => "blue")
-                @buffer.create_tag("definition", 
+                @buffer.create_tag("definitions", 
                                    "size" => 16 * Pango::SCALE,
                                    "justification" => Gtk::JUSTIFY_CENTER,
                                    "family" => "Sans")
@@ -43,44 +44,52 @@ module JLDrill::Gtk
                                    "foreground" => "red")
             end
 
-            def processString(text)
-                eval("\"#{text.gsub(/["]/, "\\\"")}\"")
-            end
-            
             def clear
                 @buffer.text = ""
             end
+
+            def publish_kanji(string)            
+                @buffer.insert(@buffer.end_iter, string + "\n", "kanji")
+            end
             
-            def showQuestion(problem)
-                clear
-                if !problem.nil?
-                    @buffer.insert(@buffer.end_iter, processString(problem.questionKanji), "kanji")
-                    if problem.kanji == ""
-                        readingStyle = "kanji"
-                    else
-                        readingStyle = "reading"
-                    end
-                    @buffer.insert(@buffer.end_iter, processString(problem.questionReading), readingStyle)
-                    @buffer.insert(@buffer.end_iter, processString(problem.questionDefinitions), "definition")
-                    @buffer.insert(@buffer.end_iter, processString(problem.questionHint), "hint")
+            def publish_reading(string)            
+                if !@hasKanji
+                    readingStyle = "kanji"
+                else
+                    readingStyle = "reading"
                 end
+                @buffer.insert(@buffer.end_iter, string + "\n", readingStyle)
             end
 
-            def showAnswer(problem)
+            def publish_definitions(string)
+                @buffer.insert(@buffer.end_iter, string + "\n", "definitions")
+            end
+
+            def publish_hint(string)
+                @buffer.insert(@buffer.end_iter, string, "hint")
+            end
+            
+        end
+
+        class QuestionPane < InfoPane
+            def update(problem)
                 clear
                 if !problem.nil?
-                    @buffer.insert(@buffer.end_iter, processString(problem.answerKanji), "kanji")
-                    if problem.kanji == ""
-                        readingStyle = "kanji"
-                    else
-                        readingStyle = "reading"
-                    end
-                    @buffer.insert(@buffer.end_iter, processString(problem.answerReading), readingStyle)
-                    @buffer.insert(@buffer.end_iter, processString(problem.answerDefinitions), "definition")
-                    @buffer.insert(@buffer.end_iter, processString(problem.answerHint), "hint")
+                    @hasKanji = problem.kanji != ""
+                    problem.publishQuestion(self)
                 end
             end
-        end
+        end        
+        
+        class AnswerPane < InfoPane
+            def update(problem)
+                clear
+                if !problem.nil?
+                    @hasKanji = problem.kanji != ""
+                    problem.publishAnswer(self)
+                end
+            end
+        end        
 	
 	    class ProblemWindow < Gtk::VBox
 	        attr_reader :question, :answer
@@ -94,8 +103,8 @@ module JLDrill::Gtk
 	            @vpane = Gtk::VPaned.new
                 @vpane.set_border_width(5)
                 @vpane.set_position(125)
-                @question = InfoPane.new
-                @answer = InfoPane.new
+                @question = QuestionPane.new
+                @answer = AnswerPane.new
                 @problem = nil
                 @vpane.pack1(@question, true, true)
                 @vpane.pack2(@answer, true, true)
@@ -105,7 +114,7 @@ module JLDrill::Gtk
 	        def newProblem(problem)
 	            @problem = problem
 	            @answer.clear
-	            @question.showQuestion(problem)
+	            @question.update(problem)
 	            if !problem.nil?  && !problem.vocab.nil?
     	            @indicatorBox.set(problem.vocab)
     	        else
@@ -115,7 +124,7 @@ module JLDrill::Gtk
 	        
 	        def showAnswer
 	            if !@problem.nil?
-    	            @answer.showAnswer(@problem)
+    	            @answer.update(@problem)
     	        end
 	        end
 	        
