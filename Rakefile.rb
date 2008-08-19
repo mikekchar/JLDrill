@@ -42,7 +42,9 @@ Spec::Rake::SpecTask.new(:rcov) do |t|
 	t.spec_files = spec_files
 	t.rcov = true
 	t.rcov_opts = ["--exclude rspec", "--exclude rcov", "--exclude syntax",
-	    "--exclude _spec", "--exclude /lib/Context/", "--exclude _story"]
+	    "--exclude _spec", "--exclude /lib/Context/", "--exclude _story",
+	    "--exclude cairo", "--exclude pango", "--exclude gtk2", "--exclude atk",
+	    "--exclude glib", "--exclude gdk"]
 	t.spec_opts = ["--format html:test_results.html"]
 	t.ruby_opts = ruby_opts
 end
