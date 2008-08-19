@@ -7,12 +7,12 @@ module JLDrill
 	describe MainContext do
 
 		before(:each) do
-			@context = MainContext.new(Context::Bridge.new(JLDrill))
+		    @parent = JLDrill::Fakes::App.new(JLDrill, MainContext)
+			@context = @parent.mainContext
 		end
 
         def test_openMainView
-		    @parent = JLDrill::Fakes::App.new(nil)
-		    @context.enter(@parent) 
+            @parent.enter
 		    @context.mainView.should_not be_nil       
         end
 		
@@ -58,7 +58,7 @@ module JLDrill
 		    # Because the quiz hasn't actually been loaded, we need to fake the
 		    # drill here.
 		    @context.quiz.should_receive(:drill).and_return("Fake")
-		    @context.mainView.should_receive(:displayQuestion).with("Fake")
+		    @context.mainView.should_receive(:displayQuestion)
 		    @context.openFile
 		end
 		
@@ -70,7 +70,7 @@ module JLDrill
 		    # Because the dict hasn't actually been loaded, we need to fake the
 		    # drill here.
 		    @context.quiz.should_receive(:drill).and_return("Fake")
-		    @context.mainView.should_receive(:displayQuestion).with("Fake")
+		    @context.mainView.should_receive(:displayQuestion)
 		    @context.openFile
 		end
 

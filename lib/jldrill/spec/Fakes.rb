@@ -1,31 +1,35 @@
 require 'Context/Context'
 require 'Context/View'
+require 'Context/Bridge'
+require 'Context/Gtk/Widget'
 
 # These are some useful fakes for testing with
 
-module JLDrill::Fakes
-    class View < Context::View
-        def initialize(context)
-            super(context)
-            @widget = Widget.new(nil)
-        end
-
-        def getWidget
-            return @widget
-        end            
-    end
-
-    class App < Context::Context
-        def intitialize(bridge)
-            super(bridge)
-            @mainView = View.new
+module JLDrill
+    module Fakes
+        # This is a fake App that doesn't start up the GTK
+        # initialization.  That way the main run look doesn't
+        # get started.
+        class App < Context::Context
+            attr_reader :mainContext
+            
+            def initialize(bridgeClass, mainContextClass)
+                bridge = Context::Bridge.new(bridgeClass)
+                super(bridge)
+                @mainContext = mainContextClass.new(bridge)
+            end
+            
+            def enter
+                super(nil)
+                @mainContext.enter(self)
+            end
         end
     end
 end
 
 module Context::Gtk
 
-    # Hopefully this will turn off the drawing of the widgets in the tests
+    # This will turn off the drawing of the widgets in the tests
     def Widget::inTests
         true
     end

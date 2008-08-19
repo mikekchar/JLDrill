@@ -3,53 +3,31 @@ require 'jldrill/contexts/MainContext'
 require 'jldrill/views/gtk/MainWindowView'
 require 'jldrill/views/gtk/ReferenceProgressView'
 require 'jldrill/views/gtk/OptionsView'
-require 'jldrill/spec/Fakes'
+require 'jldrill/spec/StoryMemento'
 
 module JLDrill::Gtk
 
 	describe MainWindowView do
 
-        class MainWindowViewStoryMemento
-            attr_reader :context, :view
-        
-            def initialize
-                restart
-            end
-            
-            def restart
-                @app = nil
-                @context = nil
-                @view = nil
-            end
-            
-            # Some useful routines
-            def setup
-                @app = JLDrill::Fakes::App.new(nil)
-                @context = JLDrill::MainContext.new(Context::Bridge.new(JLDrill::Gtk))
-                @context.enter(@app)
-                @view = @context.mainView
-            end
-            
-            # This is very important to call when using setup because otherwise
-            # you will leave windows hanging open.
-            def shutdown
-                @view.close unless @view.nil?
-                restart
-            end
-        end
-
         before(:all) do
-            @story = MainWindowViewStoryMemento.new
+            @story = JLDrill::StoryMemento.new("MainWindowView")
+            def @story.setup(type)
+                super(type)
+                @context = @mainContext
+                @view = @mainView
+            end
         end
 
 		it "should have a widget when initialized" do
-		    @story.setup
+		    @story.setup(JLDrill::Gtk)
+		    @story.start
 			@story.view.getWidget.should_not be_nil
 			@story.shutdown
 		end
 
 		it "should react to destroy signals" do
-		    @story.setup
+		    @story.setup(JLDrill::Gtk)
+		    @story.start
 			@story.view.should_receive(:close) do
 			    @story.context.exit
 			end
@@ -58,7 +36,8 @@ module JLDrill::Gtk
 		end
  
         it "should be able to processes special characters in the answer string" do
-            @story.setup
+            @story.setup(JLDrill::Gtk)
+		    @story.start
             @story.view.mainWindow.processString("This is a test\\n").should be_eql("This is a test\n")
             # Shouldn't break on quotes
             @story.view.mainWindow.processString("This is a \"test\"\\n").should be_eql("This is a \"test\"\n")
@@ -66,7 +45,8 @@ module JLDrill::Gtk
         end
         
         it "should be able to add items to the end of the window" do
-            @story.setup
+            @story.setup(JLDrill::Gtk)
+		    @story.start
             @story.view.mainWindow.mainTable.n_rows.should be(5)
             sb = Gtk::Statusbar.new
             @story.view.mainWindow.add(sb)
@@ -77,7 +57,8 @@ module JLDrill::Gtk
         it "should not be able to remove items from the window" do
             # OK.  This sucks, but the Gtk::Table has no way to
             # remove items (i.e., I shouldn't use it -- FIXME!!!)
-            @story.setup
+            @story.setup(JLDrill::Gtk)
+		    @story.start
             @story.view.mainWindow.mainTable.n_rows.should be(5)
             sb = Gtk::Statusbar.new
             @story.view.mainWindow.add(sb)
@@ -86,8 +67,6 @@ module JLDrill::Gtk
             @story.view.mainWindow.mainTable.n_rows.should be(6)
             @story.shutdown
         end
-        
-        it "should not be using a Gtk::Table because it raises an assertion on exit"
 
 # FIX ME!!! -- I've disabled these test until I get
 # back to refactoring the accel groups

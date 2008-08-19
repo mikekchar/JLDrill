@@ -1,0 +1,18 @@
+This software contains data files from the rikaichan 1.04 distribution.
+The files in question are kanji.dat and radicals.dat.
+
+The original copyright statement is here:
+
+KANJIDIC2
+Copyright (C) 2007 The Electronic Dictionary Research and Development Group
+http://www.csse.monash.edu.au/~jwb/kanjidic2/
+
+Basically, rikaichan is using the kanjidic and radkfiles from the Electronic
+Dictionary Research and Development Group.  However, they have changed
+the format and added quite a few entries.  It is much easier to parse
+and more useful.  Also, they are using UTF characters instead of EUC
+characters meaning that many more of the proper radicals can be shown.
+
+In their own distribution they don't mention their own changes, but they
+should be given a lot of credit for doing this work.
+

@@ -766,11 +766,14 @@ Copyright (C) 2005-2007  Mike Charlton
 			end
 			
 			def characterPopup(widget, window, x, y)
+			    if @view.kanjiDic.nil?
+			        return
+			    end
                 closePopup
                 type = widget.get_window_type(window)
                 char, charRect = getCharAt(widget, type, x, y)
 			    if !char.nil? && !(char =~ /[a-zA-Z0-9 \s]/)
-			        kanjiString = @view.kanjiDic.select do |entry|
+			        kanjiString = @view.kanjiDic.find do |entry|
 			            entry.character == char
 			        end.to_s
 			        @popup = createPopup(kanjiString)
@@ -790,9 +793,9 @@ Copyright (C) 2005-2007  Mike Charlton
 			@mainWindow.set_default_size(600, 400)
 			@widget = Context::Gtk::Widget.new(@mainWindow)
 			@widget.isAMainWindow
-			kanjiFile = JLDrill::Config::getDataDir + "/dict/kanjidic.utf"
-			radicalFile = JLDrill::Config::getDataDir + "/dict/radkfile.utf"
-			@kanjiDic = JLDrill::KanjidicFile.open(kanjiFile, JLDrill::RadKFile.open(radicalFile))
+#			kanjiFile = JLDrill::Config::getDataDir + "/dict/kanjidic.utf"
+#			radicalFile = JLDrill::Config::getDataDir + "/dict/radkfile.utf"
+#			@kanjiDic = JLDrill::KanjidicFile.open(kanjiFile, JLDrill::RadKFile.open(radicalFile))
 		end
 		
 		def getWidget

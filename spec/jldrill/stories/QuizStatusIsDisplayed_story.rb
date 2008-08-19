@@ -3,71 +3,16 @@ require 'jldrill/views/MainWindowView'
 require 'jldrill/views/gtk/MainWindowView'
 require 'jldrill/views/QuizStatusView'
 require 'jldrill/views/gtk/QuizStatusView'
-require 'jldrill/spec/Fakes'
+require 'jldrill/spec/StoryMemento'
 
-# The status of the quiz is displayed in the main view
-#
-# 1. There is a context called DisplayStatusContext that is entered
-#    when the MainContext is entered.
-#
-# 2. The DisplayStatusContext is exited when the MainContext is exited
-#
-# 3. The DisplayStatusContext contains a view which displays the status of the quiz
-#
-# 4. The View is updated whenever the status of the quiz changes
-#
 module JLDrill::QuizStatusIsDisplayed
 
-    class StoryMemento
-   
-        
-        attr_reader :storyName, :mainContext, :mainView, :context, :view
-    
-        def initialize
-            @storyName = "Quiz Status Is Displayed"
-            restart
-        end
-
-        def restart
-            @app = nil
-            @mainContext = nil
-            @mainView = nil
-            @context = nil
-            @view = nil
-        end
-        
-        def stepName(step)
-            @storyName + " - " + step
-        end
-    
-        # Some useful routines
-        def setupAbstract
-            @app = JLDrill::Fakes::App.new(nil)
-            @mainContext = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
-            @mainContext.enter(@app)
-            @mainView = @mainContext.mainView
-            @context = @mainContext.displayQuizStatusContext
-            @view = @context.mainView
-        end
-        
-        def setupGtk
-            @app = JLDrill::Fakes::App.new(nil)
-            @mainContext = JLDrill::MainContext.new(Context::Bridge.new(JLDrill::Gtk))
-            @mainContext.enter(@app)
-            @mainView = @mainContext.mainView
-            @context = @mainContext.displayQuizStatusContext
-            @view = @context.mainView
-        end
-        
-        # This is very important to call when using setupGtk because otherwise
-        # you will leave windows hanging open.
-        def shutdown
-            @mainContext.exit
-            restart
-        end
+    Story = JLDrill::StoryMemento.new("Quiz Status is Displayed")
+    def Story.setup(type)
+        super(type)
+        @context = @mainContext.displayQuizStatusContext
+        @view = @context.peekAtView
     end
-    
-    Story = StoryMemento.new
 
 ###########################################
 
@@ -102,7 +47,8 @@ module JLDrill::QuizStatusIsDisplayed
 
     describe Story.stepName("There is a view that displays the status of the quiz") do
         it "has a view" do
-            Story.setupAbstract
+            Story.setup(JLDrill)
+            Story.start
             Story.view.should_not be_nil
             Story.shutdown
         end
@@ -115,7 +61,8 @@ module JLDrill::QuizStatusIsDisplayed
             # I know, it's a cop out...
         end
         it "displays the status of the quiz in the Gtk view" do
-            Story.setupGtk
+            Story.setup(JLDrill::Gtk)
+            Story.start
             status = Story.mainContext.quiz.status
             Story.view.update(Story.mainContext.quiz)
             Story.view.quizStatusBar.text.should be_eql(status)
@@ -127,14 +74,16 @@ module JLDrill::QuizStatusIsDisplayed
 
     describe Story.stepName("The view is updated whenever the status of the quiz changes") do
         it "should update the status of the quiz when the context is entered" do
-            Story.setupGtk
+            Story.setup(JLDrill::Gtk)
+            Story.start
             status = Story.mainContext.quiz.status
             Story.view.quizStatusBar.text.should be_eql(status)
             Story.shutdown
         end
         
         it "should receive updates when the quiz status changes" do
-            Story.setupAbstract
+            Story.setup(JLDrill)
+            Story.start
             Story.context.should_receive(:quizUpdated)
             Story.mainContext.quiz.update
             Story.shutdown

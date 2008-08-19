@@ -89,8 +89,8 @@ module JLDrill
 			file[1].radicals.should include("口")
 			# I don't know why this is in the list, but it actually is.  It's not a bug.
 			file[1].radicals.should include("刈")
-			file[1].to_s.should be_eql("唖 Gr: * * (一, ｜, 刈, 口): mute, dumb")
-			file.to_s.should be_eql("亜 Gr: 8 * (一, ｜, 口): Asia, rank next, come after, -ous\n唖 Gr: * * (一, ｜, 刈, 口): mute, dumb\n娃 Gr: * * (土, 女): beautiful\n阿 Gr: 9 * (亅, 口, 阡): Africa, flatter, fawn upon, corner, nook, recess")
+			file[1].to_s.should be_eql("唖 Gr: * * (一, ｜, 刈, 口)\nmute, dumb")
+			file.to_s.should be_eql("亜 Gr: 8 * (一, ｜, 口)\nAsia, rank next, come after, -ous\n唖 Gr: * * (一, ｜, 刈, 口)\nmute, dumb\n娃 Gr: * * (土, 女)\nbeautiful\n阿 Gr: 9 * (亅, 口, 阡)\nAfrica, flatter, fawn upon, corner, nook, recess")
 		end
 
 		it "should be able to parse a file on disk" do

@@ -30,7 +30,7 @@ module JLDrill
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem1 = Problem.new(@vocab1)
             @problem1.should_not be_nil
-            @problem1.hint.should be_eql("\nHint: No hints\n")
+            @problem1.hint.should be_eql("Hint: No hints")
 
 		    @vocab2 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem2 = Problem.new(@vocab2)
@@ -124,7 +124,7 @@ module JLDrill
 		    @problem = ReadingProblem.new(@vocab)
             @problem.should_not be_nil
 		    @problem.level.should be(0)
-            @problem.question.should be_eql("会う\nあう\n\nHint: No hints\n")
+            @problem.question.should be_eql("会う\nあう\nHint: No hints")
             @problem.answer.should be_eql("to meet, to interview\n")
         end
     end
@@ -137,7 +137,7 @@ module JLDrill
             @problem.should_not be_nil
 		    @problem.level.should be(2)
             @problem.question.should be_eql("会う\n")
-            @problem.answer.should be_eql("あう\nto meet, to interview\n\nHint: No hints\n")
+            @problem.answer.should be_eql("あう\nto meet, to interview\nHint: No hints")
         end
     end
 
@@ -149,7 +149,7 @@ module JLDrill
             @problem.should_not be_nil
 		    @problem.level.should be(1)
             @problem.question.should be_eql("to meet, to interview\n")
-            @problem.answer.should be_eql("会う\nあう\n\nHint: No hints\n")
+            @problem.answer.should be_eql("会う\nあう\nHint: No hints")
         end
     end
 

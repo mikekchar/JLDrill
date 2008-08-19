@@ -69,7 +69,7 @@ module JLDrill
 			else
 				grade = @grade.to_s
 			end
-			@character + " Gr: " + grade + " " + self.bushuChar + " (" + self.radicals.join(", ") + "): " + @meanings.join(", ")
+			@character + " Gr: " + grade + " " + self.bushuChar + " (" + self.radicals.join(", ") + ")\n" + @meanings.join(", ")
 		end
 	end
 
