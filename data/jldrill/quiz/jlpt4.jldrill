@@ -65,7 +65,6 @@ Unseen
 /Kanji: 行く/Reading: いく/Definitions: to go/Markers: v5k-s,P/Score: 0/Bin: 0/Level: 0/Position: 43/Consecutive: 0/Difficulty: 0/
 /Kanji: 行く/Reading: ゆく/Definitions: to go/Markers: v5k-s,P/Score: 0/Bin: 0/Level: 0/Position: 44/Consecutive: 0/Difficulty: 0/
 /Reading: いくつ/Definitions: how many?,how old?/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 45/Consecutive: 0/Difficulty: 0/
-/Reading: いくら/Definitions: how much?,how many?/Markers: adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 46/Consecutive: 0/Difficulty: 0/
 /Kanji: 池/Reading: いけ/Definitions: pond/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 47/Consecutive: 0/Difficulty: 0/
 /Kanji: 医者/Reading: いしゃ/Definitions: doctor (medical)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 48/Consecutive: 0/Difficulty: 0/
 /Reading: いす/Definitions: chair/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 49/Consecutive: 0/Difficulty: 0/
@@ -693,6 +692,7 @@ Unseen
 /Kanji: 悪い/Reading: わるい/Definitions: bad,inferior/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 672/Consecutive: 0/Difficulty: 0/
 Poor
 /Kanji: 七つ/Reading: ななつ/Definitions: seven/Markers: n,P/Score: 0/Bin: 1/Level: 0/Position: 450/Consecutive: 0/Difficulty: 0/
+/Reading: いくら/Definitions: how much?,how many?/Markers: adv,n,P/Score: 0/Bin: 1/Level: 0/Position: 46/Consecutive: 0/Difficulty: 0/
 Fair
 Good
 Excellent

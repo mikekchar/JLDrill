@@ -1,5 +1,6 @@
 require 'Context/Gtk/Widget'
 require 'jldrill/views/ProblemView'
+require 'jldrill/oldUI/GtkIndicatorBox'
 require 'gtk2'
 
 module JLDrill::Gtk
@@ -81,25 +82,35 @@ module JLDrill::Gtk
             end
         end
 	
-	    class ProblemWindow < Gtk::VPaned
+	    class ProblemWindow < Gtk::VBox
 	        attr_reader :question, :answer
 
 	        def initialize(view)
 	            @view = view
 	            super()
-                self.set_border_width(5)
-                self.set_position(125)
+	            ## Create indicators
+	            @indicatorBox = GtkIndicatorBox.new
+	            self.pack_start(@indicatorBox, false)
+	            @vpane = Gtk::VPaned.new
+                @vpane.set_border_width(5)
+                @vpane.set_position(125)
                 @question = InfoPane.new
                 @answer = InfoPane.new
                 @problem = nil
-                self.pack1(@question, true, true)
-                self.pack2(@answer, true, true)
+                @vpane.pack1(@question, true, true)
+                @vpane.pack2(@answer, true, true)
+                self.pack_end(@vpane, true)
 	        end
 	        
 	        def newProblem(problem)
 	            @problem = problem
 	            @answer.clear
 	            @question.showQuestion(problem)
+	            if !problem.nil?  && !problem.vocab.nil?
+    	            @indicatorBox.set(problem.vocab)
+    	        else
+    	            @indicatorBox.clear
+    	        end
 	        end
 	        
 	        def showAnswer

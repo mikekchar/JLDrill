@@ -271,7 +271,7 @@ module JLDrill
                 level = vocab.status.bin - 1
             end
             @stats.startTimer(vocab.status.bin == 4)
-            Problem.create(level, vocab)
+            Problem.create(level, vocab, @quiz)
         end
         
         # Move the specified vocab to the specified bin

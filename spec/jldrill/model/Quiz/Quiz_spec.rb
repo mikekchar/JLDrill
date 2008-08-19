@@ -132,22 +132,22 @@ Excellent
             # bin 1 items will always be reading problems
             # because the level will always be 0
             @quiz.vocab.status.level.should be(0)
-            test_problem(question, ReadingProblem.new(@quiz.vocab))
+            test_problem(question, ReadingProblem.new(@quiz.vocab, @quiz))
             @quiz.vocab.status.consecutive.should be(0)
 	    end
 
         def test_level(question)
             case @quiz.currentProblem.requestedLevel
                 when 0
-                    test_problem(question, ReadingProblem.new(@quiz.vocab)) 
+                    test_problem(question, ReadingProblem.new(@quiz.vocab, @quiz)) 
                 when 1
                     if(!@quiz.vocab.kanji.nil?)
-                        test_problem(question, KanjiProblem.new(@quiz.vocab))
+                        test_problem(question, KanjiProblem.new(@quiz.vocab, @quiz))
                     else
-                        test_problem(question, ReadingProblem.new(@quiz.vocab)) 
+                        test_problem(question, ReadingProblem.new(@quiz.vocab, @quiz)) 
                     end
                 when 2
-                    test_problem(question, MeaningProblem.new(@quiz.vocab)) 
+                    test_problem(question, MeaningProblem.new(@quiz.vocab, @quiz)) 
             else
 	             # This shouldn't ever happen.  Blow up.
 	             true.should be(false) 
@@ -228,7 +228,7 @@ Excellent
 	        @quiz.contents.bins[0].length.should be(4)
 	        @quiz.contents.bins[1].length.should be(0)
 	        question = @quiz.drill
-            test_problem(question, ReadingProblem.new(@quiz.vocab)) 
+            test_problem(question, ReadingProblem.new(@quiz.vocab, @quiz)) 
 	        
 	        # item gets promoted to the first bin immediately
 	        @quiz.contents.bins[0].length.should be(3)
@@ -291,7 +291,7 @@ Excellent
 	        @quiz.loadFromString("none", @fileString)
 	        vocab = @quiz.contents.bins[4][0]
 	        vocab.should_not be_nil
-            @quiz.currentProblem = MeaningProblem.new(vocab)
+            @quiz.currentProblem = MeaningProblem.new(vocab, @quiz)
             test_correct
             test_incorrect            
         end

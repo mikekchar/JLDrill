@@ -11,7 +11,7 @@ module JLDrill
 	        @quiz = Quiz.new
 	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 0/Position: 0/Consecutive: 0/")
 	        @quiz.contents.add(vocab, 4)
-	        @quiz.currentProblem = ReadingProblem.new(vocab)
+	        @quiz.currentProblem = ReadingProblem.new(vocab, @quiz)
 	        @strategy = @quiz.strategy
 	    end
 	    

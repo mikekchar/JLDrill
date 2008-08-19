@@ -12,7 +12,6 @@ require 'jldrill/model/Config'
 require 'jldrill/oldUI/GtkDisplayView'
 require 'jldrill/oldUI/GtkXRefView'
 require 'jldrill/oldUI/GtkVocabTable'
-require 'jldrill/oldUI/GtkIndicatorBox'
 require 'jldrill/oldUI/GtkEnterFilename'
 require 'jldrill/Version'
 
@@ -63,7 +62,7 @@ module JLDrill::Gtk
                 @reviewModeButton = ReviewModeButton.new(@view)
 
                 ## Layout everything in a vertical table
-                @mainTable = Gtk::Table.new(1, 3, false)
+                @mainTable = Gtk::Table.new(1, 2, false)
                 add(@mainTable, true)
 
                 menu = createMenu
@@ -80,13 +79,6 @@ module JLDrill::Gtk
                              Gtk::EXPAND | Gtk::FILL, 0,
                              0,                       0)
 
-	            ## Create indicators
-	            @indicatorBox = GtkIndicatorBox.new
-	            @mainTable.attach(@indicatorBox,
-                             # X direction            # Y direction
-                             0, 1,                    2, 3,
-                             Gtk::EXPAND | Gtk::FILL, 0,
-                             0,                       0)
 				connectSignals unless @view.nil?
 			end
 

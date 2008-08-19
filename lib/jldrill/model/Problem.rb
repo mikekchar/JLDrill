@@ -5,26 +5,27 @@ module JLDrill
         attr_reader :vocab, :level, :requestedLevel
         attr_writer :requestedLevel
         
-        def initialize(vocab)
+        def initialize(vocab, quiz)
             @vocab = vocab
             @level = -1
             @requestedLevel = -1
+            @quiz = quiz
         end
         
-        def Problem.create(level, vocab)
+        def Problem.create(level, vocab, quiz)
             case level
                 when 0
-                    problem = ReadingProblem.new(vocab)
+                    problem = ReadingProblem.new(vocab, quiz)
                 when 1
                     if vocab.kanji
-                        problem = KanjiProblem.new(vocab)
+                        problem = KanjiProblem.new(vocab, quiz)
                     else
-                        problem = MeaningProblem.new(vocab)
+                        problem = MeaningProblem.new(vocab, quiz)
                     end
                 when 2
-                    problem = MeaningProblem.new(vocab)
+                    problem = MeaningProblem.new(vocab, quiz)
                 else
-                   problem = ReadingProblem.new(vocab)
+                   problem = ReadingProblem.new(vocab, quiz)
              end
             problem.requestedLevel = level
             problem
@@ -64,6 +65,7 @@ module JLDrill
         
         def vocab=(vocab)
             @vocab.assign(vocab)
+            @quiz.setNeedsSave(true)
         end
 
         # Return a string showing what bin this problem is from
@@ -117,8 +119,8 @@ module JLDrill
     # The first kind of Problem shown.  It lets you read it in Japanese and
     # guess the English
     class ReadingProblem < Problem
-        def initialize(vocab)
-            super(vocab)
+        def initialize(vocab, quiz)
+            super(vocab, quiz)
             @level = 0
         end
     
@@ -150,8 +152,8 @@ module JLDrill
     
     # Test your kanji reading.  Read the kanji and guess the reading and definitions
     class KanjiProblem < Problem
-        def initialize(vocab)
-            super(vocab)
+        def initialize(vocab, quiz)
+            super(vocab, quiz)
             @level = 2
         end
     
@@ -182,8 +184,8 @@ module JLDrill
     
     # Shows you the English and you guess the kanji and reading
     class MeaningProblem < Problem
-        def initialize(vocab)
-            super(vocab)
+        def initialize(vocab, quiz)
+            super(vocab, quiz)
             @level = 1
         end
     
