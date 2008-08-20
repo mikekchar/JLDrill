@@ -1,3 +1,4 @@
+require 'jldrill/model/Vocabulary'
 
 module JLDrill
     # This is a helper class for the tests.  It simply represents
@@ -42,6 +43,10 @@ Unseen
 /Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 0/Difficulty: 0/
 /Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 0/Level: 0/Position: 3/Consecutive: 0/Difficulty: 0/
 ]
+
+        # This is a new vocabulary to use for adding to the quiz
+        NewVocab = "/Kanji: 秋/Reading: あき/Definitions: autumn,fall/Markers: n-adv,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/Difficulty: 0/"
+
 
         FileString = FileHeader + FileInfo + FileOptions + FileVocab
         ResetString = FileHeader + FileInfo + FileOptions + ResetVocab
@@ -96,6 +101,10 @@ Unseen
         
         def resetFile
             ResetString
+        end
+        
+        def sampleVocab
+            Vocabulary::create(NewVocab)
         end
     end
 end
