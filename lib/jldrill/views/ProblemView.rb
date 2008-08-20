@@ -8,10 +8,6 @@ module JLDrill
 			super(context)
 		end
 
-		def run
-		    super
-		end	
-		
 		def newProblem(problem)
 		    # Should be overridden in the concrete class
 		end	

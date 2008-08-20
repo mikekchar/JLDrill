@@ -159,6 +159,11 @@ module JLDrill
         end
         ####################################################
            
+        it "should be able to make a clone" do
+            v = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions:/Markers:/Score: 0/Bin: 0/Level: 0/Position: 1/")
+            v2 = v.clone
+            v.should be_eql(v2)
+        end
 	end
 
 end

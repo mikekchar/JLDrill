@@ -115,6 +115,8 @@ module JLDrill
             problem2.status.should be_eql("     Bin 2, --> 5.0 days")
             problem3.status.should be_eql("     Bin 3, --> 5.0 days")
             problem4.status.should be_eql("     +0, --> 5.0 days")
+            problem4.vocab.status.markReviewed
+            problem4.status.should be_eql("     +0, Last Today, --> 5.0 days")
         end
 
     end
