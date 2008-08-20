@@ -47,28 +47,27 @@ module JLDrill::Gtk
             def clear
                 @buffer.text = ""
             end
-
-            def publish_kanji(string)            
-                @buffer.insert(@buffer.end_iter, string + "\n", "kanji")
-            end
             
-            def publish_reading(string)            
-                if !@hasKanji
-                    readingStyle = "kanji"
-                else
-                    readingStyle = "reading"
+            def text
+                @buffer.text
+            end
+
+            def receive(type, string)
+                if !string.nil? && !string.empty?
+                    if type == "reading" && !@hasKanji
+                        # We want to display readings as if they were kanji
+                        # if the item has no kanji.
+                        type = "kanji"
+                    end
+                    @buffer.insert(@buffer.end_iter, string, type)
+                    
+                    # To make it fit on the screen better, hints have no
+                    # trailing carriage return.
+                    if type != "hint"
+                        @buffer.insert(@buffer.end_iter, "\n", type)
+                    end                    
                 end
-                @buffer.insert(@buffer.end_iter, string + "\n", readingStyle)
             end
-
-            def publish_definitions(string)
-                @buffer.insert(@buffer.end_iter, string + "\n", "definitions")
-            end
-
-            def publish_hint(string)
-                @buffer.insert(@buffer.end_iter, string, "hint")
-            end
-            
         end
 
         class QuestionPane < InfoPane

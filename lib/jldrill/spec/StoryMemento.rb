@@ -71,7 +71,7 @@ module JLDrill
         end
         
         def loadQuiz
-            if @mainContext.quiz.loadFromString("SampleQuiz", @sampleQuiz.file)
+            if @mainContext.quiz.loadFromString("SampleQuiz", @sampleQuiz.resetFile)
                 @mainContext.quiz.drill
             end
         end

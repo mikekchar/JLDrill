@@ -100,9 +100,7 @@ module JLDrill
         def publishParts(parts, target)
             parts.each do |part|
                 value = evaluateAttribute(part)
-                if value != ""
-                    eval("target.publish_" + part + "(value)")
-                end
+                target.receive(part, value)
             end
         end
 
