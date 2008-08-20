@@ -545,10 +545,6 @@ Copyright (C) 2005-2007  Mike Charlton
             end
 			
 			def connectSignals
-#	            @qcontents.add_events(Gdk::Event::POINTER_MOTION_MASK)
-#	            @qcontents.add_events(Gdk::Event::LEAVE_NOTIFY_MASK)
-#	            @acontents.add_events(Gdk::Event::POINTER_MOTION_MASK)
-#	            @acontents.add_events(Gdk::Event::LEAVE_NOTIFY_MASK)
 			    signal_connect('delete_event') do
                     # Request that the destroy signal be sent
                     false
@@ -559,23 +555,6 @@ Copyright (C) 2005-2007  Mike Charlton
     					closeView
     			    end
 				end
-				
-#        		@qcontents.signal_connect('motion_notify_event') do |widget, motion|
-#				    characterPopup(widget, motion.window, motion.x, motion.y)
-#				end
-
-#        		@acontents.signal_connect('motion_notify_event') do |widget, motion|
-#				    characterPopup(widget, motion.window, motion.x, motion.y)
-#				end
-
-#        		@qcontents.signal_connect('leave_notify_event') do |widget, event|
-#				    closePopup
-#				end
-
-#        		@acontents.signal_connect('leave_notify_event') do |widget, event|
-#				    closePopup
-#				end
-
 			end
 			
 			def explicitDestroy
@@ -593,70 +572,6 @@ Copyright (C) 2005-2007  Mike Charlton
 			    @reviewModeButton.update
 			end
 			
-			def closePopup
-			    if !@popup.nil?
-			        @popup.destroy
-			        @popup = nil
-			        @popupChar = nil
-			    end
-			end
-			
-			# Translates the x,y coordinates of the widget in this
-			# window to absolute screen coordinates
-			def toAbsPos(widget, x, y)
-		        origin = self.window.position
-		        pos = [x + origin[0], y + origin[1]]
-                widget.translate_coordinates(self, pos[0], pos[1])
-			end
-			
-			def getCharAt(widget, type, x, y)
-			    coords = widget.window_to_buffer_coords(type, x, y)
-			    iter, tr = widget.get_iter_at_position(coords[0], coords[1])
-			    char = iter.char
-		        pos = widget.get_iter_location(iter)
-		        if (coords[0] > pos.x) && (coords[0] < pos.x + pos.width) &&
-			      char != ""
-			        rect = widget.buffer_to_window_coords(type, pos.x, pos.y)
-			        [char, [rect[0], rect[1], pos.width, pos.height]]
-			    else
-			        nil
-			    end
-			end
-			
-			def createPopup(char)
-		        popup = Gtk::Window.new(Gtk::Window::POPUP)
-		        popup.set_transient_for(self)
-		        popup.set_destroy_with_parent(true)
-		        popup.set_window_position(Gtk::Window::POS_NONE)
-		        label = Gtk::Label.new(char)
-		        popup.add(label)
-		        popup
-			end
-			
-			def belowRect(rect)
-			    x = rect[0] + (rect[2] / 2)
-			    y = rect[1] + (rect[3])
-			    [x, y]
-			end
-			
-			def characterPopup(widget, window, x, y)
-			    if @view.kanjiDic.nil?
-			        return
-			    end
-                closePopup
-                type = widget.get_window_type(window)
-                char, charRect = getCharAt(widget, type, x, y)
-			    if !char.nil? && !(char =~ /[a-zA-Z0-9 \s]/)
-			        kanjiString = @view.kanjiDic.find do |entry|
-			            entry.character == char
-			        end.to_s
-			        @popup = createPopup(kanjiString)
-			        charPos = belowRect(charRect)
-			        screenPos = toAbsPos(widget, charPos[0], charPos[1])
-			        @popup.move(screenPos[0], screenPos[1] )
-			        @popup.show_all
-			    end
-			end
         end
 		
 		attr_reader :mainWindow, :kanjiDic
