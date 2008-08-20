@@ -5,6 +5,7 @@ module JLDrill
         def initialize(source)
             @source = source
             @streamSubscribers = {}
+            @blocked = false
         end
         
         def subscribe(target, stream)
@@ -28,11 +29,26 @@ module JLDrill
         end
         
         def update(stream)
+            if blocked?
+                return
+            end
             if @streamSubscribers.has_key?(stream)
                 @streamSubscribers[stream].each do |subscriber|
                     eval("subscriber." + stream + "Updated(@source)")
                 end
             end
+        end
+        
+        def blocked?
+            @blocked
+        end
+        
+        def block
+            @blocked = true
+        end
+        
+        def unblock
+            @blocked = false
         end
     end
 

@@ -20,8 +20,8 @@ module JLDrill
 		
 		def enter(parent)
 		    super(parent)
-		    @parent.quiz.subscribe(self)
 		    @parent.quiz.publisher.subscribe(self, "newProblem")
+		    @parent.quiz.publisher.subscribe(self, "problemModified")
             newProblemUpdated(@parent.quiz)
 		end
 		
@@ -29,18 +29,11 @@ module JLDrill
 		    super
 		end
 
-		def quizUpdated(quiz)
-		    if quiz.currentProblem.nil?
-		        if quiz.length != 0
-		            quiz.drill
-		        end
-            else
-    		    # This forces a redraw of the current problem
-    		    @mainView.newProblem(quiz.currentProblem)
-    		end
-		end
-		
 		def newProblemUpdated(quiz)
+            @mainView.newProblem(quiz.currentProblem)
+		end
+
+		def problemModifiedUpdated(quiz)
             @mainView.newProblem(quiz.currentProblem)
 		end
 

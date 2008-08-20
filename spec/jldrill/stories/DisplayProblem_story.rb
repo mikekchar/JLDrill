@@ -44,10 +44,28 @@ module JLDrill::QuestionAndAnswerAreDisplayed
     
 ###########################################
     describe Story.stepName("There is a view that displays current Problem") do
-        it "has a view" do
+        it "The display should be updated when the application starts" do
+            Story.setup(JLDrill)
+            Story.view.should_receive(:newProblem)
+            Story.start
+            Story.shutdown
+        end
+        
+        it "should display a problem when a file is loaded" do
             Story.setup(JLDrill)
             Story.start
-            Story.view.should_not be_nil
+            Story.view.should_receive(:newProblem)
+            Story.loadQuiz
+            Story.shutdown
+        end
+        
+        it "should refresh the display when the current vocab has been edited" do
+            Story.setup(JLDrill)
+            Story.start
+            Story.view.should_receive(:newProblem).exactly(2).times
+            Story.loadQuiz
+            Story.mainContext.quiz.currentProblem.should_not be_nil
+            Story.mainContext.quiz.currentProblem.vocab = Story.sampleQuiz.sampleVocab
             Story.shutdown
         end
     end

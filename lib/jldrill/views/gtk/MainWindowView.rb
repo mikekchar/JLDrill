@@ -696,28 +696,7 @@ Copyright (C) 2005-2007  Mike Charlton
 		def emitDestroyEvent
 			@mainWindow.signal_emit("destroy")
 		end
-		
-		def accelEntry(key)
-		    @mainWindow.accelGroup.query(key.getGtkKeyval, key.getGtkState)
-		end
-		
-		def accelDefined?(key)
-		    return !accelEntry(key).nil?
-		end
-		
-		# Runs the proc associated with the key in the AccelGroup.
-		# Returns true if it could find it, false if it couldn't
-		def runAccel(key)
-		    success = false
-		    entry = accelEntry(key)
-		    if !entry.nil?  && (entry.size > 0)
-		        if !entry[0].closure.nil?
-		            success = true
-		        end 
-		    end
-		    success
-		end  
-		
+				
 		def updateQuiz
 		    @mainWindow.updateQuiz
 		end

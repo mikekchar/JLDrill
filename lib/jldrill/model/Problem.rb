@@ -68,6 +68,7 @@ module JLDrill
         def vocab=(vocab)
             @vocab.assign(vocab)
             @quiz.setNeedsSave(true)
+            @quiz.problemModified
         end
 
         # Return a string showing what bin this problem is from

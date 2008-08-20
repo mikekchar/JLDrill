@@ -12,6 +12,12 @@ module JLDrill::UserAddsVocabToQuiz
         @context = @mainContext.addNewVocabularyContext
         @view = @context.peekAtView
     end
+    
+    def Story.addVocab
+        Story.view.vocabulary.reading = "あう"
+        Story.view.vocabulary.definitions = "to meet"
+        Story.view.addVocabulary
+    end
 
 ###########################################
     
@@ -23,8 +29,6 @@ module JLDrill::UserAddsVocabToQuiz
             Story.mainView.addNewVocabulary
             Story.shutdown
         end
-        
-        it "should have a test for selecting the GTK control but it's not feasible right now"
     end
 
 ###########################################
@@ -130,11 +134,8 @@ module JLDrill::UserAddsVocabToQuiz
             Story.setup(JLDrill)
             Story.start
             Story.mainContext.addNewVocabulary
-            Story.view.vocabulary.reading = "あう"
-            Story.view.vocabulary.definitions = "to meet"
-            Story.view.vocabulary.should be_valid
             Story.context.should_receive(:addVocabulary).with(Story.view.vocabulary)
-            Story.view.addVocabulary
+            Story.addVocab
             Story.shutdown
         end
         
@@ -148,15 +149,21 @@ module JLDrill::UserAddsVocabToQuiz
             Story.shutdown           
         end
         
+        it "should do a drill when the first item is added" do
+            Story.setup(JLDrill)
+            Story.start
+            Story.mainContext.addNewVocabulary
+            Story.mainContext.quiz.should_receive(:drill)
+            Story.addVocab
+            Story.shutdown            
+        end
+        
         it "should add the vocabulary to the parent context's quiz" do
             Story.setup(JLDrill)
             Story.start
             Story.mainContext.addNewVocabulary
-            Story.view.vocabulary.reading = "あう"
-            Story.view.vocabulary.definitions = "to meet"
-            Story.view.vocabulary.should be_valid
             Story.mainContext.quiz.size.should be(0)
-            Story.view.addVocabulary
+            Story.addVocab
             Story.mainContext.quiz.size.should be(1)
             # Adding the vocabulary to an empty quiz triggers the
             # quiz to be drilled.  This automatically moves the item
@@ -170,32 +177,55 @@ module JLDrill::UserAddsVocabToQuiz
             Story.setup(JLDrill::Gtk)
             Story.start
             Story.mainContext.addNewVocabulary
-            Story.view.vocabulary.reading = "あう"
-            Story.view.vocabulary.definitions = "to meet"
-            Story.view.vocabulary.should be_valid
+            Story.view.vocabularyWindow.reading = "あう"
+            Story.view.vocabularyWindow.definitions = "to meet"
             Story.view.should_receive(:addVocabulary)
             Story.view.emitAddButtonClickedEvent
             Story.shutdown
         end
-        
-        it "should make the addition button inactive if the vocabulary is invalid"
          
     end
 
 ###########################################
     
     describe Story.stepName("The fields in the view are cleared when a Vocabulary is added") do
-        it "should clear the fields in the Gtk window when an item has been added"
+        it "should clear the fields in the Gtk window when an item has been added" do
+            Story.setup(JLDrill::Gtk)
+            Story.start
+            Story.mainContext.addNewVocabulary
+            Story.view.vocabularyWindow.reading = "あう"
+            Story.view.vocabularyWindow.definitions = "to meet"
+            Story.view.addVocabulary
+            Story.view.vocabularyWindow.reading.should be_eql("")
+            Story.view.vocabularyWindow.definitions.should be_eql("")
+            Story.shutdown
+        end
+
+        it "should not clear the fields if the item was invalid" do
+            Story.setup(JLDrill::Gtk)
+            Story.start
+            Story.mainContext.addNewVocabulary
+            Story.view.vocabularyWindow.definitions = "yuck"
+            Story.view.addVocabulary.should be(false)
+            Story.view.vocabularyWindow.definitions.should be_eql("yuck")
+            Story.shutdown
+        end
     end
 
 ###########################################
     
     describe Story.stepName("Doesn't add the same Vocabulary twice") do
-        it "it should refuse to add an item that already exists"
-        
-        it "should inform the user that the item hasn't been added"
-        
-        it "should not clear the fields in the Gtk window"
+        it "it should refuse to add an item that already exists" do
+            Story.setup(JLDrill)
+            Story.start
+            Story.mainContext.addNewVocabulary
+            Story.mainContext.quiz.size.should be(0)
+            Story.addVocab
+            Story.mainContext.quiz.size.should be(1)
+            Story.addVocab
+            # It's the same one so it shouldn't get added
+            Story.mainContext.quiz.size.should be(1)
+        end
     end
 
 end

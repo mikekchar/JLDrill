@@ -42,7 +42,6 @@ module JLDrill
             @strategy = Strategy.new(self)            
             @currentProblem = nil
             @publisher = Publisher.new(self)
-            @blockUpdates = false
             
             @last = nil
         end
@@ -74,17 +73,17 @@ module JLDrill
         def subscribe(subscriber)
             @publisher.subscribe(subscriber, "quiz")
         end
-     
+
         def update
-            if !@blockUpdates
-                @publisher.update("quiz")
-            end
+            @publisher.update("quiz")
         end
         
         def updateNewProblem
-            if !@blockUpdates
-                @publisher.update("newProblem")
-            end
+            @publisher.update("newProblem")
+        end
+        
+        def problemModified
+            @publisher.update("problemModified")
         end
 
         def setNeedsSave(bool)
@@ -92,14 +91,6 @@ module JLDrill
             update
         end
         
-        def blockUpdates
-            @blockUpdates = true
-        end
-        
-        def unblockUpdates
-            @blockUpdates = false
-        end
-
         def saveToString
             retVal = ""
             retVal += "0.2.0-LDRILL-SAVE #{@name}\n"
@@ -176,7 +167,7 @@ module JLDrill
             retVal = false
 
             # Don't update the status while we're loading the file
-            blockUpdates
+            @publisher.block
             if file != ""
                 setup
                 @savename = file
@@ -186,7 +177,7 @@ module JLDrill
                 retVal = @contents.length > 0
             end
             # Update status again
-            unblockUpdates
+            @publisher.unblock
             setNeedsSave(false)
             return retVal
         end
@@ -197,12 +188,12 @@ module JLDrill
             @savename = name
             
             # Don't update the status while we're loading the file
-            blockUpdates
+            @publisher.block
             string.each_line do |line|
                 parseLine(line)
             end
             # Update status again
-            unblockUpdates
+            @publisher.unblock
             
             setNeedsSave(true)
             @contents.length > 0
@@ -211,14 +202,14 @@ module JLDrill
         def loadFromDict(dict)
             if dict
                 # Don't update the status while we're loading the file
-                blockUpdates
+                @publisher.block
                 setup
                 @name = dict.shortFile
                 dict.eachVocab do |vocab|
                     contents.add(vocab, 0)
                 end
                 # Update status again
-                unblockUpdates
+                @publisher.unblock
                 setNeedsSave(true)
             end
         end    
@@ -228,10 +219,10 @@ module JLDrill
         #       nor does it update the status of existing items
         def append(quiz)
             # Don't update the status while we're appending the file
-            blockUpdates
+            @publisher.block
             @contents.addContents(quiz.contents)
             # Update status again
-            unblockUpdates
+            @publisher.unblock
             update
         end
         

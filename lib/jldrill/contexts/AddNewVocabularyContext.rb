@@ -30,6 +30,9 @@ module JLDrill
 		    if !@parent.nil? && !@parent.quiz.nil?
     		    @parent.quiz.appendVocab(vocab)
     		    @parent.updateQuizStatus
+		        if @parent.quiz.currentProblem.nil?
+		            @parent.quiz.drill
+        		end
     		end
 		end
 		

@@ -8,7 +8,8 @@ module JLDrill
     # easier to set up and tear down the test.  It also keeps track
     # of the state of the app.
     class StoryMemento
-        attr_reader :storyName, :app, :mainContext, :mainView, :context, :view
+        attr_reader :storyName, :app, :mainContext, 
+                    :mainView, :context, :view, :sampleQuiz
     
         def initialize(storyName)
             @storyName = storyName
@@ -21,6 +22,7 @@ module JLDrill
             @mainView = nil
             @context = nil
             @view = nil
+            @sampleQuiz = SampleQuiz.new
         end
         
         def stepName(step)
@@ -66,6 +68,12 @@ module JLDrill
                 button
             end
             @context.enter(@mainContext)
+        end
+        
+        def loadQuiz
+            if @mainContext.quiz.loadFromString("SampleQuiz", @sampleQuiz.file)
+                @mainContext.quiz.drill
+            end
         end
     end
 end
