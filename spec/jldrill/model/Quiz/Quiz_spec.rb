@@ -87,8 +87,8 @@ module JLDrill
 	        @quiz.strategy.moveToBin(vocab, 4)
 	        @quiz.contents.bins[0].length.should be(0)
 	        @quiz.contents.bins[4].length.should be(3)
-	        @quiz.contents.bins[4][2].to_s.should be_eql("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 0/Position: 0/Consecutive: 0/Difficulty: 0/\n")
 	        vocab.should be_equal(@quiz.contents.bins[4][2])
+	        vocab.status.bin.should be(4)
 	    end
 	    
         def test_problem(question, problem)
