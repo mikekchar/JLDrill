@@ -33,7 +33,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
 ###########################################
 
     describe Story.stepName("The DisplayProblemContext is exited when the MainContext is exited") do
-        it "it should exit the DisplayProblemContext when the MainContext is exited" do
+        it "should exit the DisplayProblemContext when the MainContext is exited" do
             Story.setup(JLDrill)
             Story.context.should_receive(:enter).with(Story.mainContext)
             Story.start
@@ -53,23 +53,9 @@ module JLDrill::QuestionAndAnswerAreDisplayed
     end
             
 ###########################################
-    describe Story.stepName("The panes process special characters") do
-
-        # Note: I moved this functionality into Vocabulary    
-        it "should be able to insert carriage returns" do
-            vocab = Vocabulary.new()
-            vocab.reading = "This is a test\\n"
-		    vocab.reading.should be_eql("This is a test\n")
-		    vocab.reading = "This is a test\n"
-		    vocab.reading.should be_eql("This is a test\n")
+    describe Story.stepName("Embedded returns and quotes are displayed") do
+        it "has been tested in the Vocabulary spec" do
         end
-		    
-        it "should be able to insert quotes" do
-            vocab = Vocabulary.new()
-		    vocab.reading = "This is a \"test\""
-		    vocab.reading.should be_eql("This is a \"test\"")
-        end
-        
     end
 
 end

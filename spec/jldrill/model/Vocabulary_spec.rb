@@ -141,6 +141,23 @@ module JLDrill
             v1.kanji = ""        
             v1.should_not be_hasHint
         end     
+
+        ##################################################
+        # From DisplayProblem story
+        it "should be able to insert carriage returns" do
+            vocab = Vocabulary.new()
+            vocab.reading = "This is a test\\n"
+		    vocab.reading.should be_eql("This is a test\n")
+		    vocab.reading = "This is a test\n"
+		    vocab.reading.should be_eql("This is a test\n")
+        end
+		    
+        it "should be able to insert quotes" do
+            vocab = Vocabulary.new()
+		    vocab.reading = "This is a \"test\""
+		    vocab.reading.should be_eql("This is a \"test\"")
+        end
+        ####################################################
            
 	end
 

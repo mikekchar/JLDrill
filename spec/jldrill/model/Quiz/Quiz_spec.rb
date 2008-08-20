@@ -1,58 +1,45 @@
 require 'jldrill/model/Quiz/Quiz'
+require 'jldrill/spec/SampleQuiz'
 
 module JLDrill
 
 	describe Quiz do
 	
 		before(:each) do
-        	@fileString = %Q[0.2.0-LDRILL-SAVE Testfile
-# This is the info line
-Random Order
-Promotion Threshold: 4
-Introduction Threshold: 17
-Strategy Version: 0
-Unseen
-/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 0/Consecutive: 0/Difficulty: 0/
-Poor
-Fair
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 2/Level: 0/Position: 1/Consecutive: 0/Difficulty: 0/
-Good
-Excellent
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 4/Level: 0/Position: 2/Consecutive: 1/Difficulty: 0/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 4/Level: 0/Position: 3/Consecutive: 1/Difficulty: 0/
-]
-		    @quiz = Quiz.new
+		    @sampleQuiz = JLDrill::SampleQuiz.new
+		    @quiz = @sampleQuiz.quiz
+		    @emptyQuiz = @sampleQuiz.emptyQuiz
 		end
 
 		it "should have the contents" do
-		    @quiz.should_not be_nil
+		    @emptyQuiz.should_not be_nil
 		    
-		    @quiz.contents.should_not be_nil
-		    @quiz.contents.bins.length.should be(5)
-		    @quiz.contents.bins[0].name.should be_eql("Unseen")
-		    @quiz.contents.bins[1].name.should be_eql("Poor")
-		    @quiz.contents.bins[2].name.should be_eql("Fair")
-		    @quiz.contents.bins[3].name.should be_eql("Good")
-		    @quiz.contents.bins[4].name.should be_eql("Excellent")
-		    @quiz.contents.to_s.should be_eql("Unseen\nPoor\nFair\nGood\nExcellent\n")
+		    @emptyQuiz.contents.should_not be_nil
+		    @emptyQuiz.contents.bins.length.should be(5)
+		    @emptyQuiz.contents.bins[0].name.should be_eql("Unseen")
+		    @emptyQuiz.contents.bins[1].name.should be_eql("Poor")
+		    @emptyQuiz.contents.bins[2].name.should be_eql("Fair")
+		    @emptyQuiz.contents.bins[3].name.should be_eql("Good")
+		    @emptyQuiz.contents.bins[4].name.should be_eql("Excellent")
+		    @emptyQuiz.contents.to_s.should be_eql("Unseen\nPoor\nFair\nGood\nExcellent\n")
 		end
 		
 		it "should have quiz options initialized" do
-		    @quiz.options.should_not be_nil
-		    @quiz.options.randomOrder.should be(false)
-		    @quiz.options.promoteThresh.should be(2)
-		    @quiz.options.introThresh.should be(10)
-		    @quiz.options.oldThresh.should be(90)
+		    @emptyQuiz.options.should_not be_nil
+		    @emptyQuiz.options.randomOrder.should be(false)
+		    @emptyQuiz.options.promoteThresh.should be(2)
+		    @emptyQuiz.options.introThresh.should be(10)
+		    @emptyQuiz.options.oldThresh.should be(90)
 		end
 		
 		def test_changeOption(optionString, originalValue, newValue)
-		    @quiz.needsSave.should be(false)
-		    eval("@quiz.options.#{optionString}").should be(originalValue)
-		    eval("@quiz.options.#{optionString} = #{newValue}")
-		    eval("@quiz.options.#{optionString}").should be(newValue)
-		    @quiz.needsSave.should be(true)
-		    @quiz.setNeedsSave(false)
-		    @quiz.needsSave.should be(false)
+		    @emptyQuiz.needsSave.should be(false)
+		    eval("@emptyQuiz.options.#{optionString}").should be(originalValue)
+		    eval("@emptyQuiz.options.#{optionString} = #{newValue}")
+		    eval("@emptyQuiz.options.#{optionString}").should be(newValue)
+		    @emptyQuiz.needsSave.should be(true)
+		    @emptyQuiz.setNeedsSave(false)
+		    @emptyQuiz.needsSave.should be(false)
 		end
 		
 		it "should set the quiz to needsSave when the options are changed" do
@@ -63,55 +50,39 @@ Excellent
 		end
 		
 		it "should load a file from memory" do
-		    @quiz.loadFromString("none", @fileString)
-		    @quiz.loadFromString("none", @fileString).should be(true)
-		    @quiz.savename.should be_eql("none")
-		    @quiz.name.should be_eql("Testfile")
-		    @quiz.options.randomOrder.should be(true)
-		    @quiz.options.promoteThresh.should be(4)
-		    @quiz.options.introThresh.should be(17)
-		    @quiz.contents.bins[0].length.should be(1)
-		    @quiz.contents.bins[1].length.should be(0)
-		    @quiz.contents.bins[2].length.should be(1)
-		    @quiz.contents.bins[3].length.should be(0)
-		    @quiz.contents.bins[4].length.should be(2)
+		    quiz = Quiz.new
+		    quiz.loadFromString("SampleQuiz", @sampleQuiz.file)
+		    quiz.savename.should be_eql("SampleQuiz")
+		    quiz.name.should be_eql("Testfile")
+		    quiz.options.randomOrder.should be(true)
+		    quiz.options.promoteThresh.should be(4)
+		    quiz.options.introThresh.should be(17)
+		    quiz.contents.bins[0].length.should be(1)
+		    quiz.contents.bins[1].length.should be(0)
+		    quiz.contents.bins[2].length.should be(1)
+		    quiz.contents.bins[3].length.should be(0)
+		    quiz.contents.bins[4].length.should be(2)
 		end
 		
 		it "should save a file to a string" do
-		    @quiz.loadFromString("none", @fileString)
-		    @quiz.saveToString.should be_eql(@fileString)
+		    @quiz.saveToString.should be_eql(@sampleQuiz.file)
 		end
 	
 	    it "should be able to get a list of all the vocab" do
-        	vocabString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 0/Consecutive: 0/Difficulty: 0/
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 2/Level: 0/Position: 1/Consecutive: 0/Difficulty: 0/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 4/Level: 0/Position: 2/Consecutive: 1/Difficulty: 0/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 4/Level: 0/Position: 3/Consecutive: 1/Difficulty: 0/
-]
-	        @quiz.loadFromString("none", @fileString)
-	        @quiz.allVocab.join.should be_eql(vocabString)
+	        @quiz.allVocab.join.should be_eql(@sampleQuiz.allVocab)
 	    end
 	    
 	    it "should be able to reset the contents" do
-	        # Note this vocabString is different from the previous test in that
-	        # the bins are all set to 0
-        	vocabString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 0/Consecutive: 0/Difficulty: 0/
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 0/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 0/Difficulty: 0/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 0/Level: 0/Position: 3/Consecutive: 0/Difficulty: 0/
-]
-	        @quiz.loadFromString("none", @fileString)
 	        @quiz.reset
 	        @quiz.contents.bins[0].length.should be(4)
 	        @quiz.contents.bins[1].length.should be(0)
 	        @quiz.contents.bins[2].length.should be(0)
 	        @quiz.contents.bins[3].length.should be(0)
 	        @quiz.contents.bins[4].length.should be(0)
-	        @quiz.contents.bins[0].contents.join.should be_eql(vocabString)
+	        @quiz.contents.bins[0].contents.join.should be_eql(@sampleQuiz.allResetVocab)
 	    end
 	    
 	    it "should be able to move an item from one bin to the other" do
-	        @quiz.loadFromString("none", @fileString)
 	        vocab = @quiz.contents.bins[0][0]
 	        @quiz.strategy.moveToBin(vocab, 4)
 	        @quiz.contents.bins[0].length.should be(0)
@@ -215,7 +186,7 @@ Excellent
         end
 	    
 	    def test_initializeQuiz
-	    	@quiz.loadFromString("none", @fileString)
+	    	@quiz.loadFromString("none", @sampleQuiz.file)
 	    	@quiz.options.randomOrder = false
 	    	@quiz.options.promoteThresh = 1
 	        @quiz.reset	    
@@ -288,7 +259,7 @@ Excellent
         end
         
         it "should update the status correctly for bin 4 items" do
-	        @quiz.loadFromString("none", @fileString)
+	        @quiz.loadFromString("none", @sampleQuiz.file)
 	        vocab = @quiz.contents.bins[4][0]
 	        vocab.should_not be_nil
             @quiz.currentProblem = MeaningProblem.new(vocab, @quiz)

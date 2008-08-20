@@ -4,6 +4,9 @@ require 'jldrill/views/gtk/MainWindowView'
 require 'jldrill/spec/Fakes'
 
 module JLDrill
+    # This is a helper class for the tests.  It makes it
+    # easier to set up and tear down the test.  It also keeps track
+    # of the state of the app.
     class StoryMemento
         attr_reader :storyName, :app, :mainContext, :mainView, :context, :view
     
