@@ -2,6 +2,7 @@ require 'jldrill/model/Quiz/Strategy'
 require 'jldrill/model/Quiz/Contents'
 require 'jldrill/model/Vocabulary'
 require 'jldrill/model/Problem'
+require 'jldrill/spec/SampleQuiz'
 
 module JLDrill
 
@@ -9,7 +10,8 @@ module JLDrill
 	
 	    before(:each) do
 	        @quiz = Quiz.new
-	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 0/Position: 0/Consecutive: 0/")
+	        @sampleQuiz = SampleQuiz.new
+	        vocab = @sampleQuiz.sampleVocab
 	        @quiz.contents.add(vocab, 4)
 	        @quiz.currentProblem = ReadingProblem.new(vocab, @quiz)
 	        @strategy = @quiz.strategy
@@ -41,7 +43,8 @@ module JLDrill
 	    end
 
         def test_addVocab(bin, position)
-       	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: #{bin}/Level: 0/Position: #{position}/Consecutive: 0/")
+       	        vocab = @sampleQuiz.sampleVocab
+       	        vocab.status.position = position
     	        @quiz.contents.add(vocab, bin)
     	        vocab
         end
@@ -101,9 +104,15 @@ module JLDrill
 	    end
 	    
 	    it "should be able to create problems of the correct level" do
-	        vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 1/Level: 0/Position: 1/")
-            vocab2 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 2/Level: 1/Position: 2/")
-            vocab3 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 3/Level: 2/Position: 3/")
+	        vocab1 = @sampleQuiz.sampleVocab
+	        vocab1.status.level = 0
+	        vocab1.status.bin = 1
+	        vocab2 = @sampleQuiz.sampleVocab
+	        vocab2.status.level = 1
+	        vocab2.status.bin = 2
+	        vocab3 = @sampleQuiz.sampleVocab
+	        vocab3.status.level = 2
+	        vocab3.status.bin = 3
             
             problem1 = @strategy.createProblem(vocab1)
             problem2 = @strategy.createProblem(vocab2)
@@ -114,7 +123,8 @@ module JLDrill
 	    end
     
         it "should create MeaningProblems and KanjiProblems equally in bin 4" do
-            vocab4 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 2/Position: 4/")
+            vocab4 = @sampleQuiz.sampleVocab
+            vocab4.status.bin = 4
             meaning = 0
             kanji = 0
             error = false
@@ -141,14 +151,14 @@ module JLDrill
         end
         
         it "should return -1 when asked to pick from an empty range of bins" do
-	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+            vocab = @sampleQuiz.sampleVocab
 	        @quiz.contents.add(vocab, 1)            
 	        @quiz.contents.add(vocab, 2)
 	        @strategy.randomBin(2..1).should be(-1)
         end
 
         it "should not pick empty bins even if it was the last item" do
-	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+            vocab = @sampleQuiz.sampleVocab
 	        @last = vocab
 	        @quiz.contents.add(vocab, 1)
 	        @quiz.contents.bins[0].empty?.should be(true)
@@ -159,7 +169,7 @@ module JLDrill
         end
 
         it "should alternate between 2 full bins" do
-	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+            vocab = @sampleQuiz.sampleVocab
 	        @quiz.contents.add(vocab, 0)
 	        # bin 4 already has an item
 	        sizes = [0,0,0,0,0]
@@ -176,13 +186,13 @@ module JLDrill
         end
         
         it "should pick full bins in a binary decreasing fashion" do
-	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+	        vocab = @sampleQuiz.sampleVocab
 	        @quiz.contents.add(vocab, 0)
-	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+	        vocab = @sampleQuiz.sampleVocab
 	        @quiz.contents.add(vocab, 1)
-	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+	        vocab = @sampleQuiz.sampleVocab
 	        @quiz.contents.add(vocab, 2)
-	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+	        vocab = @sampleQuiz.sampleVocab
 	        @quiz.contents.add(vocab, 3)
 	        # bin 4 already has an item
 	        sizes = [0,0,0,0,0]
@@ -208,7 +218,7 @@ module JLDrill
         it "should be able to tell if the working set is full" do
             @quiz.options.introThresh = 5
             @strategy.workingSetFull?.should be(false)
-            vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+            vocab = @sampleQuiz.sampleVocab
 	        @quiz.contents.add(vocab, 1)
             @strategy.workingSetFull?.should be(false)
 	        @quiz.contents.add(vocab, 2)
@@ -231,7 +241,7 @@ module JLDrill
             # There are only review set items.  So we should review.
             @strategy.shouldReview?.should be(true)
             
-            vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+            vocab = @sampleQuiz.sampleVocab
 	        @quiz.contents.add(vocab, 1)
             # Now there is a working set item, and we don't have enough items
             # in the review set, so we should not review
@@ -257,7 +267,7 @@ module JLDrill
             
             # We don't have any items, so getBin should fail
             strategy.getBin.should be(-1)
-            vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/")
+            vocab = @sampleQuiz.sampleVocab
 	        quiz.contents.add(vocab, 0)
 	        
 	        # We have only have an item in the new set
@@ -290,7 +300,7 @@ module JLDrill
         end
         
         it "should increment the vocabulary's difficulty when an item is incorrect" do
-	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 3/Level: 0/Position: -1/Consecutive: 0/")
+	        vocab = @sampleQuiz.sampleVocab
 	        @quiz.contents.add(vocab, 3)
 	        @quiz.currentProblem = @strategy.createProblem(vocab)
 	        vocab.status.difficulty.should be(0)
@@ -300,7 +310,7 @@ module JLDrill
         
         it "should reset the difficulty when the vocab is demoted from the 4th bin" do
             @quiz.options.promoteThresh = 1
-	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 1/Level: 0/Position: -1/Consecutive: 0/")
+	        vocab = @sampleQuiz.sampleVocab
 	        @quiz.contents.add(vocab, 1)
 	        @quiz.currentProblem = @strategy.createProblem(vocab)
 	        @strategy.incorrect
@@ -320,7 +330,7 @@ module JLDrill
         
         it "should reset the consecutive counter on an incorrect answer" do
             @quiz.options.promoteThresh = 1
-	        vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 1/Level: 0/Position: -1/Consecutive: 0/")
+	        vocab = @sampleQuiz.sampleVocab
 	        @quiz.contents.add(vocab, 1)
 	        @quiz.currentProblem = @strategy.createProblem(vocab)
             vocab.status.bin.should be(1)
