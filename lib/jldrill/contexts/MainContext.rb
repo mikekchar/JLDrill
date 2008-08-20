@@ -117,10 +117,6 @@ module JLDrill
 		    @displayQuizStatusContext.quizUpdated(@quiz) if @displayQuizStatusContext.isEntered?
 		end
 		
-		def updateNewProblemStatus
-		    @displayQuizStatusContext.newProblemUpdated(@quiz) if @displayQuizStatusContext.isEntered?
-		end
-		
 		def showAnswer
 		    @displayProblemContext.showAnswer if @displayProblemContext.isEntered?
 		end

@@ -110,12 +110,12 @@ module JLDrill::Gtk
                 self.pack_end(@vpane, true)
 	        end
 	        
-	        def newProblem(problem)
+	        def newProblem(problem, differs)
 	            @problem = problem
 	            @answer.clear
 	            @question.update(problem)
 	            if !problem.nil?  && !problem.vocab.nil?
-    	            @indicatorBox.set(problem.vocab)
+    	            @indicatorBox.set(problem.vocab, differs)
     	        else
     	            @indicatorBox.clear
     	        end
@@ -143,8 +143,8 @@ module JLDrill::Gtk
 			@widget
 		end
 		
-		def newProblem(problem)
-		    @problemWindow.newProblem(problem)
+		def newProblem(problem, differs)
+		    @problemWindow.newProblem(problem, differs)
 		end
 		
 		def showAnswer

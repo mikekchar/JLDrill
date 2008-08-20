@@ -22,7 +22,6 @@ module JLDrill
 		    super(parent)
 		    quizUpdated(@parent.quiz)
 		    @parent.quiz.subscribe(self)
-		    @parent.quiz.publisher.subscribe(self, "newProblem")
 		end
 		
 		def exit
@@ -31,13 +30,6 @@ module JLDrill
 		
 		def quizUpdated(quiz)
 		    @mainView.update(quiz)
-		end
-		
-		def newProblemUpdated(quiz)
-            if @parent.reference.loaded? && !quiz.currentProblem.nil?
-                exists = @parent.reference.include?(quiz.currentProblem.vocab)
-		        @mainView.vocabVerified(quiz, exists)
-		    end
 		end
 				
     end

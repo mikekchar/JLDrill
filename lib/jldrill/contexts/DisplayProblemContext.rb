@@ -29,12 +29,20 @@ module JLDrill
 		    super
 		end
 
+        def differs?(problem)
+            exists = true
+            if @parent.reference.loaded? && !problem.nil?
+                exists = @parent.reference.include?(problem.vocab)
+		    end
+		    return !exists
+        end
+
 		def newProblemUpdated(quiz)
-            @mainView.newProblem(quiz.currentProblem)
+            @mainView.newProblem(quiz.currentProblem, differs?(quiz.currentProblem))
 		end
 
 		def problemModifiedUpdated(quiz)
-            @mainView.newProblem(quiz.currentProblem)
+            @mainView.newProblem(quiz.currentProblem, differs?(quiz.currentProblem))
 		end
 
         def showAnswer

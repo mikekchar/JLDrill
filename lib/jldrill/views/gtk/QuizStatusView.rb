@@ -39,26 +39,9 @@ module JLDrill::Gtk
 			@widget
 		end
 		
-		def verifiedTag
-		    retVal = ""
-		    if !@verified.nil?
-		        if @verified
-		            retVal = " -- OK"
-		        else
-		            retVal = " -- XX"
-		        end
-		    end
-		    retVal
-		end
-		
 		def update(quiz)
-		    @quizStatusBar.update(quiz.status + verifiedTag)
+		    @quizStatusBar.update(quiz.status)
 		end
-		
-		def vocabVerified(quiz, bool)
-		    @verified = bool
-		    update(quiz)
-        end
     end
     
 end

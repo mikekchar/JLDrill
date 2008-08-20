@@ -8,7 +8,7 @@ module JLDrill
 			super(context)
 		end
 
-		def newProblem(problem)
+		def newProblem(problem, differs)
 		    # Should be overridden in the concrete class
 		end	
 		

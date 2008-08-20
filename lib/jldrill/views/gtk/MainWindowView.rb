@@ -493,7 +493,6 @@ Copyright (C) 2005-2007  Mike Charlton
                         end
                         dialog.destroy
                     }
-                    @view.updateCurrentProblemStatus
                 end
             end
 
@@ -512,7 +511,6 @@ Copyright (C) 2005-2007  Mike Charlton
                         end
                         dialog.destroy
                     }
-                    @view.updateCurrentProblemStatus
                 end
             end
 

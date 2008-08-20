@@ -28,12 +28,14 @@ class GtkIndicatorBox < Gtk::HBox
 		@pol = Gtk::Label.new
 		@vs = Gtk::Label.new
 		@vi = Gtk::Label.new
+		@differs = Gtk::Label.new
 		pack_start(@uk, true, true, 0)
 		pack_start(@humble, true, true, 0)
 		pack_start(@honourific, true, true, 0)
 		pack_start(@pol, true, true, 0)
 		pack_start(@vs, true, true, 0)
 		pack_start(@vi, true, true, 0)
+		pack_start(@differs, true, true, 0)
 		clear
 	end
 	
@@ -44,15 +46,17 @@ class GtkIndicatorBox < Gtk::HBox
 		self.pol = false
 		self.vs = false
 		self.vi = false
+		self.differs = false
 	end
 	
-	def set(vocab)
+	def set(vocab, differs=false)
 		self.uk = vocab.markers.include?("uk")
 		self.humble = vocab.markers.include?("hum")
 		self.honourific = vocab.markers.include?("hon")
 		self.pol = vocab.markers.include?("pol")
 		self.vs = vocab.markers.include?("vs")
 		self.vi = vocab.markers.include?("vi")
+		self.differs = differs
 	end
 	
 	def getSpan(label, state)
@@ -92,5 +96,9 @@ class GtkIndicatorBox < Gtk::HBox
 	
 	def vi=(state)
 		@vi.set_markup(getMarkup(" Intransitive ", state))
+	end
+	
+	def differs=(state)
+	    @differs.set_markup(getMarkup(" Differs ", state))
 	end	
 end
