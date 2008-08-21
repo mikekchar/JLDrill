@@ -1,18 +1,16 @@
 require 'Context/View'
 
 module JLDrill
-	class InfoView < Context::View
+	class AboutView < Context::View
+	    attr_reader :quiz
 	
-		def initialize(context)
+		def initialize(context, about)
 			super(context)
+			@about = about
 		end
 		
-		def destroy
+		def run
 		    # Only in the concrete class
-		end
-		
-		def run(info)
-		    @info = info
 		end
 		
 	end

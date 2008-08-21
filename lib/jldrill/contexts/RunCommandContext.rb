@@ -91,9 +91,11 @@ module JLDrill
         end
         
         def ack
+            @parent.showAcknowlegements
         end
         
         def about
+            @parent.showAbout
         end
         
         def setReviewMode(bool)

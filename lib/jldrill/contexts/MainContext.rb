@@ -16,6 +16,8 @@ require 'jldrill/contexts/DisplayProblemContext'
 require 'jldrill/contexts/PromptForSaveContext'
 require 'jldrill/contexts/ShowInfoContext'
 require 'jldrill/contexts/ShowAllVocabularyContext'
+require 'jldrill/model/Acknowlegements'
+require 'jldrill/contexts/ShowAboutContext'
 
 module JLDrill
 
@@ -26,6 +28,7 @@ module JLDrill
 	                :addNewVocabularyContext, :displayQuizStatusContext,
 	                :displayProblemContext, :runCommandContext,
 	                :showInfoContext, :showAllVocabularyContext,
+                    :showAboutContext,
 	                :reference, :quiz
 	    attr_writer :quiz
 		
@@ -43,6 +46,7 @@ module JLDrill
 			@displayProblemContext = DisplayProblemContext.new(viewBridge)
 			@showInfoContext = ShowInfoContext.new(viewBridge)
 			@showAllVocabularyContext = ShowAllVocabularyContext.new(viewBridge)
+			@showAboutContext = ShowAboutContext.new(viewBridge)
 			@reference = HashedEdict.new
 			@quiz = Quiz.new
 		end
@@ -194,9 +198,17 @@ module JLDrill
 		def showQuizInfo
 		    @showInfoContext.enter(self, @quiz.info) unless @showInfoContext.isEntered?
 		end
+
+		def showAcknowlegements
+		    @showInfoContext.enter(self, Acknowlegements) unless @showInfoContext.isEntered?
+		end
 		
 		def showAllVocabulary
 		    @showAllVocabularyContext.enter(self) unless @showAllVocabularyContext.isEntered?
+		end
+
+		def showAbout
+		    @showAboutContext.enter(self) unless @showAboutContext.isEntered?
 		end
     end
 end

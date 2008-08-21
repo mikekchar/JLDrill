@@ -69,7 +69,7 @@ module JLDrill::Gtk
                         @view.addNewVocabulary ],
 
                     ["/_Help"],
-                    ["/Help/Ac_knowledgements...",
+                    ["/Help/Ac_knowlegements...",
                         "<Item>",          "<control>K",    nil, 
                         @view.ack ],
                     ["/Help/_About...", 

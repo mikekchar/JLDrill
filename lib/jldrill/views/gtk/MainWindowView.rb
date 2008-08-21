@@ -378,7 +378,7 @@ module JLDrill::Gtk
 
                 authors = ["Mike Charlton"]
                 license = %Q[JLDrill - Drill Program for Learning Japanese
-Copyright (C) 2005-2007  Mike Charlton
+Copyright (C) 2005-2008  Mike Charlton
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -398,7 +398,7 @@ Copyright (C) 2005-2007  Mike Charlton
                 Gtk::AboutDialog.show(self,
         			    :name => "GTK LDrill",
         			    :version => JLDrill::VERSION,
-        			    :copyright => "(C) 2005 Mike Charlton",
+        			    :copyright => "(C) 2005-2008 Mike Charlton",
         			    :license => license,
         			    :comments => "Super Drill Program for Learning Japanese.",
                         :website => "http://jldrill.rubyforge.org",

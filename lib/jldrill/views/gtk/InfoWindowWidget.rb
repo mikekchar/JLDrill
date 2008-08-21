@@ -3,7 +3,7 @@ module JLDrill::Gtk
 
         def initialize(view)
             @view = view
-            super("Quiz Info", nil,
+            super("Info", nil,
                     Gtk::Dialog::DESTROY_WITH_PARENT,
                     [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
 
