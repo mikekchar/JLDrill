@@ -12,6 +12,7 @@ require 'jldrill/contexts/GetFilenameContext'
 require 'jldrill/contexts/AddNewVocabularyContext'
 require 'jldrill/contexts/DisplayQuizStatusContext'
 require 'jldrill/contexts/DisplayProblemContext'
+require 'jldrill/contexts/PromptForSaveContext'
 
 module JLDrill
 
@@ -114,7 +115,8 @@ module JLDrill
 		
 		def promptForSaveAnd(&block)
 		    if @quiz.needsSave?
-		        if false
+		        promptForSave = PromptForSaveContext.new(@viewBridge) 
+		        if promptForSave.enter(self) != promptForSave.cancel
 		            block.call
 		        end
 		    else
