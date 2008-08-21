@@ -126,8 +126,6 @@ module JLDrill::Gtk
                     "<StockItem>", "<control>S", Gtk::Stock::SAVE, Proc.new{save}],
                     ["/File/Save _As...",
                     "<StockItem>", "<control>A", Gtk::Stock::SAVE, Proc.new{saveAs}],
-                    ["/File/_Export...",
-                    "<Item>", "<control>E", nil, Proc.new{export}],
                     ["/File/_Open...",
                     "<StockItem>", "<control>O", Gtk::Stock::OPEN, Proc.new{open}],
 					["/File/A_ppend...",
@@ -268,18 +266,6 @@ module JLDrill::Gtk
 
             def loadReference()
                 @view.loadReference
-            end
-
-            def export()
-                if @view.quiz
-                    dialog = GtkEnterFilename.new(@currentDir, self)
-                
-                    savename = dialog.run 
-                    dialog.destroy
-                    if savename != ""
-                    @view.quiz.export(savename)
-                    end
-                end
             end
   
             def saveAs()

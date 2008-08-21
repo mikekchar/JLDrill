@@ -14,7 +14,6 @@ module JLDrill
 			super(context)
 			@save = Proc.new {@context.save}
 			@saveAs = Proc.new {@context.saveAs}
-			@export = Proc.new {@context.export}
 			@open = Proc.new {@context.open}
 			@appendFile = Proc.new {@context.appendFile}
 			@loadReference = Proc.new {@context.loadReference}

@@ -119,16 +119,6 @@ module JLDrill
             end
             return retVal
         end
-        
-        def export(filename)
-            saveFile = File.new(filename, "w")
-            if saveFile
-                @contents.bins[4].each { |word|
-                    saveFile.print(word.to_tsv + "\n")
-                }
-                saveFile.close()
-            end
-        end
 
         def Quiz.drillFile?(file)
             retVal = false

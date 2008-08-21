@@ -34,14 +34,12 @@ module JLDrill
             @parent.saveAs
         end
         
-        def export
-        end
-        
         def open
             @parent.open
         end
         
         def appendFile
+            @parent.appendFile
         end
         
         def loadReference
