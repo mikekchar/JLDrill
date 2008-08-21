@@ -4,15 +4,15 @@ require 'jldrill/views/VocabularyView'
 
 module JLDrill
 
-	class AddNewVocabularyContext < Context::Context
+	class EditVocabularyContext < Context::Context
 				
 		def initialize(viewBridge)
 			super(viewBridge)
 		end
 		
 		def createViews
-    		@mainView = @viewBridge.VocabularyView.new(self, "add") do
-    		    @mainView.addVocabulary
+    		@mainView = @viewBridge.VocabularyView.new(self, "Set") do
+    		    @mainView.setVocabulary
     		end
         end
 
@@ -23,6 +23,7 @@ module JLDrill
 		
 		def enter(parent)
 		    super(parent)
+		    @mainView.update(@parent.quiz.currentProblem.vocab)
 		end
 		
 		def exit
@@ -30,13 +31,7 @@ module JLDrill
 		end
 		
 		def addVocabulary(vocab)
-		    if !@parent.nil? && !@parent.quiz.nil?
-    		    @parent.quiz.appendVocab(vocab)
-    		    @parent.updateQuizStatus
-		        if @parent.quiz.currentProblem.nil?
-		            @parent.quiz.drill
-        		end
-    		end
+		    # Do nothing in this context
 		end
 		
 		def search(reading)
@@ -50,7 +45,7 @@ module JLDrill
 		end
 		
 		def setVocabulary(vocab)
-		    # Do nothing in this context
+		    @parent.quiz.currentProblem.vocab = vocab
 		end
     end
 end

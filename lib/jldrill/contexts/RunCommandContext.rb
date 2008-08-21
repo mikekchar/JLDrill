@@ -83,6 +83,7 @@ module JLDrill
         end
         
         def displayVocab
+            @parent.editVocabulary
         end
         
         def xReference

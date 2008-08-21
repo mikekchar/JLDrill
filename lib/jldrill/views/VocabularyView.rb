@@ -3,15 +3,17 @@ require 'jldrill/model/Vocabulary'
 
 module JLDrill
 	class VocabularyView < Context::View
-	    attr_reader :vocabulary
+	    attr_reader :vocabulary, :label, :block
 	
-		def initialize(context)
+		def initialize(context, label, &block)
 			super(context)
 			@vocabulary = Vocabulary.new
+			@label = label
+			@block = block
 		end
 
 		def run
-		    super
+		    # Only for the concrete class
 		end
 		
 		def close
@@ -21,6 +23,11 @@ module JLDrill
 		def destroy
 		    # Only for the concrete class
 		end
+
+        def update(vocabulary)
+            @vocabulary = vocabulary
+            search(vocabulary.reading)
+        end
 
         # Returns true if the vocabulary has been added
         def addVocabulary
@@ -34,6 +41,10 @@ module JLDrill
         
         def search(reading)
             @context.search(reading)
+        end
+        
+        def setVocabulary
+            @context.setVocabulary(@vocabulary)
         end
 	end
 end

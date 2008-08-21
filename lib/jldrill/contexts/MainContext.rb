@@ -10,6 +10,7 @@ require 'jldrill/contexts/SetOptionsContext'
 require 'jldrill/contexts/ShowStatisticsContext'
 require 'jldrill/contexts/GetFilenameContext'
 require 'jldrill/contexts/AddNewVocabularyContext'
+require 'jldrill/contexts/EditVocabularyContext'
 require 'jldrill/contexts/DisplayQuizStatusContext'
 require 'jldrill/contexts/DisplayProblemContext'
 require 'jldrill/contexts/PromptForSaveContext'
@@ -37,6 +38,7 @@ module JLDrill
 			@getFilenameContext = GetFilenameContext.new(viewBridge)
 			@getFilenameContext.directory = File.join(JLDrill::Config::DATA_DIR, "quiz")
 			@addNewVocabularyContext = AddNewVocabularyContext.new(viewBridge)
+			@editVocabularyContext = EditVocabularyContext.new(viewBridge)
 			@displayQuizStatusContext = DisplayQuizStatusContext.new(viewBridge)
 			@displayProblemContext = DisplayProblemContext.new(viewBridge)
 			@showQuizInfoContext = ShowQuizInfoContext.new(viewBridge)
@@ -161,6 +163,10 @@ module JLDrill
 		    @addNewVocabularyContext.enter(self) unless @addNewVocabularyContext.isEntered?
 		end
 		
+		def editVocabulary
+		    @editVocabularyContext.enter(self) unless @editVocabularyContext.isEntered?
+		end
+
 		def updateQuizStatus
 		    @displayQuizStatusContext.quizUpdated(@quiz) if @displayQuizStatusContext.isEntered?
 		end

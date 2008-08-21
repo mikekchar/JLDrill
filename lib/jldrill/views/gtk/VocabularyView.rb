@@ -11,7 +11,7 @@ module JLDrill::Gtk
 	    class VocabularyWindow < Gtk::Window
 	        attr_reader :addButton
 	    
-	        def initialize(view)
+	        def initialize(view, label)
 	            @view = view
 	            @closed = false
 	            super("Add")
@@ -22,7 +22,7 @@ module JLDrill::Gtk
 	            @searchTable = nil
 	            @buttons = Gtk::HBox.new
 	            @searchButton = Gtk::Button.new("Search")
-	            @addButton = Gtk::Button.new("Add")
+	            @addButton = Gtk::Button.new(label)
 	            @buttons.add(@searchButton)
 	            @buttons.add(@addButton)
 	            @vbox.add(@buttons)
@@ -42,7 +42,7 @@ module JLDrill::Gtk
 				end
 				
 				@addButton.signal_connect('clicked') do
-				    @view.addVocabulary
+				    @view.block.call
 				end
 				
 				@searchButton.signal_connect('clicked') do
@@ -115,9 +115,9 @@ module JLDrill::Gtk
 	
         attr_reader :vocabularyWindow
         	
-		def initialize(context)
-			super(context)
-			@vocabularyWindow = VocabularyWindow.new(self)
+		def initialize(context, label, &block)
+			super(context, label, &block)
+			@vocabularyWindow = VocabularyWindow.new(self, label)
 			@widget = Context::Gtk::Widget.new(@vocabularyWindow)
 		end
 		
@@ -137,6 +137,11 @@ module JLDrill::Gtk
             @vocabularyWindow.addButton.clicked
         end
         
+        def update(vocabulary)
+            super(vocabulary)
+            @vocabularyWindow.update(vocabulary)
+        end
+        
         # Returns true if the vocabulary has been added
         def addVocabulary
             @vocabulary = @vocabularyWindow.getVocab
@@ -147,6 +152,11 @@ module JLDrill::Gtk
             else
                 false
             end
+        end
+        
+        def setVocabulary
+            @vocabulary = @vocabularyWindow.getVocab
+            super
         end
 
     end
