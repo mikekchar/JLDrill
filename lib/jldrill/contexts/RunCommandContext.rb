@@ -53,6 +53,7 @@ module JLDrill
         end
         
         def info
+            @parent.showQuizInfo
         end
    
         def statistics

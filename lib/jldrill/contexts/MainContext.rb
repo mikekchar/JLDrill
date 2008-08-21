@@ -13,6 +13,7 @@ require 'jldrill/contexts/AddNewVocabularyContext'
 require 'jldrill/contexts/DisplayQuizStatusContext'
 require 'jldrill/contexts/DisplayProblemContext'
 require 'jldrill/contexts/PromptForSaveContext'
+require 'jldrill/contexts/ShowQuizInfoContext'
 
 module JLDrill
 
@@ -22,6 +23,7 @@ module JLDrill
 	                :showStatisticsContext, :getFilenameContext,
 	                :addNewVocabularyContext, :displayQuizStatusContext,
 	                :displayProblemContext, :runCommandContext,
+	                :quizInfoContext,
 	                :reference, :quiz
 	    attr_writer :quiz
 		
@@ -36,6 +38,7 @@ module JLDrill
 			@addNewVocabularyContext = AddNewVocabularyContext.new(viewBridge)
 			@displayQuizStatusContext = DisplayQuizStatusContext.new(viewBridge)
 			@displayProblemContext = DisplayProblemContext.new(viewBridge)
+			@showQuizInfoContext = ShowQuizInfoContext.new(viewBridge)
 			@reference = HashedEdict.new
 			@quiz = Quiz.new
 		end
@@ -176,6 +179,10 @@ module JLDrill
 		
 		def reset
 		    @quiz.reset
+		end
+		
+		def showQuizInfo
+		    @showQuizInfoContext.enter(self) unless @showQuizInfoContext.isEntered?
 		end
     end
 end
