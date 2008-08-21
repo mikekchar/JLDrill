@@ -14,7 +14,7 @@ require 'jldrill/contexts/EditVocabularyContext'
 require 'jldrill/contexts/DisplayQuizStatusContext'
 require 'jldrill/contexts/DisplayProblemContext'
 require 'jldrill/contexts/PromptForSaveContext'
-require 'jldrill/contexts/ShowQuizInfoContext'
+require 'jldrill/contexts/ShowInfoContext'
 require 'jldrill/contexts/ShowAllVocabularyContext'
 
 module JLDrill
@@ -25,7 +25,7 @@ module JLDrill
 	                :showStatisticsContext, :getFilenameContext,
 	                :addNewVocabularyContext, :displayQuizStatusContext,
 	                :displayProblemContext, :runCommandContext,
-	                :showQuizInfoContext, :showAllVocabularyContext,
+	                :showInfoContext, :showAllVocabularyContext,
 	                :reference, :quiz
 	    attr_writer :quiz
 		
@@ -41,7 +41,7 @@ module JLDrill
 			@editVocabularyContext = EditVocabularyContext.new(viewBridge)
 			@displayQuizStatusContext = DisplayQuizStatusContext.new(viewBridge)
 			@displayProblemContext = DisplayProblemContext.new(viewBridge)
-			@showQuizInfoContext = ShowQuizInfoContext.new(viewBridge)
+			@showInfoContext = ShowInfoContext.new(viewBridge)
 			@showAllVocabularyContext = ShowAllVocabularyContext.new(viewBridge)
 			@reference = HashedEdict.new
 			@quiz = Quiz.new
@@ -164,7 +164,9 @@ module JLDrill
 		end
 		
 		def editVocabulary
-		    @editVocabularyContext.enter(self) unless @editVocabularyContext.isEntered?
+		    if !@quiz.currentProblem.nil?
+    		    @editVocabularyContext.enter(self) unless @editVocabularyContext.isEntered?
+    		end
 		end
 
 		def updateQuizStatus
@@ -190,7 +192,7 @@ module JLDrill
 		end
 		
 		def showQuizInfo
-		    @showQuizInfoContext.enter(self) unless @showQuizInfoContext.isEntered?
+		    @showInfoContext.enter(self, @quiz.info) unless @showInfoContext.isEntered?
 		end
 		
 		def showAllVocabulary

@@ -82,11 +82,8 @@ module JLDrill
             @parent.reset
         end
         
-        def displayVocab
+        def editVocab
             @parent.editVocabulary
-        end
-        
-        def xReference
         end
         
         def addNewVocabulary

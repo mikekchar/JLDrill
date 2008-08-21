@@ -7,8 +7,7 @@ module JLDrill
         attr_reader :save, :saveAs, :export, :open, :appendFile, 
                     :loadReference, :quit, :info, :statistics, :check,
                     :incorrect, :correct, :vocabTable, :options,
-                    :resetQuiz, :displayVocab, :xReference, 
-                    :addNewVocabulary, :ack, :about
+                    :resetQuiz, :editVocab, :addNewVocabulary, :ack, :about
     
 		def initialize(context)
 			super(context)
@@ -26,8 +25,7 @@ module JLDrill
 			@vocabTable = Proc.new {@context.vocabTable}
 			@options = Proc.new {@context.options}
 			@resetQuiz = Proc.new {@context.resetQuiz}
-			@displayVocab = Proc.new {@context.displayVocab}
-			@xReference = Proc.new {@context.xReference}
+			@editVocab = Proc.new {@context.editVocab}
 			@addNewVocabulary = Proc.new {@context.addNewVocabulary}
 			@ack = Proc.new {@context.ack}
 			@about = Proc.new {@context.about}

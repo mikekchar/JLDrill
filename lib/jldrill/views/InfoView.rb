@@ -1,7 +1,7 @@
 require 'Context/View'
 
 module JLDrill
-	class QuizInfoView < Context::View
+	class InfoView < Context::View
 	    attr_reader :quiz
 	
 		def initialize(context)
@@ -13,8 +13,8 @@ module JLDrill
 		    # Only in the concrete class
 		end
 		
-		def run(quiz)
-		    @quiz = quiz
+		def run(info)
+		    @info = info
 		end
 		
 	end

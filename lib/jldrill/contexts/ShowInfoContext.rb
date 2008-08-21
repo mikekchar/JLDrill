@@ -1,17 +1,17 @@
 require 'Context/Context'
 require 'Context/Bridge'
-require 'jldrill/views/QuizInfoView'
+require 'jldrill/views/InfoView'
 
 module JLDrill
 
-	class ShowQuizInfoContext < Context::Context
+	class ShowInfoContext < Context::Context
 		
 		def initialize(viewBridge)
 			super(viewBridge)
 		end
 		
 		def createViews
-    		@mainView = @viewBridge.QuizInfoView.new(self)
+    		@mainView = @viewBridge.InfoView.new(self)
         end
 
         def destroyViews
@@ -19,9 +19,9 @@ module JLDrill
             @mainView = nil
         end		    
 		
-		def enter(parent)
+		def enter(parent, info)
 		    super(parent)
-    		@mainView.run(parent.quiz)
+            @mainView.run(info)
     		self.exit
 		end
     end

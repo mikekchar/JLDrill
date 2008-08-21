@@ -61,16 +61,11 @@ module JLDrill::Gtk
                         @view.resetQuiz ],
 
                     ["/_Vocab"],
-                    ["/Vocab/_Display...",
-                        "<Item>",          "D",             nil, 
-                        @view.displayVocab ],
-                    ["/Vocab/_XReference...",
-                        "<Item>",          "<control>X",    nil, 
-                        @view.xReference ],
-                    
-                    ["/_Edit"],
-                    ["/Edit/_Add...",
-                        "<Item>",          "<shift>=",      nil, 
+                    ["/Vocab/_Edit...",
+                        "<Item>",          "E",             nil, 
+                        @view.editVocab ],
+                    ["/Vocab/_Add...",
+                        "<Item>",          "A",             nil, 
                         @view.addNewVocabulary ],
 
                     ["/_Help"],
