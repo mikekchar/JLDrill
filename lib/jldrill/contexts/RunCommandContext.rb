@@ -64,9 +64,11 @@ module JLDrill
         end
         
         def incorrect
+            @parent.incorrect
         end
         
         def correct
+            @parent.correct
         end
            
         def vocabTable

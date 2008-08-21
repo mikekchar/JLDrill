@@ -163,5 +163,15 @@ module JLDrill
 		def showAnswer
 		    @displayProblemContext.showAnswer if @displayProblemContext.isEntered?
 		end
+		
+		def correct
+		    @quiz.correct
+		    @quiz.drill
+		end
+		
+		def incorrect
+		    @quiz.incorrect
+		    @quiz.drill
+		end
     end
 end
