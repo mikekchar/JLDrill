@@ -36,7 +36,7 @@ module JLDrill::Gtk
 	        end
 
         end	    
-        attr_reader :selectorWindow
+        attr_reader :quizInfoWindow
         	
 		def initialize(context)
 			super(context)

@@ -71,6 +71,7 @@ module JLDrill
         end
            
         def vocabTable
+            @parent.showAllVocabulary
         end
         
         def options
