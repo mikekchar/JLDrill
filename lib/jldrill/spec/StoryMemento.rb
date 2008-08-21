@@ -3,6 +3,11 @@ require 'jldrill/views/MainWindowView'
 require 'jldrill/views/gtk/MainWindowView'
 require 'jldrill/spec/Fakes'
 
+# A convenience since starting up the main window is likely
+# to try to open most of the views
+require 'Context/require_all'
+require_all 'jldrill/views/gtk/*.rb'
+
 module JLDrill
     # This is a helper class for the tests.  It makes it
     # easier to set up and tear down the test.  It also keeps track

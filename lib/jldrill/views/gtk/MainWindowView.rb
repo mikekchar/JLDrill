@@ -593,9 +593,6 @@ Copyright (C) 2005-2007  Mike Charlton
         	        super
         	    end
 			end
-#			kanjiFile = JLDrill::Config::getDataDir + "/dict/kanjidic.utf"
-#			radicalFile = JLDrill::Config::getDataDir + "/dict/radkfile.utf"
-#			@kanjiDic = JLDrill::KanjidicFile.open(kanjiFile, JLDrill::RadKFile.open(radicalFile))
 		end
 		
 		def getWidget

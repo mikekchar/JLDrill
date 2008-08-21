@@ -4,6 +4,7 @@ require 'Context/Bridge'
 require 'jldrill/views/MainWindowView'
 require 'jldrill/model/Edict/Edict'
 require 'jldrill/model/HashedEdict'
+require 'jldrill/contexts/RunCommandContext'
 require 'jldrill/contexts/LoadReferenceContext'
 require 'jldrill/contexts/SetOptionsContext'
 require 'jldrill/contexts/ShowStatisticsContext'
@@ -19,12 +20,13 @@ module JLDrill
 	    attr_reader :loadReferenceContext, :setOptionsContext, 
 	                :showStatisticsContext, :getFilenameContext,
 	                :addNewVocabularyContext, :displayQuizStatusContext,
-	                :displayProblemContext,
+	                :displayProblemContext, :runCommandContext,
 	                :reference, :quiz
 	    attr_writer :quiz
 		
 		def initialize(viewBridge)
 			super(viewBridge)
+			@runCommandContext = RunCommandContext.new(viewBridge)
 			@loadReferenceContext = LoadReferenceContext.new(viewBridge)
 			@setOptionsContext = SetOptionsContext.new(viewBridge)
 			@showStatisticsContext = ShowStatisticsContext.new(viewBridge)
@@ -51,6 +53,7 @@ module JLDrill
 		def enter(parent)
 			super(parent)
 			@mainView.open
+			@runCommandContext.enter(self)
 			# The quiz status is always displayed
 			@displayProblemContext.enter(self)
 			@displayQuizStatusContext.enter(self)
@@ -58,6 +61,7 @@ module JLDrill
 				
 		def exit
 			super
+			@runCommandContext.exit
 		    @displayQuizStatusContext.exit 
 		    @displayProblemContext.exit 
 			@parent.exit
