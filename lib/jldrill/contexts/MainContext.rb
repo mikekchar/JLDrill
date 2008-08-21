@@ -173,5 +173,9 @@ module JLDrill
 		    @quiz.incorrect
 		    @quiz.drill
 		end
+		
+		def reset
+		    @quiz.reset
+		end
     end
 end

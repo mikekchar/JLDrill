@@ -79,6 +79,7 @@ module JLDrill
         end
         
         def resetQuiz
+            @parent.reset
         end
         
         def displayVocab
