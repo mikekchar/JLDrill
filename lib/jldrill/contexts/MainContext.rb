@@ -54,7 +54,6 @@ module JLDrill
 			super(parent)
 			@mainView.open
 			@runCommandContext.enter(self)
-			# The quiz status is always displayed
 			@displayProblemContext.enter(self)
 			@displayQuizStatusContext.enter(self)
 		end
@@ -65,6 +64,22 @@ module JLDrill
 		    @displayQuizStatusContext.exit 
 		    @displayProblemContext.exit 
 			@parent.exit
+		end
+		
+		def save
+		    if @quiz.savename.empty?
+		        saveAs
+		    else
+    		    @quiz.save
+    		end
+		end
+		
+		def saveAs
+		    filename = @getFilenameContext.enter(self)
+		    if !filename.nil?
+		        @quiz.savename = filename
+		        @quiz.save
+		    end
 		end
 				
 		def loadQuiz(quiz)
@@ -94,6 +109,28 @@ module JLDrill
 		    newQuiz = Quiz.new
 		    if loadQuiz(newQuiz)
                 @quiz.append(newQuiz)
+		    end
+		end
+		
+		def promptForSaveAnd(&block)
+		    if @quiz.needsSave?
+		        if false
+		            block.call
+		        end
+		    else
+		        block.call
+		    end
+		end
+		
+		def open
+		    promptForSaveAnd do
+		        openFile
+		    end
+		end
+		
+		def quit
+		    promptForSaveAnd do
+		        exit
 		    end
 		end
 		

@@ -91,6 +91,10 @@ module JLDrill
             update
         end
         
+        def needsSave?
+            @needsSave
+        end
+        
         def saveToString
             retVal = ""
             retVal += "0.2.0-LDRILL-SAVE #{@name}\n"

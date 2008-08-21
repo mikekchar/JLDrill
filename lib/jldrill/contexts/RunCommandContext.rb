@@ -27,15 +27,18 @@ module JLDrill
 		end
 
         def save
+            @parent.save
         end
         
         def saveAs
+            @parent.saveAs
         end
         
         def export
         end
         
         def open
+            @parent.open
         end
         
         def appendFile
@@ -46,6 +49,7 @@ module JLDrill
         end
         
         def quit
+            @parent.quit
         end
         
         def info
