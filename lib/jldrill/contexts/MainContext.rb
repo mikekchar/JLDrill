@@ -102,9 +102,6 @@ module JLDrill
                 else
                     quiz.loadFromDict(Edict.new(filename).read)
                 end
-                if quiz = @quiz
-                    @mainWindowView.updateQuiz
-                end
                 true
             else
                 false

@@ -69,14 +69,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
             Story.shutdown
         end
         
-        it "should show the answer when the user says so" do
-            Story.setup(JLDrill)
-            Story.start
-            Story.loadQuiz
-            Story.view.should_receive(:showAnswer)
-            Story.mainView.showAnswer
-            Story.shutdown
-        end
+        it "should show the answer when the user says so"
         
         it "should display each of the items in the problem" do
             Story.setup(JLDrill::Gtk)
