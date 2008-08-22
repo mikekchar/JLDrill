@@ -4,6 +4,7 @@ require 'gtk2'
 module JLDrill::Gtk
 
 	class MainWindowView < JLDrill::MainWindowView
+	
 		class MainWindow < Gtk::Window
 		
 		    attr_reader :mainTable

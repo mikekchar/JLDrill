@@ -13,9 +13,19 @@ module JLDrill::Gtk
             @menu = Menu.new(self)
             @toolbar = ToolBar.new(self)
             @vbox = Gtk::VBox.new
+            def @vbox.accelGroup
+                @accelGroup
+            end
+            def @vbox.addAccelGroup(accelGroup)
+                @accelGroup = accelGroup
+            end
             @vbox.pack_start(@menu, false)
             @vbox.pack_end(@toolbar, false)
+            @vbox.addAccelGroup(@menu.accelGroup)
 			@widget = Context::Gtk::Widget.new(@vbox)
+			def @widget.addedTo(widget)
+			    widget.mainWindow.add_accel_group(delegate.accelGroup)
+			end
 			@widget.expandWidth = true
 			@widget.expandHeight = false
 		end

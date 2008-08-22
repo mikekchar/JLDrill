@@ -6,6 +6,7 @@ module JLDrill::Gtk
 
     class CommandView < JLDrill::CommandView
         class Menu < Gtk::HBox
+            attr_reader :accelGroup
             
             def initialize(view)
                 @view = view
