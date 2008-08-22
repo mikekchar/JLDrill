@@ -78,7 +78,7 @@ module JLDrill::Gtk
                         @view.about ]
                 ]
                 @menu.create_items(@menuItems)
-			    self.pack_start(@menu.get_widget('<main>'), true)
+			    self.pack_start(@menu.get_widget('<main>'), true, true)
 		    end
 		end
     end

@@ -32,6 +32,7 @@ module JLDrill::Gtk
 			@quizStatusBar = QuizStatusBar.new(self)
 			@widget = Context::Gtk::Widget.new(@quizStatusBar)
 			@widget.expandWidth = true
+			@widget.expandHeight = false
 			@verified = nil
 		end
 		

@@ -38,26 +38,24 @@ module JLDrill::Gtk
         it "should be able to add items to the end of the window" do
             @story.setup(JLDrill::Gtk)
 		    @story.start
-            @story.view.mainWindow.mainTable.n_rows.should be(4)
+            @story.view.mainWindow.contents.children.size.should be(3)
             sb = Gtk::Statusbar.new
             widget = Context::Gtk::Widget.new(sb)
-            @story.view.mainWindow.add(widget)
-            @story.view.mainWindow.mainTable.n_rows.should be(5)            
+            @story.view.getWidget.add(widget)
+            @story.view.mainWindow.contents.children.size.should be(4)            
             @story.shutdown
         end
         
-        it "should not be able to remove items from the window" do
-            # OK.  This sucks, but the Gtk::Table has no way to
-            # remove items (i.e., I shouldn't use it -- FIXME!!!)
+        it "should be able to remove items from the window" do
             @story.setup(JLDrill::Gtk)
 		    @story.start
-            @story.view.mainWindow.mainTable.n_rows.should be(4)
+            @story.view.mainWindow.contents.children.size.should be(3)
             sb = Gtk::Statusbar.new
             widget = Context::Gtk::Widget.new(sb)
-            @story.view.mainWindow.add(widget)
-            @story.view.mainWindow.mainTable.n_rows.should be(5)
-            @story.view.mainWindow.remove(sb)                    
-            @story.view.mainWindow.mainTable.n_rows.should be(5)
+            @story.view.getWidget.add(widget)
+            @story.view.mainWindow.contents.children.size.should be(4)
+            @story.view.getWidget.remove(widget)                    
+            @story.view.mainWindow.contents.children.size.should be(3)
             @story.shutdown
         end	
 	end

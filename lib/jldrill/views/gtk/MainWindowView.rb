@@ -1,13 +1,49 @@
 require 'jldrill/views/MainWindowView'
+require 'Context/Gtk/Widget'
 require 'gtk2'
 
 module JLDrill::Gtk
 
 	class MainWindowView < JLDrill::MainWindowView
 	
+	    class MainWidget < Context::Gtk::Widget
+	        def initialize(delegate, mainWindow)
+	            super(mainWindow)
+	            @contents = delegate
+	            @mainWindow = mainWindow
+	        end
+	        
+	        def add(widget)
+       		    if !widget.delegate.class.ancestors.include?(Gtk::Window)
+        		    widget.mainWindow = @mainWindow
+        			@contents.pack_start(widget.delegate, widget.expandHeight, widget.expandHeight)
+        			if !Context::Gtk::Widget.inTests
+                		@delegate.show_all
+                    end
+        	    else
+        	        widget.isAMainWindow
+        	        widget.delegate.set_transient_for(@mainWindow)
+        	        if !Context::Gtk::Widget.inTests
+            		    widget.delegate.show_all
+            		end
+        	    end
+			end
+			
+			def remove(widget)
+                widget.mainWindow = nil
+       		    if !widget.delegate.class.ancestors.include?(Gtk::Window)   
+                    @contents.remove(widget.delegate)
+                    if !Context::Gtk::Widget.inTests
+                        @delegate.show_all
+                    end
+                end
+                @delegate.grab_focus
+            end
+	    end
+	    
 		class MainWindow < Gtk::Window
 		
-		    attr_reader :mainTable
+		    attr_reader :contents
 		
 			def initialize(view)
 				super('JLDrill')
@@ -18,48 +54,12 @@ module JLDrill::Gtk
     
                 set_icon(@icon)
 
-                ## Layout everything in a vertical table
-                @mainTable = Gtk::Table.new(1, 0, false)
-                add(@mainTable, true)
+                @contents = Gtk::VBox.new
+                add(@contents)
 				connectSignals unless @view.nil?
 			end
 
-            def add(widget, orig=false)
-                if orig
-                    # Hack to be able to use the super's add method
-                    super(widget)
-                else
-                    size = @mainTable.n_rows
-                    @mainTable.resize(1, size + 1)
-                    if widget.expandWidth
-                        xOptions = Gtk::EXPAND | Gtk::FILL
-                    else
-                        xOptions = 0
-                    end
-                    if widget.expandHeight
-                        yOptions = Gtk::EXPAND | Gtk::FILL
-                    else
-                        yOptions = 0
-                    end
-                    @mainTable.attach(widget.delegate,
-                                 # X direction   # Y direction
-                                 0, 1,           size, size + 1,
-                                 xOptions,       yOptions,
-                                 0,              0)
-                end
-            end
-            
-            def remove(widget)
-                # Don't do it because tables can't remove things
-            end
-            
-
 			def connectSignals
-			    signal_connect('delete_event') do
-                    # Request that the destroy signal be sent
-                    false
-                end
-
 				signal_connect('destroy') do
 				    if !@closed
     					closeView
@@ -84,19 +84,7 @@ module JLDrill::Gtk
 			super(context)
 			@mainWindow = MainWindow.new(self)
 			@mainWindow.set_default_size(600, 400)
-			@widget = Context::Gtk::Widget.new(@mainWindow)
-			@widget.isAMainWindow
-			def @widget.add(widget)
-       		    if !widget.delegate.class.ancestors.include?(Gtk::Window)
-        		    widget.mainWindow = @mainWindow
-        			@delegate.add(widget)
-        			if !Context::Gtk::Widget.inTests
-                		@delegate.show_all
-                    end
-        	    else
-        	        super
-        	    end
-			end
+			@widget = MainWidget.new(@mainWindow.contents, @mainWindow)
 		end
 		
 		def getWidget

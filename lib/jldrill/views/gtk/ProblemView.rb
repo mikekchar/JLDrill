@@ -100,7 +100,7 @@ module JLDrill::Gtk
 	            super()
 	            ## Create indicators
 	            @indicatorBox = GtkIndicatorBox.new
-	            self.pack_start(@indicatorBox, false)
+	            self.pack_start(@indicatorBox, false, false)
 	            @vpane = Gtk::VPaned.new
                 @vpane.set_border_width(5)
                 @vpane.set_position(125)
@@ -109,7 +109,7 @@ module JLDrill::Gtk
                 @problem = nil
                 @vpane.pack1(@question, true, true)
                 @vpane.pack2(@answer, true, true)
-                self.pack_end(@vpane, true)
+                self.pack_end(@vpane, true, true)
                 @popup = nil
                 
                 connectSignals

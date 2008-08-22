@@ -19,8 +19,8 @@ module JLDrill::Gtk
             def @vbox.addAccelGroup(accelGroup)
                 @accelGroup = accelGroup
             end
-            @vbox.pack_start(@menu, false)
-            @vbox.pack_end(@toolbar, false)
+            @vbox.pack_start(@menu, false, false)
+            @vbox.pack_start(@toolbar, false, false)
             @vbox.addAccelGroup(@menu.accelGroup)
 			@widget = Context::Gtk::Widget.new(@vbox)
 			def @widget.addedTo(widget)
