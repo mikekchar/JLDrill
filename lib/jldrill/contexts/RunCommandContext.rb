@@ -46,6 +46,10 @@ module JLDrill
             @parent.loadReference
         end
         
+        def loadKanji
+            @parent.loadKanji
+        end
+        
         def quit
             @parent.quit
         end

@@ -16,5 +16,9 @@ module JLDrill
 		    # Should be overridden in the concrete class
 		end
 		
+		def kanjiDic
+		    @context.kanjiDic
+		end
+		
 	end
 end

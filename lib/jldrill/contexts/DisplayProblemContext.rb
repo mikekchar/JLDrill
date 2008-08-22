@@ -47,6 +47,10 @@ module JLDrill
 
         def showAnswer
             @mainView.showAnswer
-        end	
+        end
+        
+        def kanjiDic
+            @parent.kanji
+        end
     end
 end

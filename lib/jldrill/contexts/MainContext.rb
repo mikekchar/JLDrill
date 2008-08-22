@@ -18,6 +18,8 @@ require 'jldrill/contexts/ShowInfoContext'
 require 'jldrill/contexts/ShowAllVocabularyContext'
 require 'jldrill/model/Acknowlegements'
 require 'jldrill/contexts/ShowAboutContext'
+require 'jldrill/model/Radical'
+require 'jldrill/model/Kanji'
 
 module JLDrill
 
@@ -29,7 +31,7 @@ module JLDrill
 	                :displayProblemContext, :runCommandContext,
 	                :showInfoContext, :showAllVocabularyContext,
                     :showAboutContext,
-	                :reference, :quiz
+	                :reference, :quiz, :kanji
 	    attr_writer :quiz
 		
 		def initialize(viewBridge)
@@ -48,6 +50,7 @@ module JLDrill
 			@showAllVocabularyContext = ShowAllVocabularyContext.new(viewBridge)
 			@showAboutContext = ShowAboutContext.new(viewBridge)
 			@reference = HashedEdict.new
+			@kanji = nil
 			@quiz = Quiz.new
 		end
 		
@@ -146,6 +149,12 @@ module JLDrill
 		
 		def loadReference
 		    @loadReferenceContext.enter(self) unless @loadReferenceContext.isEntered?
+		end
+		
+		def loadKanji
+		    kanjiFile = Config::getDataDir + "/dict/kanjidic.utf"
+		    rads = RadKFile.open(Config::getDataDir + "/dict/radkfile.utf")
+			@kanji = KanjidicFile.open(kanjiFile, rads)
 		end
 		
 		def setOptions

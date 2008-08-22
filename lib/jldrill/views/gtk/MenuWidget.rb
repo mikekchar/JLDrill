@@ -31,6 +31,9 @@ module JLDrill::Gtk
                     ["/File/Load Reference _Dictionary...",
                         "<Item>",          "<control>D",    nil, 
                         @view.loadReference ],
+                    ["/File/Load _Kanji...",
+                        "<Item>",          "<control>K",    nil, 
+                        @view.loadKanji ],
                     ["/File/_Quit",
                         "<StockItem>",     "<control>Q",    Gtk::Stock::QUIT, 
                         @view.quit ],
@@ -71,7 +74,7 @@ module JLDrill::Gtk
 
                     ["/_Help"],
                     ["/Help/Ac_knowlegements...",
-                        "<Item>",          "<control>K",    nil, 
+                        "<Item>",          "K",             nil, 
                         @view.ack ],
                     ["/Help/_About...", 
                         "<Item>",          "?",             nil, 
