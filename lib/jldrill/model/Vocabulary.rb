@@ -59,8 +59,8 @@ class Vocabulary
   # This does *not* compare the hint, status
   # since they do not affect the meaning of the word.
   def eql?(y)
-      !y.nil? && (@kanji == y.kanji) && (self.definitions == y.definitions) &&
-                 (self.markers == y.markers) && (@reading == y.reading)
+      !y.nil? && (@kanji == y.kanji) && (@definitions.eql?(y.definitionsArray)) &&
+                 (@markers.eql?(y.markersArray)) && (@reading == y.reading)
  end
 
   # True if the two vocabulary are discussing the same word
@@ -165,6 +165,10 @@ class Vocabulary
     processOutput(Vocabulary.joinCommas(@definitions))    
   end
 
+  def definitionsArray
+    @definitions
+  end
+
   # Assigns the definitions from a string of comma separated
   # definitions
   def definitions=(string)
@@ -185,6 +189,10 @@ class Vocabulary
   # by commas
   def markers
     processOutput(Vocabulary.joinCommas(@markers))
+  end
+
+  def markersArray
+    @markers
   end
 
   # Assigns the definitions from a string of comma separated
