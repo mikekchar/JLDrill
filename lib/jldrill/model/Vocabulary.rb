@@ -28,6 +28,8 @@ class Vocabulary
       READING_RE = /^Reading: (.*)/
       DEFINITIONS_RE = /^Definitions: (.*)/
       MARKERS_RE = /^Markers: (.*)/
+      QUOTE_RE = /["]/
+      RETURN_RE = /[\n]/
 
   attr_reader :status
 
@@ -59,8 +61,8 @@ class Vocabulary
   # This does *not* compare the hint, status
   # since they do not affect the meaning of the word.
   def eql?(y)
-      !y.nil? && (@kanji == y.kanji) && (@definitions.eql?(y.definitionsArray)) &&
-                 (@markers.eql?(y.markersArray)) && (@reading == y.reading)
+      !y.nil? && (@kanji == y.kanjiRaw) && (@definitions.eql?(y.definitionsArray)) &&
+                 (@markers.eql?(y.markersArray)) && (@reading == y.readingRaw)
  end
 
   # True if the two vocabulary are discussing the same word
@@ -85,14 +87,14 @@ class Vocabulary
     if text.nil?
         return nil
     end
-    eval("\"#{text.gsub(/["]/, "\\\"")}\"")
+    eval("\"#{text.gsub(QUOTE_RE, "\\\"")}\"")
   end
 
   def processInput(text)
     if text.nil?
         return nil
     end
-    text = text.gsub(/[\n]/, "\\n")
+    text = text.gsub(RETURN_RE, "\\n")
     text
   end
 
@@ -115,6 +117,10 @@ class Vocabulary
   def kanji
     processOutput(@kanji)
   end
+  
+  def kanjiRaw
+    @kanji
+  end
     
   def hasReading?
     !@reading.nil?
@@ -126,6 +132,10 @@ class Vocabulary
   
   def reading
     processOutput(@reading)
+  end
+
+  def readingRaw
+    @reading
   end
 
   def hasHint?
