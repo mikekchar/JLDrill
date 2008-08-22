@@ -59,16 +59,9 @@ class Vocabulary
   # This does *not* compare the hint, status
   # since they do not affect the meaning of the word.
   def eql?(y)
-    retVal = false
-    if y != nil
-      retVal = true
-      retVal &= @kanji == y.kanji
-      retVal &= @reading == y.reading
-      retVal &= self.definitions == y.definitions
-      retVal &= self.markers == y.markers
-    end
-    return retVal
-  end
+      !y.nil? && (@kanji == y.kanji) && (self.definitions == y.definitions) &&
+                 (self.markers == y.markers) && (@reading == y.reading)
+ end
 
   # True if the two vocabulary are discussing the same word
   # This does *not* compare the hint or status
