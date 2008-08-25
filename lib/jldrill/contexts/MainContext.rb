@@ -31,7 +31,7 @@ module JLDrill
 	                :displayProblemContext, :runCommandContext,
 	                :showInfoContext, :showAllVocabularyContext,
                     :showAboutContext,
-	                :reference, :quiz, :kanji
+	                :reference, :quiz, :kanji, :radicals
 	    attr_writer :quiz
 		
 		def initialize(viewBridge)
@@ -51,6 +51,7 @@ module JLDrill
 			@showAboutContext = ShowAboutContext.new(viewBridge)
 			@reference = HashedEdict.new
 			@kanji = nil
+			@radicals = nil
 			@quiz = Quiz.new
 		end
 		
@@ -152,9 +153,10 @@ module JLDrill
 		end
 		
 		def loadKanji
-		    kanjiFile = Config::getDataDir + "/dict/kanjidic.utf"
-		    rads = RadKFile.open(Config::getDataDir + "/dict/radkfile.utf")
-			@kanji = KanjidicFile.open(kanjiFile, rads)
+		    kanjiFile = Config::getDataDir + "/dict/rikaichan/kanji.dat"
+            radicalsFile = Config::getDataDir + "/dict/rikaichan/radicals.dat"
+		    @radicals = RadicalList.fromFile(radicalsFile)
+			@kanji = KanjiList.fromFile(kanjiFile)
 		end
 		
 		def setOptions

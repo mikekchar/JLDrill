@@ -29,7 +29,7 @@ ruby_opts = ["-KO", "-I./lib"]
 
 
 # task :default => [:rcov, :rdoc]
-task :default => [:rcov]
+task :default => [:spec]
 
 # Run the rspec tests
 Spec::Rake::SpecTask.new(:spec) do |t|

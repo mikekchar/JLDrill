@@ -1,3 +1,5 @@
+require 'jldrill/Version'
+
 module JLDrill
 
     class AboutInfo

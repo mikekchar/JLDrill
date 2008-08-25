@@ -1,100 +1,104 @@
 module JLDrill
 
-	class RadKEntry
-	
-		attr_reader :radical, :strokes, :altGlyph, :contents
+	class Radical
 
-		def initialize(radical, strokes, altGlyph)
+        RADICAL_RE = Regexp.new('(\S)\t(\S*)\t(\S*)\t([^\t]*)\t(\S+)?', nil, 'U')
+        TO_A_RE = Regexp.new('\s*',nil,'U')
+	
+		attr_reader :radical, :reading, :altGlyphs, :meaning, :contents
+		attr_writer :radical, :reading, :altGlyphs, :meaning, :contents
+
+		def initialize(radical, reading, altGlyphs, meaning, contents)
 			@radical = radical
-			@strokes = strokes
-			@altGlyph = altGlyph
-			@contents = []
+			@reading = reading
+			@altGlyphs = altGlyphs
+			@meaning = meaning
+			@contents = contents
 		end
 		
-		def RadKEntry.parse(string)
+		def Radical.splitChars(string)
+			if !string.nil?
+			    string.split(TO_A_RE)
+			else
+			    []
+			end
+	    end
+		
+		def Radical.parse(string)
 			entry = nil
-			re = Regexp.new('^\$\ (\S)\ (\d+)\ ?(\S+)?', nil, 'U')
-			if string =~ re
+
+			if string =~ RADICAL_RE
 				radical = $1
-				strokes = $2.to_i
-				altGlyph = if $3.nil? then nil else $3.to_i(16) end
-				entry = RadKEntry.new(radical, strokes, altGlyph)
+				altGlyphs = Radical.splitChars($2)
+				reading = $3
+				meaning = $4
+				contents = Radical.splitChars($5)
+				entry = Radical.new(radical, reading, altGlyphs,
+				                    meaning, contents)
 			end
 			entry
 		end
 		
-		def parseContents(string)
-			string.chomp
-			re = Regexp.new('\s*',nil,'U')
-			string.split(re)
+		def eql?(radical)
+		    self.to_s == radical.to_s
 		end
 		
-		def add(array)
-			@contents += array
-			@contents.uniq!
+		def to_s
+		    retVal = @radical
+		    if @altGlyphs.size > 0
+		        retVal += "(" + @altGlyphs.join(",") + ")"
+		    end
+		    retVal += "   " + @reading + " - " + @meaning
+            retVal		    
 		end
 
 	end
-	
-	class RadKComment
-		attr_reader :contents
-		
-		def initialize(contents)
-			@contents = contents
-		end	
-		
-		def RadKComment.parse(string)
-			comment = nil
-			re = Regexp.new('^#(.*)\n?', nil, 'U')
-			if string =~ re
-				contents = $1
-				comment = RadKComment.new(contents)
-			end
-			comment
-		end
-	end
 
-	class RadKFile < Array
+	class RadicalList < Array
 	
-		def RadKFile.fromString(string)
-			file = RadKFile.new
-			current = nil
+		def RadicalList.fromString(string)
+			file = RadicalList.new
 			string.each_line do |line|
-				current = file.parse(current, line)
+				file.parse(line)
 			end
 			file
 		end
 		
-		def RadKFile.open(filename)
-			file = RadKFile.new
-			current = nil
+		def RadicalList.fromFile(filename)
+			file = RadicalList.new
 			IO.foreach(filename) do |line|
-				current = file.parse(current, line)			
+				file.parse(line)			
 			end
 			file
 		end
 
-		def parse(current, string)
-			if(RadKComment.parse(string).nil?)
-				entry = RadKEntry.parse(string)
-				if(!entry.nil?)
-					current = entry
-					self.push(entry)
-				else
-					current.add(current.parseContents(string)) unless current.nil?
-				end
+		def parse(string)
+			entry = Radical.parse(string)
+			if(!entry.nil?)
+				self.push(entry)
 			end
-			current
+		end
+		
+		def includesChar?(radicalChar)
+		    item = self.find do |rad|
+		        rad.radical == radicalChar
+		    end
+		    return !item.nil?
 		end
 		
 		def radicals(character)
-			retVal = []
+			retVal = RadicalList.new
 			self.each do |entry|
-				if entry.contents.include?(character)
-					retVal.push(entry.radical)
+				if entry.radical == character || 
+				  entry.contents.include?(character)
+					retVal.push(entry)
 				end
 			end
 			retVal
+		end
+		
+		def to_s
+		    self.join("\n") + "\n"
 		end
 	end
 end

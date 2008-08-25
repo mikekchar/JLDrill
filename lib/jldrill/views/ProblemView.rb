@@ -16,8 +16,12 @@ module JLDrill
 		    # Should be overridden in the concrete class
 		end
 		
-		def kanjiDic
-		    @context.kanjiDic
+		def kanjiInfo(character)
+		    @context.kanjiInfo(character)
+		end
+		
+		def kanjiLoaded?
+		    @context.kanjiLoaded?
 		end
 		
 	end

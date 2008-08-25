@@ -49,8 +49,17 @@ module JLDrill
             @mainView.showAnswer
         end
         
-        def kanjiDic
-            @parent.kanji
+        def kanjiLoaded?
+            !@parent.kanji.nil?
+        end
+        
+        def kanjiInfo(character)
+            retVal = ""
+            kanji = @parent.kanji.findChar(character)
+            if !kanji.nil?
+                retVal = kanji.withRadical_to_s(@parent.radicals)
+            end
+            retVal
         end
     end
 end

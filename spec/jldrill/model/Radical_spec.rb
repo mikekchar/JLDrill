@@ -1,92 +1,91 @@
 require 'jldrill/model/Radical'
+require 'jldrill/model/Config'
 
 module JLDrill
 
-	describe RadKEntry do
+	describe Radical do
 
 		it "should be able to parse an entry from the radkfile" do
-			entryText = "$ 一 1\n"
-			followingText = "亜唖姶悪\n"
-			entryText += followingText
+			entryText = "一		いち	one	亜唖姶\n"
 		
-			entry = RadKEntry.parse(entryText)
+			entry = Radical.parse(entryText)
 			entry.should_not be_nil
 			entry.radical.should be_eql("一")
-			entry.strokes.should be(1)
-			entry.altGlyph.should be_nil
-			contents = entry.parseContents(followingText)
-			contents.size.should be(4)
-			entry.contents.size.should be(0)
-			entry.add(contents)
-			entry.contents.size.should be(4)
-			entry.add(contents)
-			entry.contents.size.should be(4)
+			entry.reading.should be_eql("いち")
+			entry.altGlyphs.size.should be(0)
+			entry.meaning.should be_eql("one")
+			entry.contents.size.should be(3)
+			entry.contents[0].should be_eql("亜")
+			entry.contents[1].should be_eql("唖")
+			entry.contents[2].should be_eql("姶")
+			entry.to_s.should be_eql("一   いち - one")
 		end
 		
-		it "should be able to parse an entry with a alternate glyph" do
-			entryText = "$ 忙 3 3D38\n"
-			followingText = "惟悦憶快怪\n"
-			entryText += followingText
-		
-			entry = RadKEntry.parse(entryText)
+		it "should be able to parse an entry with an alternate glyph" do
+			entryText = "乙	乚	おつ	fish hook	曳洩奄掩\n"
+			entry = Radical.parse(entryText)
 			entry.should_not be_nil
-			entry.radical.should be_eql("忙")
-			entry.strokes.should be(3)
-			entry.altGlyph.should be_eql(0x3d38)
-			contents = entry.parseContents(followingText)
-			contents.size.should be(5)
-			entry.contents.size.should be(0)
-			entry.add(contents)
-			entry.contents.size.should be(5)
-			entry.add(contents)
-			entry.contents.size.should be(5)
+			entry.radical.should be_eql("乙")
+			entry.reading.should be_eql("おつ")
+			entry.altGlyphs.size.should be(1)
+			entry.altGlyphs[0].should be_eql("乚")
+			entry.meaning.should be_eql("fish hook")
+			entry.contents.size.should be(4)
+			entry.contents[0].should be_eql("曳")
+			entry.contents[1].should be_eql("洩")
+			entry.contents[2].should be_eql("奄")
+			entry.contents[3].should be_eql("掩")
+			entry.to_s.should be_eql("乙(乚)   おつ - fish hook")
 		end
-	end
-
-	describe RadKComment do		
-		it "should be able to parse a comment" do
-			commentText = "# This is the data file that drives the multi-radical lookup method in XJDIC,\n"
-			
-			comment = RadKComment.parse(commentText)
-			comment.should_not be_nil
-			comment.contents.should be_eql(" This is the data file that drives the multi-radical lookup method in XJDIC,")
-		end
-	end
 		
-	describe RadKFile do
+		it "should be able to parse an entry with multiple alternate glyphs" do
+		    entryText = "己	已巳	おのれ	snake	改鞄"
+			entry = Radical.parse(entryText)
+			entry.should_not be_nil
+			entry.radical.should be_eql("己")
+			entry.reading.should be_eql("おのれ")
+			entry.altGlyphs.size.should be(2)
+			entry.altGlyphs[0].should be_eql("已")
+			entry.altGlyphs[1].should be_eql("巳")
+			entry.meaning.should be_eql("snake")
+			entry.contents.size.should be(2)
+			entry.contents[0].should be_eql("改")
+			entry.contents[1].should be_eql("鞄")
+			entry.to_s.should be_eql("己(已,巳)   おのれ - snake")
+		end
+	end
+	
+	describe RadicalList do
 		it "should be able to parse a file in a string" do
-			fileString = %Q[#
-# This is a test file
-# I hope that it works
-$ 一 1
-亜唖姶悪或夷椅畏異遺井郁一芋右窺丑云雲盈益榎延汚央岡下可夏寡河珂苛荷華嘩
-画開碍垣劃隔岳橿且樺釜栢萱瓦寒干桓漢環看緩還基奇寄希棄稀貴騎儀宜犠義蟻誼
-$ ｜ 1
-亜唖逢悪以伊井稲印引鵜丑渦焔艶押横沖下果華嘩柿角樺鴨患諌陥貴糾旧供叫業曲
-巾串屈掘窟勲薫慧継兼嫌研謙遣碁候洪甲耕購坤詐坐座挫再妻済犀斎剤在榊崎埼碕
-作咋搾昨柵窄策錯冊撒散珊刺嗣師獅児爾璽軸雫湿篠朱殊珠種腫収州修洲繍酬重粛
+			fileString = 
+%Q[一		いち	one	亜唖姶悪或夷椅畏異遺井郁芋右窺丑云雲盈益榎延汚央岡下可夏寡河珂苛荷華嘩画開碍垣劃隔岳橿且樺釜栢萱瓦寒干桓漢環看緩還基奇寄希棄稀貴騎儀宜犠義蟻誼議丘朽求虚供彊興尭業極桐倶具勲君薫群郡恵慧兼券喧圏拳捲遣乎五互伍吾悟梧碁語乞光后宏巧恒晃更梗構洪溝硬紘綱肱講購号合佐左査再最塞妻才犀在材財肴崎埼碕柵冊三参惨珊蚕伺使司嗣屍師施死至詞
+｜		ぼう	stick	亜唖逢悪以伊井稲印引鵜丑渦焔艶押横沖下果華嘩柿角樺鴨患諌陥貴糾旧供叫業曲巾串屈掘窟勲薫慧継兼嫌研謙遣碁候洪甲耕購坤詐坐座挫再妻済犀斎剤在榊崎埼碕作咋搾昨柵窄策錯冊撒散珊刺嗣師獅児爾璽軸雫湿篠朱殊珠種腫収州修洲繍酬重粛出衝鍾乗剰伸申神紳酢垂帥睡錘菅世瀬整斉惜昔籍拙撰選岨措狙疎祖租粗組阻喪奏捜挿曹槽漕糟遭束速袖存唾帯戴泰
+丶		てん	dot	以浦永泳詠往欧殴鴎蒲釜鎌寒丸機気稀偽及救求球兇凶恐挟狭胸玉禽区躯駆犬国叉肴殺桟残似雫執勺尺杓灼酌釈主就州洲蹴酬住塾熟術述丈刃尽靭勢斥浅賎践銭訴双太汰駄丹築筑昼柱注註駐掴釣的兎菟冬忍認葱熱之博薄縛帆汎泌秘柊氷豹不敷舗鋪圃捕甫補輔簿宝乏凡密蜜尤籾匁約訳猷卵吏梁歪鷲亙丕丼仞仭偬傅兔冤劔劒剱匆匍厖咏哺囈坏埔妁孰孵寃尨巉怱怺愡愽戍
 ]
-			file = RadKFile.fromString(fileString)
-			file.size.should be(2)
-			file[0].radical.should be_eql("一")
-			file[0].strokes.should be(1)
-			file[0].contents.size.should be(72)
-			file[1].radical.should be_eql("｜")
-			file[1].strokes.should be(1)
-			file[1].contents.size.should be(108)
+			list = RadicalList.fromString(fileString)
+			list.size.should be(3)
+			list[0].radical.should be_eql("一")
+			list[0].contents.size.should be(161)
+			list[1].radical.should be_eql("｜")
+			list[1].contents.size.should be(159)
+			list[2].radical.should be_eql("丶")
+			list[1].contents.size.should be(159)
+			list.radicals("一").size.should be(1)
 		end
 
 		it "should be able to parse a file on disk" do
-			file = RadKFile.open("data/jldrill/dict/radkfile.utf")
-			file.should_not be(nil)
-			file.size.should be(248)
-			radicals = file.radicals("一")
+			list = RadicalList.fromFile(JLDrill::Config::getDataDir + 
+			                                "/dict/rikaichan/radicals.dat")
+			list.should_not be(nil)
+			list.size.should be(256)
+			radicals = list.radicals("一")
 			radicals.size.should be(1)
-			radicals.should include("一")
-			radicals = file.radicals("酒")
+			radicals.includesChar?("一").should be(true)
+			radicals = list.radicals("酒")
 			radicals.size.should be(2)
-			radicals.should include("汁")
-			radicals.should include("酉")
+			radicals.includesChar?("氵").should be(true)
+			radicals.includesChar?("酉").should be(true)
+			radicals.to_s.should be_eql("酉   ひよみのとり - sake\n氵   さんずい - water\n")
 		end
 
 	end	

@@ -185,16 +185,14 @@ module JLDrill::Gtk
 			end
 			
 			def characterPopup(widget, window, x, y)
-			    if @view.kanjiDic.nil?
+			    if !@view.kanjiLoaded?
 			        return
 			    end
                 closePopup
                 type = widget.get_window_type(window)
                 char, charRect = getCharAt(widget, type, x, y)
 			    if !char.nil? && !(char =~ /[a-zA-Z0-9 \s]/)
-			        kanjiString = @view.kanjiDic.find do |entry|
-			            entry.character == char
-			        end.to_s
+			        kanjiString = @view.kanjiInfo(char)
 			        @popup = createPopup(kanjiString)
 			        charPos = belowRect(charRect)
 			        screenPos = toAbsPos(widget, charPos[0], charPos[1])

@@ -2,136 +2,143 @@ require 'jldrill/model/Radical'
 
 module JLDrill
 
-	class KanjidicEntry
+	class Kanji
 	
-		attr_reader :character, :jisCode, :meanings, :bushu, :grade
+	    BUSHU_RE = /^B(\d+)/
+	    GRADE_RE = /^G(\d+)/
+	    STROKES_RE = /^S(\d+)/
 	
-		def initialize(character, jisCode, radkfile)
+		attr_reader :character, :readings, :meanings, :bushu, :grade, :strokes
+	
+		def initialize(character, readings, meanings, bushu, grade, strokes)
 			@character = character
-			@jisCode = jisCode
-			@meanings = []
-			@bushu = nil
-			@grade = nil
-			@radicals = nil
-			@bushuChar = nil
-			@radkfile = radkfile
-		end
-		
-		def addMeanings(meanings)
-			@meanings += meanings
-		end
-		
-		def parseBushu(string)
-			if string =~ Regexp.new('^B(\d+)')
-				@bushu = $1.to_i(10) if @bushu.nil?
-			end
-		end
-		
-		def parseGrade(string)
-			if string =~ Regexp.new('^G(\d+)')
-				@grade = $1.to_i(10) if @grade.nil?
-			end
+			@readings = readings
+			@meanings = meanings
+			@bushu = bushu
+			@grade = grade
+			@strokes = strokes
 		end
 
-		def KanjidicEntry.parse(string, radkfile)
+        def Kanji.getParts(string, separator)
+            retVal = nil
+            if !string.nil?
+                retVal = string.split(separator, -1)
+            end
+            retVal
+        end
+        
+        def Kanji.validSections?(sections)
+            !sections.nil? && sections.size == 6 && !sections[0].nil?
+        end
+		
+		def Kanji.parse(string)
 			entry = nil
-			if string =~ Regexp.new('^(\S)\ ([0-9a-fA-F]+)\ (.*)', nil, 'U')
-				character = $1
-				jisCode = $2.to_i(16)
-				meat = $3
-				meat.slice!(/\ \{.*$/)
-				codes = meat.split(' ')
-				entry = KanjidicEntry.new(character, jisCode, radkfile)
-				meanings = string.split(Regexp.new('\}?\ \{', nil, 'U'))
-				meanings.delete_at(0) unless meanings.empty?
-				meanings[meanings.size - 1].slice!(/\}\s*/) unless meanings.empty?
-				entry.addMeanings(meanings)
-				codes.each do |code|
-					entry.parseBushu(code)
-					entry.parseGrade(code)
-				end
+			sections = Kanji.getParts(string.chomp, "|")
+			return if !Kanji.validSections?(sections)
+			character = sections[0]
+			readings = Kanji.getParts(sections[2], " ")
+			meanings = Kanji.getParts(sections[5], ",")
+			commands = Kanji.getParts(sections[1], " ")
+			bushu = nil
+			grade = nil
+			strokes = nil
+			commands.each do |command|
+			    case command
+			        when BUSHU_RE
+        				bushu = $1.to_i(10)
+			        when GRADE_RE
+        				grade = $1.to_i(10)
+			        when STROKES_RE
+        				strokes = $1.to_i(10)
+			    end
 			end
-			entry
-		end
-
-		def radicals
-			@radicals = @radkfile.radicals(@character) if @radicals.nil?
-			@radicals
+			Kanji.new(character, readings, meanings, bushu, grade, strokes)
 		end
 		
-		def bushuChar
-			return "*"
+		# Outputs values for optional items
+		def optional_to_s(item)
+		    if item.nil?
+		        "*"
+		    else
+		        item.to_s
+		    end
+		end
+		
+		def optional_join(list, separator)
+		    if list.nil?
+		        ""
+		    else
+		        list.join(separator)
+		    end
+		end
+		
+		# This will create a string with the main bushu first, identified
+		# with a *, followed by the rest of the radicals
+		def radicals_to_s(radicals)
+		    retVal = ""
+    		rads = radicals.radicals(@character)
+    		if !@bushu.nil?
+		        bushu = radicals[@bushu - 1]
+        		retVal += "* " + bushu.to_s + "\n  "
+        		rads.delete(bushu)
+            end
+    		retVal += rads.join("\n  ")
+		end
+		
+		# Outputs kanji data with the added radical information
+		# radicals is a radical list
+		def withRadical_to_s(radicals)
+		    retVal = @character
+		    retVal += " [" + optional_join(@readings, " ") + "]\n"
+		    retVal += optional_join(@meanings, ", ") + "\n\n"
+		    retVal += "Grade " + optional_to_s(@grade) + ", "
+		    retVal += "Strokes " + optional_to_s(@strokes) + "\n"
+    		retVal += "\nRadicals:\n"
+    		retVal += radicals_to_s(radicals)
 		end
 		
 		def to_s
-			if @grade.nil?
-				grade = "*"
-			else
-				grade = @grade.to_s
-			end
-			@character + " Gr: " + grade + " " + self.bushuChar + " (" + self.radicals.join(", ") + ")\n" + @meanings.join(", ")
+		    retVal = @character
+		    retVal += " [" + optional_join(@readings, " ") + "]\n"
+		    retVal += optional_join(@meanings, ", ") + "\n\n"
+		    retVal += "Grade " + optional_to_s(@grade) + ", "
+		    retVal += "Strokes " + optional_to_s(@strokes) + "\n"
+		    retVal += "Bushu " + optional_to_s(@bushu) + "\n"
+		    retVal
 		end
 	end
 
-	class KanjidicComment
-		attr_reader :contents
-		
-		def initialize(contents)
-			@contents = contents
-		end	
-		
-		def KanjidicComment.parse(string)
-			comment = nil
-			re = Regexp.new('^#(.*)\n?', nil, 'U')
-			if string =~ re
-				contents = $1
-				comment = KanjidicComment.new(contents)
-			end
-			comment
-		end
-	end
-
-
+	class KanjiList < Array
 	
-	class KanjidicFile < Array
-	
-		attr_reader :radkfile
-	
-		def initialize(radkfile, array=nil)
-			super(array) if !array.nil?
-			@radkfile = radkfile
-		end
-		
-		def KanjidicFile.fromString(string, radkfile)
-			file = KanjidicFile.new(radkfile)
+		def KanjiList.fromString(string)
+			list = KanjiList.new
 			string.each_line do |line|
-				file.parse(line)
+				list.parse(line)
 			end
-			file
+			list
 		end
 		
-		def KanjidicFile.open(filename, radkfile)
-			file = KanjidicFile.new(radkfile)
+		def KanjiList.fromFile(filename)
+			list = KanjiList.new
 			IO.foreach(filename) do |line|
-				file.parse(line)			
+				list.parse(line)			
 			end
-			file
+			list
 		end
 		
 		def parse(string)
-			if(KanjidicComment.parse(string).nil?)
-				entry = KanjidicEntry.parse(string, @radkfile)
-				if(!entry.nil?)
-					self.push(entry)
-				end
+			entry = Kanji.parse(string)
+			if(!entry.nil?)
+				self.push(entry)
 			end
 		end
-
-		def select
-			array = super
-			KanjidicFile.new(@radkfile, array)
-		end
 		
+		def findChar(char)
+		    self.find do |entry|
+		        entry.character == char
+		    end
+		end
+
 		def to_s
 			self.join("\n")
 		end
