@@ -308,7 +308,11 @@ module JLDrill
 	        vocab.status.difficulty.should be(1)
         end
         
-        it "should reset the difficulty when the vocab is demoted from the 4th bin" do
+        # Originally the difficulty counter would reset when the vocab was demoted
+        # from the 4th bin.  I decided this was a bad idea, so now it doesn't
+        # reset it.  If you want to change it back, make sure to think it out
+        # thoroughly so that we don't just go back and forth.
+        it "should not reset the difficulty when the vocab is demoted from the 4th bin" do
             @quiz.options.promoteThresh = 1
 	        vocab = @sampleQuiz.sampleVocab
 	        @quiz.contents.add(vocab, 1)
@@ -325,7 +329,7 @@ module JLDrill
 	        vocab.status.difficulty.should be(3)
 	        @strategy.incorrect
             vocab.status.bin.should be(1)	        	        
-	        vocab.status.difficulty.should be(0)        
+	        vocab.status.difficulty.should be(4)        
         end
         
         it "should reset the consecutive counter on an incorrect answer" do

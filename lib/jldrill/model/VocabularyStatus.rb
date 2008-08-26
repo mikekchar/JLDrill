@@ -99,22 +99,41 @@ module JLDrill
             !@scheduledTime.nil?
         end
         
-        def calculateNewSchedule
+        # Returns a +-10% random variation in the interval.
+        # This smooths out the distribution of vocabulary and makes
+        # it so that similar items aren't always together.
+        def randomVariation(interval)
+            # 10% - rand(20%) = +- 10%
+            (interval / 10) - rand(interval / 5) 
+        end
+        
+        def calculateStart
             start = Time::now
-            interval = firstInterval()
             if bin == 4
                 if scheduled? && (start.to_i < @scheduledTime.to_i)
                     start = @scheduledTime
                 end
-
+            end
+            start
+        end
+        
+        def calculateInterval
+            interval = firstInterval()
+            if bin == 4
                 if reviewed?
                     elapsed = Time::now.to_i - @lastReviewed.to_i
                     if (2 * elapsed) > interval
                         interval = 2 * elapsed
                     end
                 end
-            end            
-            start + interval
+            end
+            interval
+        end
+                
+        def calculateNewSchedule
+            start = calculateStart
+            interval = calculateInterval
+            start + interval + randomVariation(interval)
         end
         
         # Schedule the item for review
@@ -164,7 +183,7 @@ module JLDrill
         end
         
         def potentialScheduleInDays
-            seconds = calculateNewSchedule.to_i - Time::now.to_i
+            seconds = calculateInterval.to_i
             days = (seconds * 10 / SECONDS_PER_DAY).to_f / 10
             return days
         end

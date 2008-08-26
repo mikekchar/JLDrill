@@ -58,12 +58,22 @@ module JLDrill
 		    @vocab[3].status.scheduled?.should be(true)
         end
 
+        # There's a +- 10% variation in scheduling, so the actual
+        # value should be in between those values        
+        def should_be_plus_minus_ten_percent(actual, expected)
+        variation = expected / 10
+        (actual >= (expected - variation)).should be(true)
+        (actual <= (expected + variation)).should be(true)
+        end
+
         it "should schedule new items to maximum value by default" do
 		    @vocab[1].status.scheduled?.should be(false)
 		    time = @vocab[1].status.schedule
 		    time.should_not be_nil
 		    @vocab[1].status.scheduled?.should be(true)
-		    @vocab[1].status.scheduledTime.to_i.should be_eql(Time::now.to_i + days(5))
+		    actual = @vocab[1].status.scheduledTime.to_i
+		    expected = Time::now.to_i + days(5)
+		    should_be_plus_minus_ten_percent(actual, expected)
         end
         
         it "should schedule old items to twice their elapsed time" do
@@ -74,7 +84,9 @@ module JLDrill
 		    time.should_not be_nil
 		    @vocab[3].status.scheduled?.should be(true)
 		    # Should be scheduled for 6 days from now
-		    @vocab[3].status.scheduledTime.to_i.should be_eql(Time::now.to_i + days(6))            
+		    actual = @vocab[3].status.scheduledTime.to_i
+		    expected = Time::now.to_i + days(6)
+		    should_be_plus_minus_ten_percent(actual, expected)
         end
         
         it "should set a minimum schedule equal to firstInterval" do
@@ -87,7 +99,9 @@ module JLDrill
 		    @vocab[3].status.scheduled?.should be(true)
 		    # Instead of 2 days it will be 5 because that is the minumum for
 		    # an item that has no incorrect.
-		    @vocab[3].status.scheduledTime.to_i.should be_eql(Time::now.to_i + days(5))            
+		    actual = @vocab[3].status.scheduledTime.to_i
+		    expected = Time::now.to_i + days(5)
+		    should_be_plus_minus_ten_percent(actual, expected)
         end
 
         it "should be able to write scheduledTime to file" do

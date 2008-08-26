@@ -295,11 +295,6 @@ module JLDrill
             if vocab
                 vocab.status.level = 0
                 if (vocab.status.bin != 0)
-                    if vocab.status.bin == 4
-                        # Reset the number of times incorrect when demoting
-                        # back into the working set
-                        vocab.status.numIncorrect = 0
-                    end
                     moveToBin(vocab, 1)
                 else
                 	# Demoting bin 0 items is non-sensical, but it should do
