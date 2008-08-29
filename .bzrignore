@@ -7,3 +7,4 @@ web/output
 .bzrignore
 .config
 pkg
+web/src/webgen.cache

@@ -1,6 +1,7 @@
 ---
 title: Planned Features
-inMenu: true
+in_menu: true
+sort_info: 50
 ---
 
 h2. Features Planned for 0.2.0

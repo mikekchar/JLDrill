@@ -4,6 +4,7 @@ require 'rake/rdoctask'
 require 'rake/testtask'
 require 'rubygems'
 require 'rake/gempackagetask'
+require 'webgen/webgentask'
 require 'lib/jldrill/Version'
 
 pkg_files = FileList[
@@ -121,4 +122,13 @@ package_task = Rake::GemPackageTask.new(gem_spec) do |pkg|
 	pkg.need_zip = true
 	pkg.need_tar = true
 end
+
+webgen_task = Webgen::WebgenTask.new('web') do |site|
+    site.clobber_outdir = true
+    site.config_block = lambda do |config|
+        config['sources'] = [['/', "Webgen::Source::FileSystem", 'web/src']]
+        config['output'] = ['Webgen::Output::FileSystem', 'web/output']
+    end
+end
+
 

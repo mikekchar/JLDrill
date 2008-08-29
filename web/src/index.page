@@ -1,37 +1,59 @@
 ---
-title: Home
-inMenu: true
-directoryName: Home
+title: JLDrill News
+in_menu: true
+sort_info: 10
 ---
-h2. Welcome to JLDrill
+Welcome to JLDrill
+==================
+  JLDrill is a program for helping people drill various aspects of the
+  Japanese language. Current features include a kana drill, a vocabulary
+  drill, a dictionary cross reference tool and a popup-kanji reference
+  (similar to the rikaichan plugin for Firefox).
+  
+Screenshot
+----------
 
-JLDrill is a program for helping people drill various aspects of the
-Japanese language. Current features include a kana drill, a vocabulary
-drill and a dictionary cross reference tool.  The current version
-is only useful for short term acquisition.  It does not have a
-proper scheduling algorithm for long term retention.
+![JLDrill screenshot](images/Screenshot.png "JLDrill screenshot")
 
-I have changed the scope of JLDrill since the last time I was working
-on it.  Originally it was to be a collection of Japanese language
-drill.  Now, after 2 years of playing with other software I have
-a better idea of what I find useful.  Subsequent releases of JLDrill
-will be geared towards creating one particular solution for helping
-people learn Japanese.
+What's New for 0.3.0
+--------------------
+  Version 0.3.0 introduces a long-term spaced repetition scheduling
+  algorithm.  Please see the user guide for a description
+  of the algorithm used.  It is one of my own devising and still
+  needs a bit of teaking.  However, even at this early stage I find
+  it at least as useful as the popular SuperMemo algorithms.
+  
+  Version 0.3.0 also offers numerous user interface improvements.
+  There is an indicator box that shows several of the useful Edict
+  markers for each vocabulary.  A new option for adding vocabulary
+  allows you to add new entries to a quiz (or even build a quiz
+  from scratch).  The display of the questions has been improved
+  using larger fonts for the kanji.  Finally, if you load the kanji
+  dictionary, you can hover over a kanji character and get a
+  rikaichan-like popup showing useful information about that character.
 
-This is what the application looks like right now.
+JLDrill is now Beta   
+-------------------
+  I now consider JLDrill to be in beta.  Most of the important features
+  are present.  There may still be bugs, but I have been using the
+  software myself for several months and I think I've gotten rid
+  of most of the big problems.  Please be considerate of the beta status,
+  though.  Keep your eyes open for problems and report them.  Poor
+  usability issues are especially welcome.  Usability problem reports
+  should describe the difficult work flow and give a suggestion for
+  a new work flow that will improve the problem.  I am a programmer, not
+  a UI desiger, so I welcome any and all advice on this front.
 
-<a href="images/QuizAnswer.png"><img src="images/QuizAnswer-mini.png" alt="JLDrill screenshot" /></a>
+News
+----
+Friday Aug 29 2008
 
-WARNING: This is alpha software.  That means that I think it is good
-enough for someone to use and get a benefit out of it.  But it is
-far from finished.  Please report any bugs you find.  Also feel free
-to request features that you would like.
-
-NOTE: JLDrill will be undergoing some significant changes in the
-near future (see news).  Check back later to see what's up.
-
-
-h2. News
+* JLDrill has been under constant development since the last update.
+  But I haven't been updating the site.  The reason is that I've
+  taken the opportunity to rework the entire code structure.
+  There are still plenty of places with embarrasingly bad code,
+  but the new structure is there.  Hopefully updates will be
+  more frequent
 
 Sunday, Nov 11 2007.
 
@@ -77,7 +99,8 @@ Hopefully it will all be done tonight.
 
 Monday, Dec 5 2005.
 
-* New look web page thanks to "Webgen":http://webgen.rubyforge.org
+* New look web page thanks to 
+["Webgen"](http://webgen.rubyforge.org)
 Yes, it's still ugly (that's not Webgen's fault...).  I thought I'd
 get cute with the colours, and well... graphic designer I am not.
 

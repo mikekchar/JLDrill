@@ -1,84 +1,98 @@
+/* andreas07 - an open source xhtml/css website layout by Andreas Viklund - http://andreasviklund.com . Free to use for any purpose as long as the proper credits are given for the original design work.
 
-  #all { background-color: #CCCCCC; }
+Version: 1.1, November 28, 2005 */
 
-  #header {
-    border-bottom: 1px solid black;
-    padding: 1ex;
-    background-color: #888888;
-  }
-  #header h1 {
-    margin: 0ex;
-	font-size: 300%;
-	font-style: italic;
-	font-weight: normal;
-  }
+/**************** Page and tag styles ****************/
 
-, #headerbar { border-bottom: 1px solid black; }
-  #footer { border-top: 1px solid black; }
+body
+{margin:0; padding:0; color:#303030; background:#ffffea; font:100% sans-serif;}
 
-  #body {
-    margin-left: 250px;
-    margin-right: 20px;
-    padding: 10px;
-  }
+ul
+{list-style:circle; margin:1em 0 1em 0; font-size:0.8em;}
 
-  #menu {
-	float: left;
-	width: 230px;
-    padding: 20px 0px 0px 2px;
-  }
+li
+{margin:0 0 .25em 1em;}
 
-  .bar {
-	clear: both;
-	padding: 3px;
-	text-align: center;
-	font-size: 90%;
-    background-color: #AAAAAA;
-  }
+a
+{color:#d82d2d; font-weight:bold; text-decoration:none;}
 
-  .left, .right {
-    padding: 0px 1em;
-  }
+a:hover
+{color:#505050; text-decoration:underline;}
 
-  .left {
-	float: left;
-	text-align: left;
-  }
+img
+{float:center; margin: 0 0 1em 10%; background:#ffffff; border:1px solid #d0d0d0;}
 
-  .right {
-	float: right;
-	text-align: right;
-  }
+a img
+{border-color:#d82d2d;}
 
-  /* styling the menu */
+a img:hover
+{background:#d82d2d; border-color:#d82d2d;}
 
-  #menu a, #menu span {
-	text-decoration: none;
-	font-weight: bold;
-	font-size: 130%;
-  }
+/**************** Sidebar area styles ****************/
 
-  #menu a:hover {
-	text-decoration: underline;
-  }
+#sidebar
+{position:absolute; top:0; left:0; width:23%; height:100%; overflow:auto; background:#e0e0f0; text-align:right;}
 
-  #menu .webgen-menu-item-selected {
-	border-left: 3px solid black;
-  }
+body > #sidebar
+{position:fixed;}
 
-  #menu ul {
-	list-style-type: none;
-	padding: 0px;
-	margin-left: 10px;
-  }
+#sidebar img
+{float:left; margin: 0;}
 
-  #menu li > ul {
-	font-size: 95%;
-  }
+#sidebar h1
+{margin:1em .25em 0 0; color:#d82d2d; font-size:1.5em; text-align:right;}
 
-  #menu li {
-    margin: 0.0em 0px;
-    padding: 2px 0px;
-    padding-left: 5px;
-    border-left: 3px solid #CCCCCC;
-  }
+#sidebar h2, #sidebar h3
+{margin:0 1em 1em 0; color:#404040; font-size:1em; font-weight:bold; text-align:right; line-height:1em;}
+
+#sidebar h3
+{margin:1em 1em .25em .25em; color:#404040;}
+
+#sidebar  p
+{margin:0 1em 1em .25em; color:#404040; font-size:0.8em;}
+
+#sidebar a
+{color:#606060}
+
+#sidebar ul
+{margin-right: 1em; margin-left: .25em; list-style-type: none;}
+
+#sidebar li
+{margin: 0px; padding-left: .25em;}
+
+/**************** Navigation menu styles ****************/
+
+#menu .webgen-menu ul
+{list-style-type: none; margin: 0px; padding: 0px; font-size: 1.0em; text-align:right;}
+
+#menu .webgen-menu li
+{margin: 0px; padding: 0px}
+
+#menu .webgen-menu a, #menu .webgen-menu span
+{display:block; width:80%; padding:0.1em 1em 0.1em 0; color:#303030; background:#f0e0e0 url(images/sidebarbg.gif) top right repeat-y; font-size:0.8em; font-weight:normal; text-decoration:none;}
+
+#menu .webgen-menu a:hover, #menu .webgen-menu span:hover
+{color:#303030; background:#f0a0a0 url(images/sidebarbg.gif) top right repeat-y;}
+
+#menu .webgen-menu li.webgen-menu-item-selected a, #menu .webgen-menu li.webgen-menu-item-selected span
+{padding:0.25em 1em 0.25em 0; background:#ffffea; border-top:2px solid #c0c0c0; border-bottom:2px solid #c0c0c0;}
+
+#menu .webgen-menu li.webgen-menu-item-selected a:hover, #menu .webgen-menu li.webgen-menu-item-selected span:hover
+{color:#505050; background:##ffffea;}
+
+/**************** Content area styles ****************/
+
+#content
+{width:65%; margin:0 0 0 23%; padding:2em 2em; background:#ffffea;}
+
+#content p
+{margin:0 0 1em 0; line-height:1.5em;}
+
+#content h1
+{margin:0; color:#a81d1d; font-weight:bold; font-size:2.5em; text-align:center;}
+
+#content h2
+{clear:both; color:#1d1d88; font-weight:normal; font-size: 2em;}
+
+#content h3
+{clear:both; color:#505050; font-weight:normal; font-size: 1.2em;}

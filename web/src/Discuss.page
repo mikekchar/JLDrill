@@ -1,13 +1,13 @@
 ---
 title: Contact Me
-inMenu: true
-directoryName: Home
+in_menu: true
+sort_info: 90
 ---
 h2. How To Contact Me
 
 Having problems?  Want new features?  Just want to talk about stuff?
 
-The "JLDrill forums":http://rubyforge.org/forum/?group_id=1093
+The ["JLDrill forums"](http://rubyforge.org/forum/?group_id=1093)
 are the best place to do that.
 
 If you want to contact me directly, my email is: mikekchar at gmail.com

@@ -1,10 +1,11 @@
 ---
 title: Usage
-inMenu: true
+in_menu: true
+sort_info: 30
 ---
 h2. Usage
 
-After installing, on a GNU/Linux, BSD, or Un*x system type
+After installing, on a GNU/Linux, BSD, or Unix-like system type
 <pre>
     jldrill
 </pre>
@@ -150,7 +151,7 @@ you want to save your file.
 
 h2. Non-Drill Features
 
-<strong>Reference Dictionary</strong>.  This feature is useful in case
+**Reference Dictionary**.  This feature is useful in case
 you want to check that the translation in the drill is correct.  It
 allows you to cross reference the word against a dictionary
 and edit it if necessary. 
@@ -186,28 +187,28 @@ drill.
 Important: Remember to save the drill file afterwards so that the edit
 is saved with the drill.
 
-<strong>Display</strong> word.  You can display the details of a
+**Display** word.  You can display the details of a
 word that you are drilling.  Just press D (or select Vocab/Display
 from the menu).  You can edit this word if you want from here.
 
 <a href="images/View.png"><img src="images/View-mini.png" alt="View/Edit the Vocabulary." /></a>
 
-<strong>Show all</strong>. Will show a table of all the words in the
+**Show all**. Will show a table of all the words in the
 drill.
 
 <a href="images/AllVocab.png"><img src="images/AllVocab-mini.png" alt="View All the Vocabulary." /></a>
 
-<strong>Reset</strong>.  You can reset the drill so
+**Reset**.  You can reset the drill so
 that all the words are Unseen again.  Press Ctrl-R or select
 Drill/Reset from the menu to do this.
 
-<strong>Info</strong>. Show information about the current drill.
+**Info**. Show information about the current drill.
 This is just information that the drill author wants to show.  It
 might contain copyright information or other interesting things.
 Pressing Ctrl-I or selecting Drill/Info from the menu will display
 this dialog.
 
-<strong>Create a new Drill</strong>.  You can create a new drill by
+**Create a new Drill**.  You can create a new drill by
 importing any UTF8 encoded EDict file.  Just open the file (JLDrill
 will automatically recognize the file type) and then save it to
 another name. Going up one directory from the quizes, you will find a

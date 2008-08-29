@@ -1,9 +1,23 @@
 ---
 title: Requirements
-inMenu: true
+in_menu: true
+sort_info: 20
 ---
-h2. Requirements
 
+JLDrill Requirements
+====================
+
+Important Note:
+---------------
+Version 0.3.0 does not have an easy to use installer.  This
+is planned for version 0.4.0.  I apologize for this, but
+infortunately functionality issues had priority for the
+current version.  Installation is complicated at the present
+time, but not necessarily difficult.  If you have problems,
+feel free to contact me and I will try to help.
+
+What to Install
+---------------
 JLDrill is written in Ruby and uses GTK2 as it's GUI toolkit.  You
 will need to install the following before installing JLDrill.
 
@@ -11,43 +25,59 @@ will need to install the following before installing JLDrill.
 * GTK+ 2.6 or higher
 * Ruby-Gnome2
 
-JLDrill has been tested on both GNU/Linux (Debian) and Windows.
-If you wish to help create a version of JLDrill to run on a specific
-platform, please contact me.
+JLDrill has been developed and tested on GNU/Linux (Ubuntu).
+It should work on any platform that supports Ruby, Gtk and Ruby-Gnome
+(including Windows and Apple-Macintosh).
 
-h2. Installing the Requirements
+Installing the Requirements
+---------------------------
+Note: These instructions are old an may be out of date.
+If you experience problems, please contact me.
 
-Installing the requirements take a little bit of effort, but you only
-have to do it once.  The following are instructions for installing
-them on Windows and Linux(/BSD/Un*x/etc) systems.  
+###Note to Myself
+I need to add instructions on installing ruby-gems.
 
-Please note that these instructions haven't been tested yet.  Try them
-out and tell me if they are right!
-
-h3. Windows
+###Windows
 
 You will probably want to install Ruby using the 
-"One Click Ruby Installer":http://rubyinstaller.rubyforge.org/wiki/wiki.pl
+[One Click Ruby Installer](http://rubyinstaller.rubyforge.org/wiki/wiki.pl)
 
 Once that is installed, you will need to install GTK2 and
 Ruby-Gnome2.  Detailed instructions on doing this are available
-on the "Ruby-Gnome2 site":http://ruby-gnome2.sourceforge.jp/hiki.cgi?Install+Guide+for+Windows
+on the [Ruby-Gnome2 site](http://ruby-gnome2.sourceforge.jp/hiki.cgi?Install+Guide+for+Windows)
 
-Please see the Download/Install section for details on obtaining and
-installing JLDrill
+You are now finished installing the requirements.  Please see the
+Download/Install section for details on obtaining and installing JLDrill.
 
-h3. GNU/Linux, BSD, U*nix, etc
+###GNU/Linux, BSD, Unix-like, etc
 
 The easiest way to install the prerequisites is to find the packages
 for your distribution.  However, if you'd rather roll your own
-solution,  You can find Ruby at the "main Ruby website":http://www.ruby-lang.org/en/
+solution,  You can find Ruby at the 
+[main Ruby website](http://www.ruby-lang.org/en/)
 
-GTK+ 2.6 can be obtained at the "GTK+ website":http://www.gtk.org/
+GTK+ 2.6 can be obtained at the [GTK+ website](http://www.gtk.org/)
 
-Finally, you will want to peruse the 
-"Ruby-Gnome2 install guides":http://ruby-gnome2.sourceforge.jp/hiki.cgi?Install+Guide
+Finally, you will want to peruse the
+[Ruby-Gnome2 install guides](http://ruby-gnome2.sourceforge.jp/hiki.cgi?Install+Guide)
 
 Please see the Download/Install section for details on obtaining and
 installing JLDrill
+
+###Mac OSX
+Unfortunately I don't have access to a Macintosh.  If someone
+who has one can help me make instructions, I'd really appreciate
+it.
+
+Developers
+----------
+For people who wish to contribute to the development of JLDrill,
+I recommend installing the following ruby gems.  This will allow
+you to run the tests and build the website.
+
+* rake
+* rspec
+* rcov
+* webgen
 
 

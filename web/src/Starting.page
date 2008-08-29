@@ -1,6 +1,7 @@
 ---
 title: Starting Japanese
-inMenu: true
+in_menu: true
+sort_info: 80
 ---
 h2. Starting Japanese
 
@@ -50,8 +51,8 @@ pages around, I haven't seen anything that is comprehensive enough to
 be used as a good starting point.  I recommend the following
 textbooks:
 
-* "Genki 1":http://www.amazon.com/gp/product/4789009637/qid=1134830453/sr=8-1/ref=pd_bbs_1/002-4142393-8920800?n=507846&s=books&v=glance
-* "Japanese for Busy People 1: Kana Version":http://www.amazon.com/gp/product/4770019874/qid=1134830575/sr=2-2/ref=pd_bbs_b_2_2/002-4142393-8920800?s=books&v=glance&n=283155
+* ["Genki 1"](http://www.amazon.com/gp/product/4789009637/qid=1134830453/sr=8-1/ref=pd_bbs_1/002-4142393-8920800?n=507846&s=books&v=glance)
+* ["Japanese for Busy People 1: Kana Version"](http://www.amazon.com/gp/product/4770019874/qid=1134830575/sr=2-2/ref=pd_bbs_b_2_2/002-4142393-8920800?s=books&v=glance&n=283155)
 
 These are probably the top two recommended text books that I have seen.
 I own the first and have looked through the second (I have more or less
@@ -73,7 +74,7 @@ good book.  Or they might have nothing at all.
 
 In that case, your only hope is to go through as many website
 tutorials as you can.  The best compilation of links I have found is
-the "Japanese Language site here":http://infohost.nmt.edu/~armiller/japanese/japanese.htm
+the ["Japanese Language site here"](http://infohost.nmt.edu/~armiller/japanese/japanese.htm)
 Scroll down to lessons and see what you can find.
 
 h3. Learn Kana
@@ -171,7 +172,7 @@ Ideally, you will want to make drills of the material in your text
 book.  Unfortunately, JLDrill does not make that easy right now.
 Eventually it will.  For vocabulary, you can create EDICT files by
 cutting and pasting from the edict.utf file in the dict directory
-(usually /usr/share/jldrill/dict/edict.utf on Un*x and
+(usually /usr/share/jldrill/dict/edict.utf on Unix-like and
 c:\ruby\share\jldrill\dict\edict.utf on Windows).  Just search for the
 words you are looking for and cut and paste each line into a new
 file.  You can then read the file into JLDrill and save it as a drill
@@ -194,7 +195,7 @@ achieving their next level of proficiency.  There are 4 levels,
 starting with 4th kyu and culminating in 1st kyu.
 
 A good introduction to the JLPT can be found
-"here":http://www.thejapanesepage2.com/kanji/jlpt.htm
+["here"](http://www.thejapanesepage2.com/kanji/jlpt.htm)
 
 Because the JLPT has been used as an entrance requirement for Japanese
 universities in the past (I don't think this is still true, but I'm
@@ -244,7 +245,7 @@ loosely understand what's going on in the show.
 
 Having said all that, where do you get Japanese listening material?
 The first place to look is your local library.  If they have the
-"Pimsleur Japanese Comprehensive series":http://www.amazon.com/gp/product/0743523539/qid=1134836832/sr=8-1/ref=pd_bbs_1/002-4142393-8920800?n=507846&s=books&v=glance 
+["Pimsleur Japanese Comprehensive series"](http://www.amazon.com/gp/product/0743523539/qid=1134836832/sr=8-1/ref=pd_bbs_1/002-4142393-8920800?n=507846&s=books&v=glance) 
 borrow it.  And yes, if you clicked on the link, Amazon *does* sell
 this for a whopping $345 US.  It is very much over priced, but if you
 have the cash, it's worth it to buy.  Also search around.  You might
@@ -274,7 +275,7 @@ however you slice it, it's still illegal.  I offer the following for
 informational purposes only.  Use at your own risk.
 
 The best place to find pointers to "fansubs" of Japanese anime is
-"Animesuki":http://www.animesuki.com  Japanese anime are cartoons.
+["Animesuki"](http://www.animesuki.com)  Japanese anime are cartoons.
 However, these "cartoons" are not only aimed at children but adults as
 well.  There is a thriving industry for anime in Japan with tens of
 new shows being introduced every season (i.e. 4 times a year).  Likely
@@ -306,7 +307,7 @@ non-japanese.  Please support these producers.
 In addition to anime, there is a small but vibrant community who
 fansub Japanese dramas (dubbed dorama).  One of the best places to
 look for dorama is
-"D-Addicts":http://www.d-addicts.com/forum/torrents.php?tab=Custom&custom_search=custom_search&type_jdrama=jdrama&sub_english=English&csort=date_added&csortorder=DESC&start=0
+["D-Addicts"](http://www.d-addicts.com/forum/torrents.php?tab=Custom&custom_search=custom_search&type_jdrama=jdrama&sub_english=English&csort=date_added&csortorder=DESC&start=0)
 
 The J-Doramas that get fansubbed are almost always romances, although
 you might find the occasional action series or samurai drama.
@@ -343,7 +344,7 @@ that you really understand when talking to people.
 
 Finally radio.  There are a few places to get Japanese radio on the
 internet.  I use a P2P (peer 2 peer) program for internet radio
-content called "Peercast":http://www.peercast.org/  Several large
+content called ["Peercast"](http://www.peercast.org/)  Several large
 Japanese radio stations are rebroadcast there.  Additionally, there
 are several "garage radio stations" that broadcast their own content
 (or things like anime music CDs).  These are all great language
