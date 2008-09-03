@@ -181,8 +181,21 @@ module JLDrill::Gtk
 		        @popup.set_transient_for(mainWindow)
 		        @popup.set_destroy_with_parent(true)
 		        @popup.set_window_position(Gtk::Window::POS_NONE)
-		        label = Gtk::Label.new(kanjiString)
-		        @popup.add(label)
+                @contents = Gtk::TextView.new
+                @contents.wrap_mode = Gtk::TextTag::WRAP_NONE
+                @contents.editable = false
+                @contents.cursor_visible = false
+                @contents.set_pixels_above_lines(0)
+                color = Gdk::Color.parse("lightblue1")
+                @contents.modify_base(Gtk::STATE_NORMAL, color)
+                
+                @popup.add(@contents)
+                @buffer = @contents.buffer
+                @buffer.create_tag("popupText", 
+                                   "size" => 13 * Pango::SCALE,
+                                   "justification" => Gtk::JUSTIFY_LEFT,
+                                   "family" => "Sans")
+                @buffer.insert(@buffer.end_iter, kanjiString, "popupText")
 		        @popup.move(x, y)
 		        @popup.show_all
             end
