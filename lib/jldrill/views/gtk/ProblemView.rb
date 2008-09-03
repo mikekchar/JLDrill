@@ -90,7 +90,107 @@ module JLDrill::Gtk
                     problem.publishAnswer(self)
                 end
             end
-        end        
+        end
+        
+        class PopupFactory
+            def initialize(view)
+                @view = view
+                @currentPopup = nil
+            end
+            
+            def kanjiDictionaryLoaded?
+                @view.kanjiLoaded?
+            end
+            
+            def sameCharacter?(character, x, y)
+                !@currentPopup.nil? && @currentPopup.character == character &&
+                    @currentPopup.x == x && @currentPopup.y == y
+            end
+            
+            def closePopup
+                if !@currentPopup.nil?
+                    @currentPopup.close
+                    @currentPopup = nil
+                end
+            end
+            
+            def createPopup(char, x, y)
+                closePopup
+			    kanjiString = @view.kanjiInfo(char)
+                @currentPopup = Popup.new(char, kanjiString, @view.mainWindow, x, y)
+            end
+            
+			def belowRect(rect)
+			    x = rect[0] + (rect[2] / 2)
+			    y = rect[1] + (rect[3])
+			    [x, y]
+			end
+			
+			# Translates the x,y coordinates of the widget in this
+			# window to absolute screen coordinates
+			def toAbsPos(widget, x, y)
+		        origin = @view.mainWindow.window.position
+		        pos = [x + origin[0], y + origin[1]]
+                widget.translate_coordinates(@view.mainWindow, pos[0], pos[1])
+			end
+			
+			def getCharAt(widget, window, x, y)
+                type = widget.get_window_type(window)
+			    coords = widget.window_to_buffer_coords(type, x, y)
+			    iter, tr = widget.get_iter_at_position(coords[0], coords[1])
+			    char = iter.char
+		        pos = widget.get_iter_location(iter)
+		        if (coords[0] > pos.x) && (coords[0] < pos.x + pos.width) &&
+			      char != ""
+			        rect = widget.buffer_to_window_coords(type, pos.x, pos.y)
+			        charPos = belowRect([rect[0], rect[1], pos.width, pos.height])
+			        screenPos = toAbsPos(widget, charPos[0], charPos[1])
+			        [char, screenPos]
+			    else
+			        [nil, nil]
+			    end
+			end
+			
+			def legalChar?(char)
+                !char.nil? && !(char =~ /[a-zA-Z0-9 \s]/)
+			end
+
+            def notify(widget, window, x, y)
+                if !kanjiDictionaryLoaded?
+                    return
+                end
+                char, screenPos = getCharAt(widget, window, x, y)
+                if !legalChar?(char)
+                    closePopup
+                    return
+                elsif sameCharacter?(char, screenPos[0], screenPos[1])
+                    return
+                end
+                createPopup(char, screenPos[0], screenPos[1])
+            end
+        end
+        
+        class Popup
+            attr_reader :character, :x, :y
+            
+            def initialize(char, kanjiString, mainWindow, x, y)
+                @character = char
+                @x = x
+                @y = y
+		        @popup = Gtk::Window.new(Gtk::Window::POPUP)
+		        @popup.set_transient_for(mainWindow)
+		        @popup.set_destroy_with_parent(true)
+		        @popup.set_window_position(Gtk::Window::POS_NONE)
+		        label = Gtk::Label.new(kanjiString)
+		        @popup.add(label)
+		        @popup.move(x, y)
+		        @popup.show_all
+            end
+            
+            def close
+			    @popup.destroy                
+            end
+        end
 	
 	    class ProblemWindow < Gtk::VBox
 	        attr_reader :question, :answer
@@ -110,7 +210,7 @@ module JLDrill::Gtk
                 @vpane.pack1(@question, true, true)
                 @vpane.pack2(@answer, true, true)
                 self.pack_end(@vpane, true, true)
-                @popup = nil
+                @popupFactory = PopupFactory.new(view)
                 
                 connectSignals
 	        end
@@ -122,86 +222,24 @@ module JLDrill::Gtk
 	            @answer.contents.add_events(Gdk::Event::LEAVE_NOTIFY_MASK)
 
         		@question.contents.signal_connect('motion_notify_event') do |widget, motion|
-				    characterPopup(widget, motion.window, motion.x, motion.y)
+				    @popupFactory.notify(widget, motion.window, motion.x, motion.y)
 				end
 
         		@answer.contents.signal_connect('motion_notify_event') do |widget, motion|
-				    characterPopup(widget, motion.window, motion.x, motion.y)
+				    @popupFactory.notify(widget, motion.window, motion.x, motion.y)
 				end
 
         		@question.contents.signal_connect('leave_notify_event') do
-				    closePopup
+				    @popupFactory.closePopup
 				end
 
         		@answer.contents.signal_connect('leave_notify_event') do
-				    closePopup
+				    @popupFactory.closePopup
 				end
 			end
 
-			def closePopup
-			    if !@popup.nil?
-			        @popup.destroy
-			        @popup = nil
-			        @popupChar = nil
-			    end
-			end
-			
-			# Translates the x,y coordinates of the widget in this
-			# window to absolute screen coordinates
-			def toAbsPos(widget, x, y)
-		        origin = @view.mainWindow.window.position
-		        pos = [x + origin[0], y + origin[1]]
-                widget.translate_coordinates(@view.mainWindow, pos[0], pos[1])
-			end
-			
-			def getCharAt(widget, type, x, y)
-			    coords = widget.window_to_buffer_coords(type, x, y)
-			    iter, tr = widget.get_iter_at_position(coords[0], coords[1])
-			    char = iter.char
-		        pos = widget.get_iter_location(iter)
-		        if (coords[0] > pos.x) && (coords[0] < pos.x + pos.width) &&
-			      char != ""
-			        rect = widget.buffer_to_window_coords(type, pos.x, pos.y)
-			        [char, [rect[0], rect[1], pos.width, pos.height]]
-			    else
-			        nil
-			    end
-			end
-			
-			def createPopup(char)
-		        popup = Gtk::Window.new(Gtk::Window::POPUP)
-		        popup.set_transient_for(@view.mainWindow)
-		        popup.set_destroy_with_parent(true)
-		        popup.set_window_position(Gtk::Window::POS_NONE)
-		        label = Gtk::Label.new(char)
-		        popup.add(label)
-		        popup
-			end
-			
-			def belowRect(rect)
-			    x = rect[0] + (rect[2] / 2)
-			    y = rect[1] + (rect[3])
-			    [x, y]
-			end
-			
-			def characterPopup(widget, window, x, y)
-			    if !@view.kanjiLoaded?
-			        return
-			    end
-                closePopup
-                type = widget.get_window_type(window)
-                char, charRect = getCharAt(widget, type, x, y)
-			    if !char.nil? && !(char =~ /[a-zA-Z0-9 \s]/)
-			        kanjiString = @view.kanjiInfo(char)
-			        @popup = createPopup(kanjiString)
-			        charPos = belowRect(charRect)
-			        screenPos = toAbsPos(widget, charPos[0], charPos[1])
-			        @popup.move(screenPos[0], screenPos[1] )
-			        @popup.show_all
-			    end
-			end
-	        
 	        def newProblem(problem, differs)
+			    @popupFactory.closePopup
 	            @problem = problem
 	            @answer.clear
 	            @question.update(problem)

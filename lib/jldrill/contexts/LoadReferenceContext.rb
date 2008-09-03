@@ -7,13 +7,14 @@ module JLDrill
 
 	class LoadReferenceContext < Context::Context
 		
-	    attr_reader :filename, :reference
+	    attr_reader :filename, :reference, :thread
 		
 		def initialize(viewBridge)
 			super(viewBridge)
 			dictDir = File.join(Config::DATA_DIR, "dict")
             @filename = File.join(dictDir, "edict.utf")
             @reference = nil
+            @thread = nil
 		end
 		
 		def createViews
@@ -24,14 +25,17 @@ module JLDrill
             @mainView.destroy
             @mainView = nil
         end
-        		
-		def loadInBackground
-   			Thread.new() do
+        
+        def readReference
+            if !@reference.nil?
                 @reference.read do |fraction|
                     @mainView.update(fraction)
                 end
-                exit
-            end
+            end                
+        end
+        		
+		def runInBackground(&block)
+   			@thread = Thread.new(&block)
 		end
 		
 		def enter(parent)
@@ -40,7 +44,10 @@ module JLDrill
     			if(!@reference.loaded?)
         			super(parent)
         			@reference.file = @filename
-        			loadInBackground
+        			runInBackground do
+        			    readReference
+        			    exit
+        			end
         		end
             end
 		end

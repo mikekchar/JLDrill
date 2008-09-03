@@ -1,15 +1,15 @@
 ---
 title: Download/Install
 in_menu: true
-sort_info: 40
+sort_info: 30
 ---
 
-h2. Installation Instructions
-
-The current stable release of JLDrill is 0.1.0.
+Installation Instructions
+=========================
+The current stable release of JLDrill is 0.3.0.
 
 It can be obtained at
-"JLDrill's RubyForge Project Page":http://rubyforge.org/projects/jldrill 
+[JLDrill's RubyForge Project Page](http://rubyforge.org/projects/jldrill)
 
 Once you have downloaded the package, decompress it.  Then as root (on
 Linux, et al) or a user with administrative privaledges (on Windows)
@@ -32,13 +32,4 @@ Try
   ruby setup.rb --help
 </pre>
 
-NOTE TO DEVELOPERS: The test facility in setup.rb seems to be broken
-(at least on my machine).  To run the tests, go into the test
-directory and run 
-<pre> 
-  ruby testSuite.rb 
-</pre> 
 
-You must install the software in order to run the tests.
-
-Please see the Usage page for instructions on how to run the software.

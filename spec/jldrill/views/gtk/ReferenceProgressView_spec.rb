@@ -23,7 +23,7 @@ module JLDrill::Gtk
 	        @story.setup(JLDrill::Gtk)
 	        @story.start
 	        # Stop it from actually loading the dictionary
-	        @story.context.should_receive(:loadInBackground)
+	        @story.context.should_receive(:runInBackground)
 	        @story.mainContext.loadReference
 	        fraction = 0.57
 	        @story.view.progressWindow.progress.should_receive(:fraction=).with(fraction)
@@ -36,7 +36,7 @@ module JLDrill::Gtk
             @story.setup(JLDrill::Gtk)
 	        @story.start
 	        # Stop it from actually loading the dictionary
-	        @story.context.should_receive(:loadInBackground)
+	        @story.context.should_receive(:runInBackground)
 	        @story.mainContext.loadReference
             @story.view.should_receive(:destroy) do
                 @story.view.progressWindow.destroy
