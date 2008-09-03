@@ -203,9 +203,15 @@ module JLDrill
         
         # Return a string containing the length of all the bins
         def status
-            retVal = "U: #{@bins[0].length} P: #{@bins[1].length} "
-            retVal += "F: #{@bins[2].length} "
-            retVal += "G: #{@bins[3].length} E: #{bins[4].length}"
+            retVal = "New: #{@bins[0].length} "
+            retVal += "Review: #{@bins[4].length} "
+            retVal += "Working: #{@bins[1].length}, "
+            retVal += "#{@bins[2].length}, "
+            retVal += "#{@bins[3].length}"
+            overdue = @bins[4].numOverdue
+            if overdue != 0
+                retVal += " Behind: #{overdue}"
+            end
             retVal
         end
         

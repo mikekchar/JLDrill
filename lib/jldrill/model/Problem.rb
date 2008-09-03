@@ -74,15 +74,20 @@ module JLDrill
         # Return a string showing what bin this problem is from
         def status
             retVal = "     "
-            if @vocab.status.bin < 4
-                retVal += "Bin #{@vocab.status.bin}, "
+            bin = @vocab.status.bin
+            if bin < 4
+                if bin == 0
+                    retVal += "New"
+                else
+                    retVal += bin.to_s
+                end
             else
-                retVal += "+#{@vocab.status.consecutive}, "
+                retVal += "+#{@vocab.status.consecutive}"
                 if @vocab.status.reviewed?
-                    retVal += "Last #{@vocab.status.reviewedDate}, "
+                    retVal += ", #{@vocab.status.reviewedDate}"
                 end
             end
-            retVal += "--> #{@vocab.status.potentialScheduleInDays} days"
+            retVal += " --> #{@vocab.status.potentialScheduleInDays} days"
         end
 
         def evaluateAttribute(name)
