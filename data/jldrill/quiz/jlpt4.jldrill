@@ -15,684 +15,684 @@
 # 01-DEC-04: many fixes by Peter van der Woude
 # 03-DEC-05: Converted to jldrill format by Mike Charlton (mikekchar@gmail.com)
 Random Order
-Promotion Threshold: 2
+Promotion Threshold: 1
 Introduction Threshold: 10
 Strategy Version: 0
 Unseen
-/Hint: 感動詞/Reading: ああ/Definitions: Ah!,Oh!,Alas!/Markers: int/Score: 0/Bin: 0/Level: 0/Position: 0/Consecutive: 0/Difficulty: 0/
-/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 0/
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 0/Difficulty: 0/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 3/Consecutive: 0/Difficulty: 0/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 0/Level: 0/Position: 4/Consecutive: 0/Difficulty: 0/
-/Kanji: 秋/Reading: あき/Definitions: autumn,fall/Markers: n-adv,P/Score: 0/Bin: 0/Level: 0/Position: 5/Consecutive: 0/Difficulty: 0/
-/Kanji: 開く/Reading: あく/Definitions: to open (e.g. a festival)/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 6/Consecutive: 0/Difficulty: 0/
-/Kanji: 開ける/Reading: あける/Definitions: to become civilized,to become opened up,be up-to-date/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 7/Consecutive: 0/Difficulty: 0/
-/Kanji: 上げる/Reading: あげる/Definitions: to give,to raise,to elevate,to fly (kites),to praise,to increase,to advance,to promote,to vomit,to usher in,to admit,to send (to school),to offer,to present,to leave with,to finish,to arrange (expenses),to observe,to perform,to quote,to mention,to bear (a child),to improve (talents),to do up (the hair),to arrest,to engage,to fry,(rains) to stop/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 8/Consecutive: 0/Difficulty: 0/
-/Kanji: 朝/Reading: あさ/Definitions: morning/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 9/Consecutive: 0/Difficulty: 0/
-/Kanji: 朝御飯/Reading: あさごはん/Definitions: breakfast/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 10/Consecutive: 0/Difficulty: 0/
-/Reading: あさって/Definitions: day after tomorrow/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 11/Consecutive: 0/Difficulty: 0/
-/Kanji: 足/Reading: あし/Definitions: foot,pace,gait,leg/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 12/Consecutive: 0/Difficulty: 0/
-/Reading: あした/Definitions: tomorrow/Markers: n-t,P/Score: 0/Bin: 0/Level: 0/Position: 13/Consecutive: 0/Difficulty: 0/
-/Reading: あそこ/Definitions: (1) (uk) there,over there,that place,yonder,(2) (X) (col) genitals/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 14/Consecutive: 0/Difficulty: 0/
-/Kanji: 遊ぶ/Reading: あそぶ/Definitions: (1) to play,to make a visit (esp. for pleasure),(2) to be idle,to do nothing/Markers: v5b,P/Score: 0/Bin: 0/Level: 0/Position: 15/Consecutive: 0/Difficulty: 0/
-/Kanji: 暖かい/Reading: あたたかい/Definitions: warm,mild,genial/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 16/Consecutive: 0/Difficulty: 0/
-/Kanji: 頭/Reading: あたま/Definitions: head/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 17/Consecutive: 0/Difficulty: 0/
-/Kanji: 新しい/Reading: あたらしい/Definitions: new/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 18/Consecutive: 0/Difficulty: 0/
-/Reading: あちら/Definitions: (1) there,yonder,that/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 19/Consecutive: 0/Difficulty: 0/
-/Kanji: 暑い/Reading: あつい/Definitions: hot,warm/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 20/Consecutive: 0/Difficulty: 0/
-/Kanji: 熱い/Reading: あつい/Definitions: hot (thing)/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 21/Consecutive: 0/Difficulty: 0/
-/Kanji: 厚い/Reading: あつい/Definitions: cordial,kind,warm(hearted),thick,deep/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 22/Consecutive: 0/Difficulty: 0/
-/Kanji: 後/Reading: あと/Definitions: afterwards,since then,in the future/Markers: adj-no,n,P/Score: 0/Bin: 0/Level: 0/Position: 23/Consecutive: 0/Difficulty: 0/
-/Reading: あなた/Definitions: (gn) you/Score: 0/Bin: 0/Level: 0/Position: 24/Consecutive: 0/Difficulty: 0/
-/Kanji: 兄/Reading: あに/Definitions: older brother/Markers: n,hum,P/Score: 0/Bin: 0/Level: 0/Position: 25/Consecutive: 0/Difficulty: 0/
-/Kanji: 姉/Reading: あね/Definitions: older sister/Markers: n,hum,P/Score: 0/Bin: 0/Level: 0/Position: 26/Consecutive: 0/Difficulty: 0/
-/Hint: 指示詞/Reading: あの/Definitions: that over there/Markers: adj-pn,uk,P/Score: 0/Bin: 0/Level: 0/Position: 27/Consecutive: 0/Difficulty: 0/
-/Hint: 感動詞/Reading: あの/Definitions: that over there/Markers: adj-pn,uk,P/Score: 0/Bin: 0/Level: 0/Position: 28/Consecutive: 0/Difficulty: 0/
-/Reading: アパート/Definitions: (1) apartment (abbr),(2) apartment building (abbr),(3) apart/Markers: n,adv,P/Score: 0/Bin: 0/Level: 0/Position: 29/Consecutive: 0/Difficulty: 0/
-/Reading: あびる/Definitions: to bathe,to bask in the sun,to shower/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 30/Consecutive: 0/Difficulty: 0/
-/Kanji: 危ない/Reading: あぶない/Definitions: dangerous,critical,grave,uncertain,unreliable,limping,narrow,close,watch out!/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 31/Consecutive: 0/Difficulty: 0/
-/Hint: 副詞/Reading: あまり/Definitions: not very (this form only used as adverb),not much,remainder,rest,remnant,surplus,balance,excess,remains,scraps,residue,fullness,other,too much/Markers: adj-na,adv,n,n-suf,uk,P/Score: 0/Bin: 0/Level: 0/Position: 32/Consecutive: 0/Difficulty: 0/
-/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 33/Consecutive: 0/Difficulty: 0/
-/Kanji: 洗う/Reading: あらう/Definitions: to wash/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 34/Consecutive: 0/Difficulty: 0/
-/Reading: ある/Definitions: (v5r-i) (uk) to be,to have/Markers: P/Score: 0/Bin: 0/Level: 0/Position: 35/Consecutive: 0/Difficulty: 0/
-/Kanji: 歩く/Reading: あるく/Definitions: to walk/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 36/Consecutive: 0/Difficulty: 0/
-/Reading: あれ/Definitions: (gn) that,that thing/Score: 0/Bin: 0/Level: 0/Position: 37/Consecutive: 0/Difficulty: 0/
-/Reading: いい/Definitions: good/Markers: adj,col,uk,P/Score: 0/Bin: 0/Level: 0/Position: 38/Consecutive: 0/Difficulty: 0/
-/Reading: よい/Definitions: good,nice,pleasant,ok/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 39/Consecutive: 0/Difficulty: 0/
-/Reading: いいえ/Definitions: no,nay,yes,well/Markers: int,n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 40/Consecutive: 0/Difficulty: 0/
-/Kanji: 言う/Reading: いう/Definitions: to say/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 41/Consecutive: 0/Difficulty: 0/
-/Kanji: 家/Reading: いえ/Definitions: house,family/Markers: suf,P/Score: 0/Bin: 0/Level: 0/Position: 42/Consecutive: 0/Difficulty: 0/
-/Kanji: 行く/Reading: いく/Definitions: to go/Markers: v5k-s,P/Score: 0/Bin: 0/Level: 0/Position: 43/Consecutive: 0/Difficulty: 0/
-/Kanji: 行く/Reading: ゆく/Definitions: to go/Markers: v5k-s,P/Score: 0/Bin: 0/Level: 0/Position: 44/Consecutive: 0/Difficulty: 0/
-/Reading: いくつ/Definitions: how many?,how old?/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 45/Consecutive: 0/Difficulty: 0/
-/Kanji: 池/Reading: いけ/Definitions: pond/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 47/Consecutive: 0/Difficulty: 0/
-/Kanji: 医者/Reading: いしゃ/Definitions: doctor (medical)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 48/Consecutive: 0/Difficulty: 0/
-/Reading: いす/Definitions: chair/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 49/Consecutive: 0/Difficulty: 0/
-/Kanji: 忙しい/Reading: いそがしい/Definitions: busy,irritated/Markers: adj/Score: 0/Bin: 0/Level: 0/Position: 50/Consecutive: 0/Difficulty: 0/
-/Kanji: 痛い/Reading: いたい/Definitions: painful/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 51/Consecutive: 0/Difficulty: 0/
-/Kanji: 一/Reading: いち/Definitions: one/Markers: num,P/Score: 0/Bin: 0/Level: 0/Position: 52/Consecutive: 0/Difficulty: 0/
-/Kanji: 一日/Reading: いちにち/Definitions: (1) first of month/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 53/Consecutive: 0/Difficulty: 0/
-/Reading: いちばん/Definitions: (1) best,first,number one,(2) a game,a round,a bout,a fall,an event (in a meet)/Markers: n-adv,P/Score: 0/Bin: 0/Level: 0/Position: 54/Consecutive: 0/Difficulty: 0/
-/Reading: いつ/Definitions: (gn-adv) when/Score: 0/Bin: 0/Level: 0/Position: 55/Consecutive: 0/Difficulty: 0/
-/Kanji: 五日/Reading: いつか/Definitions: five days,the fifth day (of the month)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 56/Consecutive: 0/Difficulty: 0/
-/Kanji: 一緒/Reading: いっしょ/Definitions: together,meeting,company/Markers: adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 57/Consecutive: 0/Difficulty: 0/
-/Kanji: 五つ/Reading: いつつ/Definitions: five/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 58/Consecutive: 0/Difficulty: 0/
-/Reading: いつも/Definitions: always,usually,every time,never (with neg. verb)/Markers: adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 59/Consecutive: 0/Difficulty: 0/
-/Kanji: 今/Reading: いま/Definitions: this,now/Score: 0/Bin: 0/Level: 0/Position: 60/Consecutive: 0/Difficulty: 0/
-/Kanji: 意味/Reading: いみ/Definitions: meaning,significance/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 61/Consecutive: 0/Difficulty: 0/
-/Kanji: 妹/Reading: いもうと/Definitions: younger sister/Markers: n,hum,P/Score: 0/Bin: 0/Level: 0/Position: 62/Consecutive: 0/Difficulty: 0/
-/Kanji: 嫌/Reading: いや/Definitions: disagreeable,detestable,unpleasant,reluctant/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 63/Consecutive: 0/Difficulty: 0/
-/Kanji: 入口/Reading: いりぐち/Definitions: entrance,gate,approach,mouth/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 64/Consecutive: 0/Difficulty: 0/
-/Kanji: 居る/Reading: いる/Definitions: to be (animate),to be,to exist/Markers: v5r,uk,hum,P/Score: 0/Bin: 0/Level: 0/Position: 65/Consecutive: 0/Difficulty: 0/
-/Kanji: 要る/Reading: いる/Definitions: to need/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 66/Consecutive: 0/Difficulty: 0/
-/Kanji: 入れる/Reading: いれる/Definitions: to put in,to take in,to bring in/Markers: v1/Score: 0/Bin: 0/Level: 0/Position: 67/Consecutive: 0/Difficulty: 0/
-/Kanji: 色/Reading: いろ/Definitions: (1) colour,(2) sensuality,lust/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 68/Consecutive: 0/Difficulty: 0/
-/Reading: いろいろ/Definitions: various/Markers: adj-na,adj-no,adv,n/Score: 0/Bin: 0/Level: 0/Position: 69/Consecutive: 0/Difficulty: 0/
-/Kanji: 上/Reading: うえ/Definitions: (gno-adj,gn-adv,gn,gn-suf) above,over,on top of,up/Score: 0/Bin: 0/Level: 0/Position: 70/Consecutive: 0/Difficulty: 0/
-/Kanji: 後/Reading: うしろ/Definitions: (gn) back,behind,rear/Score: 0/Bin: 0/Level: 0/Position: 71/Consecutive: 0/Difficulty: 0/
-/Kanji: 薄い/Reading: うすい/Definitions: thin,weak,watery,diluted/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 72/Consecutive: 0/Difficulty: 0/
-/Kanji: 歌/Reading: うた/Definitions: song,poetry/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 73/Consecutive: 0/Difficulty: 0/
-/Kanji: 歌う/Reading: うたう/Definitions: to sing/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 74/Consecutive: 0/Difficulty: 0/
-/Hint: わたしのうち/Reading: うち/Definitions: inside/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 75/Consecutive: 0/Difficulty: 0/
-/Kanji: 生まれる/Reading: うまれる/Definitions: to be born/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 76/Consecutive: 0/Difficulty: 0/
-/Kanji: 海/Reading: うみ/Definitions: sea,beach/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 77/Consecutive: 0/Difficulty: 0/
-/Kanji: 売る/Reading: うる/Definitions: to sell/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 78/Consecutive: 0/Difficulty: 0/
-/Kanji: 上着/Reading: うわぎ/Definitions: coat,tunic,jacket,outer garment/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 79/Consecutive: 0/Difficulty: 0/
-/Kanji: 絵/Reading: え/Definitions: picture,drawing,painting,sketch/Markers: n,n-suf/Score: 0/Bin: 0/Level: 0/Position: 80/Consecutive: 0/Difficulty: 0/
-/Kanji: 映画/Reading: えいが/Definitions: movie,film/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 81/Consecutive: 0/Difficulty: 0/
-/Kanji: 映画館/Reading: えいがかん/Definitions: movie theatre (theater),cinema/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 82/Consecutive: 0/Difficulty: 0/
-/Kanji: 英語/Reading: えいご/Definitions: the English language/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 83/Consecutive: 0/Difficulty: 0/
-/Reading: ええ/Definitions: yes/Markers: conj,int,n,P/Score: 0/Bin: 0/Level: 0/Position: 84/Consecutive: 0/Difficulty: 0/
-/Kanji: 駅/Reading: えき/Definitions: station/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 85/Consecutive: 0/Difficulty: 0/
-/Reading: エレベーター/Definitions: elevator/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 86/Consecutive: 0/Difficulty: 0/
-/Kanji: 円/Reading: えん/Definitions: (gn) (1) Yen,money,(2) circle/Score: 0/Bin: 0/Level: 0/Position: 87/Consecutive: 0/Difficulty: 0/
-/Kanji: 鉛筆/Reading: えんぴつ/Definitions: pencil/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 88/Consecutive: 0/Difficulty: 0/
-/Reading: おいしい/Definitions: delicious,tasty/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 89/Consecutive: 0/Difficulty: 0/
-/Kanji: 大きい/Reading: おおきい/Definitions: big,large,great/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 90/Consecutive: 0/Difficulty: 0/
-/Kanji: 大勢/Reading: おおぜい/Definitions: great number of people/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 91/Consecutive: 0/Difficulty: 0/
-/Kanji: お母さん/Reading: おかあさん/Definitions: mother/Markers: n,hon,P/Score: 0/Bin: 0/Level: 0/Position: 92/Consecutive: 0/Difficulty: 0/
-/Kanji: お菓子/Reading: おかし/Definitions: confections,sweets,candy/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 93/Consecutive: 0/Difficulty: 0/
-/Kanji: お金/Reading: おかね/Definitions: money/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 94/Consecutive: 0/Difficulty: 0/
-/Kanji: 起きる/Reading: おきる/Definitions: to get up,to rise/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 95/Consecutive: 0/Difficulty: 0/
-/Kanji: 置く/Reading: おく/Definitions: to put,to place/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 96/Consecutive: 0/Difficulty: 0/
-/Kanji: 奥さん/Reading: おくさん/Definitions: wife,your wife,his wife,married lady,madam/Markers: n,hon,P/Score: 0/Bin: 0/Level: 0/Position: 97/Consecutive: 0/Difficulty: 0/
-/Kanji: お酒/Reading: おさけ/Definitions: alcohol,sake (rice wine)/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 98/Consecutive: 0/Difficulty: 0/
-/Kanji: お皿/Reading: おさら/Definitions: plate,dish/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 99/Consecutive: 0/Difficulty: 0/
-/Kanji: 伯父/Reading: おじ/Definitions: uncle (older than one's parent)/Markers: n,hum/Score: 0/Bin: 0/Level: 0/Position: 100/Consecutive: 0/Difficulty: 0/
-/Kanji: 叔父/Reading: おじ/Definitions: uncle (younger than one's parent)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 101/Consecutive: 0/Difficulty: 0/
-/Reading: おじいさん/Definitions: grandfather,male senior-citizen/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 102/Consecutive: 0/Difficulty: 0/
-/Kanji: 教える/Reading: おしえる/Definitions: to teach,to inform,to instruct/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 103/Consecutive: 0/Difficulty: 0/
-/Kanji: 押す/Reading: おす/Definitions: to push,to press,to stamp (i.e. a passport)/Markers: v5s,vt,P/Score: 0/Bin: 0/Level: 0/Position: 104/Consecutive: 0/Difficulty: 0/
-/Kanji: 遅い/Reading: おそい/Definitions: late,slow/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 105/Consecutive: 0/Difficulty: 0/
-/Kanji: お茶/Reading: おちゃ/Definitions: tea (green)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 106/Consecutive: 0/Difficulty: 0/
-/Kanji: お手洗い/Reading: おてあらい/Definitions: toilet,restroom,lavatory,bathroom (US)/Markers: P/Score: 0/Bin: 0/Level: 0/Position: 107/Consecutive: 0/Difficulty: 0/
-/Kanji: お父さん/Reading: おとうさん/Definitions: father/Markers: n,hon,P/Score: 0/Bin: 0/Level: 0/Position: 108/Consecutive: 0/Difficulty: 0/
-/Kanji: 弟/Reading: おとうと/Definitions: younger brother,faithful service to those older,brotherly affection/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 109/Consecutive: 0/Difficulty: 0/
-/Kanji: 男/Reading: おとこ/Definitions: man/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 110/Consecutive: 0/Difficulty: 0/
-/Kanji: 男の子/Reading: おとこのこ/Definitions: boy/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 111/Consecutive: 0/Difficulty: 0/
-/Reading: おととい/Definitions: day before yesterday/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 112/Consecutive: 0/Difficulty: 0/
-/Reading: おととし/Definitions: year before last/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 113/Consecutive: 0/Difficulty: 0/
-/Kanji: 大人/Reading: おとな/Definitions: adult/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 114/Consecutive: 0/Difficulty: 0/
-/Reading: おなか/Definitions: stomach/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 115/Consecutive: 0/Difficulty: 0/
-/Kanji: 同じ/Reading: おなじ/Definitions: same,identical,equal,uniform,equivalent,similar,common (origin),changeless/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 116/Consecutive: 0/Difficulty: 0/
-/Kanji: お兄さん/Reading: おにいさん/Definitions: older brother,(vocative) "Mister?"/Markers: n,hon,P/Score: 0/Bin: 0/Level: 0/Position: 117/Consecutive: 0/Difficulty: 0/
-/Kanji: お姉さん/Reading: おねえさん/Definitions: older sister,(vocative) "Miss?"/Markers: n,hon,P/Score: 0/Bin: 0/Level: 0/Position: 118/Consecutive: 0/Difficulty: 0/
-/Kanji: 伯母/Reading: おば/Definitions: aunt (older than one's parent)/Markers: n,hum/Score: 0/Bin: 0/Level: 0/Position: 119/Consecutive: 0/Difficulty: 0/
-/Kanji: 叔母/Reading: おば/Definitions: aunt (younger than one's parent)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 120/Consecutive: 0/Difficulty: 0/
-/Reading: おばあさん/Definitions: grandmother,female senior-citizen/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 121/Consecutive: 0/Difficulty: 0/
-/Kanji: お弁当/Reading: おべんとう/Definitions: boxed lunch/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 122/Consecutive: 0/Difficulty: 0/
-/Kanji: 覚える/Reading: おぼえる/Definitions: to remember,to memorize/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 123/Consecutive: 0/Difficulty: 0/
-/Kanji: 重い/Reading: おもい/Definitions: (1) heavy,massive,(2) serious,important,severe,oppressed/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 124/Consecutive: 0/Difficulty: 0/
-/Reading: おもしろい/Definitions: interesting,amusing/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 125/Consecutive: 0/Difficulty: 0/
-/Kanji: 泳ぐ/Reading: およぐ/Definitions: to swim/Markers: v5g,P/Score: 0/Bin: 0/Level: 0/Position: 126/Consecutive: 0/Difficulty: 0/
-/Kanji: 降りる/Reading: おりる/Definitions: to alight (e.g. from bus),to get off,to descend (e.g. a mountain)/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 127/Consecutive: 0/Difficulty: 0/
-/Kanji: 終る/Reading: おわる/Definitions: to finish,to close/Markers: io,v5r/Score: 0/Bin: 0/Level: 0/Position: 128/Consecutive: 0/Difficulty: 0/
-/Kanji: 音楽/Reading: おんがく/Definitions: music,musical movement/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 129/Consecutive: 0/Difficulty: 0/
-/Kanji: 女/Reading: おんな/Definitions: woman,girl,daughter/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 130/Consecutive: 0/Difficulty: 0/
-/Kanji: 女の子/Reading: おんなのこ/Definitions: girl/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 131/Consecutive: 0/Difficulty: 0/
-/Kanji: ~回/Reading: ~かい/Definitions: counter for occurrences/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 132/Consecutive: 0/Difficulty: 0/
-/Kanji: ~階/Reading: ~かい/Definitions: Number of floors,storeys/Score: 0/Bin: 0/Level: 0/Position: 133/Consecutive: 0/Difficulty: 0/
-/Kanji: 外国/Reading: がいこく/Definitions: foreign country/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 134/Consecutive: 0/Difficulty: 0/
-/Kanji: 外国人/Reading: がいこくじん/Definitions: foreigner/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 135/Consecutive: 0/Difficulty: 0/
-/Kanji: 会社/Reading: かいしゃ/Definitions: company,corporation/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 136/Consecutive: 0/Difficulty: 0/
-/Kanji: 階段/Reading: かいだん/Definitions: stairs/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 137/Consecutive: 0/Difficulty: 0/
-/Kanji: 買い物/Reading: かいもの/Definitions: shopping/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 138/Consecutive: 0/Difficulty: 0/
-/Kanji: 買う/Reading: かう/Definitions: to buy/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 139/Consecutive: 0/Difficulty: 0/
-/Kanji: 返す/Reading: かえす/Definitions: to return something/Markers: v5s,vt,P/Score: 0/Bin: 0/Level: 0/Position: 140/Consecutive: 0/Difficulty: 0/
-/Kanji: 帰る/Reading: かえる/Definitions: to go back,to go home,to come home,to return/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 141/Consecutive: 0/Difficulty: 0/
-/Kanji: 顔/Reading: かお/Definitions: face (person)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 142/Consecutive: 0/Difficulty: 0/
-/Hint: 時間がかかる/Reading: かかる/Definitions: (intrans-verb) to take (e.g. time,money,etc)/Score: 0/Bin: 0/Level: 0/Position: 143/Consecutive: 0/Difficulty: 0/
-/Reading: かぎ/Definitions: key/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 144/Consecutive: 0/Difficulty: 0/
-/Kanji: 書く/Reading: かく/Definitions: to write/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 145/Consecutive: 0/Difficulty: 0/
-/Kanji: 学生/Reading: がくせい/Definitions: student/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 146/Consecutive: 0/Difficulty: 0/
-/Kanji: ~か月/Reading: ~かげつ/Definitions: (number of) months/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 147/Consecutive: 0/Difficulty: 0/
-/Hint: 眼鏡をかける/Reading: かける/Definitions: to soar,to fly/Markers: v5r/Score: 0/Bin: 0/Level: 0/Position: 148/Consecutive: 0/Difficulty: 0/
-/Hint: 電話をかける/Reading: かける/Definitions: (ru-v) to turn on,to dial (e.g. phone)/Score: 0/Bin: 0/Level: 0/Position: 149/Consecutive: 0/Difficulty: 0/
-/Kanji: 傘/Reading: かさ/Definitions: umbrella,parasol/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 150/Consecutive: 0/Difficulty: 0/
-/Kanji: 貸す/Reading: かす/Definitions: to lend/Markers: v5s,P/Score: 0/Bin: 0/Level: 0/Position: 151/Consecutive: 0/Difficulty: 0/
-/Kanji: 風/Reading: かぜ/Definitions: wind,breeze/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 152/Consecutive: 0/Difficulty: 0/
-/Kanji: 家族/Reading: かぞく/Definitions: family,members of a family/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 153/Consecutive: 0/Difficulty: 0/
-/Hint: この方/Reading: かた/Definitions: way (to do smth)/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 154/Consecutive: 0/Difficulty: 0/
-/Kanji: 片仮名/Reading: かたかな/Definitions: katakana/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 155/Consecutive: 0/Difficulty: 0/
-/Kanji: ~月/Reading: ~がつ/Definitions: month of year/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 156/Consecutive: 0/Difficulty: 0/
-/Kanji: 学校/Reading: がっこう/Definitions: school/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 157/Consecutive: 0/Difficulty: 0/
-/Kanji: 角/Reading: かど/Definitions: corner (e.g. desk,pavement)/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 158/Consecutive: 0/Difficulty: 0/
-/Kanji: 家内/Reading: かない/Definitions: wife/Markers: n,hum,P/Score: 0/Bin: 0/Level: 0/Position: 159/Consecutive: 0/Difficulty: 0/
-/Reading: かばん/Definitions: bag,satchel,briefcase,basket/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 160/Consecutive: 0/Difficulty: 0/
-/Kanji: 花瓶/Reading: かびん/Definitions: (flower) vase/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 161/Consecutive: 0/Difficulty: 0/
-/Reading: かぶる/Definitions: to wear,to put on (head),to pour or dash water (on oneself)/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 162/Consecutive: 0/Difficulty: 0/
-/Kanji: 紙/Reading: かみ/Definitions: paper/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 163/Consecutive: 0/Difficulty: 0/
-/Reading: カメラ/Definitions: camera/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 164/Consecutive: 0/Difficulty: 0/
-/Kanji: 火曜日/Reading: かようび/Definitions: Tuesday/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 165/Consecutive: 0/Difficulty: 0/
-/Kanji: 辛い/Reading: からい/Definitions: hot (spicy),salty/Score: 0/Bin: 0/Level: 0/Position: 166/Consecutive: 0/Difficulty: 0/
-/Kanji: 体/Reading: からだ/Definitions: (1) body,(2) health/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 167/Consecutive: 0/Difficulty: 0/
-/Kanji: 借りる/Reading: かりる/Definitions: to borrow,to have a loan,to hire,to rent,to buy on credit/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 168/Consecutive: 0/Difficulty: 0/
-/Kanji: 軽い/Reading: かるい/Definitions: light,non-serious,minor/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 169/Consecutive: 0/Difficulty: 0/
-/Reading: カレンダー/Definitions: calendar/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 170/Consecutive: 0/Difficulty: 0/
-/Kanji: 川/Reading: かわ/Definitions: river/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 171/Consecutive: 0/Difficulty: 0/
-/Kanji: 河/Reading: かわ/Definitions: river,stream/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 172/Consecutive: 0/Difficulty: 0/
-/Kanji: ~側/Reading: ~がわ/Definitions: side (eg. of street)/Score: 0/Bin: 0/Level: 0/Position: 173/Consecutive: 0/Difficulty: 0/
-/Reading: かわいい/Definitions: pretty,cute,lovely,charming,dear,darling,pet/Markers: adj,sl,P/Score: 0/Bin: 0/Level: 0/Position: 174/Consecutive: 0/Difficulty: 0/
-/Kanji: 漢字/Reading: かんじ/Definitions: Chinese characters,kanji/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 175/Consecutive: 0/Difficulty: 0/
-/Kanji: 木/Reading: き/Definitions: tree,wood,timber/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 176/Consecutive: 0/Difficulty: 0/
-/Kanji: 黄色い/Reading: きいろい/Definitions: yellow/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 177/Consecutive: 0/Difficulty: 0/
-/Kanji: 消える/Reading: きえる/Definitions: to go out,to vanish,to disappear/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 178/Consecutive: 0/Difficulty: 0/
-/Kanji: 聞く/Reading: きく/Definitions: to hear,to listen,to ask/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 179/Consecutive: 0/Difficulty: 0/
-/Kanji: 北/Reading: きた/Definitions: north/Score: 0/Bin: 0/Level: 0/Position: 180/Consecutive: 0/Difficulty: 0/
-/Reading: ギター/Definitions: guitar/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 181/Consecutive: 0/Difficulty: 0/
-/Kanji: 汚い/Reading: きたない/Definitions: dirty,unclean,filthy/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 182/Consecutive: 0/Difficulty: 0/
-/Kanji: 喫茶店/Reading: きっさてん/Definitions: coffee lounge/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 183/Consecutive: 0/Difficulty: 0/
-/Kanji: 切手/Reading: きって/Definitions: stamp (eg. postage)/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 184/Consecutive: 0/Difficulty: 0/
-/Kanji: 切符/Reading: きっぷ/Definitions: ticket/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 185/Consecutive: 0/Difficulty: 0/
-/Kanji: 昨日/Reading: きのう/Definitions: yesterday/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 186/Consecutive: 0/Difficulty: 0/
-/Kanji: 九/Reading: きゅう/Definitions: nine/Markers: num,P/Score: 0/Bin: 0/Level: 0/Position: 187/Consecutive: 0/Difficulty: 0/
-/Kanji: 牛肉/Reading: ぎゅうにく/Definitions: beef/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 188/Consecutive: 0/Difficulty: 0/
-/Kanji: 今日/Reading: きょう/Definitions: today,this day/Markers: n-t,P/Score: 0/Bin: 0/Level: 0/Position: 189/Consecutive: 0/Difficulty: 0/
-/Kanji: 教室/Reading: きょうしつ/Definitions: classroom/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 190/Consecutive: 0/Difficulty: 0/
-/Kanji: 兄弟/Reading: きょうだい/Definitions: siblings/Markers: n,hum,P/Score: 0/Bin: 0/Level: 0/Position: 191/Consecutive: 0/Difficulty: 0/
-/Kanji: 去年/Reading: きょねん/Definitions: last year/Markers: n-adv,n-t/Score: 0/Bin: 0/Level: 0/Position: 192/Consecutive: 0/Difficulty: 0/
-/Kanji: 嫌い/Reading: きらい/Definitions: dislike,hate/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 193/Consecutive: 0/Difficulty: 0/
-/Kanji: 切る/Reading: きる/Definitions: to cut,to chop/Markers: suf,v5r/Score: 0/Bin: 0/Level: 0/Position: 194/Consecutive: 0/Difficulty: 0/
-/Kanji: 着る/Reading: きる/Definitions: to wear,to put on (from shoulders down)/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 195/Consecutive: 0/Difficulty: 0/
-/Reading: きれい/Definitions: pretty,clean,nice,tidy,beautiful,fair/Markers: oK,adj-na,uk/Score: 0/Bin: 0/Level: 0/Position: 196/Consecutive: 0/Difficulty: 0/
-/Hint: キログラム/Reading: キロ/Definitions: kilo-,kilogram,kilometre,10^3/Markers: n,pref,abbr,P/Score: 0/Bin: 0/Level: 0/Position: 197/Consecutive: 0/Difficulty: 0/
-/Kanji: 銀行/Reading: ぎんこう/Definitions: bank/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 198/Consecutive: 0/Difficulty: 0/
-/Kanji: 金曜日/Reading: きんようび/Definitions: Friday/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 199/Consecutive: 0/Difficulty: 0/
-/Kanji: 薬/Reading: くすり/Definitions: medicine/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 200/Consecutive: 0/Difficulty: 0/
-/Reading: ください/Definitions: please (kana only),(with te-form verb) please do for me/Score: 0/Bin: 0/Level: 0/Position: 201/Consecutive: 0/Difficulty: 0/
-/Kanji: 果物/Reading: くだもの/Definitions: fruit/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 202/Consecutive: 0/Difficulty: 0/
-/Kanji: 口/Reading: くち/Definitions: mouth,orifice,opening/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 203/Consecutive: 0/Difficulty: 0/
-/Kanji: 靴/Reading: くつ/Definitions: shoes,footwear/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 204/Consecutive: 0/Difficulty: 0/
-/Kanji: 靴下/Reading: くつした/Definitions: socks/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 205/Consecutive: 0/Difficulty: 0/
-/Kanji: 国/Reading: くに/Definitions: country/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 206/Consecutive: 0/Difficulty: 0/
-/Kanji: 曇る/Reading: くもる/Definitions: to become cloudy,to become dim/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 207/Consecutive: 0/Difficulty: 0/
-/Kanji: 暗い/Reading: くらい/Definitions: dark,gloomy/Markers: adj,uk,P/Score: 0/Bin: 0/Level: 0/Position: 208/Consecutive: 0/Difficulty: 0/
-/Reading: ~くらい/Definitions: approximate (quantity)/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 209/Consecutive: 0/Difficulty: 0/
-/Reading: ~ぐらい/Definitions: approximate (quantity)/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 210/Consecutive: 0/Difficulty: 0/
-/Reading: クラス/Definitions: class/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 211/Consecutive: 0/Difficulty: 0/
-/Reading: グラム/Definitions: gram,gramme/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 212/Consecutive: 0/Difficulty: 0/
-/Kanji: 来る/Reading: くる/Definitions: to come/Markers: vk/Score: 0/Bin: 0/Level: 0/Position: 213/Consecutive: 0/Difficulty: 0/
-/Kanji: 車/Reading: くるま/Definitions: car,vehicle,wheel/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 214/Consecutive: 0/Difficulty: 0/
-/Kanji: 黒い/Reading: くろい/Definitions: (1) black,(2) dark/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 215/Consecutive: 0/Difficulty: 0/
-/Kanji: 今朝/Reading: けさ/Definitions: this morning/Markers: ik,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 216/Consecutive: 0/Difficulty: 0/
-/Kanji: 消す/Reading: けす/Definitions: to erase,to delete,to turn off power/Markers: v5s,P/Score: 0/Bin: 0/Level: 0/Position: 217/Consecutive: 0/Difficulty: 0/
-/Kanji: 結構/Reading: けっこう/Definitions: (1) (uk) splendid,nice,wonderful,delicious,sweet,(2) (arch) construction,architecture,(3) well enough,tolerably/Markers: adj-na,n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 218/Consecutive: 0/Difficulty: 0/
-/Kanji: 結婚/Reading: けっこん/Definitions: marriage/Markers: adj-no,n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 219/Consecutive: 0/Difficulty: 0/
-/Kanji: 月曜日/Reading: げつようび/Definitions: Monday/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 220/Consecutive: 0/Difficulty: 0/
-/Kanji: 玄関/Reading: げんかん/Definitions: entranceway,entry hall/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 221/Consecutive: 0/Difficulty: 0/
-/Kanji: 元気/Reading: げんき/Definitions: health(y),robust,vigor,energy,vitality,vim,stamina,spirit,courage,pep/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 222/Consecutive: 0/Difficulty: 0/
-/Kanji: ~個/Reading: ~こ/Definitions: counter for mil. units/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 223/Consecutive: 0/Difficulty: 0/
-/Kanji: 五/Reading: ご/Definitions: five/Markers: num,P/Score: 0/Bin: 0/Level: 0/Position: 224/Consecutive: 0/Difficulty: 0/
-/Kanji: ~語/Reading: ~ご/Definitions: language,word/Markers: n-suf/Score: 0/Bin: 0/Level: 0/Position: 225/Consecutive: 0/Difficulty: 0/
-/Kanji: 公園/Reading: こうえん/Definitions: (public) park/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 226/Consecutive: 0/Difficulty: 0/
-/Kanji: 交番/Reading: こうばん/Definitions: police box/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 227/Consecutive: 0/Difficulty: 0/
-/Kanji: 声/Reading: こえ/Definitions: voice/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 228/Consecutive: 0/Difficulty: 0/
-/Reading: コート/Definitions: coat,tennis court/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 229/Consecutive: 0/Difficulty: 0/
-/Reading: ここ/Definitions: here,this place/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 230/Consecutive: 0/Difficulty: 0/
-/Kanji: 午後/Reading: ごご/Definitions: afternoon,p.m.,pm/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 231/Consecutive: 0/Difficulty: 0/
-/Kanji: 九日/Reading: ここのか/Definitions: nine days,the ninth day (of the month)/Markers: P/Score: 0/Bin: 0/Level: 0/Position: 232/Consecutive: 0/Difficulty: 0/
-/Kanji: 九つ/Reading: ここのつ/Definitions: nine/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 233/Consecutive: 0/Difficulty: 0/
-/Kanji: 御主人/Reading: ごしゅじん/Definitions: your husband,her husband/Markers: n,hon/Score: 0/Bin: 0/Level: 0/Position: 234/Consecutive: 0/Difficulty: 0/
-/Kanji: 午前/Reading: ごぜん/Definitions: morning,A.M.,am/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 235/Consecutive: 0/Difficulty: 0/
-/Kanji: 答える/Reading: こたえる/Definitions: to answer,to reply/Markers: v1/Score: 0/Bin: 0/Level: 0/Position: 236/Consecutive: 0/Difficulty: 0/
-/Reading: こちら/Definitions: (1) (uk) this person,(2) this direction,(3) this side,(4) thereafter/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 237/Consecutive: 0/Difficulty: 0/
-/Reading: コップ/Definitions: (a) glass (nl: Kop)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 238/Consecutive: 0/Difficulty: 0/
-/Kanji: 今年/Reading: ことし/Definitions: this year/Markers: n-adv,n-t/Score: 0/Bin: 0/Level: 0/Position: 239/Consecutive: 0/Difficulty: 0/
-/Kanji: 言葉/Reading: ことば/Definitions: word(s),language,speech/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 240/Consecutive: 0/Difficulty: 0/
-/Kanji: 子供/Reading: こども/Definitions: child,children/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 241/Consecutive: 0/Difficulty: 0/
-/Reading: この/Definitions: this/Markers: adj-pn,int,uk,P/Score: 0/Bin: 0/Level: 0/Position: 242/Consecutive: 0/Difficulty: 0/
-/Kanji: 御飯/Reading: ごはん/Definitions: rice (cooked),meal/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 243/Consecutive: 0/Difficulty: 0/
-/Kanji: 困る/Reading: こまる/Definitions: to be worried,to be bothered/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 244/Consecutive: 0/Difficulty: 0/
-/Reading: これ/Definitions: this/Markers: int,n,uk/Score: 0/Bin: 0/Level: 0/Position: 245/Consecutive: 0/Difficulty: 0/
-/Reading: ~ころ/Definitions: time,about,toward,approximately (time)/Markers: n-suf/Score: 0/Bin: 0/Level: 0/Position: 246/Consecutive: 0/Difficulty: 0/
-/Reading: ~ごろ/Definitions: time,about,toward,approximately (time)/Markers: n-suf/Score: 0/Bin: 0/Level: 0/Position: 247/Consecutive: 0/Difficulty: 0/
-/Kanji: 今月/Reading: こんげつ/Definitions: this month/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 248/Consecutive: 0/Difficulty: 0/
-/Kanji: 今週/Reading: こんしゅう/Definitions: this week/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 249/Consecutive: 0/Difficulty: 0/
-/Reading: こんな/Definitions: such,like this/Markers: adj-na,adj-pn,adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 250/Consecutive: 0/Difficulty: 0/
-/Kanji: 今晩/Reading: こんばん/Definitions: tonight,this evening/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 251/Consecutive: 0/Difficulty: 0/
-/Hint: 感動詞/Reading: さあ/Definitions: come,come now/Markers: conj,int,int,P/Score: 0/Bin: 0/Level: 0/Position: 252/Consecutive: 0/Difficulty: 0/
-/Kanji: ~歳/Reading: ~さい/Definitions: ~years-old/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 253/Consecutive: 0/Difficulty: 0/
-/Kanji: 魚/Reading: さかな/Definitions: fish/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 254/Consecutive: 0/Difficulty: 0/
-/Kanji: 先/Reading: さき/Definitions: the future,priority,precedence,former,previous,old,late/Markers: adj-no,n/Score: 0/Bin: 0/Level: 0/Position: 255/Consecutive: 0/Difficulty: 0/
-/Kanji: 咲く/Reading: さく/Definitions: to bloom/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 256/Consecutive: 0/Difficulty: 0/
-/Kanji: 作文/Reading: さくぶん/Definitions: composition,writing/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 257/Consecutive: 0/Difficulty: 0/
-/Hint: 傘をさす/Reading: さす/Definitions: (uv) to raise (stretch out) hands,to raise umbrella/Score: 0/Bin: 0/Level: 0/Position: 258/Consecutive: 0/Difficulty: 0/
-/Kanji: ~冊/Reading: ~さつ/Definitions: counter for books/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 259/Consecutive: 0/Difficulty: 0/
-/Kanji: 雑誌/Reading: ざっし/Definitions: journal,magazine/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 260/Consecutive: 0/Difficulty: 0/
-/Kanji: 砂糖/Reading: さとう/Definitions: sugar/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 261/Consecutive: 0/Difficulty: 0/
-/Kanji: 寒い/Reading: さむい/Definitions: cold (e.g. weather)/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 262/Consecutive: 0/Difficulty: 0/
-/Kanji: 再来年/Reading: さらいねん/Definitions: year after next/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 263/Consecutive: 0/Difficulty: 0/
-/Reading: ~さん/Definitions: Mr or Mrs/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 264/Consecutive: 0/Difficulty: 0/
-/Kanji: 三/Reading: さん/Definitions: three/Markers: num,P/Score: 0/Bin: 0/Level: 0/Position: 265/Consecutive: 0/Difficulty: 0/
-/Kanji: 散歩/Reading: さんぽ/Definitions: walk,stroll/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 266/Consecutive: 0/Difficulty: 0/
-/Kanji: 四/Reading: し/Definitions: four/Markers: num,P/Score: 0/Bin: 0/Level: 0/Position: 267/Consecutive: 0/Difficulty: 0/
-/Kanji: ~時/Reading: ~じ/Definitions: time (~ O'clock)/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 268/Consecutive: 0/Difficulty: 0/
-/Kanji: 塩/Reading: しお/Definitions: salt/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 269/Consecutive: 0/Difficulty: 0/
-/Reading: しかし/Definitions: however,but/Markers: conj,uk,P/Score: 0/Bin: 0/Level: 0/Position: 270/Consecutive: 0/Difficulty: 0/
-/Kanji: 時間/Reading: じかん/Definitions: time/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 271/Consecutive: 0/Difficulty: 0/
-/Kanji: ~時間/Reading: ~じかん/Definitions: ~ hours/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 272/Consecutive: 0/Difficulty: 0/
-/Kanji: 仕事/Reading: しごと/Definitions: work,occupation,employment/Markers: adj-no,n,P/Score: 0/Bin: 0/Level: 0/Position: 273/Consecutive: 0/Difficulty: 0/
-/Kanji: 辞書/Reading: じしょ/Definitions: dictionary,lexicon/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 274/Consecutive: 0/Difficulty: 0/
-/Kanji: 静か/Reading: しずか/Definitions: quiet,peaceful/Markers: adj-na,P/Score: 0/Bin: 0/Level: 0/Position: 275/Consecutive: 0/Difficulty: 0/
-/Kanji: 下/Reading: した/Definitions: under,below,beneath/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 276/Consecutive: 0/Difficulty: 0/
-/Kanji: 七/Reading: しち/Definitions: seven/Markers: num,P/Score: 0/Bin: 0/Level: 0/Position: 277/Consecutive: 0/Difficulty: 0/
-/Kanji: 質問/Reading: しつもん/Definitions: question,inquiry/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 278/Consecutive: 0/Difficulty: 0/
-/Kanji: 自転車/Reading: じてんしゃ/Definitions: bicycle/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 279/Consecutive: 0/Difficulty: 0/
-/Kanji: 自動車/Reading: じどうしゃ/Definitions: automobile/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 280/Consecutive: 0/Difficulty: 0/
-/Kanji: 死ぬ/Reading: しぬ/Definitions: to die/Markers: v5n,P/Score: 0/Bin: 0/Level: 0/Position: 281/Consecutive: 0/Difficulty: 0/
-/Kanji: 字引/Reading: じびき/Definitions: dictionary/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 282/Consecutive: 0/Difficulty: 0/
-/Kanji: 自分/Reading: じぶん/Definitions: myself,oneself/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 283/Consecutive: 0/Difficulty: 0/
-/Kanji: 閉まる/Reading: しまる/Definitions: to close,to be closed/Markers: v5r,vi,P/Score: 0/Bin: 0/Level: 0/Position: 284/Consecutive: 0/Difficulty: 0/
-/Kanji: 閉める/Reading: しめる/Definitions: to close,to shut/Markers: v1,vt,P/Score: 0/Bin: 0/Level: 0/Position: 285/Consecutive: 0/Difficulty: 0/
-/Kanji: 締める/Reading: しめる/Definitions: to tie,to fasten/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 286/Consecutive: 0/Difficulty: 0/
-/Hint: 感動詞/Reading: じゃあ/Definitions: well,well then/Markers: conj,int,P/Score: 0/Bin: 0/Level: 0/Position: 287/Consecutive: 0/Difficulty: 0/
-/Kanji: 写真/Reading: しゃしん/Definitions: photograph/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 288/Consecutive: 0/Difficulty: 0/
-/Reading: シャツ/Definitions: shirt,singlet/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 289/Consecutive: 0/Difficulty: 0/
-/Kanji: 十/Reading: じゅう/Definitions: 10,ten/Markers: num,P/Score: 0/Bin: 0/Level: 0/Position: 290/Consecutive: 0/Difficulty: 0/
-/Kanji: ~週間/Reading: ~しゅうかん/Definitions: ~weeks/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 291/Consecutive: 0/Difficulty: 0/
-/Kanji: 授業/Reading: じゅぎょう/Definitions: lesson,class work/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 292/Consecutive: 0/Difficulty: 0/
-/Kanji: 宿題/Reading: しゅくだい/Definitions: homework/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 293/Consecutive: 0/Difficulty: 0/
-/Kanji: 上手/Reading: じょうず/Definitions: skill,skillful,dexterity/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 294/Consecutive: 0/Difficulty: 0/
-/Kanji: 丈夫/Reading: じょうぶ/Definitions: (1) hero,gentleman,warrior,manly person,(2) good health,robustness,strong,solid,durable/Markers: adj-na,n/Score: 0/Bin: 0/Level: 0/Position: 295/Consecutive: 0/Difficulty: 0/
-/Reading: しょうゆ/Definitions: soy sauce/Markers: iK,n/Score: 0/Bin: 0/Level: 0/Position: 296/Consecutive: 0/Difficulty: 0/
-/Kanji: 食堂/Reading: しょくどう/Definitions: cafeteria,dining hall/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 297/Consecutive: 0/Difficulty: 0/
-/Kanji: 知る/Reading: しる/Definitions: to know,to understand,to be acquainted with,to feel/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 298/Consecutive: 0/Difficulty: 0/
-/Kanji: 白い/Reading: しろい/Definitions: white/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 299/Consecutive: 0/Difficulty: 0/
-/Kanji: 新聞/Reading: しんぶん/Definitions: newspaper/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 300/Consecutive: 0/Difficulty: 0/
-/Kanji: 水曜日/Reading: すいようび/Definitions: Wednesday/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 301/Consecutive: 0/Difficulty: 0/
-/Kanji: 吸う/Reading: すう/Definitions: to smoke,to breathe in,to suck/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 302/Consecutive: 0/Difficulty: 0/
-/Reading: スカート/Definitions: skirt/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 303/Consecutive: 0/Difficulty: 0/
-/Kanji: 好き/Reading: すき/Definitions: liking,fondness,love/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 304/Consecutive: 0/Difficulty: 0/
-/Reading: すぐに/Definitions: instantly/Markers: adv/Score: 0/Bin: 0/Level: 0/Position: 305/Consecutive: 0/Difficulty: 0/
-/Kanji: 少し/Reading: すこし/Definitions: (1) small quantity,little,few,something,(2) little while,(3) short distance/Markers: adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 306/Consecutive: 0/Difficulty: 0/
-/Kanji: 涼しい/Reading: すずしい/Definitions: cool,refreshing/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 307/Consecutive: 0/Difficulty: 0/
-/Reading: ~ずつ/Definitions: (1) apiece,each,(2) at a time/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 308/Consecutive: 0/Difficulty: 0/
-/Reading: ストーブ/Definitions: heater (lit: stove)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 309/Consecutive: 0/Difficulty: 0/
-/Reading: スプーン/Definitions: spoon/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 310/Consecutive: 0/Difficulty: 0/
-/Reading: スポーツ/Definitions: sport/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 311/Consecutive: 0/Difficulty: 0/
-/Reading: ズボン/Definitions: (fr:) (n) trousers (fr: jupon)/Markers: P/Score: 0/Bin: 0/Level: 0/Position: 312/Consecutive: 0/Difficulty: 0/
-/Kanji: 住む/Reading: すむ/Definitions: to abide,to reside,to live in,to inhabit,to dwell/Markers: v5m,P/Score: 0/Bin: 0/Level: 0/Position: 313/Consecutive: 0/Difficulty: 0/
-/Reading: スリッパ/Definitions: slippers/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 314/Consecutive: 0/Difficulty: 0/
-/Reading: する/Definitions: to do,to try/Markers: vs-i/Score: 0/Bin: 0/Level: 0/Position: 315/Consecutive: 0/Difficulty: 0/
-/Kanji: 座る/Reading: すわる/Definitions: to sit/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 316/Consecutive: 0/Difficulty: 0/
-/Kanji: 背/Reading: せい/Definitions: height,stature/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 317/Consecutive: 0/Difficulty: 0/
-/Kanji: 生徒/Reading: せいと/Definitions: pupil/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 318/Consecutive: 0/Difficulty: 0/
-/Reading: セーター/Definitions: sweater,jumper/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 319/Consecutive: 0/Difficulty: 0/
-/Reading: せっけん/Definitions: economy,thrift/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 320/Consecutive: 0/Difficulty: 0/
-/Kanji: 背広/Reading: せびろ/Definitions: business suit/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 321/Consecutive: 0/Difficulty: 0/
-/Kanji: 狭い/Reading: せまい/Definitions: narrow,confined,small/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 322/Consecutive: 0/Difficulty: 0/
-/Reading: ゼロ/Definitions: zero/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 323/Consecutive: 0/Difficulty: 0/
-/Kanji: 千/Reading: せん/Definitions: thousand,many/Markers: P/Score: 0/Bin: 0/Level: 0/Position: 324/Consecutive: 0/Difficulty: 0/
-/Kanji: 先月/Reading: せんげつ/Definitions: last month/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 325/Consecutive: 0/Difficulty: 0/
-/Kanji: 先週/Reading: せんしゅう/Definitions: last week,the week before/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 326/Consecutive: 0/Difficulty: 0/
-/Kanji: 先生/Reading: せんせい/Definitions: teacher,master,doctor/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 327/Consecutive: 0/Difficulty: 0/
-/Kanji: 洗濯/Reading: せんたく/Definitions: washing,laundry/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 328/Consecutive: 0/Difficulty: 0/
-/Kanji: 全部/Reading: ぜんぶ/Definitions: all,entire,whole,altogether/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 329/Consecutive: 0/Difficulty: 0/
-/Hint: そうです/Reading: そう/Definitions: so,really/Score: 0/Bin: 0/Level: 0/Position: 330/Consecutive: 0/Difficulty: 0/
-/Kanji: 掃除/Reading: そうじ/Definitions: cleaning,sweeping/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 331/Consecutive: 0/Difficulty: 0/
-/Reading: そうして/Definitions: and,like that/Markers: conj,uk,P/Score: 0/Bin: 0/Level: 0/Position: 332/Consecutive: 0/Difficulty: 0/
-/Reading: そして/Definitions: and/Markers: conj,uk,P/Score: 0/Bin: 0/Level: 0/Position: 333/Consecutive: 0/Difficulty: 0/
-/Hint: 指示詞/Reading: そこ/Definitions: that place,there/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 334/Consecutive: 0/Difficulty: 0/
-/Reading: そちら/Definitions: over there,the other/Markers: n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 335/Consecutive: 0/Difficulty: 0/
-/Kanji: 外/Reading: そと/Definitions: outside,exterior/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 336/Consecutive: 0/Difficulty: 0/
-/Hint: 連体詞/Reading: その/Definitions: the,that/Markers: adj-pn,uk/Score: 0/Bin: 0/Level: 0/Position: 337/Consecutive: 0/Difficulty: 0/
-/Hint: 窓のそば/Reading: そば/Definitions: near,close,beside,vicinity,proximity,besides,while/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 338/Consecutive: 0/Difficulty: 0/
-/Kanji: 空/Reading: そら/Definitions: sky/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 339/Consecutive: 0/Difficulty: 0/
-/Hint: 指示詞/Reading: それ/Definitions: it,that/Markers: n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 340/Consecutive: 0/Difficulty: 0/
-/Reading: それから/Definitions: and then,after that/Markers: uk,P/Score: 0/Bin: 0/Level: 0/Position: 341/Consecutive: 0/Difficulty: 0/
-/Reading: それでは/Definitions: in that situation,well then .../Markers: exp,uk,P/Score: 0/Bin: 0/Level: 0/Position: 342/Consecutive: 0/Difficulty: 0/
-/Kanji: ~台/Reading: ~だい/Definitions: counter for vehicles/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 343/Consecutive: 0/Difficulty: 0/
-/Kanji: 大学/Reading: だいがく/Definitions: university/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 344/Consecutive: 0/Difficulty: 0/
-/Kanji: 大使館/Reading: たいしかん/Definitions: embassy/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 345/Consecutive: 0/Difficulty: 0/
-/Kanji: 大丈夫/Reading: だいじょうぶ/Definitions: safe,all right,O.K./Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 346/Consecutive: 0/Difficulty: 0/
-/Kanji: 大好き/Reading: だいすき/Definitions: very likeable,like very much/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 347/Consecutive: 0/Difficulty: 0/
-/Kanji: 大切/Reading: たいせつ/Definitions: important/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 348/Consecutive: 0/Difficulty: 0/
-/Reading: たいてい/Definitions: usually,generally/Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 349/Consecutive: 0/Difficulty: 0/
-/Kanji: 台所/Reading: だいどころ/Definitions: kitchen/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 350/Consecutive: 0/Difficulty: 0/
-/Hint: たいへん暑い/Reading: たいへん/Definitions: awful,dreadful,terrible,very/Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 351/Consecutive: 0/Difficulty: 0/
-/Hint: それはたいへんですね/Reading: たいへん/Definitions: awful,dreadful,terrible,very/Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 352/Consecutive: 0/Difficulty: 0/
-/Kanji: 高い/Reading: たかい/Definitions: tall,high,expensive/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 353/Consecutive: 0/Difficulty: 0/
-/Reading: たくさん/Definitions: many,a lot,much/Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 354/Consecutive: 0/Difficulty: 0/
-/Reading: タクシー/Definitions: taxi/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 355/Consecutive: 0/Difficulty: 0/
-/Kanji: 出す/Reading: だす/Definitions: to put out,to send/Markers: v5s,P/Score: 0/Bin: 0/Level: 0/Position: 356/Consecutive: 0/Difficulty: 0/
-/Kanji: 立つ/Reading: たつ/Definitions: to stand/Markers: v5t,P/Score: 0/Bin: 0/Level: 0/Position: 357/Consecutive: 0/Difficulty: 0/
-/Kanji: 建物/Reading: たてもの/Definitions: building/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 358/Consecutive: 0/Difficulty: 0/
-/Kanji: 楽しい/Reading: たのしい/Definitions: enjoyable,fun/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 359/Consecutive: 0/Difficulty: 0/
-/Kanji: 頼む/Reading: たのむ/Definitions: to request,to beg,to ask/Markers: v5m,P/Score: 0/Bin: 0/Level: 0/Position: 360/Consecutive: 0/Difficulty: 0/
-/Reading: たばこ/Definitions: (pt:) (n) (uk) tobacco (pt: tabaco),cigarettes/Score: 0/Bin: 0/Level: 0/Position: 361/Consecutive: 0/Difficulty: 0/
-/Reading: たぶん/Definitions: perhaps,probably/Markers: adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 362/Consecutive: 0/Difficulty: 0/
-/Kanji: 食べ物/Reading: たべもの/Definitions: food/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 363/Consecutive: 0/Difficulty: 0/
-/Kanji: 食べる/Reading: たべる/Definitions: to eat/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 364/Consecutive: 0/Difficulty: 0/
-/Kanji: 卵/Reading: たまご/Definitions: (1) egg(s),spawn,roe,(2) (an expert) in the making/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 365/Consecutive: 0/Difficulty: 0/
-/Reading: だれ/Definitions: who/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 366/Consecutive: 0/Difficulty: 0/
-/Kanji: 誕生日/Reading: たんじょうび/Definitions: birthday/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 367/Consecutive: 0/Difficulty: 0/
-/Reading: だんだん/Definitions: gradually,by degrees/Markers: adv,n/Score: 0/Bin: 0/Level: 0/Position: 368/Consecutive: 0/Difficulty: 0/
-/Kanji: 小さい/Reading: ちいさい/Definitions: small,little,tiny/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 369/Consecutive: 0/Difficulty: 0/
-/Kanji: 近い/Reading: ちかい/Definitions: near,close by,short/Markers: adj,suf,P/Score: 0/Bin: 0/Level: 0/Position: 370/Consecutive: 0/Difficulty: 0/
-/Kanji: 違う/Reading: ちがう/Definitions: to differ (from)/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 371/Consecutive: 0/Difficulty: 0/
-/Kanji: 近く/Reading: ちかく/Definitions: near,neighbourhood,vicinity/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 372/Consecutive: 0/Difficulty: 0/
-/Kanji: 地下鉄/Reading: ちかてつ/Definitions: underground train,subway/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 373/Consecutive: 0/Difficulty: 0/
-/Kanji: 地図/Reading: ちず/Definitions: map/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 374/Consecutive: 0/Difficulty: 0/
-/Kanji: 父/Reading: ちち/Definitions: father/Markers: n,hum,P/Score: 0/Bin: 0/Level: 0/Position: 375/Consecutive: 0/Difficulty: 0/
-/Kanji: 茶色/Reading: ちゃいろ/Definitions: light brown,tawny/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 376/Consecutive: 0/Difficulty: 0/
-/Reading: ちゃわん/Definitions: rice bowl,tea cup,teacup/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 377/Consecutive: 0/Difficulty: 0/
-/Reading: ちょうど/Definitions: (gn) just,right,exactly/Score: 0/Bin: 0/Level: 0/Position: 378/Consecutive: 0/Difficulty: 0/
-/Reading: ちょっと/Definitions: just a minute,a short time,a while,just a little,somewhat,easily,readily,rather/Markers: ateji,adv,int,uk,P/Score: 0/Bin: 0/Level: 0/Position: 379/Consecutive: 0/Difficulty: 0/
-/Kanji: 一日/Reading: ついたち/Definitions: (1) first of month/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 380/Consecutive: 0/Difficulty: 0/
-/Kanji: 使う/Reading: つかう/Definitions: to use,to handle,to manipulate,to employ,to need,to want,to spend,to consume,to speak (English),to practise (fencing),to take (one's lunch),to circulate (bad money)/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 381/Consecutive: 0/Difficulty: 0/
-/Kanji: 疲れる/Reading: つかれる/Definitions: to get tired,to tire/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 382/Consecutive: 0/Difficulty: 0/
-/Kanji: 次/Reading: つぎ/Definitions: next,stage station,stage,subsequent/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 383/Consecutive: 0/Difficulty: 0/
-/Kanji: 着く/Reading: つく/Definitions: to arrive at,to reach/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 384/Consecutive: 0/Difficulty: 0/
-/Kanji: 机/Reading: つくえ/Definitions: desk/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 385/Consecutive: 0/Difficulty: 0/
-/Kanji: 作る/Reading: つくる/Definitions: to make,to create,to manufacture,to draw up,to write,to compose,to build,to coin,to cultivate,to organize,to establish,to make up (a face),to trim (a tree),to fabricate,to prepare (food),to commit (sin),to construct/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 386/Consecutive: 0/Difficulty: 0/
-/Hint: 電灯をつける/Reading: つける/Definitions: (1) to attach,to join,to add,to append,to affix,to stick,to glue,to fasten,to sew on,to apply (ointment),(2) to furnish (a house with),(3) to wear,to put on,(4) to keep a diary,to make an entry,(5) to appraise,to set (a price),(6) to bring alongside,(7) to place (under guard or doctor),(8) to follow,to shadow,(9) to load,to give (courage to),(10) to keep (an eye on),(11) to establish (relations or understanding)/Markers: v1,vt,P/Score: 0/Bin: 0/Level: 0/Position: 387/Consecutive: 0/Difficulty: 0/
-/Kanji: 勤める/Reading: つとめる/Definitions: (1) to serve,to fill a post,to serve under,to work (for),(2) to exert oneself,to endeavor,to be diligent,(3) to play (the part of)/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 388/Consecutive: 0/Difficulty: 0/
-/Reading: つまらない/Definitions: insignificant,boring,trifling/Markers: adj,uk,P/Score: 0/Bin: 0/Level: 0/Position: 389/Consecutive: 0/Difficulty: 0/
-/Kanji: 冷たい/Reading: つめたい/Definitions: cold (to the touch),chilly,icy,freezing,coldhearted/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 390/Consecutive: 0/Difficulty: 0/
-/Kanji: 強い/Reading: つよい/Definitions: strong,powerful,mighty,potent/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 391/Consecutive: 0/Difficulty: 0/
-/Kanji: 手/Reading: て/Definitions: hand/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 392/Consecutive: 0/Difficulty: 0/
-/Reading: テープ/Definitions: tape/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 393/Consecutive: 0/Difficulty: 0/
-/Reading: テープレコーダー/Definitions: tape recorder/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 394/Consecutive: 0/Difficulty: 0/
-/Reading: テーブル/Definitions: table/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 395/Consecutive: 0/Difficulty: 0/
-/Kanji: 出かける/Reading: でかける/Definitions: to depart,to go out (e.g. on an excursion or outing),to set out,to start,to be going out/Markers: v1/Score: 0/Bin: 0/Level: 0/Position: 396/Consecutive: 0/Difficulty: 0/
-/Kanji: 手紙/Reading: てがみ/Definitions: letter/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 397/Consecutive: 0/Difficulty: 0/
-/Hint: 英語ができる/Reading: できる/Definitions: to be able to,to be ready,to occur/Markers: v1,uk,P/Score: 0/Bin: 0/Level: 0/Position: 398/Consecutive: 0/Difficulty: 0/
-/Kanji: 出口/Reading: でぐち/Definitions: exit,gateway,way out,outlet,leak,vent/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 399/Consecutive: 0/Difficulty: 0/
-/Reading: テスト/Definitions: test/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 400/Consecutive: 0/Difficulty: 0/
-/Hint: 感動詞/Reading: では/Definitions: then,well,so,well then/Score: 0/Bin: 0/Level: 0/Position: 401/Consecutive: 0/Difficulty: 0/
-/Reading: デパート/Definitions: department store/Markers: n,abbr,P/Score: 0/Bin: 0/Level: 0/Position: 402/Consecutive: 0/Difficulty: 0/
-/Reading: でも/Definitions: but,however/Markers: conj,prt/Score: 0/Bin: 0/Level: 0/Position: 403/Consecutive: 0/Difficulty: 0/
-/Kanji: 出る/Reading: でる/Definitions: to appear,to come forth,to leave/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 404/Consecutive: 0/Difficulty: 0/
-/Reading: テレビ/Definitions: television,TV/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 405/Consecutive: 0/Difficulty: 0/
-/Kanji: 天気/Reading: てんき/Definitions: weather,the elements,fine weather/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 406/Consecutive: 0/Difficulty: 0/
-/Kanji: 電気/Reading: でんき/Definitions: electricity,(electric) light/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 407/Consecutive: 0/Difficulty: 0/
-/Kanji: 電車/Reading: でんしゃ/Definitions: electric train/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 408/Consecutive: 0/Difficulty: 0/
-/Kanji: 電話/Reading: でんわ/Definitions: telephone/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 409/Consecutive: 0/Difficulty: 0/
-/Kanji: 戸/Reading: と/Definitions: door (Japanese style)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 410/Consecutive: 0/Difficulty: 0/
-/Kanji: ~度/Reading: ~ど/Definitions: (n,n-suf) counter for occurrences/Score: 0/Bin: 0/Level: 0/Position: 411/Consecutive: 0/Difficulty: 0/
-/Reading: ドア/Definitions: door (Western style)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 412/Consecutive: 0/Difficulty: 0/
-/Reading: トイレ/Definitions: toilet,restroom,bathroom,lavatory/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 413/Consecutive: 0/Difficulty: 0/
-/Reading: どう/Definitions: how,in what way/Markers: adv/Score: 0/Bin: 0/Level: 0/Position: 414/Consecutive: 0/Difficulty: 0/
-/Reading: どうして/Definitions: why?,for what reason,how,in what way,for what purpose,what for/Markers: adv,int,uk,P/Score: 0/Bin: 0/Level: 0/Position: 415/Consecutive: 0/Difficulty: 0/
-/Reading: どうぞ/Definitions: please,kindly,by all means/Markers: adv,P/Score: 0/Bin: 0/Level: 0/Position: 416/Consecutive: 0/Difficulty: 0/
-/Kanji: 動物/Reading: どうぶつ/Definitions: animal/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 417/Consecutive: 0/Difficulty: 0/
-/Reading: どうも/Definitions: thanks,how,(very) much,very,quite,really,somehow,no matter how hard one may try/Markers: adv,int,abbr,P/Score: 0/Bin: 0/Level: 0/Position: 418/Consecutive: 0/Difficulty: 0/
-/Kanji: 十/Reading: とお/Definitions: 10,ten/Markers: num,P/Score: 0/Bin: 0/Level: 0/Position: 419/Consecutive: 0/Difficulty: 0/
-/Kanji: 遠い/Reading: とおい/Definitions: far,distant/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 420/Consecutive: 0/Difficulty: 0/
-/Kanji: 十日/Reading: とおか/Definitions: ten days,the tenth (day of the month)/Markers: P/Score: 0/Bin: 0/Level: 0/Position: 421/Consecutive: 0/Difficulty: 0/
-/Kanji: 時々/Reading: ときどき/Definitions: sometimes/Markers: adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 422/Consecutive: 0/Difficulty: 0/
-/Kanji: 時計/Reading: とけい/Definitions: watch,clock/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 423/Consecutive: 0/Difficulty: 0/
-/Reading: どこ/Definitions: where,what place/Markers: n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 424/Consecutive: 0/Difficulty: 0/
-/Kanji: 所/Reading: ところ/Definitions: place/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 425/Consecutive: 0/Difficulty: 0/
-/Kanji: 図書館/Reading: としょかん/Definitions: library/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 426/Consecutive: 0/Difficulty: 0/
-/Reading: どちら/Definitions: which (of two),who/Markers: n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 427/Consecutive: 0/Difficulty: 0/
-/Reading: とても/Definitions: very,awfully,exceedingly/Markers: adv,uk,P/Score: 0/Bin: 0/Level: 0/Position: 428/Consecutive: 0/Difficulty: 0/
-/Reading: どなた/Definitions: who?/Markers: n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 429/Consecutive: 0/Difficulty: 0/
-/Kanji: 隣/Reading: となり/Definitions: next to,next door to/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 430/Consecutive: 0/Difficulty: 0/
-/Hint: どの人/Reading: どの/Definitions: which,what (way)/Score: 0/Bin: 0/Level: 0/Position: 431/Consecutive: 0/Difficulty: 0/
-/Kanji: 飛ぶ/Reading: とぶ/Definitions: to jump,to fly,to leap,to spring,to bound,to hop/Markers: v5b,P/Score: 0/Bin: 0/Level: 0/Position: 432/Consecutive: 0/Difficulty: 0/
-/Kanji: 止まる/Reading: とまる/Definitions: to come to a halt/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 433/Consecutive: 0/Difficulty: 0/
-/Kanji: 友達/Reading: ともだち/Definitions: friend/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 434/Consecutive: 0/Difficulty: 0/
-/Kanji: 土曜日/Reading: どようび/Definitions: Saturday/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 435/Consecutive: 0/Difficulty: 0/
-/Kanji: 鳥/Reading: とり/Definitions: bird,fowl,poultry/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 436/Consecutive: 0/Difficulty: 0/
-/Kanji: 鳥肉/Reading: とりにく/Definitions: chicken meat/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 437/Consecutive: 0/Difficulty: 0/
-/Kanji: 取る/Reading: とる/Definitions: to take,to pick up,to harvest,to earn,to choose/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 438/Consecutive: 0/Difficulty: 0/
-/Kanji: 撮る/Reading: とる/Definitions: to take (a photo),to make (a film)/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 439/Consecutive: 0/Difficulty: 0/
-/Reading: どれ/Definitions: well,now,let me see,which (of three or more)/Markers: n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 440/Consecutive: 0/Difficulty: 0/
-/Reading: どんな/Definitions: what,what kind of/Markers: adj-na,adj-pn,n,P/Score: 0/Bin: 0/Level: 0/Position: 441/Consecutive: 0/Difficulty: 0/
-/Reading: ない/Definitions: there isn't,doesn't have/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 442/Consecutive: 0/Difficulty: 0/
-/Reading: ナイフ/Definitions: knife/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 443/Consecutive: 0/Difficulty: 0/
-/Kanji: 中/Reading: なか/Definitions: inside,middle,among/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 444/Consecutive: 0/Difficulty: 0/
-/Kanji: 長い/Reading: ながい/Definitions: long/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 445/Consecutive: 0/Difficulty: 0/
-/Kanji: 鳴く/Reading: なく/Definitions: to bark,to purr,to make sound (animal)/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 446/Consecutive: 0/Difficulty: 0/
-/Kanji: 夏/Reading: なつ/Definitions: summer/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 447/Consecutive: 0/Difficulty: 0/
-/Kanji: 夏休み/Reading: なつやすみ/Definitions: summer vacation,summer holiday/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 448/Consecutive: 0/Difficulty: 0/
-/Reading: ~など/Definitions: et cetera/Markers: n,n-suf,prt/Score: 0/Bin: 0/Level: 0/Position: 449/Consecutive: 0/Difficulty: 0/
-/Kanji: 何/Reading: なに/Definitions: what/Markers: int,n,P/Score: 0/Bin: 0/Level: 0/Position: 451/Consecutive: 0/Difficulty: 0/
-/Kanji: 何/Reading: なん/Definitions: what/Markers: int,n,P/Score: 0/Bin: 0/Level: 0/Position: 452/Consecutive: 0/Difficulty: 0/
-/Kanji: 七日/Reading: なのか/Definitions: seven days,the seventh day (of the month)/Markers: n-adv,P/Score: 0/Bin: 0/Level: 0/Position: 453/Consecutive: 0/Difficulty: 0/
-/Kanji: 名前/Reading: なまえ/Definitions: name/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 454/Consecutive: 0/Difficulty: 0/
-/Kanji: 習う/Reading: ならう/Definitions: to learn/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 455/Consecutive: 0/Difficulty: 0/
-/Kanji: 並ぶ/Reading: ならぶ/Definitions: to line up,to stand in a line/Markers: v5b,vi,P/Score: 0/Bin: 0/Level: 0/Position: 456/Consecutive: 0/Difficulty: 0/
-/Kanji: 並べる/Reading: ならべる/Definitions: to line up,to set up/Markers: v1,vt,P/Score: 0/Bin: 0/Level: 0/Position: 457/Consecutive: 0/Difficulty: 0/
-/Hint: 春になる/Reading: なる/Definitions: (uv) to become/Score: 0/Bin: 0/Level: 0/Position: 458/Consecutive: 0/Difficulty: 0/
-/Kanji: 二/Reading: に/Definitions: two/Markers: num,P/Score: 0/Bin: 0/Level: 0/Position: 459/Consecutive: 0/Difficulty: 0/
-/Reading: にぎやか/Definitions: bustling,busy/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 460/Consecutive: 0/Difficulty: 0/
-/Kanji: 肉/Reading: にく/Definitions: meat/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 461/Consecutive: 0/Difficulty: 0/
-/Kanji: 西/Reading: にし/Definitions: west/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 462/Consecutive: 0/Difficulty: 0/
-/Kanji: ~日/Reading: ~にち/Definitions: day of the month/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 463/Consecutive: 0/Difficulty: 0/
-/Kanji: 日曜日/Reading: にちようび/Definitions: Sunday/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 464/Consecutive: 0/Difficulty: 0/
-/Kanji: 荷物/Reading: にもつ/Definitions: luggage/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 465/Consecutive: 0/Difficulty: 0/
-/Reading: ニュース/Definitions: news/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 466/Consecutive: 0/Difficulty: 0/
-/Kanji: 庭/Reading: にわ/Definitions: garden/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 467/Consecutive: 0/Difficulty: 0/
-/Kanji: ~人/Reading: ~にん/Definitions: counter for people/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 468/Consecutive: 0/Difficulty: 0/
-/Kanji: 脱ぐ/Reading: ぬぐ/Definitions: to take off clothes/Markers: v5g,P/Score: 0/Bin: 0/Level: 0/Position: 469/Consecutive: 0/Difficulty: 0/
-/Reading: ネクタイ/Definitions: tie,necktie/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 470/Consecutive: 0/Difficulty: 0/
-/Kanji: 寝る/Reading: ねる/Definitions: to go to bed,to lie down,to sleep/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 471/Consecutive: 0/Difficulty: 0/
-/Kanji: ~年/Reading: ~ねん/Definitions: ~years/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 472/Consecutive: 0/Difficulty: 0/
-/Reading: ノート/Definitions: notebook,copy-book,exercise book/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 473/Consecutive: 0/Difficulty: 0/
-/Kanji: 登る/Reading: のぼる/Definitions: to climb/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 474/Consecutive: 0/Difficulty: 0/
-/Kanji: 飲み物/Reading: のみもの/Definitions: drink,beverage/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 475/Consecutive: 0/Difficulty: 0/
-/Kanji: 飲む/Reading: のむ/Definitions: to drink/Markers: v5m,P/Score: 0/Bin: 0/Level: 0/Position: 476/Consecutive: 0/Difficulty: 0/
-/Kanji: 乗る/Reading: のる/Definitions: (1) to get on,to ride in,to board,to mount,to get up on,to spread (paints),to be taken in,(2) to share in,to join,to be found in (a dictionary),to feel like doing,to be mentioned in,to be in harmony with/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 477/Consecutive: 0/Difficulty: 0/
-/Kanji: 歯/Reading: は/Definitions: tooth/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 478/Consecutive: 0/Difficulty: 0/
-/Reading: パーティー/Definitions: party/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 479/Consecutive: 0/Difficulty: 0/
-/Reading: はい/Definitions: yes/Markers: conj,int/Score: 0/Bin: 0/Level: 0/Position: 480/Consecutive: 0/Difficulty: 0/
-/Kanji: ~杯/Reading: ~はい/Definitions: counter for cupfuls/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 481/Consecutive: 0/Difficulty: 0/
-/Kanji: 灰皿/Reading: はいざら/Definitions: ashtray/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 482/Consecutive: 0/Difficulty: 0/
-/Kanji: 入る/Reading: はいる/Definitions: to enter,to break into,to join,to enroll,to contain,to hold,to accommodate,to have (an income of)/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 483/Consecutive: 0/Difficulty: 0/
-/Kanji: 葉書/Reading: はがき/Definitions: postcard/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 484/Consecutive: 0/Difficulty: 0/
-/Kanji: 箱/Reading: はこ/Definitions: box/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 485/Consecutive: 0/Difficulty: 0/
-/Kanji: 橋/Reading: はし/Definitions: bridge/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 486/Consecutive: 0/Difficulty: 0/
-/Hint: はしで御飯を食べる/Reading: はし/Definitions: chopsticks/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 487/Consecutive: 0/Difficulty: 0/
-/Kanji: 始まる/Reading: はじまる/Definitions: to begin/Markers: v5r,vi,P/Score: 0/Bin: 0/Level: 0/Position: 488/Consecutive: 0/Difficulty: 0/
-/Kanji: 初めに/Reading: はじめに/Definitions: (expr) to begin with,first of all/Score: 0/Bin: 0/Level: 0/Position: 489/Consecutive: 0/Difficulty: 0/
-/Kanji: 初めて/Reading: はじめて/Definitions: for the first time/Markers: adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 490/Consecutive: 0/Difficulty: 0/
-/Kanji: 走る/Reading: はしる/Definitions: to run/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 491/Consecutive: 0/Difficulty: 0/
-/Reading: バス/Definitions: (1) bus,(2) bath,(3) bass/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 492/Consecutive: 0/Difficulty: 0/
-/Reading: バター/Definitions: butter/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 493/Consecutive: 0/Difficulty: 0/
-/Kanji: 二十歳/Reading: はたち/Definitions: 20 years old,20th year/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 494/Consecutive: 0/Difficulty: 0/
-/Kanji: 働く/Reading: はたらく/Definitions: to work,to labor,to do,to act,to commit,to practise,to work on,to come into play,to be conjugated,to reduce the price/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 495/Consecutive: 0/Difficulty: 0/
-/Kanji: 八/Reading: はち/Definitions: eight/Markers: num/Score: 0/Bin: 0/Level: 0/Position: 496/Consecutive: 0/Difficulty: 0/
-/Kanji: 二十日/Reading: はつか/Definitions: twenty days,twentieth (day of the month)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 497/Consecutive: 0/Difficulty: 0/
-/Kanji: 花/Reading: はな/Definitions: flower/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 498/Consecutive: 0/Difficulty: 0/
-/Kanji: 鼻/Reading: はな/Definitions: nose/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 499/Consecutive: 0/Difficulty: 0/
-/Kanji: 話/Reading: はなし/Definitions: talk,speech,chat,story,conversation/Markers: io,n,P/Score: 0/Bin: 0/Level: 0/Position: 500/Consecutive: 0/Difficulty: 0/
-/Kanji: 話す/Reading: はなす/Definitions: to speak/Markers: v5s,P/Score: 0/Bin: 0/Level: 0/Position: 501/Consecutive: 0/Difficulty: 0/
-/Kanji: 母/Reading: はは/Definitions: mother/Markers: n,hum,P/Score: 0/Bin: 0/Level: 0/Position: 502/Consecutive: 0/Difficulty: 0/
-/Kanji: 早い/Reading: はやい/Definitions: early/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 503/Consecutive: 0/Difficulty: 0/
-/Kanji: 速い/Reading: はやい/Definitions: quick,fast,swift/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 504/Consecutive: 0/Difficulty: 0/
-/Kanji: 春/Reading: はる/Definitions: spring/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 505/Consecutive: 0/Difficulty: 0/
-/Hint: 切手をはる/Reading: はる/Definitions: to stick,to paste/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 506/Consecutive: 0/Difficulty: 0/
-/Kanji: 晴れる/Reading: はれる/Definitions: to be sunny,to clear away,to stop raining/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 507/Consecutive: 0/Difficulty: 0/
-/Kanji: 半/Reading: はん/Definitions: half/Markers: n-adv,n,n-suf,P/Score: 0/Bin: 0/Level: 0/Position: 508/Consecutive: 0/Difficulty: 0/
-/Kanji: 晩/Reading: ばん/Definitions: evening/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 509/Consecutive: 0/Difficulty: 0/
-/Kanji: ~番/Reading: ~ばん/Definitions: the most ~/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 510/Consecutive: 0/Difficulty: 0/
-/Reading: パン/Definitions: (pt:) (n) (1) bread (pt: pan),(2) panning/Markers: P/Score: 0/Bin: 0/Level: 0/Position: 511/Consecutive: 0/Difficulty: 0/
-/Reading: ハンカチ/Definitions: handkerchief/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 512/Consecutive: 0/Difficulty: 0/
-/Kanji: 番号/Reading: ばんごう/Definitions: number,series of digits/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 513/Consecutive: 0/Difficulty: 0/
-/Kanji: 晩御飯/Reading: ばんごはん/Definitions: dinner,evening meal/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 514/Consecutive: 0/Difficulty: 0/
-/Kanji: 半分/Reading: はんぶん/Definitions: half minute/Score: 0/Bin: 0/Level: 0/Position: 515/Consecutive: 0/Difficulty: 0/
-/Kanji: 東/Reading: ひがし/Definitions: east/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 516/Consecutive: 0/Difficulty: 0/
-/Kanji: ~匹/Reading: ~ひき/Definitions: small animal counter/Score: 0/Bin: 0/Level: 0/Position: 517/Consecutive: 0/Difficulty: 0/
-/Kanji: 引く/Reading: ひく/Definitions: minus,to pull,to play (string instr.)/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 518/Consecutive: 0/Difficulty: 0/
-/Kanji: 弾く/Reading: ひく/Definitions: to play (piano,guitar)/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 519/Consecutive: 0/Difficulty: 0/
-/Kanji: 低い/Reading: ひくい/Definitions: short,low,humble,low (voice)/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 520/Consecutive: 0/Difficulty: 0/
-/Kanji: 飛行機/Reading: ひこうき/Definitions: aeroplane/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 521/Consecutive: 0/Difficulty: 0/
-/Kanji: 左/Reading: ひだり/Definitions: left hand side/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 522/Consecutive: 0/Difficulty: 0/
-/Kanji: 人/Reading: ひと/Definitions: man,person,human being,mankind,people,character,personality,true man,man of talent,adult,other people,messenger,visitor/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 523/Consecutive: 0/Difficulty: 0/
-/Kanji: 一つ/Reading: ひとつ/Definitions: one/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 524/Consecutive: 0/Difficulty: 0/
-/Kanji: 一月/Reading: ひとつき/Definitions: one month/Markers: P/Score: 0/Bin: 0/Level: 0/Position: 525/Consecutive: 0/Difficulty: 0/
-/Kanji: 一人/Reading: ひとり/Definitions: one person/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 526/Consecutive: 0/Difficulty: 0/
-/Kanji: 暇/Reading: ひま/Definitions: (1) free time,leisure,leave,spare time,(2) farewell/Markers: adj-na,n/Score: 0/Bin: 0/Level: 0/Position: 527/Consecutive: 0/Difficulty: 0/
-/Kanji: 百/Reading: ひゃく/Definitions: 100,hundred/Markers: num,P/Score: 0/Bin: 0/Level: 0/Position: 528/Consecutive: 0/Difficulty: 0/
-/Kanji: 病院/Reading: びょういん/Definitions: hospital/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 529/Consecutive: 0/Difficulty: 0/
-/Kanji: 病気/Reading: びょうき/Definitions: illness,disease,sickness/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 530/Consecutive: 0/Difficulty: 0/
-/Kanji: 平仮名/Reading: ひらがな/Definitions: hiragana,47 syllables,the cursive syllabary/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 531/Consecutive: 0/Difficulty: 0/
-/Kanji: 昼/Reading: ひる/Definitions: noon,daytime/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 532/Consecutive: 0/Difficulty: 0/
-/Kanji: 昼御飯/Reading: ひるごはん/Definitions: lunch,midday meal/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 533/Consecutive: 0/Difficulty: 0/
-/Kanji: 広い/Reading: ひろい/Definitions: spacious,vast,wide/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 534/Consecutive: 0/Difficulty: 0/
-/Reading: フィルム/Definitions: film (roll of)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 535/Consecutive: 0/Difficulty: 0/
-/Kanji: 封筒/Reading: ふうとう/Definitions: envelope/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 536/Consecutive: 0/Difficulty: 0/
-/Reading: プール/Definitions: swimming pool/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 537/Consecutive: 0/Difficulty: 0/
-/Reading: フォーク/Definitions: folk,fork/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 538/Consecutive: 0/Difficulty: 0/
-/Kanji: 吹く/Reading: ふく/Definitions: (1) to blow (wind,etc),(2) to emit,to spout/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 539/Consecutive: 0/Difficulty: 0/
-/Kanji: 服/Reading: ふく/Definitions: clothes/Markers: n,n-suf,P/Score: 0/Bin: 0/Level: 0/Position: 540/Consecutive: 0/Difficulty: 0/
-/Kanji: 二つ/Reading: ふたつ/Definitions: two/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 541/Consecutive: 0/Difficulty: 0/
-/Kanji: 豚肉/Reading: ぶたにく/Definitions: pork/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 542/Consecutive: 0/Difficulty: 0/
-/Kanji: 二人/Reading: ふたり/Definitions: two persons,two people,pair,couple/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 543/Consecutive: 0/Difficulty: 0/
-/Kanji: 二日/Reading: ふつか/Definitions: second day of the month,two days/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 544/Consecutive: 0/Difficulty: 0/
-/Kanji: 太い/Reading: ふとい/Definitions: fat,thick/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 545/Consecutive: 0/Difficulty: 0/
-/Kanji: 冬/Reading: ふゆ/Definitions: winter/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 546/Consecutive: 0/Difficulty: 0/
-/Kanji: 降る/Reading: ふる/Definitions: to precipitate,to fall (e.g. rain)/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 547/Consecutive: 0/Difficulty: 0/
-/Kanji: 古い/Reading: ふるい/Definitions: old (not person),aged,ancient,antiquated,stale,threadbare,outmoded,obsolete article/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 548/Consecutive: 0/Difficulty: 0/
-/Reading: ふろ/Definitions: bath/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 549/Consecutive: 0/Difficulty: 0/
-/Kanji: ~分/Reading: ~ふん/Definitions: ~minutes/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 550/Consecutive: 0/Difficulty: 0/
-/Reading: パージ/Definitions: purge/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 551/Consecutive: 0/Difficulty: 0/
-/Kanji: 下手/Reading: へた/Definitions: unskillful,poor,awkward/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 552/Consecutive: 0/Difficulty: 0/
-/Reading: ベッド/Definitions: bed/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 553/Consecutive: 0/Difficulty: 0/
-/Kanji: 部屋/Reading: へや/Definitions: room/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 554/Consecutive: 0/Difficulty: 0/
-/Kanji: 辺/Reading: へん/Definitions: area,vicinity/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 555/Consecutive: 0/Difficulty: 0/
-/Reading: ペン/Definitions: pen,P.E.N. (club)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 556/Consecutive: 0/Difficulty: 0/
-/Kanji: 勉強/Reading: べんきょう/Definitions: study,diligence,discount,reduction/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 557/Consecutive: 0/Difficulty: 0/
-/Kanji: 便利/Reading: べんり/Definitions: convenient,handy,useful/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 558/Consecutive: 0/Difficulty: 0/
-/Hint: 比較を表す/Reading: ほう/Definitions: divide/Score: 0/Bin: 0/Level: 0/Position: 559/Consecutive: 0/Difficulty: 0/
-/Kanji: 帽子/Reading: ぼうし/Definitions: hat/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 560/Consecutive: 0/Difficulty: 0/
-/Reading: ボールペン/Definitions: ball-point pen/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 561/Consecutive: 0/Difficulty: 0/
-/Kanji: 外/Reading: ほか/Definitions: other place,the rest/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 562/Consecutive: 0/Difficulty: 0/
-/Reading: ポケット/Definitions: pocket/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 563/Consecutive: 0/Difficulty: 0/
-/Kanji: 欲しい/Reading: ほしい/Definitions: wanted,wished for,in need of,desired/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 564/Consecutive: 0/Difficulty: 0/
-/Kanji: 細い/Reading: ほそい/Definitions: thin,slender,fine/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 565/Consecutive: 0/Difficulty: 0/
-/Reading: ボタン/Definitions: (pt:) (n) button (pt: bota~o)/Markers: P/Score: 0/Bin: 0/Level: 0/Position: 566/Consecutive: 0/Difficulty: 0/
-/Reading: ホテル/Definitions: hotel/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 567/Consecutive: 0/Difficulty: 0/
-/Kanji: 本/Reading: ほん/Definitions: book/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 568/Consecutive: 0/Difficulty: 0/
-/Kanji: ~本/Reading: ~ほん/Definitions: counter for long cylindrical things/Score: 0/Bin: 0/Level: 0/Position: 569/Consecutive: 0/Difficulty: 0/
-/Kanji: 本棚/Reading: ほんだな/Definitions: bookshelves/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 570/Consecutive: 0/Difficulty: 0/
-/Reading: ほんとうに/Definitions: really,truly/Markers: adv,P/Score: 0/Bin: 0/Level: 0/Position: 571/Consecutive: 0/Difficulty: 0/
-/Kanji: ~枚/Reading: ~まい/Definitions: counter for flat things/Score: 0/Bin: 0/Level: 0/Position: 572/Consecutive: 0/Difficulty: 0/
-/Kanji: 毎朝/Reading: まいあさ/Definitions: every morning/Markers: n-adv,n-t/Score: 0/Bin: 0/Level: 0/Position: 573/Consecutive: 0/Difficulty: 0/
-/Kanji: 毎月/Reading: まいげつ/Definitions: every month,each month,monthly/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 574/Consecutive: 0/Difficulty: 0/
-/Kanji: 毎月/Reading: まいつき/Definitions: every month,each month,monthly/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 575/Consecutive: 0/Difficulty: 0/
-/Kanji: 毎週/Reading: まいしゅう/Definitions: every week/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 576/Consecutive: 0/Difficulty: 0/
-/Kanji: 毎日/Reading: まいにち/Definitions: every day/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 577/Consecutive: 0/Difficulty: 0/
-/Kanji: 毎年/Reading: まいねん/Definitions: every year,yearly,annually/Markers: n-t,P/Score: 0/Bin: 0/Level: 0/Position: 578/Consecutive: 0/Difficulty: 0/
-/Kanji: 毎年/Reading: まいとし/Definitions: every year,yearly,annually/Markers: n-t,P/Score: 0/Bin: 0/Level: 0/Position: 579/Consecutive: 0/Difficulty: 0/
-/Kanji: 毎晩/Reading: まいばん/Definitions: every night/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 580/Consecutive: 0/Difficulty: 0/
-/Kanji: 前/Reading: まえ/Definitions: (1) before,in front,fore part,ago,previously,(2) head (of a line),(3) in the presence of,lady (so-and-so),(4) (five minutes) to,(5) helping,portion/Markers: n-adv,n-t,suf,P/Score: 0/Bin: 0/Level: 0/Position: 581/Consecutive: 0/Difficulty: 0/
-/Kanji: ~前/Reading: ~まえ/Definitions: before,in front/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 582/Consecutive: 0/Difficulty: 0/
-/Kanji: 曲る/Reading: まがる/Definitions: (uv) to turn,to bend/Score: 0/Bin: 0/Level: 0/Position: 583/Consecutive: 0/Difficulty: 0/
-/Reading: まずい/Definitions: unappetising,unpleasant (taste,appearance,situation),ugly,unskilful,awkward,bungling,unwise,untimely/Markers: adj,uk,P/Score: 0/Bin: 0/Level: 0/Position: 584/Consecutive: 0/Difficulty: 0/
-/Reading: また/Definitions: again,and/Markers: adv,conj,n,P/Score: 0/Bin: 0/Level: 0/Position: 585/Consecutive: 0/Difficulty: 0/
-/Reading: まだ/Definitions: yet,still,more,besides/Markers: adv,P/Score: 0/Bin: 0/Level: 0/Position: 586/Consecutive: 0/Difficulty: 0/
-/Kanji: 町/Reading: まち/Definitions: (1) town,(2) street,road/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 587/Consecutive: 0/Difficulty: 0/
-/Kanji: 待つ/Reading: まつ/Definitions: to wait/Markers: v5t,P/Score: 0/Bin: 0/Level: 0/Position: 588/Consecutive: 0/Difficulty: 0/
-/Reading: まっすぐ/Definitions: straight (ahead),direct,upright,erect,honest,frank/Markers: adj-na,adv,n/Score: 0/Bin: 0/Level: 0/Position: 589/Consecutive: 0/Difficulty: 0/
-/Reading: マッチ/Definitions: match/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 590/Consecutive: 0/Difficulty: 0/
-/Kanji: 窓/Reading: まど/Definitions: window/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 591/Consecutive: 0/Difficulty: 0/
-/Kanji: 丸い/Reading: まるい/Definitions: round,circular,spherical/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 592/Consecutive: 0/Difficulty: 0/
-/Kanji: 円い/Reading: まるい/Definitions: round,circular,spherical/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 593/Consecutive: 0/Difficulty: 0/
-/Kanji: 万/Reading: まん/Definitions: 10,000,ten thousand,myriads,all,everything/Markers: adv,num/Score: 0/Bin: 0/Level: 0/Position: 594/Consecutive: 0/Difficulty: 0/
-/Kanji: 万年筆/Reading: まんねんひつ/Definitions: fountain pen/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 595/Consecutive: 0/Difficulty: 0/
-/Kanji: 磨く/Reading: みがく/Definitions: to polish,to shine,to brush,to refine,to improve/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 596/Consecutive: 0/Difficulty: 0/
-/Kanji: 右/Reading: みぎ/Definitions: right hand side/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 597/Consecutive: 0/Difficulty: 0/
-/Kanji: 短い/Reading: みじかい/Definitions: short/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 598/Consecutive: 0/Difficulty: 0/
-/Kanji: 水/Reading: みず/Definitions: water/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 599/Consecutive: 0/Difficulty: 0/
-/Kanji: 店/Reading: みせ/Definitions: store,shop,establishment/Markers: n,n-suf,P/Score: 0/Bin: 0/Level: 0/Position: 600/Consecutive: 0/Difficulty: 0/
-/Kanji: 見せる/Reading: みせる/Definitions: to show,to display/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 601/Consecutive: 0/Difficulty: 0/
-/Kanji: 道/Reading: みち/Definitions: road,street,way,method/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 602/Consecutive: 0/Difficulty: 0/
-/Kanji: 三日/Reading: みっか/Definitions: three days,the third day (of the month)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 603/Consecutive: 0/Difficulty: 0/
-/Kanji: 三つ/Reading: みっつ/Definitions: three/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 604/Consecutive: 0/Difficulty: 0/
-/Kanji: 皆さん/Reading: みなさん/Definitions: everyone/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 605/Consecutive: 0/Difficulty: 0/
-/Kanji: 南/Reading: みなみ/Definitions: South,proceeding south/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 606/Consecutive: 0/Difficulty: 0/
-/Kanji: 耳/Reading: みみ/Definitions: ear/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 607/Consecutive: 0/Difficulty: 0/
-/Kanji: 見る/Reading: みる/Definitions: to see,to watch/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 608/Consecutive: 0/Difficulty: 0/
-/Reading: みんな/Definitions: all,everyone,everybody/Markers: adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 609/Consecutive: 0/Difficulty: 0/
-/Kanji: 六日/Reading: むいか/Definitions: six days,sixth (day of month)/Markers: P/Score: 0/Bin: 0/Level: 0/Position: 610/Consecutive: 0/Difficulty: 0/
-/Kanji: 向こう/Reading: むこう/Definitions: beyond,over there,opposite direction,the other party/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 611/Consecutive: 0/Difficulty: 0/
-/Kanji: 難しい/Reading: むずかしい/Definitions: difficult/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 612/Consecutive: 0/Difficulty: 0/
-/Kanji: 六つ/Reading: むっつ/Definitions: six/Markers: num/Score: 0/Bin: 0/Level: 0/Position: 613/Consecutive: 0/Difficulty: 0/
-/Kanji: 目/Reading: め/Definitions: eye,eyeball/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 614/Consecutive: 0/Difficulty: 0/
-/Reading: メートル/Definitions: metre (meter) (old form)/Score: 0/Bin: 0/Level: 0/Position: 615/Consecutive: 0/Difficulty: 0/
-/Kanji: 眼鏡/Reading: めがね/Definitions: spectacles,glasses/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 616/Consecutive: 0/Difficulty: 0/
-/Hint: もう、帰りました/Reading: もう/Definitions: already,soon,more,again/Markers: adv,int/Score: 0/Bin: 0/Level: 0/Position: 617/Consecutive: 0/Difficulty: 0/
-/Kanji: 木曜日/Reading: もくようび/Definitions: Thursday/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 618/Consecutive: 0/Difficulty: 0/
-/Reading: もしもし/Definitions: hello (on phone)/Markers: conj,int,P/Score: 0/Bin: 0/Level: 0/Position: 619/Consecutive: 0/Difficulty: 0/
-/Reading: もちろん/Definitions: of course,certainly,naturally/Markers: adv,uk,P/Score: 0/Bin: 0/Level: 0/Position: 620/Consecutive: 0/Difficulty: 0/
-/Kanji: 持つ/Reading: もつ/Definitions: (1) to hold,to carry,(2) to possess/Markers: v5t,P/Score: 0/Bin: 0/Level: 0/Position: 621/Consecutive: 0/Difficulty: 0/
-/Reading: もっと/Definitions: more,longer,farther/Markers: adv,P/Score: 0/Bin: 0/Level: 0/Position: 622/Consecutive: 0/Difficulty: 0/
-/Kanji: 物/Reading: もの/Definitions: thing,object/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 623/Consecutive: 0/Difficulty: 0/
-/Kanji: 門/Reading: もん/Definitions: gate/Markers: n,n-suf,P/Score: 0/Bin: 0/Level: 0/Position: 624/Consecutive: 0/Difficulty: 0/
-/Kanji: 問題/Reading: もんだい/Definitions: problem,question/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 625/Consecutive: 0/Difficulty: 0/
-/Kanji: 八百屋/Reading: やおや/Definitions: greengrocer/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 626/Consecutive: 0/Difficulty: 0/
-/Kanji: 野菜/Reading: やさい/Definitions: vegetable/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 627/Consecutive: 0/Difficulty: 0/
-/Kanji: 易しい/Reading: やさしい/Definitions: easy,plain,simple/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 628/Consecutive: 0/Difficulty: 0/
-/Kanji: 安い/Reading: やすい/Definitions: cheap,inexpensive,peaceful,quiet,gossipy,thoughtless/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 629/Consecutive: 0/Difficulty: 0/
-/Kanji: 休み/Reading: やすみ/Definitions: (1) rest,recess,respite,(2) vacation,holiday,absence,suspension,(3) moulting/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 630/Consecutive: 0/Difficulty: 0/
-/Kanji: 休む/Reading: やすむ/Definitions: to rest,to have a break,to take a day off,to be finished,to be absent,to retire,to sleep/Markers: v5m,vi,P/Score: 0/Bin: 0/Level: 0/Position: 631/Consecutive: 0/Difficulty: 0/
-/Kanji: 八つ/Reading: やっつ/Definitions: eight/Markers: num/Score: 0/Bin: 0/Level: 0/Position: 632/Consecutive: 0/Difficulty: 0/
-/Kanji: 山/Reading: やま/Definitions: (1) mountain,(2) pile,heap,(3) climax,critical point/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 633/Consecutive: 0/Difficulty: 0/
-/Hint: 仕事をやる/Reading: やる/Definitions: to do,to have sexual intercourse,to kill,to give (to inferiors,animals,etc.),to dispatch (a letter),to send,to study,to perform,to play (sports,game),to have (eat,drink,smoke),to row (a boat),to run or operate (a restaurant)/Markers: v5r,col,uk/Score: 0/Bin: 0/Level: 0/Position: 634/Consecutive: 0/Difficulty: 0/
-/Kanji: 夕方/Reading: ゆうがた/Definitions: evening/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 635/Consecutive: 0/Difficulty: 0/
-/Kanji: 郵便局/Reading: ゆうびんきょく/Definitions: post office/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 636/Consecutive: 0/Difficulty: 0/
-/Hint: ’昨晩’の意/Reading: ゆうべ/Definitions: evening/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 637/Consecutive: 0/Difficulty: 0/
-/Kanji: 有名/Reading: ゆうめい/Definitions: fame/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 638/Consecutive: 0/Difficulty: 0/
-/Kanji: 雪/Reading: ゆき/Definitions: snow/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 639/Consecutive: 0/Difficulty: 0/
-/Reading: ゆっくり/Definitions: slowly,at ease/Markers: adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 640/Consecutive: 0/Difficulty: 0/
-/Kanji: 八日/Reading: ようか/Definitions: eight days,the eighth (day of the month)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 641/Consecutive: 0/Difficulty: 0/
-/Kanji: 洋服/Reading: ようふく/Definitions: Western-style clothes/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 642/Consecutive: 0/Difficulty: 0/
-/Hint: よくできました/Reading: よく/Definitions: nicely,properly,well,skilled in/Markers: adv,n,vs/Score: 0/Bin: 0/Level: 0/Position: 643/Consecutive: 0/Difficulty: 0/
-/Kanji: 横/Reading: よこ/Definitions: beside,side,width/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 644/Consecutive: 0/Difficulty: 0/
-/Kanji: 四日/Reading: よっか/Definitions: (1) 4th day of month,(2) four days/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 645/Consecutive: 0/Difficulty: 0/
-/Kanji: 四つ/Reading: よっつ/Definitions: four/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 646/Consecutive: 0/Difficulty: 0/
-/Kanji: 呼ぶ/Reading: よぶ/Definitions: to call out,to invite/Markers: v5b,P/Score: 0/Bin: 0/Level: 0/Position: 647/Consecutive: 0/Difficulty: 0/
-/Kanji: 読む/Reading: よむ/Definitions: to read/Markers: v5m,P/Score: 0/Bin: 0/Level: 0/Position: 648/Consecutive: 0/Difficulty: 0/
-/Kanji: 夜/Reading: よる/Definitions: evening,night/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 649/Consecutive: 0/Difficulty: 0/
-/Kanji: 来月/Reading: らいげつ/Definitions: next month/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 650/Consecutive: 0/Difficulty: 0/
-/Kanji: 来週/Reading: らいしゅう/Definitions: next week/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 651/Consecutive: 0/Difficulty: 0/
-/Kanji: 来年/Reading: らいねん/Definitions: next year/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 652/Consecutive: 0/Difficulty: 0/
-/Reading: ラジオ/Definitions: radio/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 653/Consecutive: 0/Difficulty: 0/
-/Reading: りっぱ/Definitions: splendid,fine,handsome,elegant,imposing,prominent,legal,legitimate/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 654/Consecutive: 0/Difficulty: 0/
-/Kanji: 留学生/Reading: りゅうがくせい/Definitions: overseas student/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 655/Consecutive: 0/Difficulty: 0/
-/Kanji: 両親/Reading: りょうしん/Definitions: parents,both parents/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 656/Consecutive: 0/Difficulty: 0/
-/Kanji: 料理/Reading: りょうり/Definitions: cooking,cookery,cuisine/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 657/Consecutive: 0/Difficulty: 0/
-/Kanji: 旅行/Reading: りょこう/Definitions: travel,trip/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 658/Consecutive: 0/Difficulty: 0/
-/Kanji: 零/Reading: れい/Definitions: zero,nought/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 659/Consecutive: 0/Difficulty: 0/
-/Kanji: 冷蔵庫/Reading: れいぞうこ/Definitions: refrigerator/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 660/Consecutive: 0/Difficulty: 0/
-/Reading: レコード/Definitions: record/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 661/Consecutive: 0/Difficulty: 0/
-/Reading: レストラン/Definitions: restaurant/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 662/Consecutive: 0/Difficulty: 0/
-/Kanji: 練習/Reading: れんしゅう/Definitions: practice/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 663/Consecutive: 0/Difficulty: 0/
-/Kanji: 六/Reading: ろく/Definitions: six/Markers: num,P/Score: 0/Bin: 0/Level: 0/Position: 664/Consecutive: 0/Difficulty: 0/
-/Reading: ワイシャツ/Definitions: shirt (lit: white shirt),business shirt/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 665/Consecutive: 0/Difficulty: 0/
-/Kanji: 若い/Reading: わかい/Definitions: young/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 666/Consecutive: 0/Difficulty: 0/
-/Kanji: 分る/Reading: わかる/Definitions: to be understood/Markers: io,v5r/Score: 0/Bin: 0/Level: 0/Position: 667/Consecutive: 0/Difficulty: 0/
-/Kanji: 忘れる/Reading: わすれる/Definitions: to forget,to leave carelessly,to be forgetful of,to forget about,to forget (an article)/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 668/Consecutive: 0/Difficulty: 0/
-/Kanji: 私/Reading: わたし/Definitions: I,myself,private affairs/Markers: adj-no,n,P/Score: 0/Bin: 0/Level: 0/Position: 669/Consecutive: 0/Difficulty: 0/
-/Kanji: 渡す/Reading: わたす/Definitions: to pass over,to hand over/Markers: v5s,P/Score: 0/Bin: 0/Level: 0/Position: 670/Consecutive: 0/Difficulty: 0/
-/Kanji: 渡る/Reading: わたる/Definitions: to cross over,to go across/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 671/Consecutive: 0/Difficulty: 0/
-/Kanji: 悪い/Reading: わるい/Definitions: bad,inferior/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 672/Consecutive: 0/Difficulty: 0/
+/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 2/Position: 1/Consecutive: 0/Difficulty: 0/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 2/Consecutive: 0/Difficulty: 0/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 3/Consecutive: 0/Difficulty: 0/
+/Kanji: 秋/Reading: あき/Definitions: autumn,fall/Markers: n-adv,P/Score: 0/Bin: 0/Level: 2/Position: 5/Consecutive: 0/Difficulty: 0/
+/Kanji: 朝/Reading: あさ/Definitions: morning/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 9/Consecutive: 0/Difficulty: 0/
+/Kanji: 朝御飯/Reading: あさごはん/Definitions: breakfast/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 10/Consecutive: 0/Difficulty: 0/
+/Kanji: 足/Reading: あし/Definitions: foot,pace,gait,leg/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 12/Consecutive: 0/Difficulty: 0/
+/Kanji: 暖かい/Reading: あたたかい/Definitions: warm,mild,genial/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 16/Consecutive: 0/Difficulty: 0/
+/Kanji: 新しい/Reading: あたらしい/Definitions: new/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 18/Consecutive: 0/Difficulty: 0/
+/Kanji: 暑い/Reading: あつい/Definitions: hot,warm/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 20/Consecutive: 0/Difficulty: 0/
+/Kanji: 熱い/Reading: あつい/Definitions: hot (thing)/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 21/Consecutive: 0/Difficulty: 0/
+/Kanji: 厚い/Reading: あつい/Definitions: cordial,kind,warm(hearted),thick,deep/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 22/Consecutive: 0/Difficulty: 0/
+/Kanji: 兄/Reading: あに/Definitions: older brother/Markers: n,hum,P/Score: 0/Bin: 0/Level: 2/Position: 25/Consecutive: 0/Difficulty: 0/
+/Kanji: 姉/Reading: あね/Definitions: older sister/Markers: n,hum,P/Score: 0/Bin: 0/Level: 2/Position: 26/Consecutive: 0/Difficulty: 0/
+/Kanji: 危ない/Reading: あぶない/Definitions: dangerous,critical,grave,uncertain,unreliable,limping,narrow,close,watch out!/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 31/Consecutive: 0/Difficulty: 0/
+/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 33/Consecutive: 0/Difficulty: 0/
+/Kanji: 洗う/Reading: あらう/Definitions: to wash/Markers: v5u,P/Score: 0/Bin: 0/Level: 2/Position: 34/Consecutive: 0/Difficulty: 0/
+/Kanji: 歩く/Reading: あるく/Definitions: to walk/Markers: v5k,P/Score: 0/Bin: 0/Level: 2/Position: 36/Consecutive: 0/Difficulty: 0/
+/Kanji: 言う/Reading: いう/Definitions: to say/Markers: v5u,P/Score: 0/Bin: 0/Level: 2/Position: 41/Consecutive: 0/Difficulty: 0/
+/Kanji: 行く/Reading: いく/Definitions: to go/Markers: v5k-s,P/Score: 0/Bin: 0/Level: 2/Position: 43/Consecutive: 0/Difficulty: 0/
+/Kanji: 行く/Reading: ゆく/Definitions: to go/Markers: v5k-s,P/Score: 0/Bin: 0/Level: 2/Position: 44/Consecutive: 0/Difficulty: 0/
+/Kanji: 池/Reading: いけ/Definitions: pond/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 47/Consecutive: 0/Difficulty: 0/
+/Kanji: 医者/Reading: いしゃ/Definitions: doctor (medical)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 48/Consecutive: 0/Difficulty: 0/
+/Kanji: 痛い/Reading: いたい/Definitions: painful/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 51/Consecutive: 0/Difficulty: 0/
+/Kanji: 一/Reading: いち/Definitions: one/Markers: num,P/Score: 0/Bin: 0/Level: 2/Position: 52/Consecutive: 0/Difficulty: 0/
+/Kanji: 五日/Reading: いつか/Definitions: five days,the fifth day (of the month)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 56/Consecutive: 0/Difficulty: 0/
+/Kanji: 一緒/Reading: いっしょ/Definitions: together,meeting,company/Markers: adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 57/Consecutive: 0/Difficulty: 0/
+/Kanji: 五つ/Reading: いつつ/Definitions: five/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 58/Consecutive: 0/Difficulty: 0/
+/Kanji: 意味/Reading: いみ/Definitions: meaning,significance/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 61/Consecutive: 0/Difficulty: 0/
+/Kanji: 妹/Reading: いもうと/Definitions: younger sister/Markers: n,hum,P/Score: 0/Bin: 0/Level: 2/Position: 62/Consecutive: 0/Difficulty: 0/
+/Kanji: 嫌/Reading: いや/Definitions: disagreeable,detestable,unpleasant,reluctant/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 63/Consecutive: 0/Difficulty: 0/
+/Kanji: 要る/Reading: いる/Definitions: to need/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 66/Consecutive: 0/Difficulty: 0/
+/Kanji: 薄い/Reading: うすい/Definitions: thin,weak,watery,diluted/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 72/Consecutive: 0/Difficulty: 0/
+/Kanji: 歌/Reading: うた/Definitions: song,poetry/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 73/Consecutive: 0/Difficulty: 0/
+/Kanji: 歌う/Reading: うたう/Definitions: to sing/Markers: v5u,P/Score: 0/Bin: 0/Level: 2/Position: 74/Consecutive: 0/Difficulty: 0/
+/Kanji: 生まれる/Reading: うまれる/Definitions: to be born/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 76/Consecutive: 0/Difficulty: 0/
+/Kanji: 海/Reading: うみ/Definitions: sea,beach/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 77/Consecutive: 0/Difficulty: 0/
+/Kanji: 売る/Reading: うる/Definitions: to sell/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 78/Consecutive: 0/Difficulty: 0/
+/Kanji: 上着/Reading: うわぎ/Definitions: coat,tunic,jacket,outer garment/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 79/Consecutive: 0/Difficulty: 0/
+/Kanji: 映画/Reading: えいが/Definitions: movie,film/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 81/Consecutive: 0/Difficulty: 0/
+/Kanji: 映画館/Reading: えいがかん/Definitions: movie theatre (theater),cinema/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 82/Consecutive: 0/Difficulty: 0/
+/Kanji: 英語/Reading: えいご/Definitions: the English language/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 83/Consecutive: 0/Difficulty: 0/
+/Reading: ええ/Definitions: yes/Markers: conj,int,n,P/Score: 0/Bin: 0/Level: 2/Position: 84/Consecutive: 0/Difficulty: 0/
+/Kanji: 駅/Reading: えき/Definitions: station/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 85/Consecutive: 0/Difficulty: 0/
+/Kanji: 鉛筆/Reading: えんぴつ/Definitions: pencil/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 88/Consecutive: 0/Difficulty: 0/
+/Kanji: 大きい/Reading: おおきい/Definitions: big,large,great/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 90/Consecutive: 0/Difficulty: 0/
+/Kanji: お母さん/Reading: おかあさん/Definitions: mother/Markers: n,hon,P/Score: 0/Bin: 0/Level: 2/Position: 92/Consecutive: 0/Difficulty: 0/
+/Kanji: お菓子/Reading: おかし/Definitions: confections,sweets,candy/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 93/Consecutive: 0/Difficulty: 0/
+/Kanji: お金/Reading: おかね/Definitions: money/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 94/Consecutive: 0/Difficulty: 0/
+/Kanji: 奥さん/Reading: おくさん/Definitions: wife,your wife,his wife,married lady,madam/Markers: n,hon,P/Score: 0/Bin: 0/Level: 2/Position: 97/Consecutive: 0/Difficulty: 0/
+/Kanji: お皿/Reading: おさら/Definitions: plate,dish/Markers: n/Score: 0/Bin: 0/Level: 2/Position: 99/Consecutive: 0/Difficulty: 0/
+/Kanji: 叔父/Reading: おじ/Definitions: uncle (younger than one's parent)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 101/Consecutive: 0/Difficulty: 0/
+/Kanji: 教える/Reading: おしえる/Definitions: to teach,to inform,to instruct/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 103/Consecutive: 0/Difficulty: 0/
+/Kanji: 押す/Reading: おす/Definitions: to push,to press,to stamp (i.e. a passport)/Markers: v5s,vt,P/Score: 0/Bin: 0/Level: 2/Position: 104/Consecutive: 0/Difficulty: 0/
+/Kanji: 遅い/Reading: おそい/Definitions: late,slow/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 105/Consecutive: 0/Difficulty: 0/
+/Kanji: お茶/Reading: おちゃ/Definitions: tea (green)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 106/Consecutive: 0/Difficulty: 0/
+/Kanji: お父さん/Reading: おとうさん/Definitions: father/Markers: n,hon,P/Score: 0/Bin: 0/Level: 2/Position: 108/Consecutive: 0/Difficulty: 0/
+/Kanji: 男/Reading: おとこ/Definitions: man/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 110/Consecutive: 0/Difficulty: 0/
+/Kanji: 男の子/Reading: おとこのこ/Definitions: boy/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 111/Consecutive: 0/Difficulty: 0/
+/Kanji: 同じ/Reading: おなじ/Definitions: same,identical,equal,uniform,equivalent,similar,common (origin),changeless/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 116/Consecutive: 0/Difficulty: 0/
+/Kanji: 叔母/Reading: おば/Definitions: aunt (younger than one's parent)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 120/Consecutive: 0/Difficulty: 0/
+/Kanji: 泳ぐ/Reading: およぐ/Definitions: to swim/Markers: v5g,P/Score: 0/Bin: 0/Level: 2/Position: 126/Consecutive: 0/Difficulty: 0/
+/Kanji: 終る/Reading: おわる/Definitions: to finish,to close/Markers: io,v5r/Score: 0/Bin: 0/Level: 2/Position: 128/Consecutive: 0/Difficulty: 0/
+/Kanji: 音楽/Reading: おんがく/Definitions: music,musical movement/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 129/Consecutive: 0/Difficulty: 0/
+/Kanji: 女の子/Reading: おんなのこ/Definitions: girl/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 131/Consecutive: 0/Difficulty: 0/
+/Kanji: 外国/Reading: がいこく/Definitions: foreign country/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 134/Consecutive: 0/Difficulty: 0/
+/Kanji: 外国人/Reading: がいこくじん/Definitions: foreigner/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 135/Consecutive: 0/Difficulty: 0/
+/Kanji: 会社/Reading: かいしゃ/Definitions: company,corporation/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 136/Consecutive: 0/Difficulty: 0/
+/Kanji: 階段/Reading: かいだん/Definitions: stairs/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 137/Consecutive: 0/Difficulty: 0/
+/Kanji: 買い物/Reading: かいもの/Definitions: shopping/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 138/Consecutive: 0/Difficulty: 0/
+/Kanji: 買う/Reading: かう/Definitions: to buy/Markers: v5u,P/Score: 0/Bin: 0/Level: 2/Position: 139/Consecutive: 0/Difficulty: 0/
+/Kanji: 返す/Reading: かえす/Definitions: to return something/Markers: v5s,vt,P/Score: 0/Bin: 0/Level: 2/Position: 140/Consecutive: 0/Difficulty: 0/
+/Kanji: 帰る/Reading: かえる/Definitions: to go back,to go home,to come home,to return/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 141/Consecutive: 0/Difficulty: 0/
+/Kanji: 顔/Reading: かお/Definitions: face (person)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 142/Consecutive: 0/Difficulty: 0/
+/Kanji: 書く/Reading: かく/Definitions: to write/Markers: v5k,P/Score: 0/Bin: 0/Level: 2/Position: 145/Consecutive: 0/Difficulty: 0/
+/Kanji: 学生/Reading: がくせい/Definitions: student/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 146/Consecutive: 0/Difficulty: 0/
+/Kanji: ~か月/Reading: ~かげつ/Definitions: (number of) months/Markers: suf/Score: 0/Bin: 0/Level: 2/Position: 147/Consecutive: 0/Difficulty: 0/
+/Kanji: 傘/Reading: かさ/Definitions: umbrella,parasol/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 150/Consecutive: 0/Difficulty: 0/
+/Kanji: 貸す/Reading: かす/Definitions: to lend/Markers: v5s,P/Score: 0/Bin: 0/Level: 2/Position: 151/Consecutive: 0/Difficulty: 0/
+/Kanji: 家族/Reading: かぞく/Definitions: family,members of a family/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 153/Consecutive: 0/Difficulty: 0/
+/Kanji: 片仮名/Reading: かたかな/Definitions: katakana/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 155/Consecutive: 0/Difficulty: 0/
+/Kanji: 学校/Reading: がっこう/Definitions: school/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 157/Consecutive: 0/Difficulty: 0/
+/Kanji: 家内/Reading: かない/Definitions: wife/Markers: n,hum,P/Score: 0/Bin: 0/Level: 2/Position: 159/Consecutive: 0/Difficulty: 0/
+/Kanji: 紙/Reading: かみ/Definitions: paper/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 163/Consecutive: 0/Difficulty: 0/
+/Reading: カメラ/Definitions: camera/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 164/Consecutive: 0/Difficulty: 0/
+/Kanji: 火曜日/Reading: かようび/Definitions: Tuesday/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 165/Consecutive: 0/Difficulty: 0/
+/Kanji: 借りる/Reading: かりる/Definitions: to borrow,to have a loan,to hire,to rent,to buy on credit/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 168/Consecutive: 0/Difficulty: 0/
+/Kanji: 軽い/Reading: かるい/Definitions: light,non-serious,minor/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 169/Consecutive: 0/Difficulty: 0/
+/Reading: カレンダー/Definitions: calendar/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 170/Consecutive: 0/Difficulty: 0/
+/Kanji: 河/Reading: かわ/Definitions: river,stream/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 172/Consecutive: 0/Difficulty: 0/
+/Kanji: 漢字/Reading: かんじ/Definitions: Chinese characters,kanji/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 175/Consecutive: 0/Difficulty: 0/
+/Kanji: 木/Reading: き/Definitions: tree,wood,timber/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 176/Consecutive: 0/Difficulty: 0/
+/Kanji: 黄色い/Reading: きいろい/Definitions: yellow/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 177/Consecutive: 0/Difficulty: 0/
+/Kanji: 消える/Reading: きえる/Definitions: to go out,to vanish,to disappear/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 178/Consecutive: 0/Difficulty: 0/
+/Reading: ギター/Definitions: guitar/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 181/Consecutive: 0/Difficulty: 0/
+/Kanji: 汚い/Reading: きたない/Definitions: dirty,unclean,filthy/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 182/Consecutive: 0/Difficulty: 0/
+/Kanji: 切符/Reading: きっぷ/Definitions: ticket/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 185/Consecutive: 0/Difficulty: 0/
+/Kanji: 昨日/Reading: きのう/Definitions: yesterday/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 186/Consecutive: 0/Difficulty: 0/
+/Kanji: 九/Reading: きゅう/Definitions: nine/Markers: num,P/Score: 0/Bin: 0/Level: 2/Position: 187/Consecutive: 0/Difficulty: 0/
+/Kanji: 牛肉/Reading: ぎゅうにく/Definitions: beef/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 188/Consecutive: 0/Difficulty: 0/
+/Kanji: 今日/Reading: きょう/Definitions: today,this day/Markers: n-t,P/Score: 0/Bin: 0/Level: 2/Position: 189/Consecutive: 0/Difficulty: 0/
+/Kanji: 教室/Reading: きょうしつ/Definitions: classroom/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 190/Consecutive: 0/Difficulty: 0/
+/Kanji: 兄弟/Reading: きょうだい/Definitions: siblings/Markers: n,hum,P/Score: 0/Bin: 0/Level: 2/Position: 191/Consecutive: 0/Difficulty: 0/
+/Kanji: 着る/Reading: きる/Definitions: to wear,to put on (from shoulders down)/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 195/Consecutive: 0/Difficulty: 0/
+/Kanji: 銀行/Reading: ぎんこう/Definitions: bank/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 198/Consecutive: 0/Difficulty: 0/
+/Kanji: 金曜日/Reading: きんようび/Definitions: Friday/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 199/Consecutive: 0/Difficulty: 0/
+/Kanji: 働く/Reading: はたらく/Definitions: to work,to labor,to labour,to do,to act,to commit,to practise,to practice,to work on,to come into play,to be conjugated,to reduce the price/Markers: v5k,P/Score: 0/Bin: 0/Level: 2/Position: 200/Consecutive: 0/Difficulty: 0/
+/Kanji: 果物/Reading: くだもの/Definitions: fruit/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 202/Consecutive: 0/Difficulty: 0/
+/Kanji: 真っ直ぐ/Reading: まっすぐ/Definitions: straight (ahead),direct,upright,erect,honest,frank/Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 203/Consecutive: 0/Difficulty: 0/
+/Kanji: 口/Reading: くち/Definitions: mouth,orifice,opening/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 203/Consecutive: 0/Difficulty: 0/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: io,adj/Score: 0/Bin: 0/Level: 2/Position: 204/Consecutive: 0/Difficulty: 0/
+/Kanji: 靴/Reading: くつ/Definitions: shoes,footwear/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 204/Consecutive: 0/Difficulty: 0/
+/Kanji: 靴下/Reading: くつした/Definitions: socks/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 205/Consecutive: 0/Difficulty: 0/
+/Kanji: 国/Reading: くに/Definitions: country/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 206/Consecutive: 0/Difficulty: 0/
+/Kanji: 曇る/Reading: くもる/Definitions: to become cloudy,to become dim/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 207/Consecutive: 0/Difficulty: 0/
+/Kanji: 暗い/Reading: くらい/Definitions: dark,gloomy/Markers: adj,uk,P/Score: 0/Bin: 0/Level: 2/Position: 208/Consecutive: 0/Difficulty: 0/
+/Reading: クラス/Definitions: class/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 211/Consecutive: 0/Difficulty: 0/
+/Reading: グラム/Definitions: gram,gramme/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 212/Consecutive: 0/Difficulty: 0/
+/Kanji: 大抵/Reading: たいてい/Definitions: usually,generally/Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 214/Consecutive: 0/Difficulty: 0/
+/Kanji: 車/Reading: くるま/Definitions: car,vehicle,wheel/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 214/Consecutive: 0/Difficulty: 0/
+/Kanji: 点ける/Hint: 電灯をつける/Reading: つける/Definitions: to turn on,to switch on,to light up/Markers: v1,uk,P/Score: 0/Bin: 0/Level: 2/Position: 215/Consecutive: 0/Difficulty: 0/
+/Kanji: 大勢/Reading: おおぜい/Definitions: many,crowd,great number of people/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 218/Consecutive: 0/Difficulty: 0/
+/Kanji: 月曜日/Reading: げつようび/Definitions: Monday/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 220/Consecutive: 0/Difficulty: 0/
+/Kanji: 玄関/Reading: げんかん/Definitions: entranceway,entry hall/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 221/Consecutive: 0/Difficulty: 0/
+/Kanji: 五/Reading: ご/Definitions: five/Markers: num,P/Score: 0/Bin: 0/Level: 2/Position: 224/Consecutive: 0/Difficulty: 0/
+/Kanji: 交番/Reading: こうばん/Definitions: police box/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 227/Consecutive: 0/Difficulty: 0/
+/Kanji: 声/Reading: こえ/Definitions: voice/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 228/Consecutive: 0/Difficulty: 0/
+/Reading: コート/Definitions: coat,tennis court/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 229/Consecutive: 0/Difficulty: 0/
+/Kanji: 午後/Reading: ごご/Definitions: afternoon,p.m.,pm/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 231/Consecutive: 0/Difficulty: 0/
+/Kanji: 九つ/Reading: ここのつ/Definitions: nine/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 233/Consecutive: 0/Difficulty: 0/
+/Kanji: 御主人/Reading: ごしゅじん/Definitions: your husband,her husband/Markers: n,hon/Score: 0/Bin: 0/Level: 2/Position: 234/Consecutive: 0/Difficulty: 0/
+/Kanji: 答える/Reading: こたえる/Definitions: to answer,to reply/Markers: v1/Score: 0/Bin: 0/Level: 2/Position: 236/Consecutive: 0/Difficulty: 0/
+/Kanji: 言葉/Reading: ことば/Definitions: word(s),language,speech/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 240/Consecutive: 0/Difficulty: 0/
+/Kanji: 子供/Reading: こども/Definitions: child,children/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 241/Consecutive: 0/Difficulty: 0/
+/Kanji: 御飯/Reading: ごはん/Definitions: rice (cooked),meal/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 243/Consecutive: 0/Difficulty: 0/
+/Kanji: 困る/Reading: こまる/Definitions: to be worried,to be bothered/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 244/Consecutive: 0/Difficulty: 0/
+/Kanji: 今月/Reading: こんげつ/Definitions: this month/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 248/Consecutive: 0/Difficulty: 0/
+/Kanji: 今週/Reading: こんしゅう/Definitions: this week/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 249/Consecutive: 0/Difficulty: 0/
+/Reading: こんな/Definitions: such,like this/Markers: adj-na,adj-pn,adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 250/Consecutive: 0/Difficulty: 0/
+/Kanji: 今晩/Reading: こんばん/Definitions: tonight,this evening/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 251/Consecutive: 0/Difficulty: 0/
+/Kanji: 魚/Reading: さかな/Definitions: fish/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 254/Consecutive: 0/Difficulty: 0/
+/Kanji: 咲く/Reading: さく/Definitions: to bloom/Markers: v5k,P/Score: 0/Bin: 0/Level: 2/Position: 256/Consecutive: 0/Difficulty: 0/
+/Kanji: 作文/Reading: さくぶん/Definitions: composition,writing/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 257/Consecutive: 0/Difficulty: 0/
+/Kanji: 砂糖/Reading: さとう/Definitions: sugar/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 261/Consecutive: 0/Difficulty: 0/
+/Kanji: 再来年/Reading: さらいねん/Definitions: year after next/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 263/Consecutive: 0/Difficulty: 0/
+/Kanji: 三/Reading: さん/Definitions: three/Markers: num,P/Score: 0/Bin: 0/Level: 2/Position: 265/Consecutive: 0/Difficulty: 0/
+/Kanji: 散歩/Reading: さんぽ/Definitions: walk,stroll/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 266/Consecutive: 0/Difficulty: 0/
+/Kanji: 四/Reading: し/Definitions: four/Markers: num,P/Score: 0/Bin: 0/Level: 2/Position: 267/Consecutive: 0/Difficulty: 0/
+/Kanji: 塩/Reading: しお/Definitions: salt/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 269/Consecutive: 0/Difficulty: 0/
+/Kanji: 時間/Reading: じかん/Definitions: time/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 271/Consecutive: 0/Difficulty: 0/
+/Kanji: 外/Reading: そと/Definitions: [1] outside,exterior,[2] open air,[3] other place/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 272/Consecutive: 0/Difficulty: 0/
+/Kanji: 彼の/Hint: 感動詞/Reading: あの/Definitions: that over there/Markers: adj-pn,uk,P/Score: 0/Bin: 0/Level: 2/Position: 273/Consecutive: 0/Difficulty: 0/
+/Kanji: 辞書/Reading: じしょ/Definitions: dictionary,lexicon/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 274/Consecutive: 0/Difficulty: 0/
+/Kanji: 静か/Reading: しずか/Definitions: quiet,peaceful/Markers: adj-na,P/Score: 0/Bin: 0/Level: 2/Position: 275/Consecutive: 0/Difficulty: 0/
+/Kanji: 上げる/Reading: あげる/Definitions: to give,to raise,to elevate,to fly (kites),to praise,to increase,to advance,to promote,to vomit,to usher in,to admit,to send (to school),to offer,to present,to leave with,to finish,to arrange (expenses),to observe,to perform,to quote,to mention,to bear (a child),to improve (talents),to do up (the hair),to arrest,to engage,to fry,to stop/Markers: v1,rains,P/Score: 0/Bin: 0/Level: 2/Position: 275/Consecutive: 0/Difficulty: 0/
+/Kanji: 下/Reading: した/Definitions: under,below,beneath/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 276/Consecutive: 0/Difficulty: 0/
+/Kanji: 七/Reading: しち/Definitions: seven/Markers: num,P/Score: 0/Bin: 0/Level: 2/Position: 277/Consecutive: 0/Difficulty: 0/
+/Kanji: 自転車/Reading: じてんしゃ/Definitions: bicycle/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 279/Consecutive: 0/Difficulty: 0/
+/Kanji: 自動車/Reading: じどうしゃ/Definitions: automobile/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 280/Consecutive: 0/Difficulty: 0/
+/Kanji: 死ぬ/Reading: しぬ/Definitions: to die/Markers: v5n,P/Score: 0/Bin: 0/Level: 2/Position: 281/Consecutive: 0/Difficulty: 0/
+/Kanji: 字引/Reading: じびき/Definitions: dictionary/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 282/Consecutive: 0/Difficulty: 0/
+/Kanji: 自分/Reading: じぶん/Definitions: myself,oneself/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 283/Consecutive: 0/Difficulty: 0/
+/Kanji: 閉まる/Reading: しまる/Definitions: to close,to be closed/Markers: v5r,vi,P/Score: 0/Bin: 0/Level: 2/Position: 284/Consecutive: 0/Difficulty: 0/
+/Kanji: 閉める/Reading: しめる/Definitions: to close,to shut/Markers: v1,vt,P/Score: 0/Bin: 0/Level: 2/Position: 285/Consecutive: 0/Difficulty: 0/
+/Kanji: 締める/Reading: しめる/Definitions: to tie,to fasten/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 286/Consecutive: 0/Difficulty: 0/
+/Kanji: 前/Reading: まえ/Definitions: [1] before,in front,fore part,ago,previously,[2] head (of a line),[3] in the presence of,lady (so-and-so),[4] (five minutes) to,[5] helping,portion/Markers: n-adv,n-t,suf,P/Score: 0/Bin: 0/Level: 2/Position: 287/Consecutive: 0/Difficulty: 0/
+/Hint: 感動詞/Reading: じゃあ/Definitions: well,well then/Markers: conj,int,P/Score: 0/Bin: 0/Level: 2/Position: 287/Consecutive: 0/Difficulty: 0/
+/Kanji: 次/Reading: つぎ/Definitions: [1] next,following,subsequent,[2] stage,station/Markers: n,adj-no,P/Score: 0/Bin: 0/Level: 2/Position: 288/Consecutive: 0/Difficulty: 0/
+/Kanji: 写真/Reading: しゃしん/Definitions: photograph/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 288/Consecutive: 0/Difficulty: 0/
+/Reading: シャツ/Definitions: shirt,singlet/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 289/Consecutive: 0/Difficulty: 0/
+/Kanji: 醤油/Reading: しょうゆ/Definitions: soy sauce/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 290/Consecutive: 0/Difficulty: 0/
+/Kanji: 十/Reading: じゅう/Definitions: 10,ten/Markers: num,P/Score: 0/Bin: 0/Level: 2/Position: 290/Consecutive: 0/Difficulty: 0/
+/Kanji: 授業/Reading: じゅぎょう/Definitions: lesson,class work/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 292/Consecutive: 0/Difficulty: 0/
+/Kanji: 宿題/Reading: しゅくだい/Definitions: homework/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 293/Consecutive: 0/Difficulty: 0/
+/Kanji: 良い/Reading: よい/Definitions: good,nice,pleasant,fine,excellent,agreeable,ok/Markers: adj,uk,P/Score: 0/Bin: 0/Level: 2/Position: 293/Consecutive: 0/Difficulty: 0/
+/Reading: あれ/Definitions: [1] that,that thing,[2] genitals,[3] menses/Markers: int,n,n,X,col,P/Score: 0/Bin: 0/Level: 2/Position: 293/Consecutive: 0/Difficulty: 0/
+/Kanji: 上手/Reading: じょうず/Definitions: skill,skillful,dexterity/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 294/Consecutive: 0/Difficulty: 0/
+/Kanji: 十日/Reading: とおか/Definitions: ten days,the tenth (day of the month)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 294/Consecutive: 0/Difficulty: 0/
+/Reading: エレベーター/Definitions: elevator,lift/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 295/Consecutive: 0/Difficulty: 0/
+/Kanji: 食堂/Reading: しょくどう/Definitions: cafeteria,dining hall/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 297/Consecutive: 0/Difficulty: 0/
+/Kanji: 休み/Reading: やすみ/Definitions: [1] rest,recess,respite,[2] vacation,holiday,absence,suspension,[3] moulting/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 297/Consecutive: 0/Difficulty: 0/
+/Kanji: 知る/Reading: しる/Definitions: to know,to understand,to be acquainted with,to feel/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 298/Consecutive: 0/Difficulty: 0/
+/Kanji: 初めに/Reading: はじめに/Definitions: to begin with,first of all,in the beginning/Markers: exp/Score: 0/Bin: 0/Level: 2/Position: 299/Consecutive: 0/Difficulty: 0/
+/Kanji: 白い/Reading: しろい/Definitions: white/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 299/Consecutive: 0/Difficulty: 0/
+/Kanji: 新聞/Reading: しんぶん/Definitions: newspaper/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 300/Consecutive: 0/Difficulty: 0/
+/Kanji: 水曜日/Reading: すいようび/Definitions: Wednesday/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 301/Consecutive: 0/Difficulty: 0/
+/Kanji: 吸う/Reading: すう/Definitions: to smoke,to breathe in,to suck/Markers: v5u,P/Score: 0/Bin: 0/Level: 2/Position: 302/Consecutive: 0/Difficulty: 0/
+/Reading: スカート/Definitions: skirt/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 303/Consecutive: 0/Difficulty: 0/
+/Kanji: 好き/Reading: すき/Definitions: liking,fondness,love/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 304/Consecutive: 0/Difficulty: 0/
+/Kanji: 切る/Reading: きる/Definitions: to cut,to chop,to hash,to carve,to saw,to clip,to shear,to slice,to strip,to fell,to cut down,to punch,to sever (connections),to pause,to break off,to disconnect,to turn off,to hang up,to cross (a street),to discount,to sell below cost,to shake (water) off,to finish,to be through,to complete/Markers: suf,v5r,P/Score: 0/Bin: 0/Level: 2/Position: 304/Consecutive: 0/Difficulty: 0/
+/Kanji: お祖母さん/Reading: おばあさん/Definitions: grandmother,female senior-citizen/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 306/Consecutive: 0/Difficulty: 0/
+/Kanji: 幾つ/Reading: いくつ/Definitions: how many?,how old?/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 307/Consecutive: 0/Difficulty: 0/
+/Kanji: 涼しい/Reading: すずしい/Definitions: cool,refreshing/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 307/Consecutive: 0/Difficulty: 0/
+/Kanji: 語/Reading: ご/Definitions: language,word/Markers: n,n-suf,P/Score: 0/Bin: 0/Level: 2/Position: 309/Consecutive: 0/Difficulty: 0/
+/Kanji: 頃/Reading: ごろ/Definitions: time,about,toward,approximately (time)/Markers: n,n-adv,n-suf,uk/Score: 0/Bin: 0/Level: 2/Position: 310/Consecutive: 0/Difficulty: 0/
+/Reading: スプーン/Definitions: spoon/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 310/Consecutive: 0/Difficulty: 0/
+/Reading: スポーツ/Definitions: sport/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 311/Consecutive: 0/Difficulty: 0/
+/Kanji: 住む/Reading: すむ/Definitions: to abide,to reside,to live in,to inhabit,to dwell/Markers: v5m,P/Score: 0/Bin: 0/Level: 2/Position: 313/Consecutive: 0/Difficulty: 0/
+/Reading: ずつ/Definitions: [1] apiece,each,[2] at a time/Markers: suf/Score: 0/Bin: 0/Level: 2/Position: 314/Consecutive: 0/Difficulty: 0/
+/Reading: スリッパ/Definitions: slippers/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 314/Consecutive: 0/Difficulty: 0/
+/Kanji: 背/Reading: せい/Definitions: height,stature/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 317/Consecutive: 0/Difficulty: 0/
+/Kanji: 生徒/Reading: せいと/Definitions: pupil/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 318/Consecutive: 0/Difficulty: 0/
+/Reading: セーター/Definitions: sweater,jumper/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 319/Consecutive: 0/Difficulty: 0/
+/Kanji: 背広/Reading: せびろ/Definitions: business suit/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 321/Consecutive: 0/Difficulty: 0/
+/Kanji: 狭い/Reading: せまい/Definitions: narrow,confined,small/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 322/Consecutive: 0/Difficulty: 0/
+/Reading: ゼロ/Definitions: zero/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 323/Consecutive: 0/Difficulty: 0/
+/Kanji: 先月/Reading: せんげつ/Definitions: last month/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 325/Consecutive: 0/Difficulty: 0/
+/Kanji: 半/Reading: はん/Definitions: half/Markers: n,n-adv,n-suf,n-pref,P/Score: 0/Bin: 0/Level: 2/Position: 325/Consecutive: 0/Difficulty: 0/
+/Kanji: 先週/Reading: せんしゅう/Definitions: last week,the week before/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 326/Consecutive: 0/Difficulty: 0/
+/Kanji: 然して/Reading: そして/Definitions: and/Markers: conj,uk,P/Score: 0/Bin: 0/Level: 2/Position: 326/Consecutive: 0/Difficulty: 0/
+/Kanji: 先生/Reading: せんせい/Definitions: teacher,master,doctor/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 327/Consecutive: 0/Difficulty: 0/
+/Reading: バス/Definitions: [1] bus,[2] bath,[3] bass/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 327/Consecutive: 0/Difficulty: 0/
+/Kanji: 洗濯/Reading: せんたく/Definitions: washing,laundry/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 328/Consecutive: 0/Difficulty: 0/
+/Kanji: 全部/Reading: ぜんぶ/Definitions: all,entire,whole,altogether/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 329/Consecutive: 0/Difficulty: 0/
+/Kanji: 掃除/Reading: そうじ/Definitions: cleaning,sweeping/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 331/Consecutive: 0/Difficulty: 0/
+/Kanji: 昨夜/Reading: ゆうべ/Definitions: last night/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 332/Consecutive: 0/Difficulty: 0/
+/Kanji: 北/Reading: きた/Definitions: North/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 334/Consecutive: 0/Difficulty: 0/
+/Kanji: 曲る/Reading: まがる/Definitions: to turn,to bend/Markers: io,v5r/Score: 0/Bin: 0/Level: 2/Position: 336/Consecutive: 0/Difficulty: 0/
+/Hint: キログラム/Reading: キロ/Definitions: kilo-,kilogram,kilogramme,kilometre,kilometer,10^3/Markers: n,pref,abbr,P/Score: 0/Bin: 0/Level: 2/Position: 337/Consecutive: 0/Difficulty: 0/
+/Kanji: 掛ける/Hint: 電話をかける/Reading: かける/Definitions: [1] to wear,to put on,to hang,to cover,[2] to sit down,[3] to make a phone call,[4] to multiply,[5] to turn on (a switch),to play (a record),[6] to begin to,[7] to pour (water)/Markers: aux-v,v1,P/Score: 0/Bin: 0/Level: 2/Position: 338/Consecutive: 0/Difficulty: 0/
+/Kanji: 大使館/Reading: たいしかん/Definitions: embassy/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 345/Consecutive: 0/Difficulty: 0/
+/Kanji: 大丈夫/Reading: だいじょうぶ/Definitions: safe,all right,O.K./Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 346/Consecutive: 0/Difficulty: 0/
+/Kanji: 大好き/Reading: だいすき/Definitions: very likeable,like very much/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 347/Consecutive: 0/Difficulty: 0/
+/Kanji: 台所/Reading: だいどころ/Definitions: kitchen/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 350/Consecutive: 0/Difficulty: 0/
+/Reading: タクシー/Definitions: taxi/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 355/Consecutive: 0/Difficulty: 0/
+/Kanji: 立つ/Reading: たつ/Definitions: to stand/Markers: v5t,P/Score: 0/Bin: 0/Level: 2/Position: 357/Consecutive: 0/Difficulty: 0/
+/Kanji: 建物/Reading: たてもの/Definitions: building/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 358/Consecutive: 0/Difficulty: 0/
+/Kanji: 楽しい/Reading: たのしい/Definitions: enjoyable,fun/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 359/Consecutive: 0/Difficulty: 0/
+/Kanji: 頼む/Reading: たのむ/Definitions: to request,to beg,to ask/Markers: v5m,P/Score: 0/Bin: 0/Level: 2/Position: 360/Consecutive: 0/Difficulty: 0/
+/Kanji: 食べ物/Reading: たべもの/Definitions: food/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 363/Consecutive: 0/Difficulty: 0/
+/Kanji: 食べる/Reading: たべる/Definitions: to eat/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 364/Consecutive: 0/Difficulty: 0/
+/Kanji: 誕生日/Reading: たんじょうび/Definitions: birthday/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 367/Consecutive: 0/Difficulty: 0/
+/Kanji: 小さい/Reading: ちいさい/Definitions: small,little,tiny/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 369/Consecutive: 0/Difficulty: 0/
+/Kanji: 近い/Reading: ちかい/Definitions: near,close by,short/Markers: adj,suf,P/Score: 0/Bin: 0/Level: 2/Position: 370/Consecutive: 0/Difficulty: 0/
+/Kanji: 違う/Reading: ちがう/Definitions: to differ (from)/Markers: v5u,P/Score: 0/Bin: 0/Level: 2/Position: 371/Consecutive: 0/Difficulty: 0/
+/Kanji: 彼方/Reading: あちら/Definitions: there,yonder,that/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 372/Consecutive: 0/Difficulty: 0/
+/Kanji: 一昨年/Reading: おととし/Definitions: year before last/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 373/Consecutive: 0/Difficulty: 0/
+/Kanji: 地下鉄/Reading: ちかてつ/Definitions: underground train,subway/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 373/Consecutive: 0/Difficulty: 0/
+/Kanji: 地図/Reading: ちず/Definitions: map/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 374/Consecutive: 0/Difficulty: 0/
+/Kanji: 空/Reading: そら/Definitions: sky,the heavens/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 374/Consecutive: 0/Difficulty: 0/
+/Kanji: 父/Reading: ちち/Definitions: father/Markers: n,hum,P/Score: 0/Bin: 0/Level: 2/Position: 375/Consecutive: 0/Difficulty: 0/
+/Kanji: 風呂/Reading: ふろ/Definitions: bath/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 375/Consecutive: 0/Difficulty: 0/
+/Kanji: 茶色/Reading: ちゃいろ/Definitions: light brown,tawny/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 376/Consecutive: 0/Difficulty: 0/
+/Kanji: 一日/Reading: ついたち/Definitions: first of month/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 376/Consecutive: 0/Difficulty: 0/
+/Kanji: 疲れる/Reading: つかれる/Definitions: to get tired,to tire/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 382/Consecutive: 0/Difficulty: 0/
+/Kanji: 着く/Reading: つく/Definitions: to arrive at,to reach/Markers: v5k,P/Score: 0/Bin: 0/Level: 2/Position: 384/Consecutive: 0/Difficulty: 0/
+/Kanji: 机/Reading: つくえ/Definitions: desk/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 385/Consecutive: 0/Difficulty: 0/
+/Kanji: 冷たい/Reading: つめたい/Definitions: cold (to the touch),chilly,icy,freezing,coldhearted/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 390/Consecutive: 0/Difficulty: 0/
+/Kanji: 強い/Reading: つよい/Definitions: strong,powerful,mighty,potent/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 391/Consecutive: 0/Difficulty: 0/
+/Kanji: 手/Reading: て/Definitions: hand/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 392/Consecutive: 0/Difficulty: 0/
+/Reading: テープ/Definitions: tape/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 393/Consecutive: 0/Difficulty: 0/
+/Reading: テープレコーダー/Definitions: tape recorder/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 394/Consecutive: 0/Difficulty: 0/
+/Reading: テーブル/Definitions: table/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 395/Consecutive: 0/Difficulty: 0/
+/Kanji: 手紙/Reading: てがみ/Definitions: letter/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 397/Consecutive: 0/Difficulty: 0/
+/Kanji: 出口/Reading: でぐち/Definitions: exit,gateway,way out,outlet,leak,vent/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 399/Consecutive: 0/Difficulty: 0/
+/Reading: テスト/Definitions: test/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 400/Consecutive: 0/Difficulty: 0/
+/Reading: デパート/Definitions: department store/Markers: n,abbr,P/Score: 0/Bin: 0/Level: 2/Position: 402/Consecutive: 0/Difficulty: 0/
+/Kanji: 出る/Reading: でる/Definitions: to appear,to come forth,to leave/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 404/Consecutive: 0/Difficulty: 0/
+/Reading: テレビ/Definitions: television,TV/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 405/Consecutive: 0/Difficulty: 0/
+/Kanji: 天気/Reading: てんき/Definitions: weather,the elements,fine weather/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 406/Consecutive: 0/Difficulty: 0/
+/Kanji: 電車/Reading: でんしゃ/Definitions: electric train/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 408/Consecutive: 0/Difficulty: 0/
+/Kanji: 電話/Reading: でんわ/Definitions: telephone/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 409/Consecutive: 0/Difficulty: 0/
+/Reading: トイレ/Definitions: toilet,restroom,bathroom,lavatory/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 413/Consecutive: 0/Difficulty: 0/
+/Kanji: 動物/Reading: どうぶつ/Definitions: animal/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 417/Consecutive: 0/Difficulty: 0/
+/Kanji: 十/Reading: とお/Definitions: 10,ten/Markers: num,P/Score: 0/Bin: 0/Level: 2/Position: 419/Consecutive: 0/Difficulty: 0/
+/Kanji: 遠い/Reading: とおい/Definitions: far,distant/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 420/Consecutive: 0/Difficulty: 0/
+/Kanji: 伯母/Reading: おば/Definitions: aunt (older than one's parent)/Markers: n,hum,P/Score: 0/Bin: 0/Level: 2/Position: 421/Consecutive: 0/Difficulty: 0/
+/Kanji: 時々/Reading: ときどき/Definitions: sometimes/Markers: adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 422/Consecutive: 0/Difficulty: 0/
+/Kanji: 時計/Reading: とけい/Definitions: watch,clock/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 423/Consecutive: 0/Difficulty: 0/
+/Kanji: 其の/Hint: 連体詞/Reading: その/Definitions: the,that/Markers: adj-pn,uk/Score: 0/Bin: 0/Level: 2/Position: 423/Consecutive: 0/Difficulty: 0/
+/Kanji: 登る/Reading: のぼる/Definitions: [1] to rise,to ascend,to go up,to climb,[2] to go to (the capital),[3] to be promoted,[4] to add up to,[5] to advance (in price),[6] to sail up,[7] to come up (on the agenda)/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 424/Consecutive: 0/Difficulty: 0/
+/Kanji: お弁当/Reading: おべんとう/Definitions: box lunch/Markers: n/Score: 0/Bin: 0/Level: 2/Position: 426/Consecutive: 0/Difficulty: 0/
+/Kanji: 図書館/Reading: としょかん/Definitions: library/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 426/Consecutive: 0/Difficulty: 0/
+/Kanji: 分/Reading: ふん/Definitions: minute/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 427/Consecutive: 0/Difficulty: 0/
+/Kanji: 其れ/Hint: 指示詞/Reading: それ/Definitions: it,that/Markers: n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 429/Consecutive: 0/Difficulty: 0/
+/Kanji: 隣/Reading: となり/Definitions: next to,next door to/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 430/Consecutive: 0/Difficulty: 0/
+/Kanji: 飛ぶ/Reading: とぶ/Definitions: to jump,to fly,to leap,to spring,to bound,to hop/Markers: v5b,P/Score: 0/Bin: 0/Level: 2/Position: 432/Consecutive: 0/Difficulty: 0/
+/Kanji: 賑やか/Reading: にぎやか/Definitions: bustling,busy/Markers: adj-na,P/Score: 0/Bin: 0/Level: 2/Position: 433/Consecutive: 0/Difficulty: 0/
+/Kanji: 門/Reading: もん/Definitions: [1] gate,[2] counter for cannons/Markers: n,n-suf,P/Score: 0/Bin: 0/Level: 2/Position: 435/Consecutive: 0/Difficulty: 0/
+/Kanji: 土曜日/Reading: どようび/Definitions: Saturday/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 435/Consecutive: 0/Difficulty: 0/
+/Kanji: 鳥/Reading: とり/Definitions: bird,fowl,poultry/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 436/Consecutive: 0/Difficulty: 0/
+/Kanji: 鳥肉/Reading: とりにく/Definitions: chicken meat/Markers: n/Score: 0/Bin: 0/Level: 2/Position: 437/Consecutive: 0/Difficulty: 0/
+/Kanji: 取る/Reading: とる/Definitions: to take,to pick up,to harvest,to earn,to choose/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 438/Consecutive: 0/Difficulty: 0/
+/Kanji: 撮る/Reading: とる/Definitions: to take (a photo),to make (a film)/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 439/Consecutive: 0/Difficulty: 0/
+/Reading: どんな/Definitions: what,what kind of/Markers: adj-na,adj-pn,n,P/Score: 0/Bin: 0/Level: 2/Position: 441/Consecutive: 0/Difficulty: 0/
+/Reading: ナイフ/Definitions: knife/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 443/Consecutive: 0/Difficulty: 0/
+/Kanji: 中/Reading: なか/Definitions: inside,middle,among/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 444/Consecutive: 0/Difficulty: 0/
+/Kanji: 夏/Reading: なつ/Definitions: summer/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 447/Consecutive: 0/Difficulty: 0/
+/Kanji: 夏休み/Reading: なつやすみ/Definitions: summer vacation,summer holiday/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 448/Consecutive: 0/Difficulty: 0/
+/Kanji: 七つ/Reading: ななつ/Definitions: seven/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 450/Consecutive: 0/Difficulty: 0/
+/Kanji: 何/Reading: なに/Definitions: what/Markers: int,n,P/Score: 0/Bin: 0/Level: 2/Position: 451/Consecutive: 0/Difficulty: 0/
+/Kanji: 何/Reading: なん/Definitions: what/Markers: int,n,P/Score: 0/Bin: 0/Level: 2/Position: 452/Consecutive: 0/Difficulty: 0/
+/Kanji: 七日/Reading: なのか/Definitions: seven days,the seventh day (of the month)/Markers: n-adv,P/Score: 0/Bin: 0/Level: 2/Position: 453/Consecutive: 0/Difficulty: 0/
+/Kanji: 名前/Reading: なまえ/Definitions: name/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 454/Consecutive: 0/Difficulty: 0/
+/Kanji: 習う/Reading: ならう/Definitions: to learn/Markers: v5u,P/Score: 0/Bin: 0/Level: 2/Position: 455/Consecutive: 0/Difficulty: 0/
+/Kanji: 並ぶ/Reading: ならぶ/Definitions: to line up,to stand in a line/Markers: v5b,vi,P/Score: 0/Bin: 0/Level: 2/Position: 456/Consecutive: 0/Difficulty: 0/
+/Kanji: 面白い/Reading: おもしろい/Definitions: interesting,amusing/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 457/Consecutive: 0/Difficulty: 0/
+/Kanji: 並べる/Reading: ならべる/Definitions: to line up,to set up/Markers: v1,vt,P/Score: 0/Bin: 0/Level: 2/Position: 457/Consecutive: 0/Difficulty: 0/
+/Kanji: 座る/Reading: すわる/Definitions: to sit,to squat/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 458/Consecutive: 0/Difficulty: 0/
+/Kanji: 二/Reading: に/Definitions: two/Markers: num,P/Score: 0/Bin: 0/Level: 2/Position: 459/Consecutive: 0/Difficulty: 0/
+/Kanji: 目/Reading: め/Definitions: [1] eye,eyeball,[2] eyesight,[3] look,[4] experience,[5] viewpoint,[6] ordinal number suffix/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 459/Consecutive: 0/Difficulty: 0/
+/Kanji: 下さい/Reading: ください/Definitions: please (kana only),(with te-form verb) please do for me/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 460/Consecutive: 0/Difficulty: 0/
+/Reading: ぐらい/Definitions: approximately/Markers: suf,prt/Score: 0/Bin: 0/Level: 2/Position: 461/Consecutive: 0/Difficulty: 0/
+/Kanji: 肉/Reading: にく/Definitions: meat/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 461/Consecutive: 0/Difficulty: 0/
+/Kanji: 箸/Hint: はしで御飯を食べる/Reading: はし/Definitions: chopsticks/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 462/Consecutive: 0/Difficulty: 0/
+/Kanji: 西/Reading: にし/Definitions: west/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 462/Consecutive: 0/Difficulty: 0/
+/Kanji: 差す/Hint: 傘をさす/Reading: さす/Definitions: to raise (stretch out) hands,to raise umbrella/Markers: v5s,P/Score: 0/Bin: 0/Level: 2/Position: 464/Consecutive: 0/Difficulty: 0/
+/Kanji: 日曜日/Reading: にちようび/Definitions: Sunday/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 464/Consecutive: 0/Difficulty: 0/
+/Kanji: 今/Reading: いま/Definitions: now,the present time,just now,soon,immediately,more/Markers: n-adv,n,one,P/Score: 0/Bin: 0/Level: 2/Position: 465/Consecutive: 0/Difficulty: 0/
+/Reading: ニュース/Definitions: news/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 466/Consecutive: 0/Difficulty: 0/
+/Kanji: 庭/Reading: にわ/Definitions: garden/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 467/Consecutive: 0/Difficulty: 0/
+/Kanji: 張る/Hint: 切手をはる/Reading: はる/Definitions: to stick,to paste,to put,to affix,to stretch,to spread,to strain,to stick out,to slap,to be expensive,to tighten/Markers: v5r,vi,vt,P/Score: 0/Bin: 0/Level: 2/Position: 467/Consecutive: 0/Difficulty: 0/
+/Kanji: 本/Reading: ほん/Definitions: book,main,head,this,our,counter for long cylindrical things/Markers: n,pref,P/Score: 0/Bin: 0/Level: 2/Position: 468/Consecutive: 0/Difficulty: 0/
+/Reading: ネクタイ/Definitions: tie,necktie/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 470/Consecutive: 0/Difficulty: 0/
+/Kanji: 此方/Reading: こちら/Definitions: [1] this person,[2] this direction,[3] this side,[4] thereafter/Markers: n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 470/Consecutive: 0/Difficulty: 0/
+/Kanji: 寝る/Reading: ねる/Definitions: to go to bed,to lie down,to sleep/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 471/Consecutive: 0/Difficulty: 0/
+/Reading: ノート/Definitions: notebook,copy-book,exercise book/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 473/Consecutive: 0/Difficulty: 0/
+/Kanji: 飲み物/Reading: のみもの/Definitions: drink,beverage/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 475/Consecutive: 0/Difficulty: 0/
+/Kanji: 飲む/Reading: のむ/Definitions: to drink/Markers: v5m,P/Score: 0/Bin: 0/Level: 2/Position: 476/Consecutive: 0/Difficulty: 0/
+/Kanji: 又/Reading: また/Definitions: again,and,also/Markers: adv,conj,n,P/Score: 0/Bin: 0/Level: 2/Position: 476/Consecutive: 0/Difficulty: 0/
+/Kanji: 辺/Reading: へん/Definitions: [1] area,vicinity,[2] side (of triangle,rectangle,etc.),[3] circumstances/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 478/Consecutive: 0/Difficulty: 0/
+/Kanji: 歯/Reading: は/Definitions: tooth/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 478/Consecutive: 0/Difficulty: 0/
+/Reading: パーティー/Definitions: party/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 479/Consecutive: 0/Difficulty: 0/
+/Reading: はい/Definitions: yes/Markers: conj,int/Score: 0/Bin: 0/Level: 2/Position: 480/Consecutive: 0/Difficulty: 0/
+/Kanji: 丈夫/Reading: じょうぶ/Definitions: [1] hero,gentleman,warrior,manly person,[2] good health,robustness,strong,solid,durable/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 481/Consecutive: 0/Difficulty: 0/
+/Kanji: 灰皿/Reading: はいざら/Definitions: ashtray/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 482/Consecutive: 0/Difficulty: 0/
+/Kanji: 入る/Reading: はいる/Definitions: to enter,to break into,to join,to enroll,to contain,to hold,to accommodate,to have (an income of)/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 483/Consecutive: 0/Difficulty: 0/
+/Kanji: 余り/Hint: 副詞/Reading: あまり/Definitions: not very (this form only used as adverb),not much,remainder,rest,remnant,surplus,balance,excess,remains,scraps,residue,fullness,other,too much/Markers: adj-na,adv,n,n-suf,uk,P/Score: 0/Bin: 0/Level: 2/Position: 483/Consecutive: 0/Difficulty: 0/
+/Kanji: 丁度/Reading: ちょうど/Definitions: just,right,exactly/Markers: adj-na,adv,n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 484/Consecutive: 0/Difficulty: 0/
+/Kanji: 葉書/Reading: はがき/Definitions: postcard/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 484/Consecutive: 0/Difficulty: 0/
+/Kanji: 友達/Reading: ともだち/Definitions: friend,companion/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 485/Consecutive: 0/Difficulty: 0/
+/Kanji: 箱/Reading: はこ/Definitions: box/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 485/Consecutive: 0/Difficulty: 0/
+/Kanji: 橋/Reading: はし/Definitions: bridge/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 486/Consecutive: 0/Difficulty: 0/
+/Kanji: 大変/Hint: たいへん暑い/Reading: たいへん/Definitions: [1] serious,grave,dreadful,terrible,[2] immense,enormous,[3] difficult,hard/Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 486/Consecutive: 0/Difficulty: 0/
+/Kanji: 始まる/Reading: はじまる/Definitions: to begin/Markers: v5r,vi,P/Score: 0/Bin: 0/Level: 2/Position: 488/Consecutive: 0/Difficulty: 0/
+/Kanji: 不味い/Reading: まずい/Definitions: unappetising,unappetizing,unpleasant (taste,appearance,situation),ugly,unskilful,awkward,bungling,unwise,untimely/Markers: adj,uk,P/Score: 0/Bin: 0/Level: 2/Position: 488/Consecutive: 0/Difficulty: 0/
+/Kanji: 冊/Reading: さつ/Definitions: [1] volume,[2] counter for books/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 489/Consecutive: 0/Difficulty: 0/
+/Hint: 感動詞/Reading: さあ/Definitions: come,come now/Markers: conj,int,P/Score: 0/Bin: 0/Level: 2/Position: 490/Consecutive: 0/Difficulty: 0/
+/Kanji: 初めて/Reading: はじめて/Definitions: for the first time/Markers: adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 490/Consecutive: 0/Difficulty: 0/
+/Kanji: 走る/Reading: はしる/Definitions: to run/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 491/Consecutive: 0/Difficulty: 0/
+/Kanji: 戸/Reading: と/Definitions: door (Japanese-style)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 493/Consecutive: 0/Difficulty: 0/
+/Reading: バター/Definitions: butter/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 493/Consecutive: 0/Difficulty: 0/
+/Kanji: 黒い/Reading: くろい/Definitions: [1] black,[2] dark/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 494/Consecutive: 0/Difficulty: 0/
+/Kanji: 二十日/Reading: はつか/Definitions: twenty days,twentieth (day of the month)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 497/Consecutive: 0/Difficulty: 0/
+/Kanji: お祖父さん/Reading: おじいさん/Definitions: grandfather,male senior-citizen/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 498/Consecutive: 0/Difficulty: 0/
+/Kanji: 辛い/Reading: からい/Definitions: [1] hot (spicy),salty,[2] tough (on someone),adverse,harsh/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 499/Consecutive: 0/Difficulty: 0/
+/Kanji: 鼻/Reading: はな/Definitions: nose/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 499/Consecutive: 0/Difficulty: 0/
+/Kanji: 話/Reading: はなし/Definitions: talk,speech,chat,story,conversation/Markers: io,n,P/Score: 0/Bin: 0/Level: 2/Position: 500/Consecutive: 0/Difficulty: 0/
+/Kanji: 話す/Reading: はなす/Definitions: to speak/Markers: v5s,P/Score: 0/Bin: 0/Level: 2/Position: 501/Consecutive: 0/Difficulty: 0/
+/Kanji: 母/Reading: はは/Definitions: mother/Markers: n,hum,P/Score: 0/Bin: 0/Level: 2/Position: 502/Consecutive: 0/Difficulty: 0/
+/Kanji: 匹/Reading: ひき/Definitions: head,small animal counter,roll of cloth/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 502/Consecutive: 0/Difficulty: 0/
+/Kanji: 早い/Reading: はやい/Definitions: early/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 503/Consecutive: 0/Difficulty: 0/
+/Kanji: 風/Reading: かぜ/Definitions: wind,breeze/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 503/Consecutive: 0/Difficulty: 0/
+/Kanji: 立派/Reading: りっぱ/Definitions: splendid,fine,handsome,elegant,imposing,prominent,legal,legitimate/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 504/Consecutive: 0/Difficulty: 0/
+/Kanji: 速い/Reading: はやい/Definitions: quick,fast,swift/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 504/Consecutive: 0/Difficulty: 0/
+/Kanji: 春/Reading: はる/Definitions: spring/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 505/Consecutive: 0/Difficulty: 0/
+/Kanji: 晴れる/Reading: はれる/Definitions: to be sunny,to clear away,to stop raining/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 507/Consecutive: 0/Difficulty: 0/
+/Kanji: 晩/Reading: ばん/Definitions: evening/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 509/Consecutive: 0/Difficulty: 0/
+/Kanji: 貴方/Reading: あなた/Definitions: you,dear (what a wife calls a husband)/Markers: n,hum,uk,P/Score: 0/Bin: 0/Level: 2/Position: 510/Consecutive: 0/Difficulty: 0/
+/Reading: ハンカチ/Definitions: handkerchief/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 512/Consecutive: 0/Difficulty: 0/
+/Kanji: 番号/Reading: ばんごう/Definitions: number,series of digits/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 513/Consecutive: 0/Difficulty: 0/
+/Kanji: 所/Reading: ところ/Definitions: [1] place,spot,scene,site,[2] address,[3] district,area,locality,[4] one's house,[5] point,[6] part,[7] space,room/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 513/Consecutive: 0/Difficulty: 0/
+/Kanji: 晩御飯/Reading: ばんごはん/Definitions: dinner,evening meal/Markers: n/Score: 0/Bin: 0/Level: 2/Position: 514/Consecutive: 0/Difficulty: 0/
+/Kanji: 誰/Reading: だれ/Definitions: who/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 514/Consecutive: 0/Difficulty: 0/
+/Kanji: 茶わん/Reading: ちゃわん/Definitions: rice bowl,tea cup,teacup/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 515/Consecutive: 0/Difficulty: 0/
+/Kanji: 東/Reading: ひがし/Definitions: east/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 516/Consecutive: 0/Difficulty: 0/
+/Kanji: 後/Reading: あと/Definitions: after,behind,later,rear,remainder,successor/Markers: adj-no,n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 517/Consecutive: 0/Difficulty: 0/
+/Reading: どうぞ/Definitions: [1] please,kindly,[2] by all means/Markers: adv,P/Score: 0/Bin: 0/Level: 2/Position: 518/Consecutive: 0/Difficulty: 0/
+/Kanji: 年/Reading: ねん/Definitions: -years/Markers: suf/Score: 0/Bin: 0/Level: 0/Position: 519/Consecutive: 0/Difficulty: 0/
+/Kanji: 低い/Reading: ひくい/Definitions: short,low,humble,low (voice)/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 520/Consecutive: 0/Difficulty: 0/
+/Kanji: 鍵/Reading: かぎ/Definitions: key/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 521/Consecutive: 0/Difficulty: 0/
+/Reading: さん/Definitions: Mr or Mrs/Markers: suf,P/Score: 0/Bin: 0/Level: 2/Position: 522/Consecutive: 0/Difficulty: 0/
+/Kanji: 左/Reading: ひだり/Definitions: left hand side/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 522/Consecutive: 0/Difficulty: 0/
+/Kanji: 人/Reading: ひと/Definitions: man,person,human being,mankind,people,character,personality,true man,man of talent,adult,other people,messenger,visitor/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 523/Consecutive: 0/Difficulty: 0/
+/Kanji: 重い/Reading: おもい/Definitions: [1] heavy,massive,[2] serious,important,severe,oppressed/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 524/Consecutive: 0/Difficulty: 0/
+/Kanji: 一つ/Reading: ひとつ/Definitions: one/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 524/Consecutive: 0/Difficulty: 0/
+/Kanji: 絵/Reading: え/Definitions: picture,drawing,painting,sketch/Markers: n,n-suf,P/Score: 0/Bin: 0/Level: 2/Position: 524/Consecutive: 0/Difficulty: 0/
+/Kanji: 然し/Reading: しかし/Definitions: however,but/Markers: conj,uk,P/Score: 0/Bin: 0/Level: 2/Position: 525/Consecutive: 0/Difficulty: 0/
+/Kanji: 開ける/Reading: あける/Definitions: [1] to open,[2] to unwrap (e.g.,parcel,package)/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 525/Consecutive: 0/Difficulty: 0/
+/Kanji: 一人/Reading: ひとり/Definitions: one person/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 526/Consecutive: 0/Difficulty: 0/
+/Kanji: 此の/Reading: この/Definitions: this/Markers: adj-pn,int,uk,P/Score: 0/Bin: 0/Level: 2/Position: 527/Consecutive: 0/Difficulty: 0/
+/Kanji: 幾ら/Reading: いくら/Definitions: how much?,how many?/Markers: adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 527/Consecutive: 0/Difficulty: 0/
+/Hint: もう、帰りました/Reading: もう/Definitions: already,soon,more,again/Markers: adv,int,P/Score: 0/Bin: 0/Level: 2/Position: 528/Consecutive: 0/Difficulty: 0/
+/Kanji: 百/Reading: ひゃく/Definitions: 100,hundred/Markers: num,P/Score: 0/Bin: 0/Level: 2/Position: 528/Consecutive: 0/Difficulty: 0/
+/Kanji: 病院/Reading: びょういん/Definitions: hospital/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 529/Consecutive: 0/Difficulty: 0/
+/Kanji: 部屋/Reading: へや/Definitions: [1] room,[2] sumo stable/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 529/Consecutive: 0/Difficulty: 0/
+/Kanji: 勉強/Reading: べんきょう/Definitions: [1] study,[2] diligence,[3] discount,reduction/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 530/Consecutive: 0/Difficulty: 0/
+/Kanji: 病気/Reading: びょうき/Definitions: illness,disease,sickness/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 530/Consecutive: 0/Difficulty: 0/
+/Kanji: 平仮名/Reading: ひらがな/Definitions: hiragana,47 syllables,the cursive syllabary/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 531/Consecutive: 0/Difficulty: 0/
+/Kanji: 勿論/Reading: もちろん/Definitions: of course,certainly,naturally/Markers: adv,uk,P/Score: 0/Bin: 0/Level: 2/Position: 532/Consecutive: 0/Difficulty: 0/
+/Kanji: 昼/Reading: ひる/Definitions: noon,daytime/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 532/Consecutive: 0/Difficulty: 0/
+/Reading: もっと/Definitions: more,longer,further/Markers: adv,P/Score: 0/Bin: 0/Level: 2/Position: 533/Consecutive: 0/Difficulty: 0/
+/Kanji: 昼御飯/Reading: ひるごはん/Definitions: lunch,midday meal/Markers: n/Score: 0/Bin: 0/Level: 2/Position: 533/Consecutive: 0/Difficulty: 0/
+/Kanji: 広い/Reading: ひろい/Definitions: spacious,vast,wide/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 534/Consecutive: 0/Difficulty: 0/
+/Reading: パン/Definitions: [1] bread (pt: pan),pastries (e.g.,croissants),pastry-based products,[2] panning/Markers: pt:,n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 535/Consecutive: 0/Difficulty: 0/
+/Kanji: 置く/Reading: おく/Definitions: [1] to put,to place,[2] to leave (behind),[3] to do something in advance (us. following te-form verb)/Markers: v5k,uk,P/Score: 0/Bin: 0/Level: 2/Position: 536/Consecutive: 0/Difficulty: 0/
+/Kanji: 封筒/Reading: ふうとう/Definitions: envelope/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 536/Consecutive: 0/Difficulty: 0/
+/Kanji: 何処/Reading: どこ/Definitions: where,what place/Markers: n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 537/Consecutive: 0/Difficulty: 0/
+/Kanji: 色々/Reading: いろいろ/Definitions: various/Markers: adj-na,adj-no,adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 537/Consecutive: 0/Difficulty: 0/
+/Kanji: 円/Reading: えん/Definitions: [1] Yen,money,[2] circle/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 539/Consecutive: 0/Difficulty: 0/
+/Kanji: 服/Reading: ふく/Definitions: clothes/Markers: n,n-suf,P/Score: 0/Bin: 0/Level: 2/Position: 540/Consecutive: 0/Difficulty: 0/
+/Kanji: 二つ/Reading: ふたつ/Definitions: two/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 541/Consecutive: 0/Difficulty: 0/
+/Kanji: 豚肉/Reading: ぶたにく/Definitions: pork/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 542/Consecutive: 0/Difficulty: 0/
+/Kanji: 切手/Reading: きって/Definitions: stamp (postage),merchandise certificate/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 542/Consecutive: 0/Difficulty: 0/
+/Kanji: 二人/Reading: ふたり/Definitions: two persons,two people,pair,couple/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 543/Consecutive: 0/Difficulty: 0/
+/Kanji: 二日/Reading: ふつか/Definitions: second day of the month,two days/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 544/Consecutive: 0/Difficulty: 0/
+/Kanji: 太い/Reading: ふとい/Definitions: fat,thick/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 545/Consecutive: 0/Difficulty: 0/
+/Kanji: 冬/Reading: ふゆ/Definitions: winter/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 546/Consecutive: 0/Difficulty: 0/
+/Kanji: 古い/Reading: ふるい/Definitions: old (not person),aged,ancient,antiquated,stale,threadbare,outmoded,obsolete article/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 548/Consecutive: 0/Difficulty: 0/
+/Kanji: 月/Reading: がつ/Definitions: month of year/Markers: suf/Score: 0/Bin: 0/Level: 2/Position: 549/Consecutive: 0/Difficulty: 0/
+/Reading: ボタン/Definitions: button (pt: bota~o)/Markers: pt:,n/Score: 0/Bin: 0/Level: 2/Position: 551/Consecutive: 0/Difficulty: 0/
+/Kanji: 下手/Reading: へた/Definitions: unskillful,poor,awkward/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 552/Consecutive: 0/Difficulty: 0/
+/Kanji: お酒/Reading: おさけ/Definitions: alcohol,sake/Markers: n/Score: 0/Bin: 0/Level: 2/Position: 552/Consecutive: 0/Difficulty: 0/
+/Kanji: 彼処/Reading: あそこ/Definitions: [1] there,over there,that place,yonder,[2] genitals/Markers: n,n,uk,X,col,P/Score: 0/Bin: 0/Level: 2/Position: 553/Consecutive: 0/Difficulty: 0/
+/Reading: ベッド/Definitions: bed/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 553/Consecutive: 0/Difficulty: 0/
+/Kanji: 一寸/Reading: ちょっと/Definitions: [1] just a minute,short time,just a little,[2] somewhat,easily,readily,rather/Markers: ateji,adv,int,uk,P/Score: 0/Bin: 0/Level: 2/Position: 554/Consecutive: 0/Difficulty: 0/
+/Kanji: 家/Reading: いえ/Definitions: house/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 554/Consecutive: 0/Difficulty: 0/
+/Kanji: 否/Reading: いいえ/Definitions: no,nay,yes,well/Markers: int,n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 555/Consecutive: 0/Difficulty: 0/
+/Kanji: 何時/Reading: いつ/Definitions: when,how soon/Markers: n-adv,uk,P/Score: 0/Bin: 0/Level: 2/Position: 555/Consecutive: 0/Difficulty: 0/
+/Kanji: 何時も/Reading: いつも/Definitions: [1] always,usually,every time,[2] never (with neg. verb)/Markers: adv,n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 556/Consecutive: 0/Difficulty: 0/
+/Kanji: 止まる/Reading: とまる/Definitions: [1] to remain,to abide,to stay (in the one place),[2] to come to a halt,[3] to stop/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 556/Consecutive: 0/Difficulty: 0/
+/Kanji: 体/Reading: からだ/Definitions: [1] body,[2] health/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 557/Consecutive: 0/Difficulty: 0/
+/Kanji: 時間/Reading: じかん/Definitions: time/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 557/Consecutive: 0/Difficulty: 0/
+/Kanji: 町/Reading: まち/Definitions: [1] town,[2] street,road/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 558/Consecutive: 0/Difficulty: 0/
+/Kanji: 帽子/Reading: ぼうし/Definitions: hat/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 560/Consecutive: 0/Difficulty: 0/
+/Kanji: 弾く/Reading: ひく/Definitions: to play (piano,guitar)/Markers: v5k,P/Score: 0/Bin: 0/Level: 2/Position: 561/Consecutive: 0/Difficulty: 0/
+/Reading: ボールペン/Definitions: ball-point pen/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 561/Consecutive: 0/Difficulty: 0/
+/Kanji: 外/Reading: ほか/Definitions: other place,the rest/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 562/Consecutive: 0/Difficulty: 0/
+/Reading: ポケット/Definitions: pocket/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 563/Consecutive: 0/Difficulty: 0/
+/Kanji: 欲しい/Reading: ほしい/Definitions: wanted,wished for,in need of,desired/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 564/Consecutive: 0/Difficulty: 0/
+/Kanji: 椅子/Reading: いす/Definitions: chair/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 564/Consecutive: 0/Difficulty: 0/
+/Kanji: 細い/Reading: ほそい/Definitions: thin,slender,fine/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 565/Consecutive: 0/Difficulty: 0/
+/Kanji: 日/Reading: にち/Definitions: day of the month/Markers: suf/Score: 0/Bin: 0/Level: 2/Position: 566/Consecutive: 0/Difficulty: 0/
+/Kanji: 回/Reading: かい/Definitions: counter for occurrences/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 566/Consecutive: 0/Difficulty: 0/
+/Reading: ホテル/Definitions: hotel/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 567/Consecutive: 0/Difficulty: 0/
+/Kanji: 薬/Reading: くすり/Definitions: medicine,pharmaceuticals,drugs/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 568/Consecutive: 0/Difficulty: 0/
+/Kanji: 結婚/Reading: けっこん/Definitions: marriage/Markers: n,adj-no,vs,P/Score: 0/Bin: 0/Level: 2/Position: 569/Consecutive: 0/Difficulty: 0/
+/Kanji: 浴びる/Reading: あびる/Definitions: to bathe,to bask in the sun,to shower/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 570/Consecutive: 0/Difficulty: 0/
+/Kanji: 掛ける/Hint: 眼鏡をかける/Reading: かける/Definitions: [1] to wear,to put on,to hang,to cover,[2] to sit down,[3] to make a phone call,[4] to multiply,[5] to turn on (a switch),to play (a record),[6] to begin to,[7] to pour (water)/Markers: aux-v,v1,P/Score: 0/Bin: 0/Level: 2/Position: 570/Consecutive: 0/Difficulty: 0/
+/Kanji: 本棚/Reading: ほんだな/Definitions: bookshelves/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 570/Consecutive: 0/Difficulty: 0/
+/Kanji: 出す/Reading: だす/Definitions: [1] to take out,to get out,[2] to put out,[3] to submit (e.g.,thesis),to turn in,[4] to publish,to make public,[5] to send (e.g.,letter),[6] to start (fire)/Markers: v5s,P/Score: 0/Bin: 0/Level: 2/Position: 572/Consecutive: 0/Difficulty: 0/
+/Kanji: 如何/Reading: どう/Definitions: how,in what way,how about/Markers: adv,uk,P/Score: 0/Bin: 0/Level: 2/Position: 572/Consecutive: 0/Difficulty: 0/
+/Kanji: 大学/Reading: だいがく/Definitions: [1] university,[2] the Great Learning - one of the Four Books/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 573/Consecutive: 0/Difficulty: 0/
+/Kanji: 毎月/Reading: まいげつ/Definitions: every month,each month,monthly/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 574/Consecutive: 0/Difficulty: 0/
+/Kanji: 毎月/Reading: まいつき/Definitions: every month,each month,monthly/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 575/Consecutive: 0/Difficulty: 0/
+/Kanji: 来る/Reading: くる/Definitions: to come,to come to hand,to arrive,to approach,to call on,to come on (rain),to set in,to be due,to become,to grow,to get,to come from,to be caused by,to derive from/Markers: vk,P/Score: 0/Bin: 0/Level: 2/Position: 575/Consecutive: 0/Difficulty: 0/
+/Kanji: 毎週/Reading: まいしゅう/Definitions: every week/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 576/Consecutive: 0/Difficulty: 0/
+/Kanji: 何方/Reading: どちら/Definitions: which (of two),who/Markers: n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 577/Consecutive: 0/Difficulty: 0/
+/Kanji: 毎日/Reading: まいにち/Definitions: every day/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 577/Consecutive: 0/Difficulty: 0/
+/Kanji: 先/Reading: さき/Definitions: [1] previous,prior,former,[2] point (e.g.,pencil),tip,end,nozzle,head (of a line),[3] destination,[4] the first priority,the future,objective,sequel,remainder,the other party/Markers: n,adj-no,n-suf,pref,P/Score: 0/Bin: 0/Level: 2/Position: 577/Consecutive: 0/Difficulty: 0/
+/Kanji: 毎年/Reading: まいねん/Definitions: every year,yearly,annually/Markers: n-t,P/Score: 0/Bin: 0/Level: 2/Position: 578/Consecutive: 0/Difficulty: 0/
+/Kanji: 美味しい/Reading: おいしい/Definitions: delicious,tasty/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 578/Consecutive: 0/Difficulty: 0/
+/Kanji: 然うして/Reading: そうして/Definitions: and,like that/Markers: conj,uk,P/Score: 0/Bin: 0/Level: 2/Position: 579/Consecutive: 0/Difficulty: 0/
+/Kanji: 毎年/Reading: まいとし/Definitions: every year,yearly,annually/Markers: n-t,P/Score: 0/Bin: 0/Level: 2/Position: 579/Consecutive: 0/Difficulty: 0/
+/Kanji: 今朝/Reading: けさ/Definitions: this morning/Markers: n-t,P/Score: 0/Bin: 0/Level: 2/Position: 580/Consecutive: 0/Difficulty: 0/
+/Kanji: 毎晩/Reading: まいばん/Definitions: every night/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 580/Consecutive: 0/Difficulty: 0/
+/Kanji: 大変/Hint: それはたいへんですね/Reading: たいへん/Definitions: [1] serious,grave,dreadful,terrible,[2] immense,enormous,[3] difficult,hard/Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 581/Consecutive: 0/Difficulty: 0/
+/Kanji: 一月/Reading: ひとつき/Definitions: one month/Markers: n/Score: 0/Bin: 0/Level: 2/Position: 581/Consecutive: 0/Difficulty: 0/
+/Kanji: 勤める/Reading: つとめる/Definitions: [1] to serve,to fill a post,to serve under,to work (for),[2] to exert oneself,to endeavor,to endeavour,to be diligent,[3] to play (the part of)/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 583/Consecutive: 0/Difficulty: 0/
+/Kanji: 寒い/Reading: さむい/Definitions: cold (e.g.,weather)/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 585/Consecutive: 0/Difficulty: 0/
+/Kanji: 引く/Reading: ひく/Definitions: [1] to pull,[2] to draw back,[3] to draw (a card),[4] to draw (plan,line,etc.),[5] to catch (cold),[6] to play (string instr.),[7] to look up (e.g.,dictionary),to consult/Markers: v5k,P/Score: 0/Bin: 0/Level: 2/Position: 585/Consecutive: 0/Difficulty: 0/
+/Kanji: 待つ/Reading: まつ/Definitions: to wait/Markers: v5t,P/Score: 0/Bin: 0/Level: 2/Position: 588/Consecutive: 0/Difficulty: 0/
+/Kanji: 大切/Reading: たいせつ/Definitions: important,valuable,worthy of care/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 588/Consecutive: 0/Difficulty: 0/
+/Kanji: 去年/Reading: きょねん/Definitions: last year/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 589/Consecutive: 0/Difficulty: 0/
+/Kanji: 嫌い/Reading: きらい/Definitions: [1] dislike,hate,[2] suspicion,tendency,smack (of)/Markers: adj-na,n,suff,P/Score: 0/Bin: 0/Level: 2/Position: 589/Consecutive: 0/Difficulty: 0/
+/Kanji: 覚える/Reading: おぼえる/Definitions: to remember,to recollect,to memorize,to memorise/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 590/Consecutive: 0/Difficulty: 0/
+/Kanji: 一昨日/Reading: おととい/Definitions: day before yesterday/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 590/Consecutive: 0/Difficulty: 0/
+/Reading: マッチ/Definitions: match/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 590/Consecutive: 0/Difficulty: 0/
+/Kanji: 窓/Reading: まど/Definitions: window/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 591/Consecutive: 0/Difficulty: 0/
+/Kanji: 少し/Reading: すこし/Definitions: [1] small quantity,little,few,something,[2] little while,[3] short distance/Markers: adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 591/Consecutive: 0/Difficulty: 0/
+/Kanji: 丸い/Reading: まるい/Definitions: round,circular,spherical/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 592/Consecutive: 0/Difficulty: 0/
+/Kanji: 円い/Reading: まるい/Definitions: round,circular,spherical/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 593/Consecutive: 0/Difficulty: 0/
+/Kanji: 直ぐに/Reading: すぐに/Definitions: instantly,immediately/Markers: adv/Score: 0/Bin: 0/Level: 2/Position: 594/Consecutive: 0/Difficulty: 0/
+/Kanji: 脱ぐ/Reading: ぬぐ/Definitions: to take off (clothes,shoes,etc.),to undress/Markers: v5g,P/Score: 0/Bin: 0/Level: 2/Position: 595/Consecutive: 0/Difficulty: 0/
+/Kanji: 万年筆/Reading: まんねんひつ/Definitions: fountain pen/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 595/Consecutive: 0/Difficulty: 0/
+/Kanji: 磨く/Reading: みがく/Definitions: to polish,to shine,to brush,to refine,to improve/Markers: v5k,P/Score: 0/Bin: 0/Level: 2/Position: 596/Consecutive: 0/Difficulty: 0/
+/Kanji: 長い/Reading: ながい/Definitions: long,lengthy/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 597/Consecutive: 0/Difficulty: 0/
+/Kanji: 度/Reading: ど/Definitions: [1] degrees (of a circle),[2] counter for occurrences,[3] very,totally/Markers: n,n-suf,uk,pref,P/Score: 0/Bin: 0/Level: 2/Position: 598/Consecutive: 0/Difficulty: 0/
+/Kanji: 短い/Reading: みじかい/Definitions: short/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 598/Consecutive: 0/Difficulty: 0/
+/Kanji: 石鹸/Reading: せっけん/Definitions: soap/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 599/Consecutive: 0/Difficulty: 0/
+/Kanji: 花瓶/Reading: かびん/Definitions: vase/Markers: n,flower,P/Score: 0/Bin: 0/Level: 0/Position: 600/Consecutive: 0/Difficulty: 0/
+/Kanji: 店/Reading: みせ/Definitions: store,shop,establishment/Markers: n,n-suf,P/Score: 0/Bin: 0/Level: 2/Position: 600/Consecutive: 0/Difficulty: 0/
+/Reading: コップ/Definitions: glass (i.e. drinking vessel) (nl: Kop)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 601/Consecutive: 0/Difficulty: 0/
+/Kanji: 見せる/Reading: みせる/Definitions: to show,to display/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 601/Consecutive: 0/Difficulty: 0/
+/Kanji: 道/Reading: みち/Definitions: road,street,way,method/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 602/Consecutive: 0/Difficulty: 0/
+/Kanji: 三日/Reading: みっか/Definitions: three days,the third day (of the month)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 603/Consecutive: 0/Difficulty: 0/
+/Kanji: 三つ/Reading: みっつ/Definitions: three/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 604/Consecutive: 0/Difficulty: 0/
+/Kanji: 段々/Reading: だんだん/Definitions: gradually,by degrees/Markers: adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 604/Consecutive: 0/Difficulty: 0/
+/Kanji: 皆さん/Reading: みなさん/Definitions: everyone/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 605/Consecutive: 0/Difficulty: 0/
+/Kanji: 其方/Reading: そちら/Definitions: over there,the other/Markers: n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 605/Consecutive: 0/Difficulty: 0/
+/Kanji: 迚も/Reading: とても/Definitions: very,awfully,exceedingly/Markers: adv,uk,P/Score: 0/Bin: 0/Level: 2/Position: 606/Consecutive: 0/Difficulty: 0/
+/Kanji: 消す/Reading: けす/Definitions: [1] to erase,to delete,[2] to turn off power,[3] to bump off (sl)/Markers: v5s,P/Score: 0/Bin: 0/Level: 2/Position: 606/Consecutive: 0/Difficulty: 0/
+/Kanji: 南/Reading: みなみ/Definitions: South,proceeding south/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 606/Consecutive: 0/Difficulty: 0/
+/Kanji: 午前/Reading: ごぜん/Definitions: morning,a.m./Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 607/Consecutive: 0/Difficulty: 0/
+/Kanji: 千/Reading: せん/Definitions: 1,000,thousand/Markers: num,P/Score: 0/Bin: 0/Level: 2/Position: 607/Consecutive: 0/Difficulty: 0/
+/Kanji: 山/Reading: やま/Definitions: [1] mountain,[2] pile,heap,[3] climax,critical point/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 609/Consecutive: 0/Difficulty: 0/
+/Kanji: 多分/Reading: たぶん/Definitions: perhaps,probably/Markers: adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 609/Consecutive: 0/Difficulty: 0/
+/Kanji: 開く/Reading: あく/Definitions: to open,to become open,to become empty/Markers: v5k,vi,P/Score: 0/Bin: 0/Level: 2/Position: 610/Consecutive: 0/Difficulty: 0/
+/Kanji: 奇麗/Reading: きれい/Definitions: pretty,clean,nice,tidy,beautiful,fair/Markers: adj-na,uk,P/Score: 0/Bin: 0/Level: 2/Position: 611/Consecutive: 0/Difficulty: 0/
+/Kanji: 向こう/Reading: むこう/Definitions: beyond,over there,opposite direction,the other party/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 611/Consecutive: 0/Difficulty: 0/
+/Kanji: 難しい/Reading: むずかしい/Definitions: difficult/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 612/Consecutive: 0/Difficulty: 0/
+/Kanji: 荷物/Reading: にもつ/Definitions: [1] luggage,baggage,[2] payload (of a packet,cell,etc.)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 612/Consecutive: 0/Difficulty: 0/
+/Reading: くらい/Definitions: approximately/Markers: suf,prt/Score: 0/Bin: 0/Level: 2/Position: 614/Consecutive: 0/Difficulty: 0/
+/Kanji: 枚/Reading: まい/Definitions: counter for flat objects (e.g.,sheets of paper)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 614/Consecutive: 0/Difficulty: 0/
+/Kanji: 側/Hint: 窓のそば/Reading: そば/Definitions: near,close,beside,vicinity,proximity,besides,while/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 615/Consecutive: 0/Difficulty: 0/
+/Kanji: 九日/Reading: ここのか/Definitions: nine days,the ninth day (of the month)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 615/Consecutive: 0/Difficulty: 0/
+/Kanji: 眼鏡/Reading: めがね/Definitions: spectacles,glasses/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 616/Consecutive: 0/Difficulty: 0/
+/Kanji: 万/Reading: まん/Definitions: 10,000,ten thousand,myriads,all,everything/Markers: adv,num,P/Score: 0/Bin: 0/Level: 2/Position: 616/Consecutive: 0/Difficulty: 0/
+/Kanji: 其れから/Reading: それから/Definitions: and then,after that/Markers: exp,uk,P/Score: 0/Bin: 0/Level: 2/Position: 618/Consecutive: 0/Difficulty: 0/
+/Kanji: 分る/Reading: わかる/Definitions: [1] to understand,to grasp,[2] to know,to realize,to realise/Markers: io,v5r/Score: 0/Bin: 0/Level: 2/Position: 618/Consecutive: 0/Difficulty: 0/
+/Kanji: 木曜日/Reading: もくようび/Definitions: Thursday/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 618/Consecutive: 0/Difficulty: 0/
+/Reading: もしもし/Definitions: hello (on phone)/Markers: conj,int,P/Score: 0/Bin: 0/Level: 2/Position: 619/Consecutive: 0/Difficulty: 0/
+/Kanji: 可愛い/Reading: かわいい/Definitions: pretty,cute,lovely,charming,dear,darling,pet/Markers: adj,sl,P/Score: 0/Bin: 0/Level: 2/Position: 620/Consecutive: 0/Difficulty: 0/
+/Kanji: 弟/Reading: おとうと/Definitions: younger brother/Markers: n,hum,P/Score: 0/Bin: 0/Level: 2/Position: 621/Consecutive: 0/Difficulty: 0/
+/Reading: アパート/Definitions: [1] apartment (abbr),[2] apartment building (abbr),[3] apart/Markers: n,adv,P/Score: 0/Bin: 0/Level: 2/Position: 622/Consecutive: 0/Difficulty: 0/
+/Kanji: 物/Reading: もの/Definitions: thing,object/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 623/Consecutive: 0/Difficulty: 0/
+/Kanji: 前/Reading: まえ/Definitions: [1] before,in front,fore part,ago,previously,[2] head (of a line),[3] in the presence of,lady (so-and-so),[4] (five minutes) to,[5] helping,portion/Markers: n-adv,n-t,suf,P/Score: 0/Bin: 0/Level: 2/Position: 623/Consecutive: 0/Difficulty: 0/
+/Kanji: 吹く/Reading: ふく/Definitions: [1] to blow (wind,etc),[2] to emit,to spout/Markers: v5k,P/Score: 0/Bin: 0/Level: 2/Position: 624/Consecutive: 0/Difficulty: 0/
+/Kanji: 練習/Reading: れんしゅう/Definitions: practice,practise/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 624/Consecutive: 0/Difficulty: 0/
+/Kanji: 問題/Reading: もんだい/Definitions: problem,question/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 625/Consecutive: 0/Difficulty: 0/
+/Kanji: 八百屋/Reading: やおや/Definitions: greengrocer/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 626/Consecutive: 0/Difficulty: 0/
+/Kanji: 野菜/Reading: やさい/Definitions: vegetable/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 627/Consecutive: 0/Difficulty: 0/
+/Kanji: 雑誌/Reading: ざっし/Definitions: journal,magazine,periodical/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 627/Consecutive: 0/Difficulty: 0/
+/Kanji: 噫/Hint: 感動詞/Reading: ああ/Definitions: Ah!,Oh!,Alas!/Markers: int,uk/Score: 0/Bin: 0/Level: 2/Position: 628/Consecutive: 0/Difficulty: 0/
+/Kanji: 易しい/Reading: やさしい/Definitions: easy,plain,simple/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 628/Consecutive: 0/Difficulty: 0/
+/Kanji: 歳/Reading: さい/Definitions: -years-old/Markers: suf,P/Score: 0/Bin: 0/Level: 2/Position: 628/Consecutive: 0/Difficulty: 0/
+/Kanji: 方/Hint: この方/Reading: かた/Definitions: [1] person,[2] way of doing/Markers: n,suf,P/Score: 0/Bin: 0/Level: 2/Position: 628/Consecutive: 0/Difficulty: 0/
+/Reading: プール/Definitions: [1] swimming pool,[2] pool/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 628/Consecutive: 0/Difficulty: 0/
+/Reading: ゆっくり/Definitions: slowly,at ease/Markers: adv,n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 629/Consecutive: 0/Difficulty: 0/
+/Kanji: 安い/Reading: やすい/Definitions: cheap,inexpensive,peaceful,quiet,gossipy,thoughtless/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 629/Consecutive: 0/Difficulty: 0/
+/Kanji: 元気/Reading: げんき/Definitions: health(y),robust,vigor,vigour,energy,vitality,vim,stamina,spirit,courage,pep/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 629/Consecutive: 0/Difficulty: 0/
+/Kanji: 何方/Reading: どなた/Definitions: who?/Markers: n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 629/Consecutive: 0/Difficulty: 0/
+/Kanji: 毎朝/Reading: まいあさ/Definitions: every morning/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 630/Consecutive: 0/Difficulty: 0/
+/Kanji: 杯/Reading: はい/Definitions: counter for cupfuls/Markers: n/Score: 0/Bin: 0/Level: 2/Position: 630/Consecutive: 0/Difficulty: 0/
+/Kanji: 休む/Reading: やすむ/Definitions: to rest,to have a break,to take a day off,to be finished,to be absent,to retire,to sleep/Markers: v5m,vi,P/Score: 0/Bin: 0/Level: 2/Position: 631/Consecutive: 0/Difficulty: 0/
+/Reading: メートル/Definitions: metre,meter,gauge/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 632/Consecutive: 0/Difficulty: 0/
+/Kanji: 今年/Reading: ことし/Definitions: this year/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 633/Consecutive: 0/Difficulty: 0/
+/Kanji: 無い/Reading: ない/Definitions: there isn't,doesn't have/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 633/Consecutive: 0/Difficulty: 0/
+/Kanji: 夕方/Reading: ゆうがた/Definitions: evening/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 635/Consecutive: 0/Difficulty: 0/
+/Kanji: 質問/Reading: しつもん/Definitions: question,inquiry,enquiry/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 636/Consecutive: 0/Difficulty: 0/
+/Kanji: 郵便局/Reading: ゆうびんきょく/Definitions: post office/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 636/Consecutive: 0/Difficulty: 0/
+/Kanji: 週間/Reading: しゅうかん/Definitions: week,weekly/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 636/Consecutive: 0/Difficulty: 0/
+/Kanji: 能く/Hint: よくできました/Reading: よく/Definitions: being skilled in,nicely,properly,well,skillfully,thoroughly/Markers: adv,n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 636/Consecutive: 0/Difficulty: 0/
+/Kanji: 成る/Hint: 春になる/Reading: なる/Definitions: to become/Markers: v5r,uk,P/Score: 0/Bin: 0/Level: 2/Position: 637/Consecutive: 0/Difficulty: 0/
+/Kanji: 遊ぶ/Reading: あそぶ/Definitions: [1] to play,to make a visit (esp. for pleasure),[2] to be idle,to do nothing/Markers: v5b,P/Score: 0/Bin: 0/Level: 2/Position: 637/Consecutive: 0/Difficulty: 0/
+/Hint: 感動詞/Reading: では/Definitions: then,well,so,well then/Markers: conj,exp,P/Score: 0/Bin: 0/Level: 2/Position: 637/Consecutive: 0/Difficulty: 0/
+/Kanji: 有名/Reading: ゆうめい/Definitions: fame/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 638/Consecutive: 0/Difficulty: 0/
+/Kanji: 一番/Reading: いちばん/Definitions: [1] best,first,number one,[2] game,round,bout,fall,event (in a meet)/Markers: n-adv,P/Score: 0/Bin: 0/Level: 2/Position: 638/Consecutive: 0/Difficulty: 0/
+/Kanji: 八つ/Reading: やっつ/Definitions: eight/Markers: num,P/Score: 0/Bin: 0/Level: 2/Position: 638/Consecutive: 0/Difficulty: 0/
+/Kanji: 降る/Reading: ふる/Definitions: to precipitate,to fall (e.g.,rain)/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 639/Consecutive: 0/Difficulty: 0/
+/Kanji: 雪/Reading: ゆき/Definitions: snow/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 639/Consecutive: 0/Difficulty: 0/
+/Kanji: 後/Reading: うしろ/Definitions: back,behind,rear/Markers: io,n/Score: 0/Bin: 0/Level: 2/Position: 639/Consecutive: 0/Difficulty: 0/
+/Kanji: 階/Reading: かい/Definitions: -floor (counter),stories,storeys/Markers: n,n-suf,P/Score: 0/Bin: 0/Level: 2/Position: 639/Consecutive: 0/Difficulty: 0/
+/Kanji: 此処/Reading: ここ/Definitions: here,this place/Markers: n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 640/Consecutive: 0/Difficulty: 0/
+/Kanji: 掛かる/Hint: 時間がかかる/Reading: かかる/Definitions: to take (e.g.,time,money,etc),to hang/Markers: v5r,vi,P/Score: 0/Bin: 0/Level: 2/Position: 640/Consecutive: 0/Difficulty: 0/
+/Hint: そうです/Reading: そう/Definitions: so,really,seeming/Markers: adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 640/Consecutive: 0/Difficulty: 0/
+/Kanji: 八日/Reading: ようか/Definitions: eight days,the eighth (day of the month)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 641/Consecutive: 0/Difficulty: 0/
+/Kanji: 二十歳/Reading: はたち/Definitions: [1] 20 years old,[2] 20th year/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 641/Consecutive: 0/Difficulty: 0/
+/Kanji: 鞄/Reading: かばん/Definitions: bag,satchel,briefcase,basket/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 641/Consecutive: 0/Difficulty: 0/
+/Reading: どうも/Definitions: thanks,how,much,very,quite,really,somehow,no matter how hard one may try/Markers: adv,int,abbr,very,P/Score: 0/Bin: 0/Level: 2/Position: 641/Consecutive: 0/Difficulty: 0/
+/Kanji: 一日/Reading: いちにち/Definitions: [1] one day,[2] first of month/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 642/Consecutive: 0/Difficulty: 0/
+/Kanji: 何の/Hint: どの人/Reading: どの/Definitions: which,what (way)/Markers: adj-pn,P/Score: 0/Bin: 0/Level: 2/Position: 642/Consecutive: 0/Difficulty: 0/
+/Kanji: 聞く/Reading: きく/Definitions: [1] to hear,to listen,[2] to ask/Markers: v5k,P/Score: 0/Bin: 0/Level: 2/Position: 642/Consecutive: 0/Difficulty: 0/
+/Kanji: 洋服/Reading: ようふく/Definitions: Western-style clothes/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 642/Consecutive: 0/Difficulty: 0/
+/Kanji: 忙しい/Reading: いそがしい/Definitions: busy,irritated/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 643/Consecutive: 0/Difficulty: 0/
+/Kanji: お姉さん/Reading: おねえさん/Definitions: older sister,"Miss?"/Markers: n,hon,vocative,P/Score: 0/Bin: 0/Level: 2/Position: 643/Consecutive: 0/Difficulty: 0/
+/Kanji: 卵/Reading: たまご/Definitions: [1] egg(s),spawn,roe,[2] (an expert) in the making/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 643/Consecutive: 0/Difficulty: 0/
+/Kanji: 女/Reading: おんな/Definitions: woman/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 643/Consecutive: 0/Difficulty: 0/
+/Reading: パージ/Definitions: purge/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 644/Consecutive: 0/Difficulty: 0/
+/Kanji: 横/Reading: よこ/Definitions: beside,side,width/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 644/Consecutive: 0/Difficulty: 0/
+/Kanji: 被る/Reading: かぶる/Definitions: to wear,to put on (head),to pour or dash water (on oneself)/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 645/Consecutive: 0/Difficulty: 0/
+/Kanji: 皆/Reading: みんな/Definitions: all,everyone,everybody/Markers: adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 645/Consecutive: 0/Difficulty: 0/
+/Kanji: 四つ/Reading: よっつ/Definitions: four/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 646/Consecutive: 0/Difficulty: 0/
+/Kanji: 明後日/Reading: あさって/Definitions: day after tomorrow/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 646/Consecutive: 0/Difficulty: 0/
+/Kanji: 耳/Reading: みみ/Definitions: [1] ear,[2] hearing,[3] edge,crust/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 646/Consecutive: 0/Difficulty: 0/
+/Kanji: 沢山/Reading: たくさん/Definitions: many,a lot,much/Markers: adj-na,adv,n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 646/Consecutive: 0/Difficulty: 0/
+/Kanji: 遣る/Hint: 仕事をやる/Reading: やる/Definitions: to do,to have sexual intercourse,to kill,to give (to inferiors,animals,etc.),to dispatch (a letter),to despatch,to send,to study,to perform,to play (sports,game),to have (eat,drink,smoke),to row (a boat),to run or operate (a restaurant)/Markers: v5r,col,uk/Score: 0/Bin: 0/Level: 2/Position: 646/Consecutive: 0/Difficulty: 0/
+/Kanji: 作る/Reading: つくる/Definitions: to make,to create,to manufacture,to draw up,to write,to compose,to build,to coin,to cultivate,to organize,to organise,to establish,to make up (a face),to trim (a tree),to fabricate,to prepare (food),to commit (sin),to construct/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 646/Consecutive: 0/Difficulty: 0/
+/Kanji: 煙草/Reading: たばこ/Definitions: tobacco (pt: tabaco),cigarettes/Markers: pt:,n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 647/Consecutive: 0/Difficulty: 0/
+/Kanji: 花/Reading: はな/Definitions: flower,petal/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 647/Consecutive: 0/Difficulty: 0/
+/Kanji: 右/Reading: みぎ/Definitions: [1] right hand side,[2] above,afore-mentioned,foregoing,forgoing/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 647/Consecutive: 0/Difficulty: 0/
+/Kanji: 呼ぶ/Reading: よぶ/Definitions: to call out,to invite/Markers: v5b,P/Score: 0/Bin: 0/Level: 2/Position: 647/Consecutive: 0/Difficulty: 0/
+/Kanji: 此れ/Reading: これ/Definitions: this/Markers: int,n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 647/Consecutive: 0/Difficulty: 0/
+/Reading: ワイシャツ/Definitions: shirt (trans: white shirt),business shirt/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 648/Consecutive: 0/Difficulty: 0/
+/Kanji: 結構/Reading: けっこう/Definitions: [1] splendid,nice,wonderful,delicious,sweet,[2] construction,architecture,[3] well enough,tolerably/Markers: adj-na,n-adv,n,uk,arch,P/Score: 0/Bin: 0/Level: 2/Position: 648/Consecutive: 0/Difficulty: 0/
+/Kanji: 暇/Reading: ひま/Definitions: [1] free time,leisure,leave,spare time,[2] farewell/Markers: adj-na,n/Score: 0/Bin: 0/Level: 2/Position: 648/Consecutive: 0/Difficulty: 0/
+/Kanji: 読む/Reading: よむ/Definitions: to read/Markers: v5m,P/Score: 0/Bin: 0/Level: 2/Position: 648/Consecutive: 0/Difficulty: 0/
+/Kanji: 一番/Reading: いちばん/Definitions: [1] best,first,number one,[2] game,round,bout,fall,event (in a meet)/Markers: n-adv,P/Score: 0/Bin: 0/Level: 2/Position: 648/Consecutive: 0/Difficulty: 0/
+/Kanji: 出かける/Reading: でかける/Definitions: to depart,to go out (e.g.,on an excursion or outing),to set out,to start,to be going out/Markers: v1/Score: 0/Bin: 0/Level: 2/Position: 649/Consecutive: 0/Difficulty: 0/
+/Kanji: 夜/Reading: よる/Definitions: evening,night/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 649/Consecutive: 0/Difficulty: 0/
+/Reading: フィルム/Definitions: film/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 649/Consecutive: 0/Difficulty: 0/
+/Kanji: 個/Reading: こ/Definitions: [1] counter for articles and mil. units,[2] individual/Markers: n,suf,P/Score: 0/Bin: 0/Level: 2/Position: 649/Consecutive: 0/Difficulty: 0/
+/Kanji: 来月/Reading: らいげつ/Definitions: next month/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 650/Consecutive: 0/Difficulty: 0/
+/Kanji: 六日/Reading: むいか/Definitions: six days,sixth (day of month)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 650/Consecutive: 0/Difficulty: 0/
+/Kanji: 入れる/Reading: いれる/Definitions: to put in,to take in,to bring in,to let in,to admit,to introduce,to commit (to prison),to usher in,to insert,to set (jewels),to employ,to listen to,to tolerate,to comprehend,to include,to pay (interest),to cast (votes)/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 650/Consecutive: 0/Difficulty: 0/
+/Kanji: 川/Reading: かわ/Definitions: river,stream/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 651/Consecutive: 0/Difficulty: 0/
+/Kanji: 詰らない/Reading: つまらない/Definitions: [1] dull,uninteresting,boring,[2] insignificant,trifling/Markers: adj,uk,P/Score: 0/Bin: 0/Level: 2/Position: 651/Consecutive: 0/Difficulty: 0/
+/Kanji: 来週/Reading: らいしゅう/Definitions: next week/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 651/Consecutive: 0/Difficulty: 0/
+/Kanji: 鳴く/Reading: なく/Definitions: [1] to sing (bird),[2] to bark,to purr,to make sound (animal)/Markers: v5k,P/Score: 0/Bin: 0/Level: 2/Position: 651/Consecutive: 0/Difficulty: 0/
+/Kanji: 未だ/Reading: まだ/Definitions: yet,still,more,besides/Markers: adv,P/Score: 0/Bin: 0/Level: 2/Position: 652/Consecutive: 0/Difficulty: 0/
+/Kanji: 私/Reading: わたし/Definitions: I,myself,private affairs/Markers: n,adj-no,P/Score: 0/Bin: 0/Level: 2/Position: 652/Consecutive: 0/Difficulty: 0/
+/Kanji: 為る/Reading: する/Definitions: to do,to try,to attempt,to execute,to play (game),to practice,to practise,to cost,to serve as,to pass,to elapse/Markers: vs-i,uk,P/Score: 0/Bin: 0/Level: 2/Position: 652/Consecutive: 0/Difficulty: 0/
+/Kanji: お兄さん/Reading: おにいさん/Definitions: older brother,"Mister?"/Markers: n,hon,vocative,P/Score: 0/Bin: 0/Level: 2/Position: 652/Consecutive: 0/Difficulty: 0/
+/Kanji: 使う/Reading: つかう/Definitions: to use,to handle,to manipulate,to employ,to need,to want,to spend,to consume,to speak (English),to practise (fencing),to practice (fencing),to take (one's lunch),to circulate (bad money)/Markers: v5u,P/Score: 0/Bin: 0/Level: 2/Position: 652/Consecutive: 0/Difficulty: 0/
+/Kanji: 来年/Reading: らいねん/Definitions: next year/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 652/Consecutive: 0/Difficulty: 0/
+/Kanji: 近く/Reading: ちかく/Definitions: near,neighbourhood,neighborhood,vicinity/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 653/Consecutive: 0/Difficulty: 0/
+/Reading: ストーブ/Definitions: heater (trans: stove)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 653/Consecutive: 0/Difficulty: 0/
+/Kanji: 角/Reading: かど/Definitions: [1] corner (e.g.,desk,pavement),[2] edge/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 653/Consecutive: 0/Difficulty: 0/
+/Reading: ラジオ/Definitions: radio/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 653/Consecutive: 0/Difficulty: 0/
+/Kanji: 時/Reading: じ/Definitions: hour/Markers: suf/Score: 0/Bin: 0/Level: 2/Position: 654/Consecutive: 0/Difficulty: 0/
+/Reading: ドア/Definitions: door (Western-style)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 654/Consecutive: 0/Difficulty: 0/
+/Kanji: 彼の/Hint: 指示詞/Reading: あの/Definitions: that over there/Markers: adj-pn,uk,P/Score: 0/Bin: 0/Level: 2/Position: 655/Consecutive: 0/Difficulty: 0/
+/Kanji: 六つ/Reading: むっつ/Definitions: six/Markers: num,P/Score: 0/Bin: 0/Level: 2/Position: 655/Consecutive: 0/Difficulty: 0/
+/Kanji: 起きる/Reading: おきる/Definitions: [1] to get up,to rise,[2] to wake up,[3] to occur,to happen,to take place/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 655/Consecutive: 0/Difficulty: 0/
+/Kanji: 留学生/Reading: りゅうがくせい/Definitions: overseas student/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 655/Consecutive: 0/Difficulty: 0/
+/Kanji: 人/Reading: にん/Definitions: counter for people/Markers: suf/Score: 0/Bin: 0/Level: 2/Position: 655/Consecutive: 0/Difficulty: 0/
+/Kanji: 八/Reading: はち/Definitions: eight/Markers: num,P/Score: 0/Bin: 0/Level: 2/Position: 656/Consecutive: 0/Difficulty: 0/
+/Kanji: 両親/Reading: りょうしん/Definitions: parents,both parents/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 656/Consecutive: 0/Difficulty: 0/
+/Kanji: 公園/Reading: こうえん/Definitions: park/Markers: n,public,P/Score: 0/Bin: 0/Level: 2/Position: 657/Consecutive: 0/Difficulty: 0/
+/Kanji: 本当に/Reading: ほんとうに/Definitions: really,truly/Markers: adv,P/Score: 0/Bin: 0/Level: 2/Position: 657/Consecutive: 0/Difficulty: 0/
+/Kanji: 見る/Reading: みる/Definitions: [1] to see,to watch,[2] (as an auxiliary verb) to try/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 657/Consecutive: 0/Difficulty: 0/
+/Kanji: 料理/Reading: りょうり/Definitions: cooking,cookery,cuisine/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 657/Consecutive: 0/Difficulty: 0/
+/Kanji: 旅行/Reading: りょこう/Definitions: travel,trip/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 658/Consecutive: 0/Difficulty: 0/
+/Reading: でも/Definitions: but,however,even/Markers: conj,prt/Score: 0/Bin: 0/Level: 2/Position: 658/Consecutive: 0/Difficulty: 0/
+/Kanji: 伯父/Reading: おじ/Definitions: uncle (older than one's parent)/Markers: n,hum,P/Score: 0/Bin: 0/Level: 2/Position: 658/Consecutive: 0/Difficulty: 0/
+/Kanji: 如何して/Reading: どうして/Definitions: why?,for what reason,how,in what way,for what purpose,what for/Markers: adv,int,uk,P/Score: 0/Bin: 0/Level: 2/Position: 658/Consecutive: 0/Difficulty: 0/
+/Reading: ズボン/Definitions: trousers (fr: jupon)/Markers: fr:,n,P/Score: 0/Bin: 0/Level: 2/Position: 659/Consecutive: 0/Difficulty: 0/
+/Kanji: 台/Reading: だい/Definitions: [1] stand,rack,table,[2] support,[3] belt,[4] counter for machines,incl. vehicles/Markers: n,n-suf,P/Score: 0/Bin: 0/Level: 2/Position: 659/Consecutive: 0/Difficulty: 0/
+/Kanji: 四日/Reading: よっか/Definitions: [1] 4th day of month,[2] four days/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 659/Consecutive: 0/Difficulty: 0/
+/Kanji: 零/Reading: れい/Definitions: zero,nought/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 659/Consecutive: 0/Difficulty: 0/
+/Kanji: 便利/Reading: べんり/Definitions: convenient,handy,useful/Markers: adj-na,P/Score: 0/Bin: 0/Level: 2/Position: 660/Consecutive: 0/Difficulty: 0/
+/Kanji: 色/Reading: いろ/Definitions: [1] colour,color,[2] sensuality,lust/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 660/Consecutive: 0/Difficulty: 0/
+/Kanji: 冷蔵庫/Reading: れいぞうこ/Definitions: refrigerator/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 660/Consecutive: 0/Difficulty: 0/
+/Kanji: 方/Hint: 比較を表す/Reading: ほう/Definitions: side,direction,way/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 660/Consecutive: 0/Difficulty: 0/
+/Kanji: 頃/Reading: ころ/Definitions: time,about,toward,approximately (time)/Markers: n,n-adv,n-suf,uk,P/Score: 0/Bin: 0/Level: 2/Position: 661/Consecutive: 0/Difficulty: 0/
+/Kanji: 側/Reading: がわ/Definitions: [1] side (of something,or taking someone's side),part,[2] case/Markers: n,suf,watch,P/Score: 0/Bin: 0/Level: 2/Position: 661/Consecutive: 0/Difficulty: 0/
+/Reading: レコード/Definitions: record/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 661/Consecutive: 0/Difficulty: 0/
+/Reading: レストラン/Definitions: restaurant/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 662/Consecutive: 0/Difficulty: 0/
+/Kanji: 仕事/Reading: しごと/Definitions: work,occupation,employment/Markers: n,adj-no,P/Score: 0/Bin: 0/Level: 2/Position: 662/Consecutive: 0/Difficulty: 0/
+/Kanji: 大人/Reading: おとな/Definitions: adult/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 662/Consecutive: 0/Difficulty: 0/
+/Kanji: 上/Reading: うえ/Definitions: above,over,on top of,up,upper part,summit,surface,far better,higher,authority,as far as .. is concerned,besides,after,emperor,sovereign,upon (examination),influence of (liquor),lord,shogun,superior,my dear (father)/Markers: n,adj-no,n-adv,n-suf,in,P/Score: 0/Bin: 0/Level: 2/Position: 663/Consecutive: 0/Difficulty: 0/
+/Kanji: 明日/Reading: あした/Definitions: tomorrow/Markers: n-t,P/Score: 0/Bin: 0/Level: 2/Position: 664/Consecutive: 0/Difficulty: 0/
+/Kanji: 出来る/Hint: 英語ができる/Reading: できる/Definitions: [1] to be able (in a position) to do,to be up to the task,[2] to be ready,to be completed,[3] to be made,to be built,[4] to be good at,to be permitted (to do),[5] to become intimate,to take up (with somebody),[6] to grow,to be raised/Markers: v1,uk,P/Score: 0/Bin: 0/Level: 2/Position: 664/Consecutive: 0/Difficulty: 0/
+/Kanji: 六/Reading: ろく/Definitions: six/Markers: num,P/Score: 0/Bin: 0/Level: 2/Position: 664/Consecutive: 0/Difficulty: 0/
+/Kanji: 家/Hint: わたしのうち/Reading: うち/Definitions: house (one's own)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 665/Consecutive: 0/Difficulty: 0/
+/Kanji: 其処/Hint: 指示詞/Reading: そこ/Definitions: that place,there/Markers: n,uk/Score: 0/Bin: 0/Level: 2/Position: 665/Consecutive: 0/Difficulty: 0/
+/Kanji: 入口/Reading: いりぐち/Definitions: entrance,gate,approach,mouth/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 666/Consecutive: 0/Difficulty: 0/
+/Kanji: 良い/Reading: いい/Definitions: good,nice,pleasant,fine,excellent,agreeable,ok/Markers: adj,uk,P/Score: 0/Bin: 0/Level: 2/Position: 666/Consecutive: 0/Difficulty: 0/
+/Kanji: 水/Reading: みず/Definitions: water (cold,fresh)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 666/Consecutive: 0/Difficulty: 0/
+/Kanji: 高い/Reading: たかい/Definitions: [1] high,tall,[2] expensive/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 666/Consecutive: 0/Difficulty: 0/
+/Kanji: 何れ/Reading: どれ/Definitions: well,now,let me see,which (of three or more)/Markers: n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 666/Consecutive: 0/Difficulty: 0/
+/Kanji: 若い/Reading: わかい/Definitions: young/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 666/Consecutive: 0/Difficulty: 0/
+/Kanji: 飛行機/Reading: ひこうき/Definitions: aeroplane,airplane/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 666/Consecutive: 0/Difficulty: 0/
+/Kanji: 居る/Reading: いる/Definitions: to be (animate),to exist/Markers: v1,uk,hum,P/Score: 0/Bin: 0/Level: 2/Position: 667/Consecutive: 0/Difficulty: 0/
+/Kanji: 其れでは/Reading: それでは/Definitions: in that situation,well then ../Markers: exp,uk,P/Score: 0/Bin: 0/Level: 2/Position: 667/Consecutive: 0/Difficulty: 0/
+/Kanji: お手洗い/Reading: おてあらい/Definitions: toilet,restroom,lavatory,bathroom (US)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 667/Consecutive: 0/Difficulty: 0/
+/Kanji: 有る/Reading: ある/Definitions: to be,to have/Markers: v5r-i,uk,P/Score: 0/Bin: 0/Level: 2/Position: 667/Consecutive: 0/Difficulty: 0/
+/Kanji: 半分/Reading: はんぶん/Definitions: half/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 668/Consecutive: 0/Difficulty: 0/
+/Kanji: 等/Reading: など/Definitions: et cetera,etc.,and the like/Markers: n,n-suf,prt,uk/Score: 0/Bin: 0/Level: 2/Position: 668/Consecutive: 0/Difficulty: 0/
+/Kanji: 忘れる/Reading: わすれる/Definitions: to forget,to leave carelessly,to be forgetful of,to forget about,to forget (an article)/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 668/Consecutive: 0/Difficulty: 0/
+/Kanji: 本/Reading: ほん/Definitions: book,main,head,this,our,counter for long cylindrical things/Markers: n,pref,P/Score: 0/Bin: 0/Level: 2/Position: 669/Consecutive: 0/Difficulty: 0/
+/Kanji: 頭/Reading: あたま/Definitions: [1] head,[2] brains,intelligence/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 670/Consecutive: 0/Difficulty: 0/
+/Kanji: 渡す/Reading: わたす/Definitions: to pass over,to hand over/Markers: v5s,P/Score: 0/Bin: 0/Level: 2/Position: 670/Consecutive: 0/Difficulty: 0/
+/Kanji: お腹/Reading: おなか/Definitions: stomach/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 670/Consecutive: 0/Difficulty: 0/
+/Reading: フォーク/Definitions: [1] folk,[2] fork/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 670/Consecutive: 0/Difficulty: 0/
+/Kanji: 電気/Reading: でんき/Definitions: electricity,light/Markers: n,electric,P/Score: 0/Bin: 0/Level: 2/Position: 671/Consecutive: 0/Difficulty: 0/
+/Kanji: 渡る/Reading: わたる/Definitions: to cross over,to go across/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 671/Consecutive: 0/Difficulty: 0/
+/Kanji: 持つ/Reading: もつ/Definitions: [1] to hold,to carry,[2] to possess/Markers: v5t,P/Score: 0/Bin: 0/Level: 2/Position: 671/Consecutive: 0/Difficulty: 0/
+/Kanji: 乗る/Reading: のる/Definitions: [1] to get on,to ride in,to board,to mount,to get up on,[2] to spread (paints),to be taken in,[3] to share in,to join,to be found in (a dictionary),to feel like doing,to be mentioned in,to be in harmony with/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 671/Consecutive: 0/Difficulty: 0/
+/Kanji: 喫茶店/Reading: きっさてん/Definitions: coffee lounge,coffee shop,(rather formal) cafe/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 672/Consecutive: 0/Difficulty: 0/
+/Kanji: 悪い/Reading: わるい/Definitions: bad,inferior/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 672/Consecutive: 0/Difficulty: 0/
+/Reading: ペン/Definitions: [1] pen,[2] PEN (club)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 672/Consecutive: 0/Difficulty: 0/
+/Kanji: 降りる/Reading: おりる/Definitions: to alight (e.g.,from bus),to get off,to descend (e.g.,a mountain)/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 672/Consecutive: 0/Difficulty: 0/
 Poor
-/Kanji: 七つ/Reading: ななつ/Definitions: seven/Markers: n,P/Score: 0/Bin: 1/Level: 0/Position: 450/Consecutive: 0/Difficulty: 0/
-/Reading: いくら/Definitions: how much?,how many?/Markers: adv,n,P/Score: 0/Bin: 1/Level: 0/Position: 46/Consecutive: 0/Difficulty: 0/
 Fair
 Good
 Excellent

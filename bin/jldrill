@@ -1,11 +1,12 @@
 #!/usr/bin/ruby
-begin
-	require 'Context/Gtk/App'
-	require 'Context/require_all'
-	require 'jldrill/contexts/MainContext'
-	require_all 'jldrill/views/gtk/*.rb'
+require 'Context/Gtk/App'
+require 'Context/require_all'
+require 'jldrill/contexts/MainContext'
+require_all 'jldrill/views/gtk/*.rb'
+
+module JLDrill
+    module Gtk
+        jldrill = Context::Gtk::App.new(JLDrill::Gtk, JLDrill::MainContext)
+        jldrill.enter
+    end
 end
-
-jldrill = Context::Gtk::App.new(JLDrill::Gtk, JLDrill::MainContext)
-jldrill.enter
-
