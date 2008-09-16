@@ -8,3 +8,4 @@ web/output
 .config
 pkg
 web/src/webgen.cache
+webgen.cache
