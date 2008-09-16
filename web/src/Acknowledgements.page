@@ -3,8 +3,8 @@ title: Acknowledgements
 in_menu: true
 sort_info: 60
 ---
-h2. Acknowledgements
-
+Acknowledgements
+================
 This program could not have been written if it were not for the
 contribution that others have made.  Normally JLDrill will be
 distributed with data files that are used for creating the drills.
@@ -22,25 +22,25 @@ files which form the basis of the JLPT drills.  Thierry has very
 kindly granted permission to use these files in this application
 under the GPL license, thus saving me weeks of work.
 
-Finally, I would like to thank "RubyForge":http://rubyforge.org for
+Finally, I would like to thank [RubyForge](http://rubyforge.org) for
 hosting this project.  It makes a big difference.
 
-h3. Notes 
-
+Notes 
+-----
 The EDICT files are the property of the Electronic Dictionary Research
 and Development Group at Monash University, and are used in
 conformance with the Group's licence.
 
 Links: 
 
-* "EDICT":http://www.csse.monash.edu.au/~jwb/edict.html
-* "Electronic Dictionary Research and Development Group":http://www.csse.monash.edu.au/groups/edrdg/
-* "License":http://www.csse.monash.edu.au/groups/edrdg/licence.html
+* [EDICT](http://www.csse.monash.edu.au/~jwb/edict.html)
+* [Electronic Dictionary Research and Development Group](http://www.csse.monash.edu.au/groups/edrdg/)
+* [License](http://www.csse.monash.edu.au/groups/edrdg/licence.html)
 
 
 The JLPT files are Copyright (C) 2001 Thierry Bézecourt 
 
-Please visit "Thierry's Website":http://www.thbz.org
+Please visit [Thierry's Website](http://www.thbz.org)
 
 More licence information can be found in the data/jldrill/COPYING
 directory in JLDrill's main distribution.

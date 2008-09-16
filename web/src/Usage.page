@@ -3,8 +3,8 @@ title: Usage
 in_menu: true
 sort_info: 40
 ---
-h2. Usage
-
+Usage
+=====
 After installing, on a GNU/Linux, BSD, or Unix-like system type
 <pre>
     jldrill
@@ -19,22 +19,22 @@ to the ruby binary directory to run jldrill.  Usually this will be:
     ruby jldrill
 </pre>
 
-h2. Main Window
-
+Main Window
+-----------
 This is what you see when you first start JLDrill.
 
-<a href="images/Start.png"><img src="images/Start-mini.png" alt="JLDrill Starting Screen." /></a>
+![JLDrill Starting Screen](images/Start.png "JLDrill screenshot")
 
 There's not much to do until you load a drill file.
 
-h2. Selecting a Drill File
-
+Selecting a Drill File
+-----------------------
 You may open a drill file by clicking the "Open" button on the tool
 bar.  You may also access this functionality by pressing Ctrl-O, or
 selecting File/Open from the menu bar.  After doing so you will be
 presented with the file open dialog.
 
-<a href="images/OpenQuiz.png"><img src="images/OpenQuiz-mini.png" alt="Quiz File Open Dialog." /></a>
+![Quiz File Open Dialog](images/OpenQuiz.png "Quiz File Open Dialog")
 
 There are many drill files available.  They include hiragana, katakana
 and JLPT vocabulary levels 1-4.  JLDrill will automatically choose the
@@ -45,12 +45,12 @@ Please cross reference any words (the Ctrl-X function) that you are
 unfamiliar with. You can help: If you fix any translations, please
 send them to me so that everyone can benefit.
 
-h2. Conducting the Quiz
-
+Conducting the Quiz
+-------------------
 After loading the quiz file you will be presented with your first
 question.  This will be shown in the top pane of the main window.
 
-<a href="images/Quiz.png"><img src="images/Quiz-mini.png" alt="Quiz Word is Displayed." /></a>
+![Quiz Word is Displayed](images/Quiz.png "Quiz Word is Displayed")
 
 Note: Currently you will be shown the kanji and the reading for
 vocabulary in the question pane.  Eventually you will be able to drill
@@ -65,7 +65,7 @@ question.  You do this to yourself without inputting anything into the
 computer.  Then you click on the "Check" button (or "Z" key on the
 keyboard) to see if you were right.
 
-<a href="images/QuizAnswer.png"><img src="images/QuizAnswer-mini.png" alt="Quiz Answer is Displayed." /></a>
+![Quiz Answer is Displayed](images/QuizAnswer.png "Quiz Answer is Displayed")
 
 If you were right in your guess, you click on "Correct" ("C" on the
 keyboard).  Otherwise you click on "Incorrect" ("X" on the keyboard).
@@ -74,12 +74,12 @@ seems like a rather simplistic way of doing things, you are right.
 What struck me about conducting the quiz this way is that there is a
 minimum of UI to get in your way.  The drills can go very quickly.
 
-h2. Measuring Your Progress
-
+Measuring Your Progress
+-----------------------
 The status of the quiz is displayed at the bottom screen and will look
 something like: 
 
-<a href="images/Status.png"><img src="images/Status-mini.png" alt="Quiz Status." /></a>
+![Quiz Status](images/Status.png "Quiz Status")
 
 First, the * on the left hand side means that the quiz has not been
 saved yet.  As you progress through the quiz, it keeps track of your
@@ -108,8 +108,8 @@ in a random order.
 indicates the speed at which new vocabulary will be introducted.
 
 
-h2. Training Algorithm
-
+Training Algorithm
+------------------
 In the example, 2 is the number of times you have to get the word
 correct before it will be "promoted" into the next higher slot.  So
 once you get it right 2 times in a row, it will be moved from Poor to
@@ -134,10 +134,10 @@ parameter to 3 or even 4.  Adjusting the second parameter will allow
 you to quiz a more narrow or wide range of words.  These can set
 this from the quiz preferences (Ctrl-P or Quiz/Preferences from the menu).
 
-<a href="images/Options.png"><img src="images/Options-mini.png" alt="Quiz Options." /></a>
+![Quiz Options](images/Options.png "Quiz Options")
 
-h2. Saving Your Progress
-
+Saving Your Progress
+--------------------
 Remember to save your drill before you quit.  That way it will pick up
 where you left off last time.  The first time you load a drill, you
 might want to use the "Save As" entry from the menu bar (File/Save As, or
@@ -149,8 +149,8 @@ menu, Ctrl-S, or clicking on the Toolbar).  If you quit the
 application, or open up another drill, JLDrill will always ask you if
 you want to save your file.
 
-h2. Non-Drill Features
-
+Non-Drill Features
+------------------
 **Reference Dictionary**.  This feature is useful in case
 you want to check that the translation in the drill is correct.  It
 allows you to cross reference the word against a dictionary
@@ -176,7 +176,7 @@ ugly display with the Word on the left hand side, a table of
 candidates on the bottom and space for a selected word on the right
 hand side.  
 
-<a href="images/XReference.png"><img src="images/XReference-mini.png" alt="Cross Reference with Dictionary." /></a>
+![Cross Reference with Dictionary](images/XReference.png "Cross Reference with Dictionary")
 
 Currently, the dictionary lookup is by reading alone.  A kanji lookup
 is also planned.  All you do is select one of the words at the bottom and
@@ -191,12 +191,12 @@ is saved with the drill.
 word that you are drilling.  Just press D (or select Vocab/Display
 from the menu).  You can edit this word if you want from here.
 
-<a href="images/View.png"><img src="images/View-mini.png" alt="View/Edit the Vocabulary." /></a>
+![View/Edit the Vocabulary](images/View.png "View/Edit the Vocabulary")
 
 **Show all**. Will show a table of all the words in the
 drill.
 
-<a href="images/AllVocab.png"><img src="images/AllVocab-mini.png" alt="View All the Vocabulary." /></a>
+![View all the Vocabulary](images/AllVocab.png "View all the Vocabulary")
 
 **Reset**.  You can reset the drill so
 that all the words are Unseen again.  Press Ctrl-R or select

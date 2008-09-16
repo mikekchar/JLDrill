@@ -4,8 +4,8 @@ in_menu: true
 sort_info: 70
 ---
 
-h2. JDrill License
-
+JDrill License
+==============
 JLDrill is licensed under version 3.0 of the GNU General Public License (GPL)
 Please see the COPYING File for more details.  Previous versions of JLDrill
 were released under version 2.0 of the GPL and you may choose that version
