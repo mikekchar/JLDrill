@@ -24,17 +24,22 @@ that studying every third day is barely more effective than not studying
 at all.)
 
 JLDrill has two modes of scheduling strategies.  The first is for short term
-acquisition of new material.  In this mode the item is repeatedly shown
+acquisition of new material*.  In this mode the item is repeatedly shown
 to the user until the user can remember it correctly a number of times.  The
 second mode is long term review.  In this mode JLDrill uses a spaced
 repetition strategy to occasionally review an item with the user
 over days, weeks or months.
 
+(* Footnote: I am considering using a "spaced learning" approach
+for acquisition of new material.  In such an approach, the student
+reviews material for 10 minutes, takes a 10 minute break, and
+then reviews again.  This has been said to create long term memory.)
+
 What is Spaced Repetition?
 --------------------------
 Before I continue with a description of the strategies, I want to discuss
 what spaced repetition is.  Spaced repetition is the presentation
-of material separated by spaces of increasingly large durations.  These
+of material separated by spaces of increasingly large duration.  These
 spaces are measured in terms of mintues, hours, days, and months.
 
 The idea is that a new item is presented to the learner.  If the learner
@@ -81,12 +86,16 @@ way as to maximize the rate of learning (or learning rate).
 
 Learning rate, in this document, refers to the number of items that can
 be remembered divided by the amount of time it took to learn those
-items.  However, learning rate is highly dependent upon timeframe.
+items*.  However, learning rate is highly dependent upon timeframe.
 If we were only interested in short-term retention (over a couple of
 days) then cram studying might actually be a better approach.  So for
 this document, learning rate refers to items that can be remembered
 which have not been reviewed for at least 30 days.  It is convenient
 to express this value in terms of number of items per hour.
+
+(* Footnote: I am considering changing this to the number of repetitions
+rather than the amount of time.  This may allow us to compare results
+with different types of data -- for instance vocabulary and grammar.)
 
 As an example, imagine that 1000 items have been studied using a particular
 spaced repetition algorithm.  Let's say that it took about 50 hours to
@@ -98,7 +107,9 @@ Probably the easiest way for a computer application to measure the learning
 rate is simply totalling the time that each item took in order to reach
 the first place where the repetition space is greater than one month.  Then
 count the number of items that are correctly reviewed and divide by the time.
-In this way a running value of the learning rate can be maintained over time.
+In this way a running value of the learning rate can be maintained over time*.
+
+(* Footnote: JLDrill does not currently do this.  But it probably should.)
 
 However, when comparing learning rates between different algorithms it
 is important to note that items learned must be of similar type.  Learning
@@ -144,7 +155,7 @@ Instead, JLDrill merely attempts to keep the items above a certain recall
 rate.  It does this by ordering the items in the review set according
 to a binary backoff scheduling (the time the item is scheduled for is
 twice the amount of time that has expired since the last review).  I will
-show below that this is roughly homogenous to the order of probability
+be shown below that this is roughly homogenous to the order of probability
 of failure for the items.  JLDrill then reviews items until it is
 about 90% certain that the items currently being reviewed have a greater
 than 90% chance of being remembered.  After this point, only new items
@@ -288,11 +299,11 @@ So, as you can see (and a mathematical proof is left as an exercise
 to the reader -- I'm too lazy!) the final deviation from 90% is
 not large.  For values greater than 90% it can have a greater impact
 than for values less than 90%.  A deviation of +-5% is a 1/18 ratio
-on the low side, but a 1/2 ration on the high side.  However, in 
+on the low side, but a 1/2 ratio on the high side.  However, in 
 practice, reviewing is roughly 9 times faster than relearning an item.
 So even a 6.25% increase in reviewing (1/4x items out of 2x reviewed
 50% earlier than they should have been) results in only about a 1%
-increase in actual time spend.
+increase in actual time spent.
 
 Generally speaking, as long as the items in the list are well
 distributed in their schedule, the impact of not getting the
@@ -382,7 +393,16 @@ math.
 What Percentage Level to Stop Reviewing
 ---------------------------------------
 
-This needs doing...
+This needs doing...  At first I thought 90% could be easily shown
+to be the best value, but then I realized that the questions is actually
+quite complicated.  Basically, we want a percentage such that the
+weighted cost of relearning is equal to the cost of reviewing.
+In other words, the cost of relearning the word over again multiplied
+by the chance that the word is forgotten is equal to the cost of
+re-reviewing the word so that it isn't forgotten.  This creates a
+balance.  However, calculating this value is actually fairly difficult
+and I haven't had time to do it.  I believe is it fairly close to
+90%, though.
 
 Conclusion
 ----------

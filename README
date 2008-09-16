@@ -10,10 +10,10 @@ JLDrill - Japanese Language Drill program
 What's New for 0.3.0
 
   Version 0.3.0 introduces a long-term spaced repetition scheduling
-  algorithm.  Please see the user guide for a description
-  of the algorithm used.  It is one of my own devising and still
+  algorithm.  Please see the document, strategy.txt in the designDoc
+  directory.  It is an algorithm of my own devising and still
   needs a bit of teaking.  However, even at this early stage I find
-  it at least as useful as the popular SuperMemo algorithms.
+  it is working very well.
   
   Version 0.3.0 also offers numerous user interface improvements.
   There is an indicator box that shows several of the useful Edict
@@ -23,6 +23,8 @@ What's New for 0.3.0
   using larger fonts for the kanji.  Finally, if you load the kanji
   dictionary, you can hover over a kanji character and get a
   rikaichan-like popup showing useful information about that character.
+  If you install the ttf-kanjistrokeorders font, you will also be shown
+  the stroke order of kanji or kana characters.
 
 JLDrill is now Beta   
 
@@ -36,9 +38,6 @@ JLDrill is now Beta
   a new work flow that will improve the problem.  I am a programmer, not
   a UI desiger, so I welcome any and all advice on this front.
   
-  For details on how to participate in the development of JLDrill
-  see the section "Getting Involved" at the bottom of this document.
-
 TODO
 
   Version 0.4.0 will be a release version.  That is to say that it
@@ -73,7 +72,7 @@ Installation
   
   JLDrill has been developed and tested on GNU/Linux (Ubuntu).
   It should work on any platform that supports Ruby, Gtk and Ruby-Gnome
-  (including Windows and Apple-Macintosh).
+  (including Windows and Apple OSX).
   
   Please download the two gem files, context and jldrill.  Context is
   a library for user interface abstraction (jldrill is the only
@@ -88,6 +87,10 @@ Installation
   typing:
   
     jldrill
+    
+  More detailed information on installation can be found on
+  the JLDrill webpage (which is located in web/output directory
+  of the source package).
   
 License
 
@@ -100,152 +103,17 @@ License
 
 Getting Involved
 
-  While I have build JLDrill on the work of others, as an entity on its
+  While I have built JLDrill on the work of others, as an entity on its
   own, I have been the sole contributor.  There are many reasons for this,
   but regardless I am very enthusiastic about receiving any kind of
   contribution from other people.  Even if you can't write software, there
   are many ways you can contribute.  I want to encourage this as much as
   possible.
   
-  Working on a public project can be tricky at times.  Each person has their
-  own motives for working and the motives don't always match up.  In the
-  worst case, this software is licensed under the GPL so you will always be
-  free to extend if for your own purposes.  However I'd like to take some
-  space to explain my own motives in order to make it easier for others
-  to "get in".
-  
-  History of JLDrill
-  
-  First and foremost, I started this project because I needed it.
-  Originally, I couldn't find software that was suitable for studying
-  Japanese.  The software I *could* find was either buggy or incomplete
-  and I couldn't use it.  So I naively wrote my own.
-  
-  The first version of JLDrill wasn't very good, either in functionality
-  or in code quality.  I quickly realized that its lack of long term
-  review ability made it almost useless and I had found some other
-  excellent software for long term studying (namely Mnemosyne).  So I
-  closed up shop on JLDrill and decided not to pursue it any more.
-  
-  Over time, though, I started to realize that some of the features of
-  JLDrill (ability to read in EDict files, Dictionary cross reference, etc)
-  were very handy.  I also realized that while the long term review
-  functionality of Mnemosyne was vastly superior, JLDrill actually had
-  excellent *short-term* review ability.  In other words, it was great
-  for acquiring new information.  So for a long time I was using JLDrill
-  to aquire new information and then moving my data over to Mnemosyne.
-  
-  Eventually, I decided that my goals for JLDrill were different enough
-  from Mnemosyne that I should concentrate on improving JLDrill.  And
-  so I restarted the project.
-  
-  Project Goals
-  
-  There are many goals of the JLDrill project.  Some are very flexible
-  and some are not.  I hope that by reading these goals you will get
-  some idea of whether or not our interests meet.
-  
-  1. Maximize item learning throughput over a long term.  I have a specific
-     definition for this.  The JLPT 1 material is about 10,000 items of 
-     vocabulary, 2,300 characters (kana and kanji) and probably about 1-2000
-     grammar items.  My goal is to minimize the time spent memorizing
-     this information over a 1 year peoriod, while still retaining
-     a 90% recall rate.
-     
-     Such a goal consists not only of optimizing review item scheduling,
-     but also streamlining the UI to be as quick and convenient as possible.
-     With such a large number of items to learn, shaving even 1 second
-     per item off the workflow can dramatically improve memorization
-     performance.
-     
-  2. I want to experiment with some specific programming ideas.  This
-     was the basis behind refactoring the entire code base over to
-     a MVP (Model/View/Presentor).  Also, I intend to eventually hit
-     a 100% test coverage including the UI.  
-     
-     JLDrill is programming practice for me right now.  In some ways it
-     means that the software will be "wierd" in some respects.  But in others
-     it means that the code will be "polished" a lot more than you might
-     expect on other projects.  It also means that I might insist on rewriting
-     submissions to match my current coding ideas.
-     
-     But I'm flexible on this.  I really want people to look at my code
-     and comment on it.  There's still lots of bad cruft.  And even some
-     of the refactoring choices I've made recently have been poor.  A
-     discussion of "good code" vs "bad code" is welcomed.
-     
-  3. I want the software to match my method of studying.  In other words,
-     I study in a specific way and I want JLDrill be be able to be used
-     that way.  BUT I'm happy to encourage other ideas.  As long as it
-     doesn't get in my way, I'll accept new features no matter how crazy
-     they are.  Experimentation is good.
-     
-     The downside here is that we may create confusing workflows for novice
-     users.  #4 adresses that issue.  But in the end, I prefer to try out
-     an idea rather than avoid it for fear of confusing users.  Working
-     code is the vastly preferred way to introduce a feature idea to me.
-     A video/mockup is the next most preferred way.  An email description
-     is the next most preferred.  Passive agressive hints that something
-     could be improved should be avoided ;-)
-     
-     But if you give me code, probably it will end up in JLDrill.
-     
-  4. I want the software to be easy for new users to learn.  This means
-     that there should be one, and only one, obvious way to use the
-     software.  But I am majorly flexible on this.  Even if there is only
-     one obvious way to use the software, there can be many, many unobvious
-     ways to use the software.  I don't mind if users can shoot their foot
-     off as long as the gun and the bullets are stored in separate
-     locked containers.
-     
-     What I'd really like is for a new user to be able to sit down
-     for the first time and learn Japanese without having to access
-     other resources.  I'd like them to be able to have a curriculum to
-     follow and be able to happily work away at it without having to
-     decided what they want to do next -- the curriculum should take care
-     of it for them.
-     
-     But eventually multiple curriculi should be supported.  Users should
-     be able to pick the one they want.  And they should *always* have the
-     ability to abandon the curriculum they are on to follow whatever fancy
-     they want.  This is free software -- there are no dumb users!!!
-     All users are encouraged to make their own way, up to and including
-     modifying the software to do what they want. 
-     
-     Striking the balance between convenience and flexibility is difficult.
-     But the important point is that users *should* want to take
-     control of the software.  They *should* want to modify their
-     curriculum.  They *should* want to modify the way they study.
-     The software should be able to give them as much information as possible
-     to help them make decisions on what to do.
-     
-     So if you are on board with this concept of user freedom, then
-     I highly encourage you to comment on user experience.  As always,
-     working code is the form of submission I like best.  But if you don't
-     code, don't let it stop you.  Make a mock up.  Make an animated
-     video.  Describe it in an email.  But be as specific as possible.
-     Saying, "This sucks" (especially if I already know that) is
-     not helpful at all.  Saying "This sucks because of X" is marginally
-     helpful (assuming I was wondering why something sucked).  Saying,
-     "The following workflow is being impeded by X, so we should
-     replace X somehow" is actually pretty good as long as the workflow
-     interaction is described in detail.  Saying, "Introducing the
-     following workflow change will have the following (good) impact"
-     is great.  My odds of writing code improve over the range of
-     inputs.
-     
-  5. User documentation, website improvements and artwork are appreciated.
-     I am not a writer, nor a website designer, not an artist.  I
-     recognize my limits in these areas.  Criticism in these areas probably
-     won't be appreciated unless it is accompanied by changes.  I
-     won't take suggestions on these issues, but I almost guarrantee
-     that I will take a submission unless there is obviously something
-     wrong.
-     
-     This is the single easiest place to make a contribution.  I'm
-     no good at this, and I don't particularly want to improve ;-)
-     I'm leaving the door wide open here!
+  Please address any comments, suggestions, corrections and patches to:
+        Mike Charlton <mikekchar@gmail.com>
 
+  I'm also very interested in receiving any new drills you may come up with.
+  Please make sure to specify the license information for any material you
+  send to me.
   
-Mike Charlton <mikekchar@gmail.com>
-
