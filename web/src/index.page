@@ -17,9 +17,8 @@ Screenshot
 
 What's New for 0.3.0
 --------------------
-  Version 0.3.0 introduces a long-term spaced repetition scheduling
-  algorithm.  Please see the user guide for a description
-  of the algorithm used.  It is one of my own devising and still
+  Version 0.3.0 introduces a [long-term spaced repetition scheduling
+  algorithm](Strategy.html).  It is one of my own devising and still
   needs a bit of teaking.  However, even at this early stage I find
   it at least as useful as the popular SuperMemo algorithms.
   

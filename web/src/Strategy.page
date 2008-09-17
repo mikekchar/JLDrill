@@ -1,0 +1,432 @@
+---
+title: JLDrill's Scheduling Strategy
+in_menu: true
+sort_info: 85
+---
+JLDrill's Scheduling Strategy
+=============================
+
+Introduction
+------------
+The goal of JLDrill's scheduling strategies is to maximize the acquisition
+and retention of items over a long term.    For the purposes of this
+document, "long term" means over a period of a year or more.  The intent is
+not to correctly remember every item studied, but rather to maximize the number
+items that can be remembered over the long term given the same investment
+in studying time.
+
+The scheduling strategies presented here assume the user consistently
+uses the application on a daily basis.  It is assumed that the user
+can invest roughly the same amount of time every day and that they generally
+use the application every day.  No attempt is made to accomodate users
+that have inconsistent review habits.\*
+
+(\* Footnote: Once I have the scheduling strategies finished, I will
+do a simulation showing the difference in items learned when using
+the application every day, every other day and every third day.  I
+have done some "back of the envelope" type calculations and have determined
+that studying every third day is barely more effective than not studying
+at all.)
+
+JLDrill has two modes of scheduling strategies.  The first is for short term
+acquisition of new material\*.  In this mode the item is repeatedly shown
+to the user until the user can remember it correctly a number of times.  The
+second mode is long term review.  In this mode JLDrill uses a spaced
+repetition strategy to occasionally review an item with the user
+over days, weeks or months.
+
+(\* Footnote: I am considering using a "spaced learning" approach
+for acquisition of new material.  In such an approach, the student
+reviews material for 10 minutes, takes a 10 minute break, and
+then reviews again.  This has been said to create long term memory.)
+
+What is Spaced Repetition?
+--------------------------
+Before I continue with a description of the strategies, I want to discuss
+what spaced repetition is.  Spaced repetition is the presentation
+of material separated by spaces of increasingly large duration.  These
+spaces are measured in terms of mintues, hours, days, and months.
+
+The idea is that a new item is presented to the learner.  If the learner
+demonstrates that they can remember the item, the item is presented
+at a later time.  If the learner demonstrates that they can remember the
+item again, the item is presented at a later time.  Each time the
+user remembers the item, the space between presentations gets longer.
+
+The technique of spaced repetition is based on the concept of a "forgetting 
+curve".  After an item has been presented, as time goes by the chance
+that the item will be remembered falls.  This is known as the
+"forgetting curve".  The forgetting curve has the shape of
+<pre>
+    e^-(t/x)  [e to the power of negative t over x]
+</pre>    
+where t is the time that has elapsed and x is a factor representing
+the "shallowness" of the curve.  As x becomes large, the influence
+of time on the forgetting curve decreases.
+
+The variable x is dependent upon many things, including the person's
+emotional state when the item is presented.  But one of the items
+that is important to x is the number of times the item has been
+presented before.  The more times the item is presented, the larger
+x will be (it must be noted that there must be a gap between presentations
+for this to occur).
+
+Please note that the slope of the forgetting curve is continuously
+decreasing as t (time) increases.  This is important to JLDrill's
+scheduling algorithm.
+
+The intent of a spaced repetition algorithm is to schedule
+reviews of an item so as to increase the value of x for an item (shallowing
+the forgetting curve and making the item less likely to be forgotten over
+time) with the least investment of studying time.  This is usually accomplished
+by scheduling the item to be reviewed when its chance of being remembered
+drops to a certain point (90% for instance).
+
+Learning Rate
+-------------
+Generally speaking if we accept the thesis of spaced repetition, that is
+that we improve our ability to remember an item every time we correctly
+remember it, the biggest problem is to schedule reviews in such a
+way as to maximize the rate of learning (or learning rate).  
+
+Learning rate, in this document, refers to the number of items that can
+be remembered divided by the amount of time it took to learn those
+items\*.  However, learning rate is highly dependent upon timeframe.
+If we were only interested in short-term retention (over a couple of
+days) then cram studying might actually be a better approach.  So for
+this document, learning rate refers to items that can be remembered
+which have not been reviewed for at least 30 days.  It is convenient
+to express this value in terms of number of items per hour.
+
+(\* Footnote: I am considering changing this to the number of repetitions
+rather than the amount of time.  This may allow us to compare results
+with different types of data -- for instance vocabulary and grammar.)
+
+As an example, imagine that 1000 items have been studied using a particular
+spaced repetition algorithm.  Let's say that it took about 50 hours to
+study and review these items.  The items are not studied for 1 month and
+then the user is tested.  Let's say that the user gets 900 items correct.
+This means that the learning rate is 18 items/hour.
+
+Probably the easiest way for a computer application to measure the learning
+rate is simply totalling the time that each item took in order to reach
+the first place where the repetition space is greater than one month.  Then
+count the number of items that are correctly reviewed and divide by the time.
+In this way a running value of the learning rate can be maintained over time\*.
+
+(\* Footnote: JLDrill does not currently do this.  But it probably should.)
+
+However, when comparing learning rates between different algorithms it
+is important to note that items learned must be of similar type.  Learning
+language vocabulary and learning math equations may have dramatically
+different learning rates after all.
+
+Also complicating this is that many, or even most users do not consistently
+review their materials.  As I will show in a future document, the learning
+rate is dramatically affected by consistency of review.  So any discussion
+on the effectiveness of strategies much take into account consistency.
+I do not have any good suggestions for doing that.
+
+General Overview of JLDrill's Strategies
+========================================
+
+There are three types of vocabulary items JLDrill: 
+    new items, 
+    items you are learning, and
+    items you need to review.  
+    
+They are divided into 3 sets: 
+    the "new set", 
+    the "working set" and 
+    the "review set".
+
+JLDrill works differently than other spaced repetition programs.  First, it 
+has a category specifically for learning an item. This is the working set.  
+Basically, you must answer the quizes on the items in the working set
+correctly enough times that the program is convinced that you know it.
+
+Once you know the item, it is placed into the Review Set.  At this point it 
+will sit until it is scheduled to be reviewed.  Each time you review an item 
+in the Review Set correctly, the algorithm backs off the next review a little
+longer.  If you get it wrong, it goes back into the Working Set and you have 
+to prove you know it again.
+
+Probably the biggest difference between JLDrill and other spaced repetition 
+programs is that JLDrill doesn't attempt to strictly schedule the items for
+review.  While each item has a scheduled review date, that is only used to 
+make sure that old items are eventually reviewed (prevent starvation).
+
+Instead, JLDrill merely attempts to keep the items above a certain recall 
+rate.  It does this by ordering the items in the review set according
+to a binary backoff scheduling (the time the item is scheduled for is
+twice the amount of time that has expired since the last review).  I will
+be shown below that this is roughly homogenous to the order of probability
+of failure for the items.  JLDrill then reviews items until it is
+about 90% certain that the items currently being reviewed have a greater
+than 90% chance of being remembered.  After this point, only new items
+are introduced.
+
+The basic action in JLDrill is centered around the working set.  There
+are a number of items actively being learned in the working set (by default
+10).  These items are reviewed in random order.  When the user can
+demonstrate that they remember an item a number of times in a row (either
+3, 6 or 9 - user configurable) the item is "promoted" into the
+review set.  At this point, we will review items in the review set until we get
+one that is incorrect.  That item is then "demoted" back into the working
+set.  If we have already reviewed review set items up to a 90% success
+rate, then an item from the new set will be added to the working set
+instead.
+
+Justification for the Spacing Algorithm
+=======================================
+
+The spacing algorithm in the review set depends on roughly ordering
+the items according to the probability that they will be correctly
+remembered.  Items with the highest probability are put at the back
+of the set and items with the lowest probability are put at the front
+of the set.  Items are then drilled from the front of the set until
+it is estimated (with 90% confidence) that the items at the front
+of the set are at or above 90% success rate.
+
+Unfortunately, we don't know the actual probability of success of the
+items in the set.  However, I will show that the order is roughly
+homogenous to the order that a back-off scheduling algorithm
+would put them in.
+
+For example let's say we schedule newly acquired items to be reviewed
+after one day.  Then let's say that we schedule items which have been
+reviewed successfully once after two days.  Likewise, items which have been
+reviewed twice after four days, etc.  If we then sort these items based
+on schedule, these items should be in an order that approximates their
+percentage chance of being reviewed correctly.  Items with the highest
+probability of being forgotten are at the beginning and items with the
+lowest probability of being forgotten are at the end.
+
+Of course this is not strictly true.  When items are first sorted,
+since the items have just been reviewed, they should have exactly the 
+same chance of being remembered (100%). We only schedule them after they 
+have been acquired.  But as time goes forward, the rates at which the items 
+become forgotten is different.  As long as the variable x in the forgetting
+curve is usually dominated by the number of times an item has been reviewed
+(our basic thesis), the items with less reviews will have a steeper
+forgetting curve than items with more reviews.
+
+The result is that the items in the list will be sorted by success probability.
+As long as the backoff in the scheduling is high enough, the categories will
+not overlap and the items will remain strictly sorted over time.  At this point 
+it is easy to review items from the front of the list until the probability
+of success hits 90%.  A bayesian estimate can be generated to determine
+the confidence of this estimate.
+
+It is important to understand that while a "schedule" is made for each item,
+that schedule is not used to determine when the item is reviewed.  It is
+only used to rank the probability of the item being reviewed successfully.
+The items are actually reviewed when their probability of success goes
+below 90%.  This allows us to create the proper spacing without precisely
+modelling the forgetting curve.
+
+Unfortunately this method will only work if we do not add new items to the
+list.  Of course we need to be able to do that.  The problem becomes how
+to compare the probabilities of the new items with the probabilities of
+items that have been in the list for some time.  I will show that by
+acting as if the items already in the list are actually scheduled, that
+under certain conditions the list maintains a partial order which is 
+acceptably close to the correct order.
+
+As an example, say item A was initially scheduled for 4 days.  3 days
+have passed and we want to add an item, B, that is scheduled for 2 days.
+We simply put B behind A in the order and assume that the
+list is acceptably ordered.  This does not mean that item A will actually
+be reviewed in one more day.  That depends on its success probability and
+the probability of those items around it.  But under certain conditions,
+which I will describe below, the fact that the list is ordered in this
+way will not unduly affect the final probability when the item is
+reviewed (in other words it will be very close to 90% probability
+when the item is reviewed).
+
+Let's assume that we are using a binary back-off scheduling algorithm
+that starts with a space of one day.  Let's also assume a 90% success
+rate (our target).  This means that as long as the items are evenly
+distributed over the schedule and we add x items every day, the
+total number of items reviewed every day is:
+
+<pre>
+    sum[from 0 to infinity](1/2^(-i) x) + sum[from 1 to infinity](1/10^(-1) x)
+</pre>    
+    
+    
+2x is an upper bound for this value.  So in general we will be reviewing
+at most 2x items per day.  The contribution from items that have been
+reviewed 3 or more times is less than 1/4 of this value.  In the case
+that these items are reviewed too early, they will have a success rate
+of over 90%.  But the upper bound of this is small (100%) and since,
+on average, they arrive every 4th item they will have a small impact
+on the overall success rate.  The worst case is that the percentage will be
+(90 \* 3 + 100) / 4 = 92.5% an adjutment of only 2.5%.  To counteract
+this the other items will have to fall to 87.7%.  
+
+In the case that the items that have been reviewed 3 or more times are
+reviewed too late, they can have a much bigger impact on the success
+rate.  Of course, in the worst case the chance is near 0 and the
+other items can not overcome it even if they become 100% successful.
+However, in this case the items will simply be reviewed until the
+success rate is 90%.  In the worst case it means that items which
+were reviewed once or twice will all be reviewed.  At that point,
+the only items left are those that have been reviewed 3 or more times.
+Since their chance of success is below 90%, this is desirable.
+
+But it means that all of the items which were reviewed once will
+have been reviewed again.  However, since the back off in the
+first case is one day, this is what would happen anyway.  Also half
+of the items that were reviewed twice should be reviewed.  This means
+that we have mistakenly reviewed the other half.
+
+Remember that the slope of the forgetting curve is continuously
+decreasing.  If the item decreases from 100% to 90% in two days,
+and it is reviewed after one day, the average chance is 95%.  Since
+the slope is continuously decreasing, the actual chance at this
+point is actually less than 95%.  This means that 1/4x items will
+mistakenly be reviewed at somewhat less than 95% rather than
+90% in the worst case.
+
+Getting the order between the first and second time items wrong
+is no more serious that the above scenario.  As long as the items
+are evenly distributed, the deviation from 90% will only be
+small, since half of the second time items were supposed to be
+reviewed anyway.
+
+With respect to the items which have been reviewed 3 or more times,
+their order is less important.  The decrease in their success chances
+is less than 2.5% per day (geometrically decreasing), so as long as
+they are grossly sorted their impact on the final percentage is minimal.
+Also, these items, if they are evenly distributed in their schedule,
+the items will be spaced far apart.  This means they will eventually 
+be surrounded by lower level items, further mitigating problems.
+
+So, as you can see (and a mathematical proof is left as an exercise
+to the reader -- I'm too lazy!) the final deviation from 90% is
+not large.  For values greater than 90% it can have a greater impact
+than for values less than 90%.  A deviation of +-5% is a 1/18 ratio
+on the low side, but a 1/2 ratio on the high side.  However, in 
+practice, reviewing is roughly 9 times faster than relearning an item.
+So even a 6.25% increase in reviewing (1/4x items out of 2x reviewed
+50% earlier than they should have been) results in only about a 1%
+increase in actual time spent.
+
+Generally speaking, as long as the items in the list are well
+distributed in their schedule, the impact of not getting the
+order absolutely correct is very small.  But it is very important
+to get the items well distributed.  If you had 5 or 10 items
+which had a higher than normal success chance it could lead to stopping
+reviewing early and making items wait for an extra day (which for
+1 or 2 repetition items could impact their success rate greatly).
+
+Because of this, JLDrill does not use a fixed starting point for the
+first space.  Instead of one day it uses a value anywhere from 0 to
+5 days depending on how many times the item was incorrectly remembered
+during the acquisition phase.  The more times it was incorrect, the
+closer to 0 the item will be scheduled.
+
+This creates a step function for the first interval.  The schedule
+is then randomly varied by +-10% of its value.  This creates
+separation in the items that have the greatest chance of success.
+For example, items that were correct every time (i.e., the user already
+knew them) are scheduled between 4.5 and 5.5 days out.  There is
+a 1 day range between them so that when these items get close to the
+beginning of the list, there will be lots of space to put new items.
+
+The binary backoff for successful items is also varied by +-10%.
+Again, this is to create lots of space for new items to be inserted.
+Especially once items are scheduled for more than a month, identical
+items will be scheduled up to 6 days apart.  But since the variation
+is done on every backoff, two items that appeared together at first
+can be quite far apart over a few rounds.
+
+Current Probability Estimation
+------------------------------
+
+Originally JLDrill used a Bayesian estimate of the probability
+that the current items were at or above 90% success rate.
+Because the items in the list are changing over trials (grossly
+increasing) a lower limit was placed on this estimate.
+When the estimate reached 90% (i.e., 90% confidence that the
+rate was 90% or above) review was halted.
+
+This proved to be troublesome, though.  The problem is that
+for the most part, when the user is reviewing every day, the
+items in the list don't fall too much below 90%.  They hover
+around 75 - 90%.  Unfortunately the average number of reviews
+that happen before the Bayesian estimate is 90% for items that
+are actually 80% is only around 24\*.  When the daily review gets
+large, this means that this will be hit often.
+
+(\*Footnote:  In the test for JLDrill you can see a simulation
+that demonstrates this for different actual percentages).
+
+The other problem is that when an item is guessed incorrectly,
+the Bayesian estimate always drops a long way.  That's because
+we are testing that the value is 90% or above.  If you
+get 8 right in a row and get one wrong, your confidence that it's
+90% or above drops quickly.
+
+This resulted in the estimate practically equating to getting
+9 or 10 right in a row means that you are at 90% confidence.
+It is not exactly the same, but you can prove to yourself that
+it's so close that it doesn't matter.
+
+In the end I decided to modify the algorithm to be something that the
+user could relate to, rather than something fancy like the Bayesian
+estimate.  I collect the last 10 results.  When there is a 90%
+success rate I start a countdown.  If the user maintains a 90%
+success rate for 10 more items, the review is finished.
+
+This is almost exactly equivalent to getting the Bayesian estimate.
+Once it reaches 90% confidence, reset the confidence and
+start again.  Once it reaches 90% confidence again the review is
+finished.
+
+The rationale for this approach is that we get to a 90% confidence
+that we are in the 90+% area.  We then start our estimation
+procedure again and test that we remain in the 90+% range.  This
+gets us over most of the false peaks.
+
+As I said, I decided simply to keep track of the last 10 results
+and maintain a 90% rate for 10 items.  I believe this is more
+understandable for the end user.  It is also almost identical in
+result to using the Bayesian estimate (although the approach is
+*slightly* more likely to finish earlier).  Finally, the code is much
+more straightforward since it doesn't require any complicated
+math.
+
+What Percentage Level to Stop Reviewing
+---------------------------------------
+
+This needs doing...  At first I thought 90% could be easily shown
+to be the best value, but then I realized that the questions is actually
+quite complicated.  Basically, we want a percentage such that the
+weighted cost of relearning is equal to the cost of reviewing.
+In other words, the cost of relearning the word over again multiplied
+by the chance that the word is forgotten is equal to the cost of
+re-reviewing the word so that it isn't forgotten.  This creates a
+balance.  However, calculating this value is actually fairly difficult
+and I haven't had time to do it.  I believe is it fairly close to
+90%, though.
+
+Conclusion
+----------
+The intent of this document was to explain the strategies that
+JLDrill uses to quiz users.  It also attempts to show that the repetition
+algorithm is a close approximation to an ideal algorithm.  It fails
+to prove this, of couse - partly because my math is not good enough
+and partly because there are still aspects of the algorithm that are
+arbitrary and adhoc.
+
+It is very likely that this algorithm can be improved.  My intent in
+this document is mainly to show that is it likely no worse (or at least
+not much worse) than other attempts in the same area.  There is clearly,
+at least, not an order of magnitude improvement that's missing, for
+instance.
+
+I hope that others can gain from the thinking I've done and I hope
+they will return the favour by commenting on what I've written.
+
