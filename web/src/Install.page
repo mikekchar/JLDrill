@@ -11,7 +11,10 @@ The current stable release of JLDrill is 0.3.0.
 It can be obtained at
 [JLDrill's RubyForge Project Page](http://rubyforge.org/projects/jldrill)
 
-Once you have downloaded the package, decompress it.  Then as root (on
+First ensure that you have the [requirements](Requirements.html) installed.
+
+Once you have downloaded the package and installed the 
+requirements, decompress it.  Then as root (on
 Linux, et al) or a user with administrative privaledges (on Windows)
 execute the setup.rb script.  It's most useful to do this using a
 command line shell, but you should be able to do it from your
