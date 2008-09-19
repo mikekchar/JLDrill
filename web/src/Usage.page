@@ -36,14 +36,15 @@ presented with the file open dialog.
 
 ![Quiz File Open Dialog](images/OpenQuiz.png "Quiz File Open Dialog")
 
-There are many drill files available.  They include hiragana, katakana
-and JLPT vocabulary levels 1-4.  JLDrill will automatically choose the
+There are many drill files available.  They include hiragana, katakana,
+JLPT vocabulary levels 1-4 and grammar.  JLDrill will automatically choose the
 directory that contains the default drill files.
 
-Note: The JLPT files currently have several problems with the translations.
-Please cross reference any words (the Ctrl-X function) that you are
-unfamiliar with. You can help: If you fix any translations, please
-send them to me so that everyone can benefit.
+Note: Levels 1 and 2 of the JLPT files have some incorrect
+translations.  Please cross reference the vocabulary with the dictionary
+to ensure that they are correct (see below).  Also, the grammar
+drill is a work in progress and contains only about half
+of the material from Tae Kim's Japanese Guide to Japanese Grammar.
 
 Conducting the Quiz
 -------------------
@@ -52,32 +53,22 @@ question.  This will be shown in the top pane of the main window.
 
 ![Quiz Word is Displayed](images/Quiz.png "Quiz Word is Displayed")
 
-Note: Currently you will be shown the kanji and the reading for
-vocabulary in the question pane.  Eventually you will be able to drill
-on the meanings and kanji alone.  Also, for some words in the JLPT
-drills there is no kanji because it is not part of the curriculum for
-that level.  In it's place will be a hint about what word it is
-talking about.
-
-I stole the idea for the UI from PyJFlash which I thought had a simple
-but ingenious system.  What you do is guess the answer to the
-question.  You do this to yourself without inputting anything into the
-computer.  Then you click on the "Check" button (or "Z" key on the
-keyboard) to see if you were right.
+The first time you see an item you will be shown the kanji
+and reading for the word.  You should try to guess what the
+english meaning of the word is.  When you think you know,
+or you've given up, you click on "Check" ("Z" on the keyboard).
 
 ![Quiz Answer is Displayed](images/QuizAnswer.png "Quiz Answer is Displayed")
 
 If you were right in your guess, you click on "Correct" ("C" on the
 keyboard).  Otherwise you click on "Incorrect" ("X" on the keyboard).
-After replying you will be presented with a new question.  If this
-seems like a rather simplistic way of doing things, you are right.
-What struck me about conducting the quiz this way is that there is a
-minimum of UI to get in your way.  The drills can go very quickly.
+After replying you will be presented with a new question.  In this manner
+you are introduced to new material.
 
 Measuring Your Progress
 -----------------------
-The status of the quiz is displayed at the bottom screen and will look
-something like: 
+The status of the quiz is displayed at the bottom of the screen.  When you
+first load a quiz, it will look like this:
 
 ![Quiz Status](images/Status.png "Quiz Status")
 
@@ -86,48 +77,153 @@ saved yet.  As you progress through the quiz, it keeps track of your
 progress.  If you save the file (and hence your progress), the * will
 disappear. 
 
-Following the modification indicator is the name of the quiz.
-Currently this is just the file name of the dictionary that was used
-to generate the quiz.  In this case, the quiz was generated from the JLPT 4
-vocabulary file.  
+Following the modification indicator is a count of the items in
+each set of the quiz.  JLDrill divides the quiz into 3 sets: The
+New set, The Review set and the Working set.
 
-Then you are shown the number of words in each proficiency category.
-There are 5 categories: Unseen, Poor, Fair, Good and Excellent.  In
-this case 504 words haven't been seen by you yet (Unseen).  1 word requires
-much repetition (Poor), 9 require repetition but are OK (Fair), 77
-only need to be repeated occasionally (Good) and 50 will be shown
-rarely (Excellent).
+###The New Set
 
-The R(2,10) requires some explanation.  R means that new
-vocabulary will be presented randomly.  Some quizes have a set
-introduction order (like the Hiragana quiz).  The R will be missing in
-that case.  Others (like this JLPT quiz) will give you new vocabulary
-in a random order.
+The new set contains all the items that you have never seen before.
+When you first start a quiz, all of the items are put in the new
+set.  Then one item is chosen to be displayed to you.  So in the
+example above, there are 672 items in the new set. Since one is being
+displayed, you know that there are a total of 673 items in the drill.
 
-(2,10) is a reference to parameters in the training aglorithm.  It
-indicates the speed at which new vocabulary will be introducted.
+###The Review Set
+
+After you memorize an item, it will be placed into the review set.
+We have just started and no items have been memorized, so you can see
+that the review set contains 0 items.
+
+###The Working Set
+
+The working set contains the items that you are currently memorizing.
+The maximum number of items allowed in the working set depends on the drill.
+Usually, it is set to 10 items, but you can adjust this number in the options.
+The working set is further divided into 3 levels (levels 1, 2 and 3).  When
+you first start to learn an item, it is placed in level 1.  As you learn it,
+it advances to the second and third level.  After you master the third level,
+it is considered *memorized* and is moved into the review set.  In the example
+above, you can see that the count is 1,0,0 which means that there is one item
+at level 1 and zero items at levels 2 and 3.
+
+The next thing on the status is an indicator of the item currently
+being drilled.  You will notice it says "1 -> 5.0 days".  The number
+on the left hand side indicates where the currently drilled item
+came from.  In this case, it is a level 1 item from the working set.
+If it were level 2, then the number would be 2.  Level 3 would be 3.
+Items from the review set have a "+" in front of them.  They will
+be described later.
+
+After the level indicator is the *potential schedule* for the item.
+After you memorize an item, JLDrill will put it in the review set and
+schedule it for review sometime in the future.  The potential schedule
+is the approximate amount of time that JLDrill will wait before showing
+the item to you again.  While the item is in the working set, JLDrill
+keeps track of the number of times you successfully guessed the right
+answer.  It uses this value to create the potential schedule.  The
+value displayed is the scheduled amount of time that will be used
+if you continue to guess the item correctly until it is memorized.
+More will be said about this later.
+
+Finally there is an indicator showing whether or not JLDrill is
+in "review mode" or "new item mode".  Since we have just started,
+JLDrill will select items to put into the working set from the
+new set, rather than the review set.  It displays "New Items" to
+indicate this.  More detail on "review mode" and "new item mode"
+will be discussed later.
+
+Learning and Reviewing
+----------------------
+
+JLDrill's strategy for introducing items into the quiz is at the
+same time complicated to describe and easy to use.  If you want to
+understand the nitty gritty details, along with a rationale for
+the choices made, please see [the strategy documentation](Strategy.html).
+But for those who just want to use the program, a brief description
+of what is going on, follows.
+
+As has been mentioned, when you first start a drill, all items are
+put into the new set.  Then one item is selected (either the first
+item in the drill, or at random according to the options set) to
+be quized.  This item is placed into level 1 of the working set.
+Once you quiz the item and select either "correct" or "incorrect",
+a new item is selected from the new set and placed into level 1
+of the working set.  This continues until the working set is full.
+
+The size of the working set is dependent upon the drill, but by
+default it is 10 items.  You can see that every time a new item
+is introduced, the number of items in level 1 in the working set
+increases.
+
+![Quiz Status with Full Working Set](images/Status-WorkingFull.png "Quiz Status with Full Working Set")
+
+Here you can see that the working set has 10 items in level 1.
+
+At this point, JLDrill will stop adding new items to the working set.
+Instead, it will randomly select an item from the working set for
+you to try again.  You can think of the working set like a deck of
+cards.  It draws one card and then presents it to you.  Then it draws
+another card.  Once all 10 items in the working set have been presented,
+it reshuffles the deck and starts again.
+
+Note: Occasionally after the working set has been shuffled it will
+present the same item it just presented, showing the same item
+twice in a row.  This is unfortunate.  A release in the future will correct 
+this behaviour.
+
+### Going to the Next Level
+
+If you get an item correct two times in a row, it will be *promoted*
+to the next level.  The second time you get the item correct, you will
+notice that the number of level 2 items will increase and the number
+of level 1 items will decrease.
+
+![Quiz Status Promoting to Level 2](images/Status-Level2Promote.png "Quiz Status Promoting to Level 2")
+
+Here you can see that there are now 9 items at level 1 in the working set
+and 1 item at level 2.
+
+The next item you get to this item you will notice something different.
+
+![A Level 2 Item](images/Level2Item.png "A level 2 item")
+
+In the top pane (the question pane), you will notice that the quiz now
+only shows you the kanji.  You must now remember the meaning *and* the
+reading for the item.  What happens if you get this one wrong now?
+
+Every time you get an item wrong, it is *demoted* back to level 1.
+Also, the *potential schedule* for the item is reduced.  This is what
+the item looks like after we've gotten it wrong and drill it again.
+
+![A Demoted Item](images/Level2Demoted.png "A Demoted Item")
+
+Here you can see we've drilled all the other items and gotten back to
+our demoted item.  From the "1 --> 4.2 days" in the status bar, you
+can see that it is again a level 1 item and that the potential schedule
+is now 4.2 days rather than 5.0 days.  Each time you get an item
+incorrect, the potential schedule will decrease.
+
+Eventually we will start to get our item correct as we learn it.
+When it is correct twice in a row, it will be promoted to level
+2.  When it is correct twice more from there, it will be promoted
+to level 3 (i.e., it has been guessed 4 times in a row correctly).
+The quiz then looks like this.
+
+![A Level 3 Item](images/Level3Item.png "A Level 3 Item")
+
+You will notice that the question pane has the english meaning now.
+The answer pane has the kanji and the reading.  You should be able
+to say the Japanese word for the item.  You should also know what
+kanji it is using.  Finally, notice that the Status bar now
+contains "3 --> 4.2 days." indicating that this item is level 3 and
+it has a potential schedule of 4.2 days.
+
+### Review Mode
 
 
-Training Algorithm
-------------------
-In the example, 2 is the number of times you have to get the word
-correct before it will be "promoted" into the next higher slot.  So
-once you get it right 2 times in a row, it will be moved from Poor to
-Fair.  After 2 more times it will be moved to Good.  Finally, 2 more
-times and it will be moved to Excellent.  If you ever get the word
-wrong, it will be moved back to poor.
-
-Depending on how well you know the word, it will be quizzed more or
-less often.  Words in the poor category will be displayed 53% (8/15)
-of the time, Fair 27% (4/15) of the time, good 13% (2/15) of the time
-and excellent 7% (1/15) of the time.  
-
-The 10 in the status line indicates the threshold for introducing new
-words.  You are considered to know the word if it is in either the
-good or excellent category.  As long as the words in the poor and fair
-categories total less than 10, you will get new vocabulary.  That way
-your pool of lesser known words is always at least 10 words.  
-
+Options
+-------
 You can adjust these two parameters to fit your learning style.  If
 it takes you more repetition to remember words, you can set the first
 parameter to 3 or even 4.  Adjusting the second parameter will allow

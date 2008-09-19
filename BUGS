@@ -1,0 +1,15 @@
+- When a drill is reset all the items go into the new set.  But
+  the last item is still in the current problem.  Not sure what
+  to do.  
+
+- When you first start a file it will be in new item mode.  Then after
+  you go for a while it will go into review mode.  It should stay in
+  new item mode.
+  
+- Some items are flagged as differing from the dictionary even though
+  they don't.
+  
+- The Loading Reference bar does not get updated.  The program
+  hangs while the reference dictionary is loaded.  This appears to
+  be a bug in rubygtk.  Trying to find a way to get around it.
+
