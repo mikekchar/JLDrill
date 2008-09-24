@@ -1,701 +1,617 @@
 0.2.0-LDRILL-SAVE grammar.utf
-# Note: Copyright and license information is near the bottom
-# of this notice.
-#
-# This file contains some of the sentences from Tae Kim's
-# Japanese Guide to Japanese Grammar along with the vocabulary
-# needed to understand the sentences.  It is a work in progress,
-# and only about half of the sentences are currently there.
-# I also used slightly different English translations in many
-# cases in order to provide an unambiguous translation for
-# drilling.  Keep in mind, however, that Japanese is inherently
-# ambiguous, so the translation for Japanese to English will
-# probably have multiple meanings depending on the context.
-#
-# The purpose of this drill is to mostly help people with their
-# Japanese grammar production, rather than their understanding.
-# Usually, you have an idea of what you want to say, but no
-# idea how to say it in Japanese.  By practicing these sentences,
-# you will create an intuitive sense of the sentence forms that
-# you should use.
-#
-# Some of the English sentences are strange.  Wherever possible,
-# if the subject or object of the sentence in Japanese is ambiguous
-# then it is replaced with "it" in the English.  Sometimes the
-# subject in the Japanese is ambiguous, but the form of the sentence
-# is used overwhelmingly in one context.  In those cases, I've used
-# the most natural pronoun for that context.
-#
-# Tae Kim went to great lengths to preserve the Japanese feel of the
-# sentences in the English translations, including the ambiguity
-# of the subjects or objects.  I have changed that for the drill because
-# the intent is not to facilitate understanding (which can be accomplished
-# by reading the Guide), but to create a mental link between the English
-# and Japanese forms of sentences.
-#
-# As this is a work in progress, comments and feedback on whether
-# the English translations are appropriate is welcomed.  You should
-# contact me (Mike Charlton) via email at mikekchar@gmail.com.
-#
-# Copyright from Tae Kim's Japanese Guide to Japanese Grammar:
-#     Copyright (C) 2003-2007 Tae Kim (taekim.japanese AT gmail.com)
-#
-# Additional work for JLDrill entry:
-#     Copyright (C) 2008 Mike Charlton (mikekchar@gmail.com)
-#
-# Edict Vocabulary:
-#
-# This package uses the EDICT files. These files are the
-# property of the  Electronic Dictionary Research and Development Group
-# at Monash University, and are used in conformance with the Group's
-# licence. 
-#
-# Links: 
-#
-# EDICT: http://www.csse.monash.edu.au/~jwb/edict.html
-# Electronic Dictionary Research 
-#    and Development Group: http://www.csse.monash.edu.au/groups/edrdg/
-# License: http://www.csse.monash.edu.au/groups/edrdg/licence.html
-#
-# The license file is also provided in this directory under the file
-# edrdg_license.html.
-#
-# The documentation for edict is provided in the doc/edict_doc.html file.
-
-# License information: 
-#
-# The Japanese sentences in the drill were taken from Tae Kim's Japanese
-# Guide to Japanese grammar.  That guide is licensed under a Creative
-# Commons BY-NC-SA license (2.5).  This means that the author must be
-# attributed, the purpose must be non-commercial and any derivative
-# works must be under the same license.
-#
-# The vocabulary comes from the Edict files and are licensed under a
-# Creative Commons BY-SA license.  This means that the author must be
-# attributed and any derivative works must be under the same license.
-#
-# Some of the translations of the sentences to English were done by
-# Mike Charlton.  These are available under the same license that
-# covers Tae Kim's Japanese Guide to Japanese grammar.
-#
-# On the whole, this drill is distributed under a Creative Commons
-# BY-NC_SA license (2.5).  But the vocabulary parts can be filtered
-# out and used under the terms of the Edict license.
-#
-# TODO: Put actual text of the CC license here.
 Promotion Threshold: 1
 Introduction Threshold: 10
 Strategy Version: 0
 Unseen
-/Kanji: 何も/Reading: なにも/Definitions: nothing/Markers: adv,exp,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220504547/Difficulty: 0/
-/Kanji: 何時も/Reading: いつも/Definitions: (1) always,usually,every time,(2) never (with neg. verb)/Markers: adv,n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220504523/Difficulty: 0/
-/Kanji: 何れも/Reading: どれも/Definitions: both,either,any,all,every/Markers: adv,uk/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220504499/Difficulty: 0/
-/Kanji: 質問/Reading: しつもん/Definitions: question,inquiry,enquiry/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220504444/Difficulty: 0/
-/Reading: ボブは魚が好きじゃなかった。/Definitions: Bob did not like fish./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1221979238/Difficulty: 0/
-/Reading: 寝ない。/Definitions: It doesn't sleep./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1221977352/Difficulty: 0/
-/Reading: ボブも行かなかった。/Definitions: Bob also did not go./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220675645/Difficulty: 0/
-/Reading: ジムがしなかった。/Definitions: Jim is the one that did not do./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220675555/Difficulty: 0/
-/Reading: 猫はいなかった。/Definitions: There was no cat./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220675549/Difficulty: 0/
-/Reading: アリスは食べなかった。/Definitions: Alice did not eat./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220675483/Difficulty: 0/
-/Reading: お金がなかった。/Definitions: There was no money./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220675476/Difficulty: 0/
-/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220675227/Difficulty: 0/
-/Kanji: 帰る/Reading: かえる/Definitions: to go back,to go home,to come home,to return/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220675218/Difficulty: 0/
-/Reading: アメリカ/Definitions: America/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220675097/Difficulty: 0/
-/Reading: 行かなかった。/Definitions: It did not go./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674944/Difficulty: 0/
-/Reading: ジュース/Definitions: juice,soft drink (both carbonated and uncarbonated),deuce/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674928/Difficulty: 0/
-/Kanji: 街/Reading: まち/Definitions: (1) town,(2) street,road/Markers: n/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674910/Difficulty: 0/
-/Reading: メールアドレス/Definitions: (e) mail address/Markers: n/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674883/Difficulty: 0/
-/Kanji: 高速道路/Reading: こうそくどうろ/Definitions: highway,freeway,expressway,motorway/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674836/Difficulty: 0/
-/Reading: ぶらぶら/Definitions: dangle heavily,swing,sway to and fro,aimlessly,idly,lazily,loiter,loaf,stroll idly/Markers: adv,n,vs,adj-na,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674834/Difficulty: 0/
-/Kanji: 日本語/Reading: にほんご/Definitions: Japanese language/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674811/Difficulty: 0/
-/Kanji: 毎日/Reading: まいにち/Definitions: every day/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674801/Difficulty: 0/
-/Kanji: 歩く/Reading: あるく/Definitions: to walk/Markers: v5k,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674791/Difficulty: 0/
-/Kanji: 日本/Reading: にほん/Definitions: Japan/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674781/Difficulty: 0/
-/Kanji: 家/Reading: いえ/Definitions: house/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674676/Difficulty: 0/
-/Kanji: 台所/Reading: だいどころ/Definitions: kitchen/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674673/Difficulty: 0/
-/Kanji: 宿題/Reading: しゅくだい/Definitions: homework/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674666/Difficulty: 0/
-/Kanji: 椅子/Reading: いす/Definitions: chair/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674648/Difficulty: 0/
-/Kanji: 来年/Reading: らいねん/Definitions: next year/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674638/Difficulty: 0/
-/Kanji: 図書館/Reading: としょかん/Definitions: library/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674623/Difficulty: 0/
-/Reading: バス/Definitions: (1) bus,(2) bath,(3) bass/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674604/Difficulty: 0/
-/Kanji: 向う/Reading: むかう/Definitions: (1) to face,(2) to go towards/Markers: io,v5u/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674497/Difficulty: 0/
-/Kanji: 医者/Reading: いしゃ/Definitions: doctor (medical)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674484/Difficulty: 0/
-/Kanji: 昼ご飯/Reading: ひるごはん/Definitions: lunch,midday meal/Markers: n/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674451/Difficulty: 0/
-/Kanji: 映画館/Reading: えいがかん/Definitions: movie theatre (theater),cinema/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674442/Difficulty: 0/
-/Kanji: 成る/Reading: なる/Definitions: to become/Markers: v5r,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674423/Difficulty: 0/
-/Kanji: 勝ち/Reading: かち/Definitions: win,victory/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674397/Difficulty: 0/
-/Kanji: 何/Reading: なに/Definitions: what/Markers: int,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674387/Difficulty: 0/
-/Kanji: 何で/Reading: なんで/Definitions: Why?,What for?/Markers: adv,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674370/Difficulty: 0/
-/Reading: イタリア/Definitions: Italy/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220674350/Difficulty: 0/
-/Kanji: 靴/Reading: くつ/Definitions: shoes,footwear/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530533/Difficulty: 0/
-/Reading: シャツ/Definitions: shirt,singlet/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530523/Difficulty: 0/
-/Kanji: 要る/Reading: いる/Definitions: to need/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530500/Difficulty: 0/
-/Kanji: 可愛い/Reading: かわいい/Definitions: pretty,cute,lovely,charming,dear,darling,pet/Markers: adj,sl,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530485/Difficulty: 0/
-/Kanji: 其の/Reading: その/Definitions: the,that/Markers: adj-pn,uk/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530471/Difficulty: 0/
-/Kanji: 授業/Reading: じゅぎょう/Definitions: lesson,class work/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530459/Difficulty: 0/
-/Kanji: 大学/Reading: だいがく/Definitions: (1) university,(2) the Great Learning - one of the Four Books/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530449/Difficulty: 0/
-/Kanji: 白い/Reading: しろい/Definitions: white/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530437/Difficulty: 0/
-/Kanji: 大変/Reading: たいへん/Definitions: (1) serious,grave,dreadful,terrible,(2) immense,enormous,(3) difficult,hard/Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530427/Difficulty: 0/
-/Kanji: 同じ/Reading: おなじ/Definitions: same,identical,equal,uniform,equivalent,similar,common (origin),changeless/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530418/Difficulty: 0/
-/Kanji: 事/Reading: こと/Definitions: thing,matter,fact,circumstances,business,reason,experience/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530406/Difficulty: 0/
-/Reading: 本と雑誌と葉書を買った。/Definitions: It bought a book,a magazine and some post cards./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530343/Difficulty: 0/
-/Kanji: 物/Reading: もの/Definitions: thing,object/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530342/Difficulty: 0/
-/Kanji: 忙しい/Reading: いそがしい/Definitions: busy,irritated/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530283/Difficulty: 0/
-/Kanji: 遅い/Reading: おそい/Definitions: late,slow/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530271/Difficulty: 0/
-/Kanji: 面白い/Reading: おもしろい/Definitions: interesting,amusing/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530244/Difficulty: 0/
-/Kanji: 今/Reading: いま/Definitions: now,the present time,just now,soon,immediately,(one) more/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530242/Difficulty: 0/
-/Reading: 靴やシャツを買う。/Definitions: It buys shoes,shirts,etc./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530143/Difficulty: 0/
-/Reading: 先生と会った。/Definitions: It met with a teacher./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530126/Difficulty: 0/
-/Reading: 飲み物やカップやナプキンはいらない？/Definitions: You don't need drinks,cups,napkins,etc?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220530022/Difficulty: 0/
-/Reading: 友達と話した。/Definitions: It talked with a friend./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220529960/Difficulty: 0/
-/Reading: ボブのシャツだ。/Definitions: It's Bob's shirt. (male)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220529920/Difficulty: 0/
-/Reading: ボブはアメリカの大学の学生だ。/Definitions: Bob is an American university student. (male)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220529791/Difficulty: 0/
-/Reading: ボブの本。/Definitions: Bob's book./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220529769/Difficulty: 0/
-/Reading: そのシャツは誰のシャツ？/Definitions: Whose shirt is that shirt?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220529697/Difficulty: 0/
-/Reading: 白いのはかわいい。/Definitions: The white one is cute./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220529661/Difficulty: 0/
-/Reading: 授業に行くのを忘れた。/Definitions: It forgot to go to class./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220529487/Difficulty: 0/
-/Reading: 静かなのがアリスの部屋だ。/Definitions: The quiet one is Alice's room. (male)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220529482/Difficulty: 0/
-/Reading: 毎日勉強するのは大変。/Definitions: Studying every day is tough./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220529430/Difficulty: 0/
-/Reading: 今は忙しいの。/Definitions: The thing is that it's busy now./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220529300/Difficulty: 0/
-/Reading: 静かな部屋がアリスの部屋だ。/Definitions: The quiet room is Alice's room. (male)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220529243/Difficulty: 0/
-/Reading: 毎日同じ物を食べるのは面白くない。/Definitions: Eating the same thing every day is not interesting./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220529064/Difficulty: 0/
-/Reading: ジムのだ。/Definitions: It is Jim's./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220528958/Difficulty: 0/
-/Reading: 今は忙しいのだ。/Definitions: The thing is that it's busy now. (male)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220528918/Difficulty: 0/
-/Reading: 今は忙しいの？/Definitions: Is it that it's busy now?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220528875/Difficulty: 0/
-/Reading: 飲むんだ。/Definitions: It drinks. (explaining)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220528835/Difficulty: 0/
-/Reading: 学生だったんだ。/Definitions: It was a student. (explaining)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220528806/Difficulty: 0/
-/Reading: 学生じゃないんだ。/Definitions: It is not a student. (explaining)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220528775/Difficulty: 0/
-/Reading: 学生なんだ。/Definitions: It is a student. (explaining)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220528730/Difficulty: 0/
-/Reading: 飲まないんだ。/Definitions: It does not drink. (explaining)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220528679/Difficulty: 0/
-/Reading: 飲んだんだ。/Definitions: It drank. (explaining)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220527545/Difficulty: 0/
-/Reading: アリス：どこに行くの？\nボブ：授業に行くんだ。/Definitions: Alice: Where are you going? (seeking explanation)\nBob: I'm going to class./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220527421/Difficulty: 0/
-/Reading: アリス：その人が買うんじゃなかったの？\nボブ：ううん、先生が買うんだ。/Definitions: Alice: Wasn't it the case that that person is buying? (seeking explanation)\nBob: No. The teacher is buying./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220527413/Difficulty: 0/
-/Reading: アリス：今授業がないんじゃない？\nボブ：ううん、ある。/Definitions: Alice: There isn't any class right now,is there? (seeking explanation)\nBob: No,there is./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220527367/Difficulty: 0/
-/Reading: 遅くない？/Definitions: It isn't late?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220527346/Difficulty: 0/
-/Kanji: 朝ご飯/Reading: あさごはん/Definitions: breakfast/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220527302/Difficulty: 0/
-/Kanji: 沢山/Reading: たくさん/Definitions: many,a lot,much/Markers: adj-na,adv,n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220527164/Difficulty: 0/
-/Kanji: 自分/Reading: じぶん/Definitions: myself,oneself/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526443/Difficulty: 0/
-/Kanji: 最近/Reading: さいきん/Definitions: latest,most recent,nowadays/Markers: adj-no,n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526433/Difficulty: 0/
-/Kanji: 早い/Reading: はやい/Definitions: early/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526426/Difficulty: 0/
-/Kanji: 声/Reading: こえ/Definitions: voice/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526408/Difficulty: 0/
-/Kanji: 全然/Reading: ぜんぜん/Definitions: (1) wholly,entirely,completely,(2) not at all (with neg. verb)/Markers: adv,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526401/Difficulty: 0/
-/Kanji: 結構/Reading: けっこう/Definitions: (1) splendid,nice,wonderful,delicious,sweet,(2) construction,architecture,(3) well enough,tolerably/Markers: adj-na,n-adv,n,uk,arch,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526389/Difficulty: 0/
-/Kanji: 中/Reading: なか/Definitions: inside,middle,among/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526361/Difficulty: 0/
-/Kanji: 変わる/Reading: かわる/Definitions: to change,to be transformed,to vary,to be revised,to be different,to move location/Markers: v5r,vi,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526339/Difficulty: 0/
-/Kanji: 大きい/Reading: おおきい/Definitions: big,large,great/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526313/Difficulty: 0/
-/Kanji: 天気/Reading: てんき/Definitions: weather,the elements,fine weather/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526309/Difficulty: 0/
-/Kanji: 時間/Reading: じかん/Definitions: time/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526295/Difficulty: 0/
-/Reading: ボブは朝ご飯を早く食べた。/Definitions: Bob quickly ate breakfast./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526259/Difficulty: 0/
-/Kanji: 大丈夫/Reading: だいじょうぶ/Definitions: safe,all right,O.K./Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526223/Difficulty: 0/
-/Kanji: 降る/Reading: ふる/Definitions: to precipitate,to fall (e.g.,rain)/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526204/Difficulty: 0/
-/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526189/Difficulty: 0/
-/Reading: アリスは自分の部屋をきれいにした。/Definitions: Alice made her room clean./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220526102/Difficulty: 0/
-/Reading: 最近全然食べない。/Definitions: Recently it doesn't eat at all./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220525975/Difficulty: 0/
-/Reading: 映画をたくさんみた。/Definitions: It saw a lot of movies./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220525935/Difficulty: 0/
-/Reading: ボブの声は結構大きい。/Definitions: Bob's voice is fairly large./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220525913/Difficulty: 0/
-/Reading: アリス：今日はいい天気だね。\nボブ：うん。でも明日雨が降るよ。/Definitions: Alice: Good weather today,huh?\nBob: Yeah.  But it will rain tomorrow,you know./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220525756/Difficulty: 0/
-/Reading: 静かな人。/Definitions: It is a quiet person./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220525535/Difficulty: 0/
-/Reading: 友達は親切。/Definitions: The friend is kind./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220525513/Difficulty: 0/
-/Kanji: 良い/Reading: いい/Definitions: good,nice,pleasant,fine,excellent,agreeable,ok/Markers: adj,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220525488/Difficulty: 0/
-/Kanji: 高い/Reading: たかい/Definitions: (1) high,tall,(2) expensive/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220525471/Difficulty: 0/
-/Reading: 値段があまりよくなかった。/Definitions: The price was not very good./Score: 0/Bin: 0/Level: 0/Position: 0/Consecutive: 0/Difficulty: 0/
-/Kanji: 答える/Reading: こたえる/Definitions: to answer,to reply/Markers: v1/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220525459/Difficulty: 0/
-/Kanji: 昨日/Reading: きのう/Definitions: yesterday/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220525457/Difficulty: 0/
-/Kanji: 此処/Reading: ここ/Definitions: here,this place/Markers: n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220504429/Difficulty: 0/
-/Reading: アリス：時間がないよ。\nボブ：大丈夫だよ。/Definitions: Alice: There's no time,you know.\nBob: It's ok,you know./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220525432/Difficulty: 0/
-/Kanji: 子犬/Reading: こいぬ/Definitions: puppy/Markers: n/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220525286/Difficulty: 0/
-/Reading: 明日映画を見に行く。/Definitions: Tomorrow,it goes to see a movie./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220524750/Difficulty: 0/
-/Kanji: 何時でも/Reading: いつでも/Definitions: (1) (at) any time,always,at all times,(2) never (with negative verb),(3) whenever/Markers: adv,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220504145/Difficulty: 0/
-/Reading: 楽しみにする。/Definitions: It is looking forward to it./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220524663/Difficulty: 0/
-/Kanji: 値段/Reading: ねだん/Definitions: price,cost/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220509019/Difficulty: 0/
-/Reading: ボブ：いい天気だね。\nアリス：そうね。/Definitions: Bob: Good weather,huh?\nAlice: It is,isn't it./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220508874/Difficulty: 0/
-/Reading: 食べ/Definitions: ます stem for eat/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220508565/Difficulty: 0/
-/Reading: 泳ぎ/Definitions: ます stem for swim/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220508472/Difficulty: 0/
-/Hint: ます stem/Reading: し/Definitions: ます stem for suru/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220508295/Difficulty: 0/
-/Reading: 遊びます。/Definitions: It plays. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220508266/Difficulty: 0/
-/Reading: 昨日友達が遊びにきた。/Definitions: Yesterday a friend came to play./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220508087/Difficulty: 0/
-/Reading: 遊びません。/Definitions: It does not play. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220507978/Difficulty: 0/
-/Reading: 遊びました。/Definitions: It played. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220507976/Difficulty: 0/
-/Reading: 明日大学に行きます。/Definitions: Tomorrow it goes to college. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220507894/Difficulty: 0/
-/Reading: 遊びませんでした。/Definitions: It did not play. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220507738/Difficulty: 0/
-/Reading: かわいいです。/Definitions: It's cute. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220507703/Difficulty: 0/
-/Reading: 晩ご飯を食べませんでしたね。/Definitions: It didn't eat dinner,did it? (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220507680/Difficulty: 0/
-/Reading: かわいくないです。/Definitions: It's not cute. (polite,usual)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220507675/Difficulty: 0/
-/Reading: 先週ボブに会いましたよ。/Definitions: It met Bob last week,you know. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220507590/Difficulty: 0/
-/Reading: かわいかったです。/Definitions: It was cute. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220507465/Difficulty: 0/
-/Reading: かわいくなかったです。/Definitions: It wasn't cute. (polite,usual)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220507418/Difficulty: 0/
-/Reading: 静かです。/Definitions: It is quiet. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220507371/Difficulty: 0/
-/Reading: その部屋はあまり静かじゃないです。/Definitions: That room is not very quiet. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220507188/Difficulty: 0/
-/Reading: 静かじゃないです。/Definitions: It is not quiet. (polite,usual)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220507083/Difficulty: 0/
-/Reading: 静かじゃなかったです。/Definitions: It was not quiet. (polite,usual)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220506985/Difficulty: 0/
-/Reading: 静かでした。/Definitions: It was quiet. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220506930/Difficulty: 0/
-/Reading: 子犬はとても好きです。/Definitions: About puppies,it likes them very much. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220506701/Difficulty: 0/
-/Reading: 静かじゃありません。/Definitions: It is not quiet. (polite,more formal)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220506464/Difficulty: 0/
-/Reading: そうだ。/Definitions: That's so. (male)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220506371/Difficulty: 0/
-/Reading: そう。/Definitions: That's so. (female)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220506321/Difficulty: 0/
-/Reading: 静かじゃありませんでした。/Definitions: It was not quiet. (polite,more formal)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220506289/Difficulty: 0/
-/Reading: そうです。/Definitions: That's so. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220506247/Difficulty: 0/
-/Reading: そうだと思います。/Definitions: I think that's so. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220506225/Difficulty: 0/
-/Reading: そうでございます。/Definitions: That's so. (very polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220506200/Difficulty: 0/
-/Kanji: 名前/Reading: なまえ/Definitions: name/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220506163/Difficulty: 0/
-/Reading: あたし/Definitions: I/Markers: n,adj-no,fem/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220506094/Difficulty: 0/
-/Kanji: 僕/Reading: ぼく/Definitions: I,manservant/Markers: n,male,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220506018/Difficulty: 0/
-/Reading: 僕の名前はキムです。/Definitions: My name is Kim. (polite,male)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220506014/Difficulty: 0/
-/Reading: 僕の名前はボブだ。/Definitions: My name is Bob. (casual,male)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505961/Difficulty: 0/
-/Reading: 私の名前はキムです。/Definitions: My name is Kim. (polite,no gender)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505898/Difficulty: 0/
-/Kanji: 買い物/Reading: かいもの/Definitions: shopping/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505870/Difficulty: 0/
-/Kanji: 母/Reading: はは/Definitions: mother/Markers: n,hum,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505847/Difficulty: 0/
-/Kanji: お母さん/Reading: おかあさん/Definitions: mother/Markers: n,hon,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505826/Difficulty: 0/
-/Reading: あたしの名前はアリス。/Definitions: My name is Alice. (casual,female)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505782/Difficulty: 0/
-/Reading: 俺の名前はボブだ。/Definitions: My name is Bob. (very casual,male)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505769/Difficulty: 0/
-/Kanji: 済みません/Reading: すみません/Definitions: sorry,excuse me/Markers: exp,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505716/Difficulty: 0/
-/Kanji: 一寸/Reading: ちょっと/Definitions: (1) just a minute,short time,just a little,(2) somewhat,easily,readily,rather/Markers: ateji,adv,int,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505698/Difficulty: 0/
-/Kanji: 料理/Reading: りょうり/Definitions: cooking,cookery,cuisine/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505680/Difficulty: 0/
-/Kanji: お腹/Reading: おなか/Definitions: stomach/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505667/Difficulty: 0/
-/Kanji: 言う/Reading: いう/Definitions: to say/Markers: v5u,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505652/Difficulty: 0/
-/Kanji: 彼/Reading: かれ/Definitions: he,boyfriend/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505634/Difficulty: 0/
-/Kanji: 今週/Reading: こんしゅう/Definitions: this week/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220504129/Difficulty: 0/
-/Kanji: 本当/Reading: ほんとう/Definitions: truth,reality/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505600/Difficulty: 0/
-/Reading: こんな/Definitions: such,like this/Markers: adj-na,adj-pn,adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505575/Difficulty: 0/
-/Reading: そんな/Definitions: such,like that,that sort of/Markers: adj-na,adj-pn,adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505566/Difficulty: 0/
-/Kanji: 知る/Reading: しる/Definitions: to know,to understand,to be acquainted with,to feel/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505531/Difficulty: 0/
-/Kanji: 誰でも/Reading: だれでも/Definitions: anyone,anybody,whoever/Markers: conj,uk/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220504074/Difficulty: 0/
-/Kanji: 何でも/Reading: なんでも/Definitions: by all means,everything/Markers: adv,exp,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220504039/Difficulty: 0/
-/Kanji: 週末/Reading: しゅうまつ/Definitions: weekend/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220503957/Difficulty: 0/
-/Kanji: 何処でも/Reading: どこでも/Definitions: anywhere/Markers: n,uk/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220503933/Difficulty: 0/
-/Kanji: 教える/Reading: おしえる/Definitions: to teach,to inform,to instruct/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505516/Difficulty: 0/
-/Reading: こんなのを本当に食べるか？/Definitions: Do you think it will really eat this type of thing?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220503801/Difficulty: 0/
-/Reading: そんなのは、あるかよ！/Definitions: Does it look like it would have something like that?!/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220503667/Difficulty: 0/
-/Reading: 駅の方へ走っていった。/Definitions: It ran toward the direction of the station./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218573121/Difficulty: 0/
-/Reading: 魚が好きなタイプ。/Definitions: Type that likes fish./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218575253/Difficulty: 0/
-/Reading: こんなのを本当に食べる？/Definitions: Is it really going to eat something like this?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220503581/Difficulty: 0/
-/Reading: 彼は何を言ったかわからない。/Definitions: It doesn't understand what he said./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220503373/Difficulty: 0/
-/Reading: 先生が学校に行ったか教えない？/Definitions: Won't you inform me whether the teacher went to school?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220503351/Difficulty: 0/
-/Reading: 先生が学校に行ったかどうか知らない。/Definitions: It doesn't know whether or not the teacher went to school./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220503048/Difficulty: 0/
-/Reading: 犯人をどこかで見ましたか。/Definitions: Did it see the criminal somewhere? (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220502919/Difficulty: 0/
-/Reading: この質問の答えは、誰も知らない。/Definitions: Nobody knows the answer to this question./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220502771/Difficulty: 0/
-/Reading: 先生が学校に行ったか行かなかったか知らない。/Definitions: It doesn't know whether the teacher went to school or didn't./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220502655/Difficulty: 0/
-/Reading: 昼ご飯は、どこでもいいです。/Definitions: About lunch,anywhere is good. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220502128/Difficulty: 0/
-/Kanji: 魅力的/Reading: みりょくてき/Definitions: charming,fascinating/Markers: adj-na/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218575833/Difficulty: 0/
-/Reading: お父さんは、早く帰ってきました。/Definitions: Its father came home early. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218575843/Difficulty: 0/
-/Reading: 先に行っているよ。/Definitions: I'll go on ahead./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218575887/Difficulty: 0/
-/Kanji: 狭い/Reading: せまい/Definitions: narrow,confined,small/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220501708/Difficulty: 0/
-/Reading: 電池を買っときます。/Definitions: It will buy batteries. (polite,in preparation,contracted)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218575946/Difficulty: 0/
-/Reading: 時間がなかったんでパーティーに行かなかった。/Definitions: It didn't go to the party because there was no time. (explaining,contracted)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218576015/Difficulty: 0/
-/Reading: あの人は、本当に何でも食べる。/Definitions: That person really eats anything./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220494997/Difficulty: 0/
-/Kanji: 徐徐/Reading: そろそろ/Definitions: gradually,steadily,quietly,slowly,soon/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220494779/Difficulty: 0/
-/Kanji: 昼寝/Reading: ひるね/Definitions: nap (afternoon),siesta/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220494717/Difficulty: 0/
-/Reading: 映画を見たり、本を読んだりしなかった。/Definitions: It didn't do things like watch movies and read books,etc./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218576517/Difficulty: 0/
-/Reading: 何を読んでいる？\n教科書を読んでいます。/Definitions: What is it reading?\nIt is reading a textbook (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218576525/Difficulty: 0/
-/Reading: 映画を見たり、本を読んだり、昼寝したりする。/Definitions: It does things like watch movies,read books,and take naps,etc./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218577355/Difficulty: 0/
-/Reading: かわいくありません。/Definitions: It's not cute. (polite,more formal)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218577787/Difficulty: 0/
-/Reading: 行って/Definitions: It goes... (て form)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218578192/Difficulty: 0/
-/Reading: 魚が好きだったタイプ。/Definitions: Type that liked fish./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218578787/Difficulty: 0/
-/Reading: 準備はどうですか。\n準備は、もうしてあるよ。/Definitions: How are the preparations? (polite)\nThe preparations are already done./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218578990/Difficulty: 0/
-/Reading: 鉛筆を持っている？/Definitions: Is it holding a pencil?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218579742/Difficulty: 0/
-/Reading: 学生なんじゃない。/Definitions: It isn't that it is a student. (explaining)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218580479/Difficulty: 0/
-/Reading: 今日は暇だけど、明日は忙しい。/Definitions: It is free today,but will be busy tomorrow./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218581387/Difficulty: 0/
-/Kanji: 迚も/Reading: とても/Definitions: very,awfully,exceedingly/Markers: adv,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218582404/Difficulty: 0/
-/Reading: クッキー/Definitions: cookie,biscuit/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505233/Difficulty: 0/
-/Kanji: 何処か/Reading: どこか/Definitions: somewhere,anywhere,in some respects/Markers: adv,exp,n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505221/Difficulty: 0/
-/Kanji: 何時か/Reading: いつか/Definitions: sometime,someday,one day,some time or other,the other day,in due course,in time/Markers: adv,uk/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505206/Difficulty: 0/
-/Kanji: 何か/Reading: なにか/Definitions: something/Markers: exp,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505158/Difficulty: 0/
-/Reading: 見ない。/Definitions: It doesn't see./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218608307/Difficulty: 0/
-/Reading: 図書館の中では静かにする。/Definitions: Within the library it does things quietly./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218608406/Difficulty: 0/
-/Kanji: 何処も/Reading: どこも/Definitions: everywhere/Markers: conj,uk/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218608739/Difficulty: 0/
-/Kanji: 登録/Reading: とうろく/Definitions: registration,register,entry,record/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218609930/Difficulty: 0/
-/Kanji: 穏やか/Reading: おだやか/Definitions: calm,gentle,quiet/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220494410/Difficulty: 0/
-/Reading: 一郎：パーティーに行かなかったの？\n直子：うん、時間がなかったから。/Definitions: Ichiro: You didn't go to the party? (explanation)\nMako: Yeah,because I didn't have time./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218710423/Difficulty: 0/
-/Reading: 電気が付いた。/Definitions: The lights turned on./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218710662/Difficulty: 0/
-/Reading: 遅いんじゃない？/Definitions: Isn't it late?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218710798/Difficulty: 0/
-/Reading: アリス：今授業があるんじゃない？\nボブ：今はないんだ。/Definitions: Alice: Isn't there class now? (seeking explanation)\nBob: Right now,there isn't./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218710918/Difficulty: 0/
-/Kanji: 俺/Reading: おれ/Definitions: I (ego) (boastful first-person pronoun)/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218711151/Difficulty: 0/
-/Reading: 私の部屋は、きれいで、静かで、とても好き。/Definitions: My room is clean,quiet and I like it a lot./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220494216/Difficulty: 0/
-/Kanji: 子ども/Reading: こども/Definitions: child,children/Markers: n/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218712183/Difficulty: 0/
-/Reading: ボブは日本へいった。/Definitions: Bob headed towards Japan./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218713946/Difficulty: 0/
-/Reading: 何（なに）できた？\nバスできた。/Definitions: How did it come?\nIt came by bus./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218714465/Difficulty: 0/
-/Reading: どうして友達じゃないんですか？\n先生だし、年上だし・・・。/Definitions: Why isn't it a friend? (explanation,polite)\nIt's the teacher and they are older.../Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218715466/Difficulty: 0/
-/Reading: 色々な人と付き合ってきたけど、いい人はまだ見つからない。/Definitions: (Up until now) It went out with various types of people,but has yet to find a good person./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218716506/Difficulty: 0/
-/Reading: この大学の授業は簡単だったり、難しかったりする。/Definitions: This college's classes are sometimes easy,sometimes difficult,etc./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218716554/Difficulty: 0/
-/Reading: 誰が窓を開けた？/Definitions: Who opened the window?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218716849/Difficulty: 0/
-/Reading: 彼女は、学生じゃなくて、先生だ。/Definitions: She is not a student,she is a teacher./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220494022/Difficulty: 0/
-/Reading: ここは静かなんで、とても穏やかです。/Definitions: It is very calm here because it is quiet. (explaining,contracted,polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218781378/Difficulty: 0/
-/Reading: 鉛筆を家に持ってくる？/Definitions: Is it bringing a pencil to home?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218790374/Difficulty: 0/
-/Reading: 晩ご飯を作っとく。/Definitions: It will make dinner. (in preparation、contracted)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218790739/Difficulty: 0/
-/Kanji: 取る/Reading: とる/Definitions: to take,to pick up,to harvest,to earn,to choose/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218790747/Difficulty: 0/
-/Reading: 電池を買っておきます。/Definitions: It will buy batteries. (polite,in preparation)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218790900/Difficulty: 0/
-/Reading: 鉛筆を学校へ持っていく？/Definitions: Is it taking a pencil to school?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218790951/Difficulty: 0/
-/Reading: はい、はい、分かった、分かった。/Definitions: Yes,yes,I got it,I got it./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218790975/Difficulty: 0/
-/Reading: 何を読んでる？\n教科書を読んでいます。/Definitions: What is it reading? (contracted)\nIt is reading a textbook (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218791397/Difficulty: 0/
-/Reading: 晩ご飯を作っておく。/Definitions: It will make dinner. (in preparation)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218791587/Difficulty: 0/
-/Reading: 友達は何をしてるの？\n昼ご飯を食べてる。/Definitions: What is the friend doing? (contracted,explanation)\nIt is eating lunch. (contracted)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218791712/Difficulty: 0/
-/Reading: 話を聞いていますか。\nううん、聞いていない。/Definitions: Is it listening to it? (polite)\nNo,it's not listening./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218791765/Difficulty: 0/
-/Reading: 読んでいる。/Definitions: It is reading./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218791776/Difficulty: 0/
-/Reading: 話を聞いていますか。\nううん、聞いてない。/Definitions: Is it listening to it? (polite)\nNo,it's not listening. (contracted)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218791804/Difficulty: 0/
-/Reading: 読んでいない。/Definitions: It is not reading./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218791817/Difficulty: 0/
-/Reading: 読んでいた。/Definitions: It was reading./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218791891/Difficulty: 0/
-/Reading: 友達は何をしているの？\n昼ご飯を食べている。/Definitions: What is the friend doing? (explanation)\nIt is eating lunch./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218791979/Difficulty: 0/
-/Kanji: 結局/Reading: けっきょく/Definitions: after all,eventually/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792018/Difficulty: 0/
-/Kanji: 前/Reading: まえ/Definitions: (1) before,in front,fore part,ago,previously,(2) head (of a line),(3) in the presence of,lady (so-and-so),(4) (five minutes) to,(5) helping,portion/Markers: n-adv,n-t,suf,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792068/Difficulty: 0/
-/Kanji: 日本語/Reading: にほんご/Definitions: Japanese language/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792199/Difficulty: 0/
-/Reading: ずっと/Definitions: (1) direct,straight,(2) all along,the whole time,all the way,(3) for a long time,throughout,(4) by far,far and away/Markers: adv,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792329/Difficulty: 0/
-/Kanji: 付き合う/Reading: つきあう/Definitions: to associate with,to keep company with,to get on with/Markers: v5u,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792410/Difficulty: 0/
-/Kanji: 見つかる/Reading: みつかる/Definitions: to be found,to be discovered/Markers: v5r,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792415/Difficulty: 0/
-/Kanji: 色々/Reading: いろいろ/Definitions: various/Markers: adj-na,adj-no,adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792419/Difficulty: 0/
-/Kanji: 頑張る/Reading: がんばる/Definitions: to persist,to insist on,to stand firm,to try one's best/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792425/Difficulty: 0/
-/Kanji: 一生懸命/Reading: いっしょうけんめい/Definitions: very hard,with utmost effort,with all one's might,for dear life/Markers: adj-na,n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792459/Difficulty: 0/
-/Reading: コート/Definitions: coat,tennis court/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792467/Difficulty: 0/
-/Kanji: 着る/Reading: きる/Definitions: to wear,to put on (from shoulders down)/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792468/Difficulty: 0/
-/Kanji: 増える/Reading: ふえる/Definitions: to increase,to multiply/Markers: v1,vi,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792477/Difficulty: 0/
-/Kanji: 入る/Reading: はいる/Definitions: to enter,to break into,to join,to enroll,to contain,to hold,to accommodate,to have (an income of)/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792489/Difficulty: 0/
-/Kanji: 作る/Reading: つくる/Definitions: to make,to create,to manufacture,to draw up,to write,to compose,to build,to coin,to cultivate,to organize,to organise,to establish,to make up (a face),to trim (a tree),to fabricate,to prepare (food),to commit (sin),to construct/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792557/Difficulty: 0/
-/Kanji: 予約/Reading: よやく/Definitions: (1) reservation,appointment,booking,advance order,(2) contract,subscription,pledge/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792561/Difficulty: 0/
-/Reading: ホテル/Definitions: hotel/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792561/Difficulty: 0/
-/Kanji: 置く/Reading: おく/Definitions: (1) to put,to place,(2) to leave (behind),(3) to do something in advance (us. following te-form verb)/Markers: v5k,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792563/Difficulty: 0/
-/Kanji: 切符/Reading: きっぷ/Definitions: ticket/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792564/Difficulty: 0/
-/Kanji: 方/Reading: ほう/Definitions: side,direction,way/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792684/Difficulty: 0/
-/Kanji: 駅/Reading: えき/Definitions: station/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792689/Difficulty: 0/
-/Kanji: お父さん/Reading: おとうさん/Definitions: father/Markers: n,hon,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792702/Difficulty: 0/
-/Kanji: 鉛筆/Reading: えんぴつ/Definitions: pencil/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218792714/Difficulty: 0/
-/Kanji: 旅行/Reading: りょこう/Definitions: travel,trip/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218793423/Difficulty: 0/
-/Kanji: 計画/Reading: けいかく/Definitions: plan,project,schedule,scheme,program,programme/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218793432/Difficulty: 0/
-/Kanji: 終る/Reading: おわる/Definitions: to finish,to close/Markers: io,v5r/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218793442/Difficulty: 0/
-/Kanji: 準備/Reading: じゅんび/Definitions: preparation,arrangements,provision,reserve/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218793599/Difficulty: 0/
-/Reading: もう/Definitions: already,soon,more,again/Markers: adv,int,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218793601/Difficulty: 0/
-/Kanji: 歌/Reading: うた/Definitions: song,poetry/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218793605/Difficulty: 0/
-/Kanji: 道/Reading: みち/Definitions: road,street,way,method/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218793607/Difficulty: 0/
-/Kanji: 結婚/Reading: けっこん/Definitions: marriage/Markers: n,adj-no,vs,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218793653/Difficulty: 0/
-/Kanji: 教科書/Reading: きょうかしょ/Definitions: text book/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218793729/Difficulty: 0/
-/Kanji: 話/Reading: はなし/Definitions: talk,speech,chat,story,conversation/Markers: io,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218793739/Difficulty: 0/
-/Reading: 映画を見たり、本を読んだりしない。/Definitions: It doesn't do things like watch movies and read books,etc./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218793748/Difficulty: 0/
-/Reading: だけど、彼がまだ好きなの。/Definitions: That may be so,but it still likes him (feminine,explaining)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218800613/Difficulty: 0/
-/Reading: 毎日運動したのに、全然痩せなかった。/Definitions: Despite exercising every day,it didn't get thinner at all./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218800942/Difficulty: 0/
-/Reading: 学生なのに、彼女は勉強しない。/Definitions: Despite being a student,she does not study./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218801197/Difficulty: 0/
-/Reading: なんで、友達に会う時間がない。/Definitions: That's why there's no time to meet friend. (explaining,contracted)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218802175/Difficulty: 0/
-/Reading: ここは静かなので、とても穏やかです。/Definitions: It is very calm here because it is quiet. (explaining,polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218803285/Difficulty: 0/
-/Reading: 私は学生なので、お金がないんです。/Definitions: Because I'm a student,I have no money. (explaining,polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218803396/Difficulty: 0/
-/Reading: 友達だからプレゼントが来た。/Definitions: Because it is a friend,a present came./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218805260/Difficulty: 0/
-/Reading: 食堂に行って、昼ご飯を食べて、昼寝をした。/Definitions: It went to cafeteria,ate lunch,and took a nap./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218805305/Difficulty: 0/
-/Reading: 時間がなかったからパーティーに行きませんでした。/Definitions: There was no time so it didn't go to the party. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218805326/Difficulty: 0/
-/Reading: 食堂に行って、昼ご飯を食べて、昼寝をする。/Definitions: It will go to cafeteria,eat lunch,and take a nap./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218805654/Difficulty: 0/
-/Reading: 遊ばなくて/Definitions: It doesn't play... (て form)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218805783/Difficulty: 0/
-/Reading: ボブもしない。/Definitions: Bob also does not do./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218805868/Difficulty: 0/
-/Reading: ボブは魚が好きだ。/Definitions: Bob likes fish./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218805886/Difficulty: 0/
-/Reading: 飲まなくて/Definitions: It doesn't drink... (て form)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218805964/Difficulty: 0/
-/Reading: しなくて/Definitions: It doesn't do... (て form)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218806216/Difficulty: 0/
-/Kanji: 金持ち/Reading: かねもち/Definitions: rich man/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218806234/Difficulty: 0/
-/Reading: 魚が好きじゃないタイプは、肉が好きだ。/Definitions: The types of people who do not like fish,like meat./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218806243/Difficulty: 0/
-/Reading: ボブは魚が好きじゃない。/Definitions: Bob does not like fish./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218806246/Difficulty: 0/
-/Reading: 飲んで/Definitions: It drinks... (て form)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218806711/Difficulty: 0/
-/Reading: 彼はかっこいい。/Definitions: He looks cool./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218806715/Difficulty: 0/
-/Reading: 私は買わない。/Definitions: I do not buy./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218806735/Difficulty: 0/
-/Reading: 彼はかっこよくない。/Definitions: He doesn't look cool./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218806752/Difficulty: 0/
-/Reading: する/Definitions: to do,to try,to attempt,to execute,to play (game),to practice,to practise,to cost,to serve as,to pass,to elapse/Markers: vs-i,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218806777/Difficulty: 0/
-/Reading: 行かなくて/Definitions: It doesn't go... (て form)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218806786/Difficulty: 0/
-/Kanji: 遊ぶ/Reading: あそぶ/Definitions: (1) to play,to make a visit (esp. for pleasure),(2) to be idle,to do nothing/Markers: v5b,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218806892/Difficulty: 0/
-/Kanji: 簡単/Reading: かんたん/Definitions: simple/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218806929/Difficulty: 0/
-/Reading: 遊んで/Definitions: It plays... (て form)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218806939/Difficulty: 0/
-/Reading: 魚が好きじゃなかったタイプ。/Definitions: Type that did not like fish./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218806956/Difficulty: 0/
-/Reading: して/Definitions: It does... (て form)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807010/Difficulty: 0/
-/Reading: パーティー/Definitions: party/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807052/Difficulty: 0/
-/Reading: 魚が好きじゃないタイプ。/Definitions: Type that does not like fish./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807061/Difficulty: 0/
-/Kanji: 未だ/Reading: まだ/Definitions: yet,still,more,besides/Markers: adv,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807084/Difficulty: 0/
-/Reading: ボブは魚が好きだった。/Definitions: Bob liked fish./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807087/Difficulty: 0/
-/Reading: 食べて/Definitions: It eats... (て form)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807092/Difficulty: 0/
-/Reading: 高くなかったビル。/Definitions: It is a building that was not tall./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807094/Difficulty: 0/
-/Reading: 値段がいい。/Definitions: The price is good./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807097/Difficulty: 0/
-/Reading: プレゼント/Definitions: present,gift/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807100/Difficulty: 0/
-/Reading: 値段があまりよくない。/Definitions: The price is not very good./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807103/Difficulty: 0/
-/Reading: お金がない。/Definitions: There is no money./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807104/Difficulty: 0/
-/Reading: 高いビル。/Definitions: It is a tall building./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807110/Difficulty: 0/
-/Reading: 高くないビル。/Definitions: It is not a tall building./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807111/Difficulty: 0/
-/Kanji: 難しい/Reading: むずかしい/Definitions: difficult/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807117/Difficulty: 0/
-/Reading: 高かったビル。/Definitions: It is a building that was tall./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807130/Difficulty: 0/
-/Reading: アリスは食べない。/Definitions: Alice does not eat./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807141/Difficulty: 0/
-/Reading: 値段がよかった。/Definitions: The price was good./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807321/Difficulty: 0/
-/Kanji: 優しい/Reading: やさしい/Definitions: tender,kind,gentle,graceful,affectionate,amiable,suave/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807359/Difficulty: 0/
-/Reading: 高くない静かなビル。/Definitions: It is a not tall,quiet building./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807360/Difficulty: 0/
-/Kanji: 年上/Reading: としうえ/Definitions: older,senior/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807377/Difficulty: 0/
-/Kanji: 運動/Reading: うんどう/Definitions: motion,exercise/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807393/Difficulty: 0/
-/Reading: デパート/Definitions: department store/Markers: n,abbr,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807624/Difficulty: 0/
-/Kanji: 痩せる/Reading: やせる/Definitions: to become thin,to lose weight,to reduce (one's) weight,to slim/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807656/Difficulty: 0/
-/Kanji: 聞く/Reading: きく/Definitions: (1) to hear,to listen,(2) to ask/Markers: v5k,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807750/Difficulty: 0/
-/Kanji: 失礼/Reading: しつれい/Definitions: (1) discourtesy,impoliteness,(2) Excuse me,Goodbye/Markers: n,vs,adj-na,exp,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807754/Difficulty: 0/
-/Kanji: 暇/Reading: ひま/Definitions: (1) free time,leisure,leave,spare time,(2) farewell/Markers: adj-na,n/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807768/Difficulty: 0/
-/Kanji: 欲しい/Reading: ほしい/Definitions: wanted,wished for,in need of,desired/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807776/Difficulty: 0/
-/Reading: 静かな高いビル。/Definitions: It is a quiet,tall building./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807830/Difficulty: 0/
-/Reading: 私は買わなかった。/Definitions: I did not buy./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218807983/Difficulty: 0/
-/Reading: 面白くない映画は見ません。/Definitions: About uninteresting movies,it doesn't watch them. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218808007/Difficulty: 0/
-/Reading: 友達からプレゼントが来た。/Definitions: The present came from a friend./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220493628/Difficulty: 0/
-/Reading: 時間がありまして、映画を見ました。/Definitions: There was time and it watched a movie. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220493208/Difficulty: 0/
-/Kanji: 食堂/Reading: しょくどう/Definitions: cafeteria,dining hall/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220491535/Difficulty: 0/
-/Kanji: 彼女/Reading: かのじょ/Definitions: (1) she,(2) girl friend,sweetheart/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220491513/Difficulty: 0/
-/Reading: マトリックスを見たけど、面白かった。/Definitions: It watched the "Matrix" and it was interesting./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220490237/Difficulty: 0/
-/Reading: 映画を見たり、本を読んだりした。/Definitions: It did things like watch movies,and read books,etc./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220490124/Difficulty: 0/
-/Kanji: 先/Reading: さき/Definitions: (1) previous,prior,former,(2) point (e.g.,pencil),tip,end,nozzle,head (of a line),(3) destination,(4) the first priority,the future,objective,sequel,remainder,the other party/Markers: n,adj-no,n-suf,pref,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220490072/Difficulty: 0/
-/Kanji: 電池/Reading: でんち/Definitions: battery/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220490050/Difficulty: 0/
-/Kanji: 冬/Reading: ふゆ/Definitions: winter/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220490025/Difficulty: 0/
-/Reading: 出ない。/Definitions: It doesn't appear./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220108235/Difficulty: 0/
-/Kanji: 拾う/Reading: ひろう/Definitions: to pick up,to find,to gather/Markers: v5u,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220108093/Difficulty: 0/
-/Kanji: 起きる/Reading: おきる/Definitions: (1) to get up,to rise,(2) to wake up,(3) to occur,to happen,to take place/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220108082/Difficulty: 0/
-/Kanji: 捨てる/Reading: すてる/Definitions: to throw away,to cast aside,to abandon,to resign/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220108072/Difficulty: 0/
-/Kanji: 聞く/Reading: きく/Definitions: (1) to hear,to listen,(2) to ask/Markers: v5k,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220108010/Difficulty: 0/
-/Reading: 起きない。/Definitions: It doesn't wake up./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220108003/Difficulty: 0/
-/Kanji: 答え/Reading: こたえ/Definitions: answer,response/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220504560/Difficulty: 0/
-/Kanji: 直る/Reading: なおる/Definitions: (1) to be cured,to get well,to be healed,(2) to get mended,to be repaired,to be fixed/Markers: v5r,vi,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220108000/Difficulty: 0/
-/Reading: 信じない。/Definitions: It doesn't believe./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107986/Difficulty: 0/
-/Kanji: 葉書/Reading: はがき/Definitions: postcard/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218846951/Difficulty: 0/
-/Kanji: 掛ける/Reading: かける/Definitions: (1) to wear,to put on,to hang,to cover,(2) to sit down,(3) to make a phone call,(4) to multiply,(5) to turn on (a switch),to play (a record),(6) to begin to,(7) to pour (water)/Markers: aux-v,v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218847103/Difficulty: 0/
-/Kanji: 雑誌/Reading: ざっし/Definitions: journal,magazine,periodical/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218847587/Difficulty: 0/
-/Kanji: 如何/Reading: どう/Definitions: how,in what way,how about/Markers: adv,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218847778/Difficulty: 0/
-/Reading: ボブ：学校に行った？\nアリス：行かなかった。\nボブ：図書館には？\nアリス：図書館にも行かなかった。/Definitions: Bob: Did you go to school?\nAlice: I didn't go.\nBob: What about the library?\nAlice: I also didn't go to the library./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218847937/Difficulty: 0/
-/Reading: 学生じゃなかったんだ。/Definitions: It was not a student. (explaining,male)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218848064/Difficulty: 0/
-/Reading: 食べない。/Definitions: It doesn't eat./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107983/Difficulty: 0/
-/Reading: 今日、知りました。/Definitions: It found out about it today. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218848216/Difficulty: 0/
-/Kanji: 信じる/Reading: しんじる/Definitions: to believe,to believe in,to place trust in,to confide in,to have faith in/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107982/Difficulty: 0/
-/Reading: デパートに行きましたが、いい物がたくさんありました。/Definitions: It went to the department store and there was a lot of good stuff. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218848566/Difficulty: 0/
-/Reading: 日本語をずっと前から勉強してきて、結局はやめた。/Definitions: It studied Japanese from way back before and eventually quit./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218848900/Difficulty: 0/
-/Reading: どうして彼が好きなの？\n優しいし、かっこいいし、面白いから。/Definitions: Why does it like him? (explanation)\nBecause he's kind,attractive,and interesting (among other things)./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218849115/Difficulty: 0/
-/Kanji: 寝る/Reading: ねる/Definitions: to go to bed,to lie down,to sleep/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107979/Difficulty: 0/
-/Kanji: 着る/Reading: きる/Definitions: to wear,to put on (from shoulders down)/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107978/Difficulty: 0/
-/Kanji: 死ぬ/Reading: しぬ/Definitions: to die/Markers: v5n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107883/Difficulty: 0/
-/Kanji: 泳ぐ/Reading: およぐ/Definitions: to swim/Markers: v5g,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107875/Difficulty: 0/
-/Reading: 飲まない。/Definitions: It doesn't drink./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107862/Difficulty: 0/
-/Kanji: 部屋/Reading: へや/Definitions: (1) room,(2) sumo stable/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218857251/Difficulty: 0/
-/Reading: ジムが遊ぶ。/Definitions: Jim is the one that plays./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107859/Difficulty: 0/
-/Reading: 捨てない。/Definitions: It doesn't discard./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107845/Difficulty: 0/
-/Kanji: ご飯/Reading: ごはん/Definitions: rice (cooked),meal/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107841/Difficulty: 0/
-/Reading: 話さない。/Definitions: It doesn't speak./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107519/Difficulty: 0/
-/Kanji: 静か/Reading: しずか/Definitions: quiet,peaceful/Markers: adj-na,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107505/Difficulty: 0/
-/Reading: 魚だ。/Definitions: It is a fish (male)./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107495/Difficulty: 0/
-/Reading: 待たない。/Definitions: It doesn't wait./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107458/Difficulty: 0/
-/Reading: ジムが遊ばない。/Definitions: Jim is the one that does not play./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107457/Difficulty: 0/
-/Reading: 魚じゃない。/Definitions: It is not a fish./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107437/Difficulty: 0/
-/Reading: 食べなくて/Definitions: It doesn't eat... (て form)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1218884672/Difficulty: 0/
-/Reading: 友達じゃない。/Definitions: It is not a friend./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107431/Difficulty: 0/
-/Reading: 電気を消す。/Definitions: It turns off the lights./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219048912/Difficulty: 0/
-/Reading: 窓がどうして開いた。/Definitions: Why did the window open?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219048972/Difficulty: 0/
-/Kanji: 付ける/Reading: つける/Definitions: (1) to attach,to join,to add,to append,to affix,to stick,to glue,to fasten,to sew on,to apply (ointment),(2) to furnish (a house with),(3) to wear,to put on,(4) to keep a diary,to make an entry,(5) to appraise,to set (a price),(6) to bring alongside,(7) to place (under guard or doctor),(8) to follow,to shadow,(9) to load,to give (courage to),(10) to keep (an eye on),(11) to establish (relations or understanding)/Markers: v1,vt,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219049037/Difficulty: 0/
-/Reading: 家に帰らない。/Definitions: It will not go home toward the house./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219049100/Difficulty: 0/
-/Reading: 猫は部屋にいる。/Definitions: The cat is in the room./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219049192/Difficulty: 0/
-/Reading: 静かじゃない。/Definitions: It is not quiet./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219049328/Difficulty: 0/
-/Kanji: 友達/Reading: ともだち/Definitions: friend/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107419/Difficulty: 0/
-/Reading: 食べない。/Definitions: It doesn't eat./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107396/Difficulty: 0/
-/Reading: 拾わない。/Definitions: It doesn't pick up./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107392/Difficulty: 0/
-/Reading: 友達。/Definitions: It is a friend./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107308/Difficulty: 0/
-/Kanji: 魚/Reading: さかな/Definitions: fish/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107269/Difficulty: 0/
-/Reading: 学生じゃない。/Definitions: It is not a student./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107264/Difficulty: 0/
-/Kanji: 学生/Reading: がくせい/Definitions: student/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107253/Difficulty: 0/
-/Kanji: 誰か/Reading: だれか/Definitions: someone,somebody/Markers: n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505141/Difficulty: 0/
-/Kanji: 盗む/Reading: ぬすむ/Definitions: to steal/Markers: v5m,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505118/Difficulty: 0/
-/Reading: 田中さん：どうしてパーティーに行きませんでしたか。\n山田さん：時間がなかったからです。/Definitions: Tanaka san: Why didn't you go to the party? (polite)\nYamada san: Because I didn't have time. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219141429/Difficulty: 0/
-/Reading: 先週に見た映画は、とても面白かったです。/Definitions: The movie it saw last week was very interesting. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219142419/Difficulty: 0/
-/Reading: 調べない。/Definitions: It doesn't investigate./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219142433/Difficulty: 0/
-/Reading: 行った。/Definitions: It went./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219142477/Difficulty: 0/
-/Reading: そんなのは、あるの？/Definitions: Does it have something like that?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219142548/Difficulty: 0/
-/Reading: 飲まなかったんだ。/Definitions: It didn't drink. (explaining,male)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219142591/Difficulty: 0/
-/Reading: 誰が盗んだのか、誰か知りませんか。/Definitions: Does anybody know who stole it? (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219142697/Difficulty: 0/
-/Reading: 昨日友達が遊びへきた。/Definitions: Yesterday a friend came to a playing activity./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219142745/Difficulty: 0/
-/Reading: 静かじゃなかった。/Definitions: It was not quiet./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107245/Difficulty: 0/
-/Kanji: 美味しい/Reading: おいしい/Definitions: delicious,tasty/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220505114/Difficulty: 0/
-/Reading: 魚だった。/Definitions: It was a fish./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107218/Difficulty: 0/
-/Reading: 友達じゃなかった。/Definitions: It was not a friend./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107213/Difficulty: 0/
-/Kanji: 誰/Reading: だれ/Definitions: who/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107191/Difficulty: 0/
-/Kanji: 此れ/Reading: これ/Definitions: this/Markers: int,n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107186/Difficulty: 0/
-/Kanji: 待つ/Reading: まつ/Definitions: to wait/Markers: v5t,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219300702/Difficulty: 0/
-/Reading: 直らない。/Definitions: It doesn't fix./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219300708/Difficulty: 0/
-/Reading: 友達に聞いたけど、知らなかった。/Definitions: It asked a friend,but it didn't know./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219384332/Difficulty: 0/
-/Reading: アリス：おもしろい映画だったね。\nボブ：え？全然おもしろくなかった。/Definitions: Alice: That was an interesting movie,wasn't it?\nBob: Huh? No,it wasn't interesting at all./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219384457/Difficulty: 0/
-/Reading: 今週末は、どこにも行かなかった。/Definitions: This weekend it went nowhere./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219384564/Difficulty: 0/
-/Reading: 捨てなかった。/Definitions: It did not discard./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219384687/Difficulty: 0/
-/Reading: 田中さんは、お金持ちで、かっこよくて、魅力的ですね。/Definitions: Tanaka san is rich,handsome,and charming,isn't he? (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219384725/Difficulty: 0/
-/Reading: そのシャツは誰の？/Definitions: Whose shirt is that?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219384838/Difficulty: 0/
-/Reading: この質問の答えは、誰でも分かる。/Definitions: Everybody understands the answer to this question./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219385115/Difficulty: 0/
-/Kanji: 調べる/Reading: しらべる/Definitions: to investigate,to check up/Markers: v1,vt,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219386359/Difficulty: 0/
-/Reading: 持った。/Definitions: It held./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219386395/Difficulty: 0/
-/Reading: 泳いだ。/Definitions: It swam./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219386415/Difficulty: 0/
-/Reading: 買った。/Definitions: It bought./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219386444/Difficulty: 0/
-/Reading: 来た。/Definitions: It came./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219386463/Difficulty: 0/
-/Kanji: 持つ/Reading: もつ/Definitions: (1) to hold,to carry,(2) to possess/Markers: v5t,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219386478/Difficulty: 0/
-/Reading: 遊ばない。/Definitions: It doesn't play./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219386496/Difficulty: 0/
-/Reading: 買わない。/Definitions: It doesn't buy./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220107103/Difficulty: 0/
-/Kanji: 余り/Reading: あまり/Definitions: not very (this form only used as adverb),not much,remainder,rest,remnant,surplus,balance,excess,remains,scraps,residue,fullness,other,too much/Markers: adj-na,adv,n,n-suf,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955290/Difficulty: 0/
-/Reading: レストラン/Definitions: restaurant/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955290/Difficulty: 0/
-/Kanji: 格好いい/Reading: かっこいい/Definitions: attractive,good-looking,stylish,"cool"/Markers: adj-na/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955279/Difficulty: 0/
-/Reading: タイプ/Definitions: type,style,typing/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955274/Difficulty: 0/
-/Reading: 誰が学生？/Definitions: Who is the one that is the student?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955274/Difficulty: 0/
-/Kanji: 暇/Reading: ひま/Definitions: (1) free time,leisure,leave,spare time,(2) farewell/Markers: adj-na,n/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955253/Difficulty: 0/
-/Kanji: 肉/Reading: にく/Definitions: meat/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955243/Difficulty: 0/
-/Reading: 魚を食べる。/Definitions: It eats fish./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955235/Difficulty: 0/
-/Reading: 私は学生。/Definitions: I am a student./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955232/Difficulty: 0/
-/Kanji: 親切/Reading: しんせつ/Definitions: kindness,gentleness/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955201/Difficulty: 0/
-/Reading: 冬に入って、コートを着ている人が増えていきます。/Definitions: Entering winter,people wearing coats will increase (polite). (toward the future)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219436792/Difficulty: 0/
-/Reading: （１）　時間がなかった。\n（２）　だからパーティーに行かなかったの？/Definitions: (1) I didn't have time.\n (2) Is that why you didn't go to the party? (seeking explanation)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219436832/Difficulty: 0/
-/Reading: なので、友達に会う時間がない。/Definitions: That's why there is no time to meet the friend. (explaining)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219436857/Difficulty: 0/
-/Reading: 掛けない。/Definitions: It doesn't hang./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219436864/Difficulty: 0/
-/Reading: デパートに行きましたが、何も欲しくなかったです。/Definitions: It went to the department store,but there was nothing it wanted. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219436905/Difficulty: 0/
-/Reading: 読んでいなかった。/Definitions: It was not reading./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219436939/Difficulty: 0/
-/Reading: ボブ：誰が学生？\nアリス：ジムが学生。/Definitions: Bob: Who is the one that is the student?\nAlice: Jim is the one who is the student./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955186/Difficulty: 0/
-/Kanji: 人/Reading: ひと/Definitions: man,person,human being,mankind,people,character,personality,true man,man of talent,adult,other people,messenger,visitor/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955182/Difficulty: 0/
-/Reading: これが車。/Definitions: This is the car./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955157/Difficulty: 0/
-/Kanji: 私/Reading: わたし/Definitions: I,myself,private affairs/Markers: n,adj-no,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955145/Difficulty: 0/
-/Reading: アリス：今日は試験だ。\nボブ：ジムは？\nアリス：ジムは明日。/Definitions: Alice: Today is the exam.\nBob: What about Jim?\nAlice: Jim is tomorrow./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955123/Difficulty: 0/
-/Kanji: 好き/Reading: すき/Definitions: liking,fondness,love/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955105/Difficulty: 0/
-/Reading: ジムなのだ。/Definitions: It is Jim. (explaining)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219953366/Difficulty: 0/
-/Kanji: 何処/Reading: どこ/Definitions: where,what place/Markers: n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955082/Difficulty: 0/
-/Kanji: 習う/Reading: ならう/Definitions: to learn/Markers: v5u,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955069/Difficulty: 0/
-/Reading: 美恵ちゃんは、もう来ているよ。/Definitions: Mie-chan is already here,you know./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219438353/Difficulty: 0/
-/Kanji: 学校/Reading: がっこう/Definitions: school/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955066/Difficulty: 0/
-/Reading: 旅行の計画は終った？\nうん、切符を買ったし、ホテルの予約もしてある。/Definitions: Are the plans for the trip complete? \nUh huh,not only did I buy the tickets and stuff,I also took care of the hotel reservations./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219438412/Difficulty: 0/
-/Reading: ボブ：アリスは学生？\nアリス：うん、トムも学生。/Definitions: Bob: Alice,are you a student?\nAlice: Yeah,and Tom is also a student./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955058/Difficulty: 0/
-/Reading: ボブ：ジムは明日？\nアリス：明日じゃない。/Definitions: Bob: Jim is tomorrow?\nAlice: Not tomorrow./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955054/Difficulty: 0/
-/Reading: ジュースを飲んだ。/Definitions: It drank juice./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955031/Difficulty: 0/
-/Reading: 高速道路を走る。/Definitions: It runs through the highway./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954994/Difficulty: 0/
-/Reading: 学生は誰？/Definitions: The student is who?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954911/Difficulty: 0/
-/Reading: 街をぶらぶら歩く。/Definitions: It aimlessly walks through the town./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954899/Difficulty: 0/
-/Reading: 毎日、日本語を勉強する。/Definitions: It studies Japanese every day./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954703/Difficulty: 0/
-/Reading: ボブは日本に行った。/Definitions: Bob went to Japan./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954641/Difficulty: 0/
-/Reading: メールアドレスを登録した。/Definitions: It registered the email address./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954599/Difficulty: 0/
-/Reading: 部屋にくる。/Definitions: It comes to the room./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954562/Difficulty: 0/
-/Reading: 家に帰らない。/Definitions: It does not go back home./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954531/Difficulty: 0/
-/Kanji: 先週/Reading: せんしゅう/Definitions: last week,the week before/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954500/Difficulty: 0/
-/Reading: アリスはアメリカからきた。/Definitions: Alice came from America./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954482/Difficulty: 0/
-/Reading: 宿題を今日から明日までする。/Definitions: It will do homework from today to tomorrow./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954436/Difficulty: 0/
-/Reading: 椅子が台所にあった。/Definitions: The chair was in the kitchen./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954331/Difficulty: 0/
-/Reading: 先週に図書館に行った。/Definitions: It went to the library last week./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954293/Difficulty: 0/
-/Kanji: 一般的/Reading: いっぱんてき/Definitions: popular,typical,general/Markers: adj-na,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219599005/Difficulty: 0/
-/Reading: 友達は来年日本に行く。/Definitions: Next year the friend will go to Japan./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954235/Difficulty: 0/
-/Reading: いい友達に会った。/Definitions: It met a good friend./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954194/Difficulty: 0/
-/Reading: ジムは医者になる。/Definitions: Jim will become a doctor./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954170/Difficulty: 0/
-/Reading: 部屋へくる。/Definitions: It comes towards the room./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954133/Difficulty: 0/
-/Reading: この町は最近大きく変わった。/Definitions: This town had changed greatly lately./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219737324/Difficulty: 0/
-/Kanji: 撰ぶ/Reading: えらぶ/Definitions: to choose,to select/Markers: oK,v5b/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220504655/Difficulty: 0/
-/Reading: 友達は来年に日本に行く。/Definitions: The friend will go to Japan *next year*./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219954056/Difficulty: 0/
-/Reading: 一生懸命、頑張っていく！ /Definitions: With all its might it will try its hardest. (toward the future)./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219779630/Difficulty: 0/
-/Reading: 道は分かりますか。/Definitions: Does it know the way? (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219780344/Difficulty: 0/
-/Reading: 鈴木さんはどこですか。\nもう、家に帰っている。/Definitions: Where is Suzuki-san? (polite)\nHe is already at home./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219780706/Difficulty: 0/
-/Reading: この歌を知っていますか？/Definitions: Does it know this song? (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219780802/Difficulty: 0/
-/Reading: 友達が来た。/Definitions: The friend is the one that came./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787362/Difficulty: 0/
-/Reading: 今日は、走った。/Definitions: As for today,I ran./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787417/Difficulty: 0/
-/Reading: 切った。/Definitions: It cut./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787489/Difficulty: 0/
-/Reading: した。/Definitions: It did./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787502/Difficulty: 0/
-/Reading: 死んだ。/Definitions: It died./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787535/Difficulty: 0/
-/Reading: 遊んだ。/Definitions: It played./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787545/Difficulty: 0/
-/Reading: 噛んだ。/Definitions: It bit./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787611/Difficulty: 0/
-/Reading: 出た。/Definitions: It appeared./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787631/Difficulty: 0/
-/Reading: 映画は、全部見た。/Definitions: As for the movies,I saw them all./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787655/Difficulty: 0/
-/Reading: 書いた。/Definitions: It wrote./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787675/Difficulty: 0/
-/Kanji: 走る/Reading: はしる/Definitions: to run/Markers: v5r,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787701/Difficulty: 0/
-/Reading: 話した。/Definitions: It spoke./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787706/Difficulty: 0/
-/Reading: ご飯は食べた。/Definitions: As for the meal,I ate it./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787716/Difficulty: 0/
-/Reading: 捨てた。/Definitions: It discarded./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787722/Difficulty: 0/
-/Kanji: 勉強/Reading: べんきょう/Definitions: (1) study,(2) diligence,(3) discount,reduction/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787847/Difficulty: 0/
-/Kanji: 切る/Reading: きる/Definitions: to cut,to chop,to hash,to carve,to saw,to clip,to shear,to slice,to strip,to fell,to cut down,to punch,to sever (connections),to pause,to break off,to disconnect,to turn off,to hang up,to cross (a street),to discount,to sell below cost,to shake (water) off,to finish,to be through,to complete/Markers: suf,v5r,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787874/Difficulty: 0/
-/Kanji: 全部/Reading: ぜんぶ/Definitions: all,entire,whole,altogether/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787886/Difficulty: 0/
-/Kanji: 噛む/Reading: かむ/Definitions: to bite,to chew,to gnaw/Markers: v5m,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787905/Difficulty: 0/
-/Kanji: 行く/Reading: いく/Definitions: to go/Markers: v5k-s,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787915/Difficulty: 0/
-/Kanji: 来る/Reading: くる/Definitions: to come,to come to hand,to arrive,to approach,to call on,to come on (rain),to set in,to be due,to become,to grow,to get,to come from,to be caused by,to derive from/Markers: vk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787925/Difficulty: 0/
-/Kanji: 書く/Reading: かく/Definitions: to write/Markers: v5k,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787934/Difficulty: 0/
-/Kanji: 居る/Reading: いる/Definitions: to be (animate),to exist/Markers: v1,uk,hum,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787962/Difficulty: 0/
-/Kanji: 映画/Reading: えいが/Definitions: movie,film/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219787974/Difficulty: 0/
-/Reading: 値段が高いレストランはあまり好きじゃない。/Definitions: I don't like high price restaurants very much./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219788471/Difficulty: 0/
-/Reading: 彼はかっこよくなかった。/Definitions: He didn't look cool./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219798986/Difficulty: 0/
-/Kanji: 車/Reading: くるま/Definitions: car,vehicle,wheel/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219799067/Difficulty: 0/
-/Reading: 魚。/Definitions: It is a fish./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219799084/Difficulty: 0/
-/Reading: 友達だった。/Definitions: It was a friend./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219799097/Difficulty: 0/
-/Reading: ボブ：アリスは学生？\nアリス：うん、でもトムは学生じゃない。/Definitions: Bob: Alice,are you a student?\nAlice: Yes,but Tom is not a student./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219799117/Difficulty: 0/
-/Reading: ボブ：アリスは学生？\nアリス：ううん、トムも学生じゃない。/Definitions: Bob: Alice,are you a student?\nAlice: No,and Tom is also not a student./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219799132/Difficulty: 0/
-/Kanji: 試験/Reading: しけん/Definitions: examination,test,study/Markers: n,vs,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219799150/Difficulty: 0/
-/Kanji: 今日/Reading: きょう/Definitions: today,this day/Markers: n-t,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219799152/Difficulty: 0/
-/Reading: 学生じゃなかった。/Definitions: It was not a student./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219799391/Difficulty: 0/
-/Reading: 聞かない。/Definitions: It doesn't listen./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219800411/Difficulty: 0/
-/Reading: 泳がない。/Definitions: It doesn't swim./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219800441/Difficulty: 0/
-/Reading: 死なない。/Definitions: It doesn't die./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219800450/Difficulty: 0/
-/Reading: 友達は親切な人。/Definitions: The friend is a kind person./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219800451/Difficulty: 0/
-/Kanji: 明日/Reading: あした/Definitions: tomorrow/Markers: n-t,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219800518/Difficulty: 0/
-/Kanji: 見る/Reading: みる/Definitions: (1) to see,to watch,(2) (as an auxiliary verb) to try/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219800857/Difficulty: 0/
-/Kanji: 飲む/Reading: のむ/Definitions: to drink/Markers: v5m,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219800861/Difficulty: 0/
-/Reading: 私は買う。/Definitions: I buy./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219800865/Difficulty: 0/
-/Kanji: 出る/Reading: でる/Definitions: to appear,to come forth,to leave/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219800865/Difficulty: 0/
-/Reading: 猫がいる。/Definitions: There is a cat./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219800866/Difficulty: 0/
-/Reading: ボブもする。/Definitions: Bob also does./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219800867/Difficulty: 0/
-/Reading: お金がある。/Definitions: There is money./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219800872/Difficulty: 0/
-/Kanji: 話す/Reading: はなす/Definitions: to speak/Markers: v5s,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219800926/Difficulty: 0/
-/Reading: 猫がいない。/Definitions: There is no cat./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219801006/Difficulty: 0/
-/Kanji: お金/Reading: おかね/Definitions: money/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219801017/Difficulty: 0/
-/Reading: 彼はかっこよかった。/Definitions: He looked cool./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219801018/Difficulty: 0/
-/Kanji: 有る/Reading: ある/Definitions: to be,to have/Markers: v5r-i,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219801023/Difficulty: 0/
-/Kanji: 買う/Reading: かう/Definitions: to buy/Markers: v5u,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219801034/Difficulty: 0/
-/Reading: アリスは食べる。/Definitions: Alice eats./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219801034/Difficulty: 0/
-/Kanji: 食べる/Reading: たべる/Definitions: to eat/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219801041/Difficulty: 0/
-/Reading: 晩ご飯を食べなかった人は映画で見た銀行に行った。/Definitions: Speaking of the person who did not eat dinner,she went to the bank she saw at the movie./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219953705/Difficulty: 0/
-/Reading: 飲むんじゃない。/Definitions: It isn't that it drinks. (explaining)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219805348/Difficulty: 0/
-/Kanji: 遅れる/Reading: おくれる/Definitions: to be late,to be delayed,to fall behind schedule,to be overdue/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219805503/Difficulty: 0/
-/Reading: 友達はいつも遅れる。/Definitions: The friend is always late./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219805585/Difficulty: 0/
-/Reading: ここにあるレストランはどれもおいしくない。/Definitions: Of all the restaurants here,none of them are tasty./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219805652/Difficulty: 0/
-/Kanji: 一杯/Reading: いっぱい/Definitions: (1) cup of ..,drink,(2) full,(3) to the utmost,up to (one's income),(a) lot of,much/Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219805749/Difficulty: 0/
-/Kanji: 奇麗/Reading: きれい/Definitions: pretty,clean,nice,tidy,beautiful,fair/Markers: adj-na,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219805871/Difficulty: 0/
-/Reading: レストランで昼ご飯を食べた。/Definitions: It ate lunch at a restaurant./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219953634/Difficulty: 0/
-/Reading: スプーンとフォークで魚をたべた。/Definitions: It ate fish with a spoon and fork./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219953570/Difficulty: 0/
-/Kanji: 犯人/Reading: はんにん/Definitions: offender,criminal/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220504652/Difficulty: 0/
-/Kanji: 誰も/Reading: だれも/Definitions: (1) everyone,anyone,(2) no-one (with neg. verb)/Markers: conj,uk/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220504619/Difficulty: 0/
-/Kanji: 此の/Reading: この/Definitions: this/Markers: adj-pn,int,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1220504587/Difficulty: 0/
-/Reading: ボブのだ。/Definitions: It's Bob's./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219953414/Difficulty: 0/
-/Reading: ナプキン/Definitions: (1) (table) napkin,serviette,(2) sanitary napkin/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219948153/Difficulty: 0/
-/Reading: この中からどれかを選ぶの。/Definitions: It will select a certain one from inside this. (explaining)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219948191/Difficulty: 0/
-/Reading: 誰かがおいしいクッキーを全部食べた。/Definitions: Someone ate all the delicous cookies./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219948218/Difficulty: 0/
-/Reading: 昨日何を食べたか忘れた。/Definitions: It forgot what it ate yesterday./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219948425/Difficulty: 0/
-/Kanji: 飲み物/Reading: のみもの/Definitions: drink,beverage/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219948663/Difficulty: 0/
-/Reading: カップ/Definitions: cup/Markers: nl:,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219948679/Difficulty: 0/
-/Reading: キムさん：　イタリア料理を食べに行きませんか。\n鈴木さん：　すみません。ちょっと、お腹がいっぱいです。/Definitions: Kim san: Would you like to go eat Italian food? (polite)\n Suzuki san: I'm sorry.  My stomach is a little full. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219948686/Difficulty: 0/
-/Kanji: 先生/Reading: せんせい/Definitions: teacher,master,doctor/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219948734/Difficulty: 0/
-/Reading: 田中さん：お母さんはどこですか。\n鈴木さん：　母は買い物に行きました。/Definitions: Tanaka san: Where is your mother? (polite)\nSuzuki san: My mother went shopping. (polite)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219948818/Difficulty: 0/
-/Reading: スプーン/Definitions: spoon/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219949147/Difficulty: 0/
-/Reading: フォーク/Definitions: (1) folk,(2) fork/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219949154/Difficulty: 0/
-/Kanji: 本/Reading: ほん/Definitions: book,main,head,this,our,counter for long cylindrical things/Markers: n,pref,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219949179/Difficulty: 0/
-/Kanji: 何れ/Reading: どれ/Definitions: well,now,let me see,which (of three or more)/Markers: n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219949184/Difficulty: 0/
-/Reading: 私は公園でお弁当をたべた。/Definitions: I ate the lunchbox in the park./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219949219/Difficulty: 0/
-/Reading: 「はい、そうです」と答えた。/Definitions: "Yes,that's so",it replied./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219949252/Difficulty: 0/
-/Reading: 友達じゃなかったアリスはいい友達になった。/Definitions: Alice,who was not a friend,became a good friend./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219949292/Difficulty: 0/
-/Reading: 赤いズボンを買う友達はボブだ。/Definitions: A friend who buys red pants is Bob. (male)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219949304/Difficulty: 0/
-/Reading: その部屋はあまり静かじゃありませんよ。/Definitions: That room is not very quiet,you know. (polite,more formal)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219949340/Difficulty: 0/
-/Reading: かわいくありませんでした。/Definitions: It wasn't cute. (polite,more formal)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219949411/Difficulty: 0/
-/Reading: 先週に映画を見た人は誰？/Definitions: Who is the person who watched the movie last week?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219949432/Difficulty: 0/
-/Hint: ます stem/Reading: き/Definitions: ます stem for くる/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219949449/Difficulty: 0/
-/Reading: アリス：ボブは魚が好きなんだよね。\nボブ：そうだね。/Definitions: Alice: You know,you like fish,don't you.\nBob: It's true,isn't it./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219949529/Difficulty: 0/
-/Reading: 先週に医者だったボブは仕事を辞めた。/Definitions: Bob,who was a doctor last week,quit his job./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219950104/Difficulty: 0/
-/Kanji: 弁当/Reading: べんとう/Definitions: box lunch/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219950174/Difficulty: 0/
-/Reading: ボブはいつも勉強する人だ。/Definitions: Bob is a person who always studies. (male)/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219950253/Difficulty: 0/
-/Kanji: 公園/Reading: こうえん/Definitions: (public) park/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219950314/Difficulty: 0/
-/Kanji: 銀行/Reading: ぎんこう/Definitions: bank/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219950395/Difficulty: 0/
-/Reading: 学生じゃない人は学校に行かない。/Definitions: People who are not students do not go to school./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219950457/Difficulty: 0/
-/Reading: 電気が消える。/Definitions: The lights turn off./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219950476/Difficulty: 0/
-/Kanji: 開く/Reading: あく/Definitions: to open,to become open,to become empty/Markers: v5k,vi,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219950528/Difficulty: 0/
-/Kanji: 如何して/Reading: どうして/Definitions: why?,for what reason,how,in what way,for what purpose,what for/Markers: adv,int,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219950540/Difficulty: 0/
-/Reading: 私が電気を付けた。/Definitions: I am the one that turned on the lights./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219950598/Difficulty: 0/
-/Reading: 子供だったアリスが立派な大人になった。/Definitions: Alice,who was a child,became a fine adult./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219950618/Difficulty: 0/
-/Kanji: 開ける/Reading: あける/Definitions: (1) to open,(2) to unwrap (e.g.,parcel,package)/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219950671/Difficulty: 0/
-/Kanji: 窓/Reading: まど/Definitions: window/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219950683/Difficulty: 0/
-/Kanji: 消す/Reading: けす/Definitions: (1) to erase,to delete,(2) to turn off power,(3) to bump off (sl)/Markers: v5s,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219950787/Difficulty: 0/
-/Kanji: 消える/Reading: きえる/Definitions: to go out,to vanish,to disappear/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219951081/Difficulty: 0/
-/Kanji: 付く/Reading: つく/Definitions: to adjoin,to be attached,to adhere,to be connected with,to be dyed,to be stained,to be scarred,to be recorded,to start (fires),to follow,to become allied to,to accompany,to study with,to increase,to be added to/Markers: v5k,vi/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219951111/Difficulty: 0/
-/Kanji: 電気/Reading: でんき/Definitions: electricity,(electric) light/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219951273/Difficulty: 0/
-/Reading: 日本語を習う。/Definitions: It will learn Japanese./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219951295/Difficulty: 0/
-/Reading: 日本語は習う。/Definitions: About Japanese,it will learn it./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219951320/Difficulty: 0/
-/Reading: ボブ：どこで食べる？\nアリス：イタリアレストランではどう？/Definitions: Bob: Where should we eat?\nAlice: How about an Italian restaurant?/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219951426/Difficulty: 0/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219952001/Difficulty: 0/
-/Reading: 何（なん）できた？\n暇だから。/Definitions: Why did it come?\nBecause it was free./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219952013/Difficulty: 0/
-/Kanji: 何時も/Reading: いつも/Definitions: (1) always,usually,every time,(2) never (with neg. verb)/Markers: adv,n,uk,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219952017/Difficulty: 0/
-/Reading: ズボン/Definitions: trousers (fr: jupon)/Markers: fr:,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219952035/Difficulty: 0/
-/Kanji: 晩ご飯/Reading: ばんごはん/Definitions: dinner,evening meal/Markers: n/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219952066/Difficulty: 0/
-/Kanji: 仕事/Reading: しごと/Definitions: work,occupation,employment/Markers: n,adj-no,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219952074/Difficulty: 0/
-/Kanji: 立派/Reading: りっぱ/Definitions: splendid,fine,handsome,elegant,imposing,prominent,legal,legitimate/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219952114/Difficulty: 0/
-/Kanji: 辞める/Reading: やめる/Definitions: to retire/Markers: v1,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219952130/Difficulty: 0/
-/Kanji: 大人/Reading: おとな/Definitions: adult/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219952140/Difficulty: 0/
-/Reading: バスで帰る。/Definitions: It goes home by bus./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219952190/Difficulty: 0/
-/Reading: 映画館で見た。/Definitions: It saw it at a movie theater./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219952238/Difficulty: 0/
-/Reading: 勝ちへ向かう。/Definitions: It faces towards victory./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219952311/Difficulty: 0/
-/Reading: ボブ：アリスは学生？\nアリス：うん、学生。/Definitions: Bob: Alice,are you a student?\nAlice: Yeah,I am./Score: 0/Bin: 0/Level: 2/Position: 0/Consecutive: 0/ScheduledTime: 1219955101/Difficulty: 0/
+/Kanji: 魚/Reading: さかな/Definitions: fish/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 0/Consecutive: 0/Difficulty: 0/
+/Kanji: 友達/Reading: ともだち/Definitions: friend/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 0/
+/Kanji: 学生/Reading: がくせい/Definitions: student/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 0/Difficulty: 0/
+/Kanji: 静か/Reading: しずか/Definitions: quiet,peaceful/Markers: adj-na,P/Score: 0/Bin: 0/Level: 0/Position: 3/Consecutive: 0/Difficulty: 0/
+/Reading: 魚。/Definitions: It is a fish./Score: 0/Bin: 0/Level: 0/Position: 4/Consecutive: 0/Difficulty: 0/
+/Reading: 魚だ。/Definitions: It is a fish (emphatic)./Score: 0/Bin: 0/Level: 0/Position: 5/Consecutive: 0/Difficulty: 0/
+/Reading: 友達。/Definitions: It is a friend./Score: 0/Bin: 0/Level: 0/Position: 6/Consecutive: 0/Difficulty: 0/
+/Reading: 友達じゃない。/Definitions: It is not a friend./Score: 0/Bin: 0/Level: 0/Position: 7/Consecutive: 0/Difficulty: 0/
+/Reading: 魚じゃない。/Definitions: It is not a fish./Score: 0/Bin: 0/Level: 0/Position: 8/Consecutive: 0/Difficulty: 0/
+/Reading: 学生じゃない。/Definitions: It is not a student./Score: 0/Bin: 0/Level: 0/Position: 9/Consecutive: 0/Difficulty: 0/
+/Reading: 静かじゃない。/Definitions: It is not quiet./Score: 0/Bin: 0/Level: 0/Position: 10/Consecutive: 0/Difficulty: 0/
+/Reading: 友達だった。/Definitions: It was a friend./Score: 0/Bin: 0/Level: 0/Position: 11/Consecutive: 0/Difficulty: 0/
+/Reading: 友達じゃなかった。/Definitions: It was not a friend./Score: 0/Bin: 0/Level: 0/Position: 12/Consecutive: 0/Difficulty: 0/
+/Reading: 魚だった。/Definitions: It was a fish./Score: 0/Bin: 0/Level: 0/Position: 13/Consecutive: 0/Difficulty: 0/
+/Reading: 学生じゃなかった。/Definitions: It was not a student./Score: 0/Bin: 0/Level: 0/Position: 14/Consecutive: 0/Difficulty: 0/
+/Reading: 静かじゃなかった。/Definitions: It was not quiet./Score: 0/Bin: 0/Level: 0/Position: 15/Consecutive: 0/Difficulty: 0/
+/Kanji: 明日/Reading: あした/Definitions: tomorrow/Markers: n-t,P/Score: 0/Bin: 0/Level: 0/Position: 16/Consecutive: 0/Difficulty: 0/
+/Kanji: 試験/Reading: しけん/Definitions: examination,test,study/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 17/Consecutive: 0/Difficulty: 0/
+/Kanji: 誰/Reading: だれ/Definitions: who/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 18/Consecutive: 0/Difficulty: 0/
+/Reading: これ/Definitions: this/Markers: int,n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 19/Consecutive: 0/Difficulty: 0/
+/Kanji: 車/Reading: くるま/Definitions: car,vehicle,wheel/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 20/Consecutive: 0/Difficulty: 0/
+/Kanji: 私/Reading: わたし/Definitions: I,myself,private affairs/Markers: n,adj-no,P/Score: 0/Bin: 0/Level: 0/Position: 21/Consecutive: 0/Difficulty: 0/
+/Kanji: 今日/Reading: きょう/Definitions: today,this day/Markers: n-t,P/Score: 0/Bin: 0/Level: 0/Position: 22/Consecutive: 0/Difficulty: 0/
+/Reading: ボブ：アリスは学生？\nアリス：うん、学生。/Definitions: Bob: Alice,are you a student?\nAlice: Yeah,I am./Score: 0/Bin: 0/Level: 0/Position: 23/Consecutive: 0/Difficulty: 0/
+/Reading: ボブ：ジムは明日？\nアリス：明日じゃない。/Definitions: Bob: Jim is tomorrow?\nAlice: Not tomorrow./Score: 0/Bin: 0/Level: 0/Position: 24/Consecutive: 0/Difficulty: 0/
+/Reading: アリス：今日は試験だ。\nボブ：ジムは？\nアリス：ジムは明日。/Definitions: Alice: Today is the exam.\nBob: What about Jim?\nAlice: Jim is tomorrow./Score: 0/Bin: 0/Level: 0/Position: 25/Consecutive: 0/Difficulty: 0/
+/Reading: ボブ：アリスは学生？\nアリス：うん、トムも学生。/Definitions: Bob: Alice,are you a student?\nAlice: Yeah,and Tom is also a student./Score: 0/Bin: 0/Level: 0/Position: 26/Consecutive: 0/Difficulty: 0/
+/Reading: ボブ：アリスは学生？\nアリス：うん、でもトムは学生じゃない。/Definitions: Bob: Alice,are you a student?\nAlice: Yes,but Tom is not a student./Score: 0/Bin: 0/Level: 0/Position: 27/Consecutive: 0/Difficulty: 0/
+/Reading: ボブ：アリスは学生？\nアリス：ううん、トムも学生じゃない。/Definitions: Bob: Alice,are you a student?\nAlice: No,and Tom is also not a student./Score: 0/Bin: 0/Level: 0/Position: 28/Consecutive: 0/Difficulty: 0/
+/Reading: ボブ：誰が学生？\nアリス：ジムが学生。/Definitions: Bob: Who is the one that is the student?\nAlice: Jim is the one who is the student./Score: 0/Bin: 0/Level: 0/Position: 29/Consecutive: 0/Difficulty: 0/
+/Reading: 誰が学生？/Definitions: Who is the one that is the student?/Score: 0/Bin: 0/Level: 0/Position: 30/Consecutive: 0/Difficulty: 0/
+/Reading: 学生は誰？/Definitions: The student is who?/Score: 0/Bin: 0/Level: 0/Position: 31/Consecutive: 0/Difficulty: 0/
+/Reading: 私は学生。/Definitions: I am a student./Score: 0/Bin: 0/Level: 0/Position: 32/Consecutive: 0/Difficulty: 0/
+/Reading: これが車。/Definitions: This is the car./Score: 0/Bin: 0/Level: 0/Position: 33/Consecutive: 0/Difficulty: 0/
+/Kanji: 人/Reading: ひと/Definitions: man,person,human being,mankind,people,character,personality,true man,man of talent,adult,other people,messenger,visitor/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 34/Consecutive: 0/Difficulty: 0/
+/Kanji: 親切/Reading: しんせつ/Definitions: kindness,gentleness/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 35/Consecutive: 0/Difficulty: 0/
+/Kanji: 好き/Reading: すき/Definitions: liking,fondness,love/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 36/Consecutive: 0/Difficulty: 0/
+/Reading: タイプ/Definitions: type,style,typing/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 37/Consecutive: 0/Difficulty: 0/
+/Kanji: 肉/Reading: にく/Definitions: meat/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 38/Consecutive: 0/Difficulty: 0/
+/Kanji: 高い/Reading: たかい/Definitions: (1) high,tall,(2) expensive/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 39/Consecutive: 0/Difficulty: 0/
+/Kanji: 値段/Reading: ねだん/Definitions: price,cost/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 40/Consecutive: 0/Difficulty: 0/
+/Kanji: 余り/Reading: あまり/Definitions: not very (this form only used as adverb),not much,remainder,rest,remnant,surplus,balance,excess,remains,scraps,residue,fullness,other,too much/Markers: adj-na,adv,n,n-suf,uk,P/Score: 0/Bin: 0/Level: 0/Position: 41/Consecutive: 0/Difficulty: 0/
+/Kanji: 良い/Reading: いい/Definitions: good,nice,pleasant,fine,excellent,agreeable,ok/Markers: adj,uk,P/Score: 0/Bin: 0/Level: 0/Position: 42/Consecutive: 0/Difficulty: 0/
+/Kanji: 格好いい/Reading: かっこいい/Definitions: attractive,good-looking,stylish,"cool"/Markers: adj-na/Score: 0/Bin: 0/Level: 0/Position: 43/Consecutive: 0/Difficulty: 0/
+/Reading: レストラン/Definitions: restaurant/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 44/Consecutive: 0/Difficulty: 0/
+/Reading: ビル/Definitions: building,bill/Markers: n,abbr,P/Score: 0/Bin: 0/Level: 0/Position: 45/Consecutive: 0/Difficulty: 0/
+/Reading: 静かな人。/Definitions: He is a quiet person./Score: 0/Bin: 0/Level: 0/Position: 46/Consecutive: 0/Difficulty: 0/
+/Reading: 友達は親切。/Definitions: The friend is kind./Score: 0/Bin: 0/Level: 0/Position: 47/Consecutive: 0/Difficulty: 0/
+/Reading: 友達は親切な人。/Definitions: The friend is a kind person./Score: 0/Bin: 0/Level: 0/Position: 48/Consecutive: 0/Difficulty: 0/
+/Reading: ボブは魚が好きだ。/Definitions: Bob likes fish./Score: 0/Bin: 0/Level: 0/Position: 49/Consecutive: 0/Difficulty: 0/
+/Reading: ボブは魚が好きじゃない。/Definitions: Bob does not like fish./Score: 0/Bin: 0/Level: 0/Position: 50/Consecutive: 0/Difficulty: 0/
+/Reading: ボブは魚が好きだった。/Definitions: Bob liked fish./Score: 0/Bin: 0/Level: 0/Position: 51/Consecutive: 0/Difficulty: 0/
+/Reading: ボブは魚が好きじゃなかった。/Definitions: Bob did not like fish./Score: 0/Bin: 0/Level: 0/Position: 52/Consecutive: 0/Difficulty: 0/
+/Reading: 魚が好きなタイプ。/Definitions: Type that likes fish./Score: 0/Bin: 0/Level: 0/Position: 53/Consecutive: 0/Difficulty: 0/
+/Reading: 魚が好きじゃないタイプ。/Definitions: Type that does not like fish./Score: 0/Bin: 0/Level: 0/Position: 54/Consecutive: 0/Difficulty: 0/
+/Reading: 魚が好きだったタイプ。/Definitions: Type that liked fish./Score: 0/Bin: 0/Level: 0/Position: 55/Consecutive: 0/Difficulty: 0/
+/Reading: 魚が好きじゃなかったタイプ。/Definitions: Type that did not like fish./Score: 0/Bin: 0/Level: 0/Position: 56/Consecutive: 0/Difficulty: 0/
+/Reading: 魚が好きじゃないタイプは、肉が好きだ。/Definitions: The types of people who do not like fish,like meat./Score: 0/Bin: 0/Level: 0/Position: 57/Consecutive: 0/Difficulty: 0/
+/Reading: 高いビル。/Definitions: It is a tall building./Score: 0/Bin: 0/Level: 0/Position: 58/Consecutive: 0/Difficulty: 0/
+/Reading: 高くないビル。/Definitions: It is not a tall building./Score: 0/Bin: 0/Level: 0/Position: 59/Consecutive: 0/Difficulty: 0/
+/Reading: 高かったビル。/Definitions: It is a building that was tall./Score: 0/Bin: 0/Level: 0/Position: 60/Consecutive: 0/Difficulty: 0/
+/Reading: 高くなかったビル。/Definitions: It is a building that was not tall./Score: 0/Bin: 0/Level: 0/Position: 61/Consecutive: 0/Difficulty: 0/
+/Reading: 静かな高いビル。/Definitions: It is a quiet,tall building./Score: 0/Bin: 0/Level: 0/Position: 62/Consecutive: 0/Difficulty: 0/
+/Reading: 高くない静かなビル。/Definitions: It is a not tall,quiet building./Score: 0/Bin: 0/Level: 0/Position: 63/Consecutive: 0/Difficulty: 0/
+/Reading: 値段が高いレストランはあまり好きじゃない。/Definitions: I don't like high price restaurants very much./Score: 0/Bin: 0/Level: 0/Position: 64/Consecutive: 0/Difficulty: 0/
+/Reading: 値段がいい。/Definitions: The price is good./Score: 0/Bin: 0/Level: 0/Position: 65/Consecutive: 0/Difficulty: 0/
+/Reading: 値段があまりよくない。/Definitions: The price is not very good./Score: 0/Bin: 0/Level: 0/Position: 66/Consecutive: 0/Difficulty: 0/
+/Reading: 値段がよかった。/Definitions: The price was good./Score: 0/Bin: 0/Level: 0/Position: 67/Consecutive: 0/Difficulty: 0/
+/Reading: 値段があまりよくなかった。/Definitions: The price was not very good./Score: 0/Bin: 0/Level: 0/Position: 68/Consecutive: 0/Difficulty: 0/
+/Reading: 彼はかっこいい。/Definitions: He looks cool./Score: 0/Bin: 0/Level: 0/Position: 69/Consecutive: 0/Difficulty: 0/
+/Reading: 彼はかっこよくない。/Definitions: He doesn't look cool./Score: 0/Bin: 0/Level: 0/Position: 70/Consecutive: 0/Difficulty: 0/
+/Reading: 彼はかっこよかった。/Definitions: He looked cool./Score: 0/Bin: 0/Level: 0/Position: 71/Consecutive: 0/Difficulty: 0/
+/Reading: 彼はかっこよくなかった。/Definitions: He didn't look cool./Score: 0/Bin: 0/Level: 0/Position: 72/Consecutive: 0/Difficulty: 0/
+/Kanji: 食べる/Reading: たべる/Definitions: to eat/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 73/Consecutive: 0/Difficulty: 0/
+/Kanji: 遊ぶ/Reading: あそぶ/Definitions: (1) to play,to make a visit (esp. for pleasure),(2) to be idle,to do nothing/Markers: v5b,P/Score: 0/Bin: 0/Level: 0/Position: 74/Consecutive: 0/Difficulty: 0/
+/Reading: する/Definitions: to do,to try,to attempt,to execute,to play (game),to practice,to practise,to cost,to serve as,to pass,to elapse/Markers: vs-i,uk,P/Score: 0/Bin: 0/Level: 0/Position: 75/Consecutive: 0/Difficulty: 0/
+/Reading: ある/Definitions: to be,to have/Markers: v5r-i,uk,P/Score: 0/Bin: 0/Level: 0/Position: 76/Consecutive: 0/Difficulty: 0/
+/Kanji: 買う/Reading: かう/Definitions: to buy/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 77/Consecutive: 0/Difficulty: 0/
+/Kanji: 居る/Reading: いる/Definitions: to be (animate),to exist/Markers: v1,uk,hum,P/Score: 0/Bin: 0/Level: 0/Position: 78/Consecutive: 0/Difficulty: 0/
+/Kanji: お金/Reading: おかね/Definitions: money/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 79/Consecutive: 0/Difficulty: 0/
+/Reading: アリスは食べる。/Definitions: Alice eats./Score: 0/Bin: 0/Level: 0/Position: 80/Consecutive: 0/Difficulty: 0/
+/Reading: ジムが遊ぶ。/Definitions: Jim is the one that plays./Score: 0/Bin: 0/Level: 0/Position: 81/Consecutive: 0/Difficulty: 0/
+/Reading: ボブもする。/Definitions: Bob also does./Score: 0/Bin: 0/Level: 0/Position: 82/Consecutive: 0/Difficulty: 0/
+/Reading: お金がある。/Definitions: There is money./Score: 0/Bin: 0/Level: 0/Position: 83/Consecutive: 0/Difficulty: 0/
+/Reading: 私は買う。/Definitions: I buy./Score: 0/Bin: 0/Level: 0/Position: 84/Consecutive: 0/Difficulty: 0/
+/Reading: 猫はいる。/Definitions: There is a cat./Score: 0/Bin: 0/Level: 0/Position: 85/Consecutive: 0/Difficulty: 0/
+/Kanji: 見る/Reading: みる/Definitions: (1) to see,to watch,(2) (as an auxiliary verb) to try/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 86/Consecutive: 0/Difficulty: 0/
+/Kanji: 出る/Reading: でる/Definitions: to appear,to come forth,to leave/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 87/Consecutive: 0/Difficulty: 0/
+/Kanji: 飲む/Reading: のむ/Definitions: to drink/Markers: v5m,P/Score: 0/Bin: 0/Level: 0/Position: 88/Consecutive: 0/Difficulty: 0/
+/Kanji: 待つ/Reading: まつ/Definitions: to wait/Markers: v5t,P/Score: 0/Bin: 0/Level: 0/Position: 89/Consecutive: 0/Difficulty: 0/
+/Kanji: 拾う/Reading: ひろう/Definitions: to pick up,to find,to gather/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 90/Consecutive: 0/Difficulty: 0/
+/Kanji: 着る/Reading: きる/Definitions: to wear,to put on (from shoulders down)/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 91/Consecutive: 0/Difficulty: 0/
+/Kanji: 信じる/Reading: しんじる/Definitions: to believe,to believe in,to place trust in,to confide in,to have faith in/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 92/Consecutive: 0/Difficulty: 0/
+/Kanji: 寝る/Reading: ねる/Definitions: to go to bed,to lie down,to sleep/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 93/Consecutive: 0/Difficulty: 0/
+/Kanji: 起きる/Reading: おきる/Definitions: (1) to get up,to rise,(2) to wake up,(3) to occur,to happen,to take place/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 94/Consecutive: 0/Difficulty: 0/
+/Kanji: 掛ける/Reading: かける/Definitions: (1) to wear,to put on,to hang,to cover,(2) to sit down,(3) to make a phone call,(4) to multiply,(5) to turn on (a switch),to play (a record),(6) to begin to,(7) to pour (water)/Markers: aux-v,v1,P/Score: 0/Bin: 0/Level: 0/Position: 95/Consecutive: 0/Difficulty: 0/
+/Kanji: 捨てる/Reading: すてる/Definitions: to throw away,to cast aside,to abandon,to resign/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 96/Consecutive: 0/Difficulty: 0/
+/Kanji: 調べる/Reading: しらべる/Definitions: to investigate,to check up/Markers: v1,vt,P/Score: 0/Bin: 0/Level: 0/Position: 97/Consecutive: 0/Difficulty: 0/
+/Kanji: 話す/Reading: はなす/Definitions: to speak/Markers: v5s,P/Score: 0/Bin: 0/Level: 0/Position: 98/Consecutive: 0/Difficulty: 0/
+/Kanji: 聞く/Reading: きく/Definitions: (1) to hear,to listen,(2) to ask/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 99/Consecutive: 0/Difficulty: 0/
+/Kanji: 泳ぐ/Reading: およぐ/Definitions: to swim/Markers: v5g,P/Score: 0/Bin: 0/Level: 0/Position: 100/Consecutive: 0/Difficulty: 0/
+/Kanji: 直る/Reading: なおる/Definitions: (1) to be cured,to get well,to be healed,(2) to get mended,to be repaired,to be fixed/Markers: v5r,vi,P/Score: 0/Bin: 0/Level: 0/Position: 101/Consecutive: 0/Difficulty: 0/
+/Kanji: 死ぬ/Reading: しぬ/Definitions: to die/Markers: v5n,P/Score: 0/Bin: 0/Level: 0/Position: 102/Consecutive: 0/Difficulty: 0/
+/Reading: 見ない。/Definitions: It doesn't see./Score: 0/Bin: 0/Level: 0/Position: 103/Consecutive: 0/Difficulty: 0/
+/Reading: 食べない。/Definitions: It doesn't eat./Score: 0/Bin: 0/Level: 0/Position: 104/Consecutive: 0/Difficulty: 0/
+/Reading: 信じない。/Definitions: It doesn't believe./Score: 0/Bin: 0/Level: 0/Position: 105/Consecutive: 0/Difficulty: 0/
+/Reading: 寝ない。/Definitions: It doesn't sleep./Score: 0/Bin: 0/Level: 0/Position: 106/Consecutive: 0/Difficulty: 0/
+/Reading: 起きない。/Definitions: It doesn't wake up./Score: 0/Bin: 0/Level: 0/Position: 107/Consecutive: 0/Difficulty: 0/
+/Reading: 出ない。/Definitions: It doesn't appear./Score: 0/Bin: 0/Level: 0/Position: 108/Consecutive: 0/Difficulty: 0/
+/Reading: 掛けない。/Definitions: It doesn't hang./Score: 0/Bin: 0/Level: 0/Position: 109/Consecutive: 0/Difficulty: 0/
+/Reading: 捨てない。/Definitions: It doesn't discard./Score: 0/Bin: 0/Level: 0/Position: 110/Consecutive: 0/Difficulty: 0/
+/Reading: 調べない。/Definitions: It doesn't investigate./Score: 0/Bin: 0/Level: 0/Position: 111/Consecutive: 0/Difficulty: 0/
+/Reading: 話さない。/Definitions: It doesn't speak./Score: 0/Bin: 0/Level: 0/Position: 112/Consecutive: 0/Difficulty: 0/
+/Reading: 聞かない。/Definitions: It doesn't listen./Score: 0/Bin: 0/Level: 0/Position: 113/Consecutive: 0/Difficulty: 0/
+/Reading: 泳がない。/Definitions: It doesn't swim./Score: 0/Bin: 0/Level: 0/Position: 114/Consecutive: 0/Difficulty: 0/
+/Reading: 遊ばない。/Definitions: It doesn't play./Score: 0/Bin: 0/Level: 0/Position: 115/Consecutive: 0/Difficulty: 0/
+/Reading: 待たない。/Definitions: It doesn't wait./Score: 0/Bin: 0/Level: 0/Position: 116/Consecutive: 0/Difficulty: 0/
+/Reading: 飲まない。/Definitions: It doesn't drink./Score: 0/Bin: 0/Level: 0/Position: 117/Consecutive: 0/Difficulty: 0/
+/Reading: 直らない。/Definitions: It doesn't fix./Score: 0/Bin: 0/Level: 0/Position: 118/Consecutive: 0/Difficulty: 0/
+/Reading: 死なない。/Definitions: It doesn't die./Score: 0/Bin: 0/Level: 0/Position: 119/Consecutive: 0/Difficulty: 0/
+/Reading: 買わない。/Definitions: It doesn't buy./Score: 0/Bin: 0/Level: 0/Position: 120/Consecutive: 0/Difficulty: 0/
+/Reading: 食べない。/Definitions: It doesn't eat./Score: 0/Bin: 0/Level: 0/Position: 121/Consecutive: 0/Difficulty: 0/
+/Reading: 拾わない。/Definitions: It doesn't pick up./Score: 0/Bin: 0/Level: 0/Position: 122/Consecutive: 0/Difficulty: 0/
+/Reading: アリスは食べない。/Definitions: Alice does not eat./Score: 0/Bin: 0/Level: 0/Position: 123/Consecutive: 0/Difficulty: 0/
+/Reading: ジムが遊ばない。/Definitions: Jim is the one that does not play./Score: 0/Bin: 0/Level: 0/Position: 124/Consecutive: 0/Difficulty: 0/
+/Reading: ボブもしない。/Definitions: Bob also does not do./Score: 0/Bin: 0/Level: 0/Position: 125/Consecutive: 0/Difficulty: 0/
+/Reading: お金がない。/Definitions: There is no money./Score: 0/Bin: 0/Level: 0/Position: 126/Consecutive: 0/Difficulty: 0/
+/Reading: 私は買わない。/Definitions: I do not buy./Score: 0/Bin: 0/Level: 0/Position: 127/Consecutive: 0/Difficulty: 0/
+/Reading: 猫がいない。/Definitions: There is no cat./Score: 0/Bin: 0/Level: 0/Position: 128/Consecutive: 0/Difficulty: 0/
+/Kanji: ご飯/Reading: ごはん/Definitions: rice (cooked),meal/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 129/Consecutive: 0/Difficulty: 0/
+/Kanji: 映画/Reading: えいが/Definitions: movie,film/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 130/Consecutive: 0/Difficulty: 0/
+/Kanji: 全部/Reading: ぜんぶ/Definitions: all,entire,whole,altogether/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 131/Consecutive: 0/Difficulty: 0/
+/Kanji: 書く/Reading: かく/Definitions: to write/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 132/Consecutive: 0/Difficulty: 0/
+/Kanji: 噛む/Reading: かむ/Definitions: to bite,to chew,to gnaw/Markers: v5m,P/Score: 0/Bin: 0/Level: 0/Position: 133/Consecutive: 0/Difficulty: 0/
+/Kanji: 切る/Reading: きる/Definitions: to cut,to chop,to hash,to carve,to saw,to clip,to shear,to slice,to strip,to fell,to cut down,to punch,to sever (connections),to pause,to break off,to disconnect,to turn off,to hang up,to cross (a street),to discount,to sell below cost,to shake (water) off,to finish,to be through,to complete/Markers: suf,v5r,P/Score: 0/Bin: 0/Level: 0/Position: 134/Consecutive: 0/Difficulty: 0/
+/Kanji: 持つ/Reading: もつ/Definitions: (1) to hold,to carry,(2) to possess/Markers: v5t,P/Score: 0/Bin: 0/Level: 0/Position: 135/Consecutive: 0/Difficulty: 0/
+/Kanji: 来る/Reading: くる/Definitions: to come,to come to hand,to arrive,to approach,to call on,to come on (rain),to set in,to be due,to become,to grow,to get,to come from,to be caused by,to derive from/Markers: vk,P/Score: 0/Bin: 0/Level: 0/Position: 136/Consecutive: 0/Difficulty: 0/
+/Kanji: 行く/Reading: いく/Definitions: to go/Markers: v5k-s,P/Score: 0/Bin: 0/Level: 0/Position: 137/Consecutive: 0/Difficulty: 0/
+/Kanji: 走る/Reading: はしる/Definitions: to run/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 138/Consecutive: 0/Difficulty: 0/
+/Kanji: 勉強/Reading: べんきょう/Definitions: (1) study,(2) diligence,(3) discount,reduction/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 139/Consecutive: 0/Difficulty: 0/
+/Reading: 出た。/Definitions: It appeared./Score: 0/Bin: 0/Level: 0/Position: 140/Consecutive: 0/Difficulty: 0/
+/Reading: 捨てた。/Definitions: It discarded./Score: 0/Bin: 0/Level: 0/Position: 141/Consecutive: 0/Difficulty: 0/
+/Reading: ご飯は食べた。/Definitions: As for the meal,I ate it./Score: 0/Bin: 0/Level: 0/Position: 142/Consecutive: 0/Difficulty: 0/
+/Reading: 映画は、全部見た。/Definitions: As for the movies,I saw them all./Score: 0/Bin: 0/Level: 0/Position: 143/Consecutive: 0/Difficulty: 0/
+/Reading: 話した。/Definitions: It spoke./Score: 0/Bin: 0/Level: 0/Position: 144/Consecutive: 0/Difficulty: 0/
+/Reading: 書いた。/Definitions: It wrote./Score: 0/Bin: 0/Level: 0/Position: 145/Consecutive: 0/Difficulty: 0/
+/Reading: 泳いだ。/Definitions: It swam./Score: 0/Bin: 0/Level: 0/Position: 146/Consecutive: 0/Difficulty: 0/
+/Reading: 噛んだ。/Definitions: It bit./Score: 0/Bin: 0/Level: 0/Position: 147/Consecutive: 0/Difficulty: 0/
+/Reading: 遊んだ。/Definitions: It played./Score: 0/Bin: 0/Level: 0/Position: 148/Consecutive: 0/Difficulty: 0/
+/Reading: 死んだ。/Definitions: It died./Score: 0/Bin: 0/Level: 0/Position: 149/Consecutive: 0/Difficulty: 0/
+/Reading: 切った。/Definitions: It cut./Score: 0/Bin: 0/Level: 0/Position: 150/Consecutive: 0/Difficulty: 0/
+/Reading: 買った。/Definitions: It bought./Score: 0/Bin: 0/Level: 0/Position: 151/Consecutive: 0/Difficulty: 0/
+/Reading: 持った。/Definitions: It held./Score: 0/Bin: 0/Level: 0/Position: 152/Consecutive: 0/Difficulty: 0/
+/Reading: した。/Definitions: It did./Score: 0/Bin: 0/Level: 0/Position: 153/Consecutive: 0/Difficulty: 0/
+/Reading: 来た。/Definitions: It came./Score: 0/Bin: 0/Level: 0/Position: 154/Consecutive: 0/Difficulty: 0/
+/Reading: 行った。/Definitions: It went./Score: 0/Bin: 0/Level: 0/Position: 155/Consecutive: 0/Difficulty: 0/
+/Reading: 今日は、走った。/Definitions: As for today,I ran./Score: 0/Bin: 0/Level: 0/Position: 156/Consecutive: 0/Difficulty: 0/
+/Reading: 友達が来た。/Definitions: The friend is the one that came./Score: 0/Bin: 0/Level: 0/Position: 157/Consecutive: 0/Difficulty: 0/
+/Reading: 捨てなかった。/Definitions: It did not discard./Score: 0/Bin: 0/Level: 0/Position: 158/Consecutive: 0/Difficulty: 0/
+/Reading: 行かなかった。/Definitions: It did not go./Score: 0/Bin: 0/Level: 0/Position: 159/Consecutive: 0/Difficulty: 0/
+/Reading: アリスは食べなかった。/Definitions: Alice did not eat./Score: 0/Bin: 0/Level: 0/Position: 160/Consecutive: 0/Difficulty: 0/
+/Reading: ジムがしなかった。/Definitions: Jim is the one that did not do./Score: 0/Bin: 0/Level: 0/Position: 161/Consecutive: 0/Difficulty: 0/
+/Reading: ボブも行かなかった。/Definitions: Bob also did not go./Score: 0/Bin: 0/Level: 0/Position: 162/Consecutive: 0/Difficulty: 0/
+/Reading: お金がなかった。/Definitions: There was no money./Score: 0/Bin: 0/Level: 0/Position: 163/Consecutive: 0/Difficulty: 0/
+/Reading: 私は買わなかった。/Definitions: I did not buy./Score: 0/Bin: 0/Level: 0/Position: 164/Consecutive: 0/Difficulty: 0/
+/Reading: 猫はいなかった。/Definitions: There was no cat./Score: 0/Bin: 0/Level: 0/Position: 165/Consecutive: 0/Difficulty: 0/
+/Reading: ジュース/Definitions: juice,soft drink (both carbonated and　uncarbonated),deuce/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 166/Consecutive: 0/Difficulty: 0/
+/Kanji: 街/Reading: まち/Definitions: (1) town,(2) street,road/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 167/Consecutive: 0/Difficulty: 0/
+/Reading: ぶらぶら/Definitions: dangle heavily,swing,sway to and fro,aimlessly,idly,lazily,loiter,loaf,stroll idly/Markers: adv,n,vs,adj-na,P/Score: 0/Bin: 0/Level: 0/Position: 168/Consecutive: 0/Difficulty: 0/
+/Kanji: 歩く/Reading: あるく/Definitions: to walk/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 169/Consecutive: 0/Difficulty: 0/
+/Kanji: 高速道路/Reading: こうそくどうろ/Definitions: highway,freeway,expressway,motorway/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 170/Consecutive: 0/Difficulty: 0/
+/Kanji: 毎日/Reading: まいにち/Definitions: every day/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 171/Consecutive: 0/Difficulty: 0/
+/Kanji: 日本語/Reading: にっぽんご/Definitions: Japanese language/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 172/Consecutive: 0/Difficulty: 0/
+/Reading: メールアドレス/Definitions: (e) mail address/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 173/Consecutive: 0/Difficulty: 0/
+/Kanji: 登録/Reading: とうろく/Definitions: registration,register,entry,record/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 174/Consecutive: 0/Difficulty: 0/
+/Kanji: 日本/Reading: にほん/Definitions: Japan/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 175/Consecutive: 0/Difficulty: 0/
+/Kanji: 家/Reading: いえ/Definitions: house/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 176/Consecutive: 0/Difficulty: 0/
+/Kanji: 帰る/Reading: かえる/Definitions: to go back,to go home,to come home,to return/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 177/Consecutive: 0/Difficulty: 0/
+/Kanji: 部屋/Reading: へや/Definitions: (1) room,(2) sumo stable/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 178/Consecutive: 0/Difficulty: 0/
+/Reading: アメリカ/Definitions: America (p)/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 179/Consecutive: 0/Difficulty: 0/
+/Kanji: 宿題/Reading: しゅくだい/Definitions: homework/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 180/Consecutive: 0/Difficulty: 0/
+/Kanji: 椅子/Reading: いす/Definitions: chair/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 181/Consecutive: 0/Difficulty: 0/
+/Kanji: 台所/Reading: だいどころ/Definitions: kitchen/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 182/Consecutive: 0/Difficulty: 0/
+/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 183/Consecutive: 0/Difficulty: 0/
+/Kanji: 図書館/Reading: としょかん/Definitions: library/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 184/Consecutive: 0/Difficulty: 0/
+/Kanji: 来年/Reading: らいねん/Definitions: next year/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 185/Consecutive: 0/Difficulty: 0/
+/Kanji: 医者/Reading: いしゃ/Definitions: doctor (medical)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 186/Consecutive: 0/Difficulty: 0/
+/Kanji: 成る/Reading: なる/Definitions: to become/Markers: v5r,uk,P/Score: 0/Bin: 0/Level: 0/Position: 187/Consecutive: 0/Difficulty: 0/
+/Kanji: 先週/Reading: せんしゅう/Definitions: last week,the week before/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 188/Consecutive: 0/Difficulty: 0/
+/Kanji: 勝ち/Reading: かち/Definitions: win,victory/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 189/Consecutive: 0/Difficulty: 0/
+/Kanji: 向う/Reading: むかう/Definitions: (1) to face,(2) to go towards/Markers: io,v5u/Score: 0/Bin: 0/Level: 0/Position: 190/Consecutive: 0/Difficulty: 0/
+/Kanji: 映画館/Reading: えいがかん/Definitions: movie theatre (theater),cinema/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 191/Consecutive: 0/Difficulty: 0/
+/Reading: バス/Definitions: (1) bus,(2) bath,(3) bass/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 192/Consecutive: 0/Difficulty: 0/
+/Kanji: 昼ご飯/Reading: ひるごはん/Definitions: lunch,midday meal/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 193/Consecutive: 0/Difficulty: 0/
+/Kanji: 何/Reading: なに/Definitions: what/Markers: int,n,P/Score: 0/Bin: 0/Level: 0/Position: 194/Consecutive: 0/Difficulty: 0/
+/Kanji: 何で/Reading: なんで/Definitions: Why?,What for?/Markers: adv,P/Score: 0/Bin: 0/Level: 0/Position: 195/Consecutive: 0/Difficulty: 0/
+/Kanji: 暇/Reading: ひま/Definitions: (1) free time,leisure,leave,spare time,(2) farewell/Markers: adj-na,n/Score: 0/Bin: 0/Level: 0/Position: 196/Consecutive: 0/Difficulty: 0/
+/Kanji: 学校/Reading: がっこう/Definitions: school/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 197/Consecutive: 0/Difficulty: 0/
+/Kanji: 何処/Reading: どこ/Definitions: where,what place/Markers: n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 198/Consecutive: 0/Difficulty: 0/
+/Reading: イタリア/Definitions: Italy/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 199/Consecutive: 0/Difficulty: 0/
+/Kanji: 如何/Reading: どう/Definitions: how,in what way,how about/Markers: adv,uk,P/Score: 0/Bin: 0/Level: 0/Position: 200/Consecutive: 0/Difficulty: 0/
+/Kanji: 習う/Reading: ならう/Definitions: to learn/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 201/Consecutive: 0/Difficulty: 0/
+/Reading: 魚を食べる。/Definitions: It eats fish./Score: 0/Bin: 0/Level: 0/Position: 202/Consecutive: 0/Difficulty: 0/
+/Reading: ジュースを飲んだ。/Definitions: It drank juice./Score: 0/Bin: 0/Level: 0/Position: 203/Consecutive: 0/Difficulty: 0/
+/Reading: 街をぶらぶら歩く。/Definitions: It aimlessly walks through the town./Score: 0/Bin: 0/Level: 0/Position: 204/Consecutive: 0/Difficulty: 0/
+/Reading: 高速道路を走る。/Definitions: It runs through the highway./Score: 0/Bin: 0/Level: 0/Position: 205/Consecutive: 0/Difficulty: 0/
+/Reading: 毎日、日本語を勉強する。/Definitions: It studies Japanese every day./Score: 0/Bin: 0/Level: 0/Position: 206/Consecutive: 0/Difficulty: 0/
+/Reading: メールアドレスを登録した。/Definitions: It registered the email address./Score: 0/Bin: 0/Level: 0/Position: 207/Consecutive: 0/Difficulty: 0/
+/Reading: ボブは日本に行った。/Definitions: Bob went to Japan./Score: 0/Bin: 0/Level: 0/Position: 208/Consecutive: 0/Difficulty: 0/
+/Reading: 家に帰らない。/Definitions: It does not go back home./Score: 0/Bin: 0/Level: 0/Position: 209/Consecutive: 0/Difficulty: 0/
+/Reading: 部屋にくる。/Definitions: It comes to the room./Score: 0/Bin: 0/Level: 0/Position: 210/Consecutive: 0/Difficulty: 0/
+/Reading: アリスはアメリカからきた。/Definitions: Alice came from America./Score: 0/Bin: 0/Level: 0/Position: 211/Consecutive: 0/Difficulty: 0/
+/Reading: 宿題を今日から明日までする。/Definitions: It will do homework from today to tomorrow./Score: 0/Bin: 0/Level: 0/Position: 212/Consecutive: 0/Difficulty: 0/
+/Reading: 猫は部屋にいる。/Definitions: The cat is in the room./Score: 0/Bin: 0/Level: 0/Position: 213/Consecutive: 0/Difficulty: 0/
+/Reading: 椅子が台所にあった。/Definitions: The chair was in the kitchen./Score: 0/Bin: 0/Level: 0/Position: 214/Consecutive: 0/Difficulty: 0/
+/Reading: いい友達に会った。/Definitions: It met a good friend./Score: 0/Bin: 0/Level: 0/Position: 215/Consecutive: 0/Difficulty: 0/
+/Reading: ジムは医者になる。/Definitions: Jim will become a doctor./Score: 0/Bin: 0/Level: 0/Position: 216/Consecutive: 0/Difficulty: 0/
+/Reading: 先週に図書館に行った。/Definitions: It went to the library last week./Score: 0/Bin: 0/Level: 0/Position: 217/Consecutive: 0/Difficulty: 0/
+/Reading: 友達は来年日本に行く。/Definitions: Next year the friend will go to Japan./Score: 0/Bin: 0/Level: 0/Position: 218/Consecutive: 0/Difficulty: 0/
+/Reading: 友達は来年に日本に行く。/Definitions: The friend will go to Japan *next year*./Score: 0/Bin: 0/Level: 0/Position: 219/Consecutive: 0/Difficulty: 0/
+/Reading: ボブは日本へいった。/Definitions: Bob headed towards Japan./Score: 0/Bin: 0/Level: 0/Position: 220/Consecutive: 0/Difficulty: 0/
+/Reading: 家に帰らない。/Definitions: It will not go home toward the house./Score: 0/Bin: 0/Level: 0/Position: 221/Consecutive: 0/Difficulty: 0/
+/Reading: 部屋へくる。/Definitions: It comes towards the room./Score: 0/Bin: 0/Level: 0/Position: 222/Consecutive: 0/Difficulty: 0/
+/Reading: 勝ちへ向かう。/Definitions: It faces towards victory./Score: 0/Bin: 0/Level: 0/Position: 223/Consecutive: 0/Difficulty: 0/
+/Reading: 映画館で見た。/Definitions: It saw it at a movie theater./Score: 0/Bin: 0/Level: 0/Position: 224/Consecutive: 0/Difficulty: 0/
+/Reading: バスで帰る。/Definitions: It goes home by bus./Score: 0/Bin: 0/Level: 0/Position: 225/Consecutive: 0/Difficulty: 0/
+/Reading: レストランで昼ご飯を食べた。/Definitions: It ate lunch at a restaurant./Score: 0/Bin: 0/Level: 0/Position: 226/Consecutive: 0/Difficulty: 0/
+/Reading: 何（なに）できた？\nバスできた。/Definitions: How did it come?\nIt came by bus./Score: 0/Bin: 0/Level: 0/Position: 227/Consecutive: 0/Difficulty: 0/
+/Reading: 何（なん）できた？\n暇だから。/Definitions: Why did it come?\nBecause it was free./Score: 0/Bin: 0/Level: 0/Position: 228/Consecutive: 0/Difficulty: 0/
+/Reading: ボブ：学校に行った？\nアリス：行かなかった。\nボブ：図書館には？\n図書館にも行かなかった。/Definitions: Bob: Did you go to school?\nAlice: I didn't go.\nBob: What about the library?\nAlice: I also didn't go to the library./Score: 0/Bin: 0/Level: 0/Position: 229/Consecutive: 0/Difficulty: 0/
+/Reading: ボブ：どこで食べる？\nアリス：イタリアレストランではどう？/Definitions: Bob: Where should we eat?\nAlice: How about an Italian restaurant?/Score: 0/Bin: 0/Level: 0/Position: 230/Consecutive: 0/Difficulty: 0/
+/Reading: 日本語を習う。/Definitions: It will learn Japanese./Score: 0/Bin: 0/Level: 0/Position: 231/Consecutive: 0/Difficulty: 0/
+/Reading: 日本語は習う。/Definitions: About Japanese,it will learn it./Score: 0/Bin: 0/Level: 0/Position: 232/Consecutive: 0/Difficulty: 0/
+/Kanji: 電気/Reading: でんき/Definitions: electricity,(electric) light/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 233/Consecutive: 0/Difficulty: 0/
+/Kanji: 付ける/Reading: つける/Definitions: (1) to attach,to join,to add,to append,to affix,to stick,to glue,to fasten,to sew on,to apply (ointment),(2) to furnish (a house with),(3) to wear,to put on,(4) to keep a diary,to make an entry,(5) to appraise,to set (a price),(6) to bring alongside,(7) to place (under guard or doctor),(8) to follow,to shadow,(9) to load,to give (courage to),(10) to keep (an eye on),(11) to establish (relations or understanding)/Markers: v1,vt,P/Score: 0/Bin: 0/Level: 0/Position: 234/Consecutive: 0/Difficulty: 0/
+/Kanji: 付く/Reading: つく/Definitions: to adjoin,to be attached,to adhere,to be connected with,to be dyed,to be stained,to be scarred,to be recorded,to start (fires),to follow,to become allied to,to accompany,to study with,to increase,to be added to/Markers: v5k,vi/Score: 0/Bin: 0/Level: 0/Position: 235/Consecutive: 0/Difficulty: 0/
+/Kanji: 消す/Reading: けす/Definitions: (1) to erase,to delete,(2) to turn off power,(3) to bump off (sl)/Markers: v5s,P/Score: 0/Bin: 0/Level: 0/Position: 236/Consecutive: 0/Difficulty: 0/
+/Kanji: 消える/Reading: きえる/Definitions: to go out,to vanish,to disappear/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 237/Consecutive: 0/Difficulty: 0/
+/Kanji: 窓/Reading: まど/Definitions: window/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 238/Consecutive: 0/Difficulty: 0/
+/Kanji: 開ける/Reading: あける/Definitions: (1) to open,(2) to unwrap (e.g.,parcel,package)/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 239/Consecutive: 0/Difficulty: 0/
+/Kanji: 如何して/Reading: どうして/Definitions: why?,for what reason,how,in what way,for what purpose,what for/Markers: adv,int,uk,P/Score: 0/Bin: 0/Level: 0/Position: 240/Consecutive: 0/Difficulty: 0/
+/Kanji: 開く/Reading: あく/Definitions: to open,to become open,to become empty/Markers: v5k,vi,P/Score: 0/Bin: 0/Level: 0/Position: 241/Consecutive: 0/Difficulty: 0/
+/Reading: 私が電気を付けた。/Definitions: I am the one that turned on the lights./Score: 0/Bin: 0/Level: 0/Position: 242/Consecutive: 0/Difficulty: 0/
+/Reading: 電気が付いた。/Definitions: The lights turned on./Score: 0/Bin: 0/Level: 0/Position: 243/Consecutive: 0/Difficulty: 0/
+/Reading: 電気を消す。/Definitions: It turned off the lights./Score: 0/Bin: 0/Level: 0/Position: 244/Consecutive: 0/Difficulty: 0/
+/Reading: 電気が消える。/Definitions: The lights turn off./Score: 0/Bin: 0/Level: 0/Position: 245/Consecutive: 0/Difficulty: 0/
+/Reading: 誰が窓を開けた？/Definitions: Who opened the window?/Score: 0/Bin: 0/Level: 0/Position: 246/Consecutive: 0/Difficulty: 0/
+/Reading: 窓がどうして開いた。/Definitions: Why did the window open?/Score: 0/Bin: 0/Level: 0/Position: 247/Consecutive: 0/Difficulty: 0/
+/Kanji: 子ども/Reading: こども/Definitions: child,children/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 248/Consecutive: 0/Difficulty: 0/
+/Kanji: 立派/Reading: りっぱ/Definitions: splendid,fine,handsome,elegant,imposing,prominent,legal,legitimate/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 249/Consecutive: 0/Difficulty: 0/
+/Kanji: 大人/Reading: おとな/Definitions: adult/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 250/Consecutive: 0/Difficulty: 0/
+/Kanji: 仕事/Reading: しごと/Definitions: work,occupation,employment/Markers: n,adj-no,P/Score: 0/Bin: 0/Level: 0/Position: 251/Consecutive: 0/Difficulty: 0/
+/Kanji: 辞める/Reading: やめる/Definitions: to retire/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 252/Consecutive: 0/Difficulty: 0/
+/Kanji: 何時も/Reading: いつも/Definitions: (1) always,usually,every time,(2) never (with neg. verb)/Markers: adv,n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 253/Consecutive: 0/Difficulty: 0/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 254/Consecutive: 0/Difficulty: 0/
+/Reading: ズボン/Definitions: trousers (fr: jupon)/Markers: fr:,n,P/Score: 0/Bin: 0/Level: 0/Position: 255/Consecutive: 0/Difficulty: 0/
+/Kanji: 晩ご飯/Reading: ばんごはん/Definitions: dinner,evening meal/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 256/Consecutive: 0/Difficulty: 0/
+/Kanji: 銀行/Reading: ぎんこう/Definitions: bank/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 257/Consecutive: 0/Difficulty: 0/
+/Kanji: 公園/Reading: こうえん/Definitions: (public) park/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 258/Consecutive: 0/Difficulty: 0/
+/Kanji: 弁当/Reading: べんとう/Definitions: box lunch/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 259/Consecutive: 0/Difficulty: 0/
+/Reading: 学生じゃない人は学校に行かない。/Definitions: People who are not students do not go to school./Score: 0/Bin: 0/Level: 0/Position: 260/Consecutive: 0/Difficulty: 0/
+/Reading: 子供だったアリスが立派な大人になった。/Definitions: Alice,who was a child,became a fine adult./Score: 0/Bin: 0/Level: 0/Position: 261/Consecutive: 0/Difficulty: 0/
+/Reading: 友達じゃなかったアリスはいい友達になった。/Definitions: Alice,who was not a friend,became a good friend./Score: 0/Bin: 0/Level: 0/Position: 262/Consecutive: 0/Difficulty: 0/
+/Reading: 先週に医者だったボブは仕事を辞めた。/Definitions: Bob,who was a doctor last week,quit his job./Score: 0/Bin: 0/Level: 0/Position: 263/Consecutive: 0/Difficulty: 0/
+/Reading: 先週に映画を見た人は誰？/Definitions: Who is the person who watched the movie last week?/Score: 0/Bin: 0/Level: 0/Position: 264/Consecutive: 0/Difficulty: 0/
+/Reading: ボブはいつも勉強する人だ。/Definitions: Bob is a person who always studies./Score: 0/Bin: 0/Level: 0/Position: 265/Consecutive: 0/Difficulty: 0/
+/Reading: 赤いズボンを買う友達はボブだ。/Definitions: A friend who buys red pants is Bob./Score: 0/Bin: 0/Level: 0/Position: 266/Consecutive: 0/Difficulty: 0/
+/Reading: 晩ご飯を食べなかった人は映画で見た銀行に行った。/Definitions: Speaking of the person who did not eat dinner,she went to the bank she saw at the movie./Score: 0/Bin: 0/Level: 0/Position: 267/Consecutive: 0/Difficulty: 0/
+/Reading: 私は公園でお弁当をたべた。/Definitions: I ate the lunchbox in the park./Score: 0/Bin: 0/Level: 0/Position: 268/Consecutive: 0/Difficulty: 0/
+/Reading: スプーン/Definitions: spoon/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 269/Consecutive: 0/Difficulty: 0/
+/Reading: フォーク/Definitions: (1) folk,(2) fork/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 270/Consecutive: 0/Difficulty: 0/
+/Kanji: 本/Reading: ほん/Definitions: book,main,head,this,our,counter for long cylindrical things/Markers: n,pref,P/Score: 0/Bin: 0/Level: 0/Position: 271/Consecutive: 0/Difficulty: 0/
+/Kanji: 雑誌/Reading: ざっし/Definitions: journal,magazine,periodical/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 272/Consecutive: 0/Difficulty: 0/
+/Kanji: 葉書/Reading: はがき/Definitions: postcard/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 273/Consecutive: 0/Difficulty: 0/
+/Kanji: 先生/Reading: せんせい/Definitions: teacher,master,doctor/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 274/Consecutive: 0/Difficulty: 0/
+/Kanji: 飲み物/Reading: のみもの/Definitions: drink,beverage/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 275/Consecutive: 0/Difficulty: 0/
+/Reading: カップ/Definitions: cup/Markers: nl:,n,P/Score: 0/Bin: 0/Level: 0/Position: 276/Consecutive: 0/Difficulty: 0/
+/Reading: ナプキン/Definitions: (1) (table) napkin,serviette,(2) sanitary napkin/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 277/Consecutive: 0/Difficulty: 0/
+/Kanji: 要る/Reading: いる/Definitions: to need/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 278/Consecutive: 0/Difficulty: 0/
+/Kanji: 靴/Reading: くつ/Definitions: shoes,footwear/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 279/Consecutive: 0/Difficulty: 0/
+/Reading: シャツ/Definitions: shirt,singlet/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 280/Consecutive: 0/Difficulty: 0/
+/Kanji: 大学/Reading: だいがく/Definitions: (1) university,(2) the Great Learning - one of the Four Books/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 281/Consecutive: 0/Difficulty: 0/
+/Kanji: 其の/Reading: その/Definitions: the,that/Markers: adj-pn,uk/Score: 0/Bin: 0/Level: 0/Position: 282/Consecutive: 0/Difficulty: 0/
+/Kanji: 白い/Reading: しろい/Definitions: white/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 283/Consecutive: 0/Difficulty: 0/
+/Kanji: 可愛い/Reading: かわいい/Definitions: pretty,cute,lovely,charming,dear,darling,pet/Markers: adj,sl,P/Score: 0/Bin: 0/Level: 0/Position: 284/Consecutive: 0/Difficulty: 0/
+/Kanji: 授業/Reading: じゅぎょう/Definitions: lesson,class work/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 285/Consecutive: 0/Difficulty: 0/
+/Kanji: 物/Reading: もの/Definitions: thing,object/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 286/Consecutive: 0/Difficulty: 0/
+/Kanji: 事/Reading: こと/Definitions: thing,matter,fact,circumstances,business,reason,experience/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 287/Consecutive: 0/Difficulty: 0/
+/Kanji: 大変/Reading: たいへん/Definitions: (1) serious,grave,dreadful,terrible,(2) immense,enormous,(3) difficult,hard/Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 288/Consecutive: 0/Difficulty: 0/
+/Kanji: 同じ/Reading: おなじ/Definitions: same,identical,equal,uniform,equivalent,similar,common (origin),changeless/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 289/Consecutive: 0/Difficulty: 0/
+/Kanji: 面白い/Reading: おもしろい/Definitions: interesting,amusing/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 290/Consecutive: 0/Difficulty: 0/
+/Kanji: 今/Reading: いま/Definitions: now,the present time,just now,soon,immediately,(one) more/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 291/Consecutive: 0/Difficulty: 0/
+/Kanji: 忙しい/Reading: いそがしい/Definitions: busy,irritated/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 292/Consecutive: 0/Difficulty: 0/
+/Kanji: 遅い/Reading: おそい/Definitions: late,slow/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 293/Consecutive: 0/Difficulty: 0/
+/Reading: スプーンとフォークで魚をたべた。/Definitions: It ate fish with a spoon and fork./Score: 0/Bin: 0/Level: 0/Position: 294/Consecutive: 0/Difficulty: 0/
+/Reading: 本と雑誌と葉書をかった。/Definitions: It bought a book,a magazing and some post cards./Score: 0/Bin: 0/Level: 0/Position: 295/Consecutive: 0/Difficulty: 0/
+/Reading: 友達と話した。/Definitions: It talked with a friend./Score: 0/Bin: 0/Level: 0/Position: 296/Consecutive: 0/Difficulty: 0/
+/Reading: 先生と会った。/Definitions: It met with a teacher./Score: 0/Bin: 0/Level: 0/Position: 297/Consecutive: 0/Difficulty: 0/
+/Reading: 飲み物やカップやナプキンはいらない？/Definitions: You don't need drinks,cups,napkins,etc?/Score: 0/Bin: 0/Level: 0/Position: 298/Consecutive: 0/Difficulty: 0/
+/Reading: 靴やシャツを買う。/Definitions: It buys shoes,shirts,etc./Score: 0/Bin: 0/Level: 0/Position: 299/Consecutive: 0/Difficulty: 0/
+/Reading: ボブの本。/Definitions: Bob's book./Score: 0/Bin: 0/Level: 0/Position: 300/Consecutive: 0/Difficulty: 0/
+/Reading: ボブはアメリカの大学の学生だ。/Definitions: It talked with a friend./Score: 0/Bin: 0/Level: 0/Position: 301/Consecutive: 0/Difficulty: 0/
+/Reading: そのシャツは誰のシャツ？/Definitions: Whose shirt is that shirt?/Score: 0/Bin: 0/Level: 0/Position: 302/Consecutive: 0/Difficulty: 0/
+/Reading: ボブのシャツだ。/Definitions: It's Bob's shirt./Score: 0/Bin: 0/Level: 0/Position: 303/Consecutive: 0/Difficulty: 0/
+/Reading: そのシャツは誰の？/Definitions: Whose shirt is that?/Score: 0/Bin: 0/Level: 0/Position: 304/Consecutive: 0/Difficulty: 0/
+/Reading: ボブのだ。/Definitions: It's Bob's./Score: 0/Bin: 0/Level: 0/Position: 305/Consecutive: 0/Difficulty: 0/
+/Reading: 白いのはかわいい。/Definitions: The white one is cute./Score: 0/Bin: 0/Level: 0/Position: 306/Consecutive: 0/Difficulty: 0/
+/Reading: 授業に行くのを忘れた。/Definitions: It forgot to go to class./Score: 0/Bin: 0/Level: 0/Position: 307/Consecutive: 0/Difficulty: 0/
+/Reading: 毎日勉強するのは大変。/Definitions: Studying every day is tough./Score: 0/Bin: 0/Level: 0/Position: 308/Consecutive: 0/Difficulty: 0/
+/Reading: 毎日同じ物を食べるのは面白くない。/Definitions: Eating the same thing every day is not interesting./Score: 0/Bin: 0/Level: 0/Position: 309/Consecutive: 0/Difficulty: 0/
+/Reading: 静かな部屋がアリスの部屋だ。/Definitions: The quiet room is Alice's room./Score: 0/Bin: 0/Level: 0/Position: 310/Consecutive: 0/Difficulty: 0/
+/Reading: 静かなのがアリスの部屋だ。/Definitions: The quiet one is Alice's room./Score: 0/Bin: 0/Level: 0/Position: 311/Consecutive: 0/Difficulty: 0/
+/Reading: 今は忙しいの。/Definitions: The thing is that it's busy now./Score: 0/Bin: 0/Level: 0/Position: 312/Consecutive: 0/Difficulty: 0/
+/Reading: 今は忙しいのだ。/Definitions: The thing is that it's busy now. (male)/Score: 0/Bin: 0/Level: 0/Position: 313/Consecutive: 0/Difficulty: 0/
+/Reading: 今は忙しいの？/Definitions: Is it that it's busy now?/Score: 0/Bin: 0/Level: 0/Position: 314/Consecutive: 0/Difficulty: 0/
+/Reading: ジムのだ。/Definitions: It is Jim's./Score: 0/Bin: 0/Level: 0/Position: 315/Consecutive: 0/Difficulty: 0/
+/Reading: ジムなのだ。/Definitions: It is Jim. (explaining)/Score: 0/Bin: 0/Level: 0/Position: 316/Consecutive: 0/Difficulty: 0/
+/Reading: 学生なんだ。/Definitions: It is a student. (explaining)/Score: 0/Bin: 0/Level: 0/Position: 317/Consecutive: 0/Difficulty: 0/
+/Reading: 学生じゃないんだ。/Definitions: It is not a student. (explaining)/Score: 0/Bin: 0/Level: 0/Position: 318/Consecutive: 0/Difficulty: 0/
+/Reading: 学生だったんだ。/Definitions: It was a student. (explaining)/Score: 0/Bin: 0/Level: 0/Position: 319/Consecutive: 0/Difficulty: 0/
+/Reading: 学生じゃなかったんだ。/Definitions: It was not a student. (explaining)/Score: 0/Bin: 0/Level: 0/Position: 320/Consecutive: 0/Difficulty: 0/
+/Reading: 飲むんだ。/Definitions: It drinks. (explainging)/Score: 0/Bin: 0/Level: 0/Position: 321/Consecutive: 0/Difficulty: 0/
+/Reading: 飲まないんだ。/Definitions: It does not drink. (explainging)/Score: 0/Bin: 0/Level: 0/Position: 322/Consecutive: 0/Difficulty: 0/
+/Reading: 飲んだんだ。/Definitions: It drank. (explainging)/Score: 0/Bin: 0/Level: 0/Position: 323/Consecutive: 0/Difficulty: 0/
+/Reading: 飲まなかったんだ。/Definitions: It didn't drink. (explainging)/Score: 0/Bin: 0/Level: 0/Position: 324/Consecutive: 0/Difficulty: 0/
+/Reading: 学生なんじゃない。/Definitions: It isn't that it is a student. (explaining)/Score: 0/Bin: 0/Level: 0/Position: 325/Consecutive: 0/Difficulty: 0/
+/Reading: 飲むんじゃない。/Definitions: It isn't that it drinks. (explainging)/Score: 0/Bin: 0/Level: 0/Position: 326/Consecutive: 0/Difficulty: 0/
+/Reading: 遅くない？/Definitions: It isn't late?/Score: 0/Bin: 0/Level: 0/Position: 327/Consecutive: 0/Difficulty: 0/
+/Reading: 遅いんじゃない？/Definitions: Isn't it late?/Score: 0/Bin: 0/Level: 0/Position: 328/Consecutive: 0/Difficulty: 0/
+/Reading: アリス：どこに行くの？\nボブ：授業に行くんだ。/Definitions: Alice: Where are you going? (seeking explanation)\nI'm going to class./Score: 0/Bin: 0/Level: 0/Position: 329/Consecutive: 0/Difficulty: 0/
+/Reading: アリス：今授業があるんじゃない？\nボブ：今はないんだ。/Definitions: Alice: Isn't there class now? (seeking explanation)\nRight now,there isn't./Score: 0/Bin: 0/Level: 0/Position: 330/Consecutive: 0/Difficulty: 0/
+/Reading: アリス：今授業がないんじゃない？\nボブ：ううん、ある。/Definitions: Alice: There isn't any class right now,is there? (seeking explanation)\nNo,there is./Score: 0/Bin: 0/Level: 0/Position: 331/Consecutive: 0/Difficulty: 0/
+/Reading: アリス：その人が買うんじゃなかったの？\nボブ：ううん、先生が買うんだ。/Definitions: Alice: Wasn't it the case that that person is buying? (seeking explanation)\nNo. It was that the teacher is buying./Score: 0/Bin: 0/Level: 0/Position: 332/Consecutive: 0/Difficulty: 0/
+/Kanji: 朝ご飯/Reading: あさごはん/Definitions: breakfast/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 333/Consecutive: 0/Difficulty: 0/
+/Kanji: 早い/Reading: はやい/Definitions: early/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 334/Consecutive: 0/Difficulty: 0/
+/Kanji: 自分/Reading: じぶん/Definitions: myself,oneself/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 335/Consecutive: 0/Difficulty: 0/
+/Kanji: 奇麗/Reading: きれい/Definitions: pretty,clean,nice,tidy,beautiful,fair/Markers: adj-na,uk,P/Score: 0/Bin: 0/Level: 0/Position: 336/Consecutive: 0/Difficulty: 0/
+/Kanji: 沢山/Reading: たくさん/Definitions: many,a lot,much/Markers: adj-na,adv,n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 337/Consecutive: 0/Difficulty: 0/
+/Kanji: 最近/Reading: さいきん/Definitions: latest,most recent,nowadays/Markers: adj-no,n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 338/Consecutive: 0/Difficulty: 0/
+/Kanji: 全然/Reading: ぜんぜん/Definitions: (1) wholly,entirely,completely,(2) not at all (with neg. verb)/Markers: adv,P/Score: 0/Bin: 0/Level: 0/Position: 339/Consecutive: 0/Difficulty: 0/
+/Kanji: 声/Reading: こえ/Definitions: voice/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 340/Consecutive: 0/Difficulty: 0/
+/Kanji: 結構/Reading: けっこう/Definitions: (1) splendid,nice,wonderful,delicious,sweet,(2) construction,architecture,(3) well enough,tolerably/Markers: adj-na,n-adv,n,uk,arch,P/Score: 0/Bin: 0/Level: 0/Position: 341/Consecutive: 0/Difficulty: 0/
+/Kanji: 大きい/Reading: おおきい/Definitions: big,large,great/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 342/Consecutive: 0/Difficulty: 0/
+/Kanji: 変わる/Reading: かわる/Definitions: to change,to be transformed,to vary,to be revised,to be different,to move location/Markers: v5r,vi,P/Score: 0/Bin: 0/Level: 0/Position: 343/Consecutive: 0/Difficulty: 0/
+/Kanji: 中/Reading: なか/Definitions: inside,middle,among/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 344/Consecutive: 0/Difficulty: 0/
+/Kanji: 天気/Reading: てんき/Definitions: weather,the elements,fine weather/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 345/Consecutive: 0/Difficulty: 0/
+/Kanji: 時間/Reading: じかん/Definitions: time/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 346/Consecutive: 0/Difficulty: 0/
+/Kanji: 大丈夫/Reading: だいじょうぶ/Definitions: safe,all right,O.K./Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 347/Consecutive: 0/Difficulty: 0/
+/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 348/Consecutive: 0/Difficulty: 0/
+/Kanji: 降る/Reading: ふる/Definitions: to precipitate,to fall (e.g.,rain)/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 349/Consecutive: 0/Difficulty: 0/
+/Reading: ボブは朝ご飯を早く食べた。/Definitions: Bob quickly ate breakfast./Score: 0/Bin: 0/Level: 0/Position: 350/Consecutive: 0/Difficulty: 0/
+/Reading: アリスは自分の部屋をきれいにした。/Definitions: Alice made her room clean./Score: 0/Bin: 0/Level: 0/Position: 351/Consecutive: 0/Difficulty: 0/
+/Reading: 映画をたくさんみた。/Definitions: It saw a lot of movies./Score: 0/Bin: 0/Level: 0/Position: 352/Consecutive: 0/Difficulty: 0/
+/Reading: 最近全然食べない。/Definitions: Recently it doesn't eat at all./Score: 0/Bin: 0/Level: 0/Position: 353/Consecutive: 0/Difficulty: 0/
+/Reading: ボブの声は結構大きい。/Definitions: Bob's voice is fairly large./Score: 0/Bin: 0/Level: 0/Position: 354/Consecutive: 0/Difficulty: 0/
+/Reading: この町は最近大きく変わった。/Definitions: This town had changed greatly lately./Score: 0/Bin: 0/Level: 0/Position: 355/Consecutive: 0/Difficulty: 0/
+/Reading: 図書館の中では静かにする。/Definitions: Within the library it does things quietly./Score: 0/Bin: 0/Level: 0/Position: 356/Consecutive: 0/Difficulty: 0/
+/Reading: ボブ：いい天気だね。\nアリス：そうね。/Definitions: Bob: Good weather,huh?\nAlice: It is,isn't it./Score: 0/Bin: 0/Level: 0/Position: 357/Consecutive: 0/Difficulty: 0/
+/Reading: アリス：おもしろい映画だったね。\nボブ：え？全然おもしろくなかった。/Definitions: Alice: That was an interesting movie,wasn't it?\nBob: Huh? No,it wasn't interesting at all./Score: 0/Bin: 0/Level: 0/Position: 358/Consecutive: 0/Difficulty: 0/
+/Reading: アリス：時間がないよ。\nボブ：大丈夫だよ。/Definitions: Alice: There's no time,you now.\nBob: It's ok,you know./Score: 0/Bin: 0/Level: 0/Position: 359/Consecutive: 0/Difficulty: 0/
+/Reading: アリス：今日はいい天気だね。\nボブ：うん。でも明日雨が降るよ。/Definitions: Alice: Good weather today,huh?\nBob: Yeah.  But it will rain tomorrow,you know./Score: 0/Bin: 0/Level: 0/Position: 360/Consecutive: 0/Difficulty: 0/
+/Reading: アリス：ボブは魚が好きなんだよね。\nボブ：そうだね。/Definitions: Alice: You know,you like fish,don't you.\nBob: It's true,isn't it./Score: 0/Bin: 0/Level: 0/Position: 361/Consecutive: 0/Difficulty: 0/
+/Kanji: 仔犬/Reading: こいぬ/Definitions: puppy/Markers: n/Score: 0/Bin: 0/Level: 0/Position: 362/Consecutive: 0/Difficulty: 0/
+/Kanji: 迚も/Reading: とても/Definitions: very,awfully,exceedingly/Markers: adv,uk,P/Score: 0/Bin: 0/Level: 0/Position: 363/Consecutive: 0/Difficulty: 0/
+/Kanji: 昨日/Reading: きのう/Definitions: yesterday/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 364/Consecutive: 0/Difficulty: 0/
+/Kanji: 答える/Reading: こたえる/Definitions: to answer,to reply/Markers: v1/Score: 0/Bin: 0/Level: 0/Position: 365/Consecutive: 0/Difficulty: 0/
+/Reading: 食べ/Definitions: ます stem for eat/Score: 0/Bin: 0/Level: 0/Position: 366/Consecutive: 0/Difficulty: 0/
+/Reading: 泳ぎ/Definitions: ます stem for swim/Score: 0/Bin: 0/Level: 0/Position: 367/Consecutive: 0/Difficulty: 0/
+/Hint: ます stem/Reading: し/Definitions: ます stem for suru/Score: 0/Bin: 0/Level: 0/Position: 368/Consecutive: 0/Difficulty: 0/
+/Hint: ます stem/Reading: き/Definitions: ます stem for くる/Score: 0/Bin: 0/Level: 0/Position: 369/Consecutive: 0/Difficulty: 0/
+/Reading: 明日映画を見に行く。/Definitions: Tomorrow,it goes to see a movie./Score: 0/Bin: 0/Level: 0/Position: 370/Consecutive: 0/Difficulty: 0/
+/Reading: 昨日友達が遊びへきた。/Definitions: Yesterday a friend came to a playing activity./Score: 0/Bin: 0/Level: 0/Position: 371/Consecutive: 0/Difficulty: 0/
+/Reading: 昨日友達が遊びにきた。/Definitions: Yesterday a friend came to play./Score: 0/Bin: 0/Level: 0/Position: 372/Consecutive: 0/Difficulty: 0/
+/Reading: 楽しみにする。/Definitions: It is looking forward to it./Score: 0/Bin: 0/Level: 0/Position: 373/Consecutive: 0/Difficulty: 0/
+/Reading: 遊びます。/Definitions: It plays. (polite)/Score: 0/Bin: 0/Level: 0/Position: 374/Consecutive: 0/Difficulty: 0/
+/Reading: 遊びません。/Definitions: It does not play. (polite)/Score: 0/Bin: 0/Level: 0/Position: 375/Consecutive: 0/Difficulty: 0/
+/Reading: 遊びました。/Definitions: It played. (polite)/Score: 0/Bin: 0/Level: 0/Position: 376/Consecutive: 0/Difficulty: 0/
+/Reading: 遊びませんでした。/Definitions: It did not play. (polite)/Score: 0/Bin: 0/Level: 0/Position: 377/Consecutive: 0/Difficulty: 0/
+/Reading: 明日大学に行きます。/Definitions: Tomorrow it goes to college. (polite)/Score: 0/Bin: 0/Level: 0/Position: 378/Consecutive: 0/Difficulty: 0/
+/Reading: 先週ボブに会いましたよ。/Definitions: It met Bob last week,you know. (polite)/Score: 0/Bin: 0/Level: 0/Position: 379/Consecutive: 0/Difficulty: 0/
+/Reading: 晩ご飯を食べませんでしたね。/Definitions: It didn't eat dinner,did it? (polite)/Score: 0/Bin: 0/Level: 0/Position: 380/Consecutive: 0/Difficulty: 0/
+/Reading: 面白くない映画は見ません。/Definitions: About uninteresting movies,it doesn't watch them. (polite)/Score: 0/Bin: 0/Level: 0/Position: 381/Consecutive: 0/Difficulty: 0/
+/Reading: かわいいです。/Definitions: It's cute. (polite)/Score: 0/Bin: 0/Level: 0/Position: 382/Consecutive: 0/Difficulty: 0/
+/Reading: かわいくないです。/Definitions: It's not cute. (polite,usual)/Score: 0/Bin: 0/Level: 0/Position: 383/Consecutive: 0/Difficulty: 0/
+/Reading: かわいかったです。/Definitions: It was cute. (polite)/Score: 0/Bin: 0/Level: 0/Position: 384/Consecutive: 0/Difficulty: 0/
+/Reading: かわいくなかったです。/Definitions: It wasn't cute. (polite,usual)/Score: 0/Bin: 0/Level: 0/Position: 385/Consecutive: 0/Difficulty: 0/
+/Reading: 静かです。/Definitions: It is quiet. (polite)/Score: 0/Bin: 0/Level: 0/Position: 386/Consecutive: 0/Difficulty: 0/
+/Reading: 静かじゃないです。/Definitions: It is not quiet. (polite,usual)/Score: 0/Bin: 0/Level: 0/Position: 387/Consecutive: 0/Difficulty: 0/
+/Reading: 静かでした。/Definitions: It was quiet. (polite)/Score: 0/Bin: 0/Level: 0/Position: 388/Consecutive: 0/Difficulty: 0/
+/Reading: 静かじゃなかったです。/Definitions: It was not quiet. (polite,usual)/Score: 0/Bin: 0/Level: 0/Position: 389/Consecutive: 0/Difficulty: 0/
+/Reading: 子犬はとても好きです。/Definitions: About puppies,it likes them very much. (polite)/Score: 0/Bin: 0/Level: 0/Position: 390/Consecutive: 0/Difficulty: 0/
+/Reading: その部屋はあまり静かじゃないです。/Definitions: That room is not very quiet. (polite)/Score: 0/Bin: 0/Level: 0/Position: 391/Consecutive: 0/Difficulty: 0/
+/Reading: 先週に見た映画は、とても面白かったです。/Definitions: The movie it saw last week was very interesting./Score: 0/Bin: 0/Level: 0/Position: 392/Consecutive: 0/Difficulty: 0/
+/Reading: かわいくありません。/Definitions: It's not cute. (polite,more formal)/Score: 0/Bin: 0/Level: 0/Position: 393/Consecutive: 0/Difficulty: 0/
+/Reading: かわいくありませんでした。/Definitions: It wasn't cute. (polite,more formal)/Score: 0/Bin: 0/Level: 0/Position: 394/Consecutive: 0/Difficulty: 0/
+/Reading: 静かじゃありません。/Definitions: It is not quiet. (polite,more formal)/Score: 0/Bin: 0/Level: 0/Position: 395/Consecutive: 0/Difficulty: 0/
+/Reading: 静かじゃありませんでした。/Definitions: It was not quiet. (polite,more formal)/Score: 0/Bin: 0/Level: 0/Position: 396/Consecutive: 0/Difficulty: 0/
+/Reading: その部屋はあまり静かじゃありませんよ。/Definitions: That room is not very quiet,you know. (polite,more formal)/Score: 0/Bin: 0/Level: 0/Position: 397/Consecutive: 0/Difficulty: 0/
+/Reading: そう。/Definitions: That's so. (female)/Score: 0/Bin: 0/Level: 0/Position: 398/Consecutive: 0/Difficulty: 0/
+/Reading: そうだ。/Definitions: That's so. (male)/Score: 0/Bin: 0/Level: 0/Position: 399/Consecutive: 0/Difficulty: 0/
+/Reading: そうです。/Definitions: That's so. (polite)/Score: 0/Bin: 0/Level: 0/Position: 400/Consecutive: 0/Difficulty: 0/
+/Reading: そうでございます。/Definitions: That's so. (very polite)/Score: 0/Bin: 0/Level: 0/Position: 401/Consecutive: 0/Difficulty: 0/
+/Reading: そうだと思います。/Definitions: I think that's so. (polite)/Score: 0/Bin: 0/Level: 0/Position: 402/Consecutive: 0/Difficulty: 0/
+/Reading: 「はい、そうです」と答えた。/Definitions: "Yes,that's so",it replied./Score: 0/Bin: 0/Level: 0/Position: 403/Consecutive: 0/Difficulty: 0/
+/Kanji: 名前/Reading: なまえ/Definitions: name/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 404/Consecutive: 0/Difficulty: 0/
+/Kanji: 僕/Reading: ぼく/Definitions: I,manservant/Markers: n,male,P/Score: 0/Bin: 0/Level: 0/Position: 405/Consecutive: 0/Difficulty: 0/
+/Kanji: 俺/Reading: おれ/Definitions: I (ego) (boastful first-person pronoun)/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 406/Consecutive: 0/Difficulty: 0/
+/Reading: あたし/Definitions: I/Markers: n,adj-no,fem/Score: 0/Bin: 0/Level: 0/Position: 407/Consecutive: 0/Difficulty: 0/
+/Reading: 私の名前はキムです。/Definitions: My name is Kim. (polite,no gender)/Score: 0/Bin: 0/Level: 0/Position: 408/Consecutive: 0/Difficulty: 0/
+/Reading: 僕の名前はキムです。/Definitions: My name is Kim. (polite,male)/Score: 0/Bin: 0/Level: 0/Position: 409/Consecutive: 0/Difficulty: 0/
+/Reading: 僕の名前はボブだ。/Definitions: My name is Bob. (casual,male)/Score: 0/Bin: 0/Level: 0/Position: 410/Consecutive: 0/Difficulty: 0/
+/Reading: 俺の名前はボブだ。/Definitions: My name is Bob. (very casual,male)/Score: 0/Bin: 0/Level: 0/Position: 411/Consecutive: 0/Difficulty: 0/
+/Reading: あたしの名前はアリス。/Definitions: My name is Alice. (casual,female)/Score: 0/Bin: 0/Level: 0/Position: 412/Consecutive: 0/Difficulty: 0/
+/Kanji: お母さん/Reading: おかあさん/Definitions: mother/Markers: n,hon,P/Score: 0/Bin: 0/Level: 0/Position: 413/Consecutive: 0/Difficulty: 0/
+/Kanji: 母/Reading: はは/Definitions: mother/Markers: n,hum,P/Score: 0/Bin: 0/Level: 0/Position: 414/Consecutive: 0/Difficulty: 0/
+/Kanji: 買い物/Reading: かいもの/Definitions: shopping/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 415/Consecutive: 0/Difficulty: 0/
+/Kanji: 料理/Reading: りょうり/Definitions: cooking,cookery,cuisine/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 416/Consecutive: 0/Difficulty: 0/
+/Kanji: 済みません/Reading: すみません/Definitions: sorry,excuse me/Markers: exp,uk,P/Score: 0/Bin: 0/Level: 0/Position: 417/Consecutive: 0/Difficulty: 0/
+/Kanji: 一寸/Reading: ちょっと/Definitions: (1) just a minute,short time,just a little,(2) somewhat,easily,readily,rather/Markers: ateji,adv,int,uk,P/Score: 0/Bin: 0/Level: 0/Position: 418/Consecutive: 0/Difficulty: 0/
+/Kanji: お腹/Reading: おなか/Definitions: stomach/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 419/Consecutive: 0/Difficulty: 0/
+/Kanji: 一杯/Reading: いっぱい/Definitions: (1) cup of ..,drink,(2) full,(3) to the utmost,up to (one's income),(a) lot of,much/Markers: adj-na,adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 420/Consecutive: 0/Difficulty: 0/
+/Kanji: 本当/Reading: ほんとう/Definitions: truth,reality/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 421/Consecutive: 0/Difficulty: 0/
+/Reading: そんな/Definitions: such,like that,that sort of/Markers: adj-na,adj-pn,adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 422/Consecutive: 0/Difficulty: 0/
+/Reading: こんな/Definitions: such,like this/Markers: adj-na,adj-pn,adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 423/Consecutive: 0/Difficulty: 0/
+/Kanji: 彼/Reading: かれ/Definitions: he,boyfriend/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 424/Consecutive: 0/Difficulty: 0/
+/Kanji: 言う/Reading: いう/Definitions: to say/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 425/Consecutive: 0/Difficulty: 0/
+/Kanji: 教える/Reading: おしえる/Definitions: to teach,to inform,to instruct/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 426/Consecutive: 0/Difficulty: 0/
+/Kanji: 知る/Reading: しる/Definitions: to know,to understand,to be acquainted with,to feel/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 427/Consecutive: 0/Difficulty: 0/
+/Kanji: 何れ/Reading: どれ/Definitions: well,now,let me see,which (of three or more)/Markers: n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 428/Consecutive: 0/Difficulty: 0/
+/Kanji: 誰か/Reading: だれか/Definitions: someone,somebody/Markers: n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 429/Consecutive: 0/Difficulty: 0/
+/Kanji: 何か/Reading: なにか/Definitions: something/Markers: exp,P/Score: 0/Bin: 0/Level: 0/Position: 430/Consecutive: 0/Difficulty: 0/
+/Kanji: 何時か/Reading: いつか/Definitions: sometime,someday,one day,some time or other,the other day,in due course,in time/Markers: adv,uk/Score: 0/Bin: 0/Level: 0/Position: 431/Consecutive: 0/Difficulty: 0/
+/Kanji: 何処か/Reading: どこか/Definitions: somewhere,anywhere,in some respects/Markers: adv,exp,n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 432/Consecutive: 0/Difficulty: 0/
+/Kanji: 美味しい/Reading: おいしい/Definitions: delicious,tasty/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 433/Consecutive: 0/Difficulty: 0/
+/Reading: クッキー/Definitions: cookie,biscuit/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 434/Consecutive: 0/Difficulty: 0/
+/Kanji: 盗む/Reading: ぬすむ/Definitions: to steal/Markers: v5m,P/Score: 0/Bin: 0/Level: 0/Position: 435/Consecutive: 0/Difficulty: 0/
+/Kanji: 犯人/Reading: はんにん/Definitions: offender,criminal/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 436/Consecutive: 0/Difficulty: 0/
+/Kanji: 撰ぶ/Reading: えらぶ/Definitions: to choose,to select/Markers: oK,v5b/Score: 0/Bin: 0/Level: 0/Position: 437/Consecutive: 0/Difficulty: 0/
+/Kanji: 誰も/Reading: だれも/Definitions: (1) everyone,anyone,(2) no-one (with neg. verb)/Markers: conj,uk/Score: 0/Bin: 0/Level: 0/Position: 438/Consecutive: 0/Difficulty: 0/
+/Kanji: 何も/Reading: なにも/Definitions: nothing/Markers: adv,exp,P/Score: 0/Bin: 0/Level: 0/Position: 439/Consecutive: 0/Difficulty: 0/
+/Kanji: 何時も/Reading: いつも/Definitions: (1) always,usually,every time,(2) never (with neg. verb)/Markers: adv,n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 440/Consecutive: 0/Difficulty: 0/
+/Kanji: 何処も/Reading: どこも/Definitions: everywhere/Markers: conj,uk/Score: 0/Bin: 0/Level: 0/Position: 441/Consecutive: 0/Difficulty: 0/
+/Kanji: 何れも/Reading: どれも/Definitions: both,either,any,all,every/Markers: adv,uk/Score: 0/Bin: 0/Level: 0/Position: 442/Consecutive: 0/Difficulty: 0/
+/Kanji: 此の/Reading: この/Definitions: this/Markers: adj-pn,int,uk,P/Score: 0/Bin: 0/Level: 0/Position: 443/Consecutive: 0/Difficulty: 0/
+/Kanji: 質問/Reading: しつもん/Definitions: question,inquiry,enquiry/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 444/Consecutive: 0/Difficulty: 0/
+/Kanji: 答え/Reading: こたえ/Definitions: answer,response/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 445/Consecutive: 0/Difficulty: 0/
+/Kanji: 遅れる/Reading: おくれる/Definitions: to be late,to be delayed,to fall behind schedule,to be overdue/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 446/Consecutive: 0/Difficulty: 0/
+/Kanji: 此処/Reading: ここ/Definitions: here,this place/Markers: n,uk,P/Score: 0/Bin: 0/Level: 0/Position: 447/Consecutive: 0/Difficulty: 0/
+/Kanji: 今週/Reading: こんしゅう/Definitions: this week/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 448/Consecutive: 0/Difficulty: 0/
+/Kanji: 週末/Reading: しゅうまつ/Definitions: weekend/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 449/Consecutive: 0/Difficulty: 0/
+/Kanji: 誰でも/Reading: だれでも/Definitions: anyone,anybody,whoever/Markers: conj,uk/Score: 0/Bin: 0/Level: 0/Position: 450/Consecutive: 0/Difficulty: 0/
+/Kanji: 何でも/Reading: なんでも/Definitions: by all means,everything/Markers: adv,exp,P/Score: 0/Bin: 0/Level: 0/Position: 451/Consecutive: 0/Difficulty: 0/
+/Kanji: 何時でも/Reading: いつでも/Definitions: (1) (at) any time,always,at all times,(2) never (with negative verb),(3) whenever/Markers: adv,uk,P/Score: 0/Bin: 0/Level: 0/Position: 452/Consecutive: 0/Difficulty: 0/
+/Kanji: 何処でも/Reading: どこでも/Definitions: anywhere/Markers: n,uk/Score: 0/Bin: 0/Level: 0/Position: 453/Consecutive: 0/Difficulty: 0/
+/Reading: 田中さん：お母さんはどこですか。\n鈴木さん：　母は買い物に行きました。/Definitions: Tanaka san: Where is your mother? (polite)\nSuzuki san: My mother went shopping. (polite)/Score: 0/Bin: 0/Level: 0/Position: 454/Consecutive: 0/Difficulty: 0/
+/Reading: キムさん：　イタリア料理を食べに行きませんか。\n鈴木さん：　すみません。ちょっと、お腹がいっぱいです。/Definitions: Kim san: Would you like to go eat Italian food? (polite)\n Suzuki san: I'm sorry.  My stomach is a little full. (polite)/Score: 0/Bin: 0/Level: 0/Position: 455/Consecutive: 0/Difficulty: 0/
+/Reading: こんなのを本当に食べるか？/Definitions: Do you think it will really eat this type of thing?/Score: 0/Bin: 0/Level: 0/Position: 456/Consecutive: 0/Difficulty: 0/
+/Reading: そんなのは、あるかよ！/Definitions: Does it look like it would have something like that?!/Score: 0/Bin: 0/Level: 0/Position: 457/Consecutive: 0/Difficulty: 0/
+/Reading: こんなのを本当に食べる？/Definitions: Is it really going to eat something like this?/Score: 0/Bin: 0/Level: 0/Position: 458/Consecutive: 0/Difficulty: 0/
+/Reading: そんなのは、あるの？/Definitions: Does it have something like that?/Score: 0/Bin: 0/Level: 0/Position: 459/Consecutive: 0/Difficulty: 0/
+/Reading: 昨日何を食べたか忘れた。/Definitions: It forgot what it are yesterday./Score: 0/Bin: 0/Level: 0/Position: 460/Consecutive: 0/Difficulty: 0/
+/Reading: 彼は何を言ったかわからない。/Definitions: It doesn't understand what he said./Score: 0/Bin: 0/Level: 0/Position: 461/Consecutive: 0/Difficulty: 0/
+/Reading: 先生が学校に行ったか教えない？/Definitions: Won't you inform me whether the teacher went to school?/Score: 0/Bin: 0/Level: 0/Position: 462/Consecutive: 0/Difficulty: 0/
+/Reading: 先生が学校に行ったかどうか知らない。/Definitions: It doesn't know whether or not the teacher went to school./Score: 0/Bin: 0/Level: 0/Position: 463/Consecutive: 0/Difficulty: 0/
+/Reading: 先生が学校に行ったか行かなかったか知らない。/Definitions: It doesn't know whether the teacher went to school or didn't./Score: 0/Bin: 0/Level: 0/Position: 464/Consecutive: 0/Difficulty: 0/
+/Reading: 誰かがおいしいクッキーを全部食べた。/Definitions: Someone ate all the delicous cookies./Score: 0/Bin: 0/Level: 0/Position: 465/Consecutive: 0/Difficulty: 0/
+/Reading: 誰が盗んだのか、誰か知りませんか。/Definitions: Does anybody know who stole it?/Score: 0/Bin: 0/Level: 0/Position: 466/Consecutive: 0/Difficulty: 0/
+/Reading: 犯人をどこかで見ましたか。/Definitions: Did it see the criminal somewhere?/Score: 0/Bin: 0/Level: 0/Position: 467/Consecutive: 0/Difficulty: 0/
+/Reading: この中からどれかを選ぶの。/Definitions: It will select a certain one from inside this./Score: 0/Bin: 0/Level: 0/Position: 468/Consecutive: 0/Difficulty: 0/
+/Reading: この質問の答えは、誰も知らない。/Definitions: Nobody knows the answer to this question./Score: 0/Bin: 0/Level: 0/Position: 469/Consecutive: 0/Difficulty: 0/
+/Reading: 友達はいつも遅れる。/Definitions: The friend is always late./Score: 0/Bin: 0/Level: 0/Position: 470/Consecutive: 0/Difficulty: 0/
+/Reading: ここにあるレストランはどれもおいしくない。/Definitions: Of all the restaurants here,none of them are tasty./Score: 0/Bin: 0/Level: 0/Position: 471/Consecutive: 0/Difficulty: 0/
+/Reading: 今週末は、どこにも行かなかった。/Definitions: This weekend it went nowhere./Score: 0/Bin: 0/Level: 0/Position: 472/Consecutive: 0/Difficulty: 0/
+/Reading: この質問の答えは、誰でも分かる。/Definitions: Everybody understands the answer to this question./Score: 0/Bin: 0/Level: 0/Position: 473/Consecutive: 0/Difficulty: 0/
+/Reading: 昼ご飯は、どこでもいいです。/Definitions: About lunch,anywhere is good./Score: 0/Bin: 0/Level: 0/Position: 474/Consecutive: 0/Difficulty: 0/
+/Reading: あの人は、本当に何でも食べる。/Definitions: That person really eats anything./Score: 0/Bin: 0/Level: 0/Position: 475/Consecutive: 0/Difficulty: 0/
+/Kanji: 一般的/Reading: いっぱんてき/Definitions: popular,typical,general/Markers: adj-na,P/Score: 0/Bin: 0/Level: 0/Position: 476/Consecutive: 0/Difficulty: 0/
+/Kanji: 狭い/Reading: せまい/Definitions: narrow,confined,small/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 477/Consecutive: 0/Difficulty: 0/
+/Kanji: 彼女/Reading: かのじょ/Definitions: (1) she,(2) girl friend,sweetheart/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 478/Consecutive: 0/Difficulty: 0/
+/Kanji: 金持ち/Reading: かねもち/Definitions: rich man/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 479/Consecutive: 0/Difficulty: 0/
+/Kanji: 魅力的/Reading: みりょくてき/Definitions: charming,fascinating/Markers: adj-na/Score: 0/Bin: 0/Level: 0/Position: 480/Consecutive: 0/Difficulty: 0/
+/Kanji: 食堂/Reading: しょくどう/Definitions: cafeteria,dining hall/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 481/Consecutive: 0/Difficulty: 0/
+/Kanji: 昼寝/Reading: ひるね/Definitions: nap (afternoon),siesta/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 482/Consecutive: 0/Difficulty: 0/
+/Reading: パーティー/Definitions: party/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 483/Consecutive: 0/Difficulty: 0/
+/Reading: プレゼント/Definitions: present,gift/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 484/Consecutive: 0/Difficulty: 0/
+/Kanji: 徐徐/Reading: そろそろ/Definitions: gradually,steadily,quietly,slowly,soon/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 485/Consecutive: 0/Difficulty: 0/
+/Kanji: 失礼/Reading: しつれい/Definitions: (1) discourtesy,impoliteness,(2) Excuse me,Goodbye/Markers: n,vs,adj-na,exp,P/Score: 0/Bin: 0/Level: 0/Position: 486/Consecutive: 0/Difficulty: 0/
+/Kanji: 穏やか/Reading: おだやか/Definitions: calm,gentle,quiet/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 487/Consecutive: 0/Difficulty: 0/
+/Kanji: 運動/Reading: うんどう/Definitions: motion,exercise/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 488/Consecutive: 0/Difficulty: 0/
+/Kanji: 痩せる/Reading: やせる/Definitions: to become thin,to lose weight,to reduce (one's) weight,to slim/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 489/Consecutive: 0/Difficulty: 0/
+/Reading: デパート/Definitions: department store/Markers: n,abbr,P/Score: 0/Bin: 0/Level: 0/Position: 490/Consecutive: 0/Difficulty: 0/
+/Kanji: 欲しい/Reading: ほしい/Definitions: wanted,wished for,in need of,desired/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 491/Consecutive: 0/Difficulty: 0/
+/Kanji: 聞く/Reading: きく/Definitions: (1) to hear,to listen,(2) to ask/Markers: v5k,P/Score: 0/Bin: 0/Level: 0/Position: 492/Consecutive: 0/Difficulty: 0/
+/Kanji: 暇/Reading: ひま/Definitions: (1) free time,leisure,leave,spare time,(2) farewell/Markers: adj-na,n/Score: 0/Bin: 0/Level: 0/Position: 493/Consecutive: 0/Difficulty: 0/
+/Kanji: 年上/Reading: としうえ/Definitions: older,senior/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 494/Consecutive: 0/Difficulty: 0/
+/Kanji: 優しい/Reading: やさしい/Definitions: tender,kind,gentle,graceful,affectionate,amiable,suave/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 495/Consecutive: 0/Difficulty: 0/
+/Kanji: 簡単/Reading: かんたん/Definitions: simple/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 0/Position: 496/Consecutive: 0/Difficulty: 0/
+/Kanji: 難しい/Reading: むずかしい/Definitions: difficult/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 497/Consecutive: 0/Difficulty: 0/
+/Kanji: 未だ/Reading: まだ/Definitions: yet,still,more,besides/Markers: adv,P/Score: 0/Bin: 0/Level: 0/Position: 498/Consecutive: 0/Difficulty: 0/
+/Reading: 私の部屋は、きれいで、静かで、とても好き。/Definitions: My room is clean,quiet and I like it a lot./Score: 0/Bin: 0/Level: 0/Position: 499/Consecutive: 0/Difficulty: 0/
+/Reading: 彼女は、学生じゃなくて、先生だ。/Definitions: Shis is not a student,she is a tacher./Score: 0/Bin: 0/Level: 0/Position: 500/Consecutive: 0/Difficulty: 0/
+/Reading: 田中さんは、お金持ちで、かっこよくて、魅力的ですね。/Definitions: Tanaka san is rich,handsome,and charming,isn't he?/Score: 0/Bin: 0/Level: 0/Position: 501/Consecutive: 0/Difficulty: 0/
+/Reading: 食べて/Definitions: It eats... (て form)/Score: 0/Bin: 0/Level: 0/Position: 502/Consecutive: 0/Difficulty: 0/
+/Reading: 行って/Definitions: It goes... (て form)/Score: 0/Bin: 0/Level: 0/Position: 503/Consecutive: 0/Difficulty: 0/
+/Reading: して/Definitions: It does... (て form)/Score: 0/Bin: 0/Level: 0/Position: 504/Consecutive: 0/Difficulty: 0/
+/Reading: 遊んで/Definitions: It plays... (て form)/Score: 0/Bin: 0/Level: 0/Position: 505/Consecutive: 0/Difficulty: 0/
+/Reading: 飲んで/Definitions: It drinks... (て form)/Score: 0/Bin: 0/Level: 0/Position: 506/Consecutive: 0/Difficulty: 0/
+/Reading: 食べなくて/Definitions: It doesn't eat... (て form)/Score: 0/Bin: 0/Level: 0/Position: 507/Consecutive: 0/Difficulty: 0/
+/Reading: 行かなくて/Definitions: It doesn't go... (て form)/Score: 0/Bin: 0/Level: 0/Position: 508/Consecutive: 0/Difficulty: 0/
+/Reading: しなくて/Definitions: It doesn't do... (て form)/Score: 0/Bin: 0/Level: 0/Position: 509/Consecutive: 0/Difficulty: 0/
+/Reading: 遊ばなくて/Definitions: It doesn't play... (て form)/Score: 0/Bin: 0/Level: 0/Position: 510/Consecutive: 0/Difficulty: 0/
+/Reading: 飲まなくて/Definitions: It doesn't drink... (て form)/Score: 0/Bin: 0/Level: 0/Position: 511/Consecutive: 0/Difficulty: 0/
+/Reading: 食堂に行って、昼ご飯を食べて、昼寝をする。/Definitions: It will go to cafeteria,eat lunch,and take a nap./Score: 0/Bin: 0/Level: 0/Position: 512/Consecutive: 0/Difficulty: 0/
+/Reading: 食堂に行って、昼ご飯を食べて、昼寝をした。/Definitions: It went to cafeteria,ate lunch,and took a nap./Score: 0/Bin: 0/Level: 0/Position: 513/Consecutive: 0/Difficulty: 0/
+/Reading: 時間がありまして、映画を見ました。/Definitions: There was time and it watched a movie./Score: 0/Bin: 0/Level: 0/Position: 514/Consecutive: 0/Difficulty: 0/
+/Reading: 時間がなかったからパーティーに行きませんでした。/Definitions: There was no time so it didn't go to the party./Score: 0/Bin: 0/Level: 0/Position: 515/Consecutive: 0/Difficulty: 0/
+/Reading: 友達からプレゼントが来た。/Definitions: The present came from a friend./Score: 0/Bin: 0/Level: 0/Position: 516/Consecutive: 0/Difficulty: 0/
+/Reading: 友達だからプレゼントが来た。/Definitions: Because it is a friend,a present came./Score: 0/Bin: 0/Level: 0/Position: 517/Consecutive: 0/Difficulty: 0/
+/Reading: 田中さん：どうしてパーティーに行きませんでしたか。\n山田さん：時間がなかったからです。/Definitions: Tanaka san: Why didn't you go to the party? (polite)\nYamada san: Because I didn't have time. (polite)/Score: 0/Bin: 0/Level: 0/Position: 518/Consecutive: 0/Difficulty: 0/
+/Reading: 一郎：パーティーに行かなかったの？\n直子：うん、時間がなかったから。/Definitions: Ichiro: You didn't go to the party? (explanation)\nYeah,because I didn't have time./Score: 0/Bin: 0/Level: 0/Position: 519/Consecutive: 0/Difficulty: 0/
+/Reading: （１）　時間がなかった。\n（２）　だからパーティーに行かなかったの？/Definitions: (1) I didn't have time. (explanation)\n,(2) Is that why you didn't go to the party?/Score: 0/Bin: 0/Level: 0/Position: 520/Consecutive: 0/Difficulty: 0/
+/Reading: 私は学生なので、お金がないんです。/Definitions: Because I'm a student,I have no money. (explaining)/Score: 0/Bin: 0/Level: 0/Position: 521/Consecutive: 0/Difficulty: 0/
+/Reading: ここは静かなので、とても穏やかです。/Definitions: It is very calm here because it is quiet. (explaining)/Score: 0/Bin: 0/Level: 0/Position: 522/Consecutive: 0/Difficulty: 0/
+/Reading: なので、友達に会う時間がない。/Definitions: That's why there is no time to meet the friend. (explaining)/Score: 0/Bin: 0/Level: 0/Position: 523/Consecutive: 0/Difficulty: 0/
+/Reading: 時間がなかったんでパーティーに行かなかった。/Definitions: It didn't go to the party because there was no time. (explaining,contracted)/Score: 0/Bin: 0/Level: 0/Position: 524/Consecutive: 0/Difficulty: 0/
+/Reading: ここは静かなんで、とても穏やかです。/Definitions: It is very calm here because it is quiet. (explaining,contracted)/Score: 0/Bin: 0/Level: 0/Position: 525/Consecutive: 0/Difficulty: 0/
+/Reading: なんで、友達に会う時間がない。/Definitions: That's why there's no time to meet friend. (explaining,contracted)/Score: 0/Bin: 0/Level: 0/Position: 526/Consecutive: 0/Difficulty: 0/
+/Reading: 毎日運動したのに、全然痩せなかった。/Definitions: Despite exercising every day,it didn't get thinner./Score: 0/Bin: 0/Level: 0/Position: 527/Consecutive: 0/Difficulty: 0/
+/Reading: 学生なのに、彼女は勉強しない。/Definitions: Despite being a student,she does not study./Score: 0/Bin: 0/Level: 0/Position: 528/Consecutive: 0/Difficulty: 0/
+/Reading: デパートに行きましたが、何も欲しくなかったです。/Definitions: It went to the department store,but there was nothing it wanted./Score: 0/Bin: 0/Level: 0/Position: 529/Consecutive: 0/Difficulty: 0/
+/Reading: 友達に聞いたけど、知らなかった。/Definitions: It asked a friend,but it didn't know./Score: 0/Bin: 0/Level: 0/Position: 530/Consecutive: 0/Difficulty: 0/
+/Reading: 今日は暇だけど、明日は忙しい。/Definitions: It is free today,but will be busy tomorrow./Score: 0/Bin: 0/Level: 0/Position: 531/Consecutive: 0/Difficulty: 0/
+/Reading: だけど、彼がまだ好きなの。/Definitions: That may be so,but it still likes him (feminine,explaining)/Score: 0/Bin: 0/Level: 0/Position: 532/Consecutive: 0/Difficulty: 0/
+/Reading: デパートに行きましたが、いい物がたくさんありました。/Definitions: It went to the department store and there was a lot of good stuff./Score: 0/Bin: 0/Level: 0/Position: 533/Consecutive: 0/Difficulty: 0/
+/Reading: マトリックスを見たけど、面白かった。/Definitions: It watched the "Matrix" and it was interesting./Score: 0/Bin: 0/Level: 0/Position: 534/Consecutive: 0/Difficulty: 0/
+/Reading: どうして友達じゃないんですか？\n先生だし、年上だし・・・。/Definitions: Why isn't it a friend? (explanation,polite)\nIt's the teacher and they are older.../Score: 0/Bin: 0/Level: 0/Position: 535/Consecutive: 0/Difficulty: 0/
+/Reading: どうして彼が好きなの？\n優しいし、かっこいいし、面白いから。/Definitions: Why does it like him? (explanation)\nBecause he's kind,attractive,and interesting (among other things)./Score: 0/Bin: 0/Level: 0/Position: 536/Consecutive: 0/Difficulty: 0/
+/Reading: 映画を見たり、本を読んだり、昼寝したりする。/Definitions: It does things like watch movies,read books,and take naps,etc./Score: 0/Bin: 0/Level: 0/Position: 537/Consecutive: 0/Difficulty: 0/
+/Reading: この大学の授業は簡単だったり、難しかったりする。/Definitions: This college's classes are sometimes easy,sometimes difficult,etc./Score: 0/Bin: 0/Level: 0/Position: 538/Consecutive: 0/Difficulty: 0/
+/Reading: 映画を見たり、本を読んだりした。/Definitions: It did things like watch movies,and read books,etc./Score: 0/Bin: 0/Level: 0/Position: 539/Consecutive: 0/Difficulty: 0/
+/Reading: 映画を見たり、本を読んだりしない。/Definitions: It doesn't do things like watch movies and read books,etc./Score: 0/Bin: 0/Level: 0/Position: 540/Consecutive: 0/Difficulty: 0/
+/Reading: 映画を見たり、本を読んだりしなかった。/Definitions: It didn't do things like watch movies and read books,etc./Score: 0/Bin: 0/Level: 0/Position: 541/Consecutive: 0/Difficulty: 0/
+/Kanji: 教科書/Reading: きょうかしょ/Definitions: text book/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 542/Consecutive: 0/Difficulty: 0/
+/Kanji: 話/Reading: はなし/Definitions: talk,speech,chat,story,conversation/Markers: io,n,P/Score: 0/Bin: 0/Level: 0/Position: 543/Consecutive: 0/Difficulty: 0/
+/Kanji: 結婚/Reading: けっこん/Definitions: marriage/Markers: n,adj-no,vs,P/Score: 0/Bin: 0/Level: 0/Position: 544/Consecutive: 0/Difficulty: 0/
+/Kanji: 歌/Reading: うた/Definitions: song,poetry/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 545/Consecutive: 0/Difficulty: 0/
+/Kanji: 道/Reading: みち/Definitions: road,street,way,method/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 546/Consecutive: 0/Difficulty: 0/
+/Kanji: 先/Reading: さき/Definitions: (1) previous,prior,former,(2) point (e.g.,pencil),tip,end,nozzle,head (of a line),(3) destination,(4) the first priority,the future,objective,sequel,remainder,the other party/Markers: n,adj-no,n-suf,pref,P/Score: 0/Bin: 0/Level: 0/Position: 547/Consecutive: 0/Difficulty: 0/
+/Reading: もう/Definitions: already,soon,more,again/Markers: adv,int,P/Score: 0/Bin: 0/Level: 0/Position: 548/Consecutive: 0/Difficulty: 0/
+/Kanji: 準備/Reading: じゅんび/Definitions: preparation,arrangements,provision,reserve/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 549/Consecutive: 0/Difficulty: 0/
+/Kanji: 旅行/Reading: りょこう/Definitions: travel,trip/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 550/Consecutive: 0/Difficulty: 0/
+/Kanji: 計画/Reading: けいかく/Definitions: plan,project,schedule,scheme,program,programme/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 551/Consecutive: 0/Difficulty: 0/
+/Kanji: 終る/Reading: おわる/Definitions: to finish,to close/Markers: io,v5r/Score: 0/Bin: 0/Level: 0/Position: 552/Consecutive: 0/Difficulty: 0/
+/Kanji: 切符/Reading: きっぷ/Definitions: ticket/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 553/Consecutive: 0/Difficulty: 0/
+/Reading: ホテル/Definitions: hotel/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 554/Consecutive: 0/Difficulty: 0/
+/Kanji: 予約/Reading: よやく/Definitions: (1) reservation,appointment,booking,advance order,(2) contract,subscription,pledge/Markers: n,vs,P/Score: 0/Bin: 0/Level: 0/Position: 555/Consecutive: 0/Difficulty: 0/
+/Kanji: 置く/Reading: おく/Definitions: (1) to put,to place,(2) to leave (behind),(3) to do something in advance (us. following te-form verb)/Markers: v5k,uk,P/Score: 0/Bin: 0/Level: 0/Position: 556/Consecutive: 0/Difficulty: 0/
+/Kanji: 作る/Reading: つくる/Definitions: to make,to create,to manufacture,to draw up,to write,to compose,to build,to coin,to cultivate,to organize,to organise,to establish,to make up (a face),to trim (a tree),to fabricate,to prepare (food),to commit (sin),to construct/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 557/Consecutive: 0/Difficulty: 0/
+/Kanji: 電池/Reading: でんち/Definitions: battery/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 558/Consecutive: 0/Difficulty: 0/
+/Kanji: 鉛筆/Reading: えんぴつ/Definitions: pencil/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 559/Consecutive: 0/Difficulty: 0/
+/Kanji: お父さん/Reading: おとうさん/Definitions: father/Markers: n,hon,P/Score: 0/Bin: 0/Level: 0/Position: 560/Consecutive: 0/Difficulty: 0/
+/Kanji: 駅/Reading: えき/Definitions: station/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 561/Consecutive: 0/Difficulty: 0/
+/Kanji: 方/Reading: ほう/Definitions: side,direction,way/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 562/Consecutive: 0/Difficulty: 0/
+/Kanji: 冬/Reading: ふゆ/Definitions: winter/Markers: n-adv,n-t,P/Score: 0/Bin: 0/Level: 0/Position: 563/Consecutive: 0/Difficulty: 0/
+/Kanji: 入る/Reading: はいる/Definitions: to enter,to break into,to join,to enroll,to contain,to hold,to accommodate,to have (an income of)/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 564/Consecutive: 0/Difficulty: 0/
+/Reading: コート/Definitions: coat,tennis court/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 565/Consecutive: 0/Difficulty: 0/
+/Kanji: 着る/Reading: きる/Definitions: to wear,to put on (from shoulders down)/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 566/Consecutive: 0/Difficulty: 0/
+/Kanji: 増える/Reading: ふえる/Definitions: to increase,to multiply/Markers: v1,vi,P/Score: 0/Bin: 0/Level: 0/Position: 567/Consecutive: 0/Difficulty: 0/
+/Kanji: 一生懸命/Reading: いっしょうけんめい/Definitions: very hard,with utmost effort,with all one's might,for dear life/Markers: adj-na,n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 568/Consecutive: 0/Difficulty: 0/
+/Kanji: 頑張る/Reading: がんばる/Definitions: to persist,to insist on,to stand firm,to try one's best/Markers: v5r,P/Score: 0/Bin: 0/Level: 0/Position: 569/Consecutive: 0/Difficulty: 0/
+/Kanji: 色々/Reading: いろいろ/Definitions: various/Markers: adj-na,adj-no,adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 570/Consecutive: 0/Difficulty: 0/
+/Kanji: 付き合う/Reading: つきあう/Definitions: to associate with,to keep company with,to get on with/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 571/Consecutive: 0/Difficulty: 0/
+/Kanji: 見つかる/Reading: みつかる/Definitions: to be found,to be discovered/Markers: v5r,uk,P/Score: 0/Bin: 0/Level: 0/Position: 572/Consecutive: 0/Difficulty: 0/
+/Kanji: 日本語/Reading: にほんご/Definitions: Japanese language/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 573/Consecutive: 0/Difficulty: 0/
+/Reading: ずっと/Definitions: (1) direct,straight,(2) all along,the whole time,all the way,(3) for a long time,throughout,(4) by far,far and away/Markers: adv,P/Score: 0/Bin: 0/Level: 0/Position: 574/Consecutive: 0/Difficulty: 0/
+/Kanji: 前/Reading: まえ/Definitions: (1) before,in front,fore part,ago,previously,(2) head (of a line),(3) in the presence of,lady (so-and-so),(4) (five minutes) to,(5) helping,portion/Markers: n-adv,n-t,suf,P/Score: 0/Bin: 0/Level: 0/Position: 575/Consecutive: 0/Difficulty: 0/
+/Kanji: 結局/Reading: けっきょく/Definitions: after all,eventually/Markers: n-adv,n,P/Score: 0/Bin: 0/Level: 0/Position: 576/Consecutive: 0/Difficulty: 0/
+/Reading: 読んでいる。/Definitions: It is reading./Score: 0/Bin: 0/Level: 0/Position: 577/Consecutive: 0/Difficulty: 0/
+/Reading: 読んでいない。/Definitions: It is not reading./Score: 0/Bin: 0/Level: 0/Position: 578/Consecutive: 0/Difficulty: 0/
+/Reading: 読んでいた。/Definitions: It was reading./Score: 0/Bin: 0/Level: 0/Position: 579/Consecutive: 0/Difficulty: 0/
+/Reading: 読んでいなかった。/Definitions: It was not reading./Score: 0/Bin: 0/Level: 0/Position: 580/Consecutive: 0/Difficulty: 0/
+/Reading: 友達は何をしているの？\n昼ご飯を食べている。/Definitions: What is the friend doing?\nIt is eating lunch./Score: 0/Bin: 0/Level: 0/Position: 581/Consecutive: 0/Difficulty: 0/
+/Reading: 何を読んでいる？\n教科書を読んでいます。/Definitions: What is it reading?\nIt is reading a textbook (polite)/Score: 0/Bin: 0/Level: 0/Position: 582/Consecutive: 0/Difficulty: 0/
+/Reading: 話を聞いていますか。\nううん、聞いていない。/Definitions: Is it listening to it? (polite)\nNo,it's not listening./Score: 0/Bin: 0/Level: 0/Position: 583/Consecutive: 0/Difficulty: 0/
+/Reading: 友達は何をしているの？\n昼ご飯を食べている。/Definitions: What is the friend doing? (contracted)\nIt is eating lunch. (contracted)/Score: 0/Bin: 0/Level: 0/Position: 584/Consecutive: 0/Difficulty: 0/
+/Reading: 何を読んでいる？\n教科書を読んでいます。/Definitions: What is it reading? (contracted)\nIt is reading a textbook (polite)/Score: 0/Bin: 0/Level: 0/Position: 585/Consecutive: 0/Difficulty: 0/
+/Reading: 話を聞いていますか。\nううん、聞いていない。/Definitions: Is it listening to it? (polite)\nNo,it's not listening. (contracted)/Score: 0/Bin: 0/Level: 0/Position: 586/Consecutive: 0/Difficulty: 0/
+/Reading: 今日、知りました。/Definitions: It found out about it today. (polite)/Score: 0/Bin: 0/Level: 0/Position: 587/Consecutive: 0/Difficulty: 0/
+/Reading: この歌を知っていますか？/Definitions: Does it know this song? (polite)/Score: 0/Bin: 0/Level: 0/Position: 588/Consecutive: 0/Difficulty: 0/
+/Reading: 道は分かりますか。/Definitions: Does it know the way? (polite)/Score: 0/Bin: 0/Level: 0/Position: 589/Consecutive: 0/Difficulty: 0/
+/Reading: はい、はい、分かった、分かった。/Definitions: Yes,yes,I got it,I got it./Score: 0/Bin: 0/Level: 0/Position: 590/Consecutive: 0/Difficulty: 0/
+/Reading: 鈴木さんはどこですか。\nもう、家に帰っている。/Definitions: Where is Suzuki-san? (polite)\nHe is already at home./Score: 0/Bin: 0/Level: 0/Position: 591/Consecutive: 0/Difficulty: 0/
+/Reading: 先に行っているよ。/Definitions: I'll go on ahead./Score: 0/Bin: 0/Level: 0/Position: 592/Consecutive: 0/Difficulty: 0/
+/Reading: 美恵ちゃんは、もう来ているよ。/Definitions: Mie-chan is already here,you know./Score: 0/Bin: 0/Level: 0/Position: 593/Consecutive: 0/Difficulty: 0/
+/Reading: 準備はどうですか。\n準備は、もうしてあるよ。/Definitions: How are the preparations?\nThe preparations are already done./Score: 0/Bin: 0/Level: 0/Position: 594/Consecutive: 0/Difficulty: 0/
+/Reading: 旅行の計画は終った？\nうん、切符を買ったし、ホテルの予約もしてある。/Definitions: Are the plans for the trip complete? \nUh huh,not only did I buy the ticket,I also took care of the hotel reservations./Score: 0/Bin: 0/Level: 0/Position: 595/Consecutive: 0/Difficulty: 0/
+/Reading: 晩ご飯を作っておく。/Definitions: It will make dinner. (in preparation)/Score: 0/Bin: 0/Level: 0/Position: 596/Consecutive: 0/Difficulty: 0/
+/Reading: 電池を買っておきます。/Definitions: It will buy batteries. (polite,in preparation)/Score: 0/Bin: 0/Level: 0/Position: 597/Consecutive: 0/Difficulty: 0/
+/Reading: 晩ご飯を作っとく。/Definitions: It will make dinner. (in preparation、contracted)/Score: 0/Bin: 0/Level: 0/Position: 598/Consecutive: 0/Difficulty: 0/
+/Reading: 電池を買っときます。/Definitions: It will buy batteries. (polite,in preparation,contracted)/Score: 0/Bin: 0/Level: 0/Position: 599/Consecutive: 0/Difficulty: 0/
+/Reading: 鉛筆を持っている？/Definitions: Does it have a pencil?/Score: 0/Bin: 0/Level: 0/Position: 600/Consecutive: 0/Difficulty: 0/
+/Reading: 鉛筆を学校へ持っていく？/Definitions: Is it taking a pencil to school?/Score: 0/Bin: 0/Level: 0/Position: 601/Consecutive: 0/Difficulty: 0/
+/Reading: 鉛筆を家に持ってくる？/Definitions: Is it bringing a pencil to home?/Score: 0/Bin: 0/Level: 0/Position: 602/Consecutive: 0/Difficulty: 0/
+/Reading: お父さんは、早く帰ってきました。/Definitions: Its father came home early. (polite)/Score: 0/Bin: 0/Level: 0/Position: 603/Consecutive: 0/Difficulty: 0/
+/Reading: 駅の方へ走っていった。/Definitions: It ran toward the direction of the station./Score: 0/Bin: 0/Level: 0/Position: 604/Consecutive: 0/Difficulty: 0/
+/Reading: 冬に入って、コートを着ている人が増えていきます。/Definitions: Entering winder,perople wearing coats will increase (polite). (toward the future)/Score: 0/Bin: 0/Level: 0/Position: 605/Consecutive: 0/Difficulty: 0/
+/Reading: 一生懸命、頑張っていく！ /Definitions: With all its might it will try its hardest. (toward the future)./Score: 0/Bin: 0/Level: 0/Position: 606/Consecutive: 0/Difficulty: 0/
+/Reading: 色々な人と付き合ってきたけど、いい人はまだ見つからない。/Definitions: (Up until now) It went out with various types of people,but has yet to find a good person./Score: 0/Bin: 0/Level: 0/Position: 607/Consecutive: 0/Difficulty: 0/
+/Reading: 日本語をずっと前から勉強してきて、結局はやめた。/Definitions: It studied Japanese from way back before and eventually quit./Score: 0/Bin: 0/Level: 0/Position: 608/Consecutive: 0/Difficulty: 0/
 /Kanji: 出来る/Reading: できる/Definitions: (1) to be able (in a position) to do,to be up to the task,(2) to be ready,to be completed,(3) to be made,to be built,(4) to be good at,to be permitted (to do),(5) to become intimate,to take up (with somebody),(6) to grow,to be raised/Markers: v1,uk,P/Score: 0/Bin: 0/Level: 2/Position: 609/Consecutive: 0/ScheduledTime: 1218576104/Difficulty: 0/
 /Kanji: 漢字/Reading: かんじ/Definitions: Chinese characters,kanji/Markers: n,P/Score: 0/Bin: 0/Level: 2/Position: 610/Consecutive: 0/ScheduledTime: 1218575889/Difficulty: 0/
 /Kanji: 残念/Reading: ざんねん/Definitions: deplorable,bad luck,regret,disappointment/Markers: adj-na,n,P/Score: 0/Bin: 0/Level: 2/Position: 611/Consecutive: 0/ScheduledTime: 1218576106/Difficulty: 0/
