@@ -6,33 +6,73 @@ sort_info: 30
 
 Installation Instructions
 =========================
-The current stable release of JLDrill is 0.3.0.
 
-It can be obtained at
-[JLDrill's RubyForge Project Page](http://rubyforge.org/projects/jldrill)
+Download
+--------
+The current stable release of JLDrill is 0.3.0.  It can be obtained at
+[JLDrill's RubyForge Project Page](http://rubyforge.org/projects/jldrill).
+You will need the following files:
 
+<pre>
+    context-0.0.16.gem
+    jldrill-0.3.0.gem
+</pre>
+
+and optionally
+
+<pre>
+    KanjiStrokeOrders.ttf
+</pre>
+
+TODO: Add links for the files.
+
+Important Note:
+---------------
+Version 0.3.0 does not have an easy to use installer.  This
+is planned for version 0.4.0.  I apologize for this, but
+infortunately functionality issues had priority for the
+current version.  Installation is complicated at the present
+time, but not necessarily difficult.  If you have problems,
+feel free to contact me and I will try to help.
+
+
+Installation
+------------
 First ensure that you have the [requirements](Requirements.html) installed.
 
-Once you have downloaded the package and installed the 
-requirements, decompress it.  Then as root (on
-Linux, et al) or a user with administrative privaledges (on Windows)
-execute the setup.rb script.  It's most useful to do this using a
-command line shell, but you should be able to do it from your
-graphical file browser as well.
-
-Go into the top directory.  Then type:
-<pre>
- ($ su)
-  # ruby setup.rb
-</pre>
-
-This simple step installs this program under the default
-location of Ruby libraries.  You can also install files into
-your favorite directory by supplying setup.rb some options.
-Try 
+From a command line prompt (Start->Applications->Accessories->Command
+in Windows), type the following:
 
 <pre>
-  ruby setup.rb --help
+    gem install context-0.0.16.gem
+    gem install jldrill-0.3.0.gem
 </pre>
 
+Note: You will have to be root or use sudo in Linux.
+
+JLDrill is now installed.  However, in order to view the stroke order diagrams,
+you must install the stroke order font.  
+
+Installing the Stroke Order Font
+--------------------------------
+On a Debian based system (and Ubuntu), you can install the ttf-kanjistrokeorders
+package.  TODO: Write a description for how to install the font on other
+systems.
+
+In Windows you must download the KanjiStrokeOrders.ttf file and copy it into the
+font directory.  You can get the font directory by selecting Start->Control Panel->Fonts.
+
+On Windows there is one more thing you must do.  Unfortunately Windows
+doesn't follow it's own specification for fonts, so the KanjiStrokeOrders
+font looks terrible.  In some cases you can barely read the stroke number.
+In order to get the sub-pixel hints you must turn on Clear-Type.  You
+can do so by right clicking on the desktop.  Then select Properties.  From
+the window, select the Appearance tab.  Press the "Effects..." button.
+The second entry has a checkbox and reads "Use the following method to 
+smooth the edges of screen fonts:".  Check this button and select "Clear Type"
+from the following drop down menu.
+
+This will have the effect of turning on anti-aliasing for all your fonts.
+Some people don't like this as it makes your characters a bit blurry.  However,
+I find that the smoothing effect is more desirable.
 

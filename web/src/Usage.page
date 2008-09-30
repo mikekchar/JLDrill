@@ -5,19 +5,15 @@ sort_info: 40
 ---
 Usage
 =====
-After installing, on a GNU/Linux, BSD, or Unix-like system type
+From a command prompt (from Windows: Start->Programs->Accessories->Command) 
+type:
 <pre>
     jldrill
 </pre>
-from the command line prompt.
 
-On Windows you will have to do a little more.  You will have to navigate
-to the ruby binary directory to run jldrill.  Usually this will be:
-
-<pre>
-    cd c:\ruby\bin
-    ruby jldrill
-</pre>
+Note: On a Debian based Linux system, if you install the ruby-gems package
+the gems do not get put on your path.  You have to add /var/lib/gems/1.8/bin
+to your path.
 
 Main Window
 -----------
@@ -219,8 +215,226 @@ kanji it is using.  Finally, notice that the Status bar now
 contains "3 --> 4.2 days." indicating that this item is level 3 and
 it has a potential schedule of 4.2 days.
 
+When you have gotten a level 3 item correct 2 times in a row, it
+will be considered "memorized".  At this point it will be promoted
+to the review set.  How it is treated in the review set will be
+discussed below, but having been promoted it leaves a spot in
+the working set.  This spot will be filled by an item from the
+new set, unless you are in review mode (see below).
+
+In this way, you review items over and over again until they
+are memorized.  When you memorize one item in the working set,
+it is replaced by a new item from the new set.  Slowly, over
+time, you will eventually memorize all the items from the
+new set.
+
 ### Review Mode
 
+Once an item has been memorized in the working set, it is
+promoted to the review set.  Unlike the working set, the
+review set items have a definite order.  They are ordered
+by the "potential schedule" that the item has when it is
+promoted.
+
+For example, the item that we were discussing previously
+has a potential schedule of 4.2 days.  When it is promoted
+into the review set it will be inserted into the set
+according to this schedule.  In other words, it will be placed
+after items with a potential schedule of 3 days, and before items
+with a potential schedule of 5 days for instance.
+
+Over time, the potential schedule decreases.  So if we put
+an item in the review set with a potential schedule of
+4.2 days, after waiting one day it will have a potential
+schedule of 3.2 days.  If the item remains in the review set
+for a long time, it can even have a potential schedule
+below zero.  This means you are "behind" on this item.
+More about this will be discussed later.
+
+Items in the review set are displayed when you are in "review
+mode".  You automatically enter review mode when you first
+start the application.  At any other time, you can enter review
+mode by pressing the "Review Mode" button at the top right of
+the window.
+
+Note: The application won't enter review mode unless you have
+at least the same number of items in the review set as you do
+in the working set (default 10).  That's why you don't
+enter review mode the first time you start a quiz.
+
+When the application is in review mode it continues to operate
+normally.  You are continually tested on items from the working
+set.  However, when an item from the working set is promoted
+into the review set it leaves a gap in the working set.  In
+review mode, this gap is filled by an item from the review set.
+
+![Review Mode Item](images/ReviewModeItem.png "A Review Mode Item")
+
+In this picture the item has been promoted into the review set.
+Then we quit the application and restarted it later in the day.
+As you can see from the status line we have 10 items in the review
+set, so the application automatically entered review mode.  Eventually
+it displayed this item.
+
+Inspecting the status line, you can see that part of it has changed.
+It now reads "+1, Today --> 4.2 days" where the level and potential schedule
+were displayed previously.  In this case, "+1" refers to the number of
+times this item has been reviewed in review mode.  This is the first time,
+so it is level 1.  Every time we get the item right in a row, the level
+increases.
+
+"Today" refers to the last time this item was reviewed.  In reality, I
+just quit the application and restarted it, so the last time we reviewed
+the item was today.   If we reviewed it last yesterday, it would say
+"Yesterday", otherwise it just prints the date.  Finally we can see the
+potential schedule if we get the item correct.
+
+Before I make a discussion of scheduling, I would like to discuss the
+last item on the status line.  It says "50%".  When you are in review
+mode, the application keeps track of the percentage of items you got
+right in the last 10 attempts.  Unbeknownst to you, I reviewed a few
+items before this one and got 50 percent of them right.
+
+The percentage is a guide to show you when review mode will end.  If
+you can maintain a success rate of 90% in the last 10 attempts, the
+program will go into "countdown mode".  In this mode, if you manage
+to keep your success rate at 90% or above for 9 more items, then
+review mode will end and you will go back to "new items" mode.
+
+You can tell when you are in countdown mode because the percentage will
+look something like "90% - 5", meaning that you have answered 90%
+of the last 10 questions correctly and that you have 5 more questions
+before review mode ends.
+
+The system will continue asking you questions from the review set
+until you get one wrong, or review mode ends.  If you get one wrong,
+it is placed into the gap in the working set and quizzing resumes
+as normal.  If the review mode ends, then the system goes into
+new item mode and a new item is selected for the gap.
+
+Scheduling
+----------
+
+In most spaced repetion applications, each item has a fixed date
+when it is scheduled to be reviewed.  When that date has passed, the
+item is reviewed.  JLDrill doesn't work like that.
+
+Instead it has a "potential schedule".  The items are then sorted
+by the potential schedule.  You then review items until you seem
+to be getting at least 90% of them correct.  The reason for this is
+simple.
+
+When the items are scheduled, JLDrill puts  alot of effort to
+ensure that the items you are most likely to forget are placed at
+the front of the list.  Items that you are least likely to forget
+are placed at the back.  As you review, you will notice that your
+rate of success gets better and better.  Once your rate of
+success is 90% or more, then there is little point to reviewing
+any more.  We will be better off to learn new items at this point.
+
+While you are in review mode, when you get an item correct,
+it is given a potential schedule of twice the amount of time
+since the last review.  For example, if we haven't reviewed the
+item for 2 days and then get the item correct, it will be given
+a potential schedule of 4 days.  In this way the gap between
+successful reviews will get longer and longer.
+
+But it's important to realize that the "potential schedule" is
+not the actual time that it will be reviewed.  It just represents
+the order in which the items are sorted.  When you actually review
+the item will depend on how well you remember the items.  When you
+get to 90% correct, you stop reviewing.  
+
+In other words, JLDrill automatically adjusts the scheduling for
+you.  If you have difficulty remembering items, then they will
+show up more often.  If you remember them easily, then they will
+appear less often.  I believe this is a significant advantage over
+other spaced repetition algorithms.
+
+However, you may have noticed that the item we reviewed today
+started with a potential schedule of 4.2 days, and after we
+successfully reviewed it once, still had a schedule of 4.2 days.
+I had only just promoted it a few minutes ago, so the total
+schedule should have been twice that -- or only minutes.
+
+In reality, it actually does.  What happened was that the
+item was scheduled for 4.2 potential days.  But I reviewed
+all the items for those 4.2 days in just a couple of minutes.
+So the program adjusts for this and creates the new scheduled
+date from the old scheduled date.  In this case, we have
+a few minutes plus 4.2 days, which ends up being about 4.2 days
+(once the numbers are rounded off).
+
+Note: Probably I should scale the schedule.  In other words,
+I should keep track of the scheduled time vs the actual time
+and scale the new schedule accordingly.  I may do that in
+a future release.
+
+All this talk of scheduling may be confusing.  If you don't
+understand, don't worry about it.  The only important point
+is that the program is designed to keep your items roughly
+in order of the chance you have of forgetting them.  When you
+know all the items in the list with 90% chance of success,
+it gives you new items.
+
+There is a caveat, which again is mostly unimportant,
+but possibly interesting if you want to understand what's going
+on.  If you successfully review an item in the review
+set, it won't be shown again that session.  If you quit the application
+and start again, you might see it if the potential schedule is small
+enough.
+
+Getting Behind
+--------------
+
+![Getting Behind](images/Behind.png "Getting Behind")
+
+Here you can see a situation that happens from time to time.  In
+the status bar, beside the working set information you can see
+the words "Behind: 577".  When an item has a potential schedule of
+less than 0 (i.e., it sat in the review set without being reviewed
+for longer than it's original schedule), then it is known as
+being "behind".
+
+In this case, I'm behind by 577 items.  You will definitely be
+behind from time to time.  The algorithm is designed to adjust
+for your speed, so occasionally you will find that some items
+will get behind naturally.  Or sometimes you take a couple of
+days off and the items have gotten behind.
+
+As long as you can review all the items in a day or so, it doesn't
+create much difficulty.  In order to help yourself out, you can go
+into review mode by pushing the button in the top right corner.
+This will stop the program from ever going into new items mode even
+if you get every item correct.  This is a good way to clear out a backlog.
+
+But in my sad case, I'm just not going to be able to review 577
+items in a reasonable timeframe.  There are multiple problems with this.
+First, the algorithm is designed to keep things in rough order
+in the schedule.  But when items get behind they slowly go out of
+order.  Because you will forget items at different rates, you
+can no longer rely on statistics to tell you when to stop reviewing.
+
+But the next problem is worse.  If you have several days of items
+that are behind, it will take you several days to get to the back
+of the list.  Items are only scheduled in the future, so it will
+take several days before you re-review items.  At this point you
+may have forgotten them.  You can easily get into a state where
+your success rate is low enough that you can no longer learn
+anything new -- you will be spinning your wheels just trying to
+keep up with the backlog.
+
+So, if at all possible, review your items every day -- in fact, review
+them several times a day if you can.  Short frequent sessions are
+better than long sessions every once in a while.  However, you should
+always aim to get out of review mode each time you run the application.
+That way you will not fall behind.
+
+But if you get behind like I have, you have no choice.  You will
+have to reset the drill (Drill->Reset, or press Ctrl-R) and start again.
+
+Note: In a future release there will be a way to "forget" items that
+are behind.  This will put them back in the new list.
 
 Options
 -------
