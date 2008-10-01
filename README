@@ -5,7 +5,12 @@ JLDrill - Japanese Language Drill program
   drill, a dictionary cross reference tool and a popup-kanji reference
   (similar to the rikaichan plugin for Firefox).
   
-  Installation instructions begin about halfway down this file.
+  Installation instructions are available on the website:
+  http://jldrill.rubyforge.org
+  
+  You can also look at all the information for the website in the
+  web/src directory.  The Requirements.page and Install.page files
+  contain human readable text for installation instructions.
 
 What's New for 0.3.0
 
@@ -47,50 +52,6 @@ TODO
   should be able to install a package that works directly from a
   USB key with no other modifications necessary.  I also want to
   create a basic curriculum for beginner learners of Japanese.
-
-Installation
-
-  JLDrill has moved to a new installation platform.  It now uses the
-  more standard Gem packages for installation.
-  
-  Note for "normal users": I have made no effort in the release to
-  make this software easy to install.  I'm very sorry, but functionality
-  issues have had precedence this release.  The next release should
-  adress installation issues.  While installation is difficult right
-  now, it's not impossible.  If you have problems, feel free to contact
-  me for help.  I'll do my best.
-
-  Requirements
-    * Ruby 1.8
-    * GTK+ 2.6 or higher
-    * Ruby-Gnome2
-  
-  For developers, you will additionally need the following ruby gems:
-    * rake
-    * rspec
-    * rcov
-  
-  JLDrill has been developed and tested on GNU/Linux (Ubuntu).
-  It should work on any platform that supports Ruby, Gtk and Ruby-Gnome
-  (including Windows and Apple OSX).
-  
-  Please download the two gem files, context and jldrill.  Context is
-  a library for user interface abstraction (jldrill is the only
-  public application to use it), while jldrill contains the meat of
-  the application.  Once you have downloaded the two gems, simply
-  type the following as super-user from a command line:
-  
-    gem install context
-    gem install jldrill
-    
-  At this point you can run the software from the command line by
-  typing:
-  
-    jldrill
-    
-  More detailed information on installation can be found on
-  the JLDrill webpage (which is located in web/output directory
-  of the source package).
   
 License
 
