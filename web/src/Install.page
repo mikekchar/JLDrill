@@ -48,21 +48,19 @@ in Windows), type the following:
     gem install jldrill-0.3.0.gem
 </pre>
 
-Note: You will have to be root or use sudo in Linux.
+Note: Depending on how you installed ruby gems, you may have to be root or use 
+sudo in Linux.
 
 JLDrill is now installed.  However, in order to view the stroke order diagrams,
 you must install the stroke order font.  
 
 Installing the Stroke Order Font
 --------------------------------
-On a Debian based system (and Ubuntu), you can install the ttf-kanjistrokeorders
-package.  TODO: Write a description for how to install the font on other
-systems.
-
+###Windows
 In Windows you must download the KanjiStrokeOrders.ttf file and copy it into the
 font directory.  You can get the font directory by selecting Start->Control Panel->Fonts.
 
-On Windows there is one more thing you must do.  Unfortunately Windows
+There is one more thing you must do.  Unfortunately Windows
 doesn't follow it's own specification for fonts, so the KanjiStrokeOrders
 font looks terrible.  In some cases you can barely read the stroke number.
 In order to get the sub-pixel hints you must turn on Clear-Type.  You
@@ -75,4 +73,13 @@ from the following drop down menu.
 This will have the effect of turning on anti-aliasing for all your fonts.
 Some people don't like this as it makes your characters a bit blurry.  However,
 I find that the smoothing effect is more desirable.
+
+###GNU/Linux, BSD, Unix-like, etc
+On a Debian based system (which includes Ubuntu), you can install the 
+ttf-kanjistrokeorders package.  
+
+On other systems you will have to have a font system installed that handles
+true type fonts, like XFS.  If you have XFS installed, 
+[here](http://www.brandonhutchinson.com/Installing_TrueType_Fonts_with_xfs.html)
+is an explanation on how to install the font.
 

@@ -42,11 +42,18 @@ The JLPT files are Copyright (C) 2001 Thierry Bézecourt
 
 Please visit [Thierry's Website](http://www.thbz.org)
 
-
 The Grammar file was constructed using  Tae Kim's Japanese
 Guide to Japanese grammar.  That guide is licensed under a Creative
 Commons BY-NC-SA license (2.5).  It additionally includes vocabulary
 from EDICT.
+
+The stroke order information in the popup is provided by the
+KanjiStrokeOrder font:
+
+Copyright (C) 2004-2008 Ulrich Apel, the AAAA project and the Wadoku project
+All rights reserved.
+
+This font is distributed under a BSD license.
 
 More licence information can be found in the data/jldrill/COPYING
 directory in JLDrill's main distribution.
