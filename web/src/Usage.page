@@ -11,10 +11,6 @@ type:
     jldrill
 </pre>
 
-Note: On a Debian based Linux system, if you install the ruby-gems package
-the gems do not get put on your path.  You have to add /var/lib/gems/1.8/bin
-to your path.
-
 Main Window
 -----------
 This is what you see when you first start JLDrill.

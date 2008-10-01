@@ -22,8 +22,9 @@ JLDrill is written in Ruby and uses GTK2 as it's GUI toolkit.  You
 will need to install the following before installing JLDrill.
 
 * Ruby 1.8
+* rubygems
 * GTK+ 2.6 or higher
-* Ruby-Gnome2
+* Ruby-Gnome2 0.16 or higer
 
 JLDrill has been developed and tested on GNU/Linux (Ubuntu).
 It should work on any platform that supports Ruby, Gtk and Ruby-Gnome
@@ -31,43 +32,69 @@ It should work on any platform that supports Ruby, Gtk and Ruby-Gnome
 
 Installing the Requirements
 ---------------------------
-Note: These instructions are old an may be out of date.
-If you experience problems, please contact me.
-
-###Note to Myself
-I need to add instructions on installing ruby-gems.
 
 ###Windows
 
+The installation of the requirements for Windows is not very complicated.
+Unfortunately they are rather large downloads and install a lot of things
+that you won't need just to run JLDrill.  In a future release I will create
+a streamlined installer that includes only the things you need.
+
 You will probably want to install Ruby using the 
-[One Click Ruby Installer](http://rubyinstaller.rubyforge.org/wiki/wiki.pl)
+[One Click Ruby Installer](http://rubyinstaller.rubyforge.org/wiki/wiki.pl).
+This is very convenient because it also installs rubygems and puts everything
+in your path.
 
 Once that is installed, you will need to install GTK2 and
 Ruby-Gnome2.  Detailed instructions on doing this are available
-on the [Ruby-Gnome2 site](http://ruby-gnome2.sourceforge.jp/hiki.cgi?Install+Guide+for+Windows)
+on the [Ruby-Gnome2 site](http://ruby-gnome2.sourceforge.jp/hiki.cgi?Install+Guide+for+Windows).
+Again, the installation is rather simple and it installs the GTK2
+libraries at the same time as the ruby-gnome libraries.
 
 You are now finished installing the requirements.  Please see the
-Download/Install section for details on obtaining and installing JLDrill.
+[Download/Install](Install.html) section for details on obtaining and 
+installing JLDrill.
 
 ###GNU/Linux, BSD, Unix-like, etc
 
 The easiest way to install the prerequisites is to find the packages
-for your distribution.  However, if you'd rather roll your own
-solution,  You can find Ruby at the 
-[main Ruby website](http://www.ruby-lang.org/en/)
+for your distribution.  I have tested everything with the packages
+available from Debian and Ubuntu (Hardy Heron).  
+
+Note: The Debian and Ubuntu package for rubygems puts the gems
+in /var/lib/gems/1.8.  In order to be able to run JLDrill you need to
+add /var/lib/gems/1.8/bin in your path.  I have added
+<pre>
+export PATH=$PATH:/var/lib/gems/1.8/bin
+export RUBYOPT=rubygems
+</pre>
+to the end of my .bashrc file.
+
+If you'd rather roll your own solution for installation,  You can find Ruby at the 
+[main Ruby website](http://www.ruby-lang.org/en/).  Please note: The
+gnome-gtk bindings do *not* work with Ruby 1.9.  You will have to install
+Ruby 1.8.
+
+Now you need to install RubyGems.  You can find documentation on doing that
+at the [RubyGems website](http://docs.rubygems.org/read/chapter/3).
 
 GTK+ 2.6 can be obtained at the [GTK+ website](http://www.gtk.org/)
 
-Finally, you will want to peruse the
+Finally, you will want to follow the
 [Ruby-Gnome2 install guides](http://ruby-gnome2.sourceforge.jp/hiki.cgi?Install+Guide)
 
 Please see the Download/Install section for details on obtaining and
 installing JLDrill
 
 ###Mac OSX
-Unfortunately I don't have access to a Macintosh.  If someone
-who has one can help me make instructions, I'd really appreciate
-it.
+Unfortunately I don't have access to a Macintosh.  Installation of
+GTK+ and ruby-gnome is difficult and requires a developer level of
+knowledge.  If there is anyone with OSX who wants to work on an
+easy way to install this, please contact me.
+
+The difficulty of getting this running on OSX has caused me to consider
+choosing a different widget library for JLDrill.  It is possible I will
+change in the near future.
 
 Developers
 ----------
