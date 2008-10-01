@@ -11,6 +11,10 @@ type:
     jldrill
 </pre>
 
+Note: Currently there is no easy way to make an icon on your desktop
+or an entry in the start menu for JLDrill.  This will be added in a
+future release.
+
 Main Window
 -----------
 This is what you see when you first start JLDrill.
@@ -475,6 +479,196 @@ menu, Ctrl-S, or clicking on the Toolbar).  If you quit the
 application, or open up another drill, JLDrill will always ask you if
 you want to save your file.
 
+Indicators
+----------
+Above the top panel in the drill is a bank of indicators.
+
+![Indicators](images/Indicators.png "Indicators")
+
+Drills derived from edict entries have markers.  These indicators will
+light up when the word has a specific marker.  In the example, the
+word is a "suru noun".  The markers that JLDrill has indicators for are:
+
+###Usually Kana
+
+The item is usually written with kana rather than kanji.  In most of the
+drills I have kept the kanji.  If you don't want to drill them, you can
+edit the item and remove the kanji.  Personally, I find it useful to
+memorize words from the kanji, so I've left it in.  A future version of
+JLDrill will have an option to avoid drilling the kanji for items
+that are usually kana.
+
+###Humble
+
+The item is part of humble keigo.  This means that in polite speach you
+will use this word when referring to yourself or your circle (family,
+company, etc).
+
+###Honourific
+
+The item is is part of honourific keigo.  This means that in polite speech
+you will use this word when referring to people outside your circle
+(your boss, people you are talking to, etc).
+
+###Polite
+
+The item is used in polite speech.  It's neither humble nor honourific,
+but used in polite situations.
+
+###Suru Noun
+
+This noun can be made into a verb by putting "suru" (する) at the end
+of it.
+
+###Intransitive
+
+This verb does not take a direct object.  That is you can't use wo (を) with
+it.  If this item is not lit up, usually you can assume that the verb
+is transitive, but the whole transitive/intransitive thing in Edict is
+still a little shakey.  It is always best to look at usage examples.
+
+###Differs
+
+This item was not found in the reference dictionary.  This only lights up
+when the reference dictionary is loaded.
+
+Note: In the future you will be able to select which markers you want
+indicators for.
+
+Kanji/Kana Popup Information
+----------------------------
+
+JLDrill has a handy popup reference for kanji and kana characters.  You
+can load it by pressing Ctrl-K.
+
+Note: This feature should probably be loaded automatically.  It doesn't take
+long.  I was worried that people with disabilities might get annoyed by
+the popups, though.  If nobody complains before the next release I will make
+this automatic.
+
+After you press Ctrl-K, whenever you hover over a kanji or Kana character
+you will get information for that character.
+
+![JLDrill screenshot](images/Screenshot.png "JLDrill screenshot")
+
+Here you can see an example of a kanji character.  Although you can't
+see it in the picture, the mouse is hovering over the character on
+the right.
+
+In the left hand side of the window you can see the stroke order information 
+for the character.  You draw the stroked labeled "1" first.  The numbers are 
+positioned next to the end of the line where you start drawing.
+
+In the right hand side of the window there is a lot of information.
+First is a list of all the readings for that character.  In practice they
+are all there, although I've found some strange readings that are
+missing.  Underneath the readings are a list of english meanings for the
+character.
+
+Underneath that is the grade that the character would be learned in
+a Japanese school, and the number of strokes for the character.
+
+Finally there is a list of all the radicals for the character, the Japanese
+name for the character and the english meaning of each radical.  The official 
+bushu is the first radical in the list and is anotated with a \*.
+
+If you hover over a kana character you will only see the stroke order diagram.
+
+Note: The stroke order diagram is only shown if you install the stroke order
+font.  Please see [the installation instructions](Install.html) for more information.
+
+Note: In the future I want to improve these popups dramatically.
+
+Statistics
+----------
+JLDrill keeps track of some statistics to help you understand how you
+are doing.  In truth, most of these statistics are used to help me understand
+if the scheduling algorithm is working properly.  But you may also find them
+interesting.
+
+![Drill Statistics](images/Stats.png "Drill Statistics")
+
+You can obtain the statistics by pressing Alt-S, or by selecting 
+Drill->Statistics from the menu.
+
+Note: Here is another really unfinished feature.  It is UGLY.  Please
+send me suggestions for what you want to see and how you want to see it.
+
+The statistics window is split into 4 sections of 2 columns each.  The
+first section shows the number of items that are potentially scheduled
+for this week.  In the example you can see that I have 576 item that
+are overdue (behind).  I have 60 scheduled for today, 44 scheduled for
+tomorrow, etc.  Note this this is the potential schedule.  What I actually
+review depends on how well I remember the items.  
+
+This part of the statistics window is useful for seeing whether you are going 
+faster or slower than the algorithm predicts.  Normally I find myself fluctuating
+between my new items starting a little bit overdue, to a few days ahead.  Since
+the algorithm is self-correcting this is normal.  Probably the information itself
+isn't really useful, but I was always curious, so I put it in.
+
+The next two columns show the distribution of items in the review set.  This
+is actually useful.  You can see that I have 279 items that were scheduled
+within 5 days, 0 items scheduled between 5 and 10 days, 45 scheduled between
+10 and 20 days.  Note that this is when they were *originally* scheduled,
+not what their potential schedule is now.
+
+This is useful to show yourself whether or not you are progressing properly.
+Overtime, the schedule for the items will increase.  But you can see here
+that I have a lot of items in the lowest band and *no* items in the next
+band.  That's because when I was reviewing them I got them all wrong.
+If you find strange things like this, then it means you aren't learning.
+In my case it's because I didn't review for a few weeks and couldn't
+recover.  When bad things like this happen, reset your drill and start
+from scratch.
+
+The next three columns show the percentage of times you got items correct
+at each level in the review set and the number of items you've been quizzed
+on.  It does this for only the current session.  When you quit the application
+and start again, this will start fressh.
+
+In order to create a screenshot, I just raced through a few items.  You can
+see that I reviewed 26 level 1 items and got 80% of them correct.  Level 1
+means that these are items I have only reviewed one time in the review set.
+I reviewed 9 items in level 3 (they have been successfully reviewed 3 times
+in a row), and 3 items in level 4.  All of these (100%) were correct.
+
+This part of the statistics is useful to see how the algorithm is working.
+Generally speaking you will usually have less success with lower level items
+(since you forget them faster).  This is just an interesting way to see how
+it's going.  Note that you shouldn't be particularly worried about these
+number unless you review more than 30 in a group and you get a very low
+success rate.  If you do, perhaps there's a problem somewhere.
+
+Finally the last two columns show some rndom statistics.  The first line
+shows you the total number of items you have reviewed this session in
+the review set.  Then next number shows the total number of items that
+have been promoted into the review set this session (i.e., items you
+have learned or memorized).  In this example I have reviewed 38 items
+and learned 6.
+
+The next two lines tell you how much time (per item) was spend reviewing
+or learning, on average.  In my case I spent 0.8 seconds per item reviewing.
+Usually this number is about 10 or 12 seconds for me.  As I said, I was
+just racing around to get a screen shot.  I spend 2.8 seconds per item
+learning items.  This means the total amount of time it took from the
+time it was introduced until the time it was learned.  Normally it takes
+me about 90 seconds to learn an item (on good days it's more like 60 and
+on days when I'm tired it can be over 120 seconds).
+
+Note that these times are averages.  The Time to Learn, especially, will
+start out very high because it takes a long time to get the first item
+learned.  But over time it will stabalize on the correct average.
+
+The next line, total accuracy tells you your accuracy *for the review set only*.
+In this case, I got 86% of the review set items that I was drill correct
+this session.
+
+The final line is simply the percentage of time it takes to learn versus
+review.  Probably this is not interesting to you, but at one point I
+was thinking it was significant for the algorithm (I've changed my mind
+now). 
+
 Non-Drill Features
 ------------------
 **Reference Dictionary**.  This feature is useful in case
@@ -483,41 +677,57 @@ allows you to cross reference the word against a dictionary
 and edit it if necessary. 
 
 Note: The JLPT files are known to have some inappropriate or incorrect
-translations. This is very much a work in progress.  Please cross
-reference any words that you don't know.  If you find errors, please
-submit them back to me.
+translations. I have correct the words in the JLPT4 and JLPT3 files, but am
+only a third of the way through the JLPT2 files.  This is very much a work in 
+progress.  When working with words you haven't checked, please load the
+reference dictionary.
 
 You can load a reference dictionary by pressing Ctrl-D (or selecting
 File/Load Reference Dictionary from the menu)  The reference
 dictionary distributed with JLDrill is the EDICT dictionary from
-Monash University.  Note that it takes a long time (23 seconds on my
+Monash University.  Note that it takes a long time (25 seconds on my
 machine) to load the edict library.  A window with a progress bar will
 be shown.  You are able to continue drilling while the dictionary is
 loading, though.
 
-After the Reference Dictionary has been loaded, you can cross
-reference the currently quizzed word by pressing Ctrl-X (or selecting
-Vocab/XReference from the menu).  This will bring up an incredibly
-ugly display with the Word on the left hand side, a table of
-candidates on the bottom and space for a selected word on the right
-hand side.  
+After thre Reference Dictionary has been loaded, JLDrill will look up
+every item as you encounter it.  If the item can not be found in the
+dictionary, the "Differs" indicator in the upper right will be
+highlighted.
 
-![Cross Reference with Dictionary](images/XReference.png "Cross Reference with Dictionary")
+![Differs from the dictionary](images/Differs.png "Differs from the dictionary")
 
-Currently, the dictionary lookup is by reading alone.  A kanji lookup
-is also planned.  All you do is select one of the words at the bottom and
-cut and past information between the reference word and the drill
-word.   When you press OK, the new information will be added to the
-drill.
+**Edit** item.  Pressing E (or selecting Vocab/Edit
+from the menu) will allow you to edit the current item.
 
-Important: Remember to save the drill file afterwards so that the edit
-is saved with the drill.
+![Edit the Item](images/Edit.png "Edit the Item")
 
-**Display** word.  You can display the details of a
-word that you are drilling.  Just press D (or select Vocab/Display
-from the menu).  You can edit this word if you want from here.
+In this mode you can modify any of the fields.  When you are done,
+press the Set button and the item will be changed in the drill.
+You can also search the dictionary for similar words.  If you press
+the Search button, JLDrill will give you a list of all the items
+in the dictionary that start with with letters in the Reading field.
 
-![View/Edit the Vocabulary](images/View.png "View/Edit the Vocabulary")
+![Search the Dictionary](images/Search.png "Search the Dictionary")
+
+You will almost certainly have to resize the window in order to see
+the entries.  Once you do, click on the one you want and it's details
+will be filled into the fields.  If you press the Set button, the item
+will be saved in the drill.
+
+Note: The asthetics and workflow of this feature are brutal.  It works,
+but it could barely be worse.  I know this, so don't complain unless
+you are proposing a fix :-).  I'm actively requesting suggestions.
+
+**Add** item.  Pressing "A" (or selecting Vocab/Add from the menu)
+will allow you to add a new item to the drill.
+It adds it to the end of the new set.  This feature works exactly the
+same as the Edit feature except that there is an "add" button rather
+than a "Set" button.
+
+Note: The advantage to having the Add the same as the Edit is that
+they are the same.  The disadvantage is that they both suck equally
+badly.  Please send me suggestions for improvement.
 
 **Show all**. Will show a table of all the words in the
 drill.
@@ -534,7 +744,12 @@ might contain copyright information or other interesting things.
 Pressing Ctrl-I or selecting Drill/Info from the menu will display
 this dialog.
 
-**Create a new Drill**.  You can create a new drill by
+**Create a New Drill**.  There are two ways you can create
+a new drill.  The first is by starting up JLDrill and using the Add
+feature (press "A" or select Vocab/Add from the menu).  Unfortunately
+there is currently no way to rearrange or delete items.
+
+You can also create a new drill by
 importing any UTF8 encoded EDict file.  Just open the file (JLDrill
 will automatically recognize the file type) and then save it to
 another name. Going up one directory from the quizes, you will find a
@@ -544,5 +759,23 @@ Frequency files.  Finally you will also find the whole edict.utf file
 in case you want to drill yourself on all 120,000 words in the
 dictionary. 
 
-That's it.  Hope you find it useful. Please see the Planned Features
-to see what's coming up next.
+**Merging Two Drills**.  You can merge two drills by loading one
+of them and the appending the other using the File->Append menu
+item or pressing Ctrl-P.  The files can either be JLDrill files
+or UTF8 encoded EDict files.  If the files are JLDrill files, the
+status of the items will be preserved.  The items in the second file
+will be add after items in the first file.  Also items in the second
+file that duplicate items in the first file will be discard without
+warning.
+
+Notes: This operation takes a very long time and there is no feedback
+showing your status.  Please be patient.  Also if you save the resultant
+drill it will be saved under the first filename.  If you want to save
+it to another filename please make sure to use Save As.
+
+This feature was a quick and dirty implementation for something I needed
+one time.  Please give me feedback as to whether you find it useful or
+not.  I may remove it if nobody needs it.
+
+That's it.  Hope you find it useful. Please see the 
+[Planned Features page](Planned.html) to see what's coming up next.
