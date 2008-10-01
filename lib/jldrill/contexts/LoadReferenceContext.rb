@@ -28,26 +28,21 @@ module JLDrill
         
         def readReference
             if !@reference.nil?
-                @reference.read do |fraction|
-                    @mainView.update(fraction)
+                @reference.readLines
+                @mainView.idle_add do
+                    @reference.parseChunk(100)
+                    @reference.fraction
                 end
             end                
         end
-        		
-		def runInBackground(&block)
-   			@thread = Thread.new(&block)
-		end
-		
+        
 		def enter(parent)
 			if (!parent.nil?) && (parent.class.public_method_defined?(:reference))
     			@reference = parent.reference
     			if(!@reference.loaded?)
         			super(parent)
         			@reference.file = @filename
-        			runInBackground do
-        			    readReference
-        			    exit
-        			end
+        			readReference
         		end
             end
 		end

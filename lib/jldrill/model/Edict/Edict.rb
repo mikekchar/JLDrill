@@ -26,10 +26,14 @@ class Edict
   LINE_RE = /^([^\[]*)\s+(\[(.*)\]\s+)?\/(([^\/]*\/)+)\s*$/
   KANA_RE = /（(.*)）/
   COMMENT_RE = /^\#/
+  
+  attr_reader :lines, :index, :loaded
 
   def initialize(file=nil)
     @file = file
     @vocab = []
+    @lines = nil
+    @index = 0
     @loaded = false
   end
 
@@ -90,6 +94,36 @@ class Edict
         print "Warning: Could not parse - #{line}\n"
     end             
     return retVal                        
+  end
+  
+  def readLines()
+    @lines = IO.readlines(@file)
+    @index = 0
+    @vocab = []
+  end
+  
+  def parseChunk(chunkSize)
+    if @loaded then return true end
+  
+    if (@index + chunkSize) >= @lines.size
+        chunkSize = @lines.size - @index
+        @loaded = true
+    end
+
+    0.upto(chunkSize - 1) do
+      line = @lines[@index]
+      parse(line, @index) unless line =~ COMMENT_RE
+      @index += 1
+    end
+    
+    @lines = [] if @loaded
+    
+    return @loaded
+  end
+  
+  def fraction
+    retVal = @index.to_f / @lines.size.to_f
+    retVal
   end
 
   def read(&progress)

@@ -438,13 +438,33 @@ are behind.  This will put them back in the new list.
 
 Options
 -------
-You can adjust these two parameters to fit your learning style.  If
-it takes you more repetition to remember words, you can set the first
-parameter to 3 or even 4.  Adjusting the second parameter will allow
-you to quiz a more narrow or wide range of words.  These can set
-this from the quiz preferences (Ctrl-P or Quiz/Preferences from the menu).
+If you press Ctrl-P or select Quiz/Preferences from the menu, you can
+alter a few options for the quiz.
 
 ![Quiz Options](images/Options.png "Quiz Options")
+
+Right now only a few things are available to be changed.  The first is
+whether or not items from the new set are introduced randomly.  If you
+check the box, they will be.  If the box is unchecked, the items will
+be introduced in the order they appear in the file.
+
+The next slider allows you to set the number of times an item must
+be guessed correctly before it is promoted to the next level.  I
+have found settings of 1 and 2 to be most useful.  For grammar, it
+is set to 1 because you don't really want to memorize the item,
+just practice it.  Setting this value to 3 or higher might be
+useful if you are having a really difficult time remembering things
+in the working set.
+
+However, another thing you can do is alter the number of items in the
+working set.  This is controlled by the next slider.  Usually this is
+set to 10, but you can change it to whatever you like.  The more items
+you have in the working set, the longer it will take between reviews
+of the item. If the material is quite easy for you, you might want to make
+this large.  If it is very difficult, you can make the value small.
+
+The last slider sets the quiz strategy version.  This is not used
+at all and will be removed soon.
 
 Saving Your Progress
 --------------------

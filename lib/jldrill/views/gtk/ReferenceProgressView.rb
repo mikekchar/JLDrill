@@ -31,6 +31,8 @@ module JLDrill::Gtk
 			super(context)
 			@progressWindow = ProgressWindow.new(self)
 			@widget = Context::Gtk::Widget.new(@progressWindow)
+			@block = nil
+			@id = nil
 		end
 		
 		def getWidget
@@ -43,6 +45,27 @@ module JLDrill::Gtk
 		
 		def update(fraction)
 		    @progressWindow.update(fraction)
+		end
+		
+		def run
+		    fraction = @block.call
+		    if fraction <= 1.0
+    		    update(fraction)
+    		else
+    		    if !@id.nil?
+    		        Gtk.idle_remove(@id)
+		            @id = nil
+		            @block = nil
+		            self.exit
+		        end
+		    end
+		end
+		
+		def idle_add(&block)
+		    if @block.nil? && @id.nil?
+		        @block = block
+		        @id = Gtk.idle_add do run end
+		    end
 		end
     end
     

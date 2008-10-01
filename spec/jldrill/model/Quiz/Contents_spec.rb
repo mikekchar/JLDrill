@@ -31,7 +31,6 @@ module JLDrill
 	    end
 	    
 	    it "should be able to print out the status" do
-	        print "\n" +@quiz.contents.status + "\n"
     	    @quiz.contents.status.should be_eql("New: 1 Review: 2 Working: 0, 1, 0 Behind: 2")
 	    end
 	    

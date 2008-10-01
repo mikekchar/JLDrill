@@ -13,5 +13,14 @@ module JLDrill
 		def update(fraction)
 		    # This will be overridden by the concrete classes
 		end
+		
+		def idle_add(&block)
+		    # This will be overridden by the concrete classes
+		end
+		
+		def exit
+		    @context.exit
+		end
+		
 	end
 end
