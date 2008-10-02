@@ -61,9 +61,58 @@ class Vocabulary
   # This does *not* compare the hint, status
   # since they do not affect the meaning of the word.
   def eql?(y)
-      !y.nil? && (@kanji == y.kanjiRaw) && (@definitions.eql?(y.definitionsArray)) &&
+    if !y.nil?
+      (@kanji == y.kanjiRaw) && sameDefinitions(y) &&
                  (@markers.eql?(y.markersArray)) && (@reading == y.readingRaw)
- end
+    else
+        false
+    end
+  end
+
+  # I think there may be a bug in ruby 1.8.6 in Array.eql?
+  def sameDefinitions(y)
+    if @definitions.nil?
+        if y.definitionsArray.nil?
+            return true
+        else
+            return false
+        end
+    else
+        if y.definitionsArray.nil?
+            return false
+        end
+    end
+    retVal = (@definitions.size == y.definitionsArray.size)
+    if retVal
+        0.upto(@definitions.size - 1) do |i|
+            retVal &= (@definitions[i] == y.definitionsArray[i])
+        end
+    end
+    retVal
+  end
+
+  # I think there may be a bug in ruby 1.8.6 in Array.eql?
+  def sameMarkers(y)
+    if @markers.nil?
+        if y.markersArray.nil?
+            return true
+        else
+            return false
+        end
+    else
+        if y.markersArray.nil?
+            return false
+        end
+    end
+    retVal = (@markers.size == y.markersArray.size)
+    if retVal
+        0.upto(@markers.size - 1) do |i|
+            retVal &= (@markers[i] == y.markersArray[i])
+        end
+    end
+    retVal
+  end
+
 
   # True if the two vocabulary are discussing the same word
   # This does *not* compare the hint or status
