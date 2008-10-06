@@ -215,8 +215,7 @@ module JLDrill::Gtk
                     @buffer = @contents.buffer
                     @buffer.create_tag("popupText", 
                                        "size" => 10 * Pango::SCALE,
-                                       "justification" => Gtk::JUSTIFY_LEFT,
-                                       "family" => "VL PGothic")
+                                       "justification" => Gtk::JUSTIFY_LEFT)
                     @buffer.insert(@buffer.end_iter, kanjiString, "popupText")
                     @hbox.add(@contents)
                 end

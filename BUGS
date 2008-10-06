@@ -7,9 +7,14 @@
   new item mode.
   
 - Some items are flagged as differing from the dictionary even though
-  they don't.
+  they don't. (This may be fixed -- if you notice it, please tell me)
   
 - The Loading Reference bar does not get updated.  The program
   hangs while the reference dictionary is loaded.  This appears to
   be a bug in rubygtk.  Trying to find a way to get around it.
 
+- The FileSelector gets a G_IS_OBJECT failed assertion when the window
+  is closed.  I think it's because I'm not doing things in exactly the
+  same order that GTK expects.  I'll have to chase this one down
+  someday, but it's not a huge problem AFAICT.
+  
