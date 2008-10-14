@@ -1,5 +1,6 @@
 require 'jldrill/model/Bin'
 require 'jldrill/model/Vocabulary'
+require 'jldrill/model/Edict/Edict'
 
 module JLDrill
 
@@ -163,6 +164,20 @@ module JLDrill
             v = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions:/Markers:/Score: 0/Bin: 0/Level: 0/Position: 1/")
             v2 = v.clone
             v.should be_eql(v2)
+        end
+
+        # The comma in the definitions is causing problems because it is
+        # used as a separator for definitions.  Edict uses slashes, so
+        # it doesn't cause a problem.  Yes, it wa stupid to use commas
+        # in the file format; assuming that they wouldn't be used.
+        it "should parse commas properly" do
+            v1 = Vocabulary.create("/Kanji: 鈍い/Reading: にぶい/Definitions: dull (e.g.、 a knife),thickheaded,slow (opposite of fast),stupid/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
+            line = "鈍い [にぶい] /(adj) dull (e.g., a knife)/thickheaded/slow (opposite of fast)/stupid/(P)/"
+            edict = Edict.new
+            edict.parse(line, 1)
+            edict.vocab(0).should eql(v1)
+            v2 = edict.vocab(0).clone
+            edict.vocab(0).should eql(v2)
         end
 	end
 

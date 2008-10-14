@@ -19,6 +19,9 @@ pkg_files = FileList[
   'test_results.html'  
 ]
 
+# The font is really big and you have to install it by hand anyway
+pkg_files.exclude('data/jldrill/fonts/KanjiStrokeOrders.ttf')
+
 spec_files = FileList[
 	'spec/**/*_spec.rb',
 	'spec/**/*_story.rb'
@@ -84,7 +87,7 @@ gem_spec = Gem::Specification.new do |s|
     EOF
 
 
-	#### Which files are to be included in this gem?  Everything!
+	#### Which files are to be included in this gem?
 
 	s.files = pkg_files.to_a
 
@@ -102,8 +105,7 @@ gem_spec = Gem::Specification.new do |s|
 	
 	#### Dependencies
     
-    s.add_dependency('context', '>=0.0.1')
-
+    s.add_dependency('context', '>=0.0.16')
 
     #### Documentation and testing.
 

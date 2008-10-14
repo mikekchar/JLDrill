@@ -9,6 +9,7 @@ module JLDrill
 
         DEFINITION_RE = /^(\(\S*\))\s?(.*)/
         SEPARATOR_RE = /\)|,/
+        COMMA_RE = /[,]/
 
         attr_reader :types, :value
         attr_writer :types, :value
@@ -37,7 +38,7 @@ module JLDrill
         	    end
                 string = $2
             end
-            @value += string
+            @value += string.gsub(COMMA_RE, "、")
         end
         
         def eql?(definition)

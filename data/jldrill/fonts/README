@@ -1,0 +1,9 @@
+Eventually I want to put the fonts that I rely on
+here.  Right now that's KanjiStrokOrders.ttf.  However,
+the font itself is 17M and you have to install it by
+hand anyway.  So I've removed it from the gem.  If you
+need this font, please download it from
+jldrill.rubyforge.org, or contact me at
+
+mikekchar@gmail.com
+
