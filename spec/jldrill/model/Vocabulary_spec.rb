@@ -41,11 +41,6 @@ module JLDrill
             v4.should be_valid
         end
         
-        it "should be able to save itself as a tab separated value" do
-            tsv = "会う\tあう\t(v5u, P) to meet, to interview"
-            @vocab[0].to_tsv.should be_eql(tsv)
-        end
-       
         it "should be able to split strings on commas" do
             Vocabulary.splitCommas("a,b").should be_eql(["a","b"])
             Vocabulary.splitCommas("a, b").should be_eql(["a","b"])

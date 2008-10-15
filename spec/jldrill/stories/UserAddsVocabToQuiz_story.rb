@@ -57,7 +57,7 @@ module JLDrill::UserAddsVocabToQuiz
             Story.start
             Story.mainContext.addNewVocabulary
             Story.view.should_not be_nil
-            Story.view.vocabularyWindow.getVocab.should be_eql(Story.view.vocabulary)
+            Story.view.vocabularyWindow.getVocab.should eql(Story.view.vocabulary)
             kanjiString = "会う"
             hintString = "No hints!"
             readingString = "あう"

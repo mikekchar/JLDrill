@@ -1,4 +1,5 @@
 require "jldrill/model/VocabularyStatus"
+require "jldrill/model/Field"
 
 # Class file for Japanese vocabulary
 # Currently geared towards edict, but that might change
@@ -19,11 +20,11 @@ module JLDrill
 
         def initialize(kanji=nil, reading=nil, definitions=nil, 
                        markers=nil, hint=nil, position=nil)
-            @kanji = kanji
-            @reading = reading
+            @kanji = Field.new("Kanji", kanji)
+            @reading = Field.new("Reading", reading)
+            @hint = Field.new("Hint", hint)
             @definitions = definitions
             @markers = markers
-            @hint = hint
             @status = JLDrill::VocabularyStatus.new(self)
             if !position.nil? then @status.position = position end
         end
@@ -46,8 +47,9 @@ module JLDrill
         # since they do not affect the meaning of the word.
         def eql?(y)
             if !y.nil?
-                (@kanji == y.kanjiRaw) && sameDefinitions(y) &&
-                    (@markers.eql?(y.markersArray)) && (@reading == y.readingRaw)
+                (@kanji.eql?(y.kanjiRaw)) && sameDefinitions(y) &&
+                    (@markers.eql?(y.markersArray)) && 
+                    (@reading.eql?(y.readingRaw))
             else
                 false
             end
@@ -108,11 +110,11 @@ module JLDrill
         # Assign the contents of vocab to this object.
         # NOTE: It does *not* assign status
         def assign(vocab)
-            self.kanji= vocab.kanji
-            self.reading= vocab.reading
+            @kanji.assign(vocab.kanjiRaw)
+            @reading.assign(vocab.readingRaw)
             self.definitions= vocab.definitions
             self.markers= vocab.markers
-            self.hint= vocab.hint
+            @hint.assign(vocab.hintRaw)
         end
         
         # Unquote some things
@@ -141,51 +143,51 @@ module JLDrill
         end
         
         def hasKanji?
-            !@kanji.nil?
+            @kanji.assigned?
         end
         
         def kanji=(string)
-            @kanji = notEmpty(processInput(string))
+            @kanji.assign(string)
         end
 
         def kanji
-            processOutput(@kanji)
+            @kanji.output
         end
         
         def kanjiRaw
-            @kanji
+            @kanji.raw
         end
         
         def hasReading?
-            !@reading.nil?
+            @reading.assigned?
         end
 
         def reading=(string)
-            @reading = notEmpty(processInput(string))
+            @reading.assign(string)
         end
         
         def reading
-            processOutput(@reading)
+            @reading.output
         end
 
         def readingRaw
-            @reading
+            @reading.raw
         end
 
         def hasHint?
-            !@hint.nil?
+            @hint.assigned?
         end
 
         def hint=(string)
-            @hint = notEmpty(processInput(string))
+            @hint.assign(string)
         end
 
         def hint
-            processOutput(@hint)
+            @hint.output
         end
         
         def hintRaw
-            @hint
+            @hint.raw
         end
 
         # splits the string on commas and destroys and leading space
@@ -267,12 +269,13 @@ module JLDrill
             !@markers.nil?
         end
 
-        # Returns true if the vocabulary contains a reading and either at least one
-        # definition exists or kanji exists.
+        # Returns true if the vocabulary contains a reading and either 
+        # at least one definition exists or kanji exists.
         def valid?
             retVal = false
-            if !@reading.nil? 
-                if (!@definitions.nil? && (@definitions.length > 0) || !@kanji.nil?)
+            if @reading.assigned? 
+                if (!@definitions.nil? && (@definitions.length > 0) || 
+                    @kanji.assigned?)
                     retVal = true
                 end
             end
@@ -284,11 +287,11 @@ module JLDrill
             string.split("/").each do |part|
                 case part
                 when KANJI_RE
-                    @kanji = $1
+                    @kanji.assign($1)
                 when HINT_RE 
-                    @hint = $1
+                    @hint.assign($1)
                 when READING_RE 
-                    @reading = $1
+                    @reading.assign($1)
                 when DEFINITIONS_RE 
                     self.definitions = $1
                 when MARKERS_RE
@@ -299,31 +302,10 @@ module JLDrill
             end
         end
         
-        # Outputs to tab separated values.  This is primarily for
-        # outputing the data for other quiz programs.  There are only 3 fields.
-        # kanji    reading    (markers) definitions
-        # The markers and definitions are merged into one field.
-        def to_tsv
-            retVal = ""
-            if @kanji
-                retVal += @kanji
-            end
-            retVal += "\t" + @reading + "\t(" + markers + ") " + definitions
-            return retVal
-        end
-
         # Output the vocabulary as a string in save file format
         def to_s
-            retVal = ""
-            if @kanji
-                retVal += "/Kanji: #{@kanji}"
-            end
+            retVal = @kanji.to_s + @hint.to_s + @reading.to_s
 
-            if @hint
-                retVal += "/Hint: #{@hint}"
-            end
-
-            retVal += "/Reading: #{@reading}"
             if (!@definitions.nil?) && (!@definitions.empty?)
                 retVal += "/Definitions: #{@definitions.join(",")}"
             end

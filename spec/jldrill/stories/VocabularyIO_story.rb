@@ -19,7 +19,7 @@ require 'jldrill/contexts/EditVocabularyContext'
 #       "             "                "            ruby string delimeter
 #     return          \n          return or \n      end of line delimeter
 #       ,             \,             , or \,        definition/marker delimeter
-#       /             \/              /             field delimeter
+#       /             \/            \/ or /         field delimeter
 #
 # Comma *must* be entered as \, in definitions and markers at the present 
 # time, but can be entered as , in the other fields.
