@@ -68,7 +68,7 @@ module JLDrill::UserAddsVocabToQuiz
                 "Reading: #{readingString}/" +
                 "Definitions: #{definitionsString}/" +
                 "Markers: #{markersString}/"
-            testVocab = Vocabulary.create(vocabString)
+            testVocab = JLDrill::Vocabulary.create(vocabString)
             Story.view.vocabularyWindow.kanji = kanjiString
             Story.view.vocabularyWindow.kanji.should be_eql(kanjiString)
             Story.view.vocabularyWindow.hint = hintString

@@ -30,7 +30,7 @@ module JLDrill
 	                :addNewVocabularyContext, :displayQuizStatusContext,
 	                :displayProblemContext, :runCommandContext,
 	                :showInfoContext, :showAllVocabularyContext,
-                    :showAboutContext,
+                    :showAboutContext, :editVocabularyContext,
 	                :reference, :quiz, :kanji, :radicals
 	    attr_writer :quiz
 		

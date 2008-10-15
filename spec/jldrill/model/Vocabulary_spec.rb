@@ -170,6 +170,10 @@ module JLDrill
         # used as a separator for definitions.  Edict uses slashes, so
         # it doesn't cause a problem.  Yes, it wa stupid to use commas
         # in the file format; assuming that they wouldn't be used.
+        # So now in the Edict file format I'm using the Japanese comma 、
+        # here I convert it to a normal comma.
+        # This is a complete hack, of course, and I'll have to revamp
+        # the fileformat in the next version.
         it "should parse commas properly" do
             v1 = Vocabulary.create("/Kanji: 鈍い/Reading: にぶい/Definitions: dull (e.g.、 a knife),thickheaded,slow (opposite of fast),stupid/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
             line = "鈍い [にぶい] /(adj) dull (e.g., a knife)/thickheaded/slow (opposite of fast)/stupid/(P)/"

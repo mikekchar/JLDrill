@@ -22,99 +22,100 @@ require 'jldrill/model/Vocabulary'
 # Just like an Edict, only hashed on the first character of the
 # reading so that we can search it faster.  Note, it's dead slow
 # to iterate through the list, so don't do it if at all possible
+module JLDrill
+    class HashedEdict < Edict
 
-class HashedEdict < Edict
+        KEY_RE = /^(.)/mu
 
-  KEY_RE = /^(.)/mu
-
-  def initialize(file=nil)
-    super(file)
-    @hash = {}
-    @size = 0
-  end
-
-  def length
-    return @size
-  end
-
-  def findKey(string)
-    retVal = "None"
-    if string
-      if string =~ KEY_RE then retVal = $1 end
-    end
-    return retVal
-  end
-
-  def add(vocab)
-    if vocab
-      if vocab.reading
-        key = findKey(vocab.reading)
-        if @hash.has_key?(key)
-          @hash[key].push(vocab)
-        else
-          @hash[key] = [vocab]
+        def initialize(file=nil)
+            super(file)
+            @hash = {}
+            @size = 0
         end
-        @size += 1
-      end
-    end
-  end
 
-  def eachVocab
-    i = 0
-    while i < @size
-      yield(vocab(i))
-      i += 1
-    end
-  end
-
-  # This is invariably slow.  Avoid using it.
-  def vocab(index)
-    retVal = nil
-
-    @hash.each {|key, value|
-      if value
-        value.each {|v|
-          if v.position == index
-            retVal = v
-            break
-          end
-        }
-        if(retVal)
-          break
+        def length
+            return @size
         end
-      end 
-    }
-  end
-  
-  def include?(vocab)
-  	if @hash
-  		key = findKey(vocab.reading)
-  		bin = @hash[key]
-  		if bin
-  			return bin.include?(vocab)
-  		end
-  	end
-  	return false
-  end
 
-  def search(reading)
-    result = []
-    if @hash
-      key = findKey(reading)
-      bin = @hash[key]
-      if bin
-        bin.each { |vocab|
-          if vocab.reading
-            re = Regexp.new("^#{reading}")
-            if re.match(vocab.reading)
-              result.push(vocab)
+        def findKey(string)
+            retVal = "None"
+            if string
+                if string =~ KEY_RE then retVal = $1 end
             end
-          end
-        }
-      end
+            return retVal
+        end
+
+        def add(vocab)
+            if vocab
+                if vocab.reading
+                    key = findKey(vocab.reading)
+                    if @hash.has_key?(key)
+                        @hash[key].push(vocab)
+                    else
+                        @hash[key] = [vocab]
+                    end
+                    @size += 1
+                end
+            end
+        end
+
+        def eachVocab
+            i = 0
+            while i < @size
+                yield(vocab(i))
+                i += 1
+            end
+        end
+
+        # This is invariably slow.  Avoid using it.
+        def vocab(index)
+            retVal = nil
+
+            @hash.each {|key, value|
+                if value
+                    value.each {|v|
+                        if v.position == index
+                            retVal = v
+                            break
+                        end
+                    }
+                    if(retVal)
+                        break
+                    end
+                end 
+            }
+        end
+        
+        def include?(vocab)
+            if @hash
+                key = findKey(vocab.reading)
+                bin = @hash[key]
+                if bin
+                    return bin.include?(vocab)
+                end
+            end
+            return false
+        end
+
+        def search(reading)
+            result = []
+            if @hash
+                key = findKey(reading)
+                bin = @hash[key]
+                if bin
+                    bin.each { |vocab|
+                        if vocab.reading
+                            re = Regexp.new("^#{reading}")
+                            if re.match(vocab.reading)
+                                result.push(vocab)
+                            end
+                        end
+                    }
+                end
+            end
+
+            return result
+        end
+
     end
-
-    return result
-  end
-
 end

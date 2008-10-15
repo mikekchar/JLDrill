@@ -146,7 +146,7 @@ module JLDrill::Gtk
         def addVocabulary
             @vocabulary = @vocabularyWindow.getVocab
             if super
-                @vocab = Vocabulary.new
+                @vocab = JLDrill::Vocabulary.new
                 @vocabularyWindow.update(@vocab)
                 true
             else
