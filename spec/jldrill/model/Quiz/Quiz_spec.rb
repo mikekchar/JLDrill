@@ -79,7 +79,7 @@ module JLDrill
 	        @quiz.contents.bins[2].length.should be(0)
 	        @quiz.contents.bins[3].length.should be(0)
 	        @quiz.contents.bins[4].length.should be(0)
-	        @quiz.contents.bins[0].contents.join.should be_eql(@sampleQuiz.allResetVocab)
+	        @quiz.contents.bins[0].contents.join.should eql(@sampleQuiz.allResetVocab)
 	    end
 	    
 	    it "should be able to move an item from one bin to the other" do

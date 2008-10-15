@@ -75,15 +75,16 @@ module JLDrill::VocabularyIO
         end
 
         def testListQuotes(vocab, field, list)
-            joinedList = "\"" + list.join(", ") + "\""
-            eval "vocab.#{field} = #{joinedList}"
+            rawJoinedList = "\"" + list.join(",") + "\""
+            outJoinedList = "\"" + list.join(", ") + "\""
+            eval "vocab.#{field} = #{rawJoinedList}"
             eval "vocab.#{field}Array.size.should be(3)"
             0.upto(2) do |i|
                 listItem = "\"" + list[i] + "\""
                 eval "vocab.#{field}Array[#{i}].should eql(#{listItem})"
             end
-            eval "vocab.#{field}Raw.should eql(#{joinedList})"
-            eval "vocab.#{field}.should eql(#{joinedList})"
+            eval "vocab.#{field}Raw.should eql(#{rawJoinedList})"
+            eval "vocab.#{field}.should eql(#{outJoinedList})"
         end
 
         it "should handle definition and marker lists with quotes" do

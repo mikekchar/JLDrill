@@ -41,17 +41,6 @@ module JLDrill
             v4.should be_valid
         end
         
-        it "should be able to split strings on commas" do
-            Vocabulary.splitCommas("a,b").should be_eql(["a","b"])
-            Vocabulary.splitCommas("a, b").should be_eql(["a","b"])
-            Vocabulary.splitCommas("   a   , b   ").should be_eql(["a","b"])
-            Vocabulary.splitCommas(" This is it , it works ").should be_eql(["This is it","it works"])
-        end
-        
-        it "should be able to join arrays with commas" do
-            Vocabulary.joinCommas(nil).should be_eql("")
-        end
-        
         it "should not break the parser to try to parse nonsense" do
             v = Vocabulary.create("This is a nonsense string")
             v.should_not be_nil
@@ -158,7 +147,7 @@ module JLDrill
         it "should be able to make a clone" do
             v = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions:/Markers:/Score: 0/Bin: 0/Level: 0/Position: 1/")
             v2 = v.clone
-            v.should be_eql(v2)
+            v.should eql(v2)
         end
 
         # The comma in the definitions is causing problems because it is

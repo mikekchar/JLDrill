@@ -65,7 +65,7 @@ module JLDrill
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem1 = Problem.new(@vocab1, @quiz)
             @problem1.should_not be_nil
-            @problem1.definitions.should be_eql("")
+            @problem1.definitions.should eql("")
         end
         
         it "should be able to assign a vocab" do
@@ -73,7 +73,7 @@ module JLDrill
             @problem1 = Problem.new(@vocab1, @quiz)
 		    @vocab2 = Vocabulary.create("/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
             @problem1.vocab = @vocab2
-            @problem1.vocab.should be_eql(@vocab2)
+            @problem1.vocab.should eql(@vocab2)
         end
 
         it "should create a ReadingProblem for level 0" do

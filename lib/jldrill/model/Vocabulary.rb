@@ -1,5 +1,6 @@
 require "jldrill/model/VocabularyStatus"
-require "jldrill/model/Field"
+require "jldrill/model/StringField"
+require "jldrill/model/ListField"
 
 # Class file for Japanese vocabulary
 # Currently geared towards edict, but that might change
@@ -17,14 +18,14 @@ module JLDrill
         JP_COMMA_RE = Regexp.new("[、]", nil, "U")
 
         attr_reader :status
-
+        
         def initialize(kanji=nil, reading=nil, definitions=nil, 
                        markers=nil, hint=nil, position=nil)
-            @kanji = Field.new("Kanji", kanji)
-            @reading = Field.new("Reading", reading)
-            @hint = Field.new("Hint", hint)
-            @definitions = definitions
-            @markers = markers
+            @kanji = StringField.new("Kanji", kanji)
+            @reading = StringField.new("Reading", reading)
+            @hint = StringField.new("Hint", hint)
+            @definitions = ListField.new("Definitions", definitions)
+            @markers = ListField.new("Markers", markers)
             @status = JLDrill::VocabularyStatus.new(self)
             if !position.nil? then @status.position = position end
         end
@@ -47,58 +48,14 @@ module JLDrill
         # since they do not affect the meaning of the word.
         def eql?(y)
             if !y.nil?
-                (@kanji.eql?(y.kanjiRaw)) && sameDefinitions(y) &&
-                    (@markers.eql?(y.markersArray)) && 
-                    (@reading.eql?(y.readingRaw))
+                @kanji.eql?(y.kanjiRaw) && 
+                    @definitions.eql?(y.definitionsArray) &&
+                    @markers.eql?(y.markersArray) && 
+                    @reading.eql?(y.readingRaw)
             else
                 false
             end
         end
-
-        # I think there may be a bug in ruby 1.8.6 in Array.eql?
-        def sameDefinitions(y)
-            if @definitions.nil?
-                if y.definitionsArray.nil?
-                    return true
-                else
-                    return false
-                end
-            else
-                if y.definitionsArray.nil?
-                    return false
-                end
-            end
-            retVal = (@definitions.size == y.definitionsArray.size)
-            if retVal
-                0.upto(@definitions.size - 1) do |i|
-                    retVal &= (@definitions[i] == y.definitionsArray[i])
-                end
-            end
-            retVal
-        end
-
-        # I think there may be a bug in ruby 1.8.6 in Array.eql?
-        def sameMarkers(y)
-            if @markers.nil?
-                if y.markersArray.nil?
-                    return true
-                else
-                    return false
-                end
-            else
-                if y.markersArray.nil?
-                    return false
-                end
-            end
-            retVal = (@markers.size == y.markersArray.size)
-            if retVal
-                0.upto(@markers.size - 1) do |i|
-                    retVal &= (@markers[i] == y.markersArray[i])
-                end
-            end
-            retVal
-        end
-
 
         # True if the two vocabulary are discussing the same word
         # This does *not* compare the hint or status
@@ -110,36 +67,11 @@ module JLDrill
         # Assign the contents of vocab to this object.
         # NOTE: It does *not* assign status
         def assign(vocab)
-            @kanji.assign(vocab.kanjiRaw)
-            @reading.assign(vocab.readingRaw)
-            self.definitions= vocab.definitions
-            self.markers= vocab.markers
-            @hint.assign(vocab.hintRaw)
-        end
-        
-        # Unquote some things
-        def processOutput(text)
-            if text.nil?
-                return nil
-            end
-            text = text.gsub(JP_COMMA_RE, ",")
-            eval("\"#{text.gsub(QUOTE_RE, "\\\"")}\"")
-        end
-
-        def processInput(text)
-            if text.nil?
-                return nil
-            end
-            text = text.gsub(RETURN_RE, "\\n")
-            text
-        end
-
-        def notEmpty(string)
-            if (!string.nil? && !string.empty?)
-                string
-            else
-                nil
-            end
+            @kanji.copy(vocab.kanjiField)
+            @reading.copy(vocab.readingField)
+            @definitions.copy(vocab.definitionsField)
+            @markers.copy(vocab.markersField)
+            @hint.copy(vocab.hintField)
         end
         
         def hasKanji?
@@ -153,7 +85,11 @@ module JLDrill
         def kanji
             @kanji.output
         end
-        
+
+        def kanjiField
+            @kanji
+        end
+
         def kanjiRaw
             @kanji.raw
         end
@@ -168,6 +104,10 @@ module JLDrill
         
         def reading
             @reading.output
+        end
+
+        def readingField
+            @reading
         end
 
         def readingRaw
@@ -185,101 +125,78 @@ module JLDrill
         def hint
             @hint.output
         end
+
+        def hintField
+            @hint
+        end
         
         def hintRaw
             @hint.raw
         end
 
-        # splits the string on commas and destroys and leading space
-        def Vocabulary.splitCommas(string)
-            array = string.split(",")
-            array.each do |item|
-                item.strip!
-            end
-            array
-        end
-        
-        # Join the array into a string with ", " in between each item.
-        # if the array is empty or nil, print ""
-        def Vocabulary.joinCommas(array)
-            if !array.nil?
-                return array.join(", ")
-            else
-                return ""
-            end
-        end
-        
         # Returns a string containing the definitions separated
         # by commas
         def definitions
-            processOutput(Vocabulary.joinCommas(@definitions))    
+            @definitions.output
+        end
+
+        def definitionsField
+            @definitions
         end
 
         def definitionsRaw
-            Vocabulary.joinCommas(@definitions)
+            @definitions.raw
         end
 
         def definitionsArray
-            @definitions
+            @definitions.contents
         end
 
         # Assigns the definitions from a string of comma separated
         # definitions
         def definitions=(string)
-            string = processInput(string)
-            if (!string.nil? && !string.empty?)
-                @definitions = Vocabulary.splitCommas(string)
-            else
-                @definitions = nil
-            end
+            @definitions.assign(string)
         end
         
         # Returns true if there are definitions set on the Vocabulary
         def hasDefinitions?
-            !@definitions.nil?
+            @definitions.assigned?
         end
 
         # Returns a string containing the markers separated
         # by commas
         def markers
-            Vocabulary.joinCommas(@markers)
+            @markers.output
         end
 
-        def markersArray
+        def markersField
             @markers
         end
 
+        def markersArray
+            @markers.contents
+        end
+
         def markersRaw
-            Vocabulary.joinCommas(@definitions)
+            @markers.raw
         end
 
         # Assigns the definitions from a string of comma separated
         # definitions
         def markers=(string)
-            string = processInput(string)
-            if (!string.nil? && !string.empty?)
-                @markers = Vocabulary.splitCommas(string)
-            else
-                @markers = nil
-            end
+            @markers.assign(string)
         end
         
         # Returns true if there are definitions set on the Vocabulary
         def hasMarkers?
-            !@markers.nil?
+            @markers.assigned?
         end
 
         # Returns true if the vocabulary contains a reading and either 
         # at least one definition exists or kanji exists.
         def valid?
-            retVal = false
-            if @reading.assigned? 
-                if (!@definitions.nil? && (@definitions.length > 0) || 
-                    @kanji.assigned?)
-                    retVal = true
-                end
-            end
-            retVal
+            @reading.assigned? &&
+                (@definitions.assigned? || @kanji.assigned?)
         end
 
         # Parses a vocabulary value in save format.
@@ -293,9 +210,9 @@ module JLDrill
                 when READING_RE 
                     @reading.assign($1)
                 when DEFINITIONS_RE 
-                    self.definitions = $1
+                    @definitions.assign($1)
                 when MARKERS_RE
-                    self.markers = $1
+                    @markers.assign($1)
                 else # Maybe it's the status, if not ignore it
                     @status.parse(part)
                 end
@@ -304,22 +221,15 @@ module JLDrill
         
         # Output the vocabulary as a string in save file format
         def to_s
-            retVal = @kanji.to_s + @hint.to_s + @reading.to_s
-
-            if (!@definitions.nil?) && (!@definitions.empty?)
-                retVal += "/Definitions: #{@definitions.join(",")}"
-            end
-
-            if @markers && (not @markers.empty?)
-                retVal += "/Markers: #{@markers.join(",")}"
-            end
+            retVal = @kanji.to_s + @hint.to_s + @reading.to_s +
+                @definitions.to_s + @markers.to_s
             
             retVal += @status.to_s
             
             retVal += "/\n"
-
+            
             return retVal
         end
-
+        
     end
 end
