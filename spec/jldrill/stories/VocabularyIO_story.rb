@@ -97,6 +97,8 @@ module JLDrill::VocabularyIO
         def testReturns(vocab, field)
             testInput(vocab, field, "\nhello\n",
                       "\\nhello\\n", "\nhello\n")
+            testInput(vocab, field, "\\nhello\\n",
+                      "\\nhello\\n", "\nhello\n")
         end
 
         it "should handle returns" do
@@ -107,6 +109,25 @@ module JLDrill::VocabularyIO
             testReturns(vocab, "definitions")
             testReturns(vocab, "markers")            
         end
+
+        def testListReturns(vocab, field, list, rawList)
+            rawJoinedList = rawList.join(",")
+            outJoinedList = list.join(", ")
+            eval "vocab.#{field} = \"#{rawJoinedList}\""
+            eval "vocab.#{field}Array.size.should be(3)"
+            eval "vocab.#{field}Array.should eql(rawList)"
+            eval "vocab.#{field}Raw.should eql(rawJoinedList)"
+            eval "vocab.#{field}.should eql(outJoinedList)"
+        end
+
+        it "should handle definition and marker lists with returns" do
+            vocab = JLDrill::Vocabulary.new
+            list = ["hello", "\nhello\n", "he\nllo"]
+            rawList = ["hello", "\\nhello\\n", "he\\nllo"]
+            testListReturns(vocab, "definitions", list, rawList)
+            testListReturns(vocab, "markers", list, rawList)
+        end
+
 
     end
 
