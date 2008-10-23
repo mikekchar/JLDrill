@@ -38,7 +38,7 @@ module JLDrill
         	    end
                 string = $2
             end
-            @value += string.gsub(COMMA_RE, "、")
+            @value += string.gsub(COMMA_RE, "\\,")
         end
         
         def eql?(definition)

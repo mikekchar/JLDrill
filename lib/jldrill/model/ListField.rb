@@ -20,14 +20,11 @@ module JLDrill
                 merge = false
                 delete = []
                 0.upto(@contents.size - 1) do |i|
-                    if !merge
-                        if @contents[i].end_with?("\\")
-                            merge = true
-                        end
-                    else
+                    if merge
                         @contents[i - 1] += "," + @contents[i]
                         delete.push(i)
                     end
+                    merge = @contents[i].end_with?("\\")
                     @contents[i].strip!
                 end
                 delete.reverse.each do |i|
