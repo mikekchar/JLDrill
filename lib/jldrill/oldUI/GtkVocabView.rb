@@ -97,11 +97,11 @@ module JLDrill::Gtk
 
         def setVocab(vocab)
             if vocab
-                self.kanji = vocab.kanji
-                self.hint = vocab.hint
-                self.reading = vocab.reading
-                self.definitions = vocab.definitions
-                self.markers = vocab.markers
+                self.kanji = vocab.kanjiRaw
+                self.hint = vocab.hintRaw
+                self.reading = vocab.readingRaw
+                self.definitions = vocab.definitionsRaw
+                self.markers = vocab.markersRaw
             end
         end
 
