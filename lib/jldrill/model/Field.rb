@@ -13,7 +13,7 @@ module JLDrill
 
         QUOTE_RE = /["]/
         RETURN_RE = /[\n]/
-        JP_COMMA_RE = Regexp.new("[、]", nil, "U")
+        ESCAPED_COMMA_RE = Regexp.new("\\,", nil, "U")
 
         def initialize(name)
             @name = name
@@ -31,7 +31,7 @@ module JLDrill
             if text.nil?
                 return nil
             end
-            text = text.gsub(JP_COMMA_RE, ",")
+            text = text.gsub(ESCAPED_COMMA_RE, ",")
             eval("\"#{text.gsub(QUOTE_RE, "\\\"")}\"")
         end
 

@@ -110,10 +110,10 @@ module JLDrill::VocabularyIO
             testReturns(vocab, "markers")            
         end
 
-        def testListReturns(vocab, field, list, rawList)
+        def testList(vocab, field, list, rawList)
             rawJoinedList = rawList.join(",")
             outJoinedList = list.join(", ")
-            eval "vocab.#{field} = \"#{rawJoinedList}\""
+            eval "vocab.#{field} = rawJoinedList"
             eval "vocab.#{field}Array.size.should be(3)"
             eval "vocab.#{field}Array.should eql(rawList)"
             eval "vocab.#{field}Raw.should eql(rawJoinedList)"
@@ -124,10 +124,23 @@ module JLDrill::VocabularyIO
             vocab = JLDrill::Vocabulary.new
             list = ["hello", "\nhello\n", "he\nllo"]
             rawList = ["hello", "\\nhello\\n", "he\\nllo"]
-            testListReturns(vocab, "definitions", list, rawList)
-            testListReturns(vocab, "markers", list, rawList)
+            testList(vocab, "definitions", list, rawList)
+            testList(vocab, "markers", list, rawList)
         end
 
+        def testCommas(vocab, field)
+            testInput(vocab, field, "hello\\, world",
+                      "hello\\, world", "hello, world")
+        end
+
+        it "should handle commas" do
+            vocab = JLDrill::Vocabulary.new
+            testCommas(vocab, "kanji")
+            testCommas(vocab, "reading")
+            testCommas(vocab, "hint")
+            testCommas(vocab, "definitions")
+            testCommas(vocab, "markers")            
+        end
 
     end
 

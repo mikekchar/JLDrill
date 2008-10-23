@@ -20,7 +20,7 @@ module JLDrill
 		
 		it "should be able to parse vocabulary from strings" do
             0.upto(@vocab.length - 1) do |i|
-                @vocab[i].to_s.should be_eql(@strings[i] + "\n")
+                @vocab[i].to_s.should eql(@strings[i] + "\n")
             end
 		end
 		
@@ -32,27 +32,27 @@ module JLDrill
 		end
     
         it "should be able to write the last reviewed time to file" do
-            @vocab[1].to_s.should be_eql(@strings[1] + "\n")
+            @vocab[1].to_s.should eql(@strings[1] + "\n")
             time = @vocab[1].status.markReviewed
-            @vocab[1].to_s.should be_eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/LastReviewed: " + time.to_i.to_s + "/Consecutive: 0/Difficulty: 0/\n")
+            @vocab[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/LastReviewed: " + time.to_i.to_s + "/Consecutive: 0/Difficulty: 0/\n")
         end
         
         it "should be able to parse the information in the file" do
-            @vocab[1].to_s.should be_eql(@strings[1] + "\n")
+            @vocab[1].to_s.should eql(@strings[1] + "\n")
             time = @vocab[1].status.markReviewed
             newVocab = Vocabulary.create(@vocab[1].to_s)
-            newVocab.status.lastReviewed.to_i.should be_eql(@vocab[1].status.lastReviewed.to_i)
+            newVocab.status.lastReviewed.to_i.should eql(@vocab[1].status.lastReviewed.to_i)
         end
         
         it "should be able to write consecutive to file" do
-            @vocab[1].to_s.should be_eql(@strings[1] + "\n")
+            @vocab[1].to_s.should eql(@strings[1] + "\n")
             @vocab[1].status.consecutive = 2
-            @vocab[1].to_s.should be_eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 2/Difficulty: 0/\n")
+            @vocab[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 2/Difficulty: 0/\n")
         end
 
         it "should be able to set the scheduled time" do
 		    @vocab[3].status.scheduled?.should be(false)
-		    @vocab[3].status.scheduledTime.to_i.should be_eql(Time::at(0).to_i)
+		    @vocab[3].status.scheduledTime.to_i.should eql(Time::at(0).to_i)
 		    time = @vocab[3].status.schedule
 		    time.should_not be_nil
 		    @vocab[3].status.scheduled?.should be(true)
@@ -105,16 +105,16 @@ module JLDrill
         end
 
         it "should be able to write scheduledTime to file" do
-            @vocab[1].to_s.should be_eql(@strings[1] + "\n")
+            @vocab[1].to_s.should eql(@strings[1] + "\n")
             time = @vocab[1].status.schedule
-            @vocab[1].to_s.should be_eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 0/ScheduledTime: " + time.to_i.to_s + "/Difficulty: 0/\n")
+            @vocab[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 0/ScheduledTime: " + time.to_i.to_s + "/Difficulty: 0/\n")
         end
 
         it "should be able to parse the schedule information in the file" do
-            @vocab[1].to_s.should be_eql(@strings[1] + "\n")
+            @vocab[1].to_s.should eql(@strings[1] + "\n")
             time = @vocab[1].status.schedule
             newVocab = Vocabulary.create(@vocab[1].to_s)
-            newVocab.status.scheduledTime.to_i.should be_eql(time.to_i)
+            newVocab.status.scheduledTime.to_i.should eql(time.to_i)
         end
         
         it "should be able to clear the schedule" do
@@ -135,11 +135,11 @@ module JLDrill
         end
 
         it "should keep a difficulty level equal to the number of times it was incorrect the last time it was in the working set" do
-            @vocab[1].status.difficulty.should be_eql(@vocab[1].status.numIncorrect)
+            @vocab[1].status.difficulty.should eql(@vocab[1].status.numIncorrect)
             1.upto(10) do
                 @vocab[1].status.incorrect
             end
-            @vocab[1].status.difficulty.should be_eql(@vocab[1].status.numIncorrect)
+            @vocab[1].status.difficulty.should eql(@vocab[1].status.numIncorrect)
         end
         
         def days(n)
@@ -222,9 +222,9 @@ module JLDrill
         
         it "should be able to show the reviewed date" do
             @vocab[3].status.lastReviewed = Time::now
-            @vocab[3].status.reviewedDate.should be_eql("Today")
+            @vocab[3].status.reviewedDate.should eql("Today")
             @vocab[3].status.lastReviewed = Time::now - days(1)
-            @vocab[3].status.reviewedDate.should be_eql("Yesterday")
+            @vocab[3].status.reviewedDate.should eql("Yesterday")
         end
 	end
 

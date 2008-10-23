@@ -11,13 +11,13 @@ module JLDrill
 			entry = Kanji.parse(entryText)
 			
 			entry.should_not be_nil
-			entry.character.should be_eql("一")
+			entry.character.should eql("一")
 			entry.meanings.size.should be(1)
-			entry.meanings[0].should be_eql("one")
+			entry.meanings[0].should eql("one")
 			entry.bushu.should be(1)
 			entry.grade.should be(1)
 			entry.strokes.should be(1)
-			entry.to_s.should be_eql("一 [イチ イツ ひと- ひと.つ]\none\n\nGrade 1, Strokes 1\nBushu 1\n")
+			entry.to_s.should eql("一 [イチ イツ ひと- ひと.つ]\none\n\nGrade 1, Strokes 1\nBushu 1\n")
 		end
 	end
 
@@ -34,9 +34,9 @@ module JLDrill
 			list = KanjiList.fromString(string)
 			list.should_not be_nil
 			list.size.should be(6)
-			list[0].character.should be_eql("一")
+			list[0].character.should eql("一")
 			list[0].meanings.size.should be(1)
-			list[0].meanings[0].should be_eql("one")
+			list[0].meanings[0].should eql("one")
 			list[0].bushu.should be(1)
 			list[0].grade.should be(1)
 			list[0].strokes.should be(1)

@@ -10,48 +10,48 @@ module JLDrill
 		
 			entry = Radical.parse(entryText)
 			entry.should_not be_nil
-			entry.radical.should be_eql("一")
-			entry.reading.should be_eql("いち")
+			entry.radical.should eql("一")
+			entry.reading.should eql("いち")
 			entry.altGlyphs.size.should be(0)
-			entry.meaning.should be_eql("one")
+			entry.meaning.should eql("one")
 			entry.contents.size.should be(3)
-			entry.contents[0].should be_eql("亜")
-			entry.contents[1].should be_eql("唖")
-			entry.contents[2].should be_eql("姶")
-			entry.to_s.should be_eql("一   いち - one")
+			entry.contents[0].should eql("亜")
+			entry.contents[1].should eql("唖")
+			entry.contents[2].should eql("姶")
+			entry.to_s.should eql("一   いち - one")
 		end
 		
 		it "should be able to parse an entry with an alternate glyph" do
 			entryText = "乙	乚	おつ	fish hook	曳洩奄掩\n"
 			entry = Radical.parse(entryText)
 			entry.should_not be_nil
-			entry.radical.should be_eql("乙")
-			entry.reading.should be_eql("おつ")
+			entry.radical.should eql("乙")
+			entry.reading.should eql("おつ")
 			entry.altGlyphs.size.should be(1)
-			entry.altGlyphs[0].should be_eql("乚")
-			entry.meaning.should be_eql("fish hook")
+			entry.altGlyphs[0].should eql("乚")
+			entry.meaning.should eql("fish hook")
 			entry.contents.size.should be(4)
-			entry.contents[0].should be_eql("曳")
-			entry.contents[1].should be_eql("洩")
-			entry.contents[2].should be_eql("奄")
-			entry.contents[3].should be_eql("掩")
-			entry.to_s.should be_eql("乙(乚)   おつ - fish hook")
+			entry.contents[0].should eql("曳")
+			entry.contents[1].should eql("洩")
+			entry.contents[2].should eql("奄")
+			entry.contents[3].should eql("掩")
+			entry.to_s.should eql("乙(乚)   おつ - fish hook")
 		end
 		
 		it "should be able to parse an entry with multiple alternate glyphs" do
 		    entryText = "己	已巳	おのれ	snake	改鞄"
 			entry = Radical.parse(entryText)
 			entry.should_not be_nil
-			entry.radical.should be_eql("己")
-			entry.reading.should be_eql("おのれ")
+			entry.radical.should eql("己")
+			entry.reading.should eql("おのれ")
 			entry.altGlyphs.size.should be(2)
-			entry.altGlyphs[0].should be_eql("已")
-			entry.altGlyphs[1].should be_eql("巳")
-			entry.meaning.should be_eql("snake")
+			entry.altGlyphs[0].should eql("已")
+			entry.altGlyphs[1].should eql("巳")
+			entry.meaning.should eql("snake")
 			entry.contents.size.should be(2)
-			entry.contents[0].should be_eql("改")
-			entry.contents[1].should be_eql("鞄")
-			entry.to_s.should be_eql("己(已,巳)   おのれ - snake")
+			entry.contents[0].should eql("改")
+			entry.contents[1].should eql("鞄")
+			entry.to_s.should eql("己(已,巳)   おのれ - snake")
 		end
 	end
 	
@@ -64,11 +64,11 @@ module JLDrill
 ]
 			list = RadicalList.fromString(fileString)
 			list.size.should be(3)
-			list[0].radical.should be_eql("一")
+			list[0].radical.should eql("一")
 			list[0].contents.size.should be(161)
-			list[1].radical.should be_eql("｜")
+			list[1].radical.should eql("｜")
 			list[1].contents.size.should be(159)
-			list[2].radical.should be_eql("丶")
+			list[2].radical.should eql("丶")
 			list[1].contents.size.should be(159)
 			list.radicals("一").size.should be(1)
 		end
@@ -85,7 +85,7 @@ module JLDrill
 			radicals.size.should be(2)
 			radicals.includesChar?("氵").should be(true)
 			radicals.includesChar?("酉").should be(true)
-			radicals.to_s.should be_eql("酉   ひよみのとり - sake\n氵   さんずい - water\n")
+			radicals.to_s.should eql("酉   ひよみのとり - sake\n氵   さんずい - water\n")
 		end
 
 	end	

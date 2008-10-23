@@ -21,7 +21,7 @@ module JLDrill
 		
 		it "should be able to parse vocabulary from strings" do
             0.upto(@vocab.length - 1) do |i|
-                @vocab[i].to_s.should be_eql(@strings[i] + "\n")
+                @vocab[i].to_s.should eql(@strings[i] + "\n")
             end
 		end
         
@@ -48,7 +48,7 @@ module JLDrill
             v = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Difficulty: 3/Coffee: is/Great: in,the/Morning: 1/")
             v.should_not be_nil
             v.should be_valid
-            v.to_s.should be_eql(@strings[0] + "\n")
+            v.to_s.should eql(@strings[0] + "\n")
         end
        
        it "should be able to assign the contents of one Vocabulary to another" do
@@ -56,9 +56,9 @@ module JLDrill
             v1.should be_valid
             v2 = Vocabulary.create("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 1/Level: 2/Position: 2/")
             v2.should be_valid
-            v1.should_not be_eql(v2)
+            v1.should_not eql(v2)
             v1.assign(v2)
-            v1.should be_eql(v2)
+            v1.should eql(v2)
             v1.status.bin.should be(0)
             v1.status.level.should be(0)
             v1.status.position.should be(1)
@@ -76,10 +76,10 @@ module JLDrill
             v1.should_not be_hasMarkers
             v1.definitions = "one, two, three"
             v1.should be_hasDefinitions
-            v1.definitions.should be_eql("one, two, three")
+            v1.definitions.should eql("one, two, three")
             v1.markers = "one, two, three"
             v1.should be_hasMarkers
-            v1.markers.should be_eql("one, two, three")
+            v1.markers.should eql("one, two, three")
         end
         
         it "should set definitions and markers to nil if empty" do
@@ -100,17 +100,17 @@ module JLDrill
             v1.should_not be_hasKanji
             v1.kanji = "test"        
             v1.should be_hasKanji
-            v1.kanji.should be_eql("test")
+            v1.kanji.should eql("test")
             v1 = Vocabulary.new
             v1.should_not be_hasReading
             v1.reading = "test"        
             v1.should be_hasReading
-            v1.reading.should be_eql("test")
+            v1.reading.should eql("test")
             v1 = Vocabulary.new
             v1.should_not be_hasHint
             v1.hint = "test"        
             v1.should be_hasHint
-            v1.hint.should be_eql("test")
+            v1.hint.should eql("test")
         end
         
         it "should set kanji, reading and hint to nil if empty" do
@@ -132,15 +132,15 @@ module JLDrill
         it "should be able to insert carriage returns" do
             vocab = Vocabulary.new()
             vocab.reading = "This is a test\\n"
-		    vocab.reading.should be_eql("This is a test\n")
+		    vocab.reading.should eql("This is a test\n")
 		    vocab.reading = "This is a test\n"
-		    vocab.reading.should be_eql("This is a test\n")
+		    vocab.reading.should eql("This is a test\n")
         end
 		    
         it "should be able to insert quotes" do
             vocab = Vocabulary.new()
 		    vocab.reading = "This is a \"test\""
-		    vocab.reading.should be_eql("This is a \"test\"")
+		    vocab.reading.should eql("This is a \"test\"")
         end
         ####################################################
            

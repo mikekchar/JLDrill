@@ -9,11 +9,11 @@ module JLDrill
 	    end
 	    
 	    it "should have a different DATA_DIR for Gem" do
-	        Config::getDataDir.should be_eql(File.expand_path("data/jldrill"))
+	        Config::getDataDir.should eql(File.expand_path("data/jldrill"))
 	        def Gem.datadir(string)
 	            "blah"
 	        end
-	        Config::getDataDir.should be_eql(File.expand_path("blah"))
+	        Config::getDataDir.should eql(File.expand_path("blah"))
 	    end
 	    
     end

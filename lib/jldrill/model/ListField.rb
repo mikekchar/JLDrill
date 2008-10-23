@@ -5,19 +5,34 @@ require "jldrill/model/Field"
 module JLDrill
     class ListField < Field
 
+        SEPARATOR_RE = /[^\\],/
+
         def initialize(name, data)
             super(name)
             @contents = data
         end
 
         def fromString(string)
-            if !string.nil?
-                @contents = string.split(",")
-                @contents.each do |item|
-                    item.strip!
-                end
-            else
+            if string.nil? || string.empty?
                 @contents = nil
+            else
+                @contents = string.split(",")
+                merge = false
+                delete = []
+                0.upto(@contents.size - 1) do |i|
+                    if !merge
+                        if @contents[i].end_with?("\\")
+                            merge = true
+                        end
+                    else
+                        @contents[i - 1] += "," + @contents[i]
+                        delete.push(i)
+                    end
+                    @contents[i].strip!
+                end
+                delete.reverse.each do |i|
+                    @contents.delete_at(i)
+                end
             end
         end
 

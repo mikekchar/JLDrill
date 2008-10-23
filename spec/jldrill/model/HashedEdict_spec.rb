@@ -7,7 +7,7 @@ module JLDrill
 	    it "should be able to be constructed with or without a filename" do
 	        edict1 = HashedEdict.new("aFilename")
 	        edict1.should_not be_nil
-	        edict1.file.should be_eql("aFilename")
+	        edict1.file.should eql("aFilename")
 	        edict2 = HashedEdict.new()
 	        edict2.should_not be_nil
 	        edict2.file.should be_nil

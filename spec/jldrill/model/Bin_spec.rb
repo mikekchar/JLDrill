@@ -21,7 +21,7 @@ module JLDrill
 		end
 
 		it "should have a name and number when constructed" do
-		    @bin.name.should be_eql("My name")
+		    @bin.name.should eql("My name")
 		    @bin.number.should be(42)
 		end
 		
@@ -35,7 +35,7 @@ module JLDrill
 		    item.status.index.should be(pos)
 		    @bin.length.should be(pos + 1)
 		    @bin[pos].should_not be_nil
-		    @bin[pos].to_s.should be_eql(item.to_s)
+		    @bin[pos].to_s.should eql(item.to_s)
 		end
 		
 		it "should be able to push a vocabulary" do
@@ -61,7 +61,7 @@ module JLDrill
 		    end
 		    i = 0
 		    @bin.each do |v|
-		        v.to_s.should be_eql(@vocab[i].to_s)
+		        v.to_s.should eql(@vocab[i].to_s)
 		        i += 1
 		    end
 		end
@@ -73,7 +73,7 @@ module JLDrill
 		def test_delete_at(pos)
 		    @bin.delete_at(pos)
 		    @bin.length.should be(@vocab.length - 1)
-		    @bin[pos].to_s.should be_eql(@vocab[pos + 1].to_s)
+		    @bin[pos].to_s.should eql(@vocab[pos + 1].to_s)
 		end
 		
 		it "should be able to delete an item at a position" do
@@ -103,7 +103,7 @@ module JLDrill
 /Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 42/Level: 0/Position: 3/Consecutive: 0/Difficulty: 3/
 /Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 42/Level: 0/Position: 4/Consecutive: 1/Difficulty: 3/]
 		    test_pushAll
-		    @bin.to_s.should be_eql("My name\n" + contentsString + "\n")
+		    @bin.to_s.should eql("My name\n" + contentsString + "\n")
 		end
 		
 		it "should be able to create a copy of it's contents" do
@@ -126,7 +126,7 @@ module JLDrill
 		    test_pushAll
 	        bin2 = Bin.new("number2", 2)
 	        bin2.contents = @bin.cloneContents
-	        bin2.to_s.should be_eql("number2\n" + contentsString)
+	        bin2.to_s.should eql("number2\n" + contentsString)
 		end
 		
 		it "should indicate if the bin is empty" do
@@ -207,8 +207,8 @@ module JLDrill
 		    test_pushAll
 		    @bin[0].status.seen = true
 		    @bin[2].status.seen = true
-		    @bin.findUnseen(0).should be_eql(@bin[1])
-		    @bin.findUnseen(1).should be_eql(@bin[3])
+		    @bin.findUnseen(0).should eql(@bin[1])
+		    @bin.findUnseen(1).should eql(@bin[3])
         end
         
         it "should be able to tell if an item exists in the bin" do

@@ -20,45 +20,45 @@ module JLDrill
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem1 = Problem.new(@vocab1, @quiz)
             @problem1.should_not be_nil
-            @problem1.kanji.should be_eql("会う")
+            @problem1.kanji.should eql("会う")
 
 		    @vocab2 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem2 = Problem.new(@vocab2, @quiz)
             @problem2.should_not be_nil
-            @problem2.kanji.should be_eql("")
+            @problem2.kanji.should eql("")
         end
 
         it "should give a string representation of the Hint if it's there" do
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem1 = Problem.new(@vocab1, @quiz)
             @problem1.should_not be_nil
-            @problem1.hint.should be_eql("Hint: No hints")
+            @problem1.hint.should eql("Hint: No hints")
 
 		    @vocab2 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem2 = Problem.new(@vocab2, @quiz)
             @problem2.should_not be_nil
-            @problem2.hint.should be_eql("")
+            @problem2.hint.should eql("")
         end
 
         it "should give a string representation of the Reading" do
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem1 = Problem.new(@vocab1, @quiz)
             @problem1.should_not be_nil
-            @problem1.reading.should be_eql("あう")
+            @problem1.reading.should eql("あう")
         end
 
         it "should give a string representation of the Definitions" do
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem1 = Problem.new(@vocab1, @quiz)
             @problem1.should_not be_nil
-            @problem1.definitions.should be_eql("to meet, to interview")
+            @problem1.definitions.should eql("to meet, to interview")
         end
         
         it "should have and empty string if the reading isn't set" do
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
 		    @problem1 = Problem.new(@vocab1, @quiz)
             @problem1.should_not be_nil
-            @problem1.reading.should be_eql("")
+            @problem1.reading.should eql("")
         end
 
         it "should have and empty string if the definitions aren't set" do
@@ -111,12 +111,12 @@ module JLDrill
             problem2 = Problem.create(0, Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 2/Level: 0/Position: 1/"), @quiz)
             problem3 = Problem.create(0, Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 3/Level: 0/Position: 1/"), @quiz)
             problem4 = Problem.create(0, Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 4/Level: 0/Position: 1/"), @quiz)
-            problem1.status.should be_eql("     1 --> 5.0 days")
-            problem2.status.should be_eql("     2 --> 5.0 days")
-            problem3.status.should be_eql("     3 --> 5.0 days")
-            problem4.status.should be_eql("     +0 --> 5.0 days")
+            problem1.status.should eql("     1 --> 5.0 days")
+            problem2.status.should eql("     2 --> 5.0 days")
+            problem3.status.should eql("     3 --> 5.0 days")
+            problem4.status.should eql("     +0 --> 5.0 days")
             problem4.vocab.status.markReviewed
-            problem4.status.should be_eql("     +0, Today --> 5.0 days")
+            problem4.status.should eql("     +0, Today --> 5.0 days")
         end
 
     end
@@ -128,8 +128,8 @@ module JLDrill
 		    @problem = ReadingProblem.new(@vocab, @quiz)
             @problem.should_not be_nil
 		    @problem.level.should be(0)
-            @problem.question.should be_eql("会う\nあう\nHint: No hints\n")
-            @problem.answer.should be_eql("to meet, to interview\n")
+            @problem.question.should eql("会う\nあう\nHint: No hints\n")
+            @problem.answer.should eql("to meet, to interview\n")
         end
     end
 
@@ -140,8 +140,8 @@ module JLDrill
 		    @problem = KanjiProblem.new(@vocab, @quiz)
             @problem.should_not be_nil
 		    @problem.level.should be(2)
-            @problem.question.should be_eql("会う\n")
-            @problem.answer.should be_eql("あう\nto meet, to interview\nHint: No hints\n")
+            @problem.question.should eql("会う\n")
+            @problem.answer.should eql("あう\nto meet, to interview\nHint: No hints\n")
         end
     end
 
@@ -152,8 +152,8 @@ module JLDrill
 		    @problem = MeaningProblem.new(@vocab, @quiz)
             @problem.should_not be_nil
 		    @problem.level.should be(1)
-            @problem.question.should be_eql("to meet, to interview\n")
-            @problem.answer.should be_eql("会う\nあう\nHint: No hints\n")
+            @problem.question.should eql("to meet, to interview\n")
+            @problem.answer.should eql("会う\nあう\nHint: No hints\n")
         end
     end
 end
