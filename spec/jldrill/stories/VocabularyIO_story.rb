@@ -1,5 +1,6 @@
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/contexts/EditVocabularyContext'
+require 'jldrill/model/Vocabulary'
 
 # This story discusses the input and output of data in
 # Vocabulary.  As I slowly removed my assumptions about
@@ -140,6 +141,14 @@ module JLDrill::VocabularyIO
             testCommas(vocab, "hint")
             testCommas(vocab, "definitions")
             testCommas(vocab, "markers")            
+        end
+
+        it "should be able to handle akeru" do
+            v = JLDrill::Vocabulary.create("/Kanji: 開ける/Reading: あける/Definitions: (1) to open,(2) to unwrap (e.g.\, parcel\, package)/Markers: v1,P/Score: 0/Bin: 0/Level: 0/Position: 0/Consecutive: 0/Difficulty:0")
+            v.kanji.should eql("開ける")
+            v.reading.should eql("あける")
+            v.definitions.should eql("(1) to open, (2) to unwrap (e.g., parcel, package)")
+            v.markers.should eql("v1, P")
         end
 
     end

@@ -1,20 +1,16 @@
+- The JLPT2 list has an incorrect entry for 開ける.  When I
+  edited it, the it still said it differed. When I checked it (Z)
+  the program crashed in Vocabulary.processOutput.  I tried to
+  duplicate the problem, but I can't.
+
 - When a drill is reset all the items go into the new set.  But
   the last item is still in the current problem.  Not sure what
   to do.  
+
+- Can't use / in the text of items
 
 - When you first start a file it will be in new item mode.  Then after
   you go for a while it will go into review mode.  It should stay in
   new item mode.
   
-- Some items are flagged as differing from the dictionary even though
-  they don't. (This may be fixed -- if you notice it, please tell me)
-  
-- The Loading Reference bar does not get updated.  The program
-  hangs while the reference dictionary is loaded.  This appears to
-  be a bug in rubygtk.  Trying to find a way to get around it.
-
-- The FileSelector gets a G_IS_OBJECT failed assertion when the window
-  is closed.  I think it's because I'm not doing things in exactly the
-  same order that GTK expects.  I'll have to chase this one down
-  someday, but it's not a huge problem AFAICT.
   
