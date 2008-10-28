@@ -20,6 +20,7 @@ require 'jldrill/model/Acknowlegements'
 require 'jldrill/contexts/ShowAboutContext'
 require 'jldrill/model/Radical'
 require 'jldrill/model/Kanji'
+require 'jldrill/model/Kana'
 
 module JLDrill
 
@@ -31,7 +32,7 @@ module JLDrill
 	                :displayProblemContext, :runCommandContext,
 	                :showInfoContext, :showAllVocabularyContext,
                     :showAboutContext, :editVocabularyContext,
-	                :reference, :quiz, :kanji, :radicals
+	                :reference, :quiz, :kanji, :radicals, :kana
 	    attr_writer :quiz
 		
 		def initialize(viewBridge)
@@ -52,6 +53,7 @@ module JLDrill
 			@reference = HashedEdict.new
 			@kanji = nil
 			@radicals = nil
+            @kana = nil
 			@quiz = Quiz.new
 		end
 		
@@ -155,8 +157,10 @@ module JLDrill
 		def loadKanji
 		    kanjiFile = Config::getDataDir + "/dict/rikaichan/kanji.dat"
             radicalsFile = Config::getDataDir + "/dict/rikaichan/radicals.dat"
+            kanaFile = Config::getDataDir + "/dict/Kana/kana.dat"
 		    @radicals = RadicalList.fromFile(radicalsFile)
 			@kanji = KanjiList.fromFile(kanjiFile)
+            @kana = KanaList.fromFile(kanaFile)
 		end
 		
 		def setOptions

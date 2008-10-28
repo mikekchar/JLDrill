@@ -78,7 +78,13 @@ module JLDrill::PopupKanaInfo
 
     describe Story.stepName("The user should load kana information") do
         it "should load the kana info" do
-            
+            Story.setup(JLDrill)
+            Story.start
+            Story.mainContext.kana.should be_nil
+            Story.mainContext.loadKanji
+            Story.mainContext.kana.should_not be_nil
+            Story.mainContext.kana.size.should be(140)
+            Story.shutdown
         end
         
     end
