@@ -44,6 +44,14 @@ module JLDrill
 			end
 			Kana.new(character, romaji, pronunciation, strokes, examples)
 		end
+
+        def eql?(kana)
+            @character.eql?(kana.character) &&
+                @romaji.eql?(kana.romaji) &&
+                @pronunciation.eql?(kana.pronunciation) &&
+                @strokes.eql?(kana.strokes) &&
+                @examples.eql?(kana.examples)
+        end
 		
 		def to_s
 		    retVal = @character

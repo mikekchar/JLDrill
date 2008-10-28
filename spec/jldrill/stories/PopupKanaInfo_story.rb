@@ -1,5 +1,6 @@
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/model/Kana'
+require 'jldrill/model/Config'
 
 module JLDrill::PopupKanaInfo
 
@@ -45,6 +46,34 @@ module JLDrill::PopupKanaInfo
                                  "\n" +
                                  "English Examples: she, sheep\n")
         end
+
+        it "should be able to parse a file in a string" do
+            string =
+%Q[あ|S3|a|ah||father,law
+い|S2|i|ee||keep,steer
+う|S2|u|oo||boot,stupid
+え|S2|e|ay||say,may
+お|S3|o|oh||tone,low
+]
+            list = JLDrill::KanaList.fromString(string)
+            list.should_not be_nil
+            list.size.should be(5)
+            list[0].should eql(JLDrill::Kana.parse("あ|S3|a|ah||father,law\n"))
+            list[1].should eql(JLDrill::Kana.parse("い|S2|i|ee||keep,steer\n"))
+            list[2].should eql(JLDrill::Kana.parse("う|S2|u|oo||boot,stupid\n"))
+            list[3].should eql(JLDrill::Kana.parse("え|S2|e|ay||say,may\n"))
+            list[4].should eql(JLDrill::Kana.parse("お|S3|o|oh||tone,low\n"))
+        end
+
+		it "should be able to parse a file on disk" do
+			list = JLDrill::KanaList.fromFile(JLDrill::Config::getDataDir + 
+                                              "/dict/Kana/kana.dat")
+			list.should_not be(nil)
+			list.size.should be(140)
+			kana = list.findChar("じ")
+			kana.should_not be_nil
+		end
+
     end
 
     describe Story.stepName("The user should load kana information") do
