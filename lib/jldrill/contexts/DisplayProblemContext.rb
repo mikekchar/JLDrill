@@ -58,6 +58,11 @@ module JLDrill
             kanji = @parent.kanji.findChar(character)
             if !kanji.nil?
                 retVal = kanji.withRadical_to_s(@parent.radicals)
+            else
+                kana = @parent.kana.findChar(character)
+                if !kana.nil?
+                    retVal = kana.to_s
+                end
             end
             retVal
         end

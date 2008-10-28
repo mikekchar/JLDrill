@@ -1,14 +1,15 @@
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/model/Kana'
 require 'jldrill/model/Config'
+require 'jldrill/contexts/DisplayProblemContext'
 
 module JLDrill::PopupKanaInfo
 
     Story = JLDrill::StoryMemento.new("Pop up kanji info")
     def Story.setup(type)
         super(type)
-#        @context = @mainContext.displayProblemContext
-#        @view = @context.peekAtView
+        @context = @mainContext.displayProblemContext
+        @view = @context.peekAtView
     end
 
     describe JLDrill::Kana do
@@ -76,7 +77,7 @@ module JLDrill::PopupKanaInfo
 
     end
 
-    describe Story.stepName("The user should load kana information") do
+    describe Story.stepName("The user should see kana information") do
         it "should load the kana info" do
             Story.setup(JLDrill)
             Story.start
@@ -86,7 +87,15 @@ module JLDrill::PopupKanaInfo
             Story.mainContext.kana.size.should be(140)
             Story.shutdown
         end
-        
+
+        it "should be able to find the kana items" do
+            Story.setup(JLDrill)
+            Story.start
+            Story.mainContext.loadKanji
+            oString = JLDrill::Kana.parse("お|S3|o|oh||tone,low\n").to_s
+            Story.context.kanjiInfo("お").should eql(oString)
+            Story.shutdown
+        end
     end
 
 end
