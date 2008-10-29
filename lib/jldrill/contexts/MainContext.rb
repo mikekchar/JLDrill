@@ -88,7 +88,10 @@ module JLDrill
 		    if @quiz.savename.empty?
 		        saveAs
 		    else
-    		    @quiz.save
+    		    if !@quiz.save
+                    print "Error: Can't save.  Try again.\n"
+                    saveAs
+                end
     		end
 		end
 		
@@ -96,7 +99,9 @@ module JLDrill
 		    filename = @getFilenameContext.enter(self)
 		    if !filename.nil?
 		        @quiz.savename = filename
-		        @quiz.save
+		        while !@quiz.save
+                    print "Error: Can't save.  Try again.\n"
+                end
 		    end
 		end
 				

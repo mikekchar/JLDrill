@@ -1,3 +1,6 @@
+- Currently does a saveAs if the save fails.  But it doesn't
+  give the user any information as to why this is happening.
+  It should explain this.
 - When a drill is reset all the items go into the new set.  But
   the last item is still in the current problem.  Not sure what
   to do.  
