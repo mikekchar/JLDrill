@@ -28,7 +28,6 @@ module JLDrill::Gtk
                 @story.view.statisticsWindow.destroy
             end
             @story.view.emitDestroyEvent
-            @story.context.exit
             @story.shutdown
         end
         

@@ -1,4 +1,5 @@
 require 'Context/Gtk/Widget'
+require 'Context/Gtk/Key'
 require 'jldrill/views/VocabularyView'
 require 'jldrill/oldUI/GtkVocabView.rb'
 require 'jldrill/oldUI/GtkVocabTable.rb'
@@ -30,15 +31,21 @@ module JLDrill::Gtk
 	        end
 	        
 	        def connectSignals
+                add_events(Gdk::Event::KEY_PRESS_MASK)
+                signal_connect('key_press_event') do |widget, event|
+                    key = Context::Gtk::Key.createFromGtkEvent(event)
+                    if key.character == "Escape"
+                        self.close
+                    end
+                end
+
 			    signal_connect('delete_event') do
                     # Request that the destroy signal be sent
                     false
                 end
 
 				signal_connect('destroy') do
-				    if !@closed
-    					@view.close
-    			    end
+                   self.close
 				end
 				
 				@addButton.signal_connect('clicked') do
@@ -49,6 +56,12 @@ module JLDrill::Gtk
                     updateSearchTable
 				end
 			end
+
+            def close
+                if !@closed
+                    @view.close
+                end
+            end
 
             def updateSearchTable
                 if !@searchTable.nil?

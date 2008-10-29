@@ -1,4 +1,5 @@
 - Transient windows should close on escape
+- Don't search in edit or add windows if the dictionary isn't loaded
 - When a drill is reset all the items go into the new set.  But
   the last item is still in the current problem.  Not sure what
   to do.  

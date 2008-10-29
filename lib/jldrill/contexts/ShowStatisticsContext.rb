@@ -14,9 +14,10 @@ module JLDrill
         end
         
         def destroyViews
+            @mainView.destroy if !@mainView.nil?
             @mainView = nil
         end		    
-
+		
 		def hasQuiz?(parent)
 		    !parent.nil? && parent.class.public_method_defined?(:quiz) &&
 		        !parent.quiz.nil?

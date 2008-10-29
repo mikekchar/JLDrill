@@ -12,7 +12,11 @@ module JLDrill
 		def close
 		    @context.exit
 		end
-		
+
+		def destroy
+            # Only for the concrete class
+        end
+
 		def update(quiz)
 		    @quiz = quiz
 		end
