@@ -24,13 +24,33 @@ module JLDrill
 		
 		def enter(parent)
 		    super(parent)
-		    @mainView.update(@parent.quiz.currentProblem.vocab)
-            @mainView.updateSearch
+            if (!@parent.nil?) && (!@parent.quiz.nil?)
+                @parent.quiz.publisher.subscribe(self, "newProblem")
+                @parent.quiz.publisher.subscribe(self, "problemModified")
+                newProblemUpdated(@parent.quiz)
+            end
 		end
 		
 		def exit
+            if (!@parent.nil?) && (!@parent.quiz.nil?)
+                @parent.quiz.publisher.unsubscribe(self, "newProblem")
+                @parent.quiz.publisher.unsubscribe(self, "problemModified")
+            end
 		    super
 		end
+
+        def newProblemUpdated(quiz)
+            update(quiz)
+        end
+
+        def problemModifiedUpdated(quiz)
+            update(quiz)
+        end
+
+        def update(quiz)
+		    @mainView.update(quiz.currentProblem.vocab)
+            @mainView.updateSearch
+        end
 		
 		def addVocabulary(vocab)
 		    # Do nothing in this context
