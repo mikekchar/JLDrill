@@ -23,9 +23,9 @@ module JLDrill::Gtk
 	            @buttons = Gtk::HBox.new
 	            @searchButton = Gtk::Button.new("Search")
 	            @addButton = Gtk::Button.new(label)
-	            @buttons.add(@searchButton)
-	            @buttons.add(@addButton)
-	            @vbox.add(@buttons)
+	            @buttons.pack_start(@searchButton, true, true, 5)
+	            @buttons.pack_end(@addButton, true, true, 5)
+	            @vbox.pack_end(@buttons, false, false)
 	            connectSignals
 	        end
 	        

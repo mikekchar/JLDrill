@@ -11,7 +11,7 @@ module JLDrill::Gtk
             @readingField = createField("Reading: ", vocab.reading)
             @definitionsBox = createBox("Definitions: ", 
                                         vocab.definitionsRaw)
-            @markersBox = createBox("Markers: ", vocab.markers)
+            @markersBox = createField("Markers: ", vocab.markers)
             
             pack_start(@kanjiField, true, false, 5)
             pack_start(@hintField, true, false, 5)
@@ -37,7 +37,7 @@ module JLDrill::Gtk
         end
 
         def markersWidget
-            @markersBox.children[1].children[0].children[0]
+            @markersBox.children[1]
         end
 
         def kanji
@@ -77,12 +77,12 @@ module JLDrill::Gtk
         end
 
         def markers
-            markersWidget.buffer.text
+            markersWidget.text
         end
 
         def markers=(string)
             if string.nil? then string = "" end
-            markersWidget.buffer.set_text(string)
+            markersWidget.set_text(string)
         end
 
         def getVocab

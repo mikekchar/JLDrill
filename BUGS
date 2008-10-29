@@ -1,5 +1,4 @@
-- Packing on the VocabularyView window is ridiculous.  Things don't
-  resize properly.
+- Transient windows should close on escape
 - When a drill is reset all the items go into the new set.  But
   the last item is still in the current problem.  Not sure what
   to do.  
