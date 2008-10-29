@@ -723,28 +723,57 @@ from the menu) will allow you to edit the current item.
 
 ![Edit the Item](images/Edit.png "Edit the Item")
 
-In this mode you can modify any of the fields.  When you are done,
-press the Set button and the item will be changed in the drill.
-You can also search the dictionary for similar words.  If you press
-the Search button, JLDrill will give you a list of all the items
-in the dictionary that start with with letters in the Reading field.
+In this mode you can modify any of the fields.  
 
-![Search the Dictionary](images/Search.png "Search the Dictionary")
+If the dictionary has been loaded you will also see a list of
+words from the dictionary that start with the characters in
+the reading.  Clicking on one of them will copy its information
+into the field.
 
-You will almost certainly have to resize the window in order to see
-the entries.  Once you do, click on the one you want and it's details
-will be filled into the fields.  If you press the Set button, the item
-will be saved in the drill.
+When you are done, press the Set button and the item will be 
+changed in the drill.  This will also close the Edit window.
+If you wish to close the window without setting the item,
+simply press the close button in the top right of the window.
 
-Note: The asthetics and workflow of this feature are brutal.  It works,
-but it could barely be worse.  I know this, so don't complain unless
-you are proposing a fix :-).  I'm actively requesting suggestions.
+Sometimes you will edit an item but realize that you haven't
+loaded the dictionary.  You can load the dictionary from
+the main window without closing the search window.  When
+it is finished loading, you can press the "Search" button
+to update the list of items.
+
+Note: If you continue with the quiz without closing the Edit
+window, it will update itself with the new items as you
+get them.  Be careful though because if you have edited the
+data without pressing the "Set" button, the information will
+be overwritten.
+
+Note: The workflow and layout of this window are really poor.
+I hope to improve it over time.  If you have suggestions, please
+contact me.
 
 **Add** item.  Pressing "A" (or selecting Vocab/Add from the menu)
 will allow you to add a new item to the drill.
 It adds it to the end of the new set.  This feature works exactly the
-same as the Edit feature except that there is an "add" button rather
+same as the Edit feature except that there is an "Add" button rather
 than a "Set" button.
+
+When you first start adding an item the window is empty.
+
+![Add an Item](images/Add.png "Add an Item")
+
+You can edit the fields as you desire.  If you have loaded the
+dictionary you can also search for items by pressing the "Search"
+button.  This works by searching for the reading only.
+
+![Search the Dictionary](images/Search.png "Search the Dictionary")
+
+You can then simply click on the item that you want and it will
+copy itself into the fields.  When you click "Add" the item will
+be added to the quiz at the end of the New Set.
+
+When you press add, the Add window will not close.  This is so that
+you can add several items.  To close the window, press the
+close box in the upper right corner of the window.
 
 Note: The advantage to having the Add the same as the Edit is that
 they are the same.  The disadvantage is that they both suck equally
