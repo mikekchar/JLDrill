@@ -110,11 +110,11 @@ module JLDrill::Gtk
             if !value then value = "" end
 
             hbox = Gtk::HBox.new()
-            hbox.pack_start(Gtk::Label.new(label), false, false, 0)
+            hbox.pack_start(Gtk::Label.new(label), false, false, 5)
             entry = Gtk::Entry.new
             entry.editable = true
             entry.text = value
-            hbox.pack_start(entry, true, true, 0)
+            hbox.pack_start(entry, true, true, 5)
             return hbox
         end
 
@@ -125,7 +125,7 @@ module JLDrill::Gtk
             hbox = Gtk::HBox.new()
             alignment1 = Gtk::Alignment.new(0,0,0,0.5)
             alignment1.add(Gtk::Label.new(label))
-            hbox.pack_start(alignment1, false, false, 0)
+            hbox.pack_start(alignment1, false, false, 5)
 
             entry = Gtk::ScrolledWindow.new
             entry.shadow_type = Gtk::SHADOW_IN
@@ -140,7 +140,7 @@ module JLDrill::Gtk
             alignment2 = Gtk::Alignment.new(0,0.5,1,1)
             alignment2.add(entry)
 
-            hbox.pack_start(alignment2, true, true, 0)
+            hbox.pack_start(alignment2, true, true, 5)
             return hbox
         end
 

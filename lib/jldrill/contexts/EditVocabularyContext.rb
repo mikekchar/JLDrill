@@ -56,8 +56,13 @@ module JLDrill
 		    # Do nothing in this context
 		end
 		
+        def dictionaryLoaded?
+            !@parent.nil? && !@parent.reference.nil? &&
+                @parent.reference.loaded?
+        end
+
 		def search(reading)
-		    if !@parent.nil? && !@parent.reference.nil?
+		    if dictionaryLoaded?
 		        @parent.reference.search(reading).sort! do |x,y|
 		            x.reading <=> y.reading
 		        end
@@ -69,5 +74,6 @@ module JLDrill
 		def setVocabulary(vocab)
 		    @parent.quiz.currentProblem.vocab = vocab
 		end
+
     end
 end

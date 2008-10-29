@@ -39,8 +39,13 @@ module JLDrill
     		end
 		end
 		
+        def dictionaryLoaded?
+            !@parent.nil? && !@parent.reference.nil? &&
+                @parent.reference.loaded?
+        end
+
 		def search(reading)
-		    if !@parent.nil? && !@parent.reference.nil?
+		    if dictionaryLoaded?
 		        @parent.reference.search(reading).sort! do |x,y|
 		            x.reading <=> y.reading
 		        end

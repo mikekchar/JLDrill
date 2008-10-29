@@ -66,13 +66,16 @@ module JLDrill::Gtk
             def updateSearchTable
                 if !@searchTable.nil?
                     @vbox.remove(@searchTable)
+                    @searchTable = nil
                 end
-                candidates = @view.search(self.reading)
-                @searchTable = GtkVocabTable.new(candidates) do |vocab|
-                    update(vocab)
+                if @view.dictionaryLoaded?
+                    candidates = @view.search(self.reading)
+                    @searchTable = GtkVocabTable.new(candidates) do |vocab|
+                        update(vocab)
+                    end
+                    @vbox.add(@searchTable)
+                    @vbox.show_all
                 end
-                @vbox.add(@searchTable)
-                @vbox.show_all
             end
 			
 			def explicitDestroy

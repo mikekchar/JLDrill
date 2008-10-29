@@ -49,5 +49,9 @@ module JLDrill
         def setVocabulary
             @context.setVocabulary(@vocabulary)
         end
+
+        def dictionaryLoaded?
+            @context.dictionaryLoaded?
+        end
 	end
 end
