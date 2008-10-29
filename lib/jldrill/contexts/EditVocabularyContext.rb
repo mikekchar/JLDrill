@@ -13,6 +13,7 @@ module JLDrill
 		def createViews
     		@mainView = @viewBridge.VocabularyView.new(self, "Set") do
     		    @mainView.setVocabulary
+                @mainView.close
     		end
         end
 

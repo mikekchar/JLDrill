@@ -1,4 +1,3 @@
-- After pressing "Set" in the edit window, the window should disappear
 - Opening the edit window should automatically invoke the search function.
 - Going to a new item in the main window should automatically update
   the edit window (Note: This is *not* the case for the Add window!!!)
