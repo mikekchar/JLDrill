@@ -25,6 +25,7 @@ module JLDrill
 		def enter(parent)
 		    super(parent)
 		    @mainView.update(@parent.quiz.currentProblem.vocab)
+            @mainView.updateSearch
 		end
 		
 		def exit

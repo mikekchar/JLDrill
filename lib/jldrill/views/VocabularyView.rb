@@ -26,7 +26,10 @@ module JLDrill
 
         def update(vocabulary)
             @vocabulary = vocabulary
-            search(vocabulary.reading)
+        end
+
+        def updateSearch
+            # Only for the concrete class
         end
 
         # Returns true if the vocabulary has been added

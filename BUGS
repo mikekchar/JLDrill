@@ -1,6 +1,7 @@
-- Opening the edit window should automatically invoke the search function.
 - Going to a new item in the main window should automatically update
   the edit window (Note: This is *not* the case for the Add window!!!)
+- Packing on the VocabularyView window is ridiculous.  Things don't
+  resize properly.
 - When a drill is reset all the items go into the new set.  But
   the last item is still in the current problem.  Not sure what
   to do.  
@@ -9,5 +10,5 @@
   you go for a while it will go into review mode.  It should stay in
   new item mode until you start the application again or press
   the Review Mode button.
-  
+- The VocabularyView is ugly and hard to edit.  
   

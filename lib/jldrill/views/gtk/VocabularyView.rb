@@ -46,17 +46,21 @@ module JLDrill::Gtk
 				end
 				
 				@searchButton.signal_connect('clicked') do
-				    if !@searchTable.nil?
-				        @vbox.remove(@searchTable)
-				    end
-				    candidates = @view.search(reading)
-				    @searchTable = GtkVocabTable.new(candidates) do |vocab|
-				        update(vocab)
-				    end
-				    @vbox.add(@searchTable)
-				    @vbox.show_all
+                    updateSearchTable
 				end
 			end
+
+            def updateSearchTable
+                if !@searchTable.nil?
+                    @vbox.remove(@searchTable)
+                end
+                candidates = @view.search(self.reading)
+                @searchTable = GtkVocabTable.new(candidates) do |vocab|
+                    update(vocab)
+                end
+                @vbox.add(@searchTable)
+                @vbox.show_all
+            end
 			
 			def explicitDestroy
 			    @closed = true
@@ -140,6 +144,10 @@ module JLDrill::Gtk
         def update(vocabulary)
             super(vocabulary)
             @vocabularyWindow.update(vocabulary)
+        end
+
+        def updateSearch
+            @vocabularyWindow.updateSearchTable
         end
         
         # Returns true if the vocabulary has been added
