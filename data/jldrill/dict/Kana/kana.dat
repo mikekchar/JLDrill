@@ -1,8 +1,13 @@
 あ|S3|a|ah||father,law
+ぁ|S3|a|ah||father,law
 い|S2|i|ee||keep,steer
+ぃ|S2|i|ee||keep,steer
 う|S2|u|oo||boot,stupid
+ぅ|S2|u|oo||boot,stupid
 え|S2|e|ay||say,may
+ぇ|S2|e|ay||say,may
 お|S3|o|oh||tone,low
+ぉ|S3|o|oh||tone,low
 か|S3|ka|kah||call,contents
 き|S4|ki|kee||keep,keen
 く|S1|ku|koo||cool,coop
@@ -16,6 +21,7 @@
 た|S4|ta|tah||talk,taught
 ち|S2|chi/ti|chee||cheap,cheek
 つ|S1|tsu/tu|tsoo||tsunami
+っ|S1|double consonent|pause (gutteral stop)||doesn't exist in English
 て|S1|te|tay||table,take
 と|S2|to|toh||tofu,tone
 な|S4|na|nah||naughty
@@ -39,8 +45,11 @@
 れ|S2|re|rlay||ray,lay
 ろ|S1|ro|rloh||row,low
 や|S3|ya|yah||yacht,yaw
+ゃ|S3|ya|yah||yacht,yaw
 ゆ|S2|yu|yoo||you,use
+ゅ|S2|yu|yoo||you,use
 よ|S2|yo|yoh||yolk
+ょ|S2|yo|yoh||yolk
 わ|S2|wa|wah||walk,whopper
 を|S3|wo|oh||own,oats
 ん|S1|n|n||ten,wanton
@@ -69,10 +78,15 @@
 ぺ|S2|pe|pay||pay,pain
 ぽ|S5|po|poh||poke,post
 ア|S2|a|a||father,law
+ァ|S2|a|a||father,law
 イ|S2|i|ee||keep,steer
+ィ|S2|i|ee||keep,steer
 ウ|S2|u|oo||boot,stupid
+ゥ|S2|u|oo||boot,stupid
 エ|S3|e|ay||say,may
+ェ|S3|e|ay||say,may
 オ|S3|o|o||tone,low
+ォ|S3|o|o||tone,low
 カ|S2|ka|kah||call,contents
 キ|S3|ki|kee||keep,keen
 ク|S2|ku|koo||cool,coop
@@ -86,6 +100,7 @@
 タ|S3|ta|tah||talk,taught
 チ|S3|chi/ti|chee||cheap,cheek
 ツ|S3|tsu/tu|tsoo||tsunami
+ッ|S3|double consonent|pause (gutteral stop)||doesn't exist in English
 テ|S3|te|tay||table,take
 ト|S2|to|toh||tofu,tone
 ナ|S2|na|nah||naughty
@@ -109,8 +124,11 @@
 レ|S2|re|rlay||ray,lay
 ロ|S3|ro|rloh||row,low
 ヤ|S2|ya|yah||yacht,yaw
+ャ|S2|ya|yah||yacht,yaw
 ユ|S2|yu|yoo||you,use
+ュ|S2|yu|yoo||you,use
 ヨ|S3|yo|yoh||yolk
+ョ|S3|yo|yoh||yolk
 ワ|S2|wa|wah||walk,whopper
 ヲ|S2|wo|oh||own,oats
 ン|S2|n|n||ten,wanton
@@ -138,3 +156,4 @@
 プ|S2|pu|poo||pool,school
 ペ|S2|pe|pay||pay,pain
 ポ|S5|po|poh||poke,post
+ー|S1|double vowel|extend the vowel sound||doesn't exist in English
