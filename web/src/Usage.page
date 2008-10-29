@@ -556,7 +556,7 @@ see it in the picture, the mouse is hovering over the character on
 the right.
 
 In the left hand side of the window you can see the stroke order information 
-for the character.  You draw the stroked labeled "1" first.  The numbers are 
+for the character.  You draw the stroke labeled "1" first.  The numbers are 
 positioned next to the end of the line where you start drawing.
 
 In the right hand side of the window there is a lot of information.
@@ -572,7 +572,28 @@ Finally there is a list of all the radicals for the character, the Japanese
 name for the character and the english meaning of each radical.  The official 
 bushu is the first radical in the list and is anotated with a \*.
 
-If you hover over a kana character you will only see the stroke order diagram.
+If you hover over a kana character you will only see something like this:
+
+![Kana Popup](images/KanaPopup.png "Kana Popup")
+
+Note: Sorry for the change in appearance.  I changed my desktop and
+I don't feel like redoing all the pictures.  For the 1.0 release I'll
+have a consistent look to all the pictures.
+
+On the left you can see the stroke order diagram.  On the right you will
+see the character followed by the official representation in roman
+characters.  In this example the character is the katakana ス which
+is represented by the roman characters "su".
+
+Because the pronunciation of the character is not always intuitive
+from the roman characters, I have included my own inerpretation of
+the sound.  In this case it is "soo".  I have also included a few
+English words that contain the same sound -- super and soothe.  Please
+note that I am a Canadian with a Canadian English accent.  While I
+have tried to choose words that correspond with most accents I know
+of, the sounds might be wrong for your English accent.  In a future
+release I will provide recordings of all the sounds spoken by a
+native Japanese speaker.
 
 Note: The stroke order diagram is only shown if you install the stroke order
 font.  Please see [the installation instructions](Install.html) for more information.

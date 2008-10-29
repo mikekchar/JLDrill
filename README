@@ -9,8 +9,12 @@ JLDrill - Japanese Language Drill program
   http://jldrill.rubyforge.org
   
   You can also look at all the information for the website in the
-  web/src directory.  The Requirements.page and Install.page files
-  contain human readable text for installation instructions.
+  web/output directory.  Start at index.html
+
+  Note: This README file is being deprecated. I'm duplicating
+  information that is in the web page.  In the future I'll just
+  provide a pointer to the web information.  If you have a strong
+  feeling on this matter, please contact me. 
 
 What's New for 0.3.0
 
