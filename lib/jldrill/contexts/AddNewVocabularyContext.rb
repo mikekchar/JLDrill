@@ -11,7 +11,7 @@ module JLDrill
 		end
 		
 		def createViews
-    		@mainView = @viewBridge.VocabularyView.new(self, "add") do
+    		@mainView = @viewBridge.VocabularyView.new(self, "Add") do
     		    @mainView.addVocabulary
     		end
         end

@@ -14,7 +14,7 @@ module JLDrill::Gtk
 	        def initialize(view, label)
 	            @view = view
 	            @closed = false
-	            super("Add")
+	            super(label)
 	            @vbox = Gtk::VBox.new
 	            self.add(@vbox)
 	            @vocabView = GtkVocabView.new(@view.vocabulary)

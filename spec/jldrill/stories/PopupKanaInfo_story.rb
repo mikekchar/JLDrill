@@ -70,7 +70,7 @@ module JLDrill::PopupKanaInfo
 			list = JLDrill::KanaList.fromFile(JLDrill::Config::getDataDir + 
                                               "/dict/Kana/kana.dat")
 			list.should_not be(nil)
-			list.size.should be(140)
+			list.size.should be(159)
 			kana = list.findChar("じ")
 			kana.should_not be_nil
 		end
@@ -84,7 +84,7 @@ module JLDrill::PopupKanaInfo
             Story.mainContext.kana.should be_nil
             Story.mainContext.loadKanji
             Story.mainContext.kana.should_not be_nil
-            Story.mainContext.kana.size.should be(140)
+            Story.mainContext.kana.size.should be(159)
             Story.shutdown
         end
 

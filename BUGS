@@ -1,4 +1,3 @@
-- Edit window has "Add" for a title.  It should say "Edit"
 - After pressing "Set" in the edit window, the window should disappear
 - Opening the edit window should automatically invoke the search function.
 - Going to a new item in the main window should automatically update
@@ -9,6 +8,7 @@
 - Can't use / in the text of items
 - When you first start a file it will be in new item mode.  Then after
   you go for a while it will go into review mode.  It should stay in
-  new item mode.
+  new item mode until you start the application again or press
+  the Review Mode button.
   
   
