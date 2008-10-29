@@ -1,8 +1,3 @@
-- The JLPT2 list has an incorrect entry for 開ける.  When I
-  edited it, the it still said it differed. When I checked it (Z)
-  the program crashed in Vocabulary.processOutput.  I tried to
-  duplicate the problem, but I can't.
-
 - When a drill is reset all the items go into the new set.  But
   the last item is still in the current problem.  Not sure what
   to do.  

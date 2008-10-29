@@ -19,10 +19,13 @@ module JLDrill
                 @contents = string.split(",")
                 merge = false
                 delete = []
+                lastItem = 0
                 0.upto(@contents.size - 1) do |i|
                     if merge
-                        @contents[i - 1] += "," + @contents[i]
+                        @contents[lastItem] += "," + @contents[i]
                         delete.push(i)
+                    else
+                        lastItem = i
                     end
                     merge = @contents[i].end_with?("\\")
                     @contents[i].strip!
