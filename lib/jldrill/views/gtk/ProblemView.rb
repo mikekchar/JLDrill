@@ -29,11 +29,11 @@ module JLDrill::Gtk
                 @buffer.create_tag("kanji", 
                                    "size" => 36 * Pango::SCALE,
                                    "justification" => Gtk::JUSTIFY_CENTER,
-                                   "family" => "Times")
+                                   "family" => "Kochi Mincho")
                 @buffer.create_tag("reading", 
                                    "size" => 18 * Pango::SCALE,
                                    "justification" => Gtk::JUSTIFY_CENTER,
-                                   "family" => "Times",
+                                   "family" => "Kochi Mincho",
                                    "foreground" => "blue")
                 @buffer.create_tag("definitions", 
                                    "size" => 16 * Pango::SCALE,
