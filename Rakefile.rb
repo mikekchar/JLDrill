@@ -19,8 +19,8 @@ pkg_files = FileList[
   'test_results.html'  
 ]
 
-# The font is really big and you have to install it by hand anyway
-pkg_files.exclude('data/jldrill/fonts/KanjiStrokeOrders.ttf')
+# The fonts are really big and you have to install it by hand anyway
+pkg_files.exclude('data/jldrill/fonts/*.ttf')
 
 spec_files = FileList[
 	'spec/**/*_spec.rb',
