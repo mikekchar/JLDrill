@@ -10,16 +10,18 @@ Here is a prioritized list of planned features.  If you think
 the priority is wrong, please email me.  If you think of another
 feature, please email me.
 
+* Memory usage and speed.  JLDrill uses a *lot* of memory.  When
+the dictionary is loaded it's up to about 290 megs on my machine.
+I've discovered the root of the problem and the fix should also
+dramatically speed up dictionary loading. **Status: Not done**
+* Specific mode for grammar drills.  **Status: Not done**
+* Easier installation. **Status: Not done**
 * Drill construction tool.  We need to be able to make a brand new drill.
 We need to be able to delete items.  We need to be able to move items up and
 down in order. **Status: Not done**
-* Easier installation. **Status: Not done**
-* Specific mode for grammar drills.  **Status: Not done**
-* Finish correcting JLPT level 2 content.  **Status: 1330 vocab reviewed**
+* Finish correcting JLPT level 2 content.  **Status: ~1500 vocab reviewed**
 * Kanji only drills with Heisig style stories.  **Status: Not done**
 * A kanji story generator with a tool to find kanji that have the same radicals.  
 **Status: Not done**
-* Speed up Dictionary reading.  Reading the dictionary is still too slow.
-Probably the easiest way to make it faster is to write an extension. 
-Status: **Not done**
+
 

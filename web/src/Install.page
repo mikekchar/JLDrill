@@ -22,9 +22,13 @@ and optionally
 
 <pre>
     KanjiStrokeOrders.ttf
+    kochi-mincho.ttf
 </pre>
 
-TODO: Add links for the files.
+Of the two optional fonts, the KanjiStrokeOrders is most important.  It
+allows you to see the stroke orders.  The kochi-mincho font is the
+font that the application defaults to when quizing kanji and readings.
+It is not necessary if you already have a Japanese font.
 
 Important Note:
 ---------------
@@ -52,13 +56,15 @@ Note: Depending on how you installed ruby gems, you may have to be root or use
 sudo in Linux.
 
 JLDrill is now installed.  However, in order to view the stroke order diagrams,
-you must install the stroke order font.  
+you must install the stroke order font.
 
-Installing the Stroke Order Font
+Installing the Fonts
 --------------------------------
 ###Windows
-In Windows you must download the KanjiStrokeOrders.ttf file and copy it into the
-font directory.  You can get the font directory by selecting Start->Control Panel->Fonts.
+In Windows you must download the fonts (KanjiStrokeOrders.ttf and/or
+kochi-mincho.ttf) files and copy them into the
+font directory.  You can get the font directory by selecting 
+Start->Control Panel->Fonts.
 
 There is one more thing you must do.  Unfortunately Windows
 doesn't follow it's own specification for fonts, so the KanjiStrokeOrders
@@ -76,7 +82,9 @@ I find that the smoothing effect is more desirable.
 
 ###GNU/Linux, BSD, Unix-like, etc
 On a Debian based system (which includes Ubuntu), you can install the 
-ttf-kanjistrokeorders package.  
+ttf-kanjistrokeorders and ttf-kochi-mincho packages.  (Note:
+ttf-kanjistrokeorders is not available in the standard Ubuntu packages.
+You will have to enable the Universe repository)  
 
 On other systems you will have to have a font system installed that handles
 true type fonts, like XFS.  If you have XFS installed, 

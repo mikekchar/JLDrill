@@ -124,7 +124,7 @@ different learning rates after all.
 Also complicating this is that many, or even most users do not consistently
 review their materials.  As I will show in a future document, the learning
 rate is dramatically affected by consistency of review.  So any discussion
-on the effectiveness of strategies much take into account consistency.
+on the effectiveness of strategies must take into account consistency.
 I do not have any good suggestions for doing that.
 
 General Overview of JLDrill's Strategies
@@ -251,7 +251,7 @@ distributed over the schedule and we add x items every day, the
 total number of items reviewed every day is:
 
 <pre>
-    sum[from 0 to infinity](1/2^(-i) x) + sum[from 1 to infinity](1/10^(-1) x)
+    sum[from 0 to infinity](1/2^(-i) x) + sum[from 1 to infinity](1/10^(-j) x)
 </pre>    
     
     

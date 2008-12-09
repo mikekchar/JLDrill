@@ -22,8 +22,31 @@ files which form the basis of the JLPT drills.  Thierry has very
 kindly granted permission to use these files in this application
 under the GPL license, thus saving me weeks of work.
 
-Finally, I would like to thank [RubyForge](http://rubyforge.org) for
-hosting this project.  It makes a big difference.
+The emerging grammar quiz is based on the excellent Japanese
+grammar primer by Tae Kim.  This is a really fantastic aid
+to anyone learning Japanese.  In fact, I believe it significantly
+surpasses anything else written for beginner/intermediate
+learners.  Tae Kim has also made a really strong stance
+for free culture by releasing his work under a Creative Commons
+license and actively encourages others to do so.  It is
+his actions that allow me to even consider creating a grammar
+drill.
+
+Tim Eyre created the KanjiStrokeOrders font.  This fills
+a big gap in learning Japanese.  I had litterally spent tens
+of hours trying to figure out how to represent this information
+when I stumbled upon this gem.  Being able to use this font
+allowed me to implement one of the coolest features of JLDrill
+in only about an hour. 
+
+Finally, I would like to thank some people for indirectly
+contributing to the project. I really appreciate 
+[RubyForge](http://rubyforge.org) for
+hosting this project.  It makes a big difference.  Also I
+want to thank the Ottawa Coding Dojo for their support
+while I worked on JLDrill.  And last but not least, I wish
+to thank Sagara High School for employing me and giving me
+enough free time to work on JLDrill.
 
 Notes 
 -----

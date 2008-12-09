@@ -15,6 +15,11 @@ Note: Currently there is no easy way to make an icon on your desktop
 or an entry in the start menu for JLDrill.  This will be added in a
 future release.
 
+Note: On Un\*x-like systems you will have to make sure that
+the gem bin directory is in your path.  Debian (and Ubuntu)
+put this in the /var/lib/gems/1.8/bin directory, where
+1.8 is the version number for ruby.
+
 Main Window
 -----------
 This is what you see when you first start JLDrill.
@@ -698,7 +703,7 @@ allows you to cross reference the word against a dictionary
 and edit it if necessary. 
 
 Note: The JLPT files are known to have some inappropriate or incorrect
-translations. I have correct the words in the JLPT4 and JLPT3 files, but am
+translations. I have corrected the words in the JLPT4 and JLPT3 files, but am
 only a third of the way through the JLPT2 files.  This is very much a work in 
 progress.  When working with words you haven't checked, please load the
 reference dictionary.
@@ -711,7 +716,7 @@ machine) to load the edict library.  A window with a progress bar will
 be shown.  You are able to continue drilling while the dictionary is
 loading, though.
 
-After thre Reference Dictionary has been loaded, JLDrill will look up
+After the Reference Dictionary has been loaded, JLDrill will look up
 every item as you encounter it.  If the item can not be found in the
 dictionary, the "Differs" indicator in the upper right will be
 highlighted.

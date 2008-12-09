@@ -249,7 +249,8 @@ I'm "bad" at memorization).
 The approach I've used with the most success is to obtain
 a good grammar text book. Luckily, the best one I've found
 is free and available for download on the internet.
-it is [Tae Kim's Japanese Guide to Japanese Grammar](http://www.japaneseguide.org)
+It is 
+[Tae Kim's Japanese Guide to Japanese Grammar](http://www.japaneseguide.org).
 Tae Kim introduces the grammar concepts in a logical and
 understandable order.  And most importantly introduces "plain"
 form before "polite" form.
@@ -351,11 +352,13 @@ whenever a word is different than what's in the dictionary,
 the "Differs" button in the upper right corner will turn red.
 When that happens, simply press "e" to edit the vocabulary.
 
-This will bring up the vocabulary edit dialog.  To look at
-the matching items from the dictionary, press the search
-button (you may find it convenient to resize the window --
-considerable UI overhaul is necessary in this part of the
-application).  This will give you the candidate words.  Simply
+This will bring up the vocabulary edit dialog.
+JLDrill will automatically search the dictionary (if it is
+loaded) for the word and give you the candidate matches.
+It does this by searching for the reading and giving you
+all the words that start with that sound.  The search
+currently ignores the kanji (this may be improved in
+a subsequent release).  Simply
 click on the correct dictionary entry and press the "Set"
 button.  This will set the item to the vocabulary you selected.
 
@@ -367,7 +370,7 @@ If you are consistent, you can learn it surprisingly quickly.
 There are 10,000 words in the entire JLPT test.  If you
 can pass the test, your Japanese is good enough to go
 to a Japanese university or work at a Japanese job.
-But 10,000 seems like a really huge amount of work.  But
+10,000 seems like a really huge amount of work.  But
 is it really?
 
 Let's say that we work every day, taking 2 weeks off for
@@ -412,7 +415,7 @@ and katakana).  Unlike kana, kanji is not phonetic.  It is
 conceptual.
 
 It is a common misunderstanding that kanji characters represent
-words.  This is not true.  Theay are more of an alphabet that
+words.  This is not true.  They are more of an alphabet that
 represents concepts rather than sounds.  A word can be made up
 of one kanji character, but it could also be made up of
 several.
@@ -458,8 +461,9 @@ Finally, there are *lots* of kanji.  To be literate you need to
 know at least 2100 characters.  Most University graduates know
 more than 3000 characters and there are about 60,000 characters
 which pop up from time to time in publications.  How can you
-possibly learn so many in a reasonable time frame (Note, it takes
-Japanese people 12 years of school to learn the first 2000 or so).
+possibly learn so many in a reasonable time frame? It takes
+Japanese people 12 years of school to learn the first 2000 or 
+so.
 
 Luckily, it's not nearly as complicated as it all seems.  In fact,
 I consider learning kanji the most interesting and fun part of
@@ -491,18 +495,18 @@ breaking it down into parts and telling a "story" with the
 parts.  The first section of his book is available for free
 download as a PDF (put link here).  I highly recommend reading it.
 
-After buying the book and working through a little more
-than half of the kanji, I gave up on the book.  I believe the
-method is excellent.  However, some of the keywords assigned
-to kanji parts are clearly arbitrary and sometimes (in the
-case where they are a kanji character themselves) even wrong.
+That being said, after buying the book and working through a 
+little more than half of the kanji, I gave up on the book.  I 
+believe the method is excellent.  However, some of the keywords 
+assigned to kanji parts are clearly arbitrary and sometimes (in 
+the case where they are a kanji character themselves) even wrong.
 I found that it was causing me enough trouble that I wanted
 to start over using a different order and new keywords for
 many of the kanji parts.
 
 Eventually I will have a tool in JLDrill to facilitate researching
 kanji characters for this activity.  However it currently
-does not do this.  Nor does it easily allows reviewing of
+does not do this.  Nor does it easily allow reviewing of
 kanji characters and keywords.  So for now I recommend using
 Heisig's book.
 
