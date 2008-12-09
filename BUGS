@@ -10,6 +10,9 @@
   new item mode until you start the application again or press
   the Review Mode button.
 - The VocabularyView is ugly and hard to edit.  
+- Somehow the JLPT2 file got duplicate position numbers for some
+  entries.  Not sure if this is an old bug or a new one.  But
+  I think it's an old one.
 - Something makes the open dialog really small sometimes.
   Currently I think this is a Gtk bug
   
