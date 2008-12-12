@@ -7,6 +7,9 @@ require 'rake/gempackagetask'
 require 'webgen/webgentask'
 require 'lib/jldrill/Version'
 
+rubyforge_project = "jldrill"
+rubyforge_maintainer = "mikekchar@rubyforge.org"
+
 pkg_files = FileList[
   'Rakefile.rb',
   'bin/**/*', 
@@ -118,6 +121,7 @@ gem_spec = Gem::Specification.new do |s|
 	s.author = "Mike Charlton"
 	s.email = "mikekchar@gmail.com"
 	s.homepage = "http://sakabatou.dnsdojo.org"
+    s.rubyforge_project = rubyforge_project
 end
 
 package_task = Rake::GemPackageTask.new(gem_spec) do |pkg|
@@ -131,6 +135,11 @@ webgen_task = Webgen::WebgenTask.new('web') do |site|
         config['sources'] = [['/', "Webgen::Source::FileSystem", 'web/src']]
         config['output'] = ['Webgen::Output::FileSystem', 'web/output']
     end
+end
+
+task :publish => [:web] do
+    sh "scp web/output/* " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project
+    sh "scp web/output/images/* " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project + "/images/"
 end
 
 
