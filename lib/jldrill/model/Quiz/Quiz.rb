@@ -23,6 +23,7 @@ require 'jldrill/model/Quiz/Options'
 require 'jldrill/model/Quiz/Contents'
 require 'jldrill/model/Quiz/Strategy'
 require 'jldrill/model/Publisher'
+require 'jldrill/Version'
 
 module JLDrill
     class Quiz
@@ -94,10 +95,13 @@ module JLDrill
         def needsSave?
             @needsSave
         end
+
+        def fileHeader
+            JLDrill::VERSION + "-LDRILL-SAVE #{@name}\n"
+        end
         
         def saveToString
-            retVal = ""
-            retVal += "0.2.0-LDRILL-SAVE #{@name}\n"
+            retVal = fileHeader
             @info.split("\n").each { |line|
                 retVal += "# " + line + "\n"
             }
@@ -124,20 +128,25 @@ module JLDrill
             return retVal
         end
 
+        def Quiz.canLoad?(header)
+            retVal = false
+            if(header =~ /^(\d+\.\d+\.\d+)?-?LDRILL-SAVE/)
+                if($1 != "")
+                    if $1 =~ /^(\d+)\.(\d+)\.(\d+)/
+                        if $1.to_i > 0 || $2.to_i < 4
+                            retVal = true
+                        end
+                    end
+                end
+            end
+            return retVal
+        end
+
         def Quiz.drillFile?(file)
             retVal = false
             loadFile = File.new(file, "r")
             if(loadFile)
-                if(loadFile.readline =~ /^(\d+\.\d+\.\d+)?-?LDRILL-SAVE/)
-                    retVal = true
-                    if($1 != "")
-                        if $1 =~ /^(\d+)\.(\d+)\.(\d+)/
-                            if $1.to_i != 0 || $2.to_i > 2
-                                retVal = false
-                            end
-                        end
-                    end
-                end
+                retVal = Quiz.canLoad?(loadFile.readline)
             end
             return retVal
         end
@@ -161,33 +170,14 @@ module JLDrill
             @publisher = publisher
         end
 
-        def load(file)
-            retVal = false
-
-            # Don't update the status while we're loading the file
-            @publisher.block
-            if file != ""
-                setup
-                @savename = file
-                IO.foreach(file) do |line|
-                    parseLine(line)
-                end
-                retVal = @contents.length > 0
-            end
-            # Update status again
-            @publisher.unblock
-            setNeedsSave(false)
-            return retVal
-        end
-
-        def loadFromString(name, string)
+        def parse(name, lines)
             setup
             
             @savename = name
             
             # Don't update the status while we're loading the file
             @publisher.block
-            string.each_line do |line|
+            lines.each do |line|
                 parseLine(line)
             end
             # Update status again
@@ -195,6 +185,14 @@ module JLDrill
             
             setNeedsSave(true)
             @contents.length > 0
+        end
+
+        def load(file)
+            parse(file, IO.readlines(file))
+        end
+
+        def loadFromString(name, string)
+            parse(name, string.split("\n"))
         end
 
         def loadFromDict(dict)

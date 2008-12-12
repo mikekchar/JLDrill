@@ -1,4 +1,5 @@
 require 'jldrill/model/Vocabulary'
+require 'jldrill/Version'
 
 module JLDrill
     # This is a helper class for the tests.  It simply represents
@@ -8,8 +9,7 @@ module JLDrill
         # The following constants represent a sample quiz file.
         # It is split into the header, info, options and vocab for convenience
 ##################################################        
-        FileHeader = 
-%Q[0.2.0-LDRILL-SAVE Testfile]
+        FileHeader = JLDrill::VERSION + "-LDRILL-SAVE Testfile"
 
         FileInfo   = %Q[
 # This is the info line]

@@ -67,6 +67,12 @@ module JLDrill
 		it "should save a file to a string" do
 		    @quiz.saveToString.should be_eql(@sampleQuiz.file)
 		end
+
+        it "should be able to load files of the current version" do
+            Quiz.canLoad?(SampleQuiz::FileHeader).should be(true)
+            @emptyQuiz.loadFromString("TestFile", @sampleQuiz.file)
+            @emptyQuiz.saveToString.should be_eql(@sampleQuiz.file)
+        end
 	
 	    it "should be able to get a list of all the vocab" do
 	        @quiz.allVocab.join.should be_eql(@sampleQuiz.allVocab)
