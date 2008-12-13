@@ -13,17 +13,13 @@ The current stable release of JLDrill is 0.3.0.  It can be obtained at
 [JLDrill's RubyForge Project Page](http://rubyforge.org/projects/jldrill).
 You will need the following files:
 
-<pre>
-    context-0.0.16.gem
-    jldrill-0.3.0.gem
-</pre>
+* [context-0.0.16.gem](http://rubyforge.org/frs/download.php/48213/context-0.0.16.gem)
+* [jldrill-0.3.0.gem](http://rubyforge.org/frs/download.php/48212/jldrill-0.3.0.gem)
 
 and optionally
 
-<pre>
-    KanjiStrokeOrders.ttf
-    kochi-mincho.ttf
-</pre>
+* [KanjiStrokeOrders.ttf](http://rubyforge.org/frs/download.php/48214/KanjiStrokeOrders.ttf)
+* [kochi-mincho.ttf](http://rubyforge.org/frs/download.php/48217/kochi-mincho.ttf)
 
 Of the two optional fonts, the KanjiStrokeOrders is most important.  It
 allows you to see the stroke orders.  The kochi-mincho font is the
