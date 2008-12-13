@@ -59,7 +59,14 @@ ruby_opts = ["-KO", "-I./lib"]
 # web     -- Builds the web page
 #            Web page is at web/output/index.html
 # publish -- Builds the web page and uploads it to Rubyforge.
-#
+# release -- Builds everything and places the resultant files into
+#            a release directory called jldrill-<version>.  Note
+#            that it currently does not build or publish the web page
+#            as I feel that should be a separate action.
+# update -- Builds the devel build.  Essentially runs rcov, web and release.
+#           This is used by the main repository after a bzr update so
+#           that people can browse the built items through the
+#           web-dave interface 
 
 # task :default => [:rcov, :rdoc]
 task :default => [:spec]
@@ -171,9 +178,10 @@ end
 task :release => [:spec, :package] do
     release_dir = "jldrill-#{JLDrill::VERSION}"
     mkdir release_dir
-    sh "cd #{context_directory}; rake spec; rake package"
+    sh "cd #{context_directory}; rake rcov; rake package"
     sh "cp #{context_directory}/pkg/context-#{context_version}.gem #{release_dir}"
     sh "cp pkg/jldrill-#{JLDrill::VERSION}.gem #{release_dir}"
     sh "cp data/jldrill/fonts/*.ttf #{release_dir}"
 end
 
+task :update => [:rcov, :web, :release]
