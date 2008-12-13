@@ -4,12 +4,19 @@ require 'rake/rdoctask'
 require 'rake/testtask'
 require 'rubygems'
 require 'rake/gempackagetask'
-require 'webgen/webgentask'
+# require 'webgen/webgentask'
 require 'lib/jldrill/Version'
 
+#======================== Setup ================================
+
+# Rubyforge details
 rubyforge_project = "jldrill"
 rubyforge_maintainer = "mikekchar@rubyforge.org"
 
+# Dependencies
+context_version = "0.0.16"
+
+# Files that will be packaged
 pkg_files = FileList[
   'Rakefile.rb',
   'bin/**/*', 
@@ -30,10 +37,30 @@ spec_files = FileList[
 	'spec/**/*_story.rb'
 ]
 
-# This just makes sure that spec is looking in the right directories for
-# the source.
+# Options for running the application
 ruby_opts = ["-KO", "-I./lib"]
 
+
+#=============================== Tasks ===============================
+#
+# The default task is simply to run rspec.  The following tasks exist
+#
+# spec    -- Runs rspec (default)
+#            Test results are printed on stdout
+# rcov    -- Runs the rspec tests and performs code coverage. 
+#            Test results are put in test_results.html
+#            Coverage results are put in coverage/index.html
+# run     -- Runs the application
+# rdoc    -- Creates the rdoc documentation.
+#            Documentation is put in doc/index.html
+# package -- Creates the gem files.
+#            Packages are placed in pkg/jldrill-<version>.gem
+
+# The webgen gem is currently broken AFAICT, so I've disabled these
+# web     -- Builds the web page
+#            Web page is at web/output/index.html
+# publish -- Builds the web page and uploads it to Rubyforge.
+#
 
 # task :default => [:rcov, :rdoc]
 task :default => [:spec]
@@ -129,17 +156,17 @@ package_task = Rake::GemPackageTask.new(gem_spec) do |pkg|
 	pkg.need_tar = true
 end
 
-webgen_task = Webgen::WebgenTask.new('web') do |site|
-    site.clobber_outdir = true
-    site.config_block = lambda do |config|
-        config['sources'] = [['/', "Webgen::Source::FileSystem", 'web/src']]
-        config['output'] = ['Webgen::Output::FileSystem', 'web/output']
-    end
-end
+#webgen_task = Webgen::WebgenTask.new('web') do |site|
+#    site.clobber_outdir = true
+#    site.config_block = lambda do |config|
+#        config['sources'] = [['/', "Webgen::Source::FileSystem", 'web/src']]
+#        config['output'] = ['Webgen::Output::FileSystem', 'web/output']
+#    end
+#end
 
-task :publish => [:web] do
-    sh "scp web/output/*.html web/output/*.css " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project
-    sh "scp web/output/images/* " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project + "/images/"
-end
+#task :publish => [:web] do
+#    sh "scp web/output/*.html web/output/*.css " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project
+#    sh "scp web/output/images/* " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project + "/images/"
+#end
 
 
