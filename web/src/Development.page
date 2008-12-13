@@ -28,7 +28,23 @@ BZR is a distributed version control system.  You can get more
 information on BZR and download it from the 
 [Bazaar Home Page](http://bazaar-vcs.org/).
 
-After you get the development trees you can build the gems for each package:
+After you get the development trees you will need to install the
+following gems:
+
+* rake
+* rspec
+* rcov
+* webgen
+
+The current version of webgen doesn't play well with the version
+of rubygems in Debian and Ubuntu, unfortunately.  So you will have
+too install version 0.5.3 of webgen (gem install -v 0.5.3 webgen).
+Also webgen has a lot of optional dependencies that are necessary.
+Keep running webgen and installing the dependencies until it stops
+complaining.
+
+Once you have everthing installed you will be able to package
+the files using:
 
 <pre>
 		rake package
