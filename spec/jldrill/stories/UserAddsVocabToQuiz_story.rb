@@ -22,7 +22,7 @@ module JLDrill::UserAddsVocabToQuiz
 ###########################################
     
     describe Story.stepName("There is a control on the main window view for adding new items") do
-        it "should contact the main context when the user tries to add a Vocabulary"
+#        it "should contact the main context when the user tries to add a Vocabulary"
     end
 
 ###########################################

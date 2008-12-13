@@ -183,6 +183,6 @@ module JLDrill::VocabularyIO
             Story.shutdown
         end
 
-        it "should test the data through EditVocabularyContext"
+#        it "should test the data through EditVocabularyContext"
     end
 end

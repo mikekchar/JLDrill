@@ -21,7 +21,7 @@ module JLDrill::PopupKanjiInfo
             Story.shutdown
         end
         
-        it "Selecting the entry in the menu should enter the context"
+#        it "Selecting the entry in the menu should enter the context"
     end
 
 ###########################################

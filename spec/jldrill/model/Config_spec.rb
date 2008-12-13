@@ -9,8 +9,7 @@ module JLDrill
 	    end
 
 # I can't do this test as written because it interferes with other tests	    
-	    it "should have a different DATA_DIR for Gem"
-#        do
+#	    it "should have a different DATA_DIR for Gem" do
 #	        Config::getDataDir.should eql(File.expand_path("data/jldrill"))
 #	        def Gem.datadir(string)
 #	            "blah"

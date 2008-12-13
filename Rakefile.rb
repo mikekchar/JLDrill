@@ -15,6 +15,7 @@ rubyforge_maintainer = "mikekchar@rubyforge.org"
 
 # Dependencies
 context_version = "0.0.16"
+context_directory = "../context"
 
 # Files that will be packaged
 pkg_files = FileList[
@@ -167,4 +168,12 @@ task :publish => [:web] do
     sh "scp web/output/images/* " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project + "/images/"
 end
 
+task :release => [:spec, :package] do
+    release_dir = "jldrill-#{JLDrill::VERSION}"
+    mkdir release_dir
+    sh "cd #{context_directory}; rake spec; rake package"
+    sh "cp #{context_directory}/pkg/context-#{context_version}.gem #{release_dir}"
+    sh "cp pkg/jldrill-#{JLDrill::VERSION}.gem #{release_dir}"
+    sh "cp data/jldrill/fonts/*.ttf #{release_dir}"
+end
 
