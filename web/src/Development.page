@@ -1,0 +1,55 @@
+---
+title: Development Version
+in_menu: true
+sort_info: 35
+---
+
+Development Version
+===================
+
+If you've been following development of JLDrill for a while, you can
+see that stable releases are few an far between.  I'm hoping to change
+that in the near future, but sometimes I'm lazy about updating this
+site.  However, I actually do make updates to the code fairly
+frequently (usually every week).
+
+Usually the development version is quite stable (it's the one I
+use every day).  So if you want something more cutting edge, or
+you would like to get involved in doing development on JLDrill you
+can always get the latest code from the
+[JLDrill BZR Repository](http://sakabatou.dnsdojo.org/devel/jldrill/).
+
+Note that JLDrill is built upon Context, which is a library for
+abstracting user interfaces using MVP (Model View Presentor).  So
+you will need the Context code as well.  It is available from the
+[Context BZR Repository](http://sakabatou.dnsdojo.org/devel/context/).
+
+BZR is a distributed version control system.  You can get more
+information on BZR and download it from the 
+[Bazaar Home Page](http://bazaar-vcs.org/).
+
+After you get the development trees you can build the gems for each package:
+
+<pre>
+		rake package
+</pre>
+
+I am actively encouraging people to help in the development of
+JLDrill.  If you want to contribute, please send me patches,
+suggestions, etc.  There are a few areas I need specific help.
+
+* User interface design.  All suggestions are welcome.  Anyone who
+wants to work in this area can do as much as they want :-)
+* Windows/OS X packaging.  Honestly, I don't want to do this at all.
+Windows is hard for me to use and I don't even have a Mac.  So I would
+be happy to hand this over to anyone who is keen.
+* Web page development/documentation.  I don't mind doing this, but
+frankly I'm not that great at it.  And there is really more work than
+I can do myself.
+* Content development.  The content that exists now is the content
+that I am studying.  It would be better to have more (or better)
+content.
+* Itch scratching.  If you like to code, I welcome any and all patches
+of functionality.  But I have to insist on tests (even though I have
+occasionally been lax in that area).  I'm happy to work with you on
+tests if you have difficulty writing them, though.

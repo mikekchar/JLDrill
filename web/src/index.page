@@ -45,6 +45,12 @@ JLDrill is now Beta
 
 News
 ----
+Saturday, Dec 13 2008.
+
+* Added links to the download page to make installation easier.  Added
+  a page on Development which links to my bzr repositories since I no
+  longer keep the source on Rubyforge.
+
 Tuesday, Dec 9 2008.
 
 * Release day for 0.3.0.  It's taken much longer than I expected to
