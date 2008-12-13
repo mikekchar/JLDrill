@@ -138,7 +138,7 @@ webgen_task = Webgen::WebgenTask.new('web') do |site|
 end
 
 task :publish => [:web] do
-    sh "scp web/output/* " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project
+    sh "scp web/output/*.html web/output/*.css " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project
     sh "scp web/output/images/* " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project + "/images/"
 end
 
