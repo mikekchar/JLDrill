@@ -9,8 +9,7 @@ module JLDrill
     class Edict
 
         LINE_RE_TEXT = '^([^\[]*)\s+(\[(.*)\]\s+)?\/(([^\/]*\/)+)\s*$'
-        UTF8_LINE_RE = Regexp.new(LINE_RE_TEXT, nil, 'u')
-        EUC_LINE_RE = Regexp.new(LINE_RE_TEXT, nil, 'e')
+        LINE_RE = Regexp.new(LINE_RE_TEXT)
         KANA_RE = /（(.*)）/
         COMMENT_RE = /^\#/
             
@@ -23,7 +22,7 @@ module JLDrill
             @lines = nil
             @index = 0
             @loaded = false
-            @lineRE = nil
+            @isUTF8 = nil
         end
 
         def file=(filename)
@@ -66,58 +65,55 @@ module JLDrill
             !Kconv.iseuc(@lines[index]).nil?
         end
 
-        # manually set the parser to UTF8 mode no matter what's in the file
-        def setUTF8
-            @lineRE = UTF8_LINE_RE
-        end
-
-        # manually set the parser to UTF8 mode no matter what's in the file
-        def setEUC
-            @lineRE = EUC_LINE_RE
-        end
-
-        # returns the correct regular expression based on encoding
-        def lineRE
-            if @lineRE.nil?
+        # returns true if the lines are UTF8
+        def linesAreUTF8?
+            if @isUTF8.nil?
                 if @lines.nil?
-                    return UTF8_LINE_RE
-                    # There are no lines in the file, so this is
-                    # adhoc.  In this case we want to default to UTF8
+                    return true
+                    # There are no lines so assume we don't need to
+                    # convert.  This is for the benefit of a few tests.
                 end
                 index = 0
-                error = false
-                while (index < @lines.size) && @lineRE.nil? && !error
+                while (index < @lines.size) && @isUTF8.nil?
                     utf = isUTF8?(index)
                     euc = isEUC?(index)
                     if !utf && !euc
-                        error = true
-                        # can't parse.  exit
+                        @isUTF8 = false
+                        # It's neither UTF8 nor EUC.  We'll have to hope
+                        # that conversion works. exit loop.
                     elsif utf && !euc
-                        @lineRE = UTF8_LINE_RE
-                        # exit
+                        @isUTF8 = true
+                        # it is UTF8. exit loop.
                     elsif euc && !utf
-                        @lineRE = EUC_LINE_RE
-                        # exit
+                        @isUTF8 = false
+                        # it is EUC. exit loop.
                     else
                         # can't tell yet.  Keep going
                         index += 1
                     end
                 end
-                # Default to UTF8 all other things being equal
-                if @lineRE.nil? && !error
-                    @lineRE = UTF8_LINE_RE
+                if @isUTF8.nil?
+                    @isUTF8 = true
+                    # We got to the bottom and determined that UTF8
+                    # will work.  So use it.
                 end
             end
-            @lineRE
+            return @isUTF8
+        end
+
+        # returns the line as UTF8
+        def toUTF8(line)
+            if !linesAreUTF8?
+                NKF.nkf("-Ewxm0", line)
+            else
+                line
+            end
         end
         
         def parse(line, position)
             retVal = false
-            if lineRE().nil?
-                return false
-                # We can't figure out the encoding so give up
-            end
-            if line =~ lineRE
+            line = toUTF8(line)
+            if line =~ LINE_RE
                 kanji = $1
                 kana = $3
                 english = JLDrill::Meaning.create($4)

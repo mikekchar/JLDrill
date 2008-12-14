@@ -29,41 +29,50 @@ module JLDrill::LoadEdictInEUC
             jis.isEUC?(0).should be(false)            
         end
 
-        it "should determine the correct RE" do
+        it "should determine if the lines are UTF8" do
             utf = JLDrill::Edict.new
             utf.lines = ["hello", "there", "雨"]
-            utf.lineRE.should be(JLDrill::Edict.const_get(:UTF8_LINE_RE))
+            utf.linesAreUTF8?.should be(true)
             euc = JLDrill::Edict.new
             euc.lines = ["hello", "there", "\261\253"] # EUC encoding for 雨
-            euc.lineRE.should be(JLDrill::Edict.const_get(:EUC_LINE_RE))
+            euc.linesAreUTF8?.should be(false)
             jis = JLDrill::Edict.new
             jis.lines = ["hello", "there", "\211J"] # Shift-JIS encoding for 雨
-            jis.lineRE.should be(nil)
-            # It should default to UTF8 if both will fit
+            jis.linesAreUTF8?.should be(false)
             ascii = JLDrill::Edict.new
             ascii.lines = ["hello", "there", "you"]
-            ascii.lineRE.should be(JLDrill::Edict.const_get(:UTF8_LINE_RE))
+            ascii.linesAreUTF8?.should be(true)
         end
 
         it "should default to UTF8 if there are no lines in the file" do
             # Sometimes we want to parse a line without loading a file.
-            # Set the parser to UTF8 unless it is already set.
             empty = JLDrill::Edict.new
-            empty.lineRE.should be(JLDrill::Edict.const_get(:UTF8_LINE_RE))
-            empty.setEUC
-            empty.lineRE.should be(JLDrill::Edict.const_get(:EUC_LINE_RE))
-            empty.setUTF8
-            empty.lineRE.should be(JLDrill::Edict.const_get(:UTF8_LINE_RE))
-        end
-
-        it "should be able to set the parser to the desired setting" do
-            ascii = JLDrill::Edict.new
-            ascii.lines = ["hello", "there", "you"]
-            ascii.lineRE.should be(JLDrill::Edict.const_get(:UTF8_LINE_RE))
-            ascii.setEUC
-            ascii.lineRE.should be(JLDrill::Edict.const_get(:EUC_LINE_RE))
-            ascii.setUTF8
-            ascii.lineRE.should be(JLDrill::Edict.const_get(:UTF8_LINE_RE))
+            empty.linesAreUTF8?.should be(true)
         end
     end
+
+    describe Story.stepName("Edict can parse EUC entries") do
+
+        it "should convert EUC data to UTF8" do
+            euc = JLDrill::Edict.new
+            euc.lines = ["\261\253 [\244\242\244\341] /(n) rain/(P)/"]
+            euc.linesAreUTF8?.should be(false)
+            euc.parse(euc.lines[0],0).should be(true)
+            euc.vocab(0).kanji.should eql("雨")
+            euc.vocab(0).reading.should eql("あめ")
+        end
+
+        # If you don't specify EUC as the input encoding, NKF sometimes
+        # picks the wrong one.  Here's an example.
+        it "should be able to parse いってき" do
+            euc = JLDrill::Edict.new
+            euc.lines = ["\260\354\332\263 [\244\244\244\303\244\306\244\255] /(n,vs) casting off or away/"]
+            euc.linesAreUTF8?.should be(false)
+            euc.parse(euc.lines[0],0).should be(true)
+            euc.vocab(0).kanji.should eql("一擲")
+            euc.vocab(0).reading.should eql("いってき")
+        end
+    end
+
+
 end

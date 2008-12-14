@@ -12,7 +12,7 @@ module JLDrill
 		def initialize(viewBridge)
 			super(viewBridge)
 			dictDir = File.join(Config::DATA_DIR, "dict")
-            @filename = File.join(dictDir, "edict.utf")
+            @filename = File.join(dictDir, "edict")
             @reference = nil
             @thread = nil
 		end
