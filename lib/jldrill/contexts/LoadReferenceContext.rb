@@ -37,7 +37,8 @@ module JLDrill
         end
         
 		def enter(parent)
-			if (!parent.nil?) && (parent.class.public_method_defined?(:reference))
+			if (!parent.nil?) && 
+                    (parent.class.public_method_defined?(:reference))
     			@reference = parent.reference
     			if(!@reference.loaded?)
         			super(parent)

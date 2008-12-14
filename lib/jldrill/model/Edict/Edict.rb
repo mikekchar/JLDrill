@@ -1,34 +1,21 @@
-#    JLDrill - A program to drill various aspects of the Japanese Language
-#    Copyright (C) 2005  Mike Charlton
-#
-#    This program is free software; you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation; either version 2 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program; if not, write to the Free Software
-#    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
 # Contains code necessary to read in an EDict file
 # Also will parse hacked up JLPT Edict files
 
 require "jldrill/model/Vocabulary"
 require "jldrill/model/Edict/Meaning"
+require 'kconv'
 
 module JLDrill
     class Edict
 
-        LINE_RE = /^([^\[]*)\s+(\[(.*)\]\s+)?\/(([^\/]*\/)+)\s*$/
+        LINE_RE_TEXT = '^([^\[]*)\s+(\[(.*)\]\s+)?\/(([^\/]*\/)+)\s*$'
+        UTF8_LINE_RE = Regexp.new(LINE_RE_TEXT, nil, 'u')
+        EUC_LINE_RE = Regexp.new(LINE_RE_TEXT, nil, 'e')
         KANA_RE = /（(.*)）/
         COMMENT_RE = /^\#/
             
             attr_reader :lines, :index, :loaded
+            attr_writer :lines
 
         def initialize(file=nil)
             @file = file
@@ -36,6 +23,7 @@ module JLDrill
             @lines = nil
             @index = 0
             @loaded = false
+            @lineRE = nil
         end
 
         def file=(filename)
@@ -70,11 +58,66 @@ module JLDrill
             end
         end
 
+        def isUTF8?(index)
+            !Kconv.isutf8(@lines[index]).nil?
+        end
+
+        def isEUC?(index)
+            !Kconv.iseuc(@lines[index]).nil?
+        end
+
+        # manually set the parser to UTF8 mode no matter what's in the file
+        def setUTF8
+            @lineRE = UTF8_LINE_RE
+        end
+
+        # manually set the parser to UTF8 mode no matter what's in the file
+        def setEUC
+            @lineRE = EUC_LINE_RE
+        end
+
+        # returns the correct regular expression based on encoding
+        def lineRE
+            if @lineRE.nil?
+                if @lines.nil?
+                    return UTF8_LINE_RE
+                    # There are no lines in the file, so this is
+                    # adhoc.  In this case we want to default to UTF8
+                end
+                index = 0
+                error = false
+                while (index < @lines.size) && @lineRE.nil? && !error
+                    utf = isUTF8?(index)
+                    euc = isEUC?(index)
+                    if !utf && !euc
+                        error = true
+                        # can't parse.  exit
+                    elsif utf && !euc
+                        @lineRE = UTF8_LINE_RE
+                        # exit
+                    elsif euc && !utf
+                        @lineRE = EUC_LINE_RE
+                        # exit
+                    else
+                        # can't tell yet.  Keep going
+                        index += 1
+                    end
+                end
+                # Default to UTF8 all other things being equal
+                if @lineRE.nil? && !error
+                    @lineRE = UTF8_LINE_RE
+                end
+            end
+            @lineRE
+        end
+        
         def parse(line, position)
             retVal = false
-            # Replace commas with the Japanese comma as a workaround for
-            # the bug where it becomes a separator.
-            if line =~ LINE_RE
+            if lineRE().nil?
+                return false
+                # We can't figure out the encoding so give up
+            end
+            if line =~ lineRE
                 kanji = $1
                 kana = $3
                 english = JLDrill::Meaning.create($4)
@@ -104,7 +147,7 @@ module JLDrill
             @index = 0
             @vocab = []
         end
-        
+
         def parseChunk(chunkSize)
             if @loaded then return true end
             
