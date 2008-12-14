@@ -7,6 +7,10 @@ sort_info: 35
 Development Version
 ===================
 
+**Latest Completed Development Version:**  [jldrill-0.3.1](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.1)
+
+For details on development versions, see below.
+
 If you've been following development of JLDrill for a while, you can
 see that stable releases are few an far between.  I'm hoping to change
 that in the near future, but sometimes I'm lazy about updating this
@@ -69,3 +73,48 @@ content.
 of functionality.  But I have to insist on tests (even though I have
 occasionally been lax in that area).  I'm happy to work with you on
 tests if you have difficulty writing them, though.
+
+Development Versions
+--------------------
+Development versions of JLDrill have a version number like 0.3.x where
+x is not 0.  In Release versions, the number is 0.  To understand
+development versions you have to understand my process a little bit.
+
+I will give an example.  Let's say I released version 0.3.0.  That
+is the "Release version" and you know it is because the last number
+is a 0.  This is a stable release that I expect end users to be able
+to use.  After I release this version, I will start to work on
+0.3.1.  This is a "Development version".  You know it's development
+because the last number isn't 0.
+
+But while I'm working on it it isn't completed yet.  It might not even
+work properly.  This is known as the "Current Development Version".
+You can look at this web page to see what it is (see below).  There
+is no reason to use a current development version unless you are
+modifying it. 
+
+When I am finished doing what I want to do for that development
+version, it will be complete.  I will update this page to show
+what the "Latest Completed Development Version" is.  I will
+also try to show what I've done to the version.
+
+The Latest Completed Development Version is a bleeding edge
+version of JLDrill.  I expect it to work.  Some features might
+be incomplete and there might be bugs.  But it should work.
+You can use it if you really need the new features, or if
+you want to join in on testing.
+
+Development Version History
+---------------------------
+Current Development Version: **not started**.
+
+Latest Completed Development Version: [jldrill-0.3.1](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.1)
+
+Changes in [jldrill-0.3.1](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.1)
+
+* Add Rakefile tasks to build releases
+  * publish -- Publish the web page to Rubyforge
+  * release -- Create a release directory for the current version
+  * update -- Run rcov, web, and release
+* Allow reading of Edict files in either EUC or UTF8 encoding
+* Update the EDICT dictionary to the latest version
