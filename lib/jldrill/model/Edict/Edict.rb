@@ -150,6 +150,7 @@ module JLDrill
         end
 
         def parseReading(line)
+            line = toUTF8(line)
             if line =~ COMMENT_RE
                 return nil
             end
@@ -212,12 +213,12 @@ module JLDrill
 
         def search(reading)
             result = []
+            re = Regexp.new("^#{reading}")
             0.upto(@readings.size - 1) do |i|
                 candidate = @readings[i]
                 if !candidate.nil?
-                    re = Regexp.new("^#{reading}")
                     if re.match(candidate)
-                        result.push(parse(lines[i], i))
+                        result.push(vocab(i))
                     end
                 end
             end

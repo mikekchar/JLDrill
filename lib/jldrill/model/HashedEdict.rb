@@ -54,11 +54,11 @@ module JLDrill
             if @hash
                 key = findKey(reading)
                 bin = @hash[key]
+                re = Regexp.new("^#{reading}")
                 if bin
                     bin.each do |position|
                         vocab = vocab(position)
                         if !vocab.nil? && !vocab.reading.nil?
-                            re = Regexp.new("^#{reading}")
                             if re.match(vocab.reading)
                                 result.push(vocab)
                             end
