@@ -23,7 +23,7 @@ module JLDrill
         end
 
         def add(reading, position)
-            super(reading)
+            super(reading, position)
             if !reading.nil?
                 key = findKey(reading)
                 if @hash.has_key?(key)
@@ -42,7 +42,7 @@ module JLDrill
                 if bin
                     i = 0
                     while !found && (i < bin.size)
-                        found = (vocab == parse(vocab(i)))
+                        found = (vocab == vocab(i))
                     end
                 end
             end
@@ -56,8 +56,8 @@ module JLDrill
                 bin = @hash[key]
                 if bin
                     bin.each do |position|
-                        vocab = parse(vocab(position), position)
-                        if vocab.reading
+                        vocab = vocab(position)
+                        if !vocab.nil? && !vocab.reading.nil?
                             re = Regexp.new("^#{reading}")
                             if re.match(vocab.reading)
                                 result.push(vocab)

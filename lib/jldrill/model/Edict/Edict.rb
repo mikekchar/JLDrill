@@ -14,7 +14,7 @@ module JLDrill
         KANA_RE = /（(.*)）/
         COMMENT_RE = /^\#/
             
-            attr_reader :lines, :numLinesParsed, :loaded
+            attr_reader :lines, :numLinesParsed, :loaded, :readings
             attr_writer :lines
 
         def initialize(file=nil)
@@ -150,21 +150,29 @@ module JLDrill
         end
 
         def parseReading(line)
+            if line =~ COMMENT_RE
+                return nil
+            end
+
             reading = nil
-            if !line =~ COMMENT_RE 
-                if line =~ READING_RE
-                    kanji = $1
-                    reading = $3
-                    # Hack for JLPT files
-                    if reading =~ KANA_RE
-                        reading = ""
-                    end
-                    if reading == ""
-                        reading = kanji
-                    end
+            if line =~ READING_RE
+                kanji = $1
+                reading = $3
+                # Hack for JLPT files
+                if reading =~ KANA_RE
+                    reading = ""
+                end
+                if reading == ""
+                    reading = kanji
                 end
             end
             return reading
+        end
+
+        def parseNextLine
+            line = @lines[@numLinesParsed]
+            add(parseReading(line), @numLinesParsed)
+            @numLinesParsed += 1
         end
 
         def parseChunk(chunkSize)
@@ -176,9 +184,7 @@ module JLDrill
             end
 
             0.upto(chunkSize - 1) do
-                line = @lines[@numLinesParsed]
-                add(parseReading(line), @numLinesParsed)
-                @numLinesParsed += 1
+                parseNextLine()
             end
             
             return @loaded
@@ -211,7 +217,7 @@ module JLDrill
                 if !candidate.nil?
                     re = Regexp.new("^#{reading}")
                     if re.match(candidate)
-                        result.push(parse(lines[i]))
+                        result.push(parse(lines[i], i))
                     end
                 end
             end
