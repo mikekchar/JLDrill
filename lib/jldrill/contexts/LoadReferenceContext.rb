@@ -30,8 +30,11 @@ module JLDrill
             if !@reference.nil?
                 @reference.readLines
                 @mainView.idle_add do
-                    @reference.parseChunk(100)
-                    @reference.fraction
+                    if !@reference.parseChunk(100)
+                        @reference.fraction
+                    else
+                        1.0
+                    end
                 end
             end                
         end

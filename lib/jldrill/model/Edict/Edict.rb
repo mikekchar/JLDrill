@@ -177,7 +177,9 @@ module JLDrill
         end
 
         def parseChunk(chunkSize)
-            if @loaded then return true end
+            if @loaded 
+                return true 
+            end
             
             if (@numLinesParsed + chunkSize) >= @lines.size
                 chunkSize = @lines.size - @numLinesParsed
@@ -198,8 +200,11 @@ module JLDrill
         end
         
         def fraction
-            retVal = @numLinesParsed.to_f / @lines.size.to_f
-            retVal
+            if @loaded
+                1.0
+            else
+                @numLinesParsed.to_f / @lines.size.to_f
+            end
         end
 
         def shortFile

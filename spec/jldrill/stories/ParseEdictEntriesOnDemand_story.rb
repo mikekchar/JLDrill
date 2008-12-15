@@ -59,8 +59,8 @@ module JLDrill::ParseEdictEntriesOnDemand
             ame.reading.should eql("あめ")
 			dictDir = File.join(JLDrill::Config::DATA_DIR, "dict")
             filename = File.join(dictDir, "edict")
-            edict = JLDrill::Edict.new(filename)
-            edict.read
+            edict = JLDrill::HashedEdict.new(filename)
+            edict.read.should be(true)
             edict.length.should be(142339)
             ameList = edict.search("あめ")
             ameList.should_not be_nil

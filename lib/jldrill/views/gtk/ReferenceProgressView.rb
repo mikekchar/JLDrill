@@ -49,7 +49,7 @@ module JLDrill::Gtk
 		
 		def run
 		    fraction = @block.call
-		    if fraction <= 1.0
+		    if fraction < 1.0
     		    update(fraction)
     		else
     		    if !@id.nil?

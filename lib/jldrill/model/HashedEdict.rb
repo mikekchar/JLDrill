@@ -34,21 +34,6 @@ module JLDrill
             end
         end
 
-        def include?(vocab)
-            found = false
-            if @hash
-                key = findKey(vocab.reading)
-                bin = @hash[key]
-                if bin
-                    i = 0
-                    while !found && (i < bin.size)
-                        found = (vocab == vocab(i))
-                    end
-                end
-            end
-            return found
-        end
-
         def search(reading)
             result = []
             if @hash
