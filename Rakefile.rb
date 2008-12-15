@@ -9,6 +9,9 @@ require 'lib/jldrill/Version'
 
 #======================== Setup ================================
 
+# Current release directory
+release_dir = "jldrill-#{JLDrill::VERSION}"
+
 # Rubyforge details
 rubyforge_project = "jldrill"
 rubyforge_maintainer = "mikekchar@rubyforge.org"
@@ -61,12 +64,13 @@ ruby_opts = ["-KO", "-I./lib"]
 # publish -- Builds the web page and uploads it to Rubyforge.
 # release -- Builds everything and places the resultant files into
 #            a release directory called jldrill-<version>.  Note
-#            that it currently does not build or publish the web page
+#            that it currently does not publish the web page
 #            as I feel that should be a separate action.
-# update -- Builds the devel build.  Essentially runs rcov, web and release.
-#           This is used by the main repository after a bzr update so
-#           that people can browse the built items through the
-#           web-dave interface 
+# clean   -- Removes built products
+# update  -- Builds the devel build.  This is the same as release
+#            but is used by the main repository after a bzr update so
+#            that people can browse the built items through the
+#            web-dave interface 
 
 # task :default => [:rcov, :rdoc]
 task :default => [:spec]
@@ -175,8 +179,18 @@ task :publish => [:web] do
     sh "scp web/output/images/* " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project + "/images/"
 end
 
-task :release => [:spec, :package] do
-    release_dir = "jldrill-#{JLDrill::VERSION}"
+task :clean do
+    sh "rm -rf #{release_dir}"
+    sh "rm -rf test_results.html"
+    sh "rm -rf doc"
+    sh "rm -rf coverage"
+    sh "rm -rf pkg"
+    sh "rm -rf webgen.cache"
+    sh "rm -rf web/output"
+    sh "rm -rf web/webgen.cache"
+end
+
+task :release => [:clean, :rcov, :rdoc, :web, :package] do
     mkdir release_dir
     sh "cd #{context_directory}; rake rcov; rake package"
     sh "cp #{context_directory}/pkg/context-#{context_version}.gem #{release_dir}"
@@ -184,4 +198,4 @@ task :release => [:spec, :package] do
     sh "cp data/jldrill/fonts/*.ttf #{release_dir}"
 end
 
-task :update => [:rcov, :web, :release]
+task :update => [:release]
