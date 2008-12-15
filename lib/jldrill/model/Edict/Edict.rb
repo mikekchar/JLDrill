@@ -10,17 +10,19 @@ module JLDrill
 
         LINE_RE_TEXT = '^([^\[]*)\s+(\[(.*)\]\s+)?\/(([^\/]*\/)+)\s*$'
         LINE_RE = Regexp.new(LINE_RE_TEXT)
+        READING_RE = Regexp.new('^([^\[]*)\s+(\[(.*)\]\s+)?')
         KANA_RE = /（(.*)）/
         COMMENT_RE = /^\#/
             
-            attr_reader :lines, :index, :loaded
+            attr_reader :lines, :numLinesParsed, :loaded
             attr_writer :lines
 
         def initialize(file=nil)
             @file = file
-            @vocab = []
+            @readings = []
             @lines = nil
-            @index = 0
+            @numLinesParsed = 0
+            @numReadingsAdded = 0
             @loaded = false
             @isUTF8 = nil
         end
@@ -37,24 +39,27 @@ module JLDrill
             @loaded
         end
 
-        def eachVocab
-            @vocab.each {|vocab|
-                yield(vocab)
-            }
+        def vocab(index)
+            if @lines.nil?
+                return nil
+            else
+                return parse(@lines[index], index)
+            end
         end
 
-        def vocab(index)
-            return @vocab[index]
+        def eachVocab
+            0.upto(length) do |i|
+                yield(vocab(i))
+            end
         end
 
         def length
-            return @vocab.length
+            return @numReadingsAdded
         end
 
-        def add(vocab)
-            if vocab
-                @vocab.push(vocab)
-            end
+        def add(reading, position)
+            @readings.push(reading)
+            @numReadingsAdded += 1
         end
 
         def isUTF8?(index)
@@ -111,7 +116,7 @@ module JLDrill
         end
         
         def parse(line, position)
-            retVal = false
+            retVal = nil
             line = toUTF8(line)
             if line =~ LINE_RE
                 kanji = $1
@@ -129,9 +134,8 @@ module JLDrill
                     kanji = nil
                 end
 
-                add(Vocabulary.new(kanji, kana, english.allDefinitions,
-                                   english.allTypes, hint, -1))
-                retVal = true
+                retVal = Vocabulary.new(kanji, kana, english.allDefinitions,
+                                   english.allTypes, hint, position)
             else
                 print "Warning: Could not parse - #{line}\n"
             end             
@@ -140,56 +144,55 @@ module JLDrill
         
         def readLines()
             @lines = IO.readlines(@file)
-            @index = 0
-            @vocab = []
+            @numLinesParsed = 0
+            @numReadingsAdded = 0
+            @readings = []
+        end
+
+        def parseReading(line)
+            reading = nil
+            if !line =~ COMMENT_RE 
+                if line =~ READING_RE
+                    kanji = $1
+                    reading = $3
+                    # Hack for JLPT files
+                    if reading =~ KANA_RE
+                        reading = ""
+                    end
+                    if reading == ""
+                        reading = kanji
+                    end
+                end
+            end
+            return reading
         end
 
         def parseChunk(chunkSize)
             if @loaded then return true end
             
-            if (@index + chunkSize) >= @lines.size
-                chunkSize = @lines.size - @index
+            if (@numLinesParsed + chunkSize) >= @lines.size
+                chunkSize = @lines.size - @numLinesParsed
                 @loaded = true
             end
 
             0.upto(chunkSize - 1) do
-                line = @lines[@index]
-                parse(line, @index) unless line =~ COMMENT_RE
-                @index += 1
+                line = @lines[@numLinesParsed]
+                add(parseReading(line), @numLinesParsed)
+                @numLinesParsed += 1
             end
-            
-            @lines = [] if @loaded
             
             return @loaded
         end
+
+        # Reads in the whole file at once
+        def read
+            readLines()
+            parseChunk(@lines.size)
+        end
         
         def fraction
-            retVal = @index.to_f / @lines.size.to_f
+            retVal = @numLinesParsed.to_f / @lines.size.to_f
             retVal
-        end
-
-        def read(&progress)
-            if(@file.nil?) then return false end
-            i = 0
-            size = File.size(@file).to_f
-            total = 0.to_f
-            report = 0
-            IO.foreach(@file) { |line|
-                # Only report every 1000 lines because it's expensive  
-                total += line.length.to_f
-                if progress && (report == 1000)
-                    report = 0
-                    progress.call(total / size)
-                end
-                report += 1
-                unless line =~ COMMENT_RE
-                    if parse(line, i)
-                        i += 1
-                    end
-                end
-            }
-            @loaded = true
-            self
         end
 
         def shortFile
@@ -201,34 +204,29 @@ module JLDrill
             end
         end
 
-        def include?(vocab)
-            if(!@vocab.nil?)
-                return @vocab.include?(vocab)
-            else
-                return false
-            end
-        end
-
         def search(reading)
             result = []
-            if @vocab
-                @vocab.each { |vocab|
-                    if vocab.reading
-                        re = Regexp.new("^#{reading}")
-                        if re.match(vocab.reading)
-                            result.push(vocab)
-                        end
+            0.upto(@readings.size - 1) do |i|
+                candidate = @readings[i]
+                if !candidate.nil?
+                    re = Regexp.new("^#{reading}")
+                    if re.match(candidate)
+                        result.push(parse(lines[i]))
                     end
-                }
+                end
             end
             return result
         end
 
+        def include?(vocab)
+            return search(vocab.reading).include?(vocab)
+        end
+
         def to_s()
             retVal = ""
-            @vocab.each { |word|
+            eachVocab do |word|
                 retVal += word.to_s + "\n"
-            }
+            end
             return retVal
         end
     end

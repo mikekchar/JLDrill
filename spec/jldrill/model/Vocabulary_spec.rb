@@ -159,10 +159,11 @@ module JLDrill
         # This is a complete hack, of course, and I'll have to revamp
         # the fileformat in the next version.
         it "should parse commas properly" do
-            v1 = Vocabulary.create("/Kanji: 鈍い/Reading: にぶい/Definitions: dull (e.g.\\, a knife),thickheaded,slow (opposite of fast),stupid/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
+            v1 = Vocabulary.create("/Kanji: 鈍い/Reading: にぶい/Definitions: dull (e.g.\\, a knife),thickheaded,slow (opposite of fast),stupid/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 0/")
             line = "鈍い [にぶい] /(adj) dull (e.g., a knife)/thickheaded/slow (opposite of fast)/stupid/(P)/"
             edict = Edict.new
-            edict.parse(line, 1)
+            edict.lines = [line]
+            edict.parse(line, 0)
             edict.vocab(0).should eql(v1)
             v2 = edict.vocab(0).clone
             edict.vocab(0).should eql(v2)

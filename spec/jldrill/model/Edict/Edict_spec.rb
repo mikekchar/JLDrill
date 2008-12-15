@@ -13,12 +13,6 @@ module JLDrill
 	        edict2.file.should be_nil
 	    end
 	    
-	    it "should not try to read the file if it isn't set" do
-	        edict = Edict.new()
-	        edict.file.should be_nil
-	        edict.read.should be(false)
-	    end
-	
 	    it "should be able to set the filename after creation" do
 	        edict = Edict.new
 	        edict.file.should be_nil
@@ -35,7 +29,7 @@ module JLDrill
             edict.lines.size.should be(142339)
             edict.parseChunk(1000)
             edict.length.should be(1000)
-            edict.index.should be(1000)
+            edict.numLinesParsed.should be(1000)
             edict.loaded.should be(false)
 # This part of the test is too slow to run every time right now
 #            while !edict.parseChunk(1000) do end

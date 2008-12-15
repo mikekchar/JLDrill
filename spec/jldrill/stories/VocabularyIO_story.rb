@@ -157,7 +157,8 @@ module JLDrill::VocabularyIO
                 "/(v1) to close (e.g., book, eyes, meeting, etc.)" +
                 "/to shut/(P)/\n"
             edict = JLDrill::Edict.new
-            edict.parse(edictString, -1)
+            edict.lines = [edictString]
+            edict.parse(edictString, 0).should_not be_nil
             v = JLDrill::Vocabulary.create("/Kanji: 閉じる" + 
                 "/Reading: とじる" +
                 "/Definitions: to close (e.g.\\, book\\, eyes\\, meeting\\, etc.)," +
