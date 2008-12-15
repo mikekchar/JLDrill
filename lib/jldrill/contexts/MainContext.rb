@@ -111,7 +111,9 @@ module JLDrill
                 if JLDrill::Quiz.drillFile?(filename)
                     quiz.load(filename)
                 else
-                    quiz.loadFromDict(Edict.new(filename).read)
+                    dict = Edict.new(filename)
+                    dict.read
+                    quiz.loadFromDict(dict)
                 end
                 true
             else
