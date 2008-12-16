@@ -85,6 +85,14 @@ module JLDrill::ParseEdictEntriesOnDemand
             edict.include?(edict.vocab(0)).should be(true)
             edict.include?(edict.vocab(1)).should be(true)
             edict.include?(edict.vocab(2)).should be(true)
+            alist = edict.search("あ")
+            alist.size.should be(3)
+            amelist = edict.search("あめ")
+            amelist.size.should be(2)
+            amefurilist = edict.search("あめふり")
+            amefurilist.size.should be(1)
+            amefurilist = edict.search("あめが")
+            amefurilist.size.should be(0)
         end
     end
 end

@@ -10,6 +10,7 @@ module JLDrill
         # Create hash keys from the first 3 characters in the reading.
         # This will create small enough bins that we can parse them quickly
         KEY_RE = /^(..?.?)/mu
+        KEY_LIMIT_RE = /...+/mu
 
         def initialize(file=nil)
             super(file)
@@ -46,6 +47,16 @@ module JLDrill
             return bin
         end
 
+        # Return an array of bins with keys matching re
+        # This will probably be slow
+        def findBinsWith(reading, re)
+            result = []
+            @hash.each_key do |key|
+                result.push(@hash[key]) if key =~ re
+            end
+            return result
+        end
+
         # searches the bin using the regular expression, re, for the reading
         def searchBin(reading, bin, re)
             result = []
@@ -63,9 +74,24 @@ module JLDrill
         end
 
         def search(reading)
-            bin = findBin(reading)
+            result = []
             re = Regexp.new("^#{reading}")
-            return searchBin(reading, bin, re)
+
+            # Because they are kanji characters and strings are bytes,
+            # we have to check the size using a regular expression
+            if reading =~ KEY_LIMIT_RE
+                # If it's bigger than the limit size
+                bin = findBin(reading)
+                result = searchBin(reading, bin, re)
+            else
+                # If it's smaller than the limit size, then
+                # other bins might also match.
+                bins = findBinsWith(reading, re)
+                bins.each do |bin|
+                    result += searchBin(reading, bin, re)
+                end
+            end
+            return result
         end
 
         def include?(vocab)
