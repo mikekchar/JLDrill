@@ -150,13 +150,11 @@ module JLDrill
         end
 
         def parseReading(line)
+            reading = nil
             line = toUTF8(line)
             if line =~ COMMENT_RE
-                return nil
-            end
-
-            reading = nil
-            if line =~ READING_RE
+                # Do nothing
+            elsif line =~ READING_RE
                 kanji = $1
                 reading = $3
                 # Hack for JLPT files
@@ -193,10 +191,14 @@ module JLDrill
             return @loaded
         end
 
+        def parseLines
+            parseChunk(@lines.size)
+        end
+
         # Reads in the whole file at once
         def read
             readLines()
-            parseChunk(@lines.size)
+            parseLines()
         end
         
         def fraction

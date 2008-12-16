@@ -49,7 +49,7 @@ module JLDrill::ParseEdictEntriesOnDemand
             utf.should include(ame)
         end
 
-        it "should be able to find an entry in a real Edict" do
+        it "should be able to find an entry in an EUC edict file" do
             utf = JLDrill::Edict.new
             utf.lines = ["雨 [あめ] /(n) rain/(P)/"]
             utf.length.should be(0)
@@ -57,16 +57,19 @@ module JLDrill::ParseEdictEntriesOnDemand
             utf.length.should be(1)
             ame = utf.vocab(0)
             ame.reading.should eql("あめ")
-			dictDir = File.join(JLDrill::Config::DATA_DIR, "dict")
-            filename = File.join(dictDir, "edict")
-            edict = JLDrill::HashedEdict.new(filename)
-            edict.read.should be(true)
-            edict.length.should be(142339)
-            ameList = edict.search("あめ")
+            euc = JLDrill::Edict.new
+            euc.lines = ["\261\253 [\244\242\244\341] /(n) rain/(P)/"]
+            euc.parseLines
+            euc.linesAreUTF8?.should be(false)
+            euc.length.should be(1)
+            euc.vocab(0).should eql(ame)
+            euc.readings.size.should be(1)
+            euc.readings[0].should eql("あめ")
+            ameList = euc.search("あめ")
             ameList.should_not be_nil
-            ameList.size.should_not be(0)
+            ameList.size.should be(1)
             ameList.should include(ame)
-            edict.should include(ame)
+            euc.should include(ame)
         end
     end
 end

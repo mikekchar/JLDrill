@@ -50,7 +50,6 @@ module JLDrill
         def searchBin(reading, bin, re)
             result = []
             if !bin.nil?
-                print "HashedEdict::searchBin size=#{bin.size}\n"
                 bin.each do |position|
                     vocab = vocab(position)
                     if !vocab.nil? && !vocab.reading.nil?
@@ -59,7 +58,6 @@ module JLDrill
                         end
                     end
                 end
-                print "HashedEdict::searchBin Done\n"                
             end
             return result
         end
