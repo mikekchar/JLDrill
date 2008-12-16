@@ -40,7 +40,7 @@ module JLDrill
         end
 
         def vocab(index)
-            if @lines.nil?
+            if @lines.nil? || (index >= @lines.size)
                 return nil
             else
                 return parse(@lines[index], index)
@@ -159,11 +159,9 @@ module JLDrill
                 reading = $3
 
                 # Hack for JLPT files
-                if reading =~ KANA_RE
-                    reading = ""
-                end
-                if reading.nil? || reading.empty?
+                if reading =~ KANA_RE || reading.nil? || reading.empty?
                     reading = kanji
+                    kanji = nil
                 end
 
             end
@@ -211,7 +209,10 @@ module JLDrill
             end
         end
 
-        def shortFile
+        def shortFilename
+            if @file.nil? || @file.empty
+                return "No name"
+            end
             pos = @file.rindex('/')
             if(pos)
                 return @file[(pos+1)..(@file.length-1)]

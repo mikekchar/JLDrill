@@ -2,6 +2,7 @@ require 'jldrill/spec/StoryMemento'
 require 'jldrill/model/Edict/Edict'
 require 'jldrill/model/HashedEdict'
 require 'jldrill/model/Config'
+require 'jldrill/model/Quiz/Quiz'
 
 module JLDrill::ParseEdictEntriesOnDemand
 
@@ -93,6 +94,47 @@ module JLDrill::ParseEdictEntriesOnDemand
             amefurilist.size.should be(1)
             amefurilist = edict.search("あめが")
             amefurilist.size.should be(0)
+        end
+    end
+
+    describe Story.stepName("Extra Edict tests") do
+
+        it "should return nil from vocab() when index is out of range" do
+            edict = JLDrill::Edict.new
+            edict.vocab(5).should be_nil
+            edict.lines = ["雨 [あめ] /(n) rain/(P)/"]
+            edict.parseLines
+            edict.length.should be(1)
+            edict.vocab(5).should be_nil
+        end
+
+        it "should be able to load a Quiz from an Edict file" do
+            quiz = JLDrill::Quiz.new
+            quiz.length.should be(0)
+            quiz.needsSave?.should be(false)
+            edict = JLDrill::HashedEdict.new
+            edict.lines = ["あ /hiragana a/",
+                         "雨 [あめ] /(n) rain/(P)/",
+                         "雨降り [あめふり] /(n) in the rain/(P)/"]
+            edict.parseLines
+            quiz.loadFromDict(edict)
+            quiz.length.should be(3)
+            quiz.needsSave?.should be(true)
+            quiz.name.should eql("No name")
+        end
+
+        it "should be able to parse hacked JLPT files" do
+            # Some of the entries in the JLPT files look like this
+            edict = JLDrill::HashedEdict.new
+            edict.lines = ["あ [（平仮名）] /hiragana a/"]
+            edict.parseLines
+            edict.length.should be(1)
+            a = edict.vocab(0)
+            a.kanji.should be_nil
+            a.reading.should eql("あ")
+            a.hint.should eql("平仮名")
+            edict.should include(a)
+            edict.search("あ").should include(a)
         end
     end
 end
