@@ -36,6 +36,8 @@ pkg_files = FileList[
 # The fonts are really big and you have to install it by hand anyway
 pkg_files.exclude('data/jldrill/fonts/*.ttf')
 
+# Spec options
+spec_opts = ['-f html:test_results.html']
 spec_files = FileList[
 	'spec/**/*_spec.rb',
 	'spec/**/*_story.rb'
@@ -76,9 +78,10 @@ ruby_opts = ["-KO", "-I./lib"]
 task :default => [:spec]
 
 # Run the rspec tests
-Spec::Rake::SpecTask.new(:spec) do |t|
+Spec::Rake::SpecTask.new(:spec) do |t, args|
 	t.spec_files = spec_files
 	t.ruby_opts = ruby_opts
+    t.spec_opts = spec_opts
 end
 
 # Run the rspec tests with the code coverage program rcov
@@ -89,7 +92,7 @@ Spec::Rake::SpecTask.new(:rcov) do |t|
 	    "--exclude _spec", "--exclude /lib/Context/", "--exclude _story",
 	    "--exclude cairo", "--exclude pango", "--exclude gtk2", "--exclude atk",
 	    "--exclude glib", "--exclude gdk"]
-	t.spec_opts = ["--format html:test_results.html"]
+	t.spec_opts = spec_opts
 	t.ruby_opts = ruby_opts
 end
 

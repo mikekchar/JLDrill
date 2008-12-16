@@ -2,6 +2,7 @@ require 'jldrill/contexts/MainContext'
 require 'jldrill/views/MainWindowView'
 require 'jldrill/views/gtk/MainWindowView'
 require 'jldrill/spec/Fakes'
+require 'jldrill/spec/SampleQuiz'
 
 # A convenience since starting up the main window is likely
 # to try to open most of the views

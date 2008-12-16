@@ -8,15 +8,20 @@ module JLDrill
 	        Config::DATA_DIR.should_not be_nil
 	    end
 
-# I can't do this test as written because it interferes with other tests	    
-#	    it "should have a different DATA_DIR for Gem" do
-#	        Config::getDataDir.should eql(File.expand_path("data/jldrill"))
-#	        def Gem.datadir(string)
-#	            "blah"
-#	        end
-#	        Config::getDataDir.should eql(File.expand_path("blah"))
-#	    end
-	    
+        it "should not be using the Gem DATA_DIR in the tests" do
+            Config::DATA_DIR.should eql(File.expand_path("data/jldrill"))
+        end
+
+        it "should use the Gem::datadir if set" do
+            def Gem.datadir(string)
+                "blah"
+            end
+	        Config::getDataDir.should eql(File.expand_path("blah"))
+            # Reset this so the other tests don't fail
+            def Gem.datadir(string)
+                nil
+            end
+            Config::DATA_DIR.should eql(File.expand_path("data/jldrill"))
+        end
     end
-    
 end

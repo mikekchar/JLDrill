@@ -7,7 +7,9 @@ require 'jldrill/model/Vocabulary'
 module JLDrill
     class HashedEdict < Edict
 
-        KEY_RE = /^(.)/mu
+        # Create hash keys from the first 3 characters in the reading.
+        # This will create small enough bins that we can parse them quickly
+        KEY_RE = /^(..?.?)/mu
 
         def initialize(file=nil)
             super(file)
@@ -34,26 +36,45 @@ module JLDrill
             end
         end
 
-        def search(reading)
-            result = []
-            if @hash
+        # Returns the bin that contains the reading, or nil if it is not found
+        def findBin(reading)
+            bin = nil
+            if !@hash.nil?
                 key = findKey(reading)
                 bin = @hash[key]
-                re = Regexp.new("^#{reading}")
-                if bin
-                    bin.each do |position|
-                        vocab = vocab(position)
-                        if !vocab.nil? && !vocab.reading.nil?
-                            if re.match(vocab.reading)
-                                result.push(vocab)
-                            end
+            end
+            return bin
+        end
+
+        # searches the bin using the regular expression, re, for the reading
+        def searchBin(reading, bin, re)
+            result = []
+            if !bin.nil?
+                print "HashedEdict::searchBin size=#{bin.size}\n"
+                bin.each do |position|
+                    vocab = vocab(position)
+                    if !vocab.nil? && !vocab.reading.nil?
+                        if re.match(vocab.reading)
+                            result.push(vocab)
                         end
                     end
                 end
+                print "HashedEdict::searchBin Done\n"                
             end
-            
             return result
         end
 
+        def search(reading)
+            bin = findBin(reading)
+            re = Regexp.new("^#{reading}")
+            return searchBin(reading, bin, re)
+        end
+
+        def include?(vocab)
+            reading = vocab.reading
+            bin = findBin(reading)
+            re = Regexp.new("^#{reading}$")
+            return searchBin(reading, bin, re).include?(vocab)
+        end
     end
 end
