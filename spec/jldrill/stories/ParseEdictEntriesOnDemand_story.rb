@@ -25,7 +25,7 @@ module JLDrill::ParseEdictEntriesOnDemand
             utf = JLDrill::Edict.new
             utf.lines = ["雨 [あめ] /(n) rain/(P)/"]
             utf.length.should be(0)
-            utf.parseNextLine
+            utf.parseLines
             utf.length.should be(1)
             ameList = utf.search("あめ")
             ameList.size.should be(1)
@@ -39,7 +39,7 @@ module JLDrill::ParseEdictEntriesOnDemand
             utf = JLDrill::HashedEdict.new
             utf.lines = ["雨 [あめ] /(n) rain/(P)/"]
             utf.length.should be(0)
-            utf.parseNextLine
+            utf.parseLines
             utf.length.should be(1)
             ameList = utf.search("あめ")
             ameList.size.should be(1)
@@ -53,7 +53,7 @@ module JLDrill::ParseEdictEntriesOnDemand
             utf = JLDrill::Edict.new
             utf.lines = ["雨 [あめ] /(n) rain/(P)/"]
             utf.length.should be(0)
-            utf.parseNextLine
+            utf.parseLines
             utf.length.should be(1)
             ame = utf.vocab(0)
             ame.reading.should eql("あめ")
@@ -70,6 +70,21 @@ module JLDrill::ParseEdictEntriesOnDemand
             ameList.size.should be(1)
             ameList.should include(ame)
             euc.should include(ame)
+        end
+
+        it "should be able to find an entries in a HashedEdictFile" do
+            edict = JLDrill::HashedEdict.new
+            edict.lines = ["あ /hiragana a/",
+                         "雨 [あめ] /(n) rain/(P)/",
+                         "雨降り [あめふり] /(n) in the rain/(P)/"]
+            edict.parseLines
+            edict.length.should be(3)
+            edict.vocab(0).reading.should eql("あ")
+            edict.vocab(1).reading.should eql("あめ")
+            edict.vocab(2).reading.should eql("あめふり")
+            edict.include?(edict.vocab(0)).should be(true)
+            edict.include?(edict.vocab(1)).should be(true)
+            edict.include?(edict.vocab(2)).should be(true)
         end
     end
 end

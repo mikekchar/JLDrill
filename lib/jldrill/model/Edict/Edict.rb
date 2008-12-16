@@ -8,9 +8,9 @@ require 'kconv'
 module JLDrill
     class Edict
 
-        LINE_RE_TEXT = '^([^\[]*)\s+(\[(.*)\]\s+)?\/(([^\/]*\/)+)\s*$'
+        LINE_RE_TEXT = '^([^\[\s]*)\s+(\[(.*)\]\s+)?\/(([^\/]*\/)+)\s*$'
         LINE_RE = Regexp.new(LINE_RE_TEXT)
-        READING_RE = Regexp.new('^([^\[]*)\s+(\[(.*)\]\s+)?')
+        READING_RE = Regexp.new('^([^\[\s]*)\s+(\[(.*)\]\s+)?')
         KANA_RE = /（(.*)）/
         COMMENT_RE = /^\#/
             
@@ -157,13 +157,15 @@ module JLDrill
             elsif line =~ READING_RE
                 kanji = $1
                 reading = $3
+
                 # Hack for JLPT files
                 if reading =~ KANA_RE
                     reading = ""
                 end
-                if reading == ""
+                if reading.nil? || reading.empty?
                     reading = kanji
                 end
+
             end
             return reading
         end
