@@ -1,9 +1,9 @@
 require 'jldrill/model/Bin'
-require 'jldrill/model/VocabularyStatus'
+require 'jldrill/model/Quiz/ItemStatus'
 
 module JLDrill
 
-	describe VocabularyStatus do
+	describe ItemStatus do
 	
 		before(:each) do
         	@fileString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 0/
@@ -177,9 +177,9 @@ module JLDrill
         end
         
         it "should be able to tell if an item is overdue to be reviewed" do
-            @vocab[1].status.scheduledTime = Time::now - VocabularyStatus::SECONDS_PER_DAY
+            @vocab[1].status.scheduledTime = Time::now - ItemStatus::SECONDS_PER_DAY
             @vocab[1].status.overdue?.should be(true)
-            @vocab[1].status.scheduledTime = Time::now + VocabularyStatus::SECONDS_PER_DAY
+            @vocab[1].status.scheduledTime = Time::now + ItemStatus::SECONDS_PER_DAY
             @vocab[1].status.overdue?.should be(false)            
             @vocab[1].status.scheduledTime = Time::now
             @vocab[1].status.overdue?.should be(false)            

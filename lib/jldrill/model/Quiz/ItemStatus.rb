@@ -1,18 +1,20 @@
 
 module JLDrill
 
-    # A memento that keeps track of the drill status for this
-    # vocabulary.
+    # A memento that keeps track of the quiz status for this
+    # item.
     # * score is the number of times the item has been successfully
-    # drilled in the current bin.
+    #   drilled in the current bin.
     # * bin is the number of the bin
-    # * level is 0 if meaning has not been introduced 1 if kanji has not been introduced, 2 otherwise (is this right?)
+    # * level is 0 if meaning has not been introduced 
+    #            1 if kanji has not been introduced, 
+    #            2 otherwise
     # * position is the original ordinal position of the item in the quiz
     # * index is the ordinal position of the item in the bin
     #
     # Note: item is not currently being stored in the files and is not outputted
     # in to_s()
-    class VocabularyStatus
+    class ItemStatus
 
         SCORE_RE = /^Score: (.*)/
         BIN_RE = /^Bin: (.*)/
@@ -34,8 +36,7 @@ module JLDrill
                         :seen, :numIncorrect
 
 
-        def initialize(vocab)
-            @vocab = vocab
+        def initialize
             @score = 0
             @bin = 0
             @level = 0
@@ -48,7 +49,7 @@ module JLDrill
             @numIncorrect = 0
         end
         
-        # Parses a vocabulary value in save format.
+        # Parses the item status.
         def parse(string)
             parsed = true
             case string
@@ -100,7 +101,7 @@ module JLDrill
         end
         
         # Returns a +-10% random variation in the interval.
-        # This smooths out the distribution of vocabulary and makes
+        # This smooths out the distribution of items and makes
         # it so that similar items aren't always together.
         def randomVariation(interval)
             # 10% - rand(20%) = +- 10%

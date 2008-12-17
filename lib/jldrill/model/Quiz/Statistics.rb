@@ -1,5 +1,5 @@
 require 'jldrill/model/Vocabulary'
-require 'jldrill/model/VocabularyStatus'
+require 'jldrill/model/Quiz/ItemStatus'
 
 module JLDrill
 

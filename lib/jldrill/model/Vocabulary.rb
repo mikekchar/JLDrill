@@ -1,4 +1,4 @@
-require "jldrill/model/VocabularyStatus"
+require "jldrill/model/Quiz/ItemStatus"
 require "jldrill/model/StringField"
 require "jldrill/model/ListField"
 
@@ -26,7 +26,7 @@ module JLDrill
             @hint = StringField.new("Hint", hint)
             @definitions = ListField.new("Definitions", definitions)
             @markers = ListField.new("Markers", markers)
-            @status = JLDrill::VocabularyStatus.new(self)
+            @status = JLDrill::ItemStatus.new
             if !position.nil? then @status.position = position end
         end
         

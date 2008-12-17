@@ -77,19 +77,22 @@ module JLDrill::ParseEdictEntriesOnDemand
             edict = JLDrill::HashedEdict.new
             edict.lines = ["あ /hiragana a/",
                          "雨 [あめ] /(n) rain/(P)/",
-                         "雨降り [あめふり] /(n) in the rain/(P)/"]
+                         "雨降り [あめふり] /(n) in the rain/(P)/",
+                         "雨降らし [あめふらし] /(n) sea hare/"]
             edict.parseLines
-            edict.length.should be(3)
+            edict.length.should be(4)
             edict.vocab(0).reading.should eql("あ")
             edict.vocab(1).reading.should eql("あめ")
             edict.vocab(2).reading.should eql("あめふり")
+            edict.vocab(3).reading.should eql("あめふらし")
             edict.include?(edict.vocab(0)).should be(true)
             edict.include?(edict.vocab(1)).should be(true)
             edict.include?(edict.vocab(2)).should be(true)
+            edict.include?(edict.vocab(3)).should be(true)
             alist = edict.search("あ")
-            alist.size.should be(3)
+            alist.size.should be(4)
             amelist = edict.search("あめ")
-            amelist.size.should be(2)
+            amelist.size.should be(3)
             amefurilist = edict.search("あめふり")
             amefurilist.size.should be(1)
             amefurilist = edict.search("あめが")

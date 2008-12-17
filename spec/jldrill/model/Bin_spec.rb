@@ -106,29 +106,6 @@ module JLDrill
 		    @bin.to_s.should eql("My name\n" + contentsString + "\n")
 		end
 		
-		it "should be able to create a copy of it's contents" do
-		    test_pushAll
-		    i = -1
-		    @bin.cloneContents.all? do |vocab|
-		        i += 1
-		        vocab == @bin[i]
-		    end.should be(true)
-		    @bin.cloneContents.should_not be(@bin.contents) 
-		end
-		
-		it "should be able to replace it's contents array" do
-		# Note the bin number has changed
-		contentsString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 2/Level: 0/Position: 1/Consecutive: 0/Difficulty: 3/
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 2/Level: 0/Position: 2/Consecutive: 0/Difficulty: 3/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 2/Level: 0/Position: 3/Consecutive: 0/Difficulty: 3/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 2/Level: 0/Position: 4/Consecutive: 1/Difficulty: 3/
-]
-		    test_pushAll
-	        bin2 = Bin.new("number2", 2)
-	        bin2.contents = @bin.cloneContents
-	        bin2.to_s.should eql("number2\n" + contentsString)
-		end
-		
 		it "should indicate if the bin is empty" do
 		    bin = Bin.new("yeah", 3)
 		    bin.empty?.should be(true)
