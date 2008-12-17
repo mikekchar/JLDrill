@@ -711,10 +711,9 @@ reference dictionary.
 You can load a reference dictionary by pressing Ctrl-D (or selecting
 File/Load Reference Dictionary from the menu)  The reference
 dictionary distributed with JLDrill is the EDICT dictionary from
-Monash University.  Note that it takes a long time (25 seconds on my
-machine) to load the edict library.  A window with a progress bar will
-be shown.  You are able to continue drilling while the dictionary is
-loading, though.
+Monash University.  It takes a few seconds to load the dictionary.
+A window with a progress bar will be shown.  You are able to continue 
+drilling while the dictionary is loading, though.
 
 After the Reference Dictionary has been loaded, JLDrill will look up
 every item as you encounter it.  If the item can not be found in the

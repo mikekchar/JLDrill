@@ -13,7 +13,7 @@ feature, please email me.
 * Memory usage and speed.  JLDrill uses a *lot* of memory.  When
 the dictionary is loaded it's up to about 290 megs on my machine.
 I've discovered the root of the problem and the fix should also
-dramatically speed up dictionary loading. **Status: Not done**
+dramatically speed up dictionary loading. **Status: Dictionary finished**
 * Specific mode for grammar drills.  **Status: Not done**
 * Easier installation. **Status: Not done**
 * Drill construction tool.  We need to be able to make a brand new drill.
