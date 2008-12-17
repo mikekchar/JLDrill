@@ -13,27 +13,27 @@ module JLDrill
             @contents = []
         end
 
-        # Returns the number of vocabulary in the bin
+        # Returns the number of items in the bin
         def length()
             return @contents.length
         end
 
-        # Returns the vocabulary at the index specified
+        # Returns the item at the index specified
         def [](index)
-            vocab = @contents[index]
-            vocab.status.index = index unless vocab.nil?
-            vocab
+            item = @contents[index]
+            item.status.index = index unless item.nil?
+            item
         end
 
-        # Pushes a vocabulary to the end of the bin
-        # Also sets the bin number of the vocab
-        def push(vocab)
-            vocab.status.bin = @number
-            vocab.status.index = @contents.length
-            @contents.push(vocab)
+        # Pushes a item to the end of the bin
+        # Also sets the bin number of the item
+        def push(item)
+            item.status.bin = @number
+            item.status.index = @contents.length
+            @contents.push(item)
         end
         
-        # Deletes the vocabulary at the specified index
+        # Deletes the item at the specified index
         def delete_at(index)
             @contents[index].status.index = nil unless @contents[index].nil?
             @contents.delete_at(index)
@@ -42,31 +42,31 @@ module JLDrill
             end
         end
 
-        # Calls a block for each vocabulary in the bin
+        # Calls a block for each item in the bin
         def each(&block)
             i = 0
-            @contents.each do |vocab|
-                vocab.status.index = i
+            @contents.each do |item|
+                item.status.index = i
                 i += 1
-                block.call(vocab)
+                block.call(item)
             end
         end
 
-        # Calls a block for each vocabulary in the bin, stopping if the
+        # Calls a block for each item in the bin, stopping if the
         # block returns false.  Returns true if all iterations return true.
         def all?(&block)
             i = 0
-            @contents.all? do |vocab|
-                vocab.status.index = i
+            @contents.all? do |item|
+                item.status.index = i
                 i += 1
-                block.call(vocab)
+                block.call(item)
             end
         end
 
-        # Update the indeces of all the vocab entries in the bin.
+        # Update the indeces of all the item entries in the bin.
         def updateIndeces
             # each() already updates it, so all we have to do it reference them
-            self.each do |vocab|
+            self.each do |item|
             end
         end
 
@@ -83,8 +83,8 @@ module JLDrill
         def contents=(array)
             @contents = array
             # This will also update the indeces
-            self.each do |vocab|
-                vocab.status.bin = @number
+            self.each do |item|
+                item.status.bin = @number
             end
         end
    
@@ -96,16 +96,16 @@ module JLDrill
         # Returns the number of unseen items in the bin
         def numUnseen
             total = 0
-            @contents.each do |vocab|
-                total += 1 if !vocab.status.seen
+            @contents.each do |item|
+                total += 1 if !item.status.seen
             end
             total
         end
         
         # Returns true if all the items in the bin have been seen
         def allSeen?
-            @contents.all? do |vocab|
-                vocab.status.seen?
+            @contents.all? do |item|
+                item.status.seen?
             end
         end
         
@@ -144,15 +144,15 @@ module JLDrill
 
         # Sets the status of each item in the bin to unseen
         def setUnseen
-            @contents.each do |vocab|
-                vocab.status.seen = false
+            @contents.each do |item|
+                item.status.seen = false
             end
         end
         
         def numOverdue
             total = 0
-            @contents.each do |vocab|
-                if vocab.status.overdue?
+            @contents.each do |item|
+                if item.status.overdue?
                     total += 1
                 end
             end
@@ -161,8 +161,8 @@ module JLDrill
         
         def numScheduledOn(day)
             total = 0
-            @contents.each do |vocab|
-                if vocab.status.scheduledOn?(day)
+            @contents.each do |item|
+                if item.status.scheduledOn?(day)
                     total += 1
                 end
             end
@@ -171,21 +171,29 @@ module JLDrill
         
         def numDurationWithin(range)
             total = 0
-            @contents.each do |vocab|
-                if vocab.status.durationWithin?(range)
+            @contents.each do |item|
+                if item.status.durationWithin?(range)
                     total += 1
                 end
             end
             total
         end
 
-        def exists?(vocab)
+        # Returns true if the Item exists in the bin
+        def exists?(item)
             !@contents.find do |x|
-                vocab.eql?(x)
+                item.eql?(x)
             end.nil?
         end
 
-        # Returns a string containing all the vocabulary strings in the bin     
+        # Returns true if there is an Item in the bin that contains the object
+        def contain?(object)
+            !@contents.find do |x|
+                object.eql?(x)
+            end.nil?
+        end
+
+        # Returns a string containing all the item strings in the bin     
         def to_s
             @name + "\n" + @contents.join
         end

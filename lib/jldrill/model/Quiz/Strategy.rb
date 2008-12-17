@@ -45,11 +45,6 @@ module JLDrill
             1..3
         end
         
-        # Returns a random, non-empty bin in the working set
-        def workingSetBin
-            randomBin(workingSetRange)
-        end
-        
         # Returns true if there are no items in the working set
         def workingSetEmpty?
             contents.rangeEmpty?(1..3)
@@ -103,79 +98,6 @@ module JLDrill
             !workingSetKnown? && (reviewSetSize >= @quiz.options.introThresh)
         end
         
-        # Return a random bin (that has contents) in the range.
-        # The first bin has a 50% chance of being chosen.  
-        # The subsequent ones are 25%, 12.5%, 6.25% etc...  
-        # The last 2 bins have the same chance of being chosen.
-        # The percentages are only for bins with contents.  
-        # Returns -1 if the range contains no items.
-        def randomBin(range)
-            # If this range has no items at all, return -1
-            if contents.rangeEmpty?(range)
-                return -1
-            end
-            
-            # In lisp, car is the first item in the list
-            # cdr is the rest of the list.  Since this is a lispish
-            # algorithm, I'm using the same words.
-            car = range.begin
-            cdr = (range.begin + 1)..(range.end)
-
-            # We want to avoid the bin that the last item was in,
-            # thereby alternating between lesser known and
-            # better known items.  First we see if the last item
-            # was in cdr or car.
-            inCdr = false
-            inCar = false
-            if !@last.nil?
-                inCar = @last.status.bin == car
-                inCdr = cdr.find do |x|
-                    x == @last.status.bin
-                end
-            end
-                        
-            # if one or the other of car or cdr have no items in them,
-            # then return the one that has items
-            if contents.rangeEmpty?(cdr)
-                return car
-            elsif contents.bins[car].empty?
-                return randomBin(cdr)
-            
-            # Try to avoid the last item picked, but give preference for car
-            elsif inCdr
-                return car
-            elsif inCar
-                return randomBin(cdr)
-            
-            # If the last item was neither in cdr or car, pick it randomly
-            else
-                if rand(2) == 0
-                    return car
-                else
-                    return randomBin(cdr)
-                end
-            end
-        end
-        
-        # Pick a bin that has contents.  Try to keep the working set
-        # full either by reviewing items in the review set, or by
-        # adding items from the new set.
-        def getBin
-            if contents.empty?
-                return -1
-            end
-            
-            if !workingSetFull?
-                if shouldReview?
-                    return reviewSetBin
-                elsif !newSetEmpty?
-                    return newSetBin
-                end
-            end
-            
-            return workingSetBin
-        end
-
         def getVocabFromBin
             if contents.empty?
                 return nil

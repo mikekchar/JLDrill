@@ -146,74 +146,6 @@ module JLDrill
             rate.should be_close(50, 10)
         end
 
-        it "should return -1 when asked to pick from empty bins" do
-	        @strategy.randomBin(1..2).should be(-1)                    
-        end
-        
-        it "should return -1 when asked to pick from an empty range of bins" do
-            vocab = @sampleQuiz.sampleVocab
-	        @quiz.contents.add(vocab, 1)            
-	        @quiz.contents.add(vocab, 2)
-	        @strategy.randomBin(2..1).should be(-1)
-        end
-
-        it "should not pick empty bins even if it was the last item" do
-            vocab = @sampleQuiz.sampleVocab
-	        @last = vocab
-	        @quiz.contents.add(vocab, 1)
-	        @quiz.contents.bins[0].empty?.should be(true)
-	        @quiz.contents.bins[1].empty?.should be(false)
-	        @quiz.contents.bins[2].empty?.should be(true)
-	        @strategy.randomBin(0..1).should be(1)
-	        @strategy.randomBin(1..2).should be(1)
-        end
-
-        it "should alternate between 2 full bins" do
-            vocab = @sampleQuiz.sampleVocab
-	        @quiz.contents.add(vocab, 0)
-	        # bin 4 already has an item
-	        sizes = [0,0,0,0,0]
-	        0.upto(29) do
-	            bin = @strategy.randomBin(0..4)
-    	        sizes[bin] += 1
-    	        @strategy.last = @quiz.contents.bins[bin][0]
-    	    end
-    	    sizes[1].should be(0)
-    	    sizes[2].should be(0)
-    	    sizes[3].should be(0)
-    	    sizes[0].should be(15)
-    	    sizes[4].should be(15)
-        end
-        
-        it "should pick full bins in a binary decreasing fashion" do
-	        vocab = @sampleQuiz.sampleVocab
-	        @quiz.contents.add(vocab, 0)
-	        vocab = @sampleQuiz.sampleVocab
-	        @quiz.contents.add(vocab, 1)
-	        vocab = @sampleQuiz.sampleVocab
-	        @quiz.contents.add(vocab, 2)
-	        vocab = @sampleQuiz.sampleVocab
-	        @quiz.contents.add(vocab, 3)
-	        # bin 4 already has an item
-	        sizes = [0,0,0,0,0]
-	        0.upto(999) do
-	            bin = @strategy.randomBin(0..4)
-    	        sizes[bin] += 1
-    	        @strategy.last = @quiz.contents.bins[bin][0]
-    	    end
-    	    total = sizes[0] + sizes[1] + sizes[2] + sizes[3] + sizes[4]
-    	    percent = [0,0,0,0,0]
-    	    percent[0] = (sizes[0] * 100) / total
-    	    percent[1] = (sizes[1] * 100) / total
-    	    percent[2] = (sizes[2] * 100) / total
-    	    percent[3] = (sizes[3] * 100) / total
-    	    percent[4] = (sizes[4] * 100) / total
-    	    percent[0].should be_close(50, 5)
-    	    percent[1].should be_close(25, 5)
-    	    percent[2].should be_close(12, 5)
-    	    percent[3].should be_close(6, 5)
-    	    percent[4].should be_close(6, 5)
-        end
         
         it "should be able to tell if the working set is full" do
             @quiz.options.introThresh = 5
@@ -258,45 +190,6 @@ module JLDrill
             end
             # Now we know the items well enough, so we shouldn't review
             @strategy.shouldReview?.should be(false)                        
-        end
-        
-        it "should be able to pick a bin with contents if possible" do
-            quiz = Quiz.new
-            strategy = quiz.strategy
-            quiz.options.introThresh = 5
-            
-            # We don't have any items, so getBin should fail
-            strategy.getBin.should be(-1)
-            vocab = @sampleQuiz.sampleVocab
-	        quiz.contents.add(vocab, 0)
-	        
-	        # We have only have an item in the new set
-	        strategy.getBin.should be(0)
-	        
-	        # Move the item to the working set
-	        strategy.promote(vocab)
-	        strategy.getBin.should be(1)
-
-	        quiz.contents.add(vocab, 0)
-            # Now we have an item in the new set and an item in the working set
-            # It should give us the new set since the working set isn't full	        
-	        strategy.getBin.should be(0)
-	        
-	        # We don't have enough items in the review set, so sill we should
-	        # get the new set
-	        strategy.getBin.should be(0)
-	        
-            0.upto(5) do
-                quiz.contents.add(vocab,4)
-            end
-            # Now we have enough items in the review set, so we should get it
-	        strategy.getBin.should be(4)
-	        
-            0.upto(4) do
-                quiz.contents.add(vocab,1)
-            end
-	        # Now the working set is full
-	        strategy.getBin.should be(1)
         end
         
         it "should increment the vocabulary's difficulty when an item is incorrect" do

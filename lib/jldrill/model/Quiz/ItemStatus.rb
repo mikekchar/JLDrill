@@ -74,6 +74,13 @@ module JLDrill
             end
             parsed
         end
+
+        # return a copy of this item
+        def clone
+            retVal = ItemStatus.new
+            retVal.parse(self.to_s)
+            return retVal
+        end
         
         # Updates the status for the lastReviewed to be now.
         # Returns the time that it set.

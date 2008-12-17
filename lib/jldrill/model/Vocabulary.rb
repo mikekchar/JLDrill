@@ -18,6 +18,7 @@ module JLDrill
         JP_COMMA_RE = Regexp.new("[、]", nil, "U")
 
         attr_reader :status
+        attr_writer :status
         
         def initialize(kanji=nil, reading=nil, definitions=nil, 
                        markers=nil, hint=nil, position=nil)
@@ -218,11 +219,16 @@ module JLDrill
                 end
             end
         end
+
+        # Output the contents in save file format *without the status*
+        def contentString
+            return @kanji.to_s + @hint.to_s + @reading.to_s +
+                @definitions.to_s + @markers.to_s
+        end
         
         # Output the vocabulary as a string in save file format
         def to_s
-            retVal = @kanji.to_s + @hint.to_s + @reading.to_s +
-                @definitions.to_s + @markers.to_s
+            retVal = contentString
             
             retVal += @status.to_s
             
