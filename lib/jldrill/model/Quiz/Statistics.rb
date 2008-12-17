@@ -1,4 +1,4 @@
-require 'jldrill/model/Vocabulary'
+require 'jldrill/model/Quiz/Item'
 require 'jldrill/model/Quiz/ItemStatus'
 
 module JLDrill
@@ -131,9 +131,9 @@ module JLDrill
             end
         end
         
-        def correct(vocab)
+        def correct(item)
             @correct += 1
-            level = getLevel(vocab.status.consecutive)
+            level = getLevel(item.status.consecutive)
             if !level.nil?
                 level.correct
             end
@@ -142,9 +142,9 @@ module JLDrill
             calculateConfidence(true)
         end
 
-        def incorrect(vocab)
+        def incorrect(item)
             @incorrect += 1
-            level = getLevel(vocab.status.consecutive)
+            level = getLevel(item.status.consecutive)
             if !level.nil?
                 level.incorrect
             end

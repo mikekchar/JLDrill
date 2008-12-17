@@ -104,12 +104,11 @@ module JLDrill
             newVocab = @sampleQuiz.sampleVocab
             quiz2.contents.add(newVocab, 2)
             quiz2.contents.length.should be(5)
-            quiz2.contents.bins[2][1].kanji.should be_eql(newVocab.kanji)
+            quiz2.contents.bins[2][1].to_o.kanji.should be_eql(newVocab.kanji)
 	        
 	        @quiz.contents.addContents(quiz2.contents)
 	        @quiz.contents.length.should be(5)
-            @quiz.contents.bins[2][1].kanji.should be_eql(newVocab.kanji)
+            @quiz.contents.bins[2][1].to_o.kanji.should be_eql(newVocab.kanji)
 	    end
-
     end
 end

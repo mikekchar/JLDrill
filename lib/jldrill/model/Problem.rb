@@ -1,33 +1,37 @@
+require 'jldrill/model/Vocabulary'
+
 module JLDrill
 
     # Represents a single question/answer pair in a quiz
     class Problem
-        attr_reader :vocab, :level, :requestedLevel
+        attr_reader :item, :level, :requestedLevel
         attr_writer :requestedLevel
         
-        def initialize(vocab, quiz)
-            @vocab = vocab
+        def initialize(item, quiz)
+            @item = item
             @level = -1
             @requestedLevel = -1
             @quiz = quiz
             @questionParts = []
             @answerParts = []
+            @vocab = Vocabulary.create(item.to_s)
         end
         
-        def Problem.create(level, vocab, quiz)
+        def Problem.create(level, item, quiz)
             case level
                 when 0
-                    problem = ReadingProblem.new(vocab, quiz)
+                    problem = ReadingProblem.new(item, quiz)
                 when 1
-                    if vocab.kanji
-                        problem = KanjiProblem.new(vocab, quiz)
+                    v = Vocabulary.create(item.to_s)
+                    if !v.kanji.nil?
+                        problem = KanjiProblem.new(item, quiz)
                     else
-                        problem = MeaningProblem.new(vocab, quiz)
+                        problem = MeaningProblem.new(item, quiz)
                     end
                 when 2
-                    problem = MeaningProblem.new(vocab, quiz)
+                    problem = MeaningProblem.new(item, quiz)
                 else
-                   problem = ReadingProblem.new(vocab, quiz)
+                   problem = ReadingProblem.new(item, quiz)
              end
             problem.requestedLevel = level
             problem
@@ -67,6 +71,7 @@ module JLDrill
         
         def vocab=(vocab)
             @vocab.assign(vocab)
+            @item.setContents(vocab.contentString)
             @quiz.setNeedsSave(true)
             @quiz.problemModified
         end
@@ -74,7 +79,7 @@ module JLDrill
         # Return a string showing what bin this problem is from
         def status
             retVal = "     "
-            bin = @vocab.status.bin
+            bin = @item.status.bin
             if bin < 4
                 if bin == 0
                     retVal += "New"
@@ -82,12 +87,12 @@ module JLDrill
                     retVal += bin.to_s
                 end
             else
-                retVal += "+#{@vocab.status.consecutive}"
-                if @vocab.status.reviewed?
-                    retVal += ", #{@vocab.status.reviewedDate}"
+                retVal += "+#{@item.status.consecutive}"
+                if @item.status.reviewed?
+                    retVal += ", #{@item.status.reviewedDate}"
                 end
             end
-            retVal += " --> #{@vocab.status.potentialScheduleInDays} days"
+            retVal += " --> #{@item.status.potentialScheduleInDays} days"
         end
 
         def evaluateAttribute(name)
@@ -130,8 +135,8 @@ module JLDrill
     # The first kind of Problem shown.  It lets you read it in Japanese and
     # guess the English
     class ReadingProblem < Problem
-        def initialize(vocab, quiz)
-            super(vocab, quiz)
+        def initialize(item, quiz)
+            super(item, quiz)
             @level = 0
             @questionParts = ["kanji", "reading", "hint"]
             @answerParts = ["definitions"]
@@ -140,8 +145,8 @@ module JLDrill
     
     # Test your kanji reading.  Read the kanji and guess the reading and definitions
     class KanjiProblem < Problem
-        def initialize(vocab, quiz)
-            super(vocab, quiz)
+        def initialize(item, quiz)
+            super(item, quiz)
             @level = 2
             @questionParts = ["kanji"]
             @answerParts = ["reading", "definitions", "hint"]
@@ -150,8 +155,8 @@ module JLDrill
     
     # Shows you the English and you guess the kanji and reading
     class MeaningProblem < Problem
-        def initialize(vocab, quiz)
-            super(vocab, quiz)
+        def initialize(item, quiz)
+            super(item, quiz)
             @level = 1
             @questionParts = ["definitions"]
             @answerParts = ["kanji", "reading", "hint"]

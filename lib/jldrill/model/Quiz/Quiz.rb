@@ -37,18 +37,10 @@ module JLDrill
             length
         end
         
-        def vocab
-            retVal = nil
-            if !@currentProblem.nil?
-                retVal = @currentProblem.vocab
-            end
-            retVal
-        end
-
         def bin
             retVal = nil
             if !@currentProblem.nil?
-                retVal = @currentProblem.vocab.status.bin
+                retVal = @currentProblem.item.status.bin
             end
             retVal
         end
@@ -225,7 +217,7 @@ module JLDrill
 
         # Get an array containing all the vocabulary in the quiz
         def allVocab
-            @contents.all
+            @contents.allVocab
         end
 
         # Resets the quiz back to it's original state
@@ -242,8 +234,8 @@ module JLDrill
         end
 
         def drill()
-            vocab = @strategy.getVocab
-            @currentProblem = @strategy.createProblem(vocab)
+            item = @strategy.getItem
+            @currentProblem = @strategy.createProblem(item)
             update
             updateNewProblem
             return @currentProblem.question

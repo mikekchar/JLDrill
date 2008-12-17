@@ -25,11 +25,12 @@ module JLDrill
 		    @bin.number.should be(42)
 		end
 		
-		# Pushes item on the end of bin and tests to make sure that
+		# Pushes vocabulary on the end of bin and tests to make sure that
 		# position is pos
-		def test_push(pos, item)
+		def test_push(pos, vocab)
 		    @bin[pos].should be_nil
 		    @bin.length.should be(pos)
+            item = Item.new(vocab)
 		    @bin.push(item)
 		    item.status.bin.should be(@bin.number)
 		    item.status.index.should be(pos)
@@ -60,7 +61,8 @@ module JLDrill
 		        test_push(i, @vocab[i])
 		    end
 		    i = 0
-		    @bin.each do |v|
+		    @bin.each do |item|
+                v = item.to_o
 		        v.to_s.should eql(@vocab[i].to_s)
 		        i += 1
 		    end
@@ -119,8 +121,8 @@ module JLDrill
 		    bin.allSeen?.should be(true)
 		    test_pushAll
 		    @bin.allSeen?.should be(false)
-		    @bin.each do |vocab|
-		        vocab.status.seen = true
+		    @bin.each do |item|
+		        item.status.seen = true
 		    end
 		    @bin.allSeen?.should be(true)
 		end
@@ -135,8 +137,8 @@ module JLDrill
 		    @bin.contents[0].status.seen = true
 		    @bin.contents[1].status.seen = true
 		    @bin.firstUnseen.should be(2)
-		    @bin.each do |vocab|
-		        vocab.status.seen = true
+		    @bin.each do |item|
+		        item.status.seen = true
 		    end
             @bin.firstUnseen.should be(-1)
         end
@@ -153,8 +155,8 @@ module JLDrill
            
 		    test_pushAll
             @bin.firstUnseen.should be(0)
-		    @bin.each do |vocab|
-		        vocab.status.seen = true
+		    @bin.each do |item|
+		        item.status.seen = true
 		    end
             @bin.firstUnseen.should be(-1)
             @bin.setUnseen
@@ -169,8 +171,8 @@ module JLDrill
 		    test_pushAll
 		    total = 4
             @bin.numUnseen.should be(total)
-            @bin.each do |vocab|
-                vocab.status.seen = true
+            @bin.each do |item|
+                item.status.seen = true
                 total -= 1
                 @bin.numUnseen.should be(total)
             end
@@ -193,7 +195,5 @@ module JLDrill
             @bin.exists?(@bin[0]).should be(true)
             @bin.contain?(Vocabulary.create("/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 3/")).should be(false)
         end
-        
 	end
-
 end

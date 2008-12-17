@@ -12,8 +12,8 @@ module JLDrill
 	        @quiz = Quiz.new
 	        @sampleQuiz = SampleQuiz.new
 	        vocab = @sampleQuiz.sampleVocab
-	        @quiz.contents.add(vocab, 4)
-	        @quiz.currentProblem = ReadingProblem.new(vocab, @quiz)
+	        item = @quiz.contents.add(vocab, 4)
+	        @quiz.currentProblem = ReadingProblem.new(item, @quiz)
 	        @strategy = @quiz.strategy
 	    end
 	    
@@ -23,14 +23,14 @@ module JLDrill
 	    end
 	    
 	    it "should increment the statistics if correct in bin 4" do
-	        @quiz.vocab.status.bin.should be(4)
+	        @quiz.currentProblem.item.status.bin.should be(4)
 	        @strategy.stats.accuracy.should be(0)
 	        @strategy.correct
 	        @strategy.stats.accuracy.should be(100)
 	    end
 
 	    it "should decrement the statistics if incorrect in bin 4" do
-	        @quiz.vocab.status.bin.should be(4)
+	        @quiz.currentProblem.item.status.bin.should be(4)
 	        @strategy.stats.accuracy.should be(0)
 	        @strategy.correct
 	        @strategy.stats.accuracy.should be(100)
@@ -42,11 +42,11 @@ module JLDrill
 	        @strategy.contents.should be(@quiz.contents)
 	    end
 
+        # Adds a sample vocabulary to a bin in a position and returns the item
         def test_addVocab(bin, position)
-       	        vocab = @sampleQuiz.sampleVocab
-       	        vocab.status.position = position
-    	        @quiz.contents.add(vocab, bin)
-    	        vocab
+            vocab = @sampleQuiz.sampleVocab
+            vocab.status.position = position
+            return @quiz.contents.add(vocab, bin)
         end
 	    
 	    it "should only pick unseen items" do
@@ -64,43 +64,43 @@ module JLDrill
             # When they are all seen, it should wrap
     	    @strategy.findUnseen(4).should be(0)
     	    # And set all the rest to unseen
-    	    @quiz.contents.bins[4].contents[1..9].all? do |vocab|
-    	        vocab.status.seen == false
+    	    @quiz.contents.bins[4].contents[1..9].all? do |item|
+    	        item.status.seen == false
     	    end.should be(true)
 	    end
 	    
 	    it "should demote bin 0 items to bin 0 and reset the level to 0" do
 	        # Demoting bin 0 items is non-sensical, but it should do
 	        # something sensible anyway.
-	        vocab = test_addVocab(0, 1)
-	        @strategy.demote(vocab)
-	        vocab.status.bin.should be(0)
-	        vocab.status.level.should be(0)
+	        item = test_addVocab(0, 1)
+	        @strategy.demote(item)
+	        item.status.bin.should be(0)
+	        item.status.level.should be(0)
 	    end
 
 	    it "should demote other items to bin 1 and reset the level to 0" do
-	        vocab = test_addVocab(1, 1)
-	        @strategy.demote(vocab)
-	        vocab.status.bin.should be(1)
-	        vocab.status.level.should be(0)
+	        item = test_addVocab(1, 1)
+	        @strategy.demote(item)
+	        item.status.bin.should be(1)
+	        item.status.level.should be(0)
 
-	        vocab = test_addVocab(2, 2)
-	        vocab.status.level = 1
-	        @strategy.demote(vocab)
-	        vocab.status.bin.should be(1)
-	        vocab.status.level.should be(0)
+	        item = test_addVocab(2, 2)
+	        item.status.level = 1
+	        @strategy.demote(item)
+	        item.status.bin.should be(1)
+	        item.status.level.should be(0)
 
-	        vocab = test_addVocab(3, 3)
-	        vocab.status.level = 2
-	        @strategy.demote(vocab)
-	        vocab.status.bin.should be(1)
-	        vocab.status.level.should be(0)
+	        item = test_addVocab(3, 3)
+	        item.status.level = 2
+	        @strategy.demote(item)
+	        item.status.bin.should be(1)
+	        item.status.level.should be(0)
 
-	        vocab = test_addVocab(4, 4)
-	        vocab.status.level = 2
-	        @strategy.demote(vocab)
-	        vocab.status.bin.should be(1)
-	        vocab.status.level.should be(0)
+	        item = test_addVocab(4, 4)
+	        item.status.level = 2
+	        @strategy.demote(item)
+	        item.status.bin.should be(1)
+	        item.status.level.should be(0)
 	    end
 	    
 	    it "should be able to create problems of the correct level" do
@@ -114,9 +114,9 @@ module JLDrill
 	        vocab3.status.level = 2
 	        vocab3.status.bin = 3
             
-            problem1 = @strategy.createProblem(vocab1)
-            problem2 = @strategy.createProblem(vocab2)
-            problem3 = @strategy.createProblem(vocab3)
+            problem1 = @strategy.createProblem(Item.new(vocab1))
+            problem2 = @strategy.createProblem(Item.new(vocab2))
+            problem3 = @strategy.createProblem(Item.new(vocab3))
             problem1.should be_a_kind_of(ReadingProblem)
             problem2.should be_a_kind_of(KanjiProblem)
             problem3.should be_a_kind_of(MeaningProblem)
@@ -129,7 +129,7 @@ module JLDrill
             kanji = 0
             error = false
             0.upto(999) do
-                problem4= @strategy.createProblem(vocab4)
+                problem4= @strategy.createProblem(Item.new(vocab4))
                 if problem4.class == MeaningProblem
                     meaning += 1
                 elsif problem4.class == KanjiProblem
@@ -208,43 +208,43 @@ module JLDrill
         it "should not reset the difficulty when the vocab is demoted from the 4th bin" do
             @quiz.options.promoteThresh = 1
 	        vocab = @sampleQuiz.sampleVocab
-	        @quiz.contents.add(vocab, 1)
-	        @quiz.currentProblem = @strategy.createProblem(vocab)
+	        item = @quiz.contents.add(vocab, 1)
+	        @quiz.currentProblem = @strategy.createProblem(item)
 	        @strategy.incorrect
 	        @strategy.incorrect
 	        @strategy.incorrect
-            vocab.status.bin.should be(1)	        
-	        vocab.status.difficulty.should be(3)
+            item.status.bin.should be(1)	        
+	        item.status.difficulty.should be(3)
 	        @strategy.correct
 	        @strategy.correct
 	        @strategy.correct
-            vocab.status.bin.should be(4)	        
-	        vocab.status.difficulty.should be(3)
+            item.status.bin.should be(4)	        
+	        item.status.difficulty.should be(3)
 	        @strategy.incorrect
-            vocab.status.bin.should be(1)	        	        
-	        vocab.status.difficulty.should be(4)        
+            item.status.bin.should be(1)	        	        
+	        item.status.difficulty.should be(4)        
         end
         
         it "should reset the consecutive counter on an incorrect answer" do
             @quiz.options.promoteThresh = 1
 	        vocab = @sampleQuiz.sampleVocab
-	        @quiz.contents.add(vocab, 1)
-	        @quiz.currentProblem = @strategy.createProblem(vocab)
-            vocab.status.bin.should be(1)
+	        item = @quiz.contents.add(vocab, 1)
+	        @quiz.currentProblem = @strategy.createProblem(item)
+            item.status.bin.should be(1)
 	        @strategy.correct
 	        @strategy.correct
 	        @strategy.correct
-            vocab.status.bin.should be(4)
+            item.status.bin.should be(4)
             # we only increase consecutive in the review set
-            vocab.status.consecutive.should be(1)
+            item.status.consecutive.should be(1)
 	        @strategy.correct
 	        @strategy.correct
 	        @strategy.correct
-            vocab.status.consecutive.should be(4)
+            item.status.consecutive.should be(4)
 
             @strategy.incorrect
-            vocab.status.bin.should be(1)
-            vocab.status.consecutive.should be(0)
+            item.status.bin.should be(1)
+            item.status.consecutive.should be(0)
         end
     end
 end

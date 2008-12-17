@@ -38,7 +38,7 @@ module JLDrill
         def differs?(problem)
             exists = true
             if @parent.reference.loaded? && !problem.nil?
-                exists = @parent.reference.include?(problem.vocab)
+                exists = @parent.reference.include?(problem.item.to_o)
 		    end
 		    return !exists
         end

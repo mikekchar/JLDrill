@@ -280,8 +280,8 @@ module JLDrill::Gtk
 	            @problem = problem
 	            @answer.clear
 	            @question.update(problem)
-	            if !problem.nil?  && !problem.vocab.nil?
-    	            @indicatorBox.set(problem.vocab, differs)
+	            if !problem.nil?  && !problem.item.nil?
+    	            @indicatorBox.set(problem.item.to_o, differs)
     	        else
     	            @indicatorBox.clear
     	        end

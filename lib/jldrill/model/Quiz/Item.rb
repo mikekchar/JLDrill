@@ -28,6 +28,10 @@ module JLDrill
             @status.parse(status.to_s)
         end
 
+        def setContents(contents)
+            @contents = contents
+        end
+
         def to_s
             return @contents + @status.to_s + "/\n"
         end

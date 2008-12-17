@@ -89,12 +89,12 @@ module JLDrill
 	    end
 	    
 	    it "should be able to move an item from one bin to the other" do
-	        vocab = @quiz.contents.bins[0][0]
-	        @quiz.strategy.moveToBin(vocab, 4)
+	        item = @quiz.contents.bins[0][0]
+	        @quiz.strategy.moveToBin(item, 4)
 	        @quiz.contents.bins[0].length.should be(0)
 	        @quiz.contents.bins[4].length.should be(3)
-	        vocab.should be_equal(@quiz.contents.bins[4][2])
-	        vocab.status.bin.should be(4)
+	        item.should be_equal(@quiz.contents.bins[4][2])
+	        item.status.bin.should be(4)
 	    end
 	    
         def test_problem(question, problem)
@@ -108,23 +108,27 @@ module JLDrill
 	    def test_binOne(question)
             # bin 1 items will always be reading problems
             # because the level will always be 0
-            @quiz.vocab.status.level.should be(0)
-            test_problem(question, ReadingProblem.new(@quiz.vocab, @quiz))
-            @quiz.vocab.status.consecutive.should be(0)
+            @quiz.currentProblem.item.status.level.should be(0)
+            test_problem(question, 
+                         ReadingProblem.new(@quiz.currentProblem.item, @quiz))
+            @quiz.currentProblem.item.status.consecutive.should be(0)
 	    end
 
         def test_level(question)
             case @quiz.currentProblem.requestedLevel
                 when 0
-                    test_problem(question, ReadingProblem.new(@quiz.vocab, @quiz)) 
+                    test_problem(question, 
+                                 ReadingProblem.new(@quiz.currentProblem.item, @quiz)) 
                 when 1
-                    if(!@quiz.vocab.kanji.nil?)
-                        test_problem(question, KanjiProblem.new(@quiz.vocab, @quiz))
+                    if(!@quiz.currentProblem.item.to_o.kanji.nil?)
+                        test_problem(question, 
+                                     KanjiProblem.new(@quiz.currentProblem.item, @quiz))
                     else
-                        test_problem(question, ReadingProblem.new(@quiz.vocab, @quiz)) 
+                        test_problem(question, 
+                                     ReadingProblem.new(@quiz.currentProblem.item, @quiz)) 
                     end
                 when 2
-                    test_problem(question, MeaningProblem.new(@quiz.vocab, @quiz)) 
+                    test_problem(question, MeaningProblem.new(@quiz.currentProblem.item, @quiz)) 
             else
 	             # This shouldn't ever happen.  Blow up.
 	             true.should be(false) 
@@ -134,13 +138,13 @@ module JLDrill
 	    def test_binTwo(question)
             # The quiz depends on the level
             test_level(question)
-            @quiz.vocab.status.consecutive.should be(0)
+            @quiz.currentProblem.item.status.consecutive.should be(0)
 	    end
 
 	    def test_binThree(question)
             # The quiz depends on the level
             test_level(question)
-            @quiz.vocab.status.consecutive.should be(0)
+            @quiz.currentProblem.item.status.consecutive.should be(0)
 	    end
 
 	    def test_binFour(question)
@@ -151,7 +155,7 @@ module JLDrill
             # The quiz depends on the level
             test_level(question)
             # Level 4 items have consecutive of at least one
-            @quiz.vocab.status.consecutive.should_not be(0)
+            @quiz.currentProblem.item.status.consecutive.should_not be(0)
 	    end
 	    
 	    def test_drill
@@ -159,15 +163,15 @@ module JLDrill
 	        question = @quiz.drill
 	        if (binZeroSize - 1) == @quiz.contents.bins[0].length
 	            # it was a bin 0 item which was promoted
-	            @quiz.vocab.status.bin.should be(1)
+	            @quiz.currentProblem.item.status.bin.should be(1)
                 test_binOne(question)
-	        elsif @quiz.vocab.status.bin == 1
+	        elsif @quiz.currentProblem.item.status.bin == 1
 	            test_binOne(question)
-	        elsif @quiz.vocab.status.bin == 2
+	        elsif @quiz.currentProblem.item.status.bin == 2
 	            test_binTwo(question)
-	        elsif @quiz.vocab.status.bin == 3
+	        elsif @quiz.currentProblem.item.status.bin == 3
 	            test_binThree(question)
-	        elsif @quiz.vocab.status.bin == 4
+	        elsif @quiz.currentProblem.item.status.bin == 4
 	            test_binFour(question)
 	        else
 	             # This shouldn't ever happen.  Blow up.
@@ -176,19 +180,19 @@ module JLDrill
 	    end
 
         def test_correct
-            consecutive = @quiz.vocab.status.consecutive
+            consecutive = @quiz.currentProblem.item.status.consecutive
             @quiz.correct
-            bin = @quiz.vocab.status.bin
+            bin = @quiz.currentProblem.item.status.bin
             if bin == 4
-                @quiz.vocab.status.consecutive.should be_eql(consecutive + 1)
+                @quiz.currentProblem.item.status.consecutive.should be_eql(consecutive + 1)
             else
-                @quiz.vocab.status.consecutive.should be(0)
+                @quiz.currentProblem.item.status.consecutive.should be(0)
             end
         end
 	    
         def test_incorrect
             @quiz.incorrect
-            @quiz.vocab.status.consecutive.should be(0)
+            @quiz.currentProblem.item.status.consecutive.should be(0)
         end
 	    
 	    def test_initializeQuiz
@@ -201,17 +205,18 @@ module JLDrill
 	    it "should be able to create a new Problem" do
 	        test_initializeQuiz
 	        # Non random should pick the first object in the first bin
-	        vocab = @quiz.contents.bins[0][0]
+	        item = @quiz.contents.bins[0][0]
 	        @quiz.contents.bins[0].length.should be(4)
 	        @quiz.contents.bins[1].length.should be(0)
 	        question = @quiz.drill
-            test_problem(question, ReadingProblem.new(@quiz.vocab, @quiz)) 
+            test_problem(question, 
+                         ReadingProblem.new(@quiz.currentProblem.item, @quiz)) 
 	        
 	        # item gets promoted to the first bin immediately
 	        @quiz.contents.bins[0].length.should be(3)
 	        @quiz.contents.bins[1].length.should be(1)
 	        @quiz.bin.should be(1)
-	        @quiz.vocab.should be_equal(vocab)
+	        @quiz.currentProblem.item.should be_equal(item)
 
             # Threshold is 1, so a correct answer should promote
             test_correct
@@ -249,16 +254,16 @@ module JLDrill
         it "should update the last reviewed status when the answer is made" do
             test_initializeQuiz
             test_drill
-            @quiz.vocab.status.lastReviewed.should be_nil
+            @quiz.currentProblem.item.status.lastReviewed.should be_nil
             test_correct
-            test1 = @quiz.vocab
+            test1 = @quiz.currentProblem.item
             test1.status.lastReviewed.should_not be_nil
             # should get a new one
             test_drill
-            test2 = @quiz.vocab
+            test2 = @quiz.currentProblem.item
             test2.status.lastReviewed.should be_nil
             test_incorrect
-            @quiz.vocab.status.lastReviewed.should_not be_nil
+            @quiz.currentProblem.item.status.lastReviewed.should_not be_nil
             @quiz.reset
             test1.status.lastReviewed.should be_nil
             test2.status.lastReviewed.should be_nil
@@ -266,9 +271,9 @@ module JLDrill
         
         it "should update the status correctly for bin 4 items" do
 	        @quiz.loadFromString("none", @sampleQuiz.file)
-	        vocab = @quiz.contents.bins[4][0]
-	        vocab.should_not be_nil
-            @quiz.currentProblem = MeaningProblem.new(vocab, @quiz)
+	        item = @quiz.contents.bins[4][0]
+	        item.should_not be_nil
+            @quiz.currentProblem = MeaningProblem.new(item, @quiz)
             test_correct
             test_incorrect            
         end

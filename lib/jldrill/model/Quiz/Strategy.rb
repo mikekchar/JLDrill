@@ -26,7 +26,7 @@ module JLDrill
             retVal
         end
 
-        # Returns the contents (i.e. the set of vocabulary) for the quiz
+        # Returns the contents for the quiz
         def contents
             @quiz.contents
         end
@@ -98,7 +98,7 @@ module JLDrill
             !workingSetKnown? && (reviewSetSize >= @quiz.options.introThresh)
         end
         
-        def getVocabFromBin
+        def getItemFromBin
             if contents.empty?
                 return nil
             end
@@ -140,8 +140,8 @@ module JLDrill
                 end
             end
             index = rand(contents.numUnseen(range))
-            vocab = contents.findUnseen(index, range)
-            vocab
+            item = contents.findUnseen(index, range)
+            item
         end
         
         def getNewItem
@@ -151,9 +151,9 @@ module JLDrill
                 index = findUnseen(newSetBin)
             end
             if !(index == -1)
-                vocab = contents.bins[newSetBin][index]
-                promote(vocab)
-                vocab
+                item = contents.bins[newSetBin][index]
+                promote(item)
+                item
             else
                 nil
             end
@@ -172,84 +172,84 @@ module JLDrill
             randomUnseen(workingSetRange)
         end
         
-        def getVocab
-            vocab = getVocabFromBin
-            if vocab.nil?
+        def getItem
+            item = getItemFromBin
+            if item.nil?
                 return nil
             end
 
-            vocab.status.seen = true
-            @last = vocab 
-            return vocab
+            item.status.seen = true
+            @last = item 
+            return item
         end
 
         
-        def createProblem(vocab)
+        def createProblem(item)
             # Drill at random levels in bin 4, but don't drill reading
-            if vocab.status.bin == 4
+            if item.status.bin == 4
                 level = rand(2) + 1
             else
                 # Otherwise drill for the specific bin
-                level = vocab.status.bin - 1
+                level = item.status.bin - 1
             end
-            @stats.startTimer(vocab.status.bin == 4)
-            Problem.create(level, vocab, @quiz)
+            @stats.startTimer(item.status.bin == 4)
+            Problem.create(level, item, @quiz)
         end
         
-        # Move the specified vocab to the specified bin
-        def moveToBin(vocab, bin)
-            contents.moveToBin(vocab, bin)
+        # Move the specified item to the specified bin
+        def moveToBin(item, bin)
+            contents.moveToBin(item, bin)
         end
 
-        def promote(vocab)
-            if !vocab.nil?
-                if (vocab.status.bin + 1 < contents.bins.length)
-                    if (vocab.status.bin + 1) == 4
+        def promote(item)
+            if !item.nil?
+                if (item.status.bin + 1 < contents.bins.length)
+                    if (item.status.bin + 1) == 4
                         @stats.learned += 1
                     end 
-                    moveToBin(vocab, vocab.status.bin + 1)
-                    vocab.status.level = vocab.status.bin - 1 unless vocab.status.bin - 1 > 2
+                    moveToBin(item, item.status.bin + 1)
+                    item.status.level = item.status.bin - 1 unless item.status.bin - 1 > 2
                 end
             end
         end
 
-        def demote(vocab)
-            if vocab
-                vocab.status.level = 0
-                if (vocab.status.bin != 0)
-                    moveToBin(vocab, 1)
+        def demote(item)
+            if item
+                item.status.level = 0
+                if (item.status.bin != 0)
+                    moveToBin(item, 1)
                 else
                 	# Demoting bin 0 items is non-sensical, but it should do
 	                # something sensible anyway.
-                    moveToBin(vocab, 0)
+                    moveToBin(item, 0)
                 end
             end
         end
 
-        def collectStatistics(vocab, good)
-            if(vocab.status.bin == 4)
+        def collectStatistics(item, good)
+            if(item.status.bin == 4)
                 @stats.reviewed += 1
                 if(good)
-                    @stats.correct(vocab)
+                    @stats.correct(item)
                 else
-                    @stats.incorrect(vocab)
+                    @stats.incorrect(item)
                 end
             end
         end
   
         def correct
-            vocab = @quiz.currentProblem.vocab
-            collectStatistics(vocab, true)
-            if(vocab)
-                vocab.status.schedule
-                vocab.status.markReviewed
-                vocab.status.score += 1
-                if(vocab.status.score >= @quiz.options.promoteThresh)
-                    vocab.status.score = 0
-                    promote(vocab)
+            item = @quiz.currentProblem.item
+            collectStatistics(item, true)
+            if(!item.nil?)
+                item.status.schedule
+                item.status.markReviewed
+                item.status.score += 1
+                if(item.status.score >= @quiz.options.promoteThresh)
+                    item.status.score = 0
+                    promote(item)
                 end
-                if vocab.status.bin == 4
-                    vocab.status.consecutive += 1
+                if item.status.bin == 4
+                    item.status.consecutive += 1
                     contents.bins[4].sort! do |x, y|
                         x.status.scheduledTime <=> y.status.scheduledTime
                     end
@@ -259,15 +259,15 @@ module JLDrill
         end
 
         def incorrect
-            vocab = @quiz.currentProblem.vocab
-            collectStatistics(vocab, false)
-            if(vocab)
-                vocab.status.unschedule
-                vocab.status.markReviewed
-                vocab.status.score = 0
-                vocab.status.incorrect
-                demote(@quiz.currentProblem.vocab)
-                vocab.status.consecutive = 0
+            item = @quiz.currentProblem.item
+            collectStatistics(item, false)
+            if(item)
+                item.status.unschedule
+                item.status.markReviewed
+                item.status.score = 0
+                item.status.incorrect
+                demote(@quiz.currentProblem.item)
+                item.status.consecutive = 0
                 @quiz.setNeedsSave(true)
             end
         end

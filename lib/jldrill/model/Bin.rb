@@ -189,7 +189,7 @@ module JLDrill
         # Returns true if there is an Item in the bin that contains the object
         def contain?(object)
             !@contents.find do |x|
-                object.eql?(x)
+                x.contain?(object)
             end.nil?
         end
 
