@@ -16,12 +16,12 @@ module JLDrill
 		    
 		    @emptyQuiz.contents.should_not be_nil
 		    @emptyQuiz.contents.bins.length.should be(5)
-		    @emptyQuiz.contents.bins[0].name.should be_eql("Unseen")
-		    @emptyQuiz.contents.bins[1].name.should be_eql("Poor")
-		    @emptyQuiz.contents.bins[2].name.should be_eql("Fair")
-		    @emptyQuiz.contents.bins[3].name.should be_eql("Good")
-		    @emptyQuiz.contents.bins[4].name.should be_eql("Excellent")
-		    @emptyQuiz.contents.to_s.should be_eql("Unseen\nPoor\nFair\nGood\nExcellent\n")
+		    @emptyQuiz.contents.bins[0].name.should eql("Unseen")
+		    @emptyQuiz.contents.bins[1].name.should eql("Poor")
+		    @emptyQuiz.contents.bins[2].name.should eql("Fair")
+		    @emptyQuiz.contents.bins[3].name.should eql("Good")
+		    @emptyQuiz.contents.bins[4].name.should eql("Excellent")
+		    @emptyQuiz.contents.to_s.should eql("Unseen\nPoor\nFair\nGood\nExcellent\n")
 		end
 		
 		it "should have quiz options initialized" do
@@ -52,8 +52,8 @@ module JLDrill
 		it "should load a file from memory" do
 		    quiz = Quiz.new
 		    quiz.loadFromString("SampleQuiz", @sampleQuiz.file)
-		    quiz.savename.should be_eql("SampleQuiz")
-		    quiz.name.should be_eql("Testfile")
+		    quiz.savename.should eql("SampleQuiz")
+		    quiz.name.should eql("Testfile")
 		    quiz.options.randomOrder.should be(true)
 		    quiz.options.promoteThresh.should be(4)
 		    quiz.options.introThresh.should be(17)
@@ -65,17 +65,17 @@ module JLDrill
 		end
 		
 		it "should save a file to a string" do
-		    @quiz.saveToString.should be_eql(@sampleQuiz.file)
+		    @quiz.saveToString.should eql(@sampleQuiz.file)
 		end
 
         it "should be able to load files of the current version" do
             Quiz.canLoad?(SampleQuiz::FileHeader).should be(true)
             @emptyQuiz.loadFromString("TestFile", @sampleQuiz.file)
-            @emptyQuiz.saveToString.should be_eql(@sampleQuiz.file)
+            @emptyQuiz.saveToString.should eql(@sampleQuiz.file)
         end
 	
 	    it "should be able to get a list of all the vocab" do
-	        @quiz.allVocab.join.should be_eql(@sampleQuiz.allVocab)
+	        @quiz.allVocab.join("\n").should eql(@sampleQuiz.allVocab)
 	    end
 	    
 	    it "should be able to reset the contents" do
@@ -85,7 +85,7 @@ module JLDrill
 	        @quiz.contents.bins[2].length.should be(0)
 	        @quiz.contents.bins[3].length.should be(0)
 	        @quiz.contents.bins[4].length.should be(0)
-	        @quiz.contents.bins[0].contents.join.should eql(@sampleQuiz.allResetVocab)
+	        @quiz.allVocab.join("\n").should eql(@sampleQuiz.allResetVocab)
 	    end
 	    
 	    it "should be able to move an item from one bin to the other" do
@@ -98,11 +98,11 @@ module JLDrill
 	    end
 	    
         def test_problem(question, problem)
-	        question.should be_eql(problem.question)
+	        question.should eql(problem.question)
 	        
-	        @quiz.currentDrill.should be_eql(problem.question)
-	        @quiz.currentAnswer.should be_eql(problem.answer)
-	        @quiz.answer.should be_eql(problem.answer)
+	        @quiz.currentDrill.should eql(problem.question)
+	        @quiz.currentAnswer.should eql(problem.answer)
+	        @quiz.answer.should eql(problem.answer)
         end
 
 	    def test_binOne(question)
@@ -184,7 +184,7 @@ module JLDrill
             @quiz.correct
             bin = @quiz.currentProblem.item.status.bin
             if bin == 4
-                @quiz.currentProblem.item.status.consecutive.should be_eql(consecutive + 1)
+                @quiz.currentProblem.item.status.consecutive.should be(consecutive + 1)
             else
                 @quiz.currentProblem.item.status.consecutive.should be(0)
             end

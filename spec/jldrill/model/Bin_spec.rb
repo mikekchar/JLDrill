@@ -12,9 +12,9 @@ module JLDrill
 /Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 0/Level: 0/Position: 4/Consecutive: 1/Difficulty: 3/]
             @strings = @fileString.split("\n")
             @strings.length.should be(4)
-            @vocab = []
+            @items = []
             0.upto(@strings.length - 1) do |i|
-                 @vocab.push(Vocabulary.create(@strings[i]))
+                 @items.push(Item.create(@strings[i]))
             end
 
 		    @bin = Bin.new("My name", 42)
@@ -25,30 +25,29 @@ module JLDrill
 		    @bin.number.should be(42)
 		end
 		
-		# Pushes vocabulary on the end of bin and tests to make sure that
+		# Pushes item on the end of bin and tests to make sure that
 		# position is pos
-		def test_push(pos, vocab)
+		def test_push(pos, item)
 		    @bin[pos].should be_nil
 		    @bin.length.should be(pos)
-            item = Item.new(vocab)
 		    @bin.push(item)
 		    item.status.bin.should be(@bin.number)
 		    item.status.index.should be(pos)
 		    @bin.length.should be(pos + 1)
 		    @bin[pos].should_not be_nil
-		    @bin[pos].to_s.should eql(item.to_s)
+		    @bin[pos].should equal(item)
 		end
 		
 		it "should be able to push a vocabulary" do
-		    test_push(0, @vocab[0])
+		    test_push(0, @items[0])
 		end
 		
 		def test_isOriginal?
-		    retVal = @vocab.length == @bin.length
+		    retVal = @items.length == @bin.length
 		    if retVal
 		        i = 0
-		        retVal = @bin.all? do |v|
-		            equal = v.to_s.eql?(@vocab[i].to_s)
+		        retVal = @bin.all? do |item|
+		            equal = item.equal?(@items[i])
 		            i += 1
 		            equal
 		        end
@@ -57,25 +56,25 @@ module JLDrill
 		end
 		
 		def test_pushAll
-		    0.upto(@vocab.length - 1) do |i|
-		        test_push(i, @vocab[i])
+		    0.upto(@items.length - 1) do |i|
+		        test_push(i, @items[i])
 		    end
-		    i = 0
+            test_isOriginal?.should be(true)
+		end
+		
+		it "should be able to iterate through the bin using each()" do
+		    test_pushAll
+            i = 0
 		    @bin.each do |item|
-                v = item.to_o
-		        v.to_s.should eql(@vocab[i].to_s)
+		        item.should eql(@items[i])
 		        i += 1
 		    end
 		end
 		
-		it "should be able to iterate though the vocabulary" do
-		    test_pushAll
-		end
-		
 		def test_delete_at(pos)
 		    @bin.delete_at(pos)
-		    @bin.length.should be(@vocab.length - 1)
-		    @bin[pos].to_s.should eql(@vocab[pos + 1].to_s)
+		    @bin.length.should be(@items.length - 1)
+		    @bin[pos].should equal(@items[pos + 1])
 		end
 		
 		it "should be able to delete an item at a position" do
@@ -90,7 +89,7 @@ module JLDrill
 		    test_delete_at(0)
 		    test_isOriginal?.should be(false)
 		    # insert it at the end
-		    test_push(@vocab.length - 1, @vocab[0])
+		    test_push(@items.length - 1, @items[0])
 		    test_isOriginal?.should be(false)
 		    @bin.sort! do |x, y|
 		        x.status.position <=> y.status.position

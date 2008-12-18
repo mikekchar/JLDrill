@@ -197,7 +197,8 @@ module JLDrill
         end
         
         def appendVocab(vocab)
-            @contents.addUniquely(vocab)
+            item = Item.new(vocab)
+            @contents.addUniquely(item)
         end
 
         def status

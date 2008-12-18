@@ -48,8 +48,14 @@ module JLDrill
             @index = nil
             @numIncorrect = 0
         end
-        
-        # Parses the item status.
+
+        def parseLine(line)
+            line.split("/").each do |part|
+                parse(part)
+            end
+        end
+
+        # Parses a single item of the ItemStatus.
         def parse(string)
             parsed = true
             case string

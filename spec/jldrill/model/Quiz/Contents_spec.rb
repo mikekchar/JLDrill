@@ -14,16 +14,16 @@ module JLDrill
 	    
 	    it "should indicate if a range of bins has contents" do
 	        quiz = Quiz.new
-	        vocab = @sampleQuiz.sampleVocab
-	        quiz.contents.add(vocab, 4)
+	        item = Item.new(@sampleQuiz.sampleVocab)
+	        quiz.contents.addItem(item, 4)
 	        quiz.contents.rangeEmpty?(4..4).should be(false)
         end
                 
         it "should add items to the last position if the position is set to -1" do
-        	vocab = @sampleQuiz.sampleVocab
-        	vocab.status.position.should be(-1)
+        	item = Item.new(@sampleQuiz.sampleVocab)
+            item.status.position = -1
 	        @quiz.contents.bins[4].length.should be(2)
-	        @quiz.contents.add(vocab, 4)
+	        @quiz.contents.addItem(item, 4)
 	        @quiz.contents.bins[4].length.should be(3)
 	        # This is the 5th item counting from 0.  There are already 2
 	        # items in bin 4, so it should put it at the end.
@@ -49,8 +49,8 @@ module JLDrill
 	        sizes = [0,0,0,0,0]
 	        0.upto(4) do |bin|
 	            1.upto(rand(10)) do |size| 
-                	vocab = @sampleQuiz.sampleVocab
-        	        quiz.contents.add(vocab, bin)
+                	item = Item.new(@sampleQuiz.sampleVocab)
+        	        quiz.contents.addItem(item, bin)
         	        sizes[bin] = size
         	    end
     	    end
@@ -69,8 +69,8 @@ module JLDrill
 
 	        0.upto(4) do |bin|
 	            1.upto(5) do |size| 
-                	vocab = @sampleQuiz.sampleVocab
-        	        quiz.contents.add(vocab, bin)
+                	item = Item.new(@sampleQuiz.sampleVocab)
+        	        quiz.contents.addItem(item, bin)
         	    end
     	    end
     	    
@@ -88,27 +88,27 @@ module JLDrill
 	    end
 	    
 	    it "should be able to add items to the contents only if they dont already exist" do
-            newVocab = @sampleQuiz.sampleVocab
-            @quiz.contents.addUniquely(newVocab).should be(true)
-            newVocab.status.position.should be(4)
+            item = Item.new(@sampleQuiz.sampleVocab)
+            @quiz.contents.addUniquely(item).should be(true)
+            item.status.position.should be(4)
 
             # We just added this one
-            existingVocab = @sampleQuiz.sampleVocab
-            @quiz.contents.addUniquely(existingVocab).should be(false)
+            existingItem = Item.new(@sampleQuiz.sampleVocab)
+            @quiz.contents.addUniquely(existingItem).should be(false)
 	    end
 	    
 	    it "should be able to add the contents from another quiz to this one" do
 	        quiz2 = Quiz.new
 
             quiz2.loadFromString("testFile", @sampleQuiz.file)
-            newVocab = @sampleQuiz.sampleVocab
-            quiz2.contents.add(newVocab, 2)
+            item = Item.new(@sampleQuiz.sampleVocab)
+            quiz2.contents.addItem(item, 2)
             quiz2.contents.length.should be(5)
-            quiz2.contents.bins[2][1].to_o.kanji.should be_eql(newVocab.kanji)
+            quiz2.contents.bins[2][1].to_o.kanji.should be_eql(item.to_o.kanji)
 	        
 	        @quiz.contents.addContents(quiz2.contents)
 	        @quiz.contents.length.should be(5)
-            @quiz.contents.bins[2][1].to_o.kanji.should be_eql(newVocab.kanji)
+            @quiz.contents.bins[2][1].to_o.kanji.should be_eql(item.to_o.kanji)
 	    end
     end
 end

@@ -33,8 +33,8 @@ Excellent
 ]
 #################################
 
-# The following is the same vocabulary but with the quiz reset so that ever item
-# is unseen.
+# The following is the same vocabulary but with the quiz reset so 
+# that every item is unseen.
 
         ResetVocab = %Q[
 Unseen
@@ -43,6 +43,13 @@ Unseen
 /Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 0/Difficulty: 0/
 /Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 0/Level: 0/Position: 3/Consecutive: 0/Difficulty: 0/
 ]
+
+# This is the result of allVocab joined with \n
+        AllVocab = 
+%Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj]
 
         # This is a new vocabulary to use for adding to the quiz
         NewVocab = "/Kanji: 秋/Reading: あき/Definitions: autumn,fall/Markers: n-adv,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/Difficulty: 0/"
@@ -88,11 +95,11 @@ Unseen
         end
         
         def allVocab
-            onlyVocab(vocab)
+            AllVocab
         end
         
         def allResetVocab
-            onlyVocab(resetVocab)
+            AllVocab
         end
         
         def file

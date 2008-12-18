@@ -17,9 +17,6 @@ module JLDrill
         RETURN_RE = /[\n]/
         JP_COMMA_RE = Regexp.new("[、]", nil, "U")
 
-        attr_reader :status
-        attr_writer :status
-        
         def initialize(kanji=nil, reading=nil, definitions=nil, 
                        markers=nil, hint=nil, position=nil)
             @kanji = StringField.new("Kanji", kanji)
@@ -27,8 +24,6 @@ module JLDrill
             @hint = StringField.new("Hint", hint)
             @definitions = ListField.new("Definitions", definitions)
             @markers = ListField.new("Markers", markers)
-            @status = JLDrill::ItemStatus.new
-            if !position.nil? then @status.position = position end
         end
         
         # Create a new vocaublary item by parsing the string passed in.
@@ -214,8 +209,8 @@ module JLDrill
                     @definitions.assign($1)
                 when MARKERS_RE
                     @markers.assign($1)
-                else # Maybe it's the status, if not ignore it
-                    @status.parse(part)
+                else 
+                    # Something we don't understand.  Just ignore it
                 end
             end
         end
@@ -228,13 +223,7 @@ module JLDrill
         
         # Output the vocabulary as a string in save file format
         def to_s
-            retVal = contentString
-            
-            retVal += @status.to_s
-            
-            retVal += "/\n"
-            
-            return retVal
+            contentString
         end
         
     end

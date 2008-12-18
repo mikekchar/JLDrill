@@ -36,17 +36,22 @@ module JLDrill
             total
         end
 
+        # Add an item to a bin
+        def addItem(item, bin)
+            item.status.score = 0
+            if item.status.position == -1
+                item.status.position = length 
+            end
+            @bins[bin].push(item)
+            saveNeeded
+        end
+
         # Adds a vocab to a specific bin. Returns the item that was added
         def add(vocab, bin)
             item = nil
             if !vocab.nil? && vocab.valid?
                 item = Item.new(vocab)
-                item.status.score = 0
-                if item.status.position == -1
-                    item.status.position = length 
-                end
-                @bins[bin].push(item)
-                saveNeeded
+                addItem(item, bin)
             end
             return item
         end
@@ -58,13 +63,13 @@ module JLDrill
             end
         end
         
-        # Adds a vocabulary to the contents only if it doesn't already
-        # exist.  It places it in the bin specified in the vocab.  It
+        # Adds an item to the contents only if it doesn't already
+        # exist.  It places it in the bin specified in the item.  It
         # also sets it's position to the end contents.
-        def addUniquely(vocab)
-            if !exists?(vocab)
-                vocab.status.position = -1
-                add(vocab, vocab.status.bin)
+        def addUniquely(item)
+            if !exists?(item.to_o)
+                item.status.position = -1
+                addItem(item, item.status.bin)
                 true
             else
                 false
@@ -92,19 +97,15 @@ module JLDrill
         # of the new items to the end of this contents.
         def addContents(contents)
             contents.eachByPosition do |item|
-                # Note: This is horribly inefficient.  It's creating
-                # a vocab and then adding it, which basically gets the
-                # string again.  Ideally this would simply work on items,
-                # but I don't really care about this feature right now.
-                self.addUniquely(item.to_o)
+                self.addUniquely(item.clone)
             end
         end
 
-        # Parse the line for a Vocabulary item.  Add it to the contents.
+        # Parse the line for an item.  Add it to the contents.
         # Return the item that was added.
-        def parseVocab(line)
-            vocab = Vocabulary.create(line)
-            return add(vocab, @parsingBin)
+        def parseItem(line)
+            item = Item.create(line)
+            return addItem(item, @parsingBin)
         end
 
         def parseLine(line)
@@ -117,7 +118,7 @@ module JLDrill
                 end
             end
             if line =~ /^\// 
-                    parseVocab(line)
+                    parseItem(line)
                     parsed = true
             end
             parsed

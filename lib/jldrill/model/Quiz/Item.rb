@@ -18,33 +18,77 @@ module JLDrill
     class Item
         attr_reader :status
 
-        def initialize(item)
-            @itemClass = item.class
-            @contents = item.contentString
-            @status = item.status
+        def initialize(item=nil)
+            if item.nil?
+                @itemClass = nil
+                @contents = ""
+            else
+                @itemClass = item.class
+                @contents = item.to_s
+            end
+            @status = ItemStatus.new
         end
 
+        # Create an item using the save string
+        def Item.create(string)
+            item = Item.new
+            item.parse(string)
+            return item
+        end
+
+        # Set the value of the item by parsing the string
+        def parse(string)
+            @itemClass = JLDrill::Vocabulary
+            @contents = string
+            @status.parseLine(@contents)
+        end
+
+        # Create a copy of this item
+        def clone
+            item = Item.new
+            item.setClass(@itemClass)
+            item.setContents(@contents)
+            item.setStatus(@status.to_s)
+            return item
+        end
+
+        # Set the class of the item
+        def setClass(aClass)
+            @itemClass = aClass
+        end
+
+        # set the ItemStatus
         def setStatus(status)
-            @status.parse(status.to_s)
+            @status.parseLine(status.to_s)
         end
 
+        # set the contents of the item
         def setContents(contents)
             @contents = contents
         end
 
+        # Return the save format of the item
         def to_s
-            return @contents + @status.to_s + "/\n"
+            return to_o.to_s + @status.to_s + "/\n"
         end
 
+        # Create the object in the item and return it
         def to_o
-            item = @itemClass.create(self.to_s)
+            if !@contents.empty?
+                item = @itemClass.create(@contents)
+            else
+                item = nil
+            end
             return item
         end
 
+        # Returns true if the items contain the same object.
+        # Note: Does *not* compare the status
         def eql?(item)
             self.to_o.eql?(item.to_o)
         end
 
+        # Returns true if the item contains the object.
         def contain?(object)
             self.to_o.eql?(object)
         end

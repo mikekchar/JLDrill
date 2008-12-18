@@ -7,10 +7,10 @@ module JLDrill
 	describe Vocabulary do
 	
 		before(:each) do
-        	@fileString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 3/
-/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 0/Difficulty: 3/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 3/Consecutive: 0/Difficulty: 3/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 0/Level: 0/Position: 4/Consecutive: 0/Difficulty: 3/]
+        	@fileString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P
+/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj]
             @strings = @fileString.split("\n")
             @strings.length.should be(4)
             @vocab = []
@@ -21,7 +21,7 @@ module JLDrill
 		
 		it "should be able to parse vocabulary from strings" do
             0.upto(@vocab.length - 1) do |i|
-                @vocab[i].to_s.should eql(@strings[i] + "\n")
+                @vocab[i].to_s.should eql(@strings[i])
             end
 		end
         
@@ -30,13 +30,13 @@ module JLDrill
             @vocab.each do |v|
                 v.should be_valid
             end
-            v2 = Vocabulary.create("/Kanji: 会う/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/")
+            v2 = Vocabulary.create("/Kanji: 会う/Definitions: to meet,to interview/Markers: v5u,P")
             v2.should_not be_nil
             v2.should_not be_valid
-            v3 = Vocabulary.create("/Kanji: 会う/Reading: あう/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/")
+            v3 = Vocabulary.create("/Kanji: 会う/Reading: あう/Markers: v5u,P")
             v3.should_not be_nil
             v3.should be_valid
-            v4 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/")
+            v4 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P")
             v4.should_not be_nil
             v4.should be_valid
         end
@@ -45,24 +45,21 @@ module JLDrill
             v = Vocabulary.create("This is a nonsense string")
             v.should_not be_nil
             v.should_not be_valid
-            v = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/Difficulty: 3/Coffee: is/Great: in,the/Morning: 1/")
+            v = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Coffee: is/Great: in,the/Morning: 1")
             v.should_not be_nil
             v.should be_valid
-            v.to_s.should eql(@strings[0] + "\n")
+            v.to_s.should eql(@strings[0])
         end
        
        it "should be able to assign the contents of one Vocabulary to another" do
-            v1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
+            v1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P")
             v1.should be_valid
-            v2 = Vocabulary.create("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 1/Level: 2/Position: 2/")
+            v2 = Vocabulary.create("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P")
             v2.should be_valid
             v1.should_not eql(v2)
             v1.assign(v2)
             v1.should eql(v2)
-            v1.status.bin.should be(0)
-            v1.status.level.should be(0)
-            v1.status.position.should be(1)
-            v3 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
+            v3 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P")
             v3.hint.should be_nil
             v1.hint.should_not be_nil
             v1.assign(v3)
@@ -90,7 +87,7 @@ module JLDrill
             v1.should_not be_hasMarkers
             v1.markers = ""        
             v1.should_not be_hasMarkers
-            v2 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions:/Markers:/Score: 0/Bin: 0/Level: 0/Position: 1/")
+            v2 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions:/Markers:")
             v2.should_not be_hasDefinitions
             v2.should_not be_hasMarkers
         end
@@ -145,7 +142,7 @@ module JLDrill
         ####################################################
            
         it "should be able to make a clone" do
-            v = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions:/Markers:/Score: 0/Bin: 0/Level: 0/Position: 1/")
+            v = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions:/Markers:")
             v2 = v.clone
             v.should eql(v2)
         end
@@ -154,12 +151,12 @@ module JLDrill
         # used as a separator for definitions.  Edict uses slashes, so
         # it doesn't cause a problem.  Yes, it wa stupid to use commas
         # in the file format; assuming that they wouldn't be used.
-        # So now in the Edict file format I'm using the Japanese comma 、
-        # here I convert it to a normal comma.
+        # So now in the Edict file format escaping the comma with a backslash.
+        # Here I convert it to a normal comma.
         # This is a complete hack, of course, and I'll have to revamp
         # the fileformat in the next version.
         it "should parse commas properly" do
-            v1 = Vocabulary.create("/Kanji: 鈍い/Reading: にぶい/Definitions: dull (e.g.\\, a knife),thickheaded,slow (opposite of fast),stupid/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 0/")
+            v1 = Vocabulary.create("/Kanji: 鈍い/Reading: にぶい/Definitions: dull (e.g.\\, a knife),thickheaded,slow (opposite of fast),stupid/Markers: adj,P")
             line = "鈍い [にぶい] /(adj) dull (e.g., a knife)/thickheaded/slow (opposite of fast)/stupid/(P)/"
             edict = Edict.new
             edict.lines = [line]
@@ -169,5 +166,4 @@ module JLDrill
             edict.vocab(0).should eql(v2)
         end
 	end
-
 end
