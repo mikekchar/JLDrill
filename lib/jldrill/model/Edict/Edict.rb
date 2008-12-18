@@ -210,7 +210,7 @@ module JLDrill
         end
 
         def shortFilename
-            if @file.nil? || @file.empty
+            if @file.nil? || @file.empty?
                 return "No name"
             end
             pos = @file.rindex('/')
