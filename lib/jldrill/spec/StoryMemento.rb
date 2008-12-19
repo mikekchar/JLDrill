@@ -4,6 +4,11 @@ require 'jldrill/views/gtk/MainWindowView'
 require 'jldrill/spec/Fakes'
 require 'jldrill/spec/SampleQuiz'
 
+# The startGTK method requires gtk2.  But I don't want to include
+# it here in case I don't use it.  So the using file must include
+# it.
+# require 'gtk2'
+
 # A convenience since starting up the main window is likely
 # to try to open most of the views
 require 'Context/require_all'
@@ -81,5 +86,17 @@ module JLDrill
                 @mainContext.quiz.drill
             end
         end
+
+        # Starts Gtk and runs the code in the block.  Note it doesn't
+        # quit the main loop, so you will have to call ::Gtk::main_quit
+        # somewhere in the block.  See UserLoadsDictionary_story.rb
+        # for an example of usage.
+        def startGtk(&block)
+            ::Gtk.init_add do
+                block.call
+            end
+            ::Gtk.main
+        end    
+        
     end
 end

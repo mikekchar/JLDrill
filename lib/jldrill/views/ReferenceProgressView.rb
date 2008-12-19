@@ -16,6 +16,9 @@ module JLDrill
 		
 		def idle_add(&block)
 		    # This will be overridden by the concrete classes
+            while !(block.call) do
+                # Nothing
+            end
 		end
 		
 		def exit

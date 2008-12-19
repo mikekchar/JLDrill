@@ -7,14 +7,13 @@ module JLDrill
 
 	class LoadReferenceContext < Context::Context
 		
-	    attr_reader :filename, :reference, :thread
+	    attr_reader :filename, :reference
 		
 		def initialize(viewBridge)
 			super(viewBridge)
 			dictDir = File.join(Config::DATA_DIR, "dict")
             @filename = File.join(dictDir, "edict")
             @reference = nil
-            @thread = nil
 		end
 		
 		def createViews
@@ -30,11 +29,9 @@ module JLDrill
             if !@reference.nil?
                 @reference.readLines
                 @mainView.idle_add do
-                    if !@reference.parseChunk(100)
-                        @reference.fraction
-                    else
-                        1.0
-                    end
+                    eof = @reference.parseChunk(100)
+                    @mainView.update(@reference.fraction)
+                    eof
                 end
             end                
         end

@@ -48,16 +48,16 @@ module JLDrill::Gtk
 		end
 		
 		def run
-		    fraction = @block.call
-		    if fraction < 1.0
-    		    update(fraction)
-    		else
+		    if @block.call
     		    if !@id.nil?
     		        Gtk.idle_remove(@id)
 		            @id = nil
 		            @block = nil
 		            self.exit
 		        end
+                return false
+            else
+                return true
 		    end
 		end
 		
