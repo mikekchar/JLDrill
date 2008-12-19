@@ -32,9 +32,10 @@ module JLDrill
 	                :displayProblemContext, :runCommandContext,
 	                :showInfoContext, :showAllVocabularyContext,
                     :showAboutContext, :editVocabularyContext,
-	                :reference, :quiz, :kanji, :radicals, :kana
+	                :reference, :quiz, :kanji, :radicals, :kana,
+                    :inTests
 
-	    attr_writer :quiz
+	    attr_writer :quiz, :inTests
 		
 		def initialize(viewBridge)
 			super(viewBridge)
@@ -56,6 +57,7 @@ module JLDrill
 			@radicals = nil
             @kana = nil
 			@quiz = Quiz.new
+            @inTests = false
 		end
 		
 		def createViews
@@ -72,7 +74,7 @@ module JLDrill
 		def enter(parent)
 			super(parent)
 			@mainView.open
-            loadKanji
+            loadKanji unless @inTests
 			@runCommandContext.enter(self)
 			@displayProblemContext.enter(self)
 			@displayQuizStatusContext.enter(self)

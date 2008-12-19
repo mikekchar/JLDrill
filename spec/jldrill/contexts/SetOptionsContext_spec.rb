@@ -8,6 +8,7 @@ module JLDrill
 
 		before(:each) do
 			@main = MainContext.new(Context::Bridge.new(JLDrill))
+            @main.inTests = true
 			@main.createViews
 			@context = @main.setOptionsContext
 			@context.createViews

@@ -17,6 +17,7 @@ module JLDrill
                 bridge = Context::Bridge.new(bridgeClass)
                 super(bridge)
                 @mainContext = mainContextClass.new(bridge)
+                @mainContext.inTests = true
             end
             
             def enter

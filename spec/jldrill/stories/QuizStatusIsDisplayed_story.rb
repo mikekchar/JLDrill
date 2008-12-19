@@ -16,12 +16,14 @@ module JLDrill::QuizStatusIsDisplayed
     describe Story.stepName("The DisplayQuizStatusContext is entered when the MainContext is entered") do
         it "should have a DisplayQuizStatusContext" do
             main = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
+            main.inTests = true
             main.displayQuizStatusContext.should_not be_nil
         end
         
         it "should enter the DisplayQuizStatusContext when the MainContext is entered" do
             app = Context::Context.new(nil)
             main = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
+            main.inTests = true
             main.displayQuizStatusContext.should_receive(:enter).with(main)
             main.enter(app)
         end
@@ -33,6 +35,7 @@ module JLDrill::QuizStatusIsDisplayed
         it "it should exit the DisplayQuizStatus Context when the MainContext is exited" do
             app = Context::Context.new(nil)
             main = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
+            main.inTests = true
             main.displayQuizStatusContext.should_receive(:enter).with(main)
             main.enter(app)
             main.displayQuizStatusContext.should_receive(:exit)
