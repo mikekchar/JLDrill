@@ -56,6 +56,9 @@ ruby_opts = ["-KO", "-I./lib"]
 # rcov    -- Runs the rspec tests and performs code coverage. 
 #            Test results are put in test_results.html
 #            Coverage results are put in coverage/index.html
+# testSize -- Runs rcov, but reports the tests instead of the
+#             the production code.  I use this to count the number
+#             of lines of test code.  Output goes into coverage/index.html
 # run     -- Runs the application
 # rdoc    -- Creates the rdoc documentation.
 #            Documentation is put in doc/index.html
@@ -90,6 +93,22 @@ Spec::Rake::SpecTask.new(:rcov) do |t|
 	t.rcov = true
 	t.rcov_opts = ["--exclude rspec", "--exclude rcov", "--exclude syntax",
 	    "--exclude _spec", "--exclude /lib/Context/", "--exclude _story",
+	    "--exclude cairo", "--exclude pango", "--exclude gtk2", "--exclude atk",
+	    "--exclude glib", "--exclude gdk"]
+	t.spec_opts = spec_opts
+	t.ruby_opts = ruby_opts
+end
+
+# Runs rcov but excludes the source files instead of the test files
+# This is how I determine how many lines of test code I have.
+# Note, this crashes writing out the file coverage for some reason.
+# It seems to be a bug in rcov.  But since I'm only interested in
+# the file sizes, I don't care.
+Spec::Rake::SpecTask.new(:testSize) do |t|
+	t.spec_files = spec_files
+	t.rcov = true
+	t.rcov_opts = ["--exclude rspec", "--exclude rcov", "--exclude syntax",
+	    "--exclude /lib/Context/", "--exclude lib/jldrill/",
 	    "--exclude cairo", "--exclude pango", "--exclude gtk2", "--exclude atk",
 	    "--exclude glib", "--exclude gdk"]
 	t.spec_opts = spec_opts
