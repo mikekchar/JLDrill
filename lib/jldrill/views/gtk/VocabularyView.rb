@@ -172,6 +172,7 @@ module JLDrill::Gtk
             if super
                 @vocab = JLDrill::Vocabulary.new
                 @vocabularyWindow.update(@vocab)
+                @vocabularyWindow.updateSearchTable
                 true
             else
                 false
