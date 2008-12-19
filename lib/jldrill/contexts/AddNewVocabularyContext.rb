@@ -23,9 +23,15 @@ module JLDrill
 		
 		def enter(parent)
 		    super(parent)
+            if !@parent.nil? && !@parent.reference.nil?
+                @parent.reference.publisher.subscribe(self, "edictLoad")
+            end
 		end
 		
 		def exit
+            if !@parent.nil? && !@parent.reference.nil?
+                @parent.reference.publisher.unsubscribe(self, "edictLoad")
+            end
 		    super
 		end
 		
@@ -57,5 +63,9 @@ module JLDrill
 		def setVocabulary(vocab)
 		    # Do nothing in this context
 		end
+
+        def edictLoadUpdated(reference)
+            @mainView.updateSearch unless @mainView.nil?
+        end
     end
 end

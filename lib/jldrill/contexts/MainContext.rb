@@ -33,6 +33,7 @@ module JLDrill
 	                :showInfoContext, :showAllVocabularyContext,
                     :showAboutContext, :editVocabularyContext,
 	                :reference, :quiz, :kanji, :radicals, :kana
+
 	    attr_writer :quiz
 		
 		def initialize(viewBridge)

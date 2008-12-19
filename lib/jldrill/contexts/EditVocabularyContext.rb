@@ -24,17 +24,27 @@ module JLDrill
 		
 		def enter(parent)
 		    super(parent)
-            if (!@parent.nil?) && (!@parent.quiz.nil?)
-                @parent.quiz.publisher.subscribe(self, "newProblem")
-                @parent.quiz.publisher.subscribe(self, "problemModified")
+            if !@parent.nil?
+                if !@parent.quiz.nil?
+                    @parent.quiz.publisher.subscribe(self, "newProblem")
+                    @parent.quiz.publisher.subscribe(self, "problemModified")
+                end
+                if !@parent.reference.nil?
+                    @parent.reference.publisher.subscribe(self, "edictLoad")
+                end
                 newProblemUpdated(@parent.quiz)
             end
 		end
 		
 		def exit
-            if (!@parent.nil?) && (!@parent.quiz.nil?)
-                @parent.quiz.publisher.unsubscribe(self, "newProblem")
-                @parent.quiz.publisher.unsubscribe(self, "problemModified")
+            if !@parent.nil?
+                if !@parent.quiz.nil?
+                    @parent.quiz.publisher.unsubscribe(self, "newProblem")
+                    @parent.quiz.publisher.unsubscribe(self, "problemModified")
+                end
+                if !@parent.reference.nil?
+                    @parent.reference.publisher.subscribe(self, "edictLoad")
+                end
             end
 		    super
 		end
@@ -74,6 +84,10 @@ module JLDrill
 		def setVocabulary(vocab)
 		    @parent.quiz.currentProblem.vocab = vocab
 		end
+
+        def edictLoadUpdated(reference)
+            @mainView.updateSearch unless @mainView.nil?
+        end
 
     end
 end

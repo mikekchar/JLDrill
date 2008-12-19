@@ -3,6 +3,7 @@
 
 require "jldrill/model/Vocabulary"
 require "jldrill/model/Edict/Meaning"
+require 'jldrill/model/Publisher'
 require 'kconv'
 
 module JLDrill
@@ -14,7 +15,7 @@ module JLDrill
         KANA_RE = /（(.*)）/
         COMMENT_RE = /^\#/
             
-            attr_reader :lines, :numLinesParsed, :loaded, :readings
+            attr_reader :lines, :numLinesParsed, :loaded, :readings, :publisher
             attr_writer :lines
 
         def initialize(file=nil)
@@ -25,6 +26,7 @@ module JLDrill
             @numReadingsAdded = 0
             @loaded = false
             @isUTF8 = nil
+            @publisher = Publisher.new(self)
         end
 
         def file=(filename)
@@ -37,6 +39,11 @@ module JLDrill
 
         def loaded?
             @loaded
+        end
+
+        def setLoaded(bool)
+            @loaded = bool
+            @publisher.update("edictLoad")
         end
 
         def vocab(index)
@@ -143,6 +150,7 @@ module JLDrill
         end
         
         def readLines()
+            setLoaded(false)
             @lines = IO.readlines(@file)
             @numLinesParsed = 0
             @numReadingsAdded = 0
@@ -175,20 +183,20 @@ module JLDrill
         end
 
         def parseChunk(chunkSize)
-            if @loaded 
+            if loaded? 
                 return true 
             end
             
             if (@numLinesParsed + chunkSize) >= @lines.size
                 chunkSize = @lines.size - @numLinesParsed
-                @loaded = true
+                setLoaded(true)
             end
 
             0.upto(chunkSize - 1) do
                 parseNextLine()
             end
             
-            return @loaded
+            return loaded?
         end
 
         def parseLines
@@ -202,7 +210,7 @@ module JLDrill
         end
         
         def fraction
-            if @loaded
+            if loaded?
                 1.0
             else
                 @numLinesParsed.to_f / @lines.size.to_f
