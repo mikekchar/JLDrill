@@ -72,6 +72,7 @@ module JLDrill
 		def enter(parent)
 			super(parent)
 			@mainView.open
+            loadKanji
 			@runCommandContext.enter(self)
 			@displayProblemContext.enter(self)
 			@displayQuizStatusContext.enter(self)

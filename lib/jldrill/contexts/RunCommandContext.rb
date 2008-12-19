@@ -1,6 +1,7 @@
 require 'Context/Context'
 require 'Context/Bridge'
 require 'jldrill/views/ProblemView'
+require 'jldrill/views/CommandView'
 
 module JLDrill
 
@@ -44,10 +45,6 @@ module JLDrill
         
         def loadReference
             @parent.loadReference
-        end
-        
-        def loadKanji
-            @parent.loadKanji
         end
         
         def quit

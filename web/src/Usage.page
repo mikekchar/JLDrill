@@ -543,15 +543,8 @@ indicators for.
 Kanji/Kana Popup Information
 ----------------------------
 
-JLDrill has a handy popup reference for kanji and kana characters.  You
-can load it by pressing Ctrl-K.
-
-Note: This feature should probably be loaded automatically.  It doesn't take
-long.  I was worried that people with disabilities might get annoyed by
-the popups, though.  If nobody complains before the next release I will make
-this automatic.
-
-After you press Ctrl-K, whenever you hover over a kanji or Kana character
+JLDrill has a handy popup reference for kanji and kana characters. 
+Whenever you hover over a kanji or Kana character
 you will get information for that character.
 
 ![JLDrill screenshot](images/Screenshot.png "JLDrill screenshot")
@@ -742,8 +735,8 @@ simply press the close button in the top right of the window.
 Sometimes you will edit an item but realize that you haven't
 loaded the dictionary.  You can load the dictionary from
 the main window without closing the search window.  When
-it is finished loading, you can press the "Search" button
-to update the list of items.
+it is finished loading, it will automatically search for the
+item.
 
 Note: If you continue with the quiz without closing the Edit
 window, it will update itself with the new items as you
@@ -767,7 +760,11 @@ When you first start adding an item the window is empty.
 
 You can edit the fields as you desire.  If you have loaded the
 dictionary you can also search for items by pressing the "Search"
-button.  This works by searching for the reading only.
+button.  This works by searching for the reading only.  As with
+the edit window, if you haven't loaded the dictionary, you can
+press Ctrl-D in the main window without closing the Add window.
+When the dictionary is finished loading, it will search for
+the item automatically.
 
 ![Search the Dictionary](images/Search.png "Search the Dictionary")
 
