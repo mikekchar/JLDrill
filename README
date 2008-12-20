@@ -1,84 +1,122 @@
-JLDrill - Japanese Language Drill program
+= JLDrill - Japanese Language Drill program
 
-  JLDrill is a program for helping people drill various aspects of the
-  Japanese language. Current features include a kana drill, a vocabulary
-  drill, a dictionary cross reference tool and a popup-kanji reference
-  (similar to the rikaichan plugin for Firefox).
+JLDrill is a program for helping people drill aspects of the
+Japanese language using spaced repetition. 
+
+== Features
+* spaced repetition   
+* a dictionary cross reference tool 
+* pop-up kanji reference (inspired by rikaichan for Firefox)
+* ability to import EDICT format files (EUC or UTF8 encoded) as a drill
+
+Current drills include:
+* a kana drill
+* JLPT vocabulary drills
+* a partial grammar drill derived from 
+  {Tae Kim's Japanese Guide to Japanese Grammar}[http://www.guidetojapanese.org]
+
+
+== User Documentation
+Complete user documentation including installation instructions
+for GNU/Linux and Windows is available. The currently released 
+stable version will always be available at:
+
+http://jldrill.rubyforge.org
+
+The version of this package is jldrill-0.3.3.  It is an unreleased
+development version and should not be used by end users.  The
+location for the documentation for this release is depends on
+where you are viewing this.
+
+{From an installed gem package}[link://../../../gems/jldrill-0.3.3/web/output/index.html]
+
+{From a development source repository}[link://../web/output/index.html]
+
+
+== License
+
+JLDrill is copyright (C) 2005-2008 Mike Charlton.  It is licensed
+under version 3.0 of the GNU General Public License (GPL) Please see
+the COPYING File for more details.  Previous versions of JLDrill were
+released under version 2.0 of the GPL and you may choose that version
+if you wish.  However version 3.0 represents a major improvement in
+clearing up ambiguous details, so I highly recommend choosing GPL 3.0
+if you wish to extend this software.
+
+License information for the various support files (dictionary, drills,
+etc.) are located in the data/jldrill/COPYING directory.
   
-  Installation instructions are available on the website:
-  http://jldrill.rubyforge.org
+== TODO
+
+<b>For Version 0.3.3</b>
+
+* When you start a new file it will be in new item mode.  Then after a
+  while it will go into review mode.  It should stay in new item mode
+  until you start the application again or press the Review Mode
+  button.
+* Clear the current problem and create a new problem after a reset.
+* Don't steal focus when putting up the "Loading" window."
+* Should not go into countdown for new items until after the first 10 items.
+* Modify the statistics window to show percentages for time rather
+  than level.  Take the level display out of the status.
+
+<b>Backlog</b>
+
+* If a file has duplicate position numbers, renumber so it doesn't.
+* Be able to delete the current item.
+* Be able to delete or edit an item from the "All Vocab" list.
+* Be able to change the order of items in the "All Vocab" list.
+* Add description for 々 in the kanji popup
+* Need a mechanism for publishing warnings and errors.
+* Full test coverage for all the model objects
+* Full test coverage for all the contexts
+* Allow user to modify the global backoff from the options. Must be
+  saved with the drill.
+* Create a recent used menu for loading drills that you've used recently.
+* Stop distributing edict in the gem.  Allow the user to set where the
+  dictionary is.
+* Allow user to set the formatting for each type of data.  Store the
+  formatting in the drill.
+
+* Define the structure of the data in the drill.  In other words,
+  create a dynamic data type that defines the structure of the data
+  item that is to be drilled.  Save it in the drill itself.  Create a
+  structure for edict vocabulary.
+  * Rename the methods that take Vocabulary (like Quiz#add()) to
+    indicate that it's for Vocabulary (i.e., Quiz#addVocab())
+* Define a structure for grammar.
+* Display parts of speech tags next to what they modify (i.e. each
+  definition, or sentence)
+* Allow the user to choose what tags to display.  Save this in the drill.
+* Associate data items (vocabulary) with the dictionary they belong
+  to.  Only load the dictionary if it's in the drill. (Question:
+  Should it unload the dictionary on next drill?  Probably yes...)
+* Create Debian packaging.
+* Create Windows packaging.
+* Indicate when the item has been promoted.
+* When save fails, indicate it to the user before bringing up the save
+  as dialog.
+* Replace webgen with something else.  
+* Create a dictionary back end to allow it to use online dictionaries,
+  or dictionary servers (fantasdic? stardict?)
+* Create a structure for Tanaka corpus.
+* Create Redhat packaging.
+* Create OSX packaging.
+
+
+== Getting Involved
+
+While I have built JLDrill on the work of others, as an entity on its
+own, I have been the sole contributor.  There are many reasons for this,
+but regardless I am very enthusiastic about receiving any kind of
+contribution from other people.  Even if you can't write software, there
+are many ways you can contribute.  I want to encourage this as much as
+possible.
   
-  You can also look at all the information for the website in the
-  web/output directory.  Start at index.html
+Please address any comments, suggestions, corrections and patches to:
+mailto://mikekchar@gmail.com
 
-  Note: This README file is being deprecated. I'm duplicating
-  information that is in the web page.  In the future I'll just
-  provide a pointer to the web information.  If you have a strong
-  feeling on this matter, please contact me. 
-
-What's New for 0.3.0
-
-  Version 0.3.0 introduces a long-term spaced repetition scheduling
-  algorithm.  Please see the document, strategy.txt in the designDoc
-  directory.  It is an algorithm of my own devising and still
-  needs a bit of teaking.  However, even at this early stage I find
-  it is working very well.
-  
-  Version 0.3.0 also offers numerous user interface improvements.
-  There is an indicator box that shows several of the useful Edict
-  markers for each vocabulary.  A new option for adding vocabulary
-  allows you to add new entries to a quiz (or even build a quiz
-  from scratch).  The display of the questions has been improved
-  using larger fonts for the kanji.  Finally, if you load the kanji
-  dictionary, you can hover over a kanji character and get a
-  rikaichan-like popup showing useful information about that character.
-  If you install the ttf-kanjistrokeorders font, you will also be shown
-  the stroke order of kanji or kana characters.
-
-JLDrill is now Beta   
-
-  I now consider JLDrill to be in beta.  Most of the important features
-  are present.  There may still be bugs, but I have been using the
-  software myself for several months and I think I've gotten rid
-  of most of the big problems.  Please be considerate of the beta status,
-  though.  Keep you eyes open for problems and report them.  Poor
-  usability issues are especially welcome.  Usability problem reports
-  should describe the difficult work flow and give a suggestion for
-  a new work flow that will improve the problem.  I am a programmer, not
-  a UI desiger, so I welcome any and all advice on this front.
-  
-TODO
-
-  Version 0.4.0 will be a release version.  That is to say that it
-  will be working on the issues needed for a general public release.
-  I wish to have a Deb file (possibly RPM as well), and easy
-  Windows and OSX installers.  Ideally the Windows and OSX installers
-  should be able to install a package that works directly from a
-  USB key with no other modifications necessary.  I also want to
-  create a basic curriculum for beginner learners of Japanese.
-  
-License
-
-  JLDrill is licensed under version 3.0 of the GNU General Public License (GPL)
-  Please see the COPYING File for more details.  Previous versions of JLDrill
-  were released under version 2.0 of the GPL and you may choose that version
-  if you wish.  However version 3.0 represents a major improvement in clearing
-  up ambiguous details, so I highly recommend choosing GPL 3.0 if you wish to
-  extend this software.
-
-Getting Involved
-
-  While I have built JLDrill on the work of others, as an entity on its
-  own, I have been the sole contributor.  There are many reasons for this,
-  but regardless I am very enthusiastic about receiving any kind of
-  contribution from other people.  Even if you can't write software, there
-  are many ways you can contribute.  I want to encourage this as much as
-  possible.
-  
-  Please address any comments, suggestions, corrections and patches to:
-        Mike Charlton <mikekchar@gmail.com>
-
-  I'm also very interested in receiving any new drills you may come up with.
-  Please make sure to specify the license information for any material you
-  send to me.
+I'm also very interested in receiving any new drills you may come up with.
+Please make sure to specify the license information for any material you
+send to me.
   

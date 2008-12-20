@@ -129,7 +129,7 @@ rd = Rake::RDocTask.new(:rdoc) do |t|
 	t.options << '--inline-source' <<
 		'--main' << 'README' <<
 		'--title' <<  'JLDrill -- Japanese Language Drill program' 
-	t.rdoc_files.include('README', 'COPYING', 'THANKS', 'data/jldrill/COPYING')
+	t.rdoc_files.include('README', 'COPYING', 'AUTHORS', 'data/jldrill/COPYING')
 	t.rdoc_files.include('lib/**/*.rb')
 end
 
@@ -143,9 +143,12 @@ gem_spec = Gem::Specification.new do |s|
 	s.version = JLDrill::VERSION
 	s.summary = "Japanese Language Drill Program"
 	s.description = <<-EOF
-	    JLDrill is a Japanese Language Drill program.  It is meant to help
-	    you learn Japanese through drills.  It also has a rudimentary
-	    dictionary (with no lookup yet).
+        JLDrill is a program for helping people drill aspects of the
+        Japanese language using spaced repetition.  It features a
+        dictionary cross reference tool, a pop-up kanji reference
+        (inspired by rikaichan for Firefox), and the ability to
+        import EDICT format files (EUC or UTF8 encoded).  Included
+        drills: kana, JLPT, and grammar (unfinished).
     EOF
 
 
@@ -184,8 +187,8 @@ gem_spec = Gem::Specification.new do |s|
 end
 
 package_task = Rake::GemPackageTask.new(gem_spec) do |pkg|
-	pkg.need_zip = true
-	pkg.need_tar = true
+	pkg.need_zip = false
+	pkg.need_tar = false
 end
 
 webgen_task = Webgen::WebgenTask.new('web') do |site|
