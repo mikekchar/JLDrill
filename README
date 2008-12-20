@@ -46,9 +46,16 @@ if you wish to extend this software.
 License information for the various support files (dictionary, drills,
 etc.) are located in the data/jldrill/COPYING directory.
 
-== Development Status
+== Development Documentation
 
-The test results and test code coverage are available available.
+Documentation on how to build and contribute to JLDrill is available:
+
+{Installed Gem}[link://../../../gems/jldrill-0.3.3/web/output/Development.html]
+|
+{Source Repository}[link://../web/output/Development.html]
+
+The test results and test code coverage will be available here
+if they were built:
 
 Installed gem:
 {Test results}[link://../../../gems/jldrill-0.3.3/test_results.html]
