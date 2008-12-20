@@ -28,9 +28,9 @@ development version and should not be used by end users.  The
 location for the documentation for this release is depends on
 where you are viewing this.
 
-{From an installed gem package}[link://../../../gems/jldrill-0.3.3/web/output/index.html]
-
-{From a development source repository}[link://../web/output/index.html]
+{Installed Gem}[link://../../../gems/jldrill-0.3.3/web/output/index.html]
+|
+{Source Repository}[link://../web/output/index.html]
 
 
 == License
@@ -45,6 +45,20 @@ if you wish to extend this software.
 
 License information for the various support files (dictionary, drills,
 etc.) are located in the data/jldrill/COPYING directory.
+
+== Development Status
+
+The test results and test code coverage are available available.
+
+Installed gem:
+{Test results}[link://../../../gems/jldrill-0.3.3/test_results.html]
+|
+{Code coverage}[link://../../../gems/jldrill-0.3.3/coverage/index.html]
+
+Source repository:
+{Test results}[link://../test_results.html]
+|
+{Code coverage}[link://../coverage/index.html]
   
 == TODO
 
