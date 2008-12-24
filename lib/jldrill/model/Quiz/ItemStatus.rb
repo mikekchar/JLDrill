@@ -49,13 +49,14 @@ module JLDrill
             @numIncorrect = 0
         end
 
+        # Parse a whole line which include ItemStatus information
         def parseLine(line)
             line.split("/").each do |part|
                 parse(part)
             end
         end
 
-        # Parses a single item of the ItemStatus.
+        # Parses a single part of the ItemStatus.
         def parse(string)
             parsed = true
             case string
@@ -196,10 +197,13 @@ module JLDrill
             end
         end
         
+        # Return the difficulty of the item.  Right now that is
+        # the number of times it was incorrect.
         def difficulty
             @numIncorrect
         end
         
+        # Mark the item as incorrect.
         def incorrect
             @numIncorrect += 1
             unschedule
@@ -208,6 +212,7 @@ module JLDrill
             @consecutive = 0
         end
 
+        # Mark the item as correct.
         def correct
             schedule
             markReviewed
@@ -216,18 +221,21 @@ module JLDrill
                 @consecutive += 1
             end
         end
-            
+
+        # Returns true if the item has been seen before.
         def seen?
             @seen
         end
-        
+
+        # Returns the total number of days the item was last
+        # scheduled for.  Returns a float.
         def potentialScheduleInDays
             seconds = calculateInterval.to_i
             days = (seconds * 10 / SECONDS_PER_DAY).to_f / 10
             return days
         end
         
-        # Return the total number of seconds that the item from the
+        # Return the total number of seconds from the
         # last reviewed time to the scheduled time
         def scheduleDuration
             retVal = 0
@@ -237,6 +245,8 @@ module JLDrill
             retVal
         end
         
+        # Mark the item as reviewed and increase the schedule
+        # by the specified number of seconds.
         def scheduleDuration=(seconds)
             if !reviewed?
                 markReviewed
@@ -249,15 +259,22 @@ module JLDrill
             @scheduledTime.to_i < Time::now.to_i
         end
         
+        # Returns true if the date is on the specified day.
+        # 0 is today, -1 is yesterday, 1 is tomorrow.
+        # Uses the date, not 24 hour time period.
+        def onDay?(date, day)
+            target = Time::now + (SECONDS_PER_DAY * day)
+            return date.day == target.day && 
+                date.month == target.month &&
+                date.year == target.year
+        end
+
         # Returns true if the item was reviewed on the specified day.
         # 0 is today, -1 is yesterday, -2 is the day before, etc.  Uses the
         # date, not 24 hour time period (i.e., if it's 1am, then an
         # item reviewed 2 hours ago is yesterday).
         def reviewedOn?(day)
-            target = Time::now + (SECONDS_PER_DAY * day)
-            @lastReviewed.day == target.day && 
-                @lastReviewed.month == target.month &&
-                @lastReviewed.year == target.year
+            return onDay?(@lastReviewed, day)
         end
         
         # Returns true if the item is scheduled on the specified day.
@@ -265,10 +282,7 @@ module JLDrill
         # date, not 24 hour time period (i.e., if it's 11pm, then an
         # item scheduled in 2 hours is tomorrow).
         def scheduledOn?(day)
-            target = Time::now + (SECONDS_PER_DAY * day)
-            @scheduledTime.day == target.day && 
-                @scheduledTime.month == target.month &&
-                @scheduledTime.year == target.year
+            return onDay?(@scheduledTime, day)
         end
         
         # Returns true if the item has a schedule duration in the range of days
@@ -281,6 +295,8 @@ module JLDrill
             scheduleDuration >= low && scheduleDuration < high
         end
         
+        # Returns a human readable string showing when the item
+        # was last reviewed.
         def reviewedDate
             retVal = ""
             if reviewed?
@@ -295,6 +311,7 @@ module JLDrill
             retVal
         end
         
+        # Outputs the item status in save format.
         def to_s
             retVal = "/Score: #{@score}" + "/Bin: #{@bin}" + "/Level: #{@level}" +
                 "/Position: #{@position}"
