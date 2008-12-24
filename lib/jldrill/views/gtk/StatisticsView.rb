@@ -88,8 +88,9 @@ module JLDrill::Gtk
                             "160 - 320 days", "320+ days"]
                 @durationTable = StatisticsTable.new(labels)
                 hbox.add(@durationTable)
-                labels = [" Level 1 ", " Level 2 ", " Level 3 ", " Level 4 ",
-                            " Level 5 ", " Level 6 ", " Level 7 ", " Level 8 "]
+                labels = [" Less than 5 days ", "5 - 10 days", "10 - 20 days", 
+                            "20 - 40 days", "40 - 80 days", "80 - 160 days", 
+                            "160 - 320 days", "320+ days"]
                 @accuracyTable = StatisticsTable.new(labels, 2)
                 hbox.add(@accuracyTable)
                 labels = ["Reviewed", "Learned", " Time to review ", 
@@ -136,24 +137,10 @@ module JLDrill::Gtk
                 end
             end
             
-            def findRange(level)
-                low = 0
-                high = 5
-                1.upto(level) do
-                    if low == 0
-                        low = 5
-                    else
-                        low = low * 2
-                    end
-                    high = low * 2
-                end
-                low..high
-            end
-            
-            def updateDuration(bin)
+            def updateDuration(bin, stats)
                 total = 0
                 0.upto(6) do |i|
-                    num = bin.numDurationWithin(findRange(i))
+                    num = bin.numDurationWithin(stats.findRange(i))
                     @durationTable.values[i].text = num.to_s
                     total += num
                 end
@@ -208,7 +195,8 @@ module JLDrill::Gtk
 		def update(quiz)
 		    super(quiz)
 		    @statisticsWindow.updateSchedule(quiz.contents.bins[4])
-		    @statisticsWindow.updateDuration(quiz.contents.bins[4])
+		    @statisticsWindow.updateDuration(quiz.contents.bins[4], 
+                                             quiz.strategy.stats)
 		    @statisticsWindow.updateAccuracy(quiz.strategy.stats)
 		    @statisticsWindow.updateRate(quiz.strategy.stats)
 		end

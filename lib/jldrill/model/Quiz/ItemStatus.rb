@@ -166,7 +166,9 @@ module JLDrill
         # the last review.
         def calculateInterval
             interval = firstInterval()
-            if !scheduled? && reviewed?
+            # If it is scheduled, then that means it isn't 
+            # a newly promoted item
+            if scheduled?
                 elapsed = Time::now.to_i - @lastReviewed.to_i
                 if (2 * elapsed) > interval
                     interval = 2 * elapsed

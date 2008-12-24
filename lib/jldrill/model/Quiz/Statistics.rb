@@ -127,13 +127,32 @@ module JLDrill
             end
             return @inTargetZone
         end
-        
-        def getLevel(level)
-            if level >= 1 && level <= 8
-                @levels[level - 1]
-            else
-                nil
+
+        def findRange(level)
+            low = 0
+            high = 5
+            1.upto(level) do
+                if low == 0
+                    low = 5
+                else
+                    low = low * 2
+                end
+                high = low * 2
             end
+            low..high
+        end
+                    
+        def getLevel(item)
+            level = 0
+            found = false
+            while (level <= 6) && !found
+                if item.status.durationWithin?(findRange(level))
+                    found = true
+                else
+                    level += 1
+                end
+            end
+            return @levels[level]
         end
         
         def correct(item)
@@ -143,7 +162,7 @@ module JLDrill
             end
             @correct += 1
             @reviewed += 1
-            level = getLevel(item.status.consecutive)
+            level = getLevel(item)
             if !level.nil?
                 level.correct
             end
@@ -159,7 +178,7 @@ module JLDrill
             end
             @incorrect += 1
             @reviewed += 1
-            level = getLevel(item.status.consecutive)
+            level = getLevel(item)
             if !level.nil?
                 level.incorrect
             end
