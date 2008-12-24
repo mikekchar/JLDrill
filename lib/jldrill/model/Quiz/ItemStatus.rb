@@ -120,7 +120,11 @@ module JLDrill
             # 10% - rand(20%) = +- 10%
             (interval / 10) - rand(interval / 5) 
         end
-        
+
+        # Return the time where we should measure the interval from.
+        # We want to start from the date the current item is
+        # scheduled for, rather than now.  Otherwise if the user
+        # is ahead we could end up scheduling in the past.
         def calculateStart
             start = Time::now
             if bin == 4
@@ -130,29 +134,51 @@ module JLDrill
             end
             start
         end
+
+        # This is the interval the item will have when it it first
+        # promoted into the Review Set.  
+        #
+        # It is a sliding scale based on difficulty.  If the user 
+        # has never gotten the item incorrect, then the interval 
+        # will be 5.0.  For each time the get it wrong, it moves 
+        # closer to 0.
+        def firstInterval
+            if difficulty <= 5
+                SECONDS_PER_DAY +
+                    (MAX_ADDITIONAL_TIME * (1.0 - (difficulty.to_f / 5.0))).to_i
+            else
+                scale = difficulty - 5
+                current = 0.0
+                1.upto(scale) do |x|
+                    current = current + (1 - current).to_f / 10.0
+                end
+                (SECONDS_PER_DAY * (1.0 - current)).to_i
+            end
+        end
         
+        # Return the amount of time we should wait (in ideal time)
+        # for the next review.
+        #
+        # Calculates the interval for the item.  For newly
+        # promoted items, the schedule will be the firstInterval().  
+        # For the rest it is twice the actual amount of time since 
+        # the last review.
         def calculateInterval
             interval = firstInterval()
-            if bin == 4
-                if reviewed?
-                    elapsed = Time::now.to_i - @lastReviewed.to_i
-                    if (2 * elapsed) > interval
-                        interval = 2 * elapsed
-                    end
+            if !scheduled? && reviewed?
+                elapsed = Time::now.to_i - @lastReviewed.to_i
+                if (2 * elapsed) > interval
+                    interval = 2 * elapsed
                 end
             end
             interval
         end
-                
-        def calculateNewSchedule
-            start = calculateStart
-            interval = calculateInterval
-            start + interval + randomVariation(interval)
-        end
         
         # Schedule the item for review
         def schedule
-            @scheduledTime = calculateNewSchedule
+            start = calculateStart
+            interval = calculateInterval
+            @scheduledTime = start + interval + randomVariation(interval)
             return @scheduledTime
         end
         
@@ -167,20 +193,6 @@ module JLDrill
                 Time::at(0)
             else
                 @scheduledTime
-            end
-        end
-        
-        def firstInterval
-            if difficulty <= 5
-                SECONDS_PER_DAY +
-                    (MAX_ADDITIONAL_TIME * (1.0 - (difficulty.to_f / 5.0))).to_i
-            else
-                scale = difficulty - 5
-                current = 0.0
-                1.upto(scale) do |x|
-                    current = current + (1 - current).to_f / 10.0
-                end
-                (SECONDS_PER_DAY * (1.0 - current)).to_i
             end
         end
         
