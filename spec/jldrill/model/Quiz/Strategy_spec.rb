@@ -188,7 +188,14 @@ module JLDrill
             0.upto(9) do
                 @strategy.stats.correct(item)
             end
-            # Now we know the items well enough, so we shouldn't review
+            # We don't start the countdown until we have reviewed 10 items
+            # so we should continue to review
+            @strategy.shouldReview?.should be(true)
+            0.upto(9) do
+                @strategy.stats.correct(item)
+            end            
+            # Now we know the items well enough, and we have reviewed
+            # enough items, so we shouldn't review
             @strategy.shouldReview?.should be(false)                        
         end
 

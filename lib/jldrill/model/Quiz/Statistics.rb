@@ -111,6 +111,11 @@ module JLDrill
         end
         
         def inTargetZone?
+            # Don't start the countdown until we have reviewed
+            # at least 10 item.
+            if @reviewed <= 10
+                return false
+            end
             if !@inTargetZone
                 if recentAccuracy >= 90
                     @inTargetZone = true
