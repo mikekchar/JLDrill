@@ -124,15 +124,28 @@ module JLDrill
             parsed
         end
 
+        # Returns an array of all the items in the bins, sorted by
+        # position
+        def allItems
+            items = []
+            bins.each do |bin|
+                bin.contents.each do |item|
+                    items.push(item)
+                end
+            end
+            return items.sort do |x,y| 
+                x.status.position <=> y.status.position
+            end
+        end
+
         # Return an array of all the vocab in the bins
         def allVocab
             retVal = []
-            bins.each do |bin|
-                bin.contents.each do |item|
-                    retVal.push(item.to_o)
-                end
+            items = allItems
+            items.each do |item|
+                retVal.push(item.to_o)
             end
-            retVal
+            return retVal
         end
 
         # Reset the contents back to their original order and status

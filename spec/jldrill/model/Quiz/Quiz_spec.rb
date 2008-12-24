@@ -80,8 +80,8 @@ module JLDrill
 	    
 	    it "should be able to reset the contents" do
 	        @quiz.reset
-	        @quiz.contents.bins[0].length.should be(4)
-	        @quiz.contents.bins[1].length.should be(0)
+	        @quiz.contents.bins[0].length.should be(3)
+	        @quiz.contents.bins[1].length.should be(1)
 	        @quiz.contents.bins[2].length.should be(0)
 	        @quiz.contents.bins[3].length.should be(0)
 	        @quiz.contents.bins[4].length.should be(0)
@@ -199,22 +199,20 @@ module JLDrill
 	    	@quiz.loadFromString("none", @sampleQuiz.file)
 	    	@quiz.options.randomOrder = false
 	    	@quiz.options.promoteThresh = 1
+            # Reset now does a drill()
 	        @quiz.reset	    
 	    end
 	    
 	    it "should be able to create a new Problem" do
+            # The reset in test_initializeQuiz now does a drill()
 	        test_initializeQuiz
 	        # Non random should pick the first object in the first bin
-	        item = @quiz.contents.bins[0][0]
-	        @quiz.contents.bins[0].length.should be(4)
-	        @quiz.contents.bins[1].length.should be(0)
-	        question = @quiz.drill
-            test_problem(question, 
-                         ReadingProblem.new(@quiz.currentProblem.item, @quiz)) 
-	        
 	        # item gets promoted to the first bin immediately
+	        item = @quiz.contents.bins[1][0]
 	        @quiz.contents.bins[0].length.should be(3)
 	        @quiz.contents.bins[1].length.should be(1)
+            test_problem(@quiz.currentProblem.question, 
+                         ReadingProblem.new(@quiz.currentProblem.item, @quiz)) 
 	        @quiz.bin.should be(1)
 	        @quiz.currentProblem.item.should be_equal(item)
 
@@ -227,7 +225,10 @@ module JLDrill
             
             # Because we don't test level 4 items until we get one working set 
             # of them, this should take exactly 12 iterations
-            i = 0
+            # However test_initializeQuiz now does a drill() so in the
+            # first iteration we just need to do test_correct.
+            test_correct
+            i = 1
             until (@quiz.contents.bins[4].length == 4) || (i > 12) do
                 i += 1
                 test_drill
@@ -242,7 +243,10 @@ module JLDrill
             
             # Because we don't test level 4 items until we get one working set 
             # of them, this should take exactly 24 iterations
-            i = 0
+            # However test_initializeQuiz now does a drill() so in the
+            # first iteration we just need to do test_correct.
+            test_correct
+            i = 1
             until (@quiz.contents.bins[4].length == 4) || (i > 24) do
                 i += 1
                 test_drill
@@ -253,7 +257,6 @@ module JLDrill
         
         it "should update the last reviewed status when the answer is made" do
             test_initializeQuiz
-            test_drill
             @quiz.currentProblem.item.status.lastReviewed.should be_nil
             test_correct
             test1 = @quiz.currentProblem.item
@@ -286,11 +289,11 @@ module JLDrill
         end
         
         it "should notify subscribers when a new problem has been created" do
-            test_initializeQuiz
             subscriber = mock("Subscriber")
             @quiz.publisher.subscribe(subscriber, "newProblem")
             subscriber.should_receive(:newProblemUpdated)
-            @quiz.drill
+            test_initializeQuiz
+            # Note: the reset() in test_initializeQuiz does a drill() now
         end
     end
 end

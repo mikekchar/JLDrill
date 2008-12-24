@@ -226,7 +226,8 @@ module JLDrill
 
         # Resets the quiz back to it's original state
         def reset
-            @contents.reset
+            @contents.reset()
+            drill()
         end
   
         def incorrect
