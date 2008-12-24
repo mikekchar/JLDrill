@@ -2,15 +2,14 @@ require 'jldrill/model/Quiz/Statistics'
 
 module JLDrill
 
-    # Strategy for a quiz
+    # Strategy for choosing, promoting and demoting items in
+    # the quiz.
     class Strategy
-        attr_reader :stats, :last
-        attr_writer :last
+        attr_reader :stats
     
         def initialize(quiz)
             @quiz = quiz
             @stats = Statistics.new
-            @last = nil
         end
         
         # Returns a string showing the status of the quiz with this strategy
@@ -29,6 +28,11 @@ module JLDrill
         # Returns the contents for the quiz
         def contents
             @quiz.contents
+        end
+
+        # Returns the options for the quiz
+        def options
+            @quiz.options
         end
 
         # Returns the bin number of the new set
@@ -57,7 +61,7 @@ module JLDrill
         
         # Returns true if the working set is not full
         def workingSetFull?
-             workingSetSize >= @quiz.options.introThresh
+             workingSetSize >= options.introThresh
         end
         
         # returns the bin number of the review set
@@ -67,7 +71,7 @@ module JLDrill
         
         # Returns the number of items in the review set
         def reviewSetSize
-            @quiz.contents.bins[reviewSetBin].length
+            contents.bins[reviewSetBin].length
         end
         
         # Returns true is the working set has been
@@ -91,27 +95,14 @@ module JLDrill
         def shouldReview?
             # if we only have review set items, or we are in review mode
             # then return true
-            if  (newSetEmpty? && workingSetEmpty?) || (@quiz.options.reviewMode)
+            if  (newSetEmpty? && workingSetEmpty?) || (options.reviewMode)
                 return true
             end
             
-            !workingSetKnown? && (reviewSetSize >= @quiz.options.introThresh)
+            !workingSetKnown? && (reviewSetSize >= options.introThresh)
         end
         
         def getItemFromBin
-            if contents.empty?
-                return nil
-            end
-
-            if !workingSetFull?
-                if shouldReview?
-                    return getReviewItem
-                elsif !newSetEmpty?
-                    return getNewItem
-                end
-            end
-            
-            return getWorkingItem
         end
         
         # Return the index of the first item in the bin that hasn't been
@@ -144,8 +135,9 @@ module JLDrill
             item
         end
         
+        # Get an item from the New Set
         def getNewItem
-            if @quiz.options.randomOrder
+            if options.randomOrder
                 index = rand(contents.bins[newSetBin].length)
             else
                 index = findUnseen(newSetBin)
@@ -159,6 +151,7 @@ module JLDrill
             end
         end
         
+        # Get an item from the Review Set
         def getReviewItem
             index = findUnseen(reviewSetBin)
             if !(index == -1)
@@ -168,22 +161,34 @@ module JLDrill
             end
         end
         
+        # Get an item from the Working Set
         def getWorkingItem
             randomUnseen(workingSetRange)
         end
-        
+
+        # Get an item to quiz
         def getItem
-            item = getItemFromBin
-            if item.nil?
+            item = nil
+            if contents.empty?
                 return nil
             end
 
+            if !workingSetFull?
+                if shouldReview?
+                    item = getReviewItem
+                elsif !newSetEmpty?
+                    item = getNewItem
+                end
+            end
+
+            # Usually we get a working item if the above is not true
+            item = getWorkingItem if item.nil?
+
             item.status.seen = true
-            @last = item 
             return item
         end
 
-        
+        # Create a problem for the given item at the correct level
         def createProblem(item)
             # Drill at random levels in bin 4, but don't drill reading
             if item.status.bin == 4
@@ -195,81 +200,59 @@ module JLDrill
             @stats.startTimer(item.status.bin == 4)
             Problem.create(level, item, @quiz)
         end
-        
-        # Move the specified item to the specified bin
-        def moveToBin(item, bin)
-            contents.moveToBin(item, bin)
-        end
 
+        # Promote the item to the next level/bin
         def promote(item)
             if !item.nil?
                 if (item.status.bin + 1 < contents.bins.length)
                     if (item.status.bin + 1) == 4
+                        item.status.consecutive = 1
                         @stats.learned += 1
                     end 
-                    moveToBin(item, item.status.bin + 1)
+                    contents.moveToBin(item, item.status.bin + 1)
                     item.status.level = item.status.bin - 1 unless item.status.bin - 1 > 2
                 end
             end
         end
 
+        # Demote the item
         def demote(item)
-            if item
+            if !item.nil?
                 item.status.level = 0
                 if (item.status.bin != 0)
-                    moveToBin(item, 1)
+                    contents.moveToBin(item, 1)
                 else
                 	# Demoting bin 0 items is non-sensical, but it should do
 	                # something sensible anyway.
-                    moveToBin(item, 0)
+                    contents.moveToBin(item, 0)
                 end
             end
         end
 
-        def collectStatistics(item, good)
-            if(item.status.bin == 4)
-                @stats.reviewed += 1
-                if(good)
-                    @stats.correct(item)
-                else
-                    @stats.incorrect(item)
-                end
-            end
-        end
-  
-        def correct
-            item = @quiz.currentProblem.item
-            collectStatistics(item, true)
-            if(!item.nil?)
-                item.status.schedule
-                item.status.markReviewed
-                item.status.score += 1
-                if(item.status.score >= @quiz.options.promoteThresh)
-                    item.status.score = 0
-                    promote(item)
-                end
-                if item.status.bin == 4
-                    item.status.consecutive += 1
-                    contents.bins[4].sort! do |x, y|
-                        x.status.scheduledTime <=> y.status.scheduledTime
-                    end
-                end
-                @quiz.setNeedsSave(true)
-            end
-        end
-
-        def incorrect
-            item = @quiz.currentProblem.item
-            collectStatistics(item, false)
-            if(item)
-                item.status.unschedule
-                item.status.markReviewed
+        # Mark the item as having been reviewed correctly
+        def correct(item)
+            @stats.correct(item)
+            item.status.correct
+            if(item.status.score >= options.promoteThresh)
                 item.status.score = 0
-                item.status.incorrect
-                demote(@quiz.currentProblem.item)
-                item.status.consecutive = 0
-                @quiz.setNeedsSave(true)
+                promote(item)
             end
+            # Bin 4 items have either just been promoted there,
+            # or they have been rescheduled.  This means we need to
+            # resort the bin.  This should be quite fast since only
+            # one item is out of order (O(n) probably).
+            if item.status.bin == 4
+                contents.bins[4].sort! do |x, y|
+                    x.status.scheduledTime <=> y.status.scheduledTime
+                end
+            end
+        end
+
+        # Mark the item as having been reviewed incorrectly
+        def incorrect(item)
+            @stats.incorrect(item)
+            item.status.incorrect
+            demote(item)
         end
     end
 end

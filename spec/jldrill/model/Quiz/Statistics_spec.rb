@@ -22,6 +22,7 @@ module JLDrill
 	    
 	    it "should set the accuracy correctly" do
 	        item = Item.new
+            item.status.bin = 4
 	        @statistics.accuracy.should be(0)
 	        @statistics.correct(item)
 	        @statistics.accuracy.should be(100)
@@ -31,6 +32,7 @@ module JLDrill
 	    
 	    it "should slowly move the estimate towards 100" do
 	        item = Item.new
+            item.status.bin = 4
 	        results = [30, 51, 65, 75, 82, 87, 90, 93]
 	        0.upto(7) do |i|
     	        @statistics.correct(item)
@@ -40,6 +42,7 @@ module JLDrill
 	    
 	    it "should keep track of the last ten responses" do
 	        item = Item.new
+            item.status.bin = 4
 	        @statistics.lastTen.size.should be(0)
 	        @statistics.correct(item)
 	        @statistics.lastTen.size.should be(1)
@@ -55,6 +58,7 @@ module JLDrill
 	    
 	    it "should keep track of the recent (up to 10 items) accuracy" do
 	        item = Item.new
+            item.status.bin = 4
 	        @statistics.recentAccuracy.should be(0)
 	        @statistics.correct(item)
 	        @statistics.recentAccuracy.should be(100)
@@ -70,6 +74,7 @@ module JLDrill
 	    
 	    def test_numTrials(percent, requiredConfidence, trials)
 	        item = Item.new
+            item.status.bin = 4
 	        @statistics.resetConfidence
 	        i = 0
 	        finished = false

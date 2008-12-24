@@ -190,6 +190,19 @@ module JLDrill
         
         def incorrect
             @numIncorrect += 1
+            unschedule
+            markReviewed
+            @score = 0
+            @consecutive = 0
+        end
+
+        def correct
+            schedule
+            markReviewed
+            @score += 1
+            if @bin == 4
+                @consecutive += 1
+            end
         end
             
         def seen?

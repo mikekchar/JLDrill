@@ -90,7 +90,7 @@ module JLDrill
 	    
 	    it "should be able to move an item from one bin to the other" do
 	        item = @quiz.contents.bins[0][0]
-	        @quiz.strategy.moveToBin(item, 4)
+	        @quiz.contents.moveToBin(item, 4)
 	        @quiz.contents.bins[0].length.should be(0)
 	        @quiz.contents.bins[4].length.should be(3)
 	        item.should be_equal(@quiz.contents.bins[4][2])

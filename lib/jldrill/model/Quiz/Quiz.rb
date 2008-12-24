@@ -22,7 +22,7 @@ module JLDrill
             @info = ""
             @options = Options.new(self)
             @contents = Contents.new(self)
-            @strategy = Strategy.new(self)            
+            @strategy = Strategy.new(self)
             @currentProblem = nil
             @publisher = Publisher.new(self)
             
@@ -58,6 +58,9 @@ module JLDrill
         end
         
         def problemModified
+            # When the problem is modified, it means that the item
+            # was also updated.  So we need to flag that a save is needed.
+            setNeedsSave(true)
             @publisher.update("problemModified")
         end
 
@@ -227,11 +230,19 @@ module JLDrill
         end
   
         def incorrect
-            @strategy.incorrect
+            item = @currentProblem.item
+            if !item.nil?
+                @strategy.incorrect(item)
+                setNeedsSave(true)
+            end
         end
         
         def correct
-            @strategy.correct
+            item = @currentProblem.item
+            if !item.nil?
+                @strategy.correct(item)
+                setNeedsSave(true)
+            end
         end
 
         def drill()

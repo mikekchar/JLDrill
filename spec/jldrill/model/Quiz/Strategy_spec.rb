@@ -25,16 +25,16 @@ module JLDrill
 	    it "should increment the statistics if correct in bin 4" do
 	        @quiz.currentProblem.item.status.bin.should be(4)
 	        @strategy.stats.accuracy.should be(0)
-	        @strategy.correct
+	        @strategy.correct(@quiz.currentProblem.item)
 	        @strategy.stats.accuracy.should be(100)
 	    end
 
 	    it "should decrement the statistics if incorrect in bin 4" do
 	        @quiz.currentProblem.item.status.bin.should be(4)
 	        @strategy.stats.accuracy.should be(0)
-	        @strategy.correct
+	        @strategy.correct(@quiz.currentProblem.item)
 	        @strategy.stats.accuracy.should be(100)
-	        @strategy.incorrect
+	        @strategy.incorrect(@quiz.currentProblem.item)
 	        @strategy.stats.accuracy.should be(50)	        
 	    end
 	    
@@ -196,7 +196,7 @@ module JLDrill
             item = test_addItem(4, -1)
 	        @quiz.currentProblem = @strategy.createProblem(item)
 	        item.status.difficulty.should be(0)
-	        @strategy.incorrect
+	        @strategy.incorrect(item)
 	        item.status.difficulty.should be(1)
         end
         
@@ -208,17 +208,17 @@ module JLDrill
             @quiz.options.promoteThresh = 1
             item = test_addItem(1, -1)
 	        @quiz.currentProblem = @strategy.createProblem(item)
-	        @strategy.incorrect
-	        @strategy.incorrect
-	        @strategy.incorrect
+	        @strategy.incorrect(item)
+	        @strategy.incorrect(item)
+	        @strategy.incorrect(item)
             item.status.bin.should be(1)	        
 	        item.status.difficulty.should be(3)
-	        @strategy.correct
-	        @strategy.correct
-	        @strategy.correct
+	        @strategy.correct(item)
+	        @strategy.correct(item)
+	        @strategy.correct(item)
             item.status.bin.should be(4)	        
 	        item.status.difficulty.should be(3)
-	        @strategy.incorrect
+	        @strategy.incorrect(item)
             item.status.bin.should be(1)	        	        
 	        item.status.difficulty.should be(4)        
         end
@@ -228,18 +228,18 @@ module JLDrill
             item = test_addItem(1, -1)
 	        @quiz.currentProblem = @strategy.createProblem(item)
             item.status.bin.should be(1)
-	        @strategy.correct
-	        @strategy.correct
-	        @strategy.correct
+	        @strategy.correct(item)
+	        @strategy.correct(item)
+	        @strategy.correct(item)
             item.status.bin.should be(4)
             # we only increase consecutive in the review set
             item.status.consecutive.should be(1)
-	        @strategy.correct
-	        @strategy.correct
-	        @strategy.correct
+	        @strategy.correct(item)
+	        @strategy.correct(item)
+	        @strategy.correct(item)
             item.status.consecutive.should be(4)
 
-            @strategy.incorrect
+            @strategy.incorrect(item)
             item.status.bin.should be(1)
             item.status.consecutive.should be(0)
         end

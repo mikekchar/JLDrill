@@ -76,7 +76,7 @@ Source repository:
   until you start the application again or press the Review Mode
   button.
 * Clear the current problem and create a new problem after a reset.
-* Don't steal focus when putting up the "Loading" window."
+* Don't steal focus when putting up windows that take no input.
 * Should not go into countdown for new items until after the first 10 items.
 * Modify the statistics window to show percentages for time rather
   than level.  Take the level display out of the status.

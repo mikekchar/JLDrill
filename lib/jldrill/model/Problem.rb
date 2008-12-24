@@ -72,7 +72,6 @@ module JLDrill
         def vocab=(vocab)
             @vocab.assign(vocab)
             @item.setContents(vocab.contentString)
-            @quiz.setNeedsSave(true)
             @quiz.problemModified
         end
 

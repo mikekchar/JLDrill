@@ -1,4 +1,5 @@
 require 'jldrill/model/Quiz/ItemStatus'
+require 'jldrill/model/Problem'
 
 module JLDrill
 

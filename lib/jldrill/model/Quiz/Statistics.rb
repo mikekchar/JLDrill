@@ -132,7 +132,12 @@ module JLDrill
         end
         
         def correct(item)
+            # currently only level 4 items are reviewed
+            if item.status.bin != 4
+                return
+            end
             @correct += 1
+            @reviewed += 1
             level = getLevel(item.status.consecutive)
             if !level.nil?
                 level.correct
@@ -143,7 +148,12 @@ module JLDrill
         end
 
         def incorrect(item)
+            # currently only level 4 items are reviewed
+            if item.status.bin != 4
+                return
+            end
             @incorrect += 1
+            @reviewed += 1
             level = getLevel(item.status.consecutive)
             if !level.nil?
                 level.incorrect
