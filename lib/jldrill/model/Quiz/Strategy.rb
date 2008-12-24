@@ -99,10 +99,8 @@ module JLDrill
                 return true
             end
             
-            !workingSetKnown? && (reviewSetSize >= options.introThresh)
-        end
-        
-        def getItemFromBin
+            !workingSetKnown? && (reviewSetSize >= options.introThresh) &&
+                !contents.bins[4].allSeen?
         end
         
         # Return the index of the first item in the bin that hasn't been

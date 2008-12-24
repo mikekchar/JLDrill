@@ -191,6 +191,37 @@ module JLDrill
             # Now we know the items well enough, so we shouldn't review
             @strategy.shouldReview?.should be(false)                        
         end
+
+        it "should not review if all the items in the review set are seen" do
+            @quiz.options.introThresh = 5
+            # There are only review set items.  So we should review.
+            @strategy.shouldReview?.should be(true)
+
+            # Set all the items in the review set to seen
+            @quiz.contents.bins[4].each do |item|
+                item.status.seen = true
+            end
+            @quiz.contents.bins[4].allSeen?.should be(true)
+
+            # Even though we've seen all the items in the Review set,
+            # there are only review set items, so we should still review
+            @strategy.shouldReview?.should be(true)
+
+            item = test_addItem(1, -1)
+            item.status.seen = true
+            # Now there is a working set item, and we don't have enough items
+            # in the review set, so we should not review
+            @strategy.shouldReview?.should be(false)
+            # Make a total of 4 items in the review set
+            0.upto(3) do
+                item = test_addItem(4, -1)
+                item.status.seen = true
+            end
+            # We have enough items, and we haven't learned the review items
+            # to the required level, so we would ordinarily review
+            # However, all the review set items are seen, so we won't
+            @strategy.shouldReview?.should be(false)
+        end
         
         it "should increment the item's difficulty when an item is incorrect" do
             item = test_addItem(4, -1)
