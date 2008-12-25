@@ -23,10 +23,9 @@ stable version will always be available at:
 
 http://jldrill.rubyforge.org
 
-The version of this package is jldrill-0.3.3.  It is a released
-development version and can be used by end users with care.  However,
-it is not considered stable and the user should pay attention for
-bugs. The location for the documentation for this release is depends on
+The version of this package is jldrill-0.3.4.  It is an unreleased
+development version and should not be used by end users.
+The location for the documentation for this release is depends on
 where you are viewing this.
 
 {Installed Gem}[link://../../../gems/jldrill-0.3.3/web/output/index.html]
@@ -70,14 +69,55 @@ Source repository:
   
 == TODO
 
-<b>Backlog</b>
+<b>version-0.3.4</b>
+
+* <b>Date Started:</b> December 25th, 2008
+* <b>Comleted Jelly Beans:</b> 0
+* <b>Total Jelly Beans:</b> 22
+* <b>Percentage Complete:</b> 0%
+
+* Add description for 々 in the kanji popup (<b>estimate:</b> 1 jelly bean)
+* Add Ctl-D to load the dictionary from the edit and add windows.
+  (<b>estimate:</b> 2 jelly beans)
+* Improved workflow for the add window:  When the window comes up,
+  the cursor is placed in the Readings box.  If the user presses Ctrl-S,
+  the item is searched.  If there are any results, the focus is put
+  on the search box.  If not, the focus remains where it is.  When the
+  focus is on the search box, up arrow and down arrow will select
+  the previous and next items respectively.  Return will insert the
+  item and the focus will be placed on the "Add" button.  Another
+  keystroke (TBD) will return the focus to the Readings box.
+  (<b>estimate:</b> 5 jelly beans)
+* Improved workflow for the edit window:  Similar to the add window.
+  But when the window first opens, the focus is on the search box
+  if there are any entries.  Note: if the user changes items, the
+  window does not steal focus, but if possible, the search box should
+  have the focus when the window regains focus.  If there are no
+  entries in the search box the focus should be on the Readings box.
+  (<b>estimate:</b> 3 jelly bean)
 * Allow user to modify the global backoff from the options. Must be
-  saved with the drill.
-* If a file has duplicate position numbers, renumber so it doesn't.
+  saved with the drill.  When the backoff is changed, all the items
+  that are currently scheduled will have to be scaled accordingly.
+  For example, if the backoff changes from 2.0 to 1.5, if there
+  was an item with a duration of 10, then the duration becomes
+  7.5.  If the item had been waiting for 5 days (50% of the duration),
+  then reset it so that it has been waiting for 3.75 days (50%
+  of 7.5).  Then resort all the items.
+  (<b>estimate:</b> 3 jelly beans)
+* Renumber item positions when resetting the drill.  This will fix
+  problems with old drills that have gotten out of whack.
+  (<b>estimate:</b> 1 jelly bean)
 * Be able to delete the current item.
+  (<b>estimate:</b> 3 jelly beans)
 * Be able to delete or edit an item from the "All Vocab" list.
+  (<b>estimate:</b> 2 jelly beans)
 * Be able to change the order of items in the "All Vocab" list.
-* Add description for 々 in the kanji popup
+  Basically, the user selects an item.  If they press up arrow
+  the item will go up.  If they press down arrow, the item will go
+  down. (<b>estimate:</b> 2 jelly beans)
+
+<b>Backlog</b>
+
 * Need a mechanism for publishing warnings and errors.
 * Full test coverage for all the model objects
 * Full test coverage for all the contexts
@@ -89,7 +129,6 @@ Source repository:
   dictionary is.
 * Allow user to set the formatting for each type of data.  Store the
   formatting in the drill.
-
 * Define the structure of the data in the drill.  In other words,
   create a dynamic data type that defines the structure of the data
   item that is to be drilled.  Save it in the drill itself.  Create a
