@@ -23,9 +23,10 @@ stable version will always be available at:
 
 http://jldrill.rubyforge.org
 
-The version of this package is jldrill-0.3.3.  It is an unreleased
-development version and should not be used by end users.  The
-location for the documentation for this release is depends on
+The version of this package is jldrill-0.3.3.  It is a released
+development version and can be used by end users with care.  However,
+it is not considered stable and the user should pay attention for
+bugs. The location for the documentation for this release is depends on
 where you are viewing this.
 
 {Installed Gem}[link://../../../gems/jldrill-0.3.3/web/output/index.html]
@@ -69,15 +70,9 @@ Source repository:
   
 == TODO
 
-<b>For Version 0.3.3</b>
-
-* Modify the statistics window to show percentages for time rather
-  than level.  Take the level display out of the status.
-
 <b>Backlog</b>
-* Don't steal focus when putting up windows that take no input.  Deferred
-  from 0.3.3.  I tried to do it, but it never worked.  I suspect a race
-  condition in GTK and it's not important enough to kill myself over.
+* Allow user to modify the global backoff from the options. Must be
+  saved with the drill.
 * If a file has duplicate position numbers, renumber so it doesn't.
 * Be able to delete the current item.
 * Be able to delete or edit an item from the "All Vocab" list.
@@ -86,8 +81,9 @@ Source repository:
 * Need a mechanism for publishing warnings and errors.
 * Full test coverage for all the model objects
 * Full test coverage for all the contexts
-* Allow user to modify the global backoff from the options. Must be
-  saved with the drill.
+* Don't steal focus when putting up windows that take no input.  Deferred
+  from 0.3.3.  I tried to do it, but it never worked.  I suspect a race
+  condition in GTK and it's not important enough to kill myself over.
 * Create a recent used menu for loading drills that you've used recently.
 * Stop distributing edict in the gem.  Allow the user to set where the
   dictionary is.

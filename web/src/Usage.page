@@ -615,8 +615,8 @@ send me suggestions for what you want to see and how you want to see it.
 
 The statistics window is split into 4 sections of 2 columns each.  The
 first section shows the number of items that are potentially scheduled
-for this week.  In the example you can see that I have 576 item that
-are overdue (behind).  I have 60 scheduled for today, 44 scheduled for
+for this week.  In the example you can see that I have 0 items that
+are overdue (behind).  I have 8 scheduled for today, 75 scheduled for
 tomorrow, etc.  Note this this is the potential schedule.  What I actually
 review depends on how well I remember the items.  
 
@@ -627,66 +627,44 @@ the algorithm is self-correcting this is normal.  Probably the information itsel
 isn't really useful, but I was always curious, so I put it in.
 
 The next two columns show the distribution of items in the review set.  This
-is actually useful.  You can see that I have 279 items that were scheduled
-within 5 days, 0 items scheduled between 5 and 10 days, 45 scheduled between
+is actually useful.  You can see that I have 71 items that were scheduled
+within 5 days, 167 items scheduled between 5 and 10 days, 150 scheduled between
 10 and 20 days.  Note that this is when they were *originally* scheduled,
 not what their potential schedule is now.
 
 This is useful to show yourself whether or not you are progressing properly.
-Overtime, the schedule for the items will increase.  But you can see here
-that I have a lot of items in the lowest band and *no* items in the next
-band.  That's because when I was reviewing them I got them all wrong.
-If you find strange things like this, then it means you aren't learning.
-In my case it's because I didn't review for a few weeks and couldn't
-recover.  When bad things like this happen, reset your drill and start
-from scratch.
+Overtime, the schedule for the items will increase.  You can see that
+I have a nice bell curve here.  When things are progressing normally
+this is what you will see.  If you review every day and learn a similar
+number of new items every day, they will fill out the schedule like this.
+But if you fall behind and start getting many items wrong, they will bunch
+up at the beginning.  That might be a sign that you should reset and
+start again.
 
 The next three columns show the percentage of times you got items correct
 at each level in the review set and the number of items you've been quizzed
 on.  It does this for only the current session.  When you quit the application
-and start again, this will start fressh.
+and start again, this will start fresh.  I use this section to see if the
+backoff algorithm is working.  Ideally, these should be about 80-90%.
+As you can see, the accuracy is actually dropping off to around 70%, 
+so probably I need to make the backoff smaller.  A future version will
+have this option.
 
-In order to create a screenshot, I just raced through a few items.  You can
-see that I reviewed 26 level 1 items and got 80% of them correct.  Level 1
-means that these are items I have only reviewed one time in the review set.
-I reviewed 9 items in level 3 (they have been successfully reviewed 3 times
-in a row), and 3 items in level 4.  All of these (100%) were correct.
+This screen shot was taken after a typical review session for me.  At
+the right you can see some overall statistics for the session.  I reviewed
+127 items (this is a little more than normal for me -- usually I do
+about 70).  You can see that I learned (or memorized) 26 items in that
+time.  The average time to review eat item was 18.7 seconds (normally
+it takes about 10-12 seconds, but the room was very noisy this morning).
+The time to learn each item was 68.2 seconds (about normal for me).
+My total accuracy for reviewing was 80% (which is normal).  Finally
+the ratio between learning time to overall time was 78% (this may be
+a useless statistic).
 
-This part of the statistics is useful to see how the algorithm is working.
-Generally speaking you will usually have less success with lower level items
-(since you forget them faster).  This is just an interesting way to see how
-it's going.  Note that you shouldn't be particularly worried about these
-number unless you review more than 30 in a group and you get a very low
-success rate.  If you do, perhaps there's a problem somewhere.
-
-Finally the last two columns show some rndom statistics.  The first line
-shows you the total number of items you have reviewed this session in
-the review set.  Then next number shows the total number of items that
-have been promoted into the review set this session (i.e., items you
-have learned or memorized).  In this example I have reviewed 38 items
-and learned 6.
-
-The next two lines tell you how much time (per item) was spend reviewing
-or learning, on average.  In my case I spent 0.8 seconds per item reviewing.
-Usually this number is about 10 or 12 seconds for me.  As I said, I was
-just racing around to get a screen shot.  I spend 2.8 seconds per item
-learning items.  This means the total amount of time it took from the
-time it was introduced until the time it was learned.  Normally it takes
-me about 90 seconds to learn an item (on good days it's more like 60 and
-on days when I'm tired it can be over 120 seconds).
-
-Note that these times are averages.  The Time to Learn, especially, will
-start out very high because it takes a long time to get the first item
-learned.  But over time it will stabalize on the correct average.
-
-The next line, total accuracy tells you your accuracy *for the review set only*.
-In this case, I got 86% of the review set items that I was drill correct
-this session.
-
-The final line is simply the percentage of time it takes to learn versus
-review.  Probably this is not interesting to you, but at one point I
-was thinking it was significant for the algorithm (I've changed my mind
-now). 
+Don't be too concerned about these statistics.  Again, they are used
+for determining what needs to be changed in the review algorithm.
+If you are using the application consistently every day and notice
+problems, though, please contact me.
 
 Non-Drill Features
 ------------------

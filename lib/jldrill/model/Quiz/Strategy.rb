@@ -142,6 +142,9 @@ module JLDrill
             end
             if !(index == -1)
                 item = contents.bins[newSetBin][index]
+                # Resetting the status to make up for the consequences
+                # of an old bug where reset drills weren't reset properly.
+                item.status.reset
                 promote(item)
                 item
             else

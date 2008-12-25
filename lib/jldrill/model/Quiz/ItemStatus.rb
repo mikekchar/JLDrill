@@ -103,6 +103,7 @@ module JLDrill
         # Resets the status  
         def reset
             @lastReviewed = nil
+            @scheduledTime = nil
             @score = 0
             @consecutive = 0
             @seen = false

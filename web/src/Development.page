@@ -7,7 +7,7 @@ sort_info: 35
 Development Version
 ===================
 
-**Latest Completed Development Version:**  [jldrill-0.3.2](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.2)
+**Latest Completed Development Version:**  [jldrill-0.3.3](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.3)
 
 For details on development versions, see below.
 
@@ -22,6 +22,8 @@ use every day).  So if you want something more cutting edge, or
 you would like to get involved in doing development on JLDrill you
 can always get the latest code from the
 [JLDrill BZR Repository](http://sakabatou.dnsdojo.org/devel/jldrill/).
+
+[Development documentation](http://sakabatou.dnsdojo.org/devel/jldril/doc/index.html) for this version including a TODO list is available.
 
 Note that JLDrill is built upon Context, which is a library for
 abstracting user interfaces using MVP (Model View Presentor).  So
@@ -42,17 +44,22 @@ following gems:
 
 The current version of webgen doesn't play well with the version
 of rubygems in Debian and Ubuntu, unfortunately.  So you will have
-too install version 0.5.3 of webgen (gem install -v 0.5.3 webgen).
+to install version 0.5.3 of webgen (gem install -v 0.5.3 webgen).
 Also webgen has a lot of optional dependencies that are necessary.
 Keep running webgen and installing the dependencies until it stops
 complaining.
 
-Once you have everthing installed you will be able to package
-the files using:
+Once you have everthing installed you will be able to build everything
+using:
 
 <pre>
-		rake package
+		rake update
 </pre>
+
+Once you have done that, you should view the development documentation
+and TODO list for that version by looking at doc/index.html.  It will 
+also contain links to the user documentation for the specific version 
+you build.
 
 I am actively encouraging people to help in the development of
 JLDrill.  If you want to contribute, please send me patches,
@@ -106,9 +113,32 @@ you want to join in on testing.
 
 Development Version History
 ---------------------------
-Current Development Version: **jldrill-0.3.3**.
+Current Development Version: **not started**.
 
-Latest Completed Development Version: [jldrill-0.3.2](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.2)
+Latest Completed Development Version: [jldrill-0.3.3](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.3)
+
+Changes in [jldrill-0.3.3](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.3)
+
+* Improved development documentation.  Opening the index.html file in the doc 
+  directory gets you started.
+* Some refactoring with Strategy and Item Status.
+* Reset now drills the first item in the quiz.  This means that when you reset
+  the drill, there will always be one item in the level 1 working set.  But
+  this is better than keeping the last problem around, or not having a problem
+  when you reset the drill (both of which are confusing).
+* Only start the countdown for New Item mode after you have seen 10 items.
+  I did this because I found that when I'm on top of things my review for
+  the first 10 items is always 100%.  Possibly this means that I need to
+  backoff the difficulty for items that have already been memorized.  More
+  research needs to be done.
+* Properly reset the scheduled time in items when the quiz is reset.  Also
+  reset each item when it is first introduced in case we have old quizzes
+  that contain the scheduled time.
+* Modify the stats window to show the accuracy of items by original
+  duration rather than number of consequtive correct answers.  This
+  gives a better indication of whether or not the backoff is working
+  properly (for difficult items I level 5 item may have only been around
+  2 or 3 days).
 
 Changes in [jldrill-0.3.2](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.2)
 
