@@ -65,6 +65,12 @@ module JLDrill::Gtk
     					closeView
     			    end
 				end
+				signal_connect('delete-event') do
+				    if !@closed
+    					closeView
+    			    end
+                    true
+				end
 			end
 			
 			def explicitDestroy
