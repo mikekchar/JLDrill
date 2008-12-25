@@ -72,11 +72,13 @@ Source repository:
 <b>version-0.3.4</b>
 
 * <b>Date Started:</b> December 25th, 2008
-* <b>Comleted Jelly Beans:</b> 0
+* <b>Comleted Jelly Beans:</b> 1
 * <b>Total Jelly Beans:</b> 22
-* <b>Percentage Complete:</b> 0%
+* <b>Percentage Complete:</b> 4.5%
 
-* Add description for 々 in the kanji popup (<b>estimate:</b> 1 jelly bean)
+* Add description for 々 in the kanji popup (<b>estimate:</b> 1 jelly bean, <b>done</b>)
+* Pressing cancel when trying to save after quitting should bring the
+  main window back up (<b>estimate:</b> in velocity)
 * Add Ctl-D to load the dictionary from the edit and add windows.
   (<b>estimate:</b> 2 jelly beans)
 * Improved workflow for the add window:  When the window comes up,
