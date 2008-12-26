@@ -46,9 +46,18 @@ module JLDrill
 			list = KanjiList.fromFile(JLDrill::Config::getDataDir + 
 			                                "/dict/rikaichan/kanji.dat")
 			list.should_not be(nil)
-			list.size.should be(12552)
+			list.size.should be(12554)
 			kanji = list.findChar("一")
 			kanji.should_not be_nil
+
+            # It should find the two new entries I added.  Putting
+            # it here so I don't have to load the dictionary again.
+            kanji = list.findChar("々")
+            kanji.should_not be_nil
+            kanji.strokes.should be(3)
+            kanji = list.findChar("ヶ")
+            kanji.should_not be_nil
+            kanji.strokes.should be(3)
 		end
 
 	end
