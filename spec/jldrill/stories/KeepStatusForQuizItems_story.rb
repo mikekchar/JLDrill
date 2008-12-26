@@ -52,7 +52,7 @@ module JLDrill
 
         it "should be able to set the scheduled time" do
 		    @items[3].status.scheduled?.should be(false)
-		    @items[3].status.scheduledTime.to_i.should eql(Time::at(0).to_i)
+		    @items[3].status.getScheduledTime.to_i.should eql(Time::at(0).to_i)
 		    time = @items[3].status.schedule
 		    time.should_not be_nil
 		    @items[3].status.scheduled?.should be(true)
@@ -71,7 +71,7 @@ module JLDrill
 		    time = @items[1].status.schedule
 		    time.should_not be_nil
 		    @items[1].status.scheduled?.should be(true)
-		    actual = @items[1].status.scheduledTime.to_i
+		    actual = @items[1].status.getScheduledTime.to_i
 		    expected = Time::now.to_i + days(5)
 		    should_be_plus_minus_ten_percent(actual, expected)
         end
@@ -84,7 +84,7 @@ module JLDrill
 		    time.should_not be_nil
 		    @items[3].status.scheduled?.should be(true)
 		    # Should be scheduled for 6 days from now
-		    actual = @items[3].status.scheduledTime.to_i
+		    actual = @items[3].status.getScheduledTime.to_i
 		    expected = Time::now.to_i + days(6)
 		    should_be_plus_minus_ten_percent(actual, expected)
         end
@@ -99,7 +99,7 @@ module JLDrill
 		    @items[3].status.scheduled?.should be(true)
 		    # Instead of 2 days it will be 5 because that is the minumum for
 		    # an item that has no incorrect.
-		    actual = @items[3].status.scheduledTime.to_i
+		    actual = @items[3].status.getScheduledTime.to_i
 		    expected = Time::now.to_i + days(5)
 		    should_be_plus_minus_ten_percent(actual, expected)
         end
@@ -111,10 +111,10 @@ module JLDrill
         end
 
         it "should be able to parse the schedule information in the file" do
-            @items[1].to_s.should eql(@strings[1] + "\n")
-            time = @items[1].status.schedule
-            newItem = Item.create(@items[1].to_s)
-            newItem.status.scheduledTime.to_i.should eql(time.to_i)
+            @items[3].to_s.should eql(@strings[3] + "\n")
+            time = @items[3].status.schedule
+            newItem = Item.create(@items[3].to_s)
+            newItem.status.getScheduledTime.to_i.should eql(time.to_i)
         end
         
         it "should be able to clear the schedule" do
@@ -177,24 +177,24 @@ module JLDrill
         end
         
         it "should be able to tell if an item is overdue to be reviewed" do
-            @items[1].status.scheduledTime = Time::now - ItemStatus::SECONDS_PER_DAY
+            @items[1].status.setScheduledTime(Time::now - ItemStatus::SECONDS_PER_DAY)
             @items[1].status.overdue?.should be(true)
-            @items[1].status.scheduledTime = Time::now + ItemStatus::SECONDS_PER_DAY
+            @items[1].status.setScheduledTime(Time::now + ItemStatus::SECONDS_PER_DAY)
             @items[1].status.overdue?.should be(false)            
-            @items[1].status.scheduledTime = Time::now
+            @items[1].status.setScheduledTime(Time::now)
             @items[1].status.overdue?.should be(false)            
         end
         
         it "should be able to tell which day an item is scheduled for" do
-            @items[1].status.scheduledTime = Time::now
+            @items[1].status.setScheduledTime(Time::now)
             @items[1].status.scheduledOn?(0).should be(true)
             @items[1].status.scheduledOn?(1).should be(false)
-            hoursToMidnight = 24 - @items[1].status.scheduledTime.hour
-            @items[1].status.scheduledTime += hoursToMidnight * 60 * 60
+            hoursToMidnight = 24 - @items[1].status.getScheduledTime.hour
+            @items[1].status.setScheduledTime(@items[1].status.getScheduledTime + hoursToMidnight * 60 * 60)
             @items[1].status.scheduledOn?(0).should be(false)
             @items[1].status.scheduledOn?(1).should be(true)
             @items[1].status.scheduledOn?(2).should be(false)
-            @items[1].status.scheduledTime += 24 * 60 * 60
+            @items[1].status.setScheduledTime(@items[1].status.getScheduledTime + 24 * 60 * 60)
             @items[1].status.scheduledOn?(0).should be(false)
             @items[1].status.scheduledOn?(1).should be(false)
             @items[1].status.scheduledOn?(2).should be(true)

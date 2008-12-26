@@ -244,7 +244,7 @@ module JLDrill
             # one item is out of order (O(n) probably).
             if item.status.bin == 4
                 contents.bins[4].sort! do |x, y|
-                    x.status.scheduledTime <=> y.status.scheduledTime
+                    x.status.getScheduledTime <=> y.status.getScheduledTime
                 end
             end
         end

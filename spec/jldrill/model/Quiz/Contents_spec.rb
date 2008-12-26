@@ -31,7 +31,9 @@ module JLDrill
 	    end
 	    
 	    it "should be able to print out the status" do
-    	    @quiz.contents.status.should be_eql("New: 1 Review: 2 Working: 0, 1, 0 Behind: 2")
+            @quiz.contents.bins[4][1].status.scheduled?.should be(true)
+            @quiz.contents.bins[4][1].status.overdue?.should be(true)
+    	    @quiz.contents.status.should eql("New: 1 Review: 2 Working: 0, 1, 0 Behind: 2")
 	    end
 	    
 	    def countSizes(sizes, range)
@@ -74,16 +76,16 @@ module JLDrill
         	    end
     	    end
     	    
-    	    quiz.contents.findUnseen(0, 0..0).should be_eql(quiz.contents.bins[0][0])
-    	    quiz.contents.findUnseen(0, 0..4).should be_eql(quiz.contents.bins[0][0])
-    	    quiz.contents.findUnseen(0, 4..4).should be_eql(quiz.contents.bins[4][0])
-    	    quiz.contents.findUnseen(4, 0..4).should be_eql(quiz.contents.bins[0][4])
-    	    quiz.contents.findUnseen(5, 0..4).should be_eql(quiz.contents.bins[1][0])
-    	    quiz.contents.findUnseen(4, 2..3).should be_eql(quiz.contents.bins[2][4])
-    	    quiz.contents.findUnseen(5, 2..3).should be_eql(quiz.contents.bins[3][0])
-    	    quiz.contents.findUnseen(12, 1..3).should be_eql(quiz.contents.bins[3][2])
+    	    quiz.contents.findUnseen(0, 0..0).should eql(quiz.contents.bins[0][0])
+    	    quiz.contents.findUnseen(0, 0..4).should eql(quiz.contents.bins[0][0])
+    	    quiz.contents.findUnseen(0, 4..4).should eql(quiz.contents.bins[4][0])
+    	    quiz.contents.findUnseen(4, 0..4).should eql(quiz.contents.bins[0][4])
+    	    quiz.contents.findUnseen(5, 0..4).should eql(quiz.contents.bins[1][0])
+    	    quiz.contents.findUnseen(4, 2..3).should eql(quiz.contents.bins[2][4])
+    	    quiz.contents.findUnseen(5, 2..3).should eql(quiz.contents.bins[3][0])
+    	    quiz.contents.findUnseen(12, 1..3).should eql(quiz.contents.bins[3][2])
             quiz.contents.bins[1][3].status.seen = true
-    	    quiz.contents.findUnseen(12, 1..3).should be_eql(quiz.contents.bins[3][3])
+    	    quiz.contents.findUnseen(12, 1..3).should eql(quiz.contents.bins[3][3])
     	    quiz.contents.findUnseen(15, 1..3).should be_nil
 	    end
 	    
@@ -104,11 +106,11 @@ module JLDrill
             item = Item.new(@sampleQuiz.sampleVocab)
             quiz2.contents.addItem(item, 2)
             quiz2.contents.length.should be(5)
-            quiz2.contents.bins[2][1].to_o.kanji.should be_eql(item.to_o.kanji)
+            quiz2.contents.bins[2][1].to_o.kanji.should eql(item.to_o.kanji)
 	        
 	        @quiz.contents.addContents(quiz2.contents)
 	        @quiz.contents.length.should be(5)
-            @quiz.contents.bins[2][1].to_o.kanji.should be_eql(item.to_o.kanji)
+            @quiz.contents.bins[2][1].to_o.kanji.should eql(item.to_o.kanji)
 	    end
     end
 end

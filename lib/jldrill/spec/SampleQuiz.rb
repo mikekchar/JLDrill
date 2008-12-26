@@ -28,8 +28,8 @@ Fair
 /Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 2/Level: 0/Position: 1/Consecutive: 0/Difficulty: 0/
 Good
 Excellent
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 4/Level: 0/Position: 2/Consecutive: 1/Difficulty: 0/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 4/Level: 0/Position: 3/Consecutive: 1/Difficulty: 0/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 4/Level: 0/Position: 2/LastReviewed: 1230076403/Consecutive: 1/ScheduledTime: 1230076413/Difficulty: 0/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 4/Level: 0/Position: 3/LastReviewed: 1230076403/Consecutive: 1/ScheduledTime: 1230076413/Difficulty: 0/
 ]
 #################################
 

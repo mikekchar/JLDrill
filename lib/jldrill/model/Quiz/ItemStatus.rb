@@ -29,10 +29,10 @@ module JLDrill
         MAX_ADDITIONAL_TIME = 4 * SECONDS_PER_DAY
 
         attr_reader :score, :bin, :level, :position, :index, 
-                        :lastReviewed, :consecutive, :scheduledTime,
+                        :lastReviewed, :consecutive,
                         :seen, :numIncorrect
         attr_writer :score, :bin, :level, :position, :index, 
-                        :lastReviewed, :consecutive, :scheduledTime,
+                        :lastReviewed, :consecutive,
                         :seen, :numIncorrect
 
 
@@ -73,7 +73,9 @@ module JLDrill
                 when CONSECUTIVE_RE 
                     @consecutive = $1.to_i
                 when SCHEDULEDTIME_RE
-                    @scheduledTime = Time.at($1.to_i)
+                    if @bin == 4
+                        @scheduledTime = Time.at($1.to_i)
+                    end
                 when DIFFICULTY_RE
                     @numIncorrect = $1.to_i
             else # Not something we understand
@@ -98,6 +100,15 @@ module JLDrill
         # Returns true if the item has been marked reviewed at least once
         def reviewed?
             !@lastReviewed.nil?
+        end
+
+        # Return the time that the item was reviewed.  If it wasn't
+        # reviewed mark it reviewed and return now.
+        def reviewedTime
+            if !reviewed?
+                markReviewed
+            end
+            return @lastReviewed
         end
            
         # Resets the status  
@@ -170,7 +181,7 @@ module JLDrill
             # If it is scheduled, then that means it isn't 
             # a newly promoted item
             if scheduled?
-                elapsed = Time::now.to_i - @lastReviewed.to_i
+                elapsed = Time::now.to_i - reviewedTime().to_i
                 if (2 * elapsed) > interval
                     interval = 2 * elapsed
                 end
@@ -192,12 +203,17 @@ module JLDrill
         end
         
         # Return the time at which the item is scheduled for review
-        def scheduledTime
+        def getScheduledTime
             if !scheduled?
                 Time::at(0)
             else
                 @scheduledTime
             end
+        end
+        
+        # Set the scheduled time to a specific value
+        def setScheduledTime(time)
+            @scheduledTime = time
         end
         
         # Return the difficulty of the item.  Right now that is
@@ -243,7 +259,7 @@ module JLDrill
         def scheduleDuration
             retVal = 0
             if scheduled?
-                retVal = @scheduledTime.to_i - @lastReviewed.to_i
+                retVal = @scheduledTime.to_i - reviewedTime().to_i
             end
             retVal
         end
@@ -254,12 +270,16 @@ module JLDrill
             if !reviewed?
                 markReviewed
             end
-            @scheduledTime = @lastReviewed + seconds
+            @scheduledTime = reviewedTime() + seconds
         end
         
         # Returns true if the item is overdue to be reviewed
         def overdue?
-            @scheduledTime.to_i < Time::now.to_i
+            if !scheduled?
+                return false
+            else
+                @scheduledTime.to_i < Time::now.to_i
+            end
         end
         
         # Returns true if the date is on the specified day.
@@ -277,7 +297,11 @@ module JLDrill
         # date, not 24 hour time period (i.e., if it's 1am, then an
         # item reviewed 2 hours ago is yesterday).
         def reviewedOn?(day)
-            return onDay?(@lastReviewed, day)
+            if !reviewed?
+                return false
+            else
+                return onDay?(reviewedTime(), day)
+            end
         end
         
         # Returns true if the item is scheduled on the specified day.
@@ -285,7 +309,11 @@ module JLDrill
         # date, not 24 hour time period (i.e., if it's 11pm, then an
         # item scheduled in 2 hours is tomorrow).
         def scheduledOn?(day)
-            return onDay?(@scheduledTime, day)
+            if !scheduled?
+                return false
+            else
+                return onDay?(@scheduledTime, day)
+            end
         end
         
         # Returns true if the item has a schedule duration in the range of days
@@ -308,7 +336,7 @@ module JLDrill
                 elsif reviewedOn?(-1)
                     retVal = "Yesterday"
                 else
-                    retVal = @lastReviewed.strftime("%x")
+                    retVal = reviewedTime().strftime("%x")
                 end
             end
             retVal
@@ -319,7 +347,7 @@ module JLDrill
             retVal = "/Score: #{@score}" + "/Bin: #{@bin}" + "/Level: #{@level}" +
                 "/Position: #{@position}"
             if reviewed?
-                retVal += "/LastReviewed: #{@lastReviewed.to_i}"
+                retVal += "/LastReviewed: #{reviewedTime().to_i}"
             end
             if !@consecutive.nil?
                 retVal += "/Consecutive: #{@consecutive.to_i}"
