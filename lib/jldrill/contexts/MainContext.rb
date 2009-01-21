@@ -1,5 +1,4 @@
 require 'Context/Context'
-require 'Context/Key'
 require 'Context/Bridge'
 require 'jldrill/views/MainWindowView'
 require 'jldrill/model/Edict/Edict'

@@ -1,5 +1,4 @@
 require 'Context/Gtk/Widget'
-require 'Context/Gtk/Key'
 require 'jldrill/views/VocabularyView'
 require 'jldrill/oldUI/GtkVocabView.rb'
 require 'jldrill/oldUI/GtkVocabTable.rb'
