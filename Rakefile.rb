@@ -4,7 +4,7 @@ require 'rake/rdoctask'
 require 'rake/testtask'
 require 'rubygems'
 require 'rake/gempackagetask'
- require 'webgen/webgentask'
+require 'webgen/webgentask'
 require 'lib/jldrill/Version'
 
 #======================== Setup ================================
@@ -77,7 +77,6 @@ ruby_opts = ["-KO", "-I./lib"]
 #            that people can browse the built items through the
 #            web-dave interface 
 
-# task :default => [:rcov, :rdoc]
 task :default => [:spec]
 
 # Run the rspec tests
@@ -217,7 +216,7 @@ end
 
 task :release => [:clean, :rcov, :rdoc, :web, :package] do
     mkdir release_dir
-    sh "cd #{context_directory}; rake rcov; rake package"
+    sh "cd #{context_directory}; rake rcov; rake rdoc; rake package"
     sh "cp #{context_directory}/pkg/context-#{context_version}.gem #{release_dir}"
     sh "cp pkg/jldrill-#{JLDrill::VERSION}.gem #{release_dir}"
     sh "cp data/jldrill/fonts/*.ttf #{release_dir}"

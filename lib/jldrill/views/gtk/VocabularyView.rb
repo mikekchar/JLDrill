@@ -31,13 +31,12 @@ module JLDrill::Gtk
 	        end
 	        
 	        def connectSignals
-                add_events(Gdk::Event::KEY_PRESS_MASK)
-                signal_connect('key_press_event') do |widget, event|
-                    key = Context::Gtk::Key.createFromGtkEvent(event)
-                    if key.character == "Escape"
-                        self.close
-                    end
+                @accel = Gtk::AccelGroup.new
+                @accel.connect(Gdk::Keyval::GDK_Escape, 0,
+                               Gtk::ACCEL_VISIBLE) do
+                    self.close
                 end
+                add_accel_group(@accel)
 
 			    signal_connect('delete_event') do
                     # Request that the destroy signal be sent

@@ -76,7 +76,9 @@ Source repository:
 * <b>Total Jelly Beans:</b> 22
 * <b>Percentage Complete:</b> 4.5%
 
-* JLDrill crashed on me.  But I'm not sure why.
+* If you have a kanji question and edit it to take out the kanji,
+  when you finish the editing, the problem question is blank.
+  In this situation, the problem should become a meaning problem.
 * Add Ctl-D to load the dictionary from the edit and add windows.
   (<b>estimate:</b> 2 jelly beans)
 * Improved workflow for the add window:  When the window comes up,
@@ -120,6 +122,7 @@ Source repository:
 * Add description for 々 in the kanji popup (<b>estimate:</b> 1 jelly bean, <b>done</b>)
 * Pressing cancel when trying to save after quitting shouldn't leave
 you hung with no window. (<b>estimate:</b> in velocity, <b>done</b>)
+* JLDrill crashed on me.  But I'm not sure why. (<b>estimate:</b> in velocity, <b>done</b>)
 
 <b>Backlog</b>
 
