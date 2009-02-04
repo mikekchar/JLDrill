@@ -17,7 +17,7 @@ rubyforge_project = "jldrill"
 rubyforge_maintainer = "mikekchar@rubyforge.org"
 
 # Dependencies
-context_version = "0.0.16"
+context_version = "0.0.17"
 context_directory = "../context"
 
 # Files that will be packaged
