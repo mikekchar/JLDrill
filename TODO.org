@@ -50,10 +50,10 @@ the number of jellybeans done in the properties of the task.
    :Done: 2
   :END:
 ** TODO Improved workflow for the add window
-   Whent he indow comes up, the cursor is placed in the Readings box.
+   Whent he window comes up, the cursor is placed in the Readings box.
    If the user presses Ctrl-S the item is searched.  If there are any
    results, the focus is put on the search box.  If not, the focus
-   remains where it is.  Whent he foxus is on the search box, up arrow
+   remains where it is.  When the focus is on the search box, up arrow
    and down arrow will select the previous and next tiems
    respectively. Return will insert the item and the focus will be
    placed on the "Add" button.  Another keystroke (TBD) will return

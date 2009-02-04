@@ -39,6 +39,10 @@ module JLDrill::Gtk
                                Gtk::ACCEL_VISIBLE) do
                     @view.loadDictionary
                 end
+                @accel.connect(Gdk::Keyval::GDK_S, Gdk::Window::CONTROL_MASK,
+                               Gtk::ACCEL_VISIBLE) do
+                    updateSearchTable
+                end
                 add_accel_group(@accel)
 
 			    signal_connect('delete_event') do
@@ -57,6 +61,10 @@ module JLDrill::Gtk
 				@searchButton.signal_connect('clicked') do
                     updateSearchTable
 				end
+
+                @vocabView.setAcceptReading do
+                    updateSearchTable
+                end
 			end
 
             def close
@@ -77,6 +85,7 @@ module JLDrill::Gtk
                     end
                     @vbox.add(@searchTable)
                     @vbox.show_all
+                    @searchTable.focusTable
                 end
             end
 			

@@ -6,9 +6,12 @@ module JLDrill::Gtk
 
         def initialize(vocab)
             super()
+            @acceptReadingBlock = nil
             @kanjiField = createField("Kanji: ", vocab.kanji)
             @hintField = createField("Hint: ", vocab.hint)
-            @readingField = createField("Reading: ", vocab.reading)
+            @readingField = createField("Reading: ", vocab.reading) do
+                @acceptReadingBlock.call
+            end
             @definitionsBox = createBox("Definitions: ", 
                                         vocab.definitionsRaw)
             @markersBox = createField("Markers: ", vocab.markers)
@@ -105,7 +108,7 @@ module JLDrill::Gtk
             end
         end
 
-        def createField(label, value)
+        def createField(label, value, &block)
             if !label then label = "" end
             if !value then value = "" end
 
@@ -115,10 +118,15 @@ module JLDrill::Gtk
             entry.editable = true
             entry.text = value
             hbox.pack_start(entry, true, true, 5)
+            if !block.nil?
+                entry.signal_connect('activate') do |widget|
+                    block.call
+                end
+            end
             return hbox
         end
 
-        def createBox(label, value)
+        def createBox(label, value, &block)
             if !label then label = "" end
             if !value then value = "" end
 
@@ -144,5 +152,8 @@ module JLDrill::Gtk
             return hbox
         end
 
+        def setAcceptReading(&block)
+            @acceptReadingBlock = block
+        end
     end
 end
