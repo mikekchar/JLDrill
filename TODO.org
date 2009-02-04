@@ -37,7 +37,7 @@ the number of jellybeans done in the properties of the task.
 ** DONE JLDrill crashes.
   I don't know why it crashed (and I didn't record the reason when I
   fixed it.)  This is unplanned work accounted for in the velocity.
-** TODO Removing kanji from a kanji problem
+** DONE Removing kanji from a kanji problem
   If you have a kanji question and edit it to take out the kanji,
   when you finish the editing, the problem question is blank.
   In this situation, the problem should become a meaning problem.
