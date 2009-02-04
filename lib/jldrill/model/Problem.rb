@@ -140,6 +140,11 @@ module JLDrill
             @questionParts = ["kanji", "reading", "hint"]
             @answerParts = ["definitions"]
         end
+
+        # Currently always valid.
+        def valid?
+            return true
+        end
     end
     
     # Test your kanji reading.  Read the kanji and guess the reading and definitions
@@ -150,6 +155,12 @@ module JLDrill
             @questionParts = ["kanji"]
             @answerParts = ["reading", "definitions", "hint"]
         end
+
+        # Returns false if the kanji is emty and we can't drill this
+        # item.
+        def valid?
+            return !kanji.empty?
+        end
     end
     
     # Shows you the English and you guess the kanji and reading
@@ -159,6 +170,11 @@ module JLDrill
             @level = 1
             @questionParts = ["definitions"]
             @answerParts = ["kanji", "reading", "hint"]
+        end
+
+        # Currently always valid.
+        def valid?
+            return true
         end
     end
 

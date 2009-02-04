@@ -58,10 +58,17 @@ module JLDrill
         end
         
         def problemModified
-            # When the problem is modified, it means that the item
-            # was also updated.  So we need to flag that a save is needed.
-            setNeedsSave(true)
-            @publisher.update("problemModified")
+            if !currentProblem.nil? && !currentProblem.valid?
+                # The current problem has been edited and can't be displayed
+                # like it is (i.e., A Kanji problem has had it's kanji removed)
+                # Recreate it.  
+                recreateProblem
+            else
+                # When the problem is modified, it means that the item
+                # was also updated.  So we need to flag that a save is needed.
+                setNeedsSave(true)
+                @publisher.update("problemModified")
+            end
         end
 
         def setNeedsSave(bool)
@@ -246,11 +253,19 @@ module JLDrill
             end
         end
 
-        def drill()
-            item = @strategy.getItem
+        def createProblem(item)
             @currentProblem = @strategy.createProblem(item)
             update
             updateNewProblem
+        end
+        
+        def recreateProblem
+            createProblem(@currentProblem.item) unless @currentProblem.nil?
+        end
+
+        def drill()
+            item = @strategy.getItem
+            createProblem(item)
             return @currentProblem.question
         end
 
