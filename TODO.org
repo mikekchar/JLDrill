@@ -14,9 +14,9 @@ workflow for creating and editing drills.
 
 ** Development Summary
 #+BEGIN: columnview :maxlevel 1 :id local
-| ITEM                    | Total | Done |   % | Current | Needed |
-|-------------------------+-------+------+-----+---------+--------|
-| * JLDrill Version 0.3.4 |    22 |    1 | 4.5 |    0.02 |   0.26 |
+| ITEM                    | Total | Done |    % | Current | Needed |
+|-------------------------+-------+------+------+---------+--------|
+| * JLDrill Version 0.3.4 |    22 |    3 | 13.6 |    0.07 |   0.26 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -42,11 +42,12 @@ the number of jellybeans done in the properties of the task.
   when you finish the editing, the problem question is blank.
   In this situation, the problem should become a meaning problem.
   This is unplanned work accounted for in the velocity.
-** TODO Ability to load dictionary in all windows
+** DONE Ability to load dictionary in all windows
    You should be able to load the dictionary with Ctl-D from
    both the edit and add windows
   :PROPERTIES:
   :JellyBeans: 2
+   :Done: 2
   :END:
 ** TODO Improved workflow for the add window
    Whent he indow comes up, the cursor is placed in the Readings box.

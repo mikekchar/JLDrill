@@ -76,8 +76,6 @@ Source repository:
 * <b>Total Jelly Beans:</b> 22
 * <b>Percentage Complete:</b> 4.5%
 
-* Add Ctl-D to load the dictionary from the edit and add windows.
-  (<b>estimate:</b> 2 jelly beans)
 * Improved workflow for the add window:  When the window comes up,
   the cursor is placed in the Readings box.  If the user presses Ctrl-S,
   the item is searched.  If there are any results, the focus is put
@@ -127,6 +125,8 @@ Source repository:
   when you finish the editing, the problem question is blank.
   In this situation, the problem should become a meaning problem.
   (<b>estimate:</b> in velocity, <b>done</b>)
+* Add Ctl-D to load the dictionary from the edit and add windows.
+  (<b>estimate:</b> 2 jelly beans)
 
 <b>Backlog</b>
 

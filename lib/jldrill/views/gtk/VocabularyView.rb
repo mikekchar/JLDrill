@@ -35,6 +35,10 @@ module JLDrill::Gtk
                                Gtk::ACCEL_VISIBLE) do
                     self.close
                 end
+                @accel.connect(Gdk::Keyval::GDK_D, Gdk::Window::CONTROL_MASK,
+                               Gtk::ACCEL_VISIBLE) do
+                    @view.loadDictionary
+                end
                 add_accel_group(@accel)
 
 			    signal_connect('delete_event') do
