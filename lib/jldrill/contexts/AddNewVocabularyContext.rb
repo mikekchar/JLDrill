@@ -50,6 +50,10 @@ module JLDrill
                 @parent.reference.loaded?
         end
 
+        def loadDictionary
+            @parent.loadReference unless @parent.nil?
+        end
+
 		def search(reading)
 		    if dictionaryLoaded? && !reading.nil? && !reading.empty?
 		        @parent.reference.search(reading).sort! do |x,y|

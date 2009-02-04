@@ -53,5 +53,9 @@ module JLDrill
         def dictionaryLoaded?
             @context.dictionaryLoaded?
         end
+
+        def loadDictionary
+            @context.loadDictionary
+        end
 	end
 end

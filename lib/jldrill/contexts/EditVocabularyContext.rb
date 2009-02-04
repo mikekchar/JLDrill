@@ -70,6 +70,10 @@ module JLDrill
             !@parent.nil? && !@parent.reference.nil? &&
                 @parent.reference.loaded?
         end
+        
+        def loadDictionary
+            @parent.loadReference unless @parent.nil?
+        end
 
 		def search(reading)
 		    if dictionaryLoaded?
