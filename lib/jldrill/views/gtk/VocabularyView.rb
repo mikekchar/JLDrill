@@ -82,9 +82,11 @@ module JLDrill::Gtk
                     candidates = @view.search(self.reading)
                     @searchTable = GtkVocabTable.new(candidates) do |vocab|
                         update(vocab)
+                        @addButton.grab_focus
                     end
                     @vbox.add(@searchTable)
                     @vbox.show_all
+                    @searchTable.selectClosestMatch(getVocab)
                     @searchTable.focusTable
                 end
             end

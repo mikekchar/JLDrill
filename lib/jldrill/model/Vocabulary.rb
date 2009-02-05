@@ -16,6 +16,7 @@ module JLDrill
         QUOTE_RE = /["]/
         RETURN_RE = /[\n]/
         JP_COMMA_RE = Regexp.new("[、]", nil, "U")
+        TO_A_RE = Regexp.new('\s*',nil,'U')
 
         def initialize(kanji=nil, reading=nil, definitions=nil, 
                        markers=nil, hint=nil, position=nil)
@@ -58,6 +59,46 @@ module JLDrill
         # since they do not affect the meaning of the word.
         def ==(y)
             return eql?(y)
+        end
+
+        # Returns the number of characters at the beginning of
+        # string1 that are also at the beginning of string2.
+        def numCommonChars(string1, string2)
+            i = 0
+            if !string1.nil? && !string2.nil?
+                a1 = string1.split(TO_A_RE)
+                a2 = string2.split(TO_A_RE)
+                while (i < a1.size) && (i < a2.size) &&
+                        (a1[i] == a2[i]) do
+                    i += 1
+                end
+            end
+            return i
+        end
+
+        # Returns a rank based on how "close" the vocab is
+        # to this one.  Higher numbers are "closer".
+        def rank(vocab)
+            theRank = 0
+            if !vocab.nil?
+                theRank = numCommonChars(reading, vocab.reading) * 1000
+                theRank += numCommonChars(kanji, vocab.kanji) * 100
+                if !definitionsArray.nil?
+                    definitionsArray.each do |meaning|
+                        if vocab.definitions.include?(meaning)
+                            theRank += meaning.split(TO_A_RE).size
+                        end
+                    end
+                end
+                if !markersArray.nil?
+                    markersArray.each do |marker|
+                        if vocab.markers.include?(marker)
+                            theRank += marker.split(TO_A_RE).size
+                        end
+                    end
+                end
+            end
+            return theRank
         end
 
         # Assign the contents of vocab to this object.

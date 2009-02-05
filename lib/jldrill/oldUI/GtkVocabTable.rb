@@ -6,6 +6,7 @@ module JLDrill::Gtk
 
         def initialize(vocabList, &selectAction)
             super()
+            @selectAction = selectAction
             self.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
             self.shadow_type = Gtk::SHADOW_IN
             set_size_request(450, 200)
@@ -48,20 +49,56 @@ module JLDrill::Gtk
             @table.append_column(col)
             
             self.add(@table)
+            setupSelection
+        end
 
+        # Highlight the row when it is selected (by clicking on it or
+        # by moving the cursor with the arrow keys)
+        def highlightOnSelection
             select = @table.selection
-            select.set_select_function do |selection, model, path, currently_selected|
-                if iter = model.get_iter(path)
-                    if ! currently_selected
-                        selectAction.call(iter[0])
-                    end
-                end
-
+            select.set_select_function do |selection, model, path, 
+                                           currently_selected|
                 # allow selection state to change
                 true
             end
         end
 
+        # Call the selectAction block when the row is activated
+        def callActionOnActivation
+            @table.signal_connect('row-activated') do |widget, path, column|
+                if iter = @listStore.get_iter(path)
+                    widget.set_cursor(path,nil,false)
+                    @selectAction.call(iter[0])
+                end
+            end
+        end
+
+        # This method sets up the manor in which items are selected
+        # in the table.
+        def setupSelection
+            highlightOnSelection
+            callActionOnActivation
+        end
+
+        # Selects the closest match to the given vocabulary
+        def selectClosestMatch(vocab)
+            iter = @listStore.iter_first
+            if !iter.nil?
+                pos = iter.path
+                rank = vocab.rank(iter[0])
+                while iter.next!
+                    newRank = vocab.rank(iter[0])
+                    if newRank > rank
+                        rank = newRank
+                        pos = iter.path
+                    end
+                end
+                @table.selection.select_path(pos)
+                @table.scroll_to_cell(pos, nil, false, 0.0, 0.0)
+            end
+        end
+        
+        # Put focus on the table 
         def focusTable
             @table.grab_focus
         end
