@@ -1,6 +1,6 @@
 * JLDrill Version 0.3.4
   :PROPERTIES:
-  :COLUMNS: %30ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(%) %CurrentVelocity(Current) %NeededVelocity(Needed)
+  :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(%) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2008-12-25 Thu>
   :CurrentDate:  <2009-02-04 Wed>
   :EndDate: <2009-03-20 Wed>
@@ -16,7 +16,7 @@ workflow for creating and editing drills.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM                    | Total | Done |    % | Current | Needed |
 |-------------------------+-------+------+------+---------+--------|
-| * JLDrill Version 0.3.4 |    22 |    3 | 13.6 |    0.07 |   0.26 |
+| * JLDrill Version 0.3.4 |    23 |   11 | 47.8 |    0.27 |   0.27 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -49,40 +49,35 @@ the number of jellybeans done in the properties of the task.
   :JellyBeans: 2
    :Done: 2
   :END:
-** TODO Improved workflow for the add window
-   Whent he window comes up, the cursor is placed in the Readings box.
+** DONE Improved workflow for the add window
+   Whent the window comes up, the cursor is placed in the Readings box.
    If the user presses Ctrl-S the item is searched.  If there are any
    results, the focus is put on the search box.  If not, the focus
    remains where it is.  When the focus is on the search box, up arrow
    and down arrow will select the previous and next tiems
    respectively. Return will insert the item and the focus will be
-   placed on the "Add" button.  Another keystroke (TBD) will return
-   the focus to the Readings box.
-  :PROPERTIES:
-  :JellyBeans: 5
-  :END:
-** TODO Improved workflow for the edit window
+   placed on the "Add" button. 
+   :PROPERTIES:
+   :JellyBeans: 5
+   :Done: 5
+   :END:
+** DONE Improved workflow for the edit window
    Similar to the add window.  But when the window first opens, the
    focus is on the search box if there are any entries.  Note:  if the
    user changes items, the window does not steal focus, but if
-   possible the search box should have the foxus when the window
-   regains focus.  If there are no entries in the search box the focus
+   possible the search box should have the focus when the window
+   regains focus.  If there are no entries in the search box then focus
    should be on the Readings box.
-  :PROPERTIES:
-  :JellyBeans: 3
-  :END:
-** TODO Allow user to modify the global backoff.
-   Allow the user to modify the global backoff from the options.  This
-   must be saved with the drill.  When the backoff is changed, all the
-   items that are currently scheduled will have to be scaled
-   accordingly.  For example, if the backoff changes from 2.0 to 1.5,
-   if there was an item with a duration of 10, then the duration
-   becomes 7.5.  If the item had been waiting for 5 days (50% of the
-   duration), then reset it so that it has been waiting for 3.75 days
-   (50% of 7.5).  Then resort all the items.
-  :PROPERTIES:
-  :JellyBeans: 3
-  :END:
+   :PROPERTIES:
+   :JellyBeans: 3
+   :Done: 3
+   :END:
+** TODO Don't change the viewing state when updating vocab
+   If the user has seen the answer for the question, display
+   it after the vocabulary has been updated.
+   :PROPERTIES:
+   :JellyBeans: 1
+   :END:
 ** TODO Renumber item poitions when resetting the drill.
    This will fix problems with old drills that have gotten have gotten
    out of whack.
@@ -103,10 +98,30 @@ the number of jellybeans done in the properties of the task.
   :PROPERTIES:
   :JellyBeans: 2
   :END:
-
+** TODO Be able to create a new drill
+  :PROPERTIES:
+  :JellyBeans: 1
+  :END:
+** TODO If a reading can't be found in the dictionary, seach 
+   again taking off one character at a time from the end of the
+   reading. 
+   :PROPERTIES:
+   :JellyBeans: 2
+   :END:
 
 * Backlog
-
+** TODO Allow user to modify the global backoff.
+   Allow the user to modify the global backoff from the options.  This
+   must be saved with the drill.  When the backoff is changed, all the
+   items that are currently scheduled will have to be scaled
+   accordingly.  For example, if the backoff changes from 2.0 to 1.5,
+   if there was an item with a duration of 10, then the duration
+   becomes 7.5.  If the item had been waiting for 5 days (50% of the
+   duration), then reset it so that it has been waiting for 3.75 days
+   (50% of 7.5).  Then resort all the items.
+  :PROPERTIES:
+  :JellyBeans: 3
+  :END:
 ** TODO Need a mechanism for publishing warnings and errors.
 ** TODO Full test coverage for all the model objects
 ** TODO Full test coverage for all the contexts

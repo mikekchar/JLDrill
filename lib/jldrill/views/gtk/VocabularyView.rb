@@ -87,7 +87,9 @@ module JLDrill::Gtk
                     @vbox.add(@searchTable)
                     @vbox.show_all
                     @searchTable.selectClosestMatch(getVocab)
-                    @searchTable.focusTable
+                    if @searchTable.hasSelection?
+                        @searchTable.focusTable
+                    end
                 end
             end
 			
@@ -143,6 +145,14 @@ module JLDrill::Gtk
             def update(vocab)
                 @vocabView.setVocab(vocab)
             end
+
+            def setFocus
+                if !@searchTable.nil? && @searchTable.hasSelection?
+                    @searchTable.focusTable
+                else
+                    @vocabView.focusReading
+                end
+            end
     
 	    end
 	
@@ -152,6 +162,7 @@ module JLDrill::Gtk
 			super(context, label, &block)
 			@vocabularyWindow = VocabularyWindow.new(self, label)
 			@widget = Context::Gtk::Widget.new(@vocabularyWindow)
+            @vocabularyWindow.setFocus
 		end
 		
 		def getWidget
@@ -186,6 +197,7 @@ module JLDrill::Gtk
                 @vocab = JLDrill::Vocabulary.new
                 @vocabularyWindow.update(@vocab)
                 @vocabularyWindow.updateSearchTable
+                @vocabularyWindow.setFocus
                 true
             else
                 false

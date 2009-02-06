@@ -98,6 +98,10 @@ module JLDrill::Gtk
             end
         end
         
+        def hasSelection?
+            !@table.selection.selected.nil?
+        end
+
         # Put focus on the table 
         def focusTable
             @table.grab_focus

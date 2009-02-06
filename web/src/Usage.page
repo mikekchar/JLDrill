@@ -700,21 +700,19 @@ from the menu) will allow you to edit the current item.
 
 In this mode you can modify any of the fields.  
 
-If the dictionary has been loaded you will also see a list of
-words from the dictionary that start with the characters in
-the reading.  Clicking on one of them will copy its information
-into the field.
+If the dictionary has been loaded you will also see a list of words
+from the dictionary that start with the characters in the reading.
+Double clicking on one of them will copy its information into the
+fields.
 
 When you are done, press the Set button and the item will be 
 changed in the drill.  This will also close the Edit window.
 If you wish to close the window without setting the item,
 simply press the close button in the top right of the window.
 
-Sometimes you will edit an item but realize that you haven't
-loaded the dictionary.  You can load the dictionary from
-the main window without closing the search window.  When
-it is finished loading, it will automatically search for the
-item.
+Sometimes you will edit an item but realize that you haven't loaded
+the dictionary.  You can load the dictionary by pressing Ctl-D.  When
+it is finished loading, it will automatically search for the item.
 
 Note: If you continue with the quiz without closing the Edit
 window, it will update itself with the new items as you
@@ -722,9 +720,20 @@ get them.  Be careful though because if you have edited the
 data without pressing the "Set" button, the information will
 be overwritten.
 
-Note: The workflow and layout of this window are really poor.
-I hope to improve it over time.  If you have suggestions, please
-contact me.
+While the mouse driven interface is helpful, this window is
+meant to be used most times with the keyboard.  When you
+first enter the dialog, JLDrill will search for the item.
+Normally it will find several choices that are close.  However,
+it will highlight the one that is closest to the item you have.
+If JLDrill has chosen the correct one, you can simply press
+the Enter key.  If not, you can use the up and down arrow
+to highlight the item you want.  Finally you can press the
+Enter key to put the information into the fields.  After
+that, the "Set" button will be focussed (it's hard to see
+sometimes).  At this point, press Enter and the item will
+be set.
+
+Pressing the Esc button will cancel the editing process.
 
 **Add** item.  Pressing "A" (or selecting Vocab/Add from the menu)
 will allow you to add a new item to the drill.
@@ -746,17 +755,31 @@ the item automatically.
 
 ![Search the Dictionary](images/Search.png "Search the Dictionary")
 
-You can then simply click on the item that you want and it will
-copy itself into the fields.  When you click "Add" the item will
-be added to the quiz at the end of the New Set.
+You can then simply double click on the item that you want and it will
+copy itself into the fields.  When you click "Add" the item will be
+added to the quiz at the end of the New Set.
 
 When you press add, the Add window will not close.  This is so that
 you can add several items.  To close the window, press the
 close box in the upper right corner of the window.
 
-Note: The advantage to having the Add the same as the Edit is that
-they are the same.  The disadvantage is that they both suck equally
-badly.  Please send me suggestions for improvement.
+As with the edit window, this window has a useful workflow
+when using the keyboard.  When the window first opens, the
+focus will be placed in the Reading field.  If you type the
+first few characters of the reading and press Enter, the item
+will be searched in the dictionary.  The focus will move
+to the table, where you can use the up and down arrows
+to highlight the correct entry, and finally Enter to copy
+the information into the fields.  This will move the focus
+to the "Add" button.  Pressing Enter again will add the item
+and return you to the Reading field.
+
+Sometimes you will get far too many items in the search table to find
+the item you want.  In this case you can help locate it by entering
+information in the the other fields and then pressing Ctl-S (or
+hitting the Search Button).  Note that the search is always done on
+the Reading field.  The information in the other fields is only
+used to try to jump the cursor close to the correct item.
 
 **Show all**. Will show a table of all the words in the
 drill.

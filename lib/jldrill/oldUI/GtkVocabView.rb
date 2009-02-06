@@ -155,5 +155,9 @@ module JLDrill::Gtk
         def setAcceptReading(&block)
             @acceptReadingBlock = block
         end
+
+        def focusReading
+            readingWidget.grab_focus
+        end
     end
 end
