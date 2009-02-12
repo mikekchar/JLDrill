@@ -154,10 +154,11 @@ module JLDrill
                 @bins[0].contents += @bins[i].contents
                 @bins[i].contents = []
             end
+            @bins[0].sort! { |x,y| x.status.position <=> y.status.position }
             @bins[0].each do |item|
                 item.status.reset
+                item.status.position = item.status.index
             end
-            @bins[0].sort! { |x,y| x.status.position <=> y.status.position }
             saveNeeded
         end
 

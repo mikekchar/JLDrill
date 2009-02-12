@@ -87,6 +87,22 @@ module JLDrill
 	        @quiz.contents.bins[4].length.should be(0)
 	        @quiz.allVocab.join("\n").should eql(@sampleQuiz.allResetVocab)
 	    end
+
+        it "should renumber the contents when resetting" do
+            @quiz.reset
+            @quiz.contents.bins[0][0].status.position = 5
+            @quiz.contents.bins[0][1].status.position = 6
+            @quiz.contents.bins[0][2].status.position = 6
+            @quiz.contents.bins[1][0].status.position = 7
+            @quiz.options.randomOrder = false
+            @quiz.reset
+            # The first item will be drilled and therefore promoted to bin 1
+            @quiz.contents.bins[1][0].status.position.should be(0)
+            # The rest will be in bin 0, numbered sequentially
+            0.upto(2) do |i|
+                @quiz.contents.bins[0][i].status.position.should be(i + 1)
+            end
+        end
 	    
 	    it "should be able to move an item from one bin to the other" do
 	        item = @quiz.contents.bins[0][0]
