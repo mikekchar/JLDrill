@@ -16,7 +16,7 @@ workflow for creating and editing drills.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM                    | Total | Done |    % | Current | Needed |
 |-------------------------+-------+------+------+---------+--------|
-| * JLDrill Version 0.3.4 |    23 |   11 | 47.8 |    0.27 |   0.27 |
+| * JLDrill Version 0.3.4 |    23 |   13 | 56.5 |    0.27 |   0.27 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -79,11 +79,12 @@ the number of jellybeans done in the properties of the task.
    :JellyBeans: 1
    :DONE: 1
    :END:
-** TODO Renumber item poitions when resetting the drill.
+** DONE Renumber item poitions when resetting the drill.
    This will fix problems with old drills that have gotten have gotten
    out of whack.
   :PROPERTIES:
   :JellyBeans: 1
+   :DONE: 1
   :END:
 ** TODO Be able to delete the current item.
   :PROPERTIES:
