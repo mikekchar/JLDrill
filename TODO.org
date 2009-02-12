@@ -110,6 +110,9 @@ the number of jellybeans done in the properties of the task.
    :END:
 
 * Backlog
+** TODO Automatically load dictionary option
+   Have an option that is saved with the drill to automatically
+   load the dictionary when the drill is loaded.
 ** TODO Allow user to modify the global backoff.
    Allow the user to modify the global backoff from the options.  This
    must be saved with the drill.  When the backoff is changed, all the
