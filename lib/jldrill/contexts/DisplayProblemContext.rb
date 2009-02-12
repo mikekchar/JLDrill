@@ -58,7 +58,7 @@ module JLDrill
 		end
 
 		def problemModifiedUpdated(quiz)
-            @mainView.newProblem(quiz.currentProblem, differs?(quiz.currentProblem))
+            @mainView.updateProblem(quiz.currentProblem, differs?(quiz.currentProblem))
 		end
 
 		def edictLoadUpdated(reference)

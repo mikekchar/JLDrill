@@ -11,6 +11,10 @@ module JLDrill
 		def newProblem(problem, differs)
 		    # Should be overridden in the concrete class
 		end	
+
+        def updateProblem(problem, differs)
+            # Should be overridden in the concrete class
+        end
 		
 		def showAnswer
 		    # Should be overridden in the concrete class

@@ -62,7 +62,8 @@ module JLDrill::QuestionAndAnswerAreDisplayed
         it "should refresh the display when the current vocab has been edited" do
             Story.setup(JLDrill)
             Story.start
-            Story.view.should_receive(:newProblem).exactly(2).times
+            Story.view.should_receive(:newProblem).exactly(1).times
+            Story.view.should_receive(:updateProblem).exactly(1).times
             Story.loadQuiz
             Story.mainContext.quiz.currentProblem.should_not be_nil
             Story.mainContext.quiz.currentProblem.vocab = Story.sampleQuiz.sampleVocab

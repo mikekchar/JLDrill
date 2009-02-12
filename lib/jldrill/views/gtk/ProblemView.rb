@@ -83,11 +83,21 @@ module JLDrill::Gtk
         end        
         
         class AnswerPane < InfoPane
+            def clear
+                super
+                @isClear = true
+            end
+
+            def clear?
+                @isClear
+            end
+
             def update(problem)
                 clear
                 if !problem.nil?
                     @hasKanji = problem.kanji != ""
                     problem.publishAnswer(self)
+                    @isClear = false
                 end
             end
         end
@@ -275,23 +285,39 @@ module JLDrill::Gtk
 				end
 			end
 
+            def indicateDiffers(differs)
+	            if !@problem.nil?  && !@problem.item.nil?
+    	            @indicatorBox.set(@problem.item.to_o, differs)
+    	        else
+    	            @indicatorBox.clear
+    	        end
+            end
+
 	        def newProblem(problem, differs)
 			    @popupFactory.closePopup
 	            @problem = problem
 	            @answer.clear
 	            @question.update(problem)
-	            if !problem.nil?  && !problem.item.nil?
-    	            @indicatorBox.set(problem.item.to_o, differs)
-    	        else
-    	            @indicatorBox.clear
-    	        end
+                indicateDiffers(differs)
 	        end
-	        
+
 	        def showAnswer
 	            if !@problem.nil?
     	            @answer.update(@problem)
     	        end
 	        end
+
+            def showingAnswer?
+                !@answer.clear?
+            end
+	        
+            def updateProblem(problem, differs)
+                needToDisplayAnswer = showingAnswer?
+                newProblem(problem, differs)
+                if needToDisplayAnswer
+                    showAnswer
+                end
+            end
 	        
 	    end
 	
@@ -320,6 +346,10 @@ module JLDrill::Gtk
 		def showAnswer
 		    @problemWindow.showAnswer
 		end
+
+        def updateProblem(problem, differs)
+            @problemWindow.updateProblem(problem, differs)
+        end
     end
     
 end
