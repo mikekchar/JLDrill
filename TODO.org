@@ -2,7 +2,7 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(%) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2008-12-25 Thu>
-  :CurrentDate:  <2009-02-04 Wed>
+  :CurrentDate:  <2009-02-12 Thu>
   :EndDate: <2009-03-20 Wed>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -72,11 +72,12 @@ the number of jellybeans done in the properties of the task.
    :JellyBeans: 3
    :Done: 3
    :END:
-** TODO Don't change the viewing state when updating vocab
+** DONE Don't change the viewing state when updating vocab
    If the user has seen the answer for the question, display
    it after the vocabulary has been updated.
    :PROPERTIES:
    :JellyBeans: 1
+   :DONE: 1
    :END:
 ** TODO Renumber item poitions when resetting the drill.
    This will fix problems with old drills that have gotten have gotten
