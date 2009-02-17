@@ -169,7 +169,7 @@ gem_spec = Gem::Specification.new do |s|
 	
 	#### Dependencies
     
-    s.add_dependency('context', '>=0.0.16')
+    s.add_dependency('context', '=0.0.17')
 
     #### Documentation and testing.
 

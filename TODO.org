@@ -2,7 +2,7 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(%) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2008-12-25 Thu>
-  :CurrentDate:  <2009-02-12 Thu>
+  :CurrentDate:  <2009-02-17 Tue>
   :EndDate: <2009-03-20 Wed>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -16,7 +16,7 @@ workflow for creating and editing drills.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM                    | Total | Done |    % | Current | Needed |
 |-------------------------+-------+------+------+---------+--------|
-| * JLDrill Version 0.3.4 |    23 |   13 | 56.5 |    0.27 |   0.27 |
+| * JLDrill Version 0.3.4 |    23 |   13 | 56.5 |    0.24 |   0.27 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -86,13 +86,13 @@ the number of jellybeans done in the properties of the task.
   :JellyBeans: 1
    :DONE: 1
   :END:
-** TODO Be able to delete the current item.
-  :PROPERTIES:
-  :JellyBeans: 3
-  :END:
 ** TODO Be able to delete or edit an item from the "All Vocab" list.
   :PROPERTIES:
   :JellyBeans: 2
+  :END:
+** TODO Be able to delete the current item.
+  :PROPERTIES:
+  :JellyBeans: 3
   :END:
 ** TODO Be able to change the order of items in the "All Vocab" list.
    Basically, the user selects an item.  If they press up arrow, the
