@@ -1,6 +1,5 @@
-require 'Context/Gtk/Widget'
 require 'jldrill/views/InfoView'
-require 'jldrill/views/gtk/InfoWindowWidget'
+require 'jldrill/views/gtk/widgets/InfoWindow'
 require 'gtk2'
 
 module JLDrill::Gtk
@@ -12,11 +11,10 @@ module JLDrill::Gtk
 		def initialize(context)
 			super(context)
 			@infoWindow = InfoWindow.new(self)
-			@widget = Context::Gtk::Widget.new(@infoWindow)
 		end
 		
 		def getWidget
-			@widget
+			@infoWindow
 		end
 
         def destroy

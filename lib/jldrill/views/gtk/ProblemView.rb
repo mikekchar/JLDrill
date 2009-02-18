@@ -5,7 +5,7 @@ module JLDrill::Gtk
 
 	class ProblemView < JLDrill::ProblemView
 
-        attr_reader :problemWindow
+        attr_reader :problemDisplay
         	
 		def initialize(context)
 			super(context)
