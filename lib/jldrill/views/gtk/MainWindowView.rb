@@ -22,7 +22,6 @@ module JLDrill::Gtk
 
         def open
             super
-            @mainWindow.show_all
         end
 
         def close

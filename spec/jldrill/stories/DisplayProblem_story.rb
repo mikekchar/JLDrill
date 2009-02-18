@@ -1,7 +1,7 @@
+require 'jldrill/spec/StoryMemento'
 require 'jldrill/contexts/DisplayProblemContext'
 require 'jldrill/views/ProblemView'
 require 'jldrill/views/gtk/ProblemView'
-require 'jldrill/spec/StoryMemento'
 
 module JLDrill::QuestionAndAnswerAreDisplayed
 
