@@ -28,10 +28,10 @@ module JLDrill
     end
 end
 
-module Context::Gtk
+module Context::Gtk::Widget
 
     # This will turn off the drawing of the widgets in the tests
-    def Widget::inTests
+    def isInTests?
         true
     end
 

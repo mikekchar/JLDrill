@@ -1,4 +1,5 @@
 require 'Context/Gtk/Widget'
+require 'Context/Views/Gtk/Widgets/VBox'
 require 'jldrill/views/CommandView'
 require 'jldrill/views/gtk/MenuWidget'
 require 'jldrill/views/gtk/ToolBarWidget'
@@ -10,28 +11,19 @@ module JLDrill::Gtk
 
         def initialize(context)
             super(context)
+            @vbox = Context::Gtk::VBox.new
             @menu = Menu.new(self)
             @toolbar = ToolBar.new(self)
-            @vbox = Gtk::VBox.new
-            def @vbox.accelGroup
-                @accelGroup
-            end
-            def @vbox.addAccelGroup(accelGroup)
-                @accelGroup = accelGroup
-            end
             @vbox.pack_start(@menu, false, false)
             @vbox.pack_start(@toolbar, false, false)
-            @vbox.addAccelGroup(@menu.accelGroup)
-			@widget = Context::Gtk::Widget.new(@vbox)
-			def @widget.addedTo(widget)
-			    widget.mainWindow.add_accel_group(delegate.accelGroup)
+			@vbox.afterWidgetIsAdded do |container|
+			    container.gtkWidgetMainWindow.add_accel_group(@menu.accelGroup)
 			end
-			@widget.expandWidth = true
-			@widget.expandHeight = false
+			@vbox.expandWidgetWidth
 		end
 		
 		def getWidget
-			@widget
+			@vbox
 		end
     end
 end

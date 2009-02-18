@@ -80,11 +80,11 @@ module JLDrill
 		end
 				
 		def exit
-			super
 			@runCommandContext.exit
 		    @displayQuizStatusContext.exit 
 		    @displayProblemContext.exit 
 			@parent.exit
+			super
 		end
 		
 		def save

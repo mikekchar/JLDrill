@@ -2,7 +2,7 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(%) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2008-12-25 Thu>
-  :CurrentDate:  <2009-02-17 Tue>
+  :CurrentDate:  <2009-02-18 Wed>
   :EndDate: <2009-03-20 Wed>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -87,6 +87,9 @@ the number of jellybeans done in the properties of the task.
    :DONE: 1
   :END:
 ** TODO Be able to delete or edit an item from the "All Vocab" list.
+   - Refactor widget to be a mixin
+   - make gtkAdd/RemoveWidget have default values that log a warning
+   - include Widget from GtkWidget
   :PROPERTIES:
   :JellyBeans: 2
   :END:
