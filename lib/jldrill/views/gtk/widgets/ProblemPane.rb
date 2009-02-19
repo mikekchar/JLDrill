@@ -75,14 +75,6 @@ module JLDrill::Gtk
                 end                    
             end
         end
-
-        def gtkAddWidget(widget)
-            # We currently can't add widgets to this pane. Silently fail.
-        end
-
-        def gtkRemoveWidget(widget)
-            # We currently can't remove widgets from this pane. Silently fail.
-        end
     end
 
     # The pane that displays the question for the problem

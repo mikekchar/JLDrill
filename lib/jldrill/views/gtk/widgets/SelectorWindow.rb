@@ -36,13 +36,5 @@ module JLDrill::Gtk
                 nil
             end
         end
-
-        def gtkAddWidget(widget)
-            # We currently can't add widgets to this bar. Silently fail.
-        end
-        
-        def gtkRemoveWidget(widget)
-            # We currently can't remove widgets from this bar. Silently fail.
-        end
     end	    
 end

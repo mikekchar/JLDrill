@@ -69,103 +69,11 @@ Source repository:
   
 == TODO
 
-<b>version-0.3.4</b>
-
-* <b>Date Started:</b> December 25th, 2008
-* <b>Comleted Jelly Beans:</b> 1
-* <b>Total Jelly Beans:</b> 22
-* <b>Percentage Complete:</b> 4.5%
-
-* Improved workflow for the add window:  When the window comes up,
-  the cursor is placed in the Readings box.  If the user presses Ctrl-S,
-  the item is searched.  If there are any results, the focus is put
-  on the search box.  If not, the focus remains where it is.  When the
-  focus is on the search box, up arrow and down arrow will select
-  the previous and next items respectively.  Return will insert the
-  item and the focus will be placed on the "Add" button.  Another
-  keystroke (TBD) will return the focus to the Readings box.
-  (<b>estimate:</b> 5 jelly beans)
-* Improved workflow for the edit window:  Similar to the add window.
-  But when the window first opens, the focus is on the search box
-  if there are any entries.  Note: if the user changes items, the
-  window does not steal focus, but if possible, the search box should
-  have the focus when the window regains focus.  If there are no
-  entries in the search box the focus should be on the Readings box.
-  (<b>estimate:</b> 3 jelly bean)
-* Allow user to modify the global backoff from the options. Must be
-  saved with the drill.  When the backoff is changed, all the items
-  that are currently scheduled will have to be scaled accordingly.
-  For example, if the backoff changes from 2.0 to 1.5, if there
-  was an item with a duration of 10, then the duration becomes
-  7.5.  If the item had been waiting for 5 days (50% of the duration),
-  then reset it so that it has been waiting for 3.75 days (50%
-  of 7.5).  Then resort all the items.
-  (<b>estimate:</b> 3 jelly beans)
-* Renumber item positions when resetting the drill.  This will fix
-  problems with old drills that have gotten out of whack.
-  (<b>estimate:</b> 1 jelly bean)
-* Be able to delete the current item.
-  (<b>estimate:</b> 3 jelly beans)
-* Be able to delete or edit an item from the "All Vocab" list.
-  (<b>estimate:</b> 2 jelly beans)
-* Be able to change the order of items in the "All Vocab" list.
-  Basically, the user selects an item.  If they press up arrow
-  the item will go up.  If they press down arrow, the item will go
-  down. (<b>estimate:</b> 2 jelly beans)
-
-<b>Done</b>
-* Add description for 々 in the kanji popup 
-  (<b>estimate:</b> 1 jelly bean, <b>done</b>)
-* Pressing cancel when trying to save after quitting shouldn't 
-  leave you hung with no window. 
-  (<b>estimate:</b> in velocity, <b>done</b>)
-* JLDrill crashed on me.  But I'm not sure why. 
-  (<b>estimate:</b> in velocity, <b>done</b>)
-* If you have a kanji question and edit it to take out the kanji,
-  when you finish the editing, the problem question is blank.
-  In this situation, the problem should become a meaning problem.
-  (<b>estimate:</b> in velocity, <b>done</b>)
-* Add Ctl-D to load the dictionary from the edit and add windows.
-  (<b>estimate:</b> 2 jelly beans)
-
-<b>Backlog</b>
-
-* Need a mechanism for publishing warnings and errors.
-* Full test coverage for all the model objects
-* Full test coverage for all the contexts
-* Don't steal focus when putting up windows that take no input.  Deferred
-  from 0.3.3.  I tried to do it, but it never worked.  I suspect a race
-  condition in GTK and it's not important enough to kill myself over.
-* Create a recent used menu for loading drills that you've used recently.
-* Stop distributing edict in the gem.  Allow the user to set where the
-  dictionary is.
-* Allow user to set the formatting for each type of data.  Store the
-  formatting in the drill.
-* Define the structure of the data in the drill.  In other words,
-  create a dynamic data type that defines the structure of the data
-  item that is to be drilled.  Save it in the drill itself.  Create a
-  structure for edict vocabulary.
-  * Rename the methods that take Vocabulary (like Quiz#add()) to
-    indicate that it's for Vocabulary (i.e., Quiz#addVocab())
-* Define a structure for grammar.
-* Display parts of speech tags next to what they modify (i.e. each
-  definition, or sentence)
-* Allow the user to choose what tags to display.  Save this in the drill.
-* Associate data items (vocabulary) with the dictionary they belong
-  to.  Only load the dictionary if it's in the drill. (Question:
-  Should it unload the dictionary on next drill?  Probably yes...)
-* Create Debian packaging.
-* Create Windows packaging.
-* Indicate when the item has been promoted.
-* When save fails, indicate it to the user before bringing up the save
-  as dialog.
-* Replace webgen with something else.  
-* Create a dictionary back end to allow it to use online dictionaries,
-  or dictionary servers (fantasdic? stardict?)
-* Create a structure for Tanaka corpus.
-* Create Redhat packaging.
-* Create OSX packaging.
-
+Please see the TODO.org file.  This file is an Emacs org-mode file.
+I started experimenting with it and ended up liking it.  Unfortunately,
+the markup is different than rdoc, so the formatting is not that great.
+However, one day I'll write an rdoc parser for org-mode files and
+everything will be fixed.
 
 == Getting Involved
 

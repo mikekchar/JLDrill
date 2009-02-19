@@ -17,7 +17,8 @@ rubyforge_project = "jldrill"
 rubyforge_maintainer = "mikekchar@rubyforge.org"
 
 # Dependencies
-context_version = "0.0.17"
+context_name = "context"
+context_version = "0.0.18"
 context_directory = "../context"
 
 # Files that will be packaged
@@ -128,7 +129,7 @@ rd = Rake::RDocTask.new(:rdoc) do |t|
 	t.options << '--inline-source' <<
 		'--main' << 'README' <<
 		'--title' <<  'JLDrill -- Japanese Language Drill program' 
-	t.rdoc_files.include('README', 'COPYING', 'AUTHORS', 'data/jldrill/COPYING')
+	t.rdoc_files.include('README', 'TODO.org', 'COPYING', 'AUTHORS', 'data/jldrill/COPYING')
 	t.rdoc_files.include('lib/**/*.rb')
 end
 
@@ -169,7 +170,7 @@ gem_spec = Gem::Specification.new do |s|
 	
 	#### Dependencies
     
-    s.add_dependency('context', '=0.0.17')
+    s.add_dependency(context_name, "=" + context_version)
 
     #### Documentation and testing.
 

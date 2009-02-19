@@ -32,13 +32,5 @@ module JLDrill::Gtk
             addContents(string)
             run
         end
-
-        def gtkAddWidget(widget)
-            # We currently can't add widgets to this pane. Silently fail.
-        end
-
-        def gtkRemoveWidget(widget)
-            # We currently can't remove widgets from this pane. Silently fail.
-        end
     end
 end

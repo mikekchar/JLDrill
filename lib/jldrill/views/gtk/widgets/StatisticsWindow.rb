@@ -168,13 +168,5 @@ module JLDrill::Gtk
             @rateTable.values[6].text = "    "
             @rateTable.values[7].text = "    "
         end
-
-        def gtkAddWidget(widget)
-            # We currently can't add widgets to this pane. Silently fail.
-        end
-        
-        def gtkRemoveWidget(widget)
-            # We currently can't remove widgets from this pane. Silently fail.
-        end
     end
 end
