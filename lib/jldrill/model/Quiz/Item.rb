@@ -1,3 +1,4 @@
+require 'jldrill/model/ItemFactory'
 require 'jldrill/model/Quiz/ItemStatus'
 require 'jldrill/model/Problem'
 
@@ -17,14 +18,14 @@ module JLDrill
     #    o to_s() -- returns a string representation of the object
     #    o create() -- accepts a string and creates the object
     class Item
-        attr_reader :status
+        attr_reader :status, :itemType
 
         def initialize(item=nil)
             if item.nil?
-                @itemClass = nil
+                @itemType = nil
                 @contents = ""
             else
-                @itemClass = item.class
+                @itemType = item.itemType
                 @contents = item.to_s
             end
             @status = ItemStatus.new
@@ -39,7 +40,7 @@ module JLDrill
 
         # Set the value of the item by parsing the string
         def parse(string)
-            @itemClass = JLDrill::Vocabulary
+            @itemType = ItemFactory::find("Vocabulary")
             @contents = string
             @status.parseLine(@contents)
         end
@@ -47,15 +48,15 @@ module JLDrill
         # Create a copy of this item
         def clone
             item = Item.new
-            item.setClass(@itemClass)
+            item.setType(@itemType)
             item.setContents(@contents)
             item.setStatus(@status.to_s)
             return item
         end
 
-        # Set the class of the item
-        def setClass(aClass)
-            @itemClass = aClass
+        # Set the type of the item
+        def setType(aType)
+            @itemType = aType
         end
 
         # set the ItemStatus
@@ -76,7 +77,7 @@ module JLDrill
         # Create the object in the item and return it
         def to_o
             if !@contents.empty?
-                item = @itemClass.create(@contents)
+                item = @itemType.create(@contents)
             else
                 item = nil
             end

@@ -231,6 +231,10 @@ module JLDrill
             @contents.allVocab
         end
 
+        def allItems
+            @contents.allItems
+        end
+
         # Resets the quiz back to it's original state
         def reset
             @contents.reset()

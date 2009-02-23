@@ -1,6 +1,7 @@
 require "jldrill/model/Quiz/ItemStatus"
 require "jldrill/model/StringField"
 require "jldrill/model/ListField"
+require "jldrill/model/ItemFactory"
 
 # Class file for Japanese vocabulary
 # Currently geared towards edict, but that might change
@@ -38,6 +39,11 @@ module JLDrill
         # that are not saveable.  This is because of my cheezy implementation.
         def clone
             Vocabulary.create(self.to_s)
+        end
+
+        # Return the JLDrill ItemType for this item
+        def itemType
+            return ItemFactory::find("Vocabulary")
         end
 
         # True if the two vocabulary are discussing the same word

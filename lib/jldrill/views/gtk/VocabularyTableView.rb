@@ -1,4 +1,4 @@
-require 'jldrill/views/gtk/widgets/VocabularyTableWindow'
+require 'jldrill/views/gtk/widgets/ItemTableWindow'
 require 'jldrill/views/VocabularyTableView'
 require 'gtk2'
 
@@ -10,20 +10,20 @@ module JLDrill::Gtk
         	
 		def initialize(context)
 			super(context)
-			@vocabularyTableWindow = VocabularyTableWindow.new(self)
+			@itemTableWindow = JLDrill::Gtk::ItemTableWindow.new(self)
 		end
 		
 		def getWidget
-			@vocabularyTableWindow
+			@itemTableWindow
 		end
 
         def destroy
-            @vocabularyTableWindow.destroy
+            @itemTableWindow.destroy
         end
 
         def run(quiz)
             super(quiz)
-            @vocabularyTableWindow.execute
+            @itemTableWindow.execute
         end
     end
 end

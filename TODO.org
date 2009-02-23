@@ -5,7 +5,7 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(%) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2008-12-25 Thu>
-  :CurrentDate:  <2009-02-19 Thu>
+  :CurrentDate:  <2009-02-23 Mon>
   :EndDate: <2009-03-20 Wed>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -21,7 +21,7 @@ workflow for creating and editing drills.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM                    | Total | Done |    % | Current | Needed |
 |-------------------------+-------+------+------+---------+--------|
-| * JLDrill Version 0.3.4 |    23 |   13 | 56.5 |    0.23 |   0.27 |
+| * JLDrill Version 0.3.4 |    23 |   13 | 56.5 |    0.22 |   0.27 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </pre>
@@ -107,11 +107,11 @@ the number of jellybeans done in the properties of the task.
    :DONE: 1
    :END:
 
-** TODO Be able to delete or edit an item from the "All Vocab" list. [3/8]
+** TODO Be able to delete or edit an item from the "All Vocab" list. [4/8]
    - [X] Refactor widget to be a mixin
    - [X] include Widget from GtkWidget
    - [X] make gtkAdd/RemoveWidget have default values that log a warning
-   - [ ] Refactor VocabularyTable to hold items (rename it to ItemTable)
+   - [X] Refactor VocabularyTable to hold items (rename it to ItemTable)
    - [ ] Make dictionary searches return item lists
    - [ ] Updating the problem updates the All Vocab list, also selects
          that item in the list.  New problem selects that item in the
