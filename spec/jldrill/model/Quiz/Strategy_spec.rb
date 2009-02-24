@@ -1,6 +1,6 @@
 require 'jldrill/model/Quiz/Strategy'
 require 'jldrill/model/Quiz/Contents'
-require 'jldrill/model/Vocabulary'
+require 'jldrill/model/items/Vocabulary'
 require 'jldrill/model/Problem'
 require 'jldrill/spec/SampleQuiz'
 

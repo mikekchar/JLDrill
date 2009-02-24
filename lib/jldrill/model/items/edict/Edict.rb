@@ -1,8 +1,8 @@
 # Contains code necessary to read in an EDict file
 # Also will parse hacked up JLPT Edict files
 
-require "jldrill/model/Vocabulary"
-require "jldrill/model/Edict/Meaning"
+require "jldrill/model/items/Vocabulary"
+require "jldrill/model/items/edict/Meaning"
 require 'jldrill/model/Publisher'
 require 'kconv'
 

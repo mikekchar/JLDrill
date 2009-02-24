@@ -1,6 +1,6 @@
 require 'jldrill/spec/StoryMemento'
-require 'jldrill/model/Edict/Edict'
-require 'jldrill/model/HashedEdict'
+require 'jldrill/model/items/edict/Edict'
+require 'jldrill/model/items/edict/HashedEdict'
 require 'jldrill/model/Config'
 require 'jldrill/model/Quiz/Quiz'
 

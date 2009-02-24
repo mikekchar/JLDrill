@@ -1,5 +1,5 @@
 require 'Context/View'
-require 'jldrill/model/Vocabulary'
+require 'jldrill/model/items/Vocabulary'
 
 module JLDrill
 	class VocabularyView < Context::View

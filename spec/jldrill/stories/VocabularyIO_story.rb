@@ -1,7 +1,7 @@
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/contexts/EditVocabularyContext'
-require 'jldrill/model/Vocabulary'
-require 'jldrill/model/Edict/Edict'
+require 'jldrill/model/items/Vocabulary'
+require 'jldrill/model/items/edict/Edict'
 
 # This story discusses the input and output of data in
 # Vocabulary.  As I slowly removed my assumptions about

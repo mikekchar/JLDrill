@@ -1,4 +1,4 @@
-require "jldrill/model/Field"
+require "jldrill/model/items/Field"
 
 # Represents a list type Field in a Vocabulary
 

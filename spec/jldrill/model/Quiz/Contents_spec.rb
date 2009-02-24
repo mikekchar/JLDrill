@@ -1,6 +1,6 @@
 require 'jldrill/model/Quiz/Contents'
 require 'jldrill/model/Quiz/Quiz'
-require 'jldrill/model/Vocabulary'
+require 'jldrill/model/items/Vocabulary'
 require 'jldrill/spec/SampleQuiz'
 
 module JLDrill

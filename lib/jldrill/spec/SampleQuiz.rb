@@ -1,4 +1,4 @@
-require 'jldrill/model/Vocabulary'
+require 'jldrill/model/items/Vocabulary'
 require 'jldrill/Version'
 
 module JLDrill

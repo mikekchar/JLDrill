@@ -1,5 +1,5 @@
 require 'gtk2'
-require 'jldrill/model/Vocabulary'
+require 'jldrill/model/items/Vocabulary'
 
 module JLDrill::Gtk
     class GtkIndicatorBox < Gtk::HBox

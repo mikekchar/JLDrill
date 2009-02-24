@@ -1,5 +1,5 @@
-require 'jldrill/model/Quiz/Item'
-require 'jldrill/model/Quiz/ItemStatus'
+require 'jldrill/model/items/Item'
+require 'jldrill/model/items/ItemStatus'
 
 module JLDrill
 

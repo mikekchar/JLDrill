@@ -1,5 +1,5 @@
 require 'jldrill/spec/StoryMemento'
-require 'jldrill/model/Vocabulary'
+require 'jldrill/model/items/Vocabulary'
 
 module JLDrill::ClosestMatch
     

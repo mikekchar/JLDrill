@@ -1,7 +1,6 @@
-require "jldrill/model/Quiz/ItemStatus"
-require "jldrill/model/StringField"
-require "jldrill/model/ListField"
-require "jldrill/model/ItemFactory"
+require "jldrill/model/items/StringField"
+require "jldrill/model/items/ListField"
+require "jldrill/model/items/ItemFactory"
 
 # Class file for Japanese vocabulary
 # Currently geared towards edict, but that might change
@@ -47,8 +46,8 @@ module JLDrill
         end
 
         # True if the two vocabulary are discussing the same word
-        # This does *not* compare the hint, status
-        # since they do not affect the meaning of the word.
+        # This does *not* compare the hint
+        # since it does not affect the meaning of the word.
         def eql?(y)
             if !y.nil?
                 @kanji.eql?(y.kanjiRaw) && 
@@ -61,8 +60,8 @@ module JLDrill
         end
 
         # True if the two vocabulary are discussing the same word
-        # This does *not* compare the hint or status
-        # since they do not affect the meaning of the word.
+        # This does *not* compare the hint
+        # since it does not affect the meaning of the word.
         def ==(y)
             return eql?(y)
         end
@@ -108,7 +107,6 @@ module JLDrill
         end
 
         # Assign the contents of vocab to this object.
-        # NOTE: It does *not* assign status
         def assign(vocab)
             @kanji.copy(vocab.kanjiField)
             @reading.copy(vocab.readingField)
@@ -262,7 +260,7 @@ module JLDrill
             end
         end
 
-        # Output the contents in save file format *without the status*
+        # Output the contents in save file format
         def contentString
             return @kanji.to_s + @hint.to_s + @reading.to_s +
                 @definitions.to_s + @markers.to_s

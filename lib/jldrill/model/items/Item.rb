@@ -1,5 +1,5 @@
-require 'jldrill/model/ItemFactory'
-require 'jldrill/model/Quiz/ItemStatus'
+require 'jldrill/model/items/ItemFactory'
+require 'jldrill/model/items/ItemStatus'
 require 'jldrill/model/Problem'
 
 module JLDrill

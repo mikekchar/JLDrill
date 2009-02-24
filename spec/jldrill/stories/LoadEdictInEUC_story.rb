@@ -1,5 +1,5 @@
 require 'jldrill/spec/StoryMemento'
-require 'jldrill/model/Edict/Edict'
+require 'jldrill/model/items/edict/Edict'
 
 module JLDrill::LoadEdictInEUC
 

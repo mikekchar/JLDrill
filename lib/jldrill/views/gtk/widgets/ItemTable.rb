@@ -1,6 +1,6 @@
 require 'gtk2'
-require 'jldrill/model/Quiz/Item'
-require 'jldrill/model/Vocabulary'
+require 'jldrill/model/items/Item'
+require 'jldrill/model/items/Vocabulary'
 
 module JLDrill::Gtk
     class ItemTable < Gtk::ScrolledWindow

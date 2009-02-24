@@ -1,5 +1,5 @@
-require 'jldrill/model/Edict/Edict'
-require 'jldrill/model/Vocabulary'
+require 'jldrill/model/items/edict/Edict'
+require 'jldrill/model/items/Vocabulary'
 
 # Just like an Edict, only hashed on the first character of the
 # reading so that we can search it faster.  Note, it's dead slow

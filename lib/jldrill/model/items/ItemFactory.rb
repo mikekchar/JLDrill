@@ -1,5 +1,5 @@
-require 'jldrill/model/ItemType'
-require 'jldrill/model/Vocabulary'
+require 'jldrill/model/items/ItemType'
+require 'jldrill/model/items/Vocabulary'
 
 module JLDrill
     class ItemFactory

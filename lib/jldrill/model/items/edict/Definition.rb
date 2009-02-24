@@ -1,4 +1,4 @@
-require "jldrill/model/Edict/GrammarType"
+require "jldrill/model/items/edict/GrammarType"
 
 module JLDrill
 

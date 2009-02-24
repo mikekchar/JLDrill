@@ -1,4 +1,4 @@
-require 'jldrill/model/HashedEdict'
+require 'jldrill/model/items/edict/HashedEdict'
 
 module JLDrill
 

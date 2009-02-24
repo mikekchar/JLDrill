@@ -1,4 +1,4 @@
-require 'jldrill/model/Edict/Meaning'
+require 'jldrill/model/items/edict/Meaning'
 
 module JLDrill
 

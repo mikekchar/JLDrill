@@ -1,6 +1,6 @@
 require 'jldrill/model/Bin'
-require 'jldrill/model/Vocabulary'
-require 'jldrill/model/Edict/Edict'
+require 'jldrill/model/items/Vocabulary'
+require 'jldrill/model/items/edict/Edict'
 
 module JLDrill
 
