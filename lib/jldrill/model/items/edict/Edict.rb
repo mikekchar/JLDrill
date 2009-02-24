@@ -3,7 +3,7 @@
 
 require "jldrill/model/items/Vocabulary"
 require "jldrill/model/items/edict/Meaning"
-require 'jldrill/model/Publisher'
+require 'Context/Publisher'
 require 'kconv'
 
 module JLDrill
@@ -26,7 +26,7 @@ module JLDrill
             @numReadingsAdded = 0
             @loaded = false
             @isUTF8 = nil
-            @publisher = Publisher.new(self)
+            @publisher = Context::Publisher.new(self)
         end
 
         def file=(filename)

@@ -4,7 +4,7 @@ require 'jldrill/model/Problem'
 require 'jldrill/model/Quiz/Options'
 require 'jldrill/model/Quiz/Contents'
 require 'jldrill/model/Quiz/Strategy'
-require 'jldrill/model/Publisher'
+require 'Context/Publisher'
 require 'jldrill/Version'
 
 module JLDrill
@@ -24,7 +24,7 @@ module JLDrill
             @contents = Contents.new(self)
             @strategy = Strategy.new(self)
             @currentProblem = nil
-            @publisher = Publisher.new(self)
+            @publisher = Context::Publisher.new(self)
             
             @last = nil
         end
