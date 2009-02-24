@@ -26,7 +26,6 @@ module JLDrill
             @problem1.kanji.should eql("会う")
 
 		    @vocab2 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 1/")
-		    @problem2 = Problem.new(@vocab2, @quiz)
 		    @item2 = Item.new(@vocab2)
 		    @problem2 = Problem.new(@item2, @quiz)
             @problem2.should_not be_nil

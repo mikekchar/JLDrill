@@ -1,5 +1,3 @@
-require 'jldrill/model/items/Vocabulary'
-
 module JLDrill
 
     # Represents a single question/answer pair in a quiz
@@ -14,7 +12,7 @@ module JLDrill
             @quiz = quiz
             @questionParts = []
             @answerParts = []
-            @vocab = Vocabulary.create(item.to_s)
+            @vocab = item.to_o
         end
         
         def Problem.create(level, item, quiz)
@@ -22,7 +20,7 @@ module JLDrill
                 when 0
                     problem = ReadingProblem.new(item, quiz)
                 when 1
-                    v = Vocabulary.create(item.to_s)
+                    v = item.to_o
                     if !v.kanji.nil?
                         problem = KanjiProblem.new(item, quiz)
                     else
