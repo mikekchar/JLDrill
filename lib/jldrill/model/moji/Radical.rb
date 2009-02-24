@@ -1,5 +1,6 @@
 module JLDrill
 
+    # A radical (part of a kanji character).
 	class Radical
 
         RADICAL_RE = Regexp.new('(\S)\t(\S*)\t(\S*)\t([^\t]*)\t(\S+)?', nil, 'U')

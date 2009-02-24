@@ -1,5 +1,5 @@
-require 'jldrill/model/Kanji'
-require 'jldrill/model/Radical'
+require 'jldrill/model/moji/Kanji'
+require 'jldrill/model/moji/Radical'
 require 'jldrill/model/Config'
 
 module JLDrill

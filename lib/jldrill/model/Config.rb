@@ -1,6 +1,8 @@
 require 'rubygems'
 
 module JLDrill
+    # Configuration data for JLDrill.  This is how JLDrill knows where
+    # to find it's data.
     module Config
         def Config::getDataDir
             if !Gem::datadir("jldrill").nil?

@@ -1,4 +1,4 @@
-require 'jldrill/model/Radical'
+require 'jldrill/model/moji/Radical'
 require 'jldrill/model/Config'
 
 module JLDrill

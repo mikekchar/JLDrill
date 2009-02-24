@@ -1,7 +1,8 @@
-require 'jldrill/model/Radical'
+require 'jldrill/model/moji/Radical'
 
 module JLDrill
 
+    # Represents a Kanji (chinese character)
 	class Kanji
 	
 	    BUSHU_RE = /^B(\d+)/
@@ -108,6 +109,7 @@ module JLDrill
 		end
 	end
 
+    # An array of Kanji.  Useful for loading the kanji data.
 	class KanjiList < Array
 	
 		def KanjiList.fromString(string)

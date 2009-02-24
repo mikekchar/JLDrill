@@ -1,5 +1,7 @@
 
 module JLDrill
+    # Acknowlegements to those who have helped (knowingly or
+    # unknowingly) with JLDrill development.
     Acknowlegements = %Q[Acknowlegements
 
 This program could not have been written if it were not for the

@@ -1,4 +1,6 @@
 module JLDrill
+    # Represents a japanese phonetic character (either hiragana or
+    # katakana).
 	class Kana
 	
 	    STROKES_RE = /^S(\d+)/

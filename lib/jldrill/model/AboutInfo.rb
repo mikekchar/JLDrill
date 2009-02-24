@@ -2,6 +2,7 @@ require 'jldrill/Version'
 
 module JLDrill
 
+    # Information about JLDrill. 
     class AboutInfo
         attr_reader :name, :version, :copyright, :license,
                     :comments, :website, :authors
@@ -14,7 +15,7 @@ module JLDrill
 		    @comments = "Drill Program for Learning Japanese."
             @website = "http://jldrill.rubyforge.org"
             @license = %Q[JLDrill - Drill Program for Learning Japanese
-Copyright (C) 2005-2008  Mike Charlton
+Copyright (C) 2005-2009  Mike Charlton
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

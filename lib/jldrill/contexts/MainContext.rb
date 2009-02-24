@@ -17,9 +17,9 @@ require 'jldrill/contexts/ShowInfoContext'
 require 'jldrill/contexts/ShowAllVocabularyContext'
 require 'jldrill/model/Acknowlegements'
 require 'jldrill/contexts/ShowAboutContext'
-require 'jldrill/model/Radical'
-require 'jldrill/model/Kanji'
-require 'jldrill/model/Kana'
+require 'jldrill/model/moji/Radical'
+require 'jldrill/model/moji/Kanji'
+require 'jldrill/model/moji/Kana'
 
 module JLDrill
 

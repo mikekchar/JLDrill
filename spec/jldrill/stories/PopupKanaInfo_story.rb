@@ -1,5 +1,5 @@
 require 'jldrill/spec/StoryMemento'
-require 'jldrill/model/Kana'
+require 'jldrill/model/moji/Kana'
 require 'jldrill/model/Config'
 require 'jldrill/contexts/DisplayProblemContext'
 
