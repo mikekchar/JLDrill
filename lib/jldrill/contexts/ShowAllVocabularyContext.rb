@@ -22,6 +22,26 @@ module JLDrill
 		def enter(parent)
 		    super(parent)
     		@mainView.update(parent.quiz.allItems)
+            if !@parent.nil? && !@parent.quiz.nil?
+                @parent.quiz.publisher.subscribe(self, "newProblem")
+                @parent.quiz.publisher.subscribe(self, "problemModified")
+            end
+		end
+
+        def exit
+            if !@parent.nil? && !@parent.quiz.nil?
+                @parent.quiz.publisher.unsubscribe(self, "newProblem")
+                @parent.quiz.publisher.unsubscribe(self, "problemModified")
+            end
+            super
+        end
+
+		def newProblemUpdated(quiz)
+            @mainView.update(quiz.allItems)
+		end
+
+		def problemModifiedUpdated(quiz)
+            @mainView.update(quiz.allItems)
 		end
     end
 end

@@ -18,6 +18,15 @@ module JLDrill::Gtk
             @table.selection.mode = Gtk::SELECTION_SINGLE
             @table.set_rules_hint(true)
             @table.fixed_height_mode = true
+            @table.set_enable_search(true)
+            @table.set_search_equal_func do |model, column, key, iter|
+                retVal = true
+                vocab = iter[0].to_o
+                if !vocab.nil?
+                    retVal = !vocab.startsWith?(key)
+                end
+                retVal
+            end
 
             if !itemList.empty?
                 attachColumns(@table, itemList[0].itemType.headings)
@@ -87,7 +96,9 @@ module JLDrill::Gtk
             @table.signal_connect('row-activated') do |widget, path, column|
                 if iter = @listStore.get_iter(path)
                     widget.set_cursor(path,nil,false)
-                    @selectAction.call(iter[0])
+                    if !@selectAction.nil?
+                        @selectAction.call(iter[0])
+                    end
                 end
             end
         end

@@ -106,6 +106,26 @@ module JLDrill
             return theRank
         end
 
+        def arrayStartsWith?(array, string)
+            retVal = false
+            size = string.split(TO_A_RE).size
+            if !array.nil?
+                array.any? do |thing|
+                    retVal = numCommonChars(thing, string) == size
+                end
+            end
+            return retVal
+        end
+
+        # Returns true if any of the fields start with the string
+        def startsWith?(string)
+            size = string.split(TO_A_RE).size
+            return (numCommonChars(reading, string) == size) ||
+                (numCommonChars(kanji, string) == size) ||
+                arrayStartsWith?(definitionsArray, string) ||
+                arrayStartsWith?(markersArray, string)
+        end
+
         # Assign the contents of vocab to this object.
         def assign(vocab)
             @kanji.copy(vocab.kanjiField)

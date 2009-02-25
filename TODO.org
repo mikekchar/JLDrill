@@ -124,7 +124,9 @@ the number of jellybeans done in the properties of the task.
          totally related to that Quiz
    - [-] Update the All Vocab list when things change.  Also select
 		 the appropriate vocabulary when things change.
-       - [X] Implement the ItemTableWindow as a window, not a dialog (duh...)
+       - [X] Implement the ItemTableWindow as a window, not a dialog
+         (duh...)
+       - [ ] Implement search in ItemTable
        - [ ] Updating the problem updates the All Vocab list
        - [ ] Updating a problem, selects it in the list
        - [ ] New problems select it in the list
