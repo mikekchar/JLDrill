@@ -226,11 +226,7 @@ module JLDrill
             status
         end
 
-        # Get an array containing all the vocabulary in the quiz
-        def allVocab
-            @contents.allVocab
-        end
-
+        # Get an array containing all the items in the quiz
         def allItems
             @contents.allItems
         end

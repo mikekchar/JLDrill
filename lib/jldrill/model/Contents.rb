@@ -130,23 +130,11 @@ module JLDrill
         def allItems
             items = []
             bins.each do |bin|
-                bin.contents.each do |item|
-                    items.push(item)
-                end
+                items += bin.contents
             end
             return items.sort do |x,y| 
                 x.position <=> y.position
             end
-        end
-
-        # Return an array of all the vocab in the bins
-        def allVocab
-            retVal = []
-            items = allItems
-            items.each do |item|
-                retVal.push(item.to_o)
-            end
-            return retVal
         end
 
         # Reset the contents back to their original order and schedule

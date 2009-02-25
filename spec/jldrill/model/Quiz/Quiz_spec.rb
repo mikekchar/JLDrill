@@ -74,8 +74,20 @@ module JLDrill
             @emptyQuiz.saveToString.should eql(@sampleQuiz.file)
         end
 	
-	    it "should be able to get a list of all the vocab" do
-	        @quiz.allVocab.join("\n").should eql(@sampleQuiz.allVocab)
+        # Defined this since it's useful in the tests, but I
+        # removed it from Quiz (I don't want to use it)
+        def allVocabString(quiz)
+	        items = @quiz.allItems
+            string = ""
+            items.each do |item|
+                string += item.to_o.to_s + "\n"
+            end
+            return string
+        end
+
+	    it "should be able to get a list of all the items" do
+            string = allVocabString(@quiz)
+            string.should eql(@sampleQuiz.allVocab + "\n")
 	    end
 	    
 	    it "should be able to reset the contents" do
@@ -85,7 +97,8 @@ module JLDrill
 	        @quiz.contents.bins[2].length.should be(0)
 	        @quiz.contents.bins[3].length.should be(0)
 	        @quiz.contents.bins[4].length.should be(0)
-	        @quiz.allVocab.join("\n").should eql(@sampleQuiz.allResetVocab)
+            string = allVocabString(@quiz)
+	        string.should eql(@sampleQuiz.allResetVocab + "\n")
 	    end
 
         it "should renumber the contents when resetting" do
