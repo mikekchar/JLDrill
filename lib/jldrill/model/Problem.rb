@@ -84,12 +84,12 @@ module JLDrill
                     retVal += bin.to_s
                 end
             else
-                retVal += "+#{@item.status.consecutive}"
-                if @item.status.reviewed?
-                    retVal += ", #{@item.status.reviewedDate}"
+                retVal += "+#{@item.schedule.consecutive}"
+                if @item.schedule.reviewed?
+                    retVal += ", #{@item.schedule.reviewedDate}"
                 end
             end
-            retVal += " --> #{@item.status.potentialScheduleInDays} days"
+            retVal += " --> #{@item.schedule.potentialScheduleInDays} days"
         end
 
         def evaluateAttribute(name)

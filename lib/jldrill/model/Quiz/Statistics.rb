@@ -146,7 +146,7 @@ module JLDrill
             level = 0
             found = false
             while (level <= 6) && !found
-                if item.status.durationWithin?(findRange(level))
+                if item.schedule.durationWithin?(findRange(level))
                     found = true
                 else
                     level += 1

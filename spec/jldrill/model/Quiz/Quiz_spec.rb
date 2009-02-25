@@ -124,10 +124,10 @@ module JLDrill
 	    def test_binOne(question)
             # bin 1 items will always be reading problems
             # because the level will always be 0
-            @quiz.currentProblem.item.status.level.should be(0)
+            @quiz.currentProblem.item.schedule.level.should be(0)
             test_problem(question, 
                          ReadingProblem.new(@quiz.currentProblem.item, @quiz))
-            @quiz.currentProblem.item.status.consecutive.should be(0)
+            @quiz.currentProblem.item.schedule.consecutive.should be(0)
 	    end
 
         def test_level(question)
@@ -154,13 +154,13 @@ module JLDrill
 	    def test_binTwo(question)
             # The quiz depends on the level
             test_level(question)
-            @quiz.currentProblem.item.status.consecutive.should be(0)
+            @quiz.currentProblem.item.schedule.consecutive.should be(0)
 	    end
 
 	    def test_binThree(question)
             # The quiz depends on the level
             test_level(question)
-            @quiz.currentProblem.item.status.consecutive.should be(0)
+            @quiz.currentProblem.item.schedule.consecutive.should be(0)
 	    end
 
 	    def test_binFour(question)
@@ -171,7 +171,7 @@ module JLDrill
             # The quiz depends on the level
             test_level(question)
             # Level 4 items have consecutive of at least one
-            @quiz.currentProblem.item.status.consecutive.should_not be(0)
+            @quiz.currentProblem.item.schedule.consecutive.should_not be(0)
 	    end
 	    
 	    def test_drill
@@ -196,19 +196,19 @@ module JLDrill
 	    end
 
         def test_correct
-            consecutive = @quiz.currentProblem.item.status.consecutive
+            consecutive = @quiz.currentProblem.item.schedule.consecutive
             @quiz.correct
             bin = @quiz.currentProblem.item.bin
             if bin == 4
-                @quiz.currentProblem.item.status.consecutive.should be(consecutive + 1)
+                @quiz.currentProblem.item.schedule.consecutive.should be(consecutive + 1)
             else
-                @quiz.currentProblem.item.status.consecutive.should be(0)
+                @quiz.currentProblem.item.schedule.consecutive.should be(0)
             end
         end
 	    
         def test_incorrect
             @quiz.incorrect
-            @quiz.currentProblem.item.status.consecutive.should be(0)
+            @quiz.currentProblem.item.schedule.consecutive.should be(0)
         end
 	    
 	    def test_initializeQuiz
@@ -273,22 +273,22 @@ module JLDrill
         
         it "should update the last reviewed status when the answer is made" do
             test_initializeQuiz
-            @quiz.currentProblem.item.status.lastReviewed.should be_nil
+            @quiz.currentProblem.item.schedule.lastReviewed.should be_nil
             test_correct
             test1 = @quiz.currentProblem.item
-            test1.status.lastReviewed.should_not be_nil
+            test1.schedule.lastReviewed.should_not be_nil
             # should get a new one
             test_drill
             test2 = @quiz.currentProblem.item
-            test2.status.lastReviewed.should be_nil
+            test2.schedule.lastReviewed.should be_nil
             test_incorrect
-            @quiz.currentProblem.item.status.lastReviewed.should_not be_nil
+            @quiz.currentProblem.item.schedule.lastReviewed.should_not be_nil
             @quiz.reset
-            test1.status.lastReviewed.should be_nil
-            test2.status.lastReviewed.should be_nil
+            test1.schedule.lastReviewed.should be_nil
+            test2.schedule.lastReviewed.should be_nil
         end
         
-        it "should update the status correctly for bin 4 items" do
+        it "should update the schedule correctly for bin 4 items" do
 	        @quiz.loadFromString("none", @sampleQuiz.file)
 	        item = @quiz.contents.bins[4][0]
 	        item.should_not be_nil

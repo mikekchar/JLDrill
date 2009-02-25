@@ -120,7 +120,7 @@ module JLDrill
 		    test_pushAll
 		    @bin.allSeen?.should be(false)
 		    @bin.each do |item|
-		        item.status.seen = true
+		        item.schedule.seen = true
 		    end
 		    @bin.allSeen?.should be(true)
 		end
@@ -132,11 +132,11 @@ module JLDrill
 		    test_pushAll
 		    
 		    @bin.firstUnseen.should be(0)
-		    @bin.contents[0].status.seen = true
-		    @bin.contents[1].status.seen = true
+		    @bin.contents[0].schedule.seen = true
+		    @bin.contents[1].schedule.seen = true
 		    @bin.firstUnseen.should be(2)
 		    @bin.each do |item|
-		        item.status.seen = true
+		        item.schedule.seen = true
 		    end
             @bin.firstUnseen.should be(-1)
         end
@@ -154,7 +154,7 @@ module JLDrill
 		    test_pushAll
             @bin.firstUnseen.should be(0)
 		    @bin.each do |item|
-		        item.status.seen = true
+		        item.schedule.seen = true
 		    end
             @bin.firstUnseen.should be(-1)
             @bin.setUnseen
@@ -170,7 +170,7 @@ module JLDrill
 		    total = 4
             @bin.numUnseen.should be(total)
             @bin.each do |item|
-                item.status.seen = true
+                item.schedule.seen = true
                 total -= 1
                 @bin.numUnseen.should be(total)
             end
@@ -182,8 +182,8 @@ module JLDrill
             bin.findUnseen(0).should be_nil
 
 		    test_pushAll
-		    @bin[0].status.seen = true
-		    @bin[2].status.seen = true
+		    @bin[0].schedule.seen = true
+		    @bin[2].schedule.seen = true
 		    @bin.findUnseen(0).should eql(@bin[1])
 		    @bin.findUnseen(1).should eql(@bin[3])
         end

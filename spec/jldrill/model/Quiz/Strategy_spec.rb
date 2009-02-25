@@ -55,18 +55,18 @@ module JLDrill
 	            test_addItem(4, i)
     	    end
     	    @strategy.findUnseen(4).should be(0)
-    	    @quiz.contents.bins[4][0].status.seen = true
+    	    @quiz.contents.bins[4][0].schedule.seen = true
     	    @strategy.findUnseen(4).should be(1)
-    	    @quiz.contents.bins[4][1].status.seen = true
+    	    @quiz.contents.bins[4][1].schedule.seen = true
     	    @strategy.findUnseen(4).should be(2)
     	    0.upto(9) do |i|
-        	    @quiz.contents.bins[4][i].status.seen = true
+        	    @quiz.contents.bins[4][i].schedule.seen = true
             end
             # When they are all seen, it should wrap
     	    @strategy.findUnseen(4).should be(0)
     	    # And set all the rest to unseen
     	    @quiz.contents.bins[4].contents[1..9].all? do |item|
-    	        item.status.seen == false
+    	        item.schedule.seen == false
     	    end.should be(true)
 	    end
 	    
@@ -76,43 +76,43 @@ module JLDrill
 	        item = test_addItem(0, 1)
 	        @strategy.demote(item)
 	        item.bin.should be(0)
-	        item.status.level.should be(0)
+	        item.schedule.level.should be(0)
 	    end
 
 	    it "should demote other items to bin 1 and reset the level to 0" do
 	        item = test_addItem(1, 1)
 	        @strategy.demote(item)
 	        item.bin.should be(1)
-	        item.status.level.should be(0)
+	        item.schedule.level.should be(0)
 
 	        item = test_addItem(2, 2)
-	        item.status.level = 1
+	        item.schedule.level = 1
 	        @strategy.demote(item)
 	        item.bin.should be(1)
-	        item.status.level.should be(0)
+	        item.schedule.level.should be(0)
 
 	        item = test_addItem(3, 3)
-	        item.status.level = 2
+	        item.schedule.level = 2
 	        @strategy.demote(item)
 	        item.bin.should be(1)
-	        item.status.level.should be(0)
+	        item.schedule.level.should be(0)
 
 	        item = test_addItem(4, 4)
-	        item.status.level = 2
+	        item.schedule.level = 2
 	        @strategy.demote(item)
 	        item.bin.should be(1)
-	        item.status.level.should be(0)
+	        item.schedule.level.should be(0)
 	    end
 	    
 	    it "should be able to create problems of the correct level" do
 	        item1 = Item.new(@sampleQuiz.sampleVocab)
-	        item1.status.level = 0
+	        item1.schedule.level = 0
 	        item1.bin = 1
 	        item2 = Item.new(@sampleQuiz.sampleVocab)
-	        item2.status.level = 1
+	        item2.schedule.level = 1
 	        item2.bin = 2
 	        item3 = Item.new(@sampleQuiz.sampleVocab)
-	        item3.status.level = 2
+	        item3.schedule.level = 2
 	        item3.bin = 3
             
             problem1 = @strategy.createProblem(item1)
@@ -206,7 +206,7 @@ module JLDrill
 
             # Set all the items in the review set to seen
             @quiz.contents.bins[4].each do |item|
-                item.status.seen = true
+                item.schedule.seen = true
             end
             @quiz.contents.bins[4].allSeen?.should be(true)
 
@@ -215,14 +215,14 @@ module JLDrill
             @strategy.shouldReview?.should be(true)
 
             item = test_addItem(1, -1)
-            item.status.seen = true
+            item.schedule.seen = true
             # Now there is a working set item, and we don't have enough items
             # in the review set, so we should not review
             @strategy.shouldReview?.should be(false)
             # Make a total of 4 items in the review set
             0.upto(3) do
                 item = test_addItem(4, -1)
-                item.status.seen = true
+                item.schedule.seen = true
             end
             # We have enough items, and we haven't learned the review items
             # to the required level, so we would ordinarily review
@@ -233,9 +233,9 @@ module JLDrill
         it "should increment the item's difficulty when an item is incorrect" do
             item = test_addItem(4, -1)
 	        @quiz.currentProblem = @strategy.createProblem(item)
-	        item.status.difficulty.should be(0)
+	        item.schedule.difficulty.should be(0)
 	        @strategy.incorrect(item)
-	        item.status.difficulty.should be(1)
+	        item.schedule.difficulty.should be(1)
         end
         
         # Originally the difficulty counter would reset when the item was demoted
@@ -250,15 +250,15 @@ module JLDrill
 	        @strategy.incorrect(item)
 	        @strategy.incorrect(item)
             item.bin.should be(1)	        
-	        item.status.difficulty.should be(3)
+	        item.schedule.difficulty.should be(3)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
             item.bin.should be(4)	        
-	        item.status.difficulty.should be(3)
+	        item.schedule.difficulty.should be(3)
 	        @strategy.incorrect(item)
             item.bin.should be(1)	        	        
-	        item.status.difficulty.should be(4)        
+	        item.schedule.difficulty.should be(4)        
         end
         
         it "should reset the consecutive counter on an incorrect answer" do
@@ -271,15 +271,15 @@ module JLDrill
 	        @strategy.correct(item)
             item.bin.should be(4)
             # we only increase consecutive in the review set
-            item.status.consecutive.should be(1)
+            item.schedule.consecutive.should be(1)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
-            item.status.consecutive.should be(4)
+            item.schedule.consecutive.should be(4)
 
             @strategy.incorrect(item)
             item.bin.should be(1)
-            item.status.consecutive.should be(0)
+            item.schedule.consecutive.should be(0)
         end
     end
 end

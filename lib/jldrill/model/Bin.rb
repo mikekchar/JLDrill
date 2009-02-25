@@ -97,7 +97,7 @@ module JLDrill
         def numUnseen
             total = 0
             @contents.each do |item|
-                total += 1 if !item.status.seen
+                total += 1 if !item.schedule.seen
             end
             total
         end
@@ -105,7 +105,7 @@ module JLDrill
         # Returns true if all the items in the bin have been seen
         def allSeen?
             @contents.all? do |item|
-                item.status.seen?
+                item.schedule.seen?
             end
         end
         
@@ -114,7 +114,7 @@ module JLDrill
         def firstUnseen
             index = 0
             # find the first one that hasn't been seen yet
-            while (index < length) && @contents[index].status.seen?
+            while (index < length) && @contents[index].schedule.seen?
                 index += 1
             end
             
@@ -130,7 +130,7 @@ module JLDrill
             if n < numUnseen
                 i = 0
                 0.upto(n) do |m|
-                    while @contents[i].status.seen
+                    while @contents[i].schedule.seen
                         i += 1
                     end
                     if m != n
@@ -142,17 +142,17 @@ module JLDrill
             retVal
         end
 
-        # Sets the status of each item in the bin to unseen
+        # Sets the schedule of each item in the bin to unseen
         def setUnseen
             @contents.each do |item|
-                item.status.seen = false
+                item.schedule.seen = false
             end
         end
         
         def numOverdue
             total = 0
             @contents.each do |item|
-                if item.status.overdue?
+                if item.schedule.overdue?
                     total += 1
                 end
             end
@@ -162,7 +162,7 @@ module JLDrill
         def numScheduledOn(day)
             total = 0
             @contents.each do |item|
-                if item.status.scheduledOn?(day)
+                if item.schedule.scheduledOn?(day)
                     total += 1
                 end
             end
@@ -172,7 +172,7 @@ module JLDrill
         def numDurationWithin(range)
             total = 0
             @contents.each do |item|
-                if item.status.durationWithin?(range)
+                if item.schedule.durationWithin?(range)
                     total += 1
                 end
             end

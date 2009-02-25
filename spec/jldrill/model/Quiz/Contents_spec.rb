@@ -31,8 +31,8 @@ module JLDrill
 	    end
 	    
 	    it "should be able to print out the status" do
-            @quiz.contents.bins[4][1].status.scheduled?.should be(true)
-            @quiz.contents.bins[4][1].status.overdue?.should be(true)
+            @quiz.contents.bins[4][1].schedule.scheduled?.should be(true)
+            @quiz.contents.bins[4][1].schedule.overdue?.should be(true)
     	    @quiz.contents.status.should eql("New: 1 Review: 2 Working: 0, 1, 0 Behind: 2")
 	    end
 	    
@@ -84,7 +84,7 @@ module JLDrill
     	    quiz.contents.findUnseen(4, 2..3).should eql(quiz.contents.bins[2][4])
     	    quiz.contents.findUnseen(5, 2..3).should eql(quiz.contents.bins[3][0])
     	    quiz.contents.findUnseen(12, 1..3).should eql(quiz.contents.bins[3][2])
-            quiz.contents.bins[1][3].status.seen = true
+            quiz.contents.bins[1][3].schedule.seen = true
     	    quiz.contents.findUnseen(12, 1..3).should eql(quiz.contents.bins[3][3])
     	    quiz.contents.findUnseen(15, 1..3).should be_nil
 	    end

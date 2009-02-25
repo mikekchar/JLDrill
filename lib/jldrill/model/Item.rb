@@ -1,6 +1,6 @@
 require 'jldrill/model/items/ItemFactory'
 require 'jldrill/model/ItemStatus'
-require 'jldrill/model/Problem'
+require 'jldrill/model/Quiz/Schedule'
 
 module JLDrill
 
@@ -26,7 +26,7 @@ module JLDrill
 
         POSITION_RE = /^Position: (.*)/
 
-        attr_reader :status, :itemType, :contents, :position, :bin, :index
+        attr_reader :itemType, :contents, :position, :bin, :index, :status
         attr_writer :position, :bin, :index
 
         def initialize(item=nil)
@@ -41,6 +41,7 @@ module JLDrill
             @bin = 0
             @index = nil
             @status = ItemStatus.new(self)
+            @status.add(Schedule.new(self))
         end
 
         # Create an item using the save string
@@ -90,6 +91,11 @@ module JLDrill
             return item
         end
 
+        # Return the schedule for the Spaced Repetition Drill
+        def schedule
+            return @status.select("Schedule")
+        end
+
         # Assign the contents of item to this item
         def assign(item)
             setType(item.itemType)
@@ -107,7 +113,7 @@ module JLDrill
 
         # set the ItemStatus
         def setStatus(status)
-            @status.parseLine(status.to_s)
+            parseLine(status.to_s)
         end
 
         # set the contents of the item

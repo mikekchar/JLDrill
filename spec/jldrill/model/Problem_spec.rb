@@ -143,7 +143,7 @@ module JLDrill
             problem2.status.should eql("     2 --> 5.0 days")
             problem3.status.should eql("     3 --> 5.0 days")
             problem4.status.should eql("     +0 --> 5.0 days")
-            problem4.item.status.markReviewed
+            problem4.item.schedule.markReviewed
             problem4.status.should eql("     +0, Today --> 5.0 days")
         end
     end

@@ -142,9 +142,9 @@ module JLDrill
             end
             if !(index == -1)
                 item = contents.bins[newSetBin][index]
-                # Resetting the status to make up for the consequences
+                # Resetting the schedule to make up for the consequences
                 # of an old bug where reset drills weren't reset properly.
-                item.status.reset
+                item.schedule.reset
                 promote(item)
                 item
             else
@@ -185,7 +185,7 @@ module JLDrill
             # Usually we get a working item if the above is not true
             item = getWorkingItem if item.nil?
 
-            item.status.seen = true
+            item.schedule.seen = true
             return item
         end
 
@@ -207,11 +207,11 @@ module JLDrill
             if !item.nil?
                 if (item.bin + 1 < contents.bins.length)
                     if (item.bin + 1) == 4
-                        item.status.consecutive = 1
+                        item.schedule.consecutive = 1
                         @stats.learned += 1
                     end 
                     contents.moveToBin(item, item.bin + 1)
-                    item.status.level = item.bin - 1 unless item.bin - 1 > 2
+                    item.schedule.level = item.bin - 1 unless item.bin - 1 > 2
                 end
             end
         end
@@ -219,7 +219,7 @@ module JLDrill
         # Demote the item
         def demote(item)
             if !item.nil?
-                item.status.level = 0
+                item.schedule.level = 0
                 if (item.bin != 0)
                     contents.moveToBin(item, 1)
                 else
@@ -233,9 +233,9 @@ module JLDrill
         # Mark the item as having been reviewed correctly
         def correct(item)
             @stats.correct(item)
-            item.status.correct
-            if(item.status.score >= options.promoteThresh)
-                item.status.score = 0
+            item.schedule.correct
+            if(item.schedule.score >= options.promoteThresh)
+                item.schedule.score = 0
                 promote(item)
             end
             # Bin 4 items have either just been promoted there,
@@ -244,7 +244,7 @@ module JLDrill
             # one item is out of order (O(n) probably).
             if item.bin == 4
                 contents.bins[4].sort! do |x, y|
-                    x.status.getScheduledTime <=> y.status.getScheduledTime
+                    x.schedule.getScheduledTime <=> y.schedule.getScheduledTime
                 end
             end
         end
@@ -252,7 +252,7 @@ module JLDrill
         # Mark the item as having been reviewed incorrectly
         def incorrect(item)
             @stats.incorrect(item)
-            item.status.incorrect
+            item.schedule.incorrect
             demote(item)
         end
     end

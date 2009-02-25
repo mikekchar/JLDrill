@@ -38,7 +38,7 @@ module JLDrill
 
         # Add an item to a bin
         def addItem(item, bin)
-            item.status.score = 0
+            item.schedule.score = 0
             if item.position == -1
                 item.position = length 
             end
@@ -149,7 +149,7 @@ module JLDrill
             return retVal
         end
 
-        # Reset the contents back to their original order and status
+        # Reset the contents back to their original order and schedule
         def reset
             1.upto(@bins.length - 1) do |i|
                 @bins[0].contents += @bins[i].contents
@@ -157,7 +157,7 @@ module JLDrill
             end
             @bins[0].sort! { |x,y| x.position <=> y.position }
             @bins[0].each do |item|
-                item.status.reset
+                item.schedule.reset
                 item.position = item.index
             end
             saveNeeded
