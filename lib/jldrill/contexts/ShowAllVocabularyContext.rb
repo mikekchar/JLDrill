@@ -21,8 +21,7 @@ module JLDrill
 		
 		def enter(parent)
 		    super(parent)
-    		@mainView.run(parent.quiz)
-    		self.exit
+    		@mainView.update(parent.quiz.allItems)
 		end
     end
 end

@@ -13,9 +13,12 @@ module JLDrill
 		    # Only in the concrete class
 		end
 		
-		def run(quiz)
-		    @quiz = quiz
+		def update(items)
+            # Only in the concrete class
 		end
-		
+
+        def close
+            @context.exit
+        end
 	end
 end

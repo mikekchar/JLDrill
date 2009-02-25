@@ -18,12 +18,11 @@ module JLDrill::Gtk
 		end
 
         def destroy
-            @itemTableWindow.destroy
+            @itemTableWindow.explicitDestroy
         end
 
-        def run(quiz)
-            super(quiz)
-            @itemTableWindow.execute
+        def update(items)
+            @itemTableWindow.updateTable(items)
         end
     end
 end
