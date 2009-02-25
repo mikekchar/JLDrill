@@ -98,7 +98,25 @@ module JLDrill::Gtk
             highlightOnSelection
             callActionOnActivation
         end
+        # Selects the closest match to the given vocabulary
+        def selectClosestMatch(vocab)
+            iter = @listStore.iter_first
+            if !iter.nil?
+                pos = iter.path
+                rank = vocab.rank(iter[0].to_o)
+                while iter.next!
+                    newRank = vocab.rank(iter[0].to_o)
+                    if newRank > rank
+                        rank = newRank
+                        pos = iter.path
+                    end
+                end
+                @table.selection.select_path(pos)
+                @table.scroll_to_cell(pos, nil, false, 0.0, 0.0)
+            end
+        end
 
+        # Returns true if an item in the table is selected
         def hasSelection?
             !@table.selection.selected.nil?
         end

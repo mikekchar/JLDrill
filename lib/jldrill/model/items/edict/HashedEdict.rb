@@ -1,3 +1,4 @@
+require 'jldrill/model/Item'
 require 'jldrill/model/items/edict/Edict'
 require 'jldrill/model/items/Vocabulary'
 
@@ -65,7 +66,7 @@ module JLDrill
                     vocab = vocab(position)
                     if !vocab.nil? && !vocab.reading.nil?
                         if re.match(vocab.reading)
-                            result.push(vocab)
+                            result.push(Item.create(vocab.to_s))
                         end
                     end
                 end
@@ -98,7 +99,9 @@ module JLDrill
             reading = vocab.reading
             bin = findBin(reading)
             re = Regexp.new("^#{reading}$")
-            return searchBin(reading, bin, re).include?(vocab)
+            return searchBin(reading, bin, re).any? do |item|
+                item.to_o.eql?(vocab)
+            end
         end
     end
 end

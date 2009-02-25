@@ -57,7 +57,7 @@ module JLDrill
 		def search(reading)
 		    if dictionaryLoaded? && !reading.nil? && !reading.empty?
 		        @parent.reference.search(reading).sort! do |x,y|
-		            x.reading <=> y.reading
+		            x.to_o.reading <=> y.to_o.reading
 		        end
 		    else
 		        []

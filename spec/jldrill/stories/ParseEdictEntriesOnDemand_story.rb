@@ -30,7 +30,7 @@ module JLDrill::ParseEdictEntriesOnDemand
             utf.length.should be(1)
             ameList = utf.search("あめ")
             ameList.size.should be(1)
-            ame = ameList[0]
+            ame = ameList[0].to_o
             ame.should_not be_nil
             ame.should eql(utf.vocab(0))
             utf.should include(ame)
@@ -44,7 +44,7 @@ module JLDrill::ParseEdictEntriesOnDemand
             utf.length.should be(1)
             ameList = utf.search("あめ")
             ameList.size.should be(1)
-            ame = ameList[0]
+            ame = ameList[0].to_o
             ame.should_not be_nil
             ame.should eql(utf.vocab(0))
             utf.should include(ame)
@@ -69,7 +69,9 @@ module JLDrill::ParseEdictEntriesOnDemand
             ameList = euc.search("あめ")
             ameList.should_not be_nil
             ameList.size.should be(1)
-            ameList.should include(ame)
+            ameList.any? do |item|
+                item.to_o.eql?(ame)
+            end.should be(true)
             euc.should include(ame)
         end
 
@@ -137,7 +139,9 @@ module JLDrill::ParseEdictEntriesOnDemand
             a.reading.should eql("あ")
             a.hint.should eql("平仮名")
             edict.should include(a)
-            edict.search("あ").should include(a)
+            edict.search("あ").any? do |item|
+                item.to_o.eql?(a)
+            end.should be(true)
         end
     end
 end

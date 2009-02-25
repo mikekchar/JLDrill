@@ -1,6 +1,6 @@
 require 'Context/Gtk/Widget'
-require 'jldrill/oldUI/GtkVocabView.rb'
-require 'jldrill/oldUI/GtkVocabTable.rb'
+require 'jldrill/oldUI/GtkVocabView'
+require 'jldrill/views/gtk/widgets/ItemTable'
 require 'gtk2'
 
 
@@ -79,8 +79,8 @@ module JLDrill::Gtk
             end
             if @view.dictionaryLoaded?
                 candidates = @view.search(self.reading)
-                @searchTable = GtkVocabTable.new(candidates) do |vocab|
-                    update(vocab)
+                @searchTable = ItemTable.new(candidates) do |item|
+                    update(item.to_o)
                     @addButton.grab_focus
                 end
                 @vbox.add(@searchTable)

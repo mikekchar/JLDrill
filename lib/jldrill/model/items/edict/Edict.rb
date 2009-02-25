@@ -1,6 +1,7 @@
 # Contains code necessary to read in an EDict file
 # Also will parse hacked up JLPT Edict files
 
+require "jldrill/model/Item"
 require "jldrill/model/items/Vocabulary"
 require "jldrill/model/items/edict/Meaning"
 require 'Context/Publisher'
@@ -236,7 +237,7 @@ module JLDrill
                 candidate = @readings[i]
                 if !candidate.nil?
                     if re.match(candidate)
-                        result.push(vocab(i))
+                        result.push(Item.create(vocab(i).to_s))
                     end
                 end
             end
@@ -244,7 +245,9 @@ module JLDrill
         end
 
         def include?(vocab)
-            return search(vocab.reading).include?(vocab)
+            return search(vocab.reading).any? do |item|
+                item.to_o.eql?(vocab)
+            end
         end
 
         def to_s()
