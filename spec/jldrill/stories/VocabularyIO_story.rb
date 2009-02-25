@@ -145,7 +145,7 @@ module JLDrill::VocabularyIO
         end
 
         it "should be able to handle akeru" do
-            v = JLDrill::Vocabulary.create("/Kanji: 開ける/Reading: あける/Definitions: (1) to open,(2) to unwrap (e.g.\\, parcel\\, package)/Markers: v1,P/Score: 0/Level: 0/Position: 0/Consecutive: 0/Difficulty:0")
+            v = JLDrill::Vocabulary.create("/Kanji: 開ける/Reading: あける/Definitions: (1) to open,(2) to unwrap (e.g.\\, parcel\\, package)/Markers: v1,P/Position: 0/Score: 0/Level: 0/Consecutive: 0/Difficulty:0")
             v.kanji.should eql("開ける")
             v.reading.should eql("あける")
             v.definitions.should eql("(1) to open, (2) to unwrap (e.g., parcel, package)")
@@ -163,8 +163,8 @@ module JLDrill::VocabularyIO
                 "/Reading: とじる" +
                 "/Definitions: to close (e.g.\\, book\\, eyes\\, meeting\\, etc.)," +
                 "to shut" +
-                "/Markers: v1,P" +
-                "/Score: 0/Level: 0/Position: 0" +
+                "/Markers: v1,P/Position: 0" +
+                "/Score: 0/Level: 0" +
                 "/Consecutive: 0/Difficulty: 0")
             edict.vocab(0).should eql(v)
         end

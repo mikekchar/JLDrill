@@ -31,8 +31,8 @@ module JLDrill
 		    @bin[pos].should be_nil
 		    @bin.length.should be(pos)
 		    @bin.push(item)
-		    item.status.bin.should be(@bin.number)
-		    item.status.index.should be(pos)
+		    item.bin.should be(@bin.number)
+		    item.index.should be(pos)
 		    @bin.length.should be(pos + 1)
 		    @bin[pos].should_not be_nil
 		    @bin[pos].should equal(item)
@@ -92,16 +92,16 @@ module JLDrill
 		    test_push(@items.length - 1, @items[0])
 		    test_isOriginal?.should be(false)
 		    @bin.sort! do |x, y|
-		        x.status.position <=> y.status.position
+		        x.position <=> y.position
 		    end
 		    test_isOriginal?.should be(true)
 		end
 		
 		it "should output itself in save format" do
-		contentsString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 3/
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Level: 0/Position: 2/Consecutive: 0/Difficulty: 3/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Level: 0/Position: 3/Consecutive: 0/Difficulty: 3/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Level: 0/Position: 4/Consecutive: 1/Difficulty: 3/]
+		contentsString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/Consecutive: 0/Difficulty: 3/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Score: 0/Level: 0/Consecutive: 0/Difficulty: 3/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 3/Score: 0/Level: 0/Consecutive: 0/Difficulty: 3/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 4/Score: 0/Level: 0/Consecutive: 1/Difficulty: 3/]
 		    test_pushAll
 		    @bin.to_s.should eql("My name\n" + contentsString + "\n")
 		end
@@ -191,7 +191,7 @@ module JLDrill
         it "should be able to tell if an item exists in the bin" do
             test_pushAll
             @bin.exists?(@bin[0]).should be(true)
-            @bin.contain?(Vocabulary.create("/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Score: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 3/")).should be(false)
+            @bin.contain?(Vocabulary.create("/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Position: 1/Score: 0/Level: 0/Consecutive: 0/Difficulty: 3/")).should be(false)
         end
 	end
 end

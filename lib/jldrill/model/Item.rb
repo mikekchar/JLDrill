@@ -14,12 +14,20 @@ module JLDrill
     # The string representation of the object can be obtain through to_s().
     # The object representation of the object can be obtained through to_o().
     #
+    # Item also holds position information of the item in the drill
+    #    * position is the original ordinal position of the item in the quiz
+    #    * bin is the number of the bin
+    #    * index is the ordinal position of the item in the bin
+    #
     # Items stored here must implement the following:
     #    o to_s() -- returns a string representation of the object
     #    o create() -- accepts a string and creates the object
     class Item
 
-        attr_reader :status, :itemType
+        POSITION_RE = /^Position: (.*)/
+
+        attr_reader :status, :itemType, :contents, :position, :bin, :index
+        attr_writer :position, :bin, :index
 
         def initialize(item=nil)
             if item.nil?
@@ -29,7 +37,10 @@ module JLDrill
                 @itemType = item.itemType
                 @contents = item.to_s
             end
-            @status = ItemStatus.new
+            @bin = 0
+            @position = 0
+            @index = nil
+            @status = ItemStatus.new(self)
         end
 
         # Create an item using the save string
@@ -38,25 +49,55 @@ module JLDrill
         # needs to know what bin it is in when parsing.
         def Item.create(string, bin=0)
             item = Item.new
-            item.status.bin = bin
+            item.bin = bin
             item.parse(string)
             return item
+        end
+
+        def parsePart(part)
+            parsed = true
+
+            case part
+            when POSITION_RE 
+                @position = $1.to_i
+            else # Not something we understand
+                parsed = false
+            end
+
+            return parsed
+        end
+
+        # Parse a whole line which includes status information
+        def parseLine(line)
+            line.split("/").each do |part|
+                if !parsePart(part)
+                    @status.parse(part)
+                end
+            end
         end
 
         # Set the value of the item by parsing the string
         def parse(string)
             @itemType = ItemFactory::find("Vocabulary")
             @contents = string
-            @status.parseLine(@contents)
+            parseLine(@contents)
         end
 
         # Create a copy of this item
         def clone
             item = Item.new
-            item.setType(@itemType)
-            item.setContents(@contents)
-            item.status.assign(@status)
+            item.assign(self)
             return item
+        end
+
+        # Assign the contents of item to this item
+        def assign(item)
+            setType(item.itemType)
+            setContents(item.contents)
+            @position = item.position
+            @bin = item.bin
+            @index = item.index
+            @status.assign(item.status)
         end
 
         # Set the type of the item
@@ -76,7 +117,11 @@ module JLDrill
 
         # Return the save format of the item
         def to_s
-            return to_o.to_s + @status.to_s + "/\n"
+            retVal = to_o.to_s
+            retVal += "/Position: #{@position}"
+            retVal += @status.to_s 
+            retVal += "/\n"
+            return retVal
         end
 
         # Create the object in the item and return it

@@ -5,12 +5,9 @@ module JLDrill
     # item.
     # * score is the number of times the item has been successfully
     #   drilled in the current bin.
-    # * bin is the number of the bin
     # * level is 0 if meaning has not been introduced 
     #            1 if kanji has not been introduced, 
     #            2 otherwise
-    # * position is the original ordinal position of the item in the quiz
-    # * index is the ordinal position of the item in the bin
     #
     # Note: item is not currently being stored in the files and is not outputted
     # in to_s()
@@ -18,7 +15,6 @@ module JLDrill
 
         SCORE_RE = /^Score: (.*)/
         LEVEL_RE = /^Level: (.*)/
-        POSITION_RE = /^Position: (.*)/
         LASTREVIEWED_RE = /^LastReviewed: (.*)/
         CONSECUTIVE_RE = /^Consecutive: (.*)/
         SCHEDULEDTIME_RE = /^ScheduledTime: (.*)/
@@ -27,32 +23,23 @@ module JLDrill
         SECONDS_PER_DAY = 60 * 60 * 24
         MAX_ADDITIONAL_TIME = 4 * SECONDS_PER_DAY
 
-        attr_reader :score, :bin, :level, :position, :index, 
-                        :lastReviewed, :consecutive, :scheduledTime,
-                        :seen, :numIncorrect
-        attr_writer :score, :bin, :level, :position, :index, 
-                        :lastReviewed, :consecutive, :scheduledTime,
-                        :seen, :numIncorrect
+        attr_reader :score, :level, 
+                    :lastReviewed, :consecutive, :scheduledTime,
+                    :seen, :numIncorrect
+        attr_writer :score, :level,
+                    :lastReviewed, :consecutive, :scheduledTime,
+                    :seen, :numIncorrect
 
 
-        def initialize
+        def initialize(item)
             @score = 0
-            @bin = 0
             @level = 0
             @consecutive = 0
-            @position = 0
             @lastReviewed = nil
             @scheduledTime = nil
             @seen = false
-            @index = nil
             @numIncorrect = 0
-        end
-
-        # Parse a whole line which include ItemStatus information
-        def parseLine(line)
-            line.split("/").each do |part|
-                parse(part)
-            end
+            @item = item
         end
 
         # Parses a single part of the ItemStatus.
@@ -63,14 +50,12 @@ module JLDrill
                     @score = $1.to_i
                 when LEVEL_RE
                     @level = $1.to_i
-                when POSITION_RE 
-                    @position = $1.to_i
                 when LASTREVIEWED_RE
                     @lastReviewed = Time.at($1.to_i)
                 when CONSECUTIVE_RE 
                     @consecutive = $1.to_i
                 when SCHEDULEDTIME_RE
-                    if @bin == 4
+                    if @item.bin == 4
                         @scheduledTime = Time.at($1.to_i)
                     end
                 when DIFFICULTY_RE
@@ -81,17 +66,23 @@ module JLDrill
             parsed
         end
 
+        # Parse a whole line which includes status information
+        # This method is deprecated and is only retained for the benefit
+        # of testing.  It has been moved to the Item class.
+        def parseLine(line)
+            line.split("/").each do |part|
+                @status.parse(part)
+            end
+        end
+
         # copy the data from the status passed in to this one
         def assign(status)
             @score = status.score
-            @bin = status.bin
             @level = status.level
             @consecutive = status.consecutive
-            @position = status.position
             @lastReviewed = status.lastReviewed
             @scheduledTime = status.scheduledTime
             @seen = status.seen
-            @index = status.index
             @numIncorrect = status.numIncorrect
         end
         
@@ -144,7 +135,7 @@ module JLDrill
         # is ahead we could end up scheduling in the past.
         def calculateStart
             start = Time::now
-            if bin == 4
+            if @item.bin == 4
                 if scheduled? && (start.to_i < @scheduledTime.to_i)
                     start = @scheduledTime
                 end
@@ -240,7 +231,7 @@ module JLDrill
             schedule
             markReviewed
             @score += 1
-            if @bin == 4
+            if @item.bin == 4
                 @consecutive += 1
             end
         end
@@ -348,8 +339,7 @@ module JLDrill
         
         # Outputs the item status in save format.
         def to_s
-            retVal = "/Score: #{@score}" + "/Level: #{@level}" +
-                "/Position: #{@position}"
+            retVal = "/Score: #{@score}" + "/Level: #{@level}"
             if reviewed?
                 retVal += "/LastReviewed: #{reviewedTime().to_i}"
             end

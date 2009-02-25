@@ -21,13 +21,13 @@ module JLDrill
                 
         it "should add items to the last position if the position is set to -1" do
         	item = Item.new(@sampleQuiz.sampleVocab)
-            item.status.position = -1
+            item.position = -1
 	        @quiz.contents.bins[4].length.should be(2)
 	        @quiz.contents.addItem(item, 4)
 	        @quiz.contents.bins[4].length.should be(3)
 	        # This is the 5th item counting from 0.  There are already 2
 	        # items in bin 4, so it should put it at the end.
-	        @quiz.contents.bins[4][2].status.position.should be(4)
+	        @quiz.contents.bins[4][2].position.should be(4)
 	    end
 	    
 	    it "should be able to print out the status" do
@@ -92,7 +92,7 @@ module JLDrill
 	    it "should be able to add items to the contents only if they dont already exist" do
             item = Item.new(@sampleQuiz.sampleVocab)
             @quiz.contents.addUniquely(item).should be(true)
-            item.status.position.should be(4)
+            item.position.should be(4)
 
             # We just added this one
             existingItem = Item.new(@sampleQuiz.sampleVocab)

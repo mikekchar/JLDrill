@@ -40,7 +40,7 @@ module JLDrill
         def bin
             retVal = nil
             if !@currentProblem.nil?
-                retVal = @currentProblem.item.status.bin
+                retVal = @currentProblem.item.bin
             end
             retVal
         end

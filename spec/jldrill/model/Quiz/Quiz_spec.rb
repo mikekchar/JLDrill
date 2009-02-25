@@ -90,17 +90,17 @@ module JLDrill
 
         it "should renumber the contents when resetting" do
             @quiz.reset
-            @quiz.contents.bins[0][0].status.position = 5
-            @quiz.contents.bins[0][1].status.position = 6
-            @quiz.contents.bins[0][2].status.position = 6
-            @quiz.contents.bins[1][0].status.position = 7
+            @quiz.contents.bins[0][0].position = 5
+            @quiz.contents.bins[0][1].position = 6
+            @quiz.contents.bins[0][2].position = 6
+            @quiz.contents.bins[1][0].position = 7
             @quiz.options.randomOrder = false
             @quiz.reset
             # The first item will be drilled and therefore promoted to bin 1
-            @quiz.contents.bins[1][0].status.position.should be(0)
+            @quiz.contents.bins[1][0].position.should be(0)
             # The rest will be in bin 0, numbered sequentially
             0.upto(2) do |i|
-                @quiz.contents.bins[0][i].status.position.should be(i + 1)
+                @quiz.contents.bins[0][i].position.should be(i + 1)
             end
         end
 	    
@@ -110,7 +110,7 @@ module JLDrill
 	        @quiz.contents.bins[0].length.should be(0)
 	        @quiz.contents.bins[4].length.should be(3)
 	        item.should be_equal(@quiz.contents.bins[4][2])
-	        item.status.bin.should be(4)
+	        item.bin.should be(4)
 	    end
 	    
         def test_problem(question, problem)
@@ -179,15 +179,15 @@ module JLDrill
 	        question = @quiz.drill
 	        if (binZeroSize - 1) == @quiz.contents.bins[0].length
 	            # it was a bin 0 item which was promoted
-	            @quiz.currentProblem.item.status.bin.should be(1)
+	            @quiz.currentProblem.item.bin.should be(1)
                 test_binOne(question)
-	        elsif @quiz.currentProblem.item.status.bin == 1
+	        elsif @quiz.currentProblem.item.bin == 1
 	            test_binOne(question)
-	        elsif @quiz.currentProblem.item.status.bin == 2
+	        elsif @quiz.currentProblem.item.bin == 2
 	            test_binTwo(question)
-	        elsif @quiz.currentProblem.item.status.bin == 3
+	        elsif @quiz.currentProblem.item.bin == 3
 	            test_binThree(question)
-	        elsif @quiz.currentProblem.item.status.bin == 4
+	        elsif @quiz.currentProblem.item.bin == 4
 	            test_binFour(question)
 	        else
 	             # This shouldn't ever happen.  Blow up.
@@ -198,7 +198,7 @@ module JLDrill
         def test_correct
             consecutive = @quiz.currentProblem.item.status.consecutive
             @quiz.correct
-            bin = @quiz.currentProblem.item.status.bin
+            bin = @quiz.currentProblem.item.bin
             if bin == 4
                 @quiz.currentProblem.item.status.consecutive.should be(consecutive + 1)
             else

@@ -157,7 +157,7 @@ module JLDrill
         
         def correct(item)
             # currently only level 4 items are reviewed
-            if item.status.bin != 4
+            if item.bin != 4
                 return
             end
             @correct += 1
@@ -173,7 +173,7 @@ module JLDrill
 
         def incorrect(item)
             # currently only level 4 items are reviewed
-            if item.status.bin != 4
+            if item.bin != 4
                 return
             end
             @incorrect += 1

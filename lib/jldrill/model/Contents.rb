@@ -39,8 +39,8 @@ module JLDrill
         # Add an item to a bin
         def addItem(item, bin)
             item.status.score = 0
-            if item.status.position == -1
-                item.status.position = length 
+            if item.position == -1
+                item.position = length 
             end
             @bins[bin].push(item)
             saveNeeded
@@ -68,8 +68,8 @@ module JLDrill
         # also sets it's position to the end contents.
         def addUniquely(item)
             if !exists?(item.to_o)
-                item.status.position = -1
-                addItem(item, item.status.bin)
+                item.position = -1
+                addItem(item, item.bin)
                 true
             else
                 false
@@ -87,7 +87,7 @@ module JLDrill
                 end
             end
             tempArray.sort! do |x, y|
-                x.status.position <=> y.status.position
+                x.position <=> y.position
             end
             tempArray.each(&block)
         end
@@ -135,7 +135,7 @@ module JLDrill
                 end
             end
             return items.sort do |x,y| 
-                x.status.position <=> y.status.position
+                x.position <=> y.position
             end
         end
 
@@ -155,10 +155,10 @@ module JLDrill
                 @bins[0].contents += @bins[i].contents
                 @bins[i].contents = []
             end
-            @bins[0].sort! { |x,y| x.status.position <=> y.status.position }
+            @bins[0].sort! { |x,y| x.position <=> y.position }
             @bins[0].each do |item|
                 item.status.reset
-                item.status.position = item.status.index
+                item.position = item.index
             end
             saveNeeded
         end
@@ -166,7 +166,7 @@ module JLDrill
         # Move the specified item to the specified bin
         def moveToBin(item, bin)
             if !item.nil?
-                @bins[item.status.bin].delete_at(item.status.index)
+                @bins[item.bin].delete_at(item.index)
                 @bins[bin].push(item)
                 saveNeeded
             end

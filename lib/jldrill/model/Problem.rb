@@ -76,7 +76,7 @@ module JLDrill
         # Return a string showing what bin this problem is from
         def status
             retVal = "     "
-            bin = @item.status.bin
+            bin = @item.bin
             if bin < 4
                 if bin == 0
                     retVal += "New"

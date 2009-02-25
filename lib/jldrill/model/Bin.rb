@@ -21,24 +21,24 @@ module JLDrill
         # Returns the item at the index specified
         def [](index)
             item = @contents[index]
-            item.status.index = index unless item.nil?
+            item.index = index unless item.nil?
             item
         end
 
         # Pushes a item to the end of the bin
         # Also sets the bin number of the item
         def push(item)
-            item.status.bin = @number
-            item.status.index = @contents.length
+            item.bin = @number
+            item.index = @contents.length
             @contents.push(item)
         end
         
         # Deletes the item at the specified index
         def delete_at(index)
-            @contents[index].status.index = nil unless @contents[index].nil?
+            @contents[index].index = nil unless @contents[index].nil?
             @contents.delete_at(index)
             index.upto(@contents.length - 1) do |i|
-                @contents[i].status.index = i
+                @contents[i].index = i
             end
         end
 
@@ -46,7 +46,7 @@ module JLDrill
         def each(&block)
             i = 0
             @contents.each do |item|
-                item.status.index = i
+                item.index = i
                 i += 1
                 block.call(item)
             end
@@ -57,7 +57,7 @@ module JLDrill
         def all?(&block)
             i = 0
             @contents.all? do |item|
-                item.status.index = i
+                item.index = i
                 i += 1
                 block.call(item)
             end
@@ -84,7 +84,7 @@ module JLDrill
             @contents = array
             # This will also update the indeces
             self.each do |item|
-                item.status.bin = @number
+                item.bin = @number
             end
         end
    

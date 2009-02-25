@@ -163,7 +163,7 @@ module JLDrill::UserAddsVocabToQuiz
             # quiz to be drilled.  This automatically moves the item
             # from bin 0 to bin 1.
             Story.mainContext.quiz.contents.bins[1][0].should_not be_nil
-            Story.mainContext.quiz.contents.bins[1][0].status.position.should be(0)
+            Story.mainContext.quiz.contents.bins[1][0].position.should be(0)
             Story.shutdown            
         end
         

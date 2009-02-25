@@ -192,26 +192,26 @@ module JLDrill
         # Create a problem for the given item at the correct level
         def createProblem(item)
             # Drill at random levels in bin 4, but don't drill reading
-            if item.status.bin == 4
+            if item.bin == 4
                 level = rand(2) + 1
             else
                 # Otherwise drill for the specific bin
-                level = item.status.bin - 1
+                level = item.bin - 1
             end
-            @stats.startTimer(item.status.bin == 4)
+            @stats.startTimer(item.bin == 4)
             Problem.create(level, item, @quiz)
         end
 
         # Promote the item to the next level/bin
         def promote(item)
             if !item.nil?
-                if (item.status.bin + 1 < contents.bins.length)
-                    if (item.status.bin + 1) == 4
+                if (item.bin + 1 < contents.bins.length)
+                    if (item.bin + 1) == 4
                         item.status.consecutive = 1
                         @stats.learned += 1
                     end 
-                    contents.moveToBin(item, item.status.bin + 1)
-                    item.status.level = item.status.bin - 1 unless item.status.bin - 1 > 2
+                    contents.moveToBin(item, item.bin + 1)
+                    item.status.level = item.bin - 1 unless item.bin - 1 > 2
                 end
             end
         end
@@ -220,7 +220,7 @@ module JLDrill
         def demote(item)
             if !item.nil?
                 item.status.level = 0
-                if (item.status.bin != 0)
+                if (item.bin != 0)
                     contents.moveToBin(item, 1)
                 else
                 	# Demoting bin 0 items is non-sensical, but it should do
@@ -242,7 +242,7 @@ module JLDrill
             # or they have been rescheduled.  This means we need to
             # resort the bin.  This should be quite fast since only
             # one item is out of order (O(n) probably).
-            if item.status.bin == 4
+            if item.bin == 4
                 contents.bins[4].sort! do |x, y|
                     x.status.getScheduledTime <=> y.status.getScheduledTime
                 end

@@ -23,14 +23,14 @@ module JLDrill
 	    end
 	    
 	    it "should increment the statistics if correct in bin 4" do
-	        @quiz.currentProblem.item.status.bin.should be(4)
+	        @quiz.currentProblem.item.bin.should be(4)
 	        @strategy.stats.accuracy.should be(0)
 	        @strategy.correct(@quiz.currentProblem.item)
 	        @strategy.stats.accuracy.should be(100)
 	    end
 
 	    it "should decrement the statistics if incorrect in bin 4" do
-	        @quiz.currentProblem.item.status.bin.should be(4)
+	        @quiz.currentProblem.item.bin.should be(4)
 	        @strategy.stats.accuracy.should be(0)
 	        @strategy.correct(@quiz.currentProblem.item)
 	        @strategy.stats.accuracy.should be(100)
@@ -45,7 +45,7 @@ module JLDrill
         # Adds a sample vocabulary to a bin in a position and returns the item
         def test_addItem(bin, position)
             item = Item.new(@sampleQuiz.sampleVocab)
-            item.status.position = position
+            item.position = position
             @quiz.contents.addItem(item, bin)
             return item
         end
@@ -75,45 +75,45 @@ module JLDrill
 	        # something sensible anyway.
 	        item = test_addItem(0, 1)
 	        @strategy.demote(item)
-	        item.status.bin.should be(0)
+	        item.bin.should be(0)
 	        item.status.level.should be(0)
 	    end
 
 	    it "should demote other items to bin 1 and reset the level to 0" do
 	        item = test_addItem(1, 1)
 	        @strategy.demote(item)
-	        item.status.bin.should be(1)
+	        item.bin.should be(1)
 	        item.status.level.should be(0)
 
 	        item = test_addItem(2, 2)
 	        item.status.level = 1
 	        @strategy.demote(item)
-	        item.status.bin.should be(1)
+	        item.bin.should be(1)
 	        item.status.level.should be(0)
 
 	        item = test_addItem(3, 3)
 	        item.status.level = 2
 	        @strategy.demote(item)
-	        item.status.bin.should be(1)
+	        item.bin.should be(1)
 	        item.status.level.should be(0)
 
 	        item = test_addItem(4, 4)
 	        item.status.level = 2
 	        @strategy.demote(item)
-	        item.status.bin.should be(1)
+	        item.bin.should be(1)
 	        item.status.level.should be(0)
 	    end
 	    
 	    it "should be able to create problems of the correct level" do
 	        item1 = Item.new(@sampleQuiz.sampleVocab)
 	        item1.status.level = 0
-	        item1.status.bin = 1
+	        item1.bin = 1
 	        item2 = Item.new(@sampleQuiz.sampleVocab)
 	        item2.status.level = 1
-	        item2.status.bin = 2
+	        item2.bin = 2
 	        item3 = Item.new(@sampleQuiz.sampleVocab)
 	        item3.status.level = 2
-	        item3.status.bin = 3
+	        item3.bin = 3
             
             problem1 = @strategy.createProblem(item1)
             problem2 = @strategy.createProblem(item2)
@@ -130,7 +130,7 @@ module JLDrill
             error = false
             0.upto(999) do
                 item4 = Item.new(vocab4)
-                item4.status.bin = 4
+                item4.bin = 4
                 problem4 = @strategy.createProblem(item4)
                 if problem4.class == MeaningProblem
                     meaning += 1
@@ -249,15 +249,15 @@ module JLDrill
 	        @strategy.incorrect(item)
 	        @strategy.incorrect(item)
 	        @strategy.incorrect(item)
-            item.status.bin.should be(1)	        
+            item.bin.should be(1)	        
 	        item.status.difficulty.should be(3)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
-            item.status.bin.should be(4)	        
+            item.bin.should be(4)	        
 	        item.status.difficulty.should be(3)
 	        @strategy.incorrect(item)
-            item.status.bin.should be(1)	        	        
+            item.bin.should be(1)	        	        
 	        item.status.difficulty.should be(4)        
         end
         
@@ -265,11 +265,11 @@ module JLDrill
             @quiz.options.promoteThresh = 1
             item = test_addItem(1, -1)
 	        @quiz.currentProblem = @strategy.createProblem(item)
-            item.status.bin.should be(1)
+            item.bin.should be(1)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
-            item.status.bin.should be(4)
+            item.bin.should be(4)
             # we only increase consecutive in the review set
             item.status.consecutive.should be(1)
 	        @strategy.correct(item)
@@ -278,7 +278,7 @@ module JLDrill
             item.status.consecutive.should be(4)
 
             @strategy.incorrect(item)
-            item.status.bin.should be(1)
+            item.bin.should be(1)
             item.status.consecutive.should be(0)
         end
     end

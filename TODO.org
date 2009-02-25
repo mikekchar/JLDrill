@@ -107,12 +107,20 @@ the number of jellybeans done in the properties of the task.
    :DONE: 1
    :END:
 
-** TODO Be able to delete or edit an item from the "All Vocab" list. [4/8]
+** TODO Be able to delete or edit an item from the "All Vocab" list. [4/9]
    - [X] Refactor widget to be a mixin
    - [X] include Widget from GtkWidget
    - [X] make gtkAdd/RemoveWidget have default values that log a warning
    - [X] Refactor VocabularyTable to hold items (rename it to ItemTable)
-   - [ ] Make dictionary searches return item lists
+   - [-] Make dictionary searches return item lists
+       - [X] Move position information from ItemStatus into Item
+       - [ ] Rename position to be origPos
+       - [ ] Create a hash table to contain status information for
+         each drill
+       - [ ] Move ItemStatus into the Quiz directory and make it
+         totally related to that Quiz
+       - [ ] Move the Quiz.rb file out of Quiz and refactor it to be a
+         generic Quiz.
    - [ ] Unscheduled items in Bin 4 should be scheduled when read in.
    - [ ] Updating the problem updates the All Vocab list, also selects
          that item in the list.  New problem selects that item in the
