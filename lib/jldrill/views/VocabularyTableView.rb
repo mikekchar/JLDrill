@@ -13,7 +13,7 @@ module JLDrill
 		    # Only in the concrete class
 		end
 		
-		def update(items)
+		def update(items, item)
             # Only in the concrete class
 		end
 

@@ -127,6 +127,25 @@ module JLDrill::Gtk
             end
         end
 
+        # Selects the row with the given item if it exists
+        def selectItem(item)
+            if !item.nil?
+                iter = @listStore.iter_first
+                if !iter.nil?
+                    pos = iter.path
+                    found = iter[0] == item
+                    while !found && iter.next!
+                        pos = iter.path
+                        found = iter[0] == item
+                    end
+                end
+                if found
+                    @table.selection.select_path(pos)
+                    @table.scroll_to_cell(pos, nil, false, 0.0, 0.0)
+                end
+            end
+        end
+
         # Returns true if an item in the table is selected
         def hasSelection?
             !@table.selection.selected.nil?

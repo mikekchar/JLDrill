@@ -19,7 +19,7 @@ module JLDrill::Gtk
             @buttons.pack_end(@exitButton, true, true, 5)
             @vbox.pack_end(@buttons, false, false)
             connectSignals
-            updateTable([])
+            updateTable([], nil)
         end
 
         def connectSignals
@@ -50,13 +50,14 @@ module JLDrill::Gtk
             end
         end
 
-        def updateTable(items)
+        def updateTable(items, item)
             if !@vocabTable.nil?
                 @vbox.remove(@vocabTable)
             end
             if !items.empty?
                 @vocabTable = ItemTable.new(items)
                 @vbox.pack_start(@vocabTable, true, true)
+                @vocabTable.selectItem(item)
             end
             @vbox.show_all
         end

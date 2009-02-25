@@ -21,8 +21,8 @@ module JLDrill::Gtk
             @itemTableWindow.explicitDestroy
         end
 
-        def update(items)
-            @itemTableWindow.updateTable(items)
+        def update(items, item)
+            @itemTableWindow.updateTable(items, item)
         end
     end
 end

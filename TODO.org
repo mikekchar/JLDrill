@@ -107,7 +107,7 @@ the number of jellybeans done in the properties of the task.
    :DONE: 1
    :END:
 
-** TODO Be able to delete or edit an item from the "All Vocab" list. [5/8]
+** TODO Be able to delete or edit an item from the "All Vocab" list. [6/8]
    - [X] Refactor widget to be a mixin
    - [X] include Widget from GtkWidget
    - [X] make gtkAdd/RemoveWidget have default values that log a warning
@@ -122,15 +122,15 @@ the number of jellybeans done in the properties of the task.
          each drill
        - [X] Move ItemStatus into the Quiz directory and make it
          totally related to that Quiz
-   - [-] Update the All Vocab list when things change.  Also select
+   - [X] Update the All Vocab list when things change.  Also select
 		 the appropriate vocabulary when things change.
        - [X] Implement the ItemTableWindow as a window, not a dialog
          (duh...)
-       - [ ] Implement search in ItemTable
-       - [ ] Updating the problem updates the All Vocab list
-       - [ ] Updating a problem, selects it in the list
-       - [ ] New problems select it in the list
-       - [ ] Opening the list highlights the current problem
+       - [X] Implement search in ItemTable
+       - [X] Updating the problem updates the All Vocab list
+       - [X] Updating a problem, selects it in the list
+       - [X] New problems select it in the list
+       - [X] Opening the list highlights the current problem
    - [ ] "E" or activation in the All Vocab list allows editing the item
    - [ ] "Ctrl D" deletes the currently highlighted item.  Prompts first.
 
