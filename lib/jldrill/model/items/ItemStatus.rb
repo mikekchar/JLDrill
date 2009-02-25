@@ -17,7 +17,6 @@ module JLDrill
     class ItemStatus
 
         SCORE_RE = /^Score: (.*)/
-        BIN_RE = /^Bin: (.*)/
         LEVEL_RE = /^Level: (.*)/
         POSITION_RE = /^Position: (.*)/
         LASTREVIEWED_RE = /^LastReviewed: (.*)/
@@ -29,10 +28,10 @@ module JLDrill
         MAX_ADDITIONAL_TIME = 4 * SECONDS_PER_DAY
 
         attr_reader :score, :bin, :level, :position, :index, 
-                        :lastReviewed, :consecutive,
+                        :lastReviewed, :consecutive, :scheduledTime,
                         :seen, :numIncorrect
         attr_writer :score, :bin, :level, :position, :index, 
-                        :lastReviewed, :consecutive,
+                        :lastReviewed, :consecutive, :scheduledTime,
                         :seen, :numIncorrect
 
 
@@ -62,8 +61,6 @@ module JLDrill
             case string
                 when SCORE_RE 
                     @score = $1.to_i
-                when BIN_RE 
-                    @bin = $1.to_i
                 when LEVEL_RE
                     @level = $1.to_i
                 when POSITION_RE 
@@ -84,11 +81,18 @@ module JLDrill
             parsed
         end
 
-        # return a copy of this item
-        def clone
-            retVal = ItemStatus.new
-            retVal.parse(self.to_s)
-            return retVal
+        # copy the data from the status passed in to this one
+        def assign(status)
+            @score = status.score
+            @bin = status.bin
+            @level = status.level
+            @consecutive = status.consecutive
+            @position = status.position
+            @lastReviewed = status.lastReviewed
+            @scheduledTime = status.scheduledTime
+            @seen = status.seen
+            @index = status.index
+            @numIncorrect = status.numIncorrect
         end
         
         # Updates the status for the lastReviewed to be now.
@@ -344,7 +348,7 @@ module JLDrill
         
         # Outputs the item status in save format.
         def to_s
-            retVal = "/Score: #{@score}" + "/Bin: #{@bin}" + "/Level: #{@level}" +
+            retVal = "/Score: #{@score}" + "/Level: #{@level}" +
                 "/Position: #{@position}"
             if reviewed?
                 retVal += "/LastReviewed: #{reviewedTime().to_i}"

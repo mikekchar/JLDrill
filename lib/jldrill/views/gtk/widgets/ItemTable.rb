@@ -1,5 +1,5 @@
 require 'gtk2'
-require 'jldrill/model/items/Item'
+require 'jldrill/model/Item'
 require 'jldrill/model/items/Vocabulary'
 
 module JLDrill::Gtk

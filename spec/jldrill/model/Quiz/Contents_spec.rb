@@ -1,4 +1,4 @@
-require 'jldrill/model/Quiz/Contents'
+require 'jldrill/model/Contents'
 require 'jldrill/model/Quiz/Quiz'
 require 'jldrill/model/items/Vocabulary'
 require 'jldrill/spec/SampleQuiz'
@@ -107,7 +107,7 @@ module JLDrill
             quiz2.contents.addItem(item, 2)
             quiz2.contents.length.should be(5)
             quiz2.contents.bins[2][1].to_o.kanji.should eql(item.to_o.kanji)
-	        
+
 	        @quiz.contents.addContents(quiz2.contents)
 	        @quiz.contents.length.should be(5)
             @quiz.contents.bins[2][1].to_o.kanji.should eql(item.to_o.kanji)

@@ -14,7 +14,7 @@ module JLDrill
             addBin("Fair")
             addBin("Good")
             addBin("Excellent")
-            @parsingBin = 0
+            @binNum = 0
         end
 
         # Returns true if the contents have been changed but not saved
@@ -101,11 +101,12 @@ module JLDrill
             end
         end
 
-        # Parse the line for an item.  Add it to the contents.
+        # Parse the line for an item.  
+        # Add it to the contents in the specified bin.
         # Return the item that was added.
-        def parseItem(line)
-            item = Item.create(line)
-            return addItem(item, @parsingBin)
+        def parseItem(line, bin)
+            item = Item.create(line, bin)
+            return addItem(item, bin)
         end
 
         def parseLine(line)
@@ -113,12 +114,12 @@ module JLDrill
             @bins.each do |bin|
                 re = Regexp.new("^#{bin.name}$")
                 if line =~ re
-                    @parsingBin = bin.number
+                    @binNum = bin.number
                     parsed = true
                 end
             end
             if line =~ /^\// 
-                    parseItem(line)
+                    parseItem(line, @binNum)
                     parsed = true
             end
             parsed

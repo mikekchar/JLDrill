@@ -113,6 +113,7 @@ the number of jellybeans done in the properties of the task.
    - [X] make gtkAdd/RemoveWidget have default values that log a warning
    - [X] Refactor VocabularyTable to hold items (rename it to ItemTable)
    - [ ] Make dictionary searches return item lists
+   - [ ] Unscheduled items in Bin 4 should be scheduled when read in.
    - [ ] Updating the problem updates the All Vocab list, also selects
          that item in the list.  New problem selects that item in the
          list. Opening the list highlights the current problem.

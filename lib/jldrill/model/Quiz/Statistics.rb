@@ -1,4 +1,4 @@
-require 'jldrill/model/items/Item'
+require 'jldrill/model/Item'
 require 'jldrill/model/items/ItemStatus'
 
 module JLDrill

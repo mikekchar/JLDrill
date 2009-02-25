@@ -18,6 +18,7 @@ module JLDrill
     #    o to_s() -- returns a string representation of the object
     #    o create() -- accepts a string and creates the object
     class Item
+
         attr_reader :status, :itemType
 
         def initialize(item=nil)
@@ -32,8 +33,12 @@ module JLDrill
         end
 
         # Create an item using the save string
-        def Item.create(string)
+        # Note: We are passing bin to this method, since we no
+        # longer read it in.  Due to legacy issues, the item status
+        # needs to know what bin it is in when parsing.
+        def Item.create(string, bin=0)
             item = Item.new
+            item.status.bin = bin
             item.parse(string)
             return item
         end
@@ -50,7 +55,7 @@ module JLDrill
             item = Item.new
             item.setType(@itemType)
             item.setContents(@contents)
-            item.setStatus(@status.to_s)
+            item.status.assign(@status)
             return item
         end
 

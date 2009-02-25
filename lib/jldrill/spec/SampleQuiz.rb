@@ -22,14 +22,14 @@ Strategy Version: 0]
 
         FileVocab = %Q[
 Unseen
-/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 0/Level: 0/Position: 0/Consecutive: 0/Difficulty: 0/
+/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Level: 0/Position: 0/Consecutive: 0/Difficulty: 0/
 Poor
 Fair
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 2/Level: 0/Position: 1/Consecutive: 0/Difficulty: 0/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 0/
 Good
 Excellent
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 4/Level: 0/Position: 2/LastReviewed: 1230076403/Consecutive: 1/ScheduledTime: 1230076413/Difficulty: 0/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 4/Level: 0/Position: 3/LastReviewed: 1230076403/Consecutive: 1/ScheduledTime: 1230076413/Difficulty: 0/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Level: 0/Position: 2/LastReviewed: 1230076403/Consecutive: 1/ScheduledTime: 1230076413/Difficulty: 0/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Level: 0/Position: 3/LastReviewed: 1230076403/Consecutive: 1/ScheduledTime: 1230076413/Difficulty: 0/
 ]
 #################################
 
@@ -38,11 +38,11 @@ Excellent
 
         ResetVocab = %Q[
 Unseen
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 0/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Bin: 0/Level: 0/Position: 2/Consecutive: 0/Difficulty: 0/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Bin: 0/Level: 0/Position: 3/Consecutive: 0/Difficulty: 0/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Score: 0/Level: 0/Position: 1/Consecutive: 0/Difficulty: 0/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Score: 0/Level: 0/Position: 2/Consecutive: 0/Difficulty: 0/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Score: 0/Level: 0/Position: 3/Consecutive: 0/Difficulty: 0/
 Poor
-/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Bin: 1/Level: 0/Position: 0/Consecutive: 0/Difficulty: 0/
+/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Score: 0/Level: 0/Position: 0/Consecutive: 0/Difficulty: 0/
 ]
 
 # This is the result of allVocab joined with \n
@@ -53,7 +53,7 @@ Poor
 /Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj]
 
         # This is a new vocabulary to use for adding to the quiz
-        NewVocab = "/Kanji: 秋/Reading: あき/Definitions: autumn,fall/Markers: n-adv,P/Score: 0/Bin: 0/Level: 0/Position: -1/Consecutive: 0/Difficulty: 0/"
+        NewVocab = "/Kanji: 秋/Reading: あき/Definitions: autumn,fall/Markers: n-adv,P/Score: 0/Level: 0/Position: -1/Consecutive: 0/Difficulty: 0/"
 
 
         FileString = FileHeader + FileInfo + FileOptions + FileVocab
