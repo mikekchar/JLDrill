@@ -5,7 +5,7 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(%) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2008-12-25 Thu>
-  :CurrentDate:  <2009-02-23 Mon>
+  :CurrentDate:  <2009-02-25 Wed>
   :EndDate: <2009-03-20 Wed>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -21,7 +21,7 @@ workflow for creating and editing drills.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM                    | Total | Done |    % | Current | Needed |
 |-------------------------+-------+------+------+---------+--------|
-| * JLDrill Version 0.3.4 |    23 |   13 | 56.5 |    0.22 |   0.27 |
+| * JLDrill Version 0.3.4 |    23 |   13 | 56.5 |    0.21 |   0.27 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </pre>
@@ -114,13 +114,13 @@ the number of jellybeans done in the properties of the task.
    - [X] Refactor VocabularyTable to hold items (rename it to ItemTable)
    - [-] Make dictionary searches return item lists
        - [X] Move position information from ItemStatus into Item
-       - [ ] Rename position to be origPos
        - [ ] Create a hash table to contain status information for
          each drill
        - [ ] Move ItemStatus into the Quiz directory and make it
          totally related to that Quiz
        - [ ] Move the Quiz.rb file out of Quiz and refactor it to be a
          generic Quiz.
+       - [ ] Rename position to be origPos
    - [ ] Unscheduled items in Bin 4 should be scheduled when read in.
    - [ ] Updating the problem updates the All Vocab list, also selects
          that item in the list.  New problem selects that item in the

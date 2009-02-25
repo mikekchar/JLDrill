@@ -1,5 +1,5 @@
 require 'jldrill/model/items/ItemFactory'
-require 'jldrill/model/items/ItemStatus'
+require 'jldrill/model/ItemStatus'
 require 'jldrill/model/Problem'
 
 module JLDrill
@@ -37,8 +37,8 @@ module JLDrill
                 @itemType = item.itemType
                 @contents = item.to_s
             end
-            @bin = 0
             @position = 0
+            @bin = 0
             @index = nil
             @status = ItemStatus.new(self)
         end

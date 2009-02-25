@@ -1,5 +1,5 @@
 require 'jldrill/model/Bin'
-require 'jldrill/model/items/ItemStatus'
+require 'jldrill/model/ItemStatus'
 
 module JLDrill
 
