@@ -142,14 +142,23 @@ module JLDrill
         end
 
         def parseLine(line)
-            case line
-            when JLDRILL_HEADER_RE
-                @name = $2
-            when COMMENT_RE
-                    @info += $1 + "\n"
-            else 
+            # These are put in a specific order for performance
+            # By checking the most common items first we avoid doing
+            # needless regular expression checks.  It's not a huge
+            # savings, but it helps for very big files.
+            # Normal contents are the most common
+            if !@contents.parseLine(line)
+                # Quiz options are the next most common
                 if !@options.parseLine(line)
-                    if !@contents.parseLine(line)
+                    # Comments, headers and unparsable lines are 
+                    # the least common
+                    case line
+                    when JLDRILL_HEADER_RE
+                        @name = $2
+                    when COMMENT_RE
+                        @info += $1 + "\n"
+                    else 
+                        # Ignore things we don't understand
                     end
                 end
             end

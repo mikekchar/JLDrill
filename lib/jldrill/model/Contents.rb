@@ -116,16 +116,19 @@ module JLDrill
 
         def parseLine(line)
             parsed = false
-            @bins.each do |bin|
-                re = @res[bin.number]
-                if line =~ re
-                    @binNum = bin.number
-                    parsed = true
-                end
-            end
+            # Line items are the most common, so they are checked first
             if line =~ LINE_START_RE
                     parseItem(line, @binNum)
                     parsed = true
+            else
+                # Bin names are less common so they are checked after
+                @bins.each do |bin|
+                    re = @res[bin.number]
+                    if line =~ re
+                        @binNum = bin.number
+                        parsed = true
+                    end
+                end
             end
             parsed
         end
