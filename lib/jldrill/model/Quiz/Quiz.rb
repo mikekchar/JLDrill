@@ -62,6 +62,10 @@ module JLDrill
         def updateLoad
             @publisher.update("load")
         end
+
+        def updateItemAdded(item)
+            @publisher.update("itemAdded", item)
+        end
         
         def updateNewProblem(problem)
             @publisher.update("newProblem", problem)

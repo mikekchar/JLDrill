@@ -62,6 +62,12 @@ module JLDrill::Gtk
             end
         end
 
+        def addItem(item)
+            if !item.nil? && !@vocabTable.nil?
+                @vocabTable.addItem(item)
+            end
+        end
+
         def updateTable(items)
             if !@vocabTable.nil?
                 @vbox.remove(@vocabTable)

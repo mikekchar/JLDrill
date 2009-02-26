@@ -154,6 +154,17 @@ module JLDrill::Gtk
             end
         end
 
+        def addItem(item)
+            # For now we are just going to append the item to the table
+            if !item.nil?
+                iter = @listStore.append
+                setItem(iter, item)
+                path = iter.path
+                @table.selection.select_path(path)
+                @table.scroll_to_cell(path, nil, false, 0.0, 0.0)
+            end
+        end
+
         # Returns true if an item in the table is selected
         def hasSelection?
             !@table.selection.selected.nil?

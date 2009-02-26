@@ -25,6 +25,10 @@ module JLDrill
             # Only in concrete class
         end
 
+        def addItem(item)
+            # Only in concrete class
+        end
+
         def close
             @context.exit
         end

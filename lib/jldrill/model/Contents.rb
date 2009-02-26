@@ -25,6 +25,10 @@ module JLDrill
         def saveNeeded
             @quiz.setNeedsSave(true)
         end
+
+        def itemAdded(item)
+            @quiz.updateItemAdded(item)
+        end
         
         # Adds a new bin to the end of the contents
         def addBin(name)
@@ -48,6 +52,7 @@ module JLDrill
                 item.position = length 
             end
             @bins[bin].push(item)
+            itemAdded(item)
             saveNeeded
         end
 
