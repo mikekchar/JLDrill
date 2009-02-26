@@ -67,7 +67,7 @@ module JLDrill
                 bin.contain?(vocab)
             end
         end
-        
+
         # Adds an item to the contents only if it doesn't already
         # exist.  It places it in the bin specified in the item.  It
         # also sets it's position to the end contents.
@@ -85,15 +85,7 @@ module JLDrill
         # This is going to be very slow, so don't use it unless you
         # really have to.
         def eachByPosition(&block)
-            tempArray = []
-            @bins.each do |bin|
-                bin.each do |item|
-                    tempArray.push(item)
-                end
-            end
-            tempArray.sort! do |x, y|
-                x.position <=> y.position
-            end
+            tempArray = allItems
             tempArray.each(&block)
         end
         
@@ -134,27 +126,34 @@ module JLDrill
         end
 
         # Returns an array of all the items in the bins, sorted by
-        # position
+        # position.  Note: this also updates the positions of the
+        # items if they are out of whack (i.e. duplicates).  This
+        # is to combat against some old broken files.
         def allItems
             items = []
             bins.each do |bin|
                 items += bin.contents
             end
-            return items.sort do |x,y| 
+            items.sort! do |x,y| 
                 x.position <=> y.position
             end
+            # Renumber the positions in case they are out of whack
+            i = 0
+            items.each do |item|
+                item.position = i
+                i += 1
+            end
+            return items
         end
 
         # Reset the contents back to their original order and schedule
         def reset
+            @bins[0].contents = allItems
             1.upto(@bins.length - 1) do |i|
-                @bins[0].contents += @bins[i].contents
                 @bins[i].contents = []
             end
-            @bins[0].sort! { |x,y| x.position <=> y.position }
             @bins[0].each do |item|
                 item.schedule.reset
-                item.position = item.index
             end
             saveNeeded
         end

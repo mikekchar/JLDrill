@@ -36,8 +36,8 @@ module JLDrill
 		    super
 		end
 		
-		def newProblemUpdated(quiz)
-		    @mainView.update(parent.quiz) unless @mainView.nil?
+		def newProblemUpdated(problem)
+		    @mainView.update(@parent.quiz) unless @mainView.nil?
 		end
     end
 end

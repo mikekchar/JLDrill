@@ -32,7 +32,7 @@ module JLDrill
                 if !@parent.reference.nil?
                     @parent.reference.publisher.subscribe(self, "edictLoad")
                 end
-                newProblemUpdated(@parent.quiz)
+                newProblemUpdated(@parent.quiz.currentProblem)
             end
 		end
 		
@@ -49,16 +49,16 @@ module JLDrill
 		    super
 		end
 
-        def newProblemUpdated(quiz)
-            update(quiz)
+        def newProblemUpdated(problem)
+            update(problem)
         end
 
-        def problemModifiedUpdated(quiz)
-            update(quiz)
+        def problemModifiedUpdated(problem)
+            update(problem)
         end
 
-        def update(quiz)
-		    @mainView.update(quiz.currentProblem.item.to_o)
+        def update(problem)
+		    @mainView.update(problem)
             @mainView.updateSearch
         end
 		

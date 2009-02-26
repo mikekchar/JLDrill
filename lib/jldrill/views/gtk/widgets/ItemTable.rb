@@ -109,6 +109,7 @@ module JLDrill::Gtk
             highlightOnSelection
             callActionOnActivation
         end
+
         # Selects the closest match to the given vocabulary
         def selectClosestMatch(vocab)
             iter = @listStore.iter_first
@@ -130,19 +131,10 @@ module JLDrill::Gtk
         # Selects the row with the given item if it exists
         def selectItem(item)
             if !item.nil?
-                iter = @listStore.iter_first
-                if !iter.nil?
-                    pos = iter.path
-                    found = iter[0] == item
-                    while !found && iter.next!
-                        pos = iter.path
-                        found = iter[0] == item
-                    end
-                end
-                if found
-                    @table.selection.select_path(pos)
-                    @table.scroll_to_cell(pos, nil, false, 0.0, 0.0)
-                end
+                path = Gtk::TreePath.new(item.position.to_s)
+                iter = @listStore.get_iter(path)
+                @table.selection.select_path(path)
+                @table.scroll_to_cell(path, nil, false, 0.0, 0.0)
             end
         end
 

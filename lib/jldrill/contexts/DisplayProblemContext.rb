@@ -28,7 +28,7 @@ module JLDrill
                 if !@parent.reference.nil?
                     @parent.reference.publisher.subscribe(self, "edictLoad")
                 end
-                newProblemUpdated(@parent.quiz)
+                newProblemUpdated(@parent.quiz.currentProblem)
             end
 		end
 		
@@ -53,12 +53,12 @@ module JLDrill
 		    return !exists
         end
 
-		def newProblemUpdated(quiz)
-            @mainView.newProblem(quiz.currentProblem, differs?(quiz.currentProblem))
+		def newProblemUpdated(problem)
+            @mainView.newProblem(problem, differs?(problem))
 		end
 
-		def problemModifiedUpdated(quiz)
-            @mainView.updateProblem(quiz.currentProblem, differs?(quiz.currentProblem))
+		def problemModifiedUpdated(problem)
+            @mainView.updateProblem(problem, differs?(problem))
 		end
 
 		def edictLoadUpdated(reference)

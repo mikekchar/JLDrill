@@ -58,22 +58,24 @@ module JLDrill
         def update
             @publisher.update("quiz")
         end
-        
-        def updateNewProblem
-            @publisher.update("newProblem")
+
+        def updateLoad
+            @publisher.update("load")
         end
         
-        def problemModified
-            if !currentProblem.nil? && !currentProblem.valid?
+        def updateNewProblem(problem)
+            @publisher.update("newProblem", problem)
+        end
+        
+        def problemModified(problem)
+            @publisher.update("problemModified", problem)
+            setNeedsSave(true)
+            if !problem.valid? &&
+                    !@currentProblem.nil? && (problem == @currentProblem)
                 # The current problem has been edited and can't be displayed
                 # like it is (i.e., A Kanji problem has had it's kanji removed)
                 # Recreate it.  
                 recreateProblem
-            else
-                # When the problem is modified, it means that the item
-                # was also updated.  So we need to flag that a save is needed.
-                setNeedsSave(true)
-                @publisher.update("problemModified")
             end
         end
 
@@ -185,7 +187,8 @@ module JLDrill
             @publisher.unblock
             
             setNeedsSave(true)
-            @contents.length > 0
+            updateLoad
+            return @contents.length > 0
         end
 
         def load(file)
@@ -273,7 +276,7 @@ module JLDrill
         def createProblem(item)
             @currentProblem = @strategy.createProblem(item)
             update
-            updateNewProblem
+            updateNewProblem(@currentProblem)
         end
         
         def recreateProblem

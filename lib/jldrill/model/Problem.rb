@@ -70,7 +70,7 @@ module JLDrill
         def vocab=(vocab)
             @vocab.assign(vocab)
             @item.setContents(vocab.contentString)
-            @quiz.problemModified
+            @quiz.problemModified(self)
         end
 
         # Return a string showing what bin this problem is from
@@ -126,7 +126,11 @@ module JLDrill
         def publishAnswer(target)
             publishParts(@answerParts, target)
         end
-        
+
+        # Currently always valid.
+        def valid?
+            return true
+        end
     end
     
     # The first kind of Problem shown.  It lets you read it in Japanese and
@@ -137,11 +141,6 @@ module JLDrill
             @level = 0
             @questionParts = ["kanji", "reading", "hint"]
             @answerParts = ["definitions"]
-        end
-
-        # Currently always valid.
-        def valid?
-            return true
         end
     end
     
@@ -169,11 +168,5 @@ module JLDrill
             @questionParts = ["definitions"]
             @answerParts = ["kanji", "reading", "hint"]
         end
-
-        # Currently always valid.
-        def valid?
-            return true
-        end
     end
-
 end
