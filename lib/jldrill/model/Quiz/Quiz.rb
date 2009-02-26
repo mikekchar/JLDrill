@@ -9,6 +9,12 @@ require 'jldrill/Version'
 
 module JLDrill
     class Quiz
+
+        JLDRILL_HEADER_RE = /^(\d+\.\d+\.\d+)?-?LDRILL-SAVE (.*)/
+        COMMENT_RE = /^\#[ ]?(.*)/
+        VERSION_RE = /^(\d+)\.(\d+)\.(\d+)/
+        JLDRILL_CANLOAD_RE = /^(\d+\.\d+\.\d+)?-?LDRILL-SAVE/
+
         attr_reader :savename,  
                     :needsSave, :info, :name, 
                     :contents, :options, :currentProblem,
@@ -114,9 +120,9 @@ module JLDrill
 
         def Quiz.canLoad?(header)
             retVal = false
-            if(header =~ /^(\d+\.\d+\.\d+)?-?LDRILL-SAVE/)
-                if($1 != "")
-                    if $1 =~ /^(\d+)\.(\d+)\.(\d+)/
+            if header =~ JLDRILL_CANLOAD_RE
+                if $1 != ""
+                    if $1 =~ VERSION_RE
                         if $1.to_i > 0 || $2.to_i < 4
                             retVal = true
                         end
@@ -136,12 +142,14 @@ module JLDrill
         end
 
         def parseLine(line)
-            if !@options.parseLine(line)
-                if !@contents.parseLine(line)
-                    case line
-                        when /^(\d+\.\d+\.\d+)?-?LDRILL-SAVE (.*)/ then @name = $2
-                        when /^\#[ ]?(.*)/ then @info += $1 + "\n"
-                        else # ignore stuff we don't understand
+            case line
+            when JLDRILL_HEADER_RE
+                @name = $2
+            when COMMENT_RE
+                    @info += $1 + "\n"
+            else 
+                if !@options.parseLine(line)
+                    if !@contents.parseLine(line)
                     end
                 end
             end

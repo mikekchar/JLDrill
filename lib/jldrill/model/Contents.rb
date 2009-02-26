@@ -4,11 +4,15 @@ module JLDrill
 
     # Where all the items are stored
     class Contents
+
+        LINE_START_RE =  /^\//
+
         attr_reader :quiz, :bins
     
         def initialize(quiz)
             @quiz = quiz
             @bins = []
+            @res = []
             addBin("Unseen")
             addBin("Poor")
             addBin("Fair")
@@ -25,6 +29,7 @@ module JLDrill
         # Adds a new bin to the end of the contents
         def addBin(name)
             @bins.push(Bin.new(name, @bins.length))
+            @res.push(Regexp.new("^#{name}$"))
         end
         
         # Returns the number items in all the bins
@@ -112,13 +117,13 @@ module JLDrill
         def parseLine(line)
             parsed = false
             @bins.each do |bin|
-                re = Regexp.new("^#{bin.name}$")
+                re = @res[bin.number]
                 if line =~ re
                     @binNum = bin.number
                     parsed = true
                 end
             end
-            if line =~ /^\// 
+            if line =~ LINE_START_RE
                     parseItem(line, @binNum)
                     parsed = true
             end
