@@ -28,6 +28,11 @@ module JLDrill::Gtk
         def select(item)
             @itemTableWindow.select(item)
         end
+
+        def updateItem(item)
+            @itemTableWindow.updateItem(item)
+        end
+
     end
 end
 

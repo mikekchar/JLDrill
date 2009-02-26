@@ -36,6 +36,18 @@ module JLDrill::Gtk
             setupSelection
         end
 
+        def setItem(iter, item)
+            # column 0 isn't rendered.  It's just there for selection
+            iter[0] = item
+            content = item.to_o
+            i = 1
+            headings = item.itemType.headings
+            headings.each do |heading|
+                iter[i] = eval("content.#{heading[0]}")
+                i += 1
+            end
+        end
+
         # Create the ListStore for the table based on the headings in
         # the item type of the first item.
         def createListStore(itemList)
@@ -52,15 +64,8 @@ module JLDrill::Gtk
 
             if !itemList.empty?
                 itemList.each do |item|
-                    entry = listStore.append
-                    # column 0 isn't rendered.  It's just there for selection
-                    entry[0] = item
-                    content = item.to_o
-                    i = 1
-                    headings.each do |heading|
-                        entry[i] = eval("content.#{heading[0]}")
-                        i += 1
-                    end
+                    iter = listStore.append
+                    setItem(iter, item)
                 end
             end
 
@@ -133,6 +138,17 @@ module JLDrill::Gtk
             if !item.nil?
                 path = Gtk::TreePath.new(item.position.to_s)
                 iter = @listStore.get_iter(path)
+                @table.selection.select_path(path)
+                @table.scroll_to_cell(path, nil, false, 0.0, 0.0)
+            end
+        end
+
+        # Updates the item in the tree and selects the row
+        def updateItem(item)
+            if !item.nil?
+                path = Gtk::TreePath.new(item.position.to_s)
+                iter = @listStore.get_iter(path)
+                setItem(iter, item)
                 @table.selection.select_path(path)
                 @table.scroll_to_cell(path, nil, false, 0.0, 0.0)
             end

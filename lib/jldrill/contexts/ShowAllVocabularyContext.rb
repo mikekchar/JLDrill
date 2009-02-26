@@ -49,6 +49,10 @@ module JLDrill
             @mainView.select(problem.item)
         end
 
+        def updateProblem(problem)
+            @mainView.updateItem(problem.item)
+        end
+
 		def loadUpdated(quiz)
             update(quiz)
 		end
@@ -58,7 +62,7 @@ module JLDrill
 		end
 
 		def problemModifiedUpdated(problem)
-            select(problem)
+            updateProblem(problem)
 		end
     end
 end

@@ -58,7 +58,7 @@ module JLDrill
         end
 
         def update(problem)
-		    @mainView.update(problem)
+		    @mainView.update(problem.item.to_o)
             @mainView.updateSearch
         end
 		

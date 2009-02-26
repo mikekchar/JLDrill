@@ -21,6 +21,10 @@ module JLDrill
             # Only in concrete class
         end
 
+        def updateItem(item)
+            # Only in concrete class
+        end
+
         def close
             @context.exit
         end
