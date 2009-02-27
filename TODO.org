@@ -107,7 +107,7 @@ the number of jellybeans done in the properties of the task.
    :DONE: 1
    :END:
 
-** TODO Be able to delete or edit an item from the "All Vocab" list. [6/8]
+** TODO Be able to delete or edit an item from the "All Vocab" list. [6/9]
    - [X] Refactor widget to be a mixin
    - [X] include Widget from GtkWidget
    - [X] make gtkAdd/RemoveWidget have default values that log a warning
@@ -131,6 +131,9 @@ the number of jellybeans done in the properties of the task.
        - [X] Updating a problem, selects it in the list
        - [X] New problems select it in the list
        - [X] Opening the list highlights the current problem
+   - [ ] Adding items to a large file is very slow.  That's because
+     it's checking each one to see if it already exists.  Possibly we
+     need to add a hash of some sort to cut down the search parameters.
    - [ ] "E" or activation in the All Vocab list allows editing the item
    - [ ] "Ctrl D" deletes the currently highlighted item.  Prompts first.
 

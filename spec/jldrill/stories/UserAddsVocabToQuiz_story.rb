@@ -3,6 +3,7 @@ require 'jldrill/views/gtk/QuizStatusView'
 require 'jldrill/views/VocabularyView'
 require 'jldrill/views/gtk/VocabularyView'
 require 'jldrill/spec/StoryMemento'
+require 'jldrill/model/Config'
 
 module JLDrill::UserAddsVocabToQuiz
 
@@ -21,8 +22,29 @@ module JLDrill::UserAddsVocabToQuiz
 
 ###########################################
     
-    describe Story.stepName("There is a control on the main window view for adding new items") do
-#        it "should contact the main context when the user tries to add a Vocabulary"
+    describe Story.stepName("The user can begin adding new items") do
+        before(:each) do
+            Story.setup(JLDrill)
+        end
+
+        after(:each) do
+            Story.shutdown
+        end
+
+        it "should have a method to add items from the main Context" do
+            Story.start
+            cc = Story.mainContext.runCommandContext
+            cc.should_not be_nil
+            cv = cc.mainView
+            cv.should_not be_nil
+
+            # Why the hell did make all the methods in the CommandView
+            # procs?  I can't remember.  Maybe to try to distiguish
+            # between outgoing and incoming methods in the view???
+            cv.addNewVocabulary.should_not be_nil
+            Story.mainContext.should_receive(:addNewVocabulary)
+            cv.addNewVocabulary.call
+        end
     end
 
 ###########################################
@@ -222,4 +244,46 @@ module JLDrill::UserAddsVocabToQuiz
         end
     end
 
+###########################################
+    
+    describe Story.stepName("The user can search the dictionary") do
+        before(:each) do
+            Story.setup(JLDrill)
+        end
+
+        after(:each) do
+            Story.shutdown
+        end
+
+        it "can load the and search the dictionary from this context" do
+            Story.start
+            Story.mainContext.addNewVocabulary
+            # The dictionary isn't loaded yet.
+            Story.view.dictionaryLoaded?.should be(false)
+
+            # Searching should find nothing
+            Story.view.search("あめ").should be_empty
+
+            # Override with the small test dictionary
+            rc = Story.mainContext.loadReferenceContext
+            testsDir = File.join(JLDrill::Config::DATA_DIR, "tests")
+            rc.filename = File.join(testsDir, "edict.utf")
+
+            # Load the dictionary
+            Story.view.loadDictionary
+            Story.view.dictionaryLoaded?.should be(true)
+
+            # Note: Usually I'd do this in separate tests, but loading
+            # the dictionary is expensive, so I have to jam it all
+            # into one test.  It would be nice to be able to have tests
+            # that can build on one another.
+
+            # Searching for nil or empty string should find nothing
+            Story.view.search(nil).should be_empty
+            Story.view.search("").should be_empty
+
+            # It should find an entry for rain
+            Story.view.search("あめ").size.should be(1)
+        end
+    end
 end

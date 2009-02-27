@@ -8,6 +8,7 @@ module JLDrill
 	class LoadReferenceContext < Context::Context
 		
 	    attr_reader :filename, :reference
+        attr_writer :filename
 		
 		def initialize(viewBridge)
 			super(viewBridge)
