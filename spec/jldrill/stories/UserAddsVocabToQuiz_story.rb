@@ -3,7 +3,6 @@ require 'jldrill/views/gtk/QuizStatusView'
 require 'jldrill/views/VocabularyView'
 require 'jldrill/views/gtk/VocabularyView'
 require 'jldrill/spec/StoryMemento'
-require 'jldrill/model/Config'
 
 module JLDrill::UserAddsVocabToQuiz
 
@@ -265,9 +264,7 @@ module JLDrill::UserAddsVocabToQuiz
             Story.view.search("あめ").should be_empty
 
             # Override with the small test dictionary
-            rc = Story.mainContext.loadReferenceContext
-            testsDir = File.join(JLDrill::Config::DATA_DIR, "tests")
-            rc.filename = File.join(testsDir, "edict.utf")
+            Story.useTestDictionary
 
             # Load the dictionary
             Story.view.loadDictionary
@@ -282,8 +279,8 @@ module JLDrill::UserAddsVocabToQuiz
             Story.view.search(nil).should be_empty
             Story.view.search("").should be_empty
 
-            # It should find an entry for rain
-            Story.view.search("あめ").size.should be(1)
+            # It should find entries
+            Story.view.search("あ").should have_at_least(1).item
         end
     end
 end

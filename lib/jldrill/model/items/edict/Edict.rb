@@ -5,6 +5,7 @@ require "jldrill/model/Item"
 require "jldrill/model/items/Vocabulary"
 require "jldrill/model/items/edict/Meaning"
 require 'Context/Publisher'
+require 'Context/Log'
 require 'kconv'
 
 module JLDrill
@@ -145,7 +146,8 @@ module JLDrill
                 retVal = Vocabulary.new(kanji, kana, english.allDefinitions,
                                    english.allTypes, hint, position)
             else
-                print "Warning: Could not parse - #{line}\n"
+                Context::Log::warning("JLDrill::Edict", 
+                                      "Could not parse #{line}")
             end             
             return retVal                        
         end

@@ -3,6 +3,7 @@ require 'jldrill/views/MainWindowView'
 require 'jldrill/views/gtk/MainWindowView'
 require 'jldrill/spec/Fakes'
 require 'jldrill/spec/SampleQuiz'
+require 'jldrill/model/Config'
 
 # The startGTK method requires gtk2.  But I don't want to include
 # it here in case I don't use it.  So the using file must include
@@ -44,6 +45,13 @@ module JLDrill
             @app = JLDrill::Fakes::App.new(type, JLDrill::MainContext)
             @mainContext = @app.mainContext
             @mainView = @mainContext.peekAtView
+        end
+
+        def useTestDictionary
+            # Override with the small test dictionary
+            rc = @mainContext.loadReferenceContext
+            testsDir = File.join(JLDrill::Config::DATA_DIR, "tests")
+            rc.filename = File.join(testsDir, "edict.utf")
         end
         
         def start
