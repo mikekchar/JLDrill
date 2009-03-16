@@ -94,15 +94,42 @@ module JLDrill
             tempArray.each(&block)
         end
         
+        # Get an array of all the items sorted by hash.
+        # The array includes a binary search algorithm for finding
+        # items.
+        def getSortedItems
+            tempArray = allItems.sort! do |x, y|
+                x.hash <=> y.hash
+            end
+            def tempArray.binarySearch(item, spos=nil, epos=nil)
+                if spos == nil
+                    spos = 0
+                end
+                if epos == nil
+                    epos = self.size - 1
+                end
+                if spos > epos
+                    return false
+                end
+                pos = ((epos - spos) / 2) + spos
+                if self[pos].hash < item.hash
+                    return self.binarySearch(item, pos + 1, epos)
+                elsif self[pos].hash > item.hash
+                    return self.binarySearch(item, spos, pos - 1)
+                else
+                    return self[pos].eql?(item)
+                end
+            end
+            return tempArray
+        end            
+
         # Add the contents from another quiz to this one.  Only
         # adds the items that doen't already exists.  Sets the positions
         # of the new items to the end of this contents.
         def addContents(contents)
-            tempArray = allItems
+            tempArray = getSortedItems
             contents.eachByPosition do |item|
-                if tempArray.find do |x|
-                        x.eql?(item)
-                    end.nil?
+                if !tempArray.binarySearch(item)
                     newItem = item.clone
                     newItem.position = -1
                     self.addItem(newItem, newItem.bin)
