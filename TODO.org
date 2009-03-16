@@ -172,6 +172,11 @@ the number of jellybeans done in the properties of the task.
 
 
 <h2>
+** TODO Fix slowness in editing
+        Sometimes it is slow to edit an entry.  It takes a long time
+		to come up.  Possibly the search is taking a long time.
+		But when you set, it is also slow.  I saw this with
+		the word shin 芯
 * Backlog
 </h2>
 

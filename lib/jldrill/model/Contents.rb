@@ -68,7 +68,7 @@ module JLDrill
         
         # Returns true if the vocabulary exists already in the contents
         def exists?(vocab)
-            @bins.any? do |bin|
+            return @bins.any? do |bin|
                 bin.contain?(vocab)
             end
         end

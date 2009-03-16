@@ -26,16 +26,19 @@ module JLDrill
 
         POSITION_RE = /^Position: (.*)/
 
-        attr_reader :itemType, :contents, :position, :bin, :index, :status
+        attr_reader :itemType, :contents, :position, :bin, :index, :status,
+                    :hash
         attr_writer :position, :bin, :index
 
         def initialize(item=nil)
             if item.nil?
                 @itemType = nil
                 @contents = ""
+                @hash = "".hash
             else
                 @itemType = item.itemType
                 @contents = item.to_s
+                @hash = item.hash
             end
             @position = 0
             @bin = 0
@@ -82,6 +85,7 @@ module JLDrill
             @itemType = ItemFactory::find("Vocabulary")
             @contents = string
             parseLine(@contents)
+            @hash = self.to_o.hash
         end
 
         # Create a copy of this item
@@ -104,6 +108,7 @@ module JLDrill
             @bin = item.bin
             @index = item.index
             @status.assign(item.status)
+            @hash = item.hash
         end
 
         # Set the type of the item
@@ -119,6 +124,7 @@ module JLDrill
         # set the contents of the item
         def setContents(contents)
             @contents = contents
+            @hash = to_o.hash
         end
 
         # Return the save format of the item
@@ -143,12 +149,20 @@ module JLDrill
         # Returns true if the items contain the same object.
         # Note: Does *not* compare the status
         def eql?(item)
-            self.to_o.eql?(item.to_o)
+            if item.hash == @hash
+                self.to_o.eql?(item.to_o)
+            else
+                false
+            end
         end
 
         # Returns true if the item contains the object.
         def contain?(object)
-            self.to_o.eql?(object)
+            if object.hash == @hash
+                self.to_o.eql?(object)
+            else
+                false
+            end
         end
     end
 end

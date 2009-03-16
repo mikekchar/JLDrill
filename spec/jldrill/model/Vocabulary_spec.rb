@@ -165,5 +165,19 @@ module JLDrill
             v2 = edict.vocab(0).clone
             edict.vocab(0).should eql(v2)
         end
+
+        it "should have a hash based on the reading and kanji" do
+            v1 = Vocabulary.new
+            v2 = Vocabulary.new
+            v1.hash.should eql(v2.hash)
+            v3 = Vocabulary.create("/Kanji: 会う/Reading: あう/")
+            v1.hash.should_not eql(v3.hash)
+            v4 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: blah, blah/")
+            v3.hash.should eql(v4.hash)
+            v5 = Vocabulary.create("/Kanji: 会います/Reading: あう/")
+            v3.hash.should_not eql(v5.hash)
+            v6 = Vocabulary.create("/Kanji: 会う/Reading: あいます/")
+            v3.hash.should_not eql(v6.hash)
+        end
 	end
 end

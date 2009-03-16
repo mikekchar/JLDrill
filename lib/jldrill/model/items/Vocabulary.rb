@@ -66,6 +66,15 @@ module JLDrill
             return eql?(y)
         end
 
+        # Returns a hash for the Vocabulary.
+        # The hash is generated from the reading and kanji
+        def hash
+            hashstring = ""
+            hashstring += readingRaw
+            hashstring += kanjiRaw
+            return hashstring.hash
+        end
+
         # Returns the number of characters at the beginning of
         # string1 that are also at the beginning of string2.
         def numCommonChars(string1, string2)

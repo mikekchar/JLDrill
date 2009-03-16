@@ -228,6 +228,9 @@ module JLDrill
             # Update status again
             @publisher.unblock
             update
+            if @currentProblem.nil?
+                drill
+            end
         end
         
         def appendVocab(vocab)
