@@ -98,8 +98,15 @@ module JLDrill
         # adds the items that doen't already exists.  Sets the positions
         # of the new items to the end of this contents.
         def addContents(contents)
+            tempArray = allItems
             contents.eachByPosition do |item|
-                self.addUniquely(item.clone)
+                if tempArray.find do |x|
+                        x.eql?(item)
+                    end.nil?
+                    newItem = item.clone
+                    newItem.position = -1
+                    self.addItem(newItem, newItem.bin)
+                end
             end
         end
 
