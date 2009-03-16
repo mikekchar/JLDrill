@@ -134,6 +134,10 @@ the number of jellybeans done in the properties of the task.
    - [X] Adding items to a large file is very slow.  That's because
      it's checking each one to see if it already exists.  Possibly we
      need to add a hash of some sort to cut down the search parameters.
+   - [ ] Adding items to a blank quiz doesn't update the all vocab
+     table
+   - [ ] Editing and item so that it's the same as an existing item
+     results in 2 of the same item.
    - [ ] "E" or activation in the All Vocab list allows editing the item
    - [ ] "Ctrl D" deletes the currently highlighted item.  Prompts first.
 
