@@ -224,11 +224,17 @@ module JLDrill
         def append(quiz)
             # Don't update the status while we're appending the file
             @publisher.block
-            @contents.addContents(quiz.contents)
+            lastItem = @contents.addContents(quiz.contents)
             # Update status again
             @publisher.unblock
+            # The quiz has been modified
             update
+            # A file has been loaded
+            updateLoad
+            # Indicate the last item that was loaded
+            updateItemAdded(lastItem) unless lastItem.nil?
             if @currentProblem.nil?
+                # Drill a problem if there wasn't one before
                 drill
             end
         end

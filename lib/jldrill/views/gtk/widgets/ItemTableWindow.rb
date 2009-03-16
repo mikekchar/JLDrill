@@ -63,8 +63,12 @@ module JLDrill::Gtk
         end
 
         def addItem(item)
-            if !item.nil? && !@vocabTable.nil?
-                @vocabTable.addItem(item)
+            if !item.nil?
+                if @vocabTable.nil?
+                    updateTable([item])
+                else
+                    @vocabTable.addItem(item)
+                end
             end
         end
 

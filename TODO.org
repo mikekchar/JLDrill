@@ -107,7 +107,7 @@ the number of jellybeans done in the properties of the task.
    :DONE: 1
    :END:
 
-** TODO Be able to delete or edit an item from the "All Vocab" list. [7/9]
+** TODO Be able to delete or edit an item from the "All Vocab" list. [8/11]
    - [X] Refactor widget to be a mixin
    - [X] include Widget from GtkWidget
    - [X] make gtkAdd/RemoveWidget have default values that log a warning
@@ -134,7 +134,7 @@ the number of jellybeans done in the properties of the task.
    - [X] Adding items to a large file is very slow.  That's because
      it's checking each one to see if it already exists.  Possibly we
      need to add a hash of some sort to cut down the search parameters.
-   - [ ] Adding items to a blank quiz doesn't update the all vocab
+   - [X] Adding items to a blank quiz doesn't update the all vocab
      table
    - [ ] Editing and item so that it's the same as an existing item
      results in 2 of the same item.

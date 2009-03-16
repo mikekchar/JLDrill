@@ -98,10 +98,14 @@ module JLDrill
         # The array includes a binary search algorithm for finding
         # items.
         def getSortedItems
-            tempArray = allItems.sort! do |x, y|
+            items = []
+            bins.each do |bin|
+                items += bin.contents
+            end
+            items = allItems.sort! do |x, y|
                 x.hash <=> y.hash
             end
-            def tempArray.binarySearch(item, spos=nil, epos=nil)
+            def items.binarySearch(item, spos=nil, epos=nil)
                 if spos == nil
                     spos = 0
                 end
@@ -120,21 +124,25 @@ module JLDrill
                     return self[pos].eql?(item)
                 end
             end
-            return tempArray
+            return items
         end            
 
         # Add the contents from another quiz to this one.  Only
         # adds the items that doen't already exists.  Sets the positions
         # of the new items to the end of this contents.
+        # Returns the last item that was added, or nil if none were added.
         def addContents(contents)
+            lastItem = nil
             tempArray = getSortedItems
             contents.eachByPosition do |item|
                 if !tempArray.binarySearch(item)
                     newItem = item.clone
                     newItem.position = -1
                     self.addItem(newItem, newItem.bin)
+                    lastItem = newItem
                 end
             end
+            return lastItem
         end
 
         # Parse the line for an item.  
