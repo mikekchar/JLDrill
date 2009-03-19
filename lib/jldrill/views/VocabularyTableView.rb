@@ -2,11 +2,12 @@ require 'Context/View'
 
 module JLDrill
 	class VocabularyTableView < Context::View
-	    attr_reader :quiz
+	    attr_reader :quiz, :items
 	
 		def initialize(context)
 			super(context)
 			@quiz = nil
+            @items = nil
 		end
 		
 		def destroy
@@ -14,7 +15,7 @@ module JLDrill
 		end
 		
 		def update(items)
-            # Only in the concrete class
+            @items = items
 		end
 
         def select(item)
@@ -31,6 +32,10 @@ module JLDrill
 
         def close
             @context.exit
+        end
+
+        def edit(item)
+            @context.edit(item)
         end
 	end
 end

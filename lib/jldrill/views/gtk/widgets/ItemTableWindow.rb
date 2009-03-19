@@ -77,7 +77,9 @@ module JLDrill::Gtk
                 @vbox.remove(@vocabTable)
             end
             if !items.empty?
-                @vocabTable = ItemTable.new(items)
+                @vocabTable = ItemTable.new(items) do |item|
+                    @view.edit(item)
+                end
                 @vbox.pack_start(@vocabTable, true, true)
             end
             @vbox.show_all

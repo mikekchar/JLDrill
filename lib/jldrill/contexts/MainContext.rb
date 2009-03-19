@@ -195,6 +195,13 @@ module JLDrill
     		end
 		end
 
+        def editItem(item)
+            if !item.nil?
+                @quiz.createProblem(item)
+                editVocabulary
+            end
+        end
+
 		def updateQuizStatus
 		    @displayQuizStatusContext.quizUpdated(@quiz) if @displayQuizStatusContext.isEntered?
 		end

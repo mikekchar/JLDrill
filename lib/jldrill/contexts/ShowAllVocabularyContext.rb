@@ -74,5 +74,9 @@ module JLDrill
         def itemAddedUpdated(item)
             addItem(item)
         end
+
+        def edit(item)
+            @parent.editItem(item)
+        end
     end
 end
