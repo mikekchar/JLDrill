@@ -107,7 +107,7 @@ the number of jellybeans done in the properties of the task.
    :DONE: 1
    :END:
 
-** TODO Be able to delete or edit an item from the "All Vocab" list. [9/11]
+** TODO Be able to delete or edit an item from the "All Vocab" list. [10/11]
    - [X] Refactor widget to be a mixin
    - [X] include Widget from GtkWidget
    - [X] make gtkAdd/RemoveWidget have default values that log a warning
@@ -138,7 +138,7 @@ the number of jellybeans done in the properties of the task.
      table
    - [X] Editing and item so that it's the same as an existing item
      results in 2 of the same item.
-   - [ ] "E" or activation in the All Vocab list allows editing the item
+   - [X] "E" or activation in the All Vocab list allows editing the item
    - [ ] "Ctrl D" deletes the currently highlighted item.  Prompts first.
 
    :PROPERTIES:

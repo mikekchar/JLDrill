@@ -27,6 +27,12 @@ module JLDrill::Gtk
                            Gtk::ACCEL_VISIBLE) do
                 self.close
             end
+            @accel.connect(Gdk::Keyval::GDK_E, 0,
+                           Gtk::ACCEL_VISIBLE) do
+                if !searching?
+                    self.editCurrentItem
+                end
+            end
             add_accel_group(@accel)
 
             signal_connect('delete_event') do
@@ -41,7 +47,11 @@ module JLDrill::Gtk
             @exitButton.signal_connect('clicked') do
                 self.close
             end
-       end
+        end
+
+        def searching?
+            return !@vocabTable.nil? && @vocabTable.searching?
+        end
 
         def close
             if !@closed
@@ -72,12 +82,23 @@ module JLDrill::Gtk
             end
         end
 
+        def editCurrentItem
+            if !@vocabTable.nil?
+                item = @vocabTable.getSelectedItem
+                if !item.nil?
+                    @vocabTable.stopSearching
+                    @view.edit(item)
+                end
+            end
+        end
+
         def updateTable(items)
             if !@vocabTable.nil?
                 @vbox.remove(@vocabTable)
             end
             if !items.empty?
                 @vocabTable = ItemTable.new(items) do |item|
+                    @vocabTable.stopSearching
                     @view.edit(item)
                 end
                 @vbox.pack_start(@vocabTable, true, true)

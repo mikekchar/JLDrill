@@ -18,7 +18,8 @@ module JLDrill::Gtk
             @table.selection.mode = Gtk::SELECTION_SINGLE
             @table.set_rules_hint(true)
             @table.fixed_height_mode = true
-            @table.set_enable_search(true)
+            # Initially don't allow searching
+            stopSearching
             @table.set_search_equal_func do |model, column, key, iter|
                 retVal = true
                 vocab = iter[0].to_o
@@ -169,9 +170,39 @@ module JLDrill::Gtk
             !@table.selection.selected.nil?
         end
 
+        def getSelectedItem
+            retVal = nil
+            if hasSelection?
+                retVal = @table.selection.selected[0]
+            end
+            return retVal
+        end
+
         # Put focus on the table 
         def focusTable
             @table.grab_focus
+        end
+
+        def searching?
+            @table.enable_search?
+        end
+
+        def search
+            @table.set_enable_search(true)
+        end
+
+        def stopSearching
+            @table.set_enable_search(false)
+        end
+
+        def toggleSearch
+            if !@vocabTable.nil?
+                if !searching
+                    @vocabTable.search
+                else
+                    @vocabTable.stopSearching
+                end
+            end
         end
 
     end
