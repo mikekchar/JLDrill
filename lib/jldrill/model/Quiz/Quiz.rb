@@ -238,6 +238,11 @@ module JLDrill
                 drill
             end
         end
+
+        # Returns true if the vocabulary already exists in the Quiz
+        def exists?(vocab)
+            @contents.exists?(vocab)
+        end
         
         def appendVocab(vocab)
             item = Item.new(vocab)

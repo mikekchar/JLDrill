@@ -4,6 +4,7 @@ require 'jldrill/model/items/Vocabulary'
 module JLDrill
 	class VocabularyView < Context::View
 	    attr_reader :vocabulary, :label, :block
+        attr_writer :vocabulary
 	
 		def initialize(context, label, &block)
 			super(context)
@@ -45,7 +46,8 @@ module JLDrill
         def search(reading)
             @context.search(reading)
         end
-        
+
+        # Returns true if the vocabulary was set
         def setVocabulary
             @context.setVocabulary(@vocabulary)
         end

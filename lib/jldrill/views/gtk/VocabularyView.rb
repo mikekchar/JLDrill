@@ -52,7 +52,8 @@ module JLDrill::Gtk
                 false
             end
         end
-        
+
+        # Returns true if the vocabulary was set
         def setVocabulary
             @vocabulary = @vocabularyWindow.getVocab
             super

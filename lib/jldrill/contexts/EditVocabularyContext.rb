@@ -12,8 +12,12 @@ module JLDrill
 		
 		def createViews
     		@mainView = @viewBridge.VocabularyView.new(self, "Set") do
-    		    @mainView.setVocabulary
-                @mainView.close
+    		    if @mainView.setVocabulary
+                    @mainView.close
+                    true
+                else
+                    false
+                end
     		end
         end
 
@@ -85,8 +89,16 @@ module JLDrill
 		    end
 		end
 		
+        # Sets the vocabulary of the current problem to vocab
+        # Refuses to set the vocabulary if it already exists in the
+        # quiz.  Returns true if the vocabulary was set, false otherwise
 		def setVocabulary(vocab)
-		    @parent.quiz.currentProblem.vocab = vocab
+            if !@parent.quiz.exists?(vocab)
+                @parent.quiz.currentProblem.vocab = vocab
+                return true
+            else
+                return false
+            end
 		end
 
         def edictLoadUpdated(reference)
