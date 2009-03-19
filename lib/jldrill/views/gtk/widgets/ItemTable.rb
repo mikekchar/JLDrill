@@ -115,6 +115,11 @@ module JLDrill::Gtk
             callActionOnActivation
         end
 
+        # Select the item in the TreePath and scroll to the cell
+        def selectPath(path)
+            @table.set_cursor(path, nil, false)
+        end
+
         # Selects the closest match to the given vocabulary
         def selectClosestMatch(vocab)
             iter = @listStore.iter_first
@@ -128,8 +133,7 @@ module JLDrill::Gtk
                         pos = iter.path
                     end
                 end
-                @table.selection.select_path(pos)
-                @table.scroll_to_cell(pos, nil, false, 0.0, 0.0)
+                selectPath(pos)
             end
         end
 
@@ -137,9 +141,7 @@ module JLDrill::Gtk
         def selectItem(item)
             if !item.nil?
                 path = Gtk::TreePath.new(item.position.to_s)
-                iter = @listStore.get_iter(path)
-                @table.selection.select_path(path)
-                @table.scroll_to_cell(path, nil, false, 0.0, 0.0)
+                selectPath(path)
             end
         end
 
@@ -149,8 +151,7 @@ module JLDrill::Gtk
                 path = Gtk::TreePath.new(item.position.to_s)
                 iter = @listStore.get_iter(path)
                 setItem(iter, item)
-                @table.selection.select_path(path)
-                @table.scroll_to_cell(path, nil, false, 0.0, 0.0)
+                selectPath(path)
             end
         end
 
@@ -159,9 +160,7 @@ module JLDrill::Gtk
             if !item.nil?
                 iter = @listStore.append
                 setItem(iter, item)
-                path = iter.path
-                @table.selection.select_path(path)
-                @table.scroll_to_cell(path, nil, false, 0.0, 0.0)
+                selectPath(iter.path)
             end
         end
 

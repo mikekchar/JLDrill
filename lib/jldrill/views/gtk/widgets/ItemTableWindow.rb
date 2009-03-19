@@ -81,6 +81,7 @@ module JLDrill::Gtk
                     @view.edit(item)
                 end
                 @vbox.pack_start(@vocabTable, true, true)
+                @vocabTable.focusTable
             end
             @vbox.show_all
         end
