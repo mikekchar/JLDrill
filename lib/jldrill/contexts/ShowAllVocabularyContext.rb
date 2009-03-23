@@ -86,5 +86,9 @@ module JLDrill
         def edit(item)
             @parent.editItem(item)
         end
+
+        def preview(item)
+            @parent.displayItem(item)
+        end
     end
 end

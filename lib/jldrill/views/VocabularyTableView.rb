@@ -38,6 +38,10 @@ module JLDrill
             @context.edit(item)
         end
 
+        def preview(item)
+            @context.preview(item)
+        end
+
         def differs?(item)
             @context.differs?(item)
         end

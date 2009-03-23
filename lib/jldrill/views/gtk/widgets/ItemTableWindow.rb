@@ -39,6 +39,12 @@ module JLDrill::Gtk
                     self.editDifferredItem
                 end
             end
+            @accel.connect(Gdk::Keyval::GDK_P, 0,
+                           Gtk::ACCEL_VISIBLE) do
+                if !searching?
+                    self.preview
+                end
+            end
 
             add_accel_group(@accel)
 
@@ -122,6 +128,13 @@ module JLDrill::Gtk
                 @vocabTable.focusTable
             end
             @vbox.show_all
+        end
+
+        def preview
+            item = @vocabTable.getSelectedItem
+            if !item.nil?
+                @view.preview(item)
+            end
         end
 
         def explicitDestroy
