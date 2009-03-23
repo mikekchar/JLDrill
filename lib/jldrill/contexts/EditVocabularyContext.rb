@@ -8,6 +8,7 @@ module JLDrill
 				
 		def initialize(viewBridge)
 			super(viewBridge)
+            @initialProblem = nil
 		end
 		
 		def createViews
@@ -43,6 +44,9 @@ module JLDrill
 		def exit
             if !@parent.nil?
                 if !@parent.quiz.nil?
+                    if !@originalProblem.nil?
+                        @parent.quiz.setCurrentProblem(@originalProblem)
+                    end
                     @parent.quiz.publisher.unsubscribe(self, "newProblem")
                     @parent.quiz.publisher.unsubscribe(self, "problemModified")
                 end
@@ -62,6 +66,9 @@ module JLDrill
         end
 
         def update(problem)
+            if !problem.preview?
+                @originalProblem = problem
+            end
 		    @mainView.update(problem.item.to_o)
             @mainView.updateSearch
         end
@@ -94,7 +101,8 @@ module JLDrill
         # quiz.  Returns true if the vocabulary was set, false otherwise
 		def setVocabulary(vocab)
             if !@parent.quiz.exists?(vocab)
-                @parent.quiz.currentProblem.vocab = vocab
+                @originalProblem.vocab = vocab
+                @parent.quiz.setCurrentProblem(@originalProblem)
                 return true
             else
                 return false
@@ -103,6 +111,10 @@ module JLDrill
 
         def edictLoadUpdated(reference)
             @mainView.updateSearch unless @mainView.nil?
+        end
+
+        def preview(item)
+            @parent.previewItem(item)
         end
 
     end

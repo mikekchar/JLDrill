@@ -69,5 +69,10 @@ module JLDrill
         def edictLoadUpdated(reference)
             @mainView.updateSearch unless @mainView.nil?
         end
+
+        def preview(item)
+            @parent.displayItem(item)
+        end
+        
     end
 end

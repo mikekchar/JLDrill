@@ -14,6 +14,7 @@ module JLDrill
             @answerParts = []
             @vocab = item.to_o
             @displayOnly = false
+            @preview = false
         end
         
         def Problem.create(level, item, quiz)
@@ -38,6 +39,14 @@ module JLDrill
 
         def setDisplayOnly(bool)
             @displayOnly = bool
+        end
+
+        def setPreview(bool)
+            @preview = bool
+        end
+
+        def preview?
+            return @preview
         end
 
         def kanji
@@ -114,7 +123,9 @@ module JLDrill
         end
 
         def publishParts(parts, target)
-            if displayOnly?
+            if preview?
+                target.previewMode
+            elsif displayOnly?
                 target.displayOnlyMode
             else
                 target.normalMode

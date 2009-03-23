@@ -13,6 +13,7 @@ module JLDrill::Gtk
 
         NORMAL_COLOR = Gdk::Color.parse("#ffffc0")
         DISPLAY_ONLY_COLOR = Gdk::Color.parse("#e0f0ff")
+        PREVIEW_COLOR = Gdk::Color.parse("#ffe0ff")
 
         attr_reader :contents
 
@@ -38,8 +39,8 @@ module JLDrill::Gtk
             @contents.modify_base(Gtk::STATE_NORMAL, NORMAL_COLOR)
         end
 
-        def differsMode
-            @contents.modify_base(Gtk::STATE_NORMAL, DIFFER_COLOR)
+        def previewMode
+            @contents.modify_base(Gtk::STATE_NORMAL, PREVIEW_COLOR)
         end
 
         def displayOnlyMode
@@ -68,7 +69,9 @@ module JLDrill::Gtk
         end
 
         def clear(problem)
-            if !problem.nil? && problem.displayOnly?
+            if !problem.nil? && problem.preview?
+                previewMode
+            elsif !problem.nil? && problem.displayOnly?
                 displayOnlyMode
             else
                 normalMode

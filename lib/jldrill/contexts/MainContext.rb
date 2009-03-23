@@ -190,7 +190,8 @@ module JLDrill
 		end
 		
 		def editVocabulary
-		    if !@quiz.currentProblem.nil?
+		    if !@quiz.currentProblem.nil? &&
+                    !quiz.currentProblem.preview?
                 # Always show the answer before editing the problem
                 showAnswer
     		    @editVocabularyContext.enter(self) unless @editVocabularyContext.isEntered?
@@ -203,6 +204,17 @@ module JLDrill
                 if @quiz.currentProblem.nil? || 
                         !@quiz.currentProblem.item.eql?(item)
                     @quiz.displayProblem(item)
+                    showAnswer
+                end
+            end
+        end
+
+        # Preview an item that doesn't currently exist in the quiz
+        def previewItem(item)
+            if !item.nil?
+                if @quiz.currentProblem.nil? || 
+                        !@quiz.currentProblem.item.eql?(item)
+                    @quiz.previewProblem(item)
                     showAnswer
                 end
             end

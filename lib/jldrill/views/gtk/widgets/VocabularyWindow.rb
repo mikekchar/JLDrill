@@ -1,6 +1,7 @@
 require 'Context/Gtk/Widget'
 require 'jldrill/oldUI/GtkVocabView'
 require 'jldrill/views/gtk/widgets/ItemTable'
+require 'jldrill/model/Item.rb'
 require 'gtk2'
 
 
@@ -21,8 +22,10 @@ module JLDrill::Gtk
             @searchTable = nil
             @buttons = Gtk::HBox.new
             @searchButton = Gtk::Button.new("Search")
+            @previewButton = Gtk::Button.new("Preview")
             @addButton = Gtk::Button.new(label)
             @buttons.pack_start(@searchButton, true, true, 5)
+            @buttons.pack_start(@previewButton, true, true, 5)
             @buttons.pack_end(@addButton, true, true, 5)
             @vbox.pack_end(@buttons, false, false)
             connectSignals
@@ -55,6 +58,10 @@ module JLDrill::Gtk
             
             @addButton.signal_connect('clicked') do
                 @view.block.call
+            end
+
+            @previewButton.signal_connect('clicked') do
+                preview
             end
             
             @searchButton.signal_connect('clicked') do
@@ -90,6 +97,10 @@ module JLDrill::Gtk
                     @searchTable.focusTable
                 end
             end
+        end
+
+        def preview
+            @view.preview(JLDrill::Item.create(getVocab.to_s))
         end
         
         def explicitDestroy

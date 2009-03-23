@@ -296,19 +296,30 @@ module JLDrill
             end
         end
 
-        # Creates a problem to be quizzed
-        def createProblem(item)
-            @currentProblem = @strategy.createProblem(item)
+        def setCurrentProblem(problem)
+            @currentProblem = problem
             update
             updateNewProblem(@currentProblem)
+        end
+        
+        # Creates a problem to be quizzed
+        def createProblem(item)
+            setCurrentProblem(@strategy.createProblem(item))
         end
 
         # Creates a problem to be displayed only
         def displayProblem(item)
-            @currentProblem = @strategy.createProblem(item)
-            @currentProblem.setDisplayOnly(true)
-            update
-            updateNewProblem(@currentProblem)
+            problem = @strategy.createProblem(item)
+            problem.setDisplayOnly(true)
+            setCurrentProblem(problem)
+        end
+
+        # Creates a preview for a problem
+        def previewProblem(item)
+            problem = @strategy.createProblem(item)
+            problem.setDisplayOnly(true)
+            problem.setPreview(true)
+            setCurrentProblem(problem)
         end
         
         def recreateProblem
