@@ -43,6 +43,14 @@ module JLDrill
             super
         end
 
+        def differs?(item)
+            exists = true
+            if @parent.reference.loaded? && !item.nil?
+                exists = @parent.reference.include?(item.to_o)
+		    end
+		    return !exists
+        end
+
         def update(quiz)
             @mainView.update(quiz.allItems)
         end

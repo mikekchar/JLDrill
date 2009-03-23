@@ -70,7 +70,7 @@ module JLDrill::Gtk
         def newProblem(problem, differs)
             @popupFactory.closePopup
             @problem = problem
-            @answer.clear
+            @answer.clear(@problem)
             @question.update(problem)
             indicateDiffers(differs)
         end

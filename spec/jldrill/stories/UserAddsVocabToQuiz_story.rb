@@ -164,15 +164,6 @@ module JLDrill::UserAddsVocabToQuiz
             Story.shutdown           
         end
         
-        it "should do a drill when the first item is added" do
-            Story.setup(JLDrill)
-            Story.start
-            Story.mainContext.addNewVocabulary
-            Story.mainContext.quiz.should_receive(:drill)
-            Story.addVocab
-            Story.shutdown            
-        end
-        
         it "should add the vocabulary to the parent context's quiz" do
             Story.setup(JLDrill)
             Story.start
@@ -180,11 +171,8 @@ module JLDrill::UserAddsVocabToQuiz
             Story.mainContext.quiz.size.should be(0)
             Story.addVocab
             Story.mainContext.quiz.size.should be(1)
-            # Adding the vocabulary to an empty quiz triggers the
-            # quiz to be drilled.  This automatically moves the item
-            # from bin 0 to bin 1.
-            Story.mainContext.quiz.contents.bins[1][0].should_not be_nil
-            Story.mainContext.quiz.contents.bins[1][0].position.should be(0)
+            Story.mainContext.quiz.contents.bins[0][0].should_not be_nil
+            Story.mainContext.quiz.contents.bins[0][0].position.should be(0)
             Story.shutdown            
         end
         

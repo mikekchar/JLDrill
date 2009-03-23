@@ -191,13 +191,26 @@ module JLDrill
 		
 		def editVocabulary
 		    if !@quiz.currentProblem.nil?
+                # Always show the answer before editing the problem
+                showAnswer
     		    @editVocabularyContext.enter(self) unless @editVocabularyContext.isEntered?
     		end
 		end
 
+        # Display the problem if it isn't the current one
+        def displayItem(item)
+            if !item.nil?
+                if @quiz.currentProblem.nil? || 
+                        !@quiz.currentProblem.item.eql?(item)
+                    @quiz.displayProblem(item)
+                    showAnswer
+                end
+            end
+        end
+        
         def editItem(item)
             if !item.nil?
-                @quiz.createProblem(item)
+                displayItem(item)
                 editVocabulary
             end
         end

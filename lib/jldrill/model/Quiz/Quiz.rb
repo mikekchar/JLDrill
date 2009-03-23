@@ -247,6 +247,7 @@ module JLDrill
         def appendVocab(vocab)
             item = Item.new(vocab)
             @contents.addUniquely(item)
+            return item
         end
 
         def status
@@ -291,8 +292,17 @@ module JLDrill
             end
         end
 
+        # Creates a problem to be quizzed
         def createProblem(item)
             @currentProblem = @strategy.createProblem(item)
+            update
+            updateNewProblem(@currentProblem)
+        end
+
+        # Creates a problem to be displayed only
+        def displayProblem(item)
+            @currentProblem = @strategy.createProblem(item)
+            @currentProblem.setDisplayOnly(true)
             update
             updateNewProblem(@currentProblem)
         end

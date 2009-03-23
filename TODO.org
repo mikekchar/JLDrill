@@ -1,3 +1,4 @@
+
 <h2>
 * JLDrill Version 0.3.4
 </h2>
@@ -5,8 +6,8 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(%) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2008-12-25 Thu>
-  :CurrentDate:  <2009-03-19 Thu>
-  :EndDate: <2009-03-20 Fri>
+  :CurrentDate:  <2009-03-23 Mon>
+  :EndDate: <2009-04-03 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -21,7 +22,7 @@ workflow for creating and editing drills.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM                    | Total | Done |    % | Current | Needed |
 |-------------------------+-------+------+------+---------+--------|
-| * JLDrill Version 0.3.4 |    23 |   13 | 56.5 |    0.15 |   0.27 |
+| * JLDrill Version 0.3.4 |    21 |   13 | 61.9 |    0.15 |   0.21 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </pre>
@@ -139,6 +140,8 @@ the number of jellybeans done in the properties of the task.
    - [X] Editing and item so that it's the same as an existing item
      results in 2 of the same item.
    - [X] "E" or activation in the All Vocab list allows editing the item
+   - [ ] Create a "display only mode" for items that are being edited
+     or added.
    - [ ] "Ctrl D" deletes the currently highlighted item.  Prompts first.
 
    :PROPERTIES:
@@ -167,6 +170,9 @@ the number of jellybeans done in the properties of the task.
    :JellyBeans: 1
    :END:
 
+* Backlog
+</h2>
+
 ** TODO If a reading can't be found in the dictionary, seach 
    again taking off one character at a time from the end of the
    reading. 
@@ -181,9 +187,6 @@ the number of jellybeans done in the properties of the task.
 		to come up.  Possibly the search is taking a long time.
 		But when you set, it is also slow.  I saw this with
 		the word shin 芯
-* Backlog
-</h2>
-
 ** TODO Give feedback to the user when we refuse to edit or add an item.
 ** TODO In the add window, don't reload the table if the reading hasn't changed.
 ** TODO Automatically load dictionary option

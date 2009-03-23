@@ -33,6 +33,13 @@ module JLDrill::Gtk
                     self.editCurrentItem
                 end
             end
+            @accel.connect(Gdk::Keyval::GDK_D, 0,
+                           Gtk::ACCEL_VISIBLE) do
+                if !searching?
+                    self.editDifferredItem
+                end
+            end
+
             add_accel_group(@accel)
 
             signal_connect('delete_event') do
@@ -86,6 +93,16 @@ module JLDrill::Gtk
             if !@vocabTable.nil?
                 item = @vocabTable.getSelectedItem
                 if !item.nil?
+                    @vocabTable.stopSearching
+                    @view.edit(item)
+                end
+            end
+        end
+
+        def editDifferredItem
+            if !@vocabTable.nil?
+                item = @vocabTable.getSelectedItem
+                if !item.nil? && @view.differs?(item)
                     @vocabTable.stopSearching
                     @view.edit(item)
                 end

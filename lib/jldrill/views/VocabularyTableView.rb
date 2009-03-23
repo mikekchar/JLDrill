@@ -37,5 +37,9 @@ module JLDrill
         def edit(item)
             @context.edit(item)
         end
+
+        def differs?(item)
+            @context.differs?(item)
+        end
 	end
 end

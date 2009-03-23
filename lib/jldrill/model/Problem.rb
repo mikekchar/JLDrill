@@ -13,6 +13,7 @@ module JLDrill
             @questionParts = []
             @answerParts = []
             @vocab = item.to_o
+            @displayOnly = false
         end
         
         def Problem.create(level, item, quiz)
@@ -33,6 +34,10 @@ module JLDrill
              end
             problem.requestedLevel = level
             problem
+        end
+
+        def setDisplayOnly(bool)
+            @displayOnly = bool
         end
 
         def kanji
@@ -104,7 +109,16 @@ module JLDrill
             retVal
         end
         
+        def displayOnly?
+            return @displayOnly
+        end
+
         def publishParts(parts, target)
+            if displayOnly?
+                target.displayOnlyMode
+            else
+                target.normalMode
+            end
             parts.each do |part|
                 value = evaluateAttribute(part)
                 target.receive(part, value)

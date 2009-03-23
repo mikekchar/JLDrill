@@ -11,6 +11,9 @@ module JLDrill::Gtk
     class ProblemPane < Gtk::ScrolledWindow
         include Context::Gtk::Widget
 
+        NORMAL_COLOR = Gdk::Color.parse("#ffffc0")
+        DISPLAY_ONLY_COLOR = Gdk::Color.parse("#e0f0ff")
+
         attr_reader :contents
 
         def initialize
@@ -24,10 +27,23 @@ module JLDrill::Gtk
             @contents.editable = false
             @contents.cursor_visible = false
             @contents.set_pixels_above_lines(5)
+            @contents.modify_base(Gtk::STATE_NORMAL, NORMAL_COLOR)
             self.add(@contents)
             @buffer = @contents.buffer
             @hasKanji = true
             createTags
+        end
+
+        def normalMode
+            @contents.modify_base(Gtk::STATE_NORMAL, NORMAL_COLOR)
+        end
+
+        def differsMode
+            @contents.modify_base(Gtk::STATE_NORMAL, DIFFER_COLOR)
+        end
+
+        def displayOnlyMode
+            @contents.modify_base(Gtk::STATE_NORMAL, DISPLAY_ONLY_COLOR)
         end
 
         def createTags
@@ -51,7 +67,13 @@ module JLDrill::Gtk
                                "foreground" => "red")
         end
 
-        def clear
+        def clear(problem)
+            if !problem.nil? && problem.displayOnly?
+                displayOnlyMode
+            else
+                normalMode
+            end
+
             @buffer.text = ""
         end
 
@@ -80,7 +102,7 @@ module JLDrill::Gtk
     # The pane that displays the question for the problem
     class QuestionPane < ProblemPane
         def update(problem)
-            clear
+            clear(problem)
             if !problem.nil?
                 @hasKanji = problem.kanji != ""
                 problem.publishQuestion(self)
@@ -90,8 +112,8 @@ module JLDrill::Gtk
     
     # The pane that displays the answer for the problem
     class AnswerPane < ProblemPane
-        def clear
-            super
+        def clear(problem)
+            super(problem)
             @isClear = true
         end
         
@@ -100,7 +122,7 @@ module JLDrill::Gtk
         end
         
         def update(problem)
-            clear
+            clear(problem)
             if !problem.nil?
                 @hasKanji = problem.kanji != ""
                 problem.publishAnswer(self)
