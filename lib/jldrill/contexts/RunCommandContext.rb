@@ -59,6 +59,10 @@ module JLDrill
             @parent.showStatistics
         end
         
+        def drill
+            @parent.drill
+        end
+
         def check
             @parent.showAnswer
         end

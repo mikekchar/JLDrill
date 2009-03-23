@@ -7,7 +7,8 @@ module JLDrill
         attr_reader :save, :saveAs, :export, :open, :appendFile, 
                     :loadReference, :quit, :info, :statistics, :check,
                     :incorrect, :correct, :vocabTable, :options,
-                    :resetQuiz, :editVocab, :addNewVocabulary, :ack, :about
+                    :resetQuiz, :editVocab, :addNewVocabulary, :ack, :about,
+                    :drill
     
 		def initialize(context)
 			super(context)
@@ -29,6 +30,7 @@ module JLDrill
 			@addNewVocabulary = Proc.new {@context.addNewVocabulary}
 			@ack = Proc.new {@context.ack}
 			@about = Proc.new {@context.about}
+            @drill = Proc.new {@context.drill}
 		end	
 		
 		def setReviewMode(bool)

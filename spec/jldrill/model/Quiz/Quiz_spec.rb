@@ -189,7 +189,8 @@ module JLDrill
 	    
 	    def test_drill
 	        binZeroSize = @quiz.contents.bins[0].length
-	        question = @quiz.drill
+	        @quiz.drill
+            question = @quiz.currentDrill
 	        if (binZeroSize - 1) == @quiz.contents.bins[0].length
 	            # it was a bin 0 item which was promoted
 	            @quiz.currentProblem.item.bin.should be(1)

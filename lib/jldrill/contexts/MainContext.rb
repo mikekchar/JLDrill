@@ -223,6 +223,11 @@ module JLDrill
 		    @displayProblemContext.showAnswer if @displayProblemContext.isEntered?
 		end
 		
+        # Get a new problem in the drill without answering the current problem
+        def drill
+            @quiz.drill
+        end
+
 		def correct
 		    @quiz.correct
 		    @quiz.drill

@@ -277,18 +277,22 @@ module JLDrill
         end
   
         def incorrect
-            item = @currentProblem.item
-            if !item.nil?
-                @strategy.incorrect(item)
-                setNeedsSave(true)
+            if !@currentProblem.nil?
+                item = @currentProblem.item
+                if !item.nil?
+                    @strategy.incorrect(item)
+                    setNeedsSave(true)
+                end
             end
         end
         
         def correct
-            item = @currentProblem.item
-            if !item.nil?
-                @strategy.correct(item)
-                setNeedsSave(true)
+            if !@currentProblem.nil?
+                item = @currentProblem.item
+                if !item.nil?
+                    @strategy.correct(item)
+                    setNeedsSave(true)
+                end
             end
         end
 
@@ -313,8 +317,9 @@ module JLDrill
 
         def drill()
             item = @strategy.getItem
-            createProblem(item)
-            return @currentProblem.question
+            if !item.nil?
+                createProblem(item)
+            end
         end
 
         def answer()

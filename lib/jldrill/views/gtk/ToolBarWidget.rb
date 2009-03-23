@@ -40,6 +40,8 @@ module JLDrill::Gtk
                                            Gtk::IconSize::SMALL_TOOLBAR)
                 correctImage = Gtk::Image.new(Gtk::Stock::YES, 
                                          Gtk::IconSize::SMALL_TOOLBAR)
+                refreshImage = Gtk::Image.new(Gtk::Stock::REFRESH,
+                                         Gtk::IconSize::SMALL_TOOLBAR)
 
                 # toolbar.set_toolbar_style(Gtk::Toolbar::BOTH)
                 self.append(Gtk::Stock::SAVE,
@@ -61,6 +63,9 @@ module JLDrill::Gtk
                 self.append("Correct (C)", "Correct",
                                "Answer was correct", correctImage
                                ) do @view.correct.call end
+                self.append("New Item (N)", "New Item",
+                               "Select a new item to drill", refreshImage
+                               ) do @view.drill.call end
                 self.append_space                               
                 self.append(@reviewModeButton)
 		    end
