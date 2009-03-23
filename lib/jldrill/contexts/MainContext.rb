@@ -220,7 +220,9 @@ module JLDrill
 		end
 		
 		def showAnswer
-		    @displayProblemContext.showAnswer if @displayProblemContext.isEntered?
+            if !quiz.currentProblem.nil?
+                @displayProblemContext.showAnswer if @displayProblemContext.isEntered?
+            end
 		end
 		
         # Get a new problem in the drill without answering the current problem
@@ -229,13 +231,17 @@ module JLDrill
         end
 
 		def correct
-		    @quiz.correct
-		    @quiz.drill
+            if !quiz.currentProblem.nil? && !quiz.currentProblem.displayOnly?
+                @quiz.correct
+                @quiz.drill
+            end
 		end
 		
 		def incorrect
-		    @quiz.incorrect
-		    @quiz.drill
+            if !quiz.currentProblem.nil? && !quiz.currentProblem.displayOnly?
+                @quiz.incorrect
+                @quiz.drill
+            end
 		end
 		
 		def reset

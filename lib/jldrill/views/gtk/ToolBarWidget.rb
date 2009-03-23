@@ -63,8 +63,8 @@ module JLDrill::Gtk
                 self.append("Correct (C)", "Correct",
                                "Answer was correct", correctImage
                                ) do @view.correct.call end
-                self.append("New Item (N)", "New Item",
-                               "Select a new item to drill", refreshImage
+                self.append("Next (N)", "Next Problem",
+                               "Go to a new problem without answering the current one", refreshImage
                                ) do @view.drill.call end
                 self.append_space                               
                 self.append(@reviewModeButton)

@@ -42,7 +42,7 @@ module JLDrill::Gtk
                     ["/Drill/_Statistics...",
                         "<Item>",          "<alt>S",        nil, 
                         @view.statistics ],
-                    ["/Drill/_New Problem",
+                    ["/Drill/_Next Problem",
                         "<Item>",          "N",             nil,
                         @view.drill ],
                     ["/Drill/_Check",
