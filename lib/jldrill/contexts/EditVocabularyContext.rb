@@ -8,7 +8,7 @@ module JLDrill
 				
 		def initialize(viewBridge)
 			super(viewBridge)
-            @initialProblem = nil
+            @originalProblem = nil
 		end
 		
 		def createViews
@@ -37,7 +37,7 @@ module JLDrill
                 if !@parent.reference.nil?
                     @parent.reference.publisher.subscribe(self, "edictLoad")
                 end
-                newProblemUpdated(@parent.quiz.currentProblem)
+                update(@parent.quiz.currentProblem)
             end
 		end
 		
@@ -58,7 +58,9 @@ module JLDrill
 		end
 
         def newProblemUpdated(problem)
-            update(problem)
+            if !problem.preview?
+                update(problem)
+            end
         end
 
         def problemModifiedUpdated(problem)

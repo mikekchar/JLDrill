@@ -8,6 +8,7 @@ module JLDrill
 				
 		def initialize(viewBridge)
 			super(viewBridge)
+            @originalProblem = nil
 		end
 		
 		def createViews
@@ -23,18 +24,48 @@ module JLDrill
 		
 		def enter(parent)
 		    super(parent)
-            if !@parent.nil? && !@parent.reference.nil?
-                @parent.reference.publisher.subscribe(self, "edictLoad")
+            if !@parent.nil?
+                if !@parent.quiz.nil?
+                    @parent.quiz.publisher.subscribe(self, "newProblem")
+                    @parent.quiz.publisher.subscribe(self, "problemModified")
+                end
+                if !@parent.reference.nil?
+                    @parent.reference.publisher.subscribe(self, "edictLoad")
+                end
+                update(@parent.quiz.currentProblem)
             end
 		end
 		
 		def exit
-            if !@parent.nil? && !@parent.reference.nil?
-                @parent.reference.publisher.unsubscribe(self, "edictLoad")
+            if !@parent.nil?
+                if !@parent.quiz.nil?
+                    if !@originalProblem.nil?
+                        @parent.quiz.setCurrentProblem(@originalProblem)
+                    end
+                    @parent.quiz.publisher.unsubscribe(self, "newProblem")
+                    @parent.quiz.publisher.unsubscribe(self, "problemModified")
+                end
+                if !@parent.reference.nil?
+                    @parent.reference.publisher.subscribe(self, "edictLoad")
+                end
             end
 		    super
 		end
 		
+        def newProblemUpdated(problem)
+            update(problem)
+        end
+
+        def problemModifiedUpdated(problem)
+            update(problem)
+        end
+
+        def update(problem)
+            if !problem.preview?
+                @originalProblem = problem
+            end
+        end
+
 		def addVocabulary(vocab)
 		    if !@parent.nil? && !@parent.quiz.nil?
     		    item = @parent.quiz.appendVocab(vocab)
@@ -71,7 +102,7 @@ module JLDrill
         end
 
         def preview(item)
-            @parent.displayItem(item)
+            @parent.previewItem(item)
         end
         
     end
