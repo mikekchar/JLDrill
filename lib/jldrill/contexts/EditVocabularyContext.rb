@@ -68,7 +68,7 @@ module JLDrill
         end
 
         def update(problem)
-            if !problem.preview?
+            if !problem.nil? && !problem.preview?
                 @originalProblem = problem
             end
 		    @mainView.update(problem.item.to_o)
