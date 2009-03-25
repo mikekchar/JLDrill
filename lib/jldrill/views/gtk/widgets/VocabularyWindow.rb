@@ -1,6 +1,6 @@
 require 'Context/Gtk/Widget'
 require 'jldrill/oldUI/GtkVocabView'
-require 'jldrill/views/gtk/widgets/ItemTable'
+require 'jldrill/views/gtk/widgets/SearchTable'
 require 'jldrill/model/Item.rb'
 require 'gtk2'
 
@@ -79,24 +79,47 @@ module JLDrill::Gtk
             end
         end
 
-        def updateSearchTable
+        def removeSearchTable
             if !@searchTable.nil?
                 @vbox.remove(@searchTable)
                 @searchTable = nil
             end
+        end
+
+        # Callback from the Search table
+        def search(reading)
+            @view.search(self.reading)
+        end
+
+        # Callback from the Search table
+        def searchActivated(item)
+            update(item.to_o)
+            @addButton.grab_focus
+        end
+
+        def createSearchTable
             if @view.dictionaryLoaded?
-                candidates = @view.search(self.reading)
-                @searchTable = ItemTable.new(candidates) do |item|
-                    update(item.to_o)
-                    @addButton.grab_focus
-                end
+                @searchTable = SearchTable.new(self, self.reading)
                 @vbox.add(@searchTable)
                 @vbox.show_all
-                @searchTable.selectClosestMatch(getVocab)
-                if @searchTable.hasSelection?
-                    @searchTable.focusTable
-                end
             end
+        end
+
+        def selectClosestMatch
+            if !@searchTable.nil?
+                @searchTable.selectClosestMatch(getVocab)
+            end
+        end
+
+        def updateSearchTable
+            # if we don't have a seach table or the reading has changed
+            # create a new search table
+            if @searchTable.nil? || 
+                    self.reading != @searchTable.reading
+                removeSearchTable
+                createSearchTable
+            end
+            selectClosestMatch
         end
 
         def preview
