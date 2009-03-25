@@ -72,7 +72,6 @@ module JLDrill
                 @originalProblem = problem
             end
 		    @mainView.update(problem.item.to_o)
-            @mainView.updateSearch
         end
 		
 		def addVocabulary(vocab)

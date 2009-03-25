@@ -26,7 +26,12 @@ module JLDrill
 		end
 
         def update(vocabulary)
+            oldVocab = @vocabulary
             @vocabulary = vocabulary
+            # Update re-do the search if the reading has changed.
+            if !@vocabulary.reading.eql?(oldVocab.reading)
+                updateSearch
+            end
         end
 
         def updateSearch
@@ -49,7 +54,7 @@ module JLDrill
 
         # Returns true if the vocabulary was set
         def setVocabulary
-            @context.setVocabulary(@vocabulary)
+            return @context.setVocabulary(@vocabulary)
         end
 
         def preview(item)

@@ -31,8 +31,8 @@ module JLDrill::Gtk
         end
         
         def update(vocabulary)
-            super(vocabulary)
             @vocabularyWindow.update(vocabulary)
+            super(vocabulary)
         end
 
         def updateSearch
@@ -56,7 +56,8 @@ module JLDrill::Gtk
         # Returns true if the vocabulary was set
         def setVocabulary
             @vocabulary = @vocabularyWindow.getVocab
-            super
+            retVal = super
+            return retVal
         end
 
     end
