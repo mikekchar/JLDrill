@@ -37,6 +37,10 @@ module JLDrill
         def edit(item)
             @context.edit(item)
         end
+        
+        def delete(item)
+            @context.delete(item)
+        end
 
         def preview(item)
             @context.preview(item)

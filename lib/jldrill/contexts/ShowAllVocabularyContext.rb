@@ -30,6 +30,7 @@ module JLDrill
                 @parent.quiz.publisher.subscribe(self, "newProblem")
                 @parent.quiz.publisher.subscribe(self, "problemModified")
                 @parent.quiz.publisher.subscribe(self, "itemAdded")
+                @parent.quiz.publisher.subscribe(self, "itemDeleted")
             end
 		end
 
@@ -39,6 +40,7 @@ module JLDrill
                 @parent.quiz.publisher.unsubscribe(self, "newProblem")
                 @parent.quiz.publisher.unsubscribe(self, "problemModified")
                 @parent.quiz.publisher.unsubscribe(self, "itemAdded")
+                @parent.quiz.publisher.unsubscribe(self, "itemDeleted")
             end
             super
         end
@@ -83,8 +85,16 @@ module JLDrill
             addItem(item)
         end
 
+        def itemDeletedUpdated(item)
+            update(@parent.quiz)
+        end
+
         def edit(item)
             @parent.editItem(item)
+        end
+
+        def delete(item)
+            @parent.deleteItem(item)
         end
 
         def preview(item)

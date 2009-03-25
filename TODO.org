@@ -22,7 +22,7 @@ workflow for creating and editing drills.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM                    | Total | Done |    % | Current | Needed |
 |-------------------------+-------+------+------+---------+--------|
-| * JLDrill Version 0.3.4 |    21 |   13 | 61.9 |    0.14 |   0.21 |
+| * JLDrill Version 0.3.4 |    21 |   18 | 85.7 |    0.20 |   0.21 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </pre>
@@ -113,7 +113,7 @@ the number of jellybeans done in the properties of the task.
 		to come up.  Possibly the search is taking a long time.
 		But when you set, it is also slow.  I saw this with
 		the word shin 芯
-** TODO Be able to delete or edit an item from the "All Vocab" list. [11/12]
+** DONE Be able to delete or edit an item from the "All Vocab" list. [12/12]
    - [X] Refactor widget to be a mixin
    - [X] include Widget from GtkWidget
    - [X] make gtkAdd/RemoveWidget have default values that log a warning
@@ -147,18 +147,19 @@ the number of jellybeans done in the properties of the task.
    - [X] "E" or activation in the All Vocab list allows editing the item
    - [X] Create a "display only mode" for items that are being edited
      or added.
-   - [ ] "Ctrl D" deletes the currently highlighted item.  Prompts first.
+   - [X] "D" deletes the currently highlighted item.  Prompts first.
 
    :PROPERTIES:
    :JellyBeans: 2
+   :Done: 2
    :END:
 
-** TODO Be able to delete the current item. [0/1]
-   - [ ] "Ctrl D" deletes the current problem.  Prompts first.
-     Loading the dictionary is moved to "Ctrl R" (Reference)
+** DONE Be able to delete the current item. [1/1]
+   - [X] "D" deletes the current problem.  Prompts first.
 
    :PROPERTIES:
    :JellyBeans: 3
+   :Done: 3
    :END:
 
 ** TODO Be able to change the order of items in the "All Vocab" list.

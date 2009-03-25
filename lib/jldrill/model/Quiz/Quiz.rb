@@ -63,6 +63,10 @@ module JLDrill
             @publisher.update("load")
         end
 
+        def updateItemDeleted(item)
+            @publisher.update("itemDeleted", item)
+        end
+
         def updateItemAdded(item)
             @publisher.update("itemAdded", item)
         end
@@ -274,6 +278,12 @@ module JLDrill
         def reset
             @contents.reset()
             drill()
+        end
+
+        # Delete an item from the quiz
+        def deleteItem(item)
+            @contents.delete(item)
+            updateItemDeleted(item)
         end
   
         def incorrect

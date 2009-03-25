@@ -33,6 +33,7 @@ module JLDrill
                 if !@parent.quiz.nil?
                     @parent.quiz.publisher.subscribe(self, "newProblem")
                     @parent.quiz.publisher.subscribe(self, "problemModified")
+                    @parent.quiz.publisher.subscribe(self, "itemDeleted")
                 end
                 if !@parent.reference.nil?
                     @parent.reference.publisher.subscribe(self, "edictLoad")
@@ -65,6 +66,10 @@ module JLDrill
 
         def problemModifiedUpdated(problem)
             update(problem)
+        end
+
+        def itemDeletedUpdated(item)
+            # Not sure what to do here
         end
 
         def update(problem)

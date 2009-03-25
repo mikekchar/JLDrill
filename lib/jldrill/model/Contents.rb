@@ -214,6 +214,23 @@ module JLDrill
             end
         end
 
+        # Renumber the positions of the items
+        def repositionItems
+            # allItems renumbers the positions as a side-effect.
+            # Perhaps I should duplicate the code here.  I'm of
+            # two minds...
+            allItems
+        end
+
+        # Delete the specified item
+        def delete(item)
+            if !item.nil?
+                @bins[item.bin].delete_at(item.index)
+                repositionItems
+                saveNeeded
+            end
+        end
+
         # Returns true if all of the bins are empty
         def empty?
             retVal = @bins.all? do |bin|

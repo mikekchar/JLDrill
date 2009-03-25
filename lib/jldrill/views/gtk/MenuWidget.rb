@@ -71,6 +71,10 @@ module JLDrill::Gtk
                     ["/Vocab/_Add...",
                         "<Item>",          "A",             nil, 
                         @view.addNewVocabulary ],
+                    ["/Vocab/_Delete...",
+                        "<Item>",          "D",             nil, 
+                        @view.deleteVocab ],
+
 
                     ["/_Help"],
                     ["/Help/Ac_knowlegements...",

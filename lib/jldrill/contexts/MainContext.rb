@@ -13,6 +13,7 @@ require 'jldrill/contexts/EditVocabularyContext'
 require 'jldrill/contexts/DisplayQuizStatusContext'
 require 'jldrill/contexts/DisplayProblemContext'
 require 'jldrill/contexts/PromptForSaveContext'
+require 'jldrill/contexts/PromptForDeleteContext'
 require 'jldrill/contexts/ShowInfoContext'
 require 'jldrill/contexts/ShowAllVocabularyContext'
 require 'jldrill/model/Acknowlegements'
@@ -191,12 +192,26 @@ module JLDrill
 		
 		def editVocabulary
 		    if !@quiz.currentProblem.nil? &&
-                    !quiz.currentProblem.preview?
+                    !@quiz.currentProblem.preview?
                 # Always show the answer before editing the problem
                 showAnswer
     		    @editVocabularyContext.enter(self) unless @editVocabularyContext.isEntered?
     		end
 		end
+
+        def deleteVocabulary
+		    if !@quiz.currentProblem.nil? &&
+                    !@quiz.currentProblem.preview?
+                # Always show the answer before deleting an item
+                showAnswer
+                prompt = PromptForDeleteContext.new(@viewBridge)
+                if prompt.enter(self) == prompt.yes
+                    item = @quiz.currentProblem.item
+                    @quiz.deleteItem(item)
+                    drill
+                end
+            end
+        end
 
         # Display the problem if it isn't the current one
         def displayItem(item)
@@ -227,12 +242,19 @@ module JLDrill
             end
         end
 
+        def deleteItem(item)
+            if !item.nil?
+                displayItem(item)
+                deleteVocabulary
+            end
+        end
+
 		def updateQuizStatus
 		    @displayQuizStatusContext.quizUpdated(@quiz) if @displayQuizStatusContext.isEntered?
 		end
 		
 		def showAnswer
-            if !quiz.currentProblem.nil?
+            if !@quiz.currentProblem.nil?
                 @displayProblemContext.showAnswer if @displayProblemContext.isEntered?
             end
 		end
@@ -243,14 +265,14 @@ module JLDrill
         end
 
 		def correct
-            if !quiz.currentProblem.nil? && !quiz.currentProblem.displayOnly?
+            if !@quiz.currentProblem.nil? && !@quiz.currentProblem.displayOnly?
                 @quiz.correct
                 @quiz.drill
             end
 		end
 		
 		def incorrect
-            if !quiz.currentProblem.nil? && !quiz.currentProblem.displayOnly?
+            if !@quiz.currentProblem.nil? && !@quiz.currentProblem.displayOnly?
                 @quiz.incorrect
                 @quiz.drill
             end

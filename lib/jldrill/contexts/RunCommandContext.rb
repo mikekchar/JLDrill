@@ -91,6 +91,10 @@ module JLDrill
             @parent.editVocabulary
         end
         
+        def deleteVocab
+            @parent.deleteVocabulary
+        end
+        
         def addNewVocabulary
             @parent.addNewVocabulary
         end
