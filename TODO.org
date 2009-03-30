@@ -189,7 +189,6 @@ the number of jellybeans done in the properties of the task.
 
 <h2>
 ** TODO Give feedback to the user when we refuse to edit or add an item.
-** TODO In the add window, don't reload the table if the reading hasn't changed.
 ** TODO Automatically load dictionary option
    Have an option that is saved with the drill to automatically
    load the dictionary when the drill is loaded.
@@ -208,6 +207,7 @@ the number of jellybeans done in the properties of the task.
    :JellyBeans: 3
    :END:
 
+** TODO Allow searching by Kanji
 ** TODO Need a mechanism for publishing warnings and errors.
 
 ** TODO Full test coverage for all the model objects
@@ -253,7 +253,6 @@ the number of jellybeans done in the properties of the task.
 ** TODO Create Windows packaging.
 
 ** TODO Indicate when the item has been promoted.
-
 ** TODO When save fails, indicate it to the user 
    before bringing up the save as dialog.
 

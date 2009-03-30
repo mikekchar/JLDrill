@@ -127,6 +127,13 @@ module JLDrill
             @hash = to_o.hash
         end
 
+        # swap the positions between two items
+        def swapWith(item)
+            temp = @position
+            @position = item.position
+            item.position = temp
+        end
+
         # Return the save format of the item
         def to_s
             retVal = to_o.to_s
