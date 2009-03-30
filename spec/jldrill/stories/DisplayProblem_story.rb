@@ -51,10 +51,15 @@ module JLDrill::QuestionAndAnswerAreDisplayed
             Story.shutdown
         end
         
+        # Note: In the next two tests newProblem is received 3 times.
+        # That's because it does it when the quiz is reset, when
+        # the quiz is loaded and then when the first problem is
+        # formed.
+
         it "should display a problem when a file is loaded" do
             Story.setup(JLDrill)
             Story.start
-            Story.view.should_receive(:newProblem)
+            Story.view.should_receive(:newProblem).exactly(3).times
             Story.loadQuiz
             Story.shutdown
         end
@@ -62,7 +67,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
         it "should refresh the display when the current vocab has been edited" do
             Story.setup(JLDrill)
             Story.start
-            Story.view.should_receive(:newProblem).exactly(1).times
+            Story.view.should_receive(:newProblem).exactly(3).times
             Story.view.should_receive(:updateProblem).exactly(1).times
             Story.loadQuiz
             Story.mainContext.quiz.currentProblem.should_not be_nil
