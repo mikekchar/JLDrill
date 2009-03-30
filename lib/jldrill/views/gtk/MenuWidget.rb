@@ -16,6 +16,9 @@ module JLDrill::Gtk
                                                '<main>', @accelGroup)
                 @menuItems = [
                     ["/_File"],
+                    ["/File/_New",
+                        "<StockItem>",    "<control>N",     Gtk::Stock::NEW,
+                        @view.createNew ],
                     ["/File/_Save",
                         "<StockItem>",    "<control>S",     Gtk::Stock::SAVE, 
                         @view.save ],

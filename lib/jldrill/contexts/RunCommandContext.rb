@@ -116,5 +116,9 @@ module JLDrill
             retVal = @parent.quiz.options.reviewMode unless @parent.quiz.nil?
             retVal
         end
+        
+        def createNew
+            @parent.createNew
+        end
     end
 end

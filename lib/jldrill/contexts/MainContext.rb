@@ -149,6 +149,12 @@ module JLDrill
 		    end
 		end
 		
+        def createNew
+            promptForSaveAnd do
+                @quiz.setup
+            end
+        end
+
 		def open
 		    promptForSaveAnd do
 		        openFile

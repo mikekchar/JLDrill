@@ -8,7 +8,7 @@ module JLDrill
                     :loadReference, :quit, :info, :statistics, :check,
                     :incorrect, :correct, :vocabTable, :options,
                     :resetQuiz, :editVocab, :addNewVocabulary, :ack, :about,
-                    :drill, :deleteVocab
+                    :drill, :deleteVocab, :createNew
     
 		def initialize(context)
 			super(context)
@@ -32,6 +32,7 @@ module JLDrill
 			@about = Proc.new {@context.about}
             @drill = Proc.new {@context.drill}
             @deleteVocab = Proc.new {@context.deleteVocab}
+            @createNew = Proc.new {@context.createNew}
 		end	
 		
 		def setReviewMode(bool)

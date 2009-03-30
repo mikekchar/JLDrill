@@ -55,6 +55,10 @@ module JLDrill
             @publisher.subscribe(subscriber, "quiz")
         end
 
+        def unsubscribe(subscriber)
+            @publisher.unsubscribe(subscriber, "quiz")
+        end
+
         def update
             @publisher.update("quiz")
         end
@@ -179,6 +183,9 @@ module JLDrill
             publisher = @publisher
             initialize()
             @publisher = publisher
+            # We've reinitialized the quiz, so tell everyone
+            updateLoad
+            update
         end
 
         def parse(name, lines)

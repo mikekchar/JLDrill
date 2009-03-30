@@ -25,6 +25,7 @@ module JLDrill
 		end
 		
 		def exit
+            @parent.quiz.unsubscribe(self)
 		    super
 		end
 		

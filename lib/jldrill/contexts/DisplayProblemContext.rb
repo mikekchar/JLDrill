@@ -22,6 +22,7 @@ module JLDrill
 		    super(parent)
             if !@parent.nil?
                 if !@parent.quiz.nil?
+                    @parent.quiz.publisher.subscribe(self, "load")
                     @parent.quiz.publisher.subscribe(self, "newProblem")
                     @parent.quiz.publisher.subscribe(self, "problemModified")
                 end
@@ -35,6 +36,7 @@ module JLDrill
 		def exit
             if !@parent.nil?
                 if !@parent.quiz.nil?
+                    @parent.quiz.publisher.unsubscribe(self, "load")
                     @parent.quiz.publisher.unsubscribe(self, "newProblem")
                     @parent.quiz.publisher.unsubscribe(self, "problemModified")
                 end
@@ -51,6 +53,13 @@ module JLDrill
                 exists = @parent.reference.include?(problem.item.to_o)
 		    end
 		    return !exists
+        end
+
+        def loadUpdated(quiz)
+            # There isn't likely a new problem at this point, but this
+            # will clear the panes and update the status for the new
+            # quiz
+            newProblemUpdated(quiz.currentProblem)
         end
 
 		def newProblemUpdated(problem)
