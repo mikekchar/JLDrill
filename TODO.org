@@ -177,8 +177,14 @@ the number of jellybeans done in the properties of the task.
    :JellyBeans: 1
    :END:
 
+
+<h2>
 * Backlog
 </h2>
+
+** TODO Create a keyboard only mode.
+   Advanced users can probably just use the keyboard.  In this mode,
+   Remove any UI that is surpulfluous.
 
 ** TODO If a reading can't be found in the dictionary, seach 
    again taking off one character at a time from the end of the
@@ -187,8 +193,6 @@ the number of jellybeans done in the properties of the task.
    :JellyBeans: 2
    :END:
 
-
-<h2>
 ** TODO Give feedback to the user when we refuse to edit or add an item.
 ** TODO Automatically load dictionary option
    Have an option that is saved with the drill to automatically
