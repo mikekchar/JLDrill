@@ -13,6 +13,18 @@ module JLDrill::Gtk
             self.set_default_size(450, 300)
             @vbox = Gtk::VBox.new
             self.add(@vbox)
+            @frame = Gtk::HBox.new
+            @vbox.pack_start(@frame, true, true, 5)
+            @sideButtons = Gtk::VBox.new
+            @frame.pack_end(@sideButtons, true, true, 5)
+            @previewButton = Gtk::Button.new("Preview (P)")
+            @sideButtons.pack_start(@previewButton, false, false, 5)
+            @editButton = Gtk::Button.new("Edit (E)")
+            @sideButtons.pack_start(@editButton, false, false, 5)
+            @upButton = Gtk::Button.new("Move Up (Shift-Up)")
+            @sideButtons.pack_start(@upButton, false, false, 5)
+            @downButton = Gtk::Button.new("Move Down (Shift-Down)")
+            @sideButtons.pack_start(@downButton, false, false, 5)
             @vocabTable = nil
             @buttons = Gtk::HBox.new
             @exitButton = Gtk::Button.new("Exit")
@@ -43,6 +55,18 @@ module JLDrill::Gtk
                     self.preview
                 end
             end
+            @accel.connect(Gdk::Keyval::GDK_Up, Gdk::Window::SHIFT_MASK,
+                           Gtk::ACCEL_VISIBLE) do
+                if !searching?
+                    self.moveCurrentItemUp
+                end
+            end
+            @accel.connect(Gdk::Keyval::GDK_Down, Gdk::Window::SHIFT_MASK,
+                           Gtk::ACCEL_VISIBLE) do
+                if !searching?
+                    self.moveCurrentItemDown
+                end
+            end
 
             add_accel_group(@accel)
 
@@ -57,6 +81,22 @@ module JLDrill::Gtk
             
             @exitButton.signal_connect('clicked') do
                 self.close
+            end
+
+            @previewButton.signal_connect('clicked') do
+                self.preview
+            end
+
+            @editButton.signal_connect('clicked') do
+                self.editCurrentItem
+            end
+
+            @upButton.signal_connect('clicked') do
+                self.moveCurrentItemUp
+            end
+
+            @downButton.signal_connect('clicked') do
+                self.moveCurrentItemDown
             end
         end
 
@@ -122,7 +162,7 @@ module JLDrill::Gtk
                     @vocabTable.stopSearching
                     @view.edit(item)
                 end
-                @vbox.pack_start(@vocabTable, true, true)
+                @frame.pack_start(@vocabTable, true, true)
                 @vocabTable.focusTable
             end
             @vbox.show_all
@@ -139,5 +179,14 @@ module JLDrill::Gtk
             @closed = true
             self.destroy
         end
+
+        def moveCurrentItemUp
+            @vocabTable.moveUp
+        end
+
+        def moveCurrentItemDown
+            @vocabTable.moveDown
+        end
+
     end
 end

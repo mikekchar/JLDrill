@@ -6,7 +6,7 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(%) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2008-12-25 Thu>
-  :CurrentDate:  <2009-03-25 Wed>
+  :CurrentDate:  <2009-03-30 Mon>
   :EndDate: <2009-04-03 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -22,7 +22,7 @@ workflow for creating and editing drills.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM                    | Total | Done |    % | Current | Needed |
 |-------------------------+-------+------+------+---------+--------|
-| * JLDrill Version 0.3.4 |    21 |   18 | 85.7 |    0.20 |   0.21 |
+| * JLDrill Version 0.3.4 |    21 |   20 | 95.2 |    0.21 |   0.21 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </pre>
@@ -162,12 +162,13 @@ the number of jellybeans done in the properties of the task.
    :Done: 3
    :END:
 
-** TODO Be able to change the order of items in the "All Vocab" list.
-   Basically, the user selects an item.  If they press up arrow, the
-   item will go up. If the press down arrow, the item will go down.
+** DONE Be able to change the order of items in the "All Vocab" list.
+   Basically, the user selects an item.  If they press shift up arrow, the
+   item will go up. If they press shift down arrow, the item will go down.
 
    :PROPERTIES:
    :JellyBeans: 2
+   :Done: 2
    :END:
 
 ** TODO Be able to create a new drill

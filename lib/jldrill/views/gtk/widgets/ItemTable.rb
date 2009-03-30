@@ -178,6 +178,57 @@ module JLDrill::Gtk
             return retVal
         end
 
+        # Gets the iter to the row before the selected one.
+        def getPreviousIter
+            retVal = nil
+            iter = @table.selection.selected
+            if !iter.nil?
+                prevPath = iter.path
+                if prevPath.prev!
+                    retVal = @listStore.get_iter(prevPath)
+                end
+            end
+            return retVal
+        end
+
+        def getNextIter
+            retVal = nil
+            iter = @table.selection.selected
+            if !iter.nil?
+                prevPath = iter.path
+                if prevPath.next!
+                    retVal = @listStore.get_iter(prevPath)
+                end
+            end
+            return retVal            
+        end
+
+        def moveUp
+            if hasSelection?
+                iter = @table.selection.selected
+                prevIter = getPreviousIter
+                if !iter.nil? && !prevIter.nil? &&
+                        !iter[0].nil? && !prevIter[0].nil?
+                    iter[0].swapWith(prevIter[0])
+                    @listStore.move_before(iter, prevIter)
+                    selectPath(iter.path)
+                end
+            end
+        end
+
+        def moveDown
+            if hasSelection?
+                iter = @table.selection.selected
+                nextIter = getNextIter
+                if !iter.nil? && !nextIter.nil? &&
+                        !iter[0].nil? && !nextIter[0].nil?
+                    iter[0].swapWith(nextIter[0])
+                    @listStore.move_after(iter, nextIter)
+                    selectPath(iter.path)
+                end
+            end
+        end
+
         # Put focus on the table 
         def focusTable
             @table.grab_focus
