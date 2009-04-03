@@ -409,7 +409,7 @@ less than 0 (i.e., it sat in the review set without being reviewed
 for longer than it's original schedule), then it is known as
 being "behind".
 
-In this case, I'm behind by 577 items.  You will definitely be
+In this case, I'm behind by 340 items.  You will definitely be
 behind from time to time.  The algorithm is designed to adjust
 for your speed, so occasionally you will find that some items
 will get behind naturally.  Or sometimes you take a couple of
@@ -421,7 +421,7 @@ into review mode by pushing the button in the top right corner.
 This will stop the program from ever going into new items mode even
 if you get every item correct.  This is a good way to clear out a backlog.
 
-But in my sad case, I'm just not going to be able to review 577
+But in my sad case, I probably won't to be able to review 340
 items in a reasonable timeframe.  There are multiple problems with this.
 First, the algorithm is designed to keep things in rough order
 in the schedule.  But when items get behind they slowly go out of
@@ -451,10 +451,13 @@ are behind.  This will put them back in the new list.
 
 Options
 -------
-If you press Ctrl-P or select Quiz/Preferences from the menu, you can
+If you press O or select Quiz/Options from the menu, you can
 alter a few options for the quiz.
 
 ![Quiz Options](images/Options.png "Quiz Options")
+
+Note: The hotkey for this operation has changed since the last
+release.  Ctrl-P is now "Append Quiz".
 
 Right now only a few things are available to be changed.  The first is
 whether or not items from the new set are introduced randomly.  If you
