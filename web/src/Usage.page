@@ -5,7 +5,15 @@ sort_info: 40
 ---
 Usage
 =====
-From a command prompt (from Windows: Start->Programs->Accessories->Command) 
+Note: Before starting JLDrill, please make sure you have installed
+the software listed in the [Requirements](Requirements.html) and 
+[Install](Install.html) pages.  Failure to do so will cause problems.  
+This version of JLDrill is difficult to install, so please follow 
+the instructions carefully.  A full installer will be included in 
+a future release.
+
+Starting JLDrill is typically done from a a command prompt 
+(from Windows: Start->Programs->Accessories->Command) 
 type:
 <pre>
     jldrill
@@ -142,7 +150,7 @@ same time complicated to describe and easy to use.  If you want to
 understand the nitty gritty details, along with a rationale for
 the choices made, please see [the strategy documentation](Strategy.html).
 But for those who just want to use the program, a brief description
-of what is going on, follows.
+of what is going on follows.
 
 As has been mentioned, when you first start a drill, all items are
 put into the new set.  Then one item is selected (either the first
@@ -277,7 +285,7 @@ review mode, this gap is filled by an item from the review set.
 
 In this picture the item has been promoted into the review set.
 Then we quit the application and restarted it later in the day.
-As you can see from the status line we have 10 items in the review
+As you can see from the status line we have 12 items in the review
 set, so the application automatically entered review mode.  Eventually
 it displayed this item.
 
@@ -295,10 +303,10 @@ the item was today.   If we reviewed it last yesterday, it would say
 potential schedule if we get the item correct.
 
 Before I make a discussion of scheduling, I would like to discuss the
-last item on the status line.  It says "50%".  When you are in review
+last item on the status line.  It says "0%".  When you are in review
 mode, the application keeps track of the percentage of items you got
-right in the last 10 attempts.  Unbeknownst to you, I reviewed a few
-items before this one and got 50 percent of them right.
+right in the last 10 attempts.  This was my first review item, so I am 
+at 0%
 
 The percentage is a guide to show you when review mode will end.  If
 you can maintain a success rate of 90% in the last 10 attempts, the
@@ -335,7 +343,7 @@ the front of the list.  Items that you are least likely to forget
 are placed at the back.  As you review, you will notice that your
 rate of success gets better and better.  Once your rate of
 success is 90% or more, then there is little point to reviewing
-any more.  We will be better off to learn new items at this point.
+any more.  You will be better off to learn new items at this point.
 
 While you are in review mode, when you get an item correct,
 it is given a potential schedule of twice the amount of time
