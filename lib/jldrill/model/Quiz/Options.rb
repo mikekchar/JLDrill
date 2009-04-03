@@ -4,13 +4,12 @@ module JLDrill
     # Options for the standard quiz.
     class Options
         attr_reader :randomOrder, :promoteThresh, :introThresh, :oldThresh,
-                        :strategyVersion, :reviewMode
+                        :reviewMode
 
         RANDOM_ORDER_RE = /^Random Order/
         PROMOTE_THRESH_RE = /^Promotion Threshold: (.*)/
         INTRO_THRESH_RE = /^Introduction Threshold: (.*)/
         OLD_THRESH_RE = /^Old Threshold: (.*)/
-        STRATEGY_VERSION_RE = /^Strategy Version: (.*)/
             
         def initialize(quiz)
             @quiz = quiz
@@ -18,7 +17,6 @@ module JLDrill
             @promoteThresh = 2
             @introThresh = 10
             @oldThresh = 90
-            @strategyVersion = 0
             @reviewMode = false
         end
         
@@ -28,7 +26,6 @@ module JLDrill
             retVal.promoteThresh = @promoteThresh
             retVal.introThresh = @introThresh
             retVal.oldThresh = @oldThresh
-            retVal.strategyVersion = @strategyVersion
             retVal.reviewMode = @reviewMode
             retVal
         end
@@ -38,7 +35,6 @@ module JLDrill
             options.promoteThresh == @promoteThresh &&
             options.introThresh == @introThresh &&
             options.oldThresh == @oldThresh &&
-            options.strategyVersion == @strategyVersion &&
             options.reviewMode == @reviewMode
         end
             
@@ -57,7 +53,6 @@ module JLDrill
             self.promoteThresh = options.promoteThresh
             self.introThresh = options.introThresh
             self.oldThresh = options.oldThresh
-            self.strategyVersion = options.strategyVersion
         end
         
         def randomOrder=(value)
@@ -88,13 +83,6 @@ module JLDrill
             end
         end
 
-        def strategyVersion=(value)
-            if @strategyVersion != value
-                @strategyVersion = value
-                saveNeeded
-            end
-        end
-
         # Note: Review Mode isn't saved so no save needed    
         def reviewMode=(value)
             if @reviewMode != value
@@ -112,8 +100,6 @@ module JLDrill
                     self.promoteThresh = $1.to_i
                 when INTRO_THRESH_RE 
                     self.introThresh = $1.to_i
-                when STRATEGY_VERSION_RE 
-                    self.strategyVersion = $1.to_i
                 else
                     parsed = false
             end
@@ -122,7 +108,7 @@ module JLDrill
         
         # Return a string showing the current state of the options
         def status
-            retVal = @strategyVersion.to_s
+            retVal = ""
             if(@randomOrder) then retVal += "R" end
             retVal += "(#{@promoteThresh},#{@introThresh})"
             retVal
@@ -135,7 +121,6 @@ module JLDrill
             end
             retVal += "Promotion Threshold: #{@promoteThresh}\n"
             retVal += "Introduction Threshold: #{@introThresh}\n"
-            retVal += "Strategy Version: #{@strategyVersion}\n"
             retVal
         end
     end

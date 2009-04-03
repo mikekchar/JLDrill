@@ -29,7 +29,6 @@ module JLDrill::Gtk
 		    @story.mainContext.quiz.options.randomOrder = true
 		    @story.mainContext.quiz.options.promoteThresh = 3
 		    @story.mainContext.quiz.options.introThresh = 20
-		    @story.mainContext.quiz.options.strategyVersion = 1
 		    
 		    quizOptions = @story.mainContext.quiz.options.clone
 
@@ -37,7 +36,6 @@ module JLDrill::Gtk
    		    existingOptions.randomOrder = false
    		    existingOptions.promoteThresh = 4
    		    existingOptions.introThresh = 15
-   		    existingOptions.strategyVersion = 0
    		    @story.view.optionsWindow.set(existingOptions)
    		    
    		    @story.enterAndPressButton(@story.view.optionsWindow, @OK)
@@ -103,9 +101,5 @@ module JLDrill::Gtk
             test_setValue("introThresh", 10, 20)
         end
 
-        it "should be able to set the Strategy Version option" do
-            test_setValue("strategyVersion", 0, 1)
-        end
-        
 	end
 end

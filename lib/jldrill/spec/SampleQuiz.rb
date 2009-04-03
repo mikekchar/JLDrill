@@ -17,8 +17,7 @@ module JLDrill
         FileOptions = %Q[
 Random Order
 Promotion Threshold: 4
-Introduction Threshold: 17
-Strategy Version: 0]
+Introduction Threshold: 17]
 
         FileVocab = %Q[
 Unseen

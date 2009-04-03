@@ -14,15 +14,12 @@ module JLDrill::Gtk
             @randomOrder = Gtk::CheckButton.new("Introduce new items in random order")
             @promoteThresh = Gtk::HScale.new(1,10,1)
             @introThresh = Gtk::HScale.new(1,100,1)
-            @strategyVersion = Gtk::HScale.new(0,1,1)
             
             self.vbox.add(@randomOrder)
             self.vbox.add(Gtk::Label.new("Promote item after x correct"))
             self.vbox.add(@promoteThresh)
             self.vbox.add(Gtk::Label.new("Max actively learning items"))
             self.vbox.add(@introThresh)
-            self.vbox.add(Gtk::Label.new("Drill Strategy Version (advanced)"))
-            self.vbox.add(@strategyVersion)
         end
         
         def randomOrder=(value)
@@ -49,19 +46,10 @@ module JLDrill::Gtk
             @introThresh.value.to_i
         end
         
-        def strategyVersion=(value)
-            @strategyVersion.value = value
-        end
-        
-        def strategyVersion
-            @strategyVersion.value.to_i
-        end
-        
         def set(options)
             self.randomOrder = options.randomOrder
             self.promoteThresh = options.promoteThresh
             self.introThresh = options.introThresh
-            self.strategyVersion = options.strategyVersion
         end
         
         def updateFromViewData
@@ -73,7 +61,6 @@ module JLDrill::Gtk
             @view.options.randomOrder = self.randomOrder
             @view.options.promoteThresh = self.promoteThresh
             @view.options.introThresh = self.introThresh
-            @view.options.strategyVersion = self.strategyVersion
         end
         
         def execute
