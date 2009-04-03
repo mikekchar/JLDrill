@@ -500,7 +500,8 @@ Above the top panel in the drill is a bank of indicators.
 
 Drills derived from edict entries have markers.  These indicators will
 light up when the word has a specific marker.  In the example, the
-word is a "suru noun".  The markers that JLDrill has indicators for are:
+word is a "usually kana" and an "intrasitive" verb.  The markers that
+JLDrill has indicators for are:
 
 ###Usually Kana
 
@@ -545,8 +546,11 @@ still a little shakey.  It is always best to look at usage examples.
 This item was not found in the reference dictionary.  This only lights up
 when the reference dictionary is loaded.
 
-Note: In the future you will be able to select which markers you want
-indicators for.
+Note: Vocabulary items from Edict sometimes have several meanings.  In
+reality, each meaning should have a separate set of indicators.  Currently,
+all of the indicators for all of the meanings are set.  So a word could
+potentially be transitive for one meaning and intransitive for another.
+Please be careful.  A future version of JLDrill will address this issue.
 
 Kanji/Kana Popup Information
 ----------------------------
@@ -582,19 +586,15 @@ If you hover over a kana character you will only see something like this:
 
 ![Kana Popup](images/KanaPopup.png "Kana Popup")
 
-Note: Sorry for the change in appearance.  I changed my desktop and
-I don't feel like redoing all the pictures.  For the 1.0 release I'll
-have a consistent look to all the pictures.
-
 On the left you can see the stroke order diagram.  On the right you will
 see the character followed by the official representation in roman
-characters.  In this example the character is the katakana ス which
-is represented by the roman characters "su".
+characters.  In this example the character is the katakana し which
+is represented by the roman characters "shi".
 
 Because the pronunciation of the character is not always intuitive
 from the roman characters, I have included my own inerpretation of
-the sound.  In this case it is "soo".  I have also included a few
-English words that contain the same sound -- super and soothe.  Please
+the sound.  In this case it is "shee".  I have also included a few
+English words that contain the same sound -- she and sheep.  Please
 note that I am a Canadian with a Canadian English accent.  While I
 have tried to choose words that correspond with most accents I know
 of, the sounds might be wrong for your English accent.  In a future
@@ -743,6 +743,21 @@ be set.
 
 Pressing the Esc button will cancel the editing process.
 
+Occassionally it's useful to see what your changes will look
+like (or to check the kanji information).  In this case you
+can press the "Preview" button.  It will take the information
+in the upper form and show what it would look like.  
+The information is displayed in the main window.
+
+![Preview the edited item](images/EditPreview.png "Preview the edited item")
+
+Notice how the background on the main window turns purple.
+This is to show you that the item doesn't actually exist;
+it's merely a preview of what it would look like.  In this
+state, pressing the Check, Incorrect and Correct buttons
+do nothing.  When you are finished editing the item,
+the original problem (possibly edited) will be displayed.
+
 **Add** item.  Pressing "A" (or selecting Vocab/Add from the menu)
 will allow you to add a new item to the drill.
 It adds it to the end of the new set.  This feature works exactly the
@@ -769,7 +784,18 @@ added to the quiz at the end of the New Set.
 
 When you press add, the Add window will not close.  This is so that
 you can add several items.  To close the window, press the
-close box in the upper right corner of the window.
+close box in the upper right corner of the window.  After an item
+has been added, the main window will display it.
+
+![Display an item](images/AddShowAllPreview.png "Display an item")
+
+Notice that the background is blue.  This is to distinguish it
+from an edit preview (purple) or a regular quiz item (yellow).
+This special preview is intended to help you keep track of
+what you are doing.  Like the edit preview you will not be able
+to use the Check, Incorrect and Correct functions.  If you wish
+to return to your active quiz, simply press the Next button,
+or press "N".
 
 As with the edit window, this window has a useful workflow
 when using the keyboard.  When the window first opens, the
@@ -789,10 +815,46 @@ hitting the Search Button).  Note that the search is always done on
 the Reading field.  The information in the other fields is only
 used to try to jump the cursor close to the correct item.
 
+Finally, as with the edit window, the add window allows you to
+preview your item.  If you press the "Preview" button, it will
+display the item as you have created it so far.  Just like the
+edit preview, the background will be purple and you will not
+be able to use the Check, Incorrect or Correct buttons.  If you
+cancel the Add, the problem that was displayed before showing
+the preview will be shown.  If you add the item, then the item
+will be shown with a blue background.
+
 **Show all**. Will show a table of all the words in the
 drill.
 
 ![View all the Vocabulary](images/AllVocab.png "View all the Vocabulary")
+
+This window allows you to view and modify your quiz as a whole.
+The current item in the main window will be hilighted in the
+list.  Using the arrow keys or the mouse, you can select
+another item.
+
+If you wish to display that item, press the "Preview" button
+or press the "P" key.  This will show the item in the main window
+with a blue background.
+
+If you wish to edit the item, you can activate the item in
+the list (double-click, or the "Enter" key), or you can
+press the "Edit" button.
+
+You can also change the original order of the items in the
+quiz.  To do so, select an item in the list and press
+the up or down arrows along with the "Shift" key.  Or you can
+use the "Move Up" and "Move Down" buttons.  Note that this
+changes the original order, not the current schedule.  In
+other words it changes the introduction order of unseen items
+if the drill isn't random.
+
+Note: The key to understanding the purple and blue previews
+is that purple previews show items that don't actually exist yet
+(i.e., they are items you are currently editing).  Blue items
+show items that currently exist, but are not being quizzed
+right now.
 
 **Reset**.  You can reset the drill so
 that all the words are Unseen again.  Press Ctrl-R or select
@@ -805,37 +867,28 @@ Pressing Ctrl-I or selecting Drill/Info from the menu will display
 this dialog.
 
 **Create a New Drill**.  There are two ways you can create
-a new drill.  The first is by starting up JLDrill and using the Add
-feature (press "A" or select Vocab/Add from the menu).  Unfortunately
-there is currently no way to rearrange or delete items.
+a new drill.  The first is by selecting "New" from the "File"
+menu or pressing Ctrl-N.  After you have a new drill you can
+add items by using the Add function (Drill->Add, or the "A" key).
 
 You can also create a new drill by
-importing any UTF8 encoded EDict file.  Just open the file (JLDrill
+importing any UTF8 or EUC encoded EDict file.  Just open the file (JLDrill
 will automatically recognize the file type) and then save it to
 another name. Going up one directory from the quizes, you will find a
 director called "dict". In this directory you will find the files that
 generated the drill.  Additionally you will find the Mainichi Shinbun
-Frequency files.  Finally you will also find the whole edict.utf file
-in case you want to drill yourself on all 120,000 words in the
+Frequency files.  Finally you will also find the whole edict file
+in case you want to drill yourself on all 180,000 words in the
 dictionary. 
 
 **Merging Two Drills**.  You can merge two drills by loading one
 of them and the appending the other using the File->Append menu
 item or pressing Ctrl-P.  The files can either be JLDrill files
-or UTF8 encoded EDict files.  If the files are JLDrill files, the
+or UTF8 or EUC encoded EDict files.  If the files are JLDrill files, the
 status of the items will be preserved.  The items in the second file
 will be add after items in the first file.  Also items in the second
 file that duplicate items in the first file will be discard without
 warning.
-
-Notes: This operation takes a very long time and there is no feedback
-showing your status.  Please be patient.  Also if you save the resultant
-drill it will be saved under the first filename.  If you want to save
-it to another filename please make sure to use Save As.
-
-This feature was a quick and dirty implementation for something I needed
-one time.  Please give me feedback as to whether you find it useful or
-not.  I may remove it if nobody needs it.
 
 That's it.  Hope you find it useful. Please see the 
 [Planned Features page](Planned.html) to see what's coming up next.
