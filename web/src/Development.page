@@ -7,7 +7,7 @@ sort_info: 35
 Development Version
 ===================
 
-**Latest Completed Development Version:**  [jldrill-0.3.3](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.3)
+**Latest Completed Development Version:**  [jldrill-0.3.4](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.4)
 
 For details on development versions, see below.
 
@@ -113,9 +113,39 @@ you want to join in on testing.
 
 Development Version History
 ---------------------------
-Current Development Version: **version-0.3.4**.
+Current Development Version: **None**.
 
-Latest Completed Development Version: [jldrill-0.3.3](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.3)
+Latest Completed Development Version: [jldrill-0.3.4](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.4)
+
+Changes in [jldrill-0.3.4](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.4)
+
+* Add description for 々 in the kanji popup
+* Pressing Cancel when quitting used to leave you hung with no window.  Fixed.
+* Fixed a crash, but didn't record the reason for the crash when I fixed it.
+* If you have a kanji question and edit it to take out the kanji, the
+  question in the main view used to be blank.  Now it creates a new
+  meaning problem.
+* You can now load the dictionary from all windows except the Show All
+  Vocabulary window.
+* Improved the workflow for the add and edit windows (see documentation for
+  details)
+* If the user has seen the answer for a question, display it after the
+  vocabulary has been updated.
+* I now renumber the item positions when resetting the drill. This
+  is to offset a very old bug that led to some invalid files.
+* Editing items was sometimes slow due to searching more times than
+  necessary.
+* Considerable amount of code refactoring
+* Make the all vocab list a non-modal dialog and it follow what's
+  going on.
+* Add a word search in tables by pressing Ctrl-F
+* Considerable speedup for appending files
+* Allow editing, deleting and previewing items from the all vocabulary list
+* Allow previewing from edit and add windows
+* Allow deleting items from the main window
+* Allow the user to change the order of items in the quiz in the all
+  vocabulary list
+* Allow the user to create a new drill.
 
 Changes in [jldrill-0.3.3](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.3)
 

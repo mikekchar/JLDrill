@@ -45,6 +45,14 @@ JLDrill is now Beta
 
 News
 ----
+Friday, April 3 2009.
+
+* Development version 0.3.4 released.  This is the release candidate.
+If I don't find any major problems, this will become 0.4.0.  For
+a variety of reasons it actually focuses on speed, a new dictionary
+and the ability to create and edit new drills.  Packaging has been
+pushed back (again).
+
 Thursday, Dec 25 2008.
 
 * Development version 0.3.3 released.  In case you thought you didn't

@@ -173,6 +173,7 @@ the number of jellybeans done in the properties of the task.
 
 ** DONE Be able to create a new drill
 
+
    :PROPERTIES:
    :JellyBeans: 1
    :Done: 1
@@ -180,6 +181,7 @@ the number of jellybeans done in the properties of the task.
 
 
 <h2>
+** TODO Add documentation for delete item
 * Backlog
 </h2>
 
