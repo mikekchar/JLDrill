@@ -181,6 +181,9 @@ the number of jellybeans done in the properties of the task.
 
 
 <h2>
+** TODO Delete doesn't work properly from the all vocab list.
+   After you delete you have two tables.
+** TODO Need a delete button on the all vocab list.
 ** TODO Add documentation for delete item
 * Backlog
 </h2>
