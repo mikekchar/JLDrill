@@ -181,6 +181,8 @@ the number of jellybeans done in the properties of the task.
 
 
 <h2>
+** TODO Don't search edict using regexps because the items might
+   use characters in regexps which can cause a crash.
 ** TODO Delete doesn't work properly from the all vocab list.
    After you delete you have two tables.
 ** TODO Need a delete button on the all vocab list.

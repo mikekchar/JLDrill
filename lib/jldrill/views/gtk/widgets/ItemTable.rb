@@ -165,6 +165,16 @@ module JLDrill::Gtk
             end
         end
 
+        def deleteItem(item)
+            if !item.nil?
+                path = Gtk::TreePath.new(item.position.to_s)
+                iter = @listStore.get_iter(path)
+                if !iter.nil?
+                    @listStore.remove(iter)
+                end
+            end
+        end
+
         # Returns true if an item in the table is selected
         def hasSelection?
             !@table.selection.selected.nil?

@@ -1,5 +1,6 @@
 require 'jldrill/model/Item'
 require 'jldrill/model/items/edict/Edict'
+require 'jldrill/model/items/edict/ComparisonFunctors'
 require 'jldrill/model/items/Vocabulary'
 
 # Just like an Edict, only hashed on the first character of the
@@ -53,7 +54,7 @@ module JLDrill
         def findBinsWith(reading, re)
             result = []
             @hash.each_key do |key|
-                result.push(@hash[key]) if key =~ re
+                result.push(@hash[key]) if re.match(key)
             end
             return result
         end
@@ -76,7 +77,7 @@ module JLDrill
 
         def search(reading)
             result = []
-            re = Regexp.new("^#{reading}")
+            re = JLDrill::StartsWith.new(reading)
 
             # Because they are kanji characters and strings are bytes,
             # we have to check the size using a regular expression
@@ -98,7 +99,7 @@ module JLDrill
         def include?(vocab)
             reading = vocab.reading
             bin = findBin(reading)
-            re = Regexp.new("^#{reading}$")
+            re = JLDrill::Equals.new(reading)
             return searchBin(reading, bin, re).any? do |item|
                 item.to_o.eql?(vocab)
             end

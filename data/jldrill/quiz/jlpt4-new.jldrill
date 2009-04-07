@@ -1,9 +1,7 @@
 0.3.4-LDRILL-SAVE jlpt-voc-4-extra.utf
 Promotion Threshold: 2
 Introduction Threshold: 10
-Strategy Version: 0
 Unseen
-/Kanji: 会う/Reading: あう/Definitions: (1) to meet,to encounter,(2) to have an accident,to have a bad experience/Markers: v5u,vi,P/Position: 1/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
 /Kanji: 青い/Reading: あおい/Definitions: (1) blue,green,(2) pale,(3) unripe,inexperienced/Markers: adj,P/Position: 2/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
 /Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 3/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
 /Kanji: 明い/Reading: あかるい/Definitions: (1) bright,colourful,(2) cheerful,(3) familiar (with),knowledgeable (about)/Markers: io,adj/Position: 4/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
@@ -135,17 +133,17 @@ Unseen
 /Kanji: 女/Reading: おんな/Definitions: woman/Markers: n,P/Position: 130/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
 /Kanji: 女の子/Reading: おんなのこ/Definitions: girl/Markers: n,P/Position: 131/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
 /Kanji: 回/Reading: かい/Definitions: (1) counter for occurrences,(2) counter for innings (baseball)/Markers: ctr,ctr,P/Position: 132/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
-/Kanji: ~階/Reading: ~かい/Definitions: Number of floors\, storeys/Position: 133/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
+/Kanji: 階/Reading: かい/Definitions: (1) stories,storeys,(2) counter for storeys and floors of a building/Markers: n,n-suf,ctr,P/Position: 133/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
 /Kanji: 外国/Reading: がいこく/Definitions: foreign country/Markers: n,P/Position: 134/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
 /Kanji: 外国人/Reading: がいこくじん/Definitions: foreigner/Markers: n,P/Position: 135/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
 /Kanji: 会社/Reading: かいしゃ/Definitions: company,corporation/Markers: n,P/Position: 136/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
-/Kanji: 階段/Reading: かいだん/Definitions: stairs/Markers: n,P/Position: 137/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
-/Kanji: 買い物/Reading: かいもの/Definitions: shopping/Markers: n,P/Position: 138/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
-/Kanji: 買う/Reading: かう/Definitions: to buy/Markers: v5u,P/Position: 139/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
+/Kanji: 階段/Reading: かいだん/Definitions: stairs,stairway,staircase/Markers: n,P/Position: 137/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
+/Kanji: 買い物/Reading: かいもの/Definitions: shopping,purchased goods/Markers: n,P/Position: 138/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
+/Kanji: 買う/Reading: かう/Definitions: (1) to buy,(2) to value,to have a high opinion,(3) to stir,to provoke/Markers: v5u,vt,P/Position: 139/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
 /Kanji: 返す/Reading: かえす/Definitions: to return something/Markers: v5s,vt,P/Position: 140/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
-/Kanji: 帰る/Reading: かえる/Definitions: to go back,to go home,to come home,to return/Markers: v5r,P/Position: 141/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
+/Kanji: 帰る/Reading: かえる/Definitions: (1) to return,to come home,to go home,to go back,(2) (of a guest\, customer\, etc.) to leave,(3) (of a baseball player rounding the bases) to get home/Markers: v5r,vi,P/Position: 141/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
 /Kanji: 顔/Reading: かお/Definitions: face (person)/Markers: n,P/Position: 142/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
-/Hint: 時間がかかる/Reading: かかる/Definitions: (intrans-verb) to take (e.g. time\, money\, etc)/Position: 143/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
+/Kanji: 掛かる/Reading: かかる/Definitions: (1) to take,(2) to hang,(3) to arrive,(4) to come under (a contract\, a tax),(5) to start (engines\, motors),(6) to attend,to deal with,to handle,(7) to have started to,to be on the verge of,(8) to overlap (e.g. information in a manual),to cover,(9) to (come) at/Markers: v5r,vi,v5r,v5r,v5r,v5r,v5r,v5r,aux-v,v5r,aux-v,P/Position: 143/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
 /Reading: かぎ/Definitions: key/Markers: n,P/Position: 144/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
 /Kanji: 書く/Reading: かく/Definitions: to write/Markers: v5k,P/Position: 145/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
 /Kanji: 学生/Reading: がくせい/Definitions: student/Markers: n,P/Position: 146/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
@@ -677,6 +675,7 @@ Unseen
 /Kanji: 悪い/Reading: わるい/Definitions: bad,inferior/Markers: adj,P/Position: 672/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
 Poor
 /Kanji: 噫/Reading: ああ/Definitions: (1) Ah!,Oh!,Alas!,(2) Yes,Indeed,That is correct,(3) Hey!,Yo!,(4) Uh huh,Yeah yeah,Right,Gotcha/Markers: int,uk/Position: 0/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
+/Kanji: 会う/Reading: あう/Definitions: (1) to meet,to encounter,(2) to have an accident,to have a bad experience/Markers: v5u,vi,P/Position: 1/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/
 Fair
 Good
 Excellent
