@@ -4,6 +4,7 @@
 require "jldrill/model/Item"
 require "jldrill/model/items/Vocabulary"
 require "jldrill/model/items/edict/Meaning"
+require 'jldrill/model/items/edict/ComparisonFunctors'
 require 'Context/Publisher'
 require 'Context/Log'
 require 'kconv'
@@ -234,7 +235,7 @@ module JLDrill
 
         def search(reading)
             result = []
-            re = Regexp.new("^#{reading}")
+            re = JLDrill::StartsWith.new(reading)
             0.upto(@readings.size - 1) do |i|
                 candidate = @readings[i]
                 if !candidate.nil?
