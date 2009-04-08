@@ -155,7 +155,7 @@ module JLDrill::Gtk
 
         def updateTable(items)
             if !@vocabTable.nil?
-                @vbox.remove(@vocabTable)
+                @frame.remove(@vocabTable)
             end
             if !items.empty?
                 @vocabTable = ItemTable.new(items) do |item|
