@@ -21,6 +21,8 @@ module JLDrill::Gtk
             @sideButtons.pack_start(@previewButton, false, false, 5)
             @editButton = Gtk::Button.new("Edit (E)")
             @sideButtons.pack_start(@editButton, false, false, 5)
+            @deleteButton = Gtk::Button.new("Delete (D)")
+            @sideButtons.pack_start(@deleteButton, false, false, 5)
             @upButton = Gtk::Button.new("Move Up (Shift-Up)")
             @sideButtons.pack_start(@upButton, false, false, 5)
             @downButton = Gtk::Button.new("Move Down (Shift-Down)")
@@ -90,6 +92,11 @@ module JLDrill::Gtk
             @editButton.signal_connect('clicked') do
                 self.editCurrentItem
             end
+
+            @deleteButton.signal_connect('clicked') do
+                self.deleteCurrentItem
+            end
+
 
             @upButton.signal_connect('clicked') do
                 self.moveCurrentItemUp
