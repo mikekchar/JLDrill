@@ -36,6 +36,10 @@ module JLDrill::Gtk
         def addItem(item)
             @itemTableWindow.addItem(item)
         end
+
+        def removeItem(item)
+            @itemTableWindow.removeItem(item)
+        end
     end
 end
 

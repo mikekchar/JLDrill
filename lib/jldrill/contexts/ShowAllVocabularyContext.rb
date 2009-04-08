@@ -69,6 +69,10 @@ module JLDrill
             @mainView.addItem(item)
         end
 
+        def removeItem(item)
+            @mainView.removeItem(item)
+        end
+
 		def loadUpdated(quiz)
             update(quiz)
 		end
@@ -86,7 +90,7 @@ module JLDrill
         end
 
         def itemDeletedUpdated(item)
-            update(@parent.quiz)
+            removeItem(item)
         end
 
         def edit(item)

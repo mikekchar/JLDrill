@@ -133,6 +133,16 @@ module JLDrill::Gtk
             end
         end
 
+        def removeItem(item)
+            if !item.nil?
+                if @vocabTable.nil?
+                    updateTable([item])
+                else
+                    @vocabTable.removeItem(item)
+                end
+            end
+        end
+
         def editCurrentItem
             if !@vocabTable.nil?
                 item = @vocabTable.getSelectedItem

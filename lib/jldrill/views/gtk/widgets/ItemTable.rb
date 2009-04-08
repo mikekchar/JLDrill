@@ -165,7 +165,7 @@ module JLDrill::Gtk
             end
         end
 
-        def deleteItem(item)
+        def removeItem(item)
             if !item.nil?
                 path = Gtk::TreePath.new(item.position.to_s)
                 iter = @listStore.get_iter(path)

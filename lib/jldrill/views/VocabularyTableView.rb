@@ -30,6 +30,10 @@ module JLDrill
             # Only in concrete class
         end
 
+        def removeItem(item)
+            # Only in concrete class
+        end
+
         def close
             @context.exit
         end
