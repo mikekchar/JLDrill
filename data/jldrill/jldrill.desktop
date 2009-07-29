@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=JLDrill
+Name=JLDrill - Japanese Language Drills
 GenericName=jldrill
-Comment=Japanese Language Drill
+Comment=Tool for learning Japanese
 Exec=/var/lib/gems/1.8/bin/jldrill
 Terminal=false
 Icon=jldrill-icon
