@@ -159,6 +159,12 @@ module JLDrill
                 (SECONDS_PER_DAY * (1.0 - current)).to_i
             end
         end
+
+        # Calculate the difficulty from the interval.  This is used
+        # to reset the difficulty of an item based on past performance.
+        def difficultyFromInterval(interval)
+            return 0
+        end
         
         # Return the amount of time we should wait (in ideal time)
         # for the next review.

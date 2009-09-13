@@ -166,7 +166,7 @@ module JLDrill
         
         end
 
-        it "should decrement th interval from 1 day approaching 0 days as difficulty increases from 6" do
+        it "should decrement the interval from 1 day approaching 0 days as difficulty increases from 6" do
             last = days(1)
             # Note, if you make the number too big, it will actually hit zero
             # due to rounding errors.  So if you alter the algorithm remember
@@ -178,6 +178,10 @@ module JLDrill
                 last = @items[1].schedule.intervalFromDifficulty(i)
                 (last > 0).should be(true)
             end            
+        end
+
+        it "should be able to calculate the difficulty based on the interval that has passed." do
+            @items[1].schedule.difficultyFromInterval(10).should be(0)
         end
         
         it "should be able to tell if an item is overdue to be reviewed" do
