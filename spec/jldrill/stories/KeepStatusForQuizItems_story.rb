@@ -89,7 +89,7 @@ module JLDrill
 		    should_be_plus_minus_ten_percent(actual, expected)
         end
         
-        it "should set a minimum schedule equal to firstInterval" do
+        it "should set a minimum schedule based on difficulty" do
             # Set reviewed time to 1 day ago
             @items[3].schedule.lastReviewed = Time::now - days(1)
 		    @items[3].schedule.scheduled?.should be(false)
@@ -150,23 +150,23 @@ module JLDrill
             return 60 * 60 * 24 * n
         end
         
-        it "should choose the longest first interval with 0 difficulty" do
+        it "should choose the longest interval with 0 difficulty" do
             @items[1].schedule.numIncorrect = 0
             @items[1].schedule.difficulty.should be(0)
-            @items[1].schedule.firstInterval.should be(days(5))
+            @items[1].schedule.intervalFromDifficulty(0).should be(days(5))
         end
         
-        it "should decrement first interval by 20 percent from difficulty 1 to 5, down to 1 day" do
+        it "should decrement the interval by 20 percent from difficulty 1 to 5, down to 1 day" do
             1.upto(5) do |i|
                 @items[1].schedule.numIncorrect = i
                 @items[1].schedule.difficulty.should be(i)
                 int = days(1) + (days(4) * (1.0 - (i.to_f / 5.0))).to_i
-                @items[1].schedule.firstInterval.should be(int)
+                @items[1].schedule.intervalFromDifficulty(i).should be(int)
             end
         
         end
 
-        it "should decrement first interval from 1 day approaching 0 days as difficulty increases from 6" do
+        it "should decrement th interval from 1 day approaching 0 days as difficulty increases from 6" do
             last = days(1)
             # Note, if you make the number too big, it will actually hit zero
             # due to rounding errors.  So if you alter the algorithm remember
@@ -174,8 +174,8 @@ module JLDrill
             6.upto(50) do |i|
                 @items[1].schedule.numIncorrect = i
                 @items[1].schedule.difficulty.should be(i)
-                (last > @items[1].schedule.firstInterval).should be(true)
-                last = @items[1].schedule.firstInterval
+                (last > @items[1].schedule.intervalFromDifficulty(i)).should be(true)
+                last = @items[1].schedule.intervalFromDifficulty(i)
                 (last > 0).should be(true)
             end            
         end

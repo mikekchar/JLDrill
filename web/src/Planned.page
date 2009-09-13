@@ -10,15 +10,15 @@ Here is a prioritized list of planned features.  If you think
 the priority is wrong, please email me.  If you think of another
 feature, please email me.
 
-* Memory usage and speed.  JLDrill uses a *lot* of memory.  When
-the dictionary is loaded it's up to about 290 megs on my machine.
-I've discovered the root of the problem and the fix should also
-dramatically speed up dictionary loading. **Status: done**
-* Drill construction tool.  We need to be able to make a brand new drill.
-We need to be able to delete items.  We need to be able to move items up and
-down in order. **Status: done**
-* Finish correcting JLPT level 2 content.  **Status: ~1500 vocab reviewed**
 * Specific mode for grammar drills.  **Status: Not done**
+* Chinese drill mode.  Allow the user to load the CEDict dictionary
+  and view kanji popups showing pinyin descriptions.  **Status: partially 
+  finished in a separate branch**
+* Improve search to allow searches with Kanji **Status: Not done**
+* Better warning and error messages **Status: Not done**
+* Allow the user to set various options.  For example, where to load the dictionary, auto load last drill, choose their own fonts, colors, etc. **Status: Not done**
+* Allow user to tweak the parameters of the learning strategy **Status: Not done**
+* Finish correcting JLPT level 2 content.  **Status: ~1500 vocab reviewed**
 * Easier installation. **Status: Not done**
 * Kanji only drills with Heisig style stories.  **Status: Not done**
 * A kanji story generator with a tool to find kanji that have the same radicals.  

@@ -15,21 +15,28 @@ Screenshot
 
 ![JLDrill screenshot](images/Screenshot.png "JLDrill screenshot")
 
-What's New for 0.3.0
+What's New for 0.4.0
 --------------------
-  Version 0.3.0 introduces a [long-term spaced repetition scheduling
-  algorithm](Strategy.html).  It is one of my own devising and still
-  needs a bit of teaking.  However, even at this early stage I find
-  it is working very well.
-  
-  Version 0.3.0 also offers numerous user interface improvements.
-  There is an indicator box that shows several of the useful Edict
-  markers for each vocabulary.  A new option for adding vocabulary
-  allows you to add new entries to a quiz (or even build a quiz
-  from scratch).  The display of the questions has been improved
-  using larger fonts for the kanji.  Finally, if you load the kanji
-  dictionary, you can hover over a kanji character and get a
-  rikaichan-like popup showing useful information about that character.
+
+  Version 0.4.0 focusses on ease of use and speed.  While a Windows
+  packager was planned, for a variety of reasons it was dropped
+  from this version.  Hopefully it will find its way back for version
+  0.5.0.  But this version features a Debian package that can be
+  used in Linux distributions that use .deb files (For example
+  Debian and Ubuntu).
+
+  New to this version is an updated EDict dictionary.  JLDrill
+  will also read EUC files so you may now replace the distributed
+  version with new ones without having to change the file to UTF8.
+  The loading of the dictionary is also significantly faster.
+
+  You can now build a new quiz directly from JLDrill.  To that
+  end, the Add and Edit windows have had their workflow modified. The All
+  Vocab window has also been modified to allow you to modify, preview, 
+  delete and reorder items in the quiz.
+
+  Various bugs and small improvements to the scheduling strategy
+  have also been implemented.
 
 JLDrill is now Beta   
 -------------------

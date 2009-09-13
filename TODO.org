@@ -6,8 +6,8 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(%) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2008-12-25 Thu>
-  :CurrentDate:  <2009-03-30 Mon>
-  :EndDate: <2009-04-03 Fri>
+  :CurrentDate:  <2009-08-28 Fri>
+  :EndDate: <2009-09-04 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -22,7 +22,7 @@ workflow for creating and editing drills.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM                    | Total | Done |     % | Current | Needed |
 |-------------------------+-------+------+-------+---------+--------|
-| * JLDrill Version 0.3.4 |    21 |   21 | 100.0 |    0.22 |   0.21 |
+| * JLDrill Version 0.3.4 |    21 |   21 | 100.0 |    0.09 |   0.08 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </pre>
@@ -113,6 +113,7 @@ the number of jellybeans done in the properties of the task.
 		to come up.  Possibly the search is taking a long time.
 		But when you set, it is also slow.  I saw this with
 		the word shin 芯
+
 ** DONE Be able to delete or edit an item from the "All Vocab" list. [12/12]
    - [X] Refactor widget to be a mixin
    - [X] include Widget from GtkWidget
@@ -173,20 +174,22 @@ the number of jellybeans done in the properties of the task.
 
 ** DONE Be able to create a new drill
 
-
    :PROPERTIES:
    :JellyBeans: 1
    :Done: 1
    :END:
 
-
-<h2>
 ** DONE Don't search edict using regexps because the items might
    use characters in regexps which can cause a crash.
+
 ** DONE Delete doesn't work properly from the all vocab list.
    After you delete you have two tables.
+
 ** DONE Need a delete button on the all vocab list.
+
 ** TODO Add documentation for delete item
+
+<h2>
 * Backlog
 </h2>
 

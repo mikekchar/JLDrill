@@ -824,6 +824,12 @@ cancel the Add, the problem that was displayed before showing
 the preview will be shown.  If you add the item, then the item
 will be shown with a blue background.
 
+**Delete item**.  Pressing "D" or selecting "Delete..." from the
+Vocab menu will delete the currently displayed item.  JLDrill
+will first ask to verify whether or not you really want to
+delete the item.  Be careful since once you delete it you
+can't get it back.
+
 **Show all**. Will show a table of all the words in the
 drill.
 
@@ -856,6 +862,11 @@ is that purple previews show items that don't actually exist yet
 show items that currently exist, but are not being quizzed
 right now.
 
+The "D" key will allow you to delete the currently highlighted
+item.  JLDrill will ask you if you really want to delete
+the item.  Be careful because once the item is deleted you
+can't get it back.
+
 **Reset**.  You can reset the drill so
 that all the words are Unseen again.  Press Ctrl-R or select
 Drill/Reset from the menu to do this.
@@ -875,7 +886,7 @@ You can also create a new drill by
 importing any UTF8 or EUC encoded EDict file.  Just open the file (JLDrill
 will automatically recognize the file type) and then save it to
 another name. Going up one directory from the quizes, you will find a
-director called "dict". In this directory you will find the files that
+directory called "dict". In this directory you will find the files that
 generated the drill.  Additionally you will find the Mainichi Shinbun
 Frequency files.  Finally you will also find the whole edict file
 in case you want to drill yourself on all 180,000 words in the

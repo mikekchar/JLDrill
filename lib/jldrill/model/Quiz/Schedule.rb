@@ -146,12 +146,12 @@ module JLDrill
         # has never gotten the item incorrect, then the interval 
         # will be 5.0.  For each time the get it wrong, it moves 
         # closer to 0.
-        def firstInterval
-            if difficulty <= 5
+        def intervalFromDifficulty(diff)
+            if diff <= 5
                 SECONDS_PER_DAY +
-                    (MAX_ADDITIONAL_TIME * (1.0 - (difficulty.to_f / 5.0))).to_i
+                    (MAX_ADDITIONAL_TIME * (1.0 - (diff.to_f / 5.0))).to_i
             else
-                scale = difficulty - 5
+                scale = diff - 5
                 current = 0.0
                 1.upto(scale) do |x|
                     current = current + (1 - current).to_f / 10.0
@@ -164,11 +164,12 @@ module JLDrill
         # for the next review.
         #
         # Calculates the interval for the item.  For newly
-        # promoted items, the schedule will be the firstInterval().  
+        # promoted items, the schedule will be the interval based on 
+        # difficulty.  
         # For the rest it is twice the actual amount of time since 
         # the last review.
         def calculateInterval
-            interval = firstInterval()
+            interval = intervalFromDifficulty(difficulty)
             # If it is scheduled, then that means it isn't 
             # a newly promoted item
             if scheduled?
