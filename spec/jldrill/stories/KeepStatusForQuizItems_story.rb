@@ -181,7 +181,12 @@ module JLDrill
         end
 
         it "should be able to calculate the difficulty based on the interval that has passed." do
-            @items[1].schedule.difficultyFromInterval(10).should be(0)
+            sched = @items[1].schedule
+            sched.difficultyFromInterval(10*60*60*24).should be(0)
+            0.upto(50) do |i|
+                int = sched.intervalFromDifficulty(i)
+                sched.difficultyFromInterval(int).should be(i)
+            end
         end
         
         it "should be able to tell if an item is overdue to be reviewed" do

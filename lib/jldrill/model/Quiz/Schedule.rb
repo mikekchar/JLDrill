@@ -163,7 +163,12 @@ module JLDrill
         # Calculate the difficulty from the interval.  This is used
         # to reset the difficulty of an item based on past performance.
         def difficultyFromInterval(interval)
-            return 0
+            i = 0
+            while interval < intervalFromDifficulty(i)
+                i += 1
+            end
+
+            return i
         end
         
         # Return the amount of time we should wait (in ideal time)
