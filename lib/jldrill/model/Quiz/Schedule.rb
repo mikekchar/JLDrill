@@ -192,6 +192,16 @@ module JLDrill
             interval
         end
         
+        def recalculateDifficulty
+            # If it's scheduled, then it isn't a newly promoted item
+            # Set the difficulty based on how long the person was
+            # able to go since the last review.
+            if scheduled?
+                elapsed = Time::now.to_i - reviewedTime().to_i
+                difficulty = difficultyFromInterval(elapsed)
+            end
+        end
+
         # Schedule the item for review
         def schedule
             start = calculateStart
@@ -236,6 +246,7 @@ module JLDrill
 
         # Mark the item as correct.
         def correct
+            recalculateDifficulty
             schedule
             markReviewed
             @score += 1
