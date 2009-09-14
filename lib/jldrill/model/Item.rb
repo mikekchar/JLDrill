@@ -27,8 +27,8 @@ module JLDrill
         POSITION_RE = /^Position: (.*)/
 
         attr_reader :itemType, :contents, :position, :bin, :index, :status,
-                    :hash
-        attr_writer :position, :bin, :index
+                    :hash, :container
+        attr_writer :position, :bin, :index, :container
 
         def initialize(item=nil)
             if item.nil?
@@ -43,6 +43,7 @@ module JLDrill
             @position = 0
             @bin = 0
             @index = nil
+            @container = nil
             @status = ItemStatus.new(self)
             @status.add(Schedule.new(self))
         end

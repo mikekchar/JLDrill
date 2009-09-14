@@ -125,12 +125,29 @@ module JLDrill
             (interval / 10) - rand(interval / 5) 
         end
 
+        # Time in this strategy is flexible.  The dates aren't
+        # absolute.  In order to maintain this flexibility,
+        # "Now" is defined to be the scheduled date of the first
+        # item in the review set.  That's because when you are
+        # reviewing, it will be shown now.
+        def now
+            # Set a default "Now"
+            retVal = Time::now
+            if !@item.nil? && !@item.container.nil?
+                firstItem = @item.container.bins[4][0]
+                if !firstItem.nil? && firstItem.schedule.scheduled?
+                    retVal = firstItem.schedule.scheduledTime
+                end
+            end
+            return retVal
+        end
+
         # Return the time where we should measure the interval from.
         # We want to start from the date the current item is
         # scheduled for, rather than now.  Otherwise if the user
         # is ahead we could end up scheduling in the past.
         def calculateStart
-            start = Time::now
+            start = now()
             if @item.bin == 4
                 if scheduled? && (start.to_i < @scheduledTime.to_i)
                     start = @scheduledTime

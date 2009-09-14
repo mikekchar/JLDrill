@@ -52,6 +52,7 @@ module JLDrill
                 item.position = length 
             end
             @bins[bin].push(item)
+            item.container = self
             itemAdded(item)
             saveNeeded
         end
