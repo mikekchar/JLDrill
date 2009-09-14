@@ -292,7 +292,7 @@ module JLDrill
             item.schedule.now.to_i.should eql(item.schedule.scheduledTime.to_i)
 
             item2.schedule.schedule(42)
-            item2.schedule.scheduledTime.should eql(item.schedule.now + 42)
+            item2.schedule.scheduledTime.should eql(item2.schedule.now + 42)
         end
 
     end

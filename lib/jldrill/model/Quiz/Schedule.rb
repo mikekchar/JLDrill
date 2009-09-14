@@ -85,7 +85,7 @@ module JLDrill
         # Updates the schedule for the lastReviewed to be now.
         # Returns the time that it set.
         def markReviewed
-            @lastReviewed = Time::now
+            @lastReviewed = now()
         end
    
         # Returns true if the item has been marked reviewed at least once
@@ -316,7 +316,7 @@ module JLDrill
             if !scheduled?
                 return false
             else
-                @scheduledTime.to_i < Time::now.to_i
+                @scheduledTime.to_i < now().to_i
             end
         end
         
@@ -324,7 +324,7 @@ module JLDrill
         # 0 is today, -1 is yesterday, 1 is tomorrow.
         # Uses the date, not 24 hour time period.
         def onDay?(date, day)
-            target = Time::now + (SECONDS_PER_DAY * day)
+            target = now() + (SECONDS_PER_DAY * day)
             return date.day == target.day && 
                 date.month == target.month &&
                 date.year == target.year
