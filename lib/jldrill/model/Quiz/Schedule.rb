@@ -198,7 +198,10 @@ module JLDrill
             # able to go since the last review.
             if scheduled?
                 elapsed = Time::now.to_i - reviewedTime().to_i
-                difficulty = difficultyFromInterval(elapsed)
+                diff = difficultyFromInterval(elapsed)
+                if diff < @numIncorrect
+                    @numIncorrect = diff
+                end
             end
         end
 

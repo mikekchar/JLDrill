@@ -162,8 +162,7 @@ module JLDrill
                 @items[1].schedule.difficulty.should be(i)
                 int = days(1) + (days(4) * (1.0 - (i.to_f / 5.0))).to_i
                 @items[1].schedule.intervalFromDifficulty(i).should be(int)
-            end
-        
+            end        
         end
 
         it "should decrement the interval from 1 day approaching 0 days as difficulty increases from 6" do
@@ -186,6 +185,21 @@ module JLDrill
             0.upto(50) do |i|
                 int = sched.intervalFromDifficulty(i)
                 sched.difficultyFromInterval(int).should be(i)
+            end
+        end
+
+        it "should modify the difficulty when the item is correctly answered" do
+            sched = @items[1].schedule
+            sched.numIncorrect = 10
+            sched.schedule
+            sched.correct
+            sched.difficulty.should be(10)
+            1.upto(5) do |i|
+                iDaysAgo = i*60*60*24
+                # Pretend that we reviewed it i days ago
+                sched.lastReviewed = Time::now - iDaysAgo
+                sched.correct
+                sched.difficulty.should be(sched.difficultyFromInterval(iDaysAgo))
             end
         end
         
