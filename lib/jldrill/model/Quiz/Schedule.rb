@@ -223,9 +223,13 @@ module JLDrill
         end
 
         # Schedule the item for review
-        def schedule
+        def schedule(int = 0)
             start = calculateStart
-            interval = calculateInterval
+            if int == 0
+                interval = calculateInterval
+            else
+                interval = int
+            end
             @scheduledTime = start + interval + randomVariation(interval)
             return @scheduledTime
         end
