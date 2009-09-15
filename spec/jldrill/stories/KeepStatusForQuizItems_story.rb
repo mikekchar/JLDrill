@@ -204,15 +204,6 @@ module JLDrill
             end
         end
         
-        it "should be able to tell if an item is overdue to be reviewed" do
-            @items[1].schedule.setScheduledTime(Time::now - Schedule::SECONDS_PER_DAY)
-            @items[1].schedule.overdue?.should be(true)
-            @items[1].schedule.setScheduledTime(Time::now + Schedule::SECONDS_PER_DAY)
-            @items[1].schedule.overdue?.should be(false)            
-            @items[1].schedule.setScheduledTime(Time::now)
-            @items[1].schedule.overdue?.should be(false)            
-        end
-        
         it "should be able to tell which day an item is scheduled for" do
             @items[1].schedule.setScheduledTime(Time::now)
             @items[1].schedule.scheduledOn?(0).should be(true)

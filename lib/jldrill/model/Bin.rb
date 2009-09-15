@@ -149,14 +149,16 @@ module JLDrill
             end
         end
         
-        def numOverdue
-            total = 0
-            @contents.each do |item|
-                if item.schedule.overdue?
-                    total += 1
-                end
+        # Returns the number of days the "now" for scheduled
+        # items are skewed from the real now.  Positive numbers
+        # are in the future, negative numbers in the past.
+        # rounds to the nearest tenth.
+        def dateSkew
+            skew = 0.0
+            if @contents.size > 0 && !@contents[0].nil?
+                skew = @contents[0].schedule.dateSkew
             end
-            total
+            return skew
         end
         
         def numScheduledOn(day)

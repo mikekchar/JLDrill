@@ -298,10 +298,6 @@ module JLDrill
             retVal += "Working: #{@bins[1].length}, "
             retVal += "#{@bins[2].length}, "
             retVal += "#{@bins[3].length}"
-            overdue = @bins[4].numOverdue
-            if overdue != 0
-                retVal += " Behind: #{overdue}"
-            end
             retVal
         end
         

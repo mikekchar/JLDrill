@@ -79,6 +79,7 @@ module JLDrill
             end
             @learned = 0
             @reviewed = 0
+            @reviewRateSum = 0
             @reviewTimer = StatsTimer.new
             @learnTimer = StatsTimer.new
             @currentTimer = nil
@@ -154,6 +155,18 @@ module JLDrill
             end
             return @levels[level]
         end
+
+        def recordReviewRate(item)
+            @reviewRateSum += item.schedule.reviewRate
+        end
+
+        def reviewRate
+            retVal = 1.0
+            if @reviewed != 0
+                retVal = ((@reviewRateSum * 10).round / @reviewed).to_f / 10 
+            end
+            return retVal
+        end
         
         def correct(item)
             # currently only level 4 items are reviewed
@@ -162,6 +175,7 @@ module JLDrill
             end
             @correct += 1
             @reviewed += 1
+            recordReviewRate(item)
             level = getLevel(item)
             if !level.nil?
                 level.correct
@@ -178,6 +192,7 @@ module JLDrill
             end
             @incorrect += 1
             @reviewed += 1
+            recordReviewRate(item)
             level = getLevel(item)
             if !level.nil?
                 level.incorrect

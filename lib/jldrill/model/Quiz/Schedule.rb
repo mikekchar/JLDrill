@@ -306,12 +306,23 @@ module JLDrill
             @seen
         end
 
+        # Converts seconds to days rounded to the nearest 10th of a day
+        def secondsToDays(seconds)
+            return (seconds * 10 / SECONDS_PER_DAY).to_f / 10
+        end
+
         # Returns the total number of days the item was last
         # scheduled for.  Returns a float.
         def potentialScheduleInDays
-            seconds = calculateInterval.to_i
-            days = (seconds * 10 / SECONDS_PER_DAY).to_f / 10
-            return days
+            return secondsToDays(calculateInterval.to_i)
+        end
+
+        # Returns the number of days the "now" for scheduled
+        # items are skewed from the real now.  Positive numbers
+        # are in the future, negative numbers in the past.
+        # rounds to the nearest tenth.
+        def dateSkew
+            return secondsToDays(nowForScheduling.to_i - Time::now.to_i)
         end
         
         # Return the total number of seconds from the
@@ -320,22 +331,12 @@ module JLDrill
             retVal = -1
             if scheduled?
                 if @duration == -1
-                    retVal = @scheduledTime.to_i - @reviewedTime.to_i
+                    retVal = @scheduledTime.to_i - reviewedTime().to_i
                 else
                     retVal = @duration
                 end
             end
             return retVal
-        end
-        
-        # Returns true if the item is overdue to be reviewed
-        # Obsolete.  This should never happen any more.
-        def overdue?
-            if !scheduled?
-                return false
-            else
-                @scheduledTime.to_i < nowForScheduling().to_i
-            end
         end
         
         # Returns true if the date is on the specified day.
@@ -394,6 +395,19 @@ module JLDrill
                 else
                     retVal = reviewedTime().strftime("%x")
                 end
+            end
+            retVal
+        end
+
+        # Returns the "velocity" for reviewing.  It shows the ratio
+        # of the actual time between review vs. scheduled time.
+        # Values greater than 1 mean it is taking longer than expected,
+        # values less than 1 mean it is taking less time than expected.
+        def reviewRate
+            retVal = 1.0
+            dur = scheduleDuration
+            if dur != 0
+                retVal = elapsedTime.to_f / dur.to_f
             end
             retVal
         end

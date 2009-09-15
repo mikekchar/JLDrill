@@ -78,7 +78,7 @@ module JLDrill::Gtk
             hbox = Gtk::HBox.new()
             add(hbox)
             ## Layout everything in a vertical table
-            labels = ["Overdue", "Today", "  Tomorrow  ", "2 Days",
+            labels = ["Skew", "Today", "  Tomorrow  ", "2 Days",
                       "3 Days", "4 Days", "5 Days", "6 Days"]
             @scheduleTable = StatisticsTable.new(labels)
             hbox.add(@scheduleTable)
@@ -94,7 +94,7 @@ module JLDrill::Gtk
             hbox.add(@accuracyTable)
             labels = ["Reviewed", "Learned", " Time to review ", 
                       "Time to learn", "Total Accuracy", " Learn Time % ", 
-                      " ", " "]
+                      " Review Rate ", " "]
             @rateTable = StatisticsTable.new(labels)
             hbox.add(@rateTable)
         end  
@@ -129,7 +129,7 @@ module JLDrill::Gtk
         end
         
         def updateSchedule(bin)
-            @scheduleTable.values[0].text = bin.numOverdue.to_s
+            @scheduleTable.values[0].text = bin.dateSkew.to_s + " days"
             0.upto(6) do |i|
                 @scheduleTable.values[i+1].text = bin.numScheduledOn(i).to_s
             end
@@ -165,7 +165,7 @@ module JLDrill::Gtk
             @rateTable.values[3].text = statistics.learnPace.to_s + "s "
             @rateTable.values[4].text = statistics.accuracy.to_s + "% "
             @rateTable.values[5].text = statistics.learnTimePercent.to_s + "% "
-            @rateTable.values[6].text = "    "
+            @rateTable.values[6].text = statistics.reviewRate.to_s + "x "
             @rateTable.values[7].text = "    "
         end
     end
