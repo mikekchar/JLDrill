@@ -289,10 +289,10 @@ module JLDrill
             # a scheduled item in the review set
             item.should_not be_nil
             item.schedule.scheduled?.should be(true)
-            item.schedule.now.to_i.should eql(item.schedule.scheduledTime.to_i)
+            item.schedule.nowForScheduling.to_i.should eql(item.schedule.scheduledTime.to_i)
 
             item2.schedule.schedule(42)
-            item2.schedule.scheduledTime.should eql(item2.schedule.now + 42)
+            item2.schedule.scheduledTime.should eql(item2.schedule.nowForScheduling + 42)
         end
 
     end

@@ -82,10 +82,11 @@ module JLDrill
             @numIncorrect = schedule.numIncorrect
         end
         
-        # Updates the schedule for the lastReviewed to be now.
+        # Updates the time that the item was last reviewed to be the real
+        # current time.
         # Returns the time that it set.
         def markReviewed
-            @lastReviewed = now()
+            @lastReviewed = Time::now()
         end
    
         # Returns true if the item has been marked reviewed at least once
@@ -100,6 +101,15 @@ module JLDrill
                 markReviewed
             end
             return @lastReviewed
+        end
+
+        # Returns the number of seconds since the item was last reviewed
+        def elapsedTime
+            retVal = 0
+            if reviewed?
+                retVal = Time::now().to_i - @lastReviewed.to_i
+            end
+            return retVal
         end
            
         # Resets the schedule  
@@ -125,12 +135,11 @@ module JLDrill
             (interval / 10) - rand(interval / 5) 
         end
 
-        # Time in this strategy is flexible.  The dates aren't
-        # absolute.  In order to maintain this flexibility,
-        # "Now" is defined to be the scheduled date of the first
-        # item in the review set.  That's because when you are
-        # reviewing, it will be shown now.
-        def now
+        # Schedule times are based are not fixed.  They are
+        # relative to the schedule date of the first reviewed
+        # item.  That's because when we are reviewing, the
+        # first item will be reviewed "now".
+        def nowForScheduling
             # Set a default "Now"
             retVal = Time::now
             if !@item.nil? && !@item.container.nil?
@@ -147,7 +156,7 @@ module JLDrill
         # scheduled for, rather than now.  Otherwise if the user
         # is ahead we could end up scheduling in the past.
         def calculateStart
-            start = now()
+            start = nowForScheduling()
             if @item.bin == 4
                 if scheduled? && (start.to_i < @scheduledTime.to_i)
                     start = @scheduledTime
@@ -180,6 +189,10 @@ module JLDrill
         # Calculate the difficulty from the interval.  This is used
         # to reset the difficulty of an item based on past performance.
         def difficultyFromInterval(interval)
+            # to deal with corrupt files where the review times are screwed up
+            if interval <= 0
+                return 50
+            end
             i = 0
             while interval < intervalFromDifficulty(i)
                 i += 1
@@ -201,7 +214,7 @@ module JLDrill
             # If it is scheduled, then that means it isn't 
             # a newly promoted item
             if scheduled?
-                elapsed = Time::now.to_i - reviewedTime().to_i
+                elapsed = elapsedTime
                 if (2 * elapsed) > interval
                     interval = 2 * elapsed
                 end
@@ -214,7 +227,7 @@ module JLDrill
             # Set the difficulty based on how long the person was
             # able to go since the last review.
             if scheduled?
-                elapsed = Time::now.to_i - reviewedTime().to_i
+                elapsed = elapsedTime
                 diff = difficultyFromInterval(elapsed)
                 if diff < @numIncorrect
                     @numIncorrect = diff
@@ -223,14 +236,15 @@ module JLDrill
         end
 
         # Schedule the item for review
-        def schedule(int = 0)
+        def schedule(int = -1)
             start = calculateStart
-            if int == 0
+            if int < 0
                 interval = calculateInterval
+                interval = interval + randomVariation(interval)
             else
                 interval = int
             end
-            @scheduledTime = start + interval + randomVariation(interval)
+            @scheduledTime = start + interval 
             return @scheduledTime
         end
         
@@ -302,29 +316,21 @@ module JLDrill
             retVal
         end
         
-        # Mark the item as reviewed and increase the schedule
-        # by the specified number of seconds.
-        def scheduleDuration=(seconds)
-            if !reviewed?
-                markReviewed
-            end
-            @scheduledTime = reviewedTime() + seconds
-        end
-        
         # Returns true if the item is overdue to be reviewed
+        # Obsolete.  This should never happen any more.
         def overdue?
             if !scheduled?
                 return false
             else
-                @scheduledTime.to_i < now().to_i
+                @scheduledTime.to_i < nowForScheduling().to_i
             end
         end
         
         # Returns true if the date is on the specified day.
         # 0 is today, -1 is yesterday, 1 is tomorrow.
         # Uses the date, not 24 hour time period.
-        def onDay?(date, day)
-            target = now() + (SECONDS_PER_DAY * day)
+        def onDay?(current, date, day)
+            target = current + (SECONDS_PER_DAY * day)
             return date.day == target.day && 
                 date.month == target.month &&
                 date.year == target.year
@@ -338,7 +344,7 @@ module JLDrill
             if !reviewed?
                 return false
             else
-                return onDay?(reviewedTime(), day)
+                return onDay?(Time::now(), reviewedTime(), day)
             end
         end
         
@@ -350,7 +356,7 @@ module JLDrill
             if !scheduled?
                 return false
             else
-                return onDay?(@scheduledTime, day)
+                return onDay?(nowForScheduling(), @scheduledTime, day)
             end
         end
         

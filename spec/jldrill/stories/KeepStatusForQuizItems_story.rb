@@ -229,19 +229,19 @@ module JLDrill
         end
         
         it "should be able to tell if an item is scheduled in a range" do
-            @items[1].schedule.scheduleDuration = 0
+            @items[1].schedule.schedule(0)
             @items[1].schedule.durationWithin?(0..5).should be(true)
             @items[1].schedule.durationWithin?(1..5).should be(false)
 
-            @items[1].schedule.scheduleDuration = 1
+            @items[1].schedule.schedule(1)
             @items[1].schedule.durationWithin?(0..5).should be(true)
             @items[1].schedule.durationWithin?(1..5).should be(false)
 
-            @items[1].schedule.scheduleDuration = 24 * 60 * 60
+            @items[1].schedule.schedule(24 * 60 * 60)
             # Does not include the end point
             @items[1].schedule.durationWithin?(0..1).should be(false)
             @items[1].schedule.durationWithin?(1..2).should be(true)
-            @items[1].schedule.scheduleDuration += 1
+            @items[1].schedule.schedule(24 * 60 * 60 + 1)
             @items[1].schedule.durationWithin?(0..1).should be(false)
             @items[1].schedule.durationWithin?(0..2).should be(true)            
             @items[1].schedule.durationWithin?(1..2).should be(true)            
