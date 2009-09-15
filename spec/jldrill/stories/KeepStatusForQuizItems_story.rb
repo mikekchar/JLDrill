@@ -107,7 +107,8 @@ module JLDrill
         it "should be able to write scheduledTime to file" do
             @items[1].to_s.should eql(@strings[1] + "\n")
             time = @items[1].schedule.schedule
-            @items[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Score: 0/Level: 0/Consecutive: 0/ScheduledTime: " + time.to_i.to_s + "/Difficulty: 0/\n")
+            duration = @items[1].schedule.duration
+            @items[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Score: 0/Level: 0/Consecutive: 0/ScheduledTime: " + time.to_i.to_s + "/Duration: " + duration.to_s + "/Difficulty: 0/\n")
         end
 
         it "should be able to parse the schedule information in the file" do

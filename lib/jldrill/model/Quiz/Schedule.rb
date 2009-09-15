@@ -15,16 +15,17 @@ module JLDrill
         CONSECUTIVE_RE = /^Consecutive: (.*)/
         SCHEDULEDTIME_RE = /^ScheduledTime: (.*)/
         DIFFICULTY_RE = /^Difficulty: (.*)/
+        DURATION_RE = /^Duration: (.*)/
         
         SECONDS_PER_DAY = 60 * 60 * 24
         MAX_ADDITIONAL_TIME = 4 * SECONDS_PER_DAY
 
         attr_reader :name, :item, :score, :level, 
                     :lastReviewed, :consecutive, :scheduledTime,
-                    :seen, :numIncorrect
+                    :seen, :numIncorrect, :duration
         attr_writer :item, :score, :level,
                     :lastReviewed, :consecutive, :scheduledTime,
-                    :seen, :numIncorrect
+                    :seen, :numIncorrect, :duration
 
 
         def initialize(item)
@@ -37,6 +38,7 @@ module JLDrill
             @seen = false
             @numIncorrect = 0
             @item = item
+            @duration = -1
         end
 
         # Parses a single part of the Schedule information
@@ -57,6 +59,8 @@ module JLDrill
                     end
                 when DIFFICULTY_RE
                     @numIncorrect = $1.to_i
+                when DURATION_RE
+                    @duration = $1.to_i
             else # Not something we understand
                 parsed = false
             end
@@ -80,6 +84,7 @@ module JLDrill
             @scheduledTime = schedule.scheduledTime
             @seen = schedule.seen
             @numIncorrect = schedule.numIncorrect
+            @duration = schedule.duration
         end
         
         # Updates the time that the item was last reviewed to be the real
@@ -120,6 +125,7 @@ module JLDrill
             @consecutive = 0
             @seen = false
             @numIncorrect = 0
+            @duration = -1
         end
         
         # Returns true if the item has been scheduled for review
@@ -244,6 +250,7 @@ module JLDrill
             else
                 interval = int
             end
+            @duration = interval
             @scheduledTime = start + interval 
             return @scheduledTime
         end
@@ -251,6 +258,7 @@ module JLDrill
         # Remove review schedule for the item
         def unschedule
             @scheduledTime = nil
+            @duration = -1
         end
         
         # Return the time at which the item is scheduled for review
@@ -309,11 +317,15 @@ module JLDrill
         # Return the total number of seconds from the
         # last reviewed time to the scheduled time
         def scheduleDuration
-            retVal = 0
+            retVal = -1
             if scheduled?
-                retVal = @scheduledTime.to_i - reviewedTime().to_i
+                if @duration == -1
+                    retVal = @scheduledTime.to_i - @reviewedTime.to_i
+                else
+                    retVal = @duration
+                end
             end
-            retVal
+            return retVal
         end
         
         # Returns true if the item is overdue to be reviewed
@@ -397,6 +409,7 @@ module JLDrill
             end
             if scheduled?
                 retVal += "/ScheduledTime: #{@scheduledTime.to_i}"
+                retVal += "/Duration: #{scheduleDuration.to_i}"
             end
             retVal += "/Difficulty: #{difficulty}"
             retVal
