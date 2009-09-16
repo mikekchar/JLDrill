@@ -35,14 +35,21 @@ What's New for 0.4.0
   Vocab window has also been modified to allow you to modify, preview, 
   delete and reorder items in the quiz.
 
-  Various bugs and small improvements to the scheduling strategy
+  The scheduling strategy has been improved.  Previously if you
+  reviewed slower than expected, or if you neglected your studying,
+  you could fall "behind".  This concept has now been removed
+  from the software, since there is no real schedule per se.  Instead
+  the software will try to maintain a 90% success rate in your
+  reviews.  This should reduce the need for the "Review" button.
+
+  Various other bug fixes and small improvements to the scheduling strategy
   have also been implemented.
 
-JLDrill is now Beta   
--------------------
-  I now consider JLDrill to be in beta.  Most of the important features
+JLDrill is Beta Software   
+------------------------
+  I consider JLDrill to be in beta.  Most of the important features
   are present.  There may still be bugs, but I have been using the
-  software myself for several months and I think I've gotten rid
+  software myself for several yearss and I think I've gotten rid
   of most of the big problems.  Please be considerate of the beta status,
   though.  Keep your eyes open for problems and report them.  Poor
   usability issues are especially welcome.  Usability problem reports

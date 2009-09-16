@@ -8,53 +8,45 @@ JLDrill's Scheduling Strategy
 
 Introduction
 ------------
-The goal of JLDrill's scheduling strategies is to maximize the acquisition
-and retention of items over a long term.    For the purposes of this
-document, "long term" means over a period of a year or more.  The intent is
-not to correctly remember every item studied, but rather to maximize the number
-items that can be remembered over the long term given the same investment
-in studying time.
+
+The goal of JLDrill's scheduling strategies is to maximize the
+acquisition and retention of items over a long term.  For the purposes
+of this document, "long term" means over a period of a year or more.
+The intent is not to correctly remember every item studied, but rather
+to maximize the number items that can be remembered over the long term
+given the same investment in studying time.
 
 The scheduling strategies presented here assume the user consistently
 uses the application on a daily basis.  It is assumed that the user
-can invest roughly the same amount of time every day and that they generally
-use the application every day.  No attempt is made to accomodate users
-that have inconsistent review habits.\*
+can invest roughly the same amount of time every day and that they
+generally use the application every day.  No attempt is made to
+accomodate users that have inconsistent review habits.
 
-(\* Footnote: Once I have the scheduling strategies finished, I will
-do a simulation showing the difference in items learned when using
-the application every day, every other day and every third day.  I
-have done some "back of the envelope" type calculations and have determined
-that studying every third day is barely more effective than not studying
-at all.)
-
-JLDrill has two modes of scheduling strategies.  The first is for short term
-acquisition of new material\*.  In this mode the item is repeatedly shown
-to the user until the user can remember it correctly a number of times.  The
-second mode is long term review.  In this mode JLDrill uses a spaced
-repetition strategy to occasionally review an item with the user
-over days, weeks or months.
-
-(\* Footnote: I am considering using a "spaced learning" approach
-for acquisition of new material.  In such an approach, the student
-reviews material for 10 minutes, takes a 10 minute break, and
-then reviews again.  This has been said to create long term memory.)
+JLDrill has two modes of scheduling strategies.  The first is for
+short term acquisition of new material.  In this mode the item is
+repeatedly shown to the user until the user can remember it correctly
+a number of times in a row.  The second mode is long term review.  In
+this mode JLDrill uses spaced repetition to occasionally review an
+item with the user over days, weeks or months.
 
 What is Spaced Repetition?
 --------------------------
-Before I continue with a description of the strategies, I want to discuss
-what spaced repetition is.  Spaced repetition is the presentation
-of material separated by spaces of increasingly large duration.  These
-spaces are measured in terms of mintues, hours, days, and months.
 
-The idea is that a new item is presented to the learner.  If the learner
-demonstrates that they can remember the item, the item is presented
-at a later time.  If the learner demonstrates that they can remember the
-item again, the item is presented at a later time.  Each time the
-user remembers the item, the space between presentations gets longer.
+Before I continue with a description of the strategies, I want to
+discuss what spaced repetition is.  Spaced repetition is the
+presentation of material separated by spaces of increasingly large
+duration.  These spaces are measured in terms of mintues, hours, days,
+and months.
+
+New items are presented to the learner.  If the learner demonstrates
+that they can remember the item, the item is presented again at a
+later time.  If the learner demonstrates that they can remember the
+item again, the item is presented at an even longer interval.  Each
+time the user remembers the item, the space between presentations gets
+longer.
 
 The technique of spaced repetition is based on the concept of a "forgetting 
-curve".  After an item has been presented, as time goes by the chance
+curve".  A person initially memorizes an item.  As time goes by the chance
 that the item will be remembered falls.  This is known as the
 "forgetting curve".  The forgetting curve has the shape of
 <pre>
@@ -71,36 +63,30 @@ presented before.  The more times the item is presented, the larger
 x will be (it must be noted that there must be a gap between presentations
 for this to occur).
 
-Please note that the slope of the forgetting curve is continuously
-decreasing as t (time) increases.  This is important to JLDrill's
-scheduling algorithm.
-
 The intent of a spaced repetition algorithm is to schedule
-reviews of an item so as to increase the value of x for an item (shallowing
-the forgetting curve and making the item less likely to be forgotten over
-time) with the least investment of studying time.  This is usually accomplished
-by scheduling the item to be reviewed when its chance of being remembered
-drops to a certain point (90% for instance).
+reviews of an item so as to increase the value of x for an item.
+The forgetting curve thereby becomes shallower and the item becomes
+less like to be forgotten over time.  Ideally the algorithm
+will be chosen to reduce the number of presentations to the
+user.  This will reduce the amount of study that is necessary.
 
 Learning Rate
 -------------
-Generally speaking if we accept the thesis of spaced repetition, that is
-that we improve our ability to remember an item every time we correctly
-remember it, the biggest problem is to schedule reviews in such a
-way as to maximize the rate of learning (or learning rate).  
+
+Our ability to remember an item improves every time we correctly
+remember it.  But it takes time to remember an item.  By choosing
+the optimal time to remember an item, we can maximize the rate
+at which we reduce the learning curve.  I refer to this as
+maximizing the learning rate.
 
 Learning rate, in this document, refers to the number of items that can
 be remembered divided by the amount of time it took to learn those
-items\*.  However, learning rate is highly dependent upon timeframe.
+items.  However, learning rate is highly dependent upon timeframe.
 If we were only interested in short-term retention (over a couple of
 days) then cram studying might actually be a better approach.  So for
 this document, learning rate refers to items that can be remembered
 which have not been reviewed for at least 30 days.  It is convenient
 to express this value in terms of number of items per hour.
-
-(\* Footnote: I am considering changing this to the number of repetitions
-rather than the amount of time.  This may allow us to compare results
-with different types of data -- for instance vocabulary and grammar.)
 
 As an example, imagine that 1000 items have been studied using a particular
 spaced repetition algorithm.  Let's say that it took about 50 hours to
@@ -112,20 +98,12 @@ Probably the easiest way for a computer application to measure the learning
 rate is simply totalling the time that each item took in order to reach
 the first place where the repetition space is greater than one month.  Then
 count the number of items that are correctly reviewed and divide by the time.
-In this way a running value of the learning rate can be maintained over time\*.
-
-(\* Footnote: JLDrill does not currently do this.  But it probably should.)
+In this way a running value of the learning rate can be maintained over time.
 
 However, when comparing learning rates between different algorithms it
 is important to note that items learned must be of similar type.  Learning
 language vocabulary and learning math equations may have dramatically
 different learning rates after all.
-
-Also complicating this is that many, or even most users do not consistently
-review their materials.  As I will show in a future document, the learning
-rate is dramatically affected by consistency of review.  So any discussion
-on the effectiveness of strategies must take into account consistency.
-I do not have any good suggestions for doing that.
 
 General Overview of JLDrill's Strategies
 ========================================
@@ -142,7 +120,7 @@ They are divided into 3 sets:
 
 JLDrill works differently than other spaced repetition programs.  First, it 
 has a category specifically for learning an item. This is the working set.  
-Basically, you must answer the quizes on the items in the working set
+You must answer the quizes on the items in the working set
 correctly enough times that the program is convinced that you know it.
 
 Once you know the item, it is placed into the Review Set.  At this point it 
@@ -156,11 +134,11 @@ programs is that JLDrill doesn't attempt to strictly schedule the items for
 review.  While each item has a scheduled review date, that is only used to 
 make sure that old items are eventually reviewed (prevent starvation).
 
-Instead, JLDrill merely attempts to keep the items above a certain recall 
+Instead, JLDrill attempts to keep the items above a certain recall 
 rate.  It does this by ordering the items in the review set according
 to a binary backoff scheduling (the time the item is scheduled for is
 twice the amount of time that has expired since the last review).  I will
-be shown below that this is roughly homogenous to the order of probability
+show below that this is roughly homogenous to the order of probability
 of failure for the items.  JLDrill then reviews items until it is
 about 90% certain that the items currently being reviewed have a greater
 than 90% chance of being remembered.  After this point, only new items
@@ -402,7 +380,7 @@ What Percentage Level to Stop Reviewing
 ---------------------------------------
 
 This needs doing...  At first I thought 90% could be easily shown
-to be the best value, but then I realized that the questions is actually
+to be the best value, but then I realized that the question is actually
 quite complicated.  Basically, we want a percentage such that the
 weighted cost of relearning is equal to the cost of reviewing.
 In other words, the cost of relearning the word over again multiplied

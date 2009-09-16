@@ -151,7 +151,10 @@ module JLDrill
             if !@item.nil? && !@item.container.nil?
                 firstItem = @item.container.bins[4][0]
                 if !firstItem.nil? && firstItem.schedule.scheduled?
-                    retVal = firstItem.schedule.scheduledTime
+                    first = firstItem.schedule.scheduledTime
+                    if first < retVal
+                        retVal = first
+                    end
                 end
             end
             return retVal
