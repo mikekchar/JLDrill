@@ -141,6 +141,17 @@ module JLDrill
             (interval / 10) - rand(interval / 5) 
         end
 
+        def firstSchedule
+            retVal = Time::now
+            if !@item.nil? && !@item.container.nil?
+                firstItem = @item.container.bins[4][0]
+                if !firstItem.nil? && firstItem.schedule.scheduled?
+                    retVal = firstItem.schedule.scheduledTime
+                end
+            end
+            return retVal
+        end
+
         # Schedule times are based are not fixed.  They are
         # relative to the schedule date of the first reviewed
         # item.  That's because when we are reviewing, the
@@ -148,14 +159,9 @@ module JLDrill
         def nowForScheduling
             # Set a default "Now"
             retVal = Time::now
-            if !@item.nil? && !@item.container.nil?
-                firstItem = @item.container.bins[4][0]
-                if !firstItem.nil? && firstItem.schedule.scheduled?
-                    first = firstItem.schedule.scheduledTime
-                    if first < retVal
-                        retVal = first
-                    end
-                end
+            first = firstSchedule
+            if first < retVal
+                retVal = first
             end
             return retVal
         end
@@ -320,12 +326,12 @@ module JLDrill
             return secondsToDays(calculateInterval.to_i)
         end
 
-        # Returns the number of days the "now" for scheduled
-        # items are skewed from the real now.  Positive numbers
+        # Returns the number of days the first scheduled item
+        # is skewed from now.  Positive numbers
         # are in the future, negative numbers in the past.
-        # rounds to the nearest tenth.
+        # Rounds to the nearest tenth.
         def dateSkew
-            return secondsToDays(nowForScheduling.to_i - Time::now.to_i)
+            return secondsToDays(firstSchedule.to_i - Time::now.to_i)
         end
         
         # Return the total number of seconds from the
@@ -367,12 +373,15 @@ module JLDrill
         # Returns true if the item is scheduled on the specified day.
         # 0 is today, 1 is tomorrow, 2 is the day after, etc.  Uses the
         # date, not 24 hour time period (i.e., if it's 11pm, then an
-        # item scheduled in 2 hours is tomorrow).
+        # item scheduled in 2 hours is tomorrow).  Results are skewed
+        # based on the first scheduled item.  Thus the first item
+        # is always scheduled today regardless of when it is actually
+        # scheduled.
         def scheduledOn?(day)
             if !scheduled?
                 return false
             else
-                return onDay?(nowForScheduling(), @scheduledTime, day)
+                return onDay?(firstSchedule(), @scheduledTime, day)
             end
         end
         
