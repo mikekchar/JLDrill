@@ -152,32 +152,23 @@ module JLDrill
             return retVal
         end
 
-        # Schedule times are based are not fixed.  They are
-        # relative to the schedule date of the first reviewed
-        # item.  That's because when we are reviewing, the
-        # first item will be reviewed "now".
-        def nowForScheduling
-            # Set a default "Now"
-            retVal = Time::now
-            first = firstSchedule
-            if first < retVal
-                retVal = first
-            end
-            return retVal
-        end
-
         # Return the time where we should measure the interval from.
-        # We want to start from the date the current item is
-        # scheduled for, rather than now.  Otherwise if the user
-        # is ahead we could end up scheduling in the past.
-        def calculateStart
-            start = nowForScheduling()
-            if @item.bin == 4
-                if scheduled? && (start.to_i < @scheduledTime.to_i)
-                    start = @scheduledTime
+        def scheduleStart
+            # If the item has already been scheduled, the we want
+            # to start that time.
+            if @item.bin == 4 && scheduled?
+                start = @scheduledTime
+            else
+                # Otherwise we want to start from now,
+                # or the date of the first scheduled item, whichever is
+                # first
+                start = Time::now
+                first = firstSchedule
+                if first < start
+                    start = first
                 end
             end
-            start
+            return start
         end
 
         # This is the interval the item will have when it it first
@@ -252,7 +243,7 @@ module JLDrill
 
         # Schedule the item for review
         def schedule(int = -1)
-            start = calculateStart
+            start = scheduleStart
             if int < 0
                 interval = calculateInterval
                 interval = interval + randomVariation(interval)
