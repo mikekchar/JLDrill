@@ -70,6 +70,20 @@ module JLDrill::Gtk
                 end
             end
 
+            @accel.connect(Gdk::Keyval::GDK_X, Gdk::Window::CONTROL_MASK,
+                           Gtk::ACCEL_VISIBLE) do
+                if !searching?
+                    self.markCut
+                end
+            end
+
+            @accel.connect(Gdk::Keyval::GDK_V, Gdk::Window::CONTROL_MASK,
+                           Gtk::ACCEL_VISIBLE) do
+                if !searching?
+                    self.markPaste
+                end
+            end
+
             add_accel_group(@accel)
 
             signal_connect('delete_event') do
@@ -203,6 +217,14 @@ module JLDrill::Gtk
 
         def moveCurrentItemDown
             @vocabTable.moveDown
+        end
+
+        def markCut
+            @vocabTable.markCut
+        end
+
+        def markPaste
+            @vocabTable.pasteBefore
         end
 
     end

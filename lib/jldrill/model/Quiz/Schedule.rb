@@ -156,7 +156,7 @@ module JLDrill
         def scheduleStart
             # If the item has already been scheduled, the we want
             # to start that time.
-            if @item.bin == 4 && scheduled?
+            if scheduled?
                 start = @scheduledTime
             else
                 # Otherwise we want to start from now,

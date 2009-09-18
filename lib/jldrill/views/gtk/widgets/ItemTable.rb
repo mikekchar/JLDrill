@@ -35,6 +35,7 @@ module JLDrill::Gtk
 
             self.add(@table)
             setupSelection
+            @mark = nil
         end
 
         def setItem(iter, item)
@@ -264,6 +265,31 @@ module JLDrill::Gtk
                     @vocabTable.stopSearching
                 end
             end
+        end
+
+        def markCut
+            if @mark == @table.selection.selected
+                # Allow the user to clear the mark by cutting on the
+                # same item.  Non-standard, but it's the best I can think
+                # of right now
+                markClear
+            else
+                @mark = @table.selection.selected
+            end
+        end
+
+        def markClear
+            @mark = nil
+        end
+
+        def pasteBefore
+            target = @table.selection.selected
+            if !@mark.nil? && !target.nil?
+                @mark[0].insertBefore(target[0])
+                @listStore.move_before(@mark, target)
+                selectPath(@mark.path)
+            end
+            markClear
         end
 
     end

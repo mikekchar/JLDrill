@@ -9,8 +9,8 @@ module JLDrill
             if type == "Vocabulary"
                 retVal = ItemType.new("Vocabulary", Vocabulary)
                 retVal.headings = [["kanji", "Kanji", 90],
-                    ["reading", "Reading", 130],
-                    ["definitions", "Meaning", 230]]
+                                   ["reading", "Reading", 130],
+                                   ["definitions", "Meaning", 230]]
             end
             return retVal
         end

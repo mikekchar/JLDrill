@@ -135,6 +135,22 @@ module JLDrill
             item.position = temp
         end
 
+        def insertBefore(item)
+            target = item.position
+            # This is clearly slow. It can be made slightly
+            # faster by only iterating over the relevant
+            # items, but I don't know if it's worth the effort
+            # since the majority of the cost is in creating the
+            # sorted array in the first place.
+            @container.eachByPosition do |i|
+                if (i.position >= target) &&
+                        (i.position < @position)
+                    i.position += 1
+                end
+            end
+            @position = target
+        end
+
         # Return the save format of the item
         def to_s
             retVal = to_o.to_s
