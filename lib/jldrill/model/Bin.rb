@@ -161,10 +161,10 @@ module JLDrill
             return skew
         end
         
-        def numScheduledOn(day)
+        def numScheduledWithin(range)
             total = 0
             @contents.each do |item|
-                if item.schedule.scheduledOn?(day)
+                if item.schedule.scheduledWithin?(range)
                     total += 1
                 end
             end

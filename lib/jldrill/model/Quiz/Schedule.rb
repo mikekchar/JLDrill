@@ -361,23 +361,19 @@ module JLDrill
             end
         end
         
-        # Returns true if the item is scheduled on the specified day.
-        # 0 is today, 1 is tomorrow, 2 is the day after, etc.  Uses the
-        # date, not 24 hour time period (i.e., if it's 11pm, then an
-        # item scheduled in 2 hours is tomorrow).  Results are skewed
-        # based on the first scheduled item.  Thus the first item
-        # is always scheduled today regardless of when it is actually
-        # scheduled.
-        def scheduledOn?(day)
-            if !scheduled?
-                return false
-            else
-                return onDay?(firstSchedule(), @scheduledTime, day)
-            end
+        # Returns true if the item has a schedule duration in the range of days
+        # supplied.  This uses a 24 hour time period for
+        # each day.  The range does *not* include the end point.  Note that
+        # 1..1, etc will always return false.
+        def scheduledWithin?(range)
+            start = firstSchedule.to_i
+            low = SECONDS_PER_DAY * range.begin + start
+            high = SECONDS_PER_DAY * range.end + start
+            @scheduledTime.to_i >= low && @scheduledTime.to_i < high
         end
         
         # Returns true if the item has a schedule duration in the range of days
-        # supplied.  Unlike scheduledOn?, this uses a 24 hour time period for
+        # supplied.  This uses a 24 hour time period for
         # each day.  The range does *not* include the end point.  Note that
         # 1..1, etc will always return false.
         def durationWithin?(range)

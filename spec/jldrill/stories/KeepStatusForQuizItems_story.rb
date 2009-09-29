@@ -204,23 +204,7 @@ module JLDrill
             end
         end
         
-        it "should be able to tell which day an item is scheduled for" do
-            @items[1].schedule.setScheduledTime(Time::now)
-            @items[1].schedule.scheduledOn?(0).should be(true)
-            @items[1].schedule.scheduledOn?(1).should be(false)
-            hoursToMidnight = 24 - @items[1].schedule.getScheduledTime.hour
-            @items[1].schedule.setScheduledTime(@items[1].schedule.getScheduledTime + hoursToMidnight * 60 * 60)
-            @items[1].schedule.scheduledOn?(0).should be(false)
-            @items[1].schedule.scheduledOn?(1).should be(true)
-            @items[1].schedule.scheduledOn?(2).should be(false)
-            @items[1].schedule.setScheduledTime(@items[1].schedule.getScheduledTime + 24 * 60 * 60)
-            @items[1].schedule.scheduledOn?(0).should be(false)
-            @items[1].schedule.scheduledOn?(1).should be(false)
-            @items[1].schedule.scheduledOn?(2).should be(true)
-            @items[1].schedule.scheduledOn?(3).should be(false)
-        end
-        
-        it "should be able to tell if an item is scheduled in a range" do
+        it "should be able to tell if an item has duration in a range" do
             @items[1].schedule.schedule(0)
             @items[1].schedule.durationWithin?(0..5).should be(true)
             @items[1].schedule.durationWithin?(1..5).should be(false)

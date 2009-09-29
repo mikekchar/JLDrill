@@ -6,59 +6,64 @@ module JLDrill::Gtk
     class StatisticsTable < Gtk::Table
         attr_reader :values
         
-        def initialize(entries, width=1)
-            super(width, entries.size, false)
-            @columns = width
-            @values = addEntries(entries)
+        def initialize(rows, columns)
+            super(rows.size + 1, columns.size + 1, false)
+            @values = addEntries(rows, columns)
         end
         
-        def addEntries(entries)
-            values = makeValues(entries.size)
-            entries.each_index do |i|
-                addLabel(entries[i], i)
-                if @columns > 1
-                    0.upto(@columns - 1) do |j|
-                        addValue(values[j][i], i, j+1)
-                    end
-                else
-                    addValue(values[i], i)
+        def addEntries(rows, columns)
+            values = makeValues(rows.size, columns.size)
+            columns.each_index do |i|
+                column(i + 1, columns[i])
+            end
+            rows.each_index do |i|
+                row(i + 1, rows[i])
+                0.upto(columns.size - 1) do |j|
+                    addValue(values[i][j], i + 1, j + 1)
                 end
             end
             values
         end
         
-        def makeValues(num)
+        def makeValues(height, width)
             retVal = []
-            if @columns > 1
-                0.upto(@columns - 1) do
-                    retVal.push([])
-                end
+            0.upto(height - 1) do
+                retVal.push([])
             end
-            0.upto(num) do |i|
-                if @columns > 1
-                    0.upto(@columns - 1) do |j|
-                        retVal[j].push(Gtk::Label.new("0"))
-                    end
-                else
-                    retVal.push(Gtk::Label.new("0"))
+            0.upto(height - 1) do |i|
+                0.upto(width - 1) do |j|
+                    retVal[i][j] = Gtk::Label.new("0")
                 end
             end
             retVal
         end
         
-        def addLabel(text, row)
+        def row(rowNum, text)
             label = Gtk::Label.new(text)
+            # Add 1 to row to make up for the headers
             attach(label,
                    # X direction            # Y direction
-                   0, 1,                    row, row + 1,
+                   0, 1,                    rowNum + 1, rowNum + 2,
                    Gtk::EXPAND | Gtk::FILL, 0,
                    0,                       0)
         end
+
+        def column(colNum, text)
+            label = Gtk::Label.new(text)
+            # Add 1 to row to make up for the headers
+            attach(label,
+                   # X direction            # Y direction
+                   colNum + 1, colNum + 2,  0, 1,
+                   Gtk::EXPAND | Gtk::FILL, 0,
+                   0,                       0)
+                   
+        end
         
-        def addValue(value, row, column=1)
+        def addValue(value, row, column)
+            # Add 1 to row to make up for the headers
             attach(value,
                    # X direction            # Y direction
-                   column, column + 1,                    row, row + 1,
+                   column + 1, column + 2,      row + 1, row + 2,
                    Gtk::EXPAND | Gtk::FILL, 0,
                    0,                       0)
         end
@@ -78,24 +83,18 @@ module JLDrill::Gtk
             hbox = Gtk::HBox.new()
             add(hbox)
             ## Layout everything in a vertical table
-            labels = ["Skew", "Today", "  Tomorrow  ", "2 Days",
-                      "3 Days", "4 Days", "5 Days", "6 Days"]
-            @scheduleTable = StatisticsTable.new(labels)
+            rows = [" Less than 5 days ", "5 - 10 days", "10 - 20 days", 
+                      "20 - 40 days", "40 - 80 days", "80 - 160 days", 
+                      "160 - 320 days", "320+ days"]
+            columns = [" Scheduled ", " Duration ", 
+                       " Correct ", " Tried ",]
+            @scheduleTable = StatisticsTable.new(rows, columns)
             hbox.add(@scheduleTable)
-            labels = [" Less than 5 days ", "5 - 10 days", "10 - 20 days", 
-                      "20 - 40 days", "40 - 80 days", "80 - 160 days", 
-                      "160 - 320 days", "320+ days"]
-            @durationTable = StatisticsTable.new(labels)
-            hbox.add(@durationTable)
-            labels = [" Less than 5 days ", "5 - 10 days", "10 - 20 days", 
-                      "20 - 40 days", "40 - 80 days", "80 - 160 days", 
-                      "160 - 320 days", "320+ days"]
-            @accuracyTable = StatisticsTable.new(labels, 2)
-            hbox.add(@accuracyTable)
-            labels = ["Reviewed", "Learned", " Time to review ", 
+            rows = ["Reviewed", "Learned", " Time to review ", 
                       "Time to learn", "Total Accuracy", " Learn Time % ", 
-                      " Review Rate ", " "]
-            @rateTable = StatisticsTable.new(labels)
+                      " Skew ", " Review Rate "]
+            columns = [" "]
+            @rateTable = StatisticsTable.new(rows, columns)
             hbox.add(@rateTable)
         end  
         
@@ -128,45 +127,51 @@ module JLDrill::Gtk
             self.destroy
         end
         
-        def updateSchedule(bin)
-            @scheduleTable.values[0].text = bin.dateSkew.to_s + " days"
+        def updateSchedule(bin, stats)
+            total = 0
             0.upto(6) do |i|
-                @scheduleTable.values[i+1].text = bin.numScheduledOn(i).to_s
+                range = stats.findRange(i)
+                num = bin.numScheduledWithin(range)
+                size = range.end - range.begin
+                rate = (num * 100 / size).to_f / 100.0
+                @scheduleTable.values[i][0].text = rate.to_s + "/day "
+                total += num
             end
+            @scheduleTable.values[7][0].text = (bin.length - total).to_s
         end
         
         def updateDuration(bin, stats)
             total = 0
             0.upto(6) do |i|
                 num = bin.numDurationWithin(stats.findRange(i))
-                @durationTable.values[i].text = num.to_s
+                @scheduleTable.values[i][1].text = num.to_s
                 total += num
             end
-            @durationTable.values[7].text = (bin.length - total).to_s
+            @scheduleTable.values[7][1].text = (bin.length - total).to_s
         end
         
         def updateAccuracy(statistics)
             0.upto(7) do |i|
                 acc = statistics.levels[i].accuracy
                 if !acc.nil?
-                    @accuracyTable.values[0][i].text = acc.to_s + "% "
-                    @accuracyTable.values[1][i].text = statistics.levels[i].total.to_s
+                    @scheduleTable.values[i][2].text = acc.to_s + "% "
+                    @scheduleTable.values[i][3].text = statistics.levels[i].total.to_s
                 else
-                    @accuracyTable.values[0][i].text = " - "
-                    @accuracyTable.values[1][i].text = " - "
+                    @scheduleTable.values[i][2].text = " - "
+                    @scheduleTable.values[i][3].text = " - "
                 end
             end
         end
         
-        def updateRate(statistics)
-            @rateTable.values[0].text = statistics.reviewed.to_s 
-            @rateTable.values[1].text = statistics.learned.to_s
-            @rateTable.values[2].text = statistics.reviewPace.to_s + "s "
-            @rateTable.values[3].text = statistics.learnPace.to_s + "s "
-            @rateTable.values[4].text = statistics.accuracy.to_s + "% "
-            @rateTable.values[5].text = statistics.learnTimePercent.to_s + "% "
-            @rateTable.values[6].text = statistics.reviewRate.to_s + "x "
-            @rateTable.values[7].text = "    "
+        def updateRate(bin, statistics)
+            @rateTable.values[0][0].text = statistics.reviewed.to_s 
+            @rateTable.values[1][0].text = statistics.learned.to_s
+            @rateTable.values[2][0].text = statistics.reviewPace.to_s + "s "
+            @rateTable.values[3][0].text = statistics.learnPace.to_s + "s "
+            @rateTable.values[4][0].text = statistics.accuracy.to_s + "% "
+            @rateTable.values[5][0].text = statistics.learnTimePercent.to_s + "% "
+            @rateTable.values[6][0].text = bin.dateSkew.to_s + " days"
+            @rateTable.values[7][0].text = statistics.reviewRate.to_s + "x "
         end
     end
 end
