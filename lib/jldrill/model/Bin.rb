@@ -3,6 +3,8 @@ module JLDrill
     class Bin
         attr_reader :name, :number, :contents
 
+        SECONDS_PER_DAY = 60 * 60 * 24
+
         # Create a new bin and call it name
         def initialize(name, number)
             @name = name
@@ -161,10 +163,32 @@ module JLDrill
             return skew
         end
         
+        # Find the scheduledTime for the first item in the bin.
+        # Return now if the first item isn't scheduled
+        def firstSchedule
+            retVal = Time::now
+            first = @contents[0]
+            if !first.nil? && !first.schedule.scheduledTime.nil?
+                retVal = first.schedule.scheduledTime
+            end
+            return retVal
+        end
+
+        # Adjust a range in the form of number of days to
+        # a range of times from the date supplied
+        def adjustRange(range, start)
+            start = firstSchedule
+            low = SECONDS_PER_DAY * range.begin + start.to_i
+            high = SECONDS_PER_DAY * range.end + start.to_i
+            return low..high
+        end
+
         def numScheduledWithin(range)
             total = 0
+            # This is outside the loop for performance reasons
+            adjustedRange = adjustRange(range, firstSchedule())
             @contents.each do |item|
-                if item.schedule.scheduledWithin?(range)
+                if item.schedule.scheduledWithin?(adjustedRange)
                     total += 1
                 end
             end
