@@ -1,8 +1,5 @@
 module JLDrill
     # Holds a group of items that are at the same level.
-    # Note that the index of the item is updated when the item is *referenced*
-    # from the bin using []  Therefore DO NOT reference
-    # the contents directly using @contents!!!
     class Bin
         attr_reader :name, :number, :contents
 
@@ -21,33 +18,45 @@ module JLDrill
         # Returns the item at the index specified
         def [](index)
             item = @contents[index]
-            item.index = index unless item.nil?
-            item
+            return item
         end
 
         # Pushes a item to the end of the bin
         # Also sets the bin number of the item
         def push(item)
             item.bin = @number
-            item.index = @contents.length
             @contents.push(item)
         end
-        
-        # Deletes the item at the specified index
-        def delete_at(index)
-            @contents[index].index = nil unless @contents[index].nil?
-            @contents.delete_at(index)
-            index.upto(@contents.length - 1) do |i|
-                @contents[i].index = i
+
+        # Insert an item before the index indicated
+        def insertAt(index, item)
+            if index >= @contents.size
+                @contents.push(item)
+            else
+                @contents.insert(index, item)
             end
+            item.bin = @number
+        end
+
+        # Inserts an item before the one where
+        # the block evaluates true.  If the block
+        # never evaluates true, put the item at
+        # the end
+        def insertBefore(item, &block)
+            i = 0
+            while(!contents[i].nil? && !block.call(i))
+                i += 1
+            end
+            insertAt(i, item)
+        end
+        
+        def delete(item)
+            @contents.delete(item)
         end
 
         # Calls a block for each item in the bin
         def each(&block)
-            i = 0
             @contents.each do |item|
-                item.index = i
-                i += 1
                 block.call(item)
             end
         end
@@ -55,18 +64,8 @@ module JLDrill
         # Calls a block for each item in the bin, stopping if the
         # block returns false.  Returns true if all iterations return true.
         def all?(&block)
-            i = 0
             @contents.all? do |item|
-                item.index = i
-                i += 1
                 block.call(item)
-            end
-        end
-
-        # Update the indeces of all the item entries in the bin.
-        def updateIndeces
-            # each() already updates it, so all we have to do it reference them
-            self.each do |item|
             end
         end
 
@@ -75,14 +74,12 @@ module JLDrill
             @contents.sort! do |x,y|
               block.call(x,y)
             end
-            updateIndeces
         end
    
         # Set the contents array to the value specified.  Also set the bin
         # number correctly
         def contents=(array)
             @contents = array
-            # This will also update the indeces
             self.each do |item|
                 item.bin = @number
             end

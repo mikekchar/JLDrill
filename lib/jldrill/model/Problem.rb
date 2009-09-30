@@ -104,6 +104,7 @@ module JLDrill
                 end
             end
             retVal += " --> #{@item.schedule.potentialScheduleInDays} days"
+            return retVal
         end
 
         def evaluateAttribute(name)

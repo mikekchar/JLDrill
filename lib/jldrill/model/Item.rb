@@ -17,7 +17,6 @@ module JLDrill
     # Item also holds position information of the item in the drill
     #    * position is the original ordinal position of the item in the quiz
     #    * bin is the number of the bin
-    #    * index is the ordinal position of the item in the bin
     #
     # Items stored here must implement the following:
     #    o to_s() -- returns a string representation of the object
@@ -26,9 +25,9 @@ module JLDrill
 
         POSITION_RE = /^Position: (.*)/
 
-        attr_reader :itemType, :contents, :position, :bin, :index, :status,
+        attr_reader :itemType, :contents, :position, :bin, :status,
                     :hash, :container
-        attr_writer :position, :bin, :index, :container
+        attr_writer :position, :bin, :container
 
         def initialize(item=nil)
             if item.nil?
@@ -42,7 +41,6 @@ module JLDrill
             end
             @position = 0
             @bin = 0
-            @index = nil
             @container = nil
             @status = ItemStatus.new(self)
             @status.add(Schedule.new(self))
@@ -107,7 +105,6 @@ module JLDrill
             setContents(item.contents)
             @position = item.position
             @bin = item.bin
-            @index = item.index
             @status.assign(item.status)
             @hash = item.hash
         end

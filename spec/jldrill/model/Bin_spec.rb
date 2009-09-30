@@ -32,7 +32,6 @@ module JLDrill
 		    @bin.length.should be(pos)
 		    @bin.push(item)
 		    item.bin.should be(@bin.number)
-		    item.index.should be(pos)
 		    @bin.length.should be(pos + 1)
 		    @bin[pos].should_not be_nil
 		    @bin[pos].should equal(item)
@@ -72,12 +71,13 @@ module JLDrill
 		end
 		
 		def test_delete_at(pos)
-		    @bin.delete_at(pos)
+            item = @bin[pos]
+		    @bin.delete(item)
 		    @bin.length.should be(@items.length - 1)
 		    @bin[pos].should equal(@items[pos + 1])
 		end
 		
-		it "should be able to delete an item at a position" do
+		it "should be able to delete an item" do
 		    test_pushAll
 		    test_delete_at(2)
 		end

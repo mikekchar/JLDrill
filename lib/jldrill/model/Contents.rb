@@ -209,7 +209,7 @@ module JLDrill
         # Move the specified item to the specified bin
         def moveToBin(item, bin)
             if !item.nil?
-                @bins[item.bin].delete_at(item.index)
+                @bins[item.bin].delete(item)
                 @bins[bin].push(item)
                 saveNeeded
             end
@@ -226,7 +226,7 @@ module JLDrill
         # Delete the specified item
         def delete(item)
             if !item.nil?
-                @bins[item.bin].delete_at(item.index)
+                @bins[item.bin].delete(item)
                 repositionItems
                 saveNeeded
             end

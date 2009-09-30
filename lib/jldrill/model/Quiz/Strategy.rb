@@ -209,9 +209,18 @@ module JLDrill
                     if (item.bin + 1) == 4
                         item.schedule.consecutive = 1
                         @stats.learned += 1
-                    end 
-                    contents.moveToBin(item, item.bin + 1)
-                    item.schedule.level = item.bin - 1 unless item.bin - 1 > 2
+                    end
+                    item.schedule.level = item.bin unless item.bin > 2
+                    if item.bin < 3
+                        contents.moveToBin(item, item.bin + 1)
+                    else
+                        # Items already in bin 4, or have newly moved to bin 4
+                        # need to be put in the correct place.
+                        contents.bins[item.bin].delete(item)
+                        contents.bins[4].insertBefore(item) do |index|
+                            contents.bins[4][index].schedule.getScheduledTime > item.schedule.getScheduledTime
+                        end
+                    end
                 end
             end
         end
@@ -237,15 +246,6 @@ module JLDrill
             if(item.schedule.score >= options.promoteThresh)
                 item.schedule.score = 0
                 promote(item)
-            end
-            # Bin 4 items have either just been promoted there,
-            # or they have been rescheduled.  This means we need to
-            # resort the bin.  This should be quite fast since only
-            # one item is out of order (O(n) probably).
-            if item.bin == 4
-                contents.bins[4].sort! do |x, y|
-                    x.schedule.getScheduledTime <=> y.schedule.getScheduledTime
-                end
             end
         end
 

@@ -331,7 +331,7 @@ module JLDrill
             retVal = -1
             if scheduled?
                 if @duration == -1
-                    retVal = @scheduledTime.to_i - reviewedTime().to_i
+                    retVal = @scheduledTime.to_i - reviewedTime.to_i
                 else
                     retVal = @duration
                 end
@@ -357,7 +357,7 @@ module JLDrill
             if !reviewed?
                 return false
             else
-                return onDay?(Time::now(), reviewedTime(), day)
+                return onDay?(Time::now(), @lastReviewed, day)
             end
         end
         
