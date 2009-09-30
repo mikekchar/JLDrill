@@ -9,7 +9,7 @@ module JLDrill
     
         def initialize(quiz)
             @quiz = quiz
-            @stats = Statistics.new
+            @stats = Statistics.new(quiz)
         end
         
         # Returns a string showing the status of the quiz with this strategy

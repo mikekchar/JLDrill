@@ -1,3 +1,4 @@
+require 'jldrill/model/Quiz/Quiz'
 require 'jldrill/model/Quiz/Statistics'
 require 'jldrill/model/Item'
 
@@ -6,7 +7,7 @@ module JLDrill
 	describe Statistics do
 	
 	    before(:each) do
-	        @statistics = Statistics.new
+	        @statistics = Statistics.new(Quiz.new)
 	    end
 	    
 	    it "should start with an estimate of 0" do

@@ -65,8 +65,10 @@ module JLDrill
         attr_writer :learned, :reviewed
         
         MINIMUM_CONFIDENCE = 0.009
+        SECONDS_PER_DAY = 60 * 60 * 24
         
-        def initialize
+        def initialize(quiz)
+            @quiz = quiz
             @estimate = 0
             @correct = 0
             @incorrect = 0
@@ -129,7 +131,15 @@ module JLDrill
             return @inTargetZone
         end
 
-        def findRange(level)
+        # Adjust a range in the form of number of days to
+        # a range of times from the date supplied
+        def adjustRange(range, start)
+            low = SECONDS_PER_DAY * range.begin + start.to_i
+            high = SECONDS_PER_DAY * range.end + start.to_i
+            return low...high
+        end
+
+        def findRange(level, from)
             low = 0
             high = 5
             1.upto(level) do
@@ -140,14 +150,23 @@ module JLDrill
                 end
                 high = low * 2
             end
-            low..high
+            # Inclusive range so that the correct high end is
+            # used even though the resultant range will not
+            # have the end point inclusive.
+            return adjustRange(low..high, from)
+        end
+
+        # Returns the number of items per day as a float
+        def itemsPerDay(items, range)
+            return items / ((range.end - range.begin).to_f / SECONDS_PER_DAY)
         end
                     
         def getLevel(item)
             level = 0
             found = false
             while (level <= 6) && !found
-                if item.schedule.durationWithin?(findRange(level))
+                range=findRange(level, 0)
+                if item.schedule.durationWithin?(range)
                     found = true
                 else
                     level += 1

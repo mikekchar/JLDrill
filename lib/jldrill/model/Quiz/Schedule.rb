@@ -369,17 +369,14 @@ module JLDrill
         # supplied.  The range is of the form of number of seconds from
         # the epoch
         def scheduledWithin?(range)
-            @scheduledTime.to_i >= range.begin && @scheduledTime.to_i < range.end
+            range.include?(@scheduledTime.to_i)
         end
         
-        # Returns true if the item has a schedule duration in the range of days
-        # supplied.  This uses a 24 hour time period for
-        # each day.  The range does *not* include the end point.  Note that
-        # 1..1, etc will always return false.
+        # Returns true if the scheduled duration is in the range of times
+        # supplied.  The range is of the form of number of seconds from
+        # the epoch
         def durationWithin?(range)
-            low = SECONDS_PER_DAY * range.begin
-            high = SECONDS_PER_DAY * range.end
-            scheduleDuration >= low && scheduleDuration < high
+            range.include?(scheduleDuration)
         end
         
         # Returns a human readable string showing when the item

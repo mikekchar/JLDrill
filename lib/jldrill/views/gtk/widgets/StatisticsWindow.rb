@@ -129,11 +129,11 @@ module JLDrill::Gtk
         
         def updateSchedule(bin, stats)
             total = 0
+            start = bin.firstSchedule.to_i
             0.upto(6) do |i|
-                range = stats.findRange(i)
+                range = stats.findRange(i, start)
                 num = bin.numScheduledWithin(range)
-                size = range.end - range.begin
-                rate = (num * 100 / size).to_f / 100.0
+                rate = (stats.itemsPerDay(num, range) * 100).to_i / 100.0
                 @scheduleTable.values[i][0].text = rate.to_s + "/day "
                 total += num
             end
@@ -143,7 +143,7 @@ module JLDrill::Gtk
         def updateDuration(bin, stats)
             total = 0
             0.upto(6) do |i|
-                num = bin.numDurationWithin(stats.findRange(i))
+                num = bin.numDurationWithin(stats.findRange(i, 0))
                 @scheduleTable.values[i][1].text = num.to_s
                 total += num
             end
