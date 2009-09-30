@@ -179,6 +179,14 @@ module JLDrill
             @reviewRateSum += item.schedule.reviewRate
         end
 
+        def reviewBin
+            return @quiz.contents.bins[4]
+        end
+
+        def dateSkew
+            return ((reviewBin().dateSkew * 10).round / SECONDS_PER_DAY).to_f / 10
+        end
+
         def reviewRate
             retVal = 1.0
             if @reviewed != 0

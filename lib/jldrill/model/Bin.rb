@@ -146,32 +146,27 @@ module JLDrill
             end
         end
         
+        # Find the scheduledTime for the first item in the bin.
+        # Return now if the first item isn't scheduled
+        def firstSchedule
+            retVal = Time::now
+            if @contents.size > 0
+                first = @contents[0]
+                if !first.nil? && first.schedule.scheduled?
+                    retVal = first.schedule.scheduledTime
+                end
+            end
+            return retVal
+        end
+
         # Returns the number of days the "now" for scheduled
         # items are skewed from the real now.  Positive numbers
         # are in the future, negative numbers in the past.
         # rounds to the nearest tenth.
         def dateSkew
-            skew = 0.0
-            if @contents.size > 0 
-                item = @contents[0]
-                if !item.nil?
-                   skew = item.schedule.dateSkew
-                end
-            end
-            return skew
+            return firstSchedule().to_i - Time::now.to_i
         end
         
-        # Find the scheduledTime for the first item in the bin.
-        # Return now if the first item isn't scheduled
-        def firstSchedule
-            retVal = Time::now
-            first = @contents[0]
-            if !first.nil? && !first.schedule.scheduledTime.nil?
-                retVal = first.schedule.scheduledTime
-            end
-            return retVal
-        end
-
         def numScheduledWithin(range)
             total = 0
             @contents.each do |item|

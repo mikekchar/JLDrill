@@ -170,7 +170,7 @@ module JLDrill::Gtk
             @rateTable.values[3][0].text = statistics.learnPace.to_s + "s "
             @rateTable.values[4][0].text = statistics.accuracy.to_s + "% "
             @rateTable.values[5][0].text = statistics.learnTimePercent.to_s + "% "
-            @rateTable.values[6][0].text = bin.dateSkew.to_s + " days"
+            @rateTable.values[6][0].text = statistics.dateSkew.to_s + " days"
             @rateTable.values[7][0].text = statistics.reviewRate.to_s + "x "
         end
     end
