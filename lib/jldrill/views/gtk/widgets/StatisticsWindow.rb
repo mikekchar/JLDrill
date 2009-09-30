@@ -127,35 +127,33 @@ module JLDrill::Gtk
             self.destroy
         end
         
-        def updateSchedule(bin, stats)
+        def updateSchedule(stats)
             total = 0
-            start = bin.firstSchedule.to_i
             0.upto(6) do |i|
-                range = stats.findRange(i, start)
-                num = bin.numScheduledWithin(range)
-                rate = (stats.itemsPerDay(num, range) * 100).to_i / 100.0
+                num = stats.numScheduledForLevel(i)
+                rate = (stats.itemsPerDay(num, i) * 100).to_i / 100.0
                 @scheduleTable.values[i][0].text = rate.to_s + "/day "
                 total += num
             end
-            @scheduleTable.values[7][0].text = (bin.length - total).to_s
+            @scheduleTable.values[7][0].text = (stats.size - total).to_s
         end
         
-        def updateDuration(bin, stats)
+        def updateDuration(stats)
             total = 0
             0.upto(6) do |i|
-                num = bin.numDurationWithin(stats.findRange(i, 0))
+                num = stats.numDurationForLevel(i)
                 @scheduleTable.values[i][1].text = num.to_s
                 total += num
             end
-            @scheduleTable.values[7][1].text = (bin.length - total).to_s
+            @scheduleTable.values[7][1].text = (stats.size - total).to_s
         end
         
-        def updateAccuracy(statistics)
+        def updateAccuracy(stats)
             0.upto(7) do |i|
-                acc = statistics.levels[i].accuracy
+                acc = stats.levels[i].accuracy
                 if !acc.nil?
                     @scheduleTable.values[i][2].text = acc.to_s + "% "
-                    @scheduleTable.values[i][3].text = statistics.levels[i].total.to_s
+                    @scheduleTable.values[i][3].text = stats.levels[i].total.to_s
                 else
                     @scheduleTable.values[i][2].text = " - "
                     @scheduleTable.values[i][3].text = " - "
@@ -163,15 +161,15 @@ module JLDrill::Gtk
             end
         end
         
-        def updateRate(bin, statistics)
-            @rateTable.values[0][0].text = statistics.reviewed.to_s 
-            @rateTable.values[1][0].text = statistics.learned.to_s
-            @rateTable.values[2][0].text = statistics.reviewPace.to_s + "s "
-            @rateTable.values[3][0].text = statistics.learnPace.to_s + "s "
-            @rateTable.values[4][0].text = statistics.accuracy.to_s + "% "
-            @rateTable.values[5][0].text = statistics.learnTimePercent.to_s + "% "
-            @rateTable.values[6][0].text = statistics.dateSkew.to_s + " days"
-            @rateTable.values[7][0].text = statistics.reviewRate.to_s + "x "
+        def updateRate(stats)
+            @rateTable.values[0][0].text = stats.reviewed.to_s 
+            @rateTable.values[1][0].text = stats.learned.to_s
+            @rateTable.values[2][0].text = stats.reviewPace.to_s + "s "
+            @rateTable.values[3][0].text = stats.learnPace.to_s + "s "
+            @rateTable.values[4][0].text = stats.accuracy.to_s + "% "
+            @rateTable.values[5][0].text = stats.learnTimePercent.to_s + "% "
+            @rateTable.values[6][0].text = stats.dateSkew.to_s + " days"
+            @rateTable.values[7][0].text = stats.reviewRate.to_s + "x "
         end
     end
 end

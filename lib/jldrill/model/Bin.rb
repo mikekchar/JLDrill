@@ -159,34 +159,6 @@ module JLDrill
             return retVal
         end
 
-        # Returns the number of days the "now" for scheduled
-        # items are skewed from the real now.  Positive numbers
-        # are in the future, negative numbers in the past.
-        # rounds to the nearest tenth.
-        def dateSkew
-            return firstSchedule().to_i - Time::now.to_i
-        end
-        
-        def numScheduledWithin(range)
-            total = 0
-            @contents.each do |item|
-                if item.schedule.scheduledWithin?(range)
-                    total += 1
-                end
-            end
-            total
-        end
-        
-        def numDurationWithin(range)
-            total = 0
-            @contents.each do |item|
-                if item.schedule.durationWithin?(range)
-                    total += 1
-                end
-            end
-            total
-        end
-
         # Returns true if the Item exists in the bin
         def exists?(item)
             !@contents.find do |x|

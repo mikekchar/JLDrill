@@ -157,7 +157,9 @@ module JLDrill
         end
 
         # Returns the number of items per day as a float
-        def itemsPerDay(items, range)
+        def itemsPerDay(items, level)
+            start = reviewBin.firstSchedule
+            range = findRange(level, start)
             return items / ((range.end - range.begin).to_f / SECONDS_PER_DAY)
         end
                     
@@ -183,8 +185,40 @@ module JLDrill
             return @quiz.contents.bins[4]
         end
 
+        def size
+            return reviewBin.length
+        end
+
+        def numScheduledForLevel(level)
+            total = 0
+            start = reviewBin.firstSchedule.to_i
+            range = findRange(level, start)
+            reviewBin.each do |item|
+                if item.schedule.scheduledWithin?(range)
+                    total += 1
+                end
+            end
+            total
+        end
+        
+        def numDurationForLevel(level)
+            total = 0
+            range = findRange(level, 0)
+            reviewBin.each do |item|
+                if item.schedule.durationWithin?(range)
+                    total += 1
+                end
+            end
+            total
+        end
+
+        # Returns the number of days the "now" for scheduled
+        # items are skewed from the real now.  Positive numbers
+        # are in the future, negative numbers in the past.
+        # rounds to the nearest tenth.
         def dateSkew
-            return ((reviewBin().dateSkew * 10).round / SECONDS_PER_DAY).to_f / 10
+            skew = reviewBin.firstSchedule.to_i - Time::now.to_i
+            return ((skew * 10).round / SECONDS_PER_DAY).to_f / 10
         end
 
         def reviewRate
