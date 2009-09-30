@@ -152,8 +152,11 @@ module JLDrill
         # rounds to the nearest tenth.
         def dateSkew
             skew = 0.0
-            if @contents.size > 0 && !@contents[0].nil?
-                skew = @contents[0].schedule.dateSkew
+            if @contents.size > 0 
+                item = @contents[0]
+                if !item.nil?
+                   skew = item.schedule.dateSkew
+                end
             end
             return skew
         end

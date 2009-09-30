@@ -317,12 +317,16 @@ module JLDrill
             return secondsToDays(calculateInterval.to_i)
         end
 
-        # Returns the number of days the first scheduled item
-        # is skewed from now.  Positive numbers
+        # Returns the number of days this item is scheduled
+        # from now.  Positive numbers
         # are in the future, negative numbers in the past.
         # Rounds to the nearest tenth.
         def dateSkew
-            return secondsToDays(firstSchedule.to_i - Time::now.to_i)
+            retVal = 0.0
+            if scheduled?
+                retVal = secondsToDays(scheduledTime.to_i - Time::now.to_i)
+            end
+            return retVal
         end
         
         # Return the total number of seconds from the

@@ -205,21 +205,20 @@ module JLDrill
         # Promote the item to the next level/bin
         def promote(item)
             if !item.nil?
-                if (item.bin + 1 < contents.bins.length)
-                    if (item.bin + 1) == 4
+                if item.bin < 3
+                    item.schedule.level = item.bin
+                    contents.moveToBin(item, item.bin + 1)
+                else
+                    if item.bin == 3
+                        # Newly promoted items
                         item.schedule.consecutive = 1
                         @stats.learned += 1
                     end
-                    item.schedule.level = item.bin unless item.bin > 2
-                    if item.bin < 3
-                        contents.moveToBin(item, item.bin + 1)
-                    else
-                        # Items already in bin 4, or have newly moved to bin 4
-                        # need to be put in the correct place.
-                        contents.bins[item.bin].delete(item)
-                        contents.bins[4].insertBefore(item) do |index|
-                            contents.bins[4][index].schedule.getScheduledTime > item.schedule.getScheduledTime
-                        end
+                    # Insert the item into the correct place according to schedule
+                    contents.bins[item.bin].delete(item)
+                    target = item.schedule.getScheduledTime
+                    contents.bins[4].insertBefore(item) do |index|
+                        contents.bins[4][index].schedule.getScheduledTime > target
                     end
                 end
             end
@@ -245,6 +244,8 @@ module JLDrill
             item.schedule.correct
             if(item.schedule.score >= options.promoteThresh)
                 item.schedule.score = 0
+                promote(item)
+            elsif item.bin == 4
                 promote(item)
             end
         end
