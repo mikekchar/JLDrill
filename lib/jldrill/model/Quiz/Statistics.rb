@@ -228,6 +228,47 @@ module JLDrill
             end
             return retVal
         end
+
+        def statsTable
+            start = reviewBin.firstSchedule.to_i
+            scheduleRanges = []
+            durationRanges = []
+            values = []
+            0.upto(6) do |level|
+                scheduleRanges.push(findRange(level, start))
+                durationRanges.push(findRange(level, 0))
+                values.push([])
+                values[level].push(0)
+                values[level].push(0)
+            end
+            values.push([])
+            values[7].push(0)
+            values[7].push(0)
+            reviewBin.each do |item|
+                scheduleFound = false
+                durationFound = false
+                level = 0
+                while (level <= 6) && (!scheduleFound || !durationFound)
+                    schedule = item.schedule
+                    if !scheduleFound && schedule.scheduledWithin?(scheduleRanges[level])
+                        scheduleFound = true
+                        values[level][0] += 1
+                    end
+                    if !durationFound && schedule.durationWithin?(durationRanges[level])
+                        durationFound = true
+                        values[level][1] += 1
+                    end
+                    level += 1
+                end
+                if !scheduleFound
+                    values[7][0] += 1
+                end
+                if !durationFound
+                    values[7][1] += 1
+                end
+            end
+            return values
+        end
         
         def correct(item)
             # currently only level 4 items are reviewed

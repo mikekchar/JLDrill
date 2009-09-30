@@ -127,25 +127,21 @@ module JLDrill::Gtk
             self.destroy
         end
         
-        def updateSchedule(stats)
-            total = 0
+        def updateSchedule(table, stats)
             0.upto(6) do |i|
-                num = stats.numScheduledForLevel(i)
+                num = table[i][0]
                 rate = (stats.itemsPerDay(num, i) * 100).to_i / 100.0
                 @scheduleTable.values[i][0].text = rate.to_s + "/day "
-                total += num
             end
-            @scheduleTable.values[7][0].text = (stats.size - total).to_s
+            @scheduleTable.values[7][0].text = table[7][0].to_s
         end
         
-        def updateDuration(stats)
-            total = 0
+        def updateDuration(table)
             0.upto(6) do |i|
-                num = stats.numDurationForLevel(i)
+                num = table[i][1]
                 @scheduleTable.values[i][1].text = num.to_s
-                total += num
             end
-            @scheduleTable.values[7][1].text = (stats.size - total).to_s
+            @scheduleTable.values[7][1].text = table[7][0].to_s
         end
         
         def updateAccuracy(stats)
