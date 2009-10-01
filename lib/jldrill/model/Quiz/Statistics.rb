@@ -189,29 +189,6 @@ module JLDrill
             return reviewBin.length
         end
 
-        def numScheduledForLevel(level)
-            total = 0
-            start = reviewBin.firstSchedule.to_i
-            range = findRange(level, start)
-            reviewBin.each do |item|
-                if item.schedule.scheduledWithin?(range)
-                    total += 1
-                end
-            end
-            total
-        end
-        
-        def numDurationForLevel(level)
-            total = 0
-            range = findRange(level, 0)
-            reviewBin.each do |item|
-                if item.schedule.durationWithin?(range)
-                    total += 1
-                end
-            end
-            total
-        end
-
         # Returns the number of days the "now" for scheduled
         # items are skewed from the real now.  Positive numbers
         # are in the future, negative numbers in the past.
@@ -229,43 +206,75 @@ module JLDrill
             return retVal
         end
 
+        def initializeTable
+            retVal = []
+            0.upto(7) do |level|
+                retVal.push([0, 0])
+            end
+            return retVal
+        end
+
+        class Counter
+            attr_reader :found
+            attr_writer :found
+
+            def initialize(stats, start, table, pos)
+                @ranges = makeRanges(stats, start)
+                @found = false
+                @table = table
+                @pos = pos
+            end            
+
+            def makeRanges(stats, start)
+                retVal = []
+                0.upto(6) do |level|
+                    retVal.push(stats.findRange(level, start))
+                end
+                return retVal
+            end
+
+            def finalCount
+                if !@found
+                    @table[7][@pos] += 1
+                end
+                @found = false
+            end
+        end
+
+        class ScheduleCounter < Counter
+            def count(schedule, level)
+                if !@found && schedule.scheduledWithin?(@ranges[level])
+                    @table[level][@pos] += 1
+                    @found = true
+                end
+            end
+        end
+
+        class DurationCounter < Counter
+            def count(schedule, level)
+                if !@found && schedule.durationWithin?(@ranges[level])
+                    @table[level][@pos] += 1
+                    @found = true
+                end
+            end
+        end
+
         def statsTable
             start = reviewBin.firstSchedule.to_i
-            scheduleRanges = []
-            durationRanges = []
-            values = []
-            0.upto(6) do |level|
-                scheduleRanges.push(findRange(level, start))
-                durationRanges.push(findRange(level, 0))
-                values.push([])
-                values[level].push(0)
-                values[level].push(0)
-            end
-            values.push([])
-            values[7].push(0)
-            values[7].push(0)
+            values = initializeTable
+            sCounter = ScheduleCounter.new(self, start, values, 0)
+            dCounter = DurationCounter.new(self, 0, values, 1)
+
             reviewBin.each do |item|
-                scheduleFound = false
-                durationFound = false
                 level = 0
-                while (level <= 6) && (!scheduleFound || !durationFound)
+                while (level <= 6) && !(sCounter.found && dCounter.found)
                     schedule = item.schedule
-                    if !scheduleFound && schedule.scheduledWithin?(scheduleRanges[level])
-                        scheduleFound = true
-                        values[level][0] += 1
-                    end
-                    if !durationFound && schedule.durationWithin?(durationRanges[level])
-                        durationFound = true
-                        values[level][1] += 1
-                    end
+                    sCounter.count(schedule, level)
+                    dCounter.count(schedule, level)
                     level += 1
                 end
-                if !scheduleFound
-                    values[7][0] += 1
-                end
-                if !durationFound
-                    values[7][1] += 1
-                end
+                sCounter.finalCount
+                dCounter.finalCount
             end
             return values
         end
