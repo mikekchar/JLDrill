@@ -39,6 +39,10 @@ module JLDrill
         def newSetBin
             0
         end
+
+        def newSet
+            @quiz.contents.bins[newSetBin]
+        end
         
         # Returns true if there are no items in the new set
         def newSetEmpty?

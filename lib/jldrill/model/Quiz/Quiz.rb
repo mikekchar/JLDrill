@@ -201,6 +201,11 @@ module JLDrill
             # Update status again
             @publisher.unblock
             
+            # Need to sort the new set to deal with older files that
+            # may not be sorted.
+            @strategy.newSet.sort! do |x, y|
+                x.position <=> y.position
+            end
             setNeedsSave(true)
             updateLoad
             return @contents.length > 0
