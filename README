@@ -23,14 +23,14 @@ stable version will always be available at:
 
 http://jldrill.rubyforge.org
 
-The version of this package is jldrill-0.3.4.  It is a
+The version of this package is jldrill-0.3.5.  It is a
 development version but can be used by end users who want
 to participate in the development process.  Bug reports and
 suggestions are welcome.
 The location for the documentation for this release is depends on
 where you are viewing this.
 
-{Installed Gem}[link://../../../gems/jldrill-0.3.4/web/output/index.html]
+{Installed Gem}[link://../../../gems/jldrill-0.3.5/web/output/index.html]
 |
 {Source Repository}[link://../web/output/index.html]
 
@@ -52,7 +52,7 @@ etc.) are located in the data/jldrill/COPYING directory.
 
 Documentation on how to build and contribute to JLDrill is available:
 
-{Installed Gem}[link://../../../gems/jldrill-0.3.4/web/output/Development.html]
+{Installed Gem}[link://../../../gems/jldrill-0.3.5/web/output/Development.html]
 |
 {Source Repository}[link://../web/output/Development.html]
 
@@ -60,9 +60,9 @@ The test results and test code coverage will be available here
 if they were built:
 
 Installed gem:
-{Test results}[link://../../../gems/jldrill-0.3.4/test_results.html]
+{Test results}[link://../../../gems/jldrill-0.3.5/test_results.html]
 |
-{Code coverage}[link://../../../gems/jldrill-0.3.4/coverage/index.html]
+{Code coverage}[link://../../../gems/jldrill-0.3.5/coverage/index.html]
 
 Source repository:
 {Test results}[link://../test_results.html]

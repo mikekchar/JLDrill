@@ -1,28 +1,25 @@
-
-<h2>
-* JLDrill Version 0.3.4
-</h2>
+= JLDrill TODO
+* Version 0.3.5
+  This is a development release.  The main purpose is to improve
+  workflow for creating and editing drills.
 
   :PROPERTIES:
-  :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(%) %CurrentVelocity(Current) %NeededVelocity(Needed)
-  :StartDate: <2008-12-25 Thu>
-  :CurrentDate:  <2009-08-28 Fri>
-  :EndDate: <2009-09-04 Fri>
+  :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
+  :StartDate: <2009-06-06 Mon>
+  :CurrentDate:  <2009-10-08 Thu>
+  :EndDate: <2009-11-13 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
   :END:
 
-This is a development release.  The main purpose is to improve
-workflow for creating and editing drills.
-
+== Velocity Table
 ** Development Summary
-
 <pre>
 #+BEGIN: columnview :maxlevel 1 :id local
-| ITEM                    | Total | Done |     % | Current | Needed |
-|-------------------------+-------+------+-------+---------+--------|
-| * JLDrill Version 0.3.4 |    21 |   21 | 100.0 |    0.09 |   0.08 |
+| ITEM            | Total | Done | Percent | Current | Needed |
+|-----------------+-------+------+---------+---------+--------|
+| * Version 0.3.5 |    15 |   11 |    73.3 |    0.09 |   0.09 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </pre>
@@ -31,167 +28,91 @@ Note: To update the current velocity you must set the CurrentDate in
 the properties.  Also, when setting TODO tasks to DONE, you must set
 the number of jellybeans done in the properties of the task.
 
+** Work to be done
+== Current Stories
 
-** DONE Add description for 々 in the kanji popup
-
-  :PROPERTIES:
-  :JellyBeans: 1
-  :Done: 1
-  :END:
-
-** DONE Pressing cancel when quitting
-  Pressing cancel when trying to save after quitting shouldn't leave
-  you hung with no window.  This is unplanned work accounted for in
-  the velocity.
-
-** DONE JLDrill crashes.
-  I don't know why it crashed (and I didn't record the reason when I
-  fixed it.)  This is unplanned work accounted for in the velocity.
-
-** DONE Removing kanji from a kanji problem
-  If you have a kanji question and edit it to take out the kanji,
-  when you finish the editing, the problem question is blank.
-  In this situation, the problem should become a meaning problem.
-  This is unplanned work accounted for in the velocity.
-
-** DONE Ability to load dictionary in all windows
-   You should be able to load the dictionary with Ctl-D from
-   both the edit and add windows
-
-  :PROPERTIES:
-  :JellyBeans: 2
-  :Done: 2
-  :END:
-
-** DONE Improved workflow for the add window
-   Whent the window comes up, the cursor is placed in the Readings box.
-   If the user presses Ctrl-S the item is searched.  If there are any
-   results, the focus is put on the search box.  If not, the focus
-   remains where it is.  When the focus is on the search box, up arrow
-   and down arrow will select the previous and next tiems
-   respectively. Return will insert the item and the focus will be
-   placed on the "Add" button. 
-
-   :PROPERTIES:
-   :JellyBeans: 5
-   :Done: 5
-   :END:
-
-** DONE Improved workflow for the edit window
-   Similar to the add window.  But when the window first opens, the
-   focus is on the search box if there are any entries.  Note:  if the
-   user changes items, the window does not steal focus, but if
-   possible the search box should have the focus when the window
-   regains focus.  If there are no entries in the search box then focus
-   should be on the Readings box.
-
-   :PROPERTIES:
-   :JellyBeans: 3
-   :Done: 3
-   :END:
-
-** DONE Don't change the viewing state when updating vocab
-   If the user has seen the answer for the question, display
-   it after the vocabulary has been updated.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :DONE: 1
-   :END:
-
-** DONE Renumber item poitions when resetting the drill.
-   This will fix problems with old drills that have gotten have gotten
-   out of whack.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :DONE: 1
-   :END:
-
-** DONE Fix slowness in editing
-        Sometimes it is slow to edit an entry.  It takes a long time
-		to come up.  Possibly the search is taking a long time.
-		But when you set, it is also slow.  I saw this with
-		the word shin 芯
-
-** DONE Be able to delete or edit an item from the "All Vocab" list. [12/12]
-   - [X] Refactor widget to be a mixin
-   - [X] include Widget from GtkWidget
-   - [X] make gtkAdd/RemoveWidget have default values that log a warning
-   - [X] Refactor VocabularyTable to hold items (rename it to ItemTable)
-   - [X] Make dictionary searches return item lists
-		 At this point I decided to do some refactoring of Item.  I
-		 suppose it wasn't really necessary in the end, but I was
-         really confused about what I wanted Item to do, so I decided
-         it was a good idea while I was playing with Item lists.
-       - [X] Move position information from ItemStatus into Item
-       - [X] Create a hash table to contain status information for
-         each drill
-       - [X] Move ItemStatus into the Quiz directory and make it
-         totally related to that Quiz
-   - [X] Update the All Vocab list when things change.  Also select
-		 the appropriate vocabulary when things change.
-       - [X] Implement the ItemTableWindow as a window, not a dialog
-         (duh...)
-       - [X] Implement search in ItemTable
-       - [X] Updating the problem updates the All Vocab list
-       - [X] Updating a problem, selects it in the list
-       - [X] New problems select it in the list
-       - [X] Opening the list highlights the current problem
-   - [X] Adding items to a large file is very slow.  That's because
-     it's checking each one to see if it already exists.  Possibly we
-     need to add a hash of some sort to cut down the search parameters.
-   - [X] Adding items to a blank quiz doesn't update the all vocab
-     table
-   - [X] Editing and item so that it's the same as an existing item
-     results in 2 of the same item.
-   - [X] "E" or activation in the All Vocab list allows editing the item
-   - [X] Create a "display only mode" for items that are being edited
-     or added.
-   - [X] "D" deletes the currently highlighted item.  Prompts first.
-
-   :PROPERTIES:
-   :JellyBeans: 2
-   :Done: 2
-   :END:
-
-** DONE Be able to delete the current item. [1/1]
-   - [X] "D" deletes the current problem.  Prompts first.
-
-   :PROPERTIES:
-   :JellyBeans: 3
-   :Done: 3
-   :END:
-
-** DONE Be able to change the order of items in the "All Vocab" list.
-   Basically, the user selects an item.  If they press shift up arrow, the
-   item will go up. If they press shift down arrow, the item will go down.
-
-   :PROPERTIES:
-   :JellyBeans: 2
-   :Done: 2
-   :END:
-
-** DONE Be able to create a new drill
+** DONE Create a desktop entry for GNOME.  
+   Also change to an SVG icon.
 
    :PROPERTIES:
    :JellyBeans: 1
    :Done: 1
    :END:
 
-** DONE Don't search edict using regexps because the items might
-   use characters in regexps which can cause a crash.
+** DONE Reset difficulty over time.
+   If the user goes for a certain period of time without seeing the
+   item and subsequently gets it right, reset the difficulty to
+   be anagolous to the time.  In other words, if they get it right
+   after 5 days, reset the difficulty to 0
 
-** DONE Delete doesn't work properly from the all vocab list.
-   After you delete you have two tables.
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 1
+   :END:
 
-** DONE Need a delete button on the all vocab list.
+** DONE Don't always schedule from now.
+   If we are behind, schedule new items starting from the date
+   of the first item on the list.  Otherwse schedule new items
+   from now.  When scheduling review items, always schedule
+   from the scheduled date.  The effect of this is to deal with
+   the problem of getting behind while keeping similar review
+   items in similar places.
 
-** TODO Add documentation for delete item
+   :PROPERTIES:
+   :JellyBeans: 3
+   :Done: 3
+   :END:
 
-<h2>
+** DONE Allow user to cut and paste items in the vocabulary list
+   The user can press Ctrl-X to mark an item for cutting.
+   Then they press Ctrl-V to move it before the currently selected
+   item.  This allows users to more quickly move items a long
+   distance in the vocabulary list.
+
+   :PROPERTIES:
+   :JellyBeans: 3
+   :Done: 3
+   :END:
+
+** DONE Show scheduled item statistics as items per day
+   Instead of showing the number of items scheduled in the
+   first 6 days, use the range levels and show the average
+   number of items scheduled per day for each level.  The
+   statistics should start from the first item, not the
+   now.  Add a "Skew" statistic showing how many days the
+   first item is scheduled from now (negative is behind,
+   positive is ahead).
+
+  :PROPERTIES:
+  :JellyBeans: 2
+  :Done: 2
+  :END:
+
+** TODO Sort new items correctly when they have been moved [1/2]
+   When items are moved in the AllVocab window, make sure
+   they are in the correct presentation order in the
+   NewSet. 
+   - [X] Sort New Set items when the file is loaded so that
+		 old files have the correct order.
+   - [ ] Physically move New Set items when they are moved in
+	    the AllVocabWindow so that they are in the correct
+	    order.
+
+   :PROPERTIES:
+   :JellyBeans: 3
+   :Done: 1
+   :END:
+
+** TODO Update Documentation
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 0
+   :END:
+
+   
 * Backlog
-</h2>
+== Future Stories
 
 ** TODO Create a keyboard only mode.
    Advanced users can probably just use the keyboard.  In this mode,
@@ -205,6 +126,7 @@ the number of jellybeans done in the properties of the task.
    :END:
 
 ** TODO Give feedback to the user when we refuse to edit or add an item.
+
 ** TODO Automatically load dictionary option
    Have an option that is saved with the drill to automatically
    load the dictionary when the drill is loaded.
@@ -224,6 +146,7 @@ the number of jellybeans done in the properties of the task.
    :END:
 
 ** TODO Allow searching by Kanji
+
 ** TODO Need a mechanism for publishing warnings and errors.
 
 ** TODO Full test coverage for all the model objects
@@ -269,6 +192,7 @@ the number of jellybeans done in the properties of the task.
 ** TODO Create Windows packaging.
 
 ** TODO Indicate when the item has been promoted.
+
 ** TODO When save fails, indicate it to the user 
    before bringing up the save as dialog.
 
@@ -282,4 +206,3 @@ the number of jellybeans done in the properties of the task.
 ** TODO Create Redhat packaging.
 
 ** TODO Create OSX packaging.
-
