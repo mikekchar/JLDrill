@@ -6,6 +6,7 @@ module JLDrill
 	
 		def initialize(context)
 			super(context)
+            @timeout = 2000
 		end
 
 		def newProblem(problem, differs)

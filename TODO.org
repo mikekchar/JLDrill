@@ -88,6 +88,17 @@ the number of jellybeans done in the properties of the task.
   :Done: 2
   :END:
 
+** DONE Change the background after 2 seconds
+   Add a timer to the question.  After 2 seconds
+   change the background of the pane to another color.
+   This allows the user to place a limit on the amount of time
+   they use thinking.
+
+  :PROPERTIES:
+  :JellyBeans: 1
+  :Done: 1
+  :END:
+
 ** TODO Sort new items correctly when they have been moved [1/2]
    When items are moved in the AllVocab window, make sure
    they are in the correct presentation order in the

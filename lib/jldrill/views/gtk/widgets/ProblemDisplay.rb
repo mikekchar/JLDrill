@@ -80,6 +80,12 @@ module JLDrill::Gtk
                 @answer.update(@problem)
             end
         end
+
+        def expire
+            if !@problem.nil?
+                @question.expire
+            end
+        end
         
         def showingAnswer?
             !@answer.clear?

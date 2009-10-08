@@ -49,7 +49,7 @@ There are many drill files available.  They include hiragana, katakana,
 JLPT vocabulary levels 1-4 and grammar.  JLDrill will automatically choose the
 directory that contains the default drill files.
 
-Note: Levels 1 and 2 of the JLPT files have some incorrect
+Note: The JLPT files have some incorrect
 translations.  Please cross reference the vocabulary with the dictionary
 to ensure that they are correct (see below).  Also, the grammar
 drill is a work in progress and contains only about half

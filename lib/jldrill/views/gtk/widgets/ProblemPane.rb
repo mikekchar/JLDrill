@@ -14,6 +14,7 @@ module JLDrill::Gtk
         NORMAL_COLOR = Gdk::Color.parse("#ffffc0")
         DISPLAY_ONLY_COLOR = Gdk::Color.parse("#e0f0ff")
         PREVIEW_COLOR = Gdk::Color.parse("#ffe0ff")
+        EXPIRED_COLOR = Gdk::Color.parse("#f07070")
 
         attr_reader :contents
 
@@ -28,7 +29,7 @@ module JLDrill::Gtk
             @contents.editable = false
             @contents.cursor_visible = false
             @contents.set_pixels_above_lines(5)
-            @contents.modify_base(Gtk::STATE_NORMAL, NORMAL_COLOR)
+            normalMode
             self.add(@contents)
             @buffer = @contents.buffer
             @hasKanji = true
@@ -45,6 +46,10 @@ module JLDrill::Gtk
 
         def displayOnlyMode
             @contents.modify_base(Gtk::STATE_NORMAL, DISPLAY_ONLY_COLOR)
+        end
+
+        def expiredMode
+            @contents.modify_base(Gtk::STATE_NORMAL, EXPIRED_COLOR)
         end
 
         def createTags
@@ -111,6 +116,11 @@ module JLDrill::Gtk
                 problem.publishQuestion(self)
             end
         end
+
+        def expire
+            expiredMode
+        end
+
     end        
     
     # The pane that displays the answer for the problem
