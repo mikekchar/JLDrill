@@ -1,3 +1,5 @@
+require 'jldrill/model/Quiz/Strategy'
+
 module JLDrill
 
     # Calculates and stores various statistics for each item in the
@@ -8,14 +10,14 @@ module JLDrill
     class ItemStats
         CONSECUTIVE_RE = /^Consecutive: (.*)/
 
-        attr_reader :name, :item, :consecutive
-        attr_writer :item, :consecutive
+        attr_reader :name, :item, :consecutive, :thinkingTime
+        attr_writer :item, :consecutive, :thinkingTime
 
         # Create a new ItemStats for this item
         def initialize(item)
             @name = "ItemStats"
             @item = item
-            @consecutive = 0
+            reset
         end
 
         # Parse a single part of the ItemStats
@@ -40,11 +42,14 @@ module JLDrill
         # Assign this item's stats to be the same as the one passed in
         def assign(itemStats)
             @consecutive = itemStats.consecutive
+            @thinkingTime = itemStats.thinkingTime
         end
 
         # Reset the statistics for the item
         def reset
             @consecutive = 0
+            # thinkingTime is not set all the time
+            @thinkingTime = nil
         end
 
         # The item was not correctly remembered
@@ -64,5 +69,18 @@ module JLDrill
             retVal = "/Consecutive: #{@consecutive.to_i}"
             retVal
         end
+
+        def inNewSet?
+            @item.bin == Strategy.newSetBin
+        end
+
+        def inWorkingSet?
+            Strategy.workingSetBins.include?(@item.bin)
+        end
+
+        def inReviewSet?
+            @item.bin == Strategy.reviewSetBin
+        end
+
     end
 end

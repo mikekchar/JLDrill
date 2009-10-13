@@ -52,7 +52,7 @@ Poor
 /Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj]
 
         # This is a new vocabulary to use for adding to the quiz
-        NewVocab = "/Kanji: 秋/Reading: あき/Definitions: autumn,fall/Markers: n-adv,P/Position: -1/Score: 0/Level: 0/Consecutive: 0/Difficulty: 0/"
+        NewVocab = "/Kanji: 秋/Reading: あき/Definitions: autumn,fall/Markers: n-adv,P/Position: -1/Consecutive: 0/Score: 0/Level: 0/Difficulty: 0/"
 
 
         FileString = FileHeader + FileInfo + FileOptions + FileVocab

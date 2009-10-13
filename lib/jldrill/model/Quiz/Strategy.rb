@@ -12,6 +12,18 @@ module JLDrill
             @stats = Statistics.new(quiz)
         end
         
+        def Strategy.newSetBin
+            return 0
+        end
+
+        def Strategy.workingSetBins
+            return 1..3
+        end
+
+        def Strategy.reviewSetBin
+            return 4
+        end
+        
         # Returns a string showing the status of the quiz with this strategy
         def status
             if shouldReview?
@@ -35,27 +47,12 @@ module JLDrill
             @quiz.options
         end
 
-        # Returns the bin number of the new set
-        def newSetBin
-            0
-        end
-
         def newSet
-            @quiz.contents.bins[newSetBin]
+            @quiz.contents.bins[Strategy.newSetBin]
         end
         
-        # Returns true if there are no items in the new set
-        def newSetEmpty?
-            contents.bins[0].empty?
-        end
-        
-        def workingSetRange
-            1..3
-        end
-        
-        # Returns true if there are no items in the working set
         def workingSetEmpty?
-            contents.rangeEmpty?(1..3)
+            contents.rangeEmpty?(Strategy.workingSetBins)
         end
         
         # Returns the number of items in the working set
@@ -68,14 +65,13 @@ module JLDrill
              workingSetSize >= options.introThresh
         end
         
-        # returns the bin number of the review set
-        def reviewSetBin
-            4
+        def reviewSet
+            @quiz.contents.bins[Strategy.reviewSetBin]
         end
-        
+
         # Returns the number of items in the review set
         def reviewSetSize
-            contents.bins[reviewSetBin].length
+            reviewSet.length
         end
         
         # Returns true is the working set has been
@@ -99,7 +95,7 @@ module JLDrill
         def shouldReview?
             # if we only have review set items, or we are in review mode
             # then return true
-            if  (newSetEmpty? && workingSetEmpty?) || (options.reviewMode)
+            if  (newSet.empty? && workingSetEmpty?) || (options.reviewMode)
                 return true
             end
             
@@ -140,12 +136,12 @@ module JLDrill
         # Get an item from the New Set
         def getNewItem
             if options.randomOrder
-                index = rand(contents.bins[newSetBin].length)
+                index = rand(newSet.length)
             else
-                index = findUnseen(newSetBin)
+                index = findUnseen(Strategy.newSetBin)
             end
             if !(index == -1)
-                item = contents.bins[newSetBin][index]
+                item = newSet[index]
                 # Resetting the schedule to make up for the consequences
                 # of an old bug where reset drills weren't reset properly.
                 item.schedule.reset
@@ -158,9 +154,9 @@ module JLDrill
         
         # Get an item from the Review Set
         def getReviewItem
-            index = findUnseen(reviewSetBin)
+            index = findUnseen(Strategy.reviewSetBin)
             if !(index == -1)
-                contents.bins[reviewSetBin][index]
+                reviewSet[index]
             else
                 nil
             end
@@ -168,7 +164,7 @@ module JLDrill
         
         # Get an item from the Working Set
         def getWorkingItem
-            randomUnseen(workingSetRange)
+            randomUnseen(Strategy.workingSetBins)
         end
 
         # Get an item to quiz
@@ -181,7 +177,7 @@ module JLDrill
             if !workingSetFull?
                 if shouldReview?
                     item = getReviewItem
-                elsif !newSetEmpty?
+                elsif !newSet.empty?
                     item = getNewItem
                 end
             end

@@ -6,7 +6,7 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2009-06-06 Mon>
-  :CurrentDate:  <2009-10-08 Thu>
+  :CurrentDate:  <2009-10-13 Tue>
   :EndDate: <2009-11-13 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -19,7 +19,7 @@
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.3.5 |    15 |   11 |    73.3 |    0.09 |   0.09 |
+| * Version 0.3.5 |    21 |   12 |    57.1 |    0.09 |   0.13 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </pre>
@@ -88,14 +88,23 @@ the number of jellybeans done in the properties of the task.
   :Done: 2
   :END:
 
-** DONE Change the background after 2 seconds
-   Add a timer to the question.  After 2 seconds
+** TODO Add a timer for each question [1/4]
+   Add a timer to the question.  After a certain amount of time
    change the background of the pane to another color.
    This allows the user to place a limit on the amount of time
-   they use thinking.
+   they use thinking.  The time limit is variable.  When the
+   user gets a question right in review mode, that becomes the
+   time limit for the question.  The question changes color
+   (expires) after that time limit is expended
+   - [X] Change the background of each question after 2 seconds
+   - [ ] Create a time limit to be saved for each item
+   - [ ] Set the time limit when the user gets the question right in
+     review mode.  Note that the time limit will be 0 on the first review.
+   - [ ] Change the background after the time limit expires for each
+     question.  If it is 0 then never change the background.
 
   :PROPERTIES:
-  :JellyBeans: 1
+  :JellyBeans: 3
   :Done: 1
   :END:
 
@@ -112,6 +121,13 @@ the number of jellybeans done in the properties of the task.
    :PROPERTIES:
    :JellyBeans: 3
    :Done: 1
+   :END:
+
+** TODO Create a Debian package
+
+   :PROPERTIES:
+   :JellyBeans: 3
+   :Done: 0
    :END:
 
 ** TODO Update Documentation
