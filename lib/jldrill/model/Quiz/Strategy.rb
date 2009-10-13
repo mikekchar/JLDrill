@@ -215,7 +215,7 @@ module JLDrill
                 else
                     if item.bin == 3
                         # Newly promoted items
-                        item.schedule.consecutive = 1
+                        item.itemStats.consecutive = 1
                         @stats.learned += 1
                     end
                     # Insert the item into the correct place according to schedule
@@ -246,6 +246,7 @@ module JLDrill
         def correct(item)
             @stats.correct(item)
             item.schedule.correct
+            item.itemStats.correct
             if(item.schedule.score >= options.promoteThresh)
                 item.schedule.score = 0
                 promote(item)
@@ -258,6 +259,7 @@ module JLDrill
         def incorrect(item)
             @stats.incorrect(item)
             item.schedule.incorrect
+            item.itemStats.incorrect
             demote(item)
         end
     end

@@ -202,6 +202,7 @@ module JLDrill
             end
             @bins[0].each do |item|
                 item.schedule.reset
+                item.itemStats.reset
             end
             saveNeeded
         end

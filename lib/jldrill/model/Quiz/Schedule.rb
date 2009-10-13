@@ -12,7 +12,6 @@ module JLDrill
         SCORE_RE = /^Score: (.*)/
         LEVEL_RE = /^Level: (.*)/
         LASTREVIEWED_RE = /^LastReviewed: (.*)/
-        CONSECUTIVE_RE = /^Consecutive: (.*)/
         SCHEDULEDTIME_RE = /^ScheduledTime: (.*)/
         DIFFICULTY_RE = /^Difficulty: (.*)/
         DURATION_RE = /^Duration: (.*)/
@@ -21,10 +20,10 @@ module JLDrill
         MAX_ADDITIONAL_TIME = 4 * SECONDS_PER_DAY
 
         attr_reader :name, :item, :score, :level, 
-                    :lastReviewed, :consecutive, :scheduledTime,
+                    :lastReviewed, :scheduledTime,
                     :seen, :numIncorrect, :duration
         attr_writer :item, :score, :level,
-                    :lastReviewed, :consecutive, :scheduledTime,
+                    :lastReviewed, :scheduledTime,
                     :seen, :numIncorrect, :duration
 
 
@@ -32,7 +31,6 @@ module JLDrill
             @name = "Schedule"
             @score = 0
             @level = 0
-            @consecutive = 0
             @lastReviewed = nil
             @scheduledTime = nil
             @seen = false
@@ -51,8 +49,6 @@ module JLDrill
                     @level = $1.to_i
                 when LASTREVIEWED_RE
                     @lastReviewed = Time.at($1.to_i)
-                when CONSECUTIVE_RE 
-                    @consecutive = $1.to_i
                 when SCHEDULEDTIME_RE
                     if @item.bin == 4
                         @scheduledTime = Time.at($1.to_i)
@@ -79,7 +75,6 @@ module JLDrill
         def assign(schedule)
             @score = schedule.score
             @level = schedule.level
-            @consecutive = schedule.consecutive
             @lastReviewed = schedule.lastReviewed
             @scheduledTime = schedule.scheduledTime
             @seen = schedule.seen
@@ -122,7 +117,6 @@ module JLDrill
             @lastReviewed = nil
             @scheduledTime = nil
             @score = 0
-            @consecutive = 0
             @seen = false
             @numIncorrect = 0
             @duration = -1
@@ -287,7 +281,6 @@ module JLDrill
             unschedule
             markReviewed
             @score = 0
-            @consecutive = 0
         end
 
         # Mark the item as correct.
@@ -296,9 +289,6 @@ module JLDrill
             schedule
             markReviewed
             @score += 1
-            if @item.bin == 4
-                @consecutive += 1
-            end
         end
 
         # Returns true if the item has been seen before.
@@ -401,9 +391,6 @@ module JLDrill
             retVal = "/Score: #{@score}" + "/Level: #{@level}"
             if reviewed?
                 retVal += "/LastReviewed: #{reviewedTime().to_i}"
-            end
-            if !@consecutive.nil?
-                retVal += "/Consecutive: #{@consecutive.to_i}"
             end
             if scheduled?
                 retVal += "/ScheduledTime: #{@scheduledTime.to_i}"

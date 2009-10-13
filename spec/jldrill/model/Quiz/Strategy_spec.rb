@@ -271,15 +271,15 @@ module JLDrill
 	        @strategy.correct(item)
             item.bin.should be(4)
             # we only increase consecutive in the review set
-            item.schedule.consecutive.should be(1)
+            item.itemStats.consecutive.should be(1)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
-            item.schedule.consecutive.should be(4)
+            item.itemStats.consecutive.should be(4)
 
             @strategy.incorrect(item)
             item.bin.should be(1)
-            item.schedule.consecutive.should be(0)
+            item.itemStats.consecutive.should be(0)
         end
 
         it "should schedule starting from the first scheduled item" do

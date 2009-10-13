@@ -2,8 +2,6 @@
 module JLDrill
 
     # A container to hold the status of each kind of drill for the item.
-    # Currently, only Schedule information from the Spaced Repetition
-    # Drill is kept.  So, the fact that I'm using a hash is totally YAGNI!
     class ItemStatus
         
         attr_reader :statuses, :item

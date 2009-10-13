@@ -98,7 +98,7 @@ module JLDrill
                     retVal += bin.to_s
                 end
             else
-                retVal += "+#{@item.schedule.consecutive}"
+                retVal += "+#{@item.itemStats.consecutive}"
                 if @item.schedule.reviewed?
                     retVal += ", #{@item.schedule.reviewedDate}"
                 end

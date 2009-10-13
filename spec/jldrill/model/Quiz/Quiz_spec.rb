@@ -140,7 +140,7 @@ module JLDrill
             @quiz.currentProblem.item.schedule.level.should be(0)
             test_problem(question, 
                          ReadingProblem.new(@quiz.currentProblem.item, @quiz))
-            @quiz.currentProblem.item.schedule.consecutive.should be(0)
+            @quiz.currentProblem.item.itemStats.consecutive.should be(0)
 	    end
 
         def test_level(question)
@@ -167,13 +167,13 @@ module JLDrill
 	    def test_binTwo(question)
             # The quiz depends on the level
             test_level(question)
-            @quiz.currentProblem.item.schedule.consecutive.should be(0)
+            @quiz.currentProblem.item.itemStats.consecutive.should be(0)
 	    end
 
 	    def test_binThree(question)
             # The quiz depends on the level
             test_level(question)
-            @quiz.currentProblem.item.schedule.consecutive.should be(0)
+            @quiz.currentProblem.item.itemStats.consecutive.should be(0)
 	    end
 
 	    def test_binFour(question)
@@ -184,7 +184,7 @@ module JLDrill
             # The quiz depends on the level
             test_level(question)
             # Level 4 items have consecutive of at least one
-            @quiz.currentProblem.item.schedule.consecutive.should_not be(0)
+            @quiz.currentProblem.item.itemStats.consecutive.should_not be(0)
 	    end
 	    
 	    def test_drill
@@ -210,19 +210,19 @@ module JLDrill
 	    end
 
         def test_correct
-            consecutive = @quiz.currentProblem.item.schedule.consecutive
+            consecutive = @quiz.currentProblem.item.itemStats.consecutive
             @quiz.correct
             bin = @quiz.currentProblem.item.bin
             if bin == 4
-                @quiz.currentProblem.item.schedule.consecutive.should be(consecutive + 1)
+                @quiz.currentProblem.item.itemStats.consecutive.should be(consecutive + 1)
             else
-                @quiz.currentProblem.item.schedule.consecutive.should be(0)
+                @quiz.currentProblem.item.itemStats.consecutive.should be(0)
             end
         end
 	    
         def test_incorrect
             @quiz.incorrect
-            @quiz.currentProblem.item.schedule.consecutive.should be(0)
+            @quiz.currentProblem.item.itemStats.consecutive.should be(0)
         end
 	    
 	    def test_initializeQuiz

@@ -1,6 +1,7 @@
 require 'jldrill/model/items/ItemFactory'
 require 'jldrill/model/ItemStatus'
 require 'jldrill/model/Quiz/Schedule'
+require 'jldrill/model/Quiz/ItemStats'
 
 module JLDrill
 
@@ -44,6 +45,7 @@ module JLDrill
             @container = nil
             @status = ItemStatus.new(self)
             @status.add(Schedule.new(self))
+            @status.add(ItemStats.new(self))
         end
 
         # Create an item using the save string
@@ -97,6 +99,10 @@ module JLDrill
         # Return the schedule for the Spaced Repetition Drill
         def schedule
             return @status.select("Schedule")
+        end
+
+        def itemStats
+            return @status.select("ItemStats")
         end
 
         # Assign the contents of item to this item
