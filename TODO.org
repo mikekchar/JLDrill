@@ -88,7 +88,7 @@ the number of jellybeans done in the properties of the task.
   :Done: 2
   :END:
 
-** TODO Add a timer for each question [1/4]
+** TODO Add a timer for each question [2/5]
    Add a timer to the question.  After a certain amount of time
    change the background of the pane to another color.
    This allows the user to place a limit on the amount of time
@@ -97,9 +97,10 @@ the number of jellybeans done in the properties of the task.
    time limit for the question.  The question changes color
    (expires) after that time limit is expended
    - [X] Change the background of each question after 2 seconds
-   - [ ] Create a time limit to be saved for each item
-   - [ ] Set the time limit when the user gets the question right in
+   - [X] Set the time limit when the user gets the question right in
      review mode.  Note that the time limit will be 0 on the first review.
+   - [ ] Change the resolution of the timer to be sub-second
+   - [ ] Create save the time limit for each item
    - [ ] Change the background after the time limit expires for each
      question.  If it is 0 then never change the background.
 

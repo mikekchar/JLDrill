@@ -36,36 +36,79 @@ module JLDrill::ItemsHaveTimeLimits
             quiz.currentProblem.item
         end
 
+        def drillCorrectly(item)
+            quiz.createProblem(item)
+            # We have to fake the time because the test runs too fast
+            # and it will be set to 0
+            twoSecondsAgo = Time.at(Time.now.to_i - 2)
+            item.itemStats.thinkingTimer.startedAt = twoSecondsAgo
+            quiz.correct
+        end
+
+        def promoteIntoWorkingSet(item)
+            item.itemStats.should be_inNewSet
+            drillCorrectly(item)
+            item.itemStats.should be_inWorkingSet
+        end
+
+        def promoteIntoReviewSet(item)
+            item.bin.should eql(JLDrill::Strategy.workingSetBins.begin)
+
+            JLDrill::Strategy.workingSetBins.each do
+                item.itemStats.should_not be_inNewSet
+                item.itemStats.should be_inWorkingSet
+                quiz.correct
+            end
+
+            item.itemStats.should be_inReviewSet
+        end
+
+        it "should start the thinkingTimer when a new problem is created" do
+            item = newSet[0]
+            item.itemStats.thinkingTimer.should_receive(:start)
+            quiz.createProblem(item)
+        end
+
+        it "should stop the thinkingTimer when a problem is answered" do
+            item = newSet[0]
+            # Note: It's 3 times because Timer.start() that is called
+            #       from createProblem() calls stop just in case the
+            #       timer was already started.
+            item.itemStats.thinkingTimer.should_receive(:stop).exactly(3).times
+            quiz.createProblem(item)
+            quiz.correct
+            quiz.incorrect
+        end
+
         it "should not have time limits on New Set Items" do
-            quiz.createProblem(newSet[0])
-            currentItem.itemStats.thinkingTime.should be_nil
+            item = newSet[0]
+            quiz.createProblem(item)
+            item.itemStats.timeLimit.should eql(0)
         end
 
         it "should not have time limits on Working Set Items" do
-            quiz.createProblem(newSet[0])
-            currentItem.itemStats.should be_inNewSet
-            quiz.correct
-            # It should be promoted to the working set
-            currentItem.itemStats.should_not be_inNewSet
-            currentItem.itemStats.should be_inWorkingSet
-            currentItem.itemStats.thinkingTime.should be_nil
+            item = newSet[0]
+            quiz.createProblem(item)
+            promoteIntoWorkingSet(item)
+            item.itemStats.timeLimit.should eql(0)
         end
 
         it "should not have time limits on newly promoted Review Set Items" do
-            quiz.createProblem(newSet[0])
-            currentItem.itemStats.should be_inNewSet
-            # Promote it into the working set
-            quiz.correct
-            # Promote it through the working set bins
-            JLDrill::Strategy.workingSetBins.each do
-                currentItem.itemStats.should_not be_inNewSet
-                currentItem.itemStats.should be_inWorkingSet
-                quiz.correct
-            end
-            currentItem.itemStats.should_not be_inNewSet
-            currentItem.itemStats.should_not be_inWorkingSet
-            currentItem.itemStats.should be_inReviewSet
-            currentItem.itemStats.thinkingTime.should be_nil            
+            item = newSet[0]
+            quiz.createProblem(item)
+            promoteIntoWorkingSet(item)
+            promoteIntoReviewSet(item)
+            item.itemStats.timeLimit.should eql(0)            
+        end
+
+        it "should add a time limit after the first review" do
+            item = newSet[0]
+            quiz.createProblem(item)
+            promoteIntoWorkingSet(item)
+            promoteIntoReviewSet(item)
+            drillCorrectly(item)
+            # drillCorrectly sets the timer manually to 2 seconds
+            item.itemStats.timeLimit.should eql(2)
         end
     end
 end

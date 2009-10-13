@@ -1,4 +1,5 @@
 require 'jldrill/model/Quiz/Strategy'
+require 'jldrill/model/Quiz/Timer'
 
 module JLDrill
 
@@ -10,13 +11,14 @@ module JLDrill
     class ItemStats
         CONSECUTIVE_RE = /^Consecutive: (.*)/
 
-        attr_reader :name, :item, :consecutive, :thinkingTime
-        attr_writer :item, :consecutive, :thinkingTime
+        attr_reader :name, :item, :consecutive, :thinkingTimer, :timeLimit
+        attr_writer :item, :consecutive, :thinkingTimer, :timeLimit
 
         # Create a new ItemStats for this item
         def initialize(item)
             @name = "ItemStats"
             @item = item
+            @thinkingTimer = Timer.new
             reset
         end
 
@@ -42,25 +44,37 @@ module JLDrill
         # Assign this item's stats to be the same as the one passed in
         def assign(itemStats)
             @consecutive = itemStats.consecutive
-            @thinkingTime = itemStats.thinkingTime
+            @thinkingTimer.assign(itemStats.thinkingTimer)
+            @timeLimit = itemStats.timeLimit
         end
 
         # Reset the statistics for the item
         def reset
             @consecutive = 0
-            # thinkingTime is not set all the time
-            @thinkingTime = nil
+            @thinkingTimer.reset
+            @timeLimit = 0
+        end
+
+        # The item is being used to create a problem
+        def createProblem
+            @thinkingTimer.reset
+            @thinkingTimer.start
+            @timeLimit = 0
         end
 
         # The item was not correctly remembered
         def incorrect
+            @thinkingTimer.stop
             @consecutive = 0
+            @timeLimit = 0
         end
 
         # The item was correctly remembered
         def correct
+            @thinkingTimer.stop
             if @item.bin == 4
                 @consecutive += 1
+                @timeLimit = @thinkingTimer.total
             end
         end
 

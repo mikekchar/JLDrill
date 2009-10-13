@@ -191,6 +191,7 @@ module JLDrill
 
         # Create a problem for the given item at the correct level
         def createProblem(item)
+            item.itemStats.createProblem
             # Drill at random levels in bin 4, but don't drill reading
             if item.bin == 4
                 level = rand(2) + 1
