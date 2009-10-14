@@ -255,4 +255,7 @@ task :debian => [:clean, :web] do
     sh "cp -R data/* debian/jldrill/usr/share"
     sh "cp -R data/jldrill/jldrill.desktop debian/jldrill/usr/share/applications"
     sh "cp -R web/output/* debian/jldrill/usr/share/doc/jldrill/html"
+    
+    # Build the deb
+    sh "dpkg-buildpackage -rfakeroot -i.bzr"
 end
