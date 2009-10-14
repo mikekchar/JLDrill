@@ -125,8 +125,9 @@ the number of jellybeans done in the properties of the task.
    :Done: 1
    :END:
 
-** TODO Create a Debian package
-
+** TODO Create a Debian package [0/0]
+   - [ ] Update the copyright and changelog in the debian directory
+   
    :PROPERTIES:
    :JellyBeans: 3
    :Done: 0
