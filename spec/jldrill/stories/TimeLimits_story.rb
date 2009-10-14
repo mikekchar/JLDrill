@@ -105,5 +105,19 @@ module JLDrill::ItemsHaveTimeLimits
             drillCorrectly(item)
             item.itemStats.timeLimit.should_not eql(0.0)
         end
+
+        it "should be able to round the time limit to 3 decimals" do
+            item = newSet[0]
+            item.itemStats.round(123.123456789, 3).should eql(123.123)
+            item.itemStats.round(123.987654321, 3).should eql(123.988)
+        end
+
+        it "should save the time limit to 3 decimals and read it back in" do
+            item = newSet[0]
+            item.itemStats.timeLimit = 123.987654321
+            itemString = item.to_s
+            newItem = JLDrill::Item.create(itemString)
+            newItem.itemStats.timeLimit.should eql(123.988)
+        end
     end
 end

@@ -10,6 +10,7 @@ module JLDrill
     #              in the review set
     class ItemStats
         CONSECUTIVE_RE = /^Consecutive: (.*)/
+        TIMELIMIT_RE = /^TimeLimit: (.*)/
 
         attr_reader :name, :item, :consecutive, :thinkingTimer, :timeLimit
         attr_writer :item, :consecutive, :thinkingTimer, :timeLimit
@@ -28,6 +29,8 @@ module JLDrill
             case string
                 when CONSECUTIVE_RE
                     @consecutive = $1.to_i
+                when TIMELIMIT_RE
+                    @timeLimit = $1.to_f
             else
                 parsed = false
             end
@@ -78,9 +81,29 @@ module JLDrill
             end
         end
 
+        def exp(number, places)
+            retVal = 1
+            if places != 0
+                retVal = number
+                1.upto(places - 1) do
+                    retVal = retVal * number
+                end
+            end
+            retVal
+        end
+
+
+        def round(number, places)
+            mult = exp(10, places)
+            (number * mult).round.to_f / mult
+        end
+
         # Output the ItemStats in save format
         def to_s
             retVal = "/Consecutive: #{@consecutive.to_i}"
+            if @timeLimit != 0
+                retVal += "/TimeLimit: #{self.round(@timeLimit, 3)}"
+            end
             retVal
         end
 
