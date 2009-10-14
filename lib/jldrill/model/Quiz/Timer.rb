@@ -1,14 +1,13 @@
 module JLDrill
     class Timer
         attr_reader :total, :startedAt
-        attr_writer :startedAt
         
         def initialize
             reset
         end
 
         def reset
-            @total = 0
+            @total = 0.0
             @startedAt = nil
         end
 
@@ -28,7 +27,7 @@ module JLDrill
         
         def stop
             if running?
-                @total += Time.now.to_i - @startedAt.to_i
+                @total += Time.now.to_f - @startedAt.to_f
                 @startedAt = nil
             end
         end

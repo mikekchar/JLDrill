@@ -52,21 +52,21 @@ module JLDrill
         def reset
             @consecutive = 0
             @thinkingTimer.reset
-            @timeLimit = 0
+            @timeLimit = 0.0
         end
 
         # The item is being used to create a problem
         def createProblem
             @thinkingTimer.reset
             @thinkingTimer.start
-            @timeLimit = 0
+            @timeLimit = 0.0
         end
 
         # The item was not correctly remembered
         def incorrect
             @thinkingTimer.stop
             @consecutive = 0
-            @timeLimit = 0
+            @timeLimit = 0.0
         end
 
         # The item was correctly remembered

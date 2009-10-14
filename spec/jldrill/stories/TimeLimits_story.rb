@@ -38,10 +38,6 @@ module JLDrill::ItemsHaveTimeLimits
 
         def drillCorrectly(item)
             quiz.createProblem(item)
-            # We have to fake the time because the test runs too fast
-            # and it will be set to 0
-            twoSecondsAgo = Time.at(Time.now.to_i - 2)
-            item.itemStats.thinkingTimer.startedAt = twoSecondsAgo
             quiz.correct
         end
 
@@ -83,14 +79,14 @@ module JLDrill::ItemsHaveTimeLimits
         it "should not have time limits on New Set Items" do
             item = newSet[0]
             quiz.createProblem(item)
-            item.itemStats.timeLimit.should eql(0)
+            item.itemStats.timeLimit.should eql(0.0)
         end
 
         it "should not have time limits on Working Set Items" do
             item = newSet[0]
             quiz.createProblem(item)
             promoteIntoWorkingSet(item)
-            item.itemStats.timeLimit.should eql(0)
+            item.itemStats.timeLimit.should eql(0.0)
         end
 
         it "should not have time limits on newly promoted Review Set Items" do
@@ -98,7 +94,7 @@ module JLDrill::ItemsHaveTimeLimits
             quiz.createProblem(item)
             promoteIntoWorkingSet(item)
             promoteIntoReviewSet(item)
-            item.itemStats.timeLimit.should eql(0)            
+            item.itemStats.timeLimit.should eql(0.0)
         end
 
         it "should add a time limit after the first review" do
@@ -107,8 +103,7 @@ module JLDrill::ItemsHaveTimeLimits
             promoteIntoWorkingSet(item)
             promoteIntoReviewSet(item)
             drillCorrectly(item)
-            # drillCorrectly sets the timer manually to 2 seconds
-            item.itemStats.timeLimit.should eql(2)
+            item.itemStats.timeLimit.should_not eql(0.0)
         end
     end
 end
