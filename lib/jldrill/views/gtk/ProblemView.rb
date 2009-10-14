@@ -31,7 +31,7 @@ module JLDrill::Gtk
         end
 
         def startTimer(timeLimit)
-            if timeLimit != 0 && @timeoutID.nil?
+            if timeLimit != 0.0 && @timeoutID.nil?
                 @timeoutID = Gtk.timeout_add((timeLimit * 1000).to_i) do
                     @timeoutID = nil
                     expire

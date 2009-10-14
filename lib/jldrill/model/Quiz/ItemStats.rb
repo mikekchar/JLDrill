@@ -62,7 +62,6 @@ module JLDrill
         def createProblem
             @thinkingTimer.reset
             @thinkingTimer.start
-            @timeLimit = 0.0
         end
 
         # The item was not correctly remembered

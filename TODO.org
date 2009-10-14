@@ -6,7 +6,7 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2009-06-06 Mon>
-  :CurrentDate:  <2009-10-13 Tue>
+  :CurrentDate:  <2009-10-14 Wed>
   :EndDate: <2009-11-13 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -89,7 +89,7 @@ the number of jellybeans done in the properties of the task.
   :Done: 2
   :END:
 
-** TODO Add a timer for each question [4/5]
+** DONE Add a timer for each question [5/5]
    Add a timer to the question.  After a certain amount of time
    change the background of the pane to another color.
    This allows the user to place a limit on the amount of time
@@ -102,12 +102,12 @@ the number of jellybeans done in the properties of the task.
      review mode.  Note that the time limit will be 0 on the first review.
    - [X] Change the resolution of the timer to be sub-second
    - [X] Save the time limit for each item
-   - [ ] Change the background after the time limit expires for each
+   - [X] Change the background after the time limit expires for each
      question.  If it is 0 then never change the background.
 
   :PROPERTIES:
   :JellyBeans: 3
-  :Done: 1
+  :Done: 3
   :END:
 
 ** TODO Sort new items correctly when they have been moved [1/2]
