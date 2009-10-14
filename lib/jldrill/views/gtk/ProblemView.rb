@@ -24,15 +24,15 @@ module JLDrill::Gtk
 		end
 		
         def stopTimer
-            if @timeout != 0 && !@timeoutID.nil?
+            if !@timeoutID.nil?
                 Gtk.timeout_remove(@timeoutID)
                 @timeoutID = nil
             end
         end
 
-        def startTimer
-            if @timeout != 0 && @timeoutID.nil?
-                @timeoutID = Gtk.timeout_add(2000) do
+        def startTimer(timeLimit)
+            if timeLimit != 0 && @timeoutID.nil?
+                @timeoutID = Gtk.timeout_add((timeLimit * 1000).to_i) do
                     @timeoutID = nil
                     expire
                     false
@@ -43,7 +43,9 @@ module JLDrill::Gtk
 		def newProblem(problem, differs)
 		    @problemDisplay.newProblem(problem, differs)
             stopTimer
-            startTimer
+            if !problem.nil?
+                startTimer(problem.item.itemStats.timeLimit)
+            end
 		end
 		
 		def showAnswer
