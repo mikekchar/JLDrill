@@ -1,0 +1,16 @@
+Source: jldrill
+Section: text
+Priority: optional
+Maintainer: Mike Charlton <mikekchar@gmail.com>
+Build-Depends: debhelper (>= 7), ruby
+Standards-Version: 3.8.0
+Homepage: http://sakabatou.dnsdojo.org
+
+Package: jldrill
+Architecture: all
+Depends: ruby, ruby-gnome2, ttf-kanjistrokeorders, edict
+Description: Japanese language drill program
+ JLDrill is a program for helping people drill various aspects of the
+ Japanese language. Current features include a kana drill, a vocabulary
+ drill, a dictionary cross reference tool and a popup-kanji reference
+ with stroke order diagrams.

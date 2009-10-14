@@ -213,6 +213,13 @@ task :clean do
     sh "rm -rf webgen.cache"
     sh "rm -rf web/output"
     sh "rm -rf web/webgen.cache"
+
+    # These are for the debian build
+    sh "rm -rf debian/jldrill"
+    sh "rm -rf debian/*debhelper*"
+    sh "rm -rf debian/files"
+    sh "rm -rf configure-stamp"
+    sh "rm -rf build-stamp"
 end
 
 task :release => [:clean, :rcov, :rdoc, :web, :package] do
@@ -224,3 +231,28 @@ task :release => [:clean, :rcov, :rdoc, :web, :package] do
 end
 
 task :update => [:release]
+
+task :debian => [:clean, :web] do
+    # Create the new directory structure
+    sh "mkdir debian/jldrill"
+    sh "mkdir debian/jldrill/usr"
+    sh "mkdir debian/jldrill/usr/bin"
+    sh "mkdir debian/jldrill/usr/lib"
+    sh "mkdir debian/jldrill/usr/lib/ruby"
+    sh "mkdir debian/jldrill/usr/lib/ruby/1.8"    
+    sh "mkdir debian/jldrill/usr/share"
+    sh "mkdir debian/jldrill/usr/share/applications"
+    sh "mkdir debian/jldrill/usr/share/doc"
+    sh "mkdir debian/jldrill/usr/share/doc/jldrill"
+    sh "mkdir debian/jldrill/usr/share/doc/jldrill/html"    
+    
+    # Copy the context files
+    sh "cp -R #{context_directory}/lib/* debian/jldrill/usr/lib/ruby/1.8"
+
+    # Copy the jldrill files
+    sh "cp -R bin/* debian/jldrill/usr/bin"
+    sh "cp -R lib/* debian/jldrill/usr/lib/ruby/1.8"
+    sh "cp -R data/* debian/jldrill/usr/share"
+    sh "cp -R data/jldrill/jldrill.desktop debian/jldrill/usr/share/applications"
+    sh "cp -R web/output/* debian/jldrill/usr/share/doc/jldrill/html"
+end

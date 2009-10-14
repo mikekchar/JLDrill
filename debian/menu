@@ -1,0 +1,2 @@
+?package(jldrill):needs="X11" section="Apps/Education"\
+  title="JLDrill" command="/usr/bin/jldrill" icon="/usr/share/jldrill/icon.png"

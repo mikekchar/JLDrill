@@ -1,0 +1,89 @@
+This package was debianized by Mike Charlton <mikekchar@gmail.com> on
+Thu, 08 Oct 2009 13:53:51 +0900.
+
+It was downloaded from <http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.5>
+
+Upstream Author(s):
+
+    Mike Charlton <mikekchar@gmail.com>
+
+Copyright:
+
+    (C) 2005-2009 Mike Charlton
+
+License:
+
+JLDrill is licensed under version 3.0 of the GNU General Public
+License (GPL) Please see the COPYING File for more details. Previous
+versions of JLDrill were released under version 2.0 of the GPL and you
+may choose that version if you wish. However version 3.0 represents a
+major improvement in clearing up ambiguous details, so I highly
+recommend choosing GPL 3.0 if you wish to extend this software.
+
+The Debian packaging is copyright 2009, Mike Charlton <mikekchar@gmail.com> and
+is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
+
+The JLPT files are Copyright (C) 2001 Thierry Bézecourt
+
+Thierry’s Website: http://www.thbz.org/
+
+This software contains the JLPT files from Thierry Bézecourt.  Here is
+the original copyright notification.
+
+# JLPT vocabulary, level 4-1
+# Copyright (C) 2001 Thierry Bézecourt (http://www.thbz.org)
+# License information: 
+
+# You can use this file freely in a non-commercial way. If you plan to
+# make it available publicly in a book, a software or whatever medium,
+# whether freely or not, you must include the first two lines of this
+# file (the copyright information) and tell me about it by sending an
+# e-mail to kanjimots@thbz.org. Thanks.
+
+I was worried about distributing these files with a GPL licensed
+application.  Because the application might get distributed in a
+"commercial" setting, I was afraid that I might be in violation of the
+license.  So I subsequently asked for a modification the to license.
+Here is the response:
+
+Hi Mike,
+
+Thanks for your e-mail. I'm glad you found these files useful. As a matter of
+fact, when I made these files, I thought little about licensing issues and
+"prohibited" a commercial use with no particular reason. Now I know a little
+more about these issues and think there is no reason to prohibit it. I am happy
+when I receive an e-mail from people who say there are using these files in
+Japanese-related software but I don't really care whether that software is
+commercial or not. So I have decided to change the header of these files and
+only ask the user to include somewhere a mention of the source (i.e me or my
+Web site). You can use these files as you like (GPL or other).
+
+Cheers,
+
+Thierry
+
+
+The Grammar file was constructed using Tae Kim’s Japanese Guide to
+Japanese grammar. That guide is licensed under a Creative Commons
+BY-NC-SA license (2.5). It additionally includes vocabulary from
+EDICT.
+
+Tae Kim’s Japanese Guide to Japanese Grammar: http://www.guidetojapanese.org/
+
+This software contains data files from the rikaichan 1.04 distribution.
+The files in question are kanji.dat and radicals.dat.
+
+The original copyright statement is here:
+
+KANJIDIC2
+Copyright (C) 2007 The Electronic Dictionary Research and Development Group
+http://www.csse.monash.edu.au/~jwb/kanjidic2/
+
+Basically, rikaichan is using the kanjidic and radkfiles from the Electronic
+Dictionary Research and Development Group.  However, they have changed
+the format and added quite a few entries.  It is much easier to parse
+and more useful.  Also, they are using UTF characters instead of EUC
+characters meaning that many more of the proper radicals can be shown.
+
+More licence information can be found in the data/jldrill/COPYING directory in JLDrill’s main distribution.
+

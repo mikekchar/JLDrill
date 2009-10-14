@@ -1,0 +1,10 @@
+Document: jldrill
+Title: JLDrill Manual
+Author: Mike Charlton
+Abstract: This manual describes what jldrill is
+ and how it can be used.
+Section: Apps/Education
+
+Format: HTML
+Index: /usr/share/doc/jldrill/html/index.html
+Files: /usr/share/doc/jldrill/html/*.html
