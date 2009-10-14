@@ -1,5 +1,6 @@
 require 'jldrill/model/Item'
 require 'jldrill/model/ItemStatus'
+require 'jldrill/model/Quiz/Timer'
 
 module JLDrill
 
@@ -34,31 +35,6 @@ module JLDrill
             end
         end
 
-        class StatsTimer
-            attr_reader :total, :startedAt
-        
-            def initialize
-                @total = 0
-                @startedAt = nil
-            end
-            
-            def start
-                stop
-                @startedAt = Time.now
-            end
-
-            def running?
-                !@startedAt.nil?
-            end
-                        
-            def stop
-                if running?
-                    @total += Time.now.to_i - @startedAt.to_i
-                    @startedAt = nil
-                end
-            end
-        end
-    
         attr_reader :estimate, :lastTen, :confidence, :levels, 
                         :timesInTargetZone, :learned, :reviewed
     
@@ -82,8 +58,8 @@ module JLDrill
             @learned = 0
             @reviewed = 0
             @reviewRateSum = 0
-            @reviewTimer = StatsTimer.new
-            @learnTimer = StatsTimer.new
+            @reviewTimer = Timer.new
+            @learnTimer = Timer.new
             @currentTimer = nil
             resetConfidence 
         end
@@ -445,7 +421,7 @@ module JLDrill
 
         def learnPace
             if @learned > 0
-                roundToOneDecimal(learnTime.to_f / @learned.to_f)
+                roundToOneDecimal(learnTime / @learned)
             else
                 0.0
             end
@@ -453,7 +429,7 @@ module JLDrill
 
         def reviewPace
             if @reviewed > 0
-                roundToOneDecimal(reviewTime.to_f / @reviewed.to_f)
+                roundToOneDecimal(reviewTime / @reviewed)
             else
                 0.0
             end
