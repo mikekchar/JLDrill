@@ -110,18 +110,18 @@ the number of jellybeans done in the properties of the task.
   :Done: 3
   :END:
 
-** TODO Create a Debian package [2/4]
+** TODO Create a Debian package [3/5]
    - [X] Create rough debian package and build it from the rakefile
    - [X] Create debian package for Context and have jldrill depend on
      it.
-   - [ ] Create a method for the debian installed package to find
+   - [X] Create a method for the debian installed package to find
      its data files
    - [ ] Remove unneeded items from the debian package
    - [ ] Modify debs to show dependency on Ruby 1.8
    
    :PROPERTIES:
    :JellyBeans: 4
-   :Done: 2
+   :Done: 3
    :END:
 
 ** TODO Allow the user to choose the dictionary

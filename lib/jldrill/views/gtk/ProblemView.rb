@@ -60,7 +60,9 @@ module JLDrill::Gtk
         def updateProblem(problem, differs)
             @problemDisplay.updateProblem(problem, differs)
             stopTimer
-            startTimer
+            if !problem.nil?
+                startTimer(problem.item.itemStats.timeLimit)
+            end
         end
     end
     

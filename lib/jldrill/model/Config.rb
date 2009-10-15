@@ -15,5 +15,6 @@ module JLDrill
         end
     
         DATA_DIR = getDataDir
+        DICTIONARY_PATH = File.join(File.join(DATA_DIR, "dict"), "edict")
     end
 end

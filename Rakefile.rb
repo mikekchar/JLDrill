@@ -259,7 +259,9 @@ task :debian_dir => [:clean_debian, :clean_web, :web] do
     sh "cp -R lib/* debian/jldrill/usr/lib/ruby/1.8"
     sh "cp -R data/* debian/jldrill/usr/share"
     sh "cp -R data/jldrill/jldrill.desktop debian/jldrill/usr/share/applications"
-    sh "cp -R web/output/* debian/jldrill/usr/share/doc/jldrill/html"    
+    sh "cp -R web/output/* debian/jldrill/usr/share/doc/jldrill/html"
+    # Overwrite the Config file with the Debian version.
+    sh "cp config/DebianConfig.rb debian/jldrill/usr/lib/ruby/1.8/jldrill/model/Config.rb"
 end
 
 task :deb => [:clean_debian] do
