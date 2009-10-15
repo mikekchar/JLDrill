@@ -6,7 +6,7 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2009-06-06 Mon>
-  :CurrentDate:  <2009-10-14 Wed>
+  :CurrentDate:  <2009-10-15 Thu>
   :EndDate: <2009-11-13 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -20,7 +20,7 @@
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.3.5 |    21 |   14 |    66.7 |    0.11 |   0.13 |
+| * Version 0.3.5 |    26 |   16 |    61.5 |    0.12 |   0.16 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </pre>
@@ -110,6 +110,40 @@ the number of jellybeans done in the properties of the task.
   :Done: 3
   :END:
 
+** TODO Create a Debian package [1/3]
+   - [X] Create rough debian package and build it from the rakefile
+   - [ ] Create debian package for Context and have jldrill depend on
+     it.
+   - [ ] Create a method for the debian installed package to find
+     its data files
+   - [ ] Remove unneeded items from the debian package
+   
+   :PROPERTIES:
+   :JellyBeans: 4
+   :Done: 2
+   :END:
+
+** TODO Allow the user to choose the dictionary
+   Instead of having a single dictionary that is loaded, allow the
+   user to choose the dictionary they want to load from the Options
+   page. This filename is then stored in the drill file.  Remove
+   edict from the distribution.
+
+   :PROPERTIES:
+   :JellyBeans: 3
+   :Done: 0
+   :END:
+
+** TODO Automatically load dictionary option
+   Have an option that is saved with the drill to automatically
+   load the dictionary when the drill is loaded.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+
+
 ** TODO Sort new items correctly when they have been moved [1/2]
    When items are moved in the AllVocab window, make sure
    they are in the correct presentation order in the
@@ -125,14 +159,6 @@ the number of jellybeans done in the properties of the task.
    :Done: 1
    :END:
 
-** TODO Create a Debian package [0/0]
-   - [ ] Update the copyright and changelog in the debian directory
-   
-   :PROPERTIES:
-   :JellyBeans: 3
-   :Done: 0
-   :END:
-
 ** TODO Update Documentation
 
    :PROPERTIES:
@@ -143,6 +169,11 @@ the number of jellybeans done in the properties of the task.
    
 * Backlog
 == Future Stories
+
+** TODO Replace webgen with something else.  
+
+** TODO Find a way to build the debian package using tools version in Debian
+** TODO Create Windows packaging.
 
 ** TODO Create a keyboard only mode.
    Advanced users can probably just use the keyboard.  In this mode,
@@ -156,10 +187,6 @@ the number of jellybeans done in the properties of the task.
    :END:
 
 ** TODO Give feedback to the user when we refuse to edit or add an item.
-
-** TODO Automatically load dictionary option
-   Have an option that is saved with the drill to automatically
-   load the dictionary when the drill is loaded.
 
 ** TODO Allow user to modify the global backoff.
    Allow the user to modify the global backoff from the options.  This
@@ -190,9 +217,6 @@ the number of jellybeans done in the properties of the task.
 
 ** TODO Create a recent used menu for loading drills that you've used recently.
 
-** TODO Stop distributing edict in the gem.  
-   Allow the user to set where the dictionary is.
-
 ** TODO Allow user to set the formatting for each type of data.  
    Store the formatting in the drill.
 
@@ -217,16 +241,10 @@ the number of jellybeans done in the properties of the task.
    Only load the dictionary if it's in the drill. (Question: Should it
    unload the dictionary on next drill?  Probably yes...)
 
-** TODO Create Debian packaging.
-
-** TODO Create Windows packaging.
-
 ** TODO Indicate when the item has been promoted.
 
 ** TODO When save fails, indicate it to the user 
    before bringing up the save as dialog.
-
-** TODO Replace webgen with something else.  
 
 ** TODO Create a dictionary back end to allow it to use online dictionaries,
    or dictionary servers (fantasdic? stardict?)
