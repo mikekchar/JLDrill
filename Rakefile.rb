@@ -77,6 +77,10 @@ ruby_opts = ["-KO", "-I./lib"]
 #            but is used by the main repository after a bzr update so
 #            that people can browse the built items through the
 #            web-dave interface 
+# deb     -- Builds a debian package in the parent directory.  Note that
+#            the version number is dependent upon the changelog entry
+#            in the debian directory.  Also to be strictly correct your
+#            jldrill source directory should be jldrill-<version number>
 
 task :default => [:spec]
 
@@ -191,6 +195,12 @@ package_task = Rake::GemPackageTask.new(gem_spec) do |pkg|
 	pkg.need_tar = false
 end
 
+task :clean_web do
+    sh "rm -rf webgen.cache"
+    sh "rm -rf web/output"
+    sh "rm -rf web/webgen.cache"
+end
+
 webgen_task = Webgen::WebgenTask.new('web') do |site|
     site.clobber_outdir = true
     site.config_block = lambda do |config|
@@ -199,27 +209,25 @@ webgen_task = Webgen::WebgenTask.new('web') do |site|
     end
 end
 
-task :publish => [:web] do
+task :publish => [:clean_web, :web] do
     sh "scp web/output/*.html web/output/*.css " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project
     sh "scp web/output/images/* " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project + "/images/"
 end
 
-task :clean do
-    sh "rm -rf #{release_dir}"
-    sh "rm -rf test_results.html"
-    sh "rm -rf doc"
-    sh "rm -rf coverage"
-    sh "rm -rf pkg"
-    sh "rm -rf webgen.cache"
-    sh "rm -rf web/output"
-    sh "rm -rf web/webgen.cache"
-
-    # These are for the debian build
+task :clean_debian do
     sh "rm -rf debian/jldrill"
     sh "rm -rf debian/*debhelper*"
     sh "rm -rf debian/files"
     sh "rm -rf configure-stamp"
     sh "rm -rf build-stamp"
+end
+
+task :clean => [:clean_web, :clean_debian] do
+    sh "rm -rf #{release_dir}"
+    sh "rm -rf test_results.html"
+    sh "rm -rf doc"
+    sh "rm -rf coverage"
+    sh "rm -rf pkg"
 end
 
 task :release => [:clean, :rcov, :rdoc, :web, :package] do
@@ -232,7 +240,7 @@ end
 
 task :update => [:release]
 
-task :debian => [:clean, :web] do
+task :debian_dir => [:clean_debian, :clean_web, :web] do
     # Create the new directory structure
     sh "mkdir debian/jldrill"
     sh "mkdir debian/jldrill/usr"
@@ -254,8 +262,9 @@ task :debian => [:clean, :web] do
     sh "cp -R lib/* debian/jldrill/usr/lib/ruby/1.8"
     sh "cp -R data/* debian/jldrill/usr/share"
     sh "cp -R data/jldrill/jldrill.desktop debian/jldrill/usr/share/applications"
-    sh "cp -R web/output/* debian/jldrill/usr/share/doc/jldrill/html"
-    
-    # Build the deb
+    sh "cp -R web/output/* debian/jldrill/usr/share/doc/jldrill/html"    
+end
+
+task :deb => [:debian_dir] do
     sh "dpkg-buildpackage -rfakeroot -i.bzr"
 end
