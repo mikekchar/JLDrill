@@ -254,9 +254,6 @@ task :debian_dir => [:clean_debian, :clean_web, :web] do
     sh "mkdir debian/jldrill/usr/share/doc/jldrill"
     sh "mkdir debian/jldrill/usr/share/doc/jldrill/html"    
     
-    # Copy the context files
-    sh "cp -R #{context_directory}/lib/* debian/jldrill/usr/lib/ruby/1.8"
-
     # Copy the jldrill files
     sh "cp -R bin/* debian/jldrill/usr/bin"
     sh "cp -R lib/* debian/jldrill/usr/lib/ruby/1.8"
@@ -265,6 +262,6 @@ task :debian_dir => [:clean_debian, :clean_web, :web] do
     sh "cp -R web/output/* debian/jldrill/usr/share/doc/jldrill/html"    
 end
 
-task :deb => [:debian_dir] do
+task :deb => [:clean_debian] do
     sh "dpkg-buildpackage -rfakeroot -i.bzr"
 end

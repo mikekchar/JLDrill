@@ -27,8 +27,7 @@ build-stamp: configure-stamp
 	dh_testdir
 
 	# Add here commands to compile the package.
-	# This simply constructs the web page
-	rake web
+	# Nothing to do
 	#docbook-to-man debian/jldrill.sgml > jldrill.1
 
 	touch $@
@@ -50,7 +49,7 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package into debian/jldrill.
-	rake debian
+	rake debian_dir
 
 
 # Build architecture-independent files here.

@@ -110,9 +110,9 @@ the number of jellybeans done in the properties of the task.
   :Done: 3
   :END:
 
-** TODO Create a Debian package [1/3]
+** TODO Create a Debian package [2/4]
    - [X] Create rough debian package and build it from the rakefile
-   - [ ] Create debian package for Context and have jldrill depend on
+   - [X] Create debian package for Context and have jldrill depend on
      it.
    - [ ] Create a method for the debian installed package to find
      its data files
