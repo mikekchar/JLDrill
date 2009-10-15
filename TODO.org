@@ -117,6 +117,7 @@ the number of jellybeans done in the properties of the task.
    - [ ] Create a method for the debian installed package to find
      its data files
    - [ ] Remove unneeded items from the debian package
+   - [ ] Modify debs to show dependency on Ruby 1.8
    
    :PROPERTIES:
    :JellyBeans: 4
