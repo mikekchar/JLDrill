@@ -249,17 +249,35 @@ task :debian_dir => [:clean_debian, :clean_web, :web] do
     sh "mkdir debian/jldrill/usr/lib/ruby"
     sh "mkdir debian/jldrill/usr/lib/ruby/1.8"    
     sh "mkdir debian/jldrill/usr/share"
+    sh "mkdir debian/jldrill/usr/share/jldrill"
     sh "mkdir debian/jldrill/usr/share/applications"
+    sh "mkdir debian/jldrill/usr/share/app-install"
+    sh "mkdir debian/jldrill/usr/share/app-install/icons"
+    sh "mkdir debian/jldrill/usr/share/app-install/desktop"
     sh "mkdir debian/jldrill/usr/share/doc"
     sh "mkdir debian/jldrill/usr/share/doc/jldrill"
     sh "mkdir debian/jldrill/usr/share/doc/jldrill/html"    
     
-    # Copy the jldrill files
+    # Copy the jldrill source files
     sh "cp -R bin/* debian/jldrill/usr/bin"
     sh "cp -R lib/* debian/jldrill/usr/lib/ruby/1.8"
-    sh "cp -R data/* debian/jldrill/usr/share"
+
+    # Copy the jldrill data files
+    sh "cp -R data/jldrill/COPYING debian/jldrill/usr/share/jldrill"
+    sh "cp -R data/jldrill/quiz debian/jldrill/usr/share/jldrill"
+    sh "mkdir debian/jldrill/usr/share/jldrill/dict"
+    sh "cp -R data/jldrill/dict/Kana debian/jldrill/usr/share/jldrill/dict"
+    sh "cp -R data/jldrill/dict/rikaichan debian/jldrill/usr/share/jldrill/dict"
+    sh "cp -R data/jldrill/icon.* debian/jldrill/usr/share/jldrill"
+
+    # Copy the desktop and icon files
     sh "cp -R data/jldrill/jldrill.desktop debian/jldrill/usr/share/applications"
+    sh "cp -R data/jldrill/jldrill.desktop debian/jldrill/usr/share/app-install/desktop"
+    sh "cp -R data/jldrill/icon.svg debian/jldrill/usr/share/app-install/icons/jldrill-icon.svg"
+
+    # Copy the manual
     sh "cp -R web/output/* debian/jldrill/usr/share/doc/jldrill/html"
+
     # Overwrite the Config file with the Debian version.
     sh "cp config/DebianConfig.rb debian/jldrill/usr/lib/ruby/1.8/jldrill/model/Config.rb"
 end

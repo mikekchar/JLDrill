@@ -6,7 +6,7 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2009-06-06 Mon>
-  :CurrentDate:  <2009-10-15 Thu>
+  :CurrentDate:  <2009-10-16 Fri>
   :EndDate: <2009-11-13 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -20,7 +20,7 @@
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.3.5 |    26 |   16 |    61.5 |    0.12 |   0.16 |
+| * Version 0.3.5 |    27 |   18 |    66.7 |    0.14 |   0.17 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </pre>
@@ -110,18 +110,17 @@ the number of jellybeans done in the properties of the task.
   :Done: 3
   :END:
 
-** TODO Create a Debian package [3/5]
+** DONE Create a Debian package [4/4]
    - [X] Create rough debian package and build it from the rakefile
    - [X] Create debian package for Context and have jldrill depend on
      it.
    - [X] Create a method for the debian installed package to find
      its data files
-   - [ ] Remove unneeded items from the debian package
-   - [ ] Modify debs to show dependency on Ruby 1.8
+   - [X] Remove unneeded items from the debian package
    
    :PROPERTIES:
    :JellyBeans: 4
-   :Done: 3
+   :Done: 4
    :END:
 
 ** TODO Allow the user to choose the dictionary
@@ -143,7 +142,6 @@ the number of jellybeans done in the properties of the task.
    :JellyBeans: 1
    :Done: 0
    :END:
-
 
 ** TODO Sort new items correctly when they have been moved [1/2]
    When items are moved in the AllVocab window, make sure
@@ -167,6 +165,12 @@ the number of jellybeans done in the properties of the task.
    :Done: 0
    :END:
 
+** TODO Update quizes
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
    
 * Backlog
 == Future Stories
