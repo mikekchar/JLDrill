@@ -20,7 +20,7 @@
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.3.5 |    28 |   18 |    64.3 |    0.13 |   0.17 |
+| * Version 0.3.5 |    34 |   18 |    52.9 |    0.13 |   0.21 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </pre>
@@ -123,6 +123,28 @@ the number of jellybeans done in the properties of the task.
    :Done: 4
    :END:
 
+** TODO Windows Packaging Spike [0/5]
+   Determine the feasibility of creating a windows packaging.
+   Place to start:
+   - [ ] Create a rake target to make a self contained directory with
+     context and JLDrill. Have a ruby script that runs everything
+     correctly on Windows and Linux given that Ruby, GNOME, and
+     Ruby-Gnome are already installed.
+   - [ ] Create a custom version of Ruby-Gnome that is packaged in the
+     self contained directory and is used instead of the installed
+     Ruby-Gnome.  Note: Probably have to package Gtk+ here as well.
+     If not make another step for that.
+   - [ ] Create some way to package a custom ruby insterpreter in the
+     self contained directory.
+   - [ ] Create a self extracting archive for the self contained
+     directory.
+   - [ ] Create an installer for the custom fonts
+
+   :PROPERTIES:
+   :JellyBeans: 3
+   :Done: 0
+   :END:
+
 ** TODO Specify a file to load on the command line
 
    :PROPERTIES:
@@ -163,6 +185,37 @@ the number of jellybeans done in the properties of the task.
    :PROPERTIES:
    :JellyBeans: 3
    :Done: 1
+   :END:
+
+** TODO Start new drills in Preview mode
+   When a drill has been loaded for the first time (or after a reset), 
+   show the first item in preview mode.  This allows the user to
+   update the options, or to save the quiz before selecting the first
+   problem.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+
+** TODO New Drill Splash Screen
+   Create a splash screen explaining that this is a new drill and
+   the system is in Preview mode.  Press N to start
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+
+** TODO Simply loading a drill shouldn't modify it
+   Currently the "must save" flag is set when a drill is loaded.
+   This should only be set after the first item has been answered.
+   Of course if the drill was imported from an EDICT file then
+   the "must save" flag should be set immediately.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
    :END:
 
 ** TODO Update Documentation
