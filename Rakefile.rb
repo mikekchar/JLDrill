@@ -186,12 +186,9 @@ task :clean_debian do
 end
 
 desc "Cleans everything for a pristine source directory."
-task :clean => [:clean_web, :clean_debian] do
-    sh "rm -rf #{release_dir}"
-    sh "rm -rf test_results.html"
-    sh "rm -rf doc"
-    sh "rm -rf coverage"
-    sh "rm -rf pkg"
+task :clean => [:clobber_package, :clobber_rcov, :clobber_rdoc, 
+                :clobber_web, :clean_debian] do
+    FileUtils.rm_rf release_dir
 end
 
 desc "Create the debian source tree and copy the required files over.  The files will end up in debian/jldrill"
