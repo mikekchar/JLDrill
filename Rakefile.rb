@@ -57,7 +57,7 @@ Spec::Rake::SpecTask.new(:spec) do |t, args|
     t.spec_opts = spec_opts
 end
 
-desc "Run the tests and find the code coverage.  Test results are in tes_results.html.  Coverage is in coverage/index.html"
+desc "Run the tests and find the code coverage.  Test results are in test_results.html.  Coverage is in coverage/index.html"
 Spec::Rake::SpecTask.new(:rcov) do |t|
 	t.spec_files = spec_files
 	t.rcov = true
