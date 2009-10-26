@@ -38,7 +38,7 @@ clean:
 	rm -f build-stamp configure-stamp
 
 	# Add here commands to clean up after the build process.
-	rake clean
+	rake clean_debian
 
 	dh_clean 
 
@@ -72,7 +72,6 @@ binary-indep: install
 #	dh_installinfo
 	dh_installman
 	dh_icons
-	dh_desktop
 	dh_link
 #	dh_strip
 	dh_compress

@@ -197,9 +197,9 @@ package_task = Rake::GemPackageTask.new(gem_spec) do |pkg|
 end
 
 task :clean_web do
-    sh "rm -rf webgen.cache"
-    sh "rm -rf web/output"
-    sh "rm -rf web/webgen.cache"
+    FileUtils.rm_rf('webgen.cache')
+    FileUtils.rm_rf('web/output')
+    FileUtils.rm_rf('web/webgen.cache')
 end
 
 webgen_task = Webgen::WebgenTask.new('web') do |site|
@@ -216,11 +216,11 @@ task :publish => [:clean_web, :web] do
 end
 
 task :clean_debian do
-    sh "rm -rf debian/jldrill"
-    sh "rm -rf debian/*debhelper*"
-    sh "rm -rf debian/files"
-    sh "rm -rf configure-stamp"
-    sh "rm -rf build-stamp"
+    FileUtils.rm_rf('debian/jldrill')
+    FileUtils.rm_rf(Dir.glob('debian/*debhelper*'))
+    FileUtils.rm_rf('debian/files')
+    FileUtils.rm_rf('configure-stamp')
+    FileUtils.rm_rf('build-stamp')
 end
 
 task :clean => [:clean_web, :clean_debian] do
@@ -230,16 +230,6 @@ task :clean => [:clean_web, :clean_debian] do
     sh "rm -rf coverage"
     sh "rm -rf pkg"
 end
-
-task :release => [:clean, :rcov, :rdoc, :web, :package] do
-    mkdir release_dir
-    sh "cd #{context_directory}; rake rcov; rake rdoc; rake package"
-    sh "cp #{context_directory}/pkg/context-#{context_version}.gem #{release_dir}"
-    sh "cp pkg/jldrill-#{JLDrill::VERSION}.gem #{release_dir}"
-    sh "cp data/jldrill/fonts/*.ttf #{release_dir}"
-end
-
-task :update => [:release]
 
 task :debian_dir => [:clean_debian, :clean_web, :web] do
     # Create the new directory structure
@@ -283,6 +273,21 @@ task :debian_dir => [:clean_debian, :clean_web, :web] do
     sh "cp config/DebianConfig.rb debian/jldrill/usr/lib/ruby/1.8/jldrill/model/Config.rb"
 end
 
+# Build a debian package.
+# Note: This will *not* make a source package.  Also, the .deb and .changes file
+#       will be put in the parent directory.
 task :deb => [:clean_debian] do
-    sh "dpkg-buildpackage -rfakeroot -i.bzr"
+    sh "dpkg-buildpackage -b -tc -rfakeroot -i.bzr"
 end
+
+task :release => [:clean, :rcov, :rdoc, :web, :package, :deb] do
+    mkdir release_dir
+    sh "cd #{context_directory}; rake rcov; rake rdoc; rake package; rake deb"
+    sh "cp #{context_directory}/pkg/context-#{context_version}.gem #{release_dir}"
+    sh "cp pkg/jldrill-#{JLDrill::VERSION}.gem #{release_dir}"
+    sh "cp data/jldrill/fonts/*.ttf #{release_dir}"
+    sh "mv ../libcontext-ruby_#{context_version}-*.* #{release_dir}"
+    sh "mv ../jldrill_#{JLDrill::VERSION}-*.* #{release_dir}"
+end
+
+task :update => [:release]
