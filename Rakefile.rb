@@ -255,7 +255,7 @@ desc "Build both the Context and JLDrill deb files."
 task :debs => [:deb_context, :deb]
 
 desc "Rebuild everything, create gems and debs for Context and JLDrill, place all distributable files in the jldrill-<version> directory.  Used for creating a new release of JLDrill.  Note: it does not publish the web page."
-task :release => [:build, :gems, :debs] do
+task :release => [:build, :debs, :gems] do
     FileUtils.mkdir release_dir
     FileUtils.cp "#{context_directory}/pkg/context-#{context_version}.gem", release_dir
     FileUtils.cp "pkg/jldrill-#{JLDrill::VERSION}.gem", release_dir
