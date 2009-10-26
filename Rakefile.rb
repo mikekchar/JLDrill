@@ -131,8 +131,7 @@ end
 rd = Rake::RDocTask.new(:rdoc) do |t|
 	t.rdoc_dir = 'doc'
 	t.title    = "JLDrill -- Japanese Language Drill program"
-	t.options << '--inline-source' <<
-		'--main' << 'README' <<
+	t.options << '--main' << 'README' <<
 		'--title' <<  'JLDrill -- Japanese Language Drill program' 
 	t.rdoc_files.include('README', 'TODO.org', 'COPYING', 'AUTHORS', 'data/jldrill/COPYING')
 	t.rdoc_files.include('lib/**/*.rb')
@@ -233,44 +232,35 @@ end
 
 task :debian_dir => [:clean_debian, :clean_web, :web] do
     # Create the new directory structure
-    sh "mkdir debian/jldrill"
-    sh "mkdir debian/jldrill/usr"
-    sh "mkdir debian/jldrill/usr/bin"
-    sh "mkdir debian/jldrill/usr/lib"
-    sh "mkdir debian/jldrill/usr/lib/ruby"
-    sh "mkdir debian/jldrill/usr/lib/ruby/1.8"    
-    sh "mkdir debian/jldrill/usr/share"
-    sh "mkdir debian/jldrill/usr/share/jldrill"
-    sh "mkdir debian/jldrill/usr/share/applications"
-    sh "mkdir debian/jldrill/usr/share/app-install"
-    sh "mkdir debian/jldrill/usr/share/app-install/icons"
-    sh "mkdir debian/jldrill/usr/share/app-install/desktop"
-    sh "mkdir debian/jldrill/usr/share/doc"
-    sh "mkdir debian/jldrill/usr/share/doc/jldrill"
-    sh "mkdir debian/jldrill/usr/share/doc/jldrill/html"    
+    FileUtils.mkdir_p "debian/jldrill/usr/bin"
+    FileUtils.mkdir_p "debian/jldrill/usr/lib/ruby/1.8"
+    FileUtils.mkdir_p "debian/jldrill/usr/share/jldrill/dict"
+    FileUtils.mkdir_p "debian/jldrill/usr/share/applications"
+    FileUtils.mkdir_p "debian/jldrill/usr/share/app-install/icons"
+    FileUtils.mkdir_p "debian/jldrill/usr/share/app-install/desktop"
+    FileUtils.mkdir_p "debian/jldrill/usr/share/doc/jldrill/html"
     
     # Copy the jldrill source files
-    sh "cp -R bin/* debian/jldrill/usr/bin"
-    sh "cp -R lib/* debian/jldrill/usr/lib/ruby/1.8"
+    FileUtils.cp_r Dir.glob("bin/*"), "debian/jldrill/usr/bin"
+    FileUtils.cp_r Dir.glob("lib/*"), "debian/jldrill/usr/lib/ruby/1.8"
 
     # Copy the jldrill data files
-    sh "cp -R data/jldrill/COPYING debian/jldrill/usr/share/jldrill"
-    sh "cp -R data/jldrill/quiz debian/jldrill/usr/share/jldrill"
-    sh "mkdir debian/jldrill/usr/share/jldrill/dict"
-    sh "cp -R data/jldrill/dict/Kana debian/jldrill/usr/share/jldrill/dict"
-    sh "cp -R data/jldrill/dict/rikaichan debian/jldrill/usr/share/jldrill/dict"
-    sh "cp -R data/jldrill/icon.* debian/jldrill/usr/share/jldrill"
+    FileUtils.cp_r "data/jldrill/COPYING", "debian/jldrill/usr/share/jldrill"
+    FileUtils.cp_r "data/jldrill/quiz", "debian/jldrill/usr/share/jldrill"
+    FileUtils.cp_r "data/jldrill/dict/Kana", "debian/jldrill/usr/share/jldrill/dict"
+    FileUtils.cp_r "data/jldrill/dict/rikaichan", "debian/jldrill/usr/share/jldrill/dict"
+    FileUtils.cp_r Dir.glob("data/jldrill/icon.*"), "debian/jldrill/usr/share/jldrill"
 
     # Copy the desktop and icon files
-    sh "cp -R data/jldrill/jldrill.desktop debian/jldrill/usr/share/applications"
-    sh "cp -R data/jldrill/jldrill.desktop debian/jldrill/usr/share/app-install/desktop"
-    sh "cp -R data/jldrill/icon.svg debian/jldrill/usr/share/app-install/icons/jldrill-icon.svg"
+    FileUtils.cp_r "data/jldrill/jldrill.desktop", "debian/jldrill/usr/share/applications"
+    FileUtils.cp_r "data/jldrill/jldrill.desktop", "debian/jldrill/usr/share/app-install/desktop"
+    FileUtils.cp_r "data/jldrill/icon.svg", "debian/jldrill/usr/share/app-install/icons/jldrill-icon.svg"
 
     # Copy the manual
-    sh "cp -R web/output/* debian/jldrill/usr/share/doc/jldrill/html"
+    FileUtils.cp_r Dir.glob("web/output/*"), "debian/jldrill/usr/share/doc/jldrill/html"
 
     # Overwrite the Config file with the Debian version.
-    sh "cp config/DebianConfig.rb debian/jldrill/usr/lib/ruby/1.8/jldrill/model/Config.rb"
+    FileUtils.cp_r "config/DebianConfig.rb",  "debian/jldrill/usr/lib/ruby/1.8/jldrill/model/Config.rb"
 end
 
 # Build a debian package.
@@ -299,12 +289,12 @@ task :gems => [:build, :package_context, :package]
 task :debs => [:deb_context, :deb]
 
 task :release => [:build, :gems, :debs] do
-    FileUtils.mkdir(release_dir)
-    FileUtils.cp("#{context_directory}/pkg/context-#{context_version}.gem", release_dir)
-    FileUtils.cp("pkg/jldrill-#{JLDrill::VERSION}.gem", release_dir)
-    FileUtils.cp(Dir.glob("data/jldrill/fonts/*.ttf"), release_dir)
-    FileUtils.mv(Dir.glob("../libcontext-ruby_#{context_version}-*.*"), release_dir)
-    FileUtils.mv(Dir.glob("../jldrill_#{JLDrill::VERSION}-*.*"), release_dir)
+    FileUtils.mkdir release_dir
+    FileUtils.cp "#{context_directory}/pkg/context-#{context_version}.gem", release_dir
+    FileUtils.cp "pkg/jldrill-#{JLDrill::VERSION}.gem", release_dir
+    FileUtils.cp Dir.glob("data/jldrill/fonts/*.ttf"), release_dir
+    FileUtils.mv Dir.glob("../libcontext-ruby_#{context_version}-*.*"), release_dir
+    FileUtils.mv Dir.glob("../jldrill_#{JLDrill::VERSION}-*.*"), release_dir
 end
 
 task :update => [:release]
