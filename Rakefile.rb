@@ -280,14 +280,31 @@ task :deb => [:clean_debian] do
     sh "dpkg-buildpackage -b -tc -rfakeroot -i.bzr"
 end
 
-task :release => [:clean, :rcov, :rdoc, :web, :package, :deb] do
-    mkdir release_dir
-    sh "cd #{context_directory}; rake rcov; rake rdoc; rake package; rake deb"
-    sh "cp #{context_directory}/pkg/context-#{context_version}.gem #{release_dir}"
-    sh "cp pkg/jldrill-#{JLDrill::VERSION}.gem #{release_dir}"
-    sh "cp data/jldrill/fonts/*.ttf #{release_dir}"
-    sh "mv ../libcontext-ruby_#{context_version}-*.* #{release_dir}"
-    sh "mv ../jldrill_#{JLDrill::VERSION}-*.* #{release_dir}"
+task :build_context do
+    sh "cd #{context_directory}; rake build"
+end
+
+task :package_context do
+    sh "cd #{context_directory}; rake package"
+end
+
+task :deb_context do
+    sh "cd #{context_directory}; rake deb"
+end
+
+task :build => [:clean, :build_context, :rcov, :rdoc, :web]
+
+task :gems => [:build, :package_context, :package]
+
+task :debs => [:deb_context, :deb]
+
+task :release => [:build, :gems, :debs] do
+    FileUtils.mkdir(release_dir)
+    FileUtils.cp("#{context_directory}/pkg/context-#{context_version}.gem", release_dir)
+    FileUtils.cp("pkg/jldrill-#{JLDrill::VERSION}.gem", release_dir)
+    FileUtils.cp(Dir.glob("data/jldrill/fonts/*.ttf"), release_dir)
+    FileUtils.mv(Dir.glob("../libcontext-ruby_#{context_version}-*.*"), release_dir)
+    FileUtils.mv(Dir.glob("../jldrill_#{JLDrill::VERSION}-*.*"), release_dir)
 end
 
 task :update => [:release]
