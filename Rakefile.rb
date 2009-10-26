@@ -48,51 +48,16 @@ spec_files = FileList[
 # Options for running the application
 ruby_opts = ["-KO", "-I./lib"]
 
-
-#=============================== Tasks ===============================
-#
-# The default task is simply to run rspec.  The following tasks exist
-#
-# spec    -- Runs rspec (default)
-#            Test results are printed on stdout
-# rcov    -- Runs the rspec tests and performs code coverage. 
-#            Test results are put in test_results.html
-#            Coverage results are put in coverage/index.html
-# testSize -- Runs rcov, but reports the tests instead of the
-#             the production code.  I use this to count the number
-#             of lines of test code.  Output goes into coverage/index.html
-# run     -- Runs the application
-# rdoc    -- Creates the rdoc documentation.
-#            Documentation is put in doc/index.html
-# package -- Creates the gem files.
-#            Packages are placed in pkg/jldrill-<version>.gem
-# web     -- Builds the web page
-#            Web page is at web/output/index.html
-# publish -- Builds the web page and uploads it to Rubyforge.
-# release -- Builds everything and places the resultant files into
-#            a release directory called jldrill-<version>.  Note
-#            that it currently does not publish the web page
-#            as I feel that should be a separate action.
-# clean   -- Removes built products
-# update  -- Builds the devel build.  This is the same as release
-#            but is used by the main repository after a bzr update so
-#            that people can browse the built items through the
-#            web-dave interface 
-# deb     -- Builds a debian package in the parent directory.  Note that
-#            the version number is dependent upon the changelog entry
-#            in the debian directory.  Also to be strictly correct your
-#            jldrill source directory should be jldrill-<version number>
-
 task :default => [:spec]
 
-# Run the rspec tests
+desc "Run the tests (default).  Output goes to test_results.html"
 Spec::Rake::SpecTask.new(:spec) do |t, args|
 	t.spec_files = spec_files
 	t.ruby_opts = ruby_opts
     t.spec_opts = spec_opts
 end
 
-# Run the rspec tests with the code coverage program rcov
+desc "Run the tests and find the code coverage.  Test results are in tes_results.html.  Coverage is in coverage/index.html"
 Spec::Rake::SpecTask.new(:rcov) do |t|
 	t.spec_files = spec_files
 	t.rcov = true
@@ -104,11 +69,7 @@ Spec::Rake::SpecTask.new(:rcov) do |t|
 	t.ruby_opts = ruby_opts
 end
 
-# Runs rcov but excludes the source files instead of the test files
-# This is how I determine how many lines of test code I have.
-# Note, this crashes writing out the file coverage for some reason.
-# It seems to be a bug in rcov.  But since I'm only interested in
-# the file sizes, I don't care.
+desc "Runs rcov but excludes the source files instead of the test files.  This is how I determine how many lines of test code I have.  Note, this crashes writing out the file coverage for some reason.  It seems to be a bug in rcov.  But since I'm only interested in the file sizes, I don't care.  Output goes to coverage/index.html"
 Spec::Rake::SpecTask.new(:testSize) do |t|
 	t.spec_files = spec_files
 	t.rcov = true
@@ -120,14 +81,13 @@ Spec::Rake::SpecTask.new(:testSize) do |t|
 	t.ruby_opts = ruby_opts
 end
 
-# Rake task to run the application that's in the development
-# directory (rather than one that might be installed somewhere else).
+desc "Run the application that's in the development directory (rather than one that might be installed somewhere else)."
 Rake::TestTask.new(:run) do |t|
 	t.test_files = FileList['bin/jldrill']
 	t.ruby_opts = ruby_opts
 end
 
-# Build the RDOC documentation tree.
+desc "Build the RDOC development documentation. output goes to doc/index.html"
 rd = Rake::RDocTask.new(:rdoc) do |t|
 	t.rdoc_dir = 'doc'
 	t.title    = "JLDrill -- Japanese Language Drill program"
@@ -137,8 +97,6 @@ rd = Rake::RDocTask.new(:rdoc) do |t|
 	t.rdoc_files.include('lib/**/*.rb')
 end
 
-# Build tar, zip and gem files.
-# NOTE: The name of this task is automatically set to :package
 gem_spec = Gem::Specification.new do |s|
     
 	#### Basic information.
@@ -190,17 +148,20 @@ gem_spec = Gem::Specification.new do |s|
     s.rubyforge_project = rubyforge_project
 end
 
+desc "Creates the gem files for jldrill.  Packages are placed in pkg and called jldrill-<version>.gem."
 package_task = Rake::GemPackageTask.new(gem_spec) do |pkg|
 	pkg.need_zip = false
 	pkg.need_tar = false
 end
 
+desc "Clean the web directory."
 task :clean_web do
     FileUtils.rm_rf('webgen.cache')
     FileUtils.rm_rf('web/output')
     FileUtils.rm_rf('web/webgen.cache')
 end
 
+desc "Create the web html files.  Files are placed in web/output"
 webgen_task = Webgen::WebgenTask.new('web') do |site|
     site.clobber_outdir = true
     site.config_block = lambda do |config|
@@ -209,11 +170,13 @@ webgen_task = Webgen::WebgenTask.new('web') do |site|
     end
 end
 
+desc "Build the web page and upload it to Rubyforge."
 task :publish => [:clean_web, :web] do
     sh "scp web/output/*.html web/output/*.css " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project
     sh "scp web/output/images/* " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project + "/images/"
 end
 
+desc "Cleans the debian tree."
 task :clean_debian do
     FileUtils.rm_rf('debian/jldrill')
     FileUtils.rm_rf(Dir.glob('debian/*debhelper*'))
@@ -222,6 +185,7 @@ task :clean_debian do
     FileUtils.rm_rf('build-stamp')
 end
 
+desc "Cleans everything for a pristine source directory."
 task :clean => [:clean_web, :clean_debian] do
     sh "rm -rf #{release_dir}"
     sh "rm -rf test_results.html"
@@ -230,6 +194,7 @@ task :clean => [:clean_web, :clean_debian] do
     sh "rm -rf pkg"
 end
 
+desc "Create the debian source tree and copy the required files over.  The files will end up in debian/jldrill"
 task :debian_dir => [:clean_debian, :clean_web, :web] do
     # Create the new directory structure
     FileUtils.mkdir_p "debian/jldrill/usr/bin"
@@ -263,31 +228,36 @@ task :debian_dir => [:clean_debian, :clean_web, :web] do
     FileUtils.cp_r "config/DebianConfig.rb",  "debian/jldrill/usr/lib/ruby/1.8/jldrill/model/Config.rb"
 end
 
-# Build a debian package.
-# Note: This will *not* make a source package.  Also, the .deb and .changes file
-#       will be put in the parent directory.
+desc "Build a debian package. Note: This will *not* make a source package.  Also, the .deb and .changes file will be put in the parent directory."
 task :deb => [:clean_debian] do
     sh "dpkg-buildpackage -b -tc -rfakeroot -i.bzr"
 end
 
+desc "Build target for the Context lib"
 task :build_context do
     sh "cd #{context_directory}; rake build"
 end
 
+desc "Create gem packages for the Context lib"
 task :package_context do
     sh "cd #{context_directory}; rake package"
 end
 
+desc "Create deb files for the Context lib"
 task :deb_context do
     sh "cd #{context_directory}; rake deb"
 end
 
+desc "Clean everything, build context, run tests, and build all the documentation."
 task :build => [:clean, :build_context, :rcov, :rdoc, :web]
 
+desc "Build everything and create both the Context and JLDrill gems."
 task :gems => [:build, :package_context, :package]
 
+desc "Build both the Context and JLDrill deb files."
 task :debs => [:deb_context, :deb]
 
+desc "Rebuild everything, create gems and debs for Context and JLDrill, place all distributable files in the jldrill-<version> directory.  Used for creating a new release of JLDrill.  Note: it does not publish the web page."
 task :release => [:build, :gems, :debs] do
     FileUtils.mkdir release_dir
     FileUtils.cp "#{context_directory}/pkg/context-#{context_version}.gem", release_dir
@@ -297,4 +267,5 @@ task :release => [:build, :gems, :debs] do
     FileUtils.mv Dir.glob("../jldrill_#{JLDrill::VERSION}-*.*"), release_dir
 end
 
+desc "Alias for release.  Run this after doing a bzr update so that everything is rebuilt."
 task :update => [:release]
