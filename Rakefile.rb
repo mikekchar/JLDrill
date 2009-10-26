@@ -6,6 +6,7 @@ require 'rubygems'
 require 'rake/gempackagetask'
 require 'webgen/webgentask'
 require 'lib/jldrill/Version'
+require 'fileutils'
 
 #======================== Setup ================================
 
