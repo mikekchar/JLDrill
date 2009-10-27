@@ -1,9 +1,11 @@
 [Desktop Entry]
-Type=Application
+X-AppInstall-Package=jldrill
+
 Name=JLDrill - Japanese Language Drills
 GenericName=jldrill
 Comment=Tool for learning Japanese
 Exec=/usr/bin/jldrill
 Terminal=false
 Icon=jldrill-icon
-Categories=Education;
+Categories=Education
+Type=Application

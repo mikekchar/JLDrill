@@ -6,7 +6,7 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2009-06-06 Mon>
-  :CurrentDate:  <2009-10-23 Fri>
+  :CurrentDate:  <2009-10-27 Tue>
   :EndDate: <2009-11-13 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -20,7 +20,7 @@
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.3.5 |    34 |   18 |    52.9 |    0.13 |   0.21 |
+| * Version 0.3.5 |    35 |   18 |    51.4 |    0.13 |   0.22 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </pre>
@@ -121,6 +121,13 @@ the number of jellybeans done in the properties of the task.
    :PROPERTIES:
    :JellyBeans: 4
    :Done: 4
+   :END:
+
+** DONE Fix No Option 'X-AppInstall-Package' in 'Desktop Entry' bug
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
    :END:
 
 ** TODO Windows Packaging Spike [0/5]
