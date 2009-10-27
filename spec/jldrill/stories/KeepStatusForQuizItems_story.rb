@@ -190,6 +190,8 @@ module JLDrill
         end
 
         it "should modify the difficulty when the item is correctly answered" do
+            # It needs to be in bin 4 to be scheduled automatically.
+            @items[1].bin = 4
             sched = @items[1].schedule
             sched.numIncorrect = 10
             sched.schedule

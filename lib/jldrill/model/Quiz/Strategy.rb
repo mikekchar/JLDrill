@@ -214,6 +214,7 @@ module JLDrill
                         # Newly promoted items
                         item.itemStats.consecutive = 1
                         @stats.learned += 1
+                        item.schedule.schedule
                     end
                     # Insert the item into the correct place according to schedule
                     contents.bins[item.bin].delete(item)

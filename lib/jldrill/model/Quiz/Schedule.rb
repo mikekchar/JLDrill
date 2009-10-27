@@ -149,7 +149,7 @@ module JLDrill
         # Return the time where we should measure the interval from.
         def scheduleStart
             # If the item has already been scheduled, the we want
-            # to start that time.
+            # to start at that time.
             if scheduled?
                 start = @scheduledTime
             else
@@ -285,8 +285,10 @@ module JLDrill
 
         # Mark the item as correct.
         def correct
-            recalculateDifficulty
-            schedule
+            if @item.bin == 4
+                recalculateDifficulty
+                schedule
+            end
             markReviewed
             @score += 1
         end
