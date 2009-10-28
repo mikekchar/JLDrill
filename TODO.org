@@ -130,6 +130,7 @@ the number of jellybeans done in the properties of the task.
    :Done: 0
    :END:
 
+** TODO Time to learn after the first item is waaay too big (10798.7s)
 ** TODO Windows Packaging Spike [0/5]
    Determine the feasibility of creating a windows packaging.
    Place to start:

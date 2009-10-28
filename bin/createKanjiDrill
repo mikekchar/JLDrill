@@ -1,0 +1,36 @@
+#!/usr/bin/ruby
+
+# This script creates a drill file containing all the Jouyou kanji
+# ordered by grade and stroke order.
+
+require 'jldrill/model/moji/Kanji'
+require 'jldrill/model/items/Vocabulary'
+require 'jldrill/model/Item'
+require 'jldrill/model/Quiz/Quiz'
+require 'jldrill/model/Config'
+
+module JLDrill
+
+    def JLDrill::kanjiToItem(kanji)
+        char = kanji.character
+        vocab = Vocabulary.new(kanji.character, kanji.readings.join(", "), 
+                               kanji.meanings, ["G#{kanji.grade}"])
+        return Item.create(vocab.to_s)
+    end
+
+    quiz = Quiz.new
+    quiz.name = "Kanji"
+    kanjiFile = File.join(Config::DATA_DIR, "dict/rikaichan/kanji.dat")
+    kanjiList = KanjiList.fromFile(kanjiFile)
+    1.upto(12) do |grade|
+        kanjiList.select do |kanji|
+            kanji.grade == grade
+        end.sort do |x, y|
+            x.strokes <=> y.strokes
+        end.each do |kanji|
+            quiz.contents.addItem(JLDrill::kanjiToItem(kanji), 0)
+        end
+    end
+    quizString = quiz.saveToString
+    print quizString
+end
