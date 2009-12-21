@@ -86,10 +86,9 @@ module JLDrill::Gtk
             rows = [" Less than 5 days ", "5 - 10 days", "10 - 20 days", 
                       "20 - 40 days", "40 - 80 days", "80 - 160 days", 
                       "160 - 320 days", "320+ days"]
-            columns = [" Scheduled ", " Duration ", 
-                       " Correct ", " Tried ",]
-            @scheduleTable = StatisticsTable.new(rows, columns)
-            hbox.add(@scheduleTable)
+            columns = [" Duration ", " Correct ", " Tried ",]
+            @durationTable = StatisticsTable.new(rows, columns)
+            hbox.add(@durationTable)
             rows = ["Reviewed", "Learned", " Time to review ", 
                       "Time to learn", "Total Accuracy", " Learn Time % ", 
                       " Skew ", " Review Rate "]
@@ -127,32 +126,23 @@ module JLDrill::Gtk
             self.destroy
         end
         
-        def updateSchedule(table, stats)
-            0.upto(6) do |i|
-                num = table[i][0]
-                rate = (stats.itemsPerDay(num, i) * 100).to_i / 100.0
-                @scheduleTable.values[i][0].text = rate.to_s + "/day "
-            end
-            @scheduleTable.values[7][0].text = table[7][0].to_s
-        end
-        
         def updateDuration(table)
             0.upto(6) do |i|
-                num = table[i][1]
-                @scheduleTable.values[i][1].text = num.to_s
+                num = table[i][0]
+                @durationTable.values[i][0].text = num.to_s
             end
-            @scheduleTable.values[7][1].text = table[7][0].to_s
+            @durationTable.values[7][0].text = table[7][0].to_s
         end
         
         def updateAccuracy(stats)
             0.upto(7) do |i|
                 acc = stats.levels[i].accuracy
                 if !acc.nil?
-                    @scheduleTable.values[i][2].text = acc.to_s + "% "
-                    @scheduleTable.values[i][3].text = stats.levels[i].total.to_s
+                    @durationTable.values[i][1].text = acc.to_s + "% "
+                    @durationTable.values[i][2].text = stats.levels[i].total.to_s
                 else
-                    @scheduleTable.values[i][2].text = " - "
-                    @scheduleTable.values[i][3].text = " - "
+                    @durationTable.values[i][1].text = " - "
+                    @durationTable.values[i][2].text = " - "
                 end
             end
         end
@@ -164,7 +154,7 @@ module JLDrill::Gtk
             @rateTable.values[3][0].text = stats.learnPace.to_s + "s "
             @rateTable.values[4][0].text = stats.accuracy.to_s + "% "
             @rateTable.values[5][0].text = stats.learnTimePercent.to_s + "% "
-            @rateTable.values[6][0].text = stats.dateSkew.to_s + " days"
+            @rateTable.values[6][0].text = " NA "
             @rateTable.values[7][0].text = stats.reviewRate.to_s + "x "
         end
     end

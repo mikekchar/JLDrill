@@ -73,7 +73,7 @@ module JLDrill::ScheduleItems
         end
 
         def scheduleShouldBe(item, days)
-            gap = item.schedule.getScheduledTime.to_i - Time.now.to_i
+            gap = item.schedule.duration
             gapInDays = gap.to_f / (60 * 60 * 24)
             # There's a random +- 10% variation in the schedule
             gapInDays.should be_close(days.to_f, days.to_f / 10.0)

@@ -50,14 +50,6 @@ module JLDrill
             @items[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 2/Score: 0/Level: 0/Difficulty: 0/\n")
         end
 
-        it "should be able to set the scheduled time" do
-		    @items[3].schedule.scheduled?.should be(false)
-		    @items[3].schedule.getScheduledTime.to_i.should eql(Time::at(0).to_i)
-		    time = @items[3].schedule.schedule
-		    time.should_not be_nil
-		    @items[3].schedule.scheduled?.should be(true)
-        end
-
         # There's a +- 10% variation in scheduling, so the actual
         # value should be in between those values        
         def should_be_plus_minus_ten_percent(actual, expected)
@@ -71,21 +63,22 @@ module JLDrill
 		    time = @items[1].schedule.schedule
 		    time.should_not be_nil
 		    @items[1].schedule.scheduled?.should be(true)
-		    actual = @items[1].schedule.getScheduledTime.to_i
-		    expected = Time::now.to_i + days(5)
+		    actual = @items[1].schedule.duration
+		    expected = days(5)
 		    should_be_plus_minus_ten_percent(actual, expected)
         end
         
         it "should schedule old items to twice their elapsed time" do
             # Set reviewed time to 3 days ago
             @items[3].schedule.lastReviewed = Time::now - days(3)
-		    @items[3].schedule.scheduled?.should be(false)
+            @items[3].schedule.duration = days(3)
+		    @items[3].schedule.scheduled?.should be(true)
 		    time = @items[3].schedule.schedule
 		    time.should_not be_nil
 		    @items[3].schedule.scheduled?.should be(true)
 		    # Should be scheduled for 6 days from now
-		    actual = @items[3].schedule.getScheduledTime.to_i
-		    expected = Time::now.to_i + days(6)
+		    actual = @items[3].schedule.duration
+		    expected = days(6)
 		    should_be_plus_minus_ten_percent(actual, expected)
         end
         
@@ -99,16 +92,16 @@ module JLDrill
 		    @items[3].schedule.scheduled?.should be(true)
 		    # Instead of 2 days it will be 5 because that is the minumum for
 		    # an item that has no incorrect.
-		    actual = @items[3].schedule.getScheduledTime.to_i
-		    expected = Time::now.to_i + days(5)
+		    actual = @items[3].schedule.duration
+		    expected = days(5)
 		    should_be_plus_minus_ten_percent(actual, expected)
         end
 
-        it "should be able to write scheduledTime to file" do
+        it "should be able to write duration to file" do
             @items[1].to_s.should eql(@strings[1] + "\n")
             time = @items[1].schedule.schedule
             duration = @items[1].schedule.duration
-            @items[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/Score: 0/Level: 0/ScheduledTime: " + time.to_i.to_s + "/Duration: " + duration.to_s + "/Difficulty: 0/\n")
+            @items[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/Score: 0/Level: 0/Duration: " + duration.to_s + "/Difficulty: 0/\n")
         end
 
         it "should be able to parse the schedule information in the file" do
@@ -119,7 +112,7 @@ module JLDrill
             # because that's where they are stored.  Since we aren't using
             # a bin here, we'll cheat and set the bin number manually.
             newItem = Item.create(@items[3].to_s, 4)
-            newItem.schedule.getScheduledTime.to_i.should eql(time.to_i)
+            newItem.schedule.duration.should eql(time.to_i)
         end
         
         it "should be able to clear the schedule" do

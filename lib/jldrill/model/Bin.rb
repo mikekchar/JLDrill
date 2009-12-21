@@ -69,7 +69,8 @@ module JLDrill
             end
         end
 
-        # Sorts the bin according to the criteria specified in the passed in block
+        # Sorts the bin according to the criteria specified in the 
+        # passed in block
         def sort!(&block)
             @contents.sort! do |x,y|
               block.call(x,y)
@@ -146,19 +147,6 @@ module JLDrill
             end
         end
         
-        # Find the scheduledTime for the first item in the bin.
-        # Return now if the first item isn't scheduled
-        def firstSchedule
-            retVal = Time::now
-            if @contents.size > 0
-                first = @contents[0]
-                if !first.nil? && first.schedule.scheduled?
-                    retVal = first.schedule.scheduledTime
-                end
-            end
-            return retVal
-        end
-
         # Returns true if the Item exists in the bin
         def exists?(item)
             !@contents.find do |x|

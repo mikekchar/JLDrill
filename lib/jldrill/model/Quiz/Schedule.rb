@@ -12,6 +12,7 @@ module JLDrill
         SCORE_RE = /^Score: (.*)/
         LEVEL_RE = /^Level: (.*)/
         LASTREVIEWED_RE = /^LastReviewed: (.*)/
+        # Note: ScheduledTime is deprecated
         SCHEDULEDTIME_RE = /^ScheduledTime: (.*)/
         DIFFICULTY_RE = /^Difficulty: (.*)/
         DURATION_RE = /^Duration: (.*)/
@@ -19,6 +20,7 @@ module JLDrill
         SECONDS_PER_DAY = 60 * 60 * 24
         MAX_ADDITIONAL_TIME = 4 * SECONDS_PER_DAY
 
+        # Note: ScheduledTime is deprecated
         attr_reader :name, :item, :score, :level, 
                     :lastReviewed, :scheduledTime,
                     :seen, :numIncorrect, :duration
@@ -32,6 +34,7 @@ module JLDrill
             @score = 0
             @level = 0
             @lastReviewed = nil
+            # scheduledTime is deprecated
             @scheduledTime = nil
             @seen = false
             @numIncorrect = 0
@@ -50,6 +53,7 @@ module JLDrill
                 when LASTREVIEWED_RE
                     @lastReviewed = Time.at($1.to_i)
                 when SCHEDULEDTIME_RE
+                    # scheduledTime is deprecated
                     if @item.bin == 4
                         @scheduledTime = Time.at($1.to_i)
                     end
@@ -76,6 +80,7 @@ module JLDrill
             @score = schedule.score
             @level = schedule.level
             @lastReviewed = schedule.lastReviewed
+            # scheduledTime is deprecated
             @scheduledTime = schedule.scheduledTime
             @seen = schedule.seen
             @numIncorrect = schedule.numIncorrect
@@ -94,15 +99,6 @@ module JLDrill
             !@lastReviewed.nil?
         end
 
-        # Return the time that the item was reviewed.  If it wasn't
-        # reviewed mark it reviewed and return now.
-        def reviewedTime
-            if !reviewed?
-                markReviewed
-            end
-            return @lastReviewed
-        end
-
         # Returns the number of seconds since the item was last reviewed
         def elapsedTime
             retVal = 0
@@ -115,6 +111,7 @@ module JLDrill
         # Resets the schedule  
         def reset
             @lastReviewed = nil
+            # scheduledTime is deprecated
             @scheduledTime = nil
             @score = 0
             @seen = false
@@ -124,7 +121,8 @@ module JLDrill
         
         # Returns true if the item has been scheduled for review
         def scheduled?
-            !@scheduledTime.nil?
+            # scheduledTime is deprecated
+            (duration != -1) || (!@scheduledTime.nil?)
         end
         
         # Returns a +-10% random variation in the interval.
@@ -133,36 +131,6 @@ module JLDrill
         def randomVariation(interval)
             # 10% - rand(20%) = +- 10%
             (interval / 10) - rand(interval / 5) 
-        end
-
-        def firstSchedule
-            retVal = Time::now
-            if !@item.nil? && !@item.container.nil?
-                firstItem = @item.container.bins[4][0]
-                if !firstItem.nil? && firstItem.schedule.scheduled?
-                    retVal = firstItem.schedule.scheduledTime
-                end
-            end
-            return retVal
-        end
-
-        # Return the time where we should measure the interval from.
-        def scheduleStart
-            # If the item has already been scheduled, the we want
-            # to start at that time.
-            if scheduled?
-                start = @scheduledTime
-            else
-                # Otherwise we want to start from now,
-                # or the date of the first scheduled item, whichever is
-                # first
-                start = Time::now
-                first = firstSchedule
-                if first < start
-                    start = first
-                end
-            end
-            return start
         end
 
         # This is the interval the item will have when it it first
@@ -237,36 +205,18 @@ module JLDrill
 
         # Schedule the item for review
         def schedule(int = -1)
-            start = scheduleStart
             if int < 0
                 interval = calculateInterval
-                interval = interval + randomVariation(interval)
+                @duration = interval + randomVariation(interval)
             else
-                interval = int
+                @duration = int
             end
-            @duration = interval
-            @scheduledTime = start + interval 
-            return @scheduledTime
+            return @duration
         end
         
         # Remove review schedule for the item
         def unschedule
-            @scheduledTime = nil
             @duration = -1
-        end
-        
-        # Return the time at which the item is scheduled for review
-        def getScheduledTime
-            if !scheduled?
-                Time::at(0)
-            else
-                @scheduledTime
-            end
-        end
-        
-        # Set the scheduled time to a specific value
-        def setScheduledTime(time)
-            @scheduledTime = time
         end
         
         # Return the difficulty of the item.  Right now that is
@@ -309,13 +259,15 @@ module JLDrill
             return secondsToDays(calculateInterval.to_i)
         end
 
-        # Return the total number of seconds from the
-        # last reviewed time to the scheduled time
+        # Return the duration of the schedule
+        # Old quizes might not have the duration stored, so it is
+        # calculated from the scheduledTime.  scheduledTime is now
+        # deprecated, though.
         def scheduleDuration
             retVal = -1
             if scheduled?
-                if @duration == -1
-                    retVal = @scheduledTime.to_i - reviewedTime.to_i
+                if @duration == -1 && !@scheduledTime.nil?
+                    retVal = @scheduledTime.to_i - @lastReviewed.to_i
                 else
                     retVal = @duration
                 end
@@ -345,13 +297,6 @@ module JLDrill
             end
         end
         
-        # Returns true if the item is scheduled in the range of times
-        # supplied.  The range is of the form of number of seconds from
-        # the epoch
-        def scheduledWithin?(range)
-            range.include?(@scheduledTime.to_i)
-        end
-        
         # Returns true if the scheduled duration is in the range of times
         # supplied.  The range is of the form of number of seconds from
         # the epoch
@@ -369,7 +314,7 @@ module JLDrill
                 elsif reviewedOn?(-1)
                     retVal = "Yesterday"
                 else
-                    retVal = reviewedTime().strftime("%x")
+                    retVal = @lastReviewed.strftime("%x")
                 end
             end
             retVal
@@ -387,15 +332,27 @@ module JLDrill
             end
             retVal
         end
+
+        # This is simply 1/reviewRate.  It is used to sort the
+        # schedules since we want the smalled reviewRates at the
+        # end of the list.
+        def reviewLoad
+            retVal = 1.0
+            duration = scheduleDuration.to_f
+            time = elapsedTime.to_f
+            if time != 0.0
+                retVal = duration / time
+            end
+            retVal
+        end
         
         # Outputs the item schedule in save format.
         def to_s
             retVal = "/Score: #{@score}" + "/Level: #{@level}"
             if reviewed?
-                retVal += "/LastReviewed: #{reviewedTime().to_i}"
+                retVal += "/LastReviewed: #{@lastReviewed.to_i}"
             end
             if scheduled?
-                retVal += "/ScheduledTime: #{@scheduledTime.to_i}"
                 retVal += "/Duration: #{scheduleDuration.to_i}"
             end
             retVal += "/Difficulty: #{difficulty}"

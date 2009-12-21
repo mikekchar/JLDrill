@@ -132,13 +132,6 @@ module JLDrill
             return adjustRange(low..high, from)
         end
 
-        # Returns the number of items per day as a float
-        def itemsPerDay(items, level)
-            start = reviewBin.firstSchedule
-            range = findRange(level, start)
-            return items / ((range.end - range.begin).to_f / SECONDS_PER_DAY)
-        end
-                    
         def getLevel(item)
             level = 0
             found = false
@@ -163,15 +156,6 @@ module JLDrill
 
         def size
             return reviewBin.length
-        end
-
-        # Returns the number of days the "now" for scheduled
-        # items are skewed from the real now.  Positive numbers
-        # are in the future, negative numbers in the past.
-        # rounds to the nearest tenth.
-        def dateSkew
-            skew = reviewBin.firstSchedule.to_i - Time::now.to_i
-            return ((skew * 10).round / SECONDS_PER_DAY).to_f / 10
         end
 
         def reviewRate
@@ -217,15 +201,6 @@ module JLDrill
             end
         end
 
-        class ScheduleCounter < Counter
-            def count(schedule, level)
-                if !@found && schedule.scheduledWithin?(@ranges[level])
-                    @table[level][@pos] += 1
-                    @found = true
-                end
-            end
-        end
-
         class DurationCounter < Counter
             def count(schedule, level)
                 if !@found && schedule.durationWithin?(@ranges[level])
@@ -236,20 +211,16 @@ module JLDrill
         end
 
         def statsTable
-            start = reviewBin.firstSchedule.to_i
             values = initializeTable
-            sCounter = ScheduleCounter.new(self, start, values, 0)
-            dCounter = DurationCounter.new(self, 0, values, 1)
+            dCounter = DurationCounter.new(self, 0, values, 0)
 
             reviewBin.each do |item|
                 level = 0
-                while (level <= 6) && !(sCounter.found && dCounter.found)
+                while (level <= 6) && !dCounter.found
                     schedule = item.schedule
-                    sCounter.count(schedule, level)
                     dCounter.count(schedule, level)
                     level += 1
                 end
-                sCounter.finalCount
                 dCounter.finalCount
             end
             return values

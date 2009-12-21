@@ -206,6 +206,8 @@ module JLDrill
             @strategy.newSet.sort! do |x, y|
                 x.position <=> y.position
             end
+            # Resort the review set according to schedule
+            reschedule
             setNeedsSave(true)
             updateLoad
             return @contents.length > 0
@@ -228,6 +230,7 @@ module JLDrill
                 dict.eachVocab do |vocab|
                     contents.add(vocab, 0)
                 end
+                reschedule
                 # Update status again
                 @publisher.unblock
                 setNeedsSave(true)
@@ -253,6 +256,11 @@ module JLDrill
                 # Drill a problem if there wasn't one before
                 drill
             end
+        end
+
+        # Sort the items in the ReviewSet according to their schedule
+        def reschedule
+            @strategy.reschedule
         end
 
         # Returns true if the vocabulary already exists in the Quiz

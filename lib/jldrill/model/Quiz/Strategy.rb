@@ -73,6 +73,13 @@ module JLDrill
         def reviewSetSize
             reviewSet.length
         end
+
+        # Sort the items in the ReviewSet according to their schedule
+        def reschedule
+            reviewSet.sort! do |x,y|
+                x.schedule.reviewLoad <=> y.schedule.reviewLoad
+            end
+        end
         
         # Returns true is the working set has been
         # reviewed enough that it is considered to be
@@ -99,8 +106,8 @@ module JLDrill
                 return true
             end
             
-            !workingSetKnown? && (reviewSetSize >= options.introThresh) &&
-                !contents.bins[4].allSeen?
+            !workingSetKnown? && (reviewSetSize >= options.introThresh) && 
+                !(reviewSet.allSeen?)
         end
         
         # Return the index of the first item in the bin that hasn't been
@@ -154,12 +161,7 @@ module JLDrill
         
         # Get an item from the Review Set
         def getReviewItem
-            index = findUnseen(Strategy.reviewSetBin)
-            if !(index == -1)
-                reviewSet[index]
-            else
-                nil
-            end
+            reviewSet[0]
         end
         
         # Get an item from the Working Set
@@ -185,7 +187,6 @@ module JLDrill
             # Usually we get a working item if the above is not true
             item = getWorkingItem if item.nil?
 
-            item.schedule.seen = true
             return item
         end
 
@@ -216,12 +217,9 @@ module JLDrill
                         @stats.learned += 1
                         item.schedule.schedule
                     end
-                    # Insert the item into the correct place according to schedule
+                    # Put the item at the back of the bin
                     contents.bins[item.bin].delete(item)
-                    target = item.schedule.getScheduledTime
-                    contents.bins[4].insertBefore(item) do |index|
-                        contents.bins[4][index].schedule.getScheduledTime > target
-                    end
+                    contents.bins[4].push(item)
                 end
             end
         end

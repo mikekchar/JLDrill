@@ -27,7 +27,6 @@ module JLDrill::Gtk
 		def update(quiz)
 		    super(quiz)
             table = quiz.strategy.stats.statsTable
-		    @statisticsWindow.updateSchedule(table, quiz.strategy.stats)
 		    @statisticsWindow.updateDuration(table)
 		    @statisticsWindow.updateAccuracy(quiz.strategy.stats)
 		    @statisticsWindow.updateRate(quiz.strategy.stats)

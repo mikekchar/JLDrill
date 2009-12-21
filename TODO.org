@@ -6,8 +6,8 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2009-06-06 Mon>
-  :CurrentDate:  <2009-10-27 Tue>
-  :EndDate: <2009-11-13 Fri>
+  :CurrentDate:  <2009-12-21 Mon>
+  :EndDate: <2010-01-03 Sun>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -20,7 +20,7 @@
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.3.5 |    35 |   18 |    51.4 |    0.13 |   0.22 |
+| * Version 0.3.5 |    38 |   18 |    47.4 |    0.09 |   0.18 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </pre>
@@ -127,9 +127,23 @@ the number of jellybeans done in the properties of the task.
 
    :PROPERTIES:
    :JellyBeans: 1
-   :Done: 0
+   :Done: 1
    :END:
 
+** TODO Sort based on review rate
+   Right now all the entries are sorted on expirey date.  That means
+   that an item due today is sorted ahead of an item due tomorrow.
+   This is prolematic in that we end up having date skews etc.
+   Instead sort the items based on the percentage of time they have
+   sat until their expirey.  That way an item that is scheduled for
+   10 hours and only waited 1 hour will be scheduled *after* an
+   item that was scheduled for 100 days but has waited for 80 days.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 1
+   :END:
+   
 ** TODO Time to learn after the first item is waaay too big (10798.7s) [0/1]
    - [ ] Refactor tests
    - [ ] Test to see if this is a real problem	 
@@ -139,20 +153,6 @@ the number of jellybeans done in the properties of the task.
    :Done: 0
    :END:
 
-** TODO Sort based on review rate
-   Right now all the entries are sorted on expirey date.  That means
-   that an item due today is sorted ahead of an item due tomorrow.
-   This is prolematic in that we end up having date skews etc.
-   Instead sort the items based on the percentage of time they have
-   sat until their expirey.  That way an item that is scheduled for
-   10 hour and only waited 1 hour will be scheduled *after* an
-   item that was scheduled for 100 days but has waited for 80 days.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 0
-   :END:
-   
 ** TODO Windows Packaging Spike [0/5]
    Determine the feasibility of creating a windows packaging.
    Place to start:

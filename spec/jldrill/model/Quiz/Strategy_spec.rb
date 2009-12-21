@@ -281,19 +281,5 @@ module JLDrill
             item.bin.should be(1)
             item.itemStats.consecutive.should be(0)
         end
-
-        it "should schedule starting from the first scheduled item" do
-            item = @sampleQuiz.quiz.contents.bins[4][0]
-            item2 = @sampleQuiz.quiz.contents.bins[4][1]
-            # No reason for this, but the Sample Quiz should have
-            # a scheduled item in the review set
-            item.should_not be_nil
-            item.schedule.scheduled?.should be(true)
-            start = item.schedule.scheduleStart
-            start.to_i.should eql(item.schedule.scheduledTime.to_i)
-            item2.schedule.schedule(42)
-            item2.schedule.scheduledTime.should eql(start + 42)
-        end
-
     end
 end
