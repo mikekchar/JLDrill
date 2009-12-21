@@ -3,20 +3,18 @@ module JLDrill
 
     # Options for the standard quiz.
     class Options
-        attr_reader :randomOrder, :promoteThresh, :introThresh, :oldThresh,
+        attr_reader :randomOrder, :promoteThresh, :introThresh,
                         :reviewMode
 
         RANDOM_ORDER_RE = /^Random Order/
         PROMOTE_THRESH_RE = /^Promotion Threshold: (.*)/
         INTRO_THRESH_RE = /^Introduction Threshold: (.*)/
-        OLD_THRESH_RE = /^Old Threshold: (.*)/
             
         def initialize(quiz)
             @quiz = quiz
             @randomOrder = false
             @promoteThresh = 2
             @introThresh = 10
-            @oldThresh = 90
             @reviewMode = false
         end
         
@@ -25,7 +23,6 @@ module JLDrill
             retVal.randomOrder = @randomOrder
             retVal.promoteThresh = @promoteThresh
             retVal.introThresh = @introThresh
-            retVal.oldThresh = @oldThresh
             retVal.reviewMode = @reviewMode
             retVal
         end
@@ -34,7 +31,6 @@ module JLDrill
             options.randomOrder == @randomOrder &&
             options.promoteThresh == @promoteThresh &&
             options.introThresh == @introThresh &&
-            options.oldThresh == @oldThresh &&
             options.reviewMode == @reviewMode
         end
             
@@ -52,7 +48,6 @@ module JLDrill
             self.randomOrder = options.randomOrder
             self.promoteThresh = options.promoteThresh
             self.introThresh = options.introThresh
-            self.oldThresh = options.oldThresh
         end
         
         def randomOrder=(value)
@@ -72,13 +67,6 @@ module JLDrill
         def introThresh=(value)
             if @introThresh != value
                 @introThresh = value
-                saveNeeded
-            end
-        end
-
-        def oldThresh=(value)
-            if @oldThresh != value
-                @oldThresh = value
                 saveNeeded
             end
         end

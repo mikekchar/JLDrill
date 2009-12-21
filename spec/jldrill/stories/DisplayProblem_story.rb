@@ -1,11 +1,15 @@
 require 'jldrill/spec/StoryMemento'
+require 'jldrill/spec/GtkStoryFunctionality'
 require 'jldrill/contexts/DisplayProblemContext'
 require 'jldrill/views/ProblemView'
-require 'jldrill/views/gtk/ProblemView'
 
 module JLDrill::QuestionAndAnswerAreDisplayed
 
-    Story = JLDrill::StoryMemento.new("Problems are displayed")
+    class MyStory < JLDrill::StoryMemento
+        include JLDrill::StoryFunctionality::Gtk
+    end
+
+    Story = MyStory.new("Problems are displayed")
     def Story.setup(type)
         super(type)
         @context = @mainContext.displayProblemContext

@@ -1,19 +1,8 @@
 require 'jldrill/contexts/MainContext'
 require 'jldrill/views/MainWindowView'
-require 'jldrill/views/gtk/MainWindowView'
 require 'jldrill/spec/Fakes'
 require 'jldrill/spec/SampleQuiz'
 require 'jldrill/model/Config'
-
-# The startGTK method requires gtk2.  But I don't want to include
-# it here in case I don't use it.  So the using file must include
-# it.
-# require 'gtk2'
-
-# A convenience since starting up the main window is likely
-# to try to open most of the views
-require 'Context/require_all'
-require_all 'jldrill/views/gtk/*.rb'
 
 module JLDrill
     # This is a helper class for the tests.  It makes it
@@ -70,41 +59,10 @@ module JLDrill
             @view = @context.peekAtView
         end
 
-        # Overrides the method on the object with the closure
-        # that's passed in.
-        def override_method(object, method, &block)
-            class << object
-                self
-            end.send(:define_method, method, &block)
-        end
-
-        # Make the modal dialog run as if the button was pressed.	
-        def enterAndPressButton(window, button, &block)
-            override_method(window, :run) do
-                if !block.nil?
-                    block.call
-                end
-                button
-            end
-            @context.enter(@mainContext)
-        end
-        
         def loadQuiz
             if @mainContext.quiz.loadFromString("SampleQuiz", @sampleQuiz.resetFile)
                 @mainContext.quiz.drill
             end
         end
-
-        # Starts Gtk and runs the code in the block.  Note it doesn't
-        # quit the main loop, so you will have to call ::Gtk::main_quit
-        # somewhere in the block.  See UserLoadsDictionary_story.rb
-        # for an example of usage.
-        def startGtk(&block)
-            ::Gtk.init_add do
-                block.call
-            end
-            ::Gtk.main
-        end    
-        
     end
 end

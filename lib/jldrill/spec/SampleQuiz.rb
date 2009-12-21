@@ -19,6 +19,10 @@ Random Order
 Promotion Threshold: 4
 Introduction Threshold: 17]
 
+        FileDefaultOptions = %Q[
+Promotion Threshold: 2
+Introduction Threshold: 10]
+
         FileVocab = %Q[
 Unseen
 /Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 0/Consecutive: 0/Score: 0/Level: 0/Difficulty: 0/
@@ -57,8 +61,9 @@ Poor
 
         FileString = FileHeader + FileInfo + FileOptions + FileVocab
         ResetString = FileHeader + FileInfo + FileOptions + ResetVocab
+        DefaultString = FileHeader + FileInfo + ResetVocab
         
-        attr_reader :quiz, :resetQuiz, :emptyQuiz
+        attr_reader :quiz, :resetQuiz, :emptyQuiz, :defaultQuiz
         
         def initialize
             @quiz = Quiz.new
@@ -66,6 +71,8 @@ Poor
             @resetQuiz = Quiz.new
             @resetQuiz.loadFromString("ResetQuiz", ResetString)
             @emptyQuiz = Quiz.new
+            @defaultQuiz = Quiz.new
+            @defaultQuiz.loadFromString("DefaultQuiz", DefaultString)
         end
         
         def header
@@ -112,6 +119,10 @@ Poor
         
         def sampleVocab
             Vocabulary::create(NewVocab)
+        end
+
+        def defaultSaveFile
+            FileHeader + FileInfo + FileDefaultOptions + ResetVocab + "Fair\nGood\nExcellent\n"
         end
     end
 end

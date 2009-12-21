@@ -24,31 +24,6 @@ module JLDrill
 		    @emptyQuiz.contents.to_s.should eql("Unseen\nPoor\nFair\nGood\nExcellent\n")
 		end
 		
-		it "should have quiz options initialized" do
-		    @emptyQuiz.options.should_not be_nil
-		    @emptyQuiz.options.randomOrder.should be(false)
-		    @emptyQuiz.options.promoteThresh.should be(2)
-		    @emptyQuiz.options.introThresh.should be(10)
-		    @emptyQuiz.options.oldThresh.should be(90)
-		end
-		
-		def test_changeOption(optionString, originalValue, newValue)
-		    @emptyQuiz.needsSave.should be(false)
-		    eval("@emptyQuiz.options.#{optionString}").should be(originalValue)
-		    eval("@emptyQuiz.options.#{optionString} = #{newValue}")
-		    eval("@emptyQuiz.options.#{optionString}").should be(newValue)
-		    @emptyQuiz.needsSave.should be(true)
-		    @emptyQuiz.setNeedsSave(false)
-		    @emptyQuiz.needsSave.should be(false)
-		end
-		
-		it "should set the quiz to needsSave when the options are changed" do
-		    test_changeOption("randomOrder", false, true)
-		    test_changeOption("promoteThresh", 2, 4)
-		    test_changeOption("introThresh", 10, 5)
-		    test_changeOption("oldThresh", 90, 80)
-		end
-		
 		it "should load a file from memory" do
 		    quiz = Quiz.new
 		    quiz.loadFromString("SampleQuiz", @sampleQuiz.file)

@@ -130,7 +130,29 @@ the number of jellybeans done in the properties of the task.
    :Done: 0
    :END:
 
-** TODO Time to learn after the first item is waaay too big (10798.7s)
+** TODO Time to learn after the first item is waaay too big (10798.7s) [0/1]
+   - [ ] Refactor tests
+   - [ ] Test to see if this is a real problem	 
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 0
+   :END:
+
+** TODO Sort based on review rate
+   Right now all the entries are sorted on expirey date.  That means
+   that an item due today is sorted ahead of an item due tomorrow.
+   This is prolematic in that we end up having date skews etc.
+   Instead sort the items based on the percentage of time they have
+   sat until their expirey.  That way an item that is scheduled for
+   10 hour and only waited 1 hour will be scheduled *after* an
+   item that was scheduled for 100 days but has waited for 80 days.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+   
 ** TODO Windows Packaging Spike [0/5]
    Determine the feasibility of creating a windows packaging.
    Place to start:

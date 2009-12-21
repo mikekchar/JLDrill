@@ -31,11 +31,6 @@ module JLDrill
 		    @context.loadReference
 		end
 
-		it "should enter the setOptionsContext when setting the options" do
-		    @context.setOptionsContext.should_receive(:enter).with(@context)
-		    @context.setOptions
-		end
-		
 		it "should enter the showStatisticsContext when showing statistics" do
 		    @context.showStatisticsContext.should_receive(:enter).with(@context)
 		    @context.showStatistics
