@@ -91,7 +91,7 @@ module JLDrill::Gtk
             hbox.add(@durationTable)
             rows = ["Reviewed", "Learned", " Time to review ", 
                       "Time to learn", "Total Accuracy", " Learn Time % ", 
-                      " Skew ", " Review Rate "]
+                      " Curr Rate ", " Avg Rate "]
             columns = [" "]
             @rateTable = StatisticsTable.new(rows, columns)
             hbox.add(@rateTable)
@@ -154,8 +154,8 @@ module JLDrill::Gtk
             @rateTable.values[3][0].text = stats.learnPace.to_s + "s "
             @rateTable.values[4][0].text = stats.accuracy.to_s + "% "
             @rateTable.values[5][0].text = stats.learnTimePercent.to_s + "% "
-            @rateTable.values[6][0].text = " NA "
-            @rateTable.values[7][0].text = stats.reviewRate.to_s + "x "
+            @rateTable.values[6][0].text = stats.currentReviewRate.to_s + "x "
+            @rateTable.values[7][0].text = stats.averageReviewRate.to_s + "x "
         end
     end
 end

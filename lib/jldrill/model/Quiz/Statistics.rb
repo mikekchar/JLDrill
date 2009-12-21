@@ -158,12 +158,21 @@ module JLDrill
             return reviewBin.length
         end
 
-        def reviewRate
+        def averageReviewRate
             retVal = 1.0
             if @reviewed != 0
                 retVal = ((@reviewRateSum * 10).round / @reviewed).to_f / 10 
             end
             return retVal
+        end
+
+        def currentReviewRate
+            retVal = 1.0
+            if size > 0
+                rate = reviewBin[0].schedule.reviewRate
+               retVal = ((rate * 100).round).to_f / 100
+            end
+            retVal
         end
 
         def initializeTable
