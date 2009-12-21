@@ -187,6 +187,7 @@ module JLDrill
             # Usually we get a working item if the above is not true
             item = getWorkingItem if item.nil?
 
+            item.schedule.seen = true
             return item
         end
 
