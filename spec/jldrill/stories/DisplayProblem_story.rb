@@ -1,5 +1,6 @@
 require 'jldrill/spec/StoryMemento'
-require 'jldrill/spec/GtkStoryFunctionality'
+require 'jldrill/spec/storyFunctionality/Gtk'
+require 'jldrill/spec/storyFunctionality/SampleQuiz'
 require 'jldrill/contexts/DisplayProblemContext'
 require 'jldrill/views/ProblemView'
 
@@ -7,6 +8,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
 
     class MyStory < JLDrill::StoryMemento
         include JLDrill::StoryFunctionality::Gtk
+        include JLDrill::StoryFunctionality::SampleQuiz
     end
 
     Story = MyStory.new("Problems are displayed")

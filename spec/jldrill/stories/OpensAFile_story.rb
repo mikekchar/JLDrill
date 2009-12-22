@@ -1,5 +1,5 @@
 require 'jldrill/spec/StoryMemento'
-require 'jldrill/spec/GtkStoryFunctionality'
+require 'jldrill/spec/storyFunctionality/Gtk'
 require 'jldrill/contexts/GetFilenameContext'
 
 module JLDrill::OpensAFile

@@ -1,7 +1,6 @@
 require 'jldrill/contexts/MainContext'
 require 'jldrill/views/MainWindowView'
 require 'jldrill/spec/Fakes'
-require 'jldrill/spec/SampleQuiz'
 require 'jldrill/model/Config'
 
 module JLDrill
@@ -10,7 +9,7 @@ module JLDrill
     # of the state of the app.
     class StoryMemento
         attr_reader :storyName, :app, :mainContext, 
-                    :mainView, :context, :view, :sampleQuiz
+                    :mainView, :context, :view
     
         def initialize(storyName)
             @storyName = storyName
@@ -23,7 +22,6 @@ module JLDrill
             @mainView = nil
             @context = nil
             @view = nil
-            @sampleQuiz = SampleQuiz.new
         end
         
         def stepName(step)
@@ -57,12 +55,6 @@ module JLDrill
         # Create a new view after the old one has been destroyed        
         def getNewView
             @view = @context.peekAtView
-        end
-
-        def loadQuiz
-            if @mainContext.quiz.loadFromString("SampleQuiz", @sampleQuiz.resetFile)
-                @mainContext.quiz.drill
-            end
         end
     end
 end

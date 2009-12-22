@@ -1,25 +1,14 @@
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
-require 'jldrill/spec/GtkStoryFunctionality'
+require 'jldrill/spec/storyFunctionality/Gtk'
+require 'jldrill/spec/storyFunctionality/SampleQuiz'
 require 'jldrill/model/Quiz/Options'
 
 module JLDrill::UserChangesOptions
 
     class MyStory < JLDrill::StoryMemento
         include JLDrill::StoryFunctionality::Gtk
-
-        def hasDefaultQuiz
-            @sample = JLDrill::SampleQuiz.new
-            @mainContext.quiz = @sample.defaultQuiz
-        end
-
-        def sample
-            @sample
-        end
-
-        def quiz
-            @mainContext.quiz
-        end
+        include JLDrill::StoryFunctionality::SampleQuiz
 
         # Set the current context and view to the setOptionsContext
         # Note: Doesn't enter the context since enterDialogAndPressOK
@@ -61,7 +50,7 @@ module JLDrill::UserChangesOptions
             # Even though no options have been changed they should be written
             # to the output file.
             saveString = Story.quiz.saveToString
-            saveString.should eql(Story.sample.defaultSaveFile)
+            saveString.should eql(Story.sampleQuiz.defaultSaveFile)
         end
 
         it "should store changed options" do
@@ -79,9 +68,9 @@ module JLDrill::UserChangesOptions
             saveString = Story.quiz.saveToString
             # optionsString has a trailing \n but the resetVocab 
             # starts with a \n so I have to chop one out.
-            saveString.should eql(Story.sample.header + Story.sample.info + 
+            saveString.should eql(Story.sampleQuiz.header + Story.sampleQuiz.info + 
                                   "\n" + optionsString.chop + 
-                                  Story.sample.resetVocab +
+                                  Story.sampleQuiz.resetVocab +
                                   "Fair\nGood\nExcellent\n")
         end
 
@@ -128,8 +117,8 @@ module JLDrill::UserChangesOptions
             optionsString = "Random Order\n" +
                 "Promotion Threshold: 4\n" +
                 "Introduction Threshold: 20\n"
-            fileString = Story.sample.header + Story.sample.info + "\n" +
-                optionsString.chop + Story.sample.resetVocab +
+            fileString = Story.sampleQuiz.header + Story.sampleQuiz.info + "\n" +
+                optionsString.chop + Story.sampleQuiz.resetVocab +
                 "Fair\nGood\nExcellent\n"
             Story.quiz.loadFromString("nothing", fileString)
             Story.quiz.options.to_s.should eql(optionsString)
