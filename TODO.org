@@ -6,7 +6,7 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2009-06-06 Mon>
-  :CurrentDate:  <2009-12-21 Mon>
+  :CurrentDate:  <2009-12-22 Mon>
   :EndDate: <2010-01-03 Sun>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -20,7 +20,7 @@
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.3.5 |    38 |   18 |    47.4 |    0.09 |   0.18 |
+| * Version 0.3.5 |    38 |   20 |    52.6 |    0.10 |   0.18 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </pre>
@@ -57,7 +57,8 @@ the number of jellybeans done in the properties of the task.
    from now.  When scheduling review items, always schedule
    from the scheduled date.  The effect of this is to deal with
    the problem of getting behind while keeping similar review
-   items in similar places.
+   items in similar places.  NOTE: This was superceded by the
+   new scheduling algorithm.
 
    :PROPERTIES:
    :JellyBeans: 3
@@ -82,7 +83,8 @@ the number of jellybeans done in the properties of the task.
    statistics should start from the first item, not the
    now.  Add a "Skew" statistic showing how many days the
    first item is scheduled from now (negative is behind,
-   positive is ahead).
+   positive is ahead).  NOTE: This was superceded by the new
+   scheduling algorithm.
 
   :PROPERTIES:
   :JellyBeans: 2
@@ -130,7 +132,7 @@ the number of jellybeans done in the properties of the task.
    :Done: 1
    :END:
 
-** TODO Sort based on review rate
+** DONE Sort based on review rate [3/3]
    Right now all the entries are sorted on expirey date.  That means
    that an item due today is sorted ahead of an item due tomorrow.
    This is prolematic in that we end up having date skews etc.
@@ -138,14 +140,32 @@ the number of jellybeans done in the properties of the task.
    sat until their expirey.  That way an item that is scheduled for
    10 hours and only waited 1 hour will be scheduled *after* an
    item that was scheduled for 100 days but has waited for 80 days.
+   - [X] There is no concept of scheduled time now.  Remove the
+         scheduled time from the statistics.
+   - [X] Since the items are not scheduled, there is also no concept
+         of skew.  Remove it from the statistics.
+   - [X] Add a current review rate to show you where you are in the
+     stack.  Rename "Review Rate" to "Avg Review Rate".
 
    :PROPERTIES:
    :JellyBeans: 1
    :Done: 1
    :END:
    
-** TODO Time to learn after the first item is waaay too big (10798.7s) [0/1]
-   - [ ] Refactor tests
+** TODO All Vocab is truncated and in the wrong order for kanjidrill.
+** TODO One of the items in the working set had a potential schedule of 72 days
+** TODO Early reviewed items scheduled too soon
+   If an item is reviewed earlier and answered correctly, it can be
+   given a duration that is less than it's earlier duration.  This is
+   confusing at least and maybe should be fixed.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+
+** TODO Time to learn after the first item is waaay too big (10798.7s) [1/2]
+   - [X] Refactor tests
    - [ ] Test to see if this is a real problem	 
 
    :PROPERTIES:
@@ -164,7 +184,7 @@ the number of jellybeans done in the properties of the task.
      self contained directory and is used instead of the installed
      Ruby-Gnome.  Note: Probably have to package Gtk+ here as well.
      If not make another step for that.
-   - [ ] Create some way to package a custom ruby insterpreter in the
+   - [ ] Create some way to package a custom ruby interpreter in the
      self contained directory.
    - [ ] Create a self extracting archive for the self contained
      directory.

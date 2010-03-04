@@ -1,21 +1,24 @@
+require 'jldrill/model/Config'
 
 module JLDrill
 
     # Options for the standard quiz.
     class Options
         attr_reader :randomOrder, :promoteThresh, :introThresh,
-                        :reviewMode
+                        :reviewMode, :dictionary
 
         RANDOM_ORDER_RE = /^Random Order/
         PROMOTE_THRESH_RE = /^Promotion Threshold: (.*)/
         INTRO_THRESH_RE = /^Introduction Threshold: (.*)/
-            
+        DICTIONARY_RE =/^Dictionary: (.*)/
+
         def initialize(quiz)
             @quiz = quiz
             @randomOrder = false
             @promoteThresh = 2
             @introThresh = 10
             @reviewMode = false
+			@dictionary = nil
         end
         
         def clone
@@ -24,6 +27,7 @@ module JLDrill
             retVal.promoteThresh = @promoteThresh
             retVal.introThresh = @introThresh
             retVal.reviewMode = @reviewMode
+			retVal.dictionary = @dictionary
             retVal
         end
         
@@ -31,7 +35,8 @@ module JLDrill
             options.randomOrder == @randomOrder &&
             options.promoteThresh == @promoteThresh &&
             options.introThresh == @introThresh &&
-            options.reviewMode == @reviewMode
+            options.reviewMode == @reviewMode &&
+			options.dictionary == @dictionary
         end
             
         def saveNeeded
@@ -48,6 +53,7 @@ module JLDrill
             self.randomOrder = options.randomOrder
             self.promoteThresh = options.promoteThresh
             self.introThresh = options.introThresh
+			self.dictionary = options.dictionary
         end
         
         def randomOrder=(value)
@@ -78,7 +84,14 @@ module JLDrill
                 modifiedButNoSaveNeeded
             end
         end
-            
+    	
+		def dictionary=(value)
+			if @dictionary != value
+				@dictionary = value
+				saveNeeded
+			end
+		end
+
         def parseLine(line)
             parsed = true
             case line
@@ -88,6 +101,8 @@ module JLDrill
                     self.promoteThresh = $1.to_i
                 when INTRO_THRESH_RE 
                     self.introThresh = $1.to_i
+				when DICTIONARY_RE
+					self.dictionary = $1.to_i
                 else
                     parsed = false
             end
@@ -109,6 +124,9 @@ module JLDrill
             end
             retVal += "Promotion Threshold: #{@promoteThresh}\n"
             retVal += "Introduction Threshold: #{@introThresh}\n"
+			if(!@dictionary.nil?)
+				retVal += "Dictionary: #{@dictionary}\n"
+			end
             retVal
         end
     end

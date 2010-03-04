@@ -3,6 +3,7 @@ require 'jldrill/spec/SampleQuiz'
 require 'jldrill/spec/storyFunctionality/Gtk'
 require 'jldrill/spec/storyFunctionality/SampleQuiz'
 require 'jldrill/model/Quiz/Options'
+require 'jldrill/model/Config'
 
 module JLDrill::UserChangesOptions
 
@@ -34,6 +35,7 @@ module JLDrill::UserChangesOptions
             Story.quiz.options.promoteThresh.should eql(2)
             Story.quiz.options.introThresh.should eql(10)
             Story.quiz.options.reviewMode.should eql(false)
+			Story.quiz.options.dictionary.should be_nil
         end
 
         after(:each) do
