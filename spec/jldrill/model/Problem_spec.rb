@@ -2,6 +2,75 @@ require 'jldrill/model/Problem'
 
 module JLDrill
 
+    class ProblemReceiver
+        NORMAL_MODE = 0
+        PREVIEW_MODE = 1
+        DISPLAYONLY_MODE = 2
+        EXPIRED_MODE = 3
+
+        def initialize(problem)
+            @problem = problem
+            @received = {}
+            @mode = NORMAL_MODE
+        end
+
+        def getMode()
+            return @mode
+        end
+
+        def receive(part, value)
+            @received[part]=value
+        end
+
+        def received?(part)
+            return @received.has_key?(part)
+        end
+
+        def value(part)
+            if received?(part)
+                return @received[part]
+            else
+                return nil
+            end
+        end
+
+        def normalMode
+            @mode = NORMAL_MODE
+        end
+
+        def previewMode
+            @mode = PREVIEW_MODE
+        end
+
+        def displayOnlyMode
+            @mode = DISPLAYONLY_MODE
+        end
+
+        def expiredMode
+            @mode = EXPIRED_MODE
+        end
+    end
+
+    class AnswerReceiver < ProblemReceiver
+        def initialize(problem)
+            super(problem)
+        end
+
+        def request
+            @problem.publishAnswer(self)
+        end
+    end
+
+    class QuestionReceiver < ProblemReceiver
+        def initialize(problem)
+            super(problem)
+        end
+
+        def request
+            @problem.publishQuestion(self)
+        end
+    end
+
 	describe Problem do
 	
 		before(:each) do
@@ -23,13 +92,13 @@ module JLDrill
 		    @item1 = Item.new(@vocab1)
 		    @problem1 = Problem.new(@item1, @quiz)
             @problem1.should_not be_nil
-            @problem1.kanji.should eql("会う")
+            @problem1.evaluateAttribute("kanji").should eql("会う")
 
 		    @vocab2 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item2 = Item.new(@vocab2)
 		    @problem2 = Problem.new(@item2, @quiz)
             @problem2.should_not be_nil
-            @problem2.kanji.should eql("")
+            @problem2.evaluateAttribute("kanji").should eql("")
         end
 
         it "should give a string representation of the Hint if it's there" do
@@ -37,13 +106,13 @@ module JLDrill
 		    @item1 = Item.new(@vocab1)
 		    @problem1 = Problem.new(@item1, @quiz)
             @problem1.should_not be_nil
-            @problem1.hint.should eql("Hint: No hints")
+            @problem1.evaluateAttribute("hint").should eql("No hints")
 
 		    @vocab2 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item2 = Item.new(@vocab2)
 		    @problem2 = Problem.new(@item2, @quiz)
             @problem2.should_not be_nil
-            @problem2.hint.should eql("")
+            @problem2.evaluateAttribute("hint").should eql("")
         end
 
         it "should give a string representation of the Reading" do
@@ -51,7 +120,7 @@ module JLDrill
 		    @item1 = Item.new(@vocab1)
 		    @problem1 = Problem.new(@item1, @quiz)
             @problem1.should_not be_nil
-            @problem1.reading.should eql("あう")
+            @problem1.evaluateAttribute("reading").should eql("あう")
         end
 
         it "should give a string representation of the Definitions" do
@@ -59,7 +128,7 @@ module JLDrill
 		    @item1 = Item.new(@vocab1)
 		    @problem1 = Problem.new(@item1, @quiz)
             @problem1.should_not be_nil
-            @problem1.definitions.should eql("to meet, to interview")
+            @problem1.evaluateAttribute("definitions").should eql("to meet, to interview")
         end
         
         it "should have and empty string if the reading isn't set" do
@@ -67,7 +136,7 @@ module JLDrill
 		    @item1 = Item.new(@vocab1)
 		    @problem1 = Problem.new(@item1, @quiz)
             @problem1.should_not be_nil
-            @problem1.reading.should eql("")
+            @problem1.evaluateAttribute("reading").should eql("")
         end
 
         it "should have and empty string if the definitions aren't set" do
@@ -75,7 +144,7 @@ module JLDrill
 		    @item1 = Item.new(@vocab1)
 		    @problem1 = Problem.new(@item1, @quiz)
             @problem1.should_not be_nil
-            @problem1.definitions.should eql("")
+            @problem1.evaluateAttribute("definitions").should eql("")
         end
         
         it "should be able to assign a vocab" do
@@ -156,9 +225,50 @@ module JLDrill
 		    @problem = ReadingProblem.new(@item, @quiz)
             @problem.should_not be_nil
 		    @problem.level.should be(0)
-            @problem.question.should eql("会う\nあう\nHint: No hints\n")
+            @problem.question.should eql("会う\nあう\nNo hints\n")
             @problem.answer.should eql("to meet, to interview\n")
         end
+
+        it "should publish the correct items" do
+		    vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    item = Item.new(vocab)
+		    problem = ReadingProblem.new(item, @quiz)
+            questionPane = QuestionReceiver.new(problem)
+            
+            questionPane.request
+            questionPane.getMode().should be(ProblemReceiver::NORMAL_MODE)
+            questionPane.received?("kanji").should be(true)
+            questionPane.value("kanji").should eql("会う")
+            questionPane.received?("reading").should be(true)
+            questionPane.value("reading").should eql("あう")
+            questionPane.received?("hint").should be(true)
+            questionPane.value("hint").should eql("No hints")
+        end
+
+        it "should use the reading as kanji if there is no kanji" do
+		    @vocab = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    @item = Item.new(@vocab)
+		    @problem = ReadingProblem.new(@item, @quiz)
+            @problem.should_not be_nil
+		    @problem.level.should be(0)
+            @problem.question.should eql("あう\n")
+            @problem.answer.should eql("to meet, to interview\n")
+        end
+
+        it "should publish the reading as kanji if there is no kanji" do
+		    vocab = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    item = Item.new(vocab)
+		    problem = ReadingProblem.new(item, @quiz)
+            questionPane = QuestionReceiver.new(problem)
+            
+            questionPane.request
+            questionPane.getMode().should be(ProblemReceiver::NORMAL_MODE)
+            questionPane.received?("kanji").should be(true)
+            questionPane.value("kanji").should eql("あう")
+            questionPane.received?("reading").should be(false)
+            questionPane.received?("hint").should be(false)
+        end
+
     end
 
 	describe KanjiProblem do
@@ -170,7 +280,7 @@ module JLDrill
             @problem.should_not be_nil
 		    @problem.level.should be(2)
             @problem.question.should eql("会う\n")
-            @problem.answer.should eql("あう\nto meet, to interview\nHint: No hints\n")
+            @problem.answer.should eql("あう\nto meet, to interview\nNo hints\n")
         end
     end
 
@@ -183,7 +293,7 @@ module JLDrill
             @problem.should_not be_nil
 		    @problem.level.should be(1)
             @problem.question.should eql("to meet, to interview\n")
-            @problem.answer.should eql("会う\nあう\nHint: No hints\n")
+            @problem.answer.should eql("会う\nあう\nNo hints\n")
         end
     end
 end

@@ -32,7 +32,6 @@ module JLDrill::Gtk
             normalMode
             self.add(@contents)
             @buffer = @contents.buffer
-            @hasKanji = true
             createTags
         end
 
@@ -91,11 +90,6 @@ module JLDrill::Gtk
 
         def receive(type, string)
             if !string.nil? && !string.empty?
-                if type == "reading" && !@hasKanji
-                    # We want to display readings as if they were kanji
-                    # if the item has no kanji.
-                    type = "kanji"
-                end
                 @buffer.insert(@buffer.end_iter, string, type)
 
                 # To make it fit on the screen better, hints have no
@@ -112,7 +106,6 @@ module JLDrill::Gtk
         def update(problem)
             clear(problem)
             if !problem.nil?
-                @hasKanji = problem.kanji != ""
                 problem.publishQuestion(self)
             end
         end
@@ -137,7 +130,6 @@ module JLDrill::Gtk
         def update(problem)
             clear(problem)
             if !problem.nil?
-                @hasKanji = problem.kanji != ""
                 problem.publishAnswer(self)
                 @isClear = false
             end

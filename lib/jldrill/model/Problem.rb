@@ -49,38 +49,6 @@ module JLDrill
             return @preview
         end
 
-        def kanji
-            if !@vocab.kanji.nil?
-                @vocab.kanji
-            else
-                ""
-            end
-        end
-
-        def reading
-            if !@vocab.reading.nil?
-                @vocab.reading
-            else
-                ""
-            end
-        end
-
-        def hint
-            if !@vocab.hint.nil?
-                "Hint: " + @vocab.hint
-            else
-                ""
-            end
-        end
-
-        def definitions
-            if @vocab.definitions != ""
-                @vocab.definitions
-            else
-                ""
-            end
-        end
-        
         def vocab=(vocab)
             @vocab.assign(vocab)
             @item.setContents(vocab.contentString)
@@ -108,13 +76,20 @@ module JLDrill
         end
 
         def evaluateAttribute(name)
-            eval("self." + name)
+            retVal = eval("@vocab." + name)
+            if retVal.nil?
+                retVal = ""
+            end
+            return retVal
         end
 
         def evaluateParts(parts)
             retVal = ""
             parts.each do |part|
-                retVal += evaluateAttribute(part) + "\n"
+                value = evaluateAttribute(part)
+                if !value.empty?
+                    retVal += value + "\n"
+                end
             end
             retVal
         end
@@ -133,7 +108,13 @@ module JLDrill
             end
             parts.each do |part|
                 value = evaluateAttribute(part)
-                target.receive(part, value)
+                if !value.empty?
+                    if ((part == "reading") && (largeReading?))
+                        target.receive("kanji", value)
+                    else
+                        target.receive(part, value)
+                    end
+                end
             end
         end
 
@@ -157,6 +138,12 @@ module JLDrill
         def valid?
             return true
         end
+
+        # By default, don't print the reading in large print
+        def largeReading?
+            return false
+        end
+
     end
     
     # The first kind of Problem shown.  It lets you read it in Japanese and
@@ -167,6 +154,10 @@ module JLDrill
             @level = 0
             @questionParts = ["kanji", "reading", "hint"]
             @answerParts = ["definitions"]
+        end
+
+        def largeReading?
+            return evaluateAttribute("kanji").empty?
         end
     end
     
@@ -182,7 +173,7 @@ module JLDrill
         # Returns false if the kanji is emty and we can't drill this
         # item.
         def valid?
-            return !kanji.empty?
+            return !(evaluateAttribute("kanji").empty?)
         end
     end
     
@@ -193,6 +184,10 @@ module JLDrill
             @level = 1
             @questionParts = ["definitions"]
             @answerParts = ["kanji", "reading", "hint"]
+        end
+
+        def largeReading?
+            return evaluateAttribute("kanji").empty?
         end
     end
 end

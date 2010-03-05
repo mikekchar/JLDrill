@@ -86,7 +86,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
         it "should display each of the items in the problem" do
             Story.setup(JLDrill::Gtk)
             Story.start
-            Story.view.problemDisplay.question.should_receive(:receive).exactly(3).times
+            Story.view.problemDisplay.question.should_receive(:receive).exactly(2).times
             # loadQuiz will also start a drill, triggering the display
             Story.loadQuiz
             Story.view.problemDisplay.answer.should_receive(:receive)
@@ -100,11 +100,10 @@ module JLDrill::QuestionAndAnswerAreDisplayed
             # loadQuiz will also start a drill, triggering the display
             Story.loadQuiz
             Story.view.showAnswer
-            # The trailing return is for the one we don't put on the hint
-            question = Story.view.problemDisplay.question.text + "\n"
-            question.should be_eql(Story.mainContext.quiz.currentProblem.question)
+            question = Story.view.problemDisplay.question.text
+            question.should eql(Story.mainContext.quiz.currentProblem.question)
             answer = Story.view.problemDisplay.answer.text
-            answer.should be_eql(Story.mainContext.quiz.currentProblem.answer)
+            answer.should eql(Story.mainContext.quiz.currentProblem.answer)
             Story.shutdown
         end
     end
