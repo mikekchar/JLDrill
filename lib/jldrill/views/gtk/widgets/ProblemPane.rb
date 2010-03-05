@@ -33,6 +33,7 @@ module JLDrill::Gtk
             self.add(@contents)
             @buffer = @contents.buffer
             createTags
+            @image = nil
         end
 
         def normalMode
@@ -72,6 +73,14 @@ module JLDrill::Gtk
                                "foreground" => "red")
         end
 
+        # Adds an image to the bottom of the pane
+        def addImage(filename)
+            @image = Gtk::Image.new(filename)
+            if !@image.pixbuf.nil?
+                @buffer.insert(@buffer.end_iter, @image.pixbuf)
+            end
+        end
+
         def clear(problem)
             if !problem.nil? && problem.preview?
                 previewMode
@@ -82,6 +91,7 @@ module JLDrill::Gtk
             end
 
             @buffer.text = ""
+            @image = nil
         end
 
         def text
@@ -90,7 +100,11 @@ module JLDrill::Gtk
 
         def receive(type, string)
             if !string.nil? && !string.empty?
-                @buffer.insert(@buffer.end_iter, string, type)
+                if (string.start_with?("image:"))
+                    addImage(string[6..string.size])
+                else
+                    @buffer.insert(@buffer.end_iter, string, type)
+                end
 
                 # To make it fit on the screen better, hints have no
                 # trailing carriage return.
