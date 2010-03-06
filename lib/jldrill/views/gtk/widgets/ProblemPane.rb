@@ -71,14 +71,19 @@ module JLDrill::Gtk
                                "justification" => Gtk::JUSTIFY_CENTER,
                                "family" => "Sans",
                                "foreground" => "red")
+            @buffer.create_tag("image",
+                               "justification" => Gtk::JUSTIFY_CENTER)
         end
 
         # Adds an image to the bottom of the pane
         def addImage(filename)
             @image = Gtk::Image.new(filename)
+            # inserting spaces on either end of the image centers it
+            @buffer.insert(@buffer.end_iter," ", "image")
             if !@image.pixbuf.nil?
                 @buffer.insert(@buffer.end_iter, @image.pixbuf)
             end
+            @buffer.insert(@buffer.end_iter," \n", "image")
         end
 
         def clear(problem)
