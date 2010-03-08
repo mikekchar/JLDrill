@@ -10,12 +10,16 @@ module JLDrill
 			super(context)
 		end
 
-		def newProblem(problem, differs)
+		def newProblem(problem)
 		    # Should be overridden in the concrete class
 		end	
 
-        def updateProblem(problem, differs)
+        def updateProblem(problem)
             # Should be overridden in the concrete class
+        end
+
+        def differs?(problem)
+            @context.differs?(problem)
         end
 	end
 end

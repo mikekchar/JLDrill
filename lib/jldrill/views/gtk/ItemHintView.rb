@@ -22,16 +22,22 @@ module JLDrill::Gtk
         end
 
         # Update the indicators
-        def update(problem, differs)
+        def update(problem)
             if !problem.nil?  && !problem.item.nil?
-                hintBox.set(problem.item.to_o, differs)
+                hintBox.set(problem.item.to_o, differs?(problem))
             else
                 hintBox.clear
             end
         end
 
-        def newProblem(problem, differs)
-            update(problem, differs)
+        def newProblem(problem)
+            super(problem)
+            update(problem)
+        end
+
+        def updateProblem(problem)
+            super(problem)
+            update(problem)
         end
 
     end

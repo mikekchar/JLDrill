@@ -25,12 +25,12 @@ module JLDrill
             self.removeView(@itemHints)
         end
 
-		def newProblem(problem, differs)
-            itemHints.newProblem(problem, differs)
+		def newProblem(problem)
+            itemHints.newProblem(problem)
 		end	
 
-        def updateProblem(problem, differs)
-            itemHints.updateProblem(problem, differs)
+        def updateProblem(problem)
+            itemHints.updateProblem(problem)
         end
 		
 		def showAnswer

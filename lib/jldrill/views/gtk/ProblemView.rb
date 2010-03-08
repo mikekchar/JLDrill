@@ -41,8 +41,8 @@ module JLDrill::Gtk
             end
         end
 
-		def newProblem(problem, differs)
-            super(problem, differs)
+		def newProblem(problem)
+            super(problem)
 		    @problemDisplay.newProblem(problem)
             stopTimer
             if !problem.nil?
@@ -59,8 +59,8 @@ module JLDrill::Gtk
             @problemDisplay.expire
         end
 
-        def updateProblem(problem, differs)
-            super(problem, differs)
+        def updateProblem(problem)
+            super(problem)
             @problemDisplay.updateProblem(problem)
             stopTimer
             if !problem.nil?
