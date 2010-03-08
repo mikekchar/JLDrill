@@ -4,10 +4,9 @@ require 'jldrill/views/ItemHintView'
 require 'Context/Version'
 
 module JLDrill
-    # The ProblemView is made up of three sub-Views: The ItemHintView,
-    # the QuestionView and the AnswerView.  The ProblemView works as
-    # a mediator to tie the three views together and present a
-    # unified interface to the Context.
+    # The problem view displays the current problem questions
+    # and answer.  It also houses a subview which gives hints
+    # on the current item (differs from dictionary, intransitive, etc).
 	class ProblemView < Context::View
 
         attr_reader :itemHints

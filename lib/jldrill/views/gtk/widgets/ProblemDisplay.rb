@@ -6,9 +6,8 @@ require 'gtk2'
 module JLDrill::Gtk
     
     # This is the widget that displays the problem.
-    # The display is made up of 3 pieces:
-    # The IndicatorBox, which shows the markers for the
-    # item, the QuestionPane, which shows the question for the problem
+    # The display is made up of 2 pieces:
+    # the QuestionPane, which shows the question for the problem
     # and the AnswerPane which shows the answer.
     # The ProblemDisplay also interacts with the PopupFactory
     # to display the kanji/kana Popup when hovering over a character.
