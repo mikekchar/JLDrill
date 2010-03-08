@@ -18,8 +18,9 @@ module JLDrill::Gtk
 
         attr_reader :contents
 
-        def initialize
-            super
+        def initialize(display)
+            super()
+            @display = display
             setupWidget
 
             self.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
@@ -77,11 +78,15 @@ module JLDrill::Gtk
 
         # Adds an image to the bottom of the pane
         def addImage(filename)
+            filename = @display.expandWithSavePath(filename)
             @image = Gtk::Image.new(filename)
             # inserting spaces on either end of the image centers it
             @buffer.insert(@buffer.end_iter," ", "image")
             if !@image.pixbuf.nil?
                 @buffer.insert(@buffer.end_iter, @image.pixbuf)
+            else
+                @buffer.insert(@buffer.end_iter, filename + " not found.", 
+                               "image")
             end
             @buffer.insert(@buffer.end_iter," \n", "image")
         end

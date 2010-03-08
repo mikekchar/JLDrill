@@ -132,6 +132,18 @@ module JLDrill
             return retVal
         end
 
+        # Returns the filename relative to the Quiz's current
+        # path.  If a filename hasn't been set, the file is
+        # expanded using the applications current path.
+        def useSavePath(filename)
+            if !@savename.empty?
+                dirname = File.expand_path(File.dirname(@savename))
+                return File.expand_path(filename, dirname)
+            else
+                return File.expand_path(filename)
+            end
+        end
+
         def Quiz.canLoad?(header)
             retVal = false
             if header =~ JLDRILL_CANLOAD_RE

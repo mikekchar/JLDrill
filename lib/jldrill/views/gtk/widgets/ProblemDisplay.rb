@@ -20,8 +20,8 @@ module JLDrill::Gtk
             @vpane = Gtk::VPaned.new
             @vpane.set_border_width(5)
             @vpane.set_position(125)
-            @question = QuestionPane.new
-            @answer = AnswerPane.new
+            @question = QuestionPane.new(self)
+            @answer = AnswerPane.new(self)
             @problem = nil
             @vpane.pack1(@question, true, true)
             @vpane.pack2(@answer, true, true)
@@ -83,6 +83,10 @@ module JLDrill::Gtk
             if needToDisplayAnswer
                 showAnswer
             end
+        end
+
+        def expandWithSavePath(filename)
+            @view.expandWithSavePath(filename)
         end
         
     end

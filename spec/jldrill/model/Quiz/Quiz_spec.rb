@@ -300,5 +300,11 @@ module JLDrill
             test_initializeQuiz
             # Note: the reset() in test_initializeQuiz does a drill() now
         end
+
+        it "should be able to find paths relative to the save name" do
+            @quiz.savename = "/usr/share/fake.jldrill"
+            @quiz.useSavePath("mydirectory/newfile").should eql("/usr/share/mydirectory/newfile")
+            @quiz.useSavePath("../../newfile").should eql("/newfile")
+        end
     end
 end

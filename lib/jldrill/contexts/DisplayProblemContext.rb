@@ -96,5 +96,13 @@ module JLDrill
             end
             retVal
         end
+
+        def expandWithSavePath(filename)
+            if !@parent.quiz.nil?
+                return @parent.quiz.useSavePath(filename)
+            else
+                return filename
+            end
+        end
     end
 end

@@ -43,6 +43,10 @@ module JLDrill
 		def kanjiLoaded?
 		    @context.kanjiLoaded?
 		end
+
+        def expandWithSavePath(filename)
+            @context.expandWithSavePath(filename)
+        end
 		
 	end
 end
