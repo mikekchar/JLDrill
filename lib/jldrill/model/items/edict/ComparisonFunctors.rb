@@ -1,7 +1,7 @@
 module JLDrill
 
     class StartsWith
-        TO_A_RE = Regexp.new('\s*',nil,'U')
+        TO_A_RE = Regexp.new("",nil,'U')
 
         def initialize(string)
             @startsWithArray = string.split(TO_A_RE)

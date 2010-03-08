@@ -149,7 +149,7 @@ module JLDrill
 
         # The comma in the definitions is causing problems because it is
         # used as a separator for definitions.  Edict uses slashes, so
-        # it doesn't cause a problem.  Yes, it wa stupid to use commas
+        # it doesn't cause a problem.  Yes, it was stupid to use commas
         # in the file format; assuming that they wouldn't be used.
         # So now in the Edict file format escaping the comma with a backslash.
         # Here I convert it to a normal comma.

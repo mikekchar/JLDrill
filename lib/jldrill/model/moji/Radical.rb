@@ -4,7 +4,7 @@ module JLDrill
 	class Radical
 
         RADICAL_RE = Regexp.new('(\S)\t(\S*)\t(\S*)\t([^\t]*)\t(\S+)?', nil, 'U')
-        TO_A_RE = Regexp.new('\s*',nil,'U')
+        TO_A_RE = Regexp.new("",nil,'U')
 	
 		attr_reader :radical, :reading, :altGlyphs, :meaning, :contents
 		attr_writer :radical, :reading, :altGlyphs, :meaning, :contents

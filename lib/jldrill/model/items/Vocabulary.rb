@@ -8,6 +8,7 @@ require "jldrill/model/items/ItemFactory"
 module JLDrill
     class Vocabulary
 
+        DELIMITER_RE =/[^\\]\//
         KANJI_RE = /^Kanji: (.*)/
         HINT_RE = /^Hint: (.*)/
         READING_RE = /^Reading: (.*)/
@@ -15,8 +16,7 @@ module JLDrill
         MARKERS_RE = /^Markers: (.*)/
         QUOTE_RE = /["]/
         RETURN_RE = /[\n]/
-        JP_COMMA_RE = Regexp.new("[、]", nil, "U")
-        TO_A_RE = Regexp.new('\s*',nil,'U')
+        TO_A_RE = Regexp.new("",nil,'U')
 
         def initialize(kanji=nil, reading=nil, definitions=nil, 
                        markers=nil, hint=nil, position=nil)
@@ -269,9 +269,41 @@ module JLDrill
                 (@definitions.assigned? || @kanji.assigned?)
         end
 
+        # Split string on / allowing it to be escaped with a \
+        def split(string)
+            retVal = []
+            int = ""
+            esc = false
+            string.split(TO_A_RE).each do |letter|
+                if letter == "/"
+                    if !esc
+                        retVal.push(int)
+                        int = ""
+                    else
+                        int += letter
+                        esc = false
+                    end
+                elsif letter == "\\"
+                    int += letter
+                    if !esc
+                        esc = true
+                    else
+                        esc = false
+                    end
+                else
+                    esc = false
+                    int += letter
+                end
+            end
+            if !int.empty?
+                retVal.push(int)
+            end
+            return retVal
+        end
+
         # Parses a vocabulary value in save format.
         def parse(string)
-            string.split("/").each do |part|
+            split(string).each do |part|
                 case part
                 when KANJI_RE
                     @kanji.assign($1)

@@ -13,7 +13,9 @@ module JLDrill
 
         QUOTE_RE = /["]/
         RETURN_RE = /[\n]/
+        SLASH_RE = /[\/]/
         ESCAPED_COMMA_RE = Regexp.new("\\,", nil, "U")
+        ESCAPED_SLASH_RE = Regexp.new("\\/", nil, "U")
 
         def initialize(name)
             @name = name
@@ -32,6 +34,7 @@ module JLDrill
                 return nil
             end
             text = text.gsub(ESCAPED_COMMA_RE, ",")
+            text = text.gsub(ESCAPED_SLASH_RE, "/")
             eval("\"#{text.gsub(QUOTE_RE, "\\\"")}\"")
         end
 

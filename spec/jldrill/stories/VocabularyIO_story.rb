@@ -169,6 +169,27 @@ module JLDrill::VocabularyIO
             edict.vocab(0).should eql(v)
         end
 
+        def testSlashes(vocab, field)
+            testInput(vocab, field, "\\/home\\/mike\\/",
+                      "\\/home\\/mike\\/", "/home/mike/")
+        end
+
+        it "should handle slashes" do
+            vocab = JLDrill::Vocabulary.new
+            testSlashes(vocab, "kanji")
+            testSlashes(vocab, "reading")
+            testSlashes(vocab, "hint")
+            testSlashes(vocab, "definitions")
+            testSlashes(vocab, "markers")
+            vocab.kanji = "\\/home\\/mike\\/"
+            vocab.reading = "\\/home\\/mike\\/"
+            vocab.hint = "\\/home\\/mike\\/"
+            vocab.definitions = "\\/home\\/mike\\/"
+            vocab.markers = "\\/home\\/mike\\/"
+            vocab2 = JLDrill::Vocabulary.create(vocab.to_s)
+            vocab2.should eql(vocab)
+        end
+
     end
 
 ###########################################
