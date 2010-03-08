@@ -114,4 +114,33 @@ module JLDrill::QuestionAndAnswerAreDisplayed
         end
     end
 
+###########################################
+    describe Story.stepName("The ProblemView contains ItemHintsView.") do
+
+        # Note: In the next test newProblem is received 3 times.
+        # That's because it does it when the quiz is reset, when
+        # the quiz is loaded and then when the first problem is
+        # formed.
+
+        it "notifies the ItemHintsView when there is a new problem" do
+            Story.setup(JLDrill)
+            Story.start
+            Story.view.itemHints.should_not be_nil
+            Story.view.itemHints.should_receive(:newProblem).exactly(3).times
+            Story.loadQuiz
+            Story.shutdown
+        end
+
+        it "should notify the ItemHintsView when the problem is updated" do
+            Story.setup(JLDrill)
+            Story.start
+            Story.view.itemHints.should_receive(:updateProblem).exactly(1).times
+            Story.loadQuiz
+            Story.mainContext.quiz.currentProblem.should_not be_nil
+            Story.mainContext.quiz.currentProblem.vocab = Story.sampleQuiz.sampleVocab
+            Story.shutdown
+        end
+
+    end
+
 end

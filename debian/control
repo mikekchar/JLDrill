@@ -8,7 +8,7 @@ Homepage: http://sakabatou.dnsdojo.org
 
 Package: jldrill
 Architecture: all
-Depends: ruby, ruby-gnome2, libcontext-ruby (=0.0.19-1), ttf-kanjistrokeorders, edict
+Depends: ruby, ruby-gnome2, libcontext-ruby (>=0.0.20-1), ttf-kanjistrokeorders, edict
 Description: Japanese language drill program
  JLDrill is a program for helping people drill various aspects of the
  Japanese language. Current features include a kana drill, a vocabulary

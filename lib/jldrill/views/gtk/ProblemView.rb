@@ -1,3 +1,4 @@
+require 'jldrill/views/ProblemView'
 require 'jldrill/views/gtk/widgets/ProblemDisplay'
 require 'gtk2'
 
@@ -41,7 +42,8 @@ module JLDrill::Gtk
         end
 
 		def newProblem(problem, differs)
-		    @problemDisplay.newProblem(problem, differs)
+            super(problem, differs)
+		    @problemDisplay.newProblem(problem)
             stopTimer
             if !problem.nil?
                 startTimer(problem.item.itemStats.timeLimit)
@@ -58,7 +60,8 @@ module JLDrill::Gtk
         end
 
         def updateProblem(problem, differs)
-            @problemDisplay.updateProblem(problem, differs)
+            super(problem, differs)
+            @problemDisplay.updateProblem(problem)
             stopTimer
             if !problem.nil?
                 startTimer(problem.item.itemStats.timeLimit)

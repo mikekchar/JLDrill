@@ -1,6 +1,5 @@
 require 'jldrill/views/gtk/widgets/ProblemPane'
 require 'Context/Views/Gtk/Widgets/VBox'
-require 'jldrill/oldUI/GtkIndicatorBox'
 require 'jldrill/views/gtk/widgets/PopupFactory'
 require 'gtk2'
 
@@ -19,9 +18,6 @@ module JLDrill::Gtk
         def initialize(view)
             @view = view
             super()
-            ## Create indicators
-            @indicatorBox = GtkIndicatorBox.new
-            self.pack_start(@indicatorBox, false, false)
             @vpane = Gtk::VPaned.new
             @vpane.set_border_width(5)
             @vpane.set_position(125)
@@ -59,20 +55,11 @@ module JLDrill::Gtk
             end
         end
         
-        def indicateDiffers(differs)
-            if !@problem.nil?  && !@problem.item.nil?
-                @indicatorBox.set(@problem.item.to_o, differs)
-            else
-                @indicatorBox.clear
-            end
-        end
-        
-        def newProblem(problem, differs)
+        def newProblem(problem)
             @popupFactory.closePopup
             @problem = problem
             @answer.clear(@problem)
             @question.update(problem)
-            indicateDiffers(differs)
         end
         
         def showAnswer
@@ -91,9 +78,9 @@ module JLDrill::Gtk
             !@answer.clear?
         end
         
-        def updateProblem(problem, differs)
+        def updateProblem(problem)
             needToDisplayAnswer = showingAnswer?
-            newProblem(problem, differs)
+            newProblem(problem)
             if needToDisplayAnswer
                 showAnswer
             end

@@ -1,8 +1,10 @@
 require 'gtk2'
 require 'jldrill/model/items/Vocabulary'
+require 'Context/Gtk/Widget'
 
 module JLDrill::Gtk
-    class GtkIndicatorBox < Gtk::HBox
+    class VocabularyHintBox < Gtk::HBox
+        include Context::Gtk::Widget
 
         def initialize
             super
@@ -21,8 +23,20 @@ module JLDrill::Gtk
             pack_start(@vi, true, true, 0)
             pack_start(@differs, true, true, 0)
             clear
+            setupWidget
+            expandWidgetWidth
+        end
+
+        def gtkAddWidget(widget)
+            pack_start(widget,
+                       widget.expandWidgetHeight?, 
+                       widget.expandWidgetWidth?)
         end
         
+        def gtkRemoveWidget(widget)
+            remove(widget)
+        end
+
         def clear
             self.uk = false
             self.humble = false
