@@ -40,7 +40,7 @@ module JLDrill
                 @contents = item.to_s
                 @hash = item.hash
             end
-            @position = 0
+            @position = -1
             @bin = 0
             @container = nil
             @status = ItemStatus.new(self)
