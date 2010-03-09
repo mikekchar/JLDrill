@@ -283,6 +283,13 @@ module JLDrill
                 @quiz.drill
             end
 		end
+
+        def learn
+            if !@quiz.currentProblem.nil? && !@quiz.currentProblem.displayOnly?
+                @quiz.learn
+                @quiz.drill
+            end
+        end
 		
 		def reset
 		    @quiz.reset

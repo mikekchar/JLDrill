@@ -259,5 +259,16 @@ module JLDrill
             item.itemStats.incorrect
             demote(item)
         end
+
+        # Promote the item from the working set into the review
+        # set without any further training.  If it is already
+        # in the review set, simply mark it correct.
+        def learn(item)
+            if item.bin <= 3
+                item.schedule.score = options.promoteThresh
+                contents.moveToBin(item, 3)
+            end
+            correct(item)
+        end
     end
 end

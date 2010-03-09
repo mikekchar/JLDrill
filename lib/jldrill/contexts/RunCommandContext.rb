@@ -120,5 +120,9 @@ module JLDrill
         def createNew
             @parent.createNew
         end
+
+        def learn
+            @parent.learn
+        end
     end
 end

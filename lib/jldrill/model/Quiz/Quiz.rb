@@ -338,6 +338,19 @@ module JLDrill
             end
         end
 
+        # Promote the current problem into the review set
+        # if it is in the working set without any further
+        # practice.
+        def learn
+            if !@currentProblem.nil?
+                item = @currentProblem.item
+                if !item.nil?
+                    @strategy.learn(item)
+                    setNeedsSave(true)
+                end
+            end
+        end
+
         def setCurrentProblem(problem)
             @currentProblem = problem
             update
