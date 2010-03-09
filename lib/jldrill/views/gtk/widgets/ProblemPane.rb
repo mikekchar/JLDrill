@@ -88,7 +88,7 @@ module JLDrill::Gtk
                 @buffer.insert(@buffer.end_iter, filename + " not found.", 
                                "image")
             end
-            @buffer.insert(@buffer.end_iter," \n", "image")
+            @buffer.insert(@buffer.end_iter," ", "image")
         end
 
         def clear(problem)
@@ -115,13 +115,27 @@ module JLDrill::Gtk
                 else
                     @buffer.insert(@buffer.end_iter, string, type)
                 end
-
-                # To make it fit on the screen better, hints have no
-                # trailing carriage return.
-                if type != "hint"
-                    @buffer.insert(@buffer.end_iter, "\n", type)
-                end                    
+                @buffer.insert(@buffer.end_iter, "\n", type)
             end
+        end
+
+        # Returns the height of the buffer in buffer coordinates.
+        # Note: Do not call this often.  It clears the Gtk events
+        # before it calculates the size because it needs to have
+        # finished drawing in order to get a correct size.  Thus
+        # this operation is very expensive.
+        def bufferSize
+            # Allow the buffer to be drawn so that we get correct
+            # coordinates
+            while (Gtk.events_pending?)
+                Gtk.main_iteration
+            end
+            iter = @buffer.end_iter
+            y, height = @contents.get_line_yrange(iter)
+            size = y + height
+            windowType = Gtk::TextView::WINDOW_TEXT
+            winx, winy = @contents.buffer_to_window_coords(windowType, 0, size)
+            return winy
         end
     end
 
