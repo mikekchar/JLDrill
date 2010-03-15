@@ -6,8 +6,8 @@
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2009-06-06 Mon>
-  :CurrentDate:  <2009-12-22 Mon>
-  :EndDate: <2010-01-03 Sun>
+  :CurrentDate:  <2010-03-15 Mon>
+  :EndDate: <2010-01-15 Mon>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -20,7 +20,7 @@
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.3.5 |    38 |   20 |    52.6 |    0.10 |   0.18 |
+| * Version 0.3.5 |    24 |   24 |   100.0 |    0.12 |   0.11 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </pre>
