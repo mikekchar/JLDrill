@@ -8,18 +8,18 @@ Planned features
 ===========================
 Here is a prioritized list of planned features.  If you think
 the priority is wrong, please email me.  If you think of another
-feature, please email me.
+feature, please email me.  This is a high level overview only.
+The current TODO list is always in the [development branch](Development.html)
 
-* Specific mode for grammar drills.  **Status: Not done**
 * Chinese drill mode.  Allow the user to load the CEDict dictionary
   and view kanji popups showing pinyin descriptions.  **Status: partially 
   finished in a separate branch**
 * Improve search to allow searches with Kanji **Status: Not done**
 * Better warning and error messages **Status: Not done**
+* Specific mode for grammar drills.  **Status: Not done**
 * Allow the user to set various options.  For example, where to load the dictionary, auto load last drill, choose their own fonts, colors, etc. **Status: Not done**
-* Allow user to tweak the parameters of the learning strategy **Status: Not done**
-* Finish correcting JLPT level 2 content.  **Status: ~1500 vocab reviewed**
-* Easier installation. **Status: Not done**
+* Drill specific tag indicators. **Status: Not done**
+* Easier installation. **Status: Debian Package created**
 * Kanji only drills with Heisig style stories.  **Status: Not done**
 * A kanji story generator with a tool to find kanji that have the same radicals.  
 **Status: Not done**

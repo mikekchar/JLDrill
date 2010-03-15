@@ -9,19 +9,17 @@ JLDrill Requirements
 
 Important Note:
 ---------------
-Version 0.3.0 does not have an easy to use installer.  This
-is planned for version 0.4.0.  I apologize for this, but
-unfortunately functionality issues had priority for the
-current version.  Installation is complicated at the present
-time, but not necessarily difficult.  If you have problems,
-feel free to contact me and I will try to help.
+JLDrill is easiest to install on a GNU/Linux system using Debian
+based packages (for example Debian or Ubuntu).  If you have such a
+system, you can skip this section an move to the [Install](Install.html)
+ section.  Otherwise read on.
 
 What to Install
 ---------------
 JLDrill is written in Ruby and uses GTK2 as it's GUI toolkit.  You
 will need to install the following before installing JLDrill.
 
-* Ruby 1.8
+* Ruby 1.8 (Ruby 1.9 currently does *not* work!)
 * rubygems
 * GTK+ 2.6 or higher
 * Ruby-Gnome2 0.16 or higer
@@ -37,8 +35,9 @@ Installing the Requirements
 
 The installation of the requirements for Windows is not very complicated.
 Unfortunately they are rather large downloads and install a lot of things
-that you won't need just to run JLDrill.  In a future release I will create
-a streamlined installer that includes only the things you need.
+that you won't need just to run JLDrill.  If demand warrants, I will make
+a more streamlined package for Windows.  Please contact me if you are
+using JLDrill on Windows.
 
 You will probably want to install Ruby using the 
 [One Click Ruby Installer](http://rubyinstaller.rubyforge.org/wiki/wiki.pl).
@@ -91,20 +90,5 @@ Unfortunately I don't have access to a Macintosh.  Installation of
 GTK+ and ruby-gnome is difficult and requires a developer level of
 knowledge.  If there is anyone with OSX who wants to work on an
 easy way to install this, please contact me.
-
-The difficulty of getting this running on OSX has caused me to consider
-choosing a different widget library for JLDrill.  It is possible I will
-change in the near future.
-
-Developers
-----------
-For people who wish to contribute to the development of JLDrill,
-I recommend installing the following ruby gems.  This will allow
-you to run the tests and build the website.
-
-* rake
-* rspec
-* rcov
-* webgen
 
 

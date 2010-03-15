@@ -160,6 +160,33 @@ the number of jellybeans done in the properties of the task.
    :END:
 
 
+** DONE Update Documentation
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 2
+   :END:
+
+** DONE Update quizes
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 1
+   :END:
+   
+
+** TODO Update all version references to 0.4.0
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 1
+   :END:
+
+
+* Next Version
+
+== Version 0.4.1
+
 ** TODO One of the items in the working set had a potential schedule of 72 days
 
    :PROPERTIES:
@@ -183,28 +210,6 @@ the number of jellybeans done in the properties of the task.
 
    :PROPERTIES:
    :JellyBeans: 2
-   :Done: 0
-   :END:
-
-** TODO Windows Packaging Spike [0/5]
-   Determine the feasibility of creating a windows packaging.
-   Place to start:
-   - [ ] Create a rake target to make a self contained directory with
-     context and JLDrill. Have a ruby script that runs everything
-     correctly on Windows and Linux given that Ruby, GNOME, and
-     Ruby-Gnome are already installed.
-   - [ ] Create a custom version of Ruby-Gnome that is packaged in the
-     self contained directory and is used instead of the installed
-     Ruby-Gnome.  Note: Probably have to package Gtk+ here as well.
-     If not make another step for that.
-   - [ ] Create some way to package a custom ruby interpreter in the
-     self contained directory.
-   - [ ] Create a self extracting archive for the self contained
-     directory.
-   - [ ] Create an installer for the custom fonts
-
-   :PROPERTIES:
-   :JellyBeans: 3
    :Done: 0
    :END:
 
@@ -281,31 +286,13 @@ the number of jellybeans done in the properties of the task.
    :Done: 0
    :END:
 
-** TODO Update Documentation
-
-   :PROPERTIES:
-   :JellyBeans: 2
-   :Done: 0
-   :END:
-
-** TODO Update quizes
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 0
-   :END:
-   
 * Backlog
+
+
 == Future Stories
 
-** TODO Replace webgen with something else.  
-
-** TODO Find a way to build the debian package using tools version in Debian
-** TODO Create Windows packaging.
-
-** TODO Create a keyboard only mode.
-   Advanced users can probably just use the keyboard.  In this mode,
-   Remove any UI that is surpulfluous.
+** TODO Alternate Language support (i.e., Chinese)
+** TODO Allow searching by Kanji
 
 ** TODO If a reading can't be found in the dictionary, seach 
    again taking off one character at a time from the end of the
@@ -314,25 +301,12 @@ the number of jellybeans done in the properties of the task.
    :JellyBeans: 2
    :END:
 
+** TODO Need a mechanism for publishing warnings and errors.
+
 ** TODO Give feedback to the user when we refuse to edit or add an item.
 
-** TODO Allow user to modify the global backoff.
-   Allow the user to modify the global backoff from the options.  This
-   must be saved with the drill.  When the backoff is changed, all the
-   items that are currently scheduled will have to be scaled
-   accordingly.  For example, if the backoff changes from 2.0 to 1.5,
-   if there was an item with a duration of 10, then the duration
-   becomes 7.5.  If the item had been waiting for 5 days (50% of the
-   duration), then reset it so that it has been waiting for 3.75 days
-   (50% of 7.5).  Then resort all the items.
-
-   :PROPERTIES:
-   :JellyBeans: 3
-   :END:
-
-** TODO Allow searching by Kanji
-
-** TODO Need a mechanism for publishing warnings and errors.
+** TODO When save fails, indicate it to the user 
+   before bringing up the save as dialog.
 
 ** TODO Full test coverage for all the model objects
 
@@ -342,20 +316,6 @@ the number of jellybeans done in the properties of the task.
    Deferred from 0.3.3 from 0.3.3.  I tried to do it, but it never
    worked.  I suspect a race condition in GTK and it's not important
    enough to kill myself over.
-
-** TODO Create a recent used menu for loading drills that you've used recently.
-
-** TODO Allow user to set the formatting for each type of data.  
-   Store the formatting in the drill.
-
-** TODO Define the structure of the data in the drill.  
-   In other words, create a dynamic data type that defines the
-   structure of the data item that is to be drilled.  Save it in the
-   drill itself.  Create a structure for edict vocabulary.
-
-** TODO Rename the methods that take Vocabulary
-   (like Quiz#add()) to indicate that it's for Vocabulary (i.e.,
-   Quiz#addVocab())
 
 ** TODO Define a structure for grammar.
 
@@ -371,14 +331,68 @@ the number of jellybeans done in the properties of the task.
 
 ** TODO Indicate when the item has been promoted.
 
-** TODO When save fails, indicate it to the user 
-   before bringing up the save as dialog.
+** TODO Create a recent used menu for loading drills that you've used recently.
+
+** TODO Allow user to set the formatting for each type of data.  
+   Store the formatting in the drill.
+
+** TODO Define the structure of the data in the drill.  
+   In other words, create a dynamic data type that defines the
+   structure of the data item that is to be drilled.  Save it in the
+   drill itself.  Create a structure for edict vocabulary.
+
+** TODO Rename the methods that take Vocabulary
+   (like Quiz#add()) to indicate that it's for Vocabulary (i.e.,
+   Quiz#addVocab())
+
+** TODO Replace webgen with something else.  
+
+** TODO Create a keyboard only mode.
+   Advanced users can probably just use the keyboard.  In this mode,
+   Remove any UI that is surpulfluous.
+
+** TODO Windows Packaging Spike [0/5]
+   Determine the feasibility of creating a windows packaging.
+   Place to start:
+   - [ ] Create a rake target to make a self contained directory with
+     context and JLDrill. Have a ruby script that runs everything
+     correctly on Windows and Linux given that Ruby, GNOME, and
+     Ruby-Gnome are already installed.
+   - [ ] Create a custom version of Ruby-Gnome that is packaged in the
+     self contained directory and is used instead of the installed
+     Ruby-Gnome.  Note: Probably have to package Gtk+ here as well.
+     If not make another step for that.
+   - [ ] Create some way to package a custom ruby interpreter in the
+     self contained directory.
+   - [ ] Create a self extracting archive for the self contained
+     directory.
+   - [ ] Create an installer for the custom fonts
+
+   :PROPERTIES:
+   :JellyBeans: 3
+   :Done: 0
+   :END:
+
+** TODO Create Windows packaging.
+** TODO Create a structure for Tanaka corpus.
 
 ** TODO Create a dictionary back end to allow it to use online dictionaries,
    or dictionary servers (fantasdic? stardict?)
 
-** TODO Create a structure for Tanaka corpus.
-
 ** TODO Create Redhat packaging.
 
 ** TODO Create OSX packaging.
+** TODO Allow user to modify the global backoff.
+   Allow the user to modify the global backoff from the options.  This
+   must be saved with the drill.  When the backoff is changed, all the
+   items that are currently scheduled will have to be scaled
+   accordingly.  For example, if the backoff changes from 2.0 to 1.5,
+   if there was an item with a duration of 10, then the duration
+   becomes 7.5.  If the item had been waiting for 5 days (50% of the
+   duration), then reset it so that it has been waiting for 3.75 days
+   (50% of 7.5).  Then resort all the items.
+
+   :PROPERTIES:
+   :JellyBeans: 3
+   :END:
+

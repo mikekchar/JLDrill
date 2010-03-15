@@ -18,10 +18,9 @@ Screenshot
 What's New for 0.4.0
 --------------------
 
-  Version 0.4.0 focusses on ease of use and speed.  While a Windows
+  Version 0.4.0 focuses on ease of use and speed.  While a Windows
   packager was planned, for a variety of reasons it was dropped
-  from this version.  Hopefully it will find its way back for version
-  0.5.0.  But this version features a Debian package that can be
+  from this version.  This version features a Debian package that can be
   used in Linux distributions that use .deb files (For example
   Debian and Ubuntu).
 

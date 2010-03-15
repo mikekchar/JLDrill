@@ -9,7 +9,7 @@ Learning Japanese with JLDrill
 Introduction
 ------------
 
-It may be that you have come to this site, wanting to learn Japanese,
+It may be that you have come to this site wanting to learn Japanese,
 but not knowing how to approach it.  In this case I'd like to offer
 some advice on how to learn Japanese based on the experience I've
 had over the years.  One thing I've learned, though, is that over time
@@ -41,7 +41,7 @@ a textbook or taking a class if you don't want to.
 It is posible to learn Japanese using only free materials that you can
 get on the internet.  And you can do it in your free time using whatever
 schedule is available to you.  However, there is a caveat.  You must
-study every day.  The study is light and pleasant, but it must happen
+study every day.  The study is light and pleasant but it must happen
 every day, or else you will not retain the information.  So find a time
 where you can study and be consistent.  Regardless of how much time you
 spend each day, this consistency will guarrantee results eventually.
@@ -112,11 +112,14 @@ often look nothing like what you think they should.  So you must
 *always* draw the strokes in the right order.  This will allow you
 to write and read the characters in all situations.
 
-Note that you don't actually have to draw the characters on a
-piece of paper.  It is sufficient simply to trace the character
-on the desk with your finger.  Once you know the character it
-only takes you one or two times of practice drawing it for
-real to get it looking nice.
+Earlier I recommended tracing characters with your finger rather
+than writing them on a piece of paper.  I'm revising my thoughts
+on this matter.  Writing on physical paper is important.  Lately
+as I've been writing more and more I've noticed small mistakes
+that I hadn't seen before simply because I never looked at my
+own writing.  Definitely don't let a lack of pen or paper stop
+you from studying.  But I recommend that you involve regular
+writing into your regime as well.
 
 The Next Step
 -------------
@@ -182,7 +185,7 @@ The Secret To Speaking is Grammar
 Learning a lot of set expressions will get you quite a long way
 in Japanese.  In fact, I know foreigners in Japan who have lived
 here very comfortably for years only knowing common expressions.
-But you can't have a conversation, or express any novel ideas.
+But you can't have a conversation or express any novel ideas.
 
 One of the most frustrating experiences when learning a language
 happens when someone says something to you and you can't
@@ -230,7 +233,7 @@ model until you memorize it.  Then you apply the model in
 real conversation.
 
 This approach also has disadvantages.  First, it's boring.  Many
-people have difficulty memorizting things.  That's why JLDrill
+people have difficulty memorizing things.  That's why JLDrill
 was written.  The intent is to make rote memorization as fast,
 comfortable and pleasant as possible.  The second problem to memorization
 is that it has an extra step.  Once you memorize the model, you
@@ -289,28 +292,24 @@ sentences over time.  I have found that this is all that
 I need to do in order to effectively use the grammar
 in conversation.
 
-If you want to try this approach, you can use the
-grammar.jldrill drill file that I made.  It contains
-about the first half of the material in Tae Kim's
-book (hopefully I will finish it for the next release).
-Simply read a chapter of the book.  Then allow JLDrill
-to present the material for memorization/review.
-Stop when you reach the material for the next chapter
-(you can tell because I introduce vocabulary for each
-chapter first and then sentences.  When you start
-getting new vocabulary to learn, you know you
-are at the next chapter).
+If you want to try this approach, you can use the grammar.jldrill
+drill file that I made.  It contains most of the material in Tae Kim's
+book (hopefully I will finish it for the next release).  Simply read a
+chapter of the book.  Then allow JLDrill to present the material for
+memorization/review.  Stop when you reach the material for the next
+chapter (you can tell because I introduce vocabulary for each chapter
+first and then sentences.  When you start getting new vocabulary to
+learn, you know you are at the next chapter).
 
 The Vocabulary Grind
 --------------------
 
-Once you start learning, you may be very surprised to
-realize that Japanese grammar is quite simple and consistent.
-There isn't even all that much to learn.  Using JLDrill
-you could probably read a chapter of Tae Kim's guide every day
-and review the material for an hour or so.  In that way
-it would only take you a few months to learn almost all the
-important grammar in the language.
+Once you start learning, you may be very surprised to realize that
+Japanese grammar is quite simple and consistent.  There isn't even all
+that much to learn.  Using JLDrill you could probably read a chapter
+of Tae Kim's guide every few days and review the material for an hour
+or so.  In that way it would only take you a few months to learn
+almost all the important grammar in the language.
 
 But the real difficult part of Japanese is not the grammar:
 it's the vocabulary.  Speaking Japanese well requires quite
@@ -335,18 +334,21 @@ followed by 2 and then 1 is actually a very effective way
 to learn the language.  The levels really are good indicators
 of the utility of the vocabulary.
 
+(Note: The JLPT has recently been revised to contain 5 levels.
+However, they haven't published the content of those levels.
+So my discussion here pertains to the old JLPT structure.)
+
 JLDrill has vocabulary quizes for all 4 levels.  Unfortunately
 the vocabulary lists were compiled using a partially automated
 process and many mistakes were made.  I have reviewed and corrected
-the vocabulary for levels 4 and 3.  I've also made my way through
-about 1/3 of level 2.  Hopefully I will have these all reviewed by
-the next release.
+some of the vocabulary, but there are still lots of problems.
+Also, as the EDICT dictionary gets updated, the vocabulary in
+the drill gets out of date.  So you should check the vocabulary
+yourself
 
-You can feel relatively safe reviewing levels 4 and 3.  But if
-you start reviewing level 2 and 1 material you should check
-the vocabulary.  You can do this quite easily.  When you
+it is quite easy to check and correct the vocabulary.  When you
 are learning new vocabulary, load the dictionary by pressing
-control-D.  It takes about 30 seconds to load.  After that,
+control-D.  It takes several seconds to load.  After that,
 whenever a word is different than what's in the dictionary,
 the "Differs" button in the upper right corner will turn red.
 When that happens, simply press "e" to edit the vocabulary.
@@ -364,46 +366,30 @@ button.  This will set the item to the vocabulary you selected.
 Being consistent at reviewing vocabulary is the secret to
 learning the language quickly.  As was previously mentioned,
 learning vocabulary will take up the bulk of your time.
-If you are consistent, you can learn it surprisingly quickly.
+But if you are consistent, you can learn it surprisingly quickly.
 
-There are 10,000 words in the entire JLPT test.  If you
-can pass the test, your Japanese is good enough to go
-to a Japanese university or work at a Japanese job.
-10,000 seems like a really huge amount of work.  But
-is it really?
+Personally, I found that the vocabulary in levels 3 and 4
+are really easy to learn from a list.  Most of the vocabulary
+has only one meaning and the meaning is clear even without
+context.  For example, dog, cat, house are all very easy
+to understand.  But once you get into level 2 and 1,
+the vocabulary gets more abstract and difficult to understand.
+Without an example sentence, you're left wondering what the
+word really means.  For example, the word "concrete" could
+mean a hard rock-like surface, or it could mean a
+definite idea.  It's not always clear from the dictionary
+entry.
 
-Let's say that we work every day, taking 2 weeks off for
-a holiday.  That's about 350 days.  If we introduce
-only 30 new words per day, we will easily introduce all
-of them in only 1 year.  And if you are using JLDrill
-then you will be reviewing them every day and so will
-have at least a 90% retention rate by the end of the year.
-So how much time will that take.
+Finally, a lot of the more abstract vocabulary is used
+primarily in set expressions.  Just memorizing the word
+doesn't allow you to use, or even understand the word
+in context.
 
-For me, it takes about 90 seconds to introduce
-a new word.  Usually the daily review is about twice
-what your introduction rate is, so in this case
-60 words.  Reviewing each word takes me about 10 seconds.
-I will need to reintroduce words that I miss, so
-the total time needed is just a little over 1 hour
-a day.
-
-So consider that the investment of only an hour a day will
-bring you very close to fluency in a period of a year.
-But only if you are consistent.  I know from experience
-that skipping even one or two days can really cause problems.
-Someone once told me that it's like running up an escalator
-while it's going down.  If you don't keep going up, you
-won't make any progress.
-
-So no matter what amount of time you put in, you should
-feel confident that you can attain fluency in only a few
-years *if you study consistently every day*.  In fact, I
-beleive that this is the *only* cause of failure in
-language learning.  Just study every day and you will
-succeed.  Certain techniques may speed you up or slow
-you down, but consistency controls success or
-failure absolutely.
+Thus, lately I've abandoned studying vocabulary lists.
+Instead I read level appropriate books and memorize
+words that I don't know.  That way I end up with common
+vocabulary and I have the context I need to use and
+understand it properly.
 
 But what about Kanji?
 ---------------------
@@ -461,7 +447,7 @@ know at least 2100 characters.  Most University graduates know
 more than 3000 characters and there are about 60,000 characters
 which pop up from time to time in publications.  How can you
 possibly learn so many in a reasonable time frame? It takes
-Japanese people 12 years of school to learn the first 2000 or 
+Japanese people 9 years of school to learn the first 2000 or 
 so.
 
 Luckily, it's not nearly as complicated as it all seems.  In fact,
@@ -589,8 +575,9 @@ points, the list of tips, in order of importance are:
     than you can learn the spoken language alone.
 - Use hiragana and katakana to reinforce your pronunciation.  Avoid
     romaji at all costs!
-- Trace the characters you learn (kana and kanji) using your finger as
-    you review them.  Use the control-K feature in JLDrill to load the
+-  Write the characters you are learning as much as possible.  If you
+   don't have a pen and paper, then trace them on the desk with your
+    finger.  Use the control-K feature in JLDrill to load the
     kanji/kana information and hover the mouse over the characters you
     want more info on.
 - Memorize example sentences to practice grammar.  Once you have them

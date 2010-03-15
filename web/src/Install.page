@@ -9,12 +9,32 @@ Installation Instructions
 
 Download
 --------
-The current stable release of JLDrill is 0.3.0.  It can be obtained at
+
+The current stable release of JLDrill is 0.4.0.  It can be obtained at
 [JLDrill's RubyForge Project Page](http://rubyforge.org/projects/jldrill).
+
+There are 3 methods to run JLDrill
+
+###Debian Based Systems
+
+Please download and install the following files
+
+UPDATE ME!!!
+* [context-0.0.20.deb](http://rubyforge.org/frs/download.php/48213/context-0.0.20.deb)
+* [jldrill-0.4.0.deb](http://rubyforge.org/frs/download.php/48212/jldrill-0.4.0.deb)
+
+This is all you will need.
+
+### Gems
+
+For every other system that doesn't use deb files (including Windows) you can install
+the application using gem files.
+
 You will need the following files:
 
-* [context-0.0.16.gem](http://rubyforge.org/frs/download.php/48213/context-0.0.16.gem)
-* [jldrill-0.3.0.gem](http://rubyforge.org/frs/download.php/48212/jldrill-0.3.0.gem)
+UPDATE ME!!!
+* [context-0.0.20.gem](http://rubyforge.org/frs/download.php/48213/context-0.0.20.gem)
+* [jldrill-0.4.0.gem](http://rubyforge.org/frs/download.php/48212/jldrill-0.4.0.gem)
 
 and optionally
 
@@ -26,18 +46,19 @@ allows you to see the stroke orders.  The kochi-mincho font is the
 font that the application defaults to when quizing kanji and readings.
 It is not necessary if you already have a Japanese font.
 
-Important Note:
+### In place execution
+
+JLDrill will also run directly from the development tree.  You can download
+the development tree from:
+
+[jldrill-0.4.0](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.4.0)
+
+From there the application can be run by navigating to the directory and running
+AppRun.  You may want to install the fonts listed above in the gem section
+(see below)
+
+Installing Gems
 ---------------
-Version 0.3.0 does not have an easy to use installer.  This
-is planned for version 0.4.0.  I apologize for this, but
-unfortunately functionality issues had priority for the
-current version.  Installation is complicated at the present
-time, but not necessarily difficult.  If you have problems,
-feel free to contact me and I will try to help.
-
-
-Installation
-------------
 First ensure that you have the [requirements](Requirements.html) installed.
 
 From a command line prompt (Start->Applications->Accessories->Command
@@ -55,7 +76,7 @@ JLDrill is now installed.  However, in order to view the stroke order diagrams,
 you must install the stroke order font.
 
 Installing the Fonts
---------------------------------
+--------------------
 ###Windows
 In Windows you must download the fonts (KanjiStrokeOrders.ttf and/or
 kochi-mincho.ttf) files and copy them into the

@@ -8,25 +8,24 @@ Usage
 Note: Before starting JLDrill, please make sure you have installed
 the software listed in the [Requirements](Requirements.html) and 
 [Install](Install.html) pages.  Failure to do so will cause problems.  
-This version of JLDrill is difficult to install, so please follow 
-the instructions carefully.  A full installer will be included in 
-a future release.
+On some platforms JLDrill is a little bit tricky to install, so
+please follow the instructions carefully.  If you have difficulty,
+feel free to contact me.
 
-Starting JLDrill is typically done from a a command prompt 
+Starting JLDrill is typically done from a command prompt 
 (from Windows: Start->Programs->Accessories->Command) 
 type:
 <pre>
     jldrill
 </pre>
 
-Note: Currently there is no easy way to make an icon on your desktop
-or an entry in the start menu for JLDrill.  This will be added in a
-future release.
+Note: In the Debian/Ubuntu version of JLDrill an icon to start JLDrill
+will automatically be placed in your applications menu.
 
-Note: On Un\*x-like systems you will have to make sure that
-the gem bin directory is in your path.  Debian (and Ubuntu)
-put this in the /var/lib/gems/1.8/bin directory, where
-1.8 is the version number for ruby.
+Note: When using the gem installed version of JLDrill you must make
+sure that the gem bin directory is in your path.  Debian (and Ubuntu)
+put this in the /var/lib/gems/1.8/bin directory, where 1.8 is the
+version number for ruby.
 
 Main Window
 -----------
@@ -178,8 +177,9 @@ it reshuffles the deck and starts again.
 
 Note: Occasionally after the working set has been shuffled it will
 present the same item it just presented, showing the same item
-twice in a row.  This is unfortunate.  A release in the future will correct 
-this behaviour.
+twice in a row.  Since it is randomly selecting items, it happens
+from time to time.  If you want to wait a bit longer before seeing
+this item, you can simply hit the "N" key to get the next item.
 
 ### Going to the Next Level
 
@@ -246,23 +246,17 @@ new set.
 Once an item has been memorized in the working set, it is
 promoted to the review set.  Unlike the working set, the
 review set items have a definite order.  They are ordered
-by the "potential schedule" that the item has when it is
-promoted.
+by the amount of time they have waited in their
+"potential schedule".
 
-For example, the item that we were discussing previously
-has a potential schedule of 4.2 days.  When it is promoted
-into the review set it will be inserted into the set
-according to this schedule.  In other words, it will be placed
-after items with a potential schedule of 3 days, and before items
-with a potential schedule of 5 days for instance.
-
-Over time, the potential schedule decreases.  So if we put
-an item in the review set with a potential schedule of
-4.2 days, after waiting one day it will have a potential
-schedule of 3.2 days.  If the item remains in the review set
-for a long time, it can even have a potential schedule
-below zero.  This means you are "behind" on this item.
-More about this will be discussed later.
+Imagine you have 2 items.  Item A has a potential schedule
+of 2 days.  Item B has a potential schedule of 4 days.
+When the items have just been inserted, they have waited
+for 0% of their potential schedule.  But after one day,
+Item A has waited 50% of it's schedule, while Item B
+has only waited 25% of it's schedule.  Thus Item A will
+be placed before Item B.  It has waited for more of it's
+potential schedule and thus has priority.
 
 Items in the review set are displayed when you are in "review
 mode".  You automatically enter review mode when you first
@@ -378,76 +372,12 @@ date from the old scheduled date.  In this case, we have
 a few minutes plus 4.2 days, which ends up being about 4.2 days
 (once the numbers are rounded off).
 
-Note: Probably I should scale the schedule.  In other words,
-I should keep track of the scheduled time vs the actual time
-and scale the new schedule accordingly.  I may do that in
-a future release.
-
 All this talk of scheduling may be confusing.  If you don't
 understand, don't worry about it.  The only important point
 is that the program is designed to keep your items roughly
 in order of the chance you have of forgetting them.  When you
 know all the items in the list with 90% chance of success,
 it gives you new items.
-
-There is a caveat, which again is mostly unimportant,
-but possibly interesting if you want to understand what's going
-on.  If you successfully review an item in the review
-set, it won't be shown again that session.  If you quit the application
-and start again, you might see it if the potential schedule is small
-enough.
-
-Getting Behind
---------------
-
-![Getting Behind](images/Behind.png "Getting Behind")
-
-Here you can see a situation that happens from time to time.  In
-the status bar, beside the working set information you can see
-the words "Behind: 577".  When an item has a potential schedule of
-less than 0 (i.e., it sat in the review set without being reviewed
-for longer than it's original schedule), then it is known as
-being "behind".
-
-In this case, I'm behind by 340 items.  You will definitely be
-behind from time to time.  The algorithm is designed to adjust
-for your speed, so occasionally you will find that some items
-will get behind naturally.  Or sometimes you take a couple of
-days off and the items have gotten behind.
-
-As long as you can review all the items in a day or so, it doesn't
-create much difficulty.  In order to help yourself out, you can go
-into review mode by pushing the button in the top right corner.
-This will stop the program from ever going into new items mode even
-if you get every item correct.  This is a good way to clear out a backlog.
-
-But in my sad case, I probably won't to be able to review 340
-items in a reasonable timeframe.  There are multiple problems with this.
-First, the algorithm is designed to keep things in rough order
-in the schedule.  But when items get behind they slowly go out of
-order.  Because you will forget items at different rates, you
-can no longer rely on statistics to tell you when to stop reviewing.
-
-But the next problem is worse.  If you have several days of items
-that are behind, it will take you several days to get to the back
-of the list.  Items are only scheduled in the future, so it will
-take several days before you re-review items.  At this point you
-may have forgotten them.  You can easily get into a state where
-your success rate is low enough that you can no longer learn
-anything new -- you will be spinning your wheels just trying to
-keep up with the backlog.
-
-So, if at all possible, review your items every day -- in fact, review
-them several times a day if you can.  Short frequent sessions are
-better than long sessions every once in a while.  However, you should
-always aim to get out of review mode each time you run the application.
-That way you will not fall behind.
-
-But if you get behind like I have, you have no choice.  You will
-have to reset the drill (Drill->Reset, or press Ctrl-R) and start again.
-
-Note: In a future release there will be a way to "forget" items that
-are behind.  This will put them back in the new list.
 
 Options
 -------
@@ -604,7 +534,31 @@ native Japanese speaker.
 Note: The stroke order diagram is only shown if you install the stroke order
 font.  Please see [the installation instructions](Install.html) for more information.
 
-Note: In the future I want to improve these popups dramatically.
+Timer
+-----
+
+Sometimes when you review an item you haven't seen in a while, it
+takes some time to remember it.  But when you are thinking it's easy
+to lose track of time and you can't quite tell if you remembered it in
+a reasonable time frame.  Since it is important to remember vocabulary
+quickly it's better to say that you got an item wrong even if it just
+took you a long time to remember.  But how do you know if you've taken
+too long?
+
+When you review items in the review set, JLDrill keeps track of how
+long it took you to remember them.  The first time you review an item,
+it records that information.  The second time you review it, JLDrill
+starts a timer.  If you take longer than the previous time to answer
+the question, the question pane turns red.  If you spend significantly
+more time to remember the item after this point, it's a clue that
+maybe you should mark it as incorrect.
+
+![Timer Expired](images/Time.png "Timer Expired")
+
+This action has no effect on the item, or on the statistics in an of
+itself.  It's only intended to inform you when you spend more time
+thinking than is usual for that item.  Also, it only happen on the
+second and subsequent times you review the item.
 
 Statistics
 ----------
@@ -618,56 +572,40 @@ interesting.
 You can obtain the statistics by pressing Alt-S, or by selecting 
 Drill->Statistics from the menu.
 
-Note: Here is another really unfinished feature.  It is UGLY.  Please
-send me suggestions for what you want to see and how you want to see it.
+On the left side of the window you can see some potential schedule ranges.
+The first column shows the distribution of item durations in those ranges.
+For example I have 17 items with a potential schedule of less than 5 days,
+6 with a potential schedule fo 5-10 days, etc.
 
-The statistics window is split into 4 sections of 2 columns each.  The
-first section shows the number of items that are potentially scheduled
-for this week.  In the example you can see that I have 0 items that
-are overdue (behind).  I have 8 scheduled for today, 75 scheduled for
-tomorrow, etc.  Note this this is the potential schedule.  What I actually
-review depends on how well I remember the items.  
+The next column shows how successful I was in quizing items  in these
+ranges today.  The third column shows how many items I quized in those
+ranges.  For example, I reviewed 5 items with a potential schedule of
+less than 5 days.  I got 3 right and 2 wrong, meaning that I had a
+60 percent success rate.
 
-This part of the statistics window is useful for seeing whether you are going 
-faster or slower than the algorithm predicts.  Normally I find myself fluctuating
-between my new items starting a little bit overdue, to a few days ahead.  Since
-the algorithm is self-correcting this is normal.  Probably the information itself
-isn't really useful, but I was always curious, so I put it in.
+Finally there is a column with various statistics.  The first items
+shows how may items I have reviewed so far today.  In this case it was
+34.  In that time I also learned 6 items from the working set.
+Review took me on average 18.2 seconds per item (they were grammar
+items which take me a bit longer to remember) and it took 132.9
+seconds for me to memorize each of the 6 items from the working set.
+While reviewing, my total accuracy was 82%.  This is pretty typical
+for me.
 
-The next two columns show the distribution of items in the review set.  This
-is actually useful.  You can see that I have 71 items that were scheduled
-within 5 days, 167 items scheduled between 5 and 10 days, 150 scheduled between
-10 and 20 days.  Note that this is when they were *originally* scheduled,
-not what their potential schedule is now.
+The next item show the ratio of learning time to review time.
+Probably it's a useless statistic.
 
-This is useful to show yourself whether or not you are progressing properly.
-Overtime, the schedule for the items will increase.  You can see that
-I have a nice bell curve here.  When things are progressing normally
-this is what you will see.  If you review every day and learn a similar
-number of new items every day, they will fill out the schedule like this.
-But if you fall behind and start getting many items wrong, they will bunch
-up at the beginning.  That might be a sign that you should reset and
-start again.
+Finally I show the "rate" of the current item and the average "rate"
+of all the items so far.  The rate is the ratio of actual wait time
+to potential schedule.  For example, if I waited 10 days to review something,
+but it had a potential schedule of 5, then my rate would be 2.0.
 
-The next three columns show the percentage of times you got items correct
-at each level in the review set and the number of items you've been quizzed
-on.  It does this for only the current session.  When you quit the application
-and start again, this will start fresh.  I use this section to see if the
-backoff algorithm is working.  Ideally, these should be about 80-90%.
-As you can see, the accuracy is actually dropping off to around 70%, 
-so probably I need to make the backoff smaller.  A future version will
-have this option.
-
-This screen shot was taken after a typical review session for me.  At
-the right you can see some overall statistics for the session.  I reviewed
-127 items (this is a little more than normal for me -- usually I do
-about 70).  You can see that I learned (or memorized) 26 items in that
-time.  The average time to review eat item was 18.7 seconds (normally
-it takes about 10-12 seconds, but the room was very noisy this morning).
-The time to learn each item was 68.2 seconds (about normal for me).
-My total accuracy for reviewing was 80% (which is normal).  Finally
-the ratio between learning time to overall time was 78% (this may be
-a useless statistic).
+You'll notice that my rate is pretty high here.  I tend to remember
+the grammar drills pretty easily, so my actual wait time is much
+longer than the potential schedule.  For the vocabulary drill that
+I am studying now, my rate is usually about 0.7, meaning that I
+find it difficult to remember things.  The actual values aren't important,
+but it is fun to look at it.
 
 Don't be too concerned about these statistics.  Again, they are used
 for determining what needs to be changed in the review algorithm.
@@ -682,9 +620,7 @@ allows you to cross reference the word against a dictionary
 and edit it if necessary. 
 
 Note: The JLPT files are known to have some inappropriate or incorrect
-translations. I have corrected the words in the JLPT4 and JLPT3 files, but am
-only a third of the way through the JLPT2 files.  This is very much a work in 
-progress.  When working with words you haven't checked, please load the
+translations.  When working with words you haven't checked, please load the
 reference dictionary.
 
 You can load a reference dictionary by pressing Ctrl-D (or selecting
@@ -829,6 +765,13 @@ Vocab menu will delete the currently displayed item.  JLDrill
 will first ask to verify whether or not you really want to
 delete the item.  Be careful since once you delete it you
 can't get it back.
+
+**Learn item**.  Pressing "D" or selecting "Learn" from the
+Drill menu will put the current item in the review set
+(or mark it as correct if it is already in the review set).
+This is useful if you have a drill that contains items that
+you already know well and don't want to keep going over it
+in the working set.
 
 **Show all**. Will show a table of all the words in the
 drill.
