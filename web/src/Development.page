@@ -7,7 +7,7 @@ sort_info: 35
 Development Version
 ===================
 
-**Latest Completed Development Version:**  [jldrill-0.3.4](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.4)
+**Latest Completed Development Version:**  [jldrill-0.3.5](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.5)
 
 For details on development versions, see below.
 
@@ -113,9 +113,38 @@ you want to join in on testing.
 
 Development Version History
 ---------------------------
-Current Development Version: [jldrill-0.3.5](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.5)
+Current Development Version: There is no current development version.  Please wait for 0.4.1.
 
-Latest Completed Development Version: [jldrill-0.3.4](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.4)
+Latest Completed Development Version: [jldrill-0.3.5](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.5)
+
+Changes in [jldrill-0.3.5](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.5)
+
+* Desktop entry added for GNOME.  This will result in an entry in the GNOME menu.
+  Also updated the icon to SVG.
+* Reset Difficulty over time.  If the user goes for a certain period of time
+  without seeing an item and subsequently gets it right, reset the difficulty
+  to match the time the passed.
+* Allow the user to cut and paste items in the vocabulary list with C-X and C-V
+* Add a timer for each question that causes the background to change red
+  when the user spends more time thinking about the item than they did last time.
+* Create a debian package.
+* Simply scheduling strategy so that items are sorted by the percentage of time
+  passed in their potential schedule.  This simplies things dramatically, removes
+  the concept of getting behind and also improves review performace.
+* Number items properly in the kanji drill
+* Add a Learn command that promotes the item into the review set immediately.
+* Automatically adjust pane sizes so that the questions and answers fit as
+  much as possible.
+* Allow users to add a simple image to each item in their drill using an
+  image: tag.  Currently no documentation for this feature because it is
+  likely to change.
+* Simplify the statistics window slightly.
+* Various test refactoring
+* Allow jdrill to be run directly from a source repository by running the
+  AppRun script.
+* Configure the source repository so that it looks likea ROX Application Directory.
+  Admittedly few people are likely to be using ROX-filer, but it's cool for
+  those that do.
 
 Changes in [jldrill-0.3.4](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.4)
 

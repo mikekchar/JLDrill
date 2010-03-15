@@ -159,7 +159,6 @@ the number of jellybeans done in the properties of the task.
    :Done: 1
    :END:
 
-
 ** DONE Update Documentation
 
    :PROPERTIES:
@@ -174,8 +173,7 @@ the number of jellybeans done in the properties of the task.
    :Done: 1
    :END:
    
-
-** TODO Update all version references to 0.4.0
+** DONE Update all version references to 0.4.0
 
    :PROPERTIES:
    :JellyBeans: 1
