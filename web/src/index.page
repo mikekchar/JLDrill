@@ -35,12 +35,15 @@ What's New for 0.4.0
   Vocab window has also been modified to allow you to modify, preview, 
   delete and reorder items in the quiz.
 
-  The scheduling strategy has been improved.  Previously if you
-  reviewed slower than expected, or if you neglected your studying,
-  you could fall "behind".  This concept has now been removed
-  from the software, since there is no real schedule per se.  Instead
-  the software will try to maintain a 90% success rate in your
-  reviews.  This should reduce the need for the "Review" button.
+  The scheduling strategy has been dramatically simplified.  The system
+  no longer sorts by expected review date.  Instead it sorts by the
+  percentage of time the item has gone in it's expected duration.
+
+  Each card can now show a single image using the tag "image:path"
+  where the path is the relative path from the quiz to the image.
+  Note that you have to escape the / with a \ at the moment.
+  JLDrill will also attempt to automatically resize the panes to
+  fit larger problems.
 
   Various other bug fixes and small improvements to the scheduling strategy
   have also been implemented.
@@ -59,6 +62,14 @@ JLDrill is Beta Software
 
 News
 ----
+
+Friday, March 12 2010
+
+* Moving ahead with non-releases.  Essentially I decided I needed
+  to prioritize my use of the program over my development of the
+  program.  Who knows when the next release will be.  But development
+  continues slowly as I find more things that I need, personally.
+
 Thursday, October 8 2009.
 
 * Because I kept fiddling with the code I'm making a 0.3.5 development
