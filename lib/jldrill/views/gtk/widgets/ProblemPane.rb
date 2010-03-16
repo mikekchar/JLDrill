@@ -34,7 +34,7 @@ module JLDrill::Gtk
             self.add(@contents)
             @buffer = @contents.buffer
             createTags
-            @image = nil
+            @images = []
         end
 
         def normalMode
@@ -79,11 +79,14 @@ module JLDrill::Gtk
         # Adds an image to the bottom of the pane
         def addImage(filename)
             filename = @display.expandWithSavePath(filename)
-            @image = Gtk::Image.new(filename)
+            image = Gtk::Image.new(filename)
             # inserting spaces on either end of the image centers it
             @buffer.insert(@buffer.end_iter," ", "image")
-            if !@image.pixbuf.nil?
-                @buffer.insert(@buffer.end_iter, @image.pixbuf)
+            if !image.pixbuf.nil?
+                @buffer.insert(@buffer.end_iter, image.pixbuf)
+                # This simply makes sure the image isn't garbage collected
+                # because the pixbuf in the image isn't reference counted.
+                @images.push(image)
             else
                 @buffer.insert(@buffer.end_iter, filename + " not found.", 
                                "image")
@@ -101,7 +104,7 @@ module JLDrill::Gtk
             end
 
             @buffer.text = ""
-            @image = nil
+            @images = []
         end
 
         def text
