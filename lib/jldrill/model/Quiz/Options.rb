@@ -7,7 +7,6 @@ module JLDrill
         attr_reader :randomOrder, :promoteThresh, :introThresh,
                     :reviewMode, :dictionary, :reviewMeaning, 
                     :reviewKanji, :reviewReading, :reviewOptionsSet
-        attr_writer :reviewOptionsSet
 
         RANDOM_ORDER_RE = /^Random Order/
         PROMOTE_THRESH_RE = /^Promotion Threshold: (.*)/
@@ -24,10 +23,8 @@ module JLDrill
             @introThresh = 10
             @reviewMode = false
 			@dictionary = nil
-            @reviewMeaning = true
-            @reviewKanji = true
-            @reviewReading = false
             @reviewOptionsSet = false
+            defaultReviewOptions
         end
         
         def clone
@@ -37,10 +34,10 @@ module JLDrill
             retVal.introThresh = @introThresh
             retVal.reviewMode = @reviewMode
 			retVal.dictionary = @dictionary
+            setReviewOptions(@reviewOptionsSet)
             retVal.reviewMeaning = @reviewMeaning
             retVal.reviewKanji = @reviewKanji
             retVal.reviewReading = @reviewReading
-            retVal.reviewOptionsSet = @reviewOptionsSet
             retVal
         end
         
@@ -50,10 +47,10 @@ module JLDrill
             options.introThresh == @introThresh &&
             options.reviewMode == @reviewMode &&
 			options.dictionary == @dictionary &&
+            options.reviewOptionsSet == @reviewOptionsSet &&
             options.reviewMeaning == @reviewMeaning &&
             options.reviewKanji == @reviewKanji &&
-            options.reviewReading == @reviewReading &&
-            options.reviewOptionsSet == @reviewOptionsSet
+            options.reviewReading == @reviewReading
         end
             
         def saveNeeded
@@ -71,10 +68,10 @@ module JLDrill
             @promoteThresh = options.promoteThresh
             @introThresh = options.introThresh
 			@dictionary = options.dictionary
+            setReviewOptions(options.reviewOptionsSet)
             @reviewMeaning = options.reviewMeaning
             @reviewKanji = options.reviewKanji
             @reviewReading = options.reviewReading
-            @reviewOptionsSet = options.reviewOptionsSet
         end
         
         def randomOrder=(value)
@@ -113,8 +110,33 @@ module JLDrill
 			end
 		end
 
+        def clearReviewOptions
+            @reviewMeaning = false
+            @reviewKanji = false
+            @reviewReading = false
+        end
+
+        def defaultReviewOptions
+            @reviewMeaning = true
+            @reviewKanji = true
+            @reviewReading = false
+        end
+
+        def setReviewOptions(value)
+            if (value == true) 
+                if (@reviewOptionsSet == false)
+                    clearReviewOptions
+                    saveNeeded
+                end
+            else
+                defaultReviewOptions
+                saveNeeded
+            end
+            @reviewOptionsSet = value
+        end
+        
         def reviewMeaning=(value)
-            @reviewOptionsSet = true
+            setReviewOptions(true)
             if @reviewMeaning != value
                 @reviewMeaning = value
                 saveNeeded
@@ -122,7 +144,7 @@ module JLDrill
         end
 
         def reviewKanji=(value)
-            @reviewOptionsSet = true
+            setReviewOptions(true)
             if @reviewKanji != value
                 @reviewKanji = value
                 saveNeeded
@@ -130,7 +152,7 @@ module JLDrill
         end
 
         def reviewReading=(value)
-            @reviewOptionsSet = true
+            setReviewOptions(true)
             if @reviewReading != value
                 @reviewReading = value
                 saveNeeded

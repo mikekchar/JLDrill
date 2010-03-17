@@ -86,33 +86,22 @@ module JLDrill::UserChoosesReviewProblemTypes
             # ReviewMeaning
             Story.quiz.options.reviewMeaning = false
             Story.quiz.needsSave.should eql(true)
+            Story.quiz.options.setReviewOptions(false)
             Story.quiz.setNeedsSave(false)
             Story.quiz.needsSave.should eql(false)
 
             # ReviewKanji
             Story.quiz.options.reviewKanji = false
             Story.quiz.needsSave.should eql(true)
+            Story.quiz.options.setReviewOptions(false)
             Story.quiz.setNeedsSave(false)
             Story.quiz.needsSave.should eql(false)
 
             # ReviewReading
             Story.quiz.options.reviewReading = true
             Story.quiz.needsSave.should eql(true)
+            Story.quiz.options.setReviewOptions(false)
             Story.quiz.setNeedsSave(false)
-            Story.quiz.needsSave.should eql(false)
-        end
-
-        it "shouldn't need to save if the options are changed to their current value" do
-            Story.quiz.setNeedsSave(false)
-            Story.quiz.options.reviewMeaning = true
-            Story.quiz.needsSave.should eql(false)
-
-            Story.quiz.setNeedsSave(false)
-            Story.quiz.options.reviewKanji = true
-            Story.quiz.needsSave.should eql(false)
-
-            Story.quiz.setNeedsSave(false)
-            Story.quiz.options.reviewReading = false
             Story.quiz.needsSave.should eql(false)
         end
 
@@ -127,29 +116,42 @@ module JLDrill::UserChoosesReviewProblemTypes
             Story.quiz.options.reviewOptionsSet.should eql(true)
 
             # We'll set it so that we can keep testing
-            Story.quiz.options.reviewOptionsSet = false
+            Story.quiz.options.setReviewOptions(false)
             Story.quiz.options.reviewMeaning = true
             Story.quiz.options.reviewOptionsSet.should eql(true)
 
             # We'll set it so that we can keep testing
-            Story.quiz.options.reviewOptionsSet = false
+            Story.quiz.options.setReviewOptions(false)
             Story.quiz.options.reviewKanji = false
             Story.quiz.options.reviewOptionsSet.should eql(true)
 
             # We'll set it so that we can keep testing
-            Story.quiz.options.reviewOptionsSet = false
+            Story.quiz.options.setReviewOptions(false)
             Story.quiz.options.reviewKanji = true
             Story.quiz.options.reviewOptionsSet.should eql(true)
 
             # We'll set it so that we can keep testing
-            Story.quiz.options.reviewOptionsSet = false
+            Story.quiz.options.setReviewOptions(false)
             Story.quiz.options.reviewReading = false
             Story.quiz.options.reviewOptionsSet.should eql(true)
 
             # We'll set it so that we can keep testing
-            Story.quiz.options.reviewOptionsSet = false
+            Story.quiz.options.setReviewOptions(false)
             Story.quiz.options.reviewReading = true
             Story.quiz.options.reviewOptionsSet.should eql(true)
+        end
+
+        it "should clear the review defaults when the reviewOptions are set" do
+            # These are the defaults
+            Story.quiz.options.reviewMeaning.should eql(true)
+            Story.quiz.options.reviewKanji.should eql(true)
+            Story.quiz.options.reviewReading.should eql(false)
+
+            # Even if we set something to it's default...
+            Story.quiz.options.reviewReading = false
+            # It should clear all the options before doing it's thing
+            Story.quiz.options.reviewMeaning.should eql(false)
+            Story.quiz.options.reviewKanji.should eql(false)
         end
     end
 end
