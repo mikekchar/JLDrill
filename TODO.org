@@ -16,7 +16,7 @@ to define their own quiz item types.
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2010-03-17 Wed>
   :CurrentDate:  <2010-03-17 Wed>
-  :EndDate: <2010-03-18 Sun>
+  :EndDate: <2010-04-18 Sun>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -29,7 +29,7 @@ to define their own quiz item types.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.1 |    17 |    1 |     5.9 |    1.00 |  17.00 |
+| * Version 0.4.1 |    17 |    3 |    17.6 |    3.00 |   0.53 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </tt>
@@ -41,15 +41,15 @@ the number of jellybeans done in the properties of the task.
 ** Current Stories
 == Current Stories
 
-** TODO Options for allowing the user to choose problem types [0/2]
+** DONE Options for allowing the user to choose problem types [2/2]
    Allow the user to choose which problem types they want to be
    exposed to in the review set.
-   - [ ] Add options to the model
-   - [ ] Add options to the UI	 
+   - [X] Add options to the model
+   - [X] Add options to the UI	 
 
    :PROPERTIES:
    :JellyBeans: 2
-   :Done: 0
+   :Done: 2
    :END:
 
 ** TODO One of the items in the working set had a potential schedule of 72 days
