@@ -18,12 +18,14 @@ module JLDrill
 Random Order
 Promotion Threshold: 4
 Introduction Threshold: 17
-Review Meaning]
+Review Meaning
+Review Kanji]
 
         FileDefaultOptions = %Q[
 Promotion Threshold: 2
 Introduction Threshold: 10
-Review Meaning]
+Review Meaning
+Review Kanji]
 
         FileVocab = %Q[
 Unseen

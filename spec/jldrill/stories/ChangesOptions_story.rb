@@ -65,7 +65,8 @@ module JLDrill::UserChangesOptions
             optionsString = "Random Order\n" +
                 "Promotion Threshold: 4\n" +
                 "Introduction Threshold: 20\n" +
-                "Review Meaning\n"
+                "Review Meaning\n" +
+                "Review Kanji\n"
             Story.quiz.options.to_s.should eql(optionsString)
             
             saveString = Story.quiz.saveToString
@@ -120,7 +121,8 @@ module JLDrill::UserChangesOptions
             optionsString = "Random Order\n" +
                 "Promotion Threshold: 4\n" +
                 "Introduction Threshold: 20\n" +
-                "Review Meaning\n"
+                "Review Meaning\n" +
+                "Review Kanji\n"
             fileString = Story.sampleQuiz.header + Story.sampleQuiz.info + "\n" +
                 optionsString.chop + Story.sampleQuiz.resetVocab +
                 "Fair\nGood\nExcellent\n"
@@ -134,7 +136,8 @@ module JLDrill::UserChangesOptions
         it "should be able to assign the options to another options object" do
             optionsString = "Random Order\n" +
                 "Promotion Threshold: 1\n" + "Introduction Threshold: 20\n" +
-                "Review Meaning\n"
+                "Review Meaning\n" +
+                "Review Kanji\n"
 	        Story.quiz.options.randomOrder = true
 	        Story.quiz.options.promoteThresh = 1
 	        Story.quiz.options.introThresh = 20
