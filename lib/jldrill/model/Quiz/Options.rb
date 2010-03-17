@@ -5,7 +5,9 @@ module JLDrill
     # Options for the standard quiz.
     class Options
         attr_reader :randomOrder, :promoteThresh, :introThresh,
-                        :reviewMode, :dictionary, :reviewMeaning
+                    :reviewMode, :dictionary, :reviewMeaning, 
+                    :reviewOptionsSet
+        attr_writer :reviewOptionsSet
 
         RANDOM_ORDER_RE = /^Random Order/
         PROMOTE_THRESH_RE = /^Promotion Threshold: (.*)/
@@ -20,7 +22,8 @@ module JLDrill
             @introThresh = 10
             @reviewMode = false
 			@dictionary = nil
-            @reviewMeaning = false
+            @reviewMeaning = true
+            @reviewOptionsSet = false
         end
         
         def clone
@@ -31,6 +34,7 @@ module JLDrill
             retVal.reviewMode = @reviewMode
 			retVal.dictionary = @dictionary
             retVal.reviewMeaning = @reviewMeaning
+            retVal.reviewOptionsSet = @reviewOptionsSet
             retVal
         end
         
@@ -40,7 +44,8 @@ module JLDrill
             options.introThresh == @introThresh &&
             options.reviewMode == @reviewMode &&
 			options.dictionary == @dictionary &&
-            options.reviewMeaning == @reviewMeaning
+            options.reviewMeaning == @reviewMeaning &&
+            options.reviewOptionsSet == @reviewOptionsSet
         end
             
         def saveNeeded
@@ -54,11 +59,12 @@ module JLDrill
         # Assigns all the options from one to the other, but
         # does *keeps the same quiz*
         def assign(options)
-            self.randomOrder = options.randomOrder
-            self.promoteThresh = options.promoteThresh
-            self.introThresh = options.introThresh
-			self.dictionary = options.dictionary
-            self.reviewMeaning = options.reviewMeaning
+            @randomOrder = options.randomOrder
+            @promoteThresh = options.promoteThresh
+            @introThresh = options.introThresh
+			@dictionary = options.dictionary
+            @reviewMeaning = options.reviewMeaning
+            @reviewOptionsSet = options.reviewOptionsSet
         end
         
         def randomOrder=(value)
@@ -98,6 +104,7 @@ module JLDrill
 		end
 
         def reviewMeaning=(value)
+            @reviewOptionsSet = true
             if @reviewMeaning != value
                 @reviewMeaning = value
                 saveNeeded
