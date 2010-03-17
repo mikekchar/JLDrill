@@ -1,0 +1,108 @@
+---
+title: Release Howto
+in_menu: false
+---
+
+Release Howto
+=============
+
+This document briefly discusses the steps necessary to make 
+both a stable release and a development release.
+
+Finishing the Current Development Release
+-----------------------------------------
+Whether you are creating a new Stable release or a new Development
+release, you will have to finish up the current development release
+first.
+
+* Tag the current development release in bzr.  The tag should be
+  of the form VersionX.Y.Z where X is the major version number,
+  Y is the minor version number, and Z is the development version
+  number.
+* Update the web/src/Development.page to indicate that this is
+  the latest Completed Development Version.  Add a link to
+  http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-X.Y.Z
+  even though the directory doesn't exist yet on Sakabatou.
+* Update the Development Version History at the bottom of
+  web/src/Development.page.  The Current Development Version
+  should be set to None.  The Latest Completed Development
+  version should be set as in the previous step.  Update
+  the changelog for the version.  Remember to look at bzr log
+  to make sure you don't forget anything.
+* Update the index.page file to indicate that a new development
+  release has been completed.
+* Sync bzr to the main repository on Sakabatou.  Afterwards do
+  a rake update to build the new release.
+* Check that the links to the release on the Development page
+  of the web site work.
+
+Making a Stable Release
+-----------------------
+
+Stable releases are always done after the fact.  In other words,
+all development should occur in a development release.  When
+everything is working, the stable release is created.  Except in
+extreme situations, the stable release should never be modified.
+When making a stable release, you should finish the current
+development release as noted in the previous section.  Then do
+the following.
+
+* Update the version number in lib/jldrill/Version.rb.  Remember that
+  stable versions numbers are of the form X.Y.0 where X is the major
+  version number and Y is the minor version number.
+* Create an entry in the debian/changlog file.  This must include the
+  new version number.  The comment can be "Stable Release".
+* Update the index.page file to indicate that a new Stable release
+  has been completed.  Create an overview in the What's new for
+  this release section.
+* Review all the other documentation on the site to ensure that it
+  all fits with the new release.
+* Update the Install.page file to indicate the new stable release.
+  Note that the pointers to the download will be wrong because
+  of the way ruby forge works.  This is unavoidable.
+* Upload the gems, and deb files to rubyforge.  Note the locations.
+  Then update the Install.page file to have the correct locations.
+  Test them and then upload the html files to the rubyforge
+  web site.
+* Tag bzr with the new version number.  The tag should be of the form
+  VersionX.Y.0
+* Sync bzr to the main repository on Sakabatou.  Afterwards do a
+  rake update to build the release directory.
+* Check that all the links work on both the Rubyforge site and
+  Sakabatou.
+
+Creating a New Development Release
+----------------------------------
+A new development release can be created directly following
+releasing a previous development release or a new stable
+release.
+
+* Update the version number in lib/jldrill/Version.rb.  Do this by
+  increasing the last number in the version by one.
+* Create an entry in the debian/changlog file.  This must include the
+  new version number.  The comment can be "New Development Release".
+* Update the TODO.org file for the new development release.
+  Update the version number at the top.  Give a few points for
+  the purpose of the release.  Update the properties for the
+  release.  You must set the StartDate, CurrentDate, and EndDate.
+  Delete the Current Stories that are DONE.  Move new stories up
+  from the Next Release or the Backlog.  Remember to set up
+  the properties for each item.  The JellyBeans must be set.
+* Sync with main repository on Sakabatou.
+
+Syncing Development Releases with Sakabatou.
+--------------------------------------------
+You may (and are encouraged to) sync with Sakabatou when ever all the
+tests pass.  Current development releases don't have to be feature 
+complete, only have all their tests passing.  So sync frequently.
+However, before you sync please do the following:
+
+* Merge any existing changes that others might have already made
+on Sakabatou.  Run the tests to make sure that they all still
+work.
+* Add an entry to debian/changelog with a brief description of your
+changes.  Increase the revision number of the debian file.  The
+Version number should look like X.Y.Z-R It's the R that you want
+to increment.
+* Sync to Sakabatou and then run rake update on Sakabatou to make
+sure that everything is built.

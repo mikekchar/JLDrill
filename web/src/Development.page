@@ -111,9 +111,12 @@ be incomplete and there might be bugs.  But it should work.
 You can use it if you really need the new features, or if
 you want to join in on testing.
 
+If you want to create a new release, please follow the
+[New Release Procedures](ReleaseHowto.html)
+
 Development Version History
 ---------------------------
-Current Development Version: There is no current development version.  Please wait for 0.4.1.
+Current Development Version: [jldrill-0.4.1](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.4.1)
 
 Latest Completed Development Version: [jldrill-0.3.5](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.5)
 
