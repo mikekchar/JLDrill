@@ -34,6 +34,7 @@ module JLDrill::UserChoosesReviewProblemTypes
             Story.quiz.options.reviewOptionsSet.should eql(false)
 			Story.quiz.options.reviewMeaning.should eql(true)
             Story.quiz.options.reviewKanji.should eql(true)
+            Story.quiz.options.reviewReading.should eql(false)
         end
 
         after(:each) do
@@ -58,12 +59,13 @@ module JLDrill::UserChoosesReviewProblemTypes
             Story.quiz.options.reviewMeaning.should eql(false)
             Story.quiz.options.reviewKanji = false
             Story.quiz.options.reviewKanji.should eql(false)
+            Story.quiz.options.reviewReading = true
+            Story.quiz.options.reviewReading.should eql(true)
 
             # The two thresholds are written by default
-            # ReviewMeaning and ReviewKanji are set by default, 
-            # so nothing should be written
             optionsString = "Promotion Threshold: 2\n" + 
-                "Introduction Threshold: 10\n"
+                "Introduction Threshold: 10\n" +
+                "Review Reading\n"
             Story.quiz.options.to_s.should eql(optionsString)
             
             saveString = Story.quiz.saveToString
@@ -92,11 +94,25 @@ module JLDrill::UserChoosesReviewProblemTypes
             Story.quiz.needsSave.should eql(true)
             Story.quiz.setNeedsSave(false)
             Story.quiz.needsSave.should eql(false)
+
+            # ReviewReading
+            Story.quiz.options.reviewReading = true
+            Story.quiz.needsSave.should eql(true)
+            Story.quiz.setNeedsSave(false)
+            Story.quiz.needsSave.should eql(false)
         end
 
         it "shouldn't need to save if the options are changed to their current value" do
             Story.quiz.setNeedsSave(false)
             Story.quiz.options.reviewMeaning = true
+            Story.quiz.needsSave.should eql(false)
+
+            Story.quiz.setNeedsSave(false)
+            Story.quiz.options.reviewKanji = true
+            Story.quiz.needsSave.should eql(false)
+
+            Story.quiz.setNeedsSave(false)
+            Story.quiz.options.reviewReading = false
             Story.quiz.needsSave.should eql(false)
         end
 
@@ -123,6 +139,16 @@ module JLDrill::UserChoosesReviewProblemTypes
             # We'll set it so that we can keep testing
             Story.quiz.options.reviewOptionsSet = false
             Story.quiz.options.reviewKanji = true
+            Story.quiz.options.reviewOptionsSet.should eql(true)
+
+            # We'll set it so that we can keep testing
+            Story.quiz.options.reviewOptionsSet = false
+            Story.quiz.options.reviewReading = false
+            Story.quiz.options.reviewOptionsSet.should eql(true)
+
+            # We'll set it so that we can keep testing
+            Story.quiz.options.reviewOptionsSet = false
+            Story.quiz.options.reviewReading = true
             Story.quiz.options.reviewOptionsSet.should eql(true)
         end
     end

@@ -6,8 +6,7 @@ module JLDrill
     class Options
         attr_reader :randomOrder, :promoteThresh, :introThresh,
                     :reviewMode, :dictionary, :reviewMeaning, 
-                    :reviewKanji,
-                    :reviewOptionsSet
+                    :reviewKanji, :reviewReading, :reviewOptionsSet
         attr_writer :reviewOptionsSet
 
         RANDOM_ORDER_RE = /^Random Order/
@@ -16,6 +15,7 @@ module JLDrill
         DICTIONARY_RE = /^Dictionary: (.*)/
         REVIEW_MEANING_RE = /^Review Meaning/
         REVIEW_KANJI_RE = /^Review Kanji/
+        REVIEW_READING_RE = /^Review Reading/
 
         def initialize(quiz)
             @quiz = quiz
@@ -26,6 +26,7 @@ module JLDrill
 			@dictionary = nil
             @reviewMeaning = true
             @reviewKanji = true
+            @reviewReading = false
             @reviewOptionsSet = false
         end
         
@@ -38,6 +39,7 @@ module JLDrill
 			retVal.dictionary = @dictionary
             retVal.reviewMeaning = @reviewMeaning
             retVal.reviewKanji = @reviewKanji
+            retVal.reviewReading = @reviewReading
             retVal.reviewOptionsSet = @reviewOptionsSet
             retVal
         end
@@ -50,6 +52,7 @@ module JLDrill
 			options.dictionary == @dictionary &&
             options.reviewMeaning == @reviewMeaning &&
             options.reviewKanji == @reviewKanji &&
+            options.reviewReading == @reviewReading &&
             options.reviewOptionsSet == @reviewOptionsSet
         end
             
@@ -70,6 +73,7 @@ module JLDrill
 			@dictionary = options.dictionary
             @reviewMeaning = options.reviewMeaning
             @reviewKanji = options.reviewKanji
+            @reviewReading = options.reviewReading
             @reviewOptionsSet = options.reviewOptionsSet
         end
         
@@ -125,6 +129,14 @@ module JLDrill
             end
         end
 
+        def reviewReading=(value)
+            @reviewOptionsSet = true
+            if @reviewReading != value
+                @reviewReading = value
+                saveNeeded
+            end
+        end
+
         def parseLine(line)
             parsed = true
             case line
@@ -140,6 +152,8 @@ module JLDrill
                     self.reviewMeaning = $1.to_i
                 when REVIEW_KANJI_RE
                     self.reviewKanji = $1.to_i
+                when REVIEW_READING_RE
+                    self.reviewReading = $1.to_i
                 else
                     parsed = false
             end
@@ -169,6 +183,9 @@ module JLDrill
             end
             if(@reviewKanji)
                 retVal += "Review Kanji\n"
+            end
+            if(@reviewReading)
+                retVal += "Review Reading\n"
             end
             retVal
         end
