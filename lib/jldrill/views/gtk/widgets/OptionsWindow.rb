@@ -14,8 +14,17 @@ module JLDrill::Gtk
             @randomOrder = Gtk::CheckButton.new("Introduce new items in random order")
             @promoteThresh = Gtk::HScale.new(1,10,1)
             @introThresh = Gtk::HScale.new(1,100,1)
+
+            @reviewOptions = Gtk::HBox.new()
+            @reviewReading = Gtk::CheckButton.new("Review Reading")
+            @reviewKanji = Gtk::CheckButton.new("Review Kanji")
+            @reviewMeaning = Gtk::CheckButton.new("Review Meaning")
+            @reviewOptions.add(@reviewReading)
+            @reviewOptions.add(@reviewKanji)
+            @reviewOptions.add(@reviewMeaning)
             
             self.vbox.add(@randomOrder)
+            self.vbox.add(@reviewOptions)
             self.vbox.add(Gtk::Label.new("Promote item after x correct"))
             self.vbox.add(@promoteThresh)
             self.vbox.add(Gtk::Label.new("Max actively learning items"))
@@ -29,7 +38,31 @@ module JLDrill::Gtk
         def randomOrder
             @randomOrder.active?
         end
+
+        def reviewMeaning=(value)
+            @reviewMeaning.active = value
+        end
         
+        def reviewMeaning
+            @reviewMeaning.active?
+        end
+
+        def reviewKanji=(value)
+            @reviewKanji.active = value
+        end
+        
+        def reviewKanji
+            @reviewKanji.active?
+        end
+        
+        def reviewReading=(value)
+            @reviewReading.active = value
+        end
+        
+        def reviewReading
+            @reviewReading.active?
+        end
+
         def promoteThresh=(value)
             @promoteThresh.value = value
         end
@@ -50,6 +83,9 @@ module JLDrill::Gtk
             self.randomOrder = options.randomOrder
             self.promoteThresh = options.promoteThresh
             self.introThresh = options.introThresh
+            self.reviewMeaning = options.reviewMeaning
+            self.reviewKanji = options.reviewKanji
+            self.reviewReading = options.reviewReading
         end
         
         def updateFromViewData
@@ -61,6 +97,9 @@ module JLDrill::Gtk
             @view.options.randomOrder = self.randomOrder
             @view.options.promoteThresh = self.promoteThresh
             @view.options.introThresh = self.introThresh
+            @view.options.reviewMeaning = self.reviewMeaning
+            @view.options.reviewReading = self.reviewReading
+            @view.options.reviewKanji = self.reviewKanji
         end
         
         def execute
