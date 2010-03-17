@@ -281,7 +281,10 @@ In this picture the item has been promoted into the review set.
 Then we quit the application and restarted it later in the day.
 As you can see from the status line we have 12 items in the review
 set, so the application automatically entered review mode.  Eventually
-it displayed this item.
+it displayed this item. Here it is displaying a kanji problem.
+When reviewing, JLDrill will randomly select either a kanji problem
+or a meaning problem for the item.  You can change what kinds of
+problems JLDrill will select from the Options menu.
 
 Inspecting the status line, you can see that part of it has changed.
 It now reads "+1, Today --> 4.2 days" where the level and potential schedule
@@ -393,6 +396,12 @@ Right now only a few things are available to be changed.  The first is
 whether or not items from the new set are introduced randomly.  If you
 check the box, they will be.  If the box is unchecked, the items will
 be introduced in the order they appear in the file.
+
+The next three buttons allow you to choose what kind of problems to
+drill when reviewing items.  By default JLDrill will randomly choose
+between kanji and meaning problems.  You can change that behaviour
+here.  If you unselect all these, then JLDrill will fall back on
+it's default behaviour, though.
 
 The next slider allows you to set the number of times an item must
 be guessed correctly before it is promoted to the next level.  I
