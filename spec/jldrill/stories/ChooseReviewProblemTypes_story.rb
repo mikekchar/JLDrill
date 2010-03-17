@@ -188,4 +188,40 @@ module JLDrill::UserChoosesReviewProblemTypes
             Story.quiz.strategy.allowedLevels.should eql([0,1,2])
         end
     end
+
+    describe Story.stepName("Options view can modify options") do
+        before(:each) do
+            Story.setup(JLDrill::Gtk)
+            Story.start
+            Story.setOptions
+        end
+
+        after(:each) do
+            Story.shutdown
+        end
+
+        def setValueAndTest(valueString, default, target)
+            modelString = "Story.mainContext.quiz.options." + valueString
+            setUIString = "Story.view.optionsWindow." + valueString + " = " + 
+                           target.to_s 
+            eval(modelString).should be(default)
+   		    Story.enterDialogAndPressOK(Story.view.optionsWindow) do
+                eval(setUIString)
+            end
+            eval(modelString).should be(target)
+        end
+
+        it "should be able to set the review reading option" do
+            setValueAndTest("reviewReading", false, true)
+        end
+
+        it "should be able to set the review kanji option" do
+            setValueAndTest("reviewKanji", true, false)
+        end
+
+        it "should be able to set the review meaning option" do
+            setValueAndTest("reviewMeaning", true, false)
+        end
+
+    end
 end
