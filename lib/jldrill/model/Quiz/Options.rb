@@ -5,12 +5,13 @@ module JLDrill
     # Options for the standard quiz.
     class Options
         attr_reader :randomOrder, :promoteThresh, :introThresh,
-                        :reviewMode, :dictionary
+                        :reviewMode, :dictionary, :reviewMeaning
 
         RANDOM_ORDER_RE = /^Random Order/
         PROMOTE_THRESH_RE = /^Promotion Threshold: (.*)/
         INTRO_THRESH_RE = /^Introduction Threshold: (.*)/
-        DICTIONARY_RE =/^Dictionary: (.*)/
+        DICTIONARY_RE = /^Dictionary: (.*)/
+        REVIEW_MEANING_RE = /^Review Meaning/
 
         def initialize(quiz)
             @quiz = quiz
@@ -19,6 +20,7 @@ module JLDrill
             @introThresh = 10
             @reviewMode = false
 			@dictionary = nil
+            @reviewMeaning = false
         end
         
         def clone
@@ -28,6 +30,7 @@ module JLDrill
             retVal.introThresh = @introThresh
             retVal.reviewMode = @reviewMode
 			retVal.dictionary = @dictionary
+            retVal.reviewMeaning = @reviewMeaning
             retVal
         end
         
@@ -36,7 +39,8 @@ module JLDrill
             options.promoteThresh == @promoteThresh &&
             options.introThresh == @introThresh &&
             options.reviewMode == @reviewMode &&
-			options.dictionary == @dictionary
+			options.dictionary == @dictionary &&
+            options.reviewMeaning == @reviewMeaning
         end
             
         def saveNeeded
@@ -54,6 +58,7 @@ module JLDrill
             self.promoteThresh = options.promoteThresh
             self.introThresh = options.introThresh
 			self.dictionary = options.dictionary
+            self.reviewMeaning = options.reviewMeaning
         end
         
         def randomOrder=(value)
@@ -92,6 +97,13 @@ module JLDrill
 			end
 		end
 
+        def reviewMeaning=(value)
+            if @reviewMeaning != value
+                @reviewMeaning = value
+                saveNeeded
+            end
+        end
+
         def parseLine(line)
             parsed = true
             case line
@@ -103,6 +115,8 @@ module JLDrill
                     self.introThresh = $1.to_i
 				when DICTIONARY_RE
 					self.dictionary = $1.to_i
+                when REVIEW_MEANING_RE
+                    self.reviewMeaning = $1.to_i
                 else
                     parsed = false
             end
@@ -127,6 +141,9 @@ module JLDrill
 			if(!@dictionary.nil?)
 				retVal += "Dictionary: #{@dictionary}\n"
 			end
+            if(@reviewMeaning)
+                retVal += "Review Meaning\n"
+            end
             retVal
         end
     end

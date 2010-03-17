@@ -25,14 +25,14 @@ to define their own quiz item types.
 ** Velocity Table
 == Velocity Table
 
-<pre>
+<tt>
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.1 |    15 |    1 |     6.7 |    1.00 |  15.00 |
+| * Version 0.4.1 |    17 |    1 |     5.9 |    1.00 |  17.00 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
-</pre>
+</tt>
 
 Note: To update the current velocity you must set the CurrentDate in
 the properties.  Also, when setting TODO tasks to DONE, you must set
@@ -40,6 +40,17 @@ the number of jellybeans done in the properties of the task.
 
 ** Current Stories
 == Current Stories
+
+** TODO Options for allowing the user to choose problem types [0/2]
+   Allow the user to choose which problem types they want to be
+   exposed to in the review set.
+   - [ ] Add options to the model
+   - [ ] Add options to the UI	 
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 0
+   :END:
 
 ** TODO One of the items in the working set had a potential schedule of 72 days
 
