@@ -72,6 +72,9 @@ module JLDrill
             @reviewMeaning = options.reviewMeaning
             @reviewKanji = options.reviewKanji
             @reviewReading = options.reviewReading
+            if !@quiz.nil?
+                @quiz.recreateProblem
+            end
         end
         
         def randomOrder=(value)
@@ -157,6 +160,28 @@ module JLDrill
                 @reviewReading = value
                 saveNeeded
             end
+        end
+
+        # Return an array containing the allowed levels for the
+        # drills.
+        def allowedLevels
+            retVal = []
+            if reviewReading
+                retVal.push(0)
+            end
+            if reviewKanji
+                retVal.push(1)
+            end
+            if reviewMeaning
+                retVal.push(2)
+            end
+            # If the user hasn't selected any levels, then
+            # default to kanji and meaning
+            if retVal.size == 0
+                retVal.push(1)
+                retVal.push(2)
+            end
+            return retVal
         end
 
         def parseLine(line)

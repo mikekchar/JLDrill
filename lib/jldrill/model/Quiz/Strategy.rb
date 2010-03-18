@@ -192,27 +192,6 @@ module JLDrill
             return item
         end
 
-        # Randomly choose a level from those allowed by the options
-        def allowedLevels
-            retVal = []
-            if options.reviewReading
-                retVal.push(0)
-            end
-            if options.reviewKanji
-                retVal.push(1)
-            end
-            if options.reviewMeaning
-                retVal.push(2)
-            end
-            # If the user hasn't selected any levels, then
-            # default to kanji and meaning
-            if retVal.size == 0
-                retVal.push(1)
-                retVal.push(2)
-            end
-            return retVal
-        end
-
         # Create a problem for the given item at the correct level
         def createProblem(item)
             item.itemStats.createProblem

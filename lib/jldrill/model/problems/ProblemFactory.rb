@@ -11,6 +11,10 @@ module JLDrill
             PROBLEM_TYPES.find_index(string)
         end
 
+        def ProblemFactory.lookup(level)
+            return PROBLEM_TYPES[level]
+        end
+
         def ProblemFactory.create(level, item)
             case level
                 when 0

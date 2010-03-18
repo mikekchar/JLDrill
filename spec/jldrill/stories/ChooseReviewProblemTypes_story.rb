@@ -156,36 +156,36 @@ module JLDrill::UserChoosesReviewProblemTypes
 
         it "should create a list of allowed levels" do
             # It should default to meaning and kanji levels
-            Story.quiz.strategy.allowedLevels.should eql([1,2])
+            Story.quiz.options.allowedLevels.should eql([1,2])
 
             # This should reset all the options to false
             Story.quiz.options.reviewMeaning = false
             # And ironically, this should cause it to use the default
             # of meaning and kanji levels
-            Story.quiz.strategy.allowedLevels.should eql([1,2])
+            Story.quiz.options.allowedLevels.should eql([1,2])
 
             # Only Meaning
             Story.quiz.options.reviewMeaning = true            
-            Story.quiz.strategy.allowedLevels.should eql([2])
+            Story.quiz.options.allowedLevels.should eql([2])
 
             # Only Kanji
             Story.quiz.options.reviewMeaning = false
             Story.quiz.options.reviewKanji = true
-            Story.quiz.strategy.allowedLevels.should eql([1])
+            Story.quiz.options.allowedLevels.should eql([1])
 
             # Only Reading
             Story.quiz.options.reviewKanji = false
             Story.quiz.options.reviewReading = true
-            Story.quiz.strategy.allowedLevels.should eql([0])
+            Story.quiz.options.allowedLevels.should eql([0])
 
             # Kanji and Reading
             Story.quiz.options.reviewKanji = true
             Story.quiz.options.reviewReading = true
-            Story.quiz.strategy.allowedLevels.should eql([0,1])
+            Story.quiz.options.allowedLevels.should eql([0,1])
 
             # All three
             Story.quiz.options.reviewMeaning = true
-            Story.quiz.strategy.allowedLevels.should eql([0,1,2])
+            Story.quiz.options.allowedLevels.should eql([0,1,2])
         end
     end
 

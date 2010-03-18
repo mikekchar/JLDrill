@@ -71,7 +71,7 @@ the number of jellybeans done in the properties of the task.
    :Done: 2
    :END:
 
-** TODO Schedule each problem type separately [2/3]
+** DONE Schedule each problem type separately [3/3]
    Currently there is only one review for each item.  The strategy
    randomly chooses one type of the allowed problem types to review.
    Create a separate schedule for each allowed problem type and
@@ -80,13 +80,13 @@ the number of jellybeans done in the properties of the task.
    - [X] Store a problem type in the item status rather than a
      schedule.  Store the schedule in the problem type
    - [X] Allow more than one problem type in the status
-   - [ ] Automatically create/remove statuses based on allowed problem
+   - [X] Automatically create/remove statuses based on allowed problem
      types. New statuses should be reviewed at the existing schedule
      or 5 days, whichever is less.
 
    :PROPERTIES:
    :JellyBeans: 3
-   :Done: 0
+   :Done: 3
    :END:
 
 ** TODO One of the items in the working set had a potential schedule of 72 days

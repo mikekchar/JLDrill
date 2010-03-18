@@ -48,7 +48,67 @@ module JLDrill
             return retVal
         end
 
+        def findSchedule(type)
+            sched = nil
+            index = @types.find_index(type)
+            if !index.nil?
+                sched = @schedules[index]
+            end
+            return sched
+        end
+
+        def addAllowed(levels)
+            levels.each do |level|
+                type = ProblemFactory.lookup(level)
+                if findSchedule(type).nil?
+                    @types.push(type)
+                    @schedules.push(firstSchedule.clone)
+                end
+            end 
+        end
+
+        # When an item is being demoted, demote all the schedules
+        def demote
+            @schedules.each do |schedule|
+                schedule.score = 0
+            end
+        end
+
+        def disallowed?(type, levels)
+            retVal = false
+            index = ProblemFactory.parse(type)
+            if !index.nil?
+                retVal = !levels.include?(index)
+            end
+            return retVal
+        end
+
+        def removeDisallowed(levels)
+            @types.each_index do |i|
+                if disallowed?(@types[i], levels)
+                    @schedules.delete_at(i)
+                end
+            end
+            @types.delete_if do |type|
+                disallowed?(type, levels)
+            end
+        end
+
+        # Make sure the schedule types match with the allowed ones
+        # for the quiz.  If not, push a new type on.
+        def checkSchedules
+            if !@item.nil? && !@item.quiz.nil?
+                levels = @item.quiz.options.allowedLevels
+                addAllowed(levels)
+                removeDisallowed(levels)
+            end
+        end
+
         def firstProblem
+            # Every time we make a problem we should check to make sure
+            # that correct schedules have been build.  The user may have
+            # changed the options.
+            checkSchedules
             sched = firstSchedule
             index = @schedules.find_index(sched)
             level = ProblemFactory.parse(@types[index])

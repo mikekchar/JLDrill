@@ -102,6 +102,11 @@ module JLDrill
             return problemStatus.firstSchedule
         end
 
+        def demote
+            problemStatus = @status.select("ProblemStatus")
+            problemStatus.demote
+        end
+
         def problem
             problemStatus = @status.select("ProblemStatus")
             return problemStatus.firstProblem

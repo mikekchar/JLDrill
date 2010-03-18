@@ -124,32 +124,6 @@ module JLDrill
             problem3.should be_a_kind_of(MeaningProblem)
 	    end
     
-        it "should create MeaningProblems and KanjiProblems equally in bin 4" do
-            vocab4 = @sampleQuiz.sampleVocab
-            meaning = 0
-            kanji = 0
-            error = false
-            0.upto(999) do
-                item4 = Item.new(vocab4)
-                item4.bin = 4
-                problem4 = @strategy.createProblem(item4)
-                if problem4.class == MeaningProblem
-                    meaning += 1
-                elsif problem4.class == KanjiProblem
-                    kanji += 1
-                else
-                    error = true
-                end
-            end
-            error.should_not be(true)
-            rate = ((meaning * 100) / (meaning + kanji)).to_i
-            # I suppose this might fail sometime.  But it's very unlikely
-            # since we have 1000 trials.  If it fails often
-            # then there is definitely a problem.
-            rate.should be_close(50, 10)
-        end
-
-        
         it "should be able to tell if the working set is full" do
             @quiz.options.introThresh = 5
             @strategy.workingSetFull?.should be(false)
