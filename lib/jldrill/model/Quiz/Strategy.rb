@@ -1,4 +1,5 @@
 require 'jldrill/model/Quiz/Statistics'
+require 'jldrill/model/problems/ProblemFactory'
 
 module JLDrill
 
@@ -223,7 +224,7 @@ module JLDrill
                 level = item.bin - 1
             end
             @stats.startTimer(item.bin == 4)
-            Problem.create(level, item, @quiz)
+            ProblemFactory.create(level, item, @quiz)
         end
 
         # Promote the item to the next level/bin

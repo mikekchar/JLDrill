@@ -17,26 +17,6 @@ module JLDrill
             @preview = false
         end
         
-        def Problem.create(level, item, quiz)
-            case level
-                when 0
-                    problem = ReadingProblem.new(item, quiz)
-                when 1
-                    v = item.to_o
-                    if !v.kanji.nil?
-                        problem = KanjiProblem.new(item, quiz)
-                    else
-                        problem = MeaningProblem.new(item, quiz)
-                    end
-                when 2
-                    problem = MeaningProblem.new(item, quiz)
-                else
-                   problem = ReadingProblem.new(item, quiz)
-             end
-            problem.requestedLevel = level
-            problem
-        end
-
         def setDisplayOnly(bool)
             @displayOnly = bool
         end
@@ -146,48 +126,4 @@ module JLDrill
 
     end
     
-    # The first kind of Problem shown.  It lets you read it in Japanese and
-    # guess the English
-    class ReadingProblem < Problem
-        def initialize(item, quiz)
-            super(item, quiz)
-            @level = 0
-            @questionParts = ["kanji", "reading", "hint"]
-            @answerParts = ["definitions"]
-        end
-
-        def largeReading?
-            return evaluateAttribute("kanji").empty?
-        end
-    end
-    
-    # Test your kanji reading.  Read the kanji and guess the reading and definitions
-    class KanjiProblem < Problem
-        def initialize(item, quiz)
-            super(item, quiz)
-            @level = 2
-            @questionParts = ["kanji"]
-            @answerParts = ["reading", "definitions", "hint"]
-        end
-
-        # Returns false if the kanji is emty and we can't drill this
-        # item.
-        def valid?
-            return !(evaluateAttribute("kanji").empty?)
-        end
-    end
-    
-    # Shows you the English and you guess the kanji and reading
-    class MeaningProblem < Problem
-        def initialize(item, quiz)
-            super(item, quiz)
-            @level = 1
-            @questionParts = ["definitions"]
-            @answerParts = ["kanji", "reading", "hint"]
-        end
-
-        def largeReading?
-            return evaluateAttribute("kanji").empty?
-        end
-    end
 end

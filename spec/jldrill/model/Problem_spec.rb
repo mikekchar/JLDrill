@@ -1,4 +1,5 @@
 require 'jldrill/model/Problem'
+require 'jldrill/model/problems/ProblemFactory'
 
 module JLDrill
 
@@ -159,35 +160,35 @@ module JLDrill
         it "should create a ReadingProblem for level 0" do
             vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    item1 = Item.new(vocab1)
-            problem1 = Problem.create(0, item1, @quiz)
+            problem1 = ProblemFactory.create(0, item1, @quiz)
             problem1.should be_a_kind_of(ReadingProblem)
         end        
 
         it "should create a KanjiProblem for level 1" do
             vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 1/")
 		    item1 = Item.new(vocab1)
-            problem1 = Problem.create(1, item1, @quiz)
+            problem1 = ProblemFactory.create(1, item1, @quiz)
             problem1.should be_a_kind_of(KanjiProblem)
         end        
 
         it "should create a MeaningProblem for level 2" do
             vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 2/")
 		    item1 = Item.new(vocab1)
-            problem1 = Problem.create(2, item1, @quiz)
+            problem1 = ProblemFactory.create(2, item1, @quiz)
             problem1.should be_a_kind_of(MeaningProblem)
         end        
 
         it "should create a MeaningProblem for level 1 if there is no kanji" do
             vocab1 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 2/")
 		    item1 = Item.new(vocab1)
-            problem1 = Problem.create(1, item1, @quiz)
+            problem1 = ProblemFactory.create(1, item1, @quiz)
             problem1.should be_a_kind_of(MeaningProblem)
         end        
 
         it "should create a ReadingProblem for unknown levels" do
             vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    item1 = Item.new(vocab1)
-            problem1 = Problem.create(-1, item1, @quiz)
+            problem1 = ProblemFactory.create(-1, item1, @quiz)
             problem1.should be_a_kind_of(ReadingProblem)
         end        
         
@@ -203,10 +204,10 @@ module JLDrill
             i3 = createFakeItem(3)
             i4 = createFakeItem(4)
             
-            problem1 = Problem.create(0, i1, @quiz)
-            problem2 = Problem.create(0, i2, @quiz)
-            problem3 = Problem.create(0, i3, @quiz)
-            problem4 = Problem.create(0, i4, @quiz)
+            problem1 = ProblemFactory.create(0, i1, @quiz)
+            problem2 = ProblemFactory.create(0, i2, @quiz)
+            problem3 = ProblemFactory.create(0, i3, @quiz)
+            problem4 = ProblemFactory.create(0, i4, @quiz)
 
             problem1.status.should eql("     1 --> 5.0 days")
             problem2.status.should eql("     2 --> 5.0 days")

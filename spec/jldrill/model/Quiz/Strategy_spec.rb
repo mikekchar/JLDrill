@@ -2,6 +2,7 @@ require 'jldrill/model/Quiz/Strategy'
 require 'jldrill/model/Contents'
 require 'jldrill/model/items/Vocabulary'
 require 'jldrill/model/Problem'
+require 'jldrill/model/problems/ProblemFactory'
 require 'jldrill/spec/SampleQuiz'
 
 module JLDrill

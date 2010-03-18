@@ -1,7 +1,23 @@
 = JLDrill TODO
 
-* Version 0.4.0
-== Version 0.4.0
+* Process
+
+This file contains the development plan for JLDrill.  The first
+section discusses the purpose of the next stable release.  Following
+that is the current development release.  The number of JellyBeans
+chosen for the development release should be enough so that it can
+be released in about a month.
+
+Following the current development release is the next development
+release.  New stories can be moved into the current release as
+long as there is still time in the iteration to do them.  However,
+an equal number of JellyBeans must be moved to the next development
+release.
+
+When the release is complete, delete the stories and start again.
+
+* Version 0.5.0
+== Version 0.5.0
 The main purpose is to abstract the item types and more easily allow
 many different types of quizes.  The two biggest features are
 to roll in the Chinese version from CLDrill and to allow users
@@ -10,12 +26,15 @@ to define their own quiz item types.
 * Version 0.4.1
 == Version 0.4.1
 
-  This is a development release.  
+  This is a development release.  The main purpose of this development
+  release is to give more flexibility in the problem types.  The user
+  can choose which ones they want to review and each one will be
+  reviewed independently.
 
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2010-03-17 Wed>
-  :CurrentDate:  <2010-03-17 Wed>
+  :CurrentDate:  <2010-03-18 Thu>
   :EndDate: <2010-04-18 Sun>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -50,6 +69,24 @@ the number of jellybeans done in the properties of the task.
    :PROPERTIES:
    :JellyBeans: 2
    :Done: 2
+   :END:
+
+** TODO Schedule each problem type separately [0/3]
+   Currently there is only one review for each item.  The strategy
+   randomly chooses one type of the allowed problem types to review.
+   Create a separate schedule for each allowed problem type and
+   review it independently.  But if the user gets one wrong, start
+   both again.
+   - [ ] Store a problem type in the item status rather than a
+     schedule.  Store the schedule in the problem type
+   - [ ] Allow more than one problem type in the status
+   - [ ] Automatically create/remove statuses based on allowed problem
+     types. New statuses should be reviewed at the existing schedule
+     or 5 days, whichever is less.
+
+   :PROPERTIES:
+   :JellyBeans: 3
+   :Done: 0
    :END:
 
 ** TODO One of the items in the working set had a potential schedule of 72 days
@@ -120,6 +157,13 @@ the number of jellybeans done in the properties of the task.
    :Done: 1
    :END:
 
+
+* Version 0.4.2
+== Version 0.4.2
+
+This section lists important work that falls out of the
+previous iteration for one reason or another.
+
 ** TODO Start new drills in Preview mode
    When a drill has been loaded for the first time (or after a reset), 
    show the first item in preview mode.  This allows the user to
@@ -151,11 +195,6 @@ the number of jellybeans done in the properties of the task.
    :Done: 0
    :END:
 
-* Version 0.4.2
-== Version 0.4.2
-
-This section lists important work that falls out of the
-previous iteration for one reason or another.
 
 * Backlog
 == Backlog
