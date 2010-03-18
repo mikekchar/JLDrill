@@ -14,7 +14,7 @@ module JLDrill
 	        @sampleQuiz = SampleQuiz.new
 	        vocab = @sampleQuiz.sampleVocab
 	        item = @quiz.contents.add(vocab, 4)
-	        @quiz.currentProblem = ReadingProblem.new(item, @quiz)
+	        @quiz.currentProblem = ReadingProblem.new(item)
 	        @strategy = @quiz.strategy
 	    end
 	    

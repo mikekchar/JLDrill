@@ -27,10 +27,11 @@ module JLDrill
         POSITION_RE = /^Position: (.*)/
 
         attr_reader :itemType, :contents, :position, :bin, :status,
-                    :hash, :container
-        attr_writer :position, :bin, :container
+                    :hash, :container, :quiz
+        attr_writer :position, :bin, :container, :quiz
 
         def initialize(item=nil)
+            @quiz = nil
             if item.nil?
                 @itemType = nil
                 @contents = ""
@@ -52,9 +53,8 @@ module JLDrill
         # Note: We are passing bin to this method, since we no
         # longer read it in.  Due to legacy issues, the item status
         # needs to know what bin it is in when parsing.
-        def Item.create(string, bin=0)
+        def Item.create(string)
             item = Item.new
-            item.bin = bin
             item.parse(string)
             return item
         end
@@ -189,6 +189,15 @@ module JLDrill
                 self.to_o.eql?(object)
             else
                 false
+            end
+        end
+
+        # Indicate to the quiz that the problem has been modified
+        # This will be called by the problem itself whenever it
+        # has been modified.
+        def problemModified(problem)
+            if !@quiz.nil?
+                @quiz.problemModified(problem)
             end
         end
     end

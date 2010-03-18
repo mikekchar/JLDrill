@@ -4,8 +4,8 @@ module JLDrill
     # Test your kanji reading.  Read the kanji and guess the 
     # reading and definitions
     class KanjiProblem < Problem
-        def initialize(item, quiz)
-            super(item, quiz)
+        def initialize(item)
+            super(item)
             @level = 2
             @questionParts = ["kanji"]
             @answerParts = ["reading", "definitions", "hint"]
@@ -16,7 +16,7 @@ module JLDrill
         end
 
         def clone
-            value = KanjiProblem.new(item, quiz)
+            value = KanjiProblem.new(item)
             value.assign(self)
             return value
         end

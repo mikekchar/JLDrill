@@ -4,15 +4,14 @@ module JLDrill
 
     # Represents a single question/answer pair in a quiz
     class Problem
-        attr_reader :item, :level, :requestedLevel, :quiz,
+        attr_reader :item, :level, :requestedLevel,
                     :questionParts, :answerParts
         attr_writer :requestedLevel
         
-        def initialize(item, quiz)
+        def initialize(item)
             @item = item
             @level = -1
             @requestedLevel = -1
-            @quiz = quiz
             @questionParts = []
             @answerParts = []
             @vocab = item.to_o
@@ -29,7 +28,6 @@ module JLDrill
             @item = value.item
             @level = value.level
             @requestedLevel = value.requestedLevel
-            @quiz = value.quiz
             @questionParts = value.questionParts
             @answerParts = value.answerParts
             setDisplayOnly = value.displayOnly?
@@ -40,7 +38,6 @@ module JLDrill
             return @item == value.item &&
                 @level == value.level &&
                 @requestedLevel == value.requestedLevel &&
-                @quiz == value.quiz &&
                 @questionParts == value.questionParts &&
                 @answerParts == value.answerParts &&
                 displayOnly? == value.displayOnly? &&
@@ -67,7 +64,7 @@ module JLDrill
         def vocab=(vocab)
             @vocab.assign(vocab)
             @item.setContents(vocab.contentString)
-            @quiz.problemModified(self)
+            @item.problemModified(self)
         end
 
         # Return a string showing what bin this problem is from

@@ -114,7 +114,7 @@ module JLDrill
             # because the level will always be 0
             @quiz.currentProblem.item.schedule.level.should be(0)
             test_problem(question, 
-                         ReadingProblem.new(@quiz.currentProblem.item, @quiz))
+                         ReadingProblem.new(@quiz.currentProblem.item))
             @quiz.currentProblem.item.itemStats.consecutive.should be(0)
 	    end
 
@@ -122,17 +122,17 @@ module JLDrill
             case @quiz.currentProblem.requestedLevel
                 when 0
                     test_problem(question, 
-                                 ReadingProblem.new(@quiz.currentProblem.item, @quiz)) 
+                                 ReadingProblem.new(@quiz.currentProblem.item)) 
                 when 1
                     if(!@quiz.currentProblem.item.to_o.kanji.nil?)
                         test_problem(question, 
-                                     KanjiProblem.new(@quiz.currentProblem.item, @quiz))
+                                     KanjiProblem.new(@quiz.currentProblem.item))
                     else
                         test_problem(question, 
-                                     ReadingProblem.new(@quiz.currentProblem.item, @quiz)) 
+                                     ReadingProblem.new(@quiz.currentProblem.item)) 
                     end
                 when 2
-                    test_problem(question, MeaningProblem.new(@quiz.currentProblem.item, @quiz)) 
+                    test_problem(question, MeaningProblem.new(@quiz.currentProblem.item)) 
             else
 	             # This shouldn't ever happen.  Blow up.
 	             true.should be(false) 
@@ -217,7 +217,7 @@ module JLDrill
 	        @quiz.contents.bins[0].length.should be(3)
 	        @quiz.contents.bins[1].length.should be(1)
             test_problem(@quiz.currentProblem.question, 
-                         ReadingProblem.new(@quiz.currentProblem.item, @quiz)) 
+                         ReadingProblem.new(@quiz.currentProblem.item)) 
 	        @quiz.bin.should be(1)
 	        @quiz.currentProblem.item.should be_equal(item)
 
@@ -281,7 +281,7 @@ module JLDrill
 	        @quiz.loadFromString("none", @sampleQuiz.file)
 	        item = @quiz.contents.bins[4][0]
 	        item.should_not be_nil
-            @quiz.currentProblem = MeaningProblem.new(item, @quiz)
+            @quiz.currentProblem = MeaningProblem.new(item)
             test_correct
             test_incorrect            
         end

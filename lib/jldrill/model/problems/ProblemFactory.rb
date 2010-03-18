@@ -5,21 +5,21 @@ require 'jldrill/model/problems/MeaningProblem'
 
 module JLDrill
     class ProblemFactory
-        def ProblemFactory.create(level, item, quiz)
+        def ProblemFactory.create(level, item)
             case level
                 when 0
-                    problem = ReadingProblem.new(item, quiz)
+                    problem = ReadingProblem.new(item)
                 when 1
                     v = item.to_o
                     if !v.kanji.nil?
-                        problem = KanjiProblem.new(item, quiz)
+                        problem = KanjiProblem.new(item)
                     else
-                        problem = MeaningProblem.new(item, quiz)
+                        problem = MeaningProblem.new(item)
                     end
                 when 2
-                    problem = MeaningProblem.new(item, quiz)
+                    problem = MeaningProblem.new(item)
                 else
-                   problem = ReadingProblem.new(item, quiz)
+                   problem = ReadingProblem.new(item)
              end
             problem.requestedLevel = level
             return problem

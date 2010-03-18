@@ -107,11 +107,10 @@ module JLDrill
         it "should be able to parse the schedule information in the file" do
             @items[3].to_s.should eql(@strings[3] + "\n")
             time = @items[3].schedule.schedule
-            # Note: I have to pass the bin here for legacy reasons.  In the
-            # actual application, Items that are created will have a bin
-            # because that's where they are stored.  Since we aren't using
+            newItem = Item.create(@items[3].to_s)
+            # Since we aren't using
             # a bin here, we'll cheat and set the bin number manually.
-            newItem = Item.create(@items[3].to_s, 4)
+            newItem.bin = 4
             newItem.schedule.duration.should eql(time.to_i)
         end
         

@@ -39,11 +39,11 @@ module JLDrill::MultipleProblemTypeSchedules
             vocab = item.to_o
             vocab.kanji = "blah"
             item.setContents(vocab.to_s)
-            problem = JLDrill::ProblemFactory.create(0, item, Story.quiz)
+            problem = JLDrill::ProblemFactory.create(0, item)
             problem.name.should eql("ReadingProblem")
-            problem = JLDrill::ProblemFactory.create(1, item, Story.quiz)
+            problem = JLDrill::ProblemFactory.create(1, item)
             problem.name.should eql("KanjiProblem")
-            problem = JLDrill::ProblemFactory.create(2, item, Story.quiz)
+            problem = JLDrill::ProblemFactory.create(2, item)
             problem.name.should eql("MeaningProblem")
         end
 
@@ -54,13 +54,13 @@ module JLDrill::MultipleProblemTypeSchedules
             vocab = item.to_o
             vocab.kanji = "blah"
             item.setContents(vocab.to_s)
-            problem = JLDrill::ProblemFactory.create(0, item, Story.quiz)
+            problem = JLDrill::ProblemFactory.create(0, item)
             clone = problem.clone
             clone.should eql(problem)
-            problem = JLDrill::ProblemFactory.create(1, item, Story.quiz)
+            problem = JLDrill::ProblemFactory.create(1, item)
             clone = problem.clone
             clone.should eql(problem)
-            problem = JLDrill::ProblemFactory.create(2, item, Story.quiz)
+            problem = JLDrill::ProblemFactory.create(2, item)
             clone = problem.clone
             clone.should eql(problem)
         end
@@ -72,11 +72,11 @@ module JLDrill::MultipleProblemTypeSchedules
             vocab = item.to_o
             vocab.kanji = "blah"
             item.setContents(vocab.to_s)
-            problem = JLDrill::ProblemFactory.create(0, item, Story.quiz)
+            problem = JLDrill::ProblemFactory.create(0, item)
             problem.to_s.should eql("/ReadingProblem")
-            problem = JLDrill::ProblemFactory.create(1, item, Story.quiz)
+            problem = JLDrill::ProblemFactory.create(1, item)
             problem.to_s.should eql("/KanjiProblem")
-            problem = JLDrill::ProblemFactory.create(2, item, Story.quiz)
+            problem = JLDrill::ProblemFactory.create(2, item)
             problem.to_s.should eql("/MeaningProblem")
         end
     end

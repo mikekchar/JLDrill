@@ -47,6 +47,8 @@ module JLDrill
 
         # Add an item to a bin
         def addItem(item, bin)
+            item.bin = bin
+            item.quiz = @quiz
             item.schedule.score = 0
             if item.position == -1
                 item.position = length 
@@ -150,7 +152,7 @@ module JLDrill
         # Add it to the contents in the specified bin.
         # Return the item that was added.
         def parseItem(line, bin)
-            item = Item.create(line, bin)
+            item = Item.create(line)
             return addItem(item, bin)
         end
 

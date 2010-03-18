@@ -224,7 +224,7 @@ module JLDrill
                 level = item.bin - 1
             end
             @stats.startTimer(item.bin == 4)
-            ProblemFactory.create(level, item, @quiz)
+            ProblemFactory.create(level, item)
         end
 
         # Promote the item to the next level/bin
