@@ -1,16 +1,22 @@
 require 'jldrill/model/Problem'
 require 'jldrill/model/problems/ProblemFactory'
+require 'jldrill/model/Quiz/Schedule'
 
 module JLDrill
     # Keeps track of which problem types are being reviewed and
     # their schedules
     class ProblemStatus
         attr_reader :item, :types, :schedules
+        attr_writer :item
 
         def initialize(item)
             @item = item
             @types = []
             @schedules = []
+        end
+
+        def name
+            return "ProblemStatus"
         end
 
         def clone
@@ -26,6 +32,27 @@ module JLDrill
             value.schedules.each do |schedule|
                 @schedules.push(schedule.clone)
             end
+        end
+
+        # Returns the schedule that should be addressed first
+        def firstSchedule
+            retVal = @schedules.max do |x,y|
+                x.reviewLoad <=> y.reviewLoad
+            end
+            # If there is no schedule, then create a meaning problem schedule
+            if retVal.nil?
+                retVal = Schedule.new(@item)
+                @schedules.push(retVal)
+                @types.push("MeaningProblem")
+            end
+            return retVal
+        end
+
+        def firstProblem
+            sched = firstSchedule
+            index = @schedules.find_index(sched)
+            level = ProblemFactory.parse(@types[index])
+            return ProblemFactory.create(level, @item)
         end
 
         def to_s

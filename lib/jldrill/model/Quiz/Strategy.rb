@@ -216,15 +216,16 @@ module JLDrill
         # Create a problem for the given item at the correct level
         def createProblem(item)
             item.itemStats.createProblem
+            @stats.startTimer(item.bin == 4)
             # Drill at random levels in bin 4, but don't drill reading
             if item.bin == 4
-                level = allowedLevels[rand(allowedLevels.size)]
+                problem = item.problem
             else
                 # Otherwise drill for the specific bin
                 level = item.bin - 1
+                problem = ProblemFactory.create(level, item)
             end
-            @stats.startTimer(item.bin == 4)
-            ProblemFactory.create(level, item)
+            return problem
         end
 
         # Promote the item to the next level/bin

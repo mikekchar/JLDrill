@@ -1,6 +1,6 @@
 require 'jldrill/model/items/ItemFactory'
 require 'jldrill/model/ItemStatus'
-require 'jldrill/model/Quiz/Schedule'
+require 'jldrill/model/ProblemStatus'
 require 'jldrill/model/Quiz/ItemStats'
 
 module JLDrill
@@ -45,7 +45,7 @@ module JLDrill
             @bin = 0
             @container = nil
             @status = ItemStatus.new(self)
-            @status.add(Schedule.new(self))
+            @status.add(ProblemStatus.new(self))
             @status.add(ItemStats.new(self))
         end
 
@@ -98,7 +98,13 @@ module JLDrill
 
         # Return the schedule for the Spaced Repetition Drill
         def schedule
-            return @status.select("Schedule")
+            problemStatus = @status.select("ProblemStatus")
+            return problemStatus.firstSchedule
+        end
+
+        def problem
+            problemStatus = @status.select("ProblemStatus")
+            return problemStatus.firstProblem
         end
 
         def itemStats
