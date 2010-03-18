@@ -1,5 +1,3 @@
-require 'jldrill/model/Quiz/Schedule'
-
 module JLDrill
 
     # Represents a single question/answer pair in a quiz
@@ -47,6 +45,10 @@ module JLDrill
         def to_s
             retVal = "/" + name
             return retVal
+        end
+
+        def parse(part)
+            return false
         end
         
         def setDisplayOnly(bool)

@@ -65,7 +65,7 @@ module JLDrill::MultipleProblemTypeSchedules
             clone.should eql(problem)
         end
 
-        it "should print the name fot to_s" do
+        it "should print the name for to_s" do
             # Doesn't matter what item we're working with
             item = Story.quiz.strategy.getItem
             # make sure it has kanji in it

@@ -5,6 +5,12 @@ require 'jldrill/model/problems/MeaningProblem'
 
 module JLDrill
     class ProblemFactory
+        PROBLEM_TYPES = ["ReadingProblem", "KanjiProblem", "MeaningProblem"]
+
+        def ProblemFactory.parse(string)
+            PROBLEM_TYPES.find_index(string)
+        end
+
         def ProblemFactory.create(level, item)
             case level
                 when 0
