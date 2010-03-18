@@ -11,6 +11,16 @@ module JLDrill
             @answerParts = ["reading", "definitions", "hint"]
         end
 
+        def name
+            return "KanjiProblem"
+        end
+
+        def clone
+            value = KanjiProblem.new(item, quiz)
+            value.assign(self)
+            return value
+        end
+
         # Returns false if the kanji is empty and we can't drill this
         # item.
         def valid?

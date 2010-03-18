@@ -1,8 +1,11 @@
+require 'jldrill/model/Quiz/Schedule'
+
 module JLDrill
 
     # Represents a single question/answer pair in a quiz
     class Problem
-        attr_reader :item, :level, :requestedLevel
+        attr_reader :item, :level, :requestedLevel, :quiz,
+                    :questionParts, :answerParts
         attr_writer :requestedLevel
         
         def initialize(item, quiz)
@@ -15,6 +18,38 @@ module JLDrill
             @vocab = item.to_o
             @displayOnly = false
             @preview = false
+        end
+
+        # Override in the concrete classes
+        def name
+            return "Problem"
+        end
+
+        def assign(value)
+            @item = value.item
+            @level = value.level
+            @requestedLevel = value.requestedLevel
+            @quiz = value.quiz
+            @questionParts = value.questionParts
+            @answerParts = value.answerParts
+            setDisplayOnly = value.displayOnly?
+            setPreview = value.preview?
+        end
+
+        def eql?(value)
+            return @item == value.item &&
+                @level == value.level &&
+                @requestedLevel == value.requestedLevel &&
+                @quiz == value.quiz &&
+                @questionParts == value.questionParts &&
+                @answerParts == value.answerParts &&
+                displayOnly? == value.displayOnly? &&
+                preview? == value.preview?
+        end
+
+        def to_s
+            retVal = "/" + name
+            return retVal
         end
         
         def setDisplayOnly(bool)

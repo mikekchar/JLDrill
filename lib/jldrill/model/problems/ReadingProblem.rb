@@ -11,6 +11,16 @@ module JLDrill
             @answerParts = ["definitions"]
         end
 
+        def name
+            return "ReadingProblem"
+        end
+
+        def clone
+            value = ReadingProblem.new(item, quiz)
+            value.assign(self)
+            return value
+        end
+
         def largeReading?
             return evaluateAttribute("kanji").empty?
         end
