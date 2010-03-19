@@ -152,7 +152,7 @@ module JLDrill
                 item = newSet[index]
                 # Resetting the schedule to make up for the consequences
                 # of an old bug where reset drills weren't reset properly.
-                item.schedule.reset
+                item.resetSchedules
                 promote(item)
                 item
             else
@@ -188,7 +188,7 @@ module JLDrill
             # Usually we get a working item if the above is not true
             item = getWorkingItem if item.nil?
 
-            item.schedule.seen = true
+            item.allSeen(true)
             return item
         end
 
@@ -210,8 +210,9 @@ module JLDrill
         # Promote the item to the next level/bin
         def promote(item)
             if !item.nil?
+                item.setScores(0)
                 if item.bin < 3
-                    item.schedule.level = item.bin
+                    item.setLevels(item.bin)
                     contents.moveToBin(item, item.bin + 1)
                 else
                     if item.bin == 3
@@ -244,20 +245,22 @@ module JLDrill
         # Mark the item as having been reviewed correctly
         def correct(item)
             @stats.correct(item)
-            item.schedule.correct
             item.itemStats.correct
-            if(item.schedule.score >= options.promoteThresh)
-                item.schedule.score = 0
+            if item.bin == 4
+                item.schedule.correct
                 promote(item)
-            elsif item.bin == 4
-                promote(item)
+            else
+                item.allCorrect
+                if(item.schedule.score >= options.promoteThresh)
+                    promote(item)
+                end
             end
         end
 
         # Mark the item as having been reviewed incorrectly
         def incorrect(item)
             @stats.incorrect(item)
-            item.schedule.incorrect
+            item.allIncorrect
             item.itemStats.incorrect
             demote(item)
         end
@@ -267,7 +270,7 @@ module JLDrill
         # in the review set, simply mark it correct.
         def learn(item)
             if item.bin <= 3
-                item.schedule.score = options.promoteThresh
+                item.setScores(options.promoteThresh)
                 contents.moveToBin(item, 3)
             end
             correct(item)

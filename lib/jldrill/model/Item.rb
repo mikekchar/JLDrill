@@ -113,6 +113,36 @@ module JLDrill
             problemStatus = @status.select("ProblemStatus")
             problemStatus.demoteAll
         end
+        
+        def resetSchedules
+            problemStatus = @status.select("ProblemStatus")
+            problemStatus.resetAll
+        end
+
+        def allSeen(value)
+            problemStatus = @status.select("ProblemStatus")
+            problemStatus.allSeen(value)
+        end
+
+        def setScores(value)
+            problemStatus = @status.select("ProblemStatus")
+            problemStatus.setScores(value)     
+        end
+
+        def setLevels(value)
+            problemStatus = @status.select("ProblemStatus")
+            problemStatus.setLevels(value)     
+        end
+
+        def allCorrect
+            problemStatus = @status.select("ProblemStatus")
+            problemStatus.allCorrect     
+        end
+
+        def allIncorrect
+            problemStatus = @status.select("ProblemStatus")
+            problemStatus.allIncorrect     
+        end
 
         def problem
             problemStatus = @status.select("ProblemStatus")

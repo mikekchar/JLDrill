@@ -112,6 +112,45 @@ module JLDrill
             end
         end
 
+        def resetAll
+            # First check to make sure that there are the correct
+            # schedules.
+            checkSchedules
+            @schedules.each do |schedule|
+                schedule.reset
+            end
+        end
+
+        def allSeen(value)
+            @schedules.each do |schedule|
+                schedule.seen = value
+            end
+        end
+
+        def setScores(value)
+            @schedules.each do |schedule|
+                schedule.score = value
+            end
+        end
+
+        def setLevels(value)
+            @schedules.each do |schedule|
+                schedule.level = value
+            end
+        end
+
+        def allCorrect
+            @schedules.each do |schedule|
+                schedule.correct
+            end
+        end
+
+        def allIncorrect
+            @schedules.each do |schedule|
+                schedule.incorrect
+            end            
+        end
+
         def firstProblem
             # Every time we make a problem we should check to make sure
             # that correct schedules have been build.  The user may have
