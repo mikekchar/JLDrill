@@ -68,9 +68,17 @@ module JLDrill
         end
 
         # When an item is being demoted, demote all the schedules
-        def demote
+        def demoteAll
             @schedules.each do |schedule|
-                schedule.score = 0
+                schedule.demote
+            end
+        end
+
+        # When an item is being promoted to the review set, schedule
+        # each type
+        def scheduleAll
+            @schedules.each do |schedule|
+                schedule.schedule
             end
         end
 

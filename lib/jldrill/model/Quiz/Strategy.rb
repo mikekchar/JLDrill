@@ -218,7 +218,7 @@ module JLDrill
                         # Newly promoted items
                         item.itemStats.consecutive = 1
                         @stats.learned += 1
-                        item.schedule.schedule
+                        item.scheduleAll
                     end
                     # Put the item at the back of the bin
                     contents.bins[item.bin].delete(item)
@@ -230,7 +230,7 @@ module JLDrill
         # Demote the item
         def demote(item)
             if !item.nil?
-                item.schedule.level = 0
+                item.demoteAll
                 if (item.bin != 0)
                     contents.moveToBin(item, 1)
                 else

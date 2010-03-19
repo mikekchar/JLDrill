@@ -218,6 +218,13 @@ module JLDrill
         def unschedule
             @duration = -1
         end
+
+        # Unschedule and reset the level and score of the item
+        def demote
+            unschedule
+            @score = 0
+            @level = 0
+        end
         
         # Return the difficulty of the item.  Right now that is
         # the number of times it was incorrect.
