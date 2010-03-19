@@ -27,6 +27,10 @@ sure that the gem bin directory is in your path.  Debian (and Ubuntu)
 put this in the /var/lib/gems/1.8/bin directory, where 1.8 is the
 version number for ruby.
 
+Note: If you have a source release of JLDrill, you may start it by
+running AppRun in the main directory.  This will run that version
+of JLDrill even if you have another version installed somewhere else.
+
 Main Window
 -----------
 This is what you see when you first start JLDrill.
@@ -282,9 +286,6 @@ Then we quit the application and restarted it later in the day.
 As you can see from the status line we have 12 items in the review
 set, so the application automatically entered review mode.  Eventually
 it displayed this item. Here it is displaying a kanji problem.
-When reviewing, JLDrill will randomly select either a kanji problem
-or a meaning problem for the item.  You can change what kinds of
-problems JLDrill will select from the Options menu.
 
 Inspecting the status line, you can see that part of it has changed.
 It now reads "+1, Today --> 4.2 days" where the level and potential schedule
@@ -367,7 +368,7 @@ successfully reviewed it once, still had a schedule of 4.2 days.
 I had only just promoted it a few minutes ago, so the total
 schedule should have been twice that -- or only minutes.
 
-In reality, it actually does.  What happened was that the
+What happened was that the
 item was scheduled for 4.2 potential days.  But I reviewed
 all the items for those 4.2 days in just a couple of minutes.
 So the program adjusts for this and creates the new scheduled
@@ -381,6 +382,48 @@ is that the program is designed to keep your items roughly
 in order of the chance you have of forgetting them.  When you
 know all the items in the list with 90% chance of success,
 it gives you new items.
+
+Problem Types
+-------------
+
+JLDrill allows you to select what kind of problem types you
+want to review.  There are three types of problems:
+
+* Reading Problem.  This is the type of problem you see
+  in the first level of the working set.  The Kanji and
+  Reading are displayed.  You must guess the Meaning.
+* Kanji Problem.  This is the type of problem you see
+  in the second level of the working set.  The Kanji
+  is displayed and you must guess the Reading and the Meaning.
+* Meaning Problem.  This is the type of problem you see
+  in the third level of the working set.  The Meaning
+  is displayed and you must guess the Kanji and Reading.
+
+You may select which types of problems you wish to
+quiz for items in the Review Set.  By default JLDrill
+will present both Kanji Problems and Meaning Problems.
+You can change this from the Options window (see below).
+
+If you select more than one type of problem to review,
+JLDrill will schedule both types of problem independently.
+In any one session, you will see an item only once.
+But if you reload the file then you will often see the
+item again with the other problem type.
+
+For instance, if you have both Kanji Problems and
+Meaning Problems enabled, then JLDrill will create
+a schedule for both.  On the first day you may see
+the Meaning problem.  If you get it correct, it will
+be scheduled sometime in the future.  But the next
+time you run JLDrill you are likely to see the
+item again with a Kanji Problem.  Since the schedules
+randomly vary by +-10%, the two types of problems
+for the same item will eventually diverge and there
+will be little relationship between them.
+
+If you get either of the problems wrong, the schedule
+for both problem types will be reset and you will have
+to start again.
 
 Options
 -------
