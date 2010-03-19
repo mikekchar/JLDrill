@@ -36,7 +36,7 @@ module JLDrill
 
         # Returns the schedule that should be addressed first
         def firstSchedule
-            retVal = @schedules.max do |x,y|
+            retVal = @schedules.min do |x,y|
                 x.reviewLoad <=> y.reviewLoad
             end
             # If there is no schedule, then create a meaning problem schedule
