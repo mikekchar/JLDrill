@@ -89,6 +89,25 @@ the number of jellybeans done in the properties of the task.
    :JellyBeans: 3
    :Done: 3
    :END:
+
+** DONE If there is no kanji don't schedule a kanji problem
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 1
+   :END:
+
+** TODO Put a maximum of 25% extra beyond normal schedule
+        Sometimes you leave the stack for a long time but
+        you are able to answer the question anyway.  This
+        can cause the new schedule to be quite long depriving
+        you of practice.  Put a maximum on how much extra
+        you can add to the schedule
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 0
+   :END:
    
 ** TODO One of the items in the working set had a potential schedule of 72 days
 

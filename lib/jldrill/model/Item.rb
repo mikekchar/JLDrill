@@ -96,6 +96,11 @@ module JLDrill
             return item
         end
 
+        def removeInvalidKanjiProblems
+            problemStatus = @status.select("ProblemStatus")
+            problemStatus.removeInvalidKanjiProblems
+        end
+
         # Return the schedule for the Spaced Repetition Drill
         def schedule
             problemStatus = @status.select("ProblemStatus")
@@ -219,6 +224,11 @@ module JLDrill
                 item = nil
             end
             return item
+        end
+
+        def hasKanji?
+            v = to_o
+            return !v.kanji.nil?
         end
 
         # Returns true if the items contain the same object.

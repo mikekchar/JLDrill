@@ -20,8 +20,7 @@ module JLDrill
                 when 0
                     problem = ReadingProblem.new(item)
                 when 1
-                    v = item.to_o
-                    if !v.kanji.nil?
+                    if item.hasKanji?
                         problem = KanjiProblem.new(item)
                     else
                         problem = MeaningProblem.new(item)

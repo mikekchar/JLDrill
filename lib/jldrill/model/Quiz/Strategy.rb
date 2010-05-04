@@ -77,6 +77,11 @@ module JLDrill
 
         # Sort the items in the ReviewSet according to their schedule
         def reschedule
+            # This is here for legacy files that may have Kanji 
+            # problems schedules but no kanji
+            reviewSet.each do |x|
+                x.removeInvalidKanjiProblems
+            end
             reviewSet.sort! do |x,y|
                 x.schedule.reviewLoad <=> y.schedule.reviewLoad
             end

@@ -34,6 +34,23 @@ module JLDrill
             end
         end
 
+        def addScheduleType(type, schedule)
+            if (type != "KanjiProblem") || (@item.hasKanji?)
+                @schedules.push(schedule)
+                @types.push(type)
+            end
+        end
+
+        # This is here for legacy files that might have added
+        # schedules for KanjiProblems that they don't have
+        def removeInvalidKanjiProblems
+            pos = @types.find_index("KanjiProblem")
+            if !pos.nil? && !@item.hasKanji?
+                @types.delete_at(pos)
+                @schedules.delete_at(pos)
+            end
+        end
+
         # Returns the schedule that should be addressed first
         def firstSchedule
             retVal = @schedules.min do |x,y|
@@ -42,8 +59,7 @@ module JLDrill
             # If there is no schedule, then create a meaning problem schedule
             if retVal.nil?
                 retVal = Schedule.new(@item)
-                @schedules.push(retVal)
-                @types.push("MeaningProblem")
+                addScheduleType("MeaningProblem", retVal)
             end
             return retVal
         end
@@ -61,8 +77,9 @@ module JLDrill
             levels.each do |level|
                 type = ProblemFactory.lookup(level)
                 if findSchedule(type).nil?
-                    @types.push(type)
-                    @schedules.push(firstSchedule.clone)
+                    # If it can't find the correct type of schedule,
+                    # duplicate the first one it find and add it.
+                    addScheduleType(type, firstSchedule.clone)
                 end
             end 
         end
