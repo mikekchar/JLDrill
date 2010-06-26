@@ -69,6 +69,9 @@ module JLDrill::Gtk
                     ["/Drill/_Reset",
                         "<Item>",          "<control>R",    nil, 
                         @view.resetQuiz ],
+                    ["/Drill/_Remove Duplicates",
+                        "<Item>",          "R",    nil, 
+                        @view.removeDups ],
 
                     ["/_Vocab"],
                     ["/Vocab/_Edit...",

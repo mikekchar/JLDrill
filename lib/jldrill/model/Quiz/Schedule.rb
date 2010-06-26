@@ -168,7 +168,14 @@ module JLDrill
 
             return i
         end
-        
+       
+        # Return the maximum interval that this item can have.
+        # It is calculated as twice the previous duration plus 25%
+        # It will return -1 if there is no maximum
+        def maxInterval
+           return (@duration.to_f * 1.25).to_i * 2
+        end
+ 
         # Return the amount of time we should wait (in ideal time)
         # for the next review.
         #
@@ -177,6 +184,8 @@ module JLDrill
         # difficulty.  
         # For the rest it is twice the actual amount of time since 
         # the last review.
+	# To avoid increasing the gap too much, a maximum of
+	# twice the previous duration plus 25% is used.
         def calculateInterval
             interval = intervalFromDifficulty(difficulty)
             # If it is scheduled, then that means it isn't 
@@ -185,6 +194,10 @@ module JLDrill
                 elapsed = elapsedTime
                 if (2 * elapsed) > interval
                     interval = 2 * elapsed
+                    max = maxInterval
+                    if (interval > max) && (max > 0)
+                        interval = max
+                    end
                 end
             end
             interval

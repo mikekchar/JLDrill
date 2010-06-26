@@ -61,6 +61,13 @@ module JLDrill
             end
         end
 
+        # Calls a block for each item in the bin in the reverse order
+        def reverse_each(&block)
+            @contents.reverse_each do |item|
+                block.call(item)
+            end
+        end
+
         # Calls a block for each item in the bin, stopping if the
         # block returns false.  Returns true if all iterations return true.
         def all?(&block)
@@ -76,7 +83,18 @@ module JLDrill
               block.call(x,y)
             end
         end
-   
+
+        # Returns an array of items for which block returns true
+        def findAll(&block)
+            retVal = []
+            @contents.each do |item|
+                if block.call(item)
+                    retVal.push(item)
+                end
+            end
+            return retVal
+        end
+
         # Set the contents array to the value specified.  Also set the bin
         # number correctly
         def contents=(array)

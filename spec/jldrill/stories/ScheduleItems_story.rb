@@ -95,5 +95,19 @@ module JLDrill::ScheduleItems
             createAndPromote(item)
             scheduleShouldBe(item, 5)
         end
+
+	it "should set a maximum of the duration * 2 + 25%" do
+            item = newSet[0]
+            createAndPromote(item)
+            scheduleShouldBe(item, 5)
+            orig = item.schedule.duration
+            max = item.schedule.maxInterval
+            max.should eql((orig.to_f * 1.25).to_i * 2)
+            # Make the item last reviewed 20 days ago
+            item.schedule.lastReviewed = item.schedule.lastReviewed - 20 * 60 * 60 * 24
+            item.schedule.calculateInterval.should eql(max)
+            item.schedule.correct
+            scheduleShouldBe(item, (max.to_f / 24 / 60 / 60).to_i)
+        end
     end
 end

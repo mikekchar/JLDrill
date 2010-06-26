@@ -290,6 +290,12 @@ module JLDrill
                 @quiz.drill
             end
         end
+
+        def removeDups
+            if !quiz.nil?
+                @quiz.contents.removeDuplicates
+            end
+        end
 		
 		def reset
 		    @quiz.reset

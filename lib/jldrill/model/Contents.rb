@@ -235,6 +235,34 @@ module JLDrill
             end
         end
 
+        # Returns a list of items for which block returns true
+        def findAll(&block)
+            retVal = []
+            @bins.each do |bin|
+                retVal += bin.findAll(&block)
+            end
+            return retVal
+        end
+
+        # Removes all duplicate items.  Keeps the version in the
+        # highest bin
+        def removeDuplicates
+            @bins.reverse_each do |bin|
+                bin.reverse_each do |item|
+                    obj = item.to_o
+                    print "#{item.position}: #{item.to_o.reading}..."
+                    duplicates = self.findAll do |candidate|
+                        ((item != candidate) && (obj == candidate.to_o))
+                    end
+                    duplicates.each do |dup|
+                        print "   #{dup.position}"
+                        self.delete(dup)
+                    end
+                    print "\n"
+                end
+            end
+        end
+
         # Returns true if all of the bins are empty
         def empty?
             retVal = @bins.all? do |bin|

@@ -124,5 +124,9 @@ module JLDrill
         def learn
             @parent.learn
         end
+
+        def removeDups
+            @parent.removeDups
+        end
     end
 end

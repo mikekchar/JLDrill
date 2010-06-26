@@ -47,6 +47,7 @@ module JLDrill
             @status = ItemStatus.new(self)
             @status.add(ProblemStatus.new(self))
             @status.add(ItemStats.new(self))
+            @cache = nil
         end
 
         # Create an item using the save string
@@ -166,6 +167,7 @@ module JLDrill
             @bin = item.bin
             @status.assign(item.status)
             @hash = item.hash
+            @cache = nil
         end
 
         # Set the type of the item
@@ -219,11 +221,13 @@ module JLDrill
         # Create the object in the item and return it
         def to_o
             if !@contents.empty?
-                item = @itemType.create(@contents)
+                if @cache.nil?
+                    @cache = @itemType.create(@contents)
+                end
             else
-                item = nil
+                @cache = nil
             end
-            return item
+            return @cache
         end
 
         def hasKanji?
