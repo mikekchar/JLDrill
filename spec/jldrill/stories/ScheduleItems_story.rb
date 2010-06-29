@@ -109,5 +109,23 @@ module JLDrill::ScheduleItems
             item.schedule.correct
             scheduleShouldBe(item, (max.to_f / 24 / 60 / 60).to_i)
         end
+
+        it "should schedule a minimum of the last duration" do
+            item = newSet[0]
+            createAndPromote(item)
+            scheduleShouldBe(item, 5)
+            duration = item.schedule.duration
+            # Make the item last reviewed 1 day ago
+            item.schedule.lastReviewed = item.schedule.lastReviewed - 60 * 60 *24
+            # This is a strange way to say that the new Interval should
+            # be near the old duration.
+            scheduleShouldBe(item, (item.schedule.calculateInterval / 24 / 60 /60).to_i)
+            # But in no way should the new interval be less than the old one
+            (item.schedule.calculateInterval >= duration).should be_true
+            item.schedule.correct
+            # Since we are scheduling from now, the next schedule should
+            # also be around 5 days.
+            scheduleShouldBe(item, 5)
+        end
     end
 end

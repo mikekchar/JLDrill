@@ -199,6 +199,9 @@ module JLDrill
                         interval = max
                     end
                 end
+                if (interval < @duration)
+                    interval = @duration
+                end
             end
             interval
         end

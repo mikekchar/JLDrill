@@ -97,7 +97,7 @@ the number of jellybeans done in the properties of the task.
    :Done: 1
    :END:
 
-** TODO Put a maximum of 25% extra beyond normal schedule
+** DONE Put a maximum of 25% extra beyond normal schedule
         Sometimes you leave the stack for a long time but
         you are able to answer the question anyway.  This
         can cause the new schedule to be quite long depriving
@@ -106,7 +106,7 @@ the number of jellybeans done in the properties of the task.
 
    :PROPERTIES:
    :JellyBeans: 2
-   :Done: 0
+   :Done: 2
    :END:
    
 ** TODO One of the items in the working set had a potential schedule of 72 days
@@ -116,14 +116,15 @@ the number of jellybeans done in the properties of the task.
    :Done: 0
    :END:
 
-** TODO Early reviewed items scheduled too soon
+** DONE Early reviewed items scheduled too soon
    If an item is reviewed earlier and answered correctly, it can be
    given a duration that is less than it's earlier duration.  This is
-   confusing at least and maybe should be fixed.
+   confusing at least and maybe should be fixed. Basically made it
+   so it would never schedule less than the previous duration.
 
    :PROPERTIES:
    :JellyBeans: 1
-   :Done: 0
+   :Done: 1
    :END:
 
 ** TODO Time to learn after the first item is waaay too big (10798.7s) [1/2]
