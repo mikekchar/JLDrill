@@ -127,6 +127,17 @@ the number of jellybeans done in the properties of the task.
    :Done: 1
    :END:
 
+** TODO Review Mode isn't reset after loading a file
+    If you turn review mode on and then load another file,
+    the button stays depressed.  But it actually doesn't stay
+    in review mode.  Change it so that when you load another
+    file, review mode is turned off and the button isn't depressed.
+
+    :PROPERTIES:
+    :JellyBeans: 1
+    :Done: 0
+    :END:
+
 ** TODO Time to learn after the first item is waaay too big (10798.7s) [1/2]
    - [X] Refactor tests
    - [ ] Test to see if this is a real problem	 
@@ -185,6 +196,8 @@ the number of jellybeans done in the properties of the task.
 This section lists important work that falls out of the
 previous iteration for one reason or another.
 
+** TODO Allow undo
+** TODO Allow Lean/Unlean for any arbitrary item
 ** TODO Alternate Language support (i.e., Chinese)
 ** TODO Start new drills in Preview mode
    When a drill has been loaded for the first time (or after a reset), 

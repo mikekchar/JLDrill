@@ -72,11 +72,14 @@ module JLDrill::ScheduleItems
             item.schedule.difficulty.should eql(0)
         end
 
+        def inDays(duration)
+            return duration.to_f / (60 * 60 * 24)
+        end
+
         def scheduleShouldBe(item, days)
-            gap = item.schedule.duration
-            gapInDays = gap.to_f / (60 * 60 * 24)
+            gap = inDays(item.schedule.duration)
             # There's a random +- 10% variation in the schedule
-            gapInDays.should be_close(days.to_f, days.to_f / 10.0)
+            gap.should be_close(days.to_f, days.to_f / 10.0)
         end
 
         it "should schedule difficulty 0 items 5 days from now" do
