@@ -109,6 +109,23 @@ the number of jellybeans done in the properties of the task.
    :Done: 2
    :END:
    
+** TODO Use smaller backoff for longer durations
+        I have noticed that I fail in my longer duration items
+        more often than my shorter duration items.  With the
+        idea of also reviewing every item at least once
+        every 6 months, I will modify the backoff so that it
+        falls off to 1.0 at 180 days.  In other words a duration
+        of 1 day or less will have a backoff of 2.0 while a
+        duration of 180 days will have a backoff of 180 days.
+        It will decrease linearly, so at 90 days the backoff
+        is 1.5.  I also need to update the stats so that the
+        categories are more appropriate.
+
+    :PROPERTIES:
+    :JellyBeans: 2
+    :Done: 0
+    :END:
+
 ** TODO One of the items in the working set had a potential schedule of 72 days
 
    :PROPERTIES:
