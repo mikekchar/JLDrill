@@ -206,22 +206,21 @@ module JLDrill
         # difficulty.  
         # For the rest it is twice the actual amount of time since 
         # the last review.
-	# To avoid increasing the gap too much, a maximum of
-	# twice the previous duration plus 25% is used.
+	    # To avoid increasing the gap too much, a maximum of
+	    # twice the previous duration plus 25% is used.
         def calculateInterval
             interval = intervalFromDifficulty(difficulty)
             # If it is scheduled, then that means it isn't 
             # a newly promoted item
             if scheduled?
                 elapsed = elapsedTime
-                if backoff(elapsed) > interval
+                if backoff(elapsed) > @duration.seconds
                     interval = backoff(elapsed) 
                     max = maxInterval
                     if (interval > max) && (max > 0)
                         interval = max
                     end
-                end
-                if (interval < @duration.seconds)
+                else
                     interval = @duration.seconds
                 end
             end

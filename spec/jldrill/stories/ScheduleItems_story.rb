@@ -76,33 +76,33 @@ module JLDrill::ScheduleItems
             return duration.to_f / (60 * 60 * 24)
         end
 
-        def scheduleShouldBe(item, days)
+        def scheduleShouldBe(item, days, range=10)
             gap = inDays(item.schedule.duration)
-            # There's a random +- 10% variation in the schedule
-            gap.should be_close(days.to_f, days.to_f / 10.0)
+            # There's a random +- range variation in the schedule
+            gap.should be_close(days.to_f, days.to_f / range.to_f)
         end
 
         it "should schedule difficulty 0 items 5 days from now" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item, 5)
+            scheduleShouldBe(item, 5, 10)
         end
 
         it "should schedule new items from now even if there are scheduled items" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item, 5)
+            scheduleShouldBe(item, 5, 10)
 
             # Get a new item
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item, 5)
+            scheduleShouldBe(item, 5, 10)
         end
 
 	it "should set a maximum of the duration * 2 + 25%" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item, 5)
+            scheduleShouldBe(item, 5, 10)
             orig = item.schedule.duration
             max = item.schedule.maxInterval
             max.should eql(item.schedule.backoff(orig.to_f * 1.25))
@@ -110,25 +110,26 @@ module JLDrill::ScheduleItems
             item.schedule.lastReviewed = item.schedule.lastReviewed - 20 * 60 * 60 * 24
             item.schedule.calculateInterval.should eql(max)
             item.schedule.correct
-            scheduleShouldBe(item, (max.to_f / 24 / 60 / 60).to_i)
+            scheduleShouldBe(item, (max.to_f / 24 / 60 / 60).to_i, 10)
         end
 
         it "should schedule a minimum of the last duration" do
             item = newSet[0]
             createAndPromote(item)
             scheduleShouldBe(item, 5)
-            duration = item.schedule.duration
+            orig = item.schedule.duration
             # Make the item last reviewed 1 day ago
             item.schedule.lastReviewed = item.schedule.lastReviewed - 60 * 60 *24
-            # This is a strange way to say that the new Interval should
-            # be near the old duration.
-            scheduleShouldBe(item, (item.schedule.calculateInterval / 24 / 60 /60).to_i)
-            # But in no way should the new interval be less than the old one
-            (item.schedule.calculateInterval >= duration).should be_true
+
+            newInterval = item.schedule.calculateInterval
+            newInterval.should eql(orig)
+
             item.schedule.correct
-            # Since we are scheduling from now, the next schedule should
-            # also be around 5 days.
-            scheduleShouldBe(item, 5)
+            # The original schedule was 5 days +- 10%.  The new schedule
+            # since it is going from now should be the same, but with
+            # another +-10% variance.
+            newInDays = inDays(newInterval)
+            scheduleShouldBe(item, newInDays, 10)
         end
 
         it "should vary the backoff depending on the previous duration" do

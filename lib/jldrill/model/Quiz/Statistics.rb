@@ -1,40 +1,14 @@
 require 'jldrill/model/Item'
 require 'jldrill/model/ItemStatus'
 require 'jldrill/model/Quiz/Timer'
+require 'jldrill/model/Quiz/LevelStats'
+require 'jldrill/model/Quiz/Counter'
 
 module JLDrill
 
     # Statistics for a quiz session
     class Statistics
     
-        class LevelStats
-            def initialize
-                @num = 0
-                @correct = 0
-            end
-            
-            def correct
-                @correct += 1
-                @num += 1
-            end
-            
-            def incorrect
-                @num += 1
-            end
-            
-            def total
-                @num
-            end
-            
-            def accuracy
-                if @num > 0
-                    ((@correct.to_f / @num.to_f) * 100).to_i
-                else
-                    nil
-                end
-            end
-        end
-
         attr_reader :estimate, :lastTen, :confidence, :levels, 
                         :timesInTargetZone, :learned, :reviewed
     
@@ -181,42 +155,6 @@ module JLDrill
                 retVal.push([0, 0])
             end
             return retVal
-        end
-
-        class Counter
-            attr_reader :found
-            attr_writer :found
-
-            def initialize(stats, start, table, pos)
-                @ranges = makeRanges(stats, start)
-                @found = false
-                @table = table
-                @pos = pos
-            end            
-
-            def makeRanges(stats, start)
-                retVal = []
-                0.upto(6) do |level|
-                    retVal.push(stats.findRange(level, start))
-                end
-                return retVal
-            end
-
-            def finalCount
-                if !@found
-                    @table[7][@pos] += 1
-                end
-                @found = false
-            end
-        end
-
-        class DurationCounter < Counter
-            def count(schedule, level)
-                if !@found && schedule.durationWithin?(@ranges[level])
-                    @table[level][@pos] += 1
-                    @found = true
-                end
-            end
         end
 
         def statsTable

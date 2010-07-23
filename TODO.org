@@ -123,7 +123,7 @@ the number of jellybeans done in the properties of the task.
 
     :PROPERTIES:
     :JellyBeans: 2
-    :Done: 0
+    :Done: 1
     :END:
 
 ** TODO One of the items in the working set had a potential schedule of 72 days
