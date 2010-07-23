@@ -81,43 +81,9 @@ module JLDrill
             return @inTargetZone
         end
 
-        # Adjust a range in the form of number of days to
-        # a range of times from the date supplied
-        def adjustRange(range, start)
-            low = SECONDS_PER_DAY * range.begin + start.to_i
-            high = SECONDS_PER_DAY * range.end + start.to_i
-            return low...high
-        end
-
-        def findRange(level, from)
-            low = 0
-            high = 5
-            1.upto(level) do
-                if low == 0
-                    low = 5
-                else
-                    low = low * 2
-                end
-                high = low * 2
-            end
-            # Inclusive range so that the correct high end is
-            # used even though the resultant range will not
-            # have the end point inclusive.
-            return adjustRange(low..high, from)
-        end
-
+        # Get the appropriate LevelStat object for this item
         def getLevel(item)
-            level = 0
-            found = false
-            while (level <= 6) && !found
-                range=findRange(level, 0)
-                if item.schedule.durationWithin?(range)
-                    found = true
-                else
-                    level += 1
-                end
-            end
-            return @levels[level]
+            return @levels[Counter.getLevel(item)]
         end
 
         def recordReviewRate(item)
@@ -150,18 +116,12 @@ module JLDrill
         end
 
         def statsTable
-            dCounter = DurationCounter.new(self)
+            dCounter = DurationCounter.new
 
             reviewBin.each do |item|
-                level = 0
-                while (level <= 6) && !dCounter.found
-                    schedule = item.schedule
-                    dCounter.count(schedule, level)
-                    level += 1
-                end
-                dCounter.finalCount
+                dCounter.count(item)
             end
-            return dCounter.table
+            return dCounter
         end
         
         def correct(item)

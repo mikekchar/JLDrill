@@ -105,7 +105,7 @@ module JLDrill::ScheduleItems
             scheduleShouldBe(item, 5, 10)
             orig = item.schedule.duration
             max = item.schedule.maxInterval
-            max.should eql(item.schedule.backoff(orig.to_f * 1.25))
+            max.should eql(JLDrill::Schedule.backoff(orig.to_f * 1.25))
             # Make the item last reviewed 20 days ago
             item.schedule.lastReviewed = item.schedule.lastReviewed - 20 * 60 * 60 * 24
             item.schedule.calculateInterval.should eql(max)
@@ -135,20 +135,20 @@ module JLDrill::ScheduleItems
         it "should vary the backoff depending on the previous duration" do
             item = newSet[0]
             # Small numbers back off very close to 2.0
-            item.schedule.backoff(100).should eql(199)
+            JLDrill::Schedule.backoff(100).should eql(199)
             ninetyDays = JLDrill::Duration.new
             ninetyDays.days=90
             # At 90 days the back off is around 1.5
             target = (1.5 * ninetyDays.seconds).to_i
-            item.schedule.backoff(ninetyDays.seconds).should eql(target)
+            JLDrill::Schedule.backoff(ninetyDays.seconds).should eql(target)
             # At 180 days the backoff is 1.0
             hundredEightyDays = JLDrill::Duration.new
             hundredEightyDays.days=180
-            item.schedule.backoff(hundredEightyDays.seconds).should eql(hundredEightyDays.seconds)
+            JLDrill::Schedule.backoff(hundredEightyDays.seconds).should eql(hundredEightyDays.seconds)
             # At 200 days the backoff is still 1.0
             twoHundredDays = JLDrill::Duration.new
             twoHundredDays.days=200
-            item.schedule.backoff(twoHundredDays.seconds).should eql(twoHundredDays.seconds)
+            JLDrill::Schedule.backoff(twoHundredDays.seconds).should eql(twoHundredDays.seconds)
         end 
     end
 end

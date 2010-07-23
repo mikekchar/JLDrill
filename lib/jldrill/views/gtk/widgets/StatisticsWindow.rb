@@ -1,4 +1,5 @@
 require 'Context/Gtk/Widget'
+require 'jldrill/model/Quiz/Counter'
 require 'gtk2'
 
 module JLDrill::Gtk
@@ -83,9 +84,11 @@ module JLDrill::Gtk
             hbox = Gtk::HBox.new()
             add(hbox)
             ## Layout everything in a vertical table
-            rows = [" Less than 5 days ", "5 - 10 days", "10 - 20 days", 
-                      "20 - 40 days", "40 - 80 days", "80 - 160 days", 
-                      "160 - 320 days", "320+ days"]
+            counter = JLDrill::Counter.new
+            rows = []
+            0.upto(7) do |i|
+                rows = rows.push(counter.levelString(i))
+            end
             columns = [" Duration ", " Correct ", " Tried ",]
             @durationTable = StatisticsTable.new(rows, columns)
             hbox.add(@durationTable)
@@ -126,7 +129,8 @@ module JLDrill::Gtk
             self.destroy
         end
         
-        def updateDuration(table)
+        def updateDuration(counter)
+            table = counter.table
             0.upto(6) do |i|
                 num = table[i][0]
                 @durationTable.values[i][0].text = num.to_s

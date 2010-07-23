@@ -180,7 +180,7 @@ module JLDrill
         end
       
         # Return the the new interval after backing off
-        def backoff(interval)
+        def Schedule.backoff(interval)
             sixMonths = Duration.new
             sixMonths.days = 180
             if(interval < sixMonths.seconds)
@@ -195,7 +195,7 @@ module JLDrill
         # It is calculated as twice the previous duration plus 25%
         # It will return -1 if there is no maximum
         def maxInterval
-           return backoff(@duration.seconds.to_f * 1.25)
+           return Schedule.backoff(@duration.seconds.to_f * 1.25)
         end
  
         # Return the amount of time we should wait (in ideal time)
@@ -214,8 +214,8 @@ module JLDrill
             # a newly promoted item
             if scheduled?
                 elapsed = elapsedTime
-                if backoff(elapsed) > @duration.seconds
-                    interval = backoff(elapsed) 
+                if Schedule.backoff(elapsed) > @duration.seconds
+                    interval = Schedule.backoff(elapsed) 
                     max = maxInterval
                     if (interval > max) && (max > 0)
                         interval = max
