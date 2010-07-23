@@ -11,7 +11,7 @@ class Counter
     def initializeTable
         retVal = []
         0.upto(7) do |level|
-            retVal.push([0, 0])
+            retVal.push(0)
         end
         return retVal
     end
@@ -26,7 +26,7 @@ class Counter
 
     def finalCount
         if !@found
-            @table[7][0] += 1
+            @table[7] += 1
         end
         @found = false
     end
@@ -35,7 +35,7 @@ end
 class DurationCounter < Counter
     def count(schedule, level)
         if !@found && schedule.durationWithin?(@ranges[level])
-            @table[level][0] += 1
+            @table[level] += 1
             @found = true
         end
     end

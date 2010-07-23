@@ -131,7 +131,7 @@ module JLDrill::Gtk
                 num = table[i][0]
                 @durationTable.values[i][0].text = num.to_s
             end
-            @durationTable.values[7][0].text = table[7][0].to_s
+            @durationTable.values[7][0].text = table[7].to_s
         end
         
         def updateAccuracy(stats)
