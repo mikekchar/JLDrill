@@ -7,10 +7,7 @@ module JLDrill
         it "should be created" do
             quiz = Quiz.new
             stats = Statistics.new(quiz)
-            table = stats.initializeTable
-            start = 0
-            pos = 0
-            counter = Counter.new(stats, start, table, pos)
+            counter = Counter.new(stats)
             counter.found.should eql(false)
         end
     end

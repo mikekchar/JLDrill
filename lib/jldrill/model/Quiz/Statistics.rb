@@ -149,17 +149,8 @@ module JLDrill
             retVal
         end
 
-        def initializeTable
-            retVal = []
-            0.upto(7) do |level|
-                retVal.push([0, 0])
-            end
-            return retVal
-        end
-
         def statsTable
-            values = initializeTable
-            dCounter = DurationCounter.new(self, 0, values, 0)
+            dCounter = DurationCounter.new(self)
 
             reviewBin.each do |item|
                 level = 0
@@ -170,7 +161,7 @@ module JLDrill
                 end
                 dCounter.finalCount
             end
-            return values
+            return dCounter.table
         end
         
         def correct(item)
