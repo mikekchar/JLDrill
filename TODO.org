@@ -34,8 +34,8 @@ to define their own quiz item types.
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2010-03-17 Wed>
-  :CurrentDate:  <2010-03-19 Fri>
-  :EndDate: <2010-04-18 Sun>
+  :CurrentDate:  <2010-07-26 Fri>
+  :EndDate: <2010-08-27 Sun>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -48,7 +48,7 @@ to define their own quiz item types.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.1 |    17 |    6 |    35.3 |    3.00 |   0.53 |
+| * Version 0.4.1 |    23 |   12 |    52.2 |    0.09 |   0.14 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </tt>
@@ -109,7 +109,7 @@ the number of jellybeans done in the properties of the task.
    :Done: 2
    :END:
    
-** TODO Use smaller backoff for longer durations
+** DONE Use smaller backoff for longer durations
         I have noticed that I fail in my longer duration items
         more often than my shorter duration items.  With the
         idea of also reviewing every item at least once
@@ -123,7 +123,7 @@ the number of jellybeans done in the properties of the task.
 
     :PROPERTIES:
     :JellyBeans: 2
-    :Done: 1
+    :Done: 2
     :END:
 
 ** TODO One of the items in the working set had a potential schedule of 72 days

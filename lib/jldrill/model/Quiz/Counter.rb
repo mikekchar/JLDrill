@@ -26,16 +26,14 @@ module JLDrill
         end
 
         def Counter.findRange(level)
-            i = Duration.new
-            low = 0.0
-            high = 5.0
-            i.days = 5.0
+            low = Duration.new(0)
+            high = Duration.new
+            high.days = 5.0
             1.upto(level) do
-                low = i.days
-                i.seconds = Schedule.backoff(i.seconds)
-                high = i.days
+                low.assign(high)
+                high.seconds = Schedule.backoff(low.seconds)
             end
-            return low.round...high.round
+            return low.seconds...high.seconds
         end
 
         def Counter.getLevel(item)
@@ -52,14 +50,28 @@ module JLDrill
             return level
         end
 
+        # Returns the rounded number of days from seconds
+        def toDays(seconds) 
+            d = Duration.new(seconds)
+            return d.days.round
+        end
+
         def levelString(level)
             if level == 0
-                return "Less than #{@ranges[0].end} days"
+                return "Less than #{toDays(@ranges[0].end)} days"
             elsif level == 7
-                return "More than #{@ranges[6].end} days"
+                return "More than #{toDays(@ranges[6].end)} days"
             else
-                return "#{@ranges[level].begin} to #{@ranges[level].end} days"
+                return "#{toDays(@ranges[level].begin)} to #{toDays(@ranges[level].end)} days"
             end
+        end
+
+        def to_s
+            retVal = ""
+            0.upto(7) do |i|
+                retVal = retVal + levelString(i) + "    #{@table[i]}\n"
+            end
+            return retVal
         end
     end
 

@@ -132,8 +132,7 @@ module JLDrill::Gtk
         def updateDuration(counter)
             table = counter.table
             0.upto(6) do |i|
-                num = table[i][0]
-                @durationTable.values[i][0].text = num.to_s
+                @durationTable.values[i][0].text = table[i].to_s
             end
             @durationTable.values[7][0].text = table[7].to_s
         end
