@@ -1,4 +1,14 @@
-jldrill (0.4.1-4) unstable; urgency=low
+jldrill (0.4.1-5) unstable; urgency=low
+  * Fix a bug in the scheduler.  Through code inspection, some of the
+    math was wrong.  Modify the backoff in the scheduling algorith.
+    Before the backoff was always a factor of 2.  Now it varies from
+    2 to 1.  The longer the elapsed time, the less the backoff.  That
+    means that items which have gone for 180 days and are reviewed
+    at 1.0 or less will be reviewed at 180 days again.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Mon, 26 Jul 2010 11:50:00 +0900
+ 
+ jldrill (0.4.1-4) unstable; urgency=low
 
   * Fix some problems with scheduling.  There is now a maximum
     schedule of twice the previous duration plus 25 percent.
@@ -8,7 +18,7 @@ jldrill (0.4.1-4) unstable; urgency=low
     really a problem, but it's confusing when you look at the
     stats.
 
- -- Mike Charlton <mikekchar@gmail.com> Wed, 30 Jun 2010 16:09:00 +0900
+ -- Mike Charlton <mikekchar@gmail.com>  Wed, 30 Jun 2010 16:09:00 +0900
 
 jldrill (0.4.1-3) unstable; urgency=low
 

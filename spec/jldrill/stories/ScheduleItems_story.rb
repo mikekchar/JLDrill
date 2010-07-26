@@ -79,30 +79,30 @@ module JLDrill::ScheduleItems
         def scheduleShouldBe(item, days, range=10)
             gap = inDays(item.schedule.duration)
             # There's a random +- range variation in the schedule
-            gap.should be_close(days.to_f, days.to_f / range.to_f)
+            gap.should be_close(days, days.to_f / range.to_f)
         end
 
         it "should schedule difficulty 0 items 5 days from now" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item, 5, 10)
+            scheduleShouldBe(item, 5.0, 10)
         end
 
         it "should schedule new items from now even if there are scheduled items" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item, 5, 10)
+            scheduleShouldBe(item, 5.0, 10)
 
             # Get a new item
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item, 5, 10)
+            scheduleShouldBe(item, 5.0, 10)
         end
 
 	it "should set a maximum of the duration * 2 + 25%" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item, 5, 10)
+            scheduleShouldBe(item, 5.0, 10)
             orig = item.schedule.duration
             max = item.schedule.maxInterval
             max.should eql(JLDrill::Schedule.backoff(orig.to_f * 1.25))
@@ -110,13 +110,13 @@ module JLDrill::ScheduleItems
             item.schedule.lastReviewed = item.schedule.lastReviewed - 20 * 60 * 60 * 24
             item.schedule.calculateInterval.should eql(max)
             item.schedule.correct
-            scheduleShouldBe(item, (max.to_f / 24 / 60 / 60).to_i, 10)
+            scheduleShouldBe(item, (max.to_f / 24 / 60 / 60), 10)
         end
 
         it "should schedule a minimum of the last duration" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item, 5)
+            scheduleShouldBe(item, 5.0, 10)
             orig = item.schedule.duration
             # Make the item last reviewed 1 day ago
             item.schedule.lastReviewed = item.schedule.lastReviewed - 60 * 60 *24
