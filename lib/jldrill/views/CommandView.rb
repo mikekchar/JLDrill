@@ -44,6 +44,10 @@ module JLDrill
 		def getReviewMode
 		    @context.getReviewMode
 		end
+
+        def update
+            # Nothing to do in the abstract class
+        end
 	
     end
 end

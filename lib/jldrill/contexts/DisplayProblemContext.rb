@@ -41,7 +41,7 @@ module JLDrill
                     @parent.quiz.publisher.unsubscribe(self, "problemModified")
                 end
                 if !@parent.reference.nil?
-                    @parent.reference.publisher.subscribe(self, "edictLoad")
+                    @parent.reference.publisher.unsubscribe(self, "edictLoad")
                 end
             end
 		    super

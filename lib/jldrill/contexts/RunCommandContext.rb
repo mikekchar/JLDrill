@@ -21,11 +21,26 @@ module JLDrill
 		
 		def enter(parent)
 		    super(parent)
+            if !@parent.nil?
+                if !@parent.quiz.nil?
+                    @parent.quiz.publisher.subscribe(self, "load")
+                end
+            end
 		end
 		
 		def exit
+            if !@parent.nil?
+                if !@parent.quiz.nil?
+                    @parent.quiz.publisher.unsubscribe(self, "load")
+                end
+            end
 		    super
 		end
+
+        def loadUpdated(quiz)
+            # This will update the toolbar based on the options.
+            @mainView.update
+        end
 
         def save
             @parent.save

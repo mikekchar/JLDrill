@@ -25,5 +25,9 @@ module JLDrill::Gtk
 		def getWidget
 			@vbox
 		end
+
+        def update
+            @toolbar.update
+        end
     end
 end

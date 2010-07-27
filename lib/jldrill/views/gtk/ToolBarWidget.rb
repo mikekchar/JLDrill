@@ -69,6 +69,10 @@ module JLDrill::Gtk
                 self.append_space                               
                 self.append(@reviewModeButton)
 		    end
+
+            def update
+                @reviewModeButton.update
+            end
         end
     end
 end
