@@ -1,10 +1,16 @@
+jldrill (0.4.1-7) unstable; urgency=low
+
+  * Allow the user to specify a file to load on the command line.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Mon, 28 Jul 2010 11:45:00 +0900
+
 jldrill (0.4.1-6) unstable; urgency=low
 
   * Reset the Review Mode button properly when a new file is loaded.
 
  -- Mike Charlton <mikekchar@gmail.com>  Mon, 27 Jul 2010 9:00:00 +0900
 
- jldrill (0.4.1-5) unstable; urgency=low
+jldrill (0.4.1-5) unstable; urgency=low
 
   * Fix a bug in the scheduler.  Through code inspection, some of the
     math was wrong.  Modify the backoff in the scheduling algorith.

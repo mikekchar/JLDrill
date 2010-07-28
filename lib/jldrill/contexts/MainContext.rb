@@ -71,6 +71,14 @@ module JLDrill
 		    @mainView = nil
 		end
 
+        def parseCommandLineOptions
+            if ARGV.size == 1
+                if loadFile(ARGV[0])
+                    @quiz.drill
+                end
+            end
+        end
+
 		def enter(parent)
 			super(parent)
 			@mainView.open
@@ -78,6 +86,7 @@ module JLDrill
 			@runCommandContext.enter(self)
 			@displayProblemContext.enter(self)
 			@displayQuizStatusContext.enter(self)
+            parseCommandLineOptions
 		end
 				
 		def exit
@@ -108,9 +117,8 @@ module JLDrill
                 end
 		    end
 		end
-				
-		def loadQuiz(quiz)
-		    filename = @getFilenameContext.enter(self)
+
+        def loadFile(filename)
 		    if !filename.nil?
                 if JLDrill::Quiz.drillFile?(filename)
                     quiz.load(filename)
@@ -119,10 +127,15 @@ module JLDrill
                     dict.read
                     quiz.loadFromDict(dict)
                 end
-                true
+                return true
             else
-                false
+                return false
             end
+        end	
+				
+		def loadQuiz(quiz)
+		    filename = @getFilenameContext.enter(self)
+            return loadFile(filename)
 		end
 		
 		def openFile

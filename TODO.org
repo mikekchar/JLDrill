@@ -164,11 +164,11 @@ the number of jellybeans done in the properties of the task.
    :Done: 0
    :END:
 
-** TODO Specify a file to load on the command line
+** DONE Specify a file to load on the command line
 
    :PROPERTIES:
    :JellyBeans: 1
-   :Done: 0
+   :Done: 1
    :END:
 
 ** TODO Allow the user to choose the dictionary
