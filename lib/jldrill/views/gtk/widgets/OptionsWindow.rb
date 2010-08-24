@@ -22,6 +22,16 @@ module JLDrill::Gtk
             @reviewOptions.add(@reviewReading)
             @reviewOptions.add(@reviewKanji)
             @reviewOptions.add(@reviewMeaning)
+
+            @dictionaryOptions = Gtk::HBox.new()
+            @dictionaryOptions.add(Gtk::Label.new("Dictionary"))
+            @dictionaryName = Gtk::Entry.new
+            @dictionaryBrowse = Gtk::Button.new("Browse")
+            @dictionaryBrowse.signal_connect('pressed') do
+                @view.getDictionaryFilename
+            end
+            @dictionaryOptions.add(@dictionaryName)
+            @dictionaryOptions.add(@dictionaryBrowse)
             
             self.vbox.add(@randomOrder)
             self.vbox.add(@reviewOptions)
@@ -29,6 +39,7 @@ module JLDrill::Gtk
             self.vbox.add(@promoteThresh)
             self.vbox.add(Gtk::Label.new("Max actively learning items"))
             self.vbox.add(@introThresh)
+            self.vbox.add(@dictionaryOptions)
         end
         
         def randomOrder=(value)
@@ -78,6 +89,14 @@ module JLDrill::Gtk
         def introThresh
             @introThresh.value.to_i
         end
+
+        def dictionaryName=(value)
+            @dictionaryName.text = value
+        end
+
+        def dictionaryName
+            return @dictionaryName.text
+        end
         
         def set(options)
             self.randomOrder = options.randomOrder
@@ -86,6 +105,11 @@ module JLDrill::Gtk
             self.reviewMeaning = options.reviewMeaning
             self.reviewKanji = options.reviewKanji
             self.reviewReading = options.reviewReading
+            if !options.dictionary.nil?
+                self.dictionaryName = options.dictionary
+            else
+                self.dictionaryName = JLDrill::Config::DICTIONARY_NAME
+            end
         end
         
         def updateFromViewData
@@ -100,6 +124,12 @@ module JLDrill::Gtk
             @view.options.reviewMeaning = self.reviewMeaning
             @view.options.reviewReading = self.reviewReading
             @view.options.reviewKanji = self.reviewKanji
+            if self.dictionaryName != JLDrill::Config::DICTIONARY_NAME &&
+                self.dictionaryName != ""
+                @view.options.dictionary = self.dictionaryName
+            else
+                @view.options.dictionary = nil
+            end
         end
         
         def execute

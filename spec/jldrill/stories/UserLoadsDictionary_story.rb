@@ -1,5 +1,7 @@
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
+require 'jldrill/contexts/LoadReferenceContext'
+
 require 'gtk2'
 
 # This story tests loading the reference dictionary.
@@ -46,7 +48,6 @@ module JLDrill::UserLoadsDictionary
         it "should load the reference dictionary" do
             Story.start
             Story.context.should_not be_nil
-            Story.context.filename.should_not be_nil
 #            context = Story.context
 #            def context.exit
 #                super
@@ -100,4 +101,38 @@ module JLDrill::UserLoadsDictionary
         end
     end
 
+    describe Story.stepName("The dictionary to load is in the save file.") do
+        before(:each) do
+            Story.setupLoadReference(JLDrill::Gtk)
+        end
+
+        it "should save the dictionary filename in the save file" do
+            Story.start
+            options = Story.mainContext.quiz.options
+            options.dictionary.should be_nil
+            options.to_s.should eql("Promotion Threshold: 2\nIntroduction Threshold: 10\nReview Meaning\nReview Kanji\n")
+
+            options.dictionary = "TestDictionary"
+            options.to_s.should eql("Promotion Threshold: 2\nIntroduction Threshold: 10\nDictionary: TestDictionary\nReview Meaning\nReview Kanji\n")
+        end
+
+        it "should load the dictionary relative to the install directory" do
+            Story.start
+            options = Story.mainContext.quiz.options
+            context = Story.context
+            def context.readReference
+                # Remove the reference reading code.  We just
+                # want to enter the context to test the filenames
+            end
+            Story.mainContext.loadReference
+
+            Story.context.dictionaryName.should be(JLDrill::Config::DICTIONARY_NAME)
+            options.dictionary = "tempDictionary"
+            Story.context.dictionaryName.should eql("tempDictionary")
+
+            Story.context.dictionaryFilename.should eql(File.join(JLDrill::Config::DICTIONARY_DIR, "tempDictionary"))
+            Story.context.exit
+        end
+
+    end
 end

@@ -3,5 +3,9 @@ require 'shell'
 
 installDir = File.expand_path(File.dirname(__FILE__))
 argList = ARGV.join(" ")
-exec("/usr/bin/ruby", "-KO", "-I#{installDir}/lib", "#{installDir}/bin/jldrill", argList)
+if !argList.empty?
+    exec("/usr/bin/ruby", "-KO", "-I#{installDir}/lib", "#{installDir}/bin/jldrill", argList)
+else
+    exec("/usr/bin/ruby", "-KO", "-I#{installDir}/lib", "#{installDir}/bin/jldrill")
+end
 

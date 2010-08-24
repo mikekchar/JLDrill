@@ -25,6 +25,11 @@ module JLDrill::Gtk
 		    super(options)
 		    @optionsWindow.updateFromViewData
 		end
+
+        def setDictionaryFilename(filename)
+            super(filename)
+            @optionsWindow.dictionaryName = filename
+        end
 		
 		def getWidget
 			@optionsWindow

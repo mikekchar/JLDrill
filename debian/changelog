@@ -1,3 +1,11 @@
+jldrill (0.4.1-8) unstable; urgency=low
+
+  * Fix crash when editing vocabulary.  Still not sure what the exact
+    problem is, but the extra robustness should have been there
+    originally.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Mon, 28 Jul 2010 11:07:00 +0900
+
 jldrill (0.4.1-7) unstable; urgency=low
 
   * Allow the user to specify a file to load on the command line.

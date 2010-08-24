@@ -1,6 +1,7 @@
 require 'Context/Context'
 require 'Context/Bridge'
 require 'jldrill/views/OptionsView'
+require 'jldrill/contexts/GetFilenameContext'
 
 module JLDrill
 
@@ -26,6 +27,14 @@ module JLDrill
 		    !parent.nil? && parent.class.public_method_defined?(:quiz) &&
 		        !parent.quiz.nil?
 		end
+
+        def getDictionaryFilename
+            context = GetFilenameContext.new(@viewBridge)
+            filename = context.enter(self)
+            if !filename.nil?
+                @mainView.setDictionaryFilename(filename)
+            end
+        end
 		
 		def enter(parent)
 			if hasQuiz?(parent)

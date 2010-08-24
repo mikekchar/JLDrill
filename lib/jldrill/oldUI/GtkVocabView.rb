@@ -36,7 +36,19 @@ module JLDrill::Gtk
         end
 
         def definitionsWidget
-            @definitionsBox.children[1].children[0].children[0]
+            retVal = nil
+            a2 = @definitionsBox.children[1]
+            if !a2.nil?
+                entry = a2.children[0]
+                if !entry.nil?
+                    retVal = entry.children[0]
+                else
+                    print "Entry is nil!!!\n"
+                end
+            else
+                print "Alignment is nil!!!\n"
+            end
+            return retVal
         end
 
         def markersWidget

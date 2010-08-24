@@ -48,7 +48,7 @@ to define their own quiz item types.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.1 |    23 |   12 |    52.2 |    0.09 |   0.14 |
+| * Version 0.4.1 |    23 |   14 |    60.9 |    0.11 |   0.14 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </tt>
@@ -176,10 +176,11 @@ the number of jellybeans done in the properties of the task.
    user to choose the dictionary they want to load from the Options
    page. This filename is then stored in the drill file.  Remove
    edict from the distribution.
+   - [ ] When the dictionary doesn't exist don't crash on loading.
 
    :PROPERTIES:
    :JellyBeans: 3
-   :Done: 0
+   :Done: 2
    :END:
 
 ** TODO Automatically load dictionary option
@@ -214,7 +215,7 @@ This section lists important work that falls out of the
 previous iteration for one reason or another.
 
 ** TODO Allow undo
-** TODO Allow Lean/Unlean for any arbitrary item
+** TODO Allow Learn/Unlearn for any arbitrary item
 ** TODO Alternate Language support (i.e., Chinese)
 ** TODO Start new drills in Preview mode
    When a drill has been loaded for the first time (or after a reset), 
@@ -272,7 +273,7 @@ previous iteration for one reason or another.
 ** TODO Full test coverage for all the contexts
 
 ** TODO Don't steal focus when putting up windows that take no input.  
-   Deferred from 0.3.3 from 0.3.3.  I tried to do it, but it never
+   Deferred from 0.3.3.  I tried to do it, but it never
    worked.  I suspect a race condition in GTK and it's not important
    enough to kill myself over.
 

@@ -25,6 +25,15 @@ module JLDrill
 		def update(options)
 		    @options.assign(options)
 		end
+
+        def getDictionaryFilename
+            @context.getDictionaryFilename
+        end
+
+        # Overridden in the concrete class.
+        def setDictionaryFilename(filename)
+            # Nothing to do.  This just updates the UI.
+        end
 		
 		# Overridden in the concrete class.  But generally, this
 		# will set the options and then exit.
