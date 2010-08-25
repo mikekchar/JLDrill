@@ -1,10 +1,11 @@
 require 'jldrill/model/Config'
+require 'Context/Publisher'
 
 module JLDrill
 
     # Options for the standard quiz.
     class Options
-        attr_reader :randomOrder, :promoteThresh, :introThresh,
+        attr_reader :publisher, :randomOrder, :promoteThresh, :introThresh,
                     :reviewMode, :dictionary, :reviewMeaning, 
                     :reviewKanji, :reviewReading, :reviewOptionsSet,
                     :autoloadDic
@@ -20,6 +21,7 @@ module JLDrill
 
         def initialize(quiz)
             @quiz = quiz
+            @publisher = Context::Publisher.new(self)
             @randomOrder = false
             @promoteThresh = 2
             @introThresh = 10
@@ -57,27 +59,41 @@ module JLDrill
             options.autoloadDic == @autoloadDic &&
             options.reviewReading == @reviewReading
         end
+
+        def subscribe(subscriber)
+            @publisher.subscribe(subscriber, "options")
+        end
+
+        def unsubscribe(subscriber)
+            @publisher.unsubscribe(subscriber, "options")
+        end
+
+        def update
+            @publisher.update("options")
+        end
             
         def saveNeeded
             @quiz.setNeedsSave(true) unless @quiz.nil?
+            update
         end
         
         def modifiedButNoSaveNeeded
             @quiz.update unless @quiz.nil?
+            update
         end
         
         # Assigns all the options from one to the other, but
         # does *keeps the same quiz*
         def assign(options)
-            @randomOrder = options.randomOrder
-            @promoteThresh = options.promoteThresh
-            @introThresh = options.introThresh
-            @dictionary = options.dictionary
+            self.randomOrder = options.randomOrder
+            self.promoteThresh = options.promoteThresh
+            self.introThresh = options.introThresh
+            self.dictionary = options.dictionary
             setReviewOptions(options.reviewOptionsSet)
-            @reviewMeaning = options.reviewMeaning
-            @reviewKanji = options.reviewKanji
-            @reviewReading = options.reviewReading
-            @autoloadDic = options.autoloadDic
+            self.reviewMeaning = options.reviewMeaning
+            self.reviewKanji = options.reviewKanji
+            self.reviewReading = options.reviewReading
+            self.autoloadDic = options.autoloadDic
             if !@quiz.nil?
                 @quiz.recreateProblem
             end
@@ -130,23 +146,23 @@ module JLDrill
             @reviewMeaning = false
             @reviewKanji = false
             @reviewReading = false
+            saveNeeded
         end
 
         def defaultReviewOptions
             @reviewMeaning = true
             @reviewKanji = true
             @reviewReading = false
+            saveNeeded
         end
 
         def setReviewOptions(value)
             if (value == true) 
                 if (@reviewOptionsSet == false)
                     clearReviewOptions
-                    saveNeeded
                 end
             else
                 defaultReviewOptions
-                saveNeeded
             end
             @reviewOptionsSet = value
         end

@@ -22,19 +22,19 @@ module JLDrill
         attr_writer :savename, :info, :name, :currentProblem
 
         def initialize()
-            @needsSave = false
             @name = ""
             @savename = ""
             @info = ""
+            @publisher = Context::Publisher.new(self)
             @options = Options.new(self)
             @contents = Contents.new(self)
             @strategy = Strategy.new(self)
             @currentProblem = nil
-            @publisher = Context::Publisher.new(self)
+            @needsSave = false
             
             @last = nil
         end
-        
+
         def length
             @contents.length
         end

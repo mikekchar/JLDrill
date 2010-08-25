@@ -34,7 +34,7 @@ to define their own quiz item types.
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2010-03-17 Wed>
-  :CurrentDate:  <2010-07-26 Fri>
+  :CurrentDate:  <2010-08-25 Wed>
   :EndDate: <2010-08-27 Sun>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -48,7 +48,7 @@ to define their own quiz item types.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.1 |    20 |   17 |    85.0 |    0.13 |   0.12 |
+| * Version 0.4.1 |    21 |   19 |    90.5 |    0.12 |   0.13 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </tt>
@@ -167,17 +167,24 @@ the number of jellybeans done in the properties of the task.
    :Done: 3
    :END:
 
-** TODO Automatically load dictionary option [2/4]
+** DONE Automatically load dictionary option [4/4]
    Have an option that is saved with the drill to automatically
    load the dictionary when the drill is loaded.
    - [X] Add option to the options
    - [X] Save/Load options to the file
-   - [ ] Automatically load dictionary when loading the file
-   - [ ] Automatically load dictionary when dictionary changes in the options
+   - [X] Automatically load dictionary when loading the file
+   - [X] Automatically load dictionary when dictionary changes in the options
 
    :PROPERTIES:
    :JellyBeans: 1
-   :Done: 0
+   :Done: 1
+   :END:
+
+** TODO App crashes if Load Reference window is closed
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 1
    :END:
 
 ** TODO Sort new items correctly when they have been moved [1/2]

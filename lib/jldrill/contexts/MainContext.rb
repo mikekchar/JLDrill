@@ -57,6 +57,8 @@ module JLDrill
 			@radicals = nil
             @kana = nil
 			@quiz = Quiz.new
+            # The quiz doesn't need to be saved
+            @quiz.setNeedsSave(false)
             @inTests = false
 		end
 		
@@ -87,17 +89,25 @@ module JLDrill
 			@displayProblemContext.enter(self)
 			@displayQuizStatusContext.enter(self)
             parseCommandLineOptions
+            @quiz.options.subscribe(self)
 		end
 				
 		def exit
 			@runCommandContext.exit
 		    @displayQuizStatusContext.exit 
 		    @displayProblemContext.exit 
+            @quiz.options.unsubscribe(self)
 			@parent.exit
 			super
 		end
+
+        def optionsUpdated(options)
+            if options.autoloadDic
+                loadReference
+            end
+        end
 		
-		def save
+        def save
 		    if @quiz.savename.empty?
 		        saveAs
 		    else
@@ -127,6 +137,12 @@ module JLDrill
                     dict.read
                     quiz.loadFromDict(dict)
                 end
+                # We need to resubscribe to the options in the new quiz
+                # and realize that the options may have changed.
+                @quiz.options.subscribe(self)
+                optionsUpdated(@quiz.options)
+                # We've just loaded the file, so it doesn't need to be saved
+                @quiz.setNeedsSave(false)
                 return true
             else
                 return false
@@ -165,6 +181,12 @@ module JLDrill
         def createNew
             promptForSaveAnd do
                 @quiz.setup
+                # We need to resubscribe to the options in the new quiz
+                # and realize that the options may have changed.
+                @quiz.options.subscribe(self)
+                optionsUpdated(@quiz.options)
+                # New quizes don't need to be saved.
+                @quiz.setNeedsSave(false)
             end
         end
 

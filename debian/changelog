@@ -1,3 +1,11 @@
+jldrill (0.4.1-9) unstable; urgency=low
+
+  * Allow the user to change the dictionary to load in the options.
+    The name of the dictionay is saved with the quiz.  Also add
+    an option to automatically load the dictionary.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Mon, 25 Aug 2010 14:18:00 +0900
+
 jldrill (0.4.1-8) unstable; urgency=low
 
   * Fix crash when editing vocabulary.  Still not sure what the exact
