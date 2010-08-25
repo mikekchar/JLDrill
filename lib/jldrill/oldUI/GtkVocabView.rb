@@ -35,6 +35,8 @@ module JLDrill::Gtk
             @readingField.children[1]
         end
 
+        # For some reason I am losing the entry in my boxes
+        # I think it's a GTK bug, but I'm not sure.
         def definitionsWidget
             retVal = nil
             a2 = @definitionsBox.children[1]
@@ -43,10 +45,10 @@ module JLDrill::Gtk
                 if !entry.nil?
                     retVal = entry.children[0]
                 else
-                    print "Entry is nil!!!\n"
+                    print "Error: definitionsWidget Entry is nil!!!\n"
                 end
             else
-                print "Alignment is nil!!!\n"
+                print "Error: definitionsWidget Alignment is nil!!!\n"
             end
             return retVal
         end
@@ -83,12 +85,20 @@ module JLDrill::Gtk
         end
 
         def definitions
-            definitionsWidget.buffer.text
+            widget = definitionsWidget
+            if !widget.nil?
+                return widget.buffer.text
+            else
+                return ""
+            end
         end
 
         def definitions=(string)
             if string.nil? then string = "" end
-            definitionsWidget.buffer.set_text(string)
+            widget = definitionsWidget
+            if !widget.nil?
+                widget.buffer.set_text(string)
+            end
         end
 
         def markers

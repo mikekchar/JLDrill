@@ -32,8 +32,20 @@ module JLDrill
             @publisher = Context::Publisher.new(self)
         end
 
+        def reset
+            @readings = []
+            @lines = nil
+            @numLinesParsed = 0
+            @numReadingsAdded = 0
+            @isUTF8 = nil
+            setLoaded(false)
+        end
+
         def file=(filename)
-            @file = filename
+            if @file != filename
+                @file = filename
+                reset
+            end
         end
         
         def file
@@ -154,8 +166,15 @@ module JLDrill
         end
         
         def readLines()
-            setLoaded(false)
-            @lines = IO.readlines(@file)
+            begin
+                setLoaded(false)
+                @lines = IO.readlines(@file)
+            rescue
+                # Probably couldn't open the file for some reason.
+                # We should give an error message here but I don't
+                # have the facility yet.
+                @lines = []
+            end
             @numLinesParsed = 0
             @numReadingsAdded = 0
             @readings = []

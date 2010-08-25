@@ -201,10 +201,12 @@ remembering falls.  This curve is not linear, but the part of the
 curve from 100% to 90% is very, very close to linear.
 
 The JLDrill algorithm creates a potential schedule for each item.  It
-does this by doubling the amount of time it took since last
-successfully reviewing the item.  It then sorts the items based on the
-percentage of time that has elapsed in that potential schedule
-duration.
+does this by multiplying the amount of time it took since last
+successfully reviewing the item by a factor.  It then sorts the 
+items based on the percentage of time that has elapsed in that 
+potential schedule duration.  The factor used for multiplying depends
+on how much time has elapsed (see below), but for the following
+example, let's say the factor is 2.
 
 For example, imagine there are two items.  Item A has waited 5 days
 since the last review.  Item B has waited 50 days since the last
@@ -238,7 +240,7 @@ curve is very close to linear we can say that the chance of
 forgetting increases by 1% every three days.  So even if the
 item is delayed for 9 days, the chance of remembering only drops
 to 87%.  In other words, getting the schedule wrong by almost 30%
-affects the chance of remembering by only 3%.  So as long as
+affects the chance of remembering by only 3%.  As long as
 these kind of items are roughly ordered, any deviations from
 perfection will be unnoticeable.
 
@@ -267,10 +269,27 @@ Because of this, as long as the potential schedule is consistent,
 it doesn't have to be correct.
 
 JLDrill measures the amount of time between correct answers and
-creates a new potential schedule by simply doubling that time.
+creates a new potential schedule by multiplying that time by a factor.
 Note that this potential schedule is almost certainly wrong.
 However, it is consistently wrong and will place the items in
 roughly the correct order.
+
+The factor it multiplies by is dependent upon the time that has
+elapsed.  An item that was reviewed less than a day ago, will have
+a factor of 2.  In other words, when such an item is correctly
+remembered, the new potential schedule is twice the duration that
+it had waited.  But for items that waited longer, the factor
+is reduced linearly, until at 180 days the factor is 1.  In other
+words, items that have waited 180 days or more will be scheduled
+for the same amount of time they have waited.
+
+There are many rationales for changing the multiplication factor.
+The first is that it was determined that it is useful to review
+known items on a regular basis.  By backing off the multiplication,
+this is achieved.  Old items are reviewed about every 180 days.
+But also, because the penalty of reviewing an old item is small,
+the penalty for forgetting an old item is great.  So it makes sense
+to give a little bit of extra effort for old items.
 
 New items present a problem.  They have not been scheduled before and
 it is difficult to determine where they related to each other and the
@@ -291,6 +310,22 @@ other items to be inserted over time.  This variation is used even
 when rescheduling old items.  This allows items which are guessed
 identically to end up in completely different places after only a few
 generations of scheduling.
+
+Finally, if a user neglects to study, the amount of time since
+the last review can be very large.  As such, the new potential
+schedule will be even larger.  Even when an item has sat
+for a long time, there is a small chance that the item will
+be remembered.  In this case the item will be scheduled far
+into the future, depriving the user of practice.  Because of
+this, length of time used for generating the new potential
+schedule is limited to 25% more than the preview potential
+schedule.
+
+For example, let's say an item is scheduled for 1 day in the
+future.  But the user waits 10 days before reviewing the item.
+Even if the user gets the item correct, the new potential
+schedule will only be 2.5 days (1 day plus 25% of one day
+times the multiplication factor of 2) instead of 20 days.
 
 Success Rate Estimation
 ------------------------
@@ -350,12 +385,38 @@ result to using the Bayesian estimate (although the approach is
 more straightforward since it doesn't require any complicated
 math.
 
+Kanji and Meaning Problems
+--------------------------
+Starting in JLDrill 0.4.1, Kanji problems and Meaning problems
+are reviewed with separate schedules.  In previous releases
+there was only one schedule and the type of review was
+randomly determined.  In the new scheduler, if any of
+the problem types are guessed wrong, all of them are restarted
+from the beginning.  This allows you to ensure that all
+aspects of the vocabulary are remembered properly.
+
+But this causes some issues for scheduling.  The most obvious
+problem is that there are now 2 problems scheduled for each
+item.  If the user sees them close together, they are likely
+to remember the answer from the last review.  In order to
+combat this, the problems are scheduled with different random
+variations.  Since each schedule is varied by +- 10% it doesn't
+take long until the problems are far apart in the schedule.
+
+But the other issue is that the item is still being reviewed
+twice as often as it was previously.  This means that the recall
+rate will be above 90%.  This is especially problematic when
+there are items mixed in which don't have kanji.  Those items
+are only reviewed once.  The order of the items may be
+incorrect because the recall rate is different.  This is
+an issue that hasn't been adressed yet.
+
 What Percentage Level to Stop Reviewing
 ---------------------------------------
 
 JLDrill chooses a 90% rate to stop reviewing.  This was chosen
 based on personal preference and claimed success rates of
-othe spaced repetition algorithms.  However, this rate should
+other spaced repetition algorithms.  However, this rate should
 be chosen such that the
 weighted cost of relearning is equal to the cost of reviewing.
 In other words, the cost of relearning the word over again multiplied

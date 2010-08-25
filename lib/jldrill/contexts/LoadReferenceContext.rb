@@ -54,7 +54,8 @@ module JLDrill
 		def enter(parent)
 			if (!parent.nil?)
     			@reference = parent.reference
-    			if(!@reference.loaded?)
+    			if(!@reference.loaded? || 
+                   (@reference.file != dictionaryFilename))
         			super(parent)
         			readReference
                     # The view will exit the context when the file

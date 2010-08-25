@@ -19,6 +19,11 @@ module JLDrill
             @hash = {}
         end
 
+        def reset
+            super
+            @hash = {}
+        end
+
         def findKey(string)
             retVal = "None"
             if string
