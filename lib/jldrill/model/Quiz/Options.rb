@@ -6,7 +6,8 @@ module JLDrill
     class Options
         attr_reader :randomOrder, :promoteThresh, :introThresh,
                     :reviewMode, :dictionary, :reviewMeaning, 
-                    :reviewKanji, :reviewReading, :reviewOptionsSet
+                    :reviewKanji, :reviewReading, :reviewOptionsSet,
+                    :autoloadDic
 
         RANDOM_ORDER_RE = /^Random Order/
         PROMOTE_THRESH_RE = /^Promotion Threshold: (.*)/
@@ -15,6 +16,7 @@ module JLDrill
         REVIEW_MEANING_RE = /^Review Meaning/
         REVIEW_KANJI_RE = /^Review Kanji/
         REVIEW_READING_RE = /^Review Reading/
+        AUTOLOAD_DIC_RE = /^Autoload Dictionary/
 
         def initialize(quiz)
             @quiz = quiz
@@ -24,6 +26,7 @@ module JLDrill
             @reviewMode = false
 			@dictionary = nil
             @reviewOptionsSet = false
+            @autoloadDic = false
             defaultReviewOptions
         end
         
@@ -33,11 +36,12 @@ module JLDrill
             retVal.promoteThresh = @promoteThresh
             retVal.introThresh = @introThresh
             retVal.reviewMode = @reviewMode
-			retVal.dictionary = @dictionary
+            retVal.dictionary = @dictionary
             setReviewOptions(@reviewOptionsSet)
             retVal.reviewMeaning = @reviewMeaning
             retVal.reviewKanji = @reviewKanji
             retVal.reviewReading = @reviewReading
+            retVal.autoloadDic = @autoloadDic
             retVal
         end
         
@@ -46,10 +50,11 @@ module JLDrill
             options.promoteThresh == @promoteThresh &&
             options.introThresh == @introThresh &&
             options.reviewMode == @reviewMode &&
-			options.dictionary == @dictionary &&
+            options.dictionary == @dictionary &&
             options.reviewOptionsSet == @reviewOptionsSet &&
             options.reviewMeaning == @reviewMeaning &&
             options.reviewKanji == @reviewKanji &&
+            options.autoloadDic == @autoloadDic &&
             options.reviewReading == @reviewReading
         end
             
@@ -67,11 +72,12 @@ module JLDrill
             @randomOrder = options.randomOrder
             @promoteThresh = options.promoteThresh
             @introThresh = options.introThresh
-			@dictionary = options.dictionary
+            @dictionary = options.dictionary
             setReviewOptions(options.reviewOptionsSet)
             @reviewMeaning = options.reviewMeaning
             @reviewKanji = options.reviewKanji
             @reviewReading = options.reviewReading
+            @autoloadDic = options.autoloadDic
             if !@quiz.nil?
                 @quiz.recreateProblem
             end
@@ -112,6 +118,13 @@ module JLDrill
 				saveNeeded
 			end
 		end
+
+        def autoloadDic=(value)
+            if @autoloadDic != value
+                @autoloadDic = value
+                saveNeeded
+            end
+        end
 
         def clearReviewOptions
             @reviewMeaning = false
@@ -201,6 +214,8 @@ module JLDrill
                     self.reviewKanji = $1.to_i
                 when REVIEW_READING_RE
                     self.reviewReading = $1.to_i
+                when AUTOLOAD_DIC_RE
+                    self.autoloadDic = true
                 else
                     parsed = false
             end
@@ -233,6 +248,9 @@ module JLDrill
             end
             if(@reviewReading)
                 retVal += "Review Reading\n"
+            end
+            if(@autoloadDic)
+                retVal += "Autoload Dictionary\n"
             end
             retVal
         end

@@ -36,6 +36,7 @@ module JLDrill::UserChangesOptions
             Story.quiz.options.introThresh.should eql(10)
             Story.quiz.options.reviewMode.should eql(false)
 			Story.quiz.options.dictionary.should be_nil
+            Story.quiz.options.autoloadDic.should eql(false)
         end
 
         after(:each) do
@@ -122,7 +123,8 @@ module JLDrill::UserChangesOptions
                 "Promotion Threshold: 4\n" +
                 "Introduction Threshold: 20\n" +
                 "Review Meaning\n" +
-                "Review Kanji\n"
+                "Review Kanji\n" +
+                "Autoload Dictionary\n"
             fileString = Story.sampleQuiz.header + Story.sampleQuiz.info + "\n" +
                 optionsString.chop + Story.sampleQuiz.resetVocab +
                 "Fair\nGood\nExcellent\n"
@@ -131,16 +133,19 @@ module JLDrill::UserChangesOptions
             Story.quiz.options.randomOrder.should eql(true)
             Story.quiz.options.promoteThresh.should eql(4)
             Story.quiz.options.introThresh.should eql(20)
+            Story.quiz.options.autoloadDic.should eql(true)
         end
 
         it "should be able to assign the options to another options object" do
             optionsString = "Random Order\n" +
                 "Promotion Threshold: 1\n" + "Introduction Threshold: 20\n" +
                 "Review Meaning\n" +
-                "Review Kanji\n"
+                "Review Kanji\n" +
+                "Autoload Dictionary\n"
 	        Story.quiz.options.randomOrder = true
 	        Story.quiz.options.promoteThresh = 1
 	        Story.quiz.options.introThresh = 20
+            Story.quiz.options.autoloadDic = true
             Story.quiz.options.to_s.should eql(optionsString)
 
             newOptions = JLDrill::Options.new(nil)
@@ -201,6 +206,10 @@ module JLDrill::UserChangesOptions
 
         it "should be able to set the Intro Threshold option" do
             setValueAndTest("introThresh", 10, 20)
+        end
+
+        it "should be able to set the Autoload Dictionary option" do
+            setValueAndTest("autoloadDic", false, true)
         end
     end
 end

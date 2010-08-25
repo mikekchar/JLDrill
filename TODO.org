@@ -48,7 +48,7 @@ to define their own quiz item types.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.1 |    23 |   14 |    60.9 |    0.11 |   0.14 |
+| * Version 0.4.1 |    20 |   17 |    85.0 |    0.13 |   0.12 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 </tt>
@@ -126,13 +126,6 @@ the number of jellybeans done in the properties of the task.
     :Done: 2
     :END:
 
-** TODO One of the items in the working set had a potential schedule of 72 days
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 0
-   :END:
-
 ** DONE Early reviewed items scheduled too soon
    If an item is reviewed earlier and answered correctly, it can be
    given a duration that is less than it's earlier duration.  This is
@@ -155,15 +148,6 @@ the number of jellybeans done in the properties of the task.
     :Done: 1
     :END:
 
-** TODO Time to learn after the first item is waaay too big (10798.7s) [1/2]
-   - [X] Refactor tests
-   - [ ] Test to see if this is a real problem	 
-
-   :PROPERTIES:
-   :JellyBeans: 2
-   :Done: 0
-   :END:
-
 ** DONE Specify a file to load on the command line
 
    :PROPERTIES:
@@ -171,21 +155,25 @@ the number of jellybeans done in the properties of the task.
    :Done: 1
    :END:
 
-** TODO Allow the user to choose the dictionary
+** DONE Allow the user to choose the dictionary [1/1]
    Instead of having a single dictionary that is loaded, allow the
    user to choose the dictionary they want to load from the Options
    page. This filename is then stored in the drill file.  Remove
    edict from the distribution.
-   - [ ] When the dictionary doesn't exist don't crash on loading.
+   - [X] When the dictionary doesn't exist don't crash on loading.
 
    :PROPERTIES:
    :JellyBeans: 3
-   :Done: 2
+   :Done: 3
    :END:
 
-** TODO Automatically load dictionary option
+** TODO Automatically load dictionary option [2/4]
    Have an option that is saved with the drill to automatically
    load the dictionary when the drill is loaded.
+   - [X] Add option to the options
+   - [X] Save/Load options to the file
+   - [ ] Automatically load dictionary when loading the file
+   - [ ] Automatically load dictionary when dictionary changes in the options
 
    :PROPERTIES:
    :JellyBeans: 1
@@ -213,6 +201,22 @@ the number of jellybeans done in the properties of the task.
 
 This section lists important work that falls out of the
 previous iteration for one reason or another.
+
+** TODO One of the items in the working set had a potential schedule of 72 days
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+
+** TODO Time to learn after the first item is waaay too big (10798.7s) [1/2]
+   - [X] Refactor tests
+   - [ ] Test to see if this is a real problem	 
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 0
+   :END:
 
 ** TODO Allow undo
 ** TODO Allow Learn/Unlearn for any arbitrary item

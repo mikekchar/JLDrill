@@ -32,6 +32,9 @@ module JLDrill::Gtk
             end
             @dictionaryOptions.add(@dictionaryName)
             @dictionaryOptions.add(@dictionaryBrowse)
+
+            @autoloadDic = Gtk::CheckButton.new("Autoload Dictionary")
+            @promoteThresh = Gtk::HScale.new(1,10,1)
             
             self.vbox.add(@randomOrder)
             self.vbox.add(@reviewOptions)
@@ -40,6 +43,7 @@ module JLDrill::Gtk
             self.vbox.add(Gtk::Label.new("Max actively learning items"))
             self.vbox.add(@introThresh)
             self.vbox.add(@dictionaryOptions)
+            self.vbox.add(@autoloadDic)
         end
         
         def randomOrder=(value)
@@ -97,6 +101,14 @@ module JLDrill::Gtk
         def dictionaryName
             return @dictionaryName.text
         end
+
+        def autoloadDic=(value)
+            @autoloadDic.active = value
+        end
+
+        def autoloadDic
+            @autoloadDic.active?
+        end
         
         def set(options)
             self.randomOrder = options.randomOrder
@@ -110,6 +122,7 @@ module JLDrill::Gtk
             else
                 self.dictionaryName = JLDrill::Config::DICTIONARY_NAME
             end
+            self.autoloadDic = options.autoloadDic
         end
         
         def updateFromViewData
@@ -130,6 +143,7 @@ module JLDrill::Gtk
             else
                 @view.options.dictionary = nil
             end
+            @view.options.autoloadDic = self.autoloadDic
         end
         
         def execute
