@@ -1,3 +1,17 @@
+jldrill (0.4.1-11) unstable; urgency=low
+
+  * Move the dictionary loading progress bar from a separate window
+    to a widget at the bottom of the main window.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Mon, 26 Aug 2010 8:44:00 +0900
+
+jldrill (0.4.1-10) unstable; urgency=low
+
+  * Correctly modify the config for Debian so that it can find
+    the dictionary.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Mon, 25 Aug 2010 14:51:00 +0900
+
 jldrill (0.4.1-9) unstable; urgency=low
 
   * Allow the user to change the dictionary to load in the options.
@@ -80,3 +94,4 @@ jldrill (0.3.5-1) unstable; urgency=low
   * Initial release
 
  -- Mike Charlton <mikekchar@gmail.com>  Thu, 08 Oct 2009 13:53:51 +0900
+

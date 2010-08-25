@@ -1,4 +1,4 @@
-require 'jldrill/views/gtk/widgets/ProgressWindow'
+require 'jldrill/views/gtk/widgets/ProgressBar'
 require 'jldrill/views/ReferenceProgressView'
 require 'gtk2'
 
@@ -10,21 +10,18 @@ module JLDrill::Gtk
         	
 		def initialize(context)
 			super(context)
-			@progressWindow = ProgressWindow.new(self)
+			@progressBar = ProgressBar.new(self)
+            @progressBar.expandWidgetWidth
 			@block = nil
 			@id = nil
 		end
 		
 		def getWidget
-			@progressWindow
-		end
-		
-		def destroy
-		    @progressWindow.destroy
+			@progressBar
 		end
 		
 		def update(fraction)
-		    @progressWindow.update(fraction)
+		    @progressBar.update(fraction)
 		end
 		
 		def run

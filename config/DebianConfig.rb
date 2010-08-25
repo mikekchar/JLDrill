@@ -10,6 +10,7 @@ module JLDrill
     
         DATA_DIR = getDataDir
         # Debian keeps Edict in usr/share/edict
-        DICTIONARY_PATH = File.expand_path('/usr/share/edict/edict')
+        DICTIONARY_DIR = File.expand_path('/usr/share/edict')
+        DICTIONARY_NAME = "edict"
     end
 end

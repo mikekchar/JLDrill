@@ -180,7 +180,8 @@ the number of jellybeans done in the properties of the task.
    :Done: 1
    :END:
 
-** TODO App crashes if Load Reference window is closed
+** DONE App crashes if Load Reference window is closed.  Make the Load
+   Reference Window a normal widget on the main window.
 
    :PROPERTIES:
    :JellyBeans: 1
