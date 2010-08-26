@@ -38,6 +38,14 @@ module JLDrill
             item.bin = @number
         end
 
+        def moveBeforeItem(moveItem, beforeItem)
+            index = @contents.find_index(beforeItem)
+            if !index.nil?
+                delete(moveItem)
+                insertAt(index, moveItem)
+            end
+        end
+
         # Inserts an item before the one where
         # the block evaluates true.  If the block
         # never evaluates true, put the item at

@@ -7,7 +7,7 @@ sort_info: 35
 Development Version
 ===================
 
-**Latest Completed Development Version:**  [jldrill-0.3.5](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.5)
+**Latest Completed Development Version:**  [jldrill-0.4.1](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.4.1)
 
 For details on development versions, see below.
 
@@ -42,13 +42,6 @@ following gems:
 * rcov
 * webgen
 
-The current version of webgen doesn't play well with the version
-of rubygems in Debian and Ubuntu, unfortunately.  So you will have
-to install version 0.5.3 of webgen (gem install -v 0.5.3 webgen).
-Also webgen has a lot of optional dependencies that are necessary.
-Keep running webgen and installing the dependencies until it stops
-complaining.
-
 Once you have everthing installed you will be able to build everything
 using:
 
@@ -66,20 +59,24 @@ JLDrill.  If you want to contribute, please send me patches,
 suggestions, etc.  There are a few areas I need specific help.
 
 * User interface design.  All suggestions are welcome.  Anyone who
-wants to work in this area can do as much as they want :-)
+  wants to work in this area can do as much as they want.
+
 * Windows/OS X packaging.  Honestly, I don't want to do this at all.
-Windows is hard for me to use and I don't even have a Mac.  So I would
-be happy to hand this over to anyone who is keen.
+  Windows is hard for me to use and I don't even have a Mac.  So I would
+  be happy to hand this over to anyone who is keen.
+
 * Web page development/documentation.  I don't mind doing this, but
-frankly I'm not that great at it.  And there is really more work than
-I can do myself.
+  frankly I'm not that great at it.  And there is really more work than
+  I can do myself.
+
 * Content development.  The content that exists now is the content
-that I am studying.  It would be better to have more (or better)
-content.
+  that I am studying.  It would be better to have more (or better)
+  content.
+
 * Itch scratching.  If you like to code, I welcome any and all patches
-of functionality.  But I have to insist on tests (even though I have
-occasionally been lax in that area).  I'm happy to work with you on
-tests if you have difficulty writing them, though.
+  of functionality.  But I have to insist on tests (even though I have
+  occasionally been lax in that area).  I'm happy to work with you on
+  tests if you have difficulty writing them, though.
 
 Development Versions
 --------------------
@@ -116,9 +113,63 @@ If you want to create a new release, please follow the
 
 Development Version History
 ---------------------------
-Current Development Version: [jldrill-0.4.1](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.4.1)
+Current Development Version: None
 
-Latest Completed Development Version: [jldrill-0.3.5](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.5)
+Latest Completed Development Version: [jldrill-0.4.1](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.4.1)
+
+Changes in [jldrill-0.4.1](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.4.1)
+
+* Options to allow users to choose what kind of problems they want to drill
+  in the Review Set.  You can choose any or all of the 3 basic types of
+  problems.
+
+* Schedule each problem type separately.  Originally the app would
+  randomly select which type of problem to present when reviewing
+  items in the Review set.  Now each problem set is scheduled
+  independently.  But if one of them is wrong, they are all
+  scheduled again.  This has the effect that you review items more
+  often and in some ways breaks the ordering of items in the review
+  set (items that where reviewed recently with a different type
+  of problem are more likely to be guessed correctly than their
+  position would indicate).  I will try to resolve this problem
+  before 5.0.
+
+* No longer schedule a kanji problem if the item has no kanji.
+  This means that items with no kanji (like sentences in the
+  grammar drill) are reviewed less often than items with kanji
+  (like vocabulary).  This appears to be less of a problem
+  than it would seem.
+
+* Create a maximum and minimum schedule for the item.  Due to the way
+  the user reviews an item may be reviewed right away or it may sit
+  for a very long time.  With this change the new schedule will never
+  be less than the old schedule.  Also if the item sits for a long time
+  it might get a very long schedule.  If the wait time is too long it
+  is reduced to 125% of the previous schedule in calculations for the
+  new schedule.  See the Strategy document for more details.
+
+* Change the multiplication factor for the new schedule.  Originally
+  it always multiplied the wait time by 2.0.  Now it multiplies it
+  by a factor of 1.0 to 2.0.  New items that have waited less than
+  a day will be multiplied by 2.0.  Old items that have waited
+  180 days or more are multiplied by 1.0.  Other items are somewhere
+  inbetween.  See the Strategy document for more details.
+
+* Properly reset the Review Mode button when a new file is loaded.
+
+* Fix a crash when editing vocabulary.  I suspect this is actually
+  a bug in GTK, but I added a work around anyway.
+
+* Allow the user to specifiy a drill file to load on the command line.
+
+* Add an option to specify the dictionary to load.  This means
+  that different drills can use different dictionaries.  Also add an
+  option to automatically load the dictionary when the drill is loaded.
+
+* Move the dictionary loading progress bar out of its own window.
+
+* Reorder the items in the new set when their order is changed in
+  the All Vocabulary window.
 
 Changes in [jldrill-0.3.5](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.3.5)
 

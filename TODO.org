@@ -188,19 +188,27 @@ the number of jellybeans done in the properties of the task.
    :Done: 1
    :END:
 
-** TODO Sort new items correctly when they have been moved [1/2]
+** DONE Set the Quiz to Modified when an item in the All Vocab window
+   has been moved.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 1
+   :END:
+
+** DONE Sort new items correctly when they have been moved [1/2]
    When items are moved in the AllVocab window, make sure
    they are in the correct presentation order in the
    NewSet. 
    - [X] Sort New Set items when the file is loaded so that
 		 old files have the correct order.
-   - [ ] Physically move New Set items when they are moved in
+   - [X] Physically move New Set items when they are moved in
 	    the AllVocabWindow so that they are in the correct
 	    order.
 
    :PROPERTIES:
    :JellyBeans: 3
-   :Done: 1
+   :Done: 3
    :END:
 
 

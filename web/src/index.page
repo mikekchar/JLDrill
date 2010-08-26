@@ -62,6 +62,18 @@ JLDrill is Beta Software
 News
 ----
 
+Thursday, August 26 2010.
+
+* Development version 0.4.1 released.  To be honest I haven't gotten
+  around to putting up 0.4.0 anywhere, so nobody has tried it. But
+  the new development release makes some drastic changes to the
+  schedulure.  It also allows you to choose what kind of problems
+  you want to be drilled with.  Finally, it reviews problems
+  types independently (for example, Meaning and Kanji problems
+  are both scheduled for review for each item).  Sorry for the
+  slow releases.  I have been putting more time in on studying
+  and less on programming.
+
 Friday, March 15 2010
 
 * Version 0.4.0 released.  I didn't finish the features I planned

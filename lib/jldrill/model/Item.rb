@@ -191,6 +191,13 @@ module JLDrill
             temp = @position
             @position = item.position
             item.position = temp
+           
+            if !@quiz.nil?
+                if (@bin == 0) && (item.bin == 0)
+                    @quiz.contents.bins[@bin].moveBeforeItem(self, item)
+                end
+                @quiz.setNeedsSave(true)
+            end
         end
 
         def insertBefore(item)
@@ -207,6 +214,13 @@ module JLDrill
                 end
             end
             @position = target
+
+            if !@quiz.nil?
+                if (@bin == 0) && (item.bin == 0)
+                    @quiz.contents.bins[@bin].moveBeforeItem(self, item)
+                end
+                @quiz.setNeedsSave(true)
+            end
         end
 
         # Return the save format of the item

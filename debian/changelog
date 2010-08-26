@@ -1,3 +1,10 @@
+jldrill (0.4.1-12) unstable; urgency=low
+
+  * Physically move items in the new set when they are moved in
+    the All Vocabulary Window.  This marks the 4.1 candidate.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Mon, 26 Aug 2010 12:43:00 +0900
+
 jldrill (0.4.1-11) unstable; urgency=low
 
   * Move the dictionary loading progress bar from a separate window

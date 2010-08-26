@@ -31,6 +31,13 @@ Note: If you have a source release of JLDrill, you may start it by
 running AppRun in the main directory.  This will run that version
 of JLDrill even if you have another version installed somewhere else.
 
+If you know the name of the file you want to drill then you can also
+write type it.  For example:
+
+<pre>
+    jldrill myDrill.jldrill
+</pre>
+
 Main Window
 -----------
 This is what you see when you first start JLDrill.
@@ -344,10 +351,10 @@ success is 90% or more, then there is little point to reviewing
 any more.  You will be better off to learn new items at this point.
 
 While you are in review mode, when you get an item correct,
-it is given a potential schedule of twice the amount of time
+it is given a potential schedule of up to twice the amount of time
 since the last review.  For example, if we haven't reviewed the
 item for 2 days and then get the item correct, it will be given
-a potential schedule of 4 days.  In this way the gap between
+a potential schedule of around 4 days.  In this way the gap between
 successful reviews will get longer and longer.
 
 But it's important to realize that the "potential schedule" is
@@ -359,8 +366,7 @@ get to 90% correct, you stop reviewing.
 In other words, JLDrill automatically adjusts the scheduling for
 you.  If you have difficulty remembering items, then they will
 show up more often.  If you remember them easily, then they will
-appear less often.  I believe this is a significant advantage over
-other spaced repetition algorithms.
+appear less often.  
 
 However, you may have noticed that the item we reviewed today
 started with a potential schedule of 4.2 days, and after we
@@ -375,6 +381,18 @@ So the program adjusts for this and creates the new scheduled
 date from the old scheduled date.  In this case, we have
 a few minutes plus 4.2 days, which ends up being about 4.2 days
 (once the numbers are rounded off).
+
+Earlier I said that the new potential schedule is "up to"
+twice the amount of time that had passed.  In fact the
+multiplier is higher for younger items than older items.
+An item that has waited less than a day since being reviewed
+last will have it's schedule multiplied by 2.  This multiplier
+is reduced over time so that items which had a previous
+schedule of 180 days or more have a multiplier of 1.  This
+means that it is scheduled to wait the same amount of time
+as it has already.  Forgetting an old item is expensive since
+you have to start all over again.  So it makes sense to
+review old items a little more often.
 
 All this talk of scheduling may be confusing.  If you don't
 understand, don't worry about it.  The only important point
@@ -460,6 +478,15 @@ set to 10, but you can change it to whatever you like.  The more items
 you have in the working set, the longer it will take between reviews
 of the item. If the material is quite easy for you, you might want to make
 this large.  If it is very difficult, you can make the value small.
+
+Finally, you can set the dictionary that you want to use for this
+drill.  By default it is set to edict.  But you can change it to
+another dictionary by typing the filename, or browsing through
+your file system.  Note that the dictionary must be in EDICT
+format (with either EUC or UTF-8 encoding).
+
+If you want to have the dictionary load every time you load this
+drill, simply check the "Autoload Dictionary" button.
 
 Saving Your Progress
 --------------------
@@ -626,22 +653,21 @@ Drill->Statistics from the menu.
 
 On the left side of the window you can see some potential schedule ranges.
 The first column shows the distribution of item durations in those ranges.
-For example I have 17 items with a potential schedule of less than 5 days,
-6 with a potential schedule fo 5-10 days, etc.
+For example I have 52 items with a potential schedule of less than 5 days,
+62 with a potential schedule of 5-10 days, etc.
 
 The next column shows how successful I was in quizing items  in these
 ranges today.  The third column shows how many items I quized in those
-ranges.  For example, I reviewed 5 items with a potential schedule of
-less than 5 days.  I got 3 right and 2 wrong, meaning that I had a
-60 percent success rate.
+ranges.  For example, I reviewed 23 items with a potential schedule of
+less than 5 days.  I ended up with a 78% success rate for these items.
 
 Finally there is a column with various statistics.  The first items
 shows how may items I have reviewed so far today.  In this case it was
-34.  In that time I also learned 6 items from the working set.
-Review took me on average 18.2 seconds per item (they were grammar
-items which take me a bit longer to remember) and it took 132.9
-seconds for me to memorize each of the 6 items from the working set.
-While reviewing, my total accuracy was 82%.  This is pretty typical
+30.  In that time I also learned 5 items from the working set.
+Review took me on average 13.8 seconds per item (they were grammar
+items which take me a bit longer to remember) and it took 117.3
+seconds for me to memorize each of the 5 items from the working set.
+While reviewing, my total accuracy was 83%.  This is pretty typical
 for me.
 
 The next item show the ratio of learning time to review time.
