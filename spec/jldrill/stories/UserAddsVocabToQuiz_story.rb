@@ -2,6 +2,9 @@ require 'jldrill/contexts/AddNewVocabularyContext'
 require 'jldrill/views/gtk/QuizStatusView'
 require 'jldrill/views/VocabularyView'
 require 'jldrill/views/gtk/VocabularyView'
+require 'jldrill/views/gtk/MainWindowView'
+require 'jldrill/views/gtk/CommandView'
+require 'jldrill/views/gtk/ProblemView'
 require 'jldrill/spec/StoryMemento'
 
 module JLDrill::UserAddsVocabToQuiz
@@ -37,7 +40,7 @@ module JLDrill::UserAddsVocabToQuiz
             cv = cc.mainView
             cv.should_not be_nil
 
-            # Why the hell did make all the methods in the CommandView
+            # Why the hell did I make all the methods in the CommandView
             # procs?  I can't remember.  Maybe to try to distiguish
             # between outgoing and incoming methods in the view???
             cv.addNewVocabulary.should_not be_nil
@@ -268,7 +271,7 @@ module JLDrill::UserAddsVocabToQuiz
             Story.view.search("").should be_empty
 
             # It should find entries
-            Story.view.search("あ").should have_at_least(1).item
+            Story.view.search("あめ").should have_at_least(1).item
         end
     end
 end

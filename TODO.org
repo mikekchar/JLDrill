@@ -1,4 +1,4 @@
-= JLDrill TODO
+JLDrill TODO List
 
 * Process
 
@@ -16,20 +16,21 @@ release.
 
 When the release is complete, delete the stories and start again.
 
-* Version 0.5.0
-== Version 0.5.0
-The main purpose is to abstract the item types and more easily allow
-many different types of quizes.  The two biggest features are
-to roll in the Chinese version from CLDrill and to allow users
-to define their own quiz item types.
+* The Upcoming Release is Version 0.5.0
+
+The upcoming stable release will be version 0.5.0.  As usual,
+it will be made up of the development releases (from 0.4.1 up).
+
+The main purpose of the release is to abstract the item types and more
+easily allow many different types of quizes.  The two biggest features
+are to roll in the Chinese version from CLDrill and to allow users to
+define their own quiz item types.
 
 * Version 0.4.1
-== Version 0.4.1
 
-  This is a development release.  The main purpose of this development
-  release is to give more flexibility in the problem types.  The user
-  can choose which ones they want to review and each one will be
-  reviewed independently.
+  The main purpose of this development release is to give more
+  flexibility in the problem types.  The user can choose which ones
+  they want to review and each one will be reviewed independently.
 
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
@@ -42,25 +43,34 @@ to define their own quiz item types.
   :END:
 
 ** Velocity Table
-== Velocity Table
 
-<tt>
+The velocity table shows an overview of the current development.  The
+ITEM column shows which iteration we are doing.  Total shows the total
+number of "Jelly Beans" that are scheduled for the release.  A Jelly
+Bean is an arbitrary unit of effort.  Done shows how many Jelly Beans
+have been finished to date.  Percent shows what percentage of the
+iteration is finished.
+
+The last two columns show the velocity for the program.  Current shows
+the number of Jelly Beans that have been finished per day.  Needed
+shows the number of Jelly Beans per day that must be finished for the
+iteration to finish as scheduled.
+
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.1 |    21 |   19 |    90.5 |    0.12 |   0.13 |
+| * Version 0.4.1 |    22 |   22 |   100.0 |    0.14 |   0.13 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
-</tt>
 
 Note: To update the current velocity you must set the CurrentDate in
-the properties.  Also, when setting TODO tasks to DONE, you must set
-the number of jellybeans done in the properties of the task.
+the PROPERTIES section of the section.  When setting TODO tasks to
+DONE, you must set the number of JellyBeans done in the PROPERTIES of
+the task.
 
 ** Current Stories
-== Current Stories
 
-** DONE Options for allowing the user to choose problem types [2/2]
+*** DONE Options for allowing the user to choose problem types [2/2]
    Allow the user to choose which problem types they want to be
    exposed to in the review set.
    - [X] Add options to the model
@@ -71,7 +81,7 @@ the number of jellybeans done in the properties of the task.
    :Done: 2
    :END:
 
-** DONE Schedule each problem type separately [4/4]
+*** DONE Schedule each problem type separately [4/4]
    Currently there is only one review for each item.  The strategy
    randomly chooses one type of the allowed problem types to review.
    Create a separate schedule for each allowed problem type and
@@ -90,14 +100,14 @@ the number of jellybeans done in the properties of the task.
    :Done: 3
    :END:
 
-** DONE If there is no kanji don't schedule a kanji problem
+*** DONE If there is no kanji don't schedule a kanji problem
 
    :PROPERTIES:
    :JellyBeans: 1
    :Done: 1
    :END:
 
-** DONE Put a maximum of 25% extra beyond normal schedule
+*** DONE Put a maximum of 25% extra beyond normal schedule
         Sometimes you leave the stack for a long time but
         you are able to answer the question anyway.  This
         can cause the new schedule to be quite long depriving
@@ -109,7 +119,7 @@ the number of jellybeans done in the properties of the task.
    :Done: 2
    :END:
    
-** DONE Use smaller backoff for longer durations
+*** DONE Use smaller backoff for longer durations
         I have noticed that I fail in my longer duration items
         more often than my shorter duration items.  With the
         idea of also reviewing every item at least once
@@ -126,7 +136,7 @@ the number of jellybeans done in the properties of the task.
     :Done: 2
     :END:
 
-** DONE Early reviewed items scheduled too soon
+*** DONE Early reviewed items scheduled too soon
    If an item is reviewed earlier and answered correctly, it can be
    given a duration that is less than it's earlier duration.  This is
    confusing at least and maybe should be fixed. Basically made it
@@ -137,7 +147,7 @@ the number of jellybeans done in the properties of the task.
    :Done: 1
    :END:
 
-** DONE Review Mode isn't reset after loading a file
+*** DONE Review Mode isn't reset after loading a file
     If you turn review mode on and then load another file,
     the button stays depressed.  But it actually doesn't stay
     in review mode.  Change it so that when you load another
@@ -148,14 +158,14 @@ the number of jellybeans done in the properties of the task.
     :Done: 1
     :END:
 
-** DONE Specify a file to load on the command line
+*** DONE Specify a file to load on the command line
 
    :PROPERTIES:
    :JellyBeans: 1
    :Done: 1
    :END:
 
-** DONE Allow the user to choose the dictionary [1/1]
+*** DONE Allow the user to choose the dictionary [1/1]
    Instead of having a single dictionary that is loaded, allow the
    user to choose the dictionary they want to load from the Options
    page. This filename is then stored in the drill file.  Remove
@@ -167,7 +177,7 @@ the number of jellybeans done in the properties of the task.
    :Done: 3
    :END:
 
-** DONE Automatically load dictionary option [4/4]
+*** DONE Automatically load dictionary option [4/4]
    Have an option that is saved with the drill to automatically
    load the dictionary when the drill is loaded.
    - [X] Add option to the options
@@ -180,7 +190,7 @@ the number of jellybeans done in the properties of the task.
    :Done: 1
    :END:
 
-** DONE App crashes if Load Reference window is closed.  Make the Load
+*** DONE App crashes if Load Reference window is closed.  Make the Load
    Reference Window a normal widget on the main window.
 
    :PROPERTIES:
@@ -188,7 +198,7 @@ the number of jellybeans done in the properties of the task.
    :Done: 1
    :END:
 
-** DONE Set the Quiz to Modified when an item in the All Vocab window
+*** DONE Set the Quiz to Modified when an item in the All Vocab window
    has been moved.
 
    :PROPERTIES:
@@ -196,7 +206,7 @@ the number of jellybeans done in the properties of the task.
    :Done: 1
    :END:
 
-** DONE Sort new items correctly when they have been moved [1/2]
+*** DONE Sort new items correctly when they have been moved [2/2]
    When items are moved in the AllVocab window, make sure
    they are in the correct presentation order in the
    NewSet. 
@@ -213,11 +223,34 @@ the number of jellybeans done in the properties of the task.
 
 
 * Version 0.4.2
-== Version 0.4.2
 
-This section lists important work that falls out of the
-previous iteration for one reason or another.
+This section lists important work that fell out of the previous
+iteration for one reason or another.  It will be done in the next
+development version.
 
+** TODO Windows Packaging Spike [0/5]
+   Determine the feasibility of creating a windows packaging.
+   Place to start:
+   - [ ] Create a rake target to make a self contained directory with
+     context and JLDrill. Have a ruby script that runs everything
+     correctly on Windows and Linux given that Ruby, GNOME, and
+     Ruby-Gnome are already installed.
+   - [ ] Create a custom version of Ruby-Gnome that is packaged in the
+     self contained directory and is used instead of the installed
+     Ruby-Gnome.  Note: Probably have to package Gtk+ here as well.
+     If not make another step for that.
+   - [ ] Create some way to package a custom ruby interpreter in the
+     self contained directory.
+   - [ ] Create a self extracting archive for the self contained
+     directory.
+   - [ ] Create an installer for the custom fonts
+
+   :PROPERTIES:
+   :JellyBeans: 3
+   :Done: 0
+   :END:
+
+** TODO Create Windows packaging.
 ** TODO One of the items in the working set had a potential schedule of 72 days
 
    :PROPERTIES:
@@ -270,7 +303,10 @@ previous iteration for one reason or another.
 
 
 * Backlog
-== Backlog
+
+Items in the backlog aren't organized in any specific way.
+They are simply ideas that may or may not make it into
+an upcoming development version.
 
 ** TODO Allow searching by Kanji
 
@@ -331,29 +367,6 @@ previous iteration for one reason or another.
    Advanced users can probably just use the keyboard.  In this mode,
    Remove any UI that is surpulfluous.
 
-** TODO Windows Packaging Spike [0/5]
-   Determine the feasibility of creating a windows packaging.
-   Place to start:
-   - [ ] Create a rake target to make a self contained directory with
-     context and JLDrill. Have a ruby script that runs everything
-     correctly on Windows and Linux given that Ruby, GNOME, and
-     Ruby-Gnome are already installed.
-   - [ ] Create a custom version of Ruby-Gnome that is packaged in the
-     self contained directory and is used instead of the installed
-     Ruby-Gnome.  Note: Probably have to package Gtk+ here as well.
-     If not make another step for that.
-   - [ ] Create some way to package a custom ruby interpreter in the
-     self contained directory.
-   - [ ] Create a self extracting archive for the self contained
-     directory.
-   - [ ] Create an installer for the custom fonts
-
-   :PROPERTIES:
-   :JellyBeans: 3
-   :Done: 0
-   :END:
-
-** TODO Create Windows packaging.
 ** TODO Create a structure for Tanaka corpus.
 
 ** TODO Create a dictionary back end to allow it to use online dictionaries,
