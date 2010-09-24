@@ -22,7 +22,7 @@ will need to install the following before installing JLDrill.
 * Ruby 1.8 (Ruby 1.9 currently does *not* work!)
 * rubygems
 * GTK+ 2.6 or higher
-* Ruby-Gnome2 0.16 or higer
+* Ruby-Gnome2 0.16 or higher
 
 JLDrill has been developed and tested on GNU/Linux (Ubuntu).
 It should work on any platform that supports Ruby, Gtk and Ruby-Gnome

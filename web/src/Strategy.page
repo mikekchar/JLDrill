@@ -15,7 +15,7 @@ In this mode JLDrill uses spaced repetition to occasionally review an
 item with the user over days, weeks or months.
 
 The goal of JLDrill is to maximize the learning rate of items
-using a spaced repetion algorithm.  In the following two sections
+using a spaced repetition algorithm.  In the following two sections
 I will describe what I mean by that.
 
 What is Spaced Repetition?
@@ -142,7 +142,7 @@ about 90%.  Details of how it does this follow.
 Learning Working Set Items
 --------------------------
 
-The purpose of the working set is to aquire new or forgotten items.
+The purpose of the working set is to acquire new or forgotten items.
 Theoretically, one could use spaced repetition to acquire new items.
 However, this gets to be a bit problematic because very short
 spaces between items might not be convenient for the user.  The
@@ -182,7 +182,7 @@ can remember items in the review set at 90% or above.  It does this by
 roughly ordering the items by their probability of success and only
 offering items for review when the probability drops below 90%.
 
-In most spaced repetion programs items are scheduled for review.  When
+In most spaced repetition programs items are scheduled for review.  When
 the item has waited long enough, the item is reviewed.  The algorithms
 that do this make a lot of assumptions about the shape of the learning
 curve in various circumstances.  JLDrill takes a much simpler
@@ -194,7 +194,7 @@ that order until the user demonstrates that they can correctly guess
 around 90% of them.  At that point it stops offering items for review,
 and new items are used instead.
 
-The algorithm for ording the items is also very simple.  Recall that
+The algorithm for ordering the items is also very simple.  Recall that
 the probability for remembering an item is a curve.  At the start, the
 chance of remembering an item is 100%.  As time passes the chance of
 remembering falls.  This curve is not linear, but the part of the
@@ -252,7 +252,7 @@ items as time passes.  JLDrill does this by ordering the items
 by percentage of time elapsed in the potential schedule.
 
 For example, if there are 2 items, one with a potential schedule
-of 2 days and another with a pentiential schedule of 10 days,
+of 2 days and another with a potential schedule of 10 days,
 after waiting one day, the first has waited 50% of it's schedule
 while the other has waited 10%.  After one more day, the first item
 is at 100% of it's schedule while the second is only 20%.  In this
@@ -330,7 +330,7 @@ times the multiplication factor of 2) instead of 20 days.
 Success Rate Estimation
 ------------------------
 
-The key feature of JLDrills algorithm is that it measures when
+The key feature of JLDrill's algorithm is that it measures when
 the user is getting a 90% success rate and stops reviewing.
 This is what allows JLDrill to operate without having to
 precisely schedule each item.
@@ -409,7 +409,7 @@ rate will be above 90%.  This is especially problematic when
 there are items mixed in which don't have kanji.  Those items
 are only reviewed once.  The order of the items may be
 incorrect because the recall rate is different.  This is
-an issue that hasn't been adressed yet.
+an issue that hasn't been addressed yet.
 
 What Percentage Level to Stop Reviewing
 ---------------------------------------

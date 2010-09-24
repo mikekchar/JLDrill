@@ -43,7 +43,7 @@ and optionally
 
 Of the two optional fonts, the KanjiStrokeOrders is most important.  It
 allows you to see the stroke orders.  The kochi-mincho font is the
-font that the application defaults to when quizing kanji and readings.
+font that the application defaults to when quizzing kanji and readings.
 It is not necessary if you already have a Japanese font.
 
 ### In place execution

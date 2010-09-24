@@ -165,7 +165,7 @@ of what is going on follows.
 As has been mentioned, when you first start a drill, all items are
 put into the new set.  Then one item is selected (either the first
 item in the drill, or at random according to the options set) to
-be quized.  This item is placed into level 1 of the working set.
+be quizzed.  This item is placed into level 1 of the working set.
 Once you quiz the item and select either "correct" or "incorrect",
 a new item is selected from the new set and placed into level 1
 of the working set.  This continues until the working set is full.
@@ -333,7 +333,7 @@ new item mode and a new item is selected for the gap.
 Scheduling
 ----------
 
-In most spaced repetion applications, each item has a fixed date
+In most spaced repetition applications, each item has a fixed date
 when it is scheduled to be reviewed.  When that date has passed, the
 item is reviewed.  JLDrill doesn't work like that.
 
@@ -342,7 +342,7 @@ by the potential schedule.  You then review items until you seem
 to be getting at least 90% of them correct.  The reason for this is
 simple.
 
-When the items are scheduled, JLDrill puts  alot of effort to
+When the items are scheduled, JLDrill puts  a lot of effort to
 ensure that the items you are most likely to forget are placed at
 the front of the list.  Items that you are least likely to forget
 are placed at the back.  As you review, you will notice that your
@@ -509,7 +509,7 @@ Above the top panel in the drill is a bank of indicators.
 
 Drills derived from edict entries have markers.  These indicators will
 light up when the word has a specific marker.  In the example, the
-word is a "usually kana" and an "intrasitive" verb.  The markers that
+word is a "usually kana" and an "intransitive" verb.  The markers that
 JLDrill has indicators for are:
 
 ###Usually Kana
@@ -523,7 +523,7 @@ that are usually kana.
 
 ###Humble
 
-The item is part of humble keigo.  This means that in polite speach you
+The item is part of humble keigo.  This means that in polite speech you
 will use this word when referring to yourself or your circle (family,
 company, etc).
 
@@ -548,7 +548,7 @@ of it.
 This verb does not take a direct object.  That is you can't use wo (を) with
 it.  If this item is not lit up, usually you can assume that the verb
 is transitive, but the whole transitive/intransitive thing in Edict is
-still a little shakey.  It is always best to look at usage examples.
+still a little shaky.  It is always best to look at usage examples.
 
 ###Differs
 
@@ -589,7 +589,7 @@ a Japanese school, and the number of strokes for the character.
 
 Finally there is a list of all the radicals for the character, the Japanese
 name for the character and the english meaning of each radical.  The official 
-bushu is the first radical in the list and is anotated with a \*.
+bushu is the first radical in the list and is annotated with a \*.
 
 If you hover over a kana character you will only see something like this:
 
@@ -601,7 +601,7 @@ characters.  In this example the character is the katakana し which
 is represented by the roman characters "shi".
 
 Because the pronunciation of the character is not always intuitive
-from the roman characters, I have included my own inerpretation of
+from the roman characters, I have included my own interpretation of
 the sound.  In this case it is "shee".  I have also included a few
 English words that contain the same sound -- she and sheep.  Please
 note that I am a Canadian with a Canadian English accent.  While I
@@ -656,8 +656,8 @@ The first column shows the distribution of item durations in those ranges.
 For example I have 52 items with a potential schedule of less than 5 days,
 62 with a potential schedule of 5-10 days, etc.
 
-The next column shows how successful I was in quizing items  in these
-ranges today.  The third column shows how many items I quized in those
+The next column shows how successful I was in quizzing items  in these
+ranges today.  The third column shows how many items I quizzed in those
 ranges.  For example, I reviewed 23 items with a potential schedule of
 less than 5 days.  I ended up with a 78% success rate for these items.
 
@@ -733,7 +733,7 @@ If you wish to close the window without setting the item,
 simply press the close button in the top right of the window.
 
 Sometimes you will edit an item but realize that you haven't loaded
-the dictionary.  You can load the dictionary by pressing Ctl-D.  When
+the dictionary.  You can load the dictionary by pressing Ctrl-D.  When
 it is finished loading, it will automatically search for the item.
 
 Note: If you continue with the quiz without closing the Edit
@@ -757,7 +757,7 @@ be set.
 
 Pressing the Esc button will cancel the editing process.
 
-Occassionally it's useful to see what your changes will look
+Occasionally it's useful to see what your changes will look
 like (or to check the kanji information).  In this case you
 can press the "Preview" button.  It will take the information
 in the upper form and show what it would look like.  
@@ -824,7 +824,7 @@ and return you to the Reading field.
 
 Sometimes you will get far too many items in the search table to find
 the item you want.  In this case you can help locate it by entering
-information in the the other fields and then pressing Ctl-S (or
+information in the the other fields and then pressing Ctrl-S (or
 hitting the Search Button).  Note that the search is always done on
 the Reading field.  The information in the other fields is only
 used to try to jump the cursor close to the correct item.
@@ -844,7 +844,7 @@ will first ask to verify whether or not you really want to
 delete the item.  Be careful since once you delete it you
 can't get it back.
 
-**Learn item**.  Pressing "D" or selecting "Learn" from the
+**Learn item**.  Pressing "L" or selecting "Learn" from the
 Drill menu will put the current item in the review set
 (or mark it as correct if it is already in the review set).
 This is useful if you have a drill that contains items that
@@ -857,7 +857,7 @@ drill.
 ![View all the Vocabulary](images/AllVocab.png "View all the Vocabulary")
 
 This window allows you to view and modify your quiz as a whole.
-The current item in the main window will be hilighted in the
+The current item in the main window will be highlighted in the
 list.  Using the arrow keys or the mouse, you can select
 another item.
 
