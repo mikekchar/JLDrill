@@ -1,0 +1,903 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+
+<title>JLDrill TODO List</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2010-09-24 19:08:58 JST"/>
+<meta name="author" content="Mike Charlton"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">JLDrill TODO List</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Process </a></li>
+<li><a href="#sec-2">2 The Upcoming Release is Version 0.5.0 </a></li>
+<li><a href="#sec-3">3 Version 0.4.1 </a>
+<ul>
+<li><a href="#sec-3.1">3.1 Velocity Table </a></li>
+<li><a href="#sec-3.2">3.2 Current Stories </a>
+<ul>
+<li><a href="#sec-3.2.1">3.2.1 Options for allowing the user to choose problem types [2/2] </a></li>
+<li><a href="#sec-3.2.2">3.2.2 Schedule each problem type separately [4/4] </a></li>
+<li><a href="#sec-3.2.3">3.2.3 If there is no kanji don't schedule a kanji problem </a></li>
+<li><a href="#sec-3.2.4">3.2.4 Put a maximum of 25% extra beyond normal schedule </a></li>
+<li><a href="#sec-3.2.5">3.2.5 Use smaller backoff for longer durations </a></li>
+<li><a href="#sec-3.2.6">3.2.6 Early reviewed items scheduled too soon </a></li>
+<li><a href="#sec-3.2.7">3.2.7 Review Mode isn't reset after loading a file </a></li>
+<li><a href="#sec-3.2.8">3.2.8 Specify a file to load on the command line </a></li>
+<li><a href="#sec-3.2.9">3.2.9 Allow the user to choose the dictionary [1/1] </a></li>
+<li><a href="#sec-3.2.10">3.2.10 Automatically load dictionary option [4/4] </a></li>
+<li><a href="#sec-3.2.11">3.2.11 App crashes if Load Reference window is closed.  Make the Load </a></li>
+<li><a href="#sec-3.2.12">3.2.12 Set the Quiz to Modified when an item in the All Vocab window </a></li>
+<li><a href="#sec-3.2.13">3.2.13 Sort new items correctly when they have been moved [2/2] </a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-4">4 Version 0.4.2 </a>
+<ul>
+<li><a href="#sec-4.1">4.1 Windows Packaging Spike [0/5] </a></li>
+<li><a href="#sec-4.2">4.2 Create Windows packaging. </a></li>
+<li><a href="#sec-4.3">4.3 One of the items in the working set had a potential schedule of 72 days </a></li>
+<li><a href="#sec-4.4">4.4 Time to learn after the first item is waaay too big (10798.7s) [1/2] </a></li>
+<li><a href="#sec-4.5">4.5 Allow undo </a></li>
+<li><a href="#sec-4.6">4.6 Allow Learn/Unlearn for any arbitrary item </a></li>
+<li><a href="#sec-4.7">4.7 Alternate Language support (i.e., Chinese) </a></li>
+<li><a href="#sec-4.8">4.8 Start new drills in Preview mode </a></li>
+<li><a href="#sec-4.9">4.9 New Drill Splash Screen </a></li>
+<li><a href="#sec-4.10">4.10 Simply loading a drill shouldn't modify it </a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 Backlog </a>
+<ul>
+<li><a href="#sec-5.1">5.1 Allow searching by Kanji </a></li>
+<li><a href="#sec-5.2">5.2 If a reading can't be found in the dictionary, seach </a></li>
+<li><a href="#sec-5.3">5.3 Need a mechanism for publishing warnings and errors. </a></li>
+<li><a href="#sec-5.4">5.4 Give feedback to the user when we refuse to edit or add an item. </a></li>
+<li><a href="#sec-5.5">5.5 When save fails, indicate it to the user </a></li>
+<li><a href="#sec-5.6">5.6 Full test coverage for all the model objects </a></li>
+<li><a href="#sec-5.7">5.7 Full test coverage for all the contexts </a></li>
+<li><a href="#sec-5.8">5.8 Don't steal focus when putting up windows that take no input. </a></li>
+<li><a href="#sec-5.9">5.9 Define a structure for grammar. </a></li>
+<li><a href="#sec-5.10">5.10 Display parts of speech tags next to what they modify </a></li>
+<li><a href="#sec-5.11">5.11 Allow the user to choose what tags to display. </a></li>
+<li><a href="#sec-5.12">5.12 Associate data items with the dictionary they belong to. </a></li>
+<li><a href="#sec-5.13">5.13 Indicate when the item has been promoted. </a></li>
+<li><a href="#sec-5.14">5.14 Create a recent used menu for loading drills that you've used recently. </a></li>
+<li><a href="#sec-5.15">5.15 Allow user to set the formatting for each type of data. </a></li>
+<li><a href="#sec-5.16">5.16 Define the structure of the data in the drill. </a></li>
+<li><a href="#sec-5.17">5.17 Rename the methods that take Vocabulary </a></li>
+<li><a href="#sec-5.18">5.18 Replace webgen with something else. </a></li>
+<li><a href="#sec-5.19">5.19 Create a keyboard only mode. </a></li>
+<li><a href="#sec-5.20">5.20 Create a structure for Tanaka corpus. </a></li>
+<li><a href="#sec-5.21">5.21 Create a dictionary back end to allow it to use online dictionaries, </a></li>
+<li><a href="#sec-5.22">5.22 Create Redhat packaging. </a></li>
+<li><a href="#sec-5.23">5.23 Create OSX packaging. </a></li>
+<li><a href="#sec-5.24">5.24 Allow user to modify the global backoff. </a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Process </h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+This file contains the development plan for JLDrill.  The first
+section discusses the purpose of the next stable release.  Following
+that is the current development release.  The number of JellyBeans
+chosen for the development release should be enough so that it can
+be released in about a month.
+</p>
+<p>
+Following the current development release is the next development
+release.  New stories can be moved into the current release as
+long as there is still time in the iteration to do them.  However,
+an equal number of JellyBeans must be moved to the next development
+release.
+</p>
+<p>
+When the release is complete, delete the stories and start again.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> The Upcoming Release is Version 0.5.0 </h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p>
+The upcoming stable release will be version 0.5.0.  As usual,
+it will be made up of the development releases (from 0.4.1 up).
+</p>
+<p>
+The main purpose of the release is to abstract the item types and more
+easily allow many different types of quizes.  The two biggest features
+are to roll in the Chinese version from CLDrill and to allow users to
+define their own quiz item types.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Version 0.4.1 </h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p>
+The main purpose of this development release is to give more
+flexibility in the problem types.  The user can choose which ones
+they want to review and each one will be reviewed independently.
+</p>
+
+
+</div>
+
+<div id="outline-container-3.1" class="outline-3">
+<h3 id="sec-3.1"><span class="section-number-3">3.1</span> Velocity Table </h3>
+<div class="outline-text-3" id="text-3.1">
+
+
+<p>
+The velocity table shows an overview of the current development.  The
+ITEM column shows which iteration we are doing.  Total shows the total
+number of "Jelly Beans" that are scheduled for the release.  A Jelly
+Bean is an arbitrary unit of effort.  Done shows how many Jelly Beans
+have been finished to date.  Percent shows what percentage of the
+iteration is finished.
+</p>
+<p>
+The last two columns show the velocity for the program.  Current shows
+the number of Jelly Beans that have been finished per day.  Needed
+shows the number of Jelly Beans per day that must be finished for the
+iteration to finish as scheduled.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col align="left" /><col align="left" /><col align="left" /><col align="left" /><col align="left" /><col align="left" />
+</colgroup>
+<thead>
+<tr><th scope="col">ITEM</th><th scope="col">Total</th><th scope="col">Done</th><th scope="col">Percent</th><th scope="col">Current</th><th scope="col">Needed</th></tr>
+</thead>
+<tbody>
+<tr><td><span style="visibility:hidden;"></span>Version 0.4.1</td><td>22</td><td>22</td><td>100.0</td><td>0.14</td><td>0.13</td></tr>
+</tbody>
+</table>
+
+
+<p>
+Note: To update the current velocity you must set the CurrentDate in
+the PROPERTIES section of the section.  When setting TODO tasks to
+DONE, you must set the number of JellyBeans done in the PROPERTIES of
+the task.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3.2" class="outline-3">
+<h3 id="sec-3.2"><span class="section-number-3">3.2</span> Current Stories </h3>
+<div class="outline-text-3" id="text-3.2">
+
+
+
+</div>
+
+<div id="outline-container-3.2.1" class="outline-4">
+<h4 id="sec-3.2.1"><span class="section-number-4">3.2.1</span> <span class="done DONE"> DONE</span> Options for allowing the user to choose problem types [2/2] </h4>
+<div class="outline-text-4" id="text-3.2.1">
+
+<p>Allow the user to choose which problem types they want to be
+exposed to in the review set.
+</p><ul>
+<li>
+<b>[X]</b> Add options to the model
+</li>
+<li>
+<b>[X]</b> Add options to the UI   
+
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-3.2.2" class="outline-4">
+<h4 id="sec-3.2.2"><span class="section-number-4">3.2.2</span> <span class="done DONE"> DONE</span> Schedule each problem type separately [4/4] </h4>
+<div class="outline-text-4" id="text-3.2.2">
+
+<p>Currently there is only one review for each item.  The strategy
+randomly chooses one type of the allowed problem types to review.
+Create a separate schedule for each allowed problem type and
+review it independently.  But if the user gets one wrong, start
+both again.
+</p><ul>
+<li>
+<b>[X]</b> Store a problem type in the item status rather than a
+schedule.  Store the schedule in the problem type
+</li>
+<li>
+<b>[X]</b> Allow more than one problem type in the status
+</li>
+<li>
+<b>[X]</b> Automatically create/remove statuses based on allowed problem
+types. New statuses should be reviewed at the existing schedule
+or 5 days, whichever is less.
+</li>
+<li>
+<b>[X]</b> Operations on working set items must change all of the schedules.
+
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-3.2.3" class="outline-4">
+<h4 id="sec-3.2.3"><span class="section-number-4">3.2.3</span> <span class="done DONE"> DONE</span> If there is no kanji don't schedule a kanji problem </h4>
+<div class="outline-text-4" id="text-3.2.3">
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3.2.4" class="outline-4">
+<h4 id="sec-3.2.4"><span class="section-number-4">3.2.4</span> <span class="done DONE"> DONE</span> Put a maximum of 25% extra beyond normal schedule </h4>
+<div class="outline-text-4" id="text-3.2.4">
+
+<p>Sometimes you leave the stack for a long time but
+you are able to answer the question anyway.  This
+can cause the new schedule to be quite long depriving
+you of practice.  Put a maximum on how much extra
+you can add to the schedule
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3.2.5" class="outline-4">
+<h4 id="sec-3.2.5"><span class="section-number-4">3.2.5</span> <span class="done DONE"> DONE</span> Use smaller backoff for longer durations </h4>
+<div class="outline-text-4" id="text-3.2.5">
+
+<p>I have noticed that I fail in my longer duration items
+more often than my shorter duration items.  With the
+idea of also reviewing every item at least once
+every 6 months, I will modify the backoff so that it
+falls off to 1.0 at 180 days.  In other words a duration
+of 1 day or less will have a backoff of 2.0 while a
+duration of 180 days will have a backoff of 180 days.
+It will decrease linearly, so at 90 days the backoff
+is 1.5.  I also need to update the stats so that the
+categories are more appropriate.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3.2.6" class="outline-4">
+<h4 id="sec-3.2.6"><span class="section-number-4">3.2.6</span> <span class="done DONE"> DONE</span> Early reviewed items scheduled too soon </h4>
+<div class="outline-text-4" id="text-3.2.6">
+
+<p>If an item is reviewed earlier and answered correctly, it can be
+given a duration that is less than it's earlier duration.  This is
+confusing at least and maybe should be fixed. Basically made it
+so it would never schedule less than the previous duration.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3.2.7" class="outline-4">
+<h4 id="sec-3.2.7"><span class="section-number-4">3.2.7</span> <span class="done DONE"> DONE</span> Review Mode isn't reset after loading a file </h4>
+<div class="outline-text-4" id="text-3.2.7">
+
+<p>If you turn review mode on and then load another file,
+the button stays depressed.  But it actually doesn't stay
+in review mode.  Change it so that when you load another
+file, review mode is turned off and the button isn't depressed.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3.2.8" class="outline-4">
+<h4 id="sec-3.2.8"><span class="section-number-4">3.2.8</span> <span class="done DONE"> DONE</span> Specify a file to load on the command line </h4>
+<div class="outline-text-4" id="text-3.2.8">
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3.2.9" class="outline-4">
+<h4 id="sec-3.2.9"><span class="section-number-4">3.2.9</span> <span class="done DONE"> DONE</span> Allow the user to choose the dictionary [1/1] </h4>
+<div class="outline-text-4" id="text-3.2.9">
+
+<p>Instead of having a single dictionary that is loaded, allow the
+user to choose the dictionary they want to load from the Options
+page. This filename is then stored in the drill file.  Remove
+edict from the distribution.
+</p><ul>
+<li>
+<b>[X]</b> When the dictionary doesn't exist don't crash on loading.
+
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-3.2.10" class="outline-4">
+<h4 id="sec-3.2.10"><span class="section-number-4">3.2.10</span> <span class="done DONE"> DONE</span> Automatically load dictionary option [4/4] </h4>
+<div class="outline-text-4" id="text-3.2.10">
+
+<p>Have an option that is saved with the drill to automatically
+load the dictionary when the drill is loaded.
+</p><ul>
+<li>
+<b>[X]</b> Add option to the options
+</li>
+<li>
+<b>[X]</b> Save/Load options to the file
+</li>
+<li>
+<b>[X]</b> Automatically load dictionary when loading the file
+</li>
+<li>
+<b>[X]</b> Automatically load dictionary when dictionary changes in the options
+
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-3.2.11" class="outline-4">
+<h4 id="sec-3.2.11"><span class="section-number-4">3.2.11</span> <span class="done DONE"> DONE</span> App crashes if Load Reference window is closed.  Make the Load </h4>
+<div class="outline-text-4" id="text-3.2.11">
+
+<p>Reference Window a normal widget on the main window.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3.2.12" class="outline-4">
+<h4 id="sec-3.2.12"><span class="section-number-4">3.2.12</span> <span class="done DONE"> DONE</span> Set the Quiz to Modified when an item in the All Vocab window </h4>
+<div class="outline-text-4" id="text-3.2.12">
+
+<p>has been moved.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3.2.13" class="outline-4">
+<h4 id="sec-3.2.13"><span class="section-number-4">3.2.13</span> <span class="done DONE"> DONE</span> Sort new items correctly when they have been moved [2/2] </h4>
+<div class="outline-text-4" id="text-3.2.13">
+
+<p>When items are moved in the AllVocab window, make sure
+they are in the correct presentation order in the
+NewSet. 
+</p><ul>
+<li>
+<b>[X]</b> Sort New Set items when the file is loaded so that
+old files have the correct order.
+</li>
+<li>
+<b>[X]</b> Physically move New Set items when they are moved in
+the AllVocabWindow so that they are in the correct
+order.
+
+
+
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Version 0.4.2 </h2>
+<div class="outline-text-2" id="text-4">
+
+
+<p>
+This section lists important work that fell out of the previous
+iteration for one reason or another.  It will be done in the next
+development version.
+</p>
+
+</div>
+
+<div id="outline-container-4.1" class="outline-3">
+<h3 id="sec-4.1"><span class="section-number-3">4.1</span> <span class="todo TODO"> TODO</span> Windows Packaging Spike [0/5] </h3>
+<div class="outline-text-3" id="text-4.1">
+
+<p>Determine the feasibility of creating a windows packaging.
+Place to start:
+</p><ul>
+<li>
+<b>[<span style="visibility:hidden;">X</span>]</b> Create a rake target to make a self contained directory with
+context and JLDrill. Have a ruby script that runs everything
+correctly on Windows and Linux given that Ruby, GNOME, and
+Ruby-Gnome are already installed.
+</li>
+<li>
+<b>[<span style="visibility:hidden;">X</span>]</b> Create a custom version of Ruby-Gnome that is packaged in the
+self contained directory and is used instead of the installed
+Ruby-Gnome.  Note: Probably have to package Gtk+ here as well.
+If not make another step for that.
+</li>
+<li>
+<b>[<span style="visibility:hidden;">X</span>]</b> Create some way to package a custom ruby interpreter in the
+self contained directory.
+</li>
+<li>
+<b>[<span style="visibility:hidden;">X</span>]</b> Create a self extracting archive for the self contained
+directory.
+</li>
+<li>
+<b>[<span style="visibility:hidden;">X</span>]</b> Create an installer for the custom fonts
+
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-4.2" class="outline-3">
+<h3 id="sec-4.2"><span class="section-number-3">4.2</span> <span class="todo TODO"> TODO</span> Create Windows packaging. </h3>
+<div class="outline-text-3" id="text-4.2">
+
+</div>
+
+</div>
+
+<div id="outline-container-4.3" class="outline-3">
+<h3 id="sec-4.3"><span class="section-number-3">4.3</span> <span class="todo TODO"> TODO</span> One of the items in the working set had a potential schedule of 72 days </h3>
+<div class="outline-text-3" id="text-4.3">
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4.4" class="outline-3">
+<h3 id="sec-4.4"><span class="section-number-3">4.4</span> <span class="todo TODO"> TODO</span> Time to learn after the first item is waaay too big (10798.7s) [1/2] </h3>
+<div class="outline-text-3" id="text-4.4">
+
+<ul>
+<li>
+<b>[X]</b> Refactor tests
+</li>
+<li>
+<b>[<span style="visibility:hidden;">X</span>]</b> Test to see if this is a real problem   
+
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-4.5" class="outline-3">
+<h3 id="sec-4.5"><span class="section-number-3">4.5</span> <span class="todo TODO"> TODO</span> Allow undo </h3>
+<div class="outline-text-3" id="text-4.5">
+
+</div>
+
+</div>
+
+<div id="outline-container-4.6" class="outline-3">
+<h3 id="sec-4.6"><span class="section-number-3">4.6</span> <span class="todo TODO"> TODO</span> Allow Learn/Unlearn for any arbitrary item </h3>
+<div class="outline-text-3" id="text-4.6">
+
+</div>
+
+</div>
+
+<div id="outline-container-4.7" class="outline-3">
+<h3 id="sec-4.7"><span class="section-number-3">4.7</span> <span class="todo TODO"> TODO</span> Alternate Language support (i.e., Chinese) </h3>
+<div class="outline-text-3" id="text-4.7">
+
+</div>
+
+</div>
+
+<div id="outline-container-4.8" class="outline-3">
+<h3 id="sec-4.8"><span class="section-number-3">4.8</span> <span class="todo TODO"> TODO</span> Start new drills in Preview mode </h3>
+<div class="outline-text-3" id="text-4.8">
+
+<p>When a drill has been loaded for the first time (or after a reset), 
+show the first item in preview mode.  This allows the user to
+update the options, or to save the quiz before selecting the first
+problem.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-4.9" class="outline-3">
+<h3 id="sec-4.9"><span class="section-number-3">4.9</span> <span class="todo TODO"> TODO</span> New Drill Splash Screen </h3>
+<div class="outline-text-3" id="text-4.9">
+
+<p>Create a splash screen explaining that this is a new drill and
+the system is in Preview mode.  Press N to start
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-4.10" class="outline-3">
+<h3 id="sec-4.10"><span class="section-number-3">4.10</span> <span class="todo TODO"> TODO</span> Simply loading a drill shouldn't modify it </h3>
+<div class="outline-text-3" id="text-4.10">
+
+<p>Currently the "must save" flag is set when a drill is loaded.
+This should only be set after the first item has been answered.
+Of course if the drill was imported from an EDICT file then
+the "must save" flag should be set immediately.
+</p>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Backlog </h2>
+<div class="outline-text-2" id="text-5">
+
+
+<p>
+Items in the backlog aren't organized in any specific way.
+They are simply ideas that may or may not make it into
+an upcoming development version.
+</p>
+
+</div>
+
+<div id="outline-container-5.1" class="outline-3">
+<h3 id="sec-5.1"><span class="section-number-3">5.1</span> <span class="todo TODO"> TODO</span> Allow searching by Kanji </h3>
+<div class="outline-text-3" id="text-5.1">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5.2" class="outline-3">
+<h3 id="sec-5.2"><span class="section-number-3">5.2</span> <span class="todo TODO"> TODO</span> If a reading can't be found in the dictionary, seach </h3>
+<div class="outline-text-3" id="text-5.2">
+
+<p>again taking off one character at a time from the end of the
+reading. 
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5.3" class="outline-3">
+<h3 id="sec-5.3"><span class="section-number-3">5.3</span> <span class="todo TODO"> TODO</span> Need a mechanism for publishing warnings and errors. </h3>
+<div class="outline-text-3" id="text-5.3">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5.4" class="outline-3">
+<h3 id="sec-5.4"><span class="section-number-3">5.4</span> <span class="todo TODO"> TODO</span> Give feedback to the user when we refuse to edit or add an item. </h3>
+<div class="outline-text-3" id="text-5.4">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5.5" class="outline-3">
+<h3 id="sec-5.5"><span class="section-number-3">5.5</span> <span class="todo TODO"> TODO</span> When save fails, indicate it to the user </h3>
+<div class="outline-text-3" id="text-5.5">
+
+<p>before bringing up the save as dialog.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5.6" class="outline-3">
+<h3 id="sec-5.6"><span class="section-number-3">5.6</span> <span class="todo TODO"> TODO</span> Full test coverage for all the model objects </h3>
+<div class="outline-text-3" id="text-5.6">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5.7" class="outline-3">
+<h3 id="sec-5.7"><span class="section-number-3">5.7</span> <span class="todo TODO"> TODO</span> Full test coverage for all the contexts </h3>
+<div class="outline-text-3" id="text-5.7">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5.8" class="outline-3">
+<h3 id="sec-5.8"><span class="section-number-3">5.8</span> <span class="todo TODO"> TODO</span> Don't steal focus when putting up windows that take no input. </h3>
+<div class="outline-text-3" id="text-5.8">
+
+<p>Deferred from 0.3.3.  I tried to do it, but it never
+worked.  I suspect a race condition in GTK and it's not important
+enough to kill myself over.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5.9" class="outline-3">
+<h3 id="sec-5.9"><span class="section-number-3">5.9</span> <span class="todo TODO"> TODO</span> Define a structure for grammar. </h3>
+<div class="outline-text-3" id="text-5.9">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5.10" class="outline-3">
+<h3 id="sec-5.10"><span class="section-number-3">5.10</span> <span class="todo TODO"> TODO</span> Display parts of speech tags next to what they modify </h3>
+<div class="outline-text-3" id="text-5.10">
+
+<p>(i.e. each definition, or sentence)
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5.11" class="outline-3">
+<h3 id="sec-5.11"><span class="section-number-3">5.11</span> <span class="todo TODO"> TODO</span> Allow the user to choose what tags to display. </h3>
+<div class="outline-text-3" id="text-5.11">
+
+<p>Save this in the drill.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5.12" class="outline-3">
+<h3 id="sec-5.12"><span class="section-number-3">5.12</span> <span class="todo TODO"> TODO</span> Associate data items with the dictionary they belong to. </h3>
+<div class="outline-text-3" id="text-5.12">
+
+<p>Only load the dictionary if it's in the drill. (Question: Should it
+unload the dictionary on next drill?  Probably yes&hellip;)
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5.13" class="outline-3">
+<h3 id="sec-5.13"><span class="section-number-3">5.13</span> <span class="todo TODO"> TODO</span> Indicate when the item has been promoted. </h3>
+<div class="outline-text-3" id="text-5.13">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5.14" class="outline-3">
+<h3 id="sec-5.14"><span class="section-number-3">5.14</span> <span class="todo TODO"> TODO</span> Create a recent used menu for loading drills that you've used recently. </h3>
+<div class="outline-text-3" id="text-5.14">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5.15" class="outline-3">
+<h3 id="sec-5.15"><span class="section-number-3">5.15</span> <span class="todo TODO"> TODO</span> Allow user to set the formatting for each type of data. </h3>
+<div class="outline-text-3" id="text-5.15">
+
+<p>Store the formatting in the drill.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5.16" class="outline-3">
+<h3 id="sec-5.16"><span class="section-number-3">5.16</span> <span class="todo TODO"> TODO</span> Define the structure of the data in the drill. </h3>
+<div class="outline-text-3" id="text-5.16">
+
+<p>In other words, create a dynamic data type that defines the
+structure of the data item that is to be drilled.  Save it in the
+drill itself.  Create a structure for edict vocabulary.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5.17" class="outline-3">
+<h3 id="sec-5.17"><span class="section-number-3">5.17</span> <span class="todo TODO"> TODO</span> Rename the methods that take Vocabulary </h3>
+<div class="outline-text-3" id="text-5.17">
+
+<p>(like Quiz#add()) to indicate that it's for Vocabulary (i.e.,
+Quiz#addVocab())
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5.18" class="outline-3">
+<h3 id="sec-5.18"><span class="section-number-3">5.18</span> <span class="todo TODO"> TODO</span> Replace webgen with something else. </h3>
+<div class="outline-text-3" id="text-5.18">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5.19" class="outline-3">
+<h3 id="sec-5.19"><span class="section-number-3">5.19</span> <span class="todo TODO"> TODO</span> Create a keyboard only mode. </h3>
+<div class="outline-text-3" id="text-5.19">
+
+<p>Advanced users can probably just use the keyboard.  In this mode,
+Remove any UI that is surpulfluous.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5.20" class="outline-3">
+<h3 id="sec-5.20"><span class="section-number-3">5.20</span> <span class="todo TODO"> TODO</span> Create a structure for Tanaka corpus. </h3>
+<div class="outline-text-3" id="text-5.20">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5.21" class="outline-3">
+<h3 id="sec-5.21"><span class="section-number-3">5.21</span> <span class="todo TODO"> TODO</span> Create a dictionary back end to allow it to use online dictionaries, </h3>
+<div class="outline-text-3" id="text-5.21">
+
+<p>or dictionary servers (fantasdic? stardict?)
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5.22" class="outline-3">
+<h3 id="sec-5.22"><span class="section-number-3">5.22</span> <span class="todo TODO"> TODO</span> Create Redhat packaging. </h3>
+<div class="outline-text-3" id="text-5.22">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5.23" class="outline-3">
+<h3 id="sec-5.23"><span class="section-number-3">5.23</span> <span class="todo TODO"> TODO</span> Create OSX packaging. </h3>
+<div class="outline-text-3" id="text-5.23">
+
+</div>
+
+</div>
+
+<div id="outline-container-5.24" class="outline-3">
+<h3 id="sec-5.24"><span class="section-number-3">5.24</span> <span class="todo TODO"> TODO</span> Allow user to modify the global backoff. </h3>
+<div class="outline-text-3" id="text-5.24">
+
+<p>Allow the user to modify the global backoff from the options.  This
+must be saved with the drill.  When the backoff is changed, all the
+items that are currently scheduled will have to be scaled
+accordingly.  For example, if the backoff changes from 2.0 to 1.5,
+if there was an item with a duration of 10, then the duration
+becomes 7.5.  If the item had been waiting for 5 days (50% of the
+duration), then reset it so that it has been waiting for 3.75 days
+(50% of 7.5).  Then resort all the items.
+</p>
+
+</div>
+</div>
+</div>
+<div id="postamble">
+<p class="author"> Author: Mike Charlton
+<a href="mailto:mike@bishop">&lt;mike@bishop&gt;</a>
+</p>
+<p class="date"> Date: 2010-09-24 19:08:58 JST</p>
+<p class="creator">HTML generated by org-mode 6.30c in emacs 23</p>
+</div>
+</div>
+</body>
+</html>

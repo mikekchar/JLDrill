@@ -23,10 +23,10 @@ you would like to get involved in doing development on JLDrill you
 can always get the latest code from the
 [JLDrill BZR Repository](http://sakabatou.dnsdojo.org/devel/jldrill/).
 
-[Development documentation](http://sakabatou.dnsdojo.org/devel/jldril/doc/index.html) for this version including a TODO list is available.
+[Development documentation](http://sakabatou.dnsdojo.org/devel/jldrill/doc/index.html) for this version including a TODO list is available.
 
 Note that JLDrill is built upon Context, which is a library for
-abstracting user interfaces using MVP (Model View Presentor).  So
+abstracting user interfaces using MVP (Model View Presenter).  So
 you will need the Context code as well.  It is available from the
 [Context BZR Repository](http://sakabatou.dnsdojo.org/devel/context/).
 
@@ -42,7 +42,7 @@ following gems:
 * rcov
 * webgen
 
-Once you have everthing installed you will be able to build everything
+Once you have everything installed you will be able to build everything
 using:
 
 <pre>
@@ -153,14 +153,14 @@ Changes in [jldrill-0.4.1](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.
   by a factor of 1.0 to 2.0.  New items that have waited less than
   a day will be multiplied by 2.0.  Old items that have waited
   180 days or more are multiplied by 1.0.  Other items are somewhere
-  inbetween.  See the Strategy document for more details.
+  in between.  See the Strategy document for more details.
 
 * Properly reset the Review Mode button when a new file is loaded.
 
 * Fix a crash when editing vocabulary.  I suspect this is actually
   a bug in GTK, but I added a work around anyway.
 
-* Allow the user to specifiy a drill file to load on the command line.
+* Allow the user to specify a drill file to load on the command line.
 
 * Add an option to specify the dictionary to load.  This means
   that different drills can use different dictionaries.  Also add an
@@ -181,10 +181,10 @@ Changes in [jldrill-0.3.5](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.
 * Allow the user to cut and paste items in the vocabulary list with C-X and C-V
 * Add a timer for each question that causes the background to change red
   when the user spends more time thinking about the item than they did last time.
-* Create a debian package.
+* Create a Debian package.
 * Simply scheduling strategy so that items are sorted by the percentage of time
-  passed in their potential schedule.  This simplies things dramatically, removes
-  the concept of getting behind and also improves review performace.
+  passed in their potential schedule.  This simplifies things dramatically, removes
+  the concept of getting behind and also improves review performance.
 * Number items properly in the kanji drill
 * Add a Learn command that promotes the item into the review set immediately.
 * Automatically adjust pane sizes so that the questions and answers fit as
@@ -196,7 +196,7 @@ Changes in [jldrill-0.3.5](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.
 * Various test refactoring
 * Allow jdrill to be run directly from a source repository by running the
   AppRun script.
-* Configure the source repository so that it looks likea ROX Application Directory.
+* Configure the source repository so that it looks like a ROX Application Directory.
   Admittedly few people are likely to be using ROX-filer, but it's cool for
   those that do.
 
@@ -242,14 +242,14 @@ Changes in [jldrill-0.3.3](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.
 * Only start the countdown for New Item mode after you have seen 10 items.
   I did this because I found that when I'm on top of things my review for
   the first 10 items is always 100%.  Possibly this means that I need to
-  backoff the difficulty for items that have already been memorized.  More
+  back-off the difficulty for items that have already been memorized.  More
   research needs to be done.
 * Properly reset the scheduled time in items when the quiz is reset.  Also
   reset each item when it is first introduced in case we have old quizzes
   that contain the scheduled time.
 * Modify the stats window to show the accuracy of items by original
-  duration rather than number of consequtive correct answers.  This
-  gives a better indication of whether or not the backoff is working
+  duration rather than number of consecutive correct answers.  This
+  gives a better indication of whether or not the back-off is working
   properly (for difficult items I level 5 item may have only been around
   2 or 3 days).
 

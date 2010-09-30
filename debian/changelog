@@ -1,3 +1,11 @@
+jldrill (0.4.1-13) unstable; urgency=low
+
+  * Comment out some tests that were causing other tests to fail.
+    Add an HTML version of the TODO file.  
+    Numerous documentation fixes by Nick Doyle.  Thanks Nick! 
+
+ -- Mike Charlton <mikekchar@gmail.com>  Mon, 24 Sep 2010 21:19:00 +0900
+
 jldrill (0.4.1-12) unstable; urgency=low
 
   * Physically move items in the new set when they are moved in

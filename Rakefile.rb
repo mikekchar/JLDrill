@@ -39,7 +39,7 @@ pkg_files = FileList[
 pkg_files.exclude('data/jldrill/fonts/*.ttf')
 
 # Spec options
-spec_opts = ['-f html:test_results.html']
+spec_opts = ['-f html:test_results.html -f profile:profile.txt']
 spec_files = FileList[
 	'spec/**/*_spec.rb',
 	'spec/**/*_story.rb'
@@ -93,7 +93,7 @@ rd = Rake::RDocTask.new(:rdoc) do |t|
 	t.title    = "JLDrill -- Japanese Language Drill program"
 	t.options << '--main' << 'README' <<
 		'--title' <<  'JLDrill -- Japanese Language Drill program' 
-	t.rdoc_files.include('README', 'TODO.org', 'COPYING', 'AUTHORS', 'data/jldrill/COPYING')
+	t.rdoc_files.include('README', 'COPYING', 'AUTHORS', 'data/jldrill/COPYING')
 	t.rdoc_files.include('lib/**/*.rb')
 end
 

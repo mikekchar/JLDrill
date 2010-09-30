@@ -8,7 +8,7 @@ require 'Context/Gtk/Widget'
 module JLDrill
     module Fakes
         # This is a fake App that doesn't start up the GTK
-        # initialization.  That way the main run look doesn't
+        # initialization.  That way the main run loop doesn't
         # get started.
         class App < Context::Context
             attr_reader :mainContext

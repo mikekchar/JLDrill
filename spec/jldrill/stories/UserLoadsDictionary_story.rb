@@ -29,25 +29,25 @@ module JLDrill::UserLoadsDictionary
     end
 
 
-    describe Story.stepName("There is a context for loading the dictionary") do
-        before(:each) do
-            Story.setupLoadReference(JLDrill::Gtk)
-        end
-        
-        after(:each) do
-            Story.shutdown
-        end
-
-        # I suppose this test is a bit worrisome.  If the test
-        # fails then in all probability the context won't
-        # exit, and the test will hang.  
-        # Not only that, but it takes as much time as the rest of
-        # the test suite put together.  Commenting out the meat
-        # of it for now
-
-        it "should load the reference dictionary" do
-            Story.start
-            Story.context.should_not be_nil
+#    describe Story.stepName("There is a context for loading the dictionary") do
+#        before(:each) do
+#            Story.setupLoadReference(JLDrill::Gtk)
+#        end
+#        
+#        after(:each) do
+#            Story.shutdown
+#        end
+#
+#        # I suppose this test is a bit worrisome.  If the test
+#        # fails then in all probability the context won't
+#        # exit, and the test will hang.  
+#        # Not only that, but it takes as much time as the rest of
+#        # the test suite put together.  Commenting out the meat
+#        # of it for now
+#
+#        it "should load the reference dictionary" do
+#            Story.start
+#            Story.context.should_not be_nil
 #            context = Story.context
 #            def context.exit
 #                super
@@ -57,8 +57,8 @@ module JLDrill::UserLoadsDictionary
 #                Story.view.should_receive(:update).at_least(1000).times
 #                Story.mainContext.loadReference
 #            end
-        end
-    end
+#        end
+#    end
     # Note: For AddNewVocabulary and Edit Vocabulary I can't test the
     # key accelerators in Gtk.  So I'll only test that the call backs work.
     
@@ -103,7 +103,7 @@ module JLDrill::UserLoadsDictionary
 
     describe Story.stepName("The dictionary to load is in the save file.") do
         before(:each) do
-            Story.setupLoadReference(JLDrill::Gtk)
+            Story.setupLoadReference(JLDrill)
         end
 
         it "should save the dictionary filename in the save file" do

@@ -51,13 +51,13 @@ JLDrill is Beta Software
 ------------------------
   I consider JLDrill to be in beta.  Most of the important features
   are present.  There may still be bugs, but I have been using the
-  software myself for several yearss and I think I've gotten rid
+  software myself for several years and I think I've gotten rid
   of most of the big problems.  Please be considerate of the beta status,
   though.  Keep your eyes open for problems and report them.  Poor
   usability issues are especially welcome.  Usability problem reports
   should describe the difficult work flow and give a suggestion for
   a new work flow that will improve the problem.  I am a programmer, not
-  a UI desiger, so I welcome any and all advice on this front.
+  a UI designer, so I welcome any and all advice on this front.
 
 News
 ----
@@ -67,7 +67,7 @@ Thursday, August 26 2010.
 * Development version 0.4.1 released.  To be honest I haven't gotten
   around to putting up 0.4.0 anywhere, so nobody has tried it. But
   the new development release makes some drastic changes to the
-  schedulure.  It also allows you to choose what kind of problems
+  scheduler.  It also allows you to choose what kind of problems
   you want to be drilled with.  Finally, it reviews problems
   types independently (for example, Meaning and Kanji problems
   are both scheduled for review for each item).  Sorry for the
@@ -127,7 +127,7 @@ Friday, Aug 29 2008.
 * JLDrill has been under constant development since the last update.
   But I haven't been updating the site.  The reason is that I've
   taken the opportunity to rework the entire code structure.
-  There are still plenty of places with embarrasingly bad code,
+  There are still plenty of places with embarrassingly bad code,
   but the new structure is there.  Hopefully updates will be
   more frequent
 

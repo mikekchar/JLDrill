@@ -50,7 +50,7 @@ the following.
 * Update the version number in lib/jldrill/Version.rb.  Remember that
   stable versions numbers are of the form X.Y.0 where X is the major
   version number and Y is the minor version number.
-* Create an entry in the debian/changlog file.  This must include the
+* Create an entry in the Debian/changelog file.  This must include the
   new version number.  The comment can be "Stable Release".
 * Update the index.page file to indicate that a new Stable release
   has been completed.  Create an overview in the What's new for
@@ -79,7 +79,7 @@ release.
 
 * Update the version number in lib/jldrill/Version.rb.  Do this by
   increasing the last number in the version by one.
-* Create an entry in the debian/changlog file.  This must include the
+* Create an entry in the Debian/changelog file.  This must include the
   new version number.  The comment can be "New Development Release".
 * Update the TODO.org file for the new development release.
   Update the version number at the top.  Give a few points for
@@ -100,8 +100,8 @@ However, before you sync please do the following:
 * Merge any existing changes that others might have already made
 on Sakabatou.  Run the tests to make sure that they all still
 work.
-* Add an entry to debian/changelog with a brief description of your
-changes.  Increase the revision number of the debian file.  The
+* Add an entry to Debian/changelog with a brief description of your
+changes.  Increase the revision number of the Debian file.  The
 Version number should look like X.Y.Z-R It's the R that you want
 to increment.
 * Sync to Sakabatou and then run rake update on Sakabatou to make

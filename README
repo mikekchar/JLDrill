@@ -76,11 +76,15 @@ Source repository:
   
 == TODO
 
-Please see the TODO.org file.  This file is an Emacs org-mode file.
-I started experimenting with it and ended up liking it.  Unfortunately,
-the markup is different than rdoc, so the formatting is not that great.
-However, one day I'll write an rdoc parser for org-mode files and
-everything will be fixed.
+The TODO file is maintained in an Emacs Org mode file.  Org mode
+is a mode of emacs that allows you to easily organize data.
+The original file is text based and is easily readable and
+editable with any editor.  But to publish the html file you need
+Emacs.  The current published HTML file is here.
+
+{Installed Gem}[link://../../../gems/jldrill-0.4.1/TODO.html]
+|
+{Source Repository}[link://../TODO.html]
 
 == Getting Involved
 
