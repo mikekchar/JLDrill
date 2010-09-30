@@ -19,10 +19,12 @@ What to Install
 JLDrill is written in Ruby and uses GTK2 as it's GUI toolkit.  You
 will need to install the following before installing JLDrill.
 
-* Ruby 1.8 (Ruby 1.9 currently does *not* work!)
+* Ruby 1.8 (Version 1.8.7 or higher)
 * rubygems
 * GTK+ 2.6 or higher
 * Ruby-Gnome2 0.16 or higer
+
+Note: Ruby 1.9 does *not* work!!
 
 JLDrill has been developed and tested on GNU/Linux (Ubuntu).
 It should work on any platform that supports Ruby, Gtk and Ruby-Gnome
@@ -39,10 +41,10 @@ that you won't need just to run JLDrill.  If demand warrants, I will make
 a more streamlined package for Windows.  Please contact me if you are
 using JLDrill on Windows.
 
-You will probably want to install Ruby using the 
-[One Click Ruby Installer](http://rubyinstaller.rubyforge.org/wiki/wiki.pl).
-This is very convenient because it also installs rubygems and puts everything
-in your path.
+The best place to get Ruby is the official Ruby website.  You must
+install
+[Ruby version 1.8.7](http://rubyforge.org/frs/download.php/72085/rubyinstaller-1.8.7-p302.exe).  Note that only version 1.8.7 or higher will work.
+Also, version 1.9.x will not work at the current time.
 
 Once that is installed, you will need to install GTK2 and
 Ruby-Gnome2.  Detailed instructions on doing this are available
