@@ -1,3 +1,10 @@
+jldrill (0.4.1-14) unstable; urgency=low
+
+  * Change the link in the documentation for the requirements
+    to the correct version of JLDrill 
+
+ -- Mike Charlton <mikekchar@gmail.com>  Fri, 1 Oct 2010 6:31:00 +0900
+
 jldrill (0.4.1-13) unstable; urgency=low
 
   * Comment out some tests that were causing other tests to fail.
