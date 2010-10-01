@@ -11,7 +11,12 @@ module JLDrill
             tanaka = Tanaka.new
             tanaka.numSentences.should be(0)
             tanaka.numWords.should be(0)
-            tanaka.parse(entryText.split("\n")).should be(true)
+			tanaka.lines = entryText.split("\n")
+            tanaka.parse
+
+			# It should dispose of the lines after parsing
+			tanaka.lines.should eql([])
+
             tanaka.numSentences.should be(1)
             tanaka.numWords.should be(3)
             sentences = tanaka.search("です")
@@ -48,7 +53,12 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
             tanaka = Tanaka.new
             tanaka.numSentences.should be(0)
             tanaka.numWords.should be(0)
-            tanaka.parse(file.split("\n")).should be(true)
+			tanaka.lines = file.split("\n")
+            tanaka.parse
+
+			# It should dispose of the lines after parsing
+			tanaka.lines.should eql([])
+
             tanaka.numSentences.should be(8)
             tanaka.numWords.should be(52)
 			haSentences = tanaka.search("は")
@@ -58,7 +68,33 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
         it "should be able to read the file from disk" do
             tanaka = Tanaka.new
 			tanaka.load(File.join(Config::DATA_DIR, "tests/examples.utf"))
+
+			# It should dispose of the lines after parsing
+			tanaka.lines.should eql([])
+
 			tanaka.numSentences.should be(100)
+			tanaka.numWords.should be(351)
+		end
+
+		it "should be able to read the file in chunks" do
+			tanaka = Tanaka.new
+			tanaka.lines.size.should be(0)
+			tanaka.file = (File.join(Config::DATA_DIR, "tests/examples.utf"))
+			tanaka.readLines
+			tanaka.lines.size.should be(200)
+			# Not EOF yet
+			tanaka.parseChunk(20).should eql(false)
+			tanaka.fraction.should eql(0.10)
+			tanaka.parseChunk(20).should eql(false)
+			tanaka.fraction.should eql(0.20)
+			# Read to the EOF
+			tanaka.parseChunk(1000).should eql(true)
+
+			# It should dispose of the unparsed lines after parsing
+			tanaka.fraction.should eql(0.0)
+			tanaka.lines.should eql([])
+
+			tanaka.numSentences.should eql(100)
 			tanaka.numWords.should be(351)
 		end
     end
