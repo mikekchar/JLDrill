@@ -130,6 +130,19 @@ module JLDrill::Gtk
             end
         end
 
+        # Sets the fields to the vocabulary listed, but doesn't
+        # set the hint.  This is used to populate the views from
+        # a dictionary entry (which doesn't have hints) rather than
+        # the user's enter.
+        def setDictionaryVocab(vocab)
+            if vocab
+                self.kanji = vocab.kanjiRaw
+                self.reading = vocab.readingRaw
+                self.definitions = vocab.definitionsRaw
+                self.markers = vocab.markersRaw
+            end
+        end
+
         def createField(label, value, &block)
             if !label then label = "" end
             if !value then value = "" end

@@ -1,3 +1,10 @@
+jldrill (0.4.2-2) unstable; urgency=low
+
+  * Allow only comments to be entered in the edit window.  Also, don't
+    clobber the comments when inserting vocabulary from the dictionary.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Fri, 1 Oct 2010 15:51:00 +0900
+
 jldrill (0.4.2-1) unstable; urgency=low
 
   * New Development Release.
