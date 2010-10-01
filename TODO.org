@@ -26,21 +26,23 @@ easily allow many different types of quizes.  The two biggest features
 are to roll in the Chinese version from CLDrill and to allow users to
 define their own quiz item types.
 
-* Version 0.4.1
+* Version 0.4.2
 
-  The main purpose of this development release is to give more
-  flexibility in the problem types.  The user can choose which ones
-  they want to review and each one will be reviewed independently.
+The main purpose of this release is to modify the way searching and
+editing work.  This will add more functionality to Japanese studying
+and pave the way towards Chinese studying.  Finally, there will
+also be Windows packaging since I've started to get Windows users.
 
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
-  :StartDate: <2010-03-17 Wed>
-  :CurrentDate:  <2010-08-25 Wed>
-  :EndDate: <2010-08-27 Sun>
+  :StartDate: <2010-10-01 Fri>
+  :CurrentDate:  <2010-10-01 Fri>
+  :EndDate: <2010-12-10 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
   :END:
+
 
 ** Velocity Table
 
@@ -59,7 +61,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.1 |    22 |   22 |   100.0 |    0.14 |   0.13 |
+| * Version 0.4.2 |    12 |    0 |     0.0 |    0.00 |   0.17 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -69,6 +71,111 @@ DONE, you must set the number of JellyBeans done in the PROPERTIES of
 the task.
 
 ** Current Stories
+
+** TODO Modify editing of comments
+   Allow items to be saved if only the comment has been changed.
+   However, when adding items from the dictionary, don't overwrite
+   the comment.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+   
+** TODO Add examples from the Tanaka corpus to the comment of an item
+   Create the ability to read the Tanaka corpus.  If the corpus is loaded,
+   allow the user to search the corpus when adding or editing an item.
+   The user may then choose a sentence to put into the comment field.
+
+   :PROPERTIES:
+   :JellyBeans: 3
+   :Done: 0
+   :END:
+
+** TODO Allow searching by Kanji
+   If the kanji field is set and the reading field is empty, search
+   for words by kanji.  If the reading field is not empty but a search
+   found no results, then try to search by kanji.
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 0
+   :END:
+
+** TODO Windows Packaging Spike [0/5]
+   Determine the feasibility of creating a windows packaging.
+   Place to start:
+   - [ ] Create a rake target to make a self contained directory with
+     context and JLDrill. Have a ruby script that runs everything
+     correctly on Windows and Linux given that Ruby, GNOME, and
+     Ruby-Gnome are already installed.
+   - [ ] Create a custom version of Ruby-Gnome that is packaged in the
+     self contained directory and is used instead of the installed
+     Ruby-Gnome.  Note: Probably have to package Gtk+ here as well.
+     If not make another step for that.
+   - [ ] Create some way to package a custom ruby interpreter in the
+     self contained directory.
+   - [ ] Create a self extracting archive for the self contained
+     directory.
+   - [ ] Create an installer for the custom fonts
+
+   :PROPERTIES:
+   :JellyBeans: 3
+   :Done: 0
+   :END:
+
+** TODO Create Windows packaging.
+   Do whatever the packaging spike found in order to make Windows packaging.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+
+** TODO Allow users to update their drills
+   A user can update a drill by appending the new version to their drill.
+   But if the vocabulary has changed in the new/old drill (because the
+   dictionary was updated for instance), the new vocabulary will be added
+   as a new item rather than updating the old item.  Put a unique
+   ID on each item.  When merging, if the IDs are the same overwrite the old
+   one.  For old drills, if there is no ID, assume the items are the same
+   if the position, reading and kanji are the same.  (Not sure about the
+   position).
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 0
+   :END:
+
+
+* Version 0.4.1
+
+  This release is now completed.
+  
+  The main purpose of this development release was to give more
+  flexibility in the problem types.  The user can choose which ones
+  they want to review and each one will be reviewed independently.
+
+  :PROPERTIES:
+  :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
+  :StartDate: <2010-03-17 Wed>
+  :CurrentDate:  <2010-08-25 Wed>
+  :EndDate: <2010-08-27 Sun>
+  :PERCENT: 0
+  :CurrentVelocity: 0
+  :NeededVelocity: 0
+  :END:
+
+** Velocity Table
+
+#+BEGIN: columnview :maxlevel 1 :id local
+| ITEM            | Total | Done | Percent | Current | Needed |
+|-----------------+-------+------+---------+---------+--------|
+| * Version 0.4.1 |    22 |   22 |   100.0 |    0.14 |   0.13 |
+#+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
+#+END
+
+** Completed Stories
 
 *** DONE Options for allowing the user to choose problem types [2/2]
    Allow the user to choose which problem types they want to be
@@ -222,54 +329,12 @@ the task.
    :END:
 
 
-* Version 0.4.2
+* Backlog
 
-This section lists important work that fell out of the previous
-iteration for one reason or another.  It will be done in the next
-development version.
+Items in the backlog aren't organized in any specific way.
+They are simply ideas that may or may not make it into
+an upcoming development version.
 
-** TODO Windows Packaging Spike [0/5]
-   Determine the feasibility of creating a windows packaging.
-   Place to start:
-   - [ ] Create a rake target to make a self contained directory with
-     context and JLDrill. Have a ruby script that runs everything
-     correctly on Windows and Linux given that Ruby, GNOME, and
-     Ruby-Gnome are already installed.
-   - [ ] Create a custom version of Ruby-Gnome that is packaged in the
-     self contained directory and is used instead of the installed
-     Ruby-Gnome.  Note: Probably have to package Gtk+ here as well.
-     If not make another step for that.
-   - [ ] Create some way to package a custom ruby interpreter in the
-     self contained directory.
-   - [ ] Create a self extracting archive for the self contained
-     directory.
-   - [ ] Create an installer for the custom fonts
-
-   :PROPERTIES:
-   :JellyBeans: 3
-   :Done: 0
-   :END:
-
-** TODO Create Windows packaging.
-** TODO One of the items in the working set had a potential schedule of 72 days
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 0
-   :END:
-
-** TODO Time to learn after the first item is waaay too big (10798.7s) [1/2]
-   - [X] Refactor tests
-   - [ ] Test to see if this is a real problem	 
-
-   :PROPERTIES:
-   :JellyBeans: 2
-   :Done: 0
-   :END:
-
-** TODO Allow undo
-** TODO Allow Learn/Unlearn for any arbitrary item
-** TODO Alternate Language support (i.e., Chinese)
 ** TODO Start new drills in Preview mode
    When a drill has been loaded for the first time (or after a reset), 
    show the first item in preview mode.  This allows the user to
@@ -302,21 +367,44 @@ development version.
    :END:
 
 
-* Backlog
-
-Items in the backlog aren't organized in any specific way.
-They are simply ideas that may or may not make it into
-an upcoming development version.
-
-** TODO Allow searching by Kanji
-
-** TODO If a reading can't be found in the dictionary, seach 
+  :PROPERTIES:
+  :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
+  :StartDate: <2010-03-17 Wed>
+  :CurrentDate:  <2010-08-25 Wed>
+  :EndDate: <2010-08-27 Sun>
+  :PERCENT: 0
+  :CurrentVelocity: 0
+  :NeededVelocity: 0
+  :END:
+** TODO Aggressive Search
+   If a reading can't be found in the dictionary, seach 
    again taking off one character at a time from the end of the
    reading. 
+
    :PROPERTIES:
    :JellyBeans: 2
+   :Done: 0
    :END:
 
+** TODO Alternate Language support (i.e., Chinese)
+** TODO One of the items in the working set had a potential schedule of 72 days
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+
+** TODO Time to learn after the first item is waaay too big (10798.7s) [1/2]
+   - [X] Refactor tests
+   - [ ] Test to see if this is a real problem	 
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 0
+   :END:
+
+** TODO Allow undo
+** TODO Allow Learn/Unlearn for any arbitrary item
 ** TODO Need a mechanism for publishing warnings and errors.
 
 ** TODO Give feedback to the user when we refuse to edit or add an item.
@@ -366,8 +454,6 @@ an upcoming development version.
 ** TODO Create a keyboard only mode.
    Advanced users can probably just use the keyboard.  In this mode,
    Remove any UI that is surpulfluous.
-
-** TODO Create a structure for Tanaka corpus.
 
 ** TODO Create a dictionary back end to allow it to use online dictionaries,
    or dictionary servers (fantasdic? stardict?)
