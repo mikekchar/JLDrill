@@ -31,11 +31,26 @@ module JLDrill
             end
         end
 
-        def parse(text)
+		def parse(lines)
+			index = 0
+			success = false
+			while index < lines.size do
+				if parseLines(lines[index], lines[index + 1])
+					index += 2
+					# As long as a single line gets parsed it is a success
+					success = true
+				else
+					index += 1
+				end
+			end
+			return success
+		end
+
+        def parseLines(aLine, bLine)
             success = false
-            if A_RE.match(text)
+            if A_RE.match(aLine)
                 sentence = $1
-                if B_RE.match(text)
+                if B_RE.match(bLine)
                     @sentences.push(sentence)
                     pos = @sentences.size - 1
                     w = $1.split(' ')
@@ -47,6 +62,10 @@ module JLDrill
             end
             return success
         end
+
+		def load(file)
+			parse(IO.readlines(file))
+		end
 
         def search(word)
             contents = @words[word]

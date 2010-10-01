@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'jldrill/model/Tanaka'
+require 'jldrill/model/Config'
 
 module JLDrill
     describe Tanaka do
@@ -10,7 +11,7 @@ module JLDrill
             tanaka = Tanaka.new
             tanaka.numSentences.should be(0)
             tanaka.numWords.should be(0)
-            tanaka.parse(entryText).should be(true)
+            tanaka.parse(entryText.split("\n")).should be(true)
             tanaka.numSentences.should be(1)
             tanaka.numWords.should be(3)
             sentences = tanaka.search("です")
@@ -47,11 +48,18 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
             tanaka = Tanaka.new
             tanaka.numSentences.should be(0)
             tanaka.numWords.should be(0)
-            tanaka.parse(file).should be(true)
-            tanaka.numSentences.should be(1)
-            tanaka.numWords.should be(3)
-
+            tanaka.parse(file.split("\n")).should be(true)
+            tanaka.numSentences.should be(8)
+            tanaka.numWords.should be(52)
+			haSentences = tanaka.search("は")
+			haSentences.size.should be(6)
         end
 
+        it "should be able to read the file from disk" do
+            tanaka = Tanaka.new
+			tanaka.load(File.join(Config::DATA_DIR, "tests/examples.utf"))
+			tanaka.numSentences.should be(100)
+			tanaka.numWords.should be(351)
+		end
     end
 end
