@@ -19,7 +19,11 @@ module JLDrill::Gtk
 		def getWidget
 			@progressBar
 		end
-		
+	
+		def filename
+			return @context.dictionaryName
+		end
+
 		def update(fraction)
 		    @progressBar.update(fraction)
 		end

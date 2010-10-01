@@ -16,11 +16,13 @@ require 'jldrill/contexts/PromptForSaveContext'
 require 'jldrill/contexts/PromptForDeleteContext'
 require 'jldrill/contexts/ShowInfoContext'
 require 'jldrill/contexts/ShowAllVocabularyContext'
+require 'jldrill/contexts/LoadTanakaContext'
 require 'jldrill/model/Acknowlegements'
 require 'jldrill/contexts/ShowAboutContext'
 require 'jldrill/model/moji/Radical'
 require 'jldrill/model/moji/Kanji'
 require 'jldrill/model/moji/Kana'
+require 'jldrill/model/Tanaka'
 
 module JLDrill
 
@@ -32,8 +34,9 @@ module JLDrill
 	                :displayProblemContext, :runCommandContext,
 	                :showInfoContext, :showAllVocabularyContext,
                     :showAboutContext, :editVocabularyContext,
+					:loadTanakaContext,
 	                :reference, :quiz, :kanji, :radicals, :kana,
-                    :inTests
+                    :inTests, :tanaka
 
 	    attr_writer :quiz, :inTests
 		
@@ -52,6 +55,7 @@ module JLDrill
 			@showInfoContext = ShowInfoContext.new(viewBridge)
 			@showAllVocabularyContext = ShowAllVocabularyContext.new(viewBridge)
 			@showAboutContext = ShowAboutContext.new(viewBridge)
+			@loadTanakaContext = LoadTanakaContext.new(viewBridge)
 			@reference = HashedEdict.new
 			@kanji = nil
 			@radicals = nil
@@ -60,6 +64,7 @@ module JLDrill
             # The quiz doesn't need to be saved
             @quiz.setNeedsSave(false)
             @inTests = false
+			@tanaka = Tanaka.new
 		end
 		
 		def createViews
@@ -205,6 +210,11 @@ module JLDrill
 		def loadReference
 		    @loadReferenceContext.enter(self) unless @loadReferenceContext.isEntered?
 		end
+
+		def loadTanaka
+		    @loadTanakaContext.enter(self) unless @loadTanakaContext.isEntered?
+		end
+
 		
 		def loadKanji
 		    kanjiFile = Config::getDataDir + "/dict/rikaichan/kanji.dat"

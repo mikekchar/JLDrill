@@ -212,6 +212,7 @@ task :debian_dir => [:clean_debian, :clean_web, :web] do
     FileUtils.cp_r "data/jldrill/dict/Kana", "debian/jldrill/usr/share/jldrill/dict"
     FileUtils.cp_r "data/jldrill/dict/rikaichan", "debian/jldrill/usr/share/jldrill/dict"
     FileUtils.cp_r Dir.glob("data/jldrill/icon.*"), "debian/jldrill/usr/share/jldrill"
+	FileUtils.cp_r "data/jldrill/Tanaka/examples.utf", "debian/jldrill/usr/share/jldrill/Tanaka"
 
     # Copy the desktop and icon files
     FileUtils.cp_r "data/jldrill/jldrill.desktop", "debian/jldrill/usr/share/applications"

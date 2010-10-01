@@ -61,6 +61,10 @@ module JLDrill
         def loadReference
             @parent.loadReference
         end
+
+		def loadTanaka
+			@parent.loadTanaka
+		end
         
         def quit
             @parent.quit

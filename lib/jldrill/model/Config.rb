@@ -29,5 +29,7 @@ module JLDrill
         DATA_DIR = getDataDir
         DICTIONARY_DIR = File.join(DATA_DIR, "dict")
         DICTIONARY_NAME = "edict"
+		TANAKA_DIR = File.join(DATA_DIR, "Tanaka")
+		TANAKA_NAME = "examples.utf"
     end
 end

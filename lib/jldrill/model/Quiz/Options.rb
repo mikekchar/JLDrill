@@ -8,7 +8,7 @@ module JLDrill
         attr_reader :publisher, :randomOrder, :promoteThresh, :introThresh,
                     :reviewMode, :dictionary, :reviewMeaning, 
                     :reviewKanji, :reviewReading, :reviewOptionsSet,
-                    :autoloadDic
+                    :autoloadDic, :tanaka
 
         RANDOM_ORDER_RE = /^Random Order/
         PROMOTE_THRESH_RE = /^Promotion Threshold: (.*)/
@@ -27,6 +27,7 @@ module JLDrill
             @introThresh = 10
             @reviewMode = false
 			@dictionary = nil
+			@tanaka = nil
             @reviewOptionsSet = false
             @autoloadDic = false
             defaultReviewOptions

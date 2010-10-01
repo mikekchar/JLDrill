@@ -41,6 +41,10 @@ module JLDrill
 			return @parsed >= @lines.size
 		end
 
+		def loaded?
+			return eof? && (@words.size > 0)
+		end
+
 		def fraction
 			retVal = 0.0
 			if @lines.size != 0

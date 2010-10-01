@@ -8,7 +8,8 @@ module JLDrill
                     :loadReference, :quit, :info, :statistics, :check,
                     :incorrect, :correct, :vocabTable, :options,
                     :resetQuiz, :editVocab, :addNewVocabulary, :ack, :about,
-                    :drill, :deleteVocab, :createNew, :learn, :removeDups
+                    :drill, :deleteVocab, :createNew, :learn, :removeDups,
+					:loadTanaka
     
 		def initialize(context)
 			super(context)
@@ -35,6 +36,7 @@ module JLDrill
             @createNew = Proc.new {@context.createNew}
             @learn = Proc.new {@context.learn}
             @removeDups = Proc.new {@context.removeDups}
+			@loadTanaka = Proc.new {context.loadTanaka}
 		end	
 		
 		def setReviewMode(bool)

@@ -12,7 +12,7 @@ module JLDrill::Gtk
             @view = view
             
             @progress = Gtk::ProgressBar.new
-            self.add(Gtk::Label.new("Loading Dictionary:"))
+            self.add(Gtk::Label.new("Loading " + @view.filename + ":"))
             self.add(@progress)
         end
         
