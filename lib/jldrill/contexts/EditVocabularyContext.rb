@@ -105,8 +105,11 @@ module JLDrill
         # Sets the vocabulary of the current problem to vocab
         # Refuses to set the vocabulary if it already exists in the
         # quiz.  Returns true if the vocabulary was set, false otherwise
+        # Note, if the vocabulary is the one in the problem it will replace
+        # it even if it is the same vocabulary in order to update the comment.
 		def setVocabulary(vocab)
-            if !@parent.quiz.exists?(vocab)
+            if @originalProblem.contains?(vocab) ||
+                !@parent.quiz.exists?(vocab)
                 @originalProblem.vocab = vocab
                 @parent.quiz.setCurrentProblem(@originalProblem)
                 return true

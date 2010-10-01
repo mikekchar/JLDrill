@@ -69,6 +69,12 @@ module JLDrill
             @item.problemModified(self)
         end
 
+        # Returns true if the current problem contains the vocabulary
+        # passed in.
+        def contains?(vocab)
+            return @vocab.eql?(vocab)
+        end
+
         # Return a string showing what bin this problem is from
         def status
             retVal = "     "
