@@ -68,6 +68,8 @@ module JLDrill
 		
 		def exit
 		    super
+			# Show the examples as soon as this has loaded
+			@parent.showExamplesContext.enter(@parent)
 		end
     end
 end

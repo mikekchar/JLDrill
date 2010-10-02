@@ -19,6 +19,7 @@ require 'jldrill/contexts/ShowAllVocabularyContext'
 require 'jldrill/contexts/LoadTanakaContext'
 require 'jldrill/model/Acknowlegements'
 require 'jldrill/contexts/ShowAboutContext'
+require 'jldrill/contexts/ShowExamplesContext'
 require 'jldrill/model/moji/Radical'
 require 'jldrill/model/moji/Kanji'
 require 'jldrill/model/moji/Kana'
@@ -34,7 +35,7 @@ module JLDrill
 	                :displayProblemContext, :runCommandContext,
 	                :showInfoContext, :showAllVocabularyContext,
                     :showAboutContext, :editVocabularyContext,
-					:loadTanakaContext,
+					:loadTanakaContext, :showExamplesContext,
 	                :reference, :quiz, :kanji, :radicals, :kana,
                     :inTests, :tanaka
 
@@ -56,6 +57,7 @@ module JLDrill
 			@showAllVocabularyContext = ShowAllVocabularyContext.new(viewBridge)
 			@showAboutContext = ShowAboutContext.new(viewBridge)
 			@loadTanakaContext = LoadTanakaContext.new(viewBridge)
+			@showExamplesContext = ShowExamplesContext.new(viewBridge)
 			@reference = HashedEdict.new
 			@kanji = nil
 			@radicals = nil
@@ -212,7 +214,11 @@ module JLDrill
 		end
 
 		def loadTanaka
-		    @loadTanakaContext.enter(self) unless @loadTanakaContext.isEntered?
+			if @tanaka.loaded?
+				@showExamplesContext.enter(self) unless @showExamplesContext.isEntered?
+			else
+				@loadTanakaContext.enter(self) unless @loadTanakaContext.isEntered?
+			end
 		end
 
 		
