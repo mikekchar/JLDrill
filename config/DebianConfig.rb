@@ -13,6 +13,6 @@ module JLDrill
         DICTIONARY_DIR = File.expand_path('/usr/share/edict')
         DICTIONARY_NAME = "edict"
         TANAKA_DIR = File.expand_path('/usr/share/jldrill/Tanaka')
-        DICTIONARY_NAME = "examples.utf"
+        TANAKA_NAME = "examples.utf"
     end
 end

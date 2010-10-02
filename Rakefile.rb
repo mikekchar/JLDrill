@@ -201,6 +201,7 @@ task :debian_dir => [:clean_debian, :clean_web, :web] do
     FileUtils.mkdir_p "debian/jldrill/usr/share/app-install/icons"
     FileUtils.mkdir_p "debian/jldrill/usr/share/app-install/desktop"
     FileUtils.mkdir_p "debian/jldrill/usr/share/doc/jldrill/html"
+	FileUtils.mkdir_p "debian/jldrill/usr/share/jldrill/Tanaka"
     
     # Copy the jldrill source files
     FileUtils.cp_r Dir.glob("bin/*"), "debian/jldrill/usr/bin"

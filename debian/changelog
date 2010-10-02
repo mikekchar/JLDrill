@@ -1,3 +1,10 @@
+jldrill (0.4.2-3) unstable; urgency=low
+
+  * Load the Tanaka corpus with control E.  Every time you go
+    to a new vocabulary examples will be shown in a separate window. 
+
+ -- Mike Charlton <mikekchar@gmail.com>  Fri, 2 Oct 2010 18:25:00 +0900
+
 jldrill (0.4.2-2) unstable; urgency=low
 
   * Allow only comments to be entered in the edit window.  Also, don't
