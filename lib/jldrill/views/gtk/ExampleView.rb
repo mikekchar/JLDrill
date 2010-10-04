@@ -14,6 +14,10 @@ module JLDrill::Gtk
 		def getWidget
 			@exampleWindow
 		end
+
+        def mainWindow
+            getWidget.gtkWidgetMainWindow
+        end
 		
         def destroy
             @exampleWindow.explicitDestroy

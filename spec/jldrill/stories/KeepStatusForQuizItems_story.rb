@@ -53,9 +53,9 @@ module JLDrill
         # There's a +- 10% variation in scheduling, so the actual
         # value should be in between those values        
         def should_be_plus_minus_ten_percent(actual, expected)
-        variation = expected / 10
-        (actual >= (expected - variation)).should be(true)
-        (actual <= (expected + variation)).should be(true)
+        variation = expected.to_f / 10.0
+        (actual >= (expected.to_f - variation.to_f)).should be(true)
+        (actual <= (expected.to_f + variation.to_f)).should be(true)
         end
 
         it "should schedule new items to maximum value by default" do

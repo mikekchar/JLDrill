@@ -1,4 +1,5 @@
 require 'Context/Gtk/Widget'
+require 'jldrill/views/gtk/widgets/PopupFactory'
 require 'gtk2'
 
 module JLDrill::Gtk
@@ -9,7 +10,7 @@ module JLDrill::Gtk
             @view = view
 			@closed = false
             super("Examples") 
-			connectSignals unless @view.nil?
+            @popupFactory = PopupFactory.new(view)
 
             sw = Gtk::ScrolledWindow.new
             sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
@@ -21,7 +22,8 @@ module JLDrill::Gtk
             @contents.editable = false
             @contents.cursor_visible = false
             sw.add(@contents)
-            self.set_default_size(600, 360)
+            self.set_default_size(400, 360)
+			connectSignals unless @view.nil?
         end
 
 		def connectSignals
@@ -39,6 +41,18 @@ module JLDrill::Gtk
             
             signal_connect('destroy') do
                 self.close
+            end
+
+            # Kanji Popup
+            @contents.add_events(Gdk::Event::POINTER_MOTION_MASK)
+            @contents.add_events(Gdk::Event::LEAVE_NOTIFY_MASK)
+            
+            @contents.signal_connect('motion_notify_event') do |widget, motion|
+                @popupFactory.notify(widget, motion.window, motion.x, motion.y)
+            end
+
+            @contents.signal_connect('leave_notify_event') do
+                @popupFactory.closePopup
             end
         end
         

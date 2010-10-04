@@ -1,3 +1,9 @@
+jldrill (0.4.2-4) unstable; urgency=low
+
+  * Add kanji popup to the examples window.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Mon, 5 Oct 2010 11:31:00 +0900
+
 jldrill (0.4.2-3) unstable; urgency=low
 
   * Load the Tanaka corpus with control E.  Every time you go

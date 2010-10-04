@@ -56,5 +56,24 @@ module JLDrill
 		def newProblemUpdated(problem)
 		    @mainView.update(findExamples(problem)) unless @mainView.nil?
 		end
+
+        def kanjiLoaded?
+            !parent.kanji.nil?
+        end
+
+        def kanjiInfo(character)
+            retVal = ""
+            kanji = @parent.kanji.findChar(character)
+            if !kanji.nil?
+                retVal = kanji.withRadical_to_s(@parent.radicals)
+            else
+                kana = @parent.kana.findChar(character)
+                if !kana.nil?
+                    retVal = kana.to_s
+                end
+            end
+            retVal
+        end
+
     end
 end

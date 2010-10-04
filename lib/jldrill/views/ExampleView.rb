@@ -18,5 +18,13 @@ module JLDrill
 		def update(examples)
 		    # Only for the concrete class
 		end
+
+        def kanjiLoaded?
+            @context.kanjiLoaded?
+        end
+
+        def kanjiInfo(char)
+            @context.kanjiInfo(char)
+        end
 	end
 end
