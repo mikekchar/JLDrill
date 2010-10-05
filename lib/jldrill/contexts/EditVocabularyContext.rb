@@ -1,113 +1,27 @@
-require 'Context/Context'
-require 'Context/Bridge'
-require 'jldrill/views/VocabularyView'
+require 'jldrill/contexts/ModifyVocabularyContext'
 
 module JLDrill
 
-	class EditVocabularyContext < Context::Context
+	class EditVocabularyContext < ModifyVocabularyContext
 				
 		def initialize(viewBridge)
 			super(viewBridge)
-            @originalProblem = nil
 		end
-		
-		def createViews
-    		@mainView = @viewBridge.VocabularyView.new(self, "Set") do
-    		    if @mainView.setVocabulary
-                    @mainView.close
-                    true
-                else
-                    false
-                end
-    		end
-        end
-
-        def destroyViews
-            @mainView.destroy if !@mainView.nil?
-            @mainView = nil
-        end		    
-		
-		def enter(parent)
-		    super(parent)
-            if !@parent.nil?
-                if !@parent.quiz.nil?
-                    @parent.quiz.publisher.subscribe(self, "newProblem")
-                    @parent.quiz.publisher.subscribe(self, "problemModified")
-                    @parent.quiz.publisher.subscribe(self, "itemDeleted")
-                end
-                if !@parent.reference.nil?
-                    @parent.reference.publisher.subscribe(self, "edictLoad")
-                end
-                update(@parent.quiz.currentProblem)
-            end
-		end
-		
-		def exit
-            if !@parent.nil?
-                if !@parent.quiz.nil?
-                    if !@originalProblem.nil?
-                        @parent.quiz.setCurrentProblem(@originalProblem)
-                    end
-                    @parent.quiz.publisher.unsubscribe(self, "newProblem")
-                    @parent.quiz.publisher.unsubscribe(self, "problemModified")
-                end
-                if !@parent.reference.nil?
-                    @parent.reference.publisher.subscribe(self, "edictLoad")
-                end
-            end
-		    super
-		end
-
-        def newProblemUpdated(problem)
-            if !problem.preview?
-                update(problem)
-            end
-        end
-
-        def problemModifiedUpdated(problem)
-            update(problem)
-        end
-
-        def itemDeletedUpdated(item)
-            # Not sure what to do here
-        end
-
+	
+        # When items have been updated in the quiz, If we are editing and
+        # the problem changes, then the edit window should change to that
+        # problem.
         def update(problem)
-            if !problem.nil? && !problem.preview?
-                @originalProblem = problem
-            end
+            super(problem)
 		    @mainView.update(problem.item.to_o)
         end
-		
-		def addVocabulary(vocab)
-		    # Do nothing in this context
-		end
-		
-        def dictionaryLoaded?
-            !@parent.nil? && !@parent.reference.nil? &&
-                @parent.reference.loaded?
-        end
-        
-        def loadDictionary
-            @parent.loadReference unless @parent.nil?
-        end
-
-		def search(reading)
-		    if dictionaryLoaded?
-		        @parent.reference.search(reading).sort! do |x,y|
-		            x.to_o.reading <=> y.to_o.reading
-		        end
-		    else
-		        []
-		    end
-		end
 		
         # Sets the vocabulary of the current problem to vocab
         # Refuses to set the vocabulary if it already exists in the
         # quiz.  Returns true if the vocabulary was set, false otherwise
         # Note, if the vocabulary is the one in the problem it will replace
         # it even if it is the same vocabulary in order to update the comment.
-		def setVocabulary(vocab)
+		def doAction(vocab)
             if @originalProblem.contains?(vocab) ||
                 !@parent.quiz.exists?(vocab)
                 @originalProblem.vocab = vocab
@@ -117,14 +31,5 @@ module JLDrill
                 return false
             end
 		end
-
-        def edictLoadUpdated(reference)
-            @mainView.updateSearch unless @mainView.nil?
-        end
-
-        def preview(item)
-            @parent.previewItem(item)
-        end
-
     end
 end

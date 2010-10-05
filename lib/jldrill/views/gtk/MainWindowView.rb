@@ -22,14 +22,6 @@ module JLDrill::Gtk
             @mainWindow.addToThisWidget(@vbox)
 		end
 
-        def open
-            super
-        end
-
-        def close
-            super
-        end
-
 		def getWidget
 			@vbox
 		end

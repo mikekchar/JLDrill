@@ -1,16 +1,16 @@
 require 'jldrill/views/gtk/widgets/VocabularyWindow'
-require 'jldrill/views/VocabularyView'
+require 'jldrill/contexts/ModifyVocabularyContext'
 require 'gtk2'
 
 module JLDrill::Gtk
 
-	class VocabularyView < JLDrill::VocabularyView
+	class VocabularyView < JLDrill::ModifyVocabularyContext::VocabularyView
 	
         attr_reader :vocabularyWindow
         	
-		def initialize(context, label, &block)
-			super(context, label, &block)
-			@vocabularyWindow = VocabularyWindow.new(self, label)
+		def initialize(context, name)
+			super(context, name)
+			@vocabularyWindow = VocabularyWindow.new(self, name)
             @vocabularyWindow.setFocus
 		end
 		
@@ -38,28 +38,39 @@ module JLDrill::Gtk
         def updateSearch
             @vocabularyWindow.updateSearchTable
         end
-        
+       
+        def getVocabulary
+            @vocabulary = @vocabularyWindow.getVocab
+        end
+
         # Returns true if the vocabulary has been added
-        def addVocabulary
-            @vocabulary = @vocabularyWindow.getVocab
-            if super
-                @vocab = JLDrill::Vocabulary.new
-                @vocabularyWindow.update(@vocab)
-                @vocabularyWindow.updateSearchTable
-                @vocabularyWindow.setFocus
-                true
-            else
-                false
-            end
+        def clearVocabulary
+            super
+            @vocabularyWindow.update(@vocabulary)
+            @vocabularyWindow.updateSearchTable
+            @vocabularyWindow.setFocus
         end
 
-        # Returns true if the vocabulary was set
-        def setVocabulary
-            @vocabulary = @vocabularyWindow.getVocab
-            retVal = super
-            return retVal
+        def close
+            @context.exit
         end
 
+        def search(reading)
+            @context.search(reading)
+        end
+
+        def preview(item)
+            @context.preview(item)
+        end
+
+        def dictionaryLoaded?
+            @context.dictionaryLoaded?
+        end
+
+        def loadDictionary
+            @context.loadDictionary
+        end
+	
     end
     
 end

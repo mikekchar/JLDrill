@@ -57,7 +57,7 @@ module JLDrill::Gtk
             end
             
             @addButton.signal_connect('clicked') do
-                @view.block.call
+                @view.action
             end
 
             @previewButton.signal_connect('clicked') do

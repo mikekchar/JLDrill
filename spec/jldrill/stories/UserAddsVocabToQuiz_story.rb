@@ -6,6 +6,9 @@ require 'jldrill/views/gtk/MainWindowView'
 require 'jldrill/views/gtk/CommandView'
 require 'jldrill/views/gtk/ProblemView'
 require 'jldrill/spec/StoryMemento'
+require 'jldrill/views/test/FileProgress'
+require 'jldrill/views/test/MainWindowView'
+require 'jldrill/views/test/VocabularyView'
 
 module JLDrill::UserAddsVocabToQuiz
 
@@ -26,7 +29,7 @@ module JLDrill::UserAddsVocabToQuiz
     
     describe Story.stepName("The user can begin adding new items") do
         before(:each) do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
         end
 
         after(:each) do
@@ -53,14 +56,14 @@ module JLDrill::UserAddsVocabToQuiz
 
     describe Story.stepName("The user enters AddNewVocabularyContext") do
         it "should have an AddNewVocabularyContext" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.mainContext.addNewVocabularyContext.should_not be_nil
             Story.shutdown
         end
         
         it "should enter the AddNewVocabularyContext when instructed" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.context.should_receive(:enter).with(Story.mainContext)
             Story.mainContext.addNewVocabulary
@@ -68,7 +71,7 @@ module JLDrill::UserAddsVocabToQuiz
         end
         
         it "should have a view for a Vocabulary when the context is entered" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.mainContext.addNewVocabulary
             Story.view.should_not be_nil
@@ -119,7 +122,7 @@ module JLDrill::UserAddsVocabToQuiz
         # can to clean up by hand.
     
         it "should exit the context when the view is closed" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.mainContext.addNewVocabulary
             # We really should try to clean up here, but I can't think
@@ -149,7 +152,7 @@ module JLDrill::UserAddsVocabToQuiz
     
     describe Story.stepName("The user chooses to add the entered Vocabulary") do
         it "should be able to add the view's Vocabulary to the Quiz" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.mainContext.addNewVocabulary
             Story.context.should_receive(:addVocabulary).with(Story.view.vocabulary)
@@ -158,7 +161,7 @@ module JLDrill::UserAddsVocabToQuiz
         end
         
         it "should not add invalid Vocabulary" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.mainContext.addNewVocabulary
             Story.view.vocabulary.should_not be_valid
@@ -168,7 +171,7 @@ module JLDrill::UserAddsVocabToQuiz
         end
         
         it "should add the vocabulary to the parent context's quiz" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.mainContext.addNewVocabulary
             Story.mainContext.quiz.size.should be(0)
@@ -222,7 +225,7 @@ module JLDrill::UserAddsVocabToQuiz
     
     describe Story.stepName("Doesn't add the same Vocabulary twice") do
         it "it should refuse to add an item that already exists" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.mainContext.addNewVocabulary
             Story.mainContext.quiz.size.should be(0)
@@ -238,7 +241,7 @@ module JLDrill::UserAddsVocabToQuiz
     
     describe Story.stepName("The user can search the dictionary") do
         before(:each) do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
         end
 
         after(:each) do

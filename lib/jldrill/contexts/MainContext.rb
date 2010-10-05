@@ -1,5 +1,6 @@
 require 'Context/Context'
 require 'Context/Bridge'
+require 'Context/View'
 require 'jldrill/views/MainWindowView'
 require 'jldrill/model/items/edict/Edict'
 require 'jldrill/model/items/edict/HashedEdict'
@@ -68,6 +69,17 @@ module JLDrill
             @inTests = false
 			@tanaka = Tanaka.new
 		end
+
+        class MainWindowView < Context::View
+            def inititalize(context)
+                super(context)
+            end
+
+            # Destroy the main window
+            def destroy
+                # define in the concrete class
+            end
+        end
 		
 		def createViews
 			@mainWindowView = @viewBridge.MainWindowView.new(self)
