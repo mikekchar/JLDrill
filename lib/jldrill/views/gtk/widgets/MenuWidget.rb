@@ -1,15 +1,16 @@
 require 'Context/Gtk/Widget'
-require 'jldrill/views/gtk/CommandView'
+require 'jldrill/contexts/RunCommandContext'
 require 'gtk2'
 
 module JLDrill::Gtk
 
-    class CommandView < JLDrill::CommandView
+    class CommandView < JLDrill::RunCommandContext::CommandView
         class Menu < Gtk::HBox
             attr_reader :accelGroup
             
             def initialize(view)
                 @view = view
+                @context = @view.context
                 super()
                 @accelGroup = Gtk::AccelGroup.new
                 @menu = Gtk::ItemFactory.new(Gtk::ItemFactory::TYPE_MENU_BAR,
@@ -18,83 +19,83 @@ module JLDrill::Gtk
                     ["/_File"],
                     ["/File/_New",
                         "<StockItem>",    "<control>N",     Gtk::Stock::NEW,
-                        @view.createNew ],
+                        Proc.new {@context.createNew} ],
                     ["/File/_Save",
                         "<StockItem>",    "<control>S",     Gtk::Stock::SAVE, 
-                        @view.save ],
+                        Proc.new{@context.save} ],
                     ["/File/Save _As...",
                         "<StockItem>",     "<control>A",    Gtk::Stock::SAVE, 
-                        @view.saveAs ],
+                        Proc.new{@context.saveAs} ],
                     ["/File/_Open...",
                         "<StockItem>",     "<control>O",    Gtk::Stock::OPEN, 
-                        @view.open ],
+                        Proc.new{@context.open} ],
 				    ["/File/A_ppend...",
         				"<Item>",          "<control>P",    nil, 
-				        @view.appendFile ],
+				        Proc.new{@context.appendFile} ],
                     ["/File/Load Reference _Dictionary",
                         "<Item>",          "<control>D",    nil, 
-                        @view.loadReference ],
+                        Proc.new{@context.loadReference} ],
 					["/File/Load Tanaka _Examples",
 						"<Item>",		   "<control>E", 	nil,
-						@view.loadTanaka ],
+						Proc.new{@context.loadTanaka} ],
                     ["/File/_Quit",
                         "<StockItem>",     "<control>Q",    Gtk::Stock::QUIT, 
-                        @view.quit ],
+                        Proc.new{@context.quit} ],
 
                     ["/_Drill"],
                     ["/Drill/_Info...",
                         "<Item>",          "<control>I",    nil, 
-                        @view.info ],
+                        Proc.new{@context.info} ],
                     ["/Drill/_Statistics...",
                         "<Item>",          "<alt>S",        nil, 
-                        @view.statistics ],
+                        Proc.new{@context.statistics} ],
                     ["/Drill/_Next Problem",
                         "<Item>",          "N",             nil,
-                        @view.drill ],
+                        Proc.new{@context.drill} ],
                     ["/Drill/_Check",
                         "<Item>",          "Z",             nil, 
-                        @view.check ],
+                        Proc.new{@context.check} ],
                     ["/Drill/_Incorrect",
                         "<Item>",          "X",             nil, 
-                        @view.incorrect ],
+                        Proc.new{@context.incorrect} ],
                     ["/Drill/_Correct",
                         "<Item>",          "C",             nil, 
-                        @view.correct ],
+                        Proc.new{@context.correct} ],
                     ["/Drill/_Learn",
                         "<Item>",          "L",             nil,
-                         @view.learn ],
+                         Proc.new{@context.learn} ],
                     ["/Drill/Show _All...",
                         "<Item>",          "<control>T",    nil, 
-                        @view.vocabTable ],
+                        Proc.new{@context.vocabTable} ],
                     ["/Drill/_Options",
                         "<StockItem>",     "O",    Gtk::Stock::PREFERENCES, 
-                        @view.options ],
+                        Proc.new{@context.options} ],
                     ["/Drill/_Reset",
                         "<Item>",          "<control>R",    nil, 
-                        @view.resetQuiz ],
+                        Proc.new{@context.resetQuiz} ],
                     ["/Drill/_Remove Duplicates",
                         "<Item>",          "R",    nil, 
-                        @view.removeDups ],
+                        Proc.new{@context.removeDups} ],
 
                     ["/_Vocab"],
                     ["/Vocab/_Edit...",
                         "<Item>",          "E",             nil, 
-                        @view.editVocab ],
+                        Proc.new{@context.editVocab} ],
                     ["/Vocab/_Add...",
                         "<Item>",          "A",             nil, 
-                        @view.addNewVocabulary ],
+                        Proc.new{@context.addNewVocabulary} ],
                     ["/Vocab/_Delete...",
                         "<Item>",          "D",             nil, 
-                        @view.deleteVocab ],
+                        Proc.new{@context.deleteVocab} ],
 
 
                     ["/_Help"],
                     ["/Help/Ac_knowlegements...",
                         "<Item>",          "K",             nil, 
-                        @view.ack ],
+                        Proc.new{@context.ack} ],
                     ["/Help/_About...", 
                         "<Item>",          "?",             nil, 
-                        @view.about ]
+                        Proc.new{@context.about} ]
                 ]
                 @menu.create_items(@menuItems)
 			    self.pack_start(@menu.get_widget('<main>'), true, true)

@@ -16,6 +16,7 @@ module JLDrill::Gtk
 
         def initialize(view)
             @view = view
+            @context = @view.context
             super()
             @vpane = nil
             @question = QuestionPane.new(self)
@@ -118,7 +119,7 @@ module JLDrill::Gtk
         end
 
         def expandWithSavePath(filename)
-            @view.expandWithSavePath(filename)
+            @context.expandWithSavePath(filename)
         end
         
     end

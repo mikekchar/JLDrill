@@ -3,6 +3,9 @@ require 'jldrill/spec/storyFunctionality/Gtk'
 require 'jldrill/spec/storyFunctionality/SampleQuiz'
 require 'jldrill/contexts/DisplayProblemContext'
 require 'jldrill/views/ProblemView'
+require 'jldrill/views/test/CommandView'
+require 'jldrill/views/test/ProblemView'
+
 
 module JLDrill::QuestionAndAnswerAreDisplayed
 
@@ -22,14 +25,14 @@ module JLDrill::QuestionAndAnswerAreDisplayed
 
     describe Story.stepName("The DisplayProblemContext is entered when the MainContext is entered") do
         it "should have a DisplayProblemContext" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.context.should_not be_nil
             Story.shutdown
         end
         
         it "should enter the DisplayProblemContext when the app starts" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.context.should_receive(:enter).with(Story.mainContext)
             Story.start
             Story.shutdown
@@ -40,7 +43,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
 
     describe Story.stepName("The DisplayProblemContext is exited when the MainContext is exited") do
         it "should exit the DisplayProblemContext when the MainContext is exited" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.context.should_receive(:enter).with(Story.mainContext)
             Story.start
             Story.context.should_receive(:exit)
@@ -51,7 +54,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
 ###########################################
     describe Story.stepName("There is a view that displays current Problem") do
         it "The display should be updated when the application starts" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.view.should_receive(:newProblem)
             Story.start
             Story.shutdown
@@ -63,7 +66,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
         # formed.
 
         it "should display a problem when a file is loaded" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.view.should_receive(:newProblem).exactly(3).times
             Story.loadQuiz
@@ -71,7 +74,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
         end
         
         it "should refresh the display when the current vocab has been edited" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.view.should_receive(:newProblem).exactly(3).times
             Story.view.should_receive(:updateProblem).exactly(1).times
@@ -123,7 +126,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
         # formed.
 
         it "notifies the ItemHintsView when there is a new problem" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.view.itemHints.should_not be_nil
             Story.view.itemHints.should_receive(:newProblem).exactly(3).times
@@ -132,7 +135,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
         end
 
         it "should notify the ItemHintsView when the problem is updated" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.view.itemHints.should_receive(:updateProblem).exactly(1).times
             Story.loadQuiz

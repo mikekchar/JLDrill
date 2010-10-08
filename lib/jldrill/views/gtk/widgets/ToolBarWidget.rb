@@ -1,14 +1,15 @@
 require 'Context/Gtk/Widget'
-require 'jldrill/views/gtk/CommandView'
+require 'jldrill/contexts/RunCommandContext'
 require 'gtk2'
 
 module JLDrill::Gtk
 
-    class CommandView < JLDrill::CommandView
+    class CommandView < JLDrill::RunCommandContext::CommandView
 	    class ReviewModeButton < Gtk::ToggleButton
 	        def initialize(view)
 	            super('Review Mode')
 	            @view = view
+                @context = @view.context
 	            connectSignals unless @view.nil?
 	            set_active(false)
 	        end
@@ -20,17 +21,18 @@ module JLDrill::Gtk
 	        end
 	        
 	        def changeMode
-	            @view.setReviewMode(active?)
+	            @context.setReviewMode(active?)
 	        end
 	        
 	        def update
-	            set_active(@view.getReviewMode)
+	            set_active(@context.getReviewMode)
 	        end
 	    end
 	    
         class ToolBar < Gtk::Toolbar    
             def initialize(view)
                 @view = view
+                @context = @view.context
                 super()
                 @reviewModeButton = ReviewModeButton.new(@view)
 
@@ -46,26 +48,26 @@ module JLDrill::Gtk
                 # toolbar.set_toolbar_style(Gtk::Toolbar::BOTH)
                 self.append(Gtk::Stock::SAVE,
                                "Save a Drill file"
-                               ) do @view.save.call end
+                               ) do @context.save end
                 self.append(Gtk::Stock::OPEN,
                                "Open a Edict file"
-                               ) do @view.open.call end
+                               ) do @context.open end
                 self.append(Gtk::Stock::QUIT,
                                "Quit GTK LDrill"
-                               ) do @view.quit.call end
+                               ) do @context.quit end
                 self.append_space
                 self.append("Check (Z)", "Check",
                                "Check the result", checkImage
-                               ) do @view.check.call end
+                               ) do @context.check end
                 self.append("Incorrect (X)", "Incorrect",
                                "Answer was incorrect", incorrectImage
-                               ) do @view.incorrect.call end
+                               ) do @context.incorrect end
                 self.append("Correct (C)", "Correct",
                                "Answer was correct", correctImage
-                               ) do @view.correct.call end
+                               ) do @context.correct end
                 self.append("Next (N)", "Next Problem",
                                "Go to a new problem without answering the current one", refreshImage
-                               ) do @view.drill.call end
+                               ) do @context.drill end
                 self.append_space                               
                 self.append(@reviewModeButton)
 		    end

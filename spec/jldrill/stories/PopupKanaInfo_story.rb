@@ -2,6 +2,9 @@ require 'jldrill/spec/StoryMemento'
 require 'jldrill/model/moji/Kana'
 require 'jldrill/model/Config'
 require 'jldrill/contexts/DisplayProblemContext'
+require 'jldrill/views/test/CommandView'
+require 'jldrill/views/test/ProblemView'
+
 
 module JLDrill::PopupKanaInfo
 
@@ -79,7 +82,7 @@ module JLDrill::PopupKanaInfo
 
     describe Story.stepName("The user should see kana information") do
         it "should load the kana info" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.mainContext.kana.should be_nil
             Story.mainContext.loadKanji
@@ -89,7 +92,7 @@ module JLDrill::PopupKanaInfo
         end
 
         it "should be able to find the kana items" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.mainContext.loadKanji
             oString = JLDrill::Kana.parse("お|S3|o|oh||tone,low\n").to_s

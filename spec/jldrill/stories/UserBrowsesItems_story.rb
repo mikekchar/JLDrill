@@ -1,5 +1,8 @@
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
+require 'jldrill/views/test/CommandView'
+require 'jldrill/views/test/ProblemView'
+
 
 module JLDrill::BrowseItems
 
@@ -20,7 +23,7 @@ module JLDrill::BrowseItems
 
     describe Story.stepName("Edit an item from the vocabulary list") do
         before(:each) do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
         end
 

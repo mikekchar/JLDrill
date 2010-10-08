@@ -1,6 +1,6 @@
 require 'Context/Context'
 require 'Context/Bridge'
-require 'jldrill/views/ProblemView'
+require 'Context/View'
 
 module JLDrill
 
@@ -10,8 +10,66 @@ module JLDrill
 			super(viewBridge)
 		end
 		
-		def createViews
-    		@mainView = @viewBridge.ProblemView.new(self)
+        class ProblemView < Context::View
+
+            # The ItemHintView displays information about the current item
+            # that acts as hints for the user.  For instance, it might
+            # indicate that the word is intrasitive, or a suru noun, etc.
+            class ItemHintView < Context::View
+                def initialize(context)
+                    super(context)
+                end
+
+                def newProblem(problem)
+                    # Should be overridden in the concrete class
+                end	
+
+                def updateProblem(problem)
+                    # Should be overridden in the concrete class
+                end
+
+                def differs?(problem)
+                    @context.differs?(problem)
+                end
+            end
+
+            attr_reader :itemHints
+
+            def initialize(context)
+                super(context)
+                @itemHints = context.viewBridge.ItemHintView.new(context)
+            end
+
+            # Modify the viewAddedTo hook to add the ItemHintView
+            def viewAddedTo(parent)
+                self.addView(@itemHints)
+            end
+
+            # Modify the removingViewFrom hook to remove the ItemHintView
+            def removingViewFrom(parent)
+                self.removeView(@itemHints)
+            end
+
+            # A new problem has been added
+            def newProblem(problem)
+                itemHints.newProblem(problem)
+                # Define the rest in the concrete class
+            end	
+
+            # The current problem has changed and needs updating
+            def updateProblem(problem)
+                itemHints.updateProblem(problem)
+                # Define the rest in the concrete class
+            end
+
+            # Show the answer to the problem
+            def showAnswer
+                # Should be overridden in the concrete class
+            end
+        end
+
+        def createViews
+            @mainView = @viewBridge.ProblemView.new(self)
         end
 
         def destroyViews

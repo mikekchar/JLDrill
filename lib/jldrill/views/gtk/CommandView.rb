@@ -1,13 +1,13 @@
 require 'Context/Gtk/Widget'
 require 'Context/Views/Gtk/Widgets/VBox'
-require 'jldrill/views/CommandView'
-require 'jldrill/views/gtk/MenuWidget'
-require 'jldrill/views/gtk/ToolBarWidget'
+require 'jldrill/contexts/RunCommandContext'
+require 'jldrill/views/gtk/widgets/MenuWidget'
+require 'jldrill/views/gtk/widgets/ToolBarWidget'
 require 'gtk2'
 
 module JLDrill::Gtk
 
-    class CommandView < JLDrill::CommandView
+    class CommandView < JLDrill::RunCommandContext::CommandView
 
         def initialize(context)
             super(context)

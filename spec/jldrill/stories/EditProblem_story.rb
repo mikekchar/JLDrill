@@ -1,6 +1,9 @@
 require 'jldrill/model/Problem'
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
+require 'jldrill/views/test/VocabularyView'
+require 'jldrill/views/test/ProblemView'
+
 
 module JLDrill::EditProblem
 
@@ -30,7 +33,7 @@ module JLDrill::EditProblem
 
     describe Story.stepName("Delete the kanji in a KanjiProblem") do
         before(:each) do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
         end
 
@@ -55,7 +58,7 @@ module JLDrill::EditProblem
 
     describe Story.stepName("Edit the problem to create a duplicate.") do
         before(:each) do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
         end
         
@@ -76,7 +79,7 @@ module JLDrill::EditProblem
             # It shouldn't close the view
             Story.view.should_not_receive(:close)
             Story.view.vocabulary = vocab
-            Story.view.block.call.should be(false)
+            Story.view.action.should be(false)
         end
 
         it "should accept an altered vocabulary" do
@@ -93,7 +96,7 @@ module JLDrill::EditProblem
             # It should close the view
             Story.view.should_receive(:close)
             Story.view.vocabulary = vocab
-            Story.view.block.call.should be(true)
+            Story.view.action.should be(true)
         end
 
     end

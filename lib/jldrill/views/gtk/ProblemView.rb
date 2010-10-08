@@ -1,10 +1,10 @@
-require 'jldrill/views/ProblemView'
+require 'jldrill/contexts/DisplayProblemContext'
 require 'jldrill/views/gtk/widgets/ProblemDisplay'
 require 'gtk2'
 
 module JLDrill::Gtk
 
-	class ProblemView < JLDrill::ProblemView
+	class ProblemView < JLDrill::DisplayProblemContext::ProblemView
 
         attr_reader :problemDisplay
         	

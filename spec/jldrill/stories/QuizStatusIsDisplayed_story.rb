@@ -1,6 +1,9 @@
 require 'jldrill/views/QuizStatusView'
 require 'jldrill/views/gtk/QuizStatusView'
 require 'jldrill/spec/StoryMemento'
+require 'jldrill/views/test/CommandView'
+require 'jldrill/views/test/ProblemView'
+
 
 module JLDrill::QuizStatusIsDisplayed
 
@@ -15,14 +18,14 @@ module JLDrill::QuizStatusIsDisplayed
 
     describe Story.stepName("The DisplayQuizStatusContext is entered when the MainContext is entered") do
         it "should have a DisplayQuizStatusContext" do
-            main = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
+            main = JLDrill::MainContext.new(Context::Bridge.new(JLDrill::Test))
             main.inTests = true
             main.displayQuizStatusContext.should_not be_nil
         end
         
         it "should enter the DisplayQuizStatusContext when the MainContext is entered" do
             app = Context::Context.new(nil)
-            main = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
+            main = JLDrill::MainContext.new(Context::Bridge.new(JLDrill::Test))
             main.inTests = true
             main.displayQuizStatusContext.should_receive(:enter).with(main)
             main.enter(app)
@@ -34,7 +37,7 @@ module JLDrill::QuizStatusIsDisplayed
     describe Story.stepName("The DisplayQuizStatusContext is exited when the MainContext is exited") do
         it "it should exit the DisplayQuizStatus Context when the MainContext is exited" do
             app = Context::Context.new(nil)
-            main = JLDrill::MainContext.new(Context::Bridge.new(JLDrill))
+            main = JLDrill::MainContext.new(Context::Bridge.new(JLDrill::Test))
             main.inTests = true
             main.displayQuizStatusContext.should_receive(:enter).with(main)
             main.enter(app)
@@ -47,7 +50,7 @@ module JLDrill::QuizStatusIsDisplayed
 
     describe Story.stepName("There is a view that displays the status of the quiz") do
         it "has a view" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.view.should_not be_nil
             Story.shutdown
@@ -82,7 +85,7 @@ module JLDrill::QuizStatusIsDisplayed
         end
         
         it "should receive updates when the quiz status changes" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.context.should_receive(:quizUpdated)
             Story.mainContext.quiz.update

@@ -1,13 +1,15 @@
 require 'jldrill/contexts/MainContext'
 require 'Context/Bridge'
 require 'jldrill/spec/Fakes'
+require 'jldrill/views/test/CommandView'
+require 'jldrill/views/test/ProblemView'
 
 module JLDrill
 
 	describe MainContext do
 
 		before(:each) do
-		    @parent = JLDrill::Fakes::App.new(JLDrill, MainContext)
+		    @parent = JLDrill::Fakes::App.new(JLDrill::Test, MainContext)
 			@context = @parent.mainContext
 		end
 

@@ -2,6 +2,9 @@
 #require 'jldrill/views/ProblemView'
 #require 'jldrill/views/gtk/ProblemView'
 require 'jldrill/spec/StoryMemento'
+require 'jldrill/views/test/CommandView'
+require 'jldrill/views/test/ProblemView'
+
 
 module JLDrill::PopupKanjiInfo
 
@@ -16,7 +19,7 @@ module JLDrill::PopupKanjiInfo
 
     describe Story.stepName("The user is able to select popup kanji option") do
         it "should have an entry in the menu" do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.shutdown
         end

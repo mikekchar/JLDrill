@@ -1,7 +1,7 @@
 require 'Context/Context'
 require 'Context/Bridge'
+require 'Context/View'
 require 'jldrill/views/ProblemView'
-require 'jldrill/views/CommandView'
 
 module JLDrill
 
@@ -10,6 +10,17 @@ module JLDrill
 		def initialize(viewBridge)
 			super(viewBridge)
 		end
+
+        class CommandView < Context::View
+            def initialize(context)
+                super(context)
+            end
+
+            # Reread the options and update the toolbar appearance
+            def update
+                # Please define in the concrete class
+            end
+        end
 		
 		def createViews
     		@mainView = @viewBridge.CommandView.new(self)

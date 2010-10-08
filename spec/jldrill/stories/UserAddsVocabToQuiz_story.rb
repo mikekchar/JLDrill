@@ -9,6 +9,8 @@ require 'jldrill/spec/StoryMemento'
 require 'jldrill/views/test/FileProgress'
 require 'jldrill/views/test/MainWindowView'
 require 'jldrill/views/test/VocabularyView'
+require 'jldrill/views/test/ProblemView'
+
 
 module JLDrill::UserAddsVocabToQuiz
 
@@ -22,7 +24,7 @@ module JLDrill::UserAddsVocabToQuiz
     def Story.addVocab
         Story.view.vocabulary.reading = "あう"
         Story.view.vocabulary.definitions = "to meet"
-        Story.view.addVocabulary
+        Story.view.action
     end
 
 ###########################################
@@ -155,7 +157,7 @@ module JLDrill::UserAddsVocabToQuiz
             Story.setup(JLDrill::Test)
             Story.start
             Story.mainContext.addNewVocabulary
-            Story.context.should_receive(:addVocabulary).with(Story.view.vocabulary)
+            Story.context.should_receive(:action).with(Story.view.vocabulary)
             Story.addVocab
             Story.shutdown
         end
@@ -165,8 +167,8 @@ module JLDrill::UserAddsVocabToQuiz
             Story.start
             Story.mainContext.addNewVocabulary
             Story.view.vocabulary.should_not be_valid
-            Story.context.should_not_receive(:addVocabulary)
-            Story.view.addVocabulary
+            Story.context.should_not_receive(:action)
+            Story.view.action
             Story.shutdown           
         end
         
@@ -188,7 +190,7 @@ module JLDrill::UserAddsVocabToQuiz
             Story.mainContext.addNewVocabulary
             Story.view.vocabularyWindow.reading = "あう"
             Story.view.vocabularyWindow.definitions = "to meet"
-            Story.view.should_receive(:addVocabulary)
+            Story.view.should_receive(:action)
             Story.view.emitAddButtonClickedEvent
             Story.shutdown
         end
@@ -204,7 +206,7 @@ module JLDrill::UserAddsVocabToQuiz
             Story.mainContext.addNewVocabulary
             Story.view.vocabularyWindow.reading = "あう"
             Story.view.vocabularyWindow.definitions = "to meet"
-            Story.view.addVocabulary
+            Story.view.action
             Story.view.vocabularyWindow.reading.should be_eql("")
             Story.view.vocabularyWindow.definitions.should be_eql("")
             Story.shutdown
@@ -215,7 +217,7 @@ module JLDrill::UserAddsVocabToQuiz
             Story.start
             Story.mainContext.addNewVocabulary
             Story.view.vocabularyWindow.definitions = "yuck"
-            Story.view.addVocabulary.should be(false)
+            Story.view.action.should be(false)
             Story.view.vocabularyWindow.definitions.should be_eql("yuck")
             Story.shutdown
         end

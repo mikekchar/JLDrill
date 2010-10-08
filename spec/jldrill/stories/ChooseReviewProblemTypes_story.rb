@@ -4,6 +4,9 @@ require 'jldrill/spec/storyFunctionality/Gtk'
 require 'jldrill/spec/storyFunctionality/SampleQuiz'
 require 'jldrill/model/Quiz/Options'
 require 'jldrill/model/Config'
+require 'jldrill/views/test/CommandView'
+require 'jldrill/views/test/ProblemView'
+
 
 module JLDrill::UserChoosesReviewProblemTypes
 
@@ -29,7 +32,7 @@ module JLDrill::UserChoosesReviewProblemTypes
 
     describe Story.stepName("Options are stored and read") do
         before(:each) do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             Story.quiz.options.reviewOptionsSet.should eql(false)
 			Story.quiz.options.reviewMeaning.should eql(true)

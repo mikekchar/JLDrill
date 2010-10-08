@@ -1,7 +1,6 @@
 require 'Context/Context'
 require 'Context/Bridge'
 require 'Context/View'
-require 'jldrill/views/MainWindowView'
 require 'jldrill/model/items/edict/Edict'
 require 'jldrill/model/items/edict/HashedEdict'
 require 'jldrill/contexts/RunCommandContext'
@@ -102,7 +101,6 @@ module JLDrill
 
 		def enter(parent)
 			super(parent)
-			@mainView.open
             loadKanji unless @inTests
 			@runCommandContext.enter(self)
 			@displayProblemContext.enter(self)

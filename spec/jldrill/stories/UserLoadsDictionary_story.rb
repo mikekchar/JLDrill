@@ -5,6 +5,8 @@ require 'jldrill/contexts/MainContext'
 require 'jldrill/views/test/FileProgress'
 require 'jldrill/views/test/MainWindowView'
 require 'jldrill/views/test/VocabularyView'
+require 'jldrill/views/test/ProblemView'
+
 
 require 'gtk2'
 
@@ -85,7 +87,7 @@ module JLDrill::UserLoadsDictionary
 
     describe Story.stepName("You can load the reference from EditVocabulary") do
         before(:each) do
-            Story.setupEditVocabulary(JLDrill:Test)
+            Story.setupEditVocabulary(JLDrill::Test)
         end
         
         after(:each) do
@@ -107,7 +109,7 @@ module JLDrill::UserLoadsDictionary
 
     describe Story.stepName("The dictionary to load is in the save file.") do
         before(:each) do
-            Story.setupLoadReference(JLDrill:Test)
+            Story.setupLoadReference(JLDrill::Test)
         end
 
         it "should save the dictionary filename in the save file" do

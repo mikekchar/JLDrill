@@ -1,10 +1,10 @@
-require 'jldrill/views/ItemHintView'
+require 'jldrill/contexts/DisplayProblemContext'
 require 'jldrill/views/gtk/widgets/VocabularyHintBox'
 require 'gtk2'
 
 module JLDrill::Gtk
 
-	class ItemHintView < JLDrill::ItemHintView
+	class ItemHintView < JLDrill::DisplayProblemContext::ProblemView::ItemHintView
 
         attr_reader :hintBox
         	
@@ -24,7 +24,7 @@ module JLDrill::Gtk
         # Update the indicators
         def update(problem)
             if !problem.nil?  && !problem.item.nil?
-                hintBox.set(problem.item.to_o, differs?(problem))
+                hintBox.set(problem.item.to_o, @context.differs?(problem))
             else
                 hintBox.clear
             end

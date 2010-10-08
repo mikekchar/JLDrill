@@ -2,6 +2,9 @@ require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
 require 'jldrill/model/Quiz/Strategy'
 require 'jldrill/model/Quiz/Schedule'
+require 'jldrill/views/test/CommandView'
+require 'jldrill/views/test/ProblemView'
+
 
 module JLDrill::ScheduleItems
     
@@ -15,7 +18,7 @@ module JLDrill::ScheduleItems
 
     describe Story.stepName("New items are scheduled from now") do
         before(:each) do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             quiz.options.promoteThresh = 1
             newSet.length.should_not eql(0)

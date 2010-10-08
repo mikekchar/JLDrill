@@ -5,11 +5,12 @@ module JLDrill::Gtk
     class PopupFactory
         def initialize(view)
             @view = view
+            @context = @view.context
             @currentPopup = nil
         end
         
         def kanjiDictionaryLoaded?
-            @view.kanjiLoaded?
+            @context.kanjiLoaded?
         end
         
         def sameCharacter?(character, x, y)
@@ -26,7 +27,7 @@ module JLDrill::Gtk
         
         def createPopup(char, x, y)
             closePopup
-            kanjiString = @view.kanjiInfo(char)
+            kanjiString = @context.kanjiInfo(char)
             @currentPopup = Popup.new(char, kanjiString, @view.mainWindow, x, y)
         end
         

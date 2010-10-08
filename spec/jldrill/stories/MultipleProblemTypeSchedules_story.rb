@@ -2,6 +2,9 @@ require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
 require 'jldrill/spec/storyFunctionality/SampleQuiz'
 require 'jldrill/model/problems/ProblemFactory'
+require 'jldrill/views/test/CommandView'
+require 'jldrill/views/test/ProblemView'
+
 
 module JLDrill::MultipleProblemTypeSchedules
 
@@ -24,7 +27,7 @@ module JLDrill::MultipleProblemTypeSchedules
 
     describe Story.stepName("File stores the problem types") do
         before(:each) do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
         end
 

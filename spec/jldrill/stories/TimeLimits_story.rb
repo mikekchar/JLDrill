@@ -1,6 +1,9 @@
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
 require 'jldrill/model/Quiz/Strategy'
+require 'jldrill/views/test/CommandView'
+require 'jldrill/views/test/ProblemView'
+
 
 module JLDrill::ItemsHaveTimeLimits
 
@@ -13,7 +16,7 @@ module JLDrill::ItemsHaveTimeLimits
 
     describe Story.stepName("Review Set items have time limits") do
         before(:each) do
-            Story.setup(JLDrill)
+            Story.setup(JLDrill::Test)
             Story.start
             quiz.options.promoteThresh = 1
             newSet.length.should_not eql(0)
