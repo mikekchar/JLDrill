@@ -1,6 +1,6 @@
 require 'Context/Context'
 require 'Context/Bridge'
-require 'jldrill/views/QuizStatusView'
+require 'Context/View'
 
 module JLDrill
 
@@ -9,9 +9,19 @@ module JLDrill
 		def initialize(viewBridge)
 			super(viewBridge)
 		end
+
+        class QuizStatusView < Context::View
+            def initialize(context)
+                super(context)
+            end
+
+            def update(quiz)
+                # Should be overridden in the concrete class
+            end	
+        end
 		
 		def createViews
-    		@mainView = @viewBridge.QuizStatusView.new(self)
+            @mainView = @viewBridge.QuizStatusView.new(self)
         end
 
         def destroyViews

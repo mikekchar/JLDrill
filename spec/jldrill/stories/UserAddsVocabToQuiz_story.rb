@@ -10,7 +10,7 @@ require 'jldrill/views/test/FileProgress'
 require 'jldrill/views/test/MainWindowView'
 require 'jldrill/views/test/VocabularyView'
 require 'jldrill/views/test/ProblemView'
-
+require 'jldrill/views/test/QuizStatusView'
 
 module JLDrill::UserAddsVocabToQuiz
 
@@ -29,33 +29,6 @@ module JLDrill::UserAddsVocabToQuiz
 
 ###########################################
     
-    describe Story.stepName("The user can begin adding new items") do
-        before(:each) do
-            Story.setup(JLDrill::Test)
-        end
-
-        after(:each) do
-            Story.shutdown
-        end
-
-        it "should have a method to add items from the main Context" do
-            Story.start
-            cc = Story.mainContext.runCommandContext
-            cc.should_not be_nil
-            cv = cc.mainView
-            cv.should_not be_nil
-
-            # Why the hell did I make all the methods in the CommandView
-            # procs?  I can't remember.  Maybe to try to distiguish
-            # between outgoing and incoming methods in the view???
-            cv.addNewVocabulary.should_not be_nil
-            Story.mainContext.should_receive(:addNewVocabulary)
-            cv.addNewVocabulary.call
-        end
-    end
-
-###########################################
-
     describe Story.stepName("The user enters AddNewVocabularyContext") do
         it "should have an AddNewVocabularyContext" do
             Story.setup(JLDrill::Test)
@@ -117,47 +90,12 @@ module JLDrill::UserAddsVocabToQuiz
 
 ###########################################
     
-    describe Story.stepName("The user can exit the context at any time") do
-
-        # This step is difficult since we can't call Story.shutdown because
-        # the important cleanup methods are mocked.  I try as best as I
-        # can to clean up by hand.
-    
-        it "should exit the context when the view is closed" do
-            Story.setup(JLDrill::Test)
-            Story.start
-            Story.mainContext.addNewVocabulary
-            # We really should try to clean up here, but I can't think
-            # of a way to do it since Story.context#exit is already mocked.
-            # What we really need to do is call Context#exit, but I can't.
-            Story.context.should_receive(:exit)
-            Story.view.close
-            # Clean up the memento
-            Story.restart
-        end
-        
-        it "should exit the view when the Gtk window is destroyed" do
-            Story.setup(JLDrill::Gtk)
-            Story.start
-            Story.mainContext.addNewVocabulary
-            Story.view.should_receive(:close) do 
-                Story.context.exit
-            end
-            Story.view.emitDestroyEvent
-            Story.mainView.close
-            # Clean up the memento
-            Story.restart
-        end
-    end
-
-###########################################
-    
     describe Story.stepName("The user chooses to add the entered Vocabulary") do
         it "should be able to add the view's Vocabulary to the Quiz" do
             Story.setup(JLDrill::Test)
             Story.start
             Story.mainContext.addNewVocabulary
-            Story.context.should_receive(:action).with(Story.view.vocabulary)
+            Story.context.should_receive(:doAction).with(Story.view.vocabulary)
             Story.addVocab
             Story.shutdown
         end
@@ -217,7 +155,7 @@ module JLDrill::UserAddsVocabToQuiz
             Story.start
             Story.mainContext.addNewVocabulary
             Story.view.vocabularyWindow.definitions = "yuck"
-            Story.view.action.should be(false)
+            Story.view.action
             Story.view.vocabularyWindow.definitions.should be_eql("yuck")
             Story.shutdown
         end
@@ -254,17 +192,17 @@ module JLDrill::UserAddsVocabToQuiz
             Story.start
             Story.mainContext.addNewVocabulary
             # The dictionary isn't loaded yet.
-            Story.view.dictionaryLoaded?.should be(false)
+            Story.context.dictionaryLoaded?.should be(false)
 
             # Searching should find nothing
-            Story.view.search("あめ").should be_empty
+            Story.context.search("あめ").should be_empty
 
             # Override with the small test dictionary
             Story.useTestDictionary
 
             # Load the dictionary
-            Story.view.loadDictionary
-            Story.view.dictionaryLoaded?.should be(true)
+            Story.context.loadDictionary
+            Story.context.dictionaryLoaded?.should be(true)
 
             # Note: Usually I'd do this in separate tests, but loading
             # the dictionary is expensive, so I have to jam it all
@@ -272,11 +210,11 @@ module JLDrill::UserAddsVocabToQuiz
             # that can build on one another.
 
             # Searching for nil or empty string should find nothing
-            Story.view.search(nil).should be_empty
-            Story.view.search("").should be_empty
+            Story.context.search(nil).should be_empty
+            Story.context.search("").should be_empty
 
             # It should find entries
-            Story.view.search("あめ").should have_at_least(1).item
+            Story.context.search("あめ").should have_at_least(1).item
         end
     end
 end

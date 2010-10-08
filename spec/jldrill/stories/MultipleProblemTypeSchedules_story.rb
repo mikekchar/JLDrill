@@ -4,7 +4,7 @@ require 'jldrill/spec/storyFunctionality/SampleQuiz'
 require 'jldrill/model/problems/ProblemFactory'
 require 'jldrill/views/test/CommandView'
 require 'jldrill/views/test/ProblemView'
-
+require 'jldrill/views/test/QuizStatusView'
 
 module JLDrill::MultipleProblemTypeSchedules
 

@@ -4,7 +4,7 @@ require 'jldrill/model/Quiz/Strategy'
 require 'jldrill/model/Quiz/Schedule'
 require 'jldrill/views/test/CommandView'
 require 'jldrill/views/test/ProblemView'
-
+require 'jldrill/views/test/QuizStatusView'
 
 module JLDrill::ScheduleItems
     

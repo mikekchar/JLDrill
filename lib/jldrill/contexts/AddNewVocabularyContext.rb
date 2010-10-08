@@ -11,13 +11,10 @@ module JLDrill
         # This is called when the action button is pressed on the
         # view.  In this case it adds the vocabulary to the quiz.
         def doAction(vocabulary)
-            retVal = false
             if vocabulary.valid?
                 addVocabulary(vocabulary)
                 @mainView.clearVocabulary
-                retVal = true
             end
-            return retVal
         end
  
 		def addVocabulary(vocab)

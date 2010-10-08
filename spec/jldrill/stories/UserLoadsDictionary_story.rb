@@ -6,7 +6,7 @@ require 'jldrill/views/test/FileProgress'
 require 'jldrill/views/test/MainWindowView'
 require 'jldrill/views/test/VocabularyView'
 require 'jldrill/views/test/ProblemView'
-
+require 'jldrill/views/test/QuizStatusView'
 
 require 'gtk2'
 
@@ -81,7 +81,7 @@ module JLDrill::UserLoadsDictionary
             Story.start
             Story.mainContext.addNewVocabulary
             Story.mainContext.should_receive(:loadReference)
-            Story.view.loadDictionary
+            Story.context.loadDictionary
         end
     end
 
@@ -103,7 +103,7 @@ module JLDrill::UserLoadsDictionary
 
             Story.mainContext.editVocabulary
             Story.mainContext.should_receive(:loadReference)
-            Story.view.loadDictionary
+            Story.context.loadDictionary
         end
     end
 
@@ -136,7 +136,7 @@ module JLDrill::UserLoadsDictionary
             options.dictionary = "tempDictionary"
             Story.context.dictionaryName.should eql("tempDictionary")
 
-            Story.context.dictionaryFilename.should eql(File.join(JLDrill::Config::DICTIONARY_DIR, "tempDictionary"))
+            Story.context.getFilename.should eql(File.join(JLDrill::Config::DICTIONARY_DIR, "tempDictionary"))
             Story.context.exit
         end
 

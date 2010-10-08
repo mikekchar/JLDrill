@@ -3,7 +3,7 @@ require 'jldrill/views/gtk/QuizStatusView'
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/views/test/CommandView'
 require 'jldrill/views/test/ProblemView'
-
+require 'jldrill/views/test/QuizStatusView'
 
 module JLDrill::QuizStatusIsDisplayed
 

@@ -98,6 +98,13 @@ module JLDrill
             end
 		    super
 		end
+
+        # The close method is mostly just so that I have something that
+        # the tests can catch without screwing up the shutdown of
+        # the context.
+        def close
+            exit
+        end
 		
         def newProblemUpdated(problem)
             update(problem)

@@ -6,7 +6,7 @@ require 'jldrill/model/Quiz/Options'
 require 'jldrill/model/Config'
 require 'jldrill/views/test/CommandView'
 require 'jldrill/views/test/ProblemView'
-
+require 'jldrill/views/test/QuizStatusView'
 
 module JLDrill::UserChangesOptions
 

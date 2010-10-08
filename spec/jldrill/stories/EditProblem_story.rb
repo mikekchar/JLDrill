@@ -3,7 +3,7 @@ require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
 require 'jldrill/views/test/VocabularyView'
 require 'jldrill/views/test/ProblemView'
-
+require 'jldrill/views/test/QuizStatusView'
 
 module JLDrill::EditProblem
 
@@ -79,7 +79,7 @@ module JLDrill::EditProblem
             # It shouldn't close the view
             Story.view.should_not_receive(:close)
             Story.view.vocabulary = vocab
-            Story.view.action.should be(false)
+            Story.view.action
         end
 
         it "should accept an altered vocabulary" do
@@ -94,9 +94,9 @@ module JLDrill::EditProblem
             vocab.reading = "fake"
             # Now we'll try to set the vocabulary.  It should accept it.
             # It should close the view
-            Story.view.should_receive(:close)
+            Story.context.should_receive(:close)
             Story.view.vocabulary = vocab
-            Story.view.action.should be(true)
+            Story.view.action
         end
 
     end

@@ -26,9 +26,7 @@ module JLDrill
                 !@parent.quiz.exists?(vocab)
                 @originalProblem.vocab = vocab
                 @parent.quiz.setCurrentProblem(@originalProblem)
-                return true
-            else
-                return false
+                close
             end
 		end
     end

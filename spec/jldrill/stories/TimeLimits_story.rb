@@ -3,7 +3,7 @@ require 'jldrill/spec/SampleQuiz'
 require 'jldrill/model/Quiz/Strategy'
 require 'jldrill/views/test/CommandView'
 require 'jldrill/views/test/ProblemView'
-
+require 'jldrill/views/test/QuizStatusView'
 
 module JLDrill::ItemsHaveTimeLimits
 

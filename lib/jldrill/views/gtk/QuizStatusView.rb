@@ -1,10 +1,10 @@
 require 'jldrill/views/gtk/widgets/QuizStatusBar'
-require 'jldrill/views/QuizStatusView'
+require 'jldrill/contexts/DisplayQuizStatusContext'
 require 'gtk2'
 
 module JLDrill::Gtk
 
-	class QuizStatusView < JLDrill::QuizStatusView
+	class QuizStatusView < JLDrill::DisplayQuizStatusContext::QuizStatusView
 	
         attr_reader :quizStatusBar
         	
