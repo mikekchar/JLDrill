@@ -8,6 +8,7 @@ module JLDrill::Gtk
 
         def initialize(view)
             @view = view
+            @context = @view.context
             @closed = false
             super("All Vocabulary")
             self.set_default_size(450, 300)
@@ -169,7 +170,7 @@ module JLDrill::Gtk
                 item = @vocabTable.getSelectedItem
                 if !item.nil?
                     @vocabTable.stopSearching
-                    @view.edit(item)
+                    @context.edit(item)
                 end
             end
         end
@@ -179,7 +180,7 @@ module JLDrill::Gtk
                 item = @vocabTable.getSelectedItem
                 if !item.nil?
                     @vocabTable.stopSearching
-                    @view.delete(item)
+                    @context.delete(item)
                 end
             end
         end
@@ -191,7 +192,7 @@ module JLDrill::Gtk
             if !items.empty?
                 @vocabTable = ItemTable.new(items) do |item|
                     @vocabTable.stopSearching
-                    @view.edit(item)
+                    @context.edit(item)
                 end
                 @frame.pack_start(@vocabTable, true, true)
                 @vocabTable.focusTable
@@ -202,7 +203,7 @@ module JLDrill::Gtk
         def preview
             item = @vocabTable.getSelectedItem
             if !item.nil?
-                @view.preview(item)
+                @context.preview(item)
             end
         end
 

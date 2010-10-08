@@ -1,7 +1,6 @@
 require 'Context/Context'
 require 'Context/Bridge'
 require 'Context/View'
-require 'jldrill/views/ProblemView'
 
 module JLDrill
 

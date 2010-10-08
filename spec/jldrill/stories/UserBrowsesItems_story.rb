@@ -3,6 +3,8 @@ require 'jldrill/spec/SampleQuiz'
 require 'jldrill/views/test/CommandView'
 require 'jldrill/views/test/ProblemView'
 require 'jldrill/views/test/QuizStatusView'
+require 'jldrill/views/test/VocabularyTableView'
+require 'jldrill/views/test/ItemHintView'
 
 module JLDrill::BrowseItems
 
@@ -42,7 +44,7 @@ module JLDrill::BrowseItems
             item = Story.view.items[0]
             item.should_not be_nil
             Story.mainContext.should_receive(:editItem).with(item)
-            Story.view.edit(item)
+            Story.context.edit(item)
         end
     end
 end

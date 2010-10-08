@@ -5,6 +5,7 @@ require 'jldrill/contexts/DisplayProblemContext'
 require 'jldrill/views/test/CommandView'
 require 'jldrill/views/test/ProblemView'
 require 'jldrill/views/test/QuizStatusView'
+require 'jldrill/views/test/ItemHintView'
 
 module JLDrill::PopupKanaInfo
 

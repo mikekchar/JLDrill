@@ -11,6 +11,7 @@ require 'jldrill/views/test/MainWindowView'
 require 'jldrill/views/test/VocabularyView'
 require 'jldrill/views/test/ProblemView'
 require 'jldrill/views/test/QuizStatusView'
+require 'jldrill/views/test/ItemHintView'
 
 module JLDrill::UserAddsVocabToQuiz
 

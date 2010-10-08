@@ -1,6 +1,6 @@
 require 'Context/Context'
 require 'Context/Bridge'
-require 'jldrill/views/VocabularyTableView'
+require 'Context/View'
 
 module JLDrill
 
@@ -10,8 +10,61 @@ module JLDrill
 			super(viewBridge)
 		end
 		
-		def createViews
-    		@mainView = @viewBridge.VocabularyTableView.new(self)
+        class VocabularyTableView < Context::View
+            attr_reader :quiz, :items
+
+            def initialize(context)
+                super(context)
+                @quiz = nil
+                @items = nil
+            end
+
+            # Destroy the window
+            def destroy
+                # Please define in the concrete class
+            end
+
+            # Update the items in the table
+            def update(items)
+                @items = items
+                # Please define the rest in the concrete class
+            end
+
+            # Select one of the items in the table
+            def select(item)
+                # Please define in the concrete class
+            end
+
+            # Modify one of the items in the table
+            # This happens when an item has been edited while the table is open
+            def updateItem(item)
+                # Please define in the concrete class
+            end
+
+            # Add the item to the table
+            # This happens when an item has been added while the table is open
+            def addItem(item)
+                # Please define in the concrete class
+            end
+
+            # Remove an item from the table
+            # This happens when the item has been removed while the table is
+            # open
+            def removeItem(item)
+                # Please define in the concrete class
+            end
+
+            # Close the window
+            # Closing the window exits the context.
+            def close
+                # Please define in the concrete class.
+                # Run super() after everything is complete.
+                @context.exit
+            end
+        end
+
+        def createViews
+            @mainView = @viewBridge.VocabularyTableView.new(self)
         end
 
         def destroyViews

@@ -1,10 +1,10 @@
 require 'jldrill/views/gtk/widgets/ItemTableWindow'
-require 'jldrill/views/VocabularyTableView'
+require 'jldrill/contexts/ShowAllVocabularyContext'
 require 'gtk2'
 
 module JLDrill::Gtk
 
-	class VocabularyTableView < JLDrill::VocabularyTableView
+	class VocabularyTableView < JLDrill::ShowAllVocabularyContext::VocabularyTableView
 
         attr_reader :vocabularyTableWindow
         	
