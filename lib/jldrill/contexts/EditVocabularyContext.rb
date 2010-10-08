@@ -6,6 +6,7 @@ module JLDrill
 				
 		def initialize(viewBridge)
 			super(viewBridge)
+            @actionName = "Set"
 		end
 	
         # When items have been updated in the quiz, If we are editing and

@@ -6,6 +6,7 @@ module JLDrill
 				
 		def initialize(viewBridge)
 			super(viewBridge)
+            @actionName = "Add"
 		end
 
         # This is called when the action button is pressed on the

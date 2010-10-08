@@ -8,6 +8,7 @@ module JLDrill
         def initialize(viewBridge)
             super(viewBridge)
             @originalProblem = nil
+            @actionName = ""
         end
 
         class VocabularyView < Context::View
@@ -61,7 +62,7 @@ module JLDrill
         end
 
 		def createViews
-    		@mainView = @viewBridge.VocabularyView.new(self, "Add")
+    		@mainView = @viewBridge.VocabularyView.new(self, @actionName)
         end
 
         def destroyViews
