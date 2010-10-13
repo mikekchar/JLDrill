@@ -26,7 +26,7 @@ module JLDrill
         
         it "should immediately exit the context after entering it" do
             @context.should_receive(:exit)
-            filename = @context.enter(@main)
+            filename = @context.enter(@main, JLDrill::GetFilenameContext::OPEN)
         end
         
         it "should set the filename and directory from the view" do
@@ -38,7 +38,7 @@ module JLDrill
             def @view.directory
                 "directory"
             end
-            filename = @context.enter(@main)
+            filename = @context.enter(@main, JLDrill::GetFilenameContext::OPEN)
             filename.should be_eql("filename")
             @context.filename.should be_eql("filename")
             @context.directory.should be_eql("directory")

@@ -16,8 +16,6 @@ module JLDrill::UserChoosesReviewProblemTypes
         include JLDrill::StoryFunctionality::SampleQuiz
 
         # Set the current context and view to the setOptionsContext
-        # Note: Doesn't enter the context since enterDialogAndPressOK
-        # does that.
         def setOptions
             @context = @mainContext.setOptionsContext
             @view = @context.peekAtView
@@ -209,9 +207,10 @@ module JLDrill::UserChoosesReviewProblemTypes
             setUIString = "Story.view.optionsWindow." + valueString + " = " + 
                            target.to_s 
             eval(modelString).should be(default)
-   		    Story.enterDialogAndPressOK(Story.view.optionsWindow) do
+   		    Story.pressOKAfterEntry(Story.view.optionsWindow) do
                 eval(setUIString)
             end
+            @context.enter(@mainContext)
             eval(modelString).should be(target)
         end
 

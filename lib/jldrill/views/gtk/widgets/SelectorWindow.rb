@@ -1,4 +1,5 @@
 require 'Context/Gtk/Widget'
+require 'jldrill/contexts/GetFilenameContext'
 require 'gtk2'
 
 module JLDrill::Gtk
@@ -8,13 +9,20 @@ module JLDrill::Gtk
         attr_reader :chosenFilename, :chosenDirectory
         attr_writer :chosenFilename, :chosenDirectory
     
-        def initialize()
+        def initialize(type)
             @chosenFilename = nil
             @chosenDirectory = nil
-            super("Open File", nil,
-                  Gtk::FileChooser::ACTION_OPEN, nil,
-                  [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
-                  [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT])
+            if (type == JLDrill::GetFilenameContext::SAVE)
+                super("Save File", nil,
+                      Gtk::FileChooser::ACTION_SAVE, nil,
+                      [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
+                      [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT])
+            else
+                super("Open File", nil,
+                      Gtk::FileChooser::ACTION_OPEN, nil,
+                      [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
+                      [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT])
+            end
         end
         
         # The following 2 routines are only here because I couldn't
@@ -31,9 +39,9 @@ module JLDrill::Gtk
             if run == Gtk::Dialog::RESPONSE_ACCEPT
                 @chosenFilename = getFilename
                 @chosenDirectory = getCurrentFolder
-                @chosenFilename
+                return @chosenFilename
             else
-                nil
+                return nil
             end
         end
     end	    

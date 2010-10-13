@@ -5,6 +5,9 @@ require 'jldrill/views/FilenameSelectorView'
 module JLDrill
 
 	class GetFilenameContext < Context::Context
+
+        OPEN = 0
+        SAVE = 1
 		
 	    attr_reader :filename, :directory
 	    attr_writer :directory
@@ -15,6 +18,27 @@ module JLDrill
 			@directory = nil
 		end
 		
+        class FilenameSelectorView < Context::View
+            attr_reader  :filename, :directory
+            attr_writer  :filename, :directory
+            
+            def initialize(context)
+                super(context)
+                @filename = nil
+                @directory = nil
+            end
+        
+            # Destroy the modal dialog
+            def destroy
+                # Please define in the concrete class
+            end
+            
+            # Open the model dialog
+            def run
+                # Please define in the concrete class
+            end
+        end
+
 		def createViews
     		@mainView = @viewBridge.FilenameSelectorView.new(self)
         end
@@ -24,10 +48,10 @@ module JLDrill
             @mainView = nil
         end		    
 		
-		def enter(parent)
+		def enter(parent, type)
 		    super(parent)
 		    @mainView.directory = @directory
-    		@mainView.run
+    		@mainView.run(type)
     		@filename = @mainView.filename
     		@directory = @mainView.directory
     		self.exit

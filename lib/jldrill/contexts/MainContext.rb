@@ -1,6 +1,7 @@
 require 'Context/Context'
 require 'Context/Bridge'
 require 'Context/View'
+require 'jldrill/model/Quiz/Quiz'
 require 'jldrill/model/items/edict/Edict'
 require 'jldrill/model/items/edict/HashedEdict'
 require 'jldrill/contexts/RunCommandContext'
@@ -136,7 +137,7 @@ module JLDrill
 		end
 		
 		def saveAs
-		    filename = @getFilenameContext.enter(self)
+		    filename = @getFilenameContext.enter(self, GetFilenameContext::SAVE)
 		    if !filename.nil?
 		        @quiz.savename = filename
 		        while !@quiz.save
@@ -167,7 +168,7 @@ module JLDrill
         end	
 				
 		def loadQuiz(quiz)
-		    filename = @getFilenameContext.enter(self)
+		    filename = @getFilenameContext.enter(self, GetFilenameContext::OPEN)
             return loadFile(filename)
 		end
 		

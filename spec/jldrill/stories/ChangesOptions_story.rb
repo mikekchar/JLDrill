@@ -16,8 +16,6 @@ module JLDrill::UserChangesOptions
         include JLDrill::StoryFunctionality::SampleQuiz
 
         # Set the current context and view to the setOptionsContext
-        # Note: Doesn't enter the context since enterDialogAndPressOK
-        # does that.
         def setOptions
             @context = @mainContext.setOptionsContext
             @view = @context.peekAtView
@@ -174,19 +172,22 @@ module JLDrill::UserChangesOptions
 			Story.view.should_receive(:destroy) do
 			    Story.view.optionsWindow.destroy
 			end
-   		    Story.enterDialogAndPressOK(Story.view.optionsWindow)
+   		    Story.pressOKAfterEntry(Story.view.optionsWindow)
+            @context.enter(@mainContext)
 		end
 
         it "should be able to run twice" do
             firstView = Story.view
-   		    Story.enterDialogAndPressOK(Story.view.optionsWindow)
+   		    Story.pressOKAfterEntry(Story.view.optionsWindow)
+            @context.enter(@mainContext)
             Story.getNewView
             secondView = Story.view
             # This is the main point.  We need to create a new view every
             # time the context is entered, otherwise it won't work.
             firstView.should_not be(secondView)
             # Do it just to be sure it worked.  If it doesn't Gtk will complain.
-   		    Story.enterDialogAndPressOK(Story.view.optionsWindow)
+   		    Story.pressOKAfterEntry(Story.view.optionsWindow)
+            @context.enter(@mainContext)
         end
 
         def setValueAndTest(valueString, default, target)
@@ -194,9 +195,10 @@ module JLDrill::UserChangesOptions
             setUIString = "Story.view.optionsWindow." + valueString + " = " + 
                            target.to_s 
             eval(modelString).should be(default)
-   		    Story.enterDialogAndPressOK(Story.view.optionsWindow) do
+   		    pressOKAfterEntry(Story.view.optionsWindow) do
                 eval(setUIString)
             end
+            @context.enter(@mainContext)
             eval(modelString).should be(target)
         end
 
@@ -212,6 +214,8 @@ module JLDrill::UserChangesOptions
             setValueAndTest("introThresh", 10, 20)
         end
 
+# This is commented out because setting the autoloadDic option will
+# automatically load the dictionary.  I may add this back in in the future.
 #        it "should be able to set the Autoload Dictionary option" do
 #            setValueAndTest("autoloadDic", false, true)
 #        end
