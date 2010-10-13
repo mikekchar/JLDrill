@@ -29,7 +29,7 @@ module JLDrill
 		end
 
         def getDictionaryFilename
-            context = GetFilenameContext.new(@viewBridge)
+            context = GetFilenameContext.new(@viewBridge, GetFilenameContext::OPEN)
             filename = context.enter(self)
             if !filename.nil?
                 @mainView.setDictionaryFilename(filename)

@@ -28,27 +28,28 @@ module JLDrill::StoryFunctionality
             end.send(:define_method, method, &block)
         end
 
-        # Make the modal dialog run as if the button was pressed.	
-        def enterDialogAndPressButton(dialog, button, &block)
+        # Override the run method in views that contain
+        # dialogs so that once the context has been entered
+        # the specified button is pressed.
+        def pressButtonAfterEntry(dialog, button, &block)
             override_method(dialog, :run) do
                 if !block.nil?
                     block.call
                 end
                 button
             end
-            @context.enter(@mainContext)
         end
 
         # Enter a dialog and press OK
-        def enterDialogAndPressOK(dialog, &block)
-            enterDialogAndPressButton(dialog, ::Gtk::Dialog::RESPONSE_ACCEPT, 
-                                      &block)
+        def pressOKAfterEntry(dialog, &block)
+            pressButtonAfterEntry(dialog, ::Gtk::Dialog::RESPONSE_ACCEPT, 
+                                  &block)
         end
 
         # Enter a dialog and press Cancel
-        def enterDialogAndPressCancel(dialog, &block)
-            enterDialogAndPressButton(dialog, ::Gtk::Dialog::RESPONSE_CANCEL, 
-                                      &block)
+        def pressCancelAfterEntry(dialog, &block)
+            pressButtonAfterEntry(dialog, ::Gtk::Dialog::RESPONSE_CANCEL, 
+                                  &block)
         end
 
 	end

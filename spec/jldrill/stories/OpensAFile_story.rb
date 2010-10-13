@@ -27,7 +27,8 @@ module JLDrill::OpensAFile
 
         it "should automatically exit the context after entry" do
             Story.context.should_receive(:exit)
-			Story.enterDialogAndPressOK(Story.view.selectorWindow)
+			Story.pressOKAfterEntry(Story.view.selectorWindow)
+            @context.enter(@mainContext, JLDrill::GetFilenameContext::OPEN)
         end
 
 		it "should destroy the selectorWindow when it closes" do
@@ -35,7 +36,8 @@ module JLDrill::OpensAFile
 			    Story.view.selectorWindow.destroy
 			end
 			# Note: The context automatically exits after entry
-			Story.enterDialogAndPressOK(Story.view.selectorWindow)
+			Story.pressOKAfterEntry(Story.view.selectorWindow)
+            @context.enter(@mainContext , JLDrill::GetFilenameContext::OPEN)
 		end
 
         it "should set the filename and directory on OK" do
@@ -46,7 +48,8 @@ module JLDrill::OpensAFile
             def selectorWindow.getCurrentFolder
                 "folder"
             end
-			Story.enterDialogAndPressOK(Story.view.selectorWindow)
+			Story.pressOKAfterEntry(Story.view.selectorWindow)
+            @context.enter(@mainContext, JLDrill::GetFilenameContext::OPEN)
             Story.view.filename.should eql("file")
             Story.view.directory.should eql("folder")
         end
@@ -59,7 +62,8 @@ module JLDrill::OpensAFile
             def selectorWindow.getCurrentFolder
                 "folder"
             end
-			Story.enterDialogAndPressCancel(Story.view.selectorWindow)
+			Story.pressCancelAfterEntry(Story.view.selectorWindow)
+            @context.enter(@mainContext, JLDrill::GetFilenameContext::OPEN)
             Story.view.filename.should be_nil
             Story.view.directory.should be_nil
         end
