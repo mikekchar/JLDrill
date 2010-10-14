@@ -15,7 +15,6 @@ module JLDrill
 
             def initialize(context)
                 super(context)
-                @exampleWindow = ExampleWindow.new(self)
             end
 
             # Destroy the window
@@ -26,6 +25,12 @@ module JLDrill
             # Update the examples in the UI
             def update(examples)
                 # Please define in the concrete class
+            end
+
+            # This is a convenience function for the tests so that
+            # they don't have to catch the close on the context
+            def close
+                @context.exit
             end
         end	
 
