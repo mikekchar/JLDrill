@@ -1,6 +1,6 @@
 require 'Context/Context'
 require 'Context/Bridge'
-require 'jldrill/views/InfoView'
+require 'Context/View'
 require 'jldrill/model/AboutInfo'
 
 module JLDrill
@@ -10,7 +10,20 @@ module JLDrill
 		def initialize(viewBridge)
 			super(viewBridge)
 		end
-		
+
+        class AboutView < Context::View
+    
+            def initialize(context, about)
+                super(context)
+                @about = about
+            end
+	
+            # Open the window and display the about information    
+            def run
+                # Please define in the concrete class
+            end
+        end
+	
 		def createViews
     		@mainView = @viewBridge.AboutView.new(self, AboutInfo.new)
         end

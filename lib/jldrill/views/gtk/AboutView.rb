@@ -1,11 +1,11 @@
 require 'Context/Gtk/Widget'
-require 'jldrill/views/AboutView'
+require 'jldrill/contexts/ShowAboutContext'
 require 'jldrill/model/Config'
 require 'gtk2'
 
 module JLDrill::Gtk
 
-	class AboutView < JLDrill::AboutView
+	class AboutView < JLDrill::ShowAboutContext::AboutView
         	
 		def initialize(context, about)
 			super(context, about)
