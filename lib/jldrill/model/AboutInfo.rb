@@ -11,11 +11,11 @@ module JLDrill
             @authors = ["Mike Charlton"]
 		    @name = "JLDrill"
 		    @version = JLDrill::VERSION
-		    @copyright = "(C) 2005-2008 Mike Charlton"
+		    @copyright = "(C) 2005-2010 Mike Charlton"
 		    @comments = "Drill Program for Learning Japanese."
             @website = "http://jldrill.rubyforge.org"
             @license = %Q[JLDrill - Drill Program for Learning Japanese
-Copyright (C) 2005-2009  Mike Charlton
+Copyright (C) 2005-2010  Mike Charlton
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
