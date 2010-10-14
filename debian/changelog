@@ -1,3 +1,12 @@
+jldrill (0.4.2-5) unstable; urgency=low
+
+  * In the middle of refactoring.  But if you delete a view from
+    the development code it will still get picked up from the
+    installed code.  So this is simply a new package that I can install
+    while developing the new code.  Nobody else should need this version.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Mon, 14 Oct 2010 10:33:00 +0900
+
 jldrill (0.4.2-4) unstable; urgency=low
 
   * Add kanji popup to the examples window.
