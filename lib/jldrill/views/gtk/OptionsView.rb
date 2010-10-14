@@ -1,10 +1,10 @@
 require 'jldrill/views/gtk/widgets/OptionsWindow'
-require 'jldrill/views/OptionsView'
+require 'jldrill/contexts/SetOptionsContext'
 require 'gtk2'
 
 module JLDrill::Gtk
 
-	class OptionsView < JLDrill::OptionsView
+	class OptionsView < JLDrill::SetOptionsContext::OptionsView
 	
         attr_reader :optionsWindow
         	
