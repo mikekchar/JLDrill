@@ -1,15 +1,15 @@
-require 'jldrill/views/StatisticsView'
 require 'Context/Bridge'
 require 'jldrill/contexts/ShowStatisticsContext'
 require 'jldrill/model/Quiz/Quiz'
+require 'jldrill/views/test/StatisticsView'
 
 
 module JLDrill
 
-	describe StatisticsView do
+	describe ShowStatisticsContext::StatisticsView do
 	
 	    before(:each) do
-			@context = JLDrill::ShowStatisticsContext.new(Context::Bridge.new(JLDrill))
+			@context = JLDrill::ShowStatisticsContext.new(Context::Bridge.new(JLDrill::Test))
 	        @context.createViews
 	        @view = @context.mainView
 	    end

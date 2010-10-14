@@ -1,7 +1,6 @@
 require 'Context/Bridge'
 require 'jldrill/contexts/MainContext'
 require 'jldrill/views/gtk/MainWindowView'
-require 'jldrill/views/gtk/ReferenceProgressView'
 require 'jldrill/views/gtk/OptionsView'
 require 'jldrill/spec/StoryMemento'
 

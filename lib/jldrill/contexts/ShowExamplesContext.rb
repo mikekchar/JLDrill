@@ -1,6 +1,6 @@
 require 'Context/Context'
 require 'Context/Bridge'
-require 'jldrill/views/ExampleView'
+require 'Context/View'
 
 module JLDrill
 
@@ -10,8 +10,27 @@ module JLDrill
 			super(viewBridge)
 		end
 		
-		def createViews
-    		@mainView = @viewBridge.ExampleView.new(self)
+        class ExampleView < Context::View
+            attr_reader :exampleWindow
+
+            def initialize(context)
+                super(context)
+                @exampleWindow = ExampleWindow.new(self)
+            end
+
+            # Destroy the window
+            def destroy
+                # Please define in the concrete class
+            end
+
+            # Update the examples in the UI
+            def update(examples)
+                # Please define in the concrete class
+            end
+        end	
+
+        def createViews
+            @mainView = @viewBridge.ExampleView.new(self)
         end
         
         def destroyViews

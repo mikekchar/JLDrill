@@ -1,6 +1,6 @@
 require 'Context/Context'
 require 'Context/Bridge'
-require 'jldrill/views/FilenameSelectorView'
+require 'Context/View'
 
 module JLDrill
 

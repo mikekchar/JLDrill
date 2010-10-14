@@ -1,13 +1,19 @@
 require 'jldrill/contexts/SetOptionsContext'
 require 'Context/Bridge'
 require 'jldrill/model/Quiz/Quiz'
+require 'jldrill/views/test/MainWindowView'
+require 'jldrill/views/test/VocabularyView'
+require 'jldrill/views/test/ProblemView'
+require 'jldrill/views/test/QuizStatusView'
+require 'jldrill/views/test/ItemHintView'
+require 'jldrill/views/test/OptionsView'
 
 module JLDrill
 
 	describe SetOptionsContext do
 
 		before(:each) do
-			@main = MainContext.new(Context::Bridge.new(JLDrill))
+			@main = MainContext.new(Context::Bridge.new(JLDrill::Test))
             @main.inTests = true
 			@main.createViews
 			@context = @main.setOptionsContext

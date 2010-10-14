@@ -1,5 +1,4 @@
 require 'jldrill/contexts/MainContext'
-require 'jldrill/views/MainWindowView'
 require 'jldrill/spec/Fakes'
 require 'jldrill/model/Config'
 

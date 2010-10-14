@@ -1,4 +1,4 @@
-require 'jldrill/views/QuizStatusView'
+require 'jldrill/contexts/DisplayQuizStatusContext'
 require 'jldrill/views/gtk/QuizStatusView'
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/views/test/CommandView'

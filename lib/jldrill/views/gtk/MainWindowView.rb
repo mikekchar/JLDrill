@@ -1,12 +1,12 @@
 require 'Context/Gtk/Widget'
 require 'Context/Views/Gtk/Widgets/MainWindow'
 require 'Context/Views/Gtk/Widgets/VBox'
-require 'jldrill/views/MainWindowView'
+require 'jldrill/contexts/MainContext'
 require 'gtk2'
 
 module JLDrill::Gtk
 
-	class MainWindowView < JLDrill::MainWindowView
+	class MainWindowView < JLDrill::MainContext::MainWindowView
         
         attr_reader :icon, :mainWindow
 
