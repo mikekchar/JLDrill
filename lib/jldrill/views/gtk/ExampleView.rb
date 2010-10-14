@@ -1,23 +1,35 @@
+require 'jldrill/views/gtk/widgets/ExampleWindow'
 require 'jldrill/contexts/ShowExamplesContext'
+require 'gtk2'
 
-module JLDrill::Test
+module JLDrill::Gtk
 	class ExampleView < JLDrill::ShowExamplesContext::ExampleView
-    
-        attr_reader :destroyed, :examples
-        attr_writer :destroyed, :examples    
-
+        attr_reader :exampleWindow
+        	
 		def initialize(context)
 			super(context)
-            @destroyed = false
-            @examples = []
+			@exampleWindow = ExampleWindow.new(self)
 		end
 		
-        def destroy
-            @destroyed = true
+		def getWidget
+			@exampleWindow
+		end
+
+        def mainWindow
+            getWidget.gtkWidgetMainWindow
         end
 		
+        def destroy
+            @exampleWindow.explicitDestroy
+        end
+		
+		def emitDestroyEvent
+			@exampleWindow.signal_emit("destroy")
+		end
+		
 		def update(examples)
-		    @examples = examples
+		    super(examples)
+		    @exampleWindow.updateContents(examples)
 		end
     end   
 end
