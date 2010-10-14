@@ -1,5 +1,6 @@
 require 'Context/Context'
 require 'Context/Bridge'
+require 'Context/View'
 
 module JLDrill
 
@@ -8,7 +9,35 @@ module JLDrill
 		def initialize(viewBridge)
 			super(viewBridge)
 		end
-		
+	
+        class StatisticsView < Context::View
+            attr_reader  :quiz
+	
+            def initialize(context)
+                super(context)
+                @quiz = nil
+            end
+
+            # This closes the window.  It's a convenience function
+            # for the test code so that it has something to catch other
+            # than the context closing.        
+            def close
+                @context.exit
+            end
+
+            # Destroy the window containing the view
+            def destroy
+                # Please define in the concrete class
+            end
+
+            # Update the view with the statistics from the quiz
+            def update(quiz)
+                @quiz = quiz
+                # Please define the rest of this method in the concrete class.
+                # You should call super(quiz) first.
+            end
+        end
+	
 		def createViews
     		@mainView = @viewBridge.StatisticsView.new(self)
         end

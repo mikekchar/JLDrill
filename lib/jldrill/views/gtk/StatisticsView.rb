@@ -1,10 +1,10 @@
-require 'jldrill/views/gtk/widgets/StatisticsWindow.rb'
-require 'jldrill/views/StatisticsView'
+require 'jldrill/views/gtk/widgets/StatisticsWindow'
+require 'jldrill/contexts/ShowStatisticsContext'
 require 'jldrill/model/Quiz/Quiz'
 require 'gtk2'
 
 module JLDrill::Gtk
-	class StatisticsView < JLDrill::StatisticsView
+	class StatisticsView < JLDrill::ShowStatisticsContext::StatisticsView
         attr_reader :statisticsWindow
         	
 		def initialize(context)
