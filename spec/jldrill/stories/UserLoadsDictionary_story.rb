@@ -127,8 +127,8 @@ module JLDrill::UserLoadsDictionary
             Story.start
             options = Story.mainContext.quiz.options
             context = Story.context
-            def context.readReference
-                # Remove the reference reading code.  We just
+            def context.readFile
+                # Remove the file reading code.  We just
                 # want to enter the context to test the filenames
             end
             Story.mainContext.loadReference
