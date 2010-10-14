@@ -1,10 +1,10 @@
 require 'jldrill/views/gtk/widgets/PromptWindow'
-require 'jldrill/views/PromptView'
+require 'jldrill/contexts/PromptContext'
 require 'gtk2'
 
 module JLDrill::Gtk
 
-	class PromptView < JLDrill::PromptView
+	class PromptView < JLDrill::PromptContext::PromptView
         attr_reader :selectorWindow
         	
 		def initialize(context, title, message)

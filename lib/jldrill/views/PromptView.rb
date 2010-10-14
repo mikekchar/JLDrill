@@ -1,22 +1,23 @@
-require 'Context/View'
+require 'jldrill/contexts/PromptContext'
 
-module JLDrill
-	class PromptView < Context::View
-	    attr_reader  :response, :title, :message
-	
+module JLDrill::Test
+	class PromptView < JLDrill::PromptContext::PromptView
+
+        attr_reader :destroyed, :hasRun
+        attr_writer :destroyed, :hasRun
+
 		def initialize(context, title, message)
-			super(context)
-			@title = title
-			@message = message
-			@response = @context.cancel
+			super(context, title, message)
+            @destroyed = false
+            @hasRun = false
 		end
 		
 		def destroy
-		    # Only in the concrete class
+		    @destroyed = true
 		end
 		
 		def run
-		    # Override in the concrete class
+		    @hasRun = true
 		end
 		
 	end

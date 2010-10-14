@@ -189,6 +189,7 @@ module JLDrill
 		    if @quiz.needsSave?
 		        promptForSave = PromptForSaveContext.new(@viewBridge) 
 		        if promptForSave.enter(self) != promptForSave.cancel
+                    save
 		            block.call
 		        end
 		    else
