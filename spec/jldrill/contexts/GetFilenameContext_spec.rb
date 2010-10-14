@@ -1,13 +1,15 @@
 require 'jldrill/contexts/GetFilenameContext'
 require 'Context/Bridge'
-require 'jldrill/views/FilenameSelectorView'
+require 'jldrill/views/test/FilenameSelectorView'
+require 'jldrill/contexts/MainContext'
+require 'jldrill/views/test/MainWindowView'
 
 module JLDrill
 
 	describe GetFilenameContext do
 
 		before(:each) do
-			@main = MainContext.new(Context::Bridge.new(JLDrill))
+			@main = MainContext.new(Context::Bridge.new(JLDrill::Test))
             @main.inTests = true
 			@main.createViews
 			@context = @main.getFilenameContext

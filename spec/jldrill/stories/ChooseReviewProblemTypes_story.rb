@@ -210,7 +210,7 @@ module JLDrill::UserChoosesReviewProblemTypes
    		    Story.pressOKAfterEntry(Story.view.optionsWindow) do
                 eval(setUIString)
             end
-            @context.enter(@mainContext)
+            Story.context.enter(Story.mainContext)
             eval(modelString).should be(target)
         end
 

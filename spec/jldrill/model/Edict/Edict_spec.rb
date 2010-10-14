@@ -26,7 +26,7 @@ module JLDrill
             edict = Edict.new
             edict.file = filename
             edict.readLines
-            edict.lines.size.should be(142339)
+            edict.lines.size.should be(162808)
             edict.parseChunk(1000)
             edict.length.should be(1000)
             edict.numLinesParsed.should be(1000)

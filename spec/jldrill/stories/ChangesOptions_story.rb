@@ -4,6 +4,7 @@ require 'jldrill/spec/storyFunctionality/Gtk'
 require 'jldrill/spec/storyFunctionality/SampleQuiz'
 require 'jldrill/model/Quiz/Options'
 require 'jldrill/model/Config'
+require 'jldrill/views/test/MainWindowView'
 require 'jldrill/views/test/CommandView'
 require 'jldrill/views/test/ProblemView'
 require 'jldrill/views/test/QuizStatusView'
@@ -173,13 +174,13 @@ module JLDrill::UserChangesOptions
 			    Story.view.optionsWindow.destroy
 			end
    		    Story.pressOKAfterEntry(Story.view.optionsWindow)
-            @context.enter(@mainContext)
+            Story.context.enter(Story.mainContext)
 		end
 
         it "should be able to run twice" do
             firstView = Story.view
    		    Story.pressOKAfterEntry(Story.view.optionsWindow)
-            @context.enter(@mainContext)
+            Story.context.enter(Story.mainContext)
             Story.getNewView
             secondView = Story.view
             # This is the main point.  We need to create a new view every
@@ -187,7 +188,7 @@ module JLDrill::UserChangesOptions
             firstView.should_not be(secondView)
             # Do it just to be sure it worked.  If it doesn't Gtk will complain.
    		    Story.pressOKAfterEntry(Story.view.optionsWindow)
-            @context.enter(@mainContext)
+            Story.context.enter(Story.mainContext)
         end
 
         def setValueAndTest(valueString, default, target)
@@ -195,10 +196,10 @@ module JLDrill::UserChangesOptions
             setUIString = "Story.view.optionsWindow." + valueString + " = " + 
                            target.to_s 
             eval(modelString).should be(default)
-   		    pressOKAfterEntry(Story.view.optionsWindow) do
+   		    Story.pressOKAfterEntry(Story.view.optionsWindow) do
                 eval(setUIString)
             end
-            @context.enter(@mainContext)
+            Story.context.enter(Story.mainContext)
             eval(modelString).should be(target)
         end
 

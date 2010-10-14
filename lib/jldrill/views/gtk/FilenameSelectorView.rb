@@ -22,13 +22,17 @@ module JLDrill::Gtk
             @selectorWindow = nil
         end
 
-        def run(type)
+        def createSelectorWindow(type)
             if @selectorWindow.nil?
-                # It's an error for it to be non-nil, but if it is
-                # it's because the previous window didn't close for
-                # some reason.  So we'll reuse it I guess...
+                # The tests create the selector window in advance.
+                # So if the window is non-nil, don't create it.
+                # Once the window has run once, it should be reset to nil.
                 @selectorWindow = SelectorWindow.new(type)
             end
+         end
+
+        def run(type)
+            createSelectorWindow(type)
             @selectorWindow.current_folder = @directory unless @directory.nil?
             retVal = @selectorWindow.execute
             @filename = @selectorWindow.chosenFilename

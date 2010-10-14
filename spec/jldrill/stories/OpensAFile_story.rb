@@ -13,6 +13,8 @@ module JLDrill::OpensAFile
 		super(type)
         @context = @mainContext.getFilenameContext
         @view = @context.peekAtView
+        # Create the selectorWindow in advance so we can modify it.
+        Story.view.createSelectorWindow(JLDrill::GetFilenameContext::OPEN)
 	end
 
 	describe Story.stepName("Gets the filename from the user") do
@@ -28,7 +30,8 @@ module JLDrill::OpensAFile
         it "should automatically exit the context after entry" do
             Story.context.should_receive(:exit)
 			Story.pressOKAfterEntry(Story.view.selectorWindow)
-            @context.enter(@mainContext, JLDrill::GetFilenameContext::OPEN)
+            Story.context.enter(Story.mainContext, 
+                                JLDrill::GetFilenameContext::OPEN)
         end
 
 		it "should destroy the selectorWindow when it closes" do
@@ -37,7 +40,8 @@ module JLDrill::OpensAFile
 			end
 			# Note: The context automatically exits after entry
 			Story.pressOKAfterEntry(Story.view.selectorWindow)
-            @context.enter(@mainContext , JLDrill::GetFilenameContext::OPEN)
+            Story.context.enter(Story.mainContext, 
+                                JLDrill::GetFilenameContext::OPEN)
 		end
 
         it "should set the filename and directory on OK" do
@@ -49,13 +53,14 @@ module JLDrill::OpensAFile
                 "folder"
             end
 			Story.pressOKAfterEntry(Story.view.selectorWindow)
-            @context.enter(@mainContext, JLDrill::GetFilenameContext::OPEN)
+            Story.context.enter(Story.mainContext, 
+                                JLDrill::GetFilenameContext::OPEN)
             Story.view.filename.should eql("file")
             Story.view.directory.should eql("folder")
         end
         
         it "should not set the filename and directory on CANCEL" do
-            selectorWindow = Story.view.selectorWindow
+			selectorWindow = Story.view.selectorWindow
             def selectorWindow.getFilename
                 "file"
             end
@@ -63,7 +68,8 @@ module JLDrill::OpensAFile
                 "folder"
             end
 			Story.pressCancelAfterEntry(Story.view.selectorWindow)
-            @context.enter(@mainContext, JLDrill::GetFilenameContext::OPEN)
+            Story.context.enter(Story.mainContext, 
+                                JLDrill::GetFilenameContext::OPEN)
             Story.view.filename.should be_nil
             Story.view.directory.should be_nil
         end
