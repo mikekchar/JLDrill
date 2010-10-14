@@ -1,10 +1,10 @@
-require 'jldrill/views/InfoView'
+require 'jldrill/contexts/ShowInfoContext'
 require 'jldrill/views/gtk/widgets/InfoWindow'
 require 'gtk2'
 
 module JLDrill::Gtk
 
-	class InfoView < JLDrill::InfoView
+	class InfoView < JLDrill::ShowInfoContext::InfoView
 
         attr_reader :infoWindow
         	

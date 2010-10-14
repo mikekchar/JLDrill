@@ -1,111 +1,113 @@
-0.2.0-LDRILL-SAVE hiragana.utf
+0.4.2-LDRILL-SAVE hiragana.utf
 Promotion Threshold: 2
 Introduction Threshold: 10
+Review Meaning
+Review Kanji
 Unseen
-/Reading: あ/Definitions: a,pronounced "ah" as in father,short and clipped/Score: 0/Bin: 0/Level: 0/Position: 0/
-/Reading: い/Definitions: i,pronounced "ee" as in keep,short and clipped/Score: 0/Bin: 0/Level: 0/Position: 1/
-/Reading: う/Definitions: u,pronounced "oo" as in boot,short and clipped/Score: 0/Bin: 0/Level: 0/Position: 2/
-/Reading: え/Definitions: e,pronounced "ay" as in may,don't pronounced the "y" sound/Score: 0/Bin: 0/Level: 0/Position: 3/
-/Reading: お/Definitions: o,pronounced "o" as in tone,short and clipped/Score: 0/Bin: 0/Level: 0/Position: 4/
-/Reading: か/Definitions: ka,pronounced "kah"/Score: 0/Bin: 0/Level: 0/Position: 5/
-/Reading: き/Definitions: ki,pronounced "kee"/Score: 0/Bin: 0/Level: 0/Position: 6/
-/Reading: く/Definitions: ku,pronounced "koo"/Score: 0/Bin: 0/Level: 0/Position: 7/
-/Reading: け/Definitions: ke,pronounced "kay"/Score: 0/Bin: 0/Level: 0/Position: 8/
-/Reading: こ/Definitions: ko,pronounced "ko"/Score: 0/Bin: 0/Level: 0/Position: 9/
-/Reading: さ/Definitions: sa,pronounced "sah"/Score: 0/Bin: 0/Level: 0/Position: 10/
-/Reading: し/Definitions: si,shi,pronounced "shee"/Score: 0/Bin: 0/Level: 0/Position: 11/
-/Reading: す/Definitions: su,pronounced "soo"/Score: 0/Bin: 0/Level: 0/Position: 12/
-/Reading: せ/Definitions: se,pronounced "say"/Score: 0/Bin: 0/Level: 0/Position: 13/
-/Reading: そ/Definitions: so,pronounced "so"/Score: 0/Bin: 0/Level: 0/Position: 14/
-/Reading: た/Definitions: ta,pronounced "tah"/Score: 0/Bin: 0/Level: 0/Position: 15/
-/Reading: ち/Definitions: ti,chi,pronounced "chee"/Score: 0/Bin: 0/Level: 0/Position: 16/
-/Reading: つ/Definitions: tu,tsu,pronounced "tsoo"/Score: 0/Bin: 0/Level: 0/Position: 17/
-/Reading: て/Definitions: te,pronounced "tay"/Score: 0/Bin: 0/Level: 0/Position: 18/
-/Reading: と/Definitions: to,pronounced "toe"/Score: 0/Bin: 0/Level: 0/Position: 19/
-/Reading: な/Definitions: na,pronounced "nah"/Score: 0/Bin: 0/Level: 0/Position: 20/
-/Reading: に/Definitions: ni,pronounced "nee"/Score: 0/Bin: 0/Level: 0/Position: 21/
-/Reading: ぬ/Definitions: nu,pronounced "noo"/Score: 0/Bin: 0/Level: 0/Position: 22/
-/Reading: ね/Definitions: ne,pronounced "nay"/Score: 0/Bin: 0/Level: 0/Position: 23/
-/Reading: の/Definitions: no,pronounced "no"/Score: 0/Bin: 0/Level: 0/Position: 24/
-/Reading: は/Definitions: ha,pronounced "hah"/Score: 0/Bin: 0/Level: 0/Position: 25/
-/Reading: ひ/Definitions: hi,pronounced "hee"/Score: 0/Bin: 0/Level: 0/Position: 26/
-/Reading: ふ/Definitions: hu,fu,pronounced "fhoo" (the fh is a cross between f and h)/Score: 0/Bin: 0/Level: 0/Position: 27/
-/Reading: へ/Definitions: he,pronounced "hay"/Score: 0/Bin: 0/Level: 0/Position: 28/
-/Reading: ほ/Definitions: ho,pronounced "ho"/Score: 0/Bin: 0/Level: 0/Position: 29/
-/Reading: ま/Definitions: ma,pronounced "mah"/Score: 0/Bin: 0/Level: 0/Position: 30/
-/Reading: み/Definitions: mi,pronounced "mee"/Score: 0/Bin: 0/Level: 0/Position: 31/
-/Reading: む/Definitions: mu,pronounced "moo"/Score: 0/Bin: 0/Level: 0/Position: 32/
-/Reading: め/Definitions: me,pronounced "may"/Score: 0/Bin: 0/Level: 0/Position: 33/
-/Reading: も/Definitions: mo,pronounced "mo"/Score: 0/Bin: 0/Level: 0/Position: 34/
-/Reading: ら/Definitions: ra,pronounced "rah" (r is a cross between r and l)/Score: 0/Bin: 0/Level: 0/Position: 35/
-/Reading: り/Definitions: ri,pronounced "ree" (r is a cross between r and l)/Score: 0/Bin: 0/Level: 0/Position: 36/
-/Reading: る/Definitions: ru,pronounced "roo" (r is a cross between r and l)/Score: 0/Bin: 0/Level: 0/Position: 37/
-/Reading: れ/Definitions: re,pronounced "ray" (r is a cross between r and l)/Score: 0/Bin: 0/Level: 0/Position: 38/
-/Reading: ろ/Definitions: ro,pronounced "ro" (r is a cross between r and l)/Score: 0/Bin: 0/Level: 0/Position: 39/
-/Reading: や/Definitions: ya,pronounced "yah"/Score: 0/Bin: 0/Level: 0/Position: 40/
-/Reading: ゆ/Definitions: yu,pronounced "yoo"/Score: 0/Bin: 0/Level: 0/Position: 41/
-/Reading: よ/Definitions: yo,pronounced "yo"/Score: 0/Bin: 0/Level: 0/Position: 42/
-/Reading: わ/Definitions: wa,pronounced "wah"/Score: 0/Bin: 0/Level: 0/Position: 43/
-/Reading: を/Definitions: wo,pronounced "oh"/Score: 0/Bin: 0/Level: 0/Position: 44/
-/Reading: ん/Definitions: n,pronounced "n"/Score: 0/Bin: 0/Level: 0/Position: 45/
-/Reading: が/Definitions: ga,pronounced "gah"/Score: 0/Bin: 0/Level: 0/Position: 46/
-/Reading: ぎ/Definitions: gi,pronounced "gee"/Score: 0/Bin: 0/Level: 0/Position: 47/
-/Reading: ぐ/Definitions: gu,pronounced "goo"/Score: 0/Bin: 0/Level: 0/Position: 48/
-/Reading: げ/Definitions: ge,pronounced "gay"/Score: 0/Bin: 0/Level: 0/Position: 49/
-/Reading: ご/Definitions: go,pronounced "go"/Score: 0/Bin: 0/Level: 0/Position: 50/
-/Reading: ざ/Definitions: za,pronounced "zah"/Score: 0/Bin: 0/Level: 0/Position: 51/
-/Reading: じ/Definitions: ji,pronounced "gee"/Score: 0/Bin: 0/Level: 0/Position: 52/
-/Reading: ず/Definitions: zu,pronounced "zoo"/Score: 0/Bin: 0/Level: 0/Position: 53/
-/Reading: ぜ/Definitions: ze,pronounced "zay"/Score: 0/Bin: 0/Level: 0/Position: 54/
-/Reading: ぞ/Definitions: zo,pronounced "zo"/Score: 0/Bin: 0/Level: 0/Position: 55/
-/Reading: だ/Definitions: da,pronounced "dah"/Score: 0/Bin: 0/Level: 0/Position: 56/
-/Reading: ぢ/Definitions: di,dzi,pronounced "zee"/Score: 0/Bin: 0/Level: 0/Position: 57/
-/Reading: づ/Definitions: du,dzu,pronounced "zoo"/Score: 0/Bin: 0/Level: 0/Position: 58/
-/Reading: で/Definitions: de,pronounced "day"/Score: 0/Bin: 0/Level: 0/Position: 59/
-/Reading: ど/Definitions: do,pronounced "doh"/Score: 0/Bin: 0/Level: 0/Position: 60/
-/Reading: ば/Definitions: ba,pronounced "bah"/Score: 0/Bin: 0/Level: 0/Position: 61/
-/Reading: び/Definitions: bi,pronounced "bee"/Score: 0/Bin: 0/Level: 0/Position: 62/
-/Reading: ぶ/Definitions: bu,pronounced "boo"/Score: 0/Bin: 0/Level: 0/Position: 63/
-/Reading: べ/Definitions: be,pronounced "bay"/Score: 0/Bin: 0/Level: 0/Position: 64/
-/Reading: ぼ/Definitions: bo,pronounced "bo"/Score: 0/Bin: 0/Level: 0/Position: 65/
-/Reading: ぱ/Definitions: pa,pronounced "pah"/Score: 0/Bin: 0/Level: 0/Position: 66/
-/Reading: ぴ/Definitions: pi,pronounced "pee"/Score: 0/Bin: 0/Level: 0/Position: 67/
-/Reading: ぷ/Definitions: pu,pronounced "poo"/Score: 0/Bin: 0/Level: 0/Position: 68/
-/Reading: ぺ/Definitions: pe,pronounced "pay"/Score: 0/Bin: 0/Level: 0/Position: 69/
-/Reading: ぽ/Definitions: po,pronounced "po"/Score: 0/Bin: 0/Level: 0/Position: 70/
-/Reading: ああ/Definitions: aa,pronounced "ah", but twice as long/Score: 0/Bin: 0/Level: 0/Position: 71/
-/Reading: いい/Definitions: ii,pronounced "ee", but twice as long/Score: 0/Bin: 0/Level: 0/Position: 72/
-/Reading: うう/Definitions: uu,pronounced "oo", but twice as long/Score: 0/Bin: 0/Level: 0/Position: 73/
-/Reading: ええ/Definitions: ee,pronounced "ay", but twice as long/Score: 0/Bin: 0/Level: 0/Position: 74/
-/Reading: おお/Definitions: o0,pronounced "o", but twice as long/Score: 0/Bin: 0/Level: 0/Position: 75/
-/Kanji: あー/Reading: (any character followed by ー)/Definitions: a-,pronounced "ah", but twice as long,i.e., extend the vowel sound to be twice as long/Score: 0/Bin: 0/Level: 0/Position: 76/
-/Reading: えい/Definitions: ei,pronounced "ay", but twice as long/Score: 0/Bin: 0/Level: 0/Position: 77/
-/Kanji: おう/Reading: (and "o" sound followed by う)/Definitions: ou,oo,pronounced "o", but twice as long/Score: 0/Bin: 0/Level: 0/Position: 78/
-/Kanji: あっ/Reading: (any vowel followed by っ)/Definitions: a-,pronounced "ah", but cut it short,i.e., cut short the vowel sound/Score: 0/Bin: 0/Level: 0/Position: 79/
-/Kanji: っか/Reading: (っ in front of any consonant sound)/Definitions: kka,make a gutteral stop and then "kah",i.e., datta (だった) would be pronounced "dah"-small silence-"tah"/Score: 0/Bin: 0/Level: 0/Position: 80/
-/Kanji: っさ/Reading: (っ in front of any "s" sound)/Definitions: ssa,lengthen the "s" sound in the "sah"/Score: 0/Bin: 0/Level: 0/Position: 81/
-/Reading: っし/Definitions: sshi,"s" sound followed by "shee"/Score: 0/Bin: 0/Level: 0/Position: 82/
-/Reading: きゃ/Definitions: kya,pronounced "kyah"/Score: 0/Bin: 0/Level: 0/Position: 83/
-/Reading: きゅ/Definitions: kyu,pronounced "kyoo"/Score: 0/Bin: 0/Level: 0/Position: 84/
-/Reading: きょ/Definitions: kyo,pronounced "kyo"/Score: 0/Bin: 0/Level: 0/Position: 85/
-/Reading: ぎゃ/Definitions: gya,pronounced "gyah"/Score: 0/Bin: 0/Level: 0/Position: 86/
-/Reading: ぎゅ/Definitions: gyu,pronounced "gyoo"/Score: 0/Bin: 0/Level: 0/Position: 87/
-/Reading: ぎょ/Definitions: gyo,pronounced "gyo"/Score: 0/Bin: 0/Level: 0/Position: 88/
-/Reading: しゃ/Definitions: sya,sha,pronounced "shah"/Score: 0/Bin: 0/Level: 0/Position: 89/
-/Reading: しゅ/Definitions: syu,shu,pronounced "shoo"/Score: 0/Bin: 0/Level: 0/Position: 90/
-/Reading: しょ/Definitions: syo,sho,pronounced "sho"/Score: 0/Bin: 0/Level: 0/Position: 91/
-/Reading: じゃ/Definitions: jya,ja,pronounced "jah"/Score: 0/Bin: 0/Level: 0/Position: 92/
-/Reading: じゅ/Definitions: jyu,ju,pronounced "joo"/Score: 0/Bin: 0/Level: 0/Position: 93/
-/Reading: じょ/Definitions: jyo,jo,pronounced "jo"/Score: 0/Bin: 0/Level: 0/Position: 94/
-/Reading: ちゃ/Definitions: tya,cha,pronounced "chah"/Score: 0/Bin: 0/Level: 0/Position: 95/
-/Reading: ちゅ/Definitions: tyu,chu,pronounced "choo"/Score: 0/Bin: 0/Level: 0/Position: 96/
-/Reading: ちょ/Definitions: tyo,cho,pronounced "cho"/Score: 0/Bin: 0/Level: 0/Position: 97/
-/Reading: にゃ/Definitions: nya,pronounced "nyah"/Score: 0/Bin: 0/Level: 0/Position: 98/
-/Reading: にゅ/Definitions: nyu,pronounced "nyoo"/Score: 0/Bin: 0/Level: 0/Position: 99/
-/Reading: にょ/Definitions: nyo,pronounced "nyo"/Score: 0/Bin: 0/Level: 0/Position: 100/
-/Reading: りゅ/Definitions: ryu,pronounced "ryoo"/Score: 0/Bin: 0/Level: 0/Position: 101/
-/Reading: りょ/Definitions: ryo,pronounced "ryo"/Score: 0/Bin: 0/Level: 0/Position: 102/
+/Reading: い/Definitions: i,pronounced "ee" as in keep,short and clipped/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: う/Definitions: u,pronounced "oo" as in boot,short and clipped/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: え/Definitions: e,pronounced "ay" as in may,don't pronounced the "y" sound/Position: 3/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: お/Definitions: o,pronounced "o" as in tone,short and clipped/Position: 4/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: か/Definitions: ka,pronounced "kah"/Position: 5/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: き/Definitions: ki,pronounced "kee"/Position: 6/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: く/Definitions: ku,pronounced "koo"/Position: 7/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: け/Definitions: ke,pronounced "kay"/Position: 8/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: こ/Definitions: ko,pronounced "ko"/Position: 9/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: さ/Definitions: sa,pronounced "sah"/Position: 10/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: し/Definitions: si,shi,pronounced "shee"/Position: 11/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: す/Definitions: su,pronounced "soo"/Position: 12/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: せ/Definitions: se,pronounced "say"/Position: 13/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: そ/Definitions: so,pronounced "so"/Position: 14/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: た/Definitions: ta,pronounced "tah"/Position: 15/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ち/Definitions: ti,chi,pronounced "chee"/Position: 16/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: つ/Definitions: tu,tsu,pronounced "tsoo"/Position: 17/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: て/Definitions: te,pronounced "tay"/Position: 18/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: と/Definitions: to,pronounced "toe"/Position: 19/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: な/Definitions: na,pronounced "nah"/Position: 20/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: に/Definitions: ni,pronounced "nee"/Position: 21/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぬ/Definitions: nu,pronounced "noo"/Position: 22/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ね/Definitions: ne,pronounced "nay"/Position: 23/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: の/Definitions: no,pronounced "no"/Position: 24/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: は/Definitions: ha,pronounced "hah"/Position: 25/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ひ/Definitions: hi,pronounced "hee"/Position: 26/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ふ/Definitions: hu,fu,pronounced "fhoo" (the fh is a cross between f and h)/Position: 27/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: へ/Definitions: he,pronounced "hay"/Position: 28/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ほ/Definitions: ho,pronounced "ho"/Position: 29/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ま/Definitions: ma,pronounced "mah"/Position: 30/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: み/Definitions: mi,pronounced "mee"/Position: 31/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: む/Definitions: mu,pronounced "moo"/Position: 32/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: め/Definitions: me,pronounced "may"/Position: 33/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: も/Definitions: mo,pronounced "mo"/Position: 34/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ら/Definitions: ra,pronounced "rah" (r is a cross between r and l)/Position: 35/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: り/Definitions: ri,pronounced "ree" (r is a cross between r and l)/Position: 36/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: る/Definitions: ru,pronounced "roo" (r is a cross between r and l)/Position: 37/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: れ/Definitions: re,pronounced "ray" (r is a cross between r and l)/Position: 38/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ろ/Definitions: ro,pronounced "ro" (r is a cross between r and l)/Position: 39/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: や/Definitions: ya,pronounced "yah"/Position: 40/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ゆ/Definitions: yu,pronounced "yoo"/Position: 41/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: よ/Definitions: yo,pronounced "yo"/Position: 42/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: わ/Definitions: wa,pronounced "wah"/Position: 43/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: を/Definitions: wo,pronounced "oh"/Position: 44/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ん/Definitions: n,pronounced "n"/Position: 45/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: が/Definitions: ga,pronounced "gah"/Position: 46/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぎ/Definitions: gi,pronounced "gee"/Position: 47/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぐ/Definitions: gu,pronounced "goo"/Position: 48/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: げ/Definitions: ge,pronounced "gay"/Position: 49/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ご/Definitions: go,pronounced "go"/Position: 50/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ざ/Definitions: za,pronounced "zah"/Position: 51/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: じ/Definitions: ji,pronounced "gee"/Position: 52/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ず/Definitions: zu,pronounced "zoo"/Position: 53/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぜ/Definitions: ze,pronounced "zay"/Position: 54/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぞ/Definitions: zo,pronounced "zo"/Position: 55/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: だ/Definitions: da,pronounced "dah"/Position: 56/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぢ/Definitions: di,dzi,pronounced "zee"/Position: 57/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: づ/Definitions: du,dzu,pronounced "zoo"/Position: 58/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: で/Definitions: de,pronounced "day"/Position: 59/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ど/Definitions: do,pronounced "doh"/Position: 60/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ば/Definitions: ba,pronounced "bah"/Position: 61/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: び/Definitions: bi,pronounced "bee"/Position: 62/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぶ/Definitions: bu,pronounced "boo"/Position: 63/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: べ/Definitions: be,pronounced "bay"/Position: 64/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぼ/Definitions: bo,pronounced "bo"/Position: 65/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぱ/Definitions: pa,pronounced "pah"/Position: 66/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぴ/Definitions: pi,pronounced "pee"/Position: 67/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぷ/Definitions: pu,pronounced "poo"/Position: 68/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぺ/Definitions: pe,pronounced "pay"/Position: 69/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぽ/Definitions: po,pronounced "po"/Position: 70/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ああ/Definitions: aa,pronounced "ah",but twice as long/Position: 71/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: いい/Definitions: ii,pronounced "ee",but twice as long/Position: 72/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: うう/Definitions: uu,pronounced "oo",but twice as long/Position: 73/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ええ/Definitions: ee,pronounced "ay",but twice as long/Position: 74/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: おお/Definitions: o0,pronounced "o",but twice as long/Position: 75/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Kanji: あー/Reading: (any character followed by ー)/Definitions: a-,pronounced "ah",but twice as long,i.e.,extend the vowel sound to be twice as long/Position: 76/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: えい/Definitions: ei,pronounced "ay",but twice as long/Position: 77/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Kanji: おう/Reading: (and "o" sound followed by う)/Definitions: ou,oo,pronounced "o",but twice as long/Position: 78/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Kanji: あっ/Reading: (any vowel followed by っ)/Definitions: a-,pronounced "ah",but cut it short,i.e.,cut short the vowel sound/Position: 79/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Kanji: っか/Reading: (っ in front of any consonant sound)/Definitions: kka,make a gutteral stop and then "kah",i.e.,datta (だった) would be pronounced "dah"-small silence-"tah"/Position: 80/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Kanji: っさ/Reading: (っ in front of any "s" sound)/Definitions: ssa,lengthen the "s" sound in the "sah"/Position: 81/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: っし/Definitions: sshi,"s" sound followed by "shee"/Position: 82/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: きゃ/Definitions: kya,pronounced "kyah"/Position: 83/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: きゅ/Definitions: kyu,pronounced "kyoo"/Position: 84/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: きょ/Definitions: kyo,pronounced "kyo"/Position: 85/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぎゃ/Definitions: gya,pronounced "gyah"/Position: 86/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぎゅ/Definitions: gyu,pronounced "gyoo"/Position: 87/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ぎょ/Definitions: gyo,pronounced "gyo"/Position: 88/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: しゃ/Definitions: sya,sha,pronounced "shah"/Position: 89/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: しゅ/Definitions: syu,shu,pronounced "shoo"/Position: 90/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: しょ/Definitions: syo,sho,pronounced "sho"/Position: 91/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: じゃ/Definitions: jya,ja,pronounced "jah"/Position: 92/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: じゅ/Definitions: jyu,ju,pronounced "joo"/Position: 93/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: じょ/Definitions: jyo,jo,pronounced "jo"/Position: 94/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ちゃ/Definitions: tya,cha,pronounced "chah"/Position: 95/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ちゅ/Definitions: tyu,chu,pronounced "choo"/Position: 96/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: ちょ/Definitions: tyo,cho,pronounced "cho"/Position: 97/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: にゃ/Definitions: nya,pronounced "nyah"/Position: 98/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: にゅ/Definitions: nyu,pronounced "nyoo"/Position: 99/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: にょ/Definitions: nyo,pronounced "nyo"/Position: 100/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: りゅ/Definitions: ryu,pronounced "ryoo"/Position: 101/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+/Reading: りょ/Definitions: ryo,pronounced "ryo"/Position: 102/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
 Poor
+/Reading: あ/Definitions: a,pronounced "ah" as in father,short and clipped/Position: 0/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
 Fair
 Good
 Excellent

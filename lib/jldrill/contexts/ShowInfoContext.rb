@@ -1,6 +1,6 @@
 require 'Context/Context'
 require 'Context/Bridge'
-require 'jldrill/views/InfoView'
+require 'Context/View'
 
 module JLDrill
 
@@ -9,7 +9,26 @@ module JLDrill
 		def initialize(viewBridge)
 			super(viewBridge)
 		end
-		
+
+        class InfoView < Context::View
+
+            def initialize(context)
+                super(context)
+            end
+
+            # Destroy the info window
+            def destroy
+                # Please define in the concrete class
+            end
+
+            # Display the info to the user
+            def run(info)
+                @info = info
+                # Please run super() and then define the rest
+                # of the method in the concrete class
+            end
+        end
+
 		def createViews
     		@mainView = @viewBridge.InfoView.new(self)
         end
