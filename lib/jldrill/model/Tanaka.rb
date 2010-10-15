@@ -1,21 +1,18 @@
+require 'jldrill/model/DataFile'
+
 module JLDrill
 
     # Represents the Tanaka reference library
-	class Tanaka
+	class Tanaka < DataFile
 	
         A_RE = /^A: (.*)\#ID=.*$/
         B_RE = /^B: (.*)/
         WORD_RE = /([^{(\[~]*)/
 
-		attr_reader :file, :lines
-		attr_writer :file, :lines
-
 		def initialize()
+            super
             @sentences = []
             @words = {}
-			@file = ""
-			@lines = []
-			@parsed = 0
 		end
 
         def numSentences
@@ -37,50 +34,6 @@ module JLDrill
             end
         end
 
-		def eof?
-			return @parsed >= @lines.size
-		end
-
-		def loaded?
-			return eof? && (@words.size > 0)
-		end
-
-		def fraction
-			retVal = 0.0
-			if @lines.size != 0
-				retVal = @parsed.to_f / @lines.size.to_f
-			end
-			return retVal
-		end
-
-		def parse
-			parseChunk(@lines.size)
-		end
-
-		def parseChunk(size)
-			last = @parsed + size
-			if last > @lines.size
-				last = @lines.size
-			end
-			while @parsed < last do
-				if parseLines(@lines[@parsed], @lines[@parsed + 1])
-					@parsed += 2
-					# As long as a single line gets parsed it is a success
-				else
-					@parsed += 1
-				end
-			end
-
-			# If the parsing is finished dispose of the unparsed lines
-			finished = self.eof?
-			if finished
-				@lines = []
-				@parsed = 0
-			end
-
-			return finished
-		end
-
         def parseLines(aLine, bLine)
             success = false
             if A_RE.match(aLine)
@@ -98,16 +51,18 @@ module JLDrill
             return success
         end
 
-		def readLines
-			@lines = IO.readlines(@file)
-			@parsed = 0
-		end
+        def parsedData
+            @sentences
+        end
 
-		def load(file)
-			@file = file
-			readLines
-			parse
-		end
+        def parseEntry
+            if parseLines(@lines[@parsed], @lines[@parsed + 1])
+                @parsed += 2
+                # As long as a single line gets parsed it is a success
+            else
+                @parsed += 1
+            end
+        end
 
         def search(word)
             contents = @words[word]

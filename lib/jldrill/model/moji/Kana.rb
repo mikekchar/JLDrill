@@ -1,3 +1,5 @@
+require 'jldrill/model/DataFile'
+
 module JLDrill
     # Represents a japanese phonetic character (either hiragana or
     # katakana).
@@ -100,4 +102,22 @@ module JLDrill
 			self.join("\n")
 		end
 	end
+
+    class KanaFile < DataFile
+        attr_reader :kanaList
+        attr_writer :kanaList
+
+        def initialize
+            super
+            @kanaList = KanaList.new
+        end
+
+        def parsedData
+            @kanaList
+        end
+
+        def parser
+            @kanaList
+        end
+    end
 end
