@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Contains code necessary to read in an EDict file
 # Also will parse hacked up JLPT Edict files
 
@@ -5,12 +6,13 @@ require "jldrill/model/Item"
 require "jldrill/model/items/Vocabulary"
 require "jldrill/model/items/edict/Meaning"
 require 'jldrill/model/items/edict/ComparisonFunctors'
+require 'jldrill/model/DataFile'
 require 'Context/Publisher'
 require 'Context/Log'
 require 'kconv'
 
 module JLDrill
-    class Edict
+    class Edict < DataFile
 
         LINE_RE_TEXT = '^([^\[\s]*)\s+(\[(.*)\]\s+)?\/(([^\/]*\/)+)\s*$'
         LINE_RE = Regexp.new(LINE_RE_TEXT)
@@ -18,46 +20,28 @@ module JLDrill
         KANA_RE = /（(.*)）/
         COMMENT_RE = /^\#/
             
-            attr_reader :lines, :numLinesParsed, :loaded, :readings, :publisher
-            attr_writer :lines
+        attr_reader :readings
 
         def initialize(file=nil)
-            @file = file
+            super()
             @readings = []
-            @lines = nil
-            @numLinesParsed = 0
-            @numReadingsAdded = 0
-            @loaded = false
             @isUTF8 = nil
-            @publisher = Context::Publisher.new(self)
+            if !file.nil?
+                @file = file
+            end
         end
 
         def reset
+            super()
             @readings = []
-            @lines = nil
-            @numLinesParsed = 0
-            @numReadingsAdded = 0
             @isUTF8 = nil
-            setLoaded(false)
         end
 
-        def file=(filename)
-            if @file != filename
-                @file = filename
-                reset
-            end
-        end
-        
-        def file
-            @file
-        end
-
-        def loaded?
-            @loaded
+        def parsedData
+            @readings
         end
 
         def setLoaded(bool)
-            @loaded = bool
             @publisher.update("edictLoad")
         end
 
@@ -65,7 +49,7 @@ module JLDrill
             if @lines.nil? || (index >= @lines.size)
                 return nil
             else
-                return parse(@lines[index], index)
+                return parseLine(@lines[index], index)
             end
         end
 
@@ -76,12 +60,11 @@ module JLDrill
         end
 
         def length
-            return @numReadingsAdded
+            return @readings.size
         end
 
         def add(reading, position)
             @readings.push(reading)
-            @numReadingsAdded += 1
         end
 
         def isUTF8?(index)
@@ -137,7 +120,7 @@ module JLDrill
             end
         end
         
-        def parse(line, position)
+        def parseLine(line, position)
             retVal = nil
             line = toUTF8(line)
             if line =~ LINE_RE
@@ -165,21 +148,6 @@ module JLDrill
             return retVal                        
         end
         
-        def readLines()
-            begin
-                setLoaded(false)
-                @lines = IO.readlines(@file)
-            rescue
-                # Probably couldn't open the file for some reason.
-                # We should give an error message here but I don't
-                # have the facility yet.
-                @lines = []
-            end
-            @numLinesParsed = 0
-            @numReadingsAdded = 0
-            @readings = []
-        end
-
         def parseReading(line)
             reading = nil
             line = toUTF8(line)
@@ -199,57 +167,14 @@ module JLDrill
             return reading
         end
 
-        def parseNextLine
-            line = @lines[@numLinesParsed]
-            add(parseReading(line), @numLinesParsed)
-            @numLinesParsed += 1
+        def finishParsing
+            setLoaded(true)
         end
 
-        def parseChunk(chunkSize)
-            if loaded? 
-                return true 
-            end
-            
-            if (@numLinesParsed + chunkSize) >= @lines.size
-                chunkSize = @lines.size - @numLinesParsed
-                setLoaded(true)
-            end
-
-            0.upto(chunkSize - 1) do
-                parseNextLine()
-            end
-            
-            return loaded?
-        end
-
-        def parseLines
-            parseChunk(@lines.size)
-        end
-
-        # Reads in the whole file at once
-        def read
-            readLines()
-            parseLines()
-        end
-        
-        def fraction
-            if loaded?
-                1.0
-            else
-                @numLinesParsed.to_f / @lines.size.to_f
-            end
-        end
-
-        def shortFilename
-            if @file.nil? || @file.empty?
-                return "No name"
-            end
-            pos = @file.rindex('/')
-            if(pos)
-                return @file[(pos+1)..(@file.length-1)]
-            else
-                return @file
-            end
+        def parseEntry
+            line = @lines[@parsed]
+            add(parseReading(line), @parsed)
+            @parsed += 1
         end
 
         def search(reading)

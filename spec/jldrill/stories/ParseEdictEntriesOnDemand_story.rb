@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/model/items/edict/Edict'
 require 'jldrill/model/items/edict/HashedEdict'
@@ -26,7 +27,7 @@ module JLDrill::ParseEdictEntriesOnDemand
             utf = JLDrill::Edict.new
             utf.lines = ["雨 [あめ] /(n) rain/(P)/"]
             utf.length.should be(0)
-            utf.parseLines
+            utf.parse
             utf.length.should be(1)
             ameList = utf.search("あめ")
             ameList.size.should be(1)
@@ -40,7 +41,7 @@ module JLDrill::ParseEdictEntriesOnDemand
             utf = JLDrill::HashedEdict.new
             utf.lines = ["雨 [あめ] /(n) rain/(P)/"]
             utf.length.should be(0)
-            utf.parseLines
+            utf.parse
             utf.length.should be(1)
             ameList = utf.search("あめ")
             ameList.size.should be(1)
@@ -54,13 +55,13 @@ module JLDrill::ParseEdictEntriesOnDemand
             utf = JLDrill::Edict.new
             utf.lines = ["雨 [あめ] /(n) rain/(P)/"]
             utf.length.should be(0)
-            utf.parseLines
+            utf.parse
             utf.length.should be(1)
             ame = utf.vocab(0)
             ame.reading.should eql("あめ")
             euc = JLDrill::Edict.new
             euc.lines = ["\261\253 [\244\242\244\341] /(n) rain/(P)/"]
-            euc.parseLines
+            euc.parse
             euc.linesAreUTF8?.should be(false)
             euc.length.should be(1)
             euc.vocab(0).should eql(ame)
@@ -81,7 +82,7 @@ module JLDrill::ParseEdictEntriesOnDemand
                          "雨 [あめ] /(n) rain/(P)/",
                          "雨降り [あめふり] /(n) in the rain/(P)/",
                          "雨降らし [あめふらし] /(n) sea hare/"]
-            edict.parseLines
+            edict.parse
             edict.length.should be(4)
             edict.vocab(0).reading.should eql("あ")
             edict.vocab(1).reading.should eql("あめ")
@@ -108,7 +109,7 @@ module JLDrill::ParseEdictEntriesOnDemand
             edict = JLDrill::Edict.new
             edict.vocab(5).should be_nil
             edict.lines = ["雨 [あめ] /(n) rain/(P)/"]
-            edict.parseLines
+            edict.parse
             edict.length.should be(1)
             edict.vocab(5).should be_nil
         end
@@ -121,7 +122,7 @@ module JLDrill::ParseEdictEntriesOnDemand
             edict.lines = ["あ /hiragana a/",
                          "雨 [あめ] /(n) rain/(P)/",
                          "雨降り [あめふり] /(n) in the rain/(P)/"]
-            edict.parseLines
+            edict.parse
             quiz.loadFromDict(edict)
             quiz.length.should be(3)
             quiz.needsSave?.should be(true)
@@ -132,7 +133,7 @@ module JLDrill::ParseEdictEntriesOnDemand
             # Some of the entries in the JLPT files look like this
             edict = JLDrill::HashedEdict.new
             edict.lines = ["あ [（平仮名）] /hiragana a/"]
-            edict.parseLines
+            edict.parse
             edict.length.should be(1)
             a = edict.vocab(0)
             a.kanji.should be_nil

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/model/items/edict/Edict'
 
@@ -57,7 +58,7 @@ module JLDrill::LoadEdictInEUC
             euc = JLDrill::Edict.new
             euc.lines = ["\261\253 [\244\242\244\341] /(n) rain/(P)/"]
             euc.linesAreUTF8?.should be(false)
-            euc.parse(euc.lines[0],0).should_not be_nil
+            euc.parseLine(euc.lines[0],0).should_not be_nil
             euc.vocab(0).kanji.should eql("雨")
             euc.vocab(0).reading.should eql("あめ")
         end
@@ -68,7 +69,7 @@ module JLDrill::LoadEdictInEUC
             euc = JLDrill::Edict.new
             euc.lines = ["\260\354\332\263 [\244\244\244\303\244\306\244\255] /(n,vs) casting off or away/"]
             euc.linesAreUTF8?.should be(false)
-            euc.parse(euc.lines[0],0).should_not be_nil
+            euc.parseLine(euc.lines[0],0).should_not be_nil
             euc.vocab(0).kanji.should eql("一擲")
             euc.vocab(0).reading.should eql("いってき")
         end

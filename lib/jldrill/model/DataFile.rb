@@ -1,3 +1,4 @@
+require 'Context/Publisher'
 
 module JLDrill
     # This class represents a data file in JLDrill.   This
@@ -5,16 +6,12 @@ module JLDrill
     # for having a file which can be read in the background
     # in JLDrill.
     class DataFile
-        attr_reader :file, :lines
-        attr_writer :file, :lines
+        attr_reader :file, :lines, :parsed, :publisher
+        attr_writer :lines
 
         def initialize
-            # The name of the file
-            @file = ""
-            # The place where the unparsed lines go
-            @lines = []
-            # Indicated how many lines have been parsed
-            @parsed = 0
+            @publisher = Context::Publisher.new(self)
+            reset
         end
 
         # Returns a reference to the parsed data item
@@ -27,6 +24,29 @@ module JLDrill
             # Please implement this in the concrete class unless
             # you modify the parseEntry() method to directly access
             # the parser.
+        end
+
+        # Resets the file
+        def reset
+            @file = ""
+            @lines = []
+            @parsed = 0
+            setLoaded(false)
+            # Please define the rest of the method and call super()
+            # at the end.
+        end
+
+        # Sets the filename of the file and resets the data.
+        def file=(filename)
+            if @file != filename
+                reset
+                @file = filename
+            end
+        end
+
+        # Indicate to the outside world that the file is loaded
+        def setLoaded(bool)
+            @publisher.update("loaded")
         end
 
         # Returns true if there is no more data to parse
@@ -51,7 +71,13 @@ module JLDrill
 
         # Read the file into memory.  This is done before parsing
         def readLines
-            @lines = IO.readlines(@file)
+            begin
+                @lines = IO.readlines(@file)
+            rescue
+                Context::Log::warning("JLDrill::DataFile",
+                                      "Could not load #{@file}.")
+                @lines = []
+            end
             @parsed = 0
         end
 
@@ -89,11 +115,35 @@ module JLDrill
 			# If the parsing is finished dispose of the unparsed lines
 			finished = self.eof?
 			if finished
-				@lines = []
-				@parsed = 0
+                finishParsing
 			end
 
 			return finished
 		end
+
+        # Usually we want to delete the original source lines when
+        # we are finished parsing.  But some files are only
+        # partially parsed on reading (like Edict). 
+        # Please redefine this if you want to keep the source
+        # lines around for some reason.
+        def finishParsing
+            @lines = []
+            @parsed = 0
+            setLoaded(true)
+        end
+
+        # Returns the filename without the path
+        def shortFilename
+            if @file.nil? || @file.empty?
+                return "No name"
+            end
+            pos = @file.rindex('/')
+            if(pos)
+                return @file[(pos+1)..(@file.length-1)]
+            else
+                return @file
+            end
+        end
+
     end
 end

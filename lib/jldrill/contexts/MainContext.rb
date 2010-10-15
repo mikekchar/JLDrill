@@ -79,6 +79,12 @@ module JLDrill
             def destroy
                 # define in the concrete class
             end
+
+            # This is a convenience method for the tests so that
+            # they don't have to catch the exit on the context.
+            def close
+                context.exit
+            end
         end
 		
 		def createViews
@@ -151,8 +157,8 @@ module JLDrill
                 if JLDrill::Quiz.drillFile?(filename)
                     quiz.load(filename)
                 else
-                    dict = Edict.new(filename)
-                    dict.read
+                    dict = Edict.new
+                    dict.load(filename)
                     quiz.loadFromDict(dict)
                 end
                 # We need to resubscribe to the options in the new quiz
@@ -188,9 +194,14 @@ module JLDrill
 		def promptForSaveAnd(&block)
 		    if @quiz.needsSave?
 		        promptForSave = PromptForSaveContext.new(@viewBridge) 
-		        if promptForSave.enter(self) != promptForSave.cancel
+                result = promptForSave.enter(self)
+		        if result == promptForSave.yes
                     save
 		            block.call
+                elsif result == promptForSave.no
+                    block.call
+                else
+                    # Cancel... Do nothing
 		        end
 		    else
 		        block.call

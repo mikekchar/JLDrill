@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/contexts/EditVocabularyContext'
 require 'jldrill/model/items/Vocabulary'
@@ -158,7 +159,7 @@ module JLDrill::VocabularyIO
                 "/to shut/(P)/\n"
             edict = JLDrill::Edict.new
             edict.lines = [edictString]
-            edict.parse(edictString, 0).should_not be_nil
+            edict.parseLine(edictString, 0).should_not be_nil
             v = JLDrill::Vocabulary.create("/Kanji: 閉じる" + 
                 "/Reading: とじる" +
                 "/Definitions: to close (e.g.\\, book\\, eyes\\, meeting\\, etc.)," +

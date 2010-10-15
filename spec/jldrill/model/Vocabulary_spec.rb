@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'jldrill/model/Bin'
 require 'jldrill/model/items/Vocabulary'
 require 'jldrill/model/items/edict/Edict'
@@ -160,7 +161,7 @@ module JLDrill
             line = "鈍い [にぶい] /(adj) dull (e.g., a knife)/thickheaded/slow (opposite of fast)/stupid/(P)/"
             edict = Edict.new
             edict.lines = [line]
-            edict.parse(line, 0)
+            edict.parseLine(line, 0)
             edict.vocab(0).should eql(v1)
             v2 = edict.vocab(0).clone
             edict.vocab(0).should eql(v2)

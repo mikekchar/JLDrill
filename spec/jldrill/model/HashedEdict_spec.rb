@@ -10,7 +10,7 @@ module JLDrill
 	        edict1.file.should eql("aFilename")
 	        edict2 = HashedEdict.new()
 	        edict2.should_not be_nil
-	        edict2.file.should be_nil
+	        edict2.file.should eql("")
 	    end
 	
     end
