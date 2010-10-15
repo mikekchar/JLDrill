@@ -17,7 +17,7 @@ module JLDrill::BrowseItems
     def Story.start
         super
         @mainContext.quiz = JLDrill::SampleQuiz.new.quiz
-        @mainContext.quiz.reset
+        @mainContext.quiz.resetContents
     end
     def Story.quiz
         @mainContext.quiz

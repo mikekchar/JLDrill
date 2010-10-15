@@ -68,6 +68,7 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
         it "should be able to read the file from disk" do
             tanaka = Tanaka.new
 			tanaka.load(File.join(Config::DATA_DIR, "tests/examples.utf"))
+            tanaka.parse
 
 			# It should dispose of the lines after parsing
 			tanaka.lines.should eql([])

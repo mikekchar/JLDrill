@@ -4,35 +4,38 @@ require 'jldrill/model/Problem'
 require 'jldrill/model/Quiz/Options'
 require 'jldrill/model/Contents'
 require 'jldrill/model/Quiz/Strategy'
+require 'jldrill/model/DataFile'
 require 'Context/Publisher'
 require 'jldrill/Version'
 
 module JLDrill
-    class Quiz
+    class Quiz < DataFile
 
         JLDRILL_HEADER_RE = /^(\d+\.\d+\.\d+)?-?LDRILL-SAVE (.*)/
         COMMENT_RE = /^\#[ ]?(.*)/
         VERSION_RE = /^(\d+)\.(\d+)\.(\d+)/
         JLDRILL_CANLOAD_RE = /^(\d+\.\d+\.\d+)?-?LDRILL-SAVE/
 
-        attr_reader :savename,  
-                    :needsSave, :info, :name, 
+        attr_reader :needsSave, :info, :name, 
                     :contents, :options, :currentProblem,
-                    :strategy, :publisher
-        attr_writer :savename, :info, :name, :currentProblem
+                    :strategy
+        attr_writer :info, :name, :currentProblem
 
         def initialize()
+            super
+        end
+
+        def reset
             @name = ""
-            @savename = ""
             @info = ""
-            @publisher = Context::Publisher.new(self)
             @options = Options.new(self)
             @contents = Contents.new(self)
             @strategy = Strategy.new(self)
             @currentProblem = nil
             @needsSave = false
-            
             @last = nil
+            update
+            super
         end
 
         def length
@@ -65,6 +68,12 @@ module JLDrill
 
         def updateLoad
             @publisher.update("load")
+        end
+
+        def setLoaded(bool)
+            if bool
+                updateLoad
+            end
         end
 
         def updateItemDeleted(item)
@@ -116,9 +125,9 @@ module JLDrill
 
         def save
             retVal = true
-            if (@savename != "") && (contents.length != 0) && @needsSave
+            if (@file != "") && (@contents.length != 0) && @needsSave
                 begin
-                    saveFile = File.new(@savename, "w")
+                    saveFile = File.new(@file, "w")
                 rescue
                     return false
                 end
@@ -136,8 +145,8 @@ module JLDrill
         # path.  If a filename hasn't been set, the file is
         # expanded using the applications current path.
         def useSavePath(filename)
-            if !@savename.empty?
-                dirname = File.expand_path(File.dirname(@savename))
+            if !@file.empty?
+                dirname = File.expand_path(File.dirname(@file))
                 return File.expand_path(filename, dirname)
             else
                 return File.expand_path(filename)
@@ -190,29 +199,16 @@ module JLDrill
             end
         end
 
-        def setup
-            # Save the publisher so that we continue to get updates
-            publisher = @publisher
-            initialize()
-            @publisher = publisher
-            # We've reinitialized the quiz, so tell everyone
-            updateLoad
-            update
+        def parseEntry
+            parseLine(@lines[@parsed])
+            @parsed += 1
         end
 
-        def parse(name, lines)
-            setup
-            
-            @savename = name
-            
-            # Don't update the status while we're loading the file
-            @publisher.block
-            lines.each do |line|
-                parseLine(line)
-            end
-            # Update status again
-            @publisher.unblock
-            
+        def parsedData
+            @contents
+        end
+
+        def finishedParsing
             # Need to sort the new set to deal with older files that
             # may not be sorted.
             @strategy.newSet.sort! do |x, y|
@@ -220,27 +216,27 @@ module JLDrill
             end
             # Resort the review set according to schedule
             reschedule
+            @name = shortFilename
             setNeedsSave(true)
-            updateLoad
-            return @contents.length > 0
+            update
+            super
         end
 
-        def load(file)
-            parse(file, IO.readlines(file))
-        end
-
-        def loadFromString(name, string)
-            parse(name, string.split("\n"))
+        def loadFromString(file, string)
+            reset
+            @file = file
+            @lines = string.split("\n")
+            parse
         end
 
         def loadFromDict(dict)
             if dict
                 # Don't update the status while we're loading the file
                 @publisher.block
-                setup
+                reset
                 @name = dict.shortFilename
                 dict.eachVocab do |vocab|
-                    contents.add(vocab, 0)
+                    @contents.add(vocab, 0)
                 end
                 reschedule
                 # Update status again
@@ -307,7 +303,7 @@ module JLDrill
         end
 
         # Resets the quiz back to it's original state
-        def reset
+        def resetContents
             @contents.reset()
             drill()
         end

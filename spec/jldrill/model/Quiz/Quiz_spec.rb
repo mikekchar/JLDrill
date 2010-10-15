@@ -27,7 +27,7 @@ module JLDrill
 		it "should load a file from memory" do
 		    quiz = Quiz.new
 		    quiz.loadFromString("SampleQuiz", @sampleQuiz.file)
-		    quiz.savename.should eql("SampleQuiz")
+		    quiz.file.should eql("SampleQuiz")
 		    quiz.name.should eql("Testfile")
 		    quiz.options.randomOrder.should be(true)
 		    quiz.options.promoteThresh.should be(4)
@@ -66,7 +66,7 @@ module JLDrill
 	    end
 	    
 	    it "should be able to reset the contents" do
-	        @quiz.reset
+	        @quiz.resetContents
 	        @quiz.contents.bins[0].length.should be(3)
 	        @quiz.contents.bins[1].length.should be(1)
 	        @quiz.contents.bins[2].length.should be(0)
@@ -77,13 +77,13 @@ module JLDrill
 	    end
 
         it "should renumber the contents when resetting" do
-            @quiz.reset
+            @quiz.resetContents
             @quiz.contents.bins[0][0].position = 5
             @quiz.contents.bins[0][1].position = 6
             @quiz.contents.bins[0][2].position = 6
             @quiz.contents.bins[1][0].position = 7
             @quiz.options.randomOrder = false
-            @quiz.reset
+            @quiz.resetContents
             # The first item will be drilled and therefore promoted to bin 1
             @quiz.contents.bins[1][0].position.should be(0)
             # The rest will be in bin 0, numbered sequentially
@@ -205,7 +205,7 @@ module JLDrill
 	    	@quiz.options.randomOrder = false
 	    	@quiz.options.promoteThresh = 1
             # Reset now does a drill()
-	        @quiz.reset	    
+	        @quiz.resetContents
 	    end
 	    
 	    it "should be able to create a new Problem" do
@@ -272,7 +272,7 @@ module JLDrill
             test2.schedule.lastReviewed.should be_nil
             test_incorrect
             @quiz.currentProblem.item.schedule.lastReviewed.should_not be_nil
-            @quiz.reset
+            @quiz.resetContents
             test1.schedule.lastReviewed.should be_nil
             test2.schedule.lastReviewed.should be_nil
         end
@@ -302,7 +302,7 @@ module JLDrill
         end
 
         it "should be able to find paths relative to the save name" do
-            @quiz.savename = "/usr/share/fake.jldrill"
+            @quiz.file = "/usr/share/fake.jldrill"
             @quiz.useSavePath("mydirectory/newfile").should eql("/usr/share/mydirectory/newfile")
             @quiz.useSavePath("../../newfile").should eql("/newfile")
         end

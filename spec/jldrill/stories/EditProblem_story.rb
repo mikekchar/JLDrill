@@ -69,7 +69,7 @@ module JLDrill::EditProblem
 
         it "should not accept a duplicate vocabulary" do
             Story.quiz.options.randomOrder = false
-            Story.quiz.reset
+            Story.quiz.resetContents
             # Since the quiz isn't random, this will select the first item
             Story.quiz.drill
             # Now we edit it
@@ -85,7 +85,7 @@ module JLDrill::EditProblem
 
         it "should accept an altered vocabulary" do
             Story.quiz.options.randomOrder = false
-            Story.quiz.reset
+            Story.quiz.resetContents
             # Since the quiz isn't random, this will select the first item
             Story.quiz.drill
             # Now we edit it

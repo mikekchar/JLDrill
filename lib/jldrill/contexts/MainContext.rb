@@ -132,7 +132,7 @@ module JLDrill
         end
 		
         def save
-		    if @quiz.savename.empty?
+		    if @quiz.file.empty?
 		        saveAs
 		    else
     		    if !@quiz.save
@@ -145,7 +145,7 @@ module JLDrill
 		def saveAs
 		    filename = @getFilenameContext.enter(self, GetFilenameContext::SAVE)
 		    if !filename.nil?
-		        @quiz.savename = filename
+		        @quiz.file = filename
 		        while !@quiz.save
                     print "Error: Can't save.  Try again.\n"
                 end
@@ -156,9 +156,11 @@ module JLDrill
 		    if !filename.nil?
                 if JLDrill::Quiz.drillFile?(filename)
                     quiz.load(filename)
+                    quiz.parse
                 else
                     dict = Edict.new
                     dict.load(filename)
+                    dict.parse
                     quiz.loadFromDict(dict)
                 end
                 # We need to resubscribe to the options in the new quiz
@@ -372,7 +374,7 @@ module JLDrill
         end
 		
 		def reset
-		    @quiz.reset
+		    @quiz.resetContents
 		end
 		
 		def showQuizInfo

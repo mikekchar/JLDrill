@@ -11,7 +11,7 @@ module JLDrill
 
         def initialize
             @publisher = Context::Publisher.new(self)
-            reset
+            self.reset
         end
 
         # Returns a reference to the parsed data item
@@ -39,14 +39,15 @@ module JLDrill
         # Sets the filename of the file and resets the data.
         def file=(filename)
             if @file != filename
-                reset
                 @file = filename
             end
         end
 
         # Indicate to the outside world that the file is loaded
         def setLoaded(bool)
-            @publisher.update("loaded")
+            if bool
+                @publisher.update("loaded")
+            end
         end
 
         # Returns true if there is no more data to parse
@@ -81,11 +82,11 @@ module JLDrill
             @parsed = 0
         end
 
-        # Load the file and parse it all at once
+        # Load in the file data, but don't parse it yet
 		def load(file)
+            reset
 			@file = file
 			readLines
-			parse
 		end
 
         # Parse the entire file all at once
@@ -104,6 +105,9 @@ module JLDrill
         # Parse a chunk of the file.  Size shows how many entries
         # to parse
 		def parseChunk(size)
+            # We don't want to get updated when we parse a large block of data
+            @publisher.block
+
 			last = @parsed + size
 			if last > @lines.size
 				last = @lines.size
@@ -111,6 +115,7 @@ module JLDrill
 			while @parsed < last do
                 parseEntry
 			end
+            @publisher.unblock
 
 			# If the parsing is finished dispose of the unparsed lines
 			finished = self.eof?

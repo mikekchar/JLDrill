@@ -38,8 +38,7 @@ module JLDrill
         
         def readFile
             if !getFile.nil?
-                getFile.file = getFilename
-                getFile.readLines
+                getFile.load(getFilename)
                 @mainView.idle_add do
                     eof = getFile.parseChunk(100)
                     @mainView.update(getFile.fraction)
