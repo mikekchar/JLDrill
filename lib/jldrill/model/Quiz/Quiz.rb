@@ -124,7 +124,7 @@ module JLDrill
         end
 
         def save
-            retVal = true
+            retVal = false
             if (@file != "") && (@contents.length != 0) && @needsSave
                 begin
                     saveFile = File.new(@file, "w")
