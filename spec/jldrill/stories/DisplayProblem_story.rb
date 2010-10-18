@@ -2,6 +2,7 @@ require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/storyFunctionality/Gtk'
 require 'jldrill/spec/storyFunctionality/SampleQuiz'
 require 'jldrill/contexts/DisplayProblemContext'
+require 'jldrill/views/test/MainWindowView'
 require 'jldrill/views/test/CommandView'
 require 'jldrill/views/test/ProblemView'
 require 'jldrill/views/test/QuizStatusView'
@@ -60,15 +61,14 @@ module JLDrill::QuestionAndAnswerAreDisplayed
             Story.shutdown
         end
         
-        # Note: In the next two tests newProblem is received 3 times.
-        # That's because it does it when the quiz is reset, when
-        # the quiz is loaded and then when the first problem is
-        # formed.
+        # Note: In the next two tests newProblem is received 2 times.
+        # That's because it does it when the quiz is loaded and then 
+        # when the first problem is formed.
 
         it "should display a problem when a file is loaded" do
             Story.setup(JLDrill::Test)
             Story.start
-            Story.view.should_receive(:newProblem).exactly(3).times
+            Story.view.should_receive(:newProblem).exactly(2).times
             Story.loadQuiz
             Story.shutdown
         end
@@ -76,7 +76,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
         it "should refresh the display when the current vocab has been edited" do
             Story.setup(JLDrill::Test)
             Story.start
-            Story.view.should_receive(:newProblem).exactly(3).times
+            Story.view.should_receive(:newProblem).exactly(2).times
             Story.view.should_receive(:updateProblem).exactly(1).times
             Story.loadQuiz
             Story.mainContext.quiz.currentProblem.should_not be_nil
@@ -121,15 +121,14 @@ module JLDrill::QuestionAndAnswerAreDisplayed
     describe Story.stepName("The ProblemView contains ItemHintsView.") do
 
         # Note: In the next test newProblem is received 3 times.
-        # That's because it does it when the quiz is reset, when
-        # the quiz is loaded and then when the first problem is
-        # formed.
+        # That's because it does it when the quiz is loaded and
+        # then when the first problem is formed.
 
         it "notifies the ItemHintsView when there is a new problem" do
             Story.setup(JLDrill::Test)
             Story.start
             Story.view.itemHints.should_not be_nil
-            Story.view.itemHints.should_receive(:newProblem).exactly(3).times
+            Story.view.itemHints.should_receive(:newProblem).exactly(2).times
             Story.loadQuiz
             Story.shutdown
         end
