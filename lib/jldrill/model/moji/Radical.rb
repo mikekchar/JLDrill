@@ -1,3 +1,5 @@
+require 'jldrill/model/DataFile'
+
 module JLDrill
 
     # A radical (part of a kanji character).
@@ -102,4 +104,23 @@ module JLDrill
 		    self.join("\n") + "\n"
 		end
 	end
+
+    class RadicalFile < DataFile
+        attr_reader :radicalList
+        attr_writer :radicalList
+
+        def initialize
+            super
+            @radicalList = RadicalList.new
+        end
+
+        def parsedData
+            @radicalList
+        end
+
+        def parser
+            @radicalList
+        end
+    end
+
 end

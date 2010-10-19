@@ -5,29 +5,51 @@ require 'jldrill/contexts/FileProgressContext'
 
 module JLDrill
 
-	class LoadTanakaContext < FileProgressContext
+	class LoadKanjiContext < FileProgressContext
+
+        attr_reader :kanjiFile, :radicalsFile, :kanaFile
+        attr_writer :kanjiFile, :radicalsFile, :kanaFile
 		
 		def initialize(viewBridge)
 			super(viewBridge)
+		    @kanjiFile = Config::getDataDir + "/dict/rikaichan/kanji.dat"
+            @radicalsFile = Config::getDataDir + "/dict/rikaichan/radicals.dat"
+            @kanaFile = Config::getDataDir + "/dict/Kana/kana.dat"
+            @pass = 0
 		end
 
-        # Returns the filename (without the path) of the dictionary.
-        def dictionaryName
-            if !@parent.nil? && !@parent.quiz.nil? && 
-                !@parent.quiz.options.dictionary.nil?
-                return @parent.quiz.options.tanaka
+        # Gives each filename one after another
+        def getFilename
+            if @pass == 0
+                return @radicalsFile
+            elsif @pass == 1
+                return @kanjiFile
+            elsif @pass == 2
+                return @kanaFile
             else
-                return Config::TANAKA_NAME
+                return nil
             end
         end
 
-        # Returns the filename of the dictionary including the path
-        def getFilename
-            return File.expand_path(dictionaryName, Config::TANAKA_DIR)
+        def getFile
+            if @pass == 0
+                return @parent.radicals
+            elsif @pass == 1
+                return @parent.kanji
+            elsif @pass == 2
+                return @parent.kana
+            else
+                return nil
+            end
         end
 
-        def getFile
-            return @parent.tanaka
+        def finishParsing
+            # Recursively load the files until they are all finished
+            @pass += 1
+            if getFilename != nil
+                self.enter(@parent)
+            end
         end
+
     end		
 end

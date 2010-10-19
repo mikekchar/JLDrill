@@ -19,6 +19,7 @@ require 'jldrill/contexts/ShowInfoContext'
 require 'jldrill/contexts/ShowAllVocabularyContext'
 require 'jldrill/contexts/LoadTanakaContext'
 require 'jldrill/contexts/LoadFileContext'
+require 'jldrill/contexts/LoadKanjiContext'
 require 'jldrill/model/Acknowlegements'
 require 'jldrill/contexts/ShowAboutContext'
 require 'jldrill/contexts/ShowExamplesContext'
@@ -38,7 +39,7 @@ module JLDrill
 	                :showInfoContext, :showAllVocabularyContext,
                     :showAboutContext, :editVocabularyContext,
 					:loadTanakaContext, :showExamplesContext,
-                    :loadFileContext,
+                    :loadFileContext, :loadKanjiContext,
 	                :reference, :quiz, :kanji, :radicals, :kana,
                     :inTests, :tanaka
 
@@ -62,10 +63,11 @@ module JLDrill
 			@loadTanakaContext = LoadTanakaContext.new(viewBridge)
 			@showExamplesContext = ShowExamplesContext.new(viewBridge)
             @loadFileContext = LoadFileContext.new(viewBridge)
+            @loadKanjiContext = LoadKanjiContext.new(viewBridge)
 			@reference = HashedEdict.new
-			@kanji = nil
-			@radicals = nil
-            @kana = nil
+			@kanji = KanjiFile.new
+			@radicals = RadicalFile.new
+            @kana = KanaFile.new
 			@quiz = Quiz.new
             # The quiz doesn't need to be saved
             @quiz.setNeedsSave(false)
@@ -111,12 +113,12 @@ module JLDrill
 
 		def enter(parent)
 			super(parent)
-            loadKanji unless @inTests
 			@runCommandContext.enter(self)
 			@displayProblemContext.enter(self)
 			@displayQuizStatusContext.enter(self)
             parseCommandLineOptions
             @quiz.options.subscribe(self)
+            loadKanji unless @inTests
 		end
 				
 		def exit
@@ -221,12 +223,7 @@ module JLDrill
 
 		
 		def loadKanji
-		    kanjiFile = Config::getDataDir + "/dict/rikaichan/kanji.dat"
-            radicalsFile = Config::getDataDir + "/dict/rikaichan/radicals.dat"
-            kanaFile = Config::getDataDir + "/dict/Kana/kana.dat"
-		    @radicals = RadicalList.fromFile(radicalsFile)
-			@kanji = KanjiList.fromFile(kanjiFile)
-            @kana = KanaList.fromFile(kanaFile)
+            @loadKanjiContext.enter(self) unless @loadKanjiContext.isEntered?
 		end
 		
 		def setOptions

@@ -1,4 +1,5 @@
 require 'jldrill/model/moji/Radical'
+require 'jldrill/model/DataFile'
 
 module JLDrill
 
@@ -145,4 +146,23 @@ module JLDrill
 			self.join("\n")
 		end
 	end
+
+    class KanjiFile < DataFile
+        attr_reader :kanjiList
+        attr_writer :kanjiList
+
+        def initialize
+            super
+            @kanjiList = KanjiList.new
+        end
+
+        def parsedData
+            @kanjiList
+        end
+
+        def parser
+            @kanjiList
+        end
+    end
+
 end

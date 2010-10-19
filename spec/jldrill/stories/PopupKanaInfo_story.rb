@@ -2,10 +2,12 @@ require 'jldrill/spec/StoryMemento'
 require 'jldrill/model/moji/Kana'
 require 'jldrill/model/Config'
 require 'jldrill/contexts/DisplayProblemContext'
+require 'jldrill/views/test/MainWindowView'
 require 'jldrill/views/test/CommandView'
 require 'jldrill/views/test/ProblemView'
 require 'jldrill/views/test/QuizStatusView'
 require 'jldrill/views/test/ItemHintView'
+require 'jldrill/views/test/FileProgress'
 
 module JLDrill::PopupKanaInfo
 
@@ -72,9 +74,9 @@ module JLDrill::PopupKanaInfo
 
 		it "should be able to parse a file on disk" do
 			list = JLDrill::KanaList.fromFile(JLDrill::Config::getDataDir + 
-                                              "/dict/Kana/kana.dat")
+                                              "/tests/kana.dat")
 			list.should_not be(nil)
-			list.size.should be(159)
+			list.size.should be(100)
 			kana = list.findChar("じ")
 			kana.should_not be_nil
 		end
@@ -85,16 +87,20 @@ module JLDrill::PopupKanaInfo
         it "should load the kana info" do
             Story.setup(JLDrill::Test)
             Story.start
-            Story.mainContext.kana.should be_nil
+            Story.mainContext.loadKanjiContext.kanaFile = JLDrill::Config::getDataDir + "/tests/kanji.dat"
+            Story.mainContext.loadKanjiContext.radicalsFile = JLDrill::Config::getDataDir + "/tests/radicals.dat"
+            Story.mainContext.loadKanjiContext.kanjiFile = JLDrill::Config::getDataDir + "/tests/kanji.dat"
             Story.mainContext.loadKanji
-            Story.mainContext.kana.should_not be_nil
-            Story.mainContext.kana.size.should be(159)
+            Story.mainContext.kana.kanaList.size.should be(100)
             Story.shutdown
         end
 
         it "should be able to find the kana items" do
             Story.setup(JLDrill::Test)
             Story.start
+            Story.mainContext.loadKanjiContext.kanaFile = JLDrill::Config::getDataDir + "/tests/kana.dat"
+            Story.mainContext.loadKanjiContext.radicalsFile = JLDrill::Config::getDataDir + "/tests/radicals.dat"
+            Story.mainContext.loadKanjiContext.kanjiFile = JLDrill::Config::getDataDir + "/tests/kanji.dat"
             Story.mainContext.loadKanji
             oString = JLDrill::Kana.parse("お|S3|o|oh||tone,low\n").to_s
             Story.context.kanjiInfo("お").should eql(oString)

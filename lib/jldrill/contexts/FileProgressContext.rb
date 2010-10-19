@@ -71,8 +71,8 @@ module JLDrill
         end
 
 		def exit
-            finishParsing
 		    super
+            finishParsing
 		end
     end   
 end
