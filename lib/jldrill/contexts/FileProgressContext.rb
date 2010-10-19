@@ -53,8 +53,8 @@ module JLDrill
             if !parent.nil?
                 @parent = parent
 
-                if(!getFile.loaded? || 
-                   (getFile.file != getFilename))
+                if (!getFilename.nil?) && 
+                    (!getFile.loaded? || (getFile.file != getFilename))
                     super(parent)
                     readFile
                     # The view will exit the context when the file

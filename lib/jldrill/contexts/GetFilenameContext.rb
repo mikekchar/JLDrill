@@ -52,8 +52,11 @@ module JLDrill
 		    super(parent)
 		    @mainView.directory = @directory
     		@mainView.run(type)
-    		@filename = @mainView.filename
-    		@directory = @mainView.directory
+    		filename = @mainView.filename
+            if !filename.nil?
+                @filename = filename
+                @directory = @mainView.directory
+            end
     		self.exit
     		@filename
 		end

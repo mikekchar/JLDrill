@@ -30,6 +30,11 @@ module JLDrill
             return @filename
         end
 
+        def enter(parent)
+            @gotFilename = false
+            super(parent)
+        end
+
         # Returns the quiz file if the filename refers to a quiz
         # or and Edict file if it doesn't
         def getFile
