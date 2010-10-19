@@ -18,6 +18,7 @@ require 'jldrill/contexts/PromptForDeleteContext'
 require 'jldrill/contexts/ShowInfoContext'
 require 'jldrill/contexts/ShowAllVocabularyContext'
 require 'jldrill/contexts/LoadTanakaContext'
+require 'jldrill/contexts/LoadFileContext'
 require 'jldrill/model/Acknowlegements'
 require 'jldrill/contexts/ShowAboutContext'
 require 'jldrill/contexts/ShowExamplesContext'
@@ -37,6 +38,7 @@ module JLDrill
 	                :showInfoContext, :showAllVocabularyContext,
                     :showAboutContext, :editVocabularyContext,
 					:loadTanakaContext, :showExamplesContext,
+                    :loadFileContext,
 	                :reference, :quiz, :kanji, :radicals, :kana,
                     :inTests, :tanaka
 
@@ -59,6 +61,7 @@ module JLDrill
 			@showAboutContext = ShowAboutContext.new(viewBridge)
 			@loadTanakaContext = LoadTanakaContext.new(viewBridge)
 			@showExamplesContext = ShowExamplesContext.new(viewBridge)
+            @loadFileContext = LoadFileContext.new(viewBridge)
 			@reference = HashedEdict.new
 			@kanji = nil
 			@radicals = nil
@@ -152,38 +155,8 @@ module JLDrill
 		    end
 		end
 
-        def loadFile(filename)
-		    if !filename.nil?
-                if JLDrill::Quiz.drillFile?(filename)
-                    quiz.load(filename)
-                    quiz.parse
-                else
-                    dict = Edict.new
-                    dict.load(filename)
-                    dict.parse
-                    quiz.loadFromDict(dict)
-                end
-                # We need to resubscribe to the options in the new quiz
-                # and realize that the options may have changed.
-                @quiz.options.subscribe(self)
-                optionsUpdated(@quiz.options)
-                # We've just loaded the file, so it doesn't need to be saved
-                @quiz.setNeedsSave(false)
-                return true
-            else
-                return false
-            end
-        end	
-				
-		def loadQuiz(quiz)
-		    filename = @getFilenameContext.enter(self, GetFilenameContext::OPEN)
-            return loadFile(filename)
-		end
-		
 		def openFile
-		    if loadQuiz(@quiz)
-		        @quiz.drill
-            end
+            @loadFileContext.enter(self) unless @loadFileContext.isEntered?
 		end
 		
 		def appendFile

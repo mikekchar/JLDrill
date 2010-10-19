@@ -6,6 +6,8 @@ require 'jldrill/views/test/CommandView'
 require 'jldrill/views/test/ProblemView'
 require 'jldrill/views/test/QuizStatusView'
 require 'jldrill/views/test/ItemHintView'
+require 'jldrill/views/test/FilenameSelectorView'
+require 'jldrill/views/test/FileProgress'
 
 module JLDrill
 
@@ -43,7 +45,9 @@ module JLDrill
 		
 		it "should not try to open files if it doesn't get a filename" do
 		    test_openMainView
-		    @context.getFilenameContext.should_receive(:enter).with(@context, JLDrill::GetFilenameContext::OPEN).and_return(nil)
+            loadFileContext = @context.loadFileContext
+            getFilenameContext = loadFileContext.getFilenameContext
+		    getFilenameContext.should_receive(:enter).with(loadFileContext, JLDrill::GetFilenameContext::OPEN).and_return(nil)
 		    @context.quiz.should_not_receive(:load)
 		    @context.quiz.should_not_receive(:loadFromDict)
 		    @context.mainView.should_not_receive(:displayQuestion)
@@ -53,7 +57,9 @@ module JLDrill
 		it "should load drill files as drill files" do
 		    test_openMainView
 		    filename = "data/jldrill/quiz/katakana.jldrill"
-		    @context.getFilenameContext.should_receive(:enter).with(@context, JLDrill::GetFilenameContext::OPEN).and_return(filename)
+            loadFileContext = @context.loadFileContext
+            getFilenameContext = loadFileContext.getFilenameContext
+		    getFilenameContext.should_receive(:enter).with(loadFileContext, JLDrill::GetFilenameContext::OPEN).and_return(filename)
 		    @context.quiz.should_receive(:load).with(filename)
 		    # Because the quiz hasn't actually been loaded, we need to fake the
 		    # drill here.
@@ -64,7 +70,9 @@ module JLDrill
 		it "should try to load any other file as an edict file" do
 		    test_openMainView
 		    filename = "data/jldrill/dict/Kana/katakana.utf"
-		    @context.getFilenameContext.should_receive(:enter).with(@context, JLDrill::GetFilenameContext::OPEN).and_return(filename)
+            loadFileContext = @context.loadFileContext
+            getFilenameContext = loadFileContext.getFilenameContext
+		    getFilenameContext.should_receive(:enter).with(loadFileContext, JLDrill::GetFilenameContext::OPEN).and_return(filename)
 		    @context.quiz.should_receive(:loadFromDict)
 		    # Because the dict hasn't actually been loaded, we need to fake the
 		    # drill here.

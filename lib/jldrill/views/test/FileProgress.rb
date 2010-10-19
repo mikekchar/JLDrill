@@ -20,6 +20,8 @@ module JLDrill::Test
             while !block.call
                 @calls += 1
             end
+            # The view should exit the context when it is finished loading
+            @context.exit
         end
     end
 end

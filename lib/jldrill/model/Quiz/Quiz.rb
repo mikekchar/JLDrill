@@ -23,6 +23,8 @@ module JLDrill
 
         def initialize()
             super
+            # Make the file progress indicator report every 10 lines
+            @stepSize = 10
         end
 
         def reset

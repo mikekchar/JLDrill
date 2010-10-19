@@ -6,11 +6,13 @@ module JLDrill
     # for having a file which can be read in the background
     # in JLDrill.
     class DataFile
-        attr_reader :file, :lines, :parsed, :publisher
-        attr_writer :lines
+        attr_reader :file, :lines, :parsed, :publisher, :stepSize
+        attr_writer :lines, :stepSize
 
         def initialize
             @publisher = Context::Publisher.new(self)
+            # Default to reporting every 100 lines
+            @stepSize = 100
             self.reset
         end
 

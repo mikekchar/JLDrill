@@ -45,6 +45,10 @@ module JLDrill
             total
         end
 
+        def size
+            length
+        end
+
         # Add an item to a bin
         def addItem(item, bin)
             item.bin = bin

@@ -37,10 +37,12 @@ module JLDrill
         end
         
         def readFile
-            if !getFile.nil?
-                getFile.load(getFilename)
+            eof = false
+            filename = getFilename()
+            if !filename.nil? && !getFile.nil?
+                getFile.load(filename)
                 @mainView.idle_add do
-                    eof = getFile.parseChunk(100)
+                    eof = getFile.parseChunk(getFile.stepSize)
                     @mainView.update(getFile.fraction)
                     eof
                 end
@@ -63,7 +65,13 @@ module JLDrill
             end
 		end
 
+        # If there is something that needs to be done after the file
+        # has completely finished loading and parsing, do it here.
+        def finishParsing
+        end
+
 		def exit
+            finishParsing
 		    super
 		end
     end   
