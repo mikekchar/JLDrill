@@ -1,3 +1,13 @@
+jldrill (0.4.2-6) unstable; urgency=low
+
+  * There are now progress bars for everything that loads.  I will
+    have to do some testing to see if there are any side effects
+    that you can have (like saving while you are loading).  The 
+    downside to the progress bars is that it slows down loading.  But
+    I think the benefit outweighs the disadvantage. 
+
+ -- Mike Charlton <mikekchar@gmail.com>  Mon, 19 Oct 2010 15:43:00 +0900
+
 jldrill (0.4.2-5) unstable; urgency=low
 
   * In the middle of refactoring.  But if you delete a view from
