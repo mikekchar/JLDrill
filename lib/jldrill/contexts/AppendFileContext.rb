@@ -1,65 +1,44 @@
 require 'Context/Context'
 require 'Context/Bridge'
 require 'jldrill/model/Config'
-require 'jldrill/contexts/FileProgressContext'
-require 'jldrill/contexts/GetFilenameContext'
+require 'jldrill/contexts/LoadQuizContext'
 
 module JLDrill
 
-	class AppendFileContext < FileProgressContext
+	class AppendFileContext < Context::Context
 
-        attr_reader :getFilenameContext
-		
 		def initialize(viewBridge)
 			super(viewBridge)
-            @filename = nil
-            @gotFilename = false
-            @dict = nil
-            @getFilenameContext = GetFilenameContext.new(@viewBridge)
-            # Set the initial directory to the quiz Data dir
-			@getFilenameContext.directory = File.join(JLDrill::Config::DATA_DIR, "quiz")
+            @loadQuizContext = LoadQuizContext.new(@viewBridge)
 		end
 
-        # Returns the filename of the dictionary including the path
-        def getFilename
-            if !@gotFilename
-                @filename = getFilenameContext.enter(self, 
-                                                     GetFilenameContext::OPEN)
-                @gotFilename = true
-            end
-            return @filename
+        def createViews
+            @mainView =  @viewBridge.VBoxView.new(self)
         end
 
-        def enter(parent)
-            @gotFilename = false
+        def destroyViews
+            @mainView = nil
+        end
+
+        def exitAppendFileContext
+            self.exit
+        end
+
+        def loadAsQuiz(quiz, filename)
+            @loadFileContext.onExit do
+                exitLoadQuizContext
+            end
+            @loadFileContext.enter(self, quiz, filename)
+        end
+
+        def enter(parent, quiz)
             super(parent)
-        end
-
-        # Returns the quiz file if the filename refers to a quiz
-        # or and Edict file if it doesn't
-        def getFile
-            retFile = @parent.quiz
-            if !getFilename.nil? &&  !JLDrill::Quiz.drillFile?(getFilename)
-                @dict = Edict.new
-                retFile =  @dict
+            newQuiz = Quiz.new
+            @loadQuizContext.onExit do
+                quiz.append(newQuiz)
+                exitAppendFileContext
             end
-            return retFile
-        end
-
-        def finishParsing
-            if !@dict.nil?
-                @parent.quiz.loadFromDict(@dict)
-                @dict = nil
-            end
-            
-            # We need to resubscribe to the options in the new quiz
-            # and realize that the options may have changed.
-            @parent.quiz.options.subscribe(@parent)
-            @parent.optionsUpdated(@parent.quiz.options)
-
-            @parent.quiz.drill
-            @filename = nil
-            @gotFilename = false
+            @loadQuizContext.enter(self, newQuiz)
         end
     end		
 end

@@ -20,6 +20,7 @@ require 'jldrill/contexts/ShowAllVocabularyContext'
 require 'jldrill/contexts/LoadTanakaContext'
 require 'jldrill/contexts/LoadQuizContext'
 require 'jldrill/contexts/LoadKanjiContext'
+require 'jldrill/contexts/AppendFileContext'
 require 'jldrill/model/Acknowlegements'
 require 'jldrill/contexts/ShowAboutContext'
 require 'jldrill/contexts/ShowExamplesContext'
@@ -40,6 +41,7 @@ module JLDrill
                     :showAboutContext, :editVocabularyContext,
 					:loadTanakaContext, :showExamplesContext,
                     :loadQuizContext, :loadKanjiContext,
+                    :appendFileContext,
 	                :reference, :quiz, :kanji, :radicals, :kana,
                     :inTests, :tanaka
 
@@ -64,6 +66,7 @@ module JLDrill
 			@showExamplesContext = ShowExamplesContext.new(viewBridge)
             @loadQuizContext = LoadQuizContext.new(viewBridge)
             @loadKanjiContext = LoadKanjiContext.new(viewBridge)
+            @appendFileContext = AppendFileContext.new(viewBridge)
 			@reference = HashedEdict.new
 			@kanji = KanjiFile.new
 			@radicals = RadicalFile.new
@@ -169,10 +172,9 @@ module JLDrill
 		end
 		
 		def appendFile
-		    newQuiz = Quiz.new
-		    if loadQuiz(newQuiz)
-                @quiz.append(newQuiz)
-		    end
+            if !@appendFileContext.isEntered?
+                @appendFileContext.enter(self, @quiz)
+            end
 		end
 		
 		def promptForSaveAnd(&block)

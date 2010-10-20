@@ -8,8 +8,7 @@ module JLDrill
 
 	class LoadQuizContext < Context::Context
 
-        attr_reader :quiz, :getFilenameContext
-        attr_writer :quiz
+        attr_reader :getFilenameContext
 		
 		def initialize(viewBridge)
 			super(viewBridge)
