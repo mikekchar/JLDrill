@@ -20,11 +20,12 @@ module JLDrill
                                                       "quiz")
 		end
 
-        # The context has no mainview of its own.  Use the parent's
         def createViews
-            if !@parent.nil?
-                @mainView = @parent.mainView
-            end
+            @mainView =  @viewBridge.VBoxView.new(self)
+        end
+
+        def destroyViews
+            @mainView = nil
         end
 
         def exitLoadQuizContext
