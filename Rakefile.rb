@@ -19,7 +19,7 @@ rubyforge_maintainer = "mikekchar@rubyforge.org"
 
 # Dependencies
 context_name = "context"
-context_version = "0.0.20"
+context_version = "0.0.21"
 context_directory = "../context"
 
 # Files that will be packaged

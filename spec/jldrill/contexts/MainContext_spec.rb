@@ -8,6 +8,7 @@ require 'jldrill/views/test/QuizStatusView'
 require 'jldrill/views/test/ItemHintView'
 require 'jldrill/views/test/FilenameSelectorView'
 require 'jldrill/views/test/FileProgress'
+require 'jldrill/views/test/VBoxView'
 
 module JLDrill
 
