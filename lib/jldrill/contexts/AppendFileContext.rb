@@ -2,6 +2,7 @@ require 'Context/Context'
 require 'Context/Bridge'
 require 'jldrill/model/Config'
 require 'jldrill/contexts/LoadQuizContext'
+require 'jldrill/contexts/MergeQuizContext'
 
 module JLDrill
 
@@ -10,6 +11,7 @@ module JLDrill
 		def initialize(viewBridge)
 			super(viewBridge)
             @loadQuizContext = LoadQuizContext.new(@viewBridge)
+            @mergeQuizContext = MergeQuizContext.new(@viewBridge)
 		end
 
         def createViews
@@ -24,19 +26,17 @@ module JLDrill
             self.exit
         end
 
-        def loadAsQuiz(quiz, filename)
-            @loadFileContext.onExit do
-                exitLoadQuizContext
-            end
-            @loadFileContext.enter(self, quiz, filename)
-        end
-
         def enter(parent, quiz)
             super(parent)
             newQuiz = Quiz.new
             @loadQuizContext.onExit do
-                quiz.append(newQuiz)
-                exitAppendFileContext
+                @mergeQuizContext.onExit do
+                    if quiz.currentProblem.nil?
+                        quiz.drill
+                    end
+                    exitAppendFileContext
+                end
+                @mergeQuizContext.enter(self, quiz, newQuiz)
             end
             @loadQuizContext.enter(self, newQuiz)
         end

@@ -1,3 +1,10 @@
+jldrill (0.4.2-9) unstable; urgency=low
+
+  * Add file progress when adding edict entries into the quiz.
+    Add file progress when merging a new quiz file using append.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Wed, 20 Oct 2010 15:12:00 +0900
+
 jldrill (0.4.2-8) unstable; urgency=low
 
   * Back to full functionality.  Append file now works again.
