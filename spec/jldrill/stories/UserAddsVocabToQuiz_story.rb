@@ -4,6 +4,7 @@ require 'jldrill/views/gtk/VocabularyView'
 require 'jldrill/views/gtk/MainWindowView'
 require 'jldrill/views/gtk/CommandView'
 require 'jldrill/views/gtk/ProblemView'
+require 'jldrill/views/gtk/ItemHintView'
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/views/test/FileProgress'
 require 'jldrill/views/test/MainWindowView'
@@ -11,6 +12,8 @@ require 'jldrill/views/test/VocabularyView'
 require 'jldrill/views/test/ProblemView'
 require 'jldrill/views/test/QuizStatusView'
 require 'jldrill/views/test/ItemHintView'
+require 'jldrill/views/test/CommandView'
+require 'jldrill/views/test/VBoxView'
 
 module JLDrill::UserAddsVocabToQuiz
 

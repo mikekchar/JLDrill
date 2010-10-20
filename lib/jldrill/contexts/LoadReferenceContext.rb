@@ -1,32 +1,59 @@
 require 'Context/Context'
 require 'Context/Bridge'
 require 'jldrill/model/Config'
-require 'jldrill/contexts/FileProgressContext'
+require 'jldrill/contexts/LoadFileContext'
 
 module JLDrill
 
-	class LoadReferenceContext < FileProgressContext
+    # Load the reference dictionary
+	class LoadReferenceContext < Context::Context
 		
 		def initialize(viewBridge)
 			super(viewBridge)
+            @loadFileContext = LoadFileContext.new(@viewBridge)
 		end
 
-        def dictionaryName
-            if !@parent.quiz.nil? && 
-                !@parent.quiz.options.dictionary.nil?
-                return @parent.quiz.options.dictionary
+        def createViews
+            @mainView =  @viewBridge.VBoxView.new(self)
+        end
+
+        def destroyViews
+            @mainView = nil
+        end
+
+        def dictionaryName(options)
+            if !options.nil? && !options.dictionary.nil?
+                return options.dictionary
             else
                 return Config::DICTIONARY_NAME
             end
         end
 
         # Returns the filename of the dictionary including the path
-        def getFilename
-            return File.expand_path(dictionaryName, Config::DICTIONARY_DIR)
+        def getFilename(options)
+            return File.expand_path(dictionaryName(options), 
+                                    Config::DICTIONARY_DIR)
         end
 
         def getFile
             return @parent.reference
         end
+
+        def loadReference(reference, filename)
+            @loadFileContext.onExit do
+               exitLoadReferenceContext 
+            end
+            @loadFileContext.enter(self, reference, filename)
+        end
+
+        def exitLoadReferenceContext
+            self.exit
+        end
+
+        def enter(parent, reference, options)
+            super(parent)
+            loadReference(reference, getFilename(options))
+        end
+
     end
 end

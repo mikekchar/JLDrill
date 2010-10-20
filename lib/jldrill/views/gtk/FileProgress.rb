@@ -1,10 +1,10 @@
-require 'jldrill/contexts/LoadReferenceContext'
+require 'jldrill/contexts/FileProgressContext'
 require 'jldrill/views/gtk/widgets/ProgressBar'
 require 'gtk2'
 
 module JLDrill::Gtk
 
-	class FileProgress < JLDrill::LoadReferenceContext::FileProgress
+	class FileProgress < JLDrill::FileProgressContext::FileProgress
 	
         attr_reader :progressWindow
         	

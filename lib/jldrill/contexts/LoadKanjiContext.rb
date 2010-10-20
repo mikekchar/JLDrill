@@ -1,7 +1,7 @@
 require 'Context/Context'
 require 'Context/Bridge'
 require 'jldrill/model/Config'
-require 'jldrill/contexts/FileProgressContext'
+require 'jldrill/contexts/LoadFileContext'
 
 module JLDrill
 

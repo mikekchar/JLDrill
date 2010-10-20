@@ -133,11 +133,11 @@ module JLDrill::UserLoadsDictionary
             end
             Story.mainContext.loadReference
 
-            Story.context.dictionaryName.should be(JLDrill::Config::DICTIONARY_NAME)
+            Story.context.dictionaryName(options).should be(JLDrill::Config::DICTIONARY_NAME)
             options.dictionary = "tempDictionary"
-            Story.context.dictionaryName.should eql("tempDictionary")
+            Story.context.dictionaryName(options).should eql("tempDictionary")
 
-            Story.context.getFilename.should eql(File.join(JLDrill::Config::DICTIONARY_DIR, "tempDictionary"))
+            Story.context.getFilename(options).should eql(File.join(JLDrill::Config::DICTIONARY_DIR, "tempDictionary"))
             Story.context.exit
         end
 

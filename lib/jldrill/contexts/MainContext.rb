@@ -217,7 +217,10 @@ module JLDrill
 		end
 		
 		def loadReference
-		    @loadReferenceContext.enter(self) unless @loadReferenceContext.isEntered?
+            if !@loadReferenceContext.isEntered?
+                @loadReferenceContext.enter(self, 
+                                            @reference, @quiz.options)
+            end
 		end
 
 		def loadTanaka

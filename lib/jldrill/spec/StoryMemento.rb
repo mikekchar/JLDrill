@@ -36,7 +36,7 @@ module JLDrill
         def useTestDictionary
             # Override with the small test dictionary
             rc = @mainContext.loadReferenceContext
-			def rc.dictionaryName
+			def rc.dictionaryName(options)
 				testsDir = File.join(JLDrill::Config::DATA_DIR, "tests")
 				return File.join(testsDir, "edict.utf")
 			end
