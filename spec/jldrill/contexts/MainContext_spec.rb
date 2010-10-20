@@ -68,18 +68,5 @@ module JLDrill
 		    @context.openFile
 		end
 		
-		it "should try to load any other file as an edict file" do
-		    test_openMainView
-		    filename = "data/jldrill/dict/Kana/katakana.utf"
-            loadQuizContext = @context.loadQuizContext
-            getFilenameContext = loadQuizContext.getFilenameContext
-		    getFilenameContext.should_receive(:enter).with(loadQuizContext, JLDrill::GetFilenameContext::OPEN).and_return(filename)
-		    @context.quiz.should_receive(:loadFromDict)
-		    # Because the dict hasn't actually been loaded, we need to fake the
-		    # drill here.
-		    @context.quiz.should_receive(:drill).and_return("Fake")
-		    @context.openFile
-		end
-
 	end
 end
