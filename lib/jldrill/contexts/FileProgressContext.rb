@@ -48,22 +48,28 @@ module JLDrill
                 end
             end
         end
-        
-		def enter(parent)
+       
+        def isValid?(parent)
+            retVal = false
             if !parent.nil?
-                @parent = parent
-
                 if (!getFilename.nil?) && 
                     (!getFile.loaded? || (getFile.file != getFilename))
-                    super(parent)
-                    readFile
-                    # The view will exit the context when the file
-                    # has finished loading.  This is because we
-                    # can't exit the context until the idle process
-                    # is removed, and this can only be done by the view.
+                    retVal = true
                 end
             end
-		end
+            return retVal
+        end
+
+		def enter(parent)
+            if isValid?(parent)
+                super(parent)
+                readFile
+                # The view will exit the context when the file
+                # has finished loading.  This is because we
+                # can't exit the context until the idle process
+                # is removed, and this can only be done by the view.
+            end
+        end
 
 		def exit
 		    super

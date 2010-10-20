@@ -3,6 +3,7 @@ require 'Context/Bridge'
 require 'jldrill/model/Config'
 require 'jldrill/contexts/LoadFileContext'
 require 'jldrill/contexts/GetFilenameContext'
+require 'jldrill/contexts/LoadQuizFromEdictContext.rb'
 
 module JLDrill
 
@@ -17,6 +18,7 @@ module JLDrill
             # Set the initial directory to the quiz Data dir
 			@getFilenameContext.directory = File.join(JLDrill::Config::DATA_DIR,
                                                       "quiz")
+            @loadQuizFromEdictContext = LoadQuizFromEdictContext.new(@viewBridge)
 		end
 
         def createViews
@@ -34,8 +36,10 @@ module JLDrill
         def loadAsEdict(quiz, filename)
             edict = Edict.new
             @loadFileContext.onExit do
-                quiz.loadFromDict(edict)
-                exitLoadQuizContext
+                @loadQuizFromEdictContext.onExit do
+                    exitLoadQuizContext
+                end
+                @loadQuizFromEdictContext.enter(self, quiz, edict)
             end
             @loadFileContext.enter(self, edict, filename)
         end
