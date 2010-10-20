@@ -225,9 +225,16 @@ module JLDrill
 
 		def loadTanaka
 			if @tanaka.loaded?
-				@showExamplesContext.enter(self) unless @showExamplesContext.isEntered?
+                if !@showExamplesContext.isEntered
+                    @showExamplesContext.enter(self)
+                end
 			else
-				@loadTanakaContext.enter(self) unless @loadTanakaContext.isEntered?
+                if !@loadTanakaContext.isEntered?
+                    @loadTanakaContext.onExit do
+                        @showExamplesContext.enter(self)
+                    end
+                    @loadTanakaContext.enter(self, @tanaka, @quiz.options)
+                end
 			end
 		end
 

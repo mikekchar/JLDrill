@@ -35,10 +35,6 @@ module JLDrill
                                     Config::DICTIONARY_DIR)
         end
 
-        def getFile
-            return @parent.reference
-        end
-
         def loadReference(reference, filename)
             @loadFileContext.onExit do
                exitLoadReferenceContext 
