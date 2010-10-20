@@ -21,7 +21,7 @@ module JLDrill::Gtk
 		end
 	
 		def filename
-			return @context.getFilename
+			return File.basename(@context.getFilename)
 		end
 
 		def update(fraction)

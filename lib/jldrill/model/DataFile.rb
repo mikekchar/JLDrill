@@ -144,12 +144,7 @@ module JLDrill
             if @file.nil? || @file.empty?
                 return "No name"
             end
-            pos = @file.rindex('/')
-            if(pos)
-                return @file[(pos+1)..(@file.length-1)]
-            else
-                return @file
-            end
+            return File.basename(file)
         end
 
     end

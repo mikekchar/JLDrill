@@ -35,7 +35,7 @@ module JLDrill
         def destroyViews
             @mainView = nil
         end
-        
+
         def readFile
             eof = false
             filename = getFilename()
