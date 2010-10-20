@@ -87,11 +87,11 @@ module JLDrill
 
         def kanjiInfo(character)
             retVal = ""
-            kanji = @parent.kanji.findChar(character)
+            kanji = @parent.kanji.kanjiList.findChar(character)
             if !kanji.nil?
-                retVal = kanji.withRadical_to_s(@parent.radicals)
+                retVal = kanji.withRadical_to_s(@parent.radicals.radicalList)
             else
-                kana = @parent.kana.findChar(character)
+                kana = @parent.kana.kanaList.findChar(character)
                 if !kana.nil?
                     retVal = kana.to_s
                 end
