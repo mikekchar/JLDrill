@@ -44,20 +44,11 @@ module JLDrill
 
 		it "should be able to parse a file on disk" do
 			list = KanjiList.fromFile(JLDrill::Config::getDataDir + 
-			                                "/dict/rikaichan/kanji.dat")
+			                                "/tests/kanji.dat")
 			list.should_not be(nil)
-			list.size.should be(12554)
+			list.size.should be(100)
 			kanji = list.findChar("一")
 			kanji.should_not be_nil
-
-            # It should find the two new entries I added.  Putting
-            # it here so I don't have to load the dictionary again.
-            kanji = list.findChar("々")
-            kanji.should_not be_nil
-            kanji.strokes.should be(3)
-            kanji = list.findChar("ヶ")
-            kanji.should_not be_nil
-            kanji.strokes.should be(3)
 		end
 
 	end

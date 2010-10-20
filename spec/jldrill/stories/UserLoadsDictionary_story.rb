@@ -127,18 +127,12 @@ module JLDrill::UserLoadsDictionary
             Story.start
             options = Story.mainContext.quiz.options
             context = Story.context
-            def context.readFile
-                # Remove the file reading code.  We just
-                # want to enter the context to test the filenames
-            end
-            Story.mainContext.loadReference
 
             Story.context.dictionaryName(options).should be(JLDrill::Config::DICTIONARY_NAME)
             options.dictionary = "tempDictionary"
             Story.context.dictionaryName(options).should eql("tempDictionary")
 
             Story.context.getFilename(options).should eql(File.join(JLDrill::Config::DICTIONARY_DIR, "tempDictionary"))
-            Story.context.exit
         end
 
     end
