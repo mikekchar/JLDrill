@@ -18,7 +18,7 @@ require 'jldrill/contexts/PromptForDeleteContext'
 require 'jldrill/contexts/ShowInfoContext'
 require 'jldrill/contexts/ShowAllVocabularyContext'
 require 'jldrill/contexts/LoadTanakaContext'
-require 'jldrill/contexts/LoadFileContext'
+require 'jldrill/contexts/LoadQuizContext'
 require 'jldrill/contexts/LoadKanjiContext'
 require 'jldrill/model/Acknowlegements'
 require 'jldrill/contexts/ShowAboutContext'
@@ -39,7 +39,7 @@ module JLDrill
 	                :showInfoContext, :showAllVocabularyContext,
                     :showAboutContext, :editVocabularyContext,
 					:loadTanakaContext, :showExamplesContext,
-                    :loadFileContext, :loadKanjiContext,
+                    :loadQuizContext, :loadKanjiContext,
 	                :reference, :quiz, :kanji, :radicals, :kana,
                     :inTests, :tanaka
 
@@ -62,7 +62,7 @@ module JLDrill
 			@showAboutContext = ShowAboutContext.new(viewBridge)
 			@loadTanakaContext = LoadTanakaContext.new(viewBridge)
 			@showExamplesContext = ShowExamplesContext.new(viewBridge)
-            @loadFileContext = LoadFileContext.new(viewBridge)
+            @loadQuizContext = LoadQuizContext.new(viewBridge)
             @loadKanjiContext = LoadKanjiContext.new(viewBridge)
 			@reference = HashedEdict.new
 			@kanji = KanjiFile.new
@@ -158,7 +158,14 @@ module JLDrill
 		end
 
 		def openFile
-            @loadFileContext.enter(self) unless @loadFileContext.isEntered?
+            if !@loadQuizContext.isEntered?
+                @loadQuizContext.onExit do
+                    @quiz.options.subscribe(self)
+                    optionsUpdated(@quiz.options)
+                    @quiz.drill
+                end
+                @loadQuizContext.enter(self, @quiz)
+            end
 		end
 		
 		def appendFile
@@ -223,7 +230,9 @@ module JLDrill
 
 		
 		def loadKanji
-            @loadKanjiContext.enter(self) unless @loadKanjiContext.isEntered?
+            if !@loadKanjiContext.isEntered?
+                @loadKanjiContext.enter(self, @kanji, @radicals, @kana)
+            end
 		end
 		
 		def setOptions

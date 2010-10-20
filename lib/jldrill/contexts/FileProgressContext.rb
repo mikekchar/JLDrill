@@ -65,14 +65,8 @@ module JLDrill
             end
 		end
 
-        # If there is something that needs to be done after the file
-        # has completely finished loading and parsing, do it here.
-        def finishParsing
-        end
-
 		def exit
 		    super
-            finishParsing
 		end
     end   
 end

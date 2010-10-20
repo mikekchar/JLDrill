@@ -5,7 +5,8 @@ require 'jldrill/contexts/FileProgressContext'
 
 module JLDrill
 
-	class LoadKanjiContext < FileProgressContext
+    # Load the kanji, radicals and kana files one after another.
+	class LoadKanjiContext < Context::Context
 
         attr_reader :kanjiFile, :radicalsFile, :kanaFile
         attr_writer :kanjiFile, :radicalsFile, :kanaFile
@@ -15,40 +16,47 @@ module JLDrill
 		    @kanjiFile = Config::getDataDir + "/dict/rikaichan/kanji.dat"
             @radicalsFile = Config::getDataDir + "/dict/rikaichan/radicals.dat"
             @kanaFile = Config::getDataDir + "/dict/Kana/kana.dat"
-            @pass = 0
+            @loadFileContext = LoadFileContext.new(@viewBridge)
 		end
 
-        # Gives each filename one after another
-        def getFilename
-            if @pass == 0
-                return @radicalsFile
-            elsif @pass == 1
-                return @kanjiFile
-            elsif @pass == 2
-                return @kanaFile
-            else
-                return nil
+        # The context has no mainview of its own.  Use the parent's
+        def createViews
+            if !@parent.nil?
+                @mainView = @parent.mainView
             end
         end
 
-        def getFile
-            if @pass == 0
-                return @parent.radicals
-            elsif @pass == 1
-                return @parent.kanji
-            elsif @pass == 2
-                return @parent.kana
-            else
-                return nil
+        def loadKanji
+            @loadFileContext.onExit do
+                loadRadicals
             end
+            @loadFileContext.enter(self, @kanji, @kanjiFile)
         end
 
-        def finishParsing
-            # Recursively load the files until they are all finished
-            @pass += 1
-            if getFilename != nil
-                self.enter(@parent)
+        def loadRadicals
+            @loadFileContext.onExit do
+                loadKana
             end
+            @loadFileContext.enter(self, @radicals, @radicalsFile)
+        end
+
+        def loadKana
+            @loadFileContext.onExit do
+               exitLoadKanjiContext 
+            end
+            @loadFileContext.enter(self, @kana, @kanaFile)
+        end
+
+        def exitLoadKanjiContext
+            self.exit
+        end
+
+        def enter(parent, kanji, radicals, kana)
+            super(parent)
+            @kanji = kanji
+            @radicals = radicals
+            @kana = kana
+            loadKanji 
         end
 
     end		
