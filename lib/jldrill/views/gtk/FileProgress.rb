@@ -34,7 +34,6 @@ module JLDrill::Gtk
     		        Gtk.idle_remove(@id)
 		            @id = nil
 		            @block = nil
-		            @context.exit
 		        end
                 return false
             else

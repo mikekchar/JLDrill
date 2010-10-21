@@ -173,6 +173,11 @@ module JLDrill
 		
 		def appendFile
             if !@appendFileContext.isEntered?
+                @appendFileContext.onExit do
+                    if quiz.currentProblem.nil?
+                        quiz.drill
+                    end
+                end
                 @appendFileContext.enter(self, @quiz)
             end
 		end

@@ -55,10 +55,14 @@ module JLDrill
             super(parent)
             filename = @getFilenameContext.enter(self, 
                                                   GetFilenameContext::OPEN)
-            if !filename.nil? &&  !JLDrill::Quiz.drillFile?(filename)
-                loadAsEdict(quiz, filename)
+            if filename.nil?
+                exitLoadQuizContext
             else
-                loadAsQuiz(quiz, filename)
+                if !filename.nil? &&  !JLDrill::Quiz.drillFile?(filename)
+                    loadAsEdict(quiz, filename)
+                else
+                    loadAsQuiz(quiz, filename)
+                end
             end
         end
     end		

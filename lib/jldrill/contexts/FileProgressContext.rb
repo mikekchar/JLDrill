@@ -36,6 +36,10 @@ module JLDrill
             @mainView = nil
         end
 
+        def exitFileProgressContext
+            self.exit
+        end
+
         def readFile
             eof = false
             filename = getFilename()
@@ -44,6 +48,10 @@ module JLDrill
                 @mainView.idle_add do
                     eof = getFile.parseChunk(getFile.stepSize)
                     @mainView.update(getFile.fraction)
+                    fraction = getFile.fraction
+                    if eof
+                        exitFileProgressContext
+                    end
                     eof
                 end
             end

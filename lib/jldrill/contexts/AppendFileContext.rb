@@ -31,9 +31,6 @@ module JLDrill
             newQuiz = Quiz.new
             @loadQuizContext.onExit do
                 @mergeQuizContext.onExit do
-                    if quiz.currentProblem.nil?
-                        quiz.drill
-                    end
                     exitAppendFileContext
                 end
                 @mergeQuizContext.enter(self, quiz, newQuiz)
