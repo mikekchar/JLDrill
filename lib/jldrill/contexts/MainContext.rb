@@ -108,9 +108,7 @@ module JLDrill
 
         def parseCommandLineOptions
             if ARGV.size == 1
-                if loadFile(ARGV[0])
-                    @quiz.drill
-                end
+                openFile(ARGV[0])
             end
         end
 
@@ -160,14 +158,14 @@ module JLDrill
 		    end
 		end
 
-		def openFile
+		def openFile(filename = nil)
             if !@loadQuizContext.isEntered?
                 @loadQuizContext.onExit do
                     @quiz.options.subscribe(self)
                     optionsUpdated(@quiz.options)
                     @quiz.drill
                 end
-                @loadQuizContext.enter(self, @quiz)
+                @loadQuizContext.enter(self, @quiz, filename)
             end
 		end
 		

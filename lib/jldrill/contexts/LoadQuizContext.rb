@@ -19,6 +19,7 @@ module JLDrill
 			@getFilenameContext.directory = File.join(JLDrill::Config::DATA_DIR,
                                                       "quiz")
             @loadQuizFromEdictContext = LoadQuizFromEdictContext.new(@viewBridge)
+            @filename = nil
 		end
 
         def createViews
@@ -51,14 +52,16 @@ module JLDrill
             @loadFileContext.enter(self, quiz, filename)
         end
 
-        def enter(parent, quiz)
+        def enter(parent, quiz, filename=nil)
             super(parent)
-            filename = @getFilenameContext.enter(self, 
-                                                  GetFilenameContext::OPEN)
+            if filename.nil?
+                filename = @getFilenameContext.enter(self, 
+                                                     GetFilenameContext::OPEN)
+            end
             if filename.nil?
                 exitLoadQuizContext
             else
-                if !filename.nil? &&  !JLDrill::Quiz.drillFile?(filename)
+                if !JLDrill::Quiz.drillFile?(filename)
                     loadAsEdict(quiz, filename)
                 else
                     loadAsQuiz(quiz, filename)
