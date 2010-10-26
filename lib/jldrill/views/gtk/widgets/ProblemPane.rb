@@ -123,16 +123,12 @@ module JLDrill::Gtk
         end
 
         # Returns the height of the buffer in buffer coordinates.
-        # Note: Do not call this often.  It clears the Gtk events
-        # before it calculates the size because it needs to have
-        # finished drawing in order to get a correct size.  Thus
-        # this operation is very expensive.
+        # Note: This method must be called *after* all drawing
+        # has taken place.  The easiest way to do this is to
+        # put the calculation into an Gtk.idle_add block.
         def bufferSize
             # Allow the buffer to be drawn so that we get correct
             # coordinates
-            while (Gtk.events_pending?)
-                Gtk.main_iteration
-            end
             iter = @buffer.end_iter
             y, height = @contents.get_line_yrange(iter)
             size = y + height

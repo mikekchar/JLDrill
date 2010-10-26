@@ -29,7 +29,6 @@ module JLDrill::Gtk
 		end
 		
 		def run
-            print "#{@id} called\n"
 		    if @block.call
                 stop
 		    end

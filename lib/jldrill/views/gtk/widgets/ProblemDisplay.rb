@@ -73,20 +73,43 @@ module JLDrill::Gtk
             @problem = problem
             @answer.clear(@problem)
             @question.update(problem)
-            # Attempt to adjust the size of the question pane
-            # to accomodate the size of the question
-            pos = @question.bufferSize
-            # But don't adjust the size unnecessarily
-            if pos > @vpane.position
-                @vpane.position = pos
+            adjustSizeForQuestion
+        end
+
+        # Attempt to adjust the size of the question pane
+        # to accomodate the size of the question
+        # Note: This method is in an idle_add block because
+        # we have to wait until the pane has been redrawn before
+        # we calculate the size.  By putting it in an idle_add
+        # block we can ensure that the events that draw the pane
+        # have finished.
+        def adjustSizeForQuestion
+            Gtk.idle_add do
+                pos = @question.bufferSize
+                # But don't adjust the size unnecessarily
+                if pos > @vpane.position
+                    @vpane.position = pos
+                end
+                false
             end
         end
         
         def showAnswer
             if !@problem.nil?
                 @answer.update(@problem)
-                # Try to accomodate the answer size.  Always
-                # keep 10% of the panel for the question, though.
+                adjustSizeForAnswer
+            end
+        end
+
+        # Try to accomodate the answer size.  Always
+        # keep 10% of the panel for the question, though.
+        # Note: This method is in an idle_add block because
+        # we have to wait until the pane has been redrawn before
+        # we calculate the size.  By putting it in an idle_add
+        # block we can ensure that the events that draw the pane
+        # have finished.
+        def adjustSizeForAnswer
+            Gtk.idle_add do
                 maxPos = @vpane.max_position
                 minPos = (maxPos.to_f * 0.10).to_i
                 pos = maxPos - @answer.bufferSize
@@ -99,6 +122,7 @@ module JLDrill::Gtk
                 end
             end
         end
+
 
         def expire
             if !@problem.nil?

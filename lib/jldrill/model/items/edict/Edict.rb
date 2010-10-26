@@ -32,9 +32,9 @@ module JLDrill
         end
 
         def reset
-            super()
             @readings = []
             @isUTF8 = nil
+            super()
         end
 
         def parsedData
