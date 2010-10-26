@@ -6,7 +6,7 @@ lang="en" xml:lang="en">
 <title>JLDrill TODO List</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-10-01 15:57:22 JST"/>
+<meta name="generated" content="2010-10-25 11:52:46 JST"/>
 <meta name="author" content="Mike Charlton"/>
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
@@ -78,11 +78,13 @@ lang="en" xml:lang="en">
 <li><a href="#sec-3.1">3.1 Velocity Table </a></li>
 <li><a href="#sec-3.2">3.2 Current Stories </a></li>
 <li><a href="#sec-3.3">3.3 Modify editing of comments </a></li>
-<li><a href="#sec-3.4">3.4 Add examples from the Tanaka corpus to the comment of an item </a></li>
+<li><a href="#sec-3.4">3.4 Show examples from the Tanaka corpus [2/4] </a></li>
 <li><a href="#sec-3.5">3.5 Allow searching by Kanji </a></li>
-<li><a href="#sec-3.6">3.6 Windows Packaging Spike [0/5] </a></li>
-<li><a href="#sec-3.7">3.7 Create Windows packaging. </a></li>
-<li><a href="#sec-3.8">3.8 Allow users to update their drills </a></li>
+<li><a href="#sec-3.6">3.6 Create a dictionary popup for highlighted words </a></li>
+<li><a href="#sec-3.7">3.7 Insert Popup Before Item </a></li>
+<li><a href="#sec-3.8">3.8 Windows Packaging Spike [0/5] </a></li>
+<li><a href="#sec-3.9">3.9 Create Windows packaging. </a></li>
+<li><a href="#sec-3.10">3.10 Allow users to update their drills </a></li>
 </ul>
 </li>
 <li><a href="#sec-4">4 Version 0.4.1 </a>
@@ -230,7 +232,7 @@ iteration to finish as scheduled.
 <tr><th>ITEM</th><th>Total</th><th>Done</th><th>Percent</th><th>Current</th><th>Needed</th></tr>
 </thead>
 <tbody>
-<tr><td>* Version 0.4.2</td><td>12</td><td>1</td><td>8.3</td><td>1.00</td><td>0.17</td></tr>
+<tr><td><span style="visibility:hidden;"></span>Version 0.4.2</td><td>16</td><td>1</td><td>6.2</td><td>0.04</td><td>0.23</td></tr>
 </tbody>
 </table>
 
@@ -268,14 +270,29 @@ the comment.
 </div>
 
 <div id="outline-container-3.4" class="outline-3">
-<h3 id="sec-3.4">3.4 <span class="todo">TODO</span> Add examples from the Tanaka corpus to the comment of an item </h3>
+<h3 id="sec-3.4">3.4 <span class="todo">TODO</span> Show examples from the Tanaka corpus [2/4] </h3>
 <div id="text-3.4">
 
-<p>Create the ability to read the Tanaka corpus.  If the corpus is loaded,
-allow the user to search the corpus when adding or editing an item.
-The user may then choose a sentence to put into the comment field.
-</p>
+<p>Create the ability to read the Tanaka corpus.  When an item is
+displayed, show the relevant items from the Tanaka corpus.
+Sort the items first by whether they are a suggested example
+(~ items) and then by sense (<sup><a class="footref" name="fnr.1" href="#fn.1">1</a></sup>, <sup><a class="footref" name="fnr.2" href="#fn.2">2</a></sup>, etc).
+</p><ul>
+<li>
+<b>[X]</b> Load Tanaka file
+</li>
+<li>
+<b>[X]</b> Search Tanaka examples when displaying items
+</li>
+<li>
+<b>[<span style="visibility:hidden;">X</span>]</b> Put ~ items first and identify them
+</li>
+<li>
+<b>[<span style="visibility:hidden;">X</span>]</b> Sort Tanaka examples by sense  and identify divisions.
 
+
+</li>
+</ul>
 </div>
 
 </div>
@@ -294,8 +311,34 @@ found no results, then try to search by kanji.
 </div>
 
 <div id="outline-container-3.6" class="outline-3">
-<h3 id="sec-3.6">3.6 <span class="todo">TODO</span> Windows Packaging Spike [0/5] </h3>
+<h3 id="sec-3.6">3.6 <span class="todo">TODO</span> Create a dictionary popup for highlighted words </h3>
 <div id="text-3.6">
+
+<p>If the user highlights a word in the display, search for the word
+in the dictionary and create a popup showing the definition and
+use of the word.  This story does not do deinflection.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3.7" class="outline-3">
+<h3 id="sec-3.7">3.7 <span class="todo">TODO</span> Insert Popup Before Item </h3>
+<div id="text-3.7">
+
+<p>If the user presses a key (TBD) while a popup is up, an item
+contiaining the information in the popup is added to the quiz
+immediately before the current item.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3.8" class="outline-3">
+<h3 id="sec-3.8">3.8 <span class="todo">TODO</span> Windows Packaging Spike [0/5] </h3>
+<div id="text-3.8">
 
 <p>Determine the feasibility of creating a windows packaging.
 Place to start:
@@ -330,9 +373,9 @@ directory.
 
 </div>
 
-<div id="outline-container-3.7" class="outline-3">
-<h3 id="sec-3.7">3.7 <span class="todo">TODO</span> Create Windows packaging. </h3>
-<div id="text-3.7">
+<div id="outline-container-3.9" class="outline-3">
+<h3 id="sec-3.9">3.9 <span class="todo">TODO</span> Create Windows packaging. </h3>
+<div id="text-3.9">
 
 <p>Do whatever the packaging spike found in order to make Windows packaging.
 </p>
@@ -341,9 +384,9 @@ directory.
 
 </div>
 
-<div id="outline-container-3.8" class="outline-3">
-<h3 id="sec-3.8">3.8 <span class="todo">TODO</span> Allow users to update their drills </h3>
-<div id="text-3.8">
+<div id="outline-container-3.10" class="outline-3">
+<h3 id="sec-3.10">3.10 <span class="todo">TODO</span> Allow users to update their drills </h3>
+<div id="text-3.10">
 
 <p>A user can update a drill by appending the new version to their drill.
 But if the vocabulary has changed in the new/old drill (because the
@@ -964,13 +1007,25 @@ duration), then reset it so that it has been waiting for 3.75 days
 (50% of 7.5).  Then resort all the items.
 </p>
 
+
+
+
 </div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+<p class="footnote"><sup><a class="footnum" name="fn.1" href="#fnr.1">1</a></sup> FOOTNOTE DEFINITION NOT FOUND: 1
+</p>
+<p class="footnote"><sup><a class="footnum" name="fn.2" href="#fnr.2">2</a></sup> FOOTNOTE DEFINITION NOT FOUND: 2
+</p>
 </div>
 </div>
 <div id="postamble"><p class="author"> Author: Mike Charlton
 <a href="mailto:mike@Wrook">&lt;mike@Wrook&gt;</a>
 </p>
-<p class="date"> Date: 2010-10-01 15:57:22 JST</p>
+<p class="date"> Date: 2010-10-25 11:52:46 JST</p>
 <p>HTML generated by org-mode 6.21b in emacs 23</p>
 </div></body>
 </html>

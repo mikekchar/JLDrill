@@ -30,16 +30,18 @@ module JLDrill::Gtk
 		
 		def run
 		    if @block.call
-    		    if !@id.nil?
-    		        Gtk.idle_remove(@id)
-		            @id = nil
-		            @block = nil
-		        end
-                return false
-            else
-                return true
+                stop
 		    end
+            return true
 		end
+
+        def stop
+            if !@id.nil?
+                Gtk.idle_remove(@id)
+                @id = nil
+                @block = nil
+            end
+        end
 		
 		def idle_add(&block)
 		    if @block.nil? && @id.nil?

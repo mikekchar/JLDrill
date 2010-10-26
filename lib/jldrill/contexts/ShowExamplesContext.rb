@@ -53,12 +53,7 @@ module JLDrill
 			if !problem.nil?
 				vocab = problem.item.to_o
 				if !vocab.nil?
-					if vocab.kanji.nil?
-						key = vocab.reading
-					else
-						key = vocab.kanji
-					end
-					examples = @parent.tanaka.search(key)
+					examples = @parent.tanaka.search(vocab.kanji, vocab.reading)
 				end
 			end
 			return examples

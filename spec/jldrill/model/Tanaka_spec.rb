@@ -19,18 +19,48 @@ module JLDrill
 
             tanaka.numSentences.should be(1)
             tanaka.numWords.should be(3)
-            sentences = tanaka.search("です")
+            sentences = tanaka.search("です", nil)
             sentences.should_not be_nil
             sentences.should_not be_empty
             sentences.size.should be(1)
             sentences[0].should eql("なんですか？\tWhat is it?")
-            sentences = tanaka.search("Fail")
+            sentences = tanaka.search("Fail", nil)
             sentences.should_not be_nil
             sentences.should be_empty
-            sentences = tanaka.search("何")
+            sentences = tanaka.search("何", "なに")
             sentences.should_not be_empty
             sentences.size.should be(1)
             sentences[0].should eql("なんですか？\tWhat is it?")            
+        end
+
+        it "should be able to parse TanakaWords" do
+            phrase= "this(is)[0]{fun}~"
+            m = JLDrill::Tanaka::WORD_RE.match(phrase)
+            m.should_not be_nil
+            m[0].should eql(phrase)
+            m[1].should eql("this")
+            m[3].should eql("is")
+            m[5].should eql("0")
+            m[7].should eql("fun")
+            m[8].should eql("~")
+        end
+
+        it "should be able to parse the reading" do
+            a =  "A: どう為るの？\tWhat are you going to do?#ID=203\n"
+            b = "B: 如何(どう)[0]{どう}~ 為る(する) の\n"
+            tanaka = Tanaka.new
+            tanaka.parseLines(a, b)
+            tanaka.numSentences.should eql(1)
+            tanaka.numWords.should eql(3)
+            # If there is no kanji it should search for the
+            # reading in the kanji
+            tanaka.search(nil, "の").size.should eql(1)
+            # If there is a reading in the Tanaka it should only find
+            # words with both the kanji and reading
+            tanaka.search("如何","どう").size.should eql(1)
+            tanaka.search("如何",nil).size.should eql(0)
+            tanaka.search(nil,"どう").size.should eql(0)
+            tanaka.search("為る", "する").size.should eql(1)
         end
 
         it "should be able to parse multiple entries" do
@@ -61,7 +91,7 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
 
             tanaka.numSentences.should be(8)
             tanaka.numWords.should be(52)
-			haSentences = tanaka.search("は")
+			haSentences = tanaka.search(nil, "は")
 			haSentences.size.should be(6)
         end
 
@@ -74,7 +104,7 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
 			tanaka.lines.should eql([])
 
 			tanaka.numSentences.should be(100)
-			tanaka.numWords.should be(351)
+			tanaka.numWords.should be(354)
 		end
 
 		it "should be able to read the file in chunks" do
@@ -96,7 +126,7 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
 			tanaka.lines.should eql([])
 
 			tanaka.numSentences.should eql(100)
-			tanaka.numWords.should be(351)
+			tanaka.numWords.should be(354)
 		end
     end
 end
