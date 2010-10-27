@@ -75,7 +75,7 @@ module JLDrill
             # The quiz doesn't need to be saved
             @quiz.setNeedsSave(false)
             @inTests = false
-			@tanaka = Tanaka.new
+			@tanaka = Tanaka::Reference.new
 		end
 
         class MainWindowView < Context::View

@@ -2,13 +2,13 @@
 require 'jldrill/model/Tanaka'
 require 'jldrill/model/Config'
 
-module JLDrill
-    describe Tanaka do
+module JLDrill::Tanaka
+    describe Reference do
 
-        it "should be able to parse an entry from the Tanaka file" do
+        it "should be able to parse an entry from the Reference file" do
             entryText =  "A: なんですか？\tWhat is it?#ID=203\n"
             entryText += "B: 何{なん} です か\n"
-            tanaka = Tanaka.new
+            tanaka = Reference.new
             tanaka.numSentences.should be(0)
             tanaka.numWords.should be(0)
 			tanaka.lines = entryText.split("\n")
@@ -33,9 +33,9 @@ module JLDrill
             sentences[0].to_s.should eql("なんですか？\tWhat is it?#ID=203")            
         end
 
-        it "should be able to parse TanakaWords" do
+        it "should be able to parse Words" do
             phrase= "this(is)[0]{fun}~"
-            m = JLDrill::Tanaka::WORD_RE.match(phrase)
+            m = Reference::WORD_RE.match(phrase)
             m.should_not be_nil
             m[0].should eql(phrase)
             m[1].should eql("this")
@@ -48,14 +48,14 @@ module JLDrill
         it "should be able to parse the reading" do
             a =  "A: どう為るの？\tWhat are you going to do?#ID=203\n"
             b = "B: 如何(どう)[0]{どう}~ 為る(する) の\n"
-            tanaka = Tanaka.new
+            tanaka = Reference.new
             tanaka.parseLines(a, b)
             tanaka.numSentences.should eql(1)
             tanaka.numWords.should eql(3)
             # If there is no kanji it should search for the
             # reading in the kanji
             tanaka.search(nil, "の").size.should eql(1)
-            # If there is a reading in the Tanaka it should only find
+            # If there is a reading in the Reference it should only find
             # words with both the kanji and reading
             tanaka.search("如何","どう").size.should eql(1)
             tanaka.search("如何",nil).size.should eql(0)
@@ -67,7 +67,7 @@ module JLDrill
             sentence = "どう為るの？\tWhat are you going to do?#ID=203" 
             a =  "A: #{sentence}\n"
             b = "B: 如何(どう)[0]{どう}~ 為る(する) の\n"
-            tanaka = Tanaka.new
+            tanaka = Reference.new
             tanaka.parseLines(a, b)
             tanaka.numSentences.should eql(1)
             tanaka.numWords.should eql(3)
@@ -95,7 +95,7 @@ A: 処方箋をもらうために医者に行きなさい。	Go to the doctor to
 B: 処方箋~ を 貰う[01]{もらう} 為に{ために} 医者 に 行く[01]{行き} なさい
 A: 「１７歳の時スクーナー船で地中海を航海したわ」彼女はゆっくりと注意深く言う。 [F]	"I sailed around the Mediterranean in a schooner when I was seventeen," she recited slowly and carefully.#ID=8
 B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海 を 航海 為る(する)[09]{した} わ 彼女[01] は[01] ゆっくり{ゆっくりと} 注意深い{注意深く} 言う]
-            tanaka = Tanaka.new
+            tanaka = Reference.new
             tanaka.numSentences.should be(0)
             tanaka.numWords.should be(0)
 			tanaka.lines = file.split("\n")
@@ -111,8 +111,9 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
         end
 
         it "should be able to read the file from disk" do
-            tanaka = Tanaka.new
-			tanaka.load(File.join(Config::DATA_DIR, "tests/examples.utf"))
+            tanaka = Reference.new
+			tanaka.load(File.join(JLDrill::Config::DATA_DIR, 
+                                  "tests/examples.utf"))
             tanaka.parse
 
 			# It should dispose of the lines after parsing
@@ -123,9 +124,10 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
 		end
 
 		it "should be able to read the file in chunks" do
-			tanaka = Tanaka.new
+			tanaka = Reference.new
 			tanaka.lines.size.should be(0)
-			tanaka.file = (File.join(Config::DATA_DIR, "tests/examples.utf"))
+			tanaka.file = (File.join(JLDrill::Config::DATA_DIR, 
+                                     "tests/examples.utf"))
 			tanaka.readLines
 			tanaka.lines.size.should be(200)
 			# Not EOF yet

@@ -1,9 +1,9 @@
 require 'jldrill/model/DataFile'
 
-module JLDrill
+module JLDrill::Tanaka
 
     # Represents one of the words stored in the Tanaka library
-    class TanakaWord
+    class Word
         attr_reader :kanji, :reading
         attr_writer :kanji, :reading
 
@@ -29,7 +29,7 @@ module JLDrill
         end
     end
 
-    class TanakaSentence
+    class Sentence
         attr_reader :english, :japanese, :id
         attr_writer :english, :japanese, :id
 
@@ -41,12 +41,12 @@ module JLDrill
             @id = id
         end
 
-        def TanakaSentence.create(string)
+        def Sentence.create(string)
             retVal = nil
             if RE.match(string)
-                retVal = TanakaSentence.new($1, $2, $3.to_i)
+                retVal = Sentence.new($1, $2, $3.to_i)
             else
-                print "Tanaka: Couldn't parse #{string}\n"
+                print "Tanaka: Couldn't parse Sentence #{string}\n"
             end
             return retVal
         end 
@@ -57,7 +57,7 @@ module JLDrill
     end
 
     # Represents the Tanaka reference library
-	class Tanaka < DataFile
+	class Reference < JLDrill::DataFile
 
         attr_reader :words, :sentences
         attr_writer :words, :sentences
@@ -83,7 +83,7 @@ module JLDrill
 
         def addWord(word, pos)
             if WORD_RE.match(word)
-                base = TanakaWord.new($1, $3)
+                base = Word.new($1, $3)
                 if @words.has_key?(base)
                     @words[base].push(pos)
                 else
@@ -97,7 +97,7 @@ module JLDrill
             if A_RE.match(aLine)
                 sentence = $1
                 if B_RE.match(bLine)
-                    @sentences.push(TanakaSentence.create(sentence))
+                    @sentences.push(Sentence.create(sentence))
                     pos = @sentences.size - 1
                     w = $1.split(' ')
                     w.each do |word|
@@ -124,17 +124,17 @@ module JLDrill
 
         def search(kanji, reading)
             if !kanji.nil?
-                contents = @words[TanakaWord.new(kanji, reading)]
+                contents = @words[Word.new(kanji, reading)]
                 if contents.nil?
                     # The corpus only uses readings to disambiguate
                     # kanji.  Most words don't have readings.  So
                     # if we don't find anything, search again without
                     # the reading.
-                    contents = @words[TanakaWord.new(kanji, nil)]
+                    contents = @words[Word.new(kanji, nil)]
                 end
             else
                 # When there is no kanji, use the reading as the kanji
-                contents = @words[TanakaWord.new(reading, nil)]
+                contents = @words[Word.new(reading, nil)]
             end
             retVal = []
             if !contents.nil?
