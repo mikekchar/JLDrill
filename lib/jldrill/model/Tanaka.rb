@@ -56,6 +56,24 @@ module JLDrill::Tanaka
         end
     end
 
+    # Represents the connection between a word and a sentence.  It keeps
+    # track of what sense the word is used in the sentence and
+    # whether or not the usage is typical and checked.
+    class Connection
+        attr_reader :pos, :sense
+        attr_writer :pos, :sense, :typical
+
+        def initialize(pos, sense, typical)
+            @pos = pos
+            @sense = sense
+            @typical = typical
+        end
+
+        def isTypical?
+            return @typical
+        end
+    end
+
     # Represents the Tanaka reference library
 	class Reference < JLDrill::DataFile
 
@@ -84,10 +102,11 @@ module JLDrill::Tanaka
         def addWord(word, pos)
             if WORD_RE.match(word)
                 base = Word.new($1, $3)
+                connection = Connection.new(pos, $5, !$8.nil?)
                 if @words.has_key?(base)
-                    @words[base].push(pos)
+                    @words[base].push(connection)
                 else
-                    @words[base] = [pos]
+                    @words[base] = [connection]
                 end
             end
         end
@@ -124,22 +143,22 @@ module JLDrill::Tanaka
 
         def search(kanji, reading)
             if !kanji.nil?
-                contents = @words[Word.new(kanji, reading)]
-                if contents.nil?
+                connections = @words[Word.new(kanji, reading)]
+                if connections.nil?
                     # The corpus only uses readings to disambiguate
                     # kanji.  Most words don't have readings.  So
                     # if we don't find anything, search again without
                     # the reading.
-                    contents = @words[Word.new(kanji, nil)]
+                    connections = @words[Word.new(kanji, nil)]
                 end
             else
                 # When there is no kanji, use the reading as the kanji
-                contents = @words[Word.new(reading, nil)]
+                connections = @words[Word.new(reading, nil)]
             end
             retVal = []
-            if !contents.nil?
-                contents.each do |pos|
-                    retVal.push(@sentences[pos])
+            if !connections.nil?
+                connections.each do |connection|
+                    retVal.push(@sentences[connection.pos])
                 end
             end
             return retVal
