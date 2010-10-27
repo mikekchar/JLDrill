@@ -23,14 +23,14 @@ module JLDrill
             sentences.should_not be_nil
             sentences.should_not be_empty
             sentences.size.should be(1)
-            sentences[0].should eql("なんですか？\tWhat is it?")
+            sentences[0].to_s.should eql("なんですか？\tWhat is it?#ID=203")
             sentences = tanaka.search("Fail", nil)
             sentences.should_not be_nil
             sentences.should be_empty
             sentences = tanaka.search("何", "なに")
             sentences.should_not be_empty
             sentences.size.should be(1)
-            sentences[0].should eql("なんですか？\tWhat is it?")            
+            sentences[0].to_s.should eql("なんですか？\tWhat is it?#ID=203")            
         end
 
         it "should be able to parse TanakaWords" do
@@ -61,6 +61,21 @@ module JLDrill
             tanaka.search("如何",nil).size.should eql(0)
             tanaka.search(nil,"どう").size.should eql(0)
             tanaka.search("為る", "する").size.should eql(1)
+        end
+
+        it "should split sentences into Japanese and English parts" do
+            sentence = "どう為るの？\tWhat are you going to do?#ID=203" 
+            a =  "A: #{sentence}\n"
+            b = "B: 如何(どう)[0]{どう}~ 為る(する) の\n"
+            tanaka = Tanaka.new
+            tanaka.parseLines(a, b)
+            tanaka.numSentences.should eql(1)
+            tanaka.numWords.should eql(3)
+            s = tanaka.search("如何", "どう")
+            s[0].to_s.should eql(sentence)
+            s[0].english.should eql("What are you going to do?")
+            s[0].japanese.should eql("どう為るの？")
+            s[0].id.should eql(203)
         end
 
         it "should be able to parse multiple entries" do

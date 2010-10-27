@@ -29,13 +29,40 @@ module JLDrill
         end
     end
 
+    class TanakaSentence
+        attr_reader :english, :japanese, :id
+        attr_writer :english, :japanese, :id
+
+        RE = /([^\t]*)\t(.*)#ID=(.*)$/u
+
+        def initialize(japanese, english, id)
+            @japanese = japanese
+            @english = english
+            @id = id
+        end
+
+        def TanakaSentence.create(string)
+            retVal = nil
+            if RE.match(string)
+                retVal = TanakaSentence.new($1, $2, $3.to_i)
+            else
+                print "Tanaka: Couldn't parse #{string}\n"
+            end
+            return retVal
+        end 
+
+        def to_s
+            return @japanese.to_s + "\t" + @english.to_s + "#ID=#{@id}"
+        end
+    end
+
     # Represents the Tanaka reference library
 	class Tanaka < DataFile
 
         attr_reader :words, :sentences
         attr_writer :words, :sentences
 	
-        A_RE = /^A: (.*)\#ID=.*$/
+        A_RE = /^A: (.*)$/
         B_RE = /^B: (.*)/
         WORD_RE = /([^{(\[~]*)(\(([^)]*)\))?(\[([^\]]*)\])?(\{([^}]*)\})?([~])?/u
 
@@ -70,7 +97,7 @@ module JLDrill
             if A_RE.match(aLine)
                 sentence = $1
                 if B_RE.match(bLine)
-                    @sentences.push(sentence)
+                    @sentences.push(TanakaSentence.create(sentence))
                     pos = @sentences.size - 1
                     w = $1.split(' ')
                     w.each do |word|
