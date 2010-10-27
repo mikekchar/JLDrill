@@ -38,15 +38,12 @@ module JLDrill::Tanaka
             m = Reference::WORD_RE.match(phrase)
             m.should_not be_nil
             m[0].should eql(phrase)
-            m[1].should eql("this")
-            m[3].should eql("is")
-            m[5].should eql("0")
-            m[7].should eql("fun")
-            m[8].should eql("~")
+            m[1].should eql("this(is)")
+            m[3].should eql("[0]{fun}~")
         end
 
         it "should be able to parse the reading" do
-            a =  "A: どう為るの？\tWhat are you going to do?#ID=203\n"
+            a = "A: どう為るの？\tWhat are you going to do?#ID=203\n"
             b = "B: 如何(どう)[0]{どう}~ 為る(する) の\n"
             tanaka = Reference.new
             tanaka.parseLines(a, b)

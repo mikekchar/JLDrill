@@ -36,11 +36,7 @@ module JLDrill
             super(reading, position)
             if !reading.nil?
                 key = findKey(reading)
-                if @hash.has_key?(key)
-                    @hash[key].push(position)
-                else
-                    @hash[key] = [position]
-                end
+                (@hash[key] ||= []).push(position)
             end
         end
 

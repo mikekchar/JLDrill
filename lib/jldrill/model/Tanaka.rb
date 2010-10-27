@@ -4,55 +4,67 @@ module JLDrill::Tanaka
 
     # Represents one of the words stored in the Tanaka library
     class Word
-        attr_reader :kanji, :reading
-        attr_writer :kanji, :reading
+        attr_reader :contents
 
-        def initialize(kanji, reading)
-            @kanji = kanji
-            @reading = reading
+        def initialize(contents)
+            @contents = contents
+        end
+
+        def Word.create(kanji, reading)
+            contents = kanji
+            if !reading.nil?
+                contents += "(#{reading})"
+            end
+            return Word.new(contents)
         end
 
         def to_s
-            retVal = @kanji
-            if !@reading.nil?
-                retVal += "(#{@reading})"
-            end
-            return retVal
+            @contents
         end
 
         def eql?(word)
-            return self.to_s.eql?(word.to_s)
+            return @contents.eql?(word.contents)
         end
 
         def hash
-            self.to_s.hash
+            @contents.hash
         end
     end
 
     class Sentence
-        attr_reader :english, :japanese, :id
-        attr_writer :english, :japanese, :id
 
         RE = /([^\t]*)\t(.*)#ID=(.*)$/u
 
-        def initialize(japanese, english, id)
-            @japanese = japanese
-            @english = english
-            @id = id
+        def initialize(data)
+            @data = data
         end
 
-        def Sentence.create(string)
-            retVal = nil
-            if RE.match(string)
-                retVal = Sentence.new($1, $2, $3.to_i)
-            else
-                print "Tanaka: Couldn't parse Sentence #{string}\n"
+        def english
+            retVal = ""
+            if RE.match(@data)
+                retVal = $2
             end
             return retVal
-        end 
+        end
 
+        def japanese
+            retVal = ""
+            if RE.match(@data)
+                retVal = $1
+            end
+            return retVal
+        end
+
+        def id
+            retVal = ""
+            if RE.match(@data)
+                retVal = $3.to_i
+            end
+            return retVal
+        end
+        
         def to_s
-            return @japanese.to_s + "\t" + @english.to_s + "#ID=#{@id}"
+            return @data
         end
     end
 
@@ -60,18 +72,39 @@ module JLDrill::Tanaka
     # track of what sense the word is used in the sentence and
     # whether or not the usage is typical and checked.
     class Connection
-        attr_reader :pos, :sense
-        attr_writer :pos, :sense, :typical
+        attr_reader :pos
+        attr_writer :pos
 
-        def initialize(pos, sense, typical)
+        DATA_RE = /(\[([^\]]*)\])?(\{([^}]*)\})?([~])?/u
+
+        def initialize(pos, data)
             @pos = pos
-            @sense = sense
-            @typical = typical
+            @data = data
+        end
+    end
+
+    # Represents the results of searching the Tanaka reference library
+    # It is composed of a list of sentences.
+    class SearchResults
+
+        attr_reader :sentences, :connections
+        attr_writer :sentences, :connections
+
+        def initialize(connections, sentences)
+            @sentences = sentences
+            @connections = connections
         end
 
-        def isTypical?
-            return @typical
+        def getSentences
+            retVal = []
+            if !connections.nil?
+                connections.each do |connection|
+                    retVal.push(@sentences[connection.pos])
+                end
+            end
+            return retVal
         end
+
     end
 
     # Represents the Tanaka reference library
@@ -82,13 +115,13 @@ module JLDrill::Tanaka
 	
         A_RE = /^A: (.*)$/
         B_RE = /^B: (.*)/
-        WORD_RE = /([^{(\[~]*)(\(([^)]*)\))?(\[([^\]]*)\])?(\{([^}]*)\})?([~])?/u
+        WORD_RE = /([^{(\[~]*(\([^)]*\))?)(.*)/u
 
 		def initialize()
             super
             @sentences = []
             @words = {}
-            @stepSize = 500
+            @stepSize = 100
 		end
 
         def numSentences
@@ -101,13 +134,9 @@ module JLDrill::Tanaka
 
         def addWord(word, pos)
             if WORD_RE.match(word)
-                base = Word.new($1, $3)
-                connection = Connection.new(pos, $5, !$8.nil?)
-                if @words.has_key?(base)
-                    @words[base].push(connection)
-                else
-                    @words[base] = [connection]
-                end
+                base = Word.new($1)
+                connection = Connection.new(pos, $3)
+                (@words[base] ||= []).push(connection)
             end
         end
 
@@ -116,7 +145,7 @@ module JLDrill::Tanaka
             if A_RE.match(aLine)
                 sentence = $1
                 if B_RE.match(bLine)
-                    @sentences.push(Sentence.create(sentence))
+                    @sentences.push(Sentence.new(sentence))
                     pos = @sentences.size - 1
                     w = $1.split(' ')
                     w.each do |word|
@@ -143,25 +172,20 @@ module JLDrill::Tanaka
 
         def search(kanji, reading)
             if !kanji.nil?
-                connections = @words[Word.new(kanji, reading)]
+                connections = @words[Word.create(kanji, reading)]
                 if connections.nil?
                     # The corpus only uses readings to disambiguate
                     # kanji.  Most words don't have readings.  So
                     # if we don't find anything, search again without
                     # the reading.
-                    connections = @words[Word.new(kanji, nil)]
+                    connections = @words[Word.create(kanji, nil)]
                 end
             else
                 # When there is no kanji, use the reading as the kanji
-                connections = @words[Word.new(reading, nil)]
+                connections = @words[Word.create(reading, nil)]
             end
-            retVal = []
-            if !connections.nil?
-                connections.each do |connection|
-                    retVal.push(@sentences[connection.pos])
-                end
-            end
-            return retVal
+
+            return SearchResults.new(connections, @sentences).getSentences
         end
 
 	end
