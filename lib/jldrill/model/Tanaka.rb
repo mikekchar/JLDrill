@@ -33,7 +33,7 @@ module JLDrill::Tanaka
 
     class Sentence
 
-        RE = /([^\t]*)\t(.*)#ID=(.*)$/u
+        RE = /^A: ([^\t]*)\t(.*)#ID=(.*)$/u
 
         def initialize(data)
             @data = data
@@ -64,22 +64,7 @@ module JLDrill::Tanaka
         end
         
         def to_s
-            return @data
-        end
-    end
-
-    # Represents the connection between a word and a sentence.  It keeps
-    # track of what sense the word is used in the sentence and
-    # whether or not the usage is typical and checked.
-    class Connection
-        attr_reader :pos
-        attr_writer :pos
-
-        DATA_RE = /(\[([^\]]*)\])?(\{([^}]*)\})?([~])?/u
-
-        def initialize(pos, data)
-            @pos = pos
-            @data = data
+            return "#{self.id}:\n\t#{self.japanese}\n\t#{self.english}"
         end
     end
 
@@ -90,7 +75,7 @@ module JLDrill::Tanaka
         attr_reader :sentences, :connections
         attr_writer :sentences, :connections
 
-        def initialize(connections, sentences)
+        def initialize(word, connections, sentences)
             @sentences = sentences
             @connections = connections
         end
@@ -99,10 +84,14 @@ module JLDrill::Tanaka
             retVal = []
             if !connections.nil?
                 connections.each do |connection|
-                    retVal.push(@sentences[connection.pos])
+                    retVal.push(Sentence.new(@sentences[connection]))
                 end
             end
             return retVal
+        end
+
+        def getWordData
+            # The word data is in @sentences[connection + 1]
         end
 
     end
@@ -110,22 +99,22 @@ module JLDrill::Tanaka
     # Represents the Tanaka reference library
 	class Reference < JLDrill::DataFile
 
-        attr_reader :words, :sentences
-        attr_writer :words, :sentences
+        attr_reader :words
+        attr_writer :words
 	
-        A_RE = /^A: (.*)$/
+        A_RE = /^A:/
         B_RE = /^B: (.*)/
-        WORD_RE = /([^{(\[~]*(\([^)]*\))?)(.*)/u
+        WORD_RE = /([^{(\[~]*(\([^)]*\))?)/u
 
 		def initialize()
             super
-            @sentences = []
+            @sentences = 0
             @words = {}
-            @stepSize = 100
+            @stepSize = 1000
 		end
 
         def numSentences
-            return @sentences.size
+            dataSize
         end
 
         def numWords
@@ -134,19 +123,15 @@ module JLDrill::Tanaka
 
         def addWord(word, pos)
             if WORD_RE.match(word)
-                base = Word.new($1)
-                connection = Connection.new(pos, $3)
-                (@words[base] ||= []).push(connection)
+                (@words[$1] ||= []).push(pos)
             end
         end
 
-        def parseLines(aLine, bLine)
+        def parseLines(aLine, bLine, pos)
             success = false
             if A_RE.match(aLine)
-                sentence = $1
                 if B_RE.match(bLine)
-                    @sentences.push(Sentence.new(sentence))
-                    pos = @sentences.size - 1
+                    @sentences += 1
                     w = $1.split(' ')
                     w.each do |word|
                         addWord(word, pos)
@@ -157,12 +142,12 @@ module JLDrill::Tanaka
             return success
         end
 
-        def parsedData
+        def dataSize
             @sentences
         end
 
         def parseEntry
-            if parseLines(@lines[@parsed], @lines[@parsed + 1])
+            if parseLines(@lines[@parsed], @lines[@parsed + 1], @parsed)
                 @parsed += 2
                 # As long as a single line gets parsed it is a success
             else
@@ -172,20 +157,25 @@ module JLDrill::Tanaka
 
         def search(kanji, reading)
             if !kanji.nil?
-                connections = @words[Word.create(kanji, reading)]
+                connections = @words[Word.create(kanji, reading).to_s]
                 if connections.nil?
                     # The corpus only uses readings to disambiguate
                     # kanji.  Most words don't have readings.  So
                     # if we don't find anything, search again without
                     # the reading.
-                    connections = @words[Word.create(kanji, nil)]
+                    connections = @words[Word.create(kanji, nil).to_s]
                 end
             else
                 # When there is no kanji, use the reading as the kanji
-                connections = @words[Word.create(reading, nil)]
+                connections = @words[Word.create(reading, nil).to_s]
             end
 
-            return SearchResults.new(connections, @sentences).getSentences
+            return SearchResults.new(connections, @lines).getSentences
+        end
+
+        # Don't erase @lines because we need them later
+        def finishParsing
+            setLoaded(true)
         end
 
 	end

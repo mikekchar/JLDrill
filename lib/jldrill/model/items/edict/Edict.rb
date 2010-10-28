@@ -37,8 +37,8 @@ module JLDrill
             super()
         end
 
-        def parsedData
-            @readings
+        def dataSize
+            @readings.size
         end
 
         def setLoaded(bool)

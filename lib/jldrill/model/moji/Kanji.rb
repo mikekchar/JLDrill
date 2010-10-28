@@ -154,10 +154,11 @@ module JLDrill
         def initialize
             super
             @kanjiList = KanjiList.new
+            @stepSize = 100
         end
 
-        def parsedData
-            @kanjiList
+        def dataSize
+            @kanjiList.size
         end
 
         def parser

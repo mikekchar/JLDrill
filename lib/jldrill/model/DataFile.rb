@@ -16,8 +16,8 @@ module JLDrill
             self.reset
         end
 
-        # Returns a reference to the parsed data item
-        def parsedData
+        # Returns the number of items you have created
+        def dataSize
             # Please implement this in the concrete class
         end
 
@@ -59,7 +59,7 @@ module JLDrill
 
         # Returns true if the we have completed parsing a file
 		def loaded?
-			return eof? && (parsedData.size > 0)
+			return eof? && (dataSize > 0)
 		end
 
         # Returns a float showing the percentage of the file that

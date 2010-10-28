@@ -6,16 +6,16 @@ module JLDrill::Tanaka
     describe Reference do
 
         it "should be able to parse an entry from the Reference file" do
-            entryText =  "A: なんですか？\tWhat is it?#ID=203\n"
-            entryText += "B: 何{なん} です か\n"
+            a =  "A: なんですか？\tWhat is it?#ID=203\n"
+            b = "B: 何{なん} です か\n"
             tanaka = Reference.new
+            tanaka.lines = [a,b]
             tanaka.numSentences.should be(0)
             tanaka.numWords.should be(0)
-			tanaka.lines = entryText.split("\n")
             tanaka.parse
 
-			# It should dispose of the lines after parsing
-			tanaka.lines.should eql([])
+			# It should not dispose of the lines after parsing because it needs then for searching
+			tanaka.lines.should_not eql([])
 
             tanaka.numSentences.should be(1)
             tanaka.numWords.should be(3)
@@ -23,14 +23,14 @@ module JLDrill::Tanaka
             sentences.should_not be_nil
             sentences.should_not be_empty
             sentences.size.should be(1)
-            sentences[0].to_s.should eql("なんですか？\tWhat is it?#ID=203")
+            sentences[0].to_s.should eql(a)
             sentences = tanaka.search("Fail", nil)
             sentences.should_not be_nil
             sentences.should be_empty
             sentences = tanaka.search("何", "なに")
             sentences.should_not be_empty
             sentences.size.should be(1)
-            sentences[0].to_s.should eql("なんですか？\tWhat is it?#ID=203")            
+            sentences[0].to_s.should eql(a)            
         end
 
         it "should be able to parse Words" do
@@ -46,7 +46,8 @@ module JLDrill::Tanaka
             a = "A: どう為るの？\tWhat are you going to do?#ID=203\n"
             b = "B: 如何(どう)[0]{どう}~ 為る(する) の\n"
             tanaka = Reference.new
-            tanaka.parseLines(a, b)
+            tanaka.lines = [a,b]
+            tanaka.parseLines(a, b, 0)
             tanaka.numSentences.should eql(1)
             tanaka.numWords.should eql(3)
             # If there is no kanji it should search for the
@@ -65,11 +66,12 @@ module JLDrill::Tanaka
             a =  "A: #{sentence}\n"
             b = "B: 如何(どう)[0]{どう}~ 為る(する) の\n"
             tanaka = Reference.new
-            tanaka.parseLines(a, b)
+            tanaka.lines = [a,b]
+            tanaka.parseLines(a, b, 0)
             tanaka.numSentences.should eql(1)
             tanaka.numWords.should eql(3)
             s = tanaka.search("如何", "どう")
-            s[0].to_s.should eql(sentence)
+            s[0].to_s.should eql(a)
             s[0].english.should eql("What are you going to do?")
             s[0].japanese.should eql("どう為るの？")
             s[0].id.should eql(203)
@@ -98,8 +100,8 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
 			tanaka.lines = file.split("\n")
             tanaka.parse
 
-			# It should dispose of the lines after parsing
-			tanaka.lines.should eql([])
+			# It should not dispose of the lines after parsing because it needs them for searching
+			tanaka.lines.should_not eql([])
 
             tanaka.numSentences.should be(8)
             tanaka.numWords.should be(52)
@@ -113,8 +115,7 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
                                   "tests/examples.utf"))
             tanaka.parse
 
-			# It should dispose of the lines after parsing
-			tanaka.lines.should eql([])
+			tanaka.lines.should_not eql([])
 
 			tanaka.numSentences.should be(100)
 			tanaka.numWords.should be(354)
@@ -135,9 +136,8 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
 			# Read to the EOF
 			tanaka.parseChunk(1000).should eql(true)
 
-			# It should dispose of the unparsed lines after parsing
 			tanaka.fraction.should eql(0.0)
-			tanaka.lines.should eql([])
+			tanaka.lines.should_not eql([])
 
 			tanaka.numSentences.should eql(100)
 			tanaka.numWords.should be(354)

@@ -230,7 +230,7 @@ module JLDrill
 
 		def loadTanaka
 			if @tanaka.loaded?
-                if !@showExamplesContext.isEntered
+                if !@showExamplesContext.isEntered?
                     @showExamplesContext.enter(self)
                 end
 			else

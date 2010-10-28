@@ -206,8 +206,8 @@ module JLDrill
             @parsed += 1
         end
 
-        def parsedData
-            @contents
+        def dataSize
+            @contents.size
         end
 
         def finishedParsing

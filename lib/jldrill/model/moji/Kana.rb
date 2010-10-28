@@ -112,8 +112,8 @@ module JLDrill
             @kanaList = KanaList.new
         end
 
-        def parsedData
-            @kanaList
+        def dataSize
+            @kanaList.size
         end
 
         def parser

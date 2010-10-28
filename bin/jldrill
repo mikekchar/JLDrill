@@ -2,7 +2,14 @@
 require 'Context/Gtk/App'
 require 'Context/require_all'
 require 'jldrill/contexts/MainContext'
+
+# When profiling only a small part of the application, uncomment the next two lines
+# And then run Profiler__::start_profile where you want to profile
+#require 'profiler'
+#Profiler__::stop_profile
+
 require_all 'jldrill/views/gtk/*.rb'
+
 
 module JLDrill
     module Gtk
@@ -10,3 +17,8 @@ module JLDrill
         jldrill.enter
     end
 end
+
+# Uncomment these if you want to use the profiler on a small part of the code
+#        Profiler__::stop_profile
+#        Profiler__::print_profile(STDOUT)
+

@@ -114,8 +114,8 @@ module JLDrill
             @radicalList = RadicalList.new
         end
 
-        def parsedData
-            @radicalList
+        def dataSize
+            @radicalList.size
         end
 
         def parser
