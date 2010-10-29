@@ -23,23 +23,21 @@ module JLDrill::Tanaka
             sentences.should_not be_nil
             sentences.should_not be_empty
             sentences.size.should be(1)
-            sentences[0].to_s.should eql(a)
+            sentences[0].to_s.should eql("203:\n\tなんですか？\n\tWhat is it?")
             sentences = tanaka.search("Fail", nil)
             sentences.should_not be_nil
             sentences.should be_empty
             sentences = tanaka.search("何", "なに")
             sentences.should_not be_empty
             sentences.size.should be(1)
-            sentences[0].to_s.should eql(a)            
+            sentences[0].to_s.should eql("203:\n\tなんですか？\n\tWhat is it?")            
         end
 
         it "should be able to parse Words" do
             phrase= "this(is)[0]{fun}~"
             m = Reference::WORD_RE.match(phrase)
             m.should_not be_nil
-            m[0].should eql(phrase)
             m[1].should eql("this(is)")
-            m[3].should eql("[0]{fun}~")
         end
 
         it "should be able to parse the reading" do
@@ -71,7 +69,7 @@ module JLDrill::Tanaka
             tanaka.numSentences.should eql(1)
             tanaka.numWords.should eql(3)
             s = tanaka.search("如何", "どう")
-            s[0].to_s.should eql(a)
+            s[0].to_s.should eql("203:\n\tどう為るの？\n\tWhat are you going to do?")
             s[0].english.should eql("What are you going to do?")
             s[0].japanese.should eql("どう為るの？")
             s[0].id.should eql(203)

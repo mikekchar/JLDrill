@@ -156,25 +156,30 @@ module JLDrill::Tanaka
         end
 
         def search(kanji, reading)
+            word = nil
             if !kanji.nil?
-                connections = @words[Word.create(kanji, reading).to_s]
+                word = Word.create(kanji, reading).to_s
+                connections = @words[word]
                 if connections.nil?
                     # The corpus only uses readings to disambiguate
                     # kanji.  Most words don't have readings.  So
                     # if we don't find anything, search again without
                     # the reading.
-                    connections = @words[Word.create(kanji, nil).to_s]
+                    word = Word.create(kanji, nil).to_s
+                    connections = @words[word]
                 end
             else
                 # When there is no kanji, use the reading as the kanji
-                connections = @words[Word.create(reading, nil).to_s]
+                word = Word.create(reading, nil).to_s
+                connections = @words[word]
             end
 
-            return SearchResults.new(connections, @lines).getSentences
+            return SearchResults.new(word, connections, @lines).getSentences
         end
 
         # Don't erase @lines because we need them later
         def finishParsing
+            @parsed = 0
             setLoaded(true)
         end
 
