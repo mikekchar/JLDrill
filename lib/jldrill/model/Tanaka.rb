@@ -84,9 +84,9 @@ module JLDrill::Tanaka
 
         def getSentences
             retVal = []
-            if !connections.nil?
+            if !@connections.nil?
                 wordData = getWordData
-                connections.each_with_index do |connection, i|
+                @connections.each_with_index do |connection, i|
                     retVal.push(Sentence.new(@sentences[connection], wordData[i]))
                 end
             end
