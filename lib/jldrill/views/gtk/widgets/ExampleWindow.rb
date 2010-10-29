@@ -24,6 +24,14 @@ module JLDrill::Gtk
             sw.add(@contents)
             self.set_default_size(400, 360)
 			connectSignals unless @view.nil?
+            createTags
+        end
+
+        def createTags
+            @contents.buffer.create_tag("normal", 
+                               "background" => "#ffffff")
+            @contents.buffer.create_tag("checked", 
+                               "background" => "#e0f0ff")
         end
 
 		def connectSignals
@@ -68,9 +76,17 @@ module JLDrill::Gtk
         end
  
         def updateContents(examples)
-			string = ""
-			string = examples.join("\n") unless examples.nil?
-            @contents.buffer.text = string
+            @contents.buffer.text = ""
+            if !examples.nil?
+                examples.each do |example|
+                    if example.checked
+                        tag = "checked"
+                    else
+                        tag = "normal"
+                    end
+                    @contents.buffer.insert(@contents.buffer.end_iter, example.to_s + "\n", tag)
+                end
+            end
         end
     end
 end
