@@ -34,7 +34,7 @@ module JLDrill::Tanaka
         end
 
         it "should be able to parse Words" do
-            phrase= "this(is)[0]{fun}~"
+            phrase= "this(is)[1]{fun}~"
             m = Reference::WORD_RE.match(phrase)
             m.should_not be_nil
             m[1].should eql("this(is)")
@@ -42,7 +42,7 @@ module JLDrill::Tanaka
 
         it "should be able to parse the reading" do
             a = "A: どう為るの？\tWhat are you going to do?#ID=203\n"
-            b = "B: 如何(どう)[0]{どう}~ 為る(する) の\n"
+            b = "B: 如何(どう)[1]{どう}~ 為る(する) の\n"
             tanaka = Reference.new
             tanaka.lines = [a,b]
             tanaka.parseLines(a, b, 0)
@@ -62,7 +62,7 @@ module JLDrill::Tanaka
         it "should split sentences into Japanese and English parts" do
             sentence = "どう為るの？\tWhat are you going to do?#ID=203" 
             a =  "A: #{sentence}\n"
-            b = "B: 如何(どう)[0]{どう}~ 為る(する) の\n"
+            b = "B: 如何(どう)[1]{どう}~ 為る(する) の\n"
             tanaka = Reference.new
             tanaka.lines = [a,b]
             tanaka.parseLines(a, b, 0)
@@ -70,7 +70,7 @@ module JLDrill::Tanaka
             tanaka.numWords.should eql(3)
             " 如何(どう)".start_with?(" 如何(どう)").should be_true
             s = tanaka.search("如何", "どう")
-            s[0].to_s.should eql("203: 如何(どう)[0]{どう}~\n\tどう為るの？\n\tWhat are you going to do?")
+            s[0].to_s.should eql("203: 如何(どう)[1]{どう}~\n\tどう為るの？\n\tWhat are you going to do?")
             s[0].english.should eql("What are you going to do?")
             s[0].japanese.should eql("どう為るの？")
             s[0].id.should eql(203)
