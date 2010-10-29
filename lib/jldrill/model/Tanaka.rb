@@ -35,8 +35,9 @@ module JLDrill::Tanaka
 
         RE = /^A: ([^\t]*)\t(.*)#ID=(.*)$/u
 
-        def initialize(data)
+        def initialize(data, wordData)
             @data = data
+            @wordData = wordData
         end
 
         def english
@@ -64,7 +65,7 @@ module JLDrill::Tanaka
         end
         
         def to_s
-            return "#{self.id}:\n\t#{self.japanese}\n\t#{self.english}"
+            return "#{self.id}: #{@wordData}\n\t#{self.japanese}\n\t#{self.english}"
         end
     end
 
@@ -76,6 +77,7 @@ module JLDrill::Tanaka
         attr_writer :sentences, :connections
 
         def initialize(word, connections, sentences)
+            @word = word
             @sentences = sentences
             @connections = connections
         end
@@ -83,15 +85,29 @@ module JLDrill::Tanaka
         def getSentences
             retVal = []
             if !connections.nil?
-                connections.each do |connection|
-                    retVal.push(Sentence.new(@sentences[connection]))
+                wordData = getWordData
+                connections.each_with_index do |connection, i|
+                    retVal.push(Sentence.new(@sentences[connection], wordData[i]))
                 end
             end
             return retVal
         end
 
+        def findWord(connection)
+            connection.split(" ").each do |word|
+                if word.start_with?(@word)
+                    return word
+                end
+            end
+            return ""
+        end
+
         def getWordData
-            # The word data is in @sentences[connection + 1]
+            wordData = []
+            @connections.each_with_index do |connection, i|
+                wordData.push(findWord(@sentences[connection + 1]))
+            end
+            return wordData 
         end
 
     end
