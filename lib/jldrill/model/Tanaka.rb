@@ -179,7 +179,6 @@ module JLDrill::Tanaka
 
         # Don't erase @lines because we need them later
         def finishParsing
-            @parsed = 0
             setLoaded(true)
         end
 

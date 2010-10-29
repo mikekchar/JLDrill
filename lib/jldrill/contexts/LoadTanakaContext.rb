@@ -51,9 +51,5 @@ module JLDrill
             super(parent)
             loadTanaka(tanaka, getFilename(options))
         end
-
-        def exit
-        end
-
     end
 end

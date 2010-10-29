@@ -100,6 +100,7 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
 
 			# It should not dispose of the lines after parsing because it needs them for searching
 			tanaka.lines.should_not eql([])
+            tanaka.loaded?.should be_true
 
             tanaka.numSentences.should be(8)
             tanaka.numWords.should be(52)
@@ -134,7 +135,7 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
 			# Read to the EOF
 			tanaka.parseChunk(1000).should eql(true)
 
-			tanaka.fraction.should eql(0.0)
+            tanaka.loaded?.should be_true
 			tanaka.lines.should_not eql([])
 
 			tanaka.numSentences.should eql(100)
