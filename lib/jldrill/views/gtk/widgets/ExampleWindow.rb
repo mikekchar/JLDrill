@@ -78,6 +78,16 @@ module JLDrill::Gtk
         def updateContents(examples)
             @contents.buffer.text = ""
             if !examples.nil?
+                examples.sort! do |x, y|
+                    retVal = x.sense <=> y.sense
+                    if y.checked && !x.checked
+                        retVal = 1
+                    end
+                    if x.checked && !y.checked
+                        retVal = -1
+                    end
+                    retVal
+                end
                 examples.each do |example|
                     if example.checked
                         tag = "checked"
