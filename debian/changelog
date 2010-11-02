@@ -1,3 +1,10 @@
+jldrill (0.4.2-13) unstable; urgency=low
+
+  * Sort items in the example window, identify which sense the example is for,
+    clean up the output a bit.  The Tanaka story is now finished (finally)
+
+ -- Mike Charlton <mikekchar@gmail.com>  Tue, 02 Nov 2010 10:50:00 +0900
+
 jldrill (0.4.2-12) unstable; urgency=low
 
   * Dramatically speed up loading the Tanaka file.

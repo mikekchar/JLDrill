@@ -61,7 +61,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.2 |    16 |    1 |     6.2 |    0.03 |   0.23 |
+| * Version 0.4.2 |    16 |    5 |    31.2 |    0.16 |   0.23 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -82,7 +82,7 @@ the task.
    :Done: 1
    :END:
    
-** TODO Show examples from the Tanaka corpus [3/4]
+** DONE Show examples from the Tanaka corpus [4/4]
    Create the ability to read the Tanaka corpus.  When an item is
    displayed, show the relevant items from the Tanaka corpus.
    Sort the items first by whether they are a suggested example
@@ -90,11 +90,11 @@ the task.
    - [X] Load Tanaka file
    - [X] Search Tanaka examples when displaying items
    - [X] Put ~ items first and identify them
-   - [ ] Sort Tanaka examples by sense  and identify divisions.
+   - [X] Sort Tanaka examples by sense  and identify divisions.
 
    :PROPERTIES:
    :JellyBeans: 4
-   :Done: 0
+   :Done: 4
    :END:
 
 ** TODO Allow searching by Kanji

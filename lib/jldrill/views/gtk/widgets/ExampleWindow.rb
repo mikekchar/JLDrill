@@ -32,6 +32,13 @@ module JLDrill::Gtk
                                "background" => "#ffffff")
             @contents.buffer.create_tag("checked", 
                                "background" => "#e0f0ff")
+            @contents.buffer.create_tag("h1",
+                                        "size" => 20 * Pango::SCALE,
+                                        "justification" => Gtk::JUSTIFY_CENTER)
+            @contents.buffer.create_tag("h2",
+                                        "size" => 15 * Pango::SCALE,
+                                        "justification" => Gtk::JUSTIFY_CENTER)
+
         end
 
 		def connectSignals
@@ -74,29 +81,56 @@ module JLDrill::Gtk
             @closed = true
             self.destroy
         end
+
+        def sortExamples(examples)
+           return examples.sort do |x, y|
+               retVal = x.sense <=> y.sense
+               if y.checked && !x.checked
+                   retVal = 1
+               end
+               if x.checked && !y.checked
+                   retVal = -1
+               end
+               retVal
+           end
+        end
  
         def updateContents(examples)
             @contents.buffer.text = ""
             if !examples.nil?
-                examples.sort! do |x, y|
-                    retVal = x.sense <=> y.sense
-                    if y.checked && !x.checked
-                        retVal = 1
-                    end
-                    if x.checked && !y.checked
-                        retVal = -1
-                    end
-                    retVal
-                end
-                examples.each do |example|
+                section = -2
+                sortExamples(examples).each do |example|
                     if example.checked
-                        tag = "checked"
+                        if section == -2
+                            section = -1
+                            insert("Checked Examples\n", "h1")
+                            insertVSpace
+                        end
                     else
-                        tag = "normal"
+                        if section < 0
+                            insert("Unchecked Examples\n", "h1")
+                            insertVSpace
+                        end
+                        if section != example.sense
+                            section = example.sense
+                            if section != 0
+                                insertVSpace
+                                insert("Examples for sense ##{section}\n", "h2")
+                            end
+                        end
                     end
-                    @contents.buffer.insert(@contents.buffer.end_iter, example.to_s + "\n", tag)
+                    insert(example.to_s + "\n", "normal")
+                    insertVSpace
                 end
             end
+        end
+
+        def insert(text, tag)
+            @contents.buffer.insert(@contents.buffer.end_iter, text, tag)
+        end
+
+        def insertVSpace
+            insert("\n", "normal")
         end
     end
 end
