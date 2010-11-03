@@ -25,6 +25,7 @@ module JLDrill
         def initialize(file=nil)
             super()
             @readings = []
+            @kanji = []
             @isUTF8 = nil
             if !file.nil?
                 @file = file
@@ -33,6 +34,7 @@ module JLDrill
 
         def reset
             @readings = []
+            @kanji = []
             @isUTF8 = nil
             super()
         end
@@ -63,8 +65,9 @@ module JLDrill
             return @readings.size
         end
 
-        def add(reading, position)
-            @readings.push(reading)
+        def add(tags, position)
+            @kanji.push(tags[2])
+            @readings.push(tags[1])
         end
 
         def isUTF8?(index)
@@ -164,7 +167,7 @@ module JLDrill
                 end
 
             end
-            return reading
+            return [kanji, reading]
         end
 
         def finishParsing
@@ -193,6 +196,26 @@ module JLDrill
 
         def include?(vocab)
             return search(vocab.reading).any? do |item|
+                item.to_o.eql?(vocab)
+            end
+        end
+
+        def searchKanji(kanji)
+            result = []
+            re = JLDrill::StartsWith.new(kanji)
+            0.upto(@kanji.size - 1) do |i|
+                candidate = @kanji[i]
+                if !candidate.nil?
+                    if re.match(candidate)
+                        result.push(Item.create(vocab(i).to_s))
+                    end
+                end
+            end
+            return result
+        end
+
+        def includeKanji?(vocab)
+            return searchKanji(vocab.kanji).any? do |item|
                 item.to_o.eql?(vocab)
             end
         end

@@ -13,15 +13,18 @@ module JLDrill
         # This will create small enough bins that we can parse them quickly
         KEY_RE = /^(..?.?)/mu
         KEY_LIMIT_RE = /...+/mu
+        KANJIKEY_RE = /^(.)/mu
 
         def initialize(file=nil)
             super(file)
             @hash = {}
+            @kanjiHash = {}
         end
 
         def reset
             super
             @hash = {}
+            @kanjiHash = {}
         end
 
         def findKey(string)
@@ -32,11 +35,23 @@ module JLDrill
             return retVal
         end
 
-        def add(reading, position)
-            super(reading, position)
-            if !reading.nil?
-                key = findKey(reading)
+        def findKanjiKey(kanji)
+            retVal = "None"
+            if kanji
+                if kanji =~ KANJIKEY_RE then retVal = $1 end
+            end
+            return retVal
+        end
+
+        def add(tags, position)
+            super(tags, position)
+            if !tags[1].nil?
+                key = findKey(tags[1])
                 (@hash[key] ||= []).push(position)
+            end
+            if !tags[0].nil?
+                key = findKanjiKey(tags[0])
+                (@kanjiHash[key] ||= []).push(position)
             end
         end
 
@@ -60,6 +75,16 @@ module JLDrill
             return result
         end
 
+        # Returns the bin that contains the kanji, or nil if it is not found
+        def findKanjiBin(kanji)
+            bin = nil
+            if !@kanjiHash.nil?
+                key = findKanjiKey(kanji)
+                bin = @kanjiHash[key]
+            end
+            return bin
+        end
+
         # searches the bin using the regular expression, re, for the reading
         def searchBin(reading, bin, re)
             result = []
@@ -68,6 +93,22 @@ module JLDrill
                     vocab = vocab(position)
                     if !vocab.nil? && !vocab.reading.nil?
                         if re.match(vocab.reading)
+                            result.push(Item.create(vocab.to_s))
+                        end
+                    end
+                end
+            end
+            return result
+        end
+
+        # searches the bin using the regular expression, re, for the kanji
+        def searchKanjiBin(kanji, bin, re)
+            result = []
+            if !bin.nil?
+                bin.each do |position|
+                    vocab = vocab(position)
+                    if !vocab.nil? && !vocab.kanji.nil?
+                        if re.match(vocab.kanji)
                             result.push(Item.create(vocab.to_s))
                         end
                     end
@@ -102,6 +143,25 @@ module JLDrill
             bin = findBin(reading)
             re = JLDrill::Equals.new(reading)
             return searchBin(reading, bin, re).any? do |item|
+                item.to_o.eql?(vocab)
+            end
+        end
+        
+        def searchKanji(kanji)
+            result = []
+            re = JLDrill::StartsWith.new(kanji)
+
+            # If it's bigger than the limit size
+            bin = findKanjiBin(kanji)
+            result = searchKanjiBin(kanji, bin, re)
+            return result
+        end
+
+        def includeKanji?(vocab)
+            kanji = vocab.kanji
+            bin = findKanjiBin(kanji)
+            re = JLDrill::Equals.new(kanji)
+            return searchKanjiBin(kanji, bin, re).any? do |item|
                 item.to_o.eql?(vocab)
             end
         end

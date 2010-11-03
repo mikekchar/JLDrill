@@ -61,7 +61,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.2 |    16 |    5 |    31.2 |    0.16 |   0.23 |
+| * Version 0.4.2 |    16 |    7 |    43.8 |    0.22 |   0.23 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -97,14 +97,13 @@ the task.
    :Done: 4
    :END:
 
-** TODO Allow searching by Kanji
+** DONE Allow searching by Kanji
    If the kanji field is set and the reading field is empty, search
-   for words by kanji.  If the reading field is not empty but a search
-   found no results, then try to search by kanji.
+   for words by kanji.
 
    :PROPERTIES:
    :JellyBeans: 2
-   :Done: 0
+   :Done: 2
    :END:
 
 ** TODO Create a dictionary popup for highlighted words

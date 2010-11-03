@@ -1,3 +1,12 @@
+jldrill (0.4.2-14) unstable; urgency=low
+
+  * Allow searching by kanji.  In the edit or add vocabulary window, if the
+    reading is empty and the kanji is set then the dictionary will be searched
+    for the kanji.  If the reading is set then the reading is searched.  
+    This is a bit strange but it will be changed in a future release. 
+
+ -- Mike Charlton <mikekchar@gmail.com>  Tue, 02 Nov 2010 10:50:00 +0900
+
 jldrill (0.4.2-13) unstable; urgency=low
 
   * Sort items in the example window, identify which sense the example is for,

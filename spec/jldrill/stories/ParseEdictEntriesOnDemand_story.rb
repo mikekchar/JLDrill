@@ -20,7 +20,7 @@ module JLDrill::ParseEdictEntriesOnDemand
 
         it "should be able to parse readings" do
             utf = JLDrill::Edict.new
-            utf.parseReading("雨 [あめ] /(n) rain/(P)/").should eql("あめ")
+            utf.parseReading("雨 [あめ] /(n) rain/(P)/").should eql(["雨", "あめ"])
         end
 
         it "should find an entry in an Edict" do

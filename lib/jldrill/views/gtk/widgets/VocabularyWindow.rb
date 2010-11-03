@@ -87,8 +87,8 @@ module JLDrill::Gtk
         end
 
         # Callback from the Search table
-        def search(reading)
-            @view.search(self.reading)
+        def search(kanji, reading)
+            @view.search(self.kanji, self.reading)
         end
 
         # Callback from the Search table
@@ -99,7 +99,7 @@ module JLDrill::Gtk
 
         def createSearchTable
             if @view.dictionaryLoaded?
-                @searchTable = SearchTable.new(self, self.reading)
+                @searchTable = SearchTable.new(self, self.kanji, self.reading)
                 @vbox.add(@searchTable)
                 @vbox.show_all
             end
@@ -115,7 +115,8 @@ module JLDrill::Gtk
             # if we don't have a seach table or the reading has changed
             # create a new search table
             if @searchTable.nil? || 
-                    self.reading != @searchTable.reading
+                (self.reading != @searchTable.reading) ||
+                (self.kanji != @searchTable.kanji)
                 removeSearchTable
                 createSearchTable
             end

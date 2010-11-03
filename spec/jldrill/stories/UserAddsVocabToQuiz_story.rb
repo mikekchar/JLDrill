@@ -198,7 +198,7 @@ module JLDrill::UserAddsVocabToQuiz
             Story.context.dictionaryLoaded?.should be(false)
 
             # Searching should find nothing
-            Story.context.search("あめ").should be_empty
+            Story.context.search(nil, "あめ").should be_empty
 
             # Override with the small test dictionary
             Story.useTestDictionary
@@ -213,11 +213,11 @@ module JLDrill::UserAddsVocabToQuiz
             # that can build on one another.
 
             # Searching for nil or empty string should find nothing
-            Story.context.search(nil).should be_empty
-            Story.context.search("").should be_empty
+            Story.context.search(nil, nil).should be_empty
+            Story.context.search(nil, "").should be_empty
 
             # It should find entries
-            Story.context.search("あめ").should have_at_least(1).item
+            Story.context.search(nil, "あめ").should have_at_least(1).item
         end
     end
 end

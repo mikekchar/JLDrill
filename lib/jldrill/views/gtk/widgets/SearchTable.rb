@@ -3,12 +3,13 @@ require 'jldrill/views/gtk/widgets/ItemTable'
 module JLDrill::Gtk
     class SearchTable < JLDrill::Gtk::ItemTable
 
-        attr_reader :reading
+        attr_reader :kanji, :reading
 
-        def initialize(container, reading)
+        def initialize(container, kanji, reading)
             @container = container
             @reading = reading
-            candidates = @container.search(reading)
+            @kanji = kanji
+            candidates = @container.search(kanji, reading)
             super(candidates) do |item|
                 @container.searchActivated(item)
             end

@@ -130,14 +130,21 @@ module JLDrill
             @parent.loadReference unless @parent.nil?
         end
 
-		def search(reading)
-		    if dictionaryLoaded? && !reading.nil? && !reading.empty?
-		        @parent.reference.search(reading).sort! do |x,y|
-		            x.to_o.reading <=> y.to_o.reading
-		        end
-		    else
-		        []
+		def search(kanji, reading)
+            retVal = []
+
+		    if dictionaryLoaded? 
+                if !reading.nil? && !reading.empty?
+                    retVal = @parent.reference.search(reading).sort! do |x,y|
+                        x.to_o.reading <=> y.to_o.reading
+                    end
+                elsif !kanji.nil? && !kanji.empty?
+                    retVal = @parent.reference.searchKanji(kanji).sort! do |x,y|
+                        x.to_o.kanji <=> y.to_o.kanji
+                    end
+                end
 		    end
+            return retVal
 		end
 			
         def edictLoadUpdated(reference)

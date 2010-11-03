@@ -55,8 +55,8 @@ module JLDrill::Gtk
             @context.exit
         end
 
-        def search(reading)
-            @context.search(reading)
+        def search(kanji, reading)
+            @context.search(kanji, reading)
         end
 
         def preview(item)
