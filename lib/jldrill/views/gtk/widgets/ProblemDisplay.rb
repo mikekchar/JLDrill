@@ -1,6 +1,6 @@
 require 'jldrill/views/gtk/widgets/ProblemPane'
 require 'Context/Views/Gtk/Widgets/VBox'
-require 'jldrill/views/gtk/widgets/PopupFactory'
+require 'jldrill/views/gtk/widgets/KanjiPopupFactory'
 require 'gtk2'
 
 module JLDrill::Gtk
@@ -22,7 +22,7 @@ module JLDrill::Gtk
             @question = QuestionPane.new(self)
             @answer = AnswerPane.new(self)
             @problem = nil
-            @popupFactory = PopupFactory.new(view)
+            @popupFactory = KanjiPopupFactory.new(view)
             packVPane
             connectSignals
         end
@@ -50,6 +50,8 @@ module JLDrill::Gtk
             @question.contents.add_events(Gdk::Event::LEAVE_NOTIFY_MASK)
             @answer.contents.add_events(Gdk::Event::POINTER_MOTION_MASK)
             @answer.contents.add_events(Gdk::Event::LEAVE_NOTIFY_MASK)
+            @question.contents.add_events(Gdk::Event::BUTTON_RELEASE)
+            @answer.contents.add_events(Gdk::Event::BUTTON_RELEASE)
             
             @question.contents.signal_connect('motion_notify_event') do |widget, motion|
                 @popupFactory.notify(widget, motion.window, motion.x, motion.y)
@@ -65,6 +67,13 @@ module JLDrill::Gtk
             
             @answer.contents.signal_connect('leave_notify_event') do
                 @popupFactory.closePopup
+            end
+
+            @question.contents.signal_connect('button_release_event') do
+                print "Got selection\n"
+            end
+            @answer.contents.signal_connect('button_release_event') do
+                print "Got selection\n"
             end
         end
         
