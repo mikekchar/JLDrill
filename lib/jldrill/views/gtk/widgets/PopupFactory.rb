@@ -33,7 +33,9 @@ module JLDrill::Gtk
         
         def createPopup(searchString, x, y)
             closePopup
-            @currentPopup = Popup.new(searchString, getPopupString(searchString), @view.mainWindow, x, y)
+            @currentPopup = Popup.new(searchString, 
+                                      getPopupString(searchString), 
+                                      @view.mainWindow, x, y)
         end
         
         def belowRect(rect)

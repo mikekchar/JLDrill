@@ -333,8 +333,8 @@ module JLDrill
         end
 
         def to_edict
-            return @kanji.to_s + " [" + @reading.to_s + "] " + 
-                "(" + @markers.to_s + ") " + @definitions.to_s
+            return self.kanji.to_s + " [" + self.reading.to_s + "] " + 
+                "(" + self.markers.to_s + ") " + self.definitions.to_s
         end
         
     end

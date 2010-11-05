@@ -15,16 +15,9 @@ module JLDrill::Gtk
             !@currentPopup.nil? && @currentPopup.character == string &&
                 @currentPopup.x == x && @currentPopup.y == y
         end
-        
-        def getPopupString(string)
-            retVal = ""
-            candidates = @context.search(string)
-            if !candidates.nil?
-                retVal = candidates.collect do |vocab|
-                    vocab.to_edict
-                end.join("\n\n")
-            end
-            return retVal
+
+        def getCandidates(string)
+            return @context.search(string)
         end
         
         def getStringAt(widget, window, x, y)
@@ -32,7 +25,7 @@ module JLDrill::Gtk
             coords = widget.window_to_buffer_coords(type, x, y)
             iter, tr = widget.get_iter_at_position(coords[0], coords[1])
             sentenceEnd = iter.buffer.get_iter_at_offset(iter.offset)
-            sentenceEnd.forward_word_end
+            sentenceEnd.forward_sentence_end
             string = iter.get_visible_text(sentenceEnd)
             pos = widget.get_iter_location(iter)
             if (coords[0] > pos.x) && (coords[0] < pos.x + pos.width) &&
@@ -43,6 +36,23 @@ module JLDrill::Gtk
                 [string, screenPos]
             else
                 [nil, nil]
+            end
+        end
+
+        def createPopup(searchString, x, y)
+            closePopup
+            candidates = getCandidates(searchString)
+            if !candidates.nil? && !candidates.empty?
+                if !candidates[0].kanji.nil?
+                    string = candidates[0].kanji
+                else
+                    string = candidates[0].reading
+                end
+                @currentPopup = Popup.new(string,
+                                          candidates.collect do |vocab|
+                                              vocab.to_edict
+                                          end.join("\n\n"),
+                                          @view.mainWindow, x, y)
             end
         end
 

@@ -159,59 +159,9 @@ module JLDrill
             @parent.reference.loaded?
         end
 
-        def searchKanji(kanji)
-            retVal = []
-            if !kanji.nil? && !kanji.empty?
-                retVal = @parent.reference.searchKanji(kanji).sort! do |x,y|
-                    x.to_o.kanji <=> y.to_o.kanji
-                end
-            end
-            return retVal.collect do |item|
-                vocab = item.to_o
-                if kanji.start_with?(vocab.kanji)
-                    vocab
-                else
-                    nil
-                end
-            end.delete_if do |vocab|
-                vocab.nil?
-            end.sort do |x, y|
-                x.kanji.size <=> y.kanji.size
-            end
+        def search(string)
+            return @parent.reference.findStartingWith(string)
         end
-
-        def searchReading(reading)
-            retVal = []
-            if !reading.nil? && !reading.empty?
-                retVal = @parent.reference.search(reading).sort! do |x,y|
-                    x.to_o.reading <=> y.to_o.reading
-                end
-            end
-            return retVal.collect do |item|
-                vocab = item.to_o
-                if reading.start_with?(vocab.reading)
-                    vocab
-                else
-                    nil
-                end
-            end.delete_if do |vocab|
-                vocab.nil?
-            end.sort do |x, y|
-                x.reading.size <=> y.reading.size
-            end
-        end
-
-
-		def search(string)
-            retVal = []
-		    if dictionaryLoaded? 
-                retVal = searchKanji(string)
-                if retVal.empty?
-                    retVal = searchReading(string)
-                end
-		    end
-            return retVal
-		end
 
         def expandWithSavePath(filename)
             if !@parent.quiz.nil?

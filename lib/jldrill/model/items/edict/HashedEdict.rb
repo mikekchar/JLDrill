@@ -151,7 +151,6 @@ module JLDrill
             result = []
             re = JLDrill::StartsWith.new(kanji)
 
-            # If it's bigger than the limit size
             bin = findKanjiBin(kanji)
             result = searchKanjiBin(kanji, bin, re)
             return result
@@ -165,5 +164,30 @@ module JLDrill
                 item.to_o.eql?(vocab)
             end
         end
+
+        # return all the vocab that starts with the first character in
+        # the string 
+        def findStartingWith(string)
+            bin = findKanjiBin(string)
+            if bin.nil?
+                key = findKanjiKey(string)
+                re = JLDrill::StartsWith.new(key)
+                bin = findBinsWith(key, re).flatten
+            end
+            return bin.collect do |pos|
+                v = vocab(pos)
+                if string.start_with?(v.kanji) ||
+                    string.start_with?(v.reading)
+                    v
+                else
+                    nil
+                end
+            end.delete_if do |v|
+                v.nil?
+            end.sort do |x, y|
+                y.kanji.size <=> x.kanji.size
+            end
+        end
+
     end
 end
