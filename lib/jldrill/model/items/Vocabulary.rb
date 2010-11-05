@@ -331,6 +331,11 @@ module JLDrill
         def to_s
             contentString
         end
+
+        def to_edict
+            return @kanji.to_s + " [" + @reading.to_s + "] " + 
+                "(" + @markers.to_s + ") " + @definitions.to_s
+        end
         
     end
 end

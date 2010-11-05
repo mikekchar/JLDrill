@@ -7,8 +7,17 @@ module JLDrill::Gtk
             @view = view
             @context = @view.context
             @currentPopup = nil
+            @blocked = false
         end
-        
+
+        def block
+            @blocked = true
+        end
+
+        def unblock
+            @blocked = false
+        end
+
         def closePopup
             if !@currentPopup.nil?
                 @currentPopup.close
@@ -40,9 +49,6 @@ module JLDrill::Gtk
             pos = [x + origin[0], y + origin[1]]
             widget.translate_coordinates(@view.mainWindow, pos[0], pos[1])
         end
-        
-        def legalChar?(char)
-            !char.nil? && !(char =~ /[a-zA-Z0-9 \s]/)
-        end
+
     end
 end

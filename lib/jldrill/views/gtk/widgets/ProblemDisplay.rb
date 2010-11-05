@@ -1,6 +1,7 @@
 require 'jldrill/views/gtk/widgets/ProblemPane'
 require 'Context/Views/Gtk/Widgets/VBox'
 require 'jldrill/views/gtk/widgets/KanjiPopupFactory'
+require 'jldrill/views/gtk/widgets/VocabPopupFactory'
 require 'gtk2'
 
 module JLDrill::Gtk
@@ -12,7 +13,7 @@ module JLDrill::Gtk
     # The ProblemDisplay also interacts with the PopupFactory
     # to display the kanji/kana Popup when hovering over a character.
     class ProblemDisplay < Context::Gtk::VBox
-        attr_reader :question, :answer
+        attr_reader :question, :answer, :accel
 
         def initialize(view)
             @view = view
@@ -22,9 +23,16 @@ module JLDrill::Gtk
             @question = QuestionPane.new(self)
             @answer = AnswerPane.new(self)
             @problem = nil
-            @popupFactory = KanjiPopupFactory.new(view)
+            @kanjiPopupFactory = KanjiPopupFactory.new(view)
+            @vocabPopupFactory = VocabPopupFactory.new(view)
+            # Default to Kanji Popups
+            @popupFactory = @kanjiPopupFactory
+            @accel = Gtk::AccelGroup.new
             packVPane
             connectSignals
+            afterWidgetIsAdded do
+                gtkWidgetMainWindow.add_accel_group(@accel)
+            end
         end
 
         def removeVPane
@@ -50,8 +58,17 @@ module JLDrill::Gtk
             @question.contents.add_events(Gdk::Event::LEAVE_NOTIFY_MASK)
             @answer.contents.add_events(Gdk::Event::POINTER_MOTION_MASK)
             @answer.contents.add_events(Gdk::Event::LEAVE_NOTIFY_MASK)
-            @question.contents.add_events(Gdk::Event::BUTTON_RELEASE)
-            @answer.contents.add_events(Gdk::Event::BUTTON_RELEASE)
+            
+            @accel.connect(Gdk::Keyval::GDK_space, 0, Gtk::ACCEL_VISIBLE) do
+                @popupFactory.closePopup
+                if @context.dictionaryLoaded?
+                    if @popupFactory == @kanjiPopupFactory
+                        @popupFactory = @vocabPopupFactory
+                    else
+                        @popupFactory = @kanjiPopupFactory
+                    end
+                end
+            end
             
             @question.contents.signal_connect('motion_notify_event') do |widget, motion|
                 @popupFactory.notify(widget, motion.window, motion.x, motion.y)
@@ -67,13 +84,6 @@ module JLDrill::Gtk
             
             @answer.contents.signal_connect('leave_notify_event') do
                 @popupFactory.closePopup
-            end
-
-            @question.contents.signal_connect('button_release_event') do
-                print "Got selection\n"
-            end
-            @answer.contents.signal_connect('button_release_event') do
-                print "Got selection\n"
             end
         end
         

@@ -106,15 +106,33 @@ the task.
    :Done: 2
    :END:
 
-** TODO Create a dictionary popup for highlighted words
-   If the user highlights a word in the display, search for the word
-   in the dictionary and create a popup showing the definition and
-   use of the word.  This story does not do deinflection.
+** TODO Create a dictionary popup 
+   If the dictionary is loaded, the user can select between showing
+   a kanji popup or a vocabulary popup.  If the user selects a vocabulary
+   popup, the system searches for the largest substring starting under 
+   the pointer in the dictionary.  It shows that match first followed
+   by any smaller matches.
+   - [ ] Select all entries from an array that are substrings of a string
+   - [ ] Switch between kanji and vocabulary when the user presses space
+   - [ ] Find the string under the mouse
+   - [ ] Show a popup for vocabulary that searches for the character and
+         then finds the items that are substrings
 
    :PROPERTIES:
    :JellyBeans: 2
    :Done: 0
    :END:
+
+** TODO Use deinflection for dictionary searches 
+   When searching the dictionary the system inflects matches that are
+   verbs or adjectives and if the inflected word matches then it
+   is shown in the matches.
+
+   :PROPERTIES:
+   :JellyBeans: 4
+   :Done: 0
+   :END:
+
 
 ** TODO Insert Popup Before Item
    If the user presses a key (TBD) while a popup is up, an item
