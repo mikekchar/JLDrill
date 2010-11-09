@@ -67,7 +67,7 @@ module JLDrill
 
         # Return an array of bins with keys matching re
         # This will probably be slow
-        def findBinsWith(reading, re)
+        def findBinsWith(re)
             result = []
             @hash.each_key do |key|
                 result.push(@hash[key]) if re.match(key)
@@ -130,7 +130,7 @@ module JLDrill
             else
                 # If it's smaller than the limit size, then
                 # other bins might also match.
-                bins = findBinsWith(reading, re)
+                bins = findBinsWith(re)
                 bins.each do |bin|
                     result += searchBin(reading, bin, re)
                 end
@@ -165,14 +165,27 @@ module JLDrill
             end
         end
 
-        # return all the vocab that starts with the first character in
+        def findReadingStartingWith(string)
+            keys = @hash.keys.delete_if do |key|
+                !string.start_with?(key)
+            end
+            retVal = []
+            keys.each do |key|
+                retVal += @hash[key] 
+            end
+            return retVal
+        end
+
+        # return all the vocab that starts with the same characters as
         # the string 
         def findStartingWith(string)
             bin = findKanjiBin(string)
             if bin.nil?
-                key = findKanjiKey(string)
-                re = JLDrill::StartsWith.new(key)
-                bin = findBinsWith(key, re).flatten
+                bin = []
+            end
+            readingBin = findReadingStartingWith(string)
+            if !readingBin[0].nil?
+                bin += readingBin
             end
             return bin.collect do |pos|
                 v = vocab(pos)
@@ -185,7 +198,17 @@ module JLDrill
             end.delete_if do |v|
                 v.nil?
             end.sort do |x, y|
-                y.kanji.size <=> x.kanji.size
+                if x.kanji.nil?
+                    left = x.reading
+                else
+                    left = x.kanji
+                end
+                if y.kanji.nil?
+                    right = y.reading
+                else
+                    right = y.kanji
+                end
+                right.size <=> left.size
             end
         end
 
