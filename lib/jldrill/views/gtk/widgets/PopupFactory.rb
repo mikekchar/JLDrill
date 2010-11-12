@@ -1,4 +1,4 @@
-require 'jldrill/views/gtk/widgets/Popup'
+require 'jldrill/views/gtk/widgets/KanjiPopup'
 require 'gtk2'
 
 module JLDrill::Gtk
@@ -33,7 +33,7 @@ module JLDrill::Gtk
         
         def createPopup(searchString, x, y)
             closePopup
-            @currentPopup = Popup.new(searchString, 
+            @currentPopup = KanjiPopup.new(searchString, 
                                       getPopupString(searchString), 
                                       @view.mainWindow, x, y)
         end

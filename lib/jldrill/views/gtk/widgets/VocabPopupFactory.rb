@@ -1,4 +1,5 @@
 require 'jldrill/views/gtk/widgets/PopupFactory'
+require 'jldrill/views/gtk/widgets/VocabPopup'
 require 'gtk2'
 
 module JLDrill::Gtk
@@ -12,7 +13,7 @@ module JLDrill::Gtk
         end
 
         def sameString?(string, x, y)
-            !@currentPopup.nil? && @currentPopup.character == string &&
+            !@currentPopup.nil? && # @currentPopup.character == string &&
                 @currentPopup.x == x && @currentPopup.y == y
         end
 
@@ -48,7 +49,7 @@ module JLDrill::Gtk
                 else
                     string = candidates[0].reading
                 end
-                @currentPopup = Popup.new(string,
+                @currentPopup = VocabPopup.new(string,
                                           candidates.collect do |vocab|
                                               vocab.to_edict
                                           end.join("\n\n"),

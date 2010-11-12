@@ -1,3 +1,11 @@
+jldrill (0.4.2-15) unstable; urgency=low
+
+  * Create a new popup for vocabulary.  After you load the dictionary,
+    if you press space the popups will search the dictionary for
+    vocabulary under the mouse similar to rikai-chan
+
+ -- Mike Charlton <mikekchar@gmail.com>  Tue, 10 Nov 2010 11:50:00 +0900
+
 jldrill (0.4.2-14) unstable; urgency=low
 
   * Allow searching by kanji.  In the edit or add vocabulary window, if the

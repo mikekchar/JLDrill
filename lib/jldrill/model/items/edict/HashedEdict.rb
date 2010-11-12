@@ -69,8 +69,11 @@ module JLDrill
         # This will probably be slow
         def findBinsWith(re)
             result = []
-            @hash.each_key do |key|
-                result.push(@hash[key]) if re.match(key)
+            keys = @hash.keys.delete_if do |key|
+                !re.match(key)
+            end
+            keys.each do |key|
+                result.push(@hash[key])
             end
             return result
         end

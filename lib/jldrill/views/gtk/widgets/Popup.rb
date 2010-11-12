@@ -16,41 +16,9 @@ module JLDrill::Gtk
             
             @hbox = Gtk::HBox.new
             @popup.add(@hbox)
-            
-            color = Gdk::Color.parse("lightblue1")
-            @strokes = Gtk::TextView.new
-            @strokes.wrap_mode = Gtk::TextTag::WRAP_NONE
-            @strokes.editable = false
-            @strokes.cursor_visible = false
-            @strokes.set_pixels_above_lines(0)
-            @strokes.set_pixels_below_lines(0)
-            @strokes.modify_base(Gtk::STATE_NORMAL, color)
-            
-            @strokeBuffer = @strokes.buffer
-            @strokeBuffer.create_tag("strokeOrder",
-                                     "size" => 120 * Pango::SCALE,
-                                     "justification" => Gtk::JUSTIFY_CENTER,
-                                     "family" => "KanjiStrokeOrders")
-            @strokeBuffer.insert(@strokeBuffer.start_iter, @character + "\n", "strokeOrder")
-            @hbox.add(@strokes)
-            
-            if !kanjiString.empty?
-                @contents = Gtk::TextView.new
-                @contents.wrap_mode = Gtk::TextTag::WRAP_WORD
-                @contents.editable = false
-                @contents.cursor_visible = false
-                @contents.set_pixels_above_lines(0)
-                @contents.modify_base(Gtk::STATE_NORMAL, color)
-                @contents.set_width_request(250)
-                
-                @buffer = @contents.buffer
-                @buffer.create_tag("popupText", 
-                                   "size" => 10 * Pango::SCALE,
-                                   "justification" => Gtk::JUSTIFY_LEFT)
-                @buffer.insert(@buffer.end_iter, kanjiString, "popupText")
-                @hbox.add(@contents)
-            end
-            
+        end
+        
+        def display
             @popup.move(x, y)
             @popup.show_all
         end

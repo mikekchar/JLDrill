@@ -1,5 +1,6 @@
 require 'Context/Gtk/Widget'
-require 'jldrill/views/gtk/widgets/PopupFactory'
+require 'jldrill/views/gtk/widgets/KanjiPopupFactory'
+require 'jldrill/views/gtk/widgets/VocabPopupFactory'
 require 'gtk2'
 
 module JLDrill::Gtk
@@ -8,9 +9,13 @@ module JLDrill::Gtk
 
         def initialize(view)
             @view = view
+            @context = @view.context
 			@closed = false
-            super("Examples") 
-            @popupFactory = PopupFactory.new(view)
+            super("Examples")
+            @accel = Gtk::AccelGroup.new
+            @kanjiPopupFactory = KanjiPopupFactory.new(view)
+            @vocabPopupFactory = VocabPopupFactory.new(view)
+            @popupFactory = @kanjiPopupFactory
 
             sw = Gtk::ScrolledWindow.new
             sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
@@ -69,6 +74,18 @@ module JLDrill::Gtk
             @contents.signal_connect('leave_notify_event') do
                 @popupFactory.closePopup
             end
+            
+            @accel.connect(Gdk::Keyval::GDK_space, 0, Gtk::ACCEL_VISIBLE) do
+                @popupFactory.closePopup
+                if @context.dictionaryLoaded?
+                    if @popupFactory == @kanjiPopupFactory
+                        @popupFactory = @vocabPopupFactory
+                    else
+                        @popupFactory = @kanjiPopupFactory
+                    end
+                end
+            end
+            
         end
         
         def close

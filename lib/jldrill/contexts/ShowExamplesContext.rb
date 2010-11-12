@@ -94,5 +94,13 @@ module JLDrill
             retVal
         end
 
+        def dictionaryLoaded?
+            @parent.reference.loaded?
+        end
+
+        def search(string)
+            return @parent.reference.findStartingWith(string)
+        end
+
     end
 end
