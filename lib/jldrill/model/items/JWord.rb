@@ -20,6 +20,10 @@ module JLDrill
         def valid?
             return !@reading.empty?
         end
+
+        def toVocab
+            return @dictionary.getVocab(@position)
+        end
     end
 end
 

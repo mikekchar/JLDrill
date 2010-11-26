@@ -27,14 +27,28 @@ module JLDrill
             @dict.parse
 
             # Find all the words beginning with a reading
-            selection = @dict.readingsStartingWith("あ")
+            selection = @dict.findReadingsStartingWith("あ")
             selection.size.should eql(4106)
-            selection = @dict.readingsStartingWith("あめ")
+            selection = @dict.findReadingsStartingWith("あめ")
             selection.size.should eql(58)
-            selection = @dict.readingsStartingWith("あめが")
+            selection = @dict.findReadingsStartingWith("あめが")
             selection.size.should eql(5)
-            selection = @dict.readingsStartingWith("あめがbogus")
+            selection = @dict.findReadingsStartingWith("あめがbogus")
             selection.size.should eql(0)
+
+            # Should be able to find an item
+            vocab = Vocabulary.create("/Kanji: 青い/Reading: あおい/Definitions: (1) blue,green,(2) pale,(3) unripe,inexperienced/Markers: adj-i,P")
+            @dict.include?(vocab).should be_true
+            # One character words should work as well
+            vocab = Vocabulary.create("/Kanji: 目/Reading: め/Definitions: (1) eye,eyeball,(2) eyesight,(3) look,(4) experience,(5) viewpoint,(6) ordinal number suffix,(7) somewhat,-ish/Markers: n,suf,suf,P")
+            @dict.include?(vocab).should be_true
+
+            # Should not find things that aren't there
+            vocab = Vocabulary.create("/Kanji: 青い/Reading: あおい/Definitions: (1) blue,green,(3) unripe,inexperienced/Markers: adj-i,P")
+            @dict.include?(vocab).should be_false
+            # One character words should work as well
+            vocab = Vocabulary.create("/Kanji: 目/Reading: め/Definitions: (1) eye,eyeball,(2) eyesight,(3) look,(4) viewpoint,(6) ordinal number suffix,(7) somewhat,-ish/Markers: n,suf,suf,P")
+            @dict.include?(vocab).should be_false
         end
     end
 end
