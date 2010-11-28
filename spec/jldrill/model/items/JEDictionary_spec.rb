@@ -36,6 +36,16 @@ module JLDrill
             selection = @dict.findReadingsStartingWith("あめがbogus")
             selection.size.should eql(0)
 
+            # Find all the words beginning with a reading
+            selection = @dict.findKanjiStartingWith("目")
+            selection.size.should eql(337)
+            selection = @dict.findKanjiStartingWith("目を")
+            selection.size.should eql(29)
+            selection = @dict.findKanjiStartingWith("目を覚ます")
+            selection.size.should eql(1)
+            selection = @dict.findKanjiStartingWith("目をさますbogus")
+            selection.size.should eql(0)
+
             # Should be able to find an item
             vocab = Vocabulary.create("/Kanji: 青い/Reading: あおい/Definitions: (1) blue,green,(2) pale,(3) unripe,inexperienced/Markers: adj-i,P")
             @dict.include?(vocab).should be_true
@@ -49,6 +59,12 @@ module JLDrill
             # One character words should work as well
             vocab = Vocabulary.create("/Kanji: 目/Reading: め/Definitions: (1) eye,eyeball,(2) eyesight,(3) look,(4) viewpoint,(6) ordinal number suffix,(7) somewhat,-ish/Markers: n,suf,suf,P")
             @dict.include?(vocab).should be_false
+
+            # Should be able to find words that are at the start of a string
+            @dict.findReadingsThatStart("めをさます").size.should eql(5)
+            @dict.findKanjiThatStart("目を覚ます").size.should eql(3)
+            @dict.findWordsThatStart("めをさます").size.should eql(5)
+            @dict.findWordsThatStart("目を覚ます").size.should eql(3)
         end
     end
 end

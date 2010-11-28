@@ -24,6 +24,10 @@ module JLDrill
         def toVocab
             return @dictionary.getVocab(@position)
         end
+
+        def to_s
+            return @dictionary.lines[@position]
+        end
     end
 end
 

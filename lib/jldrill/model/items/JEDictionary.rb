@@ -19,6 +19,7 @@ module JLDrill
         LINE_RE = Regexp.new(LINE_RE_TEXT)
         GET_JWORD_RE = Regexp.new('^([^\[\s]*)\s+(\[(.*)\]\s+)?')
         KANA_RE = /（(.*)）/
+        FIRST_CHAR_RE = Regexp.new("^(.)", "U")
 
         def initialize
             super
@@ -188,10 +189,33 @@ module JLDrill
             return bin
         end
 
+        # Find the items that may have been hashed with this kanji.
+        def findBinWithKanji(kanji)
+            if kanji.size >= 6
+                bin = (@kanjiHash[kanji[0..5]] ||= [])
+            else
+                keys = @kanjiHash.keys.find_all do |key|
+                    key.start_with?(kanji)
+                end
+                bin = []
+                keys.each do |key|
+                    bin += @kanjiHash[key]
+                end
+            end
+            return bin
+        end
+
         # Return all the JWords that have a reading starting with reading.
         def findReadingsStartingWith(reading)
             return findBinWithReading(reading).find_all do |word|
                 word.reading.start_with?(reading)
+            end
+        end
+
+        # Return all the JWords that have kanji starting with kanji.
+        def findKanjiStartingWith(kanji)
+            return findBinWithKanji(kanji).find_all do |word|
+                word.kanji.start_with?(kanji)
             end
         end
 
@@ -207,6 +231,42 @@ module JLDrill
             return findReading(vocabulary.reading).any? do |word|
                 word.toVocab.eql?(vocabulary)
             end
+        end
+
+        # Find the first Unicode character of a string
+        # This is the only way I know how to do it in Ruby 1.8.X
+        def getFirstChar(string)
+            retVal = ""
+            if string =~ FIRST_CHAR_RE
+                retVal = $1
+            end
+            return retVal
+        end
+
+        # Return all the words that occur at the begining of reading
+        def findReadingsThatStart(reading)
+            findBinWithReading(getFirstChar(reading)).find_all do |word|
+                reading.start_with?(word.reading)
+            end
+        end
+
+        # Return all the words that occur at the begining of kanji
+        def findKanjiThatStart(kanji)
+            findBinWithKanji(getFirstChar(kanji)).find_all do |word|
+                kanji.start_with?(word.kanji)
+            end
+        end
+
+        # Return all the words that occur at the begining of the string
+        # These are sorted by size with the largest finds given first
+        def findWordsThatStart(string)
+            kanji = findKanjiThatStart(string).sort do |x, y|
+                y.kanji <=> x.kanji
+            end
+            reading = findReadingsThatStart(string).sort do |x, y|
+                y.reading <=> x.reading
+            end
+            return kanji + reading
         end
     end
 end
