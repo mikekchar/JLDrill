@@ -1,6 +1,7 @@
 require 'Context/Context'
 require 'Context/Bridge'
 require 'jldrill/model/Config'
+require 'jldrill/model/items/JEDictionary'
 require 'jldrill/contexts/LoadFileContext'
 require 'jldrill/contexts/GetFilenameContext'
 require 'jldrill/contexts/LoadQuizFromEdictContext.rb'
@@ -35,7 +36,7 @@ module JLDrill
         end
 
         def loadAsEdict(quiz, filename)
-            edict = Edict.new
+            edict = JEDictionary.new
             @loadFileContext.onExit do
                 @loadQuizFromEdictContext.onExit do
                     exitLoadQuizContext

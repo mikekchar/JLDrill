@@ -99,7 +99,7 @@ module JLDrill
         end
 
         def search(string)
-            return @parent.reference.findStartingWith(string)
+            return @parent.reference.findWordsThatStart(string)
         end
 
     end

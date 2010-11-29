@@ -2,8 +2,7 @@ require 'Context/Context'
 require 'Context/Bridge'
 require 'Context/View'
 require 'jldrill/model/Quiz/Quiz'
-require 'jldrill/model/items/edict/Edict'
-require 'jldrill/model/items/edict/HashedEdict'
+require 'jldrill/model/items/JEDictionary'
 require 'jldrill/contexts/RunCommandContext'
 require 'jldrill/contexts/LoadReferenceContext'
 require 'jldrill/contexts/SetOptionsContext'
@@ -67,7 +66,7 @@ module JLDrill
             @loadQuizContext = LoadQuizContext.new(viewBridge)
             @loadKanjiContext = LoadKanjiContext.new(viewBridge)
             @appendFileContext = AppendFileContext.new(viewBridge)
-			@reference = HashedEdict.new
+			@reference = JEDictionary.new
 			@kanji = KanjiFile.new
 			@radicals = RadicalFile.new
             @kana = KanaFile.new

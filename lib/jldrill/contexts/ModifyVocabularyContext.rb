@@ -1,6 +1,7 @@
 require 'Context/Context'
 require 'Context/Bridge'
 require 'Context/View'
+require 'jldrill/model/Item'
 
 module JLDrill
     class ModifyVocabularyContext < Context::Context
@@ -135,13 +136,16 @@ module JLDrill
 
 		    if dictionaryLoaded? 
                 if !reading.nil? && !reading.empty?
-                    retVal = @parent.reference.search(reading).sort! do |x,y|
-                        x.to_o.reading <=> y.to_o.reading
+                    retVal = @parent.reference.findReadingsStartingWith(reading).sort! do |x,y|
+                        x.reading <=> y.reading
                     end
                 elsif !kanji.nil? && !kanji.empty?
-                    retVal = @parent.reference.searchKanji(kanji).sort! do |x,y|
-                        x.to_o.kanji <=> y.to_o.kanji
+                    retVal = @parent.reference.findKanjiStartingWith(kanji).sort! do |x,y|
+                        x.kanji <=> y.kanji
                     end
+                end
+                retVal = retVal.collect do |word|
+                    Item.create(word.toVocab.to_s)
                 end
 		    end
             return retVal

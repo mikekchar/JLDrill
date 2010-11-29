@@ -50,8 +50,8 @@ module JLDrill::Gtk
                     string = candidates[0].reading
                 end
                 @currentPopup = VocabPopup.new(string,
-                                          candidates.collect do |vocab|
-                                              vocab.to_edict
+                                          candidates.collect do |word|
+                                              word.to_s
                                           end.join("\n\n"),
                                           @view.mainWindow, x, y)
             end

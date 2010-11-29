@@ -23,6 +23,7 @@ module JLDrill
 
         def initialize
             super
+            @stepsize = 10000
         end
 
         # Reset the dictionary back to empty
@@ -233,26 +234,16 @@ module JLDrill
             end
         end
 
-        # Find the first Unicode character of a string
-        # This is the only way I know how to do it in Ruby 1.8.X
-        def getFirstChar(string)
-            retVal = ""
-            if string =~ FIRST_CHAR_RE
-                retVal = $1
-            end
-            return retVal
-        end
-
         # Return all the words that occur at the begining of reading
         def findReadingsThatStart(reading)
-            findBinWithReading(getFirstChar(reading)).find_all do |word|
+            findBinWithReading(reading[0..2]).find_all do |word|
                 reading.start_with?(word.reading)
             end
         end
 
         # Return all the words that occur at the begining of kanji
         def findKanjiThatStart(kanji)
-            findBinWithKanji(getFirstChar(kanji)).find_all do |word|
+            findBinWithKanji(kanji[0..2]).find_all do |word|
                 kanji.start_with?(word.kanji)
             end
         end
