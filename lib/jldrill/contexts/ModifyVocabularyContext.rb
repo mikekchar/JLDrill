@@ -136,11 +136,11 @@ module JLDrill
 
 		    if dictionaryLoaded? 
                 if !reading.nil? && !reading.empty?
-                    retVal = @parent.reference.findReadingsStartingWith(reading).sort! do |x,y|
+                    retVal = @parent.reference.findReadingsStartingWith(reading).sort do |x,y|
                         x.reading <=> y.reading
                     end
                 elsif !kanji.nil? && !kanji.empty?
-                    retVal = @parent.reference.findKanjiStartingWith(kanji).sort! do |x,y|
+                    retVal = @parent.reference.findKanjiStartingWith(kanji).sort do |x,y|
                         x.kanji <=> y.kanji
                     end
                 end

@@ -7,7 +7,10 @@ module JLDrill::Gtk
         def initialize(vocab)
             super()
             @acceptReadingBlock = nil
-            @kanjiField = createField("Kanji: ", vocab.kanji)
+            @acceptKanjiBlock = nil
+            @kanjiField = createField("Kanji: ", vocab.kanji) do
+                @acceptKanjiBlock.call
+            end
             @hintField = createField("Hint: ", vocab.hint)
             @readingField = createField("Reading: ", vocab.reading) do
                 @acceptReadingBlock.call
@@ -191,6 +194,9 @@ module JLDrill::Gtk
             @acceptReadingBlock = block
         end
 
+        def setAcceptKanji(&block)
+            @acceptKanjiBlock = block
+        end
         def focusReading
             readingWidget.grab_focus
         end

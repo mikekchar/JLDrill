@@ -71,6 +71,10 @@ module JLDrill::Gtk
             @vocabView.setAcceptReading do
                 updateSearchTable
             end
+
+            @vocabView.setAcceptKanji do
+                updateSearchTable
+            end
         end
 
         def close
