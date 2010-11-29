@@ -23,7 +23,7 @@ module JLDrill
 
         def initialize
             super
-            @stepsize = 10000
+            @stepSize = 1000
         end
 
         # Reset the dictionary back to empty
@@ -42,41 +42,6 @@ module JLDrill
         # Returns true if the line at the given index is UTF8
         def isUTF8?(index)
             !Kconv.isutf8(@lines[index]).nil?
-        end
-
-        # Returns true if the line at the given index is EUC 
-        def isEUC?(index)
-            !Kconv.iseuc(@lines[index]).nil?
-        end
-
-        # returns true if the lines are UTF8
-        def linesAreUTF8?
-            isUTF8 = nil
-            index = 0
-            while (index < @lines.size) && isUTF8.nil?
-                utf = isUTF8?(index)
-                euc = isEUC?(index)
-                if !utf && !euc
-                    isUTF8 = false
-                    # It's neither UTF8 nor EUC.  We'll have to hope
-                    # that conversion works. exit loop.
-                elsif utf && !euc
-                    isUTF8 = true
-                    # it is UTF8. exit loop.
-                elsif euc && !utf
-                    isUTF8 = false
-                    # it is EUC. exit loop.
-                else
-                    # can't tell yet.  Keep going
-                    index += 1
-                end
-            end
-            if isUTF8.nil?
-                isUTF8 = true
-                # We got to the bottom and determined that UTF8
-                # will work.  So use it.
-            end
-            return isUTF8
         end
 
         # Parse the line at the given position and return the a Vocabulary
@@ -108,25 +73,15 @@ module JLDrill
             return retVal                        
         end
 
-        # returns the line as UTF8
-        def toUTF8(line)
-            NKF.nkf("-Ewxm0", line)
-        end
-
-        # Transforms all the lines to UTF8
-        def linesToUTF8
-            if !linesAreUTF8?
-                0.upto(lines.size - 1) do |i|
-                    lines[i] = toUTF8(lines[i])
-                end
-            end
+        # modifies the line at position to be UTF8
+        def toUTF8(position)
+            lines[position] = NKF.nkf("-Ewxm0", lines[position])
         end
 
         # Read all the lines into the buffer.
         # This method also converts them the UTF8
         def readLines
             super
-            linesToUTF8
         end
 
         # Compensate for files that have missing kanji or
@@ -155,6 +110,9 @@ module JLDrill
 
         # Create the indeces for the item at the current line.
         def parseEntry
+            if !isUTF8?(@parsed)
+                toUTF8(@parsed)
+            end
             if lines[@parsed] =~ GET_JWORD_RE
                 word = JWord.new
                 word.kanji = $1
@@ -208,15 +166,25 @@ module JLDrill
 
         # Return all the JWords that have a reading starting with reading.
         def findReadingsStartingWith(reading)
-            return findBinWithReading(reading).find_all do |word|
-                word.reading.start_with?(reading)
+            bin = findBinWithReading(reading)
+            if reading.size > 6 
+                return bin.find_all do |word|
+                    word.reading.start_with?(reading)
+                end
+            else
+                return bin
             end
         end
 
         # Return all the JWords that have kanji starting with kanji.
         def findKanjiStartingWith(kanji)
-            return findBinWithKanji(kanji).find_all do |word|
-                word.kanji.start_with?(kanji)
+            bin = findBinWithKanji(kanji)
+            if kanji.size > 6 
+                return bin.find_all do |word|
+                    word.kanji.start_with?(kanji)
+                end
+            else
+                return bin
             end
         end
 
