@@ -15,7 +15,7 @@ module JLDrill
 		end
 
         def getFilename
-            return "Merging #{@edict.shortFilename} data"
+            return "data from #{@edict.shortFilename}"
         end
 
         def readFile
@@ -26,9 +26,15 @@ module JLDrill
                 limit = pos + @quiz.stepSize
                 if limit > size then limit = size end
                 while (pos < limit)
-                    @quiz.contents.add(@edict.vocab(pos), 0)
+                    vocab = @edict.vocab(pos)
+                    if !vocab.nil?
+                        @quiz.contents.add(@edict.vocab(pos), 0)
+                    end
                     pos += 1
                     @mainView.update(pos.to_f / size.to_f)
+                end
+                if pos >= size
+                    exitLoadQuizFromEdictContext
                 end
                 pos >= size
             end
@@ -42,6 +48,10 @@ module JLDrill
             @quiz = quiz
             @edict = edict
             super(parent)
+        end
+
+        def exitLoadQuizFromEdictContext
+            self.exit
         end
 
         def exit

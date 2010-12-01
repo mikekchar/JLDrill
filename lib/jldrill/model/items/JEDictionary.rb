@@ -73,7 +73,7 @@ module JLDrill
                 retVal = Vocabulary.new(kanji, reading, english.allDefinitions,
                                    english.allTypes, hint, position)
             else
-                Context::Log::warning("JLDrill::Edict", 
+                Context::Log::warning("JLDrill::JEDictionary", 
                                       "Could not parse #{position}")
             end             
             return retVal                        
@@ -144,8 +144,6 @@ module JLDrill
                 block.call(word.toVocab)
             end
         end
-
-
 
         # Create the indeces for the item at the current line.
         def parseEntry
