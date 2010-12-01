@@ -15,6 +15,8 @@ module JLDrill
     # The JWords can then further parse the entries to
     # create Meanings.
 	class JEDictionary < DataFile
+        attr_reader :jWords
+
         LINE_RE_TEXT = '^([^\[\s]*)\s+(\[(.*)\]\s+)?\/(([^\/]*\/)+)\s*$'
         LINE_RE = Regexp.new(LINE_RE_TEXT)
         GET_JWORD_RE = Regexp.new('^([^\[\s]*)\s+(\[(.*)\]\s+)?')
@@ -37,6 +39,10 @@ module JLDrill
         # The number of items we have indexed in the dictionary.
         def dataSize
             return @jWords.size
+        end
+
+        def length
+            return dataSize
         end
 
         # Returns true if the line at the given index is UTF8
@@ -108,21 +114,42 @@ module JLDrill
             (@kanjiHash[word.kanji[0..5]] ||= []).push(word)
         end
 
-        # Create the indeces for the item at the current line.
-        def parseEntry
-            if !isUTF8?(@parsed)
-                toUTF8(@parsed)
+        def parseLine(index)
+            if !isUTF8?(index)
+                toUTF8(index)
             end
-            if lines[@parsed] =~ GET_JWORD_RE
+            if lines[index] =~ GET_JWORD_RE
                 word = JWord.new
                 word.kanji = $1
                 word.reading = $3
                 word.dictionary = self
-                word.position = @parsed
+                word.position = index
                 @jWords[@jWords.size] = word
                 word = hackWord(word)
                 hashWord(word)
             end
+        end
+
+        def vocab(index)
+            word = @jWords[index]
+            if !word.nil?
+                return word.toVocab
+            else
+                return nil
+            end
+        end
+
+        def eachVocab(&block)
+            @jWords.each do |word|
+                block.call(word.toVocab)
+            end
+        end
+
+
+
+        # Create the indeces for the item at the current line.
+        def parseEntry
+            parseLine(@parsed)
             @parsed += 1
         end
 

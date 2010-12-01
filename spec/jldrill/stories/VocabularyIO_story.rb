@@ -2,7 +2,7 @@
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/contexts/EditVocabularyContext'
 require 'jldrill/model/items/Vocabulary'
-require 'jldrill/model/items/edict/Edict'
+require 'jldrill/model/items/JEDictionary'
 
 # This story discusses the input and output of data in
 # Vocabulary.  As I slowly removed my assumptions about
@@ -157,9 +157,9 @@ module JLDrill::VocabularyIO
             edictString = "閉じる [とじる] " + 
                 "/(v1) to close (e.g., book, eyes, meeting, etc.)" +
                 "/to shut/(P)/\n"
-            edict = JLDrill::Edict.new
+            edict = JLDrill::JEDictionary.new
             edict.lines = [edictString]
-            edict.parseLine(edictString, 0).should_not be_nil
+            edict.parseLine(0).should_not be_nil
             v = JLDrill::Vocabulary.create("/Kanji: 閉じる" + 
                 "/Reading: とじる" +
                 "/Definitions: to close (e.g.\\, book\\, eyes\\, meeting\\, etc.)," +

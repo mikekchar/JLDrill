@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'jldrill/model/Bin'
 require 'jldrill/model/items/Vocabulary'
-require 'jldrill/model/items/edict/Edict'
+require 'jldrill/model/items/JEDictionary'
 
 module JLDrill
 
@@ -159,9 +159,9 @@ module JLDrill
         it "should parse commas properly" do
             v1 = Vocabulary.create("/Kanji: 鈍い/Reading: にぶい/Definitions: dull (e.g.\\, a knife),thickheaded,slow (opposite of fast),stupid/Markers: adj,P")
             line = "鈍い [にぶい] /(adj) dull (e.g., a knife)/thickheaded/slow (opposite of fast)/stupid/(P)/"
-            edict = Edict.new
+            edict = JEDictionary.new
             edict.lines = [line]
-            edict.parseLine(line, 0)
+            edict.parseLine(0)
             edict.vocab(0).should eql(v1)
             v2 = edict.vocab(0).clone
             edict.vocab(0).should eql(v2)
