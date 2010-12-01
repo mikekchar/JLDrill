@@ -42,7 +42,7 @@ module JLDrill
 
         # Return the JLDrill ItemType for this item
         def itemType
-            return ItemFactory::find("Vocabulary")
+            return ItemFactory::find(self.class)
         end
 
         # True if the two vocabulary are discussing the same word

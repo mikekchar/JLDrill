@@ -84,7 +84,7 @@ module JLDrill
 
         # Set the value of the item by parsing the string
         def parse(string)
-            @itemType = ItemFactory::find("Vocabulary")
+            @itemType = ItemFactory::find(Vocabulary)
             @contents = string
             parseLine(@contents)
             @hash = self.to_o.hash

@@ -97,7 +97,7 @@ module JLDrill::Gtk
 
         # Callback from the Search table
         def searchActivated(item)
-            @vocabView.setDictionaryVocab(item.to_o)
+            @vocabView.setDictionaryVocab(item.toVocab)
             @addButton.grab_focus
         end
 

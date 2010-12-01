@@ -144,9 +144,6 @@ module JLDrill
                         x.kanji <=> y.kanji
                     end
                 end
-                retVal = retVal.collect do |word|
-                    Item.create(word.toVocab.to_s)
-                end
 		    end
             return retVal
 		end
