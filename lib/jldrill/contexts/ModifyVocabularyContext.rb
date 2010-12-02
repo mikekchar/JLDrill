@@ -105,7 +105,7 @@ module JLDrill
         # the tests can catch without screwing up the shutdown of
         # the context.
         def close
-            exit
+            self.exit
         end
 		
         def newProblemUpdated(problem)

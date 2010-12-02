@@ -17,6 +17,7 @@ module JLDrill
             @dictionary = nil
             @position = -1
             @itemType = ItemFactory::find(self.class)
+            @vocab = nil
         end
 
         # The JWord is valid if there is a reading.  There doesn't need to
@@ -26,7 +27,10 @@ module JLDrill
         end
 
         def toVocab
-            return @dictionary.getVocab(@position)
+            if @vocab.nil?
+                @vocab = @dictionary.getVocab(@position)
+            end
+            return @vocab
         end
 
         def to_s

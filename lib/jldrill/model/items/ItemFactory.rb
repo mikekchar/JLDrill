@@ -16,7 +16,7 @@ module JLDrill
                 retVal = ItemType.new(type.to_s, type)
                 retVal.headings = [["kanji", "Kanji", 90],
                                    ["reading", "Reading", 130],
-                                   ["to_s", "Meaning", 230]]
+                                   ["toVocab.definitions", "Meaning", 230]]
             end
             return retVal
         end

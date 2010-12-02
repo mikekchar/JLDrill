@@ -36,13 +36,12 @@ also be Windows packaging since I've started to get Windows users.
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2010-10-01 Fri>
-  :CurrentDate:  <2010-11-02 Tue>
+  :CurrentDate:  <2010-12-02 Thu>
   :EndDate: <2010-12-10 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
   :END:
-
 
 ** Velocity Table
 
@@ -61,7 +60,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.2 |    16 |    7 |    43.8 |    0.22 |   0.23 |
+| * Version 0.4.2 |    22 |   12 |    54.5 |    0.19 |   0.31 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -106,21 +105,32 @@ the task.
    :Done: 2
    :END:
 
-** TODO Create a dictionary popup 
+** DONE Create a dictionary popup [4/4]
    If the dictionary is loaded, the user can select between showing
    a kanji popup or a vocabulary popup.  If the user selects a vocabulary
    popup, the system searches for the largest substring starting under 
    the pointer in the dictionary.  It shows that match first followed
    by any smaller matches.
-   - [ ] Select all entries from an array that are substrings of a string
-   - [ ] Switch between kanji and vocabulary when the user presses space
-   - [ ] Find the string under the mouse
-   - [ ] Show a popup for vocabulary that searches for the character and
+   - [X] Select all entries from an array that are substrings of a string
+   - [X] Switch between kanji and vocabulary when the user presses space
+   - [X] Find the string under the mouse
+   - [X] Show a popup for vocabulary that searches for the character and
          then finds the items that are substrings
 
    :PROPERTIES:
    :JellyBeans: 2
-   :Done: 0
+   :Done: 2
+   :END:
+
+** DONE Speed up dictionary searches [3/3]
+   The dictionary is too slow to use in the popup for certain items.
+   - [X] Rewrite Edict to get rid of cruft
+   - [X] Make SearchTable show the correct meaning
+   - [X] Cache the meanings
+
+   :PROPERTIES:
+   :JellyBeans: 3
+   :Done: 3
    :END:
 
 ** TODO Use deinflection for dictionary searches 
@@ -130,17 +140,6 @@ the task.
 
    :PROPERTIES:
    :JellyBeans: 4
-   :Done: 0
-   :END:
-
-
-** TODO Insert Popup Before Item
-   If the user presses a key (TBD) while a popup is up, an item
-   contiaining the information in the popup is added to the quiz
-   immediately before the current item.
-
-   :PROPERTIES:
-   :JellyBeans: 1
    :Done: 0
    :END:
 
@@ -376,6 +375,16 @@ the task.
 Items in the backlog aren't organized in any specific way.
 They are simply ideas that may or may not make it into
 an upcoming development version.
+
+** TODO Insert Popup Before Item
+   If the user presses a key (TBD) while a popup is up, an item
+   contiaining the information in the popup is added to the quiz
+   immediately before the current item.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
 
 ** TODO Start new drills in Preview mode
    When a drill has been loaded for the first time (or after a reset), 
