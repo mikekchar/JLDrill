@@ -27,6 +27,7 @@ require 'jldrill/model/moji/Radical'
 require 'jldrill/model/moji/Kanji'
 require 'jldrill/model/moji/Kana'
 require 'jldrill/model/Tanaka'
+require 'jldrill/model/DeinflectionRules'
 
 module JLDrill
 
@@ -42,7 +43,7 @@ module JLDrill
                     :loadQuizContext, :loadKanjiContext,
                     :appendFileContext,
 	                :reference, :quiz, :kanji, :radicals, :kana,
-                    :inTests, :tanaka
+                    :inTests, :tanaka, :deinflect
 
 	    attr_writer :quiz, :inTests
 		
@@ -75,6 +76,7 @@ module JLDrill
             @quiz.setNeedsSave(false)
             @inTests = false
 			@tanaka = Tanaka::Reference.new
+            @deinflect = DeinflectionRulesFile.new
 		end
 
         class MainWindowView < Context::View
@@ -222,8 +224,8 @@ module JLDrill
 		
 		def loadReference
             if !@loadReferenceContext.isEntered?
-                @loadReferenceContext.enter(self, 
-                                            @reference, @quiz.options)
+                @loadReferenceContext.enter(self, @reference, @deinflect, 
+                                            @quiz.options)
             end
 		end
 

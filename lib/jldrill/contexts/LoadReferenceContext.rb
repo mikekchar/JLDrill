@@ -35,9 +35,21 @@ module JLDrill
                                     Config::DICTIONARY_DIR)
         end
 
-        def loadReference(reference, filename)
+        def getDeinflectionFilename
+            return File.expand_path(Config::DEINFLECTION_NAME,
+                                    Config::DEINFLECTION_DIR)
+        end
+
+        def loadDeinflection(deinflect, filename)
             @loadFileContext.onExit do
-               exitLoadReferenceContext 
+                exitLoadReferenceContext
+            end
+            @loadFileContext.enter(self, deinflect, filename)
+        end
+
+        def loadReference(reference, deinflect, filename)
+            @loadFileContext.onExit do
+               loadDeinflection(deinflect, getDeinflectionFilename) 
             end
             @loadFileContext.enter(self, reference, filename)
         end
@@ -46,9 +58,9 @@ module JLDrill
             self.exit
         end
 
-        def enter(parent, reference, options)
+        def enter(parent, reference, deinflect, options)
             super(parent)
-            loadReference(reference, getFilename(options))
+            loadReference(reference, deinflect, getFilename(options))
         end
 
     end
