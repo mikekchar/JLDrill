@@ -1,4 +1,5 @@
 require 'jldrill/model/DataFile'
+require 'Context/Log'
 
 module JLDrill
     module Deinflection
@@ -72,7 +73,8 @@ module JLDrill
                     if !reason.nil?
                         @reasons.push(reason)
                     else
-                        print "Can't parse #{string}\n"
+                        Context::Log::warning("JLDrill::DeinflectionRules",
+                                              "Could not parse #{string}")
                     end
                 end
             end

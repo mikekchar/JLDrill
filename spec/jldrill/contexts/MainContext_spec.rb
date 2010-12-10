@@ -35,7 +35,7 @@ module JLDrill
 		end
 
 		it "should enter the loadReferenceContext when loading the reference" do
-		    @context.loadReferenceContext.should_receive(:enter).with(@context, @context.reference, @context.quiz.options)
+		    @context.loadReferenceContext.should_receive(:enter).with(@context, @context.reference, @context.deinflect, @context.quiz.options)
 		    @context.loadReference
 		end
 
