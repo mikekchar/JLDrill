@@ -29,61 +29,113 @@ module JLDrill
         # array.
         class Rule
 
-            attr_reader :original, :replaceWith, :reasonIndex
+            attr_reader :original, :replaceWith, :reason
 
             RULE_RE = /^([^\t]+)\t([^\t]+)\t([^\t]+)\t([^\t]+)/
 
-            def initialize(original, replaceWith, reasonIndex)
+            def initialize(original, replaceWith, reason)
                 @original = original
                 @replaceWith = replaceWith
-                @reasonIndex = reasonIndex
+                @reason = reason
             end
 
-            def Rule::parse(string)
+            def Rule::parse(string, reasons)
                 retVal = nil
                 if RULE_RE.match(string)
-                    retVal = Rule.new($1, $2, $4.to_i)
+                    retVal = Rule.new($1, $2, reasons[$4.to_i])
                 end
                 return retVal
             end
 
             def to_s
-                @original + "\t" + @replaceWith + "\t" + reasonIndex.to_s
+                @original + "\t" + @replaceWith + "\t" + reason
             end
         end
 
-        class Match
-            attr_reader :root, :dictionary, :reasons
+        class Transform
 
-            def initialize(root, dictionary, reasons)
+            attr_reader :original, :root, :rule
+
+            def initialize(orig, root, rule)
+                @orignal = orig
                 @root = root
-                @dictionary = dictionary
-                @reasons = reasons
+                @rule = rule
             end
 
-            def apply(rule, reason)
+            def Transform.start(string)
+                Transform.new(string, string, nil)
+            end
+
+            def dictionary
+                retVal = @root
+                if !@rule.nil?
+                    retVal = @root + @rule.replaceWith
+                end
+                return retVal
+            end
+
+            def to_s
+                @orignal + " " + @root + " " + @rule.to_s
+            end
+        end
+
+        class Match < Array
+
+            def initialize(transform, history=nil)
+                if !history.nil?
+                    super(history)
+                else
+                    super()
+                end
+                push(transform)
+            end
+
+            def Match.start(string)
+                Match.new(Transform.start(string))
+            end
+
+            def hasReason(rule)
+                any? do |transform|
+                    if !transform.nil? && !transform.rule.nil?
+                        transform.rule.reason.eql?(rule.reason)
+                    else
+                        false
+                    end
+                end
+            end
+
+            def latest
                 retVal = nil
-                if !@reasons.include?(reason)
+                if !empty?
+                    retVal = self[size - 1]
+                end
+                return retVal
+            end
+
+            def apply(rule)
+                retVal = nil
+                if !latest.nil? && !hasReason(rule)
                     re = Regexp.new("(.*)#{rule.original}")
-                    if re.match(@dictionary)
-                        retVal = Match.new($1,
-                                           $1 + rule.replaceWith, 
-                                           [@reasons, reason + "(#{$1}#{rule.original})"].flatten)
+                    if re.match(latest.dictionary)
+                        transform = Transform.new(latest.dictionary, $1, rule)
+                        retVal = Match.new(transform, self)
                     end
                 end
                 return retVal
             end
 
-            def reason
-                retVal = ""
-                if !@reasons.empty?
-                    retVal = @reasons.join(" > ")
-                end
-                return retVal
+            def transforms
+                collect do |transform|
+                    if !transform.rule.nil?
+                        "(#{transform.root}#{transform.rule.original}) #{transform.rule.reason}: #{transform.dictionary}"
+                    else
+                        transform.dictionary
+                    end
+                end.join(" > ")
             end
 
             def to_s
-                return @dictionary + " (" + @dictionary + "): " + reason
+                transforms
             end
         end
     end
@@ -104,7 +156,7 @@ module JLDrill
                 # The first line of the file must be discarded
                 @readHeader = true
             else
-                entry = Deinflection::Rule.parse(string)
+                entry = Deinflection::Rule.parse(string, @reasons)
                 if(!entry.nil?)
                     @rules.push(entry)
                 else
@@ -123,19 +175,14 @@ module JLDrill
             return @rules.size + @reasons.size
         end
 
-        def reason(rule)
-            return @reasons[rule.reasonIndex]
-        end
-
         def match(string)
-            retVal = [Deinflection::Match.new(string, string, [])]
+            retVal = [Deinflection::Match.start(string)]
             i = 0
             while(i < retVal.size) do
                 @rules.each do |rule|
-                    candidate = retVal[i]
-                    new = candidate.apply(rule, reason(rule))
+                    new = retVal[i].apply(rule)
                     if !new.nil? && !retVal.any? do |match|
-                        match.dictionary.eql?(new.dictionary)
+                        match.latest.dictionary.eql?(new.latest.dictionary)
                     end
                         retVal.push(new)
                     end

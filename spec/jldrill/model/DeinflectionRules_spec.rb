@@ -20,10 +20,12 @@ module JLDrill
 	
     describe Deinflection::Reason do
         it "should parse a reason" do
-            rule = Deinflection::Rule.parse("くありませんでした	い	1152	0")
+            reasons = ["This is a reason"]
+            rule = Deinflection::Rule.parse("くありませんでした	い	1152	0",
+                                           reasons)
             rule.original.should eql("くありませんでした")
             rule.replaceWith.should eql("い")
-            rule.reasonIndex.should eql(0)
+            rule.reason.should eql("This is a reason")
         end
     end
 
@@ -38,14 +40,18 @@ module JLDrill
             file.deinflectionRules.rules.size.should be(306)
 
             matches = file.match("できませんでした")
-            print matches.join("\n") + "\n\n\n"
-#            matches.size.should be(13)
-#            matches[3].key.should eql("できる")
+            matches.each do |match|
+                print match.to_s + "\n"
+            end
+            matches.size.should be(18)
+            matches[3].latest.dictionary.should eql("できる")
             # The keys should all be different and none of the deinflection
             # rules should be used twice.  Not sure how to write a test.
             
             matches = file.match("です")
-            print matches.join("\n") + "\n"
+            matches.each do |match|
+                print match.to_s + "\n"
+            end
         end
     end
 end
