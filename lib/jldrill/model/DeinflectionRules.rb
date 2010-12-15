@@ -16,7 +16,7 @@ module JLDrill
 
             def Reason::parse(string)
                 if Reason::isReason?(string)
-                    return Reason.new(string)
+                    return Reason.new(string.chomp)
                 else
                     return nil
                 end
@@ -31,7 +31,7 @@ module JLDrill
 
             attr_reader :original, :replaceWith, :reasonIndex
 
-            RULE_RE = /^([^\t]+)\t([^\t]+)\t([^\t]+)\t([^\t])/
+            RULE_RE = /^([^\t]+)\t([^\t]+)\t([^\t]+)\t([^\t]+)/
 
             def initialize(original, replaceWith, reasonIndex)
                 @original = original
@@ -46,6 +46,45 @@ module JLDrill
                 end
                 return retVal
             end
+
+            def to_s
+                @original + "\t" + @replaceWith + "\t" + reasonIndex.to_s
+            end
+        end
+
+        class Match
+            attr_reader :root, :dictionary, :reasons
+
+            def initialize(root, dictionary, reasons)
+                @root = root
+                @dictionary = dictionary
+                @reasons = reasons
+            end
+
+            def apply(rule, reason)
+                retVal = nil
+                if !@reasons.include?(reason)
+                    re = Regexp.new("(.*)#{rule.original}")
+                    if re.match(@dictionary)
+                        retVal = Match.new($1,
+                                           $1 + rule.replaceWith, 
+                                           [@reasons, reason + "(#{$1}#{rule.original})"].flatten)
+                    end
+                end
+                return retVal
+            end
+
+            def reason
+                retVal = ""
+                if !@reasons.empty?
+                    retVal = @reasons.join(" > ")
+                end
+                return retVal
+            end
+
+            def to_s
+                return @dictionary + " (" + @dictionary + "): " + reason
+            end
         end
     end
 
@@ -56,7 +95,7 @@ module JLDrill
 
         def initialize
             @reasons = []
-            @rules = {}
+            @rules = []
             @readHeader = false
         end
 
@@ -67,7 +106,7 @@ module JLDrill
             else
                 entry = Deinflection::Rule.parse(string)
                 if(!entry.nil?)
-                    @rules[entry.original] = entry
+                    @rules.push(entry)
                 else
                     reason = Deinflection::Reason.parse(string)
                     if !reason.nil?
@@ -82,6 +121,28 @@ module JLDrill
 
         def size
             return @rules.size + @reasons.size
+        end
+
+        def reason(rule)
+            return @reasons[rule.reasonIndex]
+        end
+
+        def match(string)
+            retVal = [Deinflection::Match.new(string, string, [])]
+            i = 0
+            while(i < retVal.size) do
+                @rules.each do |rule|
+                    candidate = retVal[i]
+                    new = candidate.apply(rule, reason(rule))
+                    if !new.nil? && !retVal.any? do |match|
+                        match.dictionary.eql?(new.dictionary)
+                    end
+                        retVal.push(new)
+                    end
+                end
+                i += 1
+            end
+            return retVal
         end
 		
 		def to_s
@@ -105,6 +166,10 @@ module JLDrill
 
         def parser
             @deinflectionRules
+        end
+
+        def match(string)
+            @deinflectionRules.match(string)
         end
     end
 

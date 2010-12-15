@@ -35,7 +35,17 @@ module JLDrill
             file.load(filename)
             file.parse
             file.deinflectionRules.reasons.size.should be(28)
-            file.deinflectionRules.rules.size.should be(236)
+            file.deinflectionRules.rules.size.should be(306)
+
+            matches = file.match("できませんでした")
+            print matches.join("\n") + "\n\n\n"
+#            matches.size.should be(13)
+#            matches[3].key.should eql("できる")
+            # The keys should all be different and none of the deinflection
+            # rules should be used twice.  Not sure how to write a test.
+            
+            matches = file.match("です")
+            print matches.join("\n") + "\n"
         end
     end
 end
