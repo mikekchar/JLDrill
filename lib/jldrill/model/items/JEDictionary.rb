@@ -220,6 +220,23 @@ module JLDrill
             end
         end
 
+        # Return all the JWords that have the kanji, kanji.
+        def findKanji(kanji)
+            return findBinWithKanji(kanji).find_all do |word|
+                word.kanji.eql?(kanji)
+            end
+        end
+
+        def findWord(string)
+            kanji = findKanji(string).sort do |x, y|
+                y.kanji <=> x.kanji
+            end
+            reading = findReading(string).sort do |x, y|
+                y.reading <=> x.reading
+            end
+            return kanji + reading
+        end
+
         # Return true if the dictionary contains this vocabulary.
         def include?(vocabulary)
             return findReading(vocabulary.reading).any? do |word|

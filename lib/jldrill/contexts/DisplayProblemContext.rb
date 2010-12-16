@@ -160,7 +160,13 @@ module JLDrill
         end
 
         def search(string)
-            return @parent.reference.findWordsThatStart(string)
+            matches = @parent.deinflect.match(string)
+            retVal = matches.collect do |match|
+                @parent.reference.findWord(match.latest.dictionary)
+            end.flatten
+
+            retVal += @parent.reference.findWordsThatStart(string)
+            return retVal
         end
 
         def expandWithSavePath(filename)

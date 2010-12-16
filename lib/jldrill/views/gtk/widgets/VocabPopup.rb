@@ -39,6 +39,7 @@ module JLDrill::Gtk
                                    "justification" => Gtk::JUSTIFY_LEFT)
                 @buffer.insert(@buffer.end_iter, kanjiString, "popupText")
                 @hbox.add(@contents)
+                @popup.set_default_size(450, 300)
             end
             display 
         end

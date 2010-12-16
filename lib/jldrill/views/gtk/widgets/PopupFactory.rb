@@ -39,7 +39,7 @@ module JLDrill::Gtk
         end
         
         def belowRect(rect)
-            x = rect[0] - 150
+            x = rect[0]
             y = rect[1] + (rect[3])
             [x, y]
         end

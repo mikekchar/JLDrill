@@ -52,7 +52,7 @@ module JLDrill::Gtk
                 @currentPopup = VocabPopup.new(string,
                                           candidates.collect do |word|
                                               word.to_s
-                                          end.join("\n\n"),
+                                          end.join("\n"),
                                           @view.mainWindow, x, y)
             end
         end
