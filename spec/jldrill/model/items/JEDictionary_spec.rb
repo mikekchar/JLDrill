@@ -15,30 +15,30 @@ module JLDrill
 		end
 		
 		it "should be able to load a dictionary using the DataFile interface" do
-            filename = File.join(Config::DICTIONARY_DIR, 
-                                 Config::DICTIONARY_NAME)
+            filename = File.join(File.join(Config::DATA_DIR, "tests"),
+                                 "edict.utf")
             @dict.file = filename
             @dict.readLines
-            @dict.lines.size.should be(162808)
-            @dict.parseChunk(1000)
-            @dict.dataSize.should be(1000)
-            @dict.parsed.should be(1000)
+            @dict.lines.size.should be(1140)
+            @dict.parseChunk(100)
+            @dict.dataSize.should be(100)
+            @dict.parsed.should be(100)
             @dict.loaded?.should be(false)
             @dict.parse
 
             # Find all the words beginning with a reading
             selection = @dict.findReadingsStartingWith("あ")
-            selection.size.should eql(4106)
+            selection.size.should eql(127)
             selection = @dict.findReadingsStartingWith("あめ")
-            selection.size.should eql(58)
+            selection.size.should eql(42)
             selection = @dict.findReadingsStartingWith("あめが")
-            selection.size.should eql(5)
+            selection.size.should eql(4)
             selection = @dict.findReadingsStartingWith("あめがbogus")
             selection.size.should eql(0)
 
             # Find all the words beginning with a reading
             selection = @dict.findKanjiStartingWith("目")
-            selection.size.should eql(337)
+            selection.size.should eql(338)
             selection = @dict.findKanjiStartingWith("目を")
             selection.size.should eql(29)
             selection = @dict.findKanjiStartingWith("目を覚ます")
@@ -61,10 +61,10 @@ module JLDrill
             @dict.include?(vocab).should be_false
 
             # Should be able to find words that are at the start of a string
-            @dict.findReadingsThatStart("めをさます").size.should eql(5)
-            @dict.findKanjiThatStart("目を覚ます").size.should eql(3)
-            @dict.findWordsThatStart("めをさます").size.should eql(5)
-            @dict.findWordsThatStart("目を覚ます").size.should eql(3)
+            @dict.findReadingsThatStart("めをさます").size.should eql(3)
+            @dict.findKanjiThatStart("目を覚ます").size.should eql(4)
+            @dict.findWordsThatStart("めをさます").size.should eql(3)
+            @dict.findWordsThatStart("目を覚ます").size.should eql(4)
         end
     end
 end

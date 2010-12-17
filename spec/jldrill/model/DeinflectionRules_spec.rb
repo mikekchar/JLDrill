@@ -40,18 +40,12 @@ module JLDrill
             file.deinflectionRules.rules.size.should be(306)
 
             matches = file.match("できませんでした")
-            matches.each do |match|
-                print match.to_s + "\n"
-            end
             matches.size.should be(18)
             matches[3].latest.dictionary.should eql("できる")
             # The keys should all be different and none of the deinflection
             # rules should be used twice.  Not sure how to write a test.
             
             matches = file.match("です")
-            matches.each do |match|
-                print match.to_s + "\n"
-            end
         end
     end
 end
