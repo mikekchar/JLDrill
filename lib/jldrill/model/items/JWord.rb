@@ -8,8 +8,10 @@ module JLDrill
     # It has a reference to a DictionaryLocation and may
     # have a cached Meaning
 	class JWord
-        attr_reader :kanji, :reading, :dictionary, :position, :itemType
-        attr_writer :kanji, :reading, :dictionary, :position
+        attr_reader :kanji, :reading, :dictionary, :position, :itemType,
+            :relevance
+        attr_writer :kanji, :reading, :dictionary, :position,
+            :relevance
 
         def initialize
             @kanji = ""
@@ -18,6 +20,7 @@ module JLDrill
             @position = -1
             @itemType = ItemFactory::find(self.class)
             @vocab = nil
+            @relevance = 0 
         end
 
         # The JWord is valid if there is a reading.  There doesn't need to

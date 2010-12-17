@@ -215,25 +215,33 @@ module JLDrill
 
         # Return all the JWords that have the reading, reading.
         def findReading(reading)
+            relevance = reading.size
             return findBinWithReading(reading).find_all do |word|
-                word.reading.eql?(reading)
+                if word.reading.eql?(reading)
+                    word.relevance = relevance
+                    true
+                else
+                    false
+                end
             end
         end
 
         # Return all the JWords that have the kanji, kanji.
         def findKanji(kanji)
+            relevance = kanji.size
             return findBinWithKanji(kanji).find_all do |word|
-                word.kanji.eql?(kanji)
+                if word.kanji.eql?(kanji)
+                    word.relevance = relevance
+                    true
+                else
+                    false
+                end
             end
         end
 
         def findWord(string)
-            kanji = findKanji(string).sort do |x, y|
-                y.kanji <=> x.kanji
-            end
-            reading = findReading(string).sort do |x, y|
-                y.reading <=> x.reading
-            end
+            kanji = findKanji(string)
+            reading = findReading(string)
             return kanji + reading
         end
 
@@ -247,26 +255,34 @@ module JLDrill
         # Return all the words that occur at the begining of reading
         def findReadingsThatStart(reading)
             findBinWithReading(reading[0..2]).find_all do |word|
-                reading.start_with?(word.reading)
+                relevance = word.reading.size
+                if reading.start_with?(word.reading)
+                    word.relevance = relevance
+                    true
+                else
+                    false
+                end
             end
         end
 
         # Return all the words that occur at the begining of kanji
         def findKanjiThatStart(kanji)
             findBinWithKanji(kanji[0..2]).find_all do |word|
-                kanji.start_with?(word.kanji)
+                relevance = word.kanji.size
+                if kanji.start_with?(word.kanji)
+                    word.relevance = relevance
+                    true
+                else
+                    false
+                end
             end
         end
 
         # Return all the words that occur at the begining of the string
         # These are sorted by size with the largest finds given first
         def findWordsThatStart(string)
-            kanji = findKanjiThatStart(string).sort do |x, y|
-                y.kanji <=> x.kanji
-            end
-            reading = findReadingsThatStart(string).sort do |x, y|
-                y.reading <=> x.reading
-            end
+            kanji = findKanjiThatStart(string)
+            reading = findReadingsThatStart(string)
             return kanji + reading
         end
     end

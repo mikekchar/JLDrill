@@ -37,7 +37,9 @@ module JLDrill::Behaviour
             end.flatten
 
             retVal += @parent.reference.findWordsThatStart(string)
-            return retVal
+            return retVal.sort do |x,y|
+                y.relevance <=> x.relevance
+            end
         end
     end
 end
