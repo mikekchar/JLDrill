@@ -10,6 +10,8 @@ module JLDrill
 			super(viewBridge)
 		end
 		
+        include JLDrill::Behaviour::SearchDictionary
+
         class ExampleView < Context::View
             attr_reader :exampleWindow
 
@@ -75,32 +77,6 @@ module JLDrill
 		def newProblemUpdated(problem)
 		    @mainView.update(findExamples(problem)) unless @mainView.nil?
 		end
-
-        def kanjiLoaded?
-            !parent.kanji.nil?
-        end
-
-        def kanjiInfo(character)
-            retVal = ""
-            kanji = @parent.kanji.kanjiList.findChar(character)
-            if !kanji.nil?
-                retVal = kanji.withRadical_to_s(@parent.radicals.radicalList)
-            else
-                kana = @parent.kana.kanaList.findChar(character)
-                if !kana.nil?
-                    retVal = kana.to_s
-                end
-            end
-            retVal
-        end
-
-        def dictionaryLoaded?
-            @parent.reference.loaded?
-        end
-
-        def search(string)
-            return @parent.reference.findWordsThatStart(string)
-        end
 
     end
 end

@@ -1,6 +1,7 @@
 require 'Context/Context'
 require 'Context/Bridge'
 require 'Context/View'
+require 'jldrill/contexts/behaviour/SearchDictionary'
 
 module JLDrill
 
@@ -9,6 +10,8 @@ module JLDrill
 		def initialize(viewBridge)
 			super(viewBridge)
 		end
+
+        include JLDrill::Behaviour::SearchDictionary
 		
         class ProblemView < Context::View
 
@@ -137,38 +140,6 @@ module JLDrill
             @mainView.showAnswer
         end
         
-        def kanjiLoaded?
-            !@parent.kanji.nil?
-        end
-        
-        def kanjiInfo(character)
-            retVal = ""
-            kanji = @parent.kanji.kanjiList.findChar(character)
-            if !kanji.nil?
-                retVal = kanji.withRadical_to_s(@parent.radicals.radicalList)
-            else
-                kana = @parent.kana.kanaList.findChar(character)
-                if !kana.nil?
-                    retVal = kana.to_s
-                end
-            end
-            retVal
-        end
-
-        def dictionaryLoaded?
-            @parent.reference.loaded?
-        end
-
-        def search(string)
-            matches = @parent.deinflect.match(string)
-            retVal = matches.collect do |match|
-                @parent.reference.findWord(match.latest.dictionary)
-            end.flatten
-
-            retVal += @parent.reference.findWordsThatStart(string)
-            return retVal
-        end
-
         def expandWithSavePath(filename)
             if !@parent.quiz.nil?
                 return @parent.quiz.useSavePath(filename)
