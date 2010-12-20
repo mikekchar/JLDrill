@@ -104,20 +104,12 @@ module JLDrill
                 end
             end
 
-            def latest
-                retVal = nil
-                if !empty?
-                    retVal = self[size - 1]
-                end
-                return retVal
-            end
-
             def apply(rule)
                 retVal = nil
-                if !latest.nil? && !hasReason(rule)
+                if !last.nil? && !hasReason(rule)
                     re = Regexp.new("(.*)#{rule.original}")
-                    if re.match(latest.dictionary)
-                        transform = Transform.new(latest.dictionary, $1, rule)
+                    if re.match(last.dictionary)
+                        transform = Transform.new(last.dictionary, $1, rule)
                         retVal = Match.new(transform, self)
                     end
                 end
@@ -182,7 +174,7 @@ module JLDrill
                 @rules.each do |rule|
                     new = retVal[i].apply(rule)
                     if !new.nil? && !retVal.any? do |match|
-                        match.latest.dictionary.eql?(new.latest.dictionary)
+                        match.last.dictionary.eql?(new.last.dictionary)
                     end
                         retVal.push(new)
                     end

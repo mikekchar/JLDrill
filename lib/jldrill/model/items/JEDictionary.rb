@@ -109,9 +109,9 @@ module JLDrill
         # we can find them quickly.
         def hashWord(word)
             # UTF8 kanji and kana characters are usually 3 bytes each.
-            # We will hash on the first two characters.
-            (@readingHash[word.reading[0..5]] ||= []).push(word)
-            (@kanjiHash[word.kanji[0..5]] ||= []).push(word)
+            # We will hash on the first character.
+            (@readingHash[word.reading[0..2]] ||= []).push(word)
+            (@kanjiHash[word.kanji[0..2]] ||= []).push(word)
         end
 
         def parseLine(index)
@@ -159,8 +159,8 @@ module JLDrill
 
         # Find the items that may have been hashed with this reading.
         def findBinWithReading(reading)
-            if reading.size >= 6
-                bin = (@readingHash[reading[0..5]] ||= [])
+            if reading.size >= 3
+                bin = (@readingHash[reading[0..2]] ||= [])
             else
                 keys = @readingHash.keys.find_all do |key|
                     key.start_with?(reading)
@@ -175,8 +175,8 @@ module JLDrill
 
         # Find the items that may have been hashed with this kanji.
         def findBinWithKanji(kanji)
-            if kanji.size >= 6
-                bin = (@kanjiHash[kanji[0..5]] ||= [])
+            if kanji.size >= 3
+                bin = (@kanjiHash[kanji[0..2]] ||= [])
             else
                 keys = @kanjiHash.keys.find_all do |key|
                     key.start_with?(kanji)
@@ -192,7 +192,7 @@ module JLDrill
         # Return all the JWords that have a reading starting with reading.
         def findReadingsStartingWith(reading)
             bin = findBinWithReading(reading)
-            if reading.size > 6 
+            if reading.size > 3 
                 return bin.find_all do |word|
                     word.reading.start_with?(reading)
                 end
@@ -204,7 +204,7 @@ module JLDrill
         # Return all the JWords that have kanji starting with kanji.
         def findKanjiStartingWith(kanji)
             bin = findBinWithKanji(kanji)
-            if kanji.size > 6 
+            if kanji.size > 3 
                 return bin.find_all do |word|
                     word.kanji.start_with?(kanji)
                 end

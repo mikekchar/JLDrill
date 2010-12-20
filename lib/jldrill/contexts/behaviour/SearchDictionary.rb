@@ -33,7 +33,7 @@ module JLDrill::Behaviour
         def search(string)
             matches = @parent.deinflect.match(string)
             retVal = matches.collect do |match|
-                @parent.reference.findWord(match.latest.dictionary)
+                @parent.reference.findWord(match.last.dictionary)
             end.flatten
 
             retVal += @parent.reference.findWordsThatStart(string)
