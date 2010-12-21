@@ -36,6 +36,11 @@ module JLDrill
             return @vocab
         end
 
+        def toMeaning
+            @meaning = @dictionary.getMeaning(@position)
+            return @meaning
+        end
+
         def to_s
             return @dictionary.lines[@position]
         end

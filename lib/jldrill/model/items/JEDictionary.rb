@@ -50,6 +50,14 @@ module JLDrill
             !Kconv.isutf8(@lines[index]).nil?
         end
 
+        def getMeaning(position)
+            retVal = ""
+            if lines[position] =~ LINE_RE
+                retVal = $4
+            end
+            return retVal
+        end
+
         # Parse the line at the given position and return the a Vocabulary
         # containing the information (this is deprecated).
         def getVocab(position)

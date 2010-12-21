@@ -4,8 +4,8 @@ require 'gtk2'
 module JLDrill::Gtk
     class VocabPopup < Popup
             
-        def initialize(char, kanjiString, mainWindow, x, y)
-            super(char, kanjiString, mainWindow, x, y)
+        def initialize(char, jwords, mainWindow, x, y)
+            super(char, mainWindow, x, y)
             
             color = Gdk::Color.parse("lightblue1")
             @strokes = Gtk::TextView.new
@@ -18,29 +18,46 @@ module JLDrill::Gtk
             
             @strokeBuffer = @strokes.buffer
             @strokeBuffer.create_tag("kanji",
-                                     "size" => 64 * Pango::SCALE,
+                                     "size" => 32 * Pango::SCALE,
                                      "justification" => Gtk::JUSTIFY_CENTER)
             @strokeBuffer.insert(@strokeBuffer.start_iter, 
-                                 @character + "\n", "kanji")
+                                 char, "kanji")
             @hbox.add(@strokes)
-            
-            if !kanjiString.empty?
+            spacer = Gtk::TextView.new
+            spacer.set_width_request(10)
+            spacer.modify_base(Gtk::STATE_NORMAL, color)
+            @hbox.add(spacer)
+
+            if !jwords.empty?
                 @contents = Gtk::TextView.new
                 @contents.wrap_mode = Gtk::TextTag::WRAP_WORD
                 @contents.editable = false
                 @contents.cursor_visible = false
                 @contents.set_pixels_above_lines(0)
                 @contents.modify_base(Gtk::STATE_NORMAL, color)
-                @contents.set_width_request(250)
+                @contents.set_width_request(420)
                 
                 @buffer = @contents.buffer
-                @buffer.create_tag("popupText", 
-                                   "size" => 10 * Pango::SCALE,
+                @buffer.create_tag("japanese", 
+                                   "size" => 12 * Pango::SCALE,
                                    "justification" => Gtk::JUSTIFY_LEFT)
-                @buffer.insert(@buffer.end_iter, kanjiString, "popupText")
+                @buffer.create_tag("definition", 
+                                   "size" => 8 * Pango::SCALE,
+                                   "justification" => Gtk::JUSTIFY_LEFT)
+                jwords.each do |word|
+                    if !word.kanji.nil?
+                        @buffer.insert(@buffer.end_iter, word.kanji, "japanese")
+                        @buffer.insert(@buffer.end_iter, "    ", "japanese")
+                    end
+                    @buffer.insert(@buffer.end_iter, word.reading, "japanese")
+                    @buffer.insert(@buffer.end_iter, "\n", "japanese")
+                    @buffer.insert(@buffer.end_iter, word.toMeaning, 
+                                   "definition")
+                    @buffer.insert(@buffer.end_iter, "\n", "definition")
+                end
                 @hbox.add(@contents)
-                @popup.set_default_size(450, 300)
             end
+            @popup.set_default_size(450, 30)
             display 
         end
 

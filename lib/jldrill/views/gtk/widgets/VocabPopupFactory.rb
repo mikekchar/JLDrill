@@ -49,10 +49,7 @@ module JLDrill::Gtk
                 else
                     string = candidates[0].reading
                 end
-                @currentPopup = VocabPopup.new(string,
-                                          candidates.collect do |word|
-                                              word.to_s
-                                          end.join("\n"),
+                @currentPopup = VocabPopup.new(string, candidates,
                                           @view.mainWindow, x, y)
             end
         end

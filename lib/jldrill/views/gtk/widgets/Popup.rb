@@ -4,10 +4,10 @@ module JLDrill::Gtk
     class Popup
         attr_reader :character, :x, :y
             
-        def initialize(char, kanjiString, mainWindow, x, y)
-            @character = char
+        def initialize(character, mainWindow, x, y)
             @x = x
             @y = y
+            @character = character
             
             @popup = Gtk::Window.new(Gtk::Window::POPUP)
             @popup.set_transient_for(mainWindow)

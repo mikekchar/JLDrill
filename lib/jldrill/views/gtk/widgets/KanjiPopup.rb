@@ -5,7 +5,7 @@ module JLDrill::Gtk
     class KanjiPopup < Popup
             
         def initialize(char, kanjiString, mainWindow, x, y)
-            super(char, kanjiString, mainWindow, x, y)
+            super(char, mainWindow, x, y)
             
             color = Gdk::Color.parse("lightblue1")
             @kanji = Gtk::TextView.new
