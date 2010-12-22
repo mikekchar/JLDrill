@@ -46,6 +46,14 @@ module JLDrill
             # rules should be used twice.  Not sure how to write a test.
             
             matches = file.match("です")
+            matches.size.should be(2)
+            matches[0].last.dictionary.should eql("です")
+            matches[1].last.dictionary.should eql("でる")
+
+            # This was a bug
+            matches = file.match("こばんで")
+            matches.size.should be(5)
+            matches[3].last.dictionary.should eql("こばむ")
         end
     end
 end

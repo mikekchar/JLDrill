@@ -36,7 +36,7 @@ also be Windows packaging since I've started to get Windows users.
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2010-10-01 Fri>
-  :CurrentDate:  <2010-12-17 Fri>
+  :CurrentDate:  <2010-12-22 Wed>
   :EndDate: <2010-12-10 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -60,7 +60,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.2 |    22 |   12 |    54.5 |    0.16 |   0.31 |
+| * Version 0.4.2 |    22 |   12 |    54.5 |    0.15 |   0.31 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -133,10 +133,12 @@ the task.
    :Done: 3
    :END:
 
-** TODO Use deinflection for dictionary searches 
+** TODO Use deinflection for dictionary searches [1/2]
    When searching the dictionary the system inflects matches that are
    verbs or adjectives and if the inflected word matches then it
-   is shown in the matches.
+   is shown in the matches. kobande doesn't select kobamu.
+   - [X] こばんで does not deinflect to 拒む
+   - [ ] Show the deinflection rules used in the output
 
    :PROPERTIES:
    :JellyBeans: 4

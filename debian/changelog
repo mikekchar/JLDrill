@@ -1,3 +1,10 @@
+jldrill (0.4.2-16) unstable; urgency=low
+
+  * Speed up searches for the vocab popup.  Improve the appearance
+    slightly.  Still a lot to be done.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Tue, 10 Nov 2010 11:50:00 +0900
+
 jldrill (0.4.2-15) unstable; urgency=low
 
   * Create a new popup for vocabulary.  After you load the dictionary,

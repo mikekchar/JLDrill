@@ -19,7 +19,7 @@ module JLDrill
                                  "edict.utf")
             @dict.file = filename
             @dict.readLines
-            @dict.lines.size.should be(1140)
+            @dict.lines.size.should be(1141)
             @dict.parseChunk(100)
             @dict.dataSize.should be(100)
             @dict.parsed.should be(100)

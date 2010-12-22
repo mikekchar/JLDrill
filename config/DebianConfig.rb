@@ -12,7 +12,9 @@ module JLDrill
         # Debian keeps Edict in usr/share/edict
         DICTIONARY_DIR = File.expand_path('/usr/share/edict')
         DICTIONARY_NAME = "edict"
-        TANAKA_DIR = File.expand_path('/usr/share/jldrill/Tanaka')
+        TANAKA_DIR = File.join(DATA_DIR, 'Tanaka')
         TANAKA_NAME = "examples.utf"
+		DEINFLECTION_DIR = File.join(DATA_DIR, "dict/rikaichan")
+		DEINFLECTION_NAME = "deinflect.dat"
     end
 end
