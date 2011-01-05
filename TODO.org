@@ -36,8 +36,8 @@ also be Windows packaging since I've started to get Windows users.
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2010-10-01 Fri>
-  :CurrentDate:  <2010-12-22 Wed>
-  :EndDate: <2010-12-10 Fri>
+  :CurrentDate:  <2011-01-05 Wed>
+  :EndDate: <2011-01-10 Mon>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -60,7 +60,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.2 |    22 |   12 |    54.5 |    0.15 |   0.31 |
+| * Version 0.4.2 |    18 |   16 |    88.9 |    0.17 |   0.18 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -133,63 +133,34 @@ the task.
    :Done: 3
    :END:
 
-** TODO Use deinflection for dictionary searches [1/2]
+** DONE Use deinflection for dictionary searches [1/1]
    When searching the dictionary the system inflects matches that are
    verbs or adjectives and if the inflected word matches then it
    is shown in the matches. kobande doesn't select kobamu.
    - [X] こばんで does not deinflect to 拒む
-   - [ ] Show the deinflection rules used in the output
 
    :PROPERTIES:
    :JellyBeans: 4
-   :Done: 0
+   :Done: 4
    :END:
 
-** TODO Windows Packaging Spike [0/5]
-   Determine the feasibility of creating a windows packaging.
-   Place to start:
-   - [ ] Create a rake target to make a self contained directory with
-     context and JLDrill. Have a ruby script that runs everything
-     correctly on Windows and Linux given that Ruby, GNOME, and
-     Ruby-Gnome are already installed.
-   - [ ] Create a custom version of Ruby-Gnome that is packaged in the
-     self contained directory and is used instead of the installed
-     Ruby-Gnome.  Note: Probably have to package Gtk+ here as well.
-     If not make another step for that.
-   - [ ] Create some way to package a custom ruby interpreter in the
-     self contained directory.
-   - [ ] Create a self extracting archive for the self contained
-     directory.
-   - [ ] Create an installer for the custom fonts
-
-   :PROPERTIES:
-   :JellyBeans: 3
-   :Done: 0
-   :END:
-
-** TODO Create Windows packaging.
-   Do whatever the packaging spike found in order to make Windows packaging.
+** TODO 彼処 かしこ finds あそこ 
+   When searching the tanaka corpus the reading should be taken into
+   account if given.  Thus examples with the same kanji but different
+   readings should not be shown.
 
    :PROPERTIES:
    :JellyBeans: 1
    :Done: 0
    :END:
 
-** TODO Allow users to update their drills
-   A user can update a drill by appending the new version to their drill.
-   But if the vocabulary has changed in the new/old drill (because the
-   dictionary was updated for instance), the new vocabulary will be added
-   as a new item rather than updating the old item.  Put a unique
-   ID on each item.  When merging, if the IDs are the same overwrite the old
-   one.  For old drills, if there is no ID, assume the items are the same
-   if the position, reading and kanji are the same.  (Not sure about the
-   position).
+** TODO Update Documentation
+   Why don't I do this as part of the stories.  Bad Mike!
 
    :PROPERTIES:
-   :JellyBeans: 2
+   :JellyBeans: 1
    :Done: 0
    :END:
-
 
 * Version 0.4.1
 
@@ -377,6 +348,51 @@ the task.
 Items in the backlog aren't organized in any specific way.
 They are simply ideas that may or may not make it into
 an upcoming development version.
+
+** TODO Windows Packaging Spike [0/5]
+   Determine the feasibility of creating a windows packaging.
+   Place to start:
+   - [ ] Create a rake target to make a self contained directory with
+     context and JLDrill. Have a ruby script that runs everything
+     correctly on Windows and Linux given that Ruby, GNOME, and
+     Ruby-Gnome are already installed.
+   - [ ] Create a custom version of Ruby-Gnome that is packaged in the
+     self contained directory and is used instead of the installed
+     Ruby-Gnome.  Note: Probably have to package Gtk+ here as well.
+     If not make another step for that.
+   - [ ] Create some way to package a custom ruby interpreter in the
+     self contained directory.
+   - [ ] Create a self extracting archive for the self contained
+     directory.
+   - [ ] Create an installer for the custom fonts
+
+   :PROPERTIES:
+   :JellyBeans: 3
+   :Done: 0
+   :END:
+
+** TODO Create Windows packaging.
+   Do whatever the packaging spike found in order to make Windows packaging.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+
+** TODO Allow users to update their drills
+   A user can update a drill by appending the new version to their drill.
+   But if the vocabulary has changed in the new/old drill (because the
+   dictionary was updated for instance), the new vocabulary will be added
+   as a new item rather than updating the old item.  Put a unique
+   ID on each item.  When merging, if the IDs are the same overwrite the old
+   one.  For old drills, if there is no ID, assume the items are the same
+   if the position, reading and kanji are the same.  (Not sure about the
+   position).
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 0
+   :END:
 
 ** TODO Insert Popup Before Item
    If the user presses a key (TBD) while a popup is up, an item
