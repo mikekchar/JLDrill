@@ -38,6 +38,10 @@ module JLDrill::ScheduleItems
             quiz.strategy.newSet
         end
 
+        def reviewSet
+            quiz.strategy.reviewSet
+        end
+
         def currentItem
             quiz.currentProblem.item
         end
@@ -80,6 +84,14 @@ module JLDrill::ScheduleItems
             return duration.to_f / (60 * 60 * 24)
         end
 
+        def inSeconds(days)
+            return (days.to_f * (60 * 60 * 24)).round
+        end
+
+        def setDaysAgoReviewed(schedule, days)
+            schedule.lastReviewed = Time::now() - inSeconds(days)
+        end
+
         def scheduleShouldBe(item, days, range=10)
             gap = inDays(item.schedule.duration)
             # There's a random +- range variation in the schedule
@@ -111,7 +123,7 @@ module JLDrill::ScheduleItems
             max = item.schedule.maxInterval
             max.should eql(JLDrill::Schedule.backoff(orig.to_f * 1.25))
             # Make the item last reviewed 20 days ago
-            item.schedule.lastReviewed = item.schedule.lastReviewed - 20 * 60 * 60 * 24
+            item.schedule.lastReviewed = setDaysAgoReviewed(item.schedule, 20.0)
             item.schedule.calculateInterval.should eql(max)
             item.schedule.correct
             scheduleShouldBe(item, (max.to_f / 24 / 60 / 60), 10)
@@ -123,7 +135,7 @@ module JLDrill::ScheduleItems
             scheduleShouldBe(item, 5.0, 10)
             orig = item.schedule.duration
             # Make the item last reviewed 1 day ago
-            item.schedule.lastReviewed = item.schedule.lastReviewed - 60 * 60 *24
+            item.schedule.lastReviewed = setDaysAgoReviewed(item.schedule, 1.0)
 
             newInterval = item.schedule.calculateInterval
             newInterval.should eql(orig)
@@ -154,5 +166,45 @@ module JLDrill::ScheduleItems
             twoHundredDays.days=200
             JLDrill::Schedule.backoff(twoHundredDays.seconds).should eql(twoHundredDays.seconds)
         end 
+
+        it "should be able to sort the review set items according to schedule" do
+            item = newSet[0]
+            createAndPromote(item)
+            scheduleShouldBe(item, 5.0, 10)
+            problemStatus = item.status.select("ProblemStatus")
+            problemStatus.schedules.size.should be(1)
+            meaningSchedule = item.schedule
+            inDays(meaningSchedule.duration).should be_close(5.0, 0.5)
+            item.hasKanji?.should be(true)
+            kanjiSchedule = JLDrill::Schedule.new(@item)
+            problemStatus.addScheduleType("KanjiProblem", kanjiSchedule)
+            problemStatus.schedules.size.should be(2)
+            kanjiSchedule.duration.should eql(-1)
+            item.schedule.should be(meaningSchedule)
+            kanjiSchedule.duration = inSeconds(6.0)
+            kanjiSchedule.markReviewed
+            item.schedule.should be(meaningSchedule)
+            setDaysAgoReviewed(kanjiSchedule, 10.0)
+            item.schedule.should be(kanjiSchedule)
+
+            item2 = newSet[0]
+            createAndPromote(item2)
+            scheduleShouldBe(item2, 5.0, 10)
+
+            reviewSet[0].should be(item)
+            reviewSet[1].should be(item2)
+
+            quiz.reschedule
+
+            reviewSet[0].should be(item)
+            reviewSet[1].should be(item2)
+
+            setDaysAgoReviewed(item2.schedule, 50.0)
+            quiz.reschedule
+
+            reviewSet[0].should be(item2)
+            reviewSet[1].should be(item)
+
+        end
     end
 end

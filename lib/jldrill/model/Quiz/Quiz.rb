@@ -125,21 +125,23 @@ module JLDrill
         end
 
         def save
-            retVal = false
-            if (@file != "") && (@contents.length != 0) && @needsSave
+            if (@contents.length == 0) || !@needsSave
+                return true
+            elsif @file == "" 
+                return false
+            else
                 begin
                     saveFile = File.new(@file, "w")
+                    if saveFile
+                        saveFile.print(saveToString)
+                        saveFile.close
+                        setNeedsSave(false)
+                        retVal = true
+                    end
                 rescue
                     return false
                 end
-                if saveFile
-                    saveFile.print(saveToString)
-                    saveFile.close
-                    setNeedsSave(false)
-                    retVal = true
-                end
             end
-            return retVal
         end
 
         # Returns the filename relative to the Quiz's current
@@ -209,7 +211,7 @@ module JLDrill
             @contents.size
         end
 
-        def finishedParsing
+        def finishParsing
             # Need to sort the new set to deal with older files that
             # may not be sorted.
             @strategy.newSet.sort! do |x, y|
@@ -217,7 +219,6 @@ module JLDrill
             end
             # Resort the review set according to schedule
             reschedule
-            @name = shortFilename
             setNeedsSave(true)
             update
             super
