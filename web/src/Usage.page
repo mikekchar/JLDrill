@@ -715,6 +715,20 @@ highlighted.
 
 ![Differs from the dictionary](images/Differs.png "Differs from the dictionary")
 
+**Tanaka Corpus**.  The Tanaka Corpus is a collection of Japanese
+sentences with English translations.  Most of the common words
+in the dictionary have example sentences in the Tanaka Corpus.
+To load the corpus press Ctrl-E (or select File/Load Tanaka Corpus from
+the menu).  It takes a while to load, but when it is finished,
+it opens up a new window.  Whenever you are reviewing a word that
+exists in the corpus, example sentences will be shown in the window.
+
+There are two main sections in the window: Checked Examples and
+Unchecked Examples.  Words in the dictionary often have multiple
+"senses".  These are distinct meanings for the words.  In the Checked
+Examples section, there will be one example for each sense of the
+word.
+
 **Edit** item.  Pressing E (or selecting Vocab/Edit
 from the menu) will allow you to edit the current item.
 

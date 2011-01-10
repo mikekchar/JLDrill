@@ -349,6 +349,28 @@ Items in the backlog aren't organized in any specific way.
 They are simply ideas that may or may not make it into
 an upcoming development version.
 
+** TODO Forget items that are too old
+   Sometimes when you haven't used the app for a long time items
+   get very old.  Their reviewRate becomes large.  This is not
+   a problem in itself, but when you start to review items they
+   will have a short duration.  If the reviewRate is something like
+   10x, then it might take 50 days until we rereview a new item.
+   Therefore make a new set of items called Forgetten.  Review
+   Items that have a reviewRate higher than some threshold (4???)
+   are moved to the Forgetten set.  Forgetten set items work just like
+   the Review set items except that are introduced like New set
+   items.  So this means the user gets Review set items until they
+   get 90% right.  Then they get Forgetten set items.  Once an expired
+   set item is reviewed, it goes back into the Review set.  After
+   all the Forgetten set items are finished, then we go back to showing
+   New set items.  This gives priority to actively reviewed items
+   without losing the valuable sorting of old items.
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 0
+   :END:
+
 ** TODO Windows Packaging Spike [0/5]
    Determine the feasibility of creating a windows packaging.
    Place to start:
