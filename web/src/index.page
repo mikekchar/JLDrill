@@ -5,50 +5,100 @@ sort_info: 10
 ---
 Welcome to JLDrill
 ==================
+
   JLDrill is a program for helping people drill various aspects of the
-  Japanese language. Current features include a kana drill, a vocabulary
-  drill, a dictionary cross reference tool and a popup-kanji reference
-  with stroke order diagrams.
+  Japanese language. Current features include a kana drill, a
+  vocabulary drill, a dictionary cross reference tool, a popup-kanji
+  reference with stroke order diagrams, example sentences from the
+  Tanaka corpus and the ability to do dictionary lookups (with
+  deinflection) by hovering the mouse over a word in the quiz or
+  examples.
+
+  The current version is 0.5.0.  There is a lot new in this version.
+  For a variety of reasons, version 0.4.0 was never publicly released.
+  So if you have been used to using version 0.3.0 there is a lot of
+  new features.  It will be a good idea to read through the
+  documentation to see what you can do.
   
-Screenshot
+Screenshots
 ----------
 
-![JLDrill screenshot](images/Screenshot.png "JLDrill screenshot")
+![JLDrill screenshot #1](images/Screenshot.png "JLDrill screenshot #1")
+![JLDrill screenshot #2](images/Screenshot2.png "JLDrill screenshot #2")
+
+What's New for 0.5.0
+--------------------
+  
+  The main purpose for 0.5.0 is to add specific functionality to help
+  people study Japanese.  Up to this point, most of the functionality
+  could be used by a learner of any language.  But the features in
+  this version are geared specifically to Japanese.
+
+  The main drill feature is the separation of problem types.  In the
+  previous version, JLDrill would present the user with random problem
+  types (meaning, kanji, etc).  But in this version, each problem type
+  has it's own schedule and you can configure which problem types to
+  drill from the options.
+
+  There are two major non-drill changes.  The first is the inclusion
+  of the Tanaka corpus into JLDrill.  The Tanaka corpus is a
+  collection of almost 200,000 Japanese sentences with English
+  translations.  When you drill a word in JLDrill, it can
+  automatically look up the example sentences in the Tanaka corpus.
+
+  The other main feature is the ability to search the dictionary by
+  kanji.  So if you are entering words in with the Add or Edit dialog,
+  you can now simply add the kanji and search for the word.  This is
+  especially useful for adding vocabulary by cutting and pasting from
+  other documents.
+
+  But in addition to the ability to search by kanji, there is a new
+  popup mode that looks up the word under the mouse in the dictionary.
+  It also does deinflection, so that verbs that are in past tense, for
+  instance are no problem.  The data and algorithm for this feature
+  come from the Firefox plugin, Rikaichan and I am very greatful to
+  them for it.
+
+  
 
 What's New for 0.4.0
 --------------------
 
+  Version 0.4.0 was never publicly released, so for those people who
+  were using 0.3.0, here is a list of new features in 0.4.0.
+
   Version 0.4.0 focuses on ease of use and speed.  While a Windows
-  packager was planned, for a variety of reasons it was dropped
-  from this version.  This version features a Debian package that can be
-  used in Linux distributions that use .deb files (For example
-  Debian and Ubuntu).
+  packager was planned, for a variety of reasons it was dropped from
+  this version.  This version features a Debian package that can be
+  used in Linux distributions that use .deb files (For example Debian
+  and Ubuntu).
 
-  New to this version is an updated EDict dictionary.  JLDrill
-  will also read EUC files so you may now replace the distributed
-  version with new ones without having to change the file to UTF8.
-  The loading of the dictionary is also significantly faster.
+  New to this version is an updated EDict dictionary.  JLDrill will
+  also read EUC files so you may now replace the distributed version
+  with new ones without having to change the file to UTF8.  The
+  loading of the dictionary is also significantly faster.
 
-  You can now build a new quiz directly from JLDrill.  To that
-  end, the Add and Edit windows have had their workflow modified. The All
-  Vocab window has also been modified to allow you to modify, preview, 
+  You can now build a new quiz directly from JLDrill.  To that end,
+  the Add and Edit windows have had their workflow modified. The All
+  Vocab window has also been modified to allow you to modify, preview,
   delete and reorder items in the quiz.
 
-  The scheduling strategy has been dramatically simplified.  The system
-  no longer sorts by expected review date.  Instead it sorts by the
-  percentage of time the item has gone in it's expected duration.
+  The scheduling strategy has been dramatically simplified.  The
+  system no longer sorts by expected review date.  Instead it sorts by
+  the percentage of time the item has gone in it's expected duration.
 
   Each card can now show a single image using the tag "image:path"
   where the path is the relative path from the quiz to the image.
-  Note that you have to escape the / with a \ at the moment.
-  JLDrill will also attempt to automatically resize the panes to
-  fit larger problems.
+  Note that you have to escape the / with a \ at the moment.  JLDrill
+  will also attempt to automatically resize the panes to fit larger
+  problems.
 
-  Various other bug fixes and small improvements to the scheduling strategy
-  have also been implemented.
+  Various other bug fixes and small improvements to the scheduling
+  strategy have also been implemented.
 
 JLDrill is Beta Software   
 ------------------------
+
   I consider JLDrill to be in beta.  Most of the important features
   are present.  There may still be bugs, but I have been using the
   software myself for several years and I think I've gotten rid
@@ -61,6 +111,13 @@ JLDrill is Beta Software
 
 News
 ----
+
+Monday, January 17 2011
+
+* I spent far more time than I expected getting this version out.
+  My apologies.  While I am reasonably consistent writing code,
+  I am less consistent releasing versions.  I have made some
+  process changes and have enlisted some help.  More news soon! 
 
 Thursday, August 26 2010.
 

@@ -7,7 +7,7 @@ sort_info: 35
 Development Version
 ===================
 
-**Latest Completed Development Version:**  [jldrill-0.4.1](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.4.1)
+**Latest Completed Development Version:**  [jldrill-0.4.2](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.4.2)
 
 For details on development versions, see below.
 
@@ -113,9 +113,35 @@ If you want to create a new release, please follow the
 
 Development Version History
 ---------------------------
-Current Development Version: [jldrill-0.4.2](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.4.2)
+Current Development Version: None
 
-Latest Completed Development Version: [jldrill-0.4.1](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.4.1)
+Latest Completed Development Version: [jldrill-0.4.2](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.4.2)
+
+Changes in [jldrill-0.4.2](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.4.2)
+
+* Allow items to be saved if only the comment has changed.  When
+  adding the items from the dictionary, don't overwrite the comment.
+* Load the Tanaka corpus and show examples of the current vocabulary
+  being quized.
+* Allow the user to search words in the dictionary by hovering the
+  mouse over the word.  This mode and the kanji lookup mode is switched
+  by pressing the space bar
+* Speed up dictionary searches.  Especially for very short words the
+  search could be slow.  Now it is about the same for every word.
+  It uses more memory now, though.
+* Deinflect words in popup dictionary searches.  This allows you
+  to hover over sentences and find the correct word.  Normal dictionary
+  searches from the Add and Edit menus don't deinflect yet.
+* Bugfix where an error was given when you tried to save a file
+  that wasn't modified.
+* Seach in the Add and Edit menu if you press return after editing the
+  kanji.
+* Create progress bars when loading any file.  Also fix some concurrency
+  problems.  There are still a few pauses here and there, though.
+  The progress bars themselves slow the load, unfortunately.
+* Append File functionality was completely broken.  It now works again.
+* Fix crash when you press cancel when opening a file.
+* Massive refactoring of the UI code.
 
 Changes in [jldrill-0.4.1](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.4.1)
 

@@ -5,6 +5,7 @@ sort_info: 60
 ---
 Acknowledgements
 ================
+
 This program could not have been written if it were not for the
 contribution that others have made.  Normally JLDrill will be
 distributed with data files that are used for creating the drills.
@@ -17,36 +18,41 @@ for it's reference dictionary.  Without this monumental work, very
 little could be done in the world of free software with respect to
 Japanese language training.  I am deeply in their debt.
 
-I would also like to thank Thierry Bézecourt for the use of the
-files which form the basis of the JLPT drills.  Thierry has very
-kindly granted permission to use these files in this application
-under the GPL license, thus saving me weeks of work.
+I would also like to thank Thierry Bézecourt for the use of the files
+which form the basis of the JLPT drills.  Thierry has very kindly
+granted permission to use these files in this application under the
+GPL license, thus saving me weeks of work.
 
-The emerging grammar quiz is based on the excellent Japanese
-grammar primer by Tae Kim.  This is a really fantastic aid
-to anyone learning Japanese.  In fact, I believe it significantly
-surpasses anything else written for beginner/intermediate
-learners.  Tae Kim has also made a really strong stance
-for free culture by releasing his work under a Creative Commons
-license and actively encourages others to do so.  It is
-his actions that allow me to even consider creating a grammar
+The emerging grammar quiz is based on the excellent Japanese grammar
+primer by Tae Kim.  This is a really fantastic aid to anyone learning
+Japanese.  In fact, I believe it significantly surpasses anything else
+written for beginner/intermediate learners.  Tae Kim has also made a
+really strong stance for free culture by releasing his work under a
+Creative Commons license and actively encourages others to do so.  It
+is his actions that allow me to even consider creating a grammar
 drill.
 
-Tim Eyre created the KanjiStrokeOrders font.  This fills
-a big gap in learning Japanese.  I had literally spent tens
-of hours trying to figure out how to represent this information
-when I stumbled upon this gem.  Being able to use this font
-allowed me to implement one of the coolest features of JLDrill
-in only about an hour. 
+Tim Eyre created the KanjiStrokeOrders font.  This fills a big gap in
+learning Japanese.  I had literally spent tens of hours trying to
+figure out how to represent this information when I stumbled upon this
+gem.  Being able to use this font allowed me to implement one of the
+coolest features of JLDrill in only about an hour.
 
-Finally, I would like to thank some people for indirectly
-contributing to the project. I really appreciate 
-[RubyForge](http://rubyforge.org) for
-hosting this project.  It makes a big difference.  Also I
-want to thank the Ottawa Coding Dojo for their support
-while I worked on JLDrill.  And last but not least, I wish
-to thank Sagara High School for employing me and giving me
-enough free time to work on JLDrill.
+I would also like to thank polarcloud.com for writing and releasing
+the firefox plugin, rikaichan, under the GPL.  I have used many of
+their data files and used the same verb deinflection algorithm as
+rikaichan.  This was a really groundbreaking piece of software and
+being able to study it and use it in my project is a testament to how
+free software should work.  If you have the ability, I would
+appreciate if you go to their website and donate some money to them.:
+[rikaichan](http://www.polarcloud.com/rikaichan/)
+
+Finally, I would like to thank some people for indirectly contributing
+to the project. I really appreciate [RubyForge](http://rubyforge.org)
+for hosting this project.  It makes a big difference.  Also I want to
+thank the Ottawa Coding Dojo for their support while I worked on
+JLDrill.  And last but not least, I wish to thank Sagara High School
+for employing me and giving me enough free time to work on JLDrill.
 
 Notes 
 -----
@@ -79,6 +85,8 @@ Copyright (C) 2004-2008 Ulrich Apel, the AAAA project and the Wadoku project
 All rights reserved.
 
 This font is distributed under a BSD license.
+
+The datafiles from rikaichan have been released under the GPL.
 
 More licence information can be found in the data/jldrill/COPYING
 directory in JLDrill's main distribution.

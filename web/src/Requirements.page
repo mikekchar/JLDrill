@@ -32,6 +32,7 @@ It should work on any platform that supports Ruby, Gtk and Ruby-Gnome
 
 Installing the Requirements
 ---------------------------
+There are different requirements depending on the system you use.
 
 ###Windows
 
