@@ -715,6 +715,26 @@ highlighted.
 
 ![Differs from the dictionary](images/Differs.png "Differs from the dictionary")
 
+You can also look up words in the Reference Dictionary by hovering
+over them.  Usually JLDrill looks up kanji when hovering over them.
+But you can change to word look up mode by pressing the space bar.
+After doing so, when you hover over a word a popup will appear
+showing you some likely definitions for the word.
+
+![Loking up vocabulary](images/VocabPopup.png "Looking up vocabulary")
+
+The right side of the popup contains the candidates of words
+ordered by how likely they are to be correct.  You should scan through
+the list to see which one is best for the context of the sentence.
+JLDrill will also deinflect words and look them up in the dictionary.
+In this example, the mouse is over the expression 果さなければならない,
+which means "must achieve".  JLDrill deinflects the word to
+discover that it is the verb 果す.  The left side of the popup shows
+a large version of the kanji for the most likely word.  
+
+You can also hover over the words in the Example window if the
+reference dictionary is loaded (see below).
+
 **Tanaka Corpus**.  The Tanaka Corpus is a collection of Japanese
 sentences with English translations.  Most of the common words
 in the dictionary have example sentences in the Tanaka Corpus.
@@ -722,12 +742,57 @@ To load the corpus press Ctrl-E (or select File/Load Tanaka Corpus from
 the menu).  It takes a while to load, but when it is finished,
 it opens up a new window.  Whenever you are reviewing a word that
 exists in the corpus, example sentences will be shown in the window.
+Here is an example for the word 甘える.
+
+![Example Sentences](images/Tanaka.png "Examples Sentences")
 
 There are two main sections in the window: Checked Examples and
 Unchecked Examples.  Words in the dictionary often have multiple
 "senses".  These are distinct meanings for the words.  In the Checked
 Examples section, there will be one example for each sense of the
-word.
+word.  In the example, 甘える has two senses: 1) to behave like
+a spoiled child and 2) to depend on another's benevolence.  You can
+see there is one example for each of these senses in the Checked Examples
+section.
+
+The examples are taken right out of the Tanaka Corpus with only
+a little bit of formatting.  The number on the left is the reference
+number for the example. Each example has a unique number.  After that
+you see the word as defined in the dictionary.  Often you will see
+a number in square brackets like \[1\] following the word.  This
+is the number of the sense for the example.  To find the definition,
+simply look at the meanings in the main JLDrill window.  After the
+sense there is often a description of the exact text used.  In this
+case \{甘えた} and \{甘えて}.  Verbs, expecially, will be inflected so
+this allows you to find the word in the example more easily.  The
+last two lines of the example show the Japanese and English text
+for the example.
+
+The Tanaka corpus is a work in progress.  There are close to 200,000
+sentences of varying quality.  In general, all of the Japanese is
+correct.  However, the English can sometimes be awkward or even
+completely unrelated to the Japanese.  So you must be careful.  All
+of the checked examples have been checked for accuracy (although there
+may still be a few errors around).
+
+The Unchecked Examples section shows examples that have not been
+checked for accuracy.  Again, the Japanese usage is almost universally
+correct, but the English translation may be incorrect.  They can
+be very useful as long as this caveat is kept in mind.  Since
+the Unchecked examples can contain many, many examples they are
+sorted by sense.
+
+Because the examples can be difficult to read, you can hover
+over any of the Japanese to either look up the kanji or look
+up the word in the reference dictionary.  To switch between
+looking up kanji or words, press the space bar while the
+Examples window is focused.  At the moment, there is no indication
+what mode you are in, but by hovering over a word you will
+notice easily.
+
+Note: You must load the reference dictionary (Ctrl-D) in order
+to look up words by hovering over them.  Please see the Reference
+Dictionary section (above) for more information.
 
 **Edit** item.  Pressing E (or selecting Vocab/Edit
 from the menu) will allow you to edit the current item.

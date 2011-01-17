@@ -36,8 +36,8 @@ also be Windows packaging since I've started to get Windows users.
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2010-10-01 Fri>
-  :CurrentDate:  <2011-01-05 Wed>
-  :EndDate: <2011-01-10 Mon>
+  :CurrentDate:  <2011-01-17 Wed>
+  :EndDate: <2011-01-17 Mon>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -60,7 +60,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.2 |    18 |   16 |    88.9 |    0.17 |   0.18 |
+| * Version 0.4.2 |    20 |   16 |    80.0 |    0.15 |   0.19 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -144,21 +144,33 @@ the task.
    :Done: 4
    :END:
 
-** TODO 彼処 かしこ finds あそこ 
-   When searching the tanaka corpus the reading should be taken into
-   account if given.  Thus examples with the same kanji but different
-   readings should not be shown.
+** TODO Update Documentation
+   Why don't I do this as part of the stories.  Bad Mike!
 
    :PROPERTIES:
    :JellyBeans: 1
    :Done: 0
    :END:
 
-** TODO Update Documentation
-   Why don't I do this as part of the stories.  Bad Mike!
+** TODO Windows Packaging Spike [0/5]
+   Determine the feasibility of creating a windows packaging.
+   Place to start:
+   - [ ] Create a rake target to make a self contained directory with
+     context and JLDrill. Have a ruby script that runs everything
+     correctly on Windows and Linux given that Ruby, GNOME, and
+     Ruby-Gnome are already installed.
+   - [ ] Create a custom version of Ruby-Gnome that is packaged in the
+     self contained directory and is used instead of the installed
+     Ruby-Gnome.  Note: Probably have to package Gtk+ here as well.
+     If not make another step for that.
+   - [ ] Create some way to package a custom ruby interpreter in the
+     self contained directory.
+   - [ ] Create a self extracting archive for the self contained
+     directory.
+   - [ ] Create an installer for the custom fonts
 
    :PROPERTIES:
-   :JellyBeans: 1
+   :JellyBeans: 3
    :Done: 0
    :END:
 
@@ -349,6 +361,16 @@ Items in the backlog aren't organized in any specific way.
 They are simply ideas that may or may not make it into
 an upcoming development version.
 
+** TODO 彼処 かしこ finds あそこ 
+   When searching the tanaka corpus the reading should be taken into
+   account if given.  Thus examples with the same kanji but different
+   readings should not be shown.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+
 ** TODO Forget items that are too old
    Sometimes when you haven't used the app for a long time items
    get very old.  Their reviewRate becomes large.  This is not
@@ -368,28 +390,6 @@ an upcoming development version.
 
    :PROPERTIES:
    :JellyBeans: 2
-   :Done: 0
-   :END:
-
-** TODO Windows Packaging Spike [0/5]
-   Determine the feasibility of creating a windows packaging.
-   Place to start:
-   - [ ] Create a rake target to make a self contained directory with
-     context and JLDrill. Have a ruby script that runs everything
-     correctly on Windows and Linux given that Ruby, GNOME, and
-     Ruby-Gnome are already installed.
-   - [ ] Create a custom version of Ruby-Gnome that is packaged in the
-     self contained directory and is used instead of the installed
-     Ruby-Gnome.  Note: Probably have to package Gtk+ here as well.
-     If not make another step for that.
-   - [ ] Create some way to package a custom ruby interpreter in the
-     self contained directory.
-   - [ ] Create a self extracting archive for the self contained
-     directory.
-   - [ ] Create an installer for the custom fonts
-
-   :PROPERTIES:
-   :JellyBeans: 3
    :Done: 0
    :END:
 
