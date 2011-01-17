@@ -19,9 +19,8 @@ There are 3 methods to run JLDrill
 
 Please download and install the following files
 
-UPDATE ME!!!
-* [context-0.0.21.deb](http://rubyforge.org/frs/download.php/48213/context-0.0.20.deb)
-* [jldrill-0.5.0.deb](http://rubyforge.org/frs/download.php/48212/jldrill-0.4.0.deb)
+* [context-0.0.21.deb](http://rubyforge.org/frs/download.php/74012/libcontext-ruby_0.0.21-1_all.deb)
+* [jldrill-0.5.0.deb](http://rubyforge.org/frs/download.php/74013/jldrill_0.5.0-1_all.deb)
 
 This is all you will need.
 
@@ -32,9 +31,8 @@ the application using gem files.
 
 You will need the following files:
 
-UPDATE ME!!!
-* [context-0.0.21.gem](http://rubyforge.org/frs/download.php/48213/context-0.0.20.gem)
-* [jldrill-0.5.0.gem](http://rubyforge.org/frs/download.php/48212/jldrill-0.4.0.gem)
+* [context-0.0.21.gem](http://rubyforge.org/frs/download.php/74010/context-0.0.21.gem)
+* [jldrill-0.5.0.gem](http://rubyforge.org/frs/download.php/74011/jldrill-0.5.0.gem)
 
 and optionally
 
@@ -51,7 +49,7 @@ It is not necessary if you already have a Japanese font.
 JLDrill will also run directly from the development tree.  You can download
 the development tree from:
 
-[jldrill-0.4.2](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.4.2)
+[jldrill-0.5.0](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.5.0)
 
 From there the application can be run by navigating to the directory and running
 AppRun.  You may want to install the fonts listed above in the gem section
