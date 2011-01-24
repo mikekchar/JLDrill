@@ -19,7 +19,7 @@ rubyforge_maintainer = "mikekchar@rubyforge.org"
 
 # Dependencies
 context_name = "context"
-context_version = "0.0.21"
+context_version = "0.0.22"
 context_directory = "../context"
 
 # Files that will be packaged
@@ -107,10 +107,10 @@ gem_spec = Gem::Specification.new do |s|
 	s.description = <<-EOF
         JLDrill is a program for helping people drill aspects of the
         Japanese language using spaced repetition.  It features a
-        dictionary cross reference tool, a pop-up kanji reference
+        dictionary cross reference tool, a pop-up kanji/vocabulary reference
         (inspired by rikaichan for Firefox), and the ability to
         import EDICT format files (EUC or UTF8 encoded).  Included
-        drills: kana, JLPT, and grammar (unfinished).
+        drills: kana, JLPT, and grammar.
     EOF
 
 
@@ -132,6 +132,7 @@ gem_spec = Gem::Specification.new do |s|
 	
 	#### Dependencies
     
+    s.add_dependency("gtk2")
     s.add_dependency(context_name, "=" + context_version)
 
     #### Documentation and testing.

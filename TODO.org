@@ -6,7 +6,7 @@ This file contains the development plan for JLDrill.  The first
 section discusses the purpose of the next stable release.  Following
 that is the current development release.  The number of JellyBeans
 chosen for the development release should be enough so that it can
-be released in about a month.
+be released in one or two weeks.
 
 Following the current development release is the next development
 release.  New stories can be moved into the current release as
@@ -16,28 +16,42 @@ release.
 
 When the release is complete, delete the stories and start again.
 
-* The Upcoming Release is Version 0.5.0
+* The Upcoming Release is Version 0.6.0
 
-The upcoming stable release will be version 0.5.0.  As usual,
-it will be made up of the development releases (from 0.4.1 up).
+The upcoming stable release will be version 0.6.0.  As usual,
+it will be made up of the development releases (from 0.5.1 up).
 
-The main purpose of the release is to abstract the item types and more
-easily allow many different types of quizes.  The two biggest features
-are to roll in the Chinese version from CLDrill and to allow users to
-define their own quiz item types.
+The rest of 0.6.0 will be devoted to drill functionality.  The idea
+is to get the multi-drill types done and to nail down the file
+format.  Additionally, some must-have UI (error messages and the
+like) will be implemented.
 
-* Version 0.4.2
+The development versions of 0.5.x will be undergoing a different
+process.  Instead of long development releases, the releases will
+be done in 1-2 weeks each.  Hopefully this will keep interest
+levels up.
 
-The main purpose of this release is to modify the way searching and
-editing work.  This will add more functionality to Japanese studying
-and pave the way towards Chinese studying.  Finally, there will
-also be Windows packaging since I've started to get Windows users.
+* Version 0.5.1
+
+This is a packaging release.  No new functionality will be done
+unless it is a huge bug.
+
+Unlike previous releases, 0.5.1 will be released as a stable release.
+For all platforms, installing ruby (with rubygems) and typing "gem
+install jldrill" will install jldrill and all its dependencies.  On
+Windows, there will be a package which downloads ruby, installs it,
+runs gem, installs the font and then creates an icon.  On Linux, there
+will be a debian package.  Both gems and debian packages will be
+submitted to the appropriate people so that it is easy to install.
+Unfortunately, unless I can get a Mac, there will be no Mac
+installation.
+
 
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
-  :StartDate: <2010-10-01 Fri>
-  :CurrentDate:  <2011-01-17 Wed>
-  :EndDate: <2011-01-17 Mon>
+  :StartDate: <2011-01-24 Mon>
+  :CurrentDate:  <2011-01-24 Mon>
+  :EndDate: <2011-01-30 Sun>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -60,7 +74,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.2 |    17 |   17 |   100.0 |    0.16 |   0.16 |
+| * Version 0.5.1 |    10 |    0 |     0.0 |    0.00 |   1.67 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -71,289 +85,28 @@ the task.
 
 ** Current Stories
 
-** DONE Modify editing of comments
-   Allow items to be saved if only the comment has been changed.
-   However, when adding items from the dictionary, don't overwrite
-   the comment.
+*** TODO Put Gem in official repository [0/5]
+    - [ ] Make dependencies for gtk2
+    - [ ] Push to official repositories
+    - [ ] Test on Linux and Windows to make sure it installs properly
+    - [ ] Update documentation for Windows install
+    - [ ] Document potential problems with debian and gem coexistance.
 
    :PROPERTIES:
    :JellyBeans: 1
-   :Done: 1
-   :END:
-   
-** DONE Show examples from the Tanaka corpus [4/4]
-   Create the ability to read the Tanaka corpus.  When an item is
-   displayed, show the relevant items from the Tanaka corpus.
-   Sort the items first by whether they are a suggested example
-   (~ items) and then by sense ([1], [2], etc).
-   - [X] Load Tanaka file
-   - [X] Search Tanaka examples when displaying items
-   - [X] Put ~ items first and identify them
-   - [X] Sort Tanaka examples by sense  and identify divisions.
-
-   :PROPERTIES:
-   :JellyBeans: 4
-   :Done: 4
+   :Done: 0
    :END:
 
-** DONE Allow searching by Kanji
-   If the kanji field is set and the reading field is empty, search
-   for words by kanji.
-
-   :PROPERTIES:
-   :JellyBeans: 2
-   :Done: 2
-   :END:
-
-** DONE Create a dictionary popup [4/4]
-   If the dictionary is loaded, the user can select between showing
-   a kanji popup or a vocabulary popup.  If the user selects a vocabulary
-   popup, the system searches for the largest substring starting under 
-   the pointer in the dictionary.  It shows that match first followed
-   by any smaller matches.
-   - [X] Select all entries from an array that are substrings of a string
-   - [X] Switch between kanji and vocabulary when the user presses space
-   - [X] Find the string under the mouse
-   - [X] Show a popup for vocabulary that searches for the character and
-         then finds the items that are substrings
-
-   :PROPERTIES:
-   :JellyBeans: 2
-   :Done: 2
-   :END:
-
-** DONE Speed up dictionary searches [3/3]
-   The dictionary is too slow to use in the popup for certain items.
-   - [X] Rewrite Edict to get rid of cruft
-   - [X] Make SearchTable show the correct meaning
-   - [X] Cache the meanings
-
-   :PROPERTIES:
-   :JellyBeans: 3
-   :Done: 3
-   :END:
-
-** DONE Use deinflection for dictionary searches [1/1]
-   When searching the dictionary the system inflects matches that are
-   verbs or adjectives and if the inflected word matches then it
-   is shown in the matches. kobande doesn't select kobamu.
-   - [X] こばんで does not deinflect to 拒む
-
-   :PROPERTIES:
-   :JellyBeans: 4
-   :Done: 4
-   :END:
-
-** DONE Update Documentation
-   Why don't I do this as part of the stories.  Bad Mike!
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 1
-   :END:
-
-* Version 0.4.1
-
-  This release is now completed.
-  
-  The main purpose of this development release was to give more
-  flexibility in the problem types.  The user can choose which ones
-  they want to review and each one will be reviewed independently.
-
-  :PROPERTIES:
-  :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
-  :StartDate: <2010-03-17 Wed>
-  :CurrentDate:  <2010-08-25 Wed>
-  :EndDate: <2010-08-27 Sun>
-  :PERCENT: 0
-  :CurrentVelocity: 0
-  :NeededVelocity: 0
-  :END:
-
-** Velocity Table
-
-#+BEGIN: columnview :maxlevel 1 :id local
-| ITEM            | Total | Done | Percent | Current | Needed |
-|-----------------+-------+------+---------+---------+--------|
-| * Version 0.4.1 |    22 |   22 |   100.0 |    0.14 |   0.13 |
-#+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
-#+END
-
-** Completed Stories
-
-*** DONE Options for allowing the user to choose problem types [2/2]
-   Allow the user to choose which problem types they want to be
-   exposed to in the review set.
-   - [X] Add options to the model
-   - [X] Add options to the UI	 
-
-   :PROPERTIES:
-   :JellyBeans: 2
-   :Done: 2
-   :END:
-
-*** DONE Schedule each problem type separately [4/4]
-   Currently there is only one review for each item.  The strategy
-   randomly chooses one type of the allowed problem types to review.
-   Create a separate schedule for each allowed problem type and
-   review it independently.  But if the user gets one wrong, start
-   both again.
-   - [X] Store a problem type in the item status rather than a
-     schedule.  Store the schedule in the problem type
-   - [X] Allow more than one problem type in the status
-   - [X] Automatically create/remove statuses based on allowed problem
-     types. New statuses should be reviewed at the existing schedule
-     or 5 days, whichever is less.
-   - [X] Operations on working set items must change all of the schedules.
-
-   :PROPERTIES:
-   :JellyBeans: 3
-   :Done: 3
-   :END:
-
-*** DONE If there is no kanji don't schedule a kanji problem
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 1
-   :END:
-
-*** DONE Put a maximum of 25% extra beyond normal schedule
-        Sometimes you leave the stack for a long time but
-        you are able to answer the question anyway.  This
-        can cause the new schedule to be quite long depriving
-        you of practice.  Put a maximum on how much extra
-        you can add to the schedule
-
-   :PROPERTIES:
-   :JellyBeans: 2
-   :Done: 2
-   :END:
-   
-*** DONE Use smaller backoff for longer durations
-        I have noticed that I fail in my longer duration items
-        more often than my shorter duration items.  With the
-        idea of also reviewing every item at least once
-        every 6 months, I will modify the backoff so that it
-        falls off to 1.0 at 180 days.  In other words a duration
-        of 1 day or less will have a backoff of 2.0 while a
-        duration of 180 days will have a backoff of 180 days.
-        It will decrease linearly, so at 90 days the backoff
-        is 1.5.  I also need to update the stats so that the
-        categories are more appropriate.
-
-    :PROPERTIES:
-    :JellyBeans: 2
-    :Done: 2
-    :END:
-
-*** DONE Early reviewed items scheduled too soon
-   If an item is reviewed earlier and answered correctly, it can be
-   given a duration that is less than it's earlier duration.  This is
-   confusing at least and maybe should be fixed. Basically made it
-   so it would never schedule less than the previous duration.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 1
-   :END:
-
-*** DONE Review Mode isn't reset after loading a file
-    If you turn review mode on and then load another file,
-    the button stays depressed.  But it actually doesn't stay
-    in review mode.  Change it so that when you load another
-    file, review mode is turned off and the button isn't depressed.
-
-    :PROPERTIES:
-    :JellyBeans: 1
-    :Done: 1
-    :END:
-
-*** DONE Specify a file to load on the command line
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 1
-   :END:
-
-*** DONE Allow the user to choose the dictionary [1/1]
-   Instead of having a single dictionary that is loaded, allow the
-   user to choose the dictionary they want to load from the Options
-   page. This filename is then stored in the drill file.  Remove
-   edict from the distribution.
-   - [X] When the dictionary doesn't exist don't crash on loading.
-
-   :PROPERTIES:
-   :JellyBeans: 3
-   :Done: 3
-   :END:
-
-*** DONE Automatically load dictionary option [4/4]
-   Have an option that is saved with the drill to automatically
-   load the dictionary when the drill is loaded.
-   - [X] Add option to the options
-   - [X] Save/Load options to the file
-   - [X] Automatically load dictionary when loading the file
-   - [X] Automatically load dictionary when dictionary changes in the options
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 1
-   :END:
-
-*** DONE App crashes if Load Reference window is closed.  Make the Load
-   Reference Window a normal widget on the main window.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 1
-   :END:
-
-*** DONE Set the Quiz to Modified when an item in the All Vocab window
-   has been moved.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 1
-   :END:
-
-*** DONE Sort new items correctly when they have been moved [2/2]
-   When items are moved in the AllVocab window, make sure
-   they are in the correct presentation order in the
-   NewSet. 
-   - [X] Sort New Set items when the file is loaded so that
-		 old files have the correct order.
-   - [X] Physically move New Set items when they are moved in
-	    the AllVocabWindow so that they are in the correct
-	    order.
-
-   :PROPERTIES:
-   :JellyBeans: 3
-   :Done: 3
-   :END:
-
-
-* Backlog
-
-Items in the backlog aren't organized in any specific way.
-They are simply ideas that may or may not make it into
-an upcoming development version.
-
-** TODO Windows Packaging Spike [0/5]
+*** TODO Windows Packaging [0/5]
    Determine the feasibility of creating a windows packaging.
    Place to start:
-   - [ ] Create a rake target to make a self contained directory with
-     context and JLDrill. Have a ruby script that runs everything
-     correctly on Windows and Linux given that Ruby, GNOME, and
-     Ruby-Gnome are already installed.
-   - [ ] Create a custom version of Ruby-Gnome that is packaged in the
-     self contained directory and is used instead of the installed
-     Ruby-Gnome.  Note: Probably have to package Gtk+ here as well.
-     If not make another step for that.
-   - [ ] Create some way to package a custom ruby interpreter in the
-     self contained directory.
-   - [ ] Create a self extracting archive for the self contained
-     directory.
+   - [ ] Create a self extranting archive that downloads and
+		 installs ruby, and then run gem install jldrill
+   - [ ] Create an uninstall script.
+   - [ ] Create a jldrill upgrade script.
+   - [ ] Create an executable with an icon for jldrill
+   - [ ] Install icon on the desktop and in the menu.  Add uninstall
+		 and upgrade scripts in the menu
    - [ ] Create an installer for the custom fonts
 
    :PROPERTIES:
@@ -361,17 +114,46 @@ an upcoming development version.
    :Done: 0
    :END:
 
-** TODO 彼処 かしこ finds あそこ 
-   When searching the tanaka corpus the reading should be taken into
-   account if given.  Thus examples with the same kanji but different
-   readings should not be shown.
+*** TODO Trim ruby-gtk2 install footprint
+	ruby-gtk2 takes up 450 megs of disk space.  It should be at least
+	200 megs smaller be getting rid of duplicate dlls.
 
    :PROPERTIES:
-   :JellyBeans: 1
+   :JellyBeans: 2
    :Done: 0
    :END:
 
-** TODO Forget items that are too old
+*** TODO Write build instructions for Windows on ruby-gtk2
+	Nobody knows how to build ruby-gtk2 on Windows.  Figure it
+	out and write documentation.
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 0
+   :END:
+
+*** TODO Streamlined Windows package
+	Create a Windows package that contains only what is needed for
+	JLDrill.  Everything should be included and it should take up
+	less than 70 Megs installed.
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 0
+   :END:
+
+
+* Version 0.5.2
+
+0.5.2 will focus on needed user interface improvements.  Mostly these
+have to do with giving feedback about errors and the like.  There is
+also some workflow for the beginning of the drill.  Looking at these
+items, it seems as if I will have to split this release up into 2
+releases.  But we'll see how much time I have.
+  
+** Items
+
+*** TODO Forget items that are too old
    Sometimes when you haven't used the app for a long time items
    get very old.  Their reviewRate becomes large.  This is not
    a problem in itself, but when you start to review items they
@@ -393,15 +175,7 @@ an upcoming development version.
    :Done: 0
    :END:
 
-** TODO Create Windows packaging.
-   Do whatever the packaging spike found in order to make Windows packaging.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 0
-   :END:
-
-** TODO Allow users to update their drills
+*** TODO Allow users to update their drills
    A user can update a drill by appending the new version to their drill.
    But if the vocabulary has changed in the new/old drill (because the
    dictionary was updated for instance), the new vocabulary will be added
@@ -416,17 +190,34 @@ an upcoming development version.
    :Done: 0
    :END:
 
-** TODO Insert Popup Before Item
-   If the user presses a key (TBD) while a popup is up, an item
-   contiaining the information in the popup is added to the quiz
-   immediately before the current item.
+*** TODO Need a mechanism for publishing warnings and errors.
+   Warnings and errors must be displayed to the user in a
+   consisten way.  To be honest I need to think more about what
+   that way is.  Currently errors are printed to the console
+   which is no good.
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 0
+   :END:
+
+*** TODO Give feedback to the user when we refuse to edit or add an item.
+   Probably use the aforementioned warning and error mechanism.
 
    :PROPERTIES:
    :JellyBeans: 1
    :Done: 0
    :END:
 
-** TODO Start new drills in Preview mode
+*** TODO When save fails, indicate it to the user 
+   before bringing up the save as dialog.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+
+*** TODO Start new drills in Preview mode
    When a drill has been loaded for the first time (or after a reset), 
    show the first item in preview mode.  This allows the user to
    update the options, or to save the quiz before selecting the first
@@ -437,7 +228,7 @@ an upcoming development version.
    :Done: 0
    :END:
 
-** TODO New Drill Splash Screen
+*** TODO New Drill Splash Screen
    Create a splash screen explaining that this is a new drill and
    the system is in Preview mode.  Press N to start
 
@@ -446,7 +237,7 @@ an upcoming development version.
    :Done: 0
    :END:
 
-** TODO Simply loading a drill shouldn't modify it
+*** TODO Simply loading a drill shouldn't modify it
    Currently the "must save" flag is set when a drill is loaded.
    This should only be set after the first item has been answered.
    Of course if the drill was imported from an EDICT file then
@@ -457,17 +248,69 @@ an upcoming development version.
    :Done: 0
    :END:
 
+*** TODO Indicate when the item has been promoted.
+   When an item has been moved to the review set, print some
+   kind of congratulatory message.  Possibly show some kind of
+   stats like Anki does.
 
-  :PROPERTIES:
-  :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
-  :StartDate: <2010-03-17 Wed>
-  :CurrentDate:  <2010-08-25 Wed>
-  :EndDate: <2010-08-27 Sun>
-  :PERCENT: 0
-  :CurrentVelocity: 0
-  :NeededVelocity: 0
-  :END:
-** TODO Aggressive Search
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+
+
+* Backlog
+
+These items are ideas that may or may not make it into
+an upcoming development version.  They are organized loosely
+by how important I think they are (the most important is
+first).  Simply being on this list is no guarantee that
+I will implement it.  However, items near the top are very
+likely to appear in the next release or two.  If you have
+feedback on this list, or its order, please email me.
+
+** Items
+
+*** TODO Allow Learn/Unlearn for any arbitrary item
+*** TODO Define the structure of the data in the drill.  
+   In other words, create a dynamic data type that defines the
+   structure of the data item that is to be drilled.  Save it in the
+   drill itself.  Create a structure for edict vocabulary.
+
+*** TODO Define a structure for grammar.
+*** TODO Display parts of speech tags next to what they modify
+   (i.e. each definition, or sentence)
+
+*** TODO Allow the user to choose what tags to display.  
+   Save this in the drill.
+
+*** TODO Associate data items with the dictionary they belong to.
+   Only load the dictionary if it's in the drill. (Question: Should it
+   unload the dictionary on next drill?  Probably yes...)
+
+*** TODO 彼処 かしこ finds あそこ 
+   When searching the tanaka corpus the reading should be taken into
+   account if given.  Thus examples with the same kanji but different
+   readings should not be shown.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+
+*** TODO Alternate Language support (i.e., Chinese)
+*** TODO Allow undo
+*** TODO Insert Popup Before Item
+   If the user presses a key (TBD) while a popup is up, an item
+   contiaining the information in the popup is added to the quiz
+   immediately before the current item.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+
+*** TODO Aggressive Search
    If a reading can't be found in the dictionary, seach 
    again taking off one character at a time from the end of the
    reading. 
@@ -477,15 +320,15 @@ an upcoming development version.
    :Done: 0
    :END:
 
-** TODO Alternate Language support (i.e., Chinese)
-** TODO One of the items in the working set had a potential schedule of 72 days
+*** TODO Create a recent used menu for loading drills that you've used recently.
+*** TODO One of the items in the working set had a potential schedule of 72 days
 
    :PROPERTIES:
    :JellyBeans: 1
    :Done: 0
    :END:
 
-** TODO Time to learn after the first item is waaay too big (10798.7s) [1/2]
+*** TODO Time to learn after the first item is waaay too big (10798.7s) [1/2]
    - [X] Refactor tests
    - [ ] Test to see if this is a real problem	 
 
@@ -494,65 +337,31 @@ an upcoming development version.
    :Done: 0
    :END:
 
-** TODO Allow undo
-** TODO Allow Learn/Unlearn for any arbitrary item
-** TODO Need a mechanism for publishing warnings and errors.
-
-** TODO Give feedback to the user when we refuse to edit or add an item.
-
-** TODO When save fails, indicate it to the user 
-   before bringing up the save as dialog.
-
-** TODO Full test coverage for all the model objects
-
-** TODO Full test coverage for all the contexts
-
-** TODO Don't steal focus when putting up windows that take no input.  
+*** TODO Full test coverage for all the model objects
+*** TODO Full test coverage for all the contexts
+*** TODO Don't steal focus when putting up windows that take no input.  
    Deferred from 0.3.3.  I tried to do it, but it never
    worked.  I suspect a race condition in GTK and it's not important
    enough to kill myself over.
 
-** TODO Define a structure for grammar.
-
-** TODO Display parts of speech tags next to what they modify
-   (i.e. each definition, or sentence)
-
-** TODO Allow the user to choose what tags to display.  
-   Save this in the drill.
-
-** TODO Associate data items with the dictionary they belong to.
-   Only load the dictionary if it's in the drill. (Question: Should it
-   unload the dictionary on next drill?  Probably yes...)
-
-** TODO Indicate when the item has been promoted.
-
-** TODO Create a recent used menu for loading drills that you've used recently.
-
-** TODO Allow user to set the formatting for each type of data.  
+*** TODO Allow user to set the formatting for each type of data.  
    Store the formatting in the drill.
 
-** TODO Define the structure of the data in the drill.  
-   In other words, create a dynamic data type that defines the
-   structure of the data item that is to be drilled.  Save it in the
-   drill itself.  Create a structure for edict vocabulary.
-
-** TODO Rename the methods that take Vocabulary
+*** TODO Rename the methods that take Vocabulary
    (like Quiz#add()) to indicate that it's for Vocabulary (i.e.,
    Quiz#addVocab())
 
-** TODO Replace webgen with something else.  
-
-** TODO Create a keyboard only mode.
+*** TODO Replace webgen with something else.  
+*** TODO Create a keyboard only mode.
    Advanced users can probably just use the keyboard.  In this mode,
    Remove any UI that is surpulfluous.
 
-** TODO Create a dictionary back end to allow it to use online dictionaries,
+*** TODO Create a dictionary back end to allow it to use online dictionaries,
    or dictionary servers (fantasdic? stardict?)
 
-** TODO Create Redhat packaging.
-
-** TODO Create OSX packaging.
-** TODO Allow user to modify the global backoff.
+*** TODO Create Redhat packaging.
+*** TODO Create OSX packaging.
+*** TODO Allow user to modify the global backoff.
    Allow the user to modify the global backoff from the options.  This
    must be saved with the drill.  When the backoff is changed, all the
    items that are currently scheduled will have to be scaled
