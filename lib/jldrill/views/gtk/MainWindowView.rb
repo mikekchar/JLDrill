@@ -13,8 +13,14 @@ module JLDrill::Gtk
 		def initialize(context)
 			super(context)
 			@mainWindow = Context::Gtk::MainWindow.new("JLDrill", self)
-            @icon = Gdk::Pixbuf.new(File.join(JLDrill::Config::DATA_DIR, 
-                                              "icon.svg"))
+            # GTK+ on windows doesn't have SVG, so if this fails read the PNG
+            begin
+                @icon = Gdk::Pixbuf.new(File.join(JLDrill::Config::DATA_DIR, 
+                                                  "icon.svg"))
+            rescue
+                @icon = Gdk::Pixbuf.new(File.join(JLDrill::Config::DATA_DIR,
+                                                  "icon.png"))
+            end
             @mainWindow.icon_list=([@icon])
 
 			@mainWindow.set_default_size(600, 400)

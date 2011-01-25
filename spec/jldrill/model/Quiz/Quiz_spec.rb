@@ -303,8 +303,9 @@ module JLDrill
 
         it "should be able to find paths relative to the save name" do
             @quiz.file = "/usr/share/fake.jldrill"
-            @quiz.useSavePath("mydirectory/newfile").should eql("/usr/share/mydirectory/newfile")
-            @quiz.useSavePath("../../newfile").should eql("/newfile")
+            root = File.expand_path("/")
+            @quiz.useSavePath("mydirectory/newfile").should eql(root + "usr/share/mydirectory/newfile")
+            @quiz.useSavePath("../../newfile").should eql(root + "newfile")
         end
     end
 end

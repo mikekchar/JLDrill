@@ -1,4 +1,5 @@
 require 'rake'
+gem 'rspec', "= 1.3.1"
 require 'spec/rake/spectask'
 require 'rake/rdoctask'
 require 'rake/testtask'
@@ -46,7 +47,7 @@ spec_files = FileList[
 ]
 
 # Options for running the application
-ruby_opts = ["-KO", "-I./lib"]
+ruby_opts = ["-KO", "-I./lib", "-rrubygems"]
 
 task :default => [:spec]
 
