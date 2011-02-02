@@ -14,6 +14,9 @@ require 'fileutils'
 # Current release directory
 release_dir = "jldrill-#{JLDrill::VERSION}"
 
+# Revision of the gem file.  Increment this every time you release a gem file.
+gem_revision ="3"
+
 # Rubyforge details
 rubyforge_project = "jldrill"
 rubyforge_maintainer = "mikekchar@rubyforge.org"
@@ -103,7 +106,7 @@ gem_spec = Gem::Specification.new do |s|
 	#### Basic information.
 
 	s.name = 'jldrill'
-	s.version = JLDrill::VERSION
+    s.version = JLDrill::VERSION + "." + gem_revision
 	s.summary = "Japanese Language Drill Program"
 	s.description = <<-EOF
         JLDrill is a program for helping people drill aspects of the
@@ -206,7 +209,7 @@ task :debian_dir => [:clean_debian, :clean_web, :web] do
 	FileUtils.mkdir_p "debian/jldrill/usr/share/jldrill/Tanaka"
     
     # Copy the jldrill source files
-    FileUtils.cp_r Dir.glob("bin/*"), "debian/jldrill/usr/bin"
+    FileUtils.cp_r "bin/jldrill", "debian/jldrill/usr/bin"
     FileUtils.cp_r Dir.glob("lib/*"), "debian/jldrill/usr/lib/ruby/1.8"
 
     # Copy the jldrill data files
@@ -262,7 +265,7 @@ desc "Rebuild everything, create gems and debs for Context and JLDrill, place al
 task :release => [:build, :debs, :gems] do
     FileUtils.mkdir release_dir
     FileUtils.cp "#{context_directory}/pkg/context-#{context_version}.gem", release_dir
-    FileUtils.cp "pkg/jldrill-#{JLDrill::VERSION}.gem", release_dir
+    FileUtils.cp "pkg/jldrill-#{JLDrill::VERSION}.#{gem_revision}.gem", release_dir
     FileUtils.cp Dir.glob("data/jldrill/fonts/*.ttf"), release_dir
     FileUtils.mv Dir.glob("../libcontext-ruby_#{context_version}-*.*"), release_dir
     FileUtils.mv Dir.glob("../jldrill_#{JLDrill::VERSION}-*.*"), release_dir

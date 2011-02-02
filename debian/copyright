@@ -21,7 +21,7 @@ major improvement in clearing up ambiguous details, so I highly
 recommend choosing GPL 3.0 if you wish to extend this software.
 
 The Debian packaging is copyright 2009, Mike Charlton <mikekchar@gmail.com> and
-is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
+is licensed under the GPL, see `/usr/share/common-licenses/GPL-3'.
 
 The JLPT files are Copyright (C) 2001 Thierry Bézecourt
 
