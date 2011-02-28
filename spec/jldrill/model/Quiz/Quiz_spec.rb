@@ -15,13 +15,14 @@ module JLDrill
 		    @emptyQuiz.should_not be_nil
 		    
 		    @emptyQuiz.contents.should_not be_nil
-		    @emptyQuiz.contents.bins.length.should be(5)
+		    @emptyQuiz.contents.bins.length.should be(6)
 		    @emptyQuiz.contents.bins[0].name.should eql("Unseen")
 		    @emptyQuiz.contents.bins[1].name.should eql("Poor")
 		    @emptyQuiz.contents.bins[2].name.should eql("Fair")
 		    @emptyQuiz.contents.bins[3].name.should eql("Good")
 		    @emptyQuiz.contents.bins[4].name.should eql("Excellent")
-		    @emptyQuiz.contents.to_s.should eql("Unseen\nPoor\nFair\nGood\nExcellent\n")
+            @emptyQuiz.contents.bins[5].name.should eql("Forgotten")
+		    @emptyQuiz.contents.to_s.should eql("Unseen\nPoor\nFair\nGood\nExcellent\nForgotten\n")
 		end
 		
 		it "should load a file from memory" do

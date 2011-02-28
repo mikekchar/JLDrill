@@ -1,6 +1,10 @@
 require 'rake'
 gem 'rspec', "= 1.3.1"
 require 'spec/rake/spectask'
+# Debian forces the installation of a very old version of rdoc
+# # in /usr/lib/ruby if you install rubygems.  So I need to override
+# # it here.
+gem 'rdoc', ">= 2.2"
 require 'rake/rdoctask'
 require 'rake/testtask'
 require 'rubygems'

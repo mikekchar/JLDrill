@@ -97,6 +97,7 @@ module JLDrill
 		def exit
 		    if @mainView.optionsSet?
 		        @quiz.options.assign(@mainView.options)
+                @quiz.strategy.reschedule
 		    end
 		    super
 		end

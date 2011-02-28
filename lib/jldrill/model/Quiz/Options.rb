@@ -8,7 +8,7 @@ module JLDrill
         attr_reader :publisher, :randomOrder, :promoteThresh, :introThresh,
                     :reviewMode, :dictionary, :reviewMeaning, 
                     :reviewKanji, :reviewReading, :reviewOptionsSet,
-                    :autoloadDic, :tanaka
+                    :autoloadDic, :tanaka, :forgettingThresh
 
         RANDOM_ORDER_RE = /^Random Order/
         PROMOTE_THRESH_RE = /^Promotion Threshold: (.*)/
@@ -18,6 +18,7 @@ module JLDrill
         REVIEW_KANJI_RE = /^Review Kanji/
         REVIEW_READING_RE = /^Review Reading/
         AUTOLOAD_DIC_RE = /^Autoload Dictionary/
+        FORGETTING_THRESH_RE = /^Forgetting Threshold: (.*)/
 
         def initialize(quiz)
             @quiz = quiz
@@ -30,6 +31,7 @@ module JLDrill
 			@tanaka = nil
             @reviewOptionsSet = false
             @autoloadDic = false
+            @forgettingThresh = 0.0
             defaultReviewOptions
         end
         
@@ -45,6 +47,7 @@ module JLDrill
             retVal.reviewKanji = @reviewKanji
             retVal.reviewReading = @reviewReading
             retVal.autoloadDic = @autoloadDic
+            retVal.forgettingThresh = @forgettingThresh
             retVal
         end
         
@@ -58,7 +61,8 @@ module JLDrill
             options.reviewMeaning == @reviewMeaning &&
             options.reviewKanji == @reviewKanji &&
             options.autoloadDic == @autoloadDic &&
-            options.reviewReading == @reviewReading
+            options.reviewReading == @reviewReading &&
+            options.forgettingThresh == @forgettingThresh
         end
 
         def subscribe(subscriber)
@@ -95,6 +99,7 @@ module JLDrill
             self.reviewKanji = options.reviewKanji
             self.reviewReading = options.reviewReading
             self.autoloadDic = options.autoloadDic
+            self.forgettingThresh = options.forgettingThresh
             if !@quiz.nil?
                 @quiz.recreateProblem
             end
@@ -192,6 +197,13 @@ module JLDrill
             end
         end
 
+        def forgettingThresh=(value)
+            if @forgettingThresh != value
+                @forgettingThresh = value
+                saveNeeded
+            end
+        end
+
         # Return an array containing the allowed levels for the
         # drills.
         def allowedLevels
@@ -233,6 +245,8 @@ module JLDrill
                     self.reviewReading = $1.to_i
                 when AUTOLOAD_DIC_RE
                     self.autoloadDic = true
+                when FORGETTING_THRESH_RE
+                    self.forgettingThresh = $1.to_f
                 else
                     parsed = false
             end
@@ -268,6 +282,9 @@ module JLDrill
             end
             if(@autoloadDic)
                 retVal += "Autoload Dictionary\n"
+            end
+            if(@forgettingThresh != 0)
+                retVal += "Forgetting Threshold: #{@forgettingThresh}\n"
             end
             retVal
         end

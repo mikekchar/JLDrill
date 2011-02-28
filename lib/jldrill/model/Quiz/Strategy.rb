@@ -24,6 +24,10 @@ module JLDrill
         def Strategy.reviewSetBin
             return 4
         end
+
+        def Strategy.forgottenSetBin
+            return 5
+        end
         
         # Returns a string showing the status of the quiz with this strategy
         def status
@@ -75,19 +79,51 @@ module JLDrill
             reviewSet.length
         end
 
-        # Sort the items in the ReviewSet according to their schedule
+        def forgottenSet
+            @quiz.contents.bins[Strategy.forgottenSetBin]
+        end
+
+        def forgottenSetSize
+            forgottenSet.length
+        end
+
+        # Sort the items according to their schedule
         def reschedule
-            # This is here for legacy files that may have Kanji 
+            # Check for legacy files that may have Kanji 
             # problems schedules but no kanji
             reviewSet.each do |x|
                 x.removeInvalidKanjiProblems
             end
+            # Sort the review set
             reviewSet.sort! do |x,y|
                 x.schedule.reviewLoad <=> y.schedule.reviewLoad
             end
+            # Move old items to the forgotten set
+            while ((options.forgettingThresh != 0.0) &&
+                   (!reviewSet.empty?) && 
+                   (reviewSet[0].schedule.reviewRate >= options.forgettingThresh.to_f))
+                contents.moveToBin(reviewSet[0], Strategy.forgottenSetBin)
+            end
+            # Sort the forgotten set
+            forgottenSet.sort! do |x,y|
+                x.schedule.reviewLoad <=> y.schedule.reviewLoad
+            end
+            # If the user changes the settings then we may have to
+            # unforget some items
+            while ((!forgottenSet.empty?) &&
+                  ((options.forgettingThresh == 0.0) ||
+                   (forgottenSet.last.schedule.reviewRate < 
+                        options.forgettingThresh.to_f)))
+                contents.moveToBin(forgottenSet.last, Strategy.reviewSetBin)
+            end
+            # Sort the review set again
+            reviewSet.sort! do |x,y|
+                x.schedule.reviewLoad <=> y.schedule.reviewLoad
+            end
+            
         end
         
-        # Returns true is the working set has been
+        # Returns true if the review set has been
         # reviewed enough that it is considered to be
         # known.  This happens when we have reviewed
         # ten items while in the target zone.
@@ -95,7 +131,7 @@ module JLDrill
         # items, we have a 90% success rate or when
         # we have a 90% confidence that the the items
         # have a 90% chance of success.
-        def workingSetKnown?
+        def reviewSetKnown?
             !(10 - @stats.timesInTargetZone > 0)        
         end
         
@@ -112,7 +148,7 @@ module JLDrill
                 return true
             end
             
-            !workingSetKnown? && (reviewSetSize >= options.introThresh) && 
+            !reviewSetKnown? && (reviewSetSize >= options.introThresh) && 
                 !(reviewSet.allSeen?)
         end
         
@@ -169,6 +205,10 @@ module JLDrill
         def getReviewItem
             reviewSet[0]
         end
+
+        def getForgottenItem
+            forgottenSet[0]
+        end
         
         # Get an item from the Working Set
         def getWorkingItem
@@ -185,6 +225,8 @@ module JLDrill
             if !workingSetFull?
                 if shouldReview?
                     item = getReviewItem
+                elsif !forgottenSet.empty?
+                    item = getForgottenItem
                 elsif !newSet.empty?
                     item = getNewItem
                 end
@@ -200,9 +242,9 @@ module JLDrill
         # Create a problem for the given item at the correct level
         def createProblem(item)
             item.itemStats.createProblem
-            @stats.startTimer(item.bin == 4)
+            @stats.startTimer(item.bin == Strategy.reviewSetBin)
             # Drill at random levels in bin 4, but don't drill reading
-            if item.bin == 4
+            if item.bin == Strategy.reviewSetBin
                 problem = item.problem
             else
                 # Otherwise drill for the specific bin
@@ -228,7 +270,7 @@ module JLDrill
                     end
                     # Put the item at the back of the bin
                     contents.bins[item.bin].delete(item)
-                    contents.bins[4].push(item)
+                    reviewSet.push(item)
                 end
             end
         end
@@ -251,7 +293,8 @@ module JLDrill
         def correct(item)
             @stats.correct(item)
             item.itemStats.correct
-            if item.bin == 4
+            if ((item.bin == Strategy.reviewSetBin) ||
+                (item.bin == Strategy.forgottenSetBin))
                 item.schedule.correct
                 promote(item)
             else

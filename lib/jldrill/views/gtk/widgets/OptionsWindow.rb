@@ -35,6 +35,7 @@ module JLDrill::Gtk
 
             @autoloadDic = Gtk::CheckButton.new("Autoload Dictionary")
             @promoteThresh = Gtk::HScale.new(1,10,1)
+            @forgettingThresh = Gtk::HScale.new(0.0, 10.0, 0.1)
             
             self.vbox.add(@randomOrder)
             self.vbox.add(@reviewOptions)
@@ -44,6 +45,8 @@ module JLDrill::Gtk
             self.vbox.add(@introThresh)
             self.vbox.add(@dictionaryOptions)
             self.vbox.add(@autoloadDic)
+            self.vbox.add(Gtk::Label.new("Forget items higher than"))
+            self.vbox.add(@forgettingThresh)
         end
         
         def randomOrder=(value)
@@ -110,6 +113,14 @@ module JLDrill::Gtk
             @autoloadDic.active?
         end
         
+        def forgettingThresh=(value)
+            @forgettingThresh.value = value
+        end
+
+        def forgettingThresh
+            @forgettingThresh.value.to_f
+        end
+
         def set(options)
             self.randomOrder = options.randomOrder
             self.promoteThresh = options.promoteThresh
@@ -123,6 +134,7 @@ module JLDrill::Gtk
                 self.dictionaryName = JLDrill::Config::DICTIONARY_NAME
             end
             self.autoloadDic = options.autoloadDic
+            self.forgettingThresh = options.forgettingThresh
         end
         
         def updateFromViewData
@@ -144,6 +156,7 @@ module JLDrill::Gtk
                 @view.options.dictionary = nil
             end
             @view.options.autoloadDic = self.autoloadDic
+            @view.options.forgettingThresh = self.forgettingThresh
         end
         
         def execute

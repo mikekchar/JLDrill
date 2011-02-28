@@ -21,6 +21,15 @@ module JLDrill
             return item
         end
 
+        def last
+            if length > 0
+                item = @contents[length - 1]
+                return item
+            else
+                return nil
+            end
+        end
+
         # Pushes a item to the end of the bin
         # Also sets the bin number of the item
         def push(item)

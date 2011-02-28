@@ -6,7 +6,7 @@ lang="en" xml:lang="en">
 <title>JLDrill TODO List</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-01-24 14:54:43 JST"/>
+<meta name="generated" content="2011-02-28 14:15:49 JST"/>
 <meta name="author" content="Mike Charlton"/>
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
@@ -78,11 +78,12 @@ lang="en" xml:lang="en">
 <li><a href="#sec-3.1">3.1 Velocity Table </a></li>
 <li><a href="#sec-3.2">3.2 Current Stories </a>
 <ul>
-<li><a href="#sec-3.2.1">3.2.1 Put Gem in official repository [0/5] </a></li>
-<li><a href="#sec-3.2.2">3.2.2 Windows Packaging [0/5] </a></li>
-<li><a href="#sec-3.2.3">3.2.3 Trim ruby-gtk2 install footprint </a></li>
-<li><a href="#sec-3.2.4">3.2.4 Write build instructions for Windows on ruby-gtk2 </a></li>
-<li><a href="#sec-3.2.5">3.2.5 Streamlined Windows package </a></li>
+<li><a href="#sec-3.2.1">3.2.1 Forget items that are too old </a></li>
+<li><a href="#sec-3.2.2">3.2.2 Put Gem in official repository [3/5] </a></li>
+<li><a href="#sec-3.2.3">3.2.3 Windows Packaging [0/5] </a></li>
+<li><a href="#sec-3.2.4">3.2.4 Trim ruby-gtk2 install footprint </a></li>
+<li><a href="#sec-3.2.5">3.2.5 Write build instructions for Windows on ruby-gtk2 </a></li>
+<li><a href="#sec-3.2.6">3.2.6 Streamlined Windows package </a></li>
 </ul></li>
 </ul>
 </li>
@@ -90,15 +91,14 @@ lang="en" xml:lang="en">
 <ul>
 <li><a href="#sec-4.1">4.1 Items </a>
 <ul>
-<li><a href="#sec-4.1.1">4.1.1 Forget items that are too old </a></li>
-<li><a href="#sec-4.1.2">4.1.2 Allow users to update their drills </a></li>
-<li><a href="#sec-4.1.3">4.1.3 Need a mechanism for publishing warnings and errors. </a></li>
-<li><a href="#sec-4.1.4">4.1.4 Give feedback to the user when we refuse to edit or add an item. </a></li>
-<li><a href="#sec-4.1.5">4.1.5 When save fails, indicate it to the user </a></li>
-<li><a href="#sec-4.1.6">4.1.6 Start new drills in Preview mode </a></li>
-<li><a href="#sec-4.1.7">4.1.7 New Drill Splash Screen </a></li>
-<li><a href="#sec-4.1.8">4.1.8 Simply loading a drill shouldn't modify it </a></li>
-<li><a href="#sec-4.1.9">4.1.9 Indicate when the item has been promoted. </a></li>
+<li><a href="#sec-4.1.1">4.1.1 Allow users to update their drills </a></li>
+<li><a href="#sec-4.1.2">4.1.2 Need a mechanism for publishing warnings and errors. </a></li>
+<li><a href="#sec-4.1.3">4.1.3 Give feedback to the user when we refuse to edit or add an item. </a></li>
+<li><a href="#sec-4.1.4">4.1.4 When save fails, indicate it to the user </a></li>
+<li><a href="#sec-4.1.5">4.1.5 Start new drills in Preview mode </a></li>
+<li><a href="#sec-4.1.6">4.1.6 New Drill Splash Screen </a></li>
+<li><a href="#sec-4.1.7">4.1.7 Simply loading a drill shouldn't modify it </a></li>
+<li><a href="#sec-4.1.8">4.1.8 Indicate when the item has been promoted. </a></li>
 </ul></li>
 </ul>
 </li>
@@ -196,8 +196,8 @@ levels up.
 
 
 <p>
-This is a packaging release.  No new functionality will be done
-unless it is a huge bug.
+This is a packaging release.  However, I have added a single
+feature because I needed it for my own study.
 </p>
 <p>
 Unlike previous releases, 0.5.1 will be released as a stable release.
@@ -240,7 +240,7 @@ iteration to finish as scheduled.
 <tr><th>ITEM</th><th>Total</th><th>Done</th><th>Percent</th><th>Current</th><th>Needed</th></tr>
 </thead>
 <tbody>
-<tr><td><span style="visibility:hidden;"></span>Version 0.5.1</td><td>10</td><td>0</td><td>0.0</td><td>0.00</td><td>1.67</td></tr>
+<tr><td><span style="visibility:hidden;"></span>Version 0.5.1</td><td>12</td><td>2</td><td>16.7</td><td>0.06</td><td>0.31</td></tr>
 </tbody>
 </table>
 
@@ -264,18 +264,45 @@ the task.
 </div>
 
 <div id="outline-container-3.2.1" class="outline-4">
-<h4 id="sec-3.2.1">3.2.1 <span class="todo">TODO</span> Put Gem in official repository [0/5] </h4>
+<h4 id="sec-3.2.1">3.2.1 <span class="done">DONE</span> Forget items that are too old </h4>
 <div id="text-3.2.1">
+
+<p>Sometimes when you haven't used the app for a long time items
+get very old.  Their reviewRate becomes large.  This is not
+a problem in itself, but when you start to review items they
+will have a short duration.  If the reviewRate is something like
+10x, then it might take 50 days until we rereview a new item.
+Therefore make a new set of items called Forgetten.  Review
+Items that have a reviewRate higher than some threshold (4???)
+are moved to the Forgetten set.  Forgetten set items work just like
+the Review set items except that are introduced like New set
+items.  So this means the user gets Review set items until they
+get 90% right.  Then they get Forgetten set items.  Once an expired
+set item is reviewed, it goes back into the Review set.  After
+all the Forgetten set items are finished, then we go back to showing
+New set items.  This gives priority to actively reviewed items
+without losing the valuable sorting of old items.
+There is an option for setting the threshold.  If the threshold
+is 0 (default) then no items are forgotten.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3.2.2" class="outline-4">
+<h4 id="sec-3.2.2">3.2.2 <span class="todo">TODO</span> Put Gem in official repository [3/5] </h4>
+<div id="text-3.2.2">
 
 <ul>
 <li>
-<b>[<span style="visibility:hidden;">X</span>]</b> Make dependencies for gtk2
+<b>[X]</b> Make dependencies for gtk2
 </li>
 <li>
-<b>[<span style="visibility:hidden;">X</span>]</b> Push to official repositories
+<b>[X]</b> Push to official repositories
 </li>
 <li>
-<b>[<span style="visibility:hidden;">X</span>]</b> Test on Linux and Windows to make sure it installs properly
+<b>[X]</b> Test on Linux and Windows to make sure it installs properly
 </li>
 <li>
 <b>[<span style="visibility:hidden;">X</span>]</b> Update documentation for Windows install
@@ -290,9 +317,9 @@ the task.
 
 </div>
 
-<div id="outline-container-3.2.2" class="outline-4">
-<h4 id="sec-3.2.2">3.2.2 <span class="todo">TODO</span> Windows Packaging [0/5] </h4>
-<div id="text-3.2.2">
+<div id="outline-container-3.2.3" class="outline-4">
+<h4 id="sec-3.2.3">3.2.3 <span class="todo">TODO</span> Windows Packaging [0/5] </h4>
+<div id="text-3.2.3">
 
 <p>Determine the feasibility of creating a windows packaging.
 Place to start:
@@ -324,9 +351,9 @@ and upgrade scripts in the menu
 
 </div>
 
-<div id="outline-container-3.2.3" class="outline-4">
-<h4 id="sec-3.2.3">3.2.3 <span class="todo">TODO</span> Trim ruby-gtk2 install footprint </h4>
-<div id="text-3.2.3">
+<div id="outline-container-3.2.4" class="outline-4">
+<h4 id="sec-3.2.4">3.2.4 <span class="todo">TODO</span> Trim ruby-gtk2 install footprint </h4>
+<div id="text-3.2.4">
 
 <p>ruby-gtk2 takes up 450 megs of disk space.  It should be at least
 200 megs smaller be getting rid of duplicate dlls.
@@ -336,9 +363,9 @@ and upgrade scripts in the menu
 
 </div>
 
-<div id="outline-container-3.2.4" class="outline-4">
-<h4 id="sec-3.2.4">3.2.4 <span class="todo">TODO</span> Write build instructions for Windows on ruby-gtk2 </h4>
-<div id="text-3.2.4">
+<div id="outline-container-3.2.5" class="outline-4">
+<h4 id="sec-3.2.5">3.2.5 <span class="todo">TODO</span> Write build instructions for Windows on ruby-gtk2 </h4>
+<div id="text-3.2.5">
 
 <p>Nobody knows how to build ruby-gtk2 on Windows.  Figure it
 out and write documentation.
@@ -348,9 +375,9 @@ out and write documentation.
 
 </div>
 
-<div id="outline-container-3.2.5" class="outline-4">
-<h4 id="sec-3.2.5">3.2.5 <span class="todo">TODO</span> Streamlined Windows package </h4>
-<div id="text-3.2.5">
+<div id="outline-container-3.2.6" class="outline-4">
+<h4 id="sec-3.2.6">3.2.6 <span class="todo">TODO</span> Streamlined Windows package </h4>
+<div id="text-3.2.6">
 
 <p>Create a Windows package that contains only what is needed for
 JLDrill.  Everything should be included and it should take up
@@ -388,33 +415,8 @@ releases.  But we'll see how much time I have.
 </div>
 
 <div id="outline-container-4.1.1" class="outline-4">
-<h4 id="sec-4.1.1">4.1.1 <span class="todo">TODO</span> Forget items that are too old </h4>
+<h4 id="sec-4.1.1">4.1.1 <span class="todo">TODO</span> Allow users to update their drills </h4>
 <div id="text-4.1.1">
-
-<p>Sometimes when you haven't used the app for a long time items
-get very old.  Their reviewRate becomes large.  This is not
-a problem in itself, but when you start to review items they
-will have a short duration.  If the reviewRate is something like
-10x, then it might take 50 days until we rereview a new item.
-Therefore make a new set of items called Forgetten.  Review
-Items that have a reviewRate higher than some threshold (4???)
-are moved to the Forgetten set.  Forgetten set items work just like
-the Review set items except that are introduced like New set
-items.  So this means the user gets Review set items until they
-get 90% right.  Then they get Forgetten set items.  Once an expired
-set item is reviewed, it goes back into the Review set.  After
-all the Forgetten set items are finished, then we go back to showing
-New set items.  This gives priority to actively reviewed items
-without losing the valuable sorting of old items.
-</p>
-
-</div>
-
-</div>
-
-<div id="outline-container-4.1.2" class="outline-4">
-<h4 id="sec-4.1.2">4.1.2 <span class="todo">TODO</span> Allow users to update their drills </h4>
-<div id="text-4.1.2">
 
 <p>A user can update a drill by appending the new version to their drill.
 But if the vocabulary has changed in the new/old drill (because the
@@ -430,9 +432,9 @@ position).
 
 </div>
 
-<div id="outline-container-4.1.3" class="outline-4">
-<h4 id="sec-4.1.3">4.1.3 <span class="todo">TODO</span> Need a mechanism for publishing warnings and errors. </h4>
-<div id="text-4.1.3">
+<div id="outline-container-4.1.2" class="outline-4">
+<h4 id="sec-4.1.2">4.1.2 <span class="todo">TODO</span> Need a mechanism for publishing warnings and errors. </h4>
+<div id="text-4.1.2">
 
 <p>Warnings and errors must be displayed to the user in a
 consisten way.  To be honest I need to think more about what
@@ -444,9 +446,9 @@ which is no good.
 
 </div>
 
-<div id="outline-container-4.1.4" class="outline-4">
-<h4 id="sec-4.1.4">4.1.4 <span class="todo">TODO</span> Give feedback to the user when we refuse to edit or add an item. </h4>
-<div id="text-4.1.4">
+<div id="outline-container-4.1.3" class="outline-4">
+<h4 id="sec-4.1.3">4.1.3 <span class="todo">TODO</span> Give feedback to the user when we refuse to edit or add an item. </h4>
+<div id="text-4.1.3">
 
 <p>Probably use the aforementioned warning and error mechanism.
 </p>
@@ -455,9 +457,9 @@ which is no good.
 
 </div>
 
-<div id="outline-container-4.1.5" class="outline-4">
-<h4 id="sec-4.1.5">4.1.5 <span class="todo">TODO</span> When save fails, indicate it to the user </h4>
-<div id="text-4.1.5">
+<div id="outline-container-4.1.4" class="outline-4">
+<h4 id="sec-4.1.4">4.1.4 <span class="todo">TODO</span> When save fails, indicate it to the user </h4>
+<div id="text-4.1.4">
 
 <p>before bringing up the save as dialog.
 </p>
@@ -466,9 +468,9 @@ which is no good.
 
 </div>
 
-<div id="outline-container-4.1.6" class="outline-4">
-<h4 id="sec-4.1.6">4.1.6 <span class="todo">TODO</span> Start new drills in Preview mode </h4>
-<div id="text-4.1.6">
+<div id="outline-container-4.1.5" class="outline-4">
+<h4 id="sec-4.1.5">4.1.5 <span class="todo">TODO</span> Start new drills in Preview mode </h4>
+<div id="text-4.1.5">
 
 <p>When a drill has been loaded for the first time (or after a reset), 
 show the first item in preview mode.  This allows the user to
@@ -480,9 +482,9 @@ problem.
 
 </div>
 
-<div id="outline-container-4.1.7" class="outline-4">
-<h4 id="sec-4.1.7">4.1.7 <span class="todo">TODO</span> New Drill Splash Screen </h4>
-<div id="text-4.1.7">
+<div id="outline-container-4.1.6" class="outline-4">
+<h4 id="sec-4.1.6">4.1.6 <span class="todo">TODO</span> New Drill Splash Screen </h4>
+<div id="text-4.1.6">
 
 <p>Create a splash screen explaining that this is a new drill and
 the system is in Preview mode.  Press N to start
@@ -492,9 +494,9 @@ the system is in Preview mode.  Press N to start
 
 </div>
 
-<div id="outline-container-4.1.8" class="outline-4">
-<h4 id="sec-4.1.8">4.1.8 <span class="todo">TODO</span> Simply loading a drill shouldn't modify it </h4>
-<div id="text-4.1.8">
+<div id="outline-container-4.1.7" class="outline-4">
+<h4 id="sec-4.1.7">4.1.7 <span class="todo">TODO</span> Simply loading a drill shouldn't modify it </h4>
+<div id="text-4.1.7">
 
 <p>Currently the "must save" flag is set when a drill is loaded.
 This should only be set after the first item has been answered.
@@ -506,9 +508,9 @@ the "must save" flag should be set immediately.
 
 </div>
 
-<div id="outline-container-4.1.9" class="outline-4">
-<h4 id="sec-4.1.9">4.1.9 <span class="todo">TODO</span> Indicate when the item has been promoted. </h4>
-<div id="text-4.1.9">
+<div id="outline-container-4.1.8" class="outline-4">
+<h4 id="sec-4.1.8">4.1.8 <span class="todo">TODO</span> Indicate when the item has been promoted. </h4>
+<div id="text-4.1.8">
 
 <p>When an item has been moved to the review set, print some
 kind of congratulatory message.  Possibly show some kind of
@@ -812,7 +814,7 @@ duration), then reset it so that it has been waiting for 3.75 days
 <div id="postamble"><p class="author"> Author: Mike Charlton
 <a href="mailto:mike@Wrook">&lt;mike@Wrook&gt;</a>
 </p>
-<p class="date"> Date: 2011-01-24 14:54:43 JST</p>
+<p class="date"> Date: 2011-02-28 14:15:49 JST</p>
 <p>HTML generated by org-mode 6.21b in emacs 23</p>
 </div></body>
 </html>

@@ -1,4 +1,4 @@
-#!ruby
+#!/usr/bin/ruby
 require 'shell'
 
 installDir = File.expand_path(File.dirname(__FILE__))

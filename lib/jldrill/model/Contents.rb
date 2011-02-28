@@ -18,6 +18,7 @@ module JLDrill
             addBin("Fair")
             addBin("Good")
             addBin("Excellent")
+            addBin("Forgotten")
             @binNum = 0
         end
 
@@ -286,7 +287,7 @@ module JLDrill
         
         # returns true if there are bins in the specified range
         def includesRange?(range)
-            !(range.begin < 0 || range.end > 4)
+            !(range.begin < 0 || range.end > 5)
         end
         
         # Returns the nth unseen item in the range of contents, or nil if there
@@ -329,6 +330,9 @@ module JLDrill
         # Return a string containing the length of all the bins
         def status
             retVal = "New: #{@bins[0].length} "
+            if (quiz.options.forgettingThresh != 0.0)
+                retVal += "Forgotten: #{@bins[5].length} "
+            end
             retVal += "Review: #{@bins[4].length} "
             retVal += "Working: #{@bins[1].length}, "
             retVal += "#{@bins[2].length}, "

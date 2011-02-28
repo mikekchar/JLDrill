@@ -79,7 +79,7 @@ module JLDrill::UserChangesOptions
             saveString.should eql(Story.sampleQuiz.header + Story.sampleQuiz.info + 
                                   "\n" + optionsString.chop + 
                                   Story.sampleQuiz.resetVocab +
-                                  "Fair\nGood\nExcellent\n")
+                                  "Fair\nGood\nExcellent\nForgotten\n")
         end
 
         it "should show that the quiz needs saving if certain options are changed" do

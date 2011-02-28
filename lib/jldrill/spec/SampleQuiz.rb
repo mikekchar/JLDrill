@@ -37,6 +37,7 @@ Good
 Excellent
 /Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 2/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/LastReviewed: 1230076403/Duration: 10/Difficulty: 0/
 /Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 3/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/LastReviewed: 1230076403/Duration: 10/Difficulty: 0/
+Forgotten
 ]
 #################################
 
@@ -126,7 +127,7 @@ Poor
         end
 
         def defaultSaveFile
-            FileHeader + FileInfo + FileDefaultOptions + ResetVocab + "Fair\nGood\nExcellent\n"
+            FileHeader + FileInfo + FileDefaultOptions + ResetVocab + "Fair\nGood\nExcellent\nForgotten\n"
         end
     end
 end

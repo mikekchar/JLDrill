@@ -33,8 +33,8 @@ levels up.
 
 * Version 0.5.1
 
-This is a packaging release.  No new functionality will be done
-unless it is a huge bug.
+This is a packaging release.  However, I have added a single
+feature because I needed it for my own study.
 
 Unlike previous releases, 0.5.1 will be released as a stable release.
 For all platforms, installing ruby (with rubygems) and typing "gem
@@ -50,8 +50,8 @@ installation.
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2011-01-24 Mon>
-  :CurrentDate:  <2011-01-24 Mon>
-  :EndDate: <2011-01-30 Sun>
+  :CurrentDate:  <2011-02-28 Mon>
+  :EndDate: <2011-03-04 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -74,7 +74,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.5.1 |    10 |    0 |     0.0 |    0.00 |   1.67 |
+| * Version 0.5.1 |    12 |    2 |    16.7 |    0.06 |   0.31 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -85,10 +85,34 @@ the task.
 
 ** Current Stories
 
-*** TODO Put Gem in official repository [0/5]
-    - [ ] Make dependencies for gtk2
-    - [ ] Push to official repositories
-    - [ ] Test on Linux and Windows to make sure it installs properly
+*** DONE Forget items that are too old
+   Sometimes when you haven't used the app for a long time items
+   get very old.  Their reviewRate becomes large.  This is not
+   a problem in itself, but when you start to review items they
+   will have a short duration.  If the reviewRate is something like
+   10x, then it might take 50 days until we rereview a new item.
+   Therefore make a new set of items called Forgetten.  Review
+   Items that have a reviewRate higher than some threshold (4???)
+   are moved to the Forgetten set.  Forgetten set items work just like
+   the Review set items except that are introduced like New set
+   items.  So this means the user gets Review set items until they
+   get 90% right.  Then they get Forgetten set items.  Once an expired
+   set item is reviewed, it goes back into the Review set.  After
+   all the Forgetten set items are finished, then we go back to showing
+   New set items.  This gives priority to actively reviewed items
+   without losing the valuable sorting of old items.
+   There is an option for setting the threshold.  If the threshold
+   is 0 (default) then no items are forgotten.
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 2
+   :END:
+
+*** TODO Put Gem in official repository [3/5]
+    - [X] Make dependencies for gtk2
+    - [X] Push to official repositories
+    - [X] Test on Linux and Windows to make sure it installs properly
     - [ ] Update documentation for Windows install
     - [ ] Document potential problems with debian and gem coexistance.
 
@@ -152,28 +176,6 @@ items, it seems as if I will have to split this release up into 2
 releases.  But we'll see how much time I have.
   
 ** Items
-
-*** TODO Forget items that are too old
-   Sometimes when you haven't used the app for a long time items
-   get very old.  Their reviewRate becomes large.  This is not
-   a problem in itself, but when you start to review items they
-   will have a short duration.  If the reviewRate is something like
-   10x, then it might take 50 days until we rereview a new item.
-   Therefore make a new set of items called Forgetten.  Review
-   Items that have a reviewRate higher than some threshold (4???)
-   are moved to the Forgetten set.  Forgetten set items work just like
-   the Review set items except that are introduced like New set
-   items.  So this means the user gets Review set items until they
-   get 90% right.  Then they get Forgetten set items.  Once an expired
-   set item is reviewed, it goes back into the Review set.  After
-   all the Forgetten set items are finished, then we go back to showing
-   New set items.  This gives priority to actively reviewed items
-   without losing the valuable sorting of old items.
-
-   :PROPERTIES:
-   :JellyBeans: 2
-   :Done: 0
-   :END:
 
 *** TODO Allow users to update their drills
    A user can update a drill by appending the new version to their drill.
