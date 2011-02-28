@@ -1,8 +1,10 @@
 jldrill (0.5.1-2) unstable; urgency=low
 
   * Make debian lintian pass
+  * Add an option for forgetting items after a certain review rate
+    threshhold.
 
- -- Mike Charlton <mikekchar@gmail.com>  Wed, 2 Feb 2011 11:39:00 +0900
+ -- Mike Charlton <mike@Wrook>  Mon, 28 Feb 2011 14:20:25 +0900
 
 jldrill (0.5.1-1) unstable; urgency=low
 
