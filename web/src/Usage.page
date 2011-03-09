@@ -450,43 +450,80 @@ alter a few options for the quiz.
 
 ![Quiz Options](images/Options.png "Quiz Options")
 
-Note: The hotkey for this operation has changed since the last
-release.  Ctrl-P is now "Append Quiz".
 
-Right now only a few things are available to be changed.  The first is
-whether or not items from the new set are introduced randomly.  If you
-check the box, they will be.  If the box is unchecked, the items will
-be introduced in the order they appear in the file.
+There are four sections to the options.  These options are
+associated with the quiz that you have loaded and will be saved
+with that quiz.  You may change the options for each of your
+quizes separately.
 
-The next three buttons allow you to choose what kind of problems to
-drill when reviewing items.  By default JLDrill will randomly choose
-between kanji and meaning problems.  You can change that behaviour
-here.  If you unselect all these, then JLDrill will fall back on
-it's default behaviour, though.
+The first section is the dictionary.  This sets the name of the
+dictionary that you want to load.  JLDrill is usually installed with
+the Japanese edict dictionary.  If you have a different dictionary,
+for example the Chinese cedict dictionary, you can change it here.
+Hitting the "Browse" button will allow you to select any file on
+you system.  Dictionaries must be in the EDict file format.
 
-The next slider allows you to set the number of times an item must
-be guessed correctly before it is promoted to the next level.  I
-have found settings of 1 and 2 to be most useful.  For grammar, it
-is set to 1 because you don't really want to memorize the item,
-just practice it.  Setting this value to 3 or higher might be
-useful if you are having a really difficult time remembering things
-in the working set.
+Normally the dictionary won't load every time you run JLDrill.
+But if you want the dictionary to be loaded automatically
+for this drill, then you can select the "Autoload?" button.
 
-However, another thing you can do is alter the number of items in the
-working set.  This is controlled by the next slider.  Usually this is
-set to 10, but you can change it to whatever you like.  The more items
-you have in the working set, the longer it will take between reviews
-of the item. If the material is quite easy for you, you might want to make
-this large.  If it is very difficult, you can make the value small.
+The next section is for the new set.  Here you can select
+whether or not you want new items to be selected in the order
+they appear in the quiz, or in random order.
 
-Finally, you can set the dictionary that you want to use for this
-drill.  By default it is set to edict.  But you can change it to
-another dictionary by typing the filename, or browsing through
-your file system.  Note that the dictionary must be in EDICT
-format (with either EUC or UTF-8 encoding).
+Next is the working set section.  You may select the size of
+the working set.  Remember that the working set is the area
+that the item appears in after it has been introduced and
+before you have memorized it.  By default it is set to 10,
+but you can alter it from 1 to 30.  Having more items means
+that it will take more time between seeing the same item
+again while memorizing it.  If you are having a very easy time
+memorizing the items, increase this.  If you are having a hard
+time, decrease it.  Useful values are probably between 5 and 20.
 
-If you want to have the dictionary load every time you load this
-drill, simply check the "Autoload Dictionary" button.
+The "Promote After" slider indicates how many times you must
+get the item correct before it goes to the next level.  Remember
+that there are 3 levels in the working set.  If you set this
+to 1, you will have to remember the item 3 times in a row to
+for it to be memorized and moved to the review set.  If it
+is at 2, then you need to get it right 6 times in a row.
+You can set it up to 5, but that is rarely necessary.  I
+usually use 2 for vocabulary quizes and 1 for kanji or
+grammar quizes.
+
+The final section is the review set.  Here you can select
+what kinds of problems you want to review.  For each
+problem, you can review from the reading, the kanji or
+the meaning.  Each problem type has a separate schedule,
+so if you have kanji and meaning problem set, each will
+be scheduled.  However, you will only see each problem
+type once in a session for each question.
+
+Finally you can set the rate at which you "forget" items.
+This option is useful if you haven't reviewed your items for
+a while and they have gotten very old.  Once the "review rate"
+of a problem exceeds the value you set here, the item will be
+"forgotten".  That means it will be removed from the review
+set and placed in a separate forgotten set.  When you
+have finished reviewing, the items will be selected from
+the forgotten set, rather than the new set.
+
+The "review rate" is the multiple of time that has passed
+compared to the ideal schedule.  That means that if an item
+has a schedule of 10 days and 20 days have passed, the 
+"review rate" is 2.  When forgetting items you should set
+the "Forget At" level to the highest value that allows
+you to complete the review (get out of review mode).
+Feel free to experiment.  Reducing the value of this
+slider will "unforget" items that you have forgotten,
+so you do no harm by trying it.
+
+Setting "Forget At" to 0.0 means that no items will be in
+the forgotten set.  If you have really gone a long time,
+you can set the value so that all items are forgotten.
+This is better than resetting the drill because the items
+will be presented in an order based on how likely you are
+to remember them.  Hardest items will be presented first.
 
 Saving Your Progress
 --------------------
