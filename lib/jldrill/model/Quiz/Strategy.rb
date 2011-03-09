@@ -36,6 +36,8 @@ module JLDrill
                 if @stats.inTargetZone?
                     retVal += " - #{(10 - @stats.timesInTargetZone)}"
                 end
+            elsif !forgottenSet.empty?
+                retVal = " Forgotten Items"
             else
                 retVal = "     New Items"
             end
@@ -243,8 +245,9 @@ module JLDrill
         def createProblem(item)
             item.itemStats.createProblem
             @stats.startTimer(item.bin == Strategy.reviewSetBin)
-            # Drill at random levels in bin 4, but don't drill reading
-            if item.bin == Strategy.reviewSetBin
+            # Drill at the scheduled level in the review and forgotten sets 
+            if (item.bin == Strategy.reviewSetBin) ||
+                (item.bin == Strategy.forgottenSetBin) 
                 problem = item.problem
             else
                 # Otherwise drill for the specific bin

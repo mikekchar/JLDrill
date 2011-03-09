@@ -11,44 +11,113 @@ module JLDrill::Gtk
                   Gtk::Dialog::DESTROY_WITH_PARENT,
                   [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
                   [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
-            @randomOrder = Gtk::CheckButton.new("Introduce new items in random order")
-            @promoteThresh = Gtk::HScale.new(1,10,1)
-            @introThresh = Gtk::HScale.new(1,100,1)
 
-            @reviewOptions = Gtk::HBox.new()
-            @reviewReading = Gtk::CheckButton.new("Review Reading")
-            @reviewKanji = Gtk::CheckButton.new("Review Kanji")
-            @reviewMeaning = Gtk::CheckButton.new("Review Meaning")
-            @reviewOptions.add(@reviewReading)
-            @reviewOptions.add(@reviewKanji)
-            @reviewOptions.add(@reviewMeaning)
+            @dictionaryOptions = createDictionaryOptions
+            @newSetOptions = createNewSetOptions
+            @workingSetOptions = createWorkingSetOptions
+            @reviewSetOptions = createReviewSetOptions
+            
+            self.vbox.add(@dictionaryOptions.box)
+            self.vbox.add(@newSetOptions.box)
+            self.vbox.add(@workingSetOptions.box)
+            self.vbox.add(@reviewSetOptions.box)
+        end
 
-            @dictionaryOptions = Gtk::HBox.new()
-            @dictionaryOptions.add(Gtk::Label.new("Dictionary"))
+        # A horizontal slider with a label on the left
+        class Scale
+            attr_reader :box, :label, :scale
+
+            def initialize(label, first, last, step)
+                @box = Gtk::HBox.new()
+                @label = Gtk::Label.new(label + ": ") 
+                @scale = Gtk::HScale.new(first, last, step)
+                @box.pack_start(@label, false)
+                @box.pack_start(@scale, true)
+            end
+
+            # Add a widget to the right of the slider
+            def add(widget, expand=true, fill=true, padding=0)
+                @box.pack_start(widget, expand, fill, padding)
+            end
+        end
+
+        # A vertical box with a label at the top
+        class Section
+            attr_reader :box, :label, :contents
+
+            def initialize(label)
+                @box = Gtk::VBox.new()
+                @label = Gtk::Label.new()
+                @label.set_markup("<big><b>#{label}</b></big>")
+                @label.set_alignment(0.0, 0.0)
+                @box.pack_start(@label, true, true)
+                indent = Gtk::HBox.new()
+                indent.pack_start(Gtk::VBox.new(), false, false, 25)
+                @contents = Gtk::VBox.new()
+                indent.pack_start(@contents, true, true)
+                @box.pack_start(indent)
+            end
+
+            # Add a widget to the bottom of the box
+            def add(widget)
+                @contents.add(widget)
+            end
+        end
+
+        def createNewSetOptions
+            retVal = Section.new("New Set")
+            @randomOrder = Gtk::CheckButton.new("Random Order?")
+            retVal.add(@randomOrder)
+            return retVal
+        end
+
+        def createReviewSetOptions
+            retVal = Section.new("Review Set")
+            reviewOptions = Gtk::HBox.new()
+            reviewOptions.add(Gtk::Label.new("Review: "))
+            @reviewReading = Gtk::CheckButton.new("Reading")
+            @reviewKanji = Gtk::CheckButton.new("Kanji")
+            @reviewMeaning = Gtk::CheckButton.new("Meaning")
+            reviewOptions.pack_start(@reviewReading, true, true, 5)
+            reviewOptions.pack_start(@reviewKanji, true, true, 5)
+            reviewOptions.pack_start(@reviewMeaning, true, true, 5)
+            retVal.add(reviewOptions)
+
+            forget = Scale.new("Forget At", 0.0, 10.0, 0.1)
+            @forgettingThresh = forget.scale
+            retVal.add(forget.box)
+            return retVal
+        end
+
+        def createWorkingSetOptions
+            retVal = Section.new("Working Set")
+            size = Scale.new("Size", 1, 30, 1)
+            @introThresh = size.scale
+            promote = Scale.new("Promote After", 1, 5, 1)
+            @promoteThresh = promote.scale
+            retVal.add(size.box)
+            retVal.add(promote.box)
+            return retVal
+        end
+       
+        def createDictionaryOptions
+            retVal = Section.new("Dictionary")
+            options = Gtk::HBox.new()
             @dictionaryName = Gtk::Entry.new
             @dictionaryBrowse = Gtk::Button.new("Browse")
             @dictionaryBrowse.signal_connect('pressed') do
                 @view.getDictionaryFilename
             end
-            @dictionaryOptions.add(@dictionaryName)
-            @dictionaryOptions.add(@dictionaryBrowse)
+            options.add(@dictionaryName)
+            options.add(@dictionaryBrowse)
 
-            @autoloadDic = Gtk::CheckButton.new("Autoload Dictionary")
-            @promoteThresh = Gtk::HScale.new(1,10,1)
-            @forgettingThresh = Gtk::HScale.new(0.0, 10.0, 0.1)
-            
-            self.vbox.add(@randomOrder)
-            self.vbox.add(@reviewOptions)
-            self.vbox.add(Gtk::Label.new("Promote item after x correct"))
-            self.vbox.add(@promoteThresh)
-            self.vbox.add(Gtk::Label.new("Max actively learning items"))
-            self.vbox.add(@introThresh)
-            self.vbox.add(@dictionaryOptions)
-            self.vbox.add(@autoloadDic)
-            self.vbox.add(Gtk::Label.new("Forget items higher than"))
-            self.vbox.add(@forgettingThresh)
+            retVal.add(options)
+            @autoloadDic = Gtk::CheckButton.new("Autoload?")
+            retVal.add(@autoloadDic)
+
+            return retVal
         end
-        
+
         def randomOrder=(value)
             @randomOrder.active = value
         end

@@ -50,8 +50,8 @@ installation.
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2011-01-24 Mon>
-  :CurrentDate:  <2011-02-28 Mon>
-  :EndDate: <2011-03-04 Fri>
+  :CurrentDate:  <2011-03-09 Wed>
+  :EndDate: <2011-03-18 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -74,7 +74,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.5.1 |    12 |    2 |    16.7 |    0.06 |   0.31 |
+| * Version 0.5.1 |     8 |    3 |    37.5 |    0.07 |   0.15 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -109,12 +109,31 @@ the task.
    :Done: 2
    :END:
 
+*** DONE Reorganize Options UI
+	The UI is ugly and disorganized for the Options window.
+	Organize the options so that they have a grouping that makes
+	sense and try to visually improve the look.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 1
+   :END:
+
 *** TODO Put Gem in official repository [3/5]
     - [X] Make dependencies for gtk2
     - [X] Push to official repositories
     - [X] Test on Linux and Windows to make sure it installs properly
     - [ ] Update documentation for Windows install
     - [ ] Document potential problems with debian and gem coexistance.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+
+*** TODO Update Dictionaries
+	Update the EDict and Tanaka corpus dictionaries to the
+	latest version.
 
    :PROPERTIES:
    :JellyBeans: 1
@@ -135,34 +154,6 @@ the task.
 
    :PROPERTIES:
    :JellyBeans: 3
-   :Done: 0
-   :END:
-
-*** TODO Trim ruby-gtk2 install footprint
-	ruby-gtk2 takes up 450 megs of disk space.  It should be at least
-	200 megs smaller be getting rid of duplicate dlls.
-
-   :PROPERTIES:
-   :JellyBeans: 2
-   :Done: 0
-   :END:
-
-*** TODO Write build instructions for Windows on ruby-gtk2
-	Nobody knows how to build ruby-gtk2 on Windows.  Figure it
-	out and write documentation.
-
-   :PROPERTIES:
-   :JellyBeans: 2
-   :Done: 0
-   :END:
-
-*** TODO Streamlined Windows package
-	Create a Windows package that contains only what is needed for
-	JLDrill.  Everything should be included and it should take up
-	less than 70 Megs installed.
-
-   :PROPERTIES:
-   :JellyBeans: 2
    :Done: 0
    :END:
 

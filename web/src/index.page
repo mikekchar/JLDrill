@@ -148,10 +148,10 @@ Thursday, October 8 2009.
 Friday, April 3 2009.
 
 * Development version 0.3.4 released.  This is the release candidate.
-If I don't find any major problems, this will become 0.4.0.  For
-a variety of reasons it actually focuses on speed, a new dictionary
-and the ability to create and edit new drills.  Packaging has been
-pushed back (again).
+  If I don't find any major problems, this will become 0.4.0.  For
+  a variety of reasons it actually focuses on speed, a new dictionary
+  and the ability to create and edit new drills.  Packaging has been
+  pushed back (again).
 
 Thursday, Dec 25 2008.
 
@@ -227,18 +227,17 @@ Saturday, Dec 17 2005.
 Friday, Dec 16 2005.
 
 * Lots of updates.  All functionality required for the first alpha
-release is completed.  Just need to finish the documentation.
-Hopefully it will all be done tonight.
+  release is completed.  Just need to finish the documentation.
+  Hopefully it will all be done tonight.
 
 Monday, Dec 5 2005.
 
-* New look web page thanks to 
-["Webgen"](http://webgen.rubyforge.org)
-Yes, it's still ugly (that's not Webgen's fault...).  I thought I'd
-get cute with the colours, and well... graphic designer I am not.
+* New look web page thanks to ["Webgen"](http://webgen.rubyforge.org)
+  Yes, it's still ugly (that's not Webgen's fault...).  I thought I'd
+  get cute with the colours, and well... graphic designer I am not.
 
 * New icon for JLDrill (look to the left of the title)
-Umm... see the point above about me not being a graphic designer?  If
-you want to help and you don't know how to program, here's your
-chance!  I've done the basics, <strong>please</strong> make it not
-ugly.
+  Umm... see the point above about me not being a graphic designer?  If
+  you want to help and you don't know how to program, here's your
+  chance!  I've done the basics, <strong>please</strong> make it not
+  ugly.

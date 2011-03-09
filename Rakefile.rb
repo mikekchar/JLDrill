@@ -19,7 +19,7 @@ require 'fileutils'
 release_dir = "jldrill-#{JLDrill::VERSION}"
 
 # Revision of the gem file.  Increment this every time you release a gem file.
-gem_revision ="3"
+gem_revision ="5"
 
 # Rubyforge details
 rubyforge_project = "jldrill"
