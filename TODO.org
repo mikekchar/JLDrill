@@ -74,7 +74,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.5.1 |     8 |    4 |    50.0 |    0.09 |   0.15 |
+| * Version 0.5.1 |     8 |    5 |    62.5 |    0.11 |   0.15 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -131,13 +131,13 @@ the task.
    :Done: 1
    :END:
 
-*** TODO Update Dictionaries
+*** DONE Update Dictionaries
 	Update the EDict and Tanaka corpus dictionaries to the
 	latest version.
 
    :PROPERTIES:
    :JellyBeans: 1
-   :Done: 0
+   :Done: 1
    :END:
 
 *** TODO Windows Packaging [0/5]
