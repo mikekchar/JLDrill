@@ -26,62 +26,53 @@ This is all you will need.
 
 ### Gems
 
-For every other system that doesn't use deb files (including Windows) you can install
-the application using gem files.
+For every other system that doesn't use deb files (including Windows)
+you can install the application using gem files.  The easiest
+way to do this is simply go to your command line
+(from Windows: Start->Programs->Accessories->Command) 
+and type;
+<pre>
+    gem install jldrill
+</pre>
 
-You will need the following files:
+This will automatically download and install the latest version of
+JLDrill from the internet.  It will also install ruby-gnome2,
+and on Windows the gnome libraries as well.  Please be patient
+because it can take a long time to download.  You can use
+JLDrill as it is, but probably you will want to install the
+stroke order font for showing the stroke order of kanji
+characters.
+
+* [KanjiStrokeOrders.ttf](http://rubyforge.org/frs/download.php/48214/KanjiStrokeOrders.ttf)
+
+If you wish to download the gems for jldrill by hand for some reason,
+they are located here.  Context is a library used by jldrill.
 
 * [context-0.0.21.gem](http://rubyforge.org/frs/download.php/74010/context-0.0.21.gem)
 * [jldrill-0.5.0.gem](http://rubyforge.org/frs/download.php/74011/jldrill-0.5.0.gem)
-
-and optionally
-
-* [KanjiStrokeOrders.ttf](http://rubyforge.org/frs/download.php/48214/KanjiStrokeOrders.ttf)
-* [kochi-mincho.ttf](http://rubyforge.org/frs/download.php/48217/kochi-mincho.ttf)
-
-Of the two optional fonts, the KanjiStrokeOrders is most important.  It
-allows you to see the stroke orders.  The kochi-mincho font is the
-font that the application defaults to when quizzing kanji and readings.
-It is not necessary if you already have a Japanese font.
 
 ### In place execution
 
 JLDrill will also run directly from the development tree.  You can download
 the development tree from:
 
-[jldrill-0.5.0](http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.5.0)
+[jldrill-0.5.1](http://sakabatou.dnsdojo.org/devel/jldrill)
 
 From there the application can be run by navigating to the directory and running
-AppRun.  You may want to install the fonts listed above in the gem section
+AppRun.  You may want to install the font listed above in the gem section
 (see below)
 
-Installing Gems
----------------
-First ensure that you have the [requirements](Requirements.html) installed.
-
-From a command line prompt (Start->Applications->Accessories->Command
-in Windows), type the following:
-
-<pre>
-    gem install context-0.0.21.gem
-    gem install jldrill-0.5.0.gem
-</pre>
-
-Note: Depending on how you installed ruby gems, you may have to be root or use 
-sudo in Linux.
-
-JLDrill is now installed.  However, in order to view the stroke order diagrams,
-you must install the stroke order font.
-
-Installing the Fonts
+Installing the Font
 --------------------
+It is useful to install the KanjiStrokeOrders font in order to see
+the stroke order for Kanji characters.
+
 ###Windows
-In Windows you must download the fonts (KanjiStrokeOrders.ttf and/or
-kochi-mincho.ttf) files and copy them into the
+In Windows you must download KanjiStrokeOrders.ttf and copy it into the
 font directory.  You can get the font directory by selecting 
 Start->Control Panel->Fonts.
 
-There is one more thing you must do.  Unfortunately Windows
+There is one more thing you must do.  Unfortunately Windows XP
 doesn't follow it's own specification for fonts, so the KanjiStrokeOrders
 font looks terrible.  In some cases you can barely read the stroke number.
 In order to get the sub-pixel hints you must turn on Clear-Type.  You
@@ -94,6 +85,9 @@ from the following drop down menu.
 This will have the effect of turning on anti-aliasing for all your fonts.
 Some people don't like this as it makes your characters a bit blurry.  However,
 I find that the smoothing effect is more desirable.
+
+Windows 7 doesn't seem to have this problem, so if you are using
+a recent version of Windows, you shouldn't have to do anything. 
 
 ###GNU/Linux, BSD, Unix-like, etc
 On a Debian based system (which includes Ubuntu), you can install the 
