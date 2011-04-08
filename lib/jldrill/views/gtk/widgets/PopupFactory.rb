@@ -2,12 +2,22 @@ require 'jldrill/views/gtk/widgets/KanjiPopup'
 require 'gtk2'
 
 module JLDrill::Gtk
+    class MotionEvent
+        attr_reader :widget, :motion
+
+        def initialize(aWidget, aMotion)
+            @widget = aWidget
+            @motion = aMotion
+        end
+    end
+
     class PopupFactory
         def initialize(view)
             @view = view
             @context = @view.context
             @currentPopup = nil
             @blocked = false
+            @lastEvent = nil
         end
 
         def block
@@ -51,6 +61,5 @@ module JLDrill::Gtk
             pos = [x + origin[0], y + origin[1]]
             widget.translate_coordinates(@view.mainWindow, pos[0], pos[1])
         end
-
     end
 end

@@ -54,11 +54,12 @@ module JLDrill::Gtk
             end
         end
 
-        def notify(widget, window, x, y)
+        def notify(event)
             if @blocked || !dictionaryLoaded?
                 return
             end
-            string, screenPos = getStringAt(widget, window, x, y)
+            string, screenPos = getStringAt(event.widget, event.motion.window, 
+                                            event.motion.x, event.motion.y)
             if string.nil? || screenPos.nil?
                 closePopup
                 return

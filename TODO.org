@@ -50,8 +50,8 @@ installation.
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2011-01-24 Mon>
-  :CurrentDate:  <2011-03-09 Wed>
-  :EndDate: <2011-03-18 Fri>
+  :CurrentDate:  <2011-04-08 Fri>
+  :EndDate: <2011-04-08 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -74,7 +74,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.5.1 |     8 |    5 |    62.5 |    0.11 |   0.15 |
+| * Version 0.5.1 |     9 |    6 |    66.7 |    0.14 |   0.17 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -134,6 +134,15 @@ the task.
 *** DONE Update Dictionaries
 	Update the EDict and Tanaka corpus dictionaries to the
 	latest version.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 1
+   :END:
+
+*** DONE Switch between kanji and vocab popups
+	Make it so that you can switch between the kanji and vocab
+    popups without having to move the mouse in between.
 
    :PROPERTIES:
    :JellyBeans: 1

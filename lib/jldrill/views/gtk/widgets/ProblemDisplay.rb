@@ -27,6 +27,7 @@ module JLDrill::Gtk
             @vocabPopupFactory = VocabPopupFactory.new(view)
             # Default to Kanji Popups
             @popupFactory = @kanjiPopupFactory
+            @lastEvent = nil
             @accel = Gtk::AccelGroup.new
             packVPane
             connectSignals
@@ -67,15 +68,20 @@ module JLDrill::Gtk
                     else
                         @popupFactory = @kanjiPopupFactory
                     end
+                    if !@lastEvent.nil?
+                        @popupFactory.notify(@lastEvent)
+                    end
                 end
             end
             
             @question.contents.signal_connect('motion_notify_event') do |widget, motion|
-                @popupFactory.notify(widget, motion.window, motion.x, motion.y)
+                @lastEvent = MotionEvent.new(widget, motion)
+                @popupFactory.notify(@lastEvent)
             end
 
             @answer.contents.signal_connect('motion_notify_event') do |widget, motion|
-                @popupFactory.notify(widget, motion.window, motion.x, motion.y)
+                @lastEvent = MotionEvent.new(widget, motion)
+                @popupFactory.notify(@lastEvent)
             end
             
             @question.contents.signal_connect('leave_notify_event') do

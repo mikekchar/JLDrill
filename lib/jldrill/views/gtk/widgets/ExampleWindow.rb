@@ -16,6 +16,7 @@ module JLDrill::Gtk
             @kanjiPopupFactory = KanjiPopupFactory.new(view)
             @vocabPopupFactory = VocabPopupFactory.new(view)
             @popupFactory = @kanjiPopupFactory
+            @lastEvent = nil
 
             sw = Gtk::ScrolledWindow.new
             sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
@@ -68,7 +69,8 @@ module JLDrill::Gtk
             @contents.add_events(Gdk::Event::LEAVE_NOTIFY_MASK)
             
             @contents.signal_connect('motion_notify_event') do |widget, motion|
-                @popupFactory.notify(widget, motion.window, motion.x, motion.y)
+                @lastEvent = MotionEvent.new(widget, motion)
+                @popupFactory.notify(@lastEvent)
             end
 
             @contents.signal_connect('leave_notify_event') do
@@ -82,6 +84,9 @@ module JLDrill::Gtk
                         @popupFactory = @vocabPopupFactory
                     else
                         @popupFactory = @kanjiPopupFactory
+                    end
+                    if !@lastEvent.nil?
+                        @popupFactory.notify(@lastEvent)
                     end
                 end
             end

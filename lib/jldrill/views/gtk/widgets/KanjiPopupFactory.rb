@@ -41,11 +41,12 @@ module JLDrill::Gtk
             !char.nil? && !(char =~ /[a-zA-Z0-9 \s]/)
         end
         
-        def notify(widget, window, x, y)
+        def notify(event)
             if @blocked || !dictionaryLoaded?
                 return
             end
-            char, screenPos = getCharAt(widget, window, x, y)
+            char, screenPos = getCharAt(event.widget, event.motion.window, 
+                                        event.motion.x, event.motion.y)
             if !legalChar?(char) || screenPos.nil?
                 closePopup
                 return
