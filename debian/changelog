@@ -1,3 +1,9 @@
+jldrill (0.5.1-7) unstable; urgency=low
+
+  * Integrate jldrill and Context into one package.
+
+ -- Mike Charlton <mike@Wrook>  Tue, 13 May 2011 10:24:48 +0900
+
 jldrill (0.5.1-6) unstable; urgency=low
 
   * Immediately display popup when changing between kanji popup and

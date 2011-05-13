@@ -1,9 +1,10 @@
 require 'rake'
+# I haven't updated to the latest version of rspec yet
 gem 'rspec', "= 1.3.1"
 require 'spec/rake/spectask'
 # Debian forces the installation of a very old version of rdoc
-# # in /usr/lib/ruby if you install rubygems.  So I need to override
-# # it here.
+# in /usr/lib/ruby if you install rubygems.  So I need to override
+# it here.
 gem 'rdoc', ">= 2.2"
 require 'rake/rdoctask'
 require 'rake/testtask'
@@ -19,16 +20,11 @@ require 'fileutils'
 release_dir = "jldrill-#{JLDrill::VERSION}"
 
 # Revision of the gem file.  Increment this every time you release a gem file.
-gem_revision ="6"
+gem_revision ="7"
 
 # Rubyforge details
 rubyforge_project = "jldrill"
 rubyforge_maintainer = "mikekchar@rubyforge.org"
-
-# Dependencies
-context_name = "context"
-context_version = "0.0.22"
-context_directory = "../context"
 
 # Files that will be packaged
 pkg_files = FileList[
@@ -70,14 +66,14 @@ Spec::Rake::SpecTask.new(:rcov) do |t|
 	t.spec_files = spec_files
 	t.rcov = true
 	t.rcov_opts = ["--exclude rspec", "--exclude rcov", "--exclude syntax",
-	    "--exclude _spec", "--exclude /lib/Context/", "--exclude _story",
+	    "--exclude _spec", "--exclude _story",
 	    "--exclude cairo", "--exclude pango", "--exclude gtk2", "--exclude atk",
 	    "--exclude glib", "--exclude gdk"]
 	t.spec_opts = spec_opts
 	t.ruby_opts = ruby_opts
 end
 
-desc "Runs rcov but excludes the source files instead of the test files.  This is how I determine how many lines of test code I have.  Note, this crashes writing out the file coverage for some reason.  It seems to be a bug in rcov.  But since I'm only interested in the file sizes, I don't care.  Output goes to coverage/index.html"
+desc "Runs rcov but excludes the source files instead of the test files.  This is how I determine how many lines of test code I have.  Output goes to coverage/index.html"
 Spec::Rake::SpecTask.new(:testSize) do |t|
 	t.spec_files = spec_files
 	t.rcov = true
@@ -120,6 +116,8 @@ gem_spec = Gem::Specification.new do |s|
         import EDICT format files (EUC or UTF8 encoded).  Included
         drills: kana, JLPT, and grammar.
     EOF
+    s.licenses = ['GPL-3']
+    s.required_ruby_version = '~> 1.8.7'
 
 
 	#### Which files are to be included in this gem?
@@ -141,7 +139,6 @@ gem_spec = Gem::Specification.new do |s|
 	#### Dependencies
     
     s.add_dependency("gtk2")
-    s.add_dependency(context_name, "=" + context_version)
 
     #### Documentation and testing.
 
@@ -241,37 +238,20 @@ task :deb => [:clean_debian] do
     sh "dpkg-buildpackage -b -tc -rfakeroot -i.bzr"
 end
 
-desc "Build target for the Context lib"
-task :build_context do
-    sh "cd #{context_directory}; rake build"
-end
+desc "Clean everything, run tests, and build all the documentation."
+task :build => [:clean, :rcov, :rdoc, :web]
 
-desc "Create gem packages for the Context lib"
-task :package_context do
-    sh "cd #{context_directory}; rake package"
-end
+desc "Build everything and create the JLDrill gems."
+task :gems => [:build, :package]
 
-desc "Create deb files for the Context lib"
-task :deb_context do
-    sh "cd #{context_directory}; rake deb"
-end
+desc "Build the JLDrill deb files."
+task :debs => [:deb]
 
-desc "Clean everything, build context, run tests, and build all the documentation."
-task :build => [:clean, :build_context, :rcov, :rdoc, :web]
-
-desc "Build everything and create both the Context and JLDrill gems."
-task :gems => [:build, :package_context, :package]
-
-desc "Build both the Context and JLDrill deb files."
-task :debs => [:deb_context, :deb]
-
-desc "Rebuild everything, create gems and debs for Context and JLDrill, place all distributable files in the jldrill-<version> directory.  Used for creating a new release of JLDrill.  Note: it does not publish the web page."
+desc "Rebuild everything, create gems and debs for JLDrill, place all distributable files in the jldrill-<version> directory.  Used for creating a new release of JLDrill.  Note: it does not publish the web page."
 task :release => [:build, :debs, :gems] do
     FileUtils.mkdir release_dir
-    FileUtils.cp "#{context_directory}/pkg/context-#{context_version}.gem", release_dir
     FileUtils.cp "pkg/jldrill-#{JLDrill::VERSION}.#{gem_revision}.gem", release_dir
     FileUtils.cp Dir.glob("data/jldrill/fonts/*.ttf"), release_dir
-    FileUtils.mv Dir.glob("../libcontext-ruby_#{context_version}-*.*"), release_dir
     FileUtils.mv Dir.glob("../jldrill_#{JLDrill::VERSION}-*.*"), release_dir
 end
 
