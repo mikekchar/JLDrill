@@ -8,11 +8,15 @@ Japanese language using spaced repetition.
 * a dictionary cross reference tool 
 * pop-up kanji reference (inspired by rikaichan for Firefox)
 * ability to import EDICT format files (EUC or UTF8 encoded) as a drill
+* The Tanaka corpus example sentences can be shown for vocabulary
+* A popup dictionary lookup tool with deinflection (again inspired
+  by rikaichan for Firefox)
 
 Current drills include:
 * a kana drill
-* JLPT vocabulary drills
-* a partial grammar drill derived from 
+* JLPT vocabulary drills (These are the old 1, 2, 3, 4 lists NOT the new
+  N1, N2, N3, N4, N5 lists)
+* grammar drill derived from 
   {Tae Kim's Japanese Guide to Japanese Grammar}[http://www.guidetojapanese.org]
 
 
@@ -23,13 +27,8 @@ stable version will always be available at:
 
 http://jldrill.rubyforge.org
 
-The version of this package is jldrill-0.4.1.  It is a
-development release version that is intended to by used by
-those wanting to try out new features.  While development
-releases are intended to be complete and bug free, some
-features are still being explored in terms of their usefulness
-and useability.  If you require a stable release, please
-use the general realeas 0.4.0.  JLDrill is considered to be beta quality, but
+The version of this package is jldrill-0.6.0.
+JLDrill is considered to be beta quality, but
 it is hoped to be useful for end users. Bug reports and
 suggestions are welcome.
 The location for the documentation for this release is depends on

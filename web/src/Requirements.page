@@ -59,7 +59,7 @@ for your distribution.  I have tested everything with the packages
 available from Debian and Ubuntu.  You currently have 2 options for
 installing JLDrill from packages.  The first is using a debian package
 install.  If you are doing this then there is nothing you need to
-prepare.  The second option is instal using gems.  If you are doing
+prepare.  The second option is install using gems.  If you are doing
 this then you must install Ruby and Ruby gems.
 
 Note: The Debian and Ubuntu package for rubygems puts the gems

@@ -21,7 +21,7 @@ first.
   number.
 * Update the web/src/Development.page to indicate that this is
   the latest Completed Development Version.  Add a link to
-  http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-X.Y.Z
+  http://sakabatou.dyndns.org/devel/jldrill/jldrill-X.Y.Z
   even though the directory doesn't exist yet on Sakabatou.
 * Update the Development Version History at the bottom of
   web/src/Development.page.  The Current Development Version
@@ -82,7 +82,7 @@ release.
 * Create an entry in the Debian/changelog file.  This must include the
   new version number.  The comment can be "New Development Release".
 * Update the web/src/Development.page to add a link to
-  http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-X.Y.Z
+  http://sakabatou.dyndns.org/devel/jldrill/jldrill-X.Y.Z
   for the new development release.
 * Update the TODO.org file for the new development release.
   Update the version number at the top.  Give a few points for

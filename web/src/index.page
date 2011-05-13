@@ -14,7 +14,7 @@ Welcome to JLDrill
   deinflection) by hovering the mouse over a word in the quiz or
   examples.
 
-  The current version is 0.5.1.
+  The current version is 0.6.0.
   
 Screenshots
 ----------
@@ -25,7 +25,7 @@ Screenshots
 What's New for 0.5.1
 --------------------
 
-  Version 0.5.1 is primarily a packaging release. Apart from
+  Version 0.6.0 is primarily a packaging release. Apart from
   packaging there is one minor feature.  Sometime if you have
   been away from studying for a long time you get into a situation
   where you can't review all your items in a day or two.  In this
@@ -43,8 +43,10 @@ What's New for 0.5.1
   will also upgrade you to the latest version of jldrill.  For
   most people this will be the simplest way to install JLDrill.
   
-  Work is also progressing on a simplified Windows installer
-  that will also install Ruby for you automatically.  
+  Work has once again halted on a simplified Windows installer.
+  The current installation instructions are quite simple and I
+  haven't found anyone having problems.  If have problems installing
+  JLDrill, please contact me.
 
 JLDrill is Beta Software   
 ------------------------
