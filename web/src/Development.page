@@ -7,7 +7,7 @@ sort_info: 35
 Development Version
 ===================
 
-**Latest Completed Development Version:**  [jldrill-0.4.2](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.4.2)
+**Latest Completed Development Version:**  [jldrill-0.5.1](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5.1)
 
 For details on development versions, see below.
 
@@ -110,9 +110,22 @@ If you want to create a new release, please follow the
 
 Development Version History
 ---------------------------
-Current Development Version: [jldrill-0.5.1](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5.1)
+Current Development Version: None
 
-Latest Completed Development Version: [jldrill-0.4.2](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.4.2)
+Latest Completed Development Version: [jldrill-0.5.1](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5.1)
+
+Changes in [jldrill-0.5.1](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5.1)
+
+* Merge Context library with JLDrill code.  Now there is just one deb file
+  and gem.
+* Allow switching between vocab and kanji popups without moving the mouse.
+*  Update Edict and Tanaka corpus from their source sites.
+* Improve the Options UI
+* Allow items to be forgotten if they have sat in the Review Set too long.
+* Clean up Debian package so that lintian doesn't complain any more.
+* Create an official Gem package so that jldrill can be installed by
+  simply typing "gem install jldrill".  This also installs the GTK
+  libraries.
 
 Changes in [jldrill-0.4.2](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.4.2)
 

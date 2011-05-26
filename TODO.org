@@ -39,10 +39,8 @@ feature because I needed it for my own study.
 Unlike previous releases, 0.5.1 will be released as a stable release.
 For all platforms, installing ruby (with rubygems) and typing "gem
 install jldrill" will install jldrill and all its dependencies.  On
-Windows, there will be a package which downloads ruby, installs it,
-runs gem, installs the font and then creates an icon.  On Linux, there
-will be a debian package.  Both gems and debian packages will be
-submitted to the appropriate people so that it is easy to install.
+On Linux, there will be a debian package.  Both gems and debian packages 
+will be submitted to the appropriate people so that it is easy to install.
 Unfortunately, unless I can get a Mac, there will be no Mac
 installation.
 
@@ -50,8 +48,8 @@ installation.
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2011-01-24 Mon>
-  :CurrentDate:  <2011-04-08 Fri>
-  :EndDate: <2011-04-08 Fri>
+  :CurrentDate:  <2011-05-23 Mon>
+  :EndDate: <2011-05-27 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -74,7 +72,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.5.1 |     9 |    6 |    66.7 |    0.14 |   0.17 |
+| * Version 0.5.1 |     6 |    6 |   100.0 |    0.05 |   0.05 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -147,23 +145,6 @@ the task.
    :PROPERTIES:
    :JellyBeans: 1
    :Done: 1
-   :END:
-
-*** TODO Windows Packaging [0/5]
-   Determine the feasibility of creating a windows packaging.
-   Place to start:
-   - [ ] Create a self extranting archive that downloads and
-		 installs ruby, and then run gem install jldrill
-   - [ ] Create an uninstall script.
-   - [ ] Create a jldrill upgrade script.
-   - [ ] Create an executable with an icon for jldrill
-   - [ ] Install icon on the desktop and in the menu.  Add uninstall
-		 and upgrade scripts in the menu
-   - [ ] Create an installer for the custom fonts
-
-   :PROPERTIES:
-   :JellyBeans: 3
-   :Done: 0
    :END:
 
 
@@ -272,6 +253,23 @@ likely to appear in the next release or two.  If you have
 feedback on this list, or its order, please email me.
 
 ** Items
+
+*** TODO Windows Packaging [0/5]
+   Determine the feasibility of creating a windows packaging.
+   Place to start:
+   - [ ] Create a self extranting archive that downloads and
+		 installs ruby, and then run gem install jldrill
+   - [ ] Create an uninstall script.
+   - [ ] Create a jldrill upgrade script.
+   - [ ] Create an executable with an icon for jldrill
+   - [ ] Install icon on the desktop and in the menu.  Add uninstall
+		 and upgrade scripts in the menu
+   - [ ] Create an installer for the custom fonts
+
+   :PROPERTIES:
+   :JellyBeans: 3
+   :Done: 0
+   :END:
 
 *** TODO Allow Learn/Unlearn for any arbitrary item
 *** TODO Define the structure of the data in the drill.  

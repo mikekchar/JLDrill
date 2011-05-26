@@ -14,7 +14,7 @@ Welcome to JLDrill
   deinflection) by hovering the mouse over a word in the quiz or
   examples.
 
-  The current version is 0.6.0.
+  The current version is 0.5.1.
   
 Screenshots
 ----------
@@ -25,7 +25,7 @@ Screenshots
 What's New for 0.5.1
 --------------------
 
-  Version 0.6.0 is primarily a packaging release. Apart from
+  Version 0.5.1 is primarily a packaging release. Apart from
   packaging there is one minor feature.  Sometime if you have
   been away from studying for a long time you get into a situation
   where you can't review all your items in a day or two.  In this
@@ -64,7 +64,11 @@ JLDrill is Beta Software
 News
 ----
 
-Wednesday, March  9 2001
+Monday, May 23 2011
+
+* Release 0.5.1
+
+Wednesday, March  9 2011
 
 * Getting ready for the 0.5.1 release.
 

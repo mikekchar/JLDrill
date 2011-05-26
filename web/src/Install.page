@@ -10,7 +10,7 @@ Installation Instructions
 Download
 --------
 
-The current stable release of JLDrill is 0.6.0.  It can be obtained at
+The current stable release of JLDrill is 0.5.1.  It can be obtained at
 [JLDrill's RubyForge Project Page](http://rubyforge.org/projects/jldrill).
 
 There are 3 methods to run JLDrill
@@ -19,7 +19,7 @@ There are 3 methods to run JLDrill
 
 Please download and install the following files
 
-* [jldrill-0.6.0.deb](http://rubyforge.org/frs/download.php/74013/jldrill_0.5.0-1_all.deb)
+* [jldrill-0.5.1.deb](http://rubyforge.org/frs/download.php/74902/jldrill_0.5.1-7_all.deb)
 
 This is all you will need.
 
@@ -50,10 +50,17 @@ type:
     gem update jldrill
 </pre>
 
+Note: jldrill used to depend on the context gem.  These two gems
+are now merged.  If you have installed a version prior to 0.5.1,
+you should remove context with:
+<pre>
+    gem uninstall context
+</pre>
+
 If you wish to download the gems for jldrill by hand for some reason,
 they are located here.  Context is a library used by jldrill.
 
-* [jldrill-0.6.0.gem](http://rubyforge.org/frs/download.php/74011/jldrill-0.5.0.gem)
+* [jldrill-0.5.1.gem](http://rubyforge.org/frs/download.php/74901/jldrill-0.5.1.7.gem)
 
 ### In place execution
 
