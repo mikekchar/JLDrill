@@ -20,7 +20,13 @@ require 'fileutils'
 release_dir = "jldrill-#{JLDrill::VERSION}"
 
 # Revision of the gem file.  Increment this every time you release a gem file.
-gem_revision ="7"
+gem_revision ="9"
+
+# Debian build tools have a hissy fit if you don't call the base
+# directory that they want.  We will rename the directory every time
+# we build.  Very stupid, but better than bloody making a copy
+# every time I want to make a debian package.
+debian_base_dir_name = "jldrill_#{JLDrill::VERSION}"
 
 # Rubyforge details
 rubyforge_project = "jldrill"
@@ -233,9 +239,11 @@ task :debian_dir => [:clean_debian, :clean_web, :web] do
     FileUtils.cp_r "config/DebianConfig.rb",  "debian/jldrill/usr/lib/ruby/1.8/jldrill/model/Config.rb"
 end
 
-desc "Build a debian package. Note: This will *not* make a source package.  Also, the .deb and .changes file will be put in the parent directory."
+desc "Build a debian package. The .deb and .changes file will be put in the parent directory."
 task :deb => [:clean_debian] do
-    sh "dpkg-buildpackage -b -tc -rfakeroot -i.bzr"
+    FileUtils.mv "../jldrill", "../#{debian_base_dir_name}"
+    sh "dpkg-buildpackage -tc -rfakeroot -I.git -Idata/jldrill/dict/edict -Idata/jldrill/fonts -Icoverage -Idoc -Ipkg -Ijldrill-* -Itest_results.html -Iwebgen.cache -Iweb/output/* -I/data/jldrill/COPYING/fonts -I/data/jldrill/COPYING/MainichiShinbun_files -I/data/jldrill/dict/MainichiShinbun -Iprofile.txt"
+    FileUtils.mv "../#{debian_base_dir_name}", "../jldrill"
 end
 
 desc "Clean everything, run tests, and build all the documentation."

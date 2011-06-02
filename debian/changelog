@@ -1,34 +1,46 @@
+jldrill (0.5.1-9) unstable; urgency=low
+
+  * Build debian source files when building the debian packages.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Tue, 2 Jun 2011 13:00:00 +0900
+
+jldrill (0.5.1-8) unstable; urgency=low
+
+  * Fix the email address in the changelog so that lintian doesn't complain.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Tue, 31 May 2011 16:47:08 +0900
+
 jldrill (0.5.1-7) unstable; urgency=low
 
   * Integrate jldrill and Context into one package.
 
- -- Mike Charlton <mike@Wrook>  Tue, 13 May 2011 10:24:48 +0900
+ -- Mike Charlton <mikekchar@gmail.com>  Tue, 13 May 2011 10:24:48 +0900
 
 jldrill (0.5.1-6) unstable; urgency=low
 
   * Immediately display popup when changing between kanji popup and
     vocab popup
 
- -- Mike Charlton <mike@Wrook>  Tue, 8 Apr 2011 10:19:45 +0900
+ -- Mike Charlton <mikekchar@gmail.com>  Tue, 8 Apr 2011 10:19:45 +0900
 
 jldrill (0.5.1-5) unstable; urgency=low
 
   * Long overdue reorganization of the Options UI
 
- -- Mike Charlton <mike@Wrook>  Tue, 9 Mar 2011 12:00:25 +0900
+ -- Mike Charlton <mikekchar@gmail.com>  Tue, 9 Mar 2011 12:00:25 +0900
 
 jldrill (0.5.1-4) unstable; urgency=low
 
   * Fix bug where forgotten items are drilled using meaning questions only.
 
- -- Mike Charlton <mike@Wrook>  Tue, 8 Mar 2011 10:50:25 +0900
+ -- Mike Charlton <mikekchar@gmail.com>  Tue, 8 Mar 2011 10:50:25 +0900
 
 jldrill (0.5.1-3) unstable; urgency=low
 
   * Doesn't actually exist.  Just trying to make the gem revision
     and the deb version match.
 
- -- Mike Charlton <mike@Wrook>  Tue, 8 Mar 2011 9:41:25 +0900
+ -- Mike Charlton <mikekchar@gmail.com>  Tue, 8 Mar 2011 9:41:25 +0900
 
 jldrill (0.5.1-2) unstable; urgency=low
 
@@ -36,7 +48,7 @@ jldrill (0.5.1-2) unstable; urgency=low
   * Add an option for forgetting items after a certain review rate
     threshhold.
 
- -- Mike Charlton <mike@Wrook>  Mon, 28 Feb 2011 14:20:25 +0900
+ -- Mike Charlton <mikekchar@gmail.com>  Mon, 28 Feb 2011 14:20:25 +0900
 
 jldrill (0.5.1-1) unstable; urgency=low
 
