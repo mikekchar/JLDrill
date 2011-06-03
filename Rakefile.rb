@@ -1,4 +1,5 @@
 require 'rake'
+require 'rubygems'
 # I haven't updated to the latest version of rspec yet
 gem 'rspec', "= 1.3.1"
 require 'spec/rake/spectask'
@@ -8,7 +9,6 @@ require 'spec/rake/spectask'
 gem 'rdoc', ">= 2.2"
 require 'rake/rdoctask'
 require 'rake/testtask'
-require 'rubygems'
 require 'rake/gempackagetask'
 require 'webgen/webgentask'
 require 'lib/jldrill/Version'
@@ -22,12 +22,6 @@ release_dir = "jldrill-#{JLDrill::VERSION}"
 # Revision of the gem file.  Increment this every time you release a gem file.
 gem_revision ="9"
 
-# Debian build tools have a hissy fit if you don't call the base
-# directory that they want.  We will rename the directory every time
-# we build.  Very stupid, but better than bloody making a copy
-# every time I want to make a debian package.
-debian_base_dir_name = "jldrill_#{JLDrill::VERSION}"
-
 # Rubyforge details
 rubyforge_project = "jldrill"
 rubyforge_maintainer = "mikekchar@rubyforge.org"
@@ -38,15 +32,18 @@ pkg_files = FileList[
   'bin/**/*', 
   'lib/**/*.rb', 
   'spec/**/*.rb',
-  'doc/**/*',
   'web/**/*',
   'data/**/*',
-  'coverage/**/*',
-  'test_results.html'  
+  'config/**/*',
+  'test_results.html',
+  'TODO.org',
+  'TODO.html',
+  'AUTHORS',
+  'COPYING',
+  'README',
+  'jldrill.1',
+  'AppRun'
 ]
-
-# The fonts are really big and you have to install it by hand anyway
-pkg_files.exclude('data/jldrill/fonts/*.ttf')
 
 # Spec options
 spec_opts = ['-f html:test_results.html -f profile:profile.txt']
@@ -160,12 +157,6 @@ gem_spec = Gem::Specification.new do |s|
     s.rubyforge_project = rubyforge_project
 end
 
-desc "Creates the gem files for jldrill.  Packages are placed in pkg and called jldrill-<version>.gem."
-package_task = Rake::GemPackageTask.new(gem_spec) do |pkg|
-	pkg.need_zip = false
-	pkg.need_tar = false
-end
-
 desc "Clean the web directory."
 task :clean_web do
     FileUtils.rm_rf('webgen.cache')
@@ -180,6 +171,12 @@ webgen_task = Webgen::WebgenTask.new('web') do |site|
         config['sources'] = [['/', "Webgen::Source::FileSystem", 'web/src']]
         config['output'] = ['Webgen::Output::FileSystem', 'web/output']
     end
+end
+
+desc "Creates the gem files for jldrill.  Packages are placed in pkg and called jldrill-<version>.gem."
+package_task = Rake::GemPackageTask.new(gem_spec) do |pkg|
+	pkg.need_zip = false
+	pkg.need_tar = true
 end
 
 desc "Build the web page and upload it to Rubyforge."
@@ -204,7 +201,7 @@ task :clean => [:clobber_package, :clobber_rcov, :clobber_rdoc,
 end
 
 desc "Create the debian source tree and copy the required files over.  The files will end up in debian/jldrill"
-task :debian_dir => [:clean_debian, :clean_web, :web] do
+task :debian_dir => [:clean_debian] do
     # Create the new directory structure
     FileUtils.mkdir_p "debian/jldrill/usr/bin"
     FileUtils.mkdir_p "debian/jldrill/usr/lib/ruby/1.8"
@@ -239,28 +236,30 @@ task :debian_dir => [:clean_debian, :clean_web, :web] do
     FileUtils.cp_r "config/DebianConfig.rb",  "debian/jldrill/usr/lib/ruby/1.8/jldrill/model/Config.rb"
 end
 
-desc "Build a debian package. The .deb and .changes file will be put in the parent directory."
-task :deb => [:clean_debian] do
-    FileUtils.mv "../jldrill", "../#{debian_base_dir_name}"
-    sh "dpkg-buildpackage -tc -rfakeroot -I.git -Idata/jldrill/dict/edict -Idata/jldrill/fonts -Icoverage -Idoc -Ipkg -Ijldrill-* -Itest_results.html -Iwebgen.cache -Iweb/output/* -I/data/jldrill/COPYING/fonts -I/data/jldrill/COPYING/MainichiShinbun_files -I/data/jldrill/dict/MainichiShinbun -Iprofile.txt"
-    FileUtils.mv "../#{debian_base_dir_name}", "../jldrill"
-end
-
 desc "Clean everything, run tests, and build all the documentation."
 task :build => [:clean, :rcov, :rdoc, :web]
 
-desc "Build everything and create the JLDrill gems."
-task :gems => [:build, :package]
-
-desc "Build the JLDrill deb files."
-task :debs => [:deb]
-
-desc "Rebuild everything, create gems and debs for JLDrill, place all distributable files in the jldrill-<version> directory.  Used for creating a new release of JLDrill.  Note: it does not publish the web page."
-task :release => [:build, :debs, :gems] do
+desc "Make the release directory"
+task :releaseDir do
     FileUtils.mkdir release_dir
-    FileUtils.cp "pkg/jldrill-#{JLDrill::VERSION}.#{gem_revision}.gem", release_dir
-    FileUtils.cp Dir.glob("data/jldrill/fonts/*.ttf"), release_dir
-    FileUtils.mv Dir.glob("../jldrill_#{JLDrill::VERSION}-*.*"), release_dir
+end
+
+desc "Build the debian packages"
+task :debs do
+    FileUtils.mv "pkg/jldrill-#{JLDrill::VERSION}.#{gem_revision}",
+            "pkg/jldrill-#{JLDrill::VERSION}"
+    # Debian packages its own edict dictionary
+    FileUtils.rm_r "pkg/jldrill-#{JLDrill::VERSION}/data/jldrill/dict/edict"
+    sh "cd pkg; tar cvzf jldrill_#{JLDrill::VERSION}.orig.tar.gz jldrill-#{JLDrill::VERSION}"
+    FileUtils.cp_r Dir.glob("debian"), "pkg/jldrill-#{JLDrill::VERSION}"
+    sh "cd pkg/jldrill-#{JLDrill::VERSION}; debuild -us -uc"
+end
+
+desc "Rebuild everything, create gem and tar for JLDrill, place all distributable files in the jldrill-<version> directory.  Used for creating a new release of JLDrill.  Note: it does not publish the web page."
+task :release => [:build, :releaseDir, :package, :debs] do
+    FileUtils.mv Dir.glob("pkg/*.gem"), release_dir
+    FileUtils.mv Dir.glob("pkg/jldrill_#{JLDrill::VERSION}*"), release_dir
+    FileUtils.rm_rf "pkg"
 end
 
 desc "Alias for release.  Run this after doing a bzr update so that everything is rebuilt."

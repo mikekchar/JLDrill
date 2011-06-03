@@ -2,14 +2,13 @@ Source: jldrill
 Section: text
 Priority: optional
 Maintainer: Mike Charlton <mikekchar@gmail.com>
-Build-Depends: debhelper (>= 7), ruby
-Standards-Version: 3.8.0
+Build-Depends: debhelper (>= 7), ruby, rubygems, rake, librspec-ruby, rcov
+Standards-Version: 3.9.1
 Homepage: http://sakabatou.dnsdojo.org
 
 Package: jldrill
 Architecture: all
-Depends: ruby, ruby-gnome2, ttf-kanjistrokeorders, edict
-Conflicts: libcontext-ruby
+Depends: ruby, ruby-gnome2, ttf-kanjistrokeorders, edict, ${misc:Depends}
 Description: Japanese language drill program
  JLDrill is a program for helping people study and drill various aspects 
  of the Japanese language. Current features include a variety of drills
@@ -19,5 +18,5 @@ Description: Japanese language drill program
  series of example sentences in English and Japanese).  JLDrill's
  drills use a spaced repetition algorithm which is unique to it.
  This algorithm helps with initial acquisition of vocabulary, automatic
- grading of item difficulty and ability to deal with inconsistant
+ grading of item difficulty and ability to deal with inconsistent
  review schedules.
