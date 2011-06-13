@@ -140,7 +140,7 @@ module JLDrill
         # it so that similar items aren't always together.
         def randomVariation(interval)
             # 10% - rand(20%) = +- 10%
-            (interval / 10) - rand(interval / 5) 
+            ((interval.to_f / 10) - rand(interval.to_f / 5)).to_i 
         end
 
         # This is the interval the item will have when it it first
@@ -204,8 +204,9 @@ module JLDrill
         # Calculates the interval for the item.  For newly
         # promoted items, the schedule will be the interval based on 
         # difficulty.  
-        # For the rest it is twice the actual amount of time since 
-        # the last review.
+        # For the rest it is based on the actual amount of time since 
+        # the last review. A reducing backoff algorithm computes the
+        # multiple.
 	    # To avoid increasing the gap too much, a maximum of
 	    # twice the previous duration plus 25% is used.
         def calculateInterval

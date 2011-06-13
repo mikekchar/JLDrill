@@ -1,5 +1,7 @@
 require 'jldrill/model/Bin'
 require 'jldrill/model/Quiz/Schedule'
+require 'jldrill/model/Item'
+require 'jldrill/model/ItemStatus'
 
 module JLDrill
 
@@ -53,9 +55,9 @@ module JLDrill
         # There's a +- 10% variation in scheduling, so the actual
         # value should be in between those values        
         def should_be_plus_minus_ten_percent(actual, expected)
-        variation = expected.to_f / 10.0
-        (actual >= (expected.to_f - variation.to_f)).should be(true)
-        (actual <= (expected.to_f + variation.to_f)).should be(true)
+            variation = expected.to_f / 10.0
+            (actual >= (expected.to_f - variation.to_f).to_i).should be(true)
+            (actual <= (expected.to_f + variation.to_f).to_i).should be(true)
         end
 
         it "should schedule new items to maximum value by default" do
@@ -68,17 +70,17 @@ module JLDrill
 		    should_be_plus_minus_ten_percent(actual, expected)
         end
         
-        it "should schedule old items to twice their elapsed time" do
+        it "should schedule old items to based on their elapsed time" do
             # Set reviewed time to 3 days ago
-            @items[3].schedule.lastReviewed = Time::now - days(3)
+            @items[3].schedule.lastReviewed = Time::now - (days(3) - 1)
             @items[3].schedule.duration = days(3)
 		    @items[3].schedule.scheduled?.should be(true)
 		    time = @items[3].schedule.schedule
 		    time.should_not be_nil
 		    @items[3].schedule.scheduled?.should be(true)
-		    # Should be scheduled for 6 days from now
+		    # Should be scheduled based on actual duration
 		    actual = @items[3].schedule.duration
-		    expected = days(6)
+		    expected = Schedule.backoff(days(3))
 		    should_be_plus_minus_ten_percent(actual, expected)
         end
         

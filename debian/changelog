@@ -1,3 +1,10 @@
+jldrill (0.5.1-10) unstable; urgency=low
+
+  * Remove grammar drill due to license restrictions.  Fix faulty
+    test that would sometimes fail incorrectly. 
+
+ -- Mike Charlton <mikekchar@gmail.com>  Mon, 13 Jun 2011 16:20:00 +0900
+
 jldrill (0.5.1-9) unstable; urgency=low
 
   * Build debian source files when building the debian packages.

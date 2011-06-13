@@ -16,9 +16,6 @@ Current drills include:
 * a kana drill
 * JLPT vocabulary drills (These are the old 1, 2, 3, 4 lists NOT the new
   N1, N2, N3, N4, N5 lists)
-* grammar drill derived from 
-  {Tae Kim's Japanese Guide to Japanese Grammar}[http://www.guidetojapanese.org]
-
 
 == User Documentation
 Complete user documentation including installation instructions
@@ -27,14 +24,14 @@ stable version will always be available at:
 
 http://jldrill.rubyforge.org
 
-The version of this package is jldrill-0.6.0.
+The version of this package is jldrill-0.5.1.
 JLDrill is considered to be beta quality, but
 it is hoped to be useful for end users. Bug reports and
 suggestions are welcome.
 The location for the documentation for this release is depends on
 where you are viewing this.
 
-{Installed Gem}[link://../../../gems/jldrill-0.4.1/web/output/index.html]
+{Installed Gem}[link://../../../gems/jldrill-0.5.1/web/output/index.html]
 |
 {Source Repository}[link://../web/output/index.html]
 
@@ -56,7 +53,7 @@ etc.) are located in the data/jldrill/COPYING directory.
 
 Documentation on how to build and contribute to JLDrill is available:
 
-{Installed Gem}[link://../../../gems/jldrill-0.4.1/web/output/Development.html]
+{Installed Gem}[link://../../../gems/jldrill-0.5.1/web/output/Development.html]
 |
 {Source Repository}[link://../web/output/Development.html]
 
@@ -64,9 +61,9 @@ If you have installed from a development tree and have built the tests, then
 the results and test code coverage will be available here:
 
 Installed gem:
-{Test results}[link://../../../gems/jldrill-0.4.1/test_results.html]
+{Test results}[link://../../../gems/jldrill-0.5.1/test_results.html]
 |
-{Code coverage}[link://../../../gems/jldrill-0.4.1/coverage/index.html]
+{Code coverage}[link://../../../gems/jldrill-0.5.1/coverage/index.html]
 
 Source repository:
 {Test results}[link://../test_results.html]
@@ -81,7 +78,7 @@ The original file is text based and is easily readable and
 editable with any editor.  But to publish the html file you need
 Emacs.  The current published HTML file is here.
 
-{Installed Gem}[link://../../../gems/jldrill-0.4.1/TODO.html]
+{Installed Gem}[link://../../../gems/jldrill-0.5.1/TODO.html]
 |
 {Source Repository}[link://../TODO.html]
 
