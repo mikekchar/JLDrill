@@ -1,0 +1,13 @@
+bin/jldrill usr/bin
+lib/* usr/lib/ruby/1.8
+data/jldrill/COPYING usr/share/jldrill
+data/jldrill/quiz usr/share/jldrill
+data/jldrill/dict/Kana usr/share/jldrill/dict
+data/jldrill/dict/rikaichan usr/share/jldrill/dict
+data/jldrill/jldrill-icon.* usr/share/jldrill
+data/jldrill/Tanaka/examples.utf usr/share/jldrill/Tanaka
+data/jldrill/jldrill.desktop usr/share/applications
+data/jldrill/jldrill.desktop usr/share/app-install/desktop
+data/jldrill/jldrill-icon.svg usr/share/app-install/icons
+debian/Config.rb usr/lib/ruby/1.8/jldrill/model
+web/output/* usr/share/doc/jldrill/html

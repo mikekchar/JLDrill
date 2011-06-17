@@ -1,2 +1,2 @@
 ?package(jldrill):needs="X11" section="Applications/Education"\
-  title="JLDrill" command="/usr/bin/jldrill" icon="/usr/share/jldrill/icon.xpm"
+  title="JLDrill" command="/usr/bin/jldrill" icon="/usr/share/jldrill/jldrill-icon.xpm"

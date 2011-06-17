@@ -16,10 +16,10 @@ module JLDrill::Gtk
             # GTK+ on windows doesn't have SVG, so if this fails read the PNG
             begin
                 @icon = Gdk::Pixbuf.new(File.join(JLDrill::Config::DATA_DIR, 
-                                                  "icon.svg"))
+                                                  "jldrill-icon.svg"))
             rescue
                 @icon = Gdk::Pixbuf.new(File.join(JLDrill::Config::DATA_DIR,
-                                                  "icon.png"))
+                                                  "jldrill-icon.png"))
             end
             @mainWindow.icon_list=([@icon])
 

@@ -38,7 +38,7 @@ clean:
 	rm -f build-stamp configure-stamp
 
 	# Add here commands to clean up after the build process.
-	rake clean_debian
+#	rake clean_debian
 
 	dh_clean 
 
@@ -49,7 +49,7 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package into debian/jldrill.
-	rake debian_dir
+#	rake debian_dir
 
 
 # Build architecture-independent files here.
@@ -59,7 +59,7 @@ binary-indep: install
 	dh_installchangelogs 
 	dh_installdocs
 #	dh_installexamples
-#	dh_install
+	dh_install
 	dh_installmenu
 #	dh_installdebconf
 #	dh_installlogrotate

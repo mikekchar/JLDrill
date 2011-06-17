@@ -16,16 +16,6 @@ require 'fileutils'
 
 #======================== Setup ================================
 
-# Current release directory
-release_dir = "jldrill-#{JLDrill::VERSION}"
-
-# Revision of the gem file.  Increment this every time you release a gem file.
-gem_revision ="10"
-
-# Rubyforge details
-rubyforge_project = "jldrill"
-rubyforge_maintainer = "mikekchar@rubyforge.org"
-
 # Files that will be packaged
 pkg_files = FileList[
   'Rakefile.rb',
@@ -44,6 +34,16 @@ pkg_files = FileList[
   'jldrill.1',
   'AppRun'
 ]
+
+# Current release directory
+release_dir = "jldrill-#{JLDrill::VERSION}"
+
+# Revision of the gem file.  Increment this every time you release a gem file.
+gem_revision ="11"
+
+# Rubyforge details
+rubyforge_project = "jldrill"
+rubyforge_maintainer = "mikekchar@rubyforge.org"
 
 # Spec options
 spec_opts = ['-f html:test_results.html -f profile:profile.txt']
@@ -112,12 +112,16 @@ gem_spec = Gem::Specification.new do |s|
     s.version = JLDrill::VERSION + "." + gem_revision
 	s.summary = "Japanese Language Drill Program"
 	s.description = <<-EOF
-        JLDrill is a program for helping people drill aspects of the
-        Japanese language using spaced repetition.  It features a
-        dictionary cross reference tool, a pop-up kanji/vocabulary reference
-        (inspired by rikaichan for Firefox), and the ability to
-        import EDICT format files (EUC or UTF8 encoded).  Included
-        drills: kana, JLPT, and grammar.
+        JLDrill is a program for helping people study and drill various aspects 
+        of the Japanese language. Current features include a variety of drills
+        (kana, and vocabulary) a kanji and dictionary reference tool
+        inspired by the firefox plugin Rikaichan, kanji stroke order
+        diagrams, and vocabulary collocations using the Tanaka corpus (a
+        series of example sentences in English and Japanese).  JLDrill's
+        drills use a spaced repetition algorithm which is unique to it.
+        This algorithm helps with initial acquisition of vocabulary, 
+        automatically grades item difficulty and improves the ability to deal 
+        with inconsistent review schedules.
     EOF
     s.licenses = ['GPL-3']
     s.required_ruby_version = '~> 1.8.7'
@@ -185,55 +189,10 @@ task :publish => [:clean_web, :web] do
     sh "scp web/output/images/* " + rubyforge_maintainer + ":/var/www/gforge-projects/" + rubyforge_project + "/images/"
 end
 
-desc "Cleans the debian tree."
-task :clean_debian do
-    FileUtils.rm_rf('debian/jldrill')
-    FileUtils.rm_rf(Dir.glob('debian/*debhelper*'))
-    FileUtils.rm_rf('debian/files')
-    FileUtils.rm_rf('configure-stamp')
-    FileUtils.rm_rf('build-stamp')
-end
-
 desc "Cleans everything for a pristine source directory."
 task :clean => [:clobber_package, :clobber_rcov, :clobber_rdoc, 
-                :clobber_web, :clean_debian] do
+                :clobber_web] do
     FileUtils.rm_rf release_dir
-end
-
-desc "Create the debian source tree and copy the required files over.  The files will end up in debian/jldrill"
-task :debian_dir => [:clean_debian] do
-    # Create the new directory structure
-    FileUtils.mkdir_p "debian/jldrill/usr/bin"
-    FileUtils.mkdir_p "debian/jldrill/usr/lib/ruby/1.8"
-    FileUtils.mkdir_p "debian/jldrill/usr/share/jldrill/dict"
-    FileUtils.mkdir_p "debian/jldrill/usr/share/applications"
-    FileUtils.mkdir_p "debian/jldrill/usr/share/app-install/icons"
-    FileUtils.mkdir_p "debian/jldrill/usr/share/app-install/desktop"
-    FileUtils.mkdir_p "debian/jldrill/usr/share/doc/jldrill/html"
-	FileUtils.mkdir_p "debian/jldrill/usr/share/jldrill/Tanaka"
-    
-    # Copy the jldrill source files
-    FileUtils.cp_r "bin/jldrill", "debian/jldrill/usr/bin"
-    FileUtils.cp_r Dir.glob("lib/*"), "debian/jldrill/usr/lib/ruby/1.8"
-
-    # Copy the jldrill data files
-    FileUtils.cp_r "data/jldrill/COPYING", "debian/jldrill/usr/share/jldrill"
-    FileUtils.cp_r "data/jldrill/quiz", "debian/jldrill/usr/share/jldrill"
-    FileUtils.cp_r "data/jldrill/dict/Kana", "debian/jldrill/usr/share/jldrill/dict"
-    FileUtils.cp_r "data/jldrill/dict/rikaichan", "debian/jldrill/usr/share/jldrill/dict"
-    FileUtils.cp_r Dir.glob("data/jldrill/icon.*"), "debian/jldrill/usr/share/jldrill"
-	FileUtils.cp_r "data/jldrill/Tanaka/examples.utf", "debian/jldrill/usr/share/jldrill/Tanaka"
-
-    # Copy the desktop and icon files
-    FileUtils.cp_r "data/jldrill/jldrill.desktop", "debian/jldrill/usr/share/applications"
-    FileUtils.cp_r "data/jldrill/jldrill.desktop", "debian/jldrill/usr/share/app-install/desktop"
-    FileUtils.cp_r "data/jldrill/icon.svg", "debian/jldrill/usr/share/app-install/icons/jldrill-icon.svg"
-
-    # Copy the manual
-    FileUtils.cp_r Dir.glob("web/output/*"), "debian/jldrill/usr/share/doc/jldrill/html"
-
-    # Overwrite the Config file with the Debian version.
-    FileUtils.cp_r "config/DebianConfig.rb",  "debian/jldrill/usr/lib/ruby/1.8/jldrill/model/Config.rb"
 end
 
 desc "Clean everything, run tests, and build all the documentation."
@@ -245,7 +204,7 @@ task :releaseDir do
 end
 
 desc "Build the debian packages"
-task :debs do
+task :debian => [:web, :package] do
     FileUtils.mv "pkg/jldrill-#{JLDrill::VERSION}.#{gem_revision}",
             "pkg/jldrill-#{JLDrill::VERSION}"
     # Debian packages its own edict dictionary
@@ -256,7 +215,7 @@ task :debs do
 end
 
 desc "Rebuild everything, create gem and tar for JLDrill, place all distributable files in the jldrill-<version> directory.  Used for creating a new release of JLDrill.  Note: it does not publish the web page."
-task :release => [:build, :releaseDir, :package, :debs] do
+task :release => [:build, :releaseDir, :package, :debian] do
     FileUtils.mv Dir.glob("pkg/*.gem"), release_dir
     FileUtils.mv Dir.glob("pkg/jldrill_#{JLDrill::VERSION}*"), release_dir
     FileUtils.rm_rf "pkg"

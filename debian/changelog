@@ -1,3 +1,13 @@
+jldrill (0.5.1-11) unstable; urgency=low
+
+  * Remove rake from the debian build.  It now uses debhelper exclusively.
+    You can still make the debian package from the rakefile by typing
+    "rake debian".  This is actually the only way to make the source
+    packages at the moment.  But now the debian source packages will
+    build the debian packages without the need of rake.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Fri, 17 Jun 2011 15:50:00 +0900
+
 jldrill (0.5.1-10) unstable; urgency=low
 
   * Remove grammar drill due to license restrictions.  Fix faulty
