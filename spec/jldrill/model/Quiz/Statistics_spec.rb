@@ -7,7 +7,7 @@ module JLDrill
 	describe Statistics do
 	
 	    before(:each) do
-	        @statistics = Statistics.new(Quiz.new)
+	        @statistics = Statistics.new(Quiz.new, 4)
 	    end
 	    
 	    it "should start with an estimate of 0" do

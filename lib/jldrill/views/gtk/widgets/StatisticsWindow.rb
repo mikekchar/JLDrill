@@ -69,20 +69,15 @@ module JLDrill::Gtk
                    0,                       0)
         end
     end
-    
-    class StatisticsWindow < Gtk::Window
-        include Context::Gtk::Widget
+   
+    class StatisticsPage
 
-        attr_reader :accel
-        
+        attr_reader :widget, :durationTable, :rateTable
+
         def initialize(view)
             @view = view
-            @closed = false
-            super("Statistics")
-            connectSignals unless @view.nil?
+            @widget = Gtk::HBox.new()
             
-            hbox = Gtk::HBox.new()
-            add(hbox)
             ## Layout everything in a vertical table
             counter = JLDrill::Counter.new
             rows = []
@@ -91,44 +86,15 @@ module JLDrill::Gtk
             end
             columns = [" Duration ", " Correct ", " Tried ",]
             @durationTable = StatisticsTable.new(rows, columns)
-            hbox.add(@durationTable)
+            @widget.add(@durationTable)
             rows = ["Reviewed", "Learned", " Time to review ", 
                       "Time to learn", "Total Accuracy", " Learn Time % ", 
                       " Curr Rate ", " Avg Rate "]
             columns = [" "]
             @rateTable = StatisticsTable.new(rows, columns)
-            hbox.add(@rateTable)
-        end  
-        
-        def connectSignals
-            @accel = Gtk::AccelGroup.new
-            @accel.connect(Gdk::Keyval::GDK_Escape, 0,
-                           Gtk::ACCEL_VISIBLE) do
-                self.close
-            end
-            add_accel_group(@accel)
-            
-            signal_connect('delete_event') do
-                # Request that the destroy signal be sent
-                false
-            end
-            
-            signal_connect('destroy') do
-                self.close
-            end
+            @widget.add(@rateTable)
         end
-        
-        def close
-            if !@closed
-                @view.close
-            end
-        end
-        
-        def explicitDestroy
-            @closed = true
-            self.destroy
-        end
-        
+
         def updateDuration(counter)
             table = counter.table
             0.upto(6) do |i|
@@ -159,6 +125,81 @@ module JLDrill::Gtk
             @rateTable.values[5][0].text = stats.learnTimePercent.to_s + "% "
             @rateTable.values[6][0].text = stats.currentReviewRate.to_s + "x "
             @rateTable.values[7][0].text = stats.averageReviewRate.to_s + "x "
+        end
+    end
+
+    class StatisticsWindow < Gtk::Window
+        include Context::Gtk::Widget
+
+        attr_reader :accel
+        
+        def initialize(view)
+            @view = view
+            @closed = false
+            super("Statistics")
+            connectSignals unless @view.nil?
+
+            tabs = Gtk::Notebook.new()
+            add(tabs)
+            reviewSetLabel = Gtk::Label.new("Review Set")
+            @reviewStats = StatisticsPage.new(view)
+            tabs.append_page(@reviewStats.widget, reviewSetLabel)
+            forgottenSetLabel = Gtk::Label.new("Forgotten Set")
+            @forgottenStats = StatisticsPage.new(view)
+            tabs.append_page(@forgottenStats.widget, forgottenSetLabel)
+        end  
+        
+        def connectSignals
+            @accel = Gtk::AccelGroup.new
+            @accel.connect(Gdk::Keyval::GDK_Escape, 0,
+                           Gtk::ACCEL_VISIBLE) do
+                self.close
+            end
+            add_accel_group(@accel)
+            
+            signal_connect('delete_event') do
+                # Request that the destroy signal be sent
+                false
+            end
+            
+            signal_connect('destroy') do
+                self.close
+            end
+        end
+        
+        def close
+            if !@closed
+                @view.close
+            end
+        end
+        
+        def explicitDestroy
+            @closed = true
+            self.destroy
+        end
+
+        def updateReviewDuration(counter)
+            @reviewStats.updateDuration(counter)
+        end
+
+        def updateReviewAccuracy(stats)
+            @reviewStats.updateAccuracy(stats)
+        end
+
+        def updateReviewRate(stats)
+            @reviewStats.updateRate(stats)
+        end
+        
+        def updateForgottenDuration(counter)
+            @forgottenStats.updateDuration(counter)
+        end
+
+        def updateForgottenAccuracy(stats)
+            @forgottenStats.updateAccuracy(stats)
+        end
+
+        def updateForgottenRate(stats)
+            @forgottenStats.updateRate(stats)
         end
     end
 end

@@ -6,11 +6,12 @@ module JLDrill
     # Strategy for choosing, promoting and demoting items in
     # the quiz.
     class Strategy
-        attr_reader :stats
+        attr_reader :reviewStats, :forgottenStats
     
         def initialize(quiz)
             @quiz = quiz
-            @stats = Statistics.new(quiz)
+            @reviewStats = Statistics.new(quiz, 4)
+            @forgottenStats = Statistics.new(quiz, 5)
         end
         
         def Strategy.newSetBin
@@ -32,9 +33,9 @@ module JLDrill
         # Returns a string showing the status of the quiz with this strategy
         def status
             if shouldReview?
-                retVal = "     #{@stats.recentAccuracy}%"
-                if @stats.inTargetZone?
-                    retVal += " - #{(10 - @stats.timesInTargetZone)}"
+                retVal = "     #{@reviewStats.recentAccuracy}%"
+                if @reviewStats.inTargetZone?
+                    retVal += " - #{(10 - @reviewStats.timesInTargetZone)}"
                 end
             elsif !forgottenSet.empty?
                 retVal = " Forgotten Items"
@@ -134,7 +135,7 @@ module JLDrill
         # we have a 90% confidence that the the items
         # have a 90% chance of success.
         def reviewSetKnown?
-            !(10 - @stats.timesInTargetZone > 0)        
+            !(10 - @reviewStats.timesInTargetZone > 0)        
         end
         
         # Returns true if at least one working set full of
@@ -244,7 +245,8 @@ module JLDrill
         # Create a problem for the given item at the correct level
         def createProblem(item)
             item.itemStats.createProblem
-            @stats.startTimer(item.bin == Strategy.reviewSetBin)
+            @reviewStats.startTimer(item.bin == Strategy.reviewSetBin)
+            @forgottenStats.startTimer(item.bin == Strategy.forgottenSetBin)
             # Drill at the scheduled level in the review and forgotten sets 
             if (item.bin == Strategy.reviewSetBin) ||
                 (item.bin == Strategy.forgottenSetBin) 
@@ -268,7 +270,8 @@ module JLDrill
                     if item.bin == 3
                         # Newly promoted items
                         item.itemStats.consecutive = 1
-                        @stats.learned += 1
+                        @reviewStats.learned += 1
+                        @forgottenStats.learned += 1
                         item.scheduleAll
                     end
                     # Put the item at the back of the bin
@@ -294,7 +297,8 @@ module JLDrill
 
         # Mark the item as having been reviewed correctly
         def correct(item)
-            @stats.correct(item)
+            @reviewStats.correct(item)
+            @forgottenStats.correct(item)
             item.itemStats.correct
             if ((item.bin == Strategy.reviewSetBin) ||
                 (item.bin == Strategy.forgottenSetBin))
@@ -310,7 +314,8 @@ module JLDrill
 
         # Mark the item as having been reviewed incorrectly
         def incorrect(item)
-            @stats.incorrect(item)
+            @reviewStats.incorrect(item)
+            @forgottenStats.incorrect(item)
             item.allIncorrect
             item.itemStats.incorrect
             demote(item)

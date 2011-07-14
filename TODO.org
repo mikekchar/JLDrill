@@ -31,25 +31,19 @@ process.  Instead of long development releases, the releases will
 be done in 1-2 weeks each.  Hopefully this will keep interest
 levels up.
 
-* Version 0.5.1
+* Version 0.5.2
 
-This is a packaging release.  However, I have added a single
-feature because I needed it for my own study.
-
-Unlike previous releases, 0.5.1 will be released as a stable release.
-For all platforms, installing ruby (with rubygems) and typing "gem
-install jldrill" will install jldrill and all its dependencies.  On
-On Linux, there will be a debian package.  Both gems and debian packages 
-will be submitted to the appropriate people so that it is easy to install.
-Unfortunately, unless I can get a Mac, there will be no Mac
-installation.
-
-
+0.5.2 will focus on needed user interface improvements.  Mostly these
+have to do with giving feedback about errors and the like.  There is
+also some workflow for the beginning of the drill.  Looking at these
+items, it seems as if I will have to split this release up into 2
+releases.  But we'll see how much time I have.
+  
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
-  :StartDate: <2011-01-24 Mon>
-  :CurrentDate:  <2011-05-23 Mon>
-  :EndDate: <2011-05-27 Fri>
+  :StartDate: <2011-07-14 Thu>
+  :CurrentDate:  <2011-07-14 Thu>
+  :EndDate: <2011-08-31 Wed>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -72,7 +66,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.5.1 |     6 |    6 |   100.0 |    0.05 |   0.05 |
+| * Version 0.5.2 |    17 |    1 |     5.9 |    1.00 |   0.35 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -81,82 +75,22 @@ the PROPERTIES section of the section.  When setting TODO tasks to
 DONE, you must set the number of JellyBeans done in the PROPERTIES of
 the task.
 
-** Current Stories
+** Current Items
 
-*** DONE Forget items that are too old
-   Sometimes when you haven't used the app for a long time items
-   get very old.  Their reviewRate becomes large.  This is not
-   a problem in itself, but when you start to review items they
-   will have a short duration.  If the reviewRate is something like
-   10x, then it might take 50 days until we rereview a new item.
-   Therefore make a new set of items called Forgetten.  Review
-   Items that have a reviewRate higher than some threshold (4???)
-   are moved to the Forgetten set.  Forgetten set items work just like
-   the Review set items except that are introduced like New set
-   items.  So this means the user gets Review set items until they
-   get 90% right.  Then they get Forgetten set items.  Once an expired
-   set item is reviewed, it goes back into the Review set.  After
-   all the Forgetten set items are finished, then we go back to showing
-   New set items.  This gives priority to actively reviewed items
-   without losing the valuable sorting of old items.
-   There is an option for setting the threshold.  If the threshold
-   is 0 (default) then no items are forgotten.
+*** DONE Display statistics for forgotten items [2/2]
+	In the statistics window, display the statistics for the
+	forgotten set as well as the review set.  To be honest, I
+	don't really know how I want this to work, so this will
+	probably end up being a spike.
 
-   :PROPERTIES:
-   :JellyBeans: 2
-   :Done: 2
-   :END:
+	- [X] Create a tabbed interface for the statistics window
+    - [X] Make one tab show the statistics for the review set
+          and one for the forgotten set
 
-*** DONE Reorganize Options UI
-	The UI is ugly and disorganized for the Options window.
-	Organize the options so that they have a grouping that makes
-	sense and try to visually improve the look.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 1
-   :END:
-
-*** DONE Put Gem in official repository [5/5]
-    - [X] Make dependencies for gtk2
-    - [X] Push to official repositories
-    - [X] Test on Linux and Windows to make sure it installs properly
-    - [X] Update documentation for Windows install
-    - [X] Document potential problems with debian and gem coexistance.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 1
-   :END:
-
-*** DONE Update Dictionaries
-	Update the EDict and Tanaka corpus dictionaries to the
-	latest version.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 1
-   :END:
-
-*** DONE Switch between kanji and vocab popups
-	Make it so that you can switch between the kanji and vocab
-    popups without having to move the mouse in between.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 1
-   :END:
-
-
-* Version 0.5.2
-
-0.5.2 will focus on needed user interface improvements.  Mostly these
-have to do with giving feedback about errors and the like.  There is
-also some workflow for the beginning of the drill.  Looking at these
-items, it seems as if I will have to split this release up into 2
-releases.  But we'll see how much time I have.
-  
-** Items
+	:PROPERTIES:
+	:JellyBeans: 1
+	:Done: 1
+	:END:
 
 *** TODO Allow users to update their drills
    A user can update a drill by appending the new version to their drill.
@@ -172,6 +106,33 @@ releases.  But we'll see how much time I have.
    :JellyBeans: 2
    :Done: 0
    :END:
+
+*** TODO Personalized Directories
+	Create a configuration directory that contains the users configuration
+	for JLDrill.
+
+	:PROPERTIES:
+	:JellyBeans: 2
+	:Done: 0
+	:END:
+
+*** TODO Automatically update Dictionary
+	Allow the user to select a download site for a dictionary and
+	automatically updated it when it changes.
+
+	:PROPERTIES:
+	:JellyBeans: 2
+	:Done: 0
+	:END:
+
+*** TODO Automatically update Collocations
+	Allow the user to select a download site for a collocation dictionary and
+	automatically updated it when it changes.
+
+	:PROPERTIES:
+	:JellyBeans: 2
+	:Done: 0
+	:END:
 
 *** TODO Need a mechanism for publishing warnings and errors.
    Warnings and errors must be displayed to the user in a
@@ -241,7 +202,88 @@ releases.  But we'll see how much time I have.
    :Done: 0
    :END:
 
+* Finished -- Version 5.1
 
+This is a packaging release.  However, I have added a single
+feature because I needed it for my own study.
+
+Unlike previous releases, 0.5.1 will be released as a stable release.
+For all platforms, installing ruby (with rubygems) and typing "gem
+install jldrill" will install jldrill and all its dependencies.  On
+On Linux, there will be a debian package.  Both gems and debian packages 
+will be submitted to the appropriate people so that it is easy to install.
+Unfortunately, unless I can get a Mac, there will be no Mac
+installation.
+
+*** DONE Forget items that are too old
+   Sometimes when you haven't used the app for a long time items
+   get very old.  Their reviewRate becomes large.  This is not
+   a problem in itself, but when you start to review items they
+   will have a short duration.  If the reviewRate is something like
+   10x, then it might take 50 days until we rereview a new item.
+   Therefore make a new set of items called Forgetten.  Review
+   Items that have a reviewRate higher than some threshold (4???)
+   are moved to the Forgetten set.  Forgetten set items work just like
+   the Review set items except that are introduced like New set
+   items.  So this means the user gets Review set items until they
+   get 90% right.  Then they get Forgetten set items.  Once an expired
+   set item is reviewed, it goes back into the Review set.  After
+   all the Forgetten set items are finished, then we go back to showing
+   New set items.  This gives priority to actively reviewed items
+   without losing the valuable sorting of old items.
+   There is an option for setting the threshold.  If the threshold
+   is 0 (default) then no items are forgotten.
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 2
+   :END:
+
+*** DONE Reorganize Options UI
+	The UI is ugly and disorganized for the Options window.
+	Organize the options so that they have a grouping that makes
+	sense and try to visually improve the look.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 1
+   :END:
+
+*** DONE Put Gem in official repository [5/5]
+    - [X] Make dependencies for gtk2
+    - [X] Push to official repositories
+    - [X] Test on Linux and Windows to make sure it installs properly
+    - [X] Update documentation for Windows install
+    - [X] Document potential problems with debian and gem coexistance.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 1
+   :END:
+
+*** DONE Update Dictionaries
+	Update the EDict and Tanaka corpus dictionaries to the
+	latest version.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 1
+   :END:
+
+*** DONE Switch between kanji and vocab popups
+	Make it so that you can switch between the kanji and vocab
+    popups without having to move the mouse in between.
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 1
+   :END:
+
+*** DONE Improve Debian build
+	The Debian build system was not being done the "Debian way".
+	Modify it so that it it lintian clean and build a source
+	package.
+	
 * Backlog
 
 These items are ideas that may or may not make it into
@@ -253,6 +295,11 @@ likely to appear in the next release or two.  If you have
 feedback on this list, or its order, please email me.
 
 ** Items
+
+*** TODO Move to Ruby 1.9
+	Currently using Ruby 1.8.7 Move to Ruby 1.9.  This should
+	improve performance somewhat.  This needs to be done before
+	Debian moves over to Ruby 1.9 as its standard.
 
 *** TODO Windows Packaging [0/5]
    Determine the feasibility of creating a windows packaging.

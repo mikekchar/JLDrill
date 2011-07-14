@@ -1,3 +1,9 @@
+jldrill (0.5.2-1) unstable; urgency=low
+
+  * New development release
+
+ -- Mike Charlton <mikekchar@gmail.com>  Fri, 15 Jul 2011 8:21:00 +0900
+
 jldrill (0.5.1-11) unstable; urgency=low
 
   * Remove rake from the debian build.  It now uses debhelper exclusively.

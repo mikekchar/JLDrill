@@ -25,18 +25,18 @@ module JLDrill
 	    
 	    it "should increment the statistics if correct in bin 4" do
 	        @quiz.currentProblem.item.bin.should be(4)
-	        @strategy.stats.accuracy.should be(0)
+	        @strategy.reviewStats.accuracy.should be(0)
 	        @strategy.correct(@quiz.currentProblem.item)
-	        @strategy.stats.accuracy.should be(100)
+	        @strategy.reviewStats.accuracy.should be(100)
 	    end
 
 	    it "should decrement the statistics if incorrect in bin 4" do
 	        @quiz.currentProblem.item.bin.should be(4)
-	        @strategy.stats.accuracy.should be(0)
+	        @strategy.reviewStats.accuracy.should be(0)
 	        @strategy.correct(@quiz.currentProblem.item)
-	        @strategy.stats.accuracy.should be(100)
+	        @strategy.reviewStats.accuracy.should be(100)
 	        @strategy.incorrect(@quiz.currentProblem.item)
-	        @strategy.stats.accuracy.should be(50)	        
+	        @strategy.reviewStats.accuracy.should be(50)	        
 	    end
 	    
 	    it "should use the contents from the quiz" do
@@ -161,13 +161,13 @@ module JLDrill
             # to the required level, so we should review
             @strategy.shouldReview?.should be(true)
             0.upto(9) do
-                @strategy.stats.correct(item)
+                @strategy.reviewStats.correct(item)
             end
             # We don't start the countdown until we have reviewed 10 items
             # so we should continue to review
             @strategy.shouldReview?.should be(true)
             0.upto(9) do
-                @strategy.stats.correct(item)
+                @strategy.reviewStats.correct(item)
             end            
             # Now we know the items well enough, and we have reviewed
             # enough items, so we shouldn't review

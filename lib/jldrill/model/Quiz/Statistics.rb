@@ -17,8 +17,9 @@ module JLDrill
         MINIMUM_CONFIDENCE = 0.009
         SECONDS_PER_DAY = 60 * 60 * 24
         
-        def initialize(quiz)
+        def initialize(quiz, binNumber)
             @quiz = quiz
+            @binNumber = binNumber
             @estimate = 0
             @correct = 0
             @incorrect = 0
@@ -37,7 +38,9 @@ module JLDrill
             @currentTimer = nil
             resetConfidence 
         end
-        
+
+        # Record a result.  True means that the item was guessed
+        # correctly, false means it was incorrect.        
         def record(bool)
             @lastTen.push(bool)
             while @lastTen.size > 10
@@ -91,7 +94,7 @@ module JLDrill
         end
 
         def reviewBin
-            return @quiz.contents.bins[4]
+            return @quiz.contents.bins[@binNumber]
         end
 
         def size
@@ -125,8 +128,7 @@ module JLDrill
         end
         
         def correct(item)
-            # currently only level 4 items are reviewed
-            if item.bin != 4
+            if item.bin != @binNumber
                 return
             end
             @correct += 1
@@ -142,8 +144,7 @@ module JLDrill
         end
 
         def incorrect(item)
-            # currently only level 4 items are reviewed
-            if item.bin != 4
+            if item.bin != @binNumber
                 return
             end
             @incorrect += 1
