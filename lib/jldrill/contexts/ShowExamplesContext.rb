@@ -75,8 +75,12 @@ module JLDrill
 		end
 		
 		def newProblemUpdated(problem)
-		    @mainView.update(findExamples(problem)) unless @mainView.nil?
+		    @mainView.update(nil) unless @mainView.nil?
 		end
+
+        def showAnswer()
+            @mainView.update(findExamples(@parent.quiz.currentProblem)) unless @mainView.nil?
+        end
 
     end
 end

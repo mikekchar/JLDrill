@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>JLDrill TODO List</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-07-15 08:30:47 JST"/>
+<meta name="generated" content="2011-07-15 13:57:35 JST"/>
 <meta name="author" content="Mike Charlton"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -85,17 +85,19 @@ lang="en" xml:lang="en">
 <li><a href="#sec-3.2">3.2 Current Items </a>
 <ul>
 <li><a href="#sec-3.2.1">3.2.1 Display statistics for forgotten items [2/2] </a></li>
-<li><a href="#sec-3.2.2">3.2.2 Allow users to update their drills </a></li>
-<li><a href="#sec-3.2.3">3.2.3 Personalized Directories </a></li>
-<li><a href="#sec-3.2.4">3.2.4 Automatically update Dictionary </a></li>
-<li><a href="#sec-3.2.5">3.2.5 Automatically update Collocations </a></li>
-<li><a href="#sec-3.2.6">3.2.6 Need a mechanism for publishing warnings and errors. </a></li>
-<li><a href="#sec-3.2.7">3.2.7 Give feedback to the user when we refuse to edit or add an item. </a></li>
-<li><a href="#sec-3.2.8">3.2.8 When save fails, indicate it to the user </a></li>
-<li><a href="#sec-3.2.9">3.2.9 Start new drills in Preview mode </a></li>
-<li><a href="#sec-3.2.10">3.2.10 New Drill Splash Screen </a></li>
-<li><a href="#sec-3.2.11">3.2.11 Simply loading a drill shouldn't modify it </a></li>
-<li><a href="#sec-3.2.12">3.2.12 Indicate when the item has been promoted. </a></li>
+<li><a href="#sec-3.2.2">3.2.2 Only show the examples when the answer is shown </a></li>
+<li><a href="#sec-3.2.3">3.2.3 Show appropriate examples when the question is shown </a></li>
+<li><a href="#sec-3.2.4">3.2.4 Allow users to update their drills </a></li>
+<li><a href="#sec-3.2.5">3.2.5 Personalized Directories </a></li>
+<li><a href="#sec-3.2.6">3.2.6 Automatically update Dictionary </a></li>
+<li><a href="#sec-3.2.7">3.2.7 Automatically update Collocations </a></li>
+<li><a href="#sec-3.2.8">3.2.8 Need a mechanism for publishing warnings and errors. </a></li>
+<li><a href="#sec-3.2.9">3.2.9 Give feedback to the user when we refuse to edit or add an item. </a></li>
+<li><a href="#sec-3.2.10">3.2.10 When save fails, indicate it to the user </a></li>
+<li><a href="#sec-3.2.11">3.2.11 Start new drills in Preview mode </a></li>
+<li><a href="#sec-3.2.12">3.2.12 New Drill Splash Screen </a></li>
+<li><a href="#sec-3.2.13">3.2.13 Simply loading a drill shouldn't modify it </a></li>
+<li><a href="#sec-3.2.14">3.2.14 Indicate when the item has been promoted. </a></li>
 </ul></li>
 </ul>
 </li>
@@ -245,7 +247,7 @@ iteration to finish as scheduled.
 <tr><th scope="col">ITEM</th><th scope="col">Total</th><th scope="col">Done</th><th scope="col">Percent</th><th scope="col">Current</th><th scope="col">Needed</th></tr>
 </thead>
 <tbody>
-<tr><td><span style="visibility:hidden;"></span>Version 0.5.2</td><td>17</td><td>1</td><td>5.9</td><td>1.00</td><td>0.35</td></tr>
+<tr><td><span style="visibility:hidden;"></span>Version 0.5.2</td><td>19</td><td>2</td><td>10.5</td><td>2.00</td><td>0.40</td></tr>
 </tbody>
 </table>
 
@@ -293,8 +295,36 @@ and one for the forgotten set
 </div>
 
 <div id="outline-container-3.2.2" class="outline-4">
-<h4 id="sec-3.2.2"><span class="section-number-4">3.2.2</span> <span class="todo TODO"> TODO</span> Allow users to update their drills </h4>
+<h4 id="sec-3.2.2"><span class="section-number-4">3.2.2</span> <span class="done DONE"> DONE</span> Only show the examples when the answer is shown </h4>
 <div class="outline-text-4" id="text-3.2.2">
+
+<p>Right now the colocations are shown when the new problem is
+made.  Instead, show the colocations when the answer is shown
+for the problem.  Before that a blank screen.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3.2.3" class="outline-4">
+<h4 id="sec-3.2.3"><span class="section-number-4">3.2.3</span> <span class="todo TODO"> TODO</span> Show appropriate examples when the question is shown </h4>
+<div class="outline-text-4" id="text-3.2.3">
+
+<p>When the question is shown, show the English side of the
+examples when it is a meaning question, Japanese side of the
+example when it is a Kanji question and Japanese with
+header if it is a reading question.  Fill in the rest of
+the details when the answer is shown.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3.2.4" class="outline-4">
+<h4 id="sec-3.2.4"><span class="section-number-4">3.2.4</span> <span class="todo TODO"> TODO</span> Allow users to update their drills </h4>
+<div class="outline-text-4" id="text-3.2.4">
 
 <p>A user can update a drill by appending the new version to their drill.
 But if the vocabulary has changed in the new/old drill (because the
@@ -310,9 +340,9 @@ position).
 
 </div>
 
-<div id="outline-container-3.2.3" class="outline-4">
-<h4 id="sec-3.2.3"><span class="section-number-4">3.2.3</span> <span class="todo TODO"> TODO</span> Personalized Directories </h4>
-<div class="outline-text-4" id="text-3.2.3">
+<div id="outline-container-3.2.5" class="outline-4">
+<h4 id="sec-3.2.5"><span class="section-number-4">3.2.5</span> <span class="todo TODO"> TODO</span> Personalized Directories </h4>
+<div class="outline-text-4" id="text-3.2.5">
 
 <p>Create a configuration directory that contains the users configuration
 for JLDrill.
@@ -322,9 +352,9 @@ for JLDrill.
 
 </div>
 
-<div id="outline-container-3.2.4" class="outline-4">
-<h4 id="sec-3.2.4"><span class="section-number-4">3.2.4</span> <span class="todo TODO"> TODO</span> Automatically update Dictionary </h4>
-<div class="outline-text-4" id="text-3.2.4">
+<div id="outline-container-3.2.6" class="outline-4">
+<h4 id="sec-3.2.6"><span class="section-number-4">3.2.6</span> <span class="todo TODO"> TODO</span> Automatically update Dictionary </h4>
+<div class="outline-text-4" id="text-3.2.6">
 
 <p>Allow the user to select a download site for a dictionary and
 automatically updated it when it changes.
@@ -334,9 +364,9 @@ automatically updated it when it changes.
 
 </div>
 
-<div id="outline-container-3.2.5" class="outline-4">
-<h4 id="sec-3.2.5"><span class="section-number-4">3.2.5</span> <span class="todo TODO"> TODO</span> Automatically update Collocations </h4>
-<div class="outline-text-4" id="text-3.2.5">
+<div id="outline-container-3.2.7" class="outline-4">
+<h4 id="sec-3.2.7"><span class="section-number-4">3.2.7</span> <span class="todo TODO"> TODO</span> Automatically update Collocations </h4>
+<div class="outline-text-4" id="text-3.2.7">
 
 <p>Allow the user to select a download site for a collocation dictionary and
 automatically updated it when it changes.
@@ -346,9 +376,9 @@ automatically updated it when it changes.
 
 </div>
 
-<div id="outline-container-3.2.6" class="outline-4">
-<h4 id="sec-3.2.6"><span class="section-number-4">3.2.6</span> <span class="todo TODO"> TODO</span> Need a mechanism for publishing warnings and errors. </h4>
-<div class="outline-text-4" id="text-3.2.6">
+<div id="outline-container-3.2.8" class="outline-4">
+<h4 id="sec-3.2.8"><span class="section-number-4">3.2.8</span> <span class="todo TODO"> TODO</span> Need a mechanism for publishing warnings and errors. </h4>
+<div class="outline-text-4" id="text-3.2.8">
 
 <p>Warnings and errors must be displayed to the user in a
 consisten way.  To be honest I need to think more about what
@@ -360,9 +390,9 @@ which is no good.
 
 </div>
 
-<div id="outline-container-3.2.7" class="outline-4">
-<h4 id="sec-3.2.7"><span class="section-number-4">3.2.7</span> <span class="todo TODO"> TODO</span> Give feedback to the user when we refuse to edit or add an item. </h4>
-<div class="outline-text-4" id="text-3.2.7">
+<div id="outline-container-3.2.9" class="outline-4">
+<h4 id="sec-3.2.9"><span class="section-number-4">3.2.9</span> <span class="todo TODO"> TODO</span> Give feedback to the user when we refuse to edit or add an item. </h4>
+<div class="outline-text-4" id="text-3.2.9">
 
 <p>Probably use the aforementioned warning and error mechanism.
 </p>
@@ -371,9 +401,9 @@ which is no good.
 
 </div>
 
-<div id="outline-container-3.2.8" class="outline-4">
-<h4 id="sec-3.2.8"><span class="section-number-4">3.2.8</span> <span class="todo TODO"> TODO</span> When save fails, indicate it to the user </h4>
-<div class="outline-text-4" id="text-3.2.8">
+<div id="outline-container-3.2.10" class="outline-4">
+<h4 id="sec-3.2.10"><span class="section-number-4">3.2.10</span> <span class="todo TODO"> TODO</span> When save fails, indicate it to the user </h4>
+<div class="outline-text-4" id="text-3.2.10">
 
 <p>before bringing up the save as dialog.
 </p>
@@ -382,9 +412,9 @@ which is no good.
 
 </div>
 
-<div id="outline-container-3.2.9" class="outline-4">
-<h4 id="sec-3.2.9"><span class="section-number-4">3.2.9</span> <span class="todo TODO"> TODO</span> Start new drills in Preview mode </h4>
-<div class="outline-text-4" id="text-3.2.9">
+<div id="outline-container-3.2.11" class="outline-4">
+<h4 id="sec-3.2.11"><span class="section-number-4">3.2.11</span> <span class="todo TODO"> TODO</span> Start new drills in Preview mode </h4>
+<div class="outline-text-4" id="text-3.2.11">
 
 <p>When a drill has been loaded for the first time (or after a reset), 
 show the first item in preview mode.  This allows the user to
@@ -396,9 +426,9 @@ problem.
 
 </div>
 
-<div id="outline-container-3.2.10" class="outline-4">
-<h4 id="sec-3.2.10"><span class="section-number-4">3.2.10</span> <span class="todo TODO"> TODO</span> New Drill Splash Screen </h4>
-<div class="outline-text-4" id="text-3.2.10">
+<div id="outline-container-3.2.12" class="outline-4">
+<h4 id="sec-3.2.12"><span class="section-number-4">3.2.12</span> <span class="todo TODO"> TODO</span> New Drill Splash Screen </h4>
+<div class="outline-text-4" id="text-3.2.12">
 
 <p>Create a splash screen explaining that this is a new drill and
 the system is in Preview mode.  Press N to start
@@ -408,9 +438,9 @@ the system is in Preview mode.  Press N to start
 
 </div>
 
-<div id="outline-container-3.2.11" class="outline-4">
-<h4 id="sec-3.2.11"><span class="section-number-4">3.2.11</span> <span class="todo TODO"> TODO</span> Simply loading a drill shouldn't modify it </h4>
-<div class="outline-text-4" id="text-3.2.11">
+<div id="outline-container-3.2.13" class="outline-4">
+<h4 id="sec-3.2.13"><span class="section-number-4">3.2.13</span> <span class="todo TODO"> TODO</span> Simply loading a drill shouldn't modify it </h4>
+<div class="outline-text-4" id="text-3.2.13">
 
 <p>Currently the "must save" flag is set when a drill is loaded.
 This should only be set after the first item has been answered.
@@ -422,9 +452,9 @@ the "must save" flag should be set immediately.
 
 </div>
 
-<div id="outline-container-3.2.12" class="outline-4">
-<h4 id="sec-3.2.12"><span class="section-number-4">3.2.12</span> <span class="todo TODO"> TODO</span> Indicate when the item has been promoted. </h4>
-<div class="outline-text-4" id="text-3.2.12">
+<div id="outline-container-3.2.14" class="outline-4">
+<h4 id="sec-3.2.14"><span class="section-number-4">3.2.14</span> <span class="todo TODO"> TODO</span> Indicate when the item has been promoted. </h4>
+<div class="outline-text-4" id="text-3.2.14">
 
 <p>When an item has been moved to the review set, print some
 kind of congratulatory message.  Possibly show some kind of
@@ -899,7 +929,7 @@ duration), then reset it so that it has been waiting for 3.75 days
 <p class="author"> Author: Mike Charlton
 <a href="mailto:mike@Wrook">&lt;mike@Wrook&gt;</a>
 </p>
-<p class="date"> Date: 2011-07-15 08:30:47 JST</p>
+<p class="date"> Date: 2011-07-15 13:57:35 JST</p>
 <p class="creator">HTML generated by org-mode 6.33x in emacs 23</p>
 </div>
 </div>

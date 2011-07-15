@@ -66,7 +66,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.5.2 |    17 |    1 |     5.9 |    1.00 |   0.35 |
+| * Version 0.5.2 |    19 |    2 |    10.5 |    2.00 |   0.40 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -90,6 +90,28 @@ the task.
 	:PROPERTIES:
 	:JellyBeans: 1
 	:Done: 1
+	:END:
+
+*** DONE Only show the examples when the answer is shown
+	Right now the colocations are shown when the new problem is
+	made.  Instead, show the colocations when the answer is shown
+	for the problem.  Before that a blank screen.
+
+	:PROPERTIES:
+	:JellyBeans: 1
+	:Done: 1
+	:END:
+
+*** TODO Show appropriate examples when the question is shown
+	When the question is shown, show the English side of the
+	examples when it is a meaning question, Japanese side of the
+	example when it is a Kanji question and Japanese with
+	header if it is a reading question.  Fill in the rest of
+	the details when the answer is shown.
+
+	:PROPERTIES:
+	:JellyBeans: 1
+	:Done: 0
 	:END:
 
 *** TODO Allow users to update their drills

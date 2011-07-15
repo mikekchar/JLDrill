@@ -333,6 +333,7 @@ module JLDrill
 		def showAnswer
             if !@quiz.currentProblem.nil?
                 @displayProblemContext.showAnswer if @displayProblemContext.isEntered?
+                @showExamplesContext.showAnswer if @showExamplesContext.isEntered?
             end
 		end
 		
