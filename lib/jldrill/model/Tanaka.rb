@@ -99,8 +99,16 @@ module JLDrill::Tanaka
             return retVal
         end
 
+        def japaneseTo_s
+            return "#{self.id}: " + word_to_s + "\n\t#{self.japanese}"
+        end
+
+        def englishTo_s
+            return "#{self.id}: " + "\n\t#{self.english}"
+        end
+
         def to_s
-           return "#{self.id}: " + word_to_s + "\n\t#{self.japanese}\n\t#{self.english}"
+            return "#{self.id}: " + word_to_s + "\n\t#{self.japanese}\n\t#{self.english}"
         end
     end
 

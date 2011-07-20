@@ -116,31 +116,60 @@ module JLDrill::Gtk
                retVal
            end
         end
- 
+
+        def insertHeader(section, example)
+            if example.checked
+                if section == -2
+                    section = -1
+                    insert("Checked Examples\n", "h1")
+                    insertVSpace
+                end
+            else
+                if section < 0
+                    insert("Unchecked Examples\n", "h1")
+                    insertVSpace
+                end
+                if section != example.sense
+                    section = example.sense
+                    if section != 0
+                        insertVSpace
+                        insert("Examples for sense ##{section}\n", "h2")
+                    end
+                end
+            end
+            return section
+        end
+
+        def updateEnglishOnly(examples)
+            @contents.buffer.text = ""
+            if !examples.nil?
+                section = -2
+                sortExamples(examples).each do |example|
+                    section = insertHeader(section, example)
+                    insert(example.englishTo_s + "\n", "normal")
+                    insertVSpace
+                end
+            end
+        end
+
+        def updateJapaneseOnly(examples)
+            @contents.buffer.text = ""
+            if !examples.nil?
+                section = -2
+                sortExamples(examples).each do |example|
+                    section = insertHeader(section, example)
+                    insert(example.japaneseTo_s + "\n", "normal")
+                    insertVSpace
+                end
+            end
+        end
+
         def updateContents(examples)
             @contents.buffer.text = ""
             if !examples.nil?
                 section = -2
                 sortExamples(examples).each do |example|
-                    if example.checked
-                        if section == -2
-                            section = -1
-                            insert("Checked Examples\n", "h1")
-                            insertVSpace
-                        end
-                    else
-                        if section < 0
-                            insert("Unchecked Examples\n", "h1")
-                            insertVSpace
-                        end
-                        if section != example.sense
-                            section = example.sense
-                            if section != 0
-                                insertVSpace
-                                insert("Examples for sense ##{section}\n", "h2")
-                            end
-                        end
-                    end
+                    section = insertHeader(section, example)
                     insert(example.to_s + "\n", "normal")
                     insertVSpace
                 end

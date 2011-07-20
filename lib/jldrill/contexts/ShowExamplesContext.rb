@@ -8,6 +8,7 @@ module JLDrill
 		
 		def initialize(viewBridge)
 			super(viewBridge)
+            @examples = nil
 		end
 		
         include JLDrill::Behaviour::SearchDictionary
@@ -21,6 +22,16 @@ module JLDrill
 
             # Destroy the window
             def destroy
+                # Please define in the concrete class
+            end
+
+            # Update the examples in the UI showing only English
+            def updateEnglishOnly(examples)
+                # Please define in the concrete class
+            end
+
+            # Update the examples in the UI showing only Japanese
+            def updateJapaneseOnly(examples)
                 # Please define in the concrete class
             end
 
@@ -75,11 +86,18 @@ module JLDrill
 		end
 		
 		def newProblemUpdated(problem)
-		    @mainView.update(nil) unless @mainView.nil?
+            if !@mainView.nil?
+                @examples = findExamples(problem)
+                if (problem.name.eql?("MeaningProblem"))
+                    @mainView.updateEnglishOnly(@examples)
+                else
+                    @mainView.updateJapaneseOnly(@examples)
+                end
+            end
 		end
 
         def showAnswer()
-            @mainView.update(findExamples(@parent.quiz.currentProblem)) unless @mainView.nil?
+            @mainView.update(@examples) unless @mainView.nil?
         end
 
     end

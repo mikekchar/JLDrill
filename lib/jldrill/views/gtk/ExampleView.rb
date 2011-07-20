@@ -26,6 +26,16 @@ module JLDrill::Gtk
 		def emitDestroyEvent
 			@exampleWindow.signal_emit("destroy")
 		end
+
+        def updateEnglishOnly(examples)
+            super(examples)
+            @exampleWindow.updateEnglishOnly(examples)
+        end
+		
+        def updateJapaneseOnly(examples)
+            super(examples)
+            @exampleWindow.updateJapaneseOnly(examples)
+        end
 		
 		def update(examples)
 		    super(examples)
