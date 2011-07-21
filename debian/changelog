@@ -1,3 +1,13 @@
+jldrill (0.5.2-2) unstable; urgency=low
+
+  * Show statistics for the forgotten set.  Also show only the appropriate
+    parts of the tanaka examples when showing questions.  For example, show
+    only English, when English is showing in the question, Japanese when
+    Japanese is showing in the question.  Show everything when the answer
+    is shown.
+
+ -- Mike Charlton <mikekchar@gmail.com>  Wed, 20 Jul 2011 10:13:00 +0900
+
 jldrill (0.5.2-1) unstable; urgency=low
 
   * New development release

@@ -42,7 +42,7 @@ releases.  But we'll see how much time I have.
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2011-07-14 Thu>
-  :CurrentDate:  <2011-07-14 Thu>
+  :CurrentDate:  <2011-07-20 Wed>
   :EndDate: <2011-08-31 Wed>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -66,7 +66,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.5.2 |    19 |    2 |    10.5 |    2.00 |   0.40 |
+| * Version 0.5.2 |    19 |    3 |    15.8 |    0.50 |   0.40 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -102,16 +102,15 @@ the task.
 	:Done: 1
 	:END:
 
-*** TODO Show appropriate examples when the question is shown
+*** DONE Show appropriate examples when the question is shown
 	When the question is shown, show the English side of the
 	examples when it is a meaning question, Japanese side of the
-	example when it is a Kanji question and Japanese with
-	header if it is a reading question.  Fill in the rest of
-	the details when the answer is shown.
+	example when it is a Kanji question or reading question.  
+	Fill in the rest of	the details when the answer is shown.
 
 	:PROPERTIES:
 	:JellyBeans: 1
-	:Done: 0
+	:Done: 1
 	:END:
 
 *** TODO Allow users to update their drills
