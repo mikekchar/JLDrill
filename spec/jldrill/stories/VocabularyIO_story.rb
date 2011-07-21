@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# encoding: utf-8
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/contexts/EditVocabularyContext'
 require 'jldrill/model/items/Vocabulary'

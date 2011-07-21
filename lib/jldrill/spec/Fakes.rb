@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'Context/Context'
 require 'Context/View'
 require 'Context/Bridge'

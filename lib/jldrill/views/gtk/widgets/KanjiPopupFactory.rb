@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/views/gtk/widgets/PopupFactory'
 require 'gtk2'
 

@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/contexts/GetFilenameContext'
 require 'Context/Bridge'
 require 'jldrill/views/test/FilenameSelectorView'

@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Kernel
 
 	# Requires all the files that match the glob in the

@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'Context/Views/PageView'
 require 'Context/Gtk/Widget'
 require 'Context/Views/Gtk/Widgets/MainWindow'

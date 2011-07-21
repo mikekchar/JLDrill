@@ -1,4 +1,4 @@
-
+# encoding: utf-8
 module Context
 
     # The Context is the Presenter in the Model, View, Presentor (MVP)

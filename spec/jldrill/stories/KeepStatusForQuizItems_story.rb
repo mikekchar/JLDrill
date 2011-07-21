@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/model/Bin'
 require 'jldrill/model/Quiz/Schedule'
 require 'jldrill/model/Item'

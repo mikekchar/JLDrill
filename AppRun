@@ -4,8 +4,8 @@ require 'shell'
 installDir = File.expand_path(File.dirname(__FILE__))
 argList = ARGV.join(" ")
 if !argList.empty?
-    exec("ruby", "-KO", "-I#{installDir}/lib", "-rrubygems", "#{installDir}/bin/jldrill", argList)
+    exec("ruby1.9.1", "-KO", "-I#{installDir}/lib", "-rrubygems", "#{installDir}/bin/jldrill", argList)
 else
-    exec("ruby", "-KO", "-I#{installDir}/lib", "-rrubygems", "#{installDir}/bin/jldrill")
+    exec("ruby1.9.1", "-KO", "-I#{installDir}/lib", "-rrubygems", "#{installDir}/bin/jldrill")
 end
 

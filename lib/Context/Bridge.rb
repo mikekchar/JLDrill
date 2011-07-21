@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Context
 
     # This class is used to specify the namespace for a symbol

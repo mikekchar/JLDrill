@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'Context/Bridge'
 require 'jldrill/contexts/MainContext'
 require 'jldrill/views/gtk/MainWindowView'

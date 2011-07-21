@@ -1,3 +1,4 @@
+# encoding: utf-8
 require "jldrill/model/items/StringField"
 require "jldrill/model/items/ListField"
 require "jldrill/model/items/ItemFactory"
@@ -16,7 +17,7 @@ module JLDrill
         MARKERS_RE = /^Markers: (.*)/
         QUOTE_RE = /["]/
         RETURN_RE = /[\n]/
-        TO_A_RE = Regexp.new("",nil,'U')
+        TO_A_RE = Regexp.new("",nil)
 
         def initialize(kanji=nil, reading=nil, definitions=nil, 
                        markers=nil, hint=nil, position=nil)

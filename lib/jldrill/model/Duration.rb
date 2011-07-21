@@ -1,3 +1,4 @@
+# encoding: utf-8
 module JLDrill
 
     # Holds a duration in seconds.  Note that this is an integer value

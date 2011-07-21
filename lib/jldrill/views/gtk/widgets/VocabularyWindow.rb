@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'Context/Gtk/Widget'
 require 'jldrill/oldUI/GtkVocabView'
 require 'jldrill/views/gtk/widgets/SearchTable'

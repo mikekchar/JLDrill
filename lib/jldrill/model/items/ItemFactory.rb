@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/model/items/ItemType'
 require 'jldrill/model/items/Vocabulary'
 require 'jldrill/model/items/JWord'

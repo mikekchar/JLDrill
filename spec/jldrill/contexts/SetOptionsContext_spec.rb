@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/contexts/SetOptionsContext'
 require 'Context/Bridge'
 require 'jldrill/model/Quiz/Quiz'

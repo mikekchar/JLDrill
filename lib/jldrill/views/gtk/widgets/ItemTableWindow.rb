@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'Context/Gtk/Widget'
 require 'jldrill/views/gtk/widgets/ItemTable'
 require 'gtk2'

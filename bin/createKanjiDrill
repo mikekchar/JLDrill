@@ -1,5 +1,6 @@
 #!/usr/bin/ruby
 
+# encoding: utf-8
 # This script creates a drill file containing all the Jouyou kanji
 # ordered by grade and stroke order.
 

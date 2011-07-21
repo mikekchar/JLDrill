@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
 require 'jldrill/views/test/CommandView'

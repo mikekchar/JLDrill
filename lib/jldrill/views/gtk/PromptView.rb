@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/views/gtk/widgets/PromptWindow'
 require 'jldrill/contexts/PromptContext'
 require 'gtk2'

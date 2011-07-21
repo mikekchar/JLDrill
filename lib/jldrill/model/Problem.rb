@@ -1,3 +1,4 @@
+# encoding: utf-8
 module JLDrill
 
     # Represents a single question/answer pair in a quiz

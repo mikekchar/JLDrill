@@ -1,3 +1,4 @@
+# encoding: utf-8
 module JLDrill
     # Holds a group of items that are at the same level.
     class Bin

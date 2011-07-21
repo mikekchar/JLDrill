@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'Context/Spec'
 require 'Context/require_all'
 require 'Context/Context'

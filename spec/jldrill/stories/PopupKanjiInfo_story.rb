@@ -1,3 +1,4 @@
+# encoding: utf-8
 #require 'jldrill/contexts/DisplayProblemContext'
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/views/test/CommandView'

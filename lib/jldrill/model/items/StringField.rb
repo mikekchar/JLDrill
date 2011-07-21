@@ -1,3 +1,4 @@
+# encoding: utf-8
 require "jldrill/model/items/Field"
 
 # Represents a string type Field in a Vocabulary

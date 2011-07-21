@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'Context/Widget'
 require 'Context/Log'
 require 'gtk2'

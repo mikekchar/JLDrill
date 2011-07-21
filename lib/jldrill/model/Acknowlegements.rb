@@ -1,3 +1,4 @@
+# encoding: utf-8
 
 module JLDrill
     # Acknowlegements to those who have helped (knowingly or

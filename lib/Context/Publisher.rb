@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Context
 
     # Publisher implements an observer pattern.

@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/model/DataFile'
 
 module JLDrill
@@ -5,8 +6,8 @@ module JLDrill
     # A radical (part of a kanji character).
 	class Radical
 
-        RADICAL_RE = Regexp.new('(\S)\t(\S*)\t(\S*)\t([^\t]*)\t(\S+)?', nil, 'U')
-        TO_A_RE = Regexp.new("",nil,'U')
+        RADICAL_RE = Regexp.new('(\S)\t(\S*)\t(\S*)\t([^\t]*)\t(\S+)?', nil)
+        TO_A_RE = Regexp.new("",nil)
 	
 		attr_reader :radical, :reading, :altGlyphs, :meaning, :contents
 		attr_writer :radical, :reading, :altGlyphs, :meaning, :contents

@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/model/items/ItemFactory'
 require 'jldrill/model/ItemStatus'
 require 'jldrill/model/ProblemStatus'

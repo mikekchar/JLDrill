@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/contexts/MainContext.rb'
 
 module JLDrill::Test

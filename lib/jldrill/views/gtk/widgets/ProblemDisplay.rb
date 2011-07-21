@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/views/gtk/widgets/ProblemPane'
 require 'Context/Views/Gtk/Widgets/VBox'
 require 'jldrill/views/gtk/widgets/KanjiPopupFactory'

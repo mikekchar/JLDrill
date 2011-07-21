@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/views/gtk/widgets/ItemTableWindow'
 require 'jldrill/contexts/ShowAllVocabularyContext'
 require 'gtk2'

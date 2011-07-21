@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# encoding: utf-8
 require 'jldrill/model/items/JWord'
 
 module JLDrill

@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/contexts/AddNewVocabularyContext'
 require 'jldrill/views/gtk/QuizStatusView'
 require 'jldrill/views/gtk/VocabularyView'

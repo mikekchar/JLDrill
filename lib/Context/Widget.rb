@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Context
     # This is the Widget mixin for Context.  If you wish to be able
     # to add to, add, or remove a widget inside a View using context,

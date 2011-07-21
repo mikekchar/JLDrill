@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/contexts/ShowInfoContext'
 require 'jldrill/views/gtk/widgets/InfoWindow'
 require 'gtk2'

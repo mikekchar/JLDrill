@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Context
 
 	# This is the abstract view class

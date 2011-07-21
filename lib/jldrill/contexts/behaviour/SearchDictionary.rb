@@ -1,3 +1,4 @@
+# encoding: utf-8
 module JLDrill::Behaviour
     # Provides the ability to search the kanji and JEDictionary.
     module SearchDictionary

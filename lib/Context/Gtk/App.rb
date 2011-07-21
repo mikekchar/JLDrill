@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'Context/Bridge'
 require 'Context/Context'
 require 'gtk2'

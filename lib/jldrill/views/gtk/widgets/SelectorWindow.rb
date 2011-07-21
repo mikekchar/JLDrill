@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'Context/Gtk/Widget'
 require 'jldrill/contexts/GetFilenameContext'
 require 'gtk2'

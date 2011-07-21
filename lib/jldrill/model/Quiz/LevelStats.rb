@@ -1,3 +1,4 @@
+# encoding: utf-8
 module JLDrill
     # Keeps track of statistics for a particular level
     # @num is the number of tries, @correct is the number that

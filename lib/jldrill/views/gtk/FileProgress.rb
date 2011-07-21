@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/contexts/FileProgressContext'
 require 'jldrill/views/gtk/widgets/ProgressBar'
 require 'gtk2'

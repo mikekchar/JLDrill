@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/views/gtk/widgets/ExampleWindow'
 require 'jldrill/contexts/ShowExamplesContext'
 require 'gtk2'

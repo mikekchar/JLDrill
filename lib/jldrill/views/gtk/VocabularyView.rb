@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/views/gtk/widgets/VocabularyWindow'
 require 'jldrill/contexts/ModifyVocabularyContext'
 require 'gtk2'

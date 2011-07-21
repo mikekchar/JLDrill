@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/contexts/DisplayQuizStatusContext'
 require 'jldrill/views/gtk/QuizStatusView'
 require 'jldrill/spec/StoryMemento'

@@ -1,7 +1,8 @@
+# encoding: utf-8
 module JLDrill
 
     class StartsWith
-        TO_A_RE = Regexp.new("",nil,'U')
+        TO_A_RE = Regexp.new("",nil)
 
         def initialize(string)
             @startsWithArray = string.split(TO_A_RE)

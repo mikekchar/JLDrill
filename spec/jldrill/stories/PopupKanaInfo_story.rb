@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/model/moji/Kana'
 require 'jldrill/model/Config'

@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'gtk2'
 require 'jldrill/model/items/Vocabulary'
 

@@ -1,4 +1,5 @@
 #!/usr/bin/ruby
+# encoding: utf-8
 require 'Context/Gtk/App'
 require 'Context/require_all'
 require 'jldrill/contexts/MainContext'

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# encoding: utf-8
 
 require 'jldrill/model/items/JWord'
 require 'jldrill/model/DataFile'
@@ -21,7 +21,7 @@ module JLDrill
         LINE_RE = Regexp.new(LINE_RE_TEXT)
         GET_JWORD_RE = Regexp.new('^([^\[\s]*)\s+(\[(.*)\]\s+)?')
         KANA_RE = /（(.*)）/
-        FIRST_CHAR_RE = Regexp.new("^(.)", "U")
+        FIRST_CHAR_RE = Regexp.new("^(.)")
 
         def initialize
             super
@@ -47,7 +47,7 @@ module JLDrill
 
         # Returns true if the line at the given index is UTF8
         def isUTF8?(index)
-            !Kconv.isutf8(@lines[index]).nil?
+            @lines[index].valid_encoding?
         end
 
         def getMeaning(position)
@@ -89,7 +89,7 @@ module JLDrill
 
         # modifies the line at position to be UTF8
         def toUTF8(position)
-            lines[position] = NKF.nkf("-Ewxm0", lines[position])
+            lines[position] = lines[position].encode('UTF-8')
         end
 
         # Read all the lines into the buffer.
@@ -124,6 +124,8 @@ module JLDrill
 
         def parseLine(index)
             if !isUTF8?(index)
+                # Assume it is EUC
+                lines[index].force_encoding('EUC-JP')
                 toUTF8(index)
             end
             if lines[index] =~ GET_JWORD_RE

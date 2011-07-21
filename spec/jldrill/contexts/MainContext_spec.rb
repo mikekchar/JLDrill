@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/contexts/MainContext'
 require 'Context/Bridge'
 require 'jldrill/spec/Fakes'

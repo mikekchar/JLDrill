@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/views/gtk/widgets/QuizStatusBar'
 require 'jldrill/contexts/DisplayQuizStatusContext'
 require 'gtk2'

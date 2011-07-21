@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Context
 
     # Implements some rudimentary logging for context.

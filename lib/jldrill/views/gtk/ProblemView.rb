@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/contexts/DisplayProblemContext'
 require 'jldrill/views/gtk/widgets/ProblemDisplay'
 require 'gtk2'

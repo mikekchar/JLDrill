@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'Context/Views/Gtk/Widgets/VBox'
 require 'Context/View'
 require 'gtk2'

@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/model/Config'
 require 'jldrill/views/gtk/widgets/SelectorWindow'
 require 'jldrill/contexts/GetFilenameContext'

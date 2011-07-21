@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Represents a Field in a Vocabulary
 # This is an abstract class.  The concrete class must implement:
 #
@@ -14,8 +15,8 @@ module JLDrill
         QUOTE_RE = /["]/
         RETURN_RE = /[\n]/
         SLASH_RE = /[\/]/
-        ESCAPED_COMMA_RE = Regexp.new("\\,", nil, "U")
-        ESCAPED_SLASH_RE = Regexp.new("\\/", nil, "U")
+        ESCAPED_COMMA_RE = Regexp.new("\\,", nil)
+        ESCAPED_SLASH_RE = Regexp.new("\\/", nil)
 
         def initialize(name)
             @name = name

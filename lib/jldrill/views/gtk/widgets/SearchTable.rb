@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/views/gtk/widgets/ItemTable'
 require 'jldrill/model/items/ItemFactory'
 require 'jldrill/model/items/JWord'

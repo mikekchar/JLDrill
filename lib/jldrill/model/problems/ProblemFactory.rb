@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/model/Problem'
 require 'jldrill/model/problems/ReadingProblem'
 require 'jldrill/model/problems/KanjiProblem'

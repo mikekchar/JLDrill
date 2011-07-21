@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/views/gtk/widgets/StatisticsWindow'
 require 'jldrill/contexts/ShowStatisticsContext'
 require 'jldrill/model/Quiz/Quiz'

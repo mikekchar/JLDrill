@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'jldrill/views/gtk/widgets/OptionsWindow'
 require 'jldrill/contexts/SetOptionsContext'
 require 'gtk2'

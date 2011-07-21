@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# encoding: utf-8
 require 'jldrill/model/Bin'
 require 'jldrill/model/items/Vocabulary'
 require 'jldrill/model/items/JEDictionary'

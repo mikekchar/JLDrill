@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'Context/Gtk/Widget'
 require 'Context/Views/Gtk/Widgets/MainWindow'
 require 'Context/Views/Gtk/Widgets/VBox'
