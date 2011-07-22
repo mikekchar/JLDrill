@@ -1,7 +1,6 @@
 # encoding: utf-8
 require "jldrill/model/items/StringField"
 require "jldrill/model/items/ListField"
-require "jldrill/model/items/ItemFactory"
 
 # Class file for Japanese vocabulary
 # Currently geared towards edict, but that might change
@@ -18,6 +17,10 @@ module JLDrill
         QUOTE_RE = /["]/
         RETURN_RE = /[\n]/
         TO_A_RE = Regexp.new("",nil)
+
+        Headings = [["kanji", "Kanji", 90],
+                    ["reading", "Reading", 130],
+                    ["definitions", "Meaning", 230]]
 
         def initialize(kanji=nil, reading=nil, definitions=nil, 
                        markers=nil, hint=nil, position=nil)
@@ -39,11 +42,6 @@ module JLDrill
         # that are not saveable.  This is because of my cheezy implementation.
         def clone
             Vocabulary.create(self.to_s)
-        end
-
-        # Return the JLDrill ItemType for this item
-        def itemType
-            return ItemFactory::find(self.class)
         end
 
         # True if the two vocabulary are discussing the same word

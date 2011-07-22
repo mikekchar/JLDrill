@@ -6,8 +6,7 @@ module JLDrill::Gtk
 
         def initialize(itemList, itemType, &selectAction)
             super()
-            @itemType = itemType
-            @headings = @itemType.headings
+            @headings = itemType.const_get(:Headings)
             @selectAction = selectAction
             self.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
             self.shadow_type = Gtk::SHADOW_IN

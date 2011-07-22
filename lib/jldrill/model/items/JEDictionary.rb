@@ -26,6 +26,7 @@ module JLDrill
         def initialize
             super
             @stepSize = 1000
+            @isEUC = false
         end
 
         # Reset the dictionary back to empty
@@ -33,6 +34,7 @@ module JLDrill
             @jWords = []
             @readingHash = {}
             @kanjiHash = {}
+            @isEUC = false
             super
         end
 
@@ -46,8 +48,12 @@ module JLDrill
         end
 
         # Returns true if the line at the given index is UTF8
+        # Returns false otherwise or if any previously tested line wasn't UTF8
         def isUTF8?(index)
-            @lines[index].valid_encoding?
+            if !@isEUC
+                @isEUC = !(@lines[index].valid_encoding?)
+            end
+            return !@isEUC
         end
 
         def getMeaning(position)
@@ -87,11 +93,6 @@ module JLDrill
             return retVal                        
         end
 
-        # modifies the line at position to be UTF8
-        def toUTF8(position)
-            lines[position] = lines[position].encode('UTF-8')
-        end
-
         # Read all the lines into the buffer.
         # This method also converts them the UTF8
         def readLines
@@ -125,7 +126,7 @@ module JLDrill
             if !isUTF8?(index)
                 # Assume it is EUC
                 lines[index].force_encoding('EUC-JP')
-                toUTF8(index)
+                lines[index].encode!('UTF-8')
             end
             if lines[index] =~ GET_JWORD_RE
                 word = JWord.new

@@ -1,14 +1,16 @@
 # encoding: utf-8
 
-require 'jldrill/model/items/ItemFactory'
-
 module JLDrill
 
     # A JWord is a Japanese Word in a Japanese to English dictionary.
     # It has a reference to a DictionaryLocation and may
     # have a cached Meaning
 	class JWord
-        attr_reader :kanji, :reading, :dictionary, :position, :itemType,
+        Headings = [["kanji", "Kanji", 90],
+                    ["reading", "Reading", 130],
+                    ["toVocab.definitions", "Meaning", 230]]
+
+        attr_reader :kanji, :reading, :dictionary, :position, 
             :relevance
         attr_writer :kanji, :reading, :dictionary, :position,
             :relevance
@@ -18,7 +20,6 @@ module JLDrill
             @reading = ""
             @dictionary = nil
             @position = -1
-            @itemType = ItemFactory::find(self.class)
             @vocab = nil
             @relevance = 0 
         end

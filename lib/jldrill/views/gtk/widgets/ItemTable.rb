@@ -2,7 +2,6 @@
 require 'gtk2'
 require 'jldrill/views/gtk/widgets/WordTable.rb'
 require 'jldrill/model/Item'
-require 'jldrill/model/items/ItemFactory'
 require 'jldrill/model/items/Vocabulary'
 
 
@@ -10,8 +9,7 @@ module JLDrill::Gtk
     class ItemTable < WordTable
 
         def initialize(itemList, &selectAction)
-            super(itemList, JLDrill::ItemFactory.find(JLDrill::Vocabulary), 
-                  &selectAction)
+            super(itemList, JLDrill::Vocabulary, &selectAction)
         end
 
         def searchEqual(model, column, key, iter)

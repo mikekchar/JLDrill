@@ -1,5 +1,4 @@
 # encoding: utf-8
-require 'jldrill/model/items/ItemFactory'
 require 'jldrill/model/ItemStatus'
 require 'jldrill/model/ProblemStatus'
 require 'jldrill/model/Quiz/ItemStats'
@@ -38,7 +37,7 @@ module JLDrill
                 @contents = ""
                 @hash = "".hash
             else
-                @itemType = item.itemType
+                @itemType = item.class
                 @contents = item.to_s
                 @hash = item.hash
             end
@@ -85,7 +84,7 @@ module JLDrill
 
         # Set the value of the item by parsing the string
         def parse(string)
-            @itemType = ItemFactory::find(Vocabulary)
+            @itemType = JLDrill::Vocabulary
             @contents = string
             parseLine(@contents)
             @hash = self.to_o.hash
