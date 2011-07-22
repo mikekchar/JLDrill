@@ -1,7 +1,6 @@
 require 'rake'
 require 'rubygems'
-# I haven't updated to the latest version of rspec yet
-gem 'rspec', "= 1.3.1"
+require 'rspec'
 require 'spec/rake/spectask'
 # Debian forces the installation of a very old version of rdoc
 # in /usr/lib/ruby if you install rubygems.  So I need to override
@@ -11,7 +10,7 @@ require 'rake/rdoctask'
 require 'rake/testtask'
 require 'rake/gempackagetask'
 require 'webgen/webgentask'
-require 'lib/jldrill/Version'
+require './lib/jldrill/Version'
 require 'fileutils'
 
 #======================== Setup ================================
