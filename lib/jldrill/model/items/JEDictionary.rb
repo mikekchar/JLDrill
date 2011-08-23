@@ -255,6 +255,9 @@ module JLDrill
 
         # Return true if the dictionary contains this vocabulary.
         def include?(vocabulary)
+            if vocabulary.reading.nil?
+                return false
+            end
             return findReading(vocabulary.reading).any? do |word|
                 word.toVocab.eql?(vocabulary)
             end
