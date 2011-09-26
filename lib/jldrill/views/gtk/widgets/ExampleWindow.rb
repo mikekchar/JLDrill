@@ -142,13 +142,21 @@ module JLDrill::Gtk
             return section
         end
 
+        def getTag(example)
+            if (example.checked) 
+                tag = "checked"
+            else
+                tag = "normal"
+            end
+        end
+
         def updateEnglishOnly(examples)
             @contents.buffer.text = ""
             if !examples.nil?
                 section = -2
                 sortExamples(examples).each do |example|
                     section = insertHeader(section, example)
-                    insert(example.englishTo_s + "\n", "normal")
+                    insert(example.englishTo_s + "\n", getTag(example))
                     insertVSpace
                 end
             end
@@ -160,7 +168,7 @@ module JLDrill::Gtk
                 section = -2
                 sortExamples(examples).each do |example|
                     section = insertHeader(section, example)
-                    insert(example.japaneseTo_s + "\n", "normal")
+                    insert(example.japaneseTo_s + "\n", getTag(example))
                     insertVSpace
                 end
             end
@@ -172,7 +180,7 @@ module JLDrill::Gtk
                 section = -2
                 sortExamples(examples).each do |example|
                     section = insertHeader(section, example)
-                    insert(example.to_s + "\n", "normal")
+                    insert(example.to_s + "\n", getTag(example))
                     insertVSpace
                 end
             end
