@@ -35,8 +35,10 @@ module JLDrill::Gtk
 
         def createTags
             @contents.buffer.create_tag("normal", 
+                               "size" => 12 * Pango::SCALE,
                                "background" => "#ffffff")
             @contents.buffer.create_tag("checked", 
+                               "size" => 12 * Pango::SCALE,
                                "background" => "#e0f0ff")
             @contents.buffer.create_tag("h1",
                                         "size" => 20 * Pango::SCALE,
