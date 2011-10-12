@@ -26,7 +26,6 @@ module JLDrill
         def initialize
             super
             @stepSize = 1000
-            @isEUC = false
         end
 
         # Reset the dictionary back to empty
@@ -34,7 +33,6 @@ module JLDrill
             @jWords = []
             @readingHash = {}
             @kanjiHash = {}
-            @isEUC = false
             super
         end
 
@@ -45,15 +43,6 @@ module JLDrill
 
         def length
             return dataSize
-        end
-
-        # Returns true if the line at the given index is UTF8
-        # Returns false otherwise or if any previously tested line wasn't UTF8
-        def isUTF8?(index)
-            if !@isEUC
-                @isEUC = !(@lines[index].valid_encoding?)
-            end
-            return !@isEUC
         end
 
         def getMeaning(position)

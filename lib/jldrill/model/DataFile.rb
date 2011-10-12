@@ -73,26 +73,18 @@ module JLDrill
 			return retVal
 		end
 
-        def findEncoding
-            print "got here!\n"
-            encoding = "EUC-JP:UTF-8"
-            buffer = IO.read(@file, 1000)
-            print buffer + "\n\n"
+        # Make sure the encoding is correct and split the lines
+        def createLines(buffer)
             if (!buffer.valid_encoding?)
-                print "EUC File!\n"
-                encoding = "EUC-JP:UTF-8"
+                buffer = NKF.nkf("-Ewxm0", buffer)
             end
-            return encoding
+            @lines = buffer.split("\n")
         end
 
         # Read the file into memory.  This is done before parsing
         def readLines
             begin
-                buffer = IO.read(@file)
-                if (!buffer.valid_encoding?)
-                    buffer = NKF.nkf("-Ewxm0", buffer)
-                end
-                @lines = buffer.split("\n")
+                createLines(IO.read(@file))
             rescue
                 Context::Log::warning("JLDrill::DataFile",
                                       "Could not load #{@file}.")

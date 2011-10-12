@@ -19,7 +19,7 @@ module JLDrill::ParseEdictEntriesOnDemand
 
         it "should find an entry in a JEDictionary" do
             utf = JLDrill::JEDictionary.new
-            utf.lines = ["雨 [あめ] /(n) rain/(P)/"]
+            utf.createLines("雨 [あめ] /(n) rain/(P)/")
             utf.length.should be(0)
             utf.parse
             utf.length.should be(1)
@@ -32,14 +32,14 @@ module JLDrill::ParseEdictEntriesOnDemand
 
         it "should be able to find an entry in an EUC edict file" do
             utf = JLDrill::JEDictionary.new
-            utf.lines = ["雨 [あめ] /(n) rain/(P)/"]
+            utf.createLines("雨 [あめ] /(n) rain/(P)/")
             utf.length.should be(0)
             utf.parse
             utf.length.should be(1)
             ame = utf.vocab(0)
             ame.reading.should eql("あめ")
             euc = JLDrill::JEDictionary.new
-            euc.lines = ["\261\253 [\244\242\244\341] /(n) rain/(P)/"]
+            euc.createLines("\261\253 [\244\242\244\341] /(n) rain/(P)/")
             euc.parse
             euc.length.should be(1)
             euc.vocab(0).should eql(ame)
@@ -56,10 +56,10 @@ module JLDrill::ParseEdictEntriesOnDemand
 
         it "should be able to find an entries in a JEDictionary" do
             edict = JLDrill::JEDictionary.new
-            edict.lines = ["あ /hiragana a/",
-                         "雨 [あめ] /(n) rain/(P)/",
-                         "雨降り [あめふり] /(n) in the rain/(P)/",
-                         "雨降らし [あめふらし] /(n) sea hare/"]
+            edict.createLines("あ /hiragana a/\n" +
+                         "雨 [あめ] /(n) rain/(P)/\n" +
+                         "雨降り [あめふり] /(n) in the rain/(P)/\n" +
+                         "雨降らし [あめふらし] /(n) sea hare/")
             edict.parse
             edict.length.should be(4)
             edict.vocab(0).reading.should eql("あ")
@@ -86,7 +86,7 @@ module JLDrill::ParseEdictEntriesOnDemand
         it "should return nil from vocab() when index is out of range" do
             edict = JLDrill::JEDictionary.new
             edict.vocab(5).should be_nil
-            edict.lines = ["雨 [あめ] /(n) rain/(P)/"]
+            edict.createLines("雨 [あめ] /(n) rain/(P)/")
             edict.parse
             edict.length.should be(1)
             edict.vocab(5).should be_nil
@@ -97,9 +97,9 @@ module JLDrill::ParseEdictEntriesOnDemand
             quiz.length.should be(0)
             quiz.needsSave?.should be(false)
             edict = JLDrill::JEDictionary.new
-            edict.lines = ["あ /hiragana a/",
-                         "雨 [あめ] /(n) rain/(P)/",
-                         "雨降り [あめふり] /(n) in the rain/(P)/"]
+            edict.createLines("あ /hiragana a/\n" +
+                         "雨 [あめ] /(n) rain/(P)/\n" +
+                         "雨降り [あめふり] /(n) in the rain/(P)/")
             edict.parse
             quiz.loadFromDict(edict)
             quiz.length.should be(3)
@@ -110,7 +110,7 @@ module JLDrill::ParseEdictEntriesOnDemand
         it "should be able to parse hacked JLPT files" do
             # Some of the entries in the JLPT files look like this
             edict = JLDrill::JEDictionary.new
-            edict.lines = ["あ [（平仮名）] /hiragana a/"]
+            edict.createLines("あ [（平仮名）] /hiragana a/")
             edict.parse
             edict.length.should be(1)
             a = edict.vocab(0)
