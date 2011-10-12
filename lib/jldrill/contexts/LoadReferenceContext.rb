@@ -49,7 +49,6 @@ module JLDrill
         end
 
         def loadReference(reference, deinflect, filename)
-            #Profiler__::start_profile
             @loadFileContext.onExit do
                loadDeinflection(deinflect, getDeinflectionFilename) 
             end

@@ -94,7 +94,6 @@ module JLDrill
         end
 
         # Read all the lines into the buffer.
-        # This method also converts them the UTF8
         def readLines
             super
         end
@@ -123,11 +122,6 @@ module JLDrill
         end
 
         def parseLine(index)
-            if !isUTF8?(index)
-                # Assume it is EUC
-                lines[index].force_encoding('EUC-JP')
-                lines[index].encode!('UTF-8')
-            end
             if lines[index] =~ GET_JWORD_RE
                 word = JWord.new
                 word.kanji = $1
