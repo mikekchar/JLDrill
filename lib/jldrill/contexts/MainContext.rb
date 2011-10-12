@@ -201,13 +201,14 @@ module JLDrill
 		
         def createNew
             promptForSaveAnd do
-                @quiz.setup
+                @quiz.reset
                 # We need to resubscribe to the options in the new quiz
                 # and realize that the options may have changed.
                 @quiz.options.subscribe(self)
                 optionsUpdated(@quiz.options)
                 # New quizes don't need to be saved.
                 @quiz.setNeedsSave(false)
+                @quiz.updateLoad
             end
         end
 
