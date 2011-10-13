@@ -7,13 +7,14 @@ module JLDrill
     # for having a file which can be read in the background
     # in JLDrill.
     class DataFile
-        attr_reader :file, :lines, :parsed, :publisher, :stepSize
-        attr_writer :lines, :stepSize
+        attr_reader :file, :lines, :parsed, :publisher, :stepSize, :utf8
+        attr_writer :lines, :stepSize, :utf8
 
         def initialize
             @publisher = Context::Publisher.new(self)
             # Default to reporting every 100 lines
             @stepSize = 100
+            @utf8 = nil
             self.reset
         end
 
@@ -73,9 +74,21 @@ module JLDrill
 			return retVal
 		end
 
+        # Returns true if the string is UTF8 and false if not
+        # This can be overriden by setting the utf8 flag to true
+        # or false.  This is for files where the autodetection can fail
+        # (with ruby 1.8 the deinflection file fails)
+        def isUTF8?(string)
+            if @utf8.nil?
+                # Ruby 1.8 returns nil while 1.9 returns false if it isn't UTF8
+                @utf8 = (Kconv.isutf8(string) == true)
+            end
+            return @utf8
+        end
+
         # Make sure the encoding is correct and split the lines
         def createLines(buffer)
-            if (!buffer.valid_encoding?)
+            if (!isUTF8?(buffer))
                 buffer = NKF.nkf("-Ewxm0", buffer)
             end
             @lines = buffer.split("\n")

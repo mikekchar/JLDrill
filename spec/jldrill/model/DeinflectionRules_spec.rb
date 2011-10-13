@@ -37,6 +37,7 @@ module JLDrill
             file = DeinflectionRulesFile.new
             file.load(filename)
             file.parse
+            file.utf8.should eql(true)
             file.deinflectionRules.reasons.size.should be(28)
             file.deinflectionRules.rules.size.should be(306)
 
