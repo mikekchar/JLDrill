@@ -198,10 +198,6 @@ module JLDrill
             super
             @deinflectionRules = DeinflectionRules.new
             @stepSize = 20
-
-            # There is a bug in ruby 1.8 where the encoding detection
-            # fails, so we will set it here
-            self.utf8 = true
         end
 
         def dataSize
