@@ -111,6 +111,7 @@ module JLDrill
         def initialize
             super
             @kanaList = KanaList.new
+            self.utf8 = true
         end
 
         def dataSize
