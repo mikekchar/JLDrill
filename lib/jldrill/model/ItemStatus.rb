@@ -41,8 +41,8 @@ module JLDrill
 
         def to_s
             retVal = ""
-            @statuses.each_value do |status|
-                retVal += status.to_s
+            statuses.keys().sort.each do |key|
+                retVal += statuses[key].to_s
             end
             return retVal
         end

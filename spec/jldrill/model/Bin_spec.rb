@@ -7,10 +7,10 @@ module JLDrill
 	describe Bin do
 	
 		before(:each) do
-        	@fileString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/Consecutive: 0/
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/Consecutive: 0/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 3/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/Consecutive: 0/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 4/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/Consecutive: 1/]
+        	@fileString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 3/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 4/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/]
             @strings = @fileString.split("\n")
             @strings.length.should be(4)
             @items = []
@@ -99,10 +99,10 @@ module JLDrill
 		end
 		
 		it "should output itself in save format" do
-		contentsString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/Consecutive: 0/
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/Consecutive: 0/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 3/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/Consecutive: 0/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 4/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/Consecutive: 1/]
+		contentsString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 3/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 4/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/]
 		    test_pushAll
 		    @bin.to_s.should eql("My name\n" + contentsString + "\n")
 		end
@@ -192,7 +192,7 @@ module JLDrill
         it "should be able to tell if an item exists in the bin" do
             test_pushAll
             @bin.exists?(@bin[0]).should be(true)
-            @bin.contain?(Vocabulary.create("/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Position: 1/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/Consecutive: 0/")).should be(false)
+            @bin.contain?(Vocabulary.create("/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/")).should be(false)
         end
 	end
 end

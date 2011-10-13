@@ -14,16 +14,16 @@ module JLDrill::VocabularyIsStoredInItems
 
     describe Story.stepName("Items can hold Vocabulary") do
         it "should be able to create an Item from a Vocabulary" do
-            vocabString = "/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 2/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/Consecutive: 1/\n"
+            vocabString = "/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 2/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/\n"
             item = JLDrill::Item.create(vocabString)
             item.to_s.should eql(vocabString)
         end
 
         it "should be able to see if items are equal" do
             # Note: This does not check status
-            v1 = "/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 2/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/Consecutive: 1/\n"
-            v2 = "/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 3/MeaningProblem/Score: 2/Level: 1/Difficulty: 4/Consecutive: 0/\n"
-            v3 = "/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Position: 2/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/Consecutive: 1/\n"
+            v1 = "/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 2/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/\n"
+            v2 = "/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 3/Consecutive: 0/MeaningProblem/Score: 2/Level: 1/Difficulty: 4/\n"
+            v3 = "/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Position: 2/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/\n"
 
             vocab1 = JLDrill::Vocabulary.create(v1)
             vocab2 = JLDrill::Vocabulary.create(v2)
