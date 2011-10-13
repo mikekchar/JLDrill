@@ -7,13 +7,14 @@ module JLDrill
     # for having a file which can be read in the background
     # in JLDrill.
     class DataFile
-        attr_reader :file, :lines, :parsed, :publisher, :stepSize
+        attr_reader :file, :lines, :parsed, :publisher, :stepSize, :encoding
         attr_writer :lines, :stepSize
 
         def initialize
             @publisher = Context::Publisher.new(self)
             # Default to reporting every 100 lines
             @stepSize = 100
+            @encoding = nil
             self.reset
         end
 
@@ -73,17 +74,24 @@ module JLDrill
 			return retVal
 		end
 
+        # Try to determine the encoding from the first 999 characters
+        # of the string.  By keeping it to a multiple of 3 we avoid
+        # splitting the encodings for UTF8 strings.  I can't help but
+        # think that this function is prone to failure since UTF8 characters
+        # are variable length, but I can't think of a better idea.
+        # Note this problem will only manifest itself on ruby 1.8
+        def findEncoding(buffer)
+            encoding = Kconv.guess(buffer[0..998])
+            return encoding
+        end
+
         # Make sure the encoding is correct and split the lines
         def createLines(buffer)
-            begin
-                # This will throw an exception if the encoding is wrong
-                @lines = buffer.split("\n")
-            rescue
-                # Assume that it is EUC, change to UTF-8 and then
-                # resplit.  
-                buffer = NKF.nkf("-Ewxm0", buffer)
-                @lines = buffer.split("\n")
+            @encoding = findEncoding(buffer)
+            if (@encoding != Kconv::UTF8)
+                buffer = Kconv.kconv(buffer, Kconv::UTF8, @encoding)
             end
+            @lines = buffer.split("\n")
         end
 
         # Read the file into memory.  This is done before parsing

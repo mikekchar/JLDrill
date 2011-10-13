@@ -11,6 +11,7 @@ module JLDrill
 			kf.lines.size.should be(0)
 			kf.file = (File.join(Config::DATA_DIR, "tests/kana.dat"))
 			kf.readLines
+            kf.encoding.should eql(Kconv::UTF8)
 			kf.lines.size.should be(100)
 			# Not EOF yet
 			kf.parseChunk(10).should eql(false)

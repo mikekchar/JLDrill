@@ -28,6 +28,16 @@ module JLDrill
             @stepSize = 1000
         end
 
+        # Ruby 1.8 counts in bytes so Japanese characters are 3 characters
+        # long.  Ruby 1.9 counts in characters, so Japanese characters are
+        # 1 character each.  When we are hashing we need to use a Japanese
+        # character for a key.  When creating the slices to search for the
+        # hash key we need to know how many characters to strip off. This
+        # function tells you what that is.
+        def hashSize
+            return "あ".size
+        end
+
         # Reset the dictionary back to empty
         def reset
             @jWords = []
@@ -106,8 +116,8 @@ module JLDrill
         # we can find them quickly.
         def hashWord(word)
             # We will hash on the first character.
-            (@readingHash[word.reading[0]] ||= []).push(word)
-            (@kanjiHash[word.kanji[0]] ||= []).push(word)
+            (@readingHash[word.reading[0..hashSize - 1]] ||= []).push(word)
+            (@kanjiHash[word.kanji[0..hashSize - 1]] ||= []).push(word)
         end
 
         def parseLine(index)
@@ -152,8 +162,8 @@ module JLDrill
 
         # Find the items that may have been hashed with this reading.
         def findBinWithReading(reading)
-            if reading.size >= 1
-                bin = (@readingHash[reading[0]] ||= [])
+            if reading.size >= hashSize
+                bin = (@readingHash[reading[0..hashSize - 1]] ||= [])
             else
                 keys = @readingHash.keys.find_all do |key|
                     key.start_with?(reading)
@@ -168,8 +178,8 @@ module JLDrill
 
         # Find the items that may have been hashed with this kanji.
         def findBinWithKanji(kanji)
-            if kanji.size >= 1
-                bin = (@kanjiHash[kanji[0]] ||= [])
+            if kanji.size >= hashSize
+                bin = (@kanjiHash[kanji[0..hashSize - 1]] ||= [])
             else
                 keys = @kanjiHash.keys.find_all do |key|
                     key.start_with?(kanji)
@@ -185,7 +195,7 @@ module JLDrill
         # Return all the JWords that have a reading starting with reading.
         def findReadingsStartingWith(reading)
             bin = findBinWithReading(reading)
-            if reading.size > 1 
+            if reading.size > hashSize 
                 return bin.find_all do |word|
                     word.reading.start_with?(reading)
                 end
@@ -197,7 +207,7 @@ module JLDrill
         # Return all the JWords that have kanji starting with kanji.
         def findKanjiStartingWith(kanji)
             bin = findBinWithKanji(kanji)
-            if kanji.size > 1 
+            if kanji.size > hashSize 
                 return bin.find_all do |word|
                     word.kanji.start_with?(kanji)
                 end
@@ -250,7 +260,7 @@ module JLDrill
 
         # Return all the words that occur at the begining of reading
         def findReadingsThatStart(reading)
-            findBinWithReading(reading[0]).find_all do |word|
+            findBinWithReading(reading[0..hashSize - 1]).find_all do |word|
                 relevance = word.reading.size
                 if reading.start_with?(word.reading)
                     word.relevance = relevance
@@ -263,7 +273,7 @@ module JLDrill
 
         # Return all the words that occur at the begining of kanji
         def findKanjiThatStart(kanji)
-            findBinWithKanji(kanji[0]).find_all do |word|
+            findBinWithKanji(kanji[0..hashSize - 1]).find_all do |word|
                 relevance = word.kanji.size
                 if kanji.start_with?(word.kanji)
                     word.relevance = relevance

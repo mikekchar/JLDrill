@@ -128,6 +128,7 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
 			tanaka.file = (File.join(JLDrill::Config::DATA_DIR, 
                                      "tests/examples.utf"))
 			tanaka.readLines
+            tanaka.encoding.should eql(Kconv::UTF8)
 			tanaka.lines.size.should be(200)
 			# Not EOF yet
 			tanaka.parseChunk(20).should eql(false)
