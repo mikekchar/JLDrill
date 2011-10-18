@@ -18,10 +18,10 @@ module JLDrill
         attr_reader :jWords
 
         LINE_RE_TEXT = '^([^\[\s]*)\s+(\[(.*)\]\s+)?\/(([^\/]*\/)+)\s*$'
-        LINE_RE = Regexp.new(LINE_RE_TEXT)
-        GET_JWORD_RE = Regexp.new('^([^\[\s]*)\s+(\[(.*)\]\s+)?')
+        LINE_RE = Regexp.new(LINE_RE_TEXT, nil)
+        GET_JWORD_RE = Regexp.new('^([^\[\s]*)\s+(\[(.*)\]\s+)?', nil)
         KANA_RE = /（(.*)）/
-        FIRST_CHAR_RE = Regexp.new("^(.)")
+        FIRST_CHAR_RE = Regexp.new("^(.)", nil)
 
         def initialize
             super

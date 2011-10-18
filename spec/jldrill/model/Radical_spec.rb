@@ -90,4 +90,39 @@ module JLDrill
 		end
 
 	end	
+
+    describe RadicalFile do
+		it "should be able to read the file in chunks" do
+			rf = RadicalFile.new
+			rf.lines.size.should be(0)
+			rf.file = (File.join(Config::DATA_DIR, "dict/rikaichan/radicals.dat"))
+			rf.readLines
+            rf.encoding.should eql(Kconv::UTF8)
+			rf.lines.size.should be(256)
+			# Not EOF yet
+			rf.parseChunk(16).should eql(false)
+			rf.fraction.should eql(1.0/16.0)
+			rf.parseChunk(16).should eql(false)
+			rf.fraction.should eql(2.0/16.0)
+			# Read to the EOF
+			rf.parseChunk(1000).should eql(true)
+
+			# It should dispose of the unparsed lines after parsing
+			rf.fraction.should eql(0.0)
+			rf.lines.should eql([])
+
+			list = rf.radicalList
+			list.should_not be(nil)
+			list.size.should be(256)
+			radicals = list.radicals("一")
+			radicals.size.should be(1)
+			radicals.includesChar?("一").should be(true)
+			radicals = list.radicals("酒")
+			radicals.size.should be(2)
+			radicals.includesChar?("氵").should be(true)
+			radicals.includesChar?("酉").should be(true)
+			radicals.to_s.should eql("酉   ひよみのとり - sake\n氵   さんずい - water\n")
+		end
+    end
+
 end

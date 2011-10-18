@@ -108,7 +108,7 @@ module JLDrill
             def apply(rule)
                 retVal = nil
                 if !last.nil? && !hasReason(rule)
-                    re = Regexp.new("(.*)#{rule.original}")
+                    re = Regexp.new("(.*)#{rule.original}", nil)
                     if re.match(last.dictionary)
                         transform = Transform.new(last.dictionary, $1, rule)
                         retVal = Match.new(transform, self)

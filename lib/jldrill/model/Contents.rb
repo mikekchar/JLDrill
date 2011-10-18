@@ -35,7 +35,7 @@ module JLDrill
         # Adds a new bin to the end of the contents
         def addBin(name)
             @bins.push(Bin.new(name, @bins.length))
-            @res.push(Regexp.new("^#{name}$"))
+            @res.push(Regexp.new("^#{name}$",nil))
         end
         
         # Returns the number items in all the bins

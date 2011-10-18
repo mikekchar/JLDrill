@@ -6,8 +6,8 @@ module JLDrill
     # A radical (part of a kanji character).
 	class Radical
 
-        RADICAL_RE = Regexp.new('(\S)\t(\S*)\t(\S*)\t([^\t]*)\t(\S+)?', nil)
-        TO_A_RE = Regexp.new("",nil)
+        RADICAL_RE = Regexp.new('(\S)\t(\S*)\t(\S*)\t([^\t]*)\t(\S+)?', nil, "u")
+        TO_A_RE = Regexp.new("",nil, "u")
 	
 		attr_reader :radical, :reading, :altGlyphs, :meaning, :contents
 		attr_writer :radical, :reading, :altGlyphs, :meaning, :contents
@@ -30,7 +30,6 @@ module JLDrill
 		
 		def Radical.parse(string)
 			entry = nil
-
 			if string =~ RADICAL_RE
 				radical = $1
 				altGlyphs = Radical.splitChars($2)
