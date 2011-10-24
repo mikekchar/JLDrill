@@ -1,3 +1,9 @@
+jldrill (0.5.2-3) unstable; urgency=low
+
+  * Add support for ruby 1.9
+
+ -- Mike Charlton <mikekchar@gmail.com>  Thu, 20 Oct 2011 10:12:00 +0900
+
 jldrill (0.5.2-2) unstable; urgency=low
 
   * Show statistics for the forgotten set.  Also show only the appropriate

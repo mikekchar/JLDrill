@@ -38,7 +38,7 @@ pkg_files = FileList[
 release_dir = "jldrill-#{JLDrill::VERSION}"
 
 # Revision of the gem file.  Increment this every time you release a gem file.
-gem_revision ="1"
+gem_revision ="3"
 
 # Rubyforge details
 rubyforge_project = "jldrill"
@@ -123,8 +123,6 @@ gem_spec = Gem::Specification.new do |s|
         with inconsistent review schedules.
     EOF
     s.licenses = ['GPL-3']
-    s.required_ruby_version = '~> 1.8.7'
-
 
 	#### Which files are to be included in this gem?
 
@@ -195,7 +193,7 @@ task :clean => [:clobber_package, :clobber_rcov, :clobber_rdoc,
 end
 
 desc "Clean everything, run tests, and build all the documentation."
-task :build => [:clean, :rcov, :rdoc, :web]
+task :build => [:clean, :spec, :rdoc, :web]
 
 desc "Make the release directory"
 task :releaseDir do
