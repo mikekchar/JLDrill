@@ -115,6 +115,8 @@ module JLDrill::Gtk
             retVal.add(options)
             @autoloadDic = Gtk::CheckButton.new("Autoload?")
             retVal.add(@autoloadDic)
+            @chinese = Gtk::CheckButton.new("Chinese")
+            retVal.add(@chinese)
 
             return retVal
         end
@@ -175,6 +177,22 @@ module JLDrill::Gtk
             return @dictionaryName.text
         end
 
+        def language=(value)
+            if (value == "Chinese")
+                @chinese.active = true
+            else
+                @chinese.active = false
+            end
+        end
+
+        def language
+            if (@chinese.active?)
+                return "Chinese"
+            else
+                return "Japanese"
+            end
+        end
+
         def autoloadDic=(value)
             @autoloadDic.active = value
         end
@@ -203,6 +221,7 @@ module JLDrill::Gtk
             else
                 self.dictionaryName = JLDrill::Config::DICTIONARY_NAME
             end
+            self.language = options.language
             self.autoloadDic = options.autoloadDic
             self.forgettingThresh = options.forgettingThresh
         end
@@ -225,6 +244,7 @@ module JLDrill::Gtk
             else
                 @view.options.dictionary = nil
             end
+            @view.options.language = self.language
             @view.options.autoloadDic = self.autoloadDic
             @view.options.forgettingThresh = self.forgettingThresh
         end

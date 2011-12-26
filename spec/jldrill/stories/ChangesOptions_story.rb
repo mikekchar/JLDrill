@@ -110,6 +110,12 @@ module JLDrill::UserChangesOptions
             # Review mode doesn't need saving
             Story.quiz.options.reviewMode = true
             Story.quiz.needsSave.should eql(false)
+
+            # Dictionary Language
+            Story.quiz.options.language = "Chinese"
+            Story.quiz.needsSave.should eql(true)
+            Story.quiz.setNeedsSave(false)
+            Story.quiz.needsSave.should eql(false)
         end
 
         it "shouldn't need to save if the options are changed to their current value" do
@@ -120,15 +126,17 @@ module JLDrill::UserChangesOptions
             Story.quiz.needsSave.should eql(false)
             Story.quiz.options.introThresh = 10
             Story.quiz.needsSave.should eql(false)
+            Story.quiz.options.language = "Japanese"
+            Story.quiz.needsSave.should eql(false)
         end
 
         it "should load a file with different options" do
             optionsString = "Random Order\n" +
                 "Promotion Threshold: 4\n" +
                 "Introduction Threshold: 20\n" +
+                "Language: Chinese\n" +
                 "Review Meaning\n" +
-                "Review Kanji\n"# +
-#                "Autoload Dictionary\n"
+                "Review Kanji\n" 
             fileString = Story.sampleQuiz.header + Story.sampleQuiz.info + "\n" +
                 optionsString.chop + Story.sampleQuiz.resetVocab +
                 "Fair\nGood\nExcellent\n"
@@ -137,7 +145,7 @@ module JLDrill::UserChangesOptions
             Story.quiz.options.randomOrder.should eql(true)
             Story.quiz.options.promoteThresh.should eql(4)
             Story.quiz.options.introThresh.should eql(20)
-#            Story.quiz.options.autoloadDic.should eql(true)
+            Story.quiz.options.language.should eql("Chinese")
         end
 
         it "should be able to assign the options to another options object" do
@@ -196,12 +204,12 @@ module JLDrill::UserChangesOptions
             modelString = "Story.mainContext.quiz.options." + valueString
             setUIString = "Story.view.optionsWindow." + valueString + " = " + 
                            target.to_s 
-            eval(modelString).should be(default)
+            eval(modelString).should eql(default)
    		    Story.pressOKAfterEntry(Story.view.optionsWindow) do
                 eval(setUIString)
             end
             Story.context.enter(Story.mainContext)
-            eval(modelString).should be(target)
+            eval(modelString).should eql(eval("#{target}"))
         end
 
         it "should be able to set the Random Order option" do
@@ -216,10 +224,11 @@ module JLDrill::UserChangesOptions
             setValueAndTest("introThresh", 10, 20)
         end
 
-# This is commented out because setting the autoloadDic option will
-# automatically load the dictionary.  I may add this back in in the future.
-#        it "should be able to set the Autoload Dictionary option" do
-#            setValueAndTest("autoloadDic", false, true)
-#        end
+        it "should be able to set the language option" do
+            setValueAndTest("language", "Japanese", "\"Chinese\"")
+        end
+
+        # Autoload Dictionary is not tested because it will load the
+        # dictionary, which makes the tests too slow.
     end
 end

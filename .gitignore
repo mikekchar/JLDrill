@@ -7,3 +7,4 @@ test_results.html
 web/output
 webgen.cache
 debian/jldrill.substvars
+*.swp
