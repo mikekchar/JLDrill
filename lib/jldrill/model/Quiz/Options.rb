@@ -7,7 +7,7 @@ module JLDrill
     # Options for the standard quiz.
     class Options
         attr_reader :publisher, :randomOrder, :promoteThresh, :introThresh,
-                    :reviewMode, :dictionary, :reviewMeaning, 
+                    :reviewMode, :dictionary, :language, :reviewMeaning, 
                     :reviewKanji, :reviewReading, :reviewOptionsSet,
                     :autoloadDic, :tanaka, :forgettingThresh
 
@@ -15,6 +15,7 @@ module JLDrill
         PROMOTE_THRESH_RE = /^Promotion Threshold: (.*)/
         INTRO_THRESH_RE = /^Introduction Threshold: (.*)/
         DICTIONARY_RE = /^Dictionary: (.*)/
+        LANGUAGE_RE = /^Language: (.*)/
         REVIEW_MEANING_RE = /^Review Meaning/
         REVIEW_KANJI_RE = /^Review Kanji/
         REVIEW_READING_RE = /^Review Reading/
@@ -29,6 +30,7 @@ module JLDrill
             @introThresh = 10
             @reviewMode = false
 			@dictionary = nil
+            @language = "Japanese"
 			@tanaka = nil
             @reviewOptionsSet = false
             @autoloadDic = false
@@ -43,6 +45,7 @@ module JLDrill
             retVal.introThresh = @introThresh
             retVal.reviewMode = @reviewMode
             retVal.dictionary = @dictionary
+            retVal.language = @language
             setReviewOptions(@reviewOptionsSet)
             retVal.reviewMeaning = @reviewMeaning
             retVal.reviewKanji = @reviewKanji
@@ -58,6 +61,7 @@ module JLDrill
             options.introThresh == @introThresh &&
             options.reviewMode == @reviewMode &&
             options.dictionary == @dictionary &&
+            options.language == @language &&
             options.reviewOptionsSet == @reviewOptionsSet &&
             options.reviewMeaning == @reviewMeaning &&
             options.reviewKanji == @reviewKanji &&
@@ -95,6 +99,7 @@ module JLDrill
             self.promoteThresh = options.promoteThresh
             self.introThresh = options.introThresh
             self.dictionary = options.dictionary
+            self.language = options.language
             setReviewOptions(options.reviewOptionsSet)
             self.reviewMeaning = options.reviewMeaning
             self.reviewKanji = options.reviewKanji
@@ -138,6 +143,13 @@ module JLDrill
 		def dictionary=(value)
 			if @dictionary != value
 				@dictionary = value
+				saveNeeded
+			end
+		end
+
+		def language=(value)
+			if @language != value
+				@language = value
 				saveNeeded
 			end
 		end
@@ -238,6 +250,8 @@ module JLDrill
                     self.introThresh = $1.to_i
 				when DICTIONARY_RE
 					self.dictionary = $1.to_i
+				when LANGUAGE_RE
+					self.language = $1
                 when REVIEW_MEANING_RE
                     self.reviewMeaning = $1.to_i
                 when REVIEW_KANJI_RE
@@ -272,6 +286,9 @@ module JLDrill
 			if(!@dictionary.nil?)
 				retVal += "Dictionary: #{@dictionary}\n"
 			end
+            if(@language != "Japanese")
+                retVal += "Language: #{@language}\n"
+            end
             if(@reviewMeaning)
                 retVal += "Review Meaning\n"
             end

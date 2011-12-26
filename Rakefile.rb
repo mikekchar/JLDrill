@@ -138,7 +138,6 @@ gem_spec = Gem::Specification.new do |s|
 
 	s.bindir = "bin"
 	s.executables = ["jldrill"]
-	s.default_executable = "jldrill"
 	
 	#### Dependencies
     
@@ -146,7 +145,6 @@ gem_spec = Gem::Specification.new do |s|
 
     #### Documentation and testing.
 
-	s.has_rdoc = true
 	s.extra_rdoc_files = rd.rdoc_files.reject { |fn| fn =~ /\.rb$/ }.to_a
 	s.rdoc_options = rd.options
 
