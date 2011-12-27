@@ -10,16 +10,20 @@ module JLDrill
 	    BUSHU_RE = /^B(\d+)/
 	    GRADE_RE = /^G(\d+)/
 	    STROKES_RE = /^S(\d+)/
+        PINYIN_RE = /^Y([^|\s]+)/
 	
-		attr_reader :character, :readings, :meanings, :bushu, :grade, :strokes
+		attr_reader :character, :readings, :meanings, :bushu, 
+                    :grade, :strokes, :pinyin
 	
-		def initialize(character, readings, meanings, bushu, grade, strokes)
+		def initialize(character, readings, meanings, bushu, 
+                       grade, strokes, pinyin)
 			@character = character
 			@readings = readings
 			@meanings = meanings
 			@bushu = bushu
 			@grade = grade
 			@strokes = strokes
+            @pinyin = pinyin
 		end
 
         def Kanji.getParts(string, separator)
@@ -45,6 +49,7 @@ module JLDrill
 			bushu = nil
 			grade = nil
 			strokes = nil
+            pinyin=[]
 			commands.each do |command|
 			    case command
 			        when BUSHU_RE
@@ -53,9 +58,11 @@ module JLDrill
         				grade = $1.to_i(10)
 			        when STROKES_RE
         				strokes = $1.to_i(10)
+                    when PINYIN_RE
+                        pinyin.push($1)
 			    end
 			end
-			Kanji.new(character, readings, meanings, bushu, grade, strokes)
+			Kanji.new(character, readings, meanings, bushu, grade, strokes, pinyin)
 		end
 		
 		# Outputs values for optional items
@@ -88,6 +95,20 @@ module JLDrill
     		retVal += rads.join("\n  ")
 		end
 		
+		def pinyin_radicals_to_s(kanjilist, radicals)
+		    retVal = ""
+    		rads = radicals.radicals(@character)
+    		if !@bushu.nil?
+		        bushu = radicals[@bushu - 1]
+        		retVal += "* " + bushu.to_s_with_pinyin(kanjilist) + "\n  "
+        		rads.delete(bushu)
+            end
+            rads.each do |rad|
+                retVal += rad.to_s_with_pinyin(kanjilist) + "\n  "
+            end
+            retVal
+		end
+
 		# Outputs kanji data with the added radical information
 		# radicals is a radical list
 		def withRadical_to_s(radicals)
@@ -100,9 +121,29 @@ module JLDrill
     		retVal += radicals_to_s(radicals)
 		end
 		
+        def withPinYinRadical_to_s(kanjilist, radicals)
+		    retVal = @character
+		    retVal += " [" + optional_join(@pinyin, " ") + "]\n"
+		    retVal += optional_join(@meanings, ", ") + "\n\n"
+		    retVal += "Grade " + optional_to_s(@grade) + ", "
+		    retVal += "Strokes " + optional_to_s(@strokes) + "\n"
+    		retVal += "\nRadicals:\n"
+    		retVal += pinyin_radicals_to_s(kanjilist, radicals)
+        end
+		
 		def to_s
 		    retVal = @character
 		    retVal += " [" + optional_join(@readings, " ") + "]\n"
+		    retVal += optional_join(@meanings, ", ") + "\n\n"
+		    retVal += "Grade " + optional_to_s(@grade) + ", "
+		    retVal += "Strokes " + optional_to_s(@strokes) + "\n"
+		    retVal += "Bushu " + optional_to_s(@bushu) + "\n"
+		    retVal
+		end
+		
+        def to_s_with_pinyin
+		    retVal = @character
+		    retVal += " [" + optional_join(@pinyin, " ") + "]\n"
 		    retVal += optional_join(@meanings, ", ") + "\n\n"
 		    retVal += "Grade " + optional_to_s(@grade) + ", "
 		    retVal += "Strokes " + optional_to_s(@strokes) + "\n"

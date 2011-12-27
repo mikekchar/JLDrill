@@ -46,6 +46,21 @@ module JLDrill
 		    self.to_s == radical.to_s
 		end
 		
+        def to_s_with_pinyin(kanjilist)
+            kanji = kanjilist.findChar(@radical)
+            if !kanji.nil? && !kanji.pinyin.nil?
+                pinyin = kanji.pinyin.join(" ")
+            else
+                pinyin = ""
+            end
+		    retVal = @radical
+		    if @altGlyphs.size > 0
+		        retVal += "(" + @altGlyphs.join(",") + ")"
+		    end
+		    retVal += "   " + pinyin + " - " + @meaning
+            retVal		    
+        end
+
 		def to_s
 		    retVal = @radical
 		    if @altGlyphs.size > 0
