@@ -1,11 +1,9 @@
 # encoding: utf-8
 
-require 'jldrill/model/items/JWord'
-require 'jldrill/model/DataFile'
+require 'jldrill/model/items/Dictionary'
 require "jldrill/model/items/Vocabulary"
-require "jldrill/model/items/edict/Meaning"
+require 'jldrill/model/items/JWord'
 require 'Context/Log'
-require 'kconv'
 
 module JLDrill
 
@@ -14,7 +12,7 @@ module JLDrill
     # dictionary. These entries are parsed to create JWords.
     # The JWords can then further parse the entries to
     # create Meanings.
-	class JEDictionary < DataFile
+	class JEDictionary < Dictionary
         attr_reader :jWords
 
         LINE_RE_TEXT = '^([^\[\s]*)\s+(\[(.*)\]\s+)?\/(([^\/]*\/)+)\s*$'
@@ -22,11 +20,6 @@ module JLDrill
         GET_JWORD_RE = Regexp.new('^([^\[\s]*)\s+(\[(.*)\]\s+)?', nil)
         KANA_RE = /（(.*)）/
         FIRST_CHAR_RE = Regexp.new("^(.)", nil)
-
-        def initialize
-            super
-            @stepSize = 1000
-        end
 
         # Ruby 1.8 counts in bytes so Japanese characters are 3 characters
         # long.  Ruby 1.9 counts in characters, so Japanese characters are
@@ -36,23 +29,6 @@ module JLDrill
         # function tells you what that is.
         def hashSize
             return "あ".size
-        end
-
-        # Reset the dictionary back to empty
-        def reset
-            @jWords = []
-            @readingHash = {}
-            @kanjiHash = {}
-            super
-        end
-
-        # The number of items we have indexed in the dictionary.
-        def dataSize
-            return @jWords.size
-        end
-
-        def length
-            return dataSize
         end
 
         def getMeaning(position)
@@ -92,11 +68,6 @@ module JLDrill
             return retVal                        
         end
 
-        # Read all the lines into the buffer.
-        def readLines
-            super
-        end
-
         # Compensate for files that have missing kanji or
         # JLPT files which have a strange format.
         def hackWord(word)
@@ -120,176 +91,15 @@ module JLDrill
             (@kanjiHash[word.kanji[0..hashSize - 1]] ||= []).push(word)
         end
 
-        def parseLine(index)
+        def getJWord(index)
+            retVal = nil
             if lines[index] =~ GET_JWORD_RE
-                word = JWord.new
-                word.kanji = $1
-                word.reading = $3
-                word.dictionary = self
-                word.position = index
-                @jWords[@jWords.size] = word
-                word = hackWord(word)
-                hashWord(word)
+                retVal = JWord.new
+                retVal.kanji = $1
+                retVal.reading = $3
+                retVal = hackWord(retVal)
             end
-        end
-
-        def vocab(index)
-            word = @jWords[index]
-            if !word.nil?
-                return word.toVocab
-            else
-                return nil
-            end
-        end
-
-        def eachVocab(&block)
-            @jWords.each do |word|
-                block.call(word.toVocab)
-            end
-        end
-
-        # Create the indeces for the item at the current line.
-        def parseEntry
-            parseLine(@parsed)
-            @parsed += 1
-        end
-
-        # This is what to do when we are finished parsing.
-        def finishParsing
-            # Don't reset the lines because we need them later
-            setLoaded(true)
-        end
-
-        # Find the items that may have been hashed with this reading.
-        def findBinWithReading(reading)
-            if reading.size >= hashSize
-                bin = (@readingHash[reading[0..hashSize - 1]] ||= [])
-            else
-                keys = @readingHash.keys.find_all do |key|
-                    key.start_with?(reading)
-                end
-                bin = []
-                keys.each do |key|
-                    bin += @readingHash[key]
-                end
-            end
-            return bin
-        end
-
-        # Find the items that may have been hashed with this kanji.
-        def findBinWithKanji(kanji)
-            if kanji.size >= hashSize
-                bin = (@kanjiHash[kanji[0..hashSize - 1]] ||= [])
-            else
-                keys = @kanjiHash.keys.find_all do |key|
-                    key.start_with?(kanji)
-                end
-                bin = []
-                keys.each do |key|
-                    bin += @kanjiHash[key]
-                end
-            end
-            return bin
-        end
-
-        # Return all the JWords that have a reading starting with reading.
-        def findReadingsStartingWith(reading)
-            bin = findBinWithReading(reading)
-            if reading.size > hashSize 
-                return bin.find_all do |word|
-                    word.reading.start_with?(reading)
-                end
-            else
-                return bin
-            end
-        end
-
-        # Return all the JWords that have kanji starting with kanji.
-        def findKanjiStartingWith(kanji)
-            bin = findBinWithKanji(kanji)
-            if kanji.size > hashSize 
-                return bin.find_all do |word|
-                    word.kanji.start_with?(kanji)
-                end
-            else
-                return bin
-            end
-        end
-
-        # Return all the JWords that have the reading, reading.
-        def findReading(reading)
-            relevance = reading.size
-            return findBinWithReading(reading).find_all do |word|
-                if word.reading.eql?(reading)
-                    word.relevance = relevance
-                    true
-                else
-                    false
-                end
-            end
-        end
-
-        # Return all the JWords that have the kanji, kanji.
-        def findKanji(kanji)
-            relevance = kanji.size
-            return findBinWithKanji(kanji).find_all do |word|
-                if word.kanji.eql?(kanji)
-                    word.relevance = relevance
-                    true
-                else
-                    false
-                end
-            end
-        end
-
-        def findWord(string)
-            kanji = findKanji(string)
-            reading = findReading(string)
-            return kanji + reading
-        end
-
-        # Return true if the dictionary contains this vocabulary.
-        def include?(vocabulary)
-            if vocabulary.reading.nil?
-                return false
-            end
-            return findReading(vocabulary.reading).any? do |word|
-                word.toVocab.eql?(vocabulary)
-            end
-        end
-
-        # Return all the words that occur at the begining of reading
-        def findReadingsThatStart(reading)
-            findBinWithReading(reading[0..hashSize - 1]).find_all do |word|
-                relevance = word.reading.size
-                if reading.start_with?(word.reading)
-                    word.relevance = relevance
-                    true
-                else
-                    false
-                end
-            end
-        end
-
-        # Return all the words that occur at the begining of kanji
-        def findKanjiThatStart(kanji)
-            findBinWithKanji(kanji[0..hashSize - 1]).find_all do |word|
-                relevance = word.kanji.size
-                if kanji.start_with?(word.kanji)
-                    word.relevance = relevance
-                    true
-                else
-                    false
-                end
-            end
-        end
-
-        # Return all the words that occur at the begining of the string
-        # These are sorted by size with the largest finds given first
-        def findWordsThatStart(string)
-            kanji = findKanjiThatStart(string)
-            reading = findReadingsThatStart(string)
-            return kanji + reading
+            return retVal
         end
     end
 end
