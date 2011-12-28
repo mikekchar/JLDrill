@@ -3,6 +3,7 @@ require 'Context/Context'
 require 'Context/Bridge'
 require 'jldrill/model/Config'
 require 'jldrill/model/items/JEDictionary'
+require 'jldrill/model/items/CEDictionary'
 require 'jldrill/contexts/LoadFileContext'
 require 'jldrill/contexts/GetFilenameContext'
 require 'jldrill/contexts/LoadQuizFromEdictContext.rb'
@@ -37,7 +38,11 @@ module JLDrill
         end
 
         def loadAsEdict(quiz, filename)
-            edict = JEDictionary.new
+            if quiz.options.language == "Chinese"
+                edict = CEDictionary.new
+            else
+                edict = JEDictionary.new
+            end
             @loadFileContext.onExit do
                 @loadQuizFromEdictContext.onExit do
                     exitLoadQuizContext

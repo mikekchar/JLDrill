@@ -12,23 +12,16 @@ module JLDrill
     # dictionary. These entries are parsed to create JWords.
     # The JWords can then further parse the entries to
     # create Meanings.
-	class JEDictionary < Dictionary
+	class CEDictionary < Dictionary
         attr_reader :jWords
 
-        LINE_RE_TEXT = '^([^\[\s]*)\s+(\[(.*)\]\s+)?\/(([^\/]*\/)+)\s*$'
+        LINE_RE_TEXT = '^([^\[\s]*)\s+([^\[\s]*)\[(.*)\]\s+\/(([^\/]*\/)+)\s*$'
         LINE_RE = Regexp.new(LINE_RE_TEXT, nil)
-        GET_JWORD_RE = Regexp.new('^([^\[\s]*)\s+(\[(.*)\]\s+)?', nil)
-        KANA_RE = /（(.*)）/
+        GET_JWORD_RE = Regexp.new('^([^\[\s]*)\s+([^\[\s]*)\[(.*)\]\s+', nil)
         FIRST_CHAR_RE = Regexp.new("^(.)", nil)
 
-        # Ruby 1.8 counts in bytes so Japanese characters are 3 characters
-        # long.  Ruby 1.9 counts in characters, so Japanese characters are
-        # 1 character each.  When we are hashing we need to use a Japanese
-        # character for a key.  When creating the slices to search for the
-        # hash key we need to know how many characters to strip off. This
-        # function tells you what that is.
         def hashSize
-            return "あ".size
+            return "雨".size
         end
 
         def getMeaning(position)
@@ -48,39 +41,13 @@ module JLDrill
                 reading = $3
                 english = JLDrill::Meaning.create($4)
                 
-                # Hack for JLPT files
-                if reading =~ KANA_RE
-                    reading = nil
-                    hint = $1
-                end
-
-                if(reading == "" || reading == nil)
-                    reading = kanji
-                    kanji = nil
-                end
-
                 retVal = Vocabulary.new(kanji, reading, english.allDefinitions,
-                                   english.allTypes, hint, position)
+                                   english.allTypes, "", position)
             else
-                Context::Log::warning("JLDrill::JEDictionary", 
+                Context::Log::warning("JLDrill::CEDictionary", 
                                       "Could not parse #{position}")
             end             
             return retVal                        
-        end
-
-        # Compensate for files that have missing kanji or
-        # JLPT files which have a strange format.
-        def hackWord(word)
-            # Hack for JLPT files
-            if word.reading =~ KANA_RE || word.reading.nil? ||
-                    word.reading.empty?
-                word.reading = word.kanji
-                word.kanji = ""
-            end
-            if word.kanji.nil?
-                word.kanji = ""
-            end
-            return word
         end
 
         def getJWord(index)
@@ -95,3 +62,4 @@ module JLDrill
         end
     end
 end
+
