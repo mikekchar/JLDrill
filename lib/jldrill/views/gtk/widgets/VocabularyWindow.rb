@@ -16,6 +16,7 @@ module JLDrill::Gtk
             @view = view
             @closed = false
             super(label)
+            set_default_size(400, 500)
             @vbox = Gtk::VBox.new
             self.add(@vbox)
             @vocabView = GtkVocabView.new(@view.vocabulary)

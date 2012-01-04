@@ -20,11 +20,11 @@ module JLDrill::Gtk
                                         vocab.definitionsRaw)
             @markersBox = createField("Markers: ", vocab.markers)
             
-            pack_start(@kanjiField, true, false, 5)
-            pack_start(@hintField, true, false, 5)
-            pack_start(@readingField, true, false, 5)
+            pack_start(@kanjiField, false, false, 5)
+            pack_start(@hintField, false, false, 5)
+            pack_start(@readingField, false, false, 5)
             pack_start(@definitionsBox, true, true, 5)
-            pack_start(@markersBox, true, true, 5)
+            pack_start(@markersBox, false, true, 5)
         end
         
         def kanjiWidget

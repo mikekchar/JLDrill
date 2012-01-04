@@ -15,9 +15,9 @@ module JLDrill
 	class CEDictionary < Dictionary
         attr_reader :jWords
 
-        LINE_RE_TEXT = '^([^\[\s]*)\s+([^\[\s]*)\[(.*)\]\s+\/(([^\/]*\/)+)\s*$'
+        LINE_RE_TEXT = '^([^\[\s]*)\s+([^\[\s]*)\s+\[(.*)\]\s+\/(([^\/]*\/)+)'
         LINE_RE = Regexp.new(LINE_RE_TEXT, nil)
-        GET_JWORD_RE = Regexp.new('^([^\[\s]*)\s+([^\[\s]*)\[(.*)\]\s+', nil)
+        GET_JWORD_RE = Regexp.new('^([^\[\s]*)\s+([^\[\s]*)\s+\[(.*)\]\s+', nil)
         FIRST_CHAR_RE = Regexp.new("^(.)", nil)
 
         def hashSize
@@ -56,7 +56,6 @@ module JLDrill
                 retVal = JWord.new
                 retVal.kanji = $1
                 retVal.reading = $3
-                retVal = hackWord(retVal)
             end
             return retVal
         end

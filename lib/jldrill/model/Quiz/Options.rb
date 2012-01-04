@@ -249,7 +249,7 @@ module JLDrill
                 when INTRO_THRESH_RE 
                     self.introThresh = $1.to_i
 				when DICTIONARY_RE
-					self.dictionary = $1.to_i
+					self.dictionary = $1
 				when LANGUAGE_RE
 					self.language = $1
                 when REVIEW_MEANING_RE
