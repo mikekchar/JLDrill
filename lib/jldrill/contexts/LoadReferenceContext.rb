@@ -61,7 +61,12 @@ module JLDrill
 
         def enter(parent, reference, deinflect, options)
             super(parent)
-            loadReference(reference, deinflect, getFilename(options))
+            if (options.language == "Chinese")
+                parent.reference = CEDictionary.new
+            else
+                parent.reference = JEDictionary.new
+            end
+            loadReference(parent.reference, deinflect, getFilename(options))
         end
 
     end

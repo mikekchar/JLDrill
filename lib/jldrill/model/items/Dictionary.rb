@@ -53,13 +53,6 @@ module JLDrill
             return ""
         end
 
-        # Parse the line at the given position and return the a Vocabulary
-        # containing the information (this is deprecated).
-        # It should be overridden in the concrete Dictionary
-        def getVocab(position)
-            return nil                        
-        end
-
         # Read all the lines into the buffer.
         def readLines
             super
@@ -73,17 +66,9 @@ module JLDrill
             (@kanjiHash[word.kanji[0..hashSize - 1]] ||= []).push(word)
         end
 
-        # Parse a line in the dictionary and create JWord
-        # This method must be overridden in the concrete dictionary
-        def getJWord(index)
-            return nil
-        end
-
         def parseLine(index)
             word = getJWord(index)
             if !word.nil?
-                word.dictionary = self
-                word.position = index
                 @jWords[@jWords.size] = word
                 hashWord(word)
             end

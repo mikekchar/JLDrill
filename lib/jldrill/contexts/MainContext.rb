@@ -46,7 +46,7 @@ module JLDrill
 	                :reference, :quiz, :kanji, :radicals, :kana,
                     :inTests, :tanaka, :deinflect
 
-	    attr_writer :quiz, :inTests
+	    attr_writer :quiz, :inTests, :reference
 		
 		def initialize(viewBridge)
 			super(viewBridge)

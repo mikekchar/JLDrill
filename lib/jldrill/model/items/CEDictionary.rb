@@ -36,6 +36,7 @@ module JLDrill
         # containing the information (this is deprecated).
         def getVocab(position)
             retVal = nil
+            print "----> #{lines[position]}\n"
             if lines[position] =~ LINE_RE
                 kanji = $1
                 reading = $3
@@ -56,6 +57,8 @@ module JLDrill
                 retVal = JWord.new
                 retVal.kanji = $1
                 retVal.reading = $3
+                retVal.dictionary = self
+                retVal.position = index
             end
             return retVal
         end

@@ -43,6 +43,16 @@ module JLDrill
 			end
         end
         
+        def useChineseTestDictionary
+            # Override with the small test dictionary
+            rc = @mainContext.loadReferenceContext
+			def rc.dictionaryName(options)
+                options.language = "Chinese"
+				testsDir = File.join(JLDrill::Config::DATA_DIR, "tests")
+				return File.join(testsDir, "cedict.utf")
+			end
+        end
+
         def start
             @app.enter
         end

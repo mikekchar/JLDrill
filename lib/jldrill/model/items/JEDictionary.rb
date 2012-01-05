@@ -89,6 +89,8 @@ module JLDrill
                 retVal = JWord.new
                 retVal.kanji = $1
                 retVal.reading = $3
+                retVal.dictionary = self
+                retVal.position = index
                 retVal = hackWord(retVal)
             end
             return retVal
