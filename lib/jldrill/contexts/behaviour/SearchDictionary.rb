@@ -14,14 +14,19 @@ module JLDrill::Behaviour
             kanji = @parent.kanji.kanjiList.findChar(character)
             if !kanji.nil?
                 if @parent.quiz.options.language == "Chinese"
-                    retVal = kanji.withPinYinRadical_to_s(@parent.kanji.kanjiList, @parent.radicals.radicalList)
+                    retVal += kanji.withPinYinRadical_to_s(@parent.kanji.kanjiList, @parent.radicals.radicalList)
                 else
-                    retVal = kanji.withRadical_to_s(@parent.radicals.radicalList)
+                    retVal += kanji.withRadical_to_s(@parent.radicals.radicalList)
+                end
+                if dictionaryLoaded?
+                    retVal += "\n\nDictionary Lookup:\n"
+                    retVal += @parent.reference.findKanji(kanji.character).join("\n")
+                    retVal += "\n"
                 end
             else
                 kana = @parent.kana.kanaList.findChar(character)
                 if !kana.nil?
-                    retVal = kana.to_s
+                    retVal += kana.to_s
                 end
             end
             retVal
