@@ -36,7 +36,6 @@ module JLDrill
         # containing the information (this is deprecated).
         def getVocab(position)
             retVal = nil
-            print "----> #{lines[position]}\n"
             if lines[position] =~ LINE_RE
                 kanji = $1
                 reading = $3

@@ -228,31 +228,27 @@ module JLDrill::UserAddsVocabToQuiz
             Story.context.dictionaryLoaded?.should be(false)
 
             # Searching should find nothing
-            Story.context.search(nil, "一生").should be_empty
+            Story.context.search("一生", nil).should be_empty
 
             # Override with the small test dictionary
             Story.useChineseTestDictionary
+            Story.mainContext.quiz.options.language.should eql("Chinese")
 
             # Load the dictionary
             Story.context.loadDictionary
             Story.context.dictionaryLoaded?.should be(true)
-
-            # Note: Usually I'd do this in separate tests, but loading
-            # the dictionary is expensive, so I have to jam it all
-            # into one test.  It would be nice to be able to have tests
-            # that can build on one another.
 
             # Searching for nil or empty string should find nothing
             Story.context.search(nil, nil).should be_empty
             Story.context.search(nil, "").should be_empty
 
             # It should find entries
-            jwords = Story.context.search(nil, "一生") 
+            jwords = Story.context.search("一生", nil) 
             jwords.size.should eql(2)
 
-            print(jwords[0].dictionary.class.to_s + "\n")
-
-            jwords[0].toVocab.should eql("fred")
+            jwords[0].toVocab.kanji.should eql("一生")
+            jwords[0].toVocab.reading.should eql("yi1 sheng1")
+            jwords[0].toVocab.definitions.to_s.should eql("all one's life, throughout one's life")
         end
     end
 end
