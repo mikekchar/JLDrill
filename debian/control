@@ -3,7 +3,7 @@ Section: text
 Priority: optional
 Maintainer: Mike Charlton <mikekchar@gmail.com>
 Build-Depends: debhelper (>= 7), ruby, rubygems, rake, librspec-ruby, rcov
-Standards-Version: 3.9.1
+Standards-Version: 3.9.2
 Homepage: http://sakabatou.dnsdojo.org
 
 Package: jldrill

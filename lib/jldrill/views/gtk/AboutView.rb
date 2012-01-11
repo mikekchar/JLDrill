@@ -18,7 +18,7 @@ module JLDrill::Gtk
 		end
 
         def run
-            iconFile = File.join(JLDrill::Config::DATA_DIR, "icon.svg")
+            iconFile = File.join(JLDrill::Config::DATA_DIR, "jldrill-icon.svg")
             icon = Gdk::Pixbuf.new(iconFile)
             Gtk::AboutDialog.show(nil,
     			    :name => @about.name,

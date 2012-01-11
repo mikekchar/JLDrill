@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>JLDrill TODO List</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-07-15 13:57:35 JST"/>
+<meta name="generated" content="2012-01-10 15:13:54 JST"/>
 <meta name="author" content="Mike Charlton"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -87,17 +87,11 @@ lang="en" xml:lang="en">
 <li><a href="#sec-3.2.1">3.2.1 Display statistics for forgotten items [2/2] </a></li>
 <li><a href="#sec-3.2.2">3.2.2 Only show the examples when the answer is shown </a></li>
 <li><a href="#sec-3.2.3">3.2.3 Show appropriate examples when the question is shown </a></li>
-<li><a href="#sec-3.2.4">3.2.4 Allow users to update their drills </a></li>
-<li><a href="#sec-3.2.5">3.2.5 Personalized Directories </a></li>
-<li><a href="#sec-3.2.6">3.2.6 Automatically update Dictionary </a></li>
-<li><a href="#sec-3.2.7">3.2.7 Automatically update Collocations </a></li>
-<li><a href="#sec-3.2.8">3.2.8 Need a mechanism for publishing warnings and errors. </a></li>
-<li><a href="#sec-3.2.9">3.2.9 Give feedback to the user when we refuse to edit or add an item. </a></li>
-<li><a href="#sec-3.2.10">3.2.10 When save fails, indicate it to the user </a></li>
-<li><a href="#sec-3.2.11">3.2.11 Start new drills in Preview mode </a></li>
-<li><a href="#sec-3.2.12">3.2.12 New Drill Splash Screen </a></li>
-<li><a href="#sec-3.2.13">3.2.13 Simply loading a drill shouldn't modify it </a></li>
-<li><a href="#sec-3.2.14">3.2.14 Indicate when the item has been promoted. </a></li>
+<li><a href="#sec-3.2.4">3.2.4 Move to Ruby 1.9 </a></li>
+<li><a href="#sec-3.2.5">3.2.5 Chinese Mode for Kanji Popup </a></li>
+<li><a href="#sec-3.2.6">3.2.6 Ability to load CC-CEDICT dictionary in Chinese mode </a></li>
+<li><a href="#sec-3.2.7">3.2.7 Replace Tanaka corpus with Tatoeba example sentences </a></li>
+<li><a href="#sec-3.2.8">3.2.8 Read Chinese collocations from Tatoeba example sentence </a></li>
 </ul></li>
 </ul>
 </li>
@@ -118,33 +112,42 @@ lang="en" xml:lang="en">
 <ul>
 <li><a href="#sec-5.1">5.1 Items </a>
 <ul>
-<li><a href="#sec-5.1.1">5.1.1 Move to Ruby 1.9 </a></li>
-<li><a href="#sec-5.1.2">5.1.2 Windows Packaging [0/5] </a></li>
-<li><a href="#sec-5.1.3">5.1.3 Allow Learn/Unlearn for any arbitrary item </a></li>
-<li><a href="#sec-5.1.4">5.1.4 Define the structure of the data in the drill. </a></li>
-<li><a href="#sec-5.1.5">5.1.5 Define a structure for grammar. </a></li>
-<li><a href="#sec-5.1.6">5.1.6 Display parts of speech tags next to what they modify </a></li>
-<li><a href="#sec-5.1.7">5.1.7 Allow the user to choose what tags to display. </a></li>
-<li><a href="#sec-5.1.8">5.1.8 Associate data items with the dictionary they belong to. </a></li>
-<li><a href="#sec-5.1.9">5.1.9 彼処 かしこ finds あそこ </a></li>
-<li><a href="#sec-5.1.10">5.1.10 Alternate Language support (i.e., Chinese) </a></li>
-<li><a href="#sec-5.1.11">5.1.11 Allow undo </a></li>
-<li><a href="#sec-5.1.12">5.1.12 Insert Popup Before Item </a></li>
-<li><a href="#sec-5.1.13">5.1.13 Aggressive Search </a></li>
-<li><a href="#sec-5.1.14">5.1.14 Create a recent used menu for loading drills that you've used recently. </a></li>
-<li><a href="#sec-5.1.15">5.1.15 One of the items in the working set had a potential schedule of 72 days </a></li>
-<li><a href="#sec-5.1.16">5.1.16 Time to learn after the first item is waaay too big (10798.7s) [1/2] </a></li>
-<li><a href="#sec-5.1.17">5.1.17 Full test coverage for all the model objects </a></li>
-<li><a href="#sec-5.1.18">5.1.18 Full test coverage for all the contexts </a></li>
-<li><a href="#sec-5.1.19">5.1.19 Don't steal focus when putting up windows that take no input. </a></li>
-<li><a href="#sec-5.1.20">5.1.20 Allow user to set the formatting for each type of data. </a></li>
-<li><a href="#sec-5.1.21">5.1.21 Rename the methods that take Vocabulary </a></li>
-<li><a href="#sec-5.1.22">5.1.22 Replace webgen with something else. </a></li>
-<li><a href="#sec-5.1.23">5.1.23 Create a keyboard only mode. </a></li>
-<li><a href="#sec-5.1.24">5.1.24 Create a dictionary back end to allow it to use online dictionaries, </a></li>
-<li><a href="#sec-5.1.25">5.1.25 Create Redhat packaging. </a></li>
-<li><a href="#sec-5.1.26">5.1.26 Create OSX packaging. </a></li>
-<li><a href="#sec-5.1.27">5.1.27 Allow user to modify the global backoff. </a></li>
+<li><a href="#sec-5.1.1">5.1.1 Ability to switch between Japanese and Chinese mode </a></li>
+<li><a href="#sec-5.1.2">5.1.2 Allow users to update their drills </a></li>
+<li><a href="#sec-5.1.3">5.1.3 Personalized Directories </a></li>
+<li><a href="#sec-5.1.4">5.1.4 Automatically update Dictionary </a></li>
+<li><a href="#sec-5.1.5">5.1.5 Automatically update Collocations </a></li>
+<li><a href="#sec-5.1.6">5.1.6 Need a mechanism for publishing warnings and errors. </a></li>
+<li><a href="#sec-5.1.7">5.1.7 Give feedback to the user when we refuse to edit or add an item. </a></li>
+<li><a href="#sec-5.1.8">5.1.8 When save fails, indicate it to the user </a></li>
+<li><a href="#sec-5.1.9">5.1.9 Start new drills in Preview mode </a></li>
+<li><a href="#sec-5.1.10">5.1.10 New Drill Splash Screen </a></li>
+<li><a href="#sec-5.1.11">5.1.11 Simply loading a drill shouldn't modify it </a></li>
+<li><a href="#sec-5.1.12">5.1.12 Indicate when the item has been promoted. </a></li>
+<li><a href="#sec-5.1.13">5.1.13 Windows Packaging [0/5] </a></li>
+<li><a href="#sec-5.1.14">5.1.14 Allow Learn/Unlearn for any arbitrary item </a></li>
+<li><a href="#sec-5.1.15">5.1.15 Define the structure of the data in the drill. </a></li>
+<li><a href="#sec-5.1.16">5.1.16 Define a structure for grammar. </a></li>
+<li><a href="#sec-5.1.17">5.1.17 Display parts of speech tags next to what they modify </a></li>
+<li><a href="#sec-5.1.18">5.1.18 Allow the user to choose what tags to display. </a></li>
+<li><a href="#sec-5.1.19">5.1.19 Associate data items with the dictionary they belong to. </a></li>
+<li><a href="#sec-5.1.20">5.1.20 彼処 かしこ finds あそこ </a></li>
+<li><a href="#sec-5.1.21">5.1.21 Allow undo </a></li>
+<li><a href="#sec-5.1.22">5.1.22 Insert Popup Before Item </a></li>
+<li><a href="#sec-5.1.23">5.1.23 Aggressive Search </a></li>
+<li><a href="#sec-5.1.24">5.1.24 Create a recent used menu for loading drills that you've used recently. </a></li>
+<li><a href="#sec-5.1.25">5.1.25 One of the items in the working set had a potential schedule of 72 days </a></li>
+<li><a href="#sec-5.1.26">5.1.26 Time to learn after the first item is waaay too big (10798.7s) [1/2] </a></li>
+<li><a href="#sec-5.1.27">5.1.27 Full test coverage for all the model objects </a></li>
+<li><a href="#sec-5.1.28">5.1.28 Full test coverage for all the contexts </a></li>
+<li><a href="#sec-5.1.29">5.1.29 Don't steal focus when putting up windows that take no input. </a></li>
+<li><a href="#sec-5.1.30">5.1.30 Allow user to set the formatting for each type of data. </a></li>
+<li><a href="#sec-5.1.31">5.1.31 Rename the methods that take Vocabulary </a></li>
+<li><a href="#sec-5.1.32">5.1.32 Create a keyboard only mode. </a></li>
+<li><a href="#sec-5.1.33">5.1.33 Create a dictionary back end to allow it to use online dictionaries, </a></li>
+<li><a href="#sec-5.1.34">5.1.34 Create Redhat packaging. </a></li>
+<li><a href="#sec-5.1.35">5.1.35 Create OSX packaging. </a></li>
+<li><a href="#sec-5.1.36">5.1.36 Allow user to modify the global backoff. </a></li>
 </ul>
 </li>
 </ul>
@@ -210,11 +213,11 @@ levels up.
 
 
 <p>
-0.5.2 will focus on needed user interface improvements.  Mostly these
-have to do with giving feedback about errors and the like.  There is
-also some workflow for the beginning of the drill.  Looking at these
-items, it seems as if I will have to split this release up into 2
-releases.  But we'll see how much time I have.
+0.5.2 originally meant to focus on UI imporovements, but
+I got sidetracked with other issues.  The main improvements
+are statistics for forgotten items, better display of examples,
+Ruby 1.9.1 compatibility, and ability to study Mandarin Chinese
+with traditional characters using CC-EDICT.
 </p>
 
 
@@ -247,7 +250,7 @@ iteration to finish as scheduled.
 <tr><th scope="col">ITEM</th><th scope="col">Total</th><th scope="col">Done</th><th scope="col">Percent</th><th scope="col">Current</th><th scope="col">Needed</th></tr>
 </thead>
 <tbody>
-<tr><td><span style="visibility:hidden;"></span>Version 0.5.2</td><td>19</td><td>2</td><td>10.5</td><td>2.00</td><td>0.40</td></tr>
+<tr><td><span style="visibility:hidden;"></span>Version 0.5.2</td><td>13</td><td>9</td><td>69.2</td><td>0.05</td><td>0.07</td></tr>
 </tbody>
 </table>
 
@@ -308,14 +311,13 @@ for the problem.  Before that a blank screen.
 </div>
 
 <div id="outline-container-3.2.3" class="outline-4">
-<h4 id="sec-3.2.3"><span class="section-number-4">3.2.3</span> <span class="todo TODO"> TODO</span> Show appropriate examples when the question is shown </h4>
+<h4 id="sec-3.2.3"><span class="section-number-4">3.2.3</span> <span class="done DONE"> DONE</span> Show appropriate examples when the question is shown </h4>
 <div class="outline-text-4" id="text-3.2.3">
 
 <p>When the question is shown, show the English side of the
 examples when it is a meaning question, Japanese side of the
-example when it is a Kanji question and Japanese with
-header if it is a reading question.  Fill in the rest of
-the details when the answer is shown.
+example when it is a Kanji question or reading question.  
+Fill in the rest of the details when the answer is shown.
 </p>
 
 </div>
@@ -323,17 +325,11 @@ the details when the answer is shown.
 </div>
 
 <div id="outline-container-3.2.4" class="outline-4">
-<h4 id="sec-3.2.4"><span class="section-number-4">3.2.4</span> <span class="todo TODO"> TODO</span> Allow users to update their drills </h4>
+<h4 id="sec-3.2.4"><span class="section-number-4">3.2.4</span> <span class="done DONE"> DONE</span> Move to Ruby 1.9 </h4>
 <div class="outline-text-4" id="text-3.2.4">
 
-<p>A user can update a drill by appending the new version to their drill.
-But if the vocabulary has changed in the new/old drill (because the
-dictionary was updated for instance), the new vocabulary will be added
-as a new item rather than updating the old item.  Put a unique
-ID on each item.  When merging, if the IDs are the same overwrite the old
-one.  For old drills, if there is no ID, assume the items are the same
-if the position, reading and kanji are the same.  (Not sure about the
-position).
+<p>Currently using Ruby 1.8.7 Move to Ruby 1.9.  This needs to 
+be done before Debian moves over to Ruby 1.9 as its standard.
 </p>
 
 </div>
@@ -341,11 +337,13 @@ position).
 </div>
 
 <div id="outline-container-3.2.5" class="outline-4">
-<h4 id="sec-3.2.5"><span class="section-number-4">3.2.5</span> <span class="todo TODO"> TODO</span> Personalized Directories </h4>
+<h4 id="sec-3.2.5"><span class="section-number-4">3.2.5</span> <span class="done DONE"> DONE</span> Chinese Mode for Kanji Popup </h4>
 <div class="outline-text-4" id="text-3.2.5">
 
-<p>Create a configuration directory that contains the users configuration
-for JLDrill.
+<p>Create an option to go to Chinese mode that presents the
+chinese readings rather than the Japanese readings for
+the chinese characters.  Note that this only works for
+traditional (not simplified) characters.
 </p>
 
 </div>
@@ -353,11 +351,15 @@ for JLDrill.
 </div>
 
 <div id="outline-container-3.2.6" class="outline-4">
-<h4 id="sec-3.2.6"><span class="section-number-4">3.2.6</span> <span class="todo TODO"> TODO</span> Automatically update Dictionary </h4>
+<h4 id="sec-3.2.6"><span class="section-number-4">3.2.6</span> <span class="done DONE"> DONE</span> Ability to load CC-CEDICT dictionary in Chinese mode </h4>
 <div class="outline-text-4" id="text-3.2.6">
 
-<p>Allow the user to select a download site for a dictionary and
-automatically updated it when it changes.
+<p>If the Chinese mode option is set, use a Chinese dictionary
+parser to read CC-CEDICT dictionaries.  In this mode, you
+can hover over traditional (not simplified) characters
+to look up chinese words using the dictionary popup.
+You can also search for and add entries in Add Vocab
+and Edit Vocab windows.
 </p>
 
 </div>
@@ -365,11 +367,14 @@ automatically updated it when it changes.
 </div>
 
 <div id="outline-container-3.2.7" class="outline-4">
-<h4 id="sec-3.2.7"><span class="section-number-4">3.2.7</span> <span class="todo TODO"> TODO</span> Automatically update Collocations </h4>
+<h4 id="sec-3.2.7"><span class="section-number-4">3.2.7</span> <span class="todo TODO"> TODO</span> Replace Tanaka corpus with Tatoeba example sentences </h4>
 <div class="outline-text-4" id="text-3.2.7">
 
-<p>Allow the user to select a download site for a collocation dictionary and
-automatically updated it when it changes.
+<p>Tatoeba is the replacesment for the Tanaka corpus upstream.
+There are 3 CSV files now &ndash; One for collocations, one
+for sentence type and one for the old Tanaka B line information.
+Read in the Japanese collocations and Tanaka B line information
+in Japanese mode.
 </p>
 
 </div>
@@ -377,89 +382,12 @@ automatically updated it when it changes.
 </div>
 
 <div id="outline-container-3.2.8" class="outline-4">
-<h4 id="sec-3.2.8"><span class="section-number-4">3.2.8</span> <span class="todo TODO"> TODO</span> Need a mechanism for publishing warnings and errors. </h4>
+<h4 id="sec-3.2.8"><span class="section-number-4">3.2.8</span> <span class="todo TODO"> TODO</span> Read Chinese collocations from Tatoeba example sentence </h4>
 <div class="outline-text-4" id="text-3.2.8">
 
-<p>Warnings and errors must be displayed to the user in a
-consisten way.  To be honest I need to think more about what
-that way is.  Currently errors are printed to the console
-which is no good.
+<p>In Chinese mode, read and select the Chinese collocations.
 </p>
 
-</div>
-
-</div>
-
-<div id="outline-container-3.2.9" class="outline-4">
-<h4 id="sec-3.2.9"><span class="section-number-4">3.2.9</span> <span class="todo TODO"> TODO</span> Give feedback to the user when we refuse to edit or add an item. </h4>
-<div class="outline-text-4" id="text-3.2.9">
-
-<p>Probably use the aforementioned warning and error mechanism.
-</p>
-
-</div>
-
-</div>
-
-<div id="outline-container-3.2.10" class="outline-4">
-<h4 id="sec-3.2.10"><span class="section-number-4">3.2.10</span> <span class="todo TODO"> TODO</span> When save fails, indicate it to the user </h4>
-<div class="outline-text-4" id="text-3.2.10">
-
-<p>before bringing up the save as dialog.
-</p>
-
-</div>
-
-</div>
-
-<div id="outline-container-3.2.11" class="outline-4">
-<h4 id="sec-3.2.11"><span class="section-number-4">3.2.11</span> <span class="todo TODO"> TODO</span> Start new drills in Preview mode </h4>
-<div class="outline-text-4" id="text-3.2.11">
-
-<p>When a drill has been loaded for the first time (or after a reset), 
-show the first item in preview mode.  This allows the user to
-update the options, or to save the quiz before selecting the first
-problem.
-</p>
-
-</div>
-
-</div>
-
-<div id="outline-container-3.2.12" class="outline-4">
-<h4 id="sec-3.2.12"><span class="section-number-4">3.2.12</span> <span class="todo TODO"> TODO</span> New Drill Splash Screen </h4>
-<div class="outline-text-4" id="text-3.2.12">
-
-<p>Create a splash screen explaining that this is a new drill and
-the system is in Preview mode.  Press N to start
-</p>
-
-</div>
-
-</div>
-
-<div id="outline-container-3.2.13" class="outline-4">
-<h4 id="sec-3.2.13"><span class="section-number-4">3.2.13</span> <span class="todo TODO"> TODO</span> Simply loading a drill shouldn't modify it </h4>
-<div class="outline-text-4" id="text-3.2.13">
-
-<p>Currently the "must save" flag is set when a drill is loaded.
-This should only be set after the first item has been answered.
-Of course if the drill was imported from an EDICT file then
-the "must save" flag should be set immediately.
-</p>
-
-</div>
-
-</div>
-
-<div id="outline-container-3.2.14" class="outline-4">
-<h4 id="sec-3.2.14"><span class="section-number-4">3.2.14</span> <span class="todo TODO"> TODO</span> Indicate when the item has been promoted. </h4>
-<div class="outline-text-4" id="text-3.2.14">
-
-<p>When an item has been moved to the review set, print some
-kind of congratulatory message.  Possibly show some kind of
-stats like Anki does.
-</p>
 
 </div>
 </div>
@@ -618,20 +546,166 @@ feedback on this list, or its order, please email me.
 </div>
 
 <div id="outline-container-5.1.1" class="outline-4">
-<h4 id="sec-5.1.1"><span class="section-number-4">5.1.1</span> <span class="todo TODO"> TODO</span> Move to Ruby 1.9 </h4>
+<h4 id="sec-5.1.1"><span class="section-number-4">5.1.1</span> <span class="todo TODO"> TODO</span> Ability to switch between Japanese and Chinese mode </h4>
 <div class="outline-text-4" id="text-5.1.1">
 
-<p>Currently using Ruby 1.8.7 Move to Ruby 1.9.  This should
-improve performance somewhat.  This needs to be done before
-Debian moves over to Ruby 1.9 as its standard.
+<p>When when one of the dictionaries is loaded and you load a file
+that uses the other language, the previous dictionary remains.
+It should not use it in the other language.  If the new language
+dictionary is set to autoload, it should autoload, replacing the
+previous dictionary in memory.  However, if a new language dictionary
+is not loaded, the previous dictionary should not be removed.
 </p>
 </div>
 
 </div>
 
 <div id="outline-container-5.1.2" class="outline-4">
-<h4 id="sec-5.1.2"><span class="section-number-4">5.1.2</span> <span class="todo TODO"> TODO</span> Windows Packaging [0/5] </h4>
+<h4 id="sec-5.1.2"><span class="section-number-4">5.1.2</span> <span class="todo TODO"> TODO</span> Allow users to update their drills </h4>
 <div class="outline-text-4" id="text-5.1.2">
+
+<p>A user can update a drill by appending the new version to their drill.
+But if the vocabulary has changed in the new/old drill (because the
+dictionary was updated for instance), the new vocabulary will be added
+as a new item rather than updating the old item.  Put a unique
+ID on each item.  When merging, if the IDs are the same overwrite the old
+one.  For old drills, if there is no ID, assume the items are the same
+if the position, reading and kanji are the same.  (Not sure about the
+position).
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-5.1.3" class="outline-4">
+<h4 id="sec-5.1.3"><span class="section-number-4">5.1.3</span> <span class="todo TODO"> TODO</span> Personalized Directories </h4>
+<div class="outline-text-4" id="text-5.1.3">
+
+<p>Create a configuration directory that contains the users configuration
+for JLDrill.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-5.1.4" class="outline-4">
+<h4 id="sec-5.1.4"><span class="section-number-4">5.1.4</span> <span class="todo TODO"> TODO</span> Automatically update Dictionary </h4>
+<div class="outline-text-4" id="text-5.1.4">
+
+<p>Allow the user to select a download site for a dictionary and
+automatically updated it when it changes.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-5.1.5" class="outline-4">
+<h4 id="sec-5.1.5"><span class="section-number-4">5.1.5</span> <span class="todo TODO"> TODO</span> Automatically update Collocations </h4>
+<div class="outline-text-4" id="text-5.1.5">
+
+<p>Allow the user to select a download site for a collocation dictionary and
+automatically updated it when it changes.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-5.1.6" class="outline-4">
+<h4 id="sec-5.1.6"><span class="section-number-4">5.1.6</span> <span class="todo TODO"> TODO</span> Need a mechanism for publishing warnings and errors. </h4>
+<div class="outline-text-4" id="text-5.1.6">
+
+<p>Warnings and errors must be displayed to the user in a
+consisten way.  To be honest I need to think more about what
+that way is.  Currently errors are printed to the console
+which is no good.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-5.1.7" class="outline-4">
+<h4 id="sec-5.1.7"><span class="section-number-4">5.1.7</span> <span class="todo TODO"> TODO</span> Give feedback to the user when we refuse to edit or add an item. </h4>
+<div class="outline-text-4" id="text-5.1.7">
+
+<p>Probably use the aforementioned warning and error mechanism.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-5.1.8" class="outline-4">
+<h4 id="sec-5.1.8"><span class="section-number-4">5.1.8</span> <span class="todo TODO"> TODO</span> When save fails, indicate it to the user </h4>
+<div class="outline-text-4" id="text-5.1.8">
+
+<p>before bringing up the save as dialog.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-5.1.9" class="outline-4">
+<h4 id="sec-5.1.9"><span class="section-number-4">5.1.9</span> <span class="todo TODO"> TODO</span> Start new drills in Preview mode </h4>
+<div class="outline-text-4" id="text-5.1.9">
+
+<p>When a drill has been loaded for the first time (or after a reset), 
+show the first item in preview mode.  This allows the user to
+update the options, or to save the quiz before selecting the first
+problem.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-5.1.10" class="outline-4">
+<h4 id="sec-5.1.10"><span class="section-number-4">5.1.10</span> <span class="todo TODO"> TODO</span> New Drill Splash Screen </h4>
+<div class="outline-text-4" id="text-5.1.10">
+
+<p>Create a splash screen explaining that this is a new drill and
+the system is in Preview mode.  Press N to start
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-5.1.11" class="outline-4">
+<h4 id="sec-5.1.11"><span class="section-number-4">5.1.11</span> <span class="todo TODO"> TODO</span> Simply loading a drill shouldn't modify it </h4>
+<div class="outline-text-4" id="text-5.1.11">
+
+<p>Currently the "must save" flag is set when a drill is loaded.
+This should only be set after the first item has been answered.
+Of course if the drill was imported from an EDICT file then
+the "must save" flag should be set immediately.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-5.1.12" class="outline-4">
+<h4 id="sec-5.1.12"><span class="section-number-4">5.1.12</span> <span class="todo TODO"> TODO</span> Indicate when the item has been promoted. </h4>
+<div class="outline-text-4" id="text-5.1.12">
+
+<p>When an item has been moved to the review set, print some
+kind of congratulatory message.  Possibly show some kind of
+stats like Anki does.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-5.1.13" class="outline-4">
+<h4 id="sec-5.1.13"><span class="section-number-4">5.1.13</span> <span class="todo TODO"> TODO</span> Windows Packaging [0/5] </h4>
+<div class="outline-text-4" id="text-5.1.13">
 
 <p>Determine the feasibility of creating a windows packaging.
 Place to start:
@@ -663,17 +737,17 @@ and upgrade scripts in the menu
 
 </div>
 
-<div id="outline-container-5.1.3" class="outline-4">
-<h4 id="sec-5.1.3"><span class="section-number-4">5.1.3</span> <span class="todo TODO"> TODO</span> Allow Learn/Unlearn for any arbitrary item </h4>
-<div class="outline-text-4" id="text-5.1.3">
+<div id="outline-container-5.1.14" class="outline-4">
+<h4 id="sec-5.1.14"><span class="section-number-4">5.1.14</span> <span class="todo TODO"> TODO</span> Allow Learn/Unlearn for any arbitrary item </h4>
+<div class="outline-text-4" id="text-5.1.14">
 
 </div>
 
 </div>
 
-<div id="outline-container-5.1.4" class="outline-4">
-<h4 id="sec-5.1.4"><span class="section-number-4">5.1.4</span> <span class="todo TODO"> TODO</span> Define the structure of the data in the drill. </h4>
-<div class="outline-text-4" id="text-5.1.4">
+<div id="outline-container-5.1.15" class="outline-4">
+<h4 id="sec-5.1.15"><span class="section-number-4">5.1.15</span> <span class="todo TODO"> TODO</span> Define the structure of the data in the drill. </h4>
+<div class="outline-text-4" id="text-5.1.15">
 
 <p>In other words, create a dynamic data type that defines the
 structure of the data item that is to be drilled.  Save it in the
@@ -683,17 +757,17 @@ drill itself.  Create a structure for edict vocabulary.
 
 </div>
 
-<div id="outline-container-5.1.5" class="outline-4">
-<h4 id="sec-5.1.5"><span class="section-number-4">5.1.5</span> <span class="todo TODO"> TODO</span> Define a structure for grammar. </h4>
-<div class="outline-text-4" id="text-5.1.5">
+<div id="outline-container-5.1.16" class="outline-4">
+<h4 id="sec-5.1.16"><span class="section-number-4">5.1.16</span> <span class="todo TODO"> TODO</span> Define a structure for grammar. </h4>
+<div class="outline-text-4" id="text-5.1.16">
 
 </div>
 
 </div>
 
-<div id="outline-container-5.1.6" class="outline-4">
-<h4 id="sec-5.1.6"><span class="section-number-4">5.1.6</span> <span class="todo TODO"> TODO</span> Display parts of speech tags next to what they modify </h4>
-<div class="outline-text-4" id="text-5.1.6">
+<div id="outline-container-5.1.17" class="outline-4">
+<h4 id="sec-5.1.17"><span class="section-number-4">5.1.17</span> <span class="todo TODO"> TODO</span> Display parts of speech tags next to what they modify </h4>
+<div class="outline-text-4" id="text-5.1.17">
 
 <p>(i.e. each definition, or sentence)
 </p>
@@ -701,9 +775,9 @@ drill itself.  Create a structure for edict vocabulary.
 
 </div>
 
-<div id="outline-container-5.1.7" class="outline-4">
-<h4 id="sec-5.1.7"><span class="section-number-4">5.1.7</span> <span class="todo TODO"> TODO</span> Allow the user to choose what tags to display. </h4>
-<div class="outline-text-4" id="text-5.1.7">
+<div id="outline-container-5.1.18" class="outline-4">
+<h4 id="sec-5.1.18"><span class="section-number-4">5.1.18</span> <span class="todo TODO"> TODO</span> Allow the user to choose what tags to display. </h4>
+<div class="outline-text-4" id="text-5.1.18">
 
 <p>Save this in the drill.
 </p>
@@ -711,9 +785,9 @@ drill itself.  Create a structure for edict vocabulary.
 
 </div>
 
-<div id="outline-container-5.1.8" class="outline-4">
-<h4 id="sec-5.1.8"><span class="section-number-4">5.1.8</span> <span class="todo TODO"> TODO</span> Associate data items with the dictionary they belong to. </h4>
-<div class="outline-text-4" id="text-5.1.8">
+<div id="outline-container-5.1.19" class="outline-4">
+<h4 id="sec-5.1.19"><span class="section-number-4">5.1.19</span> <span class="todo TODO"> TODO</span> Associate data items with the dictionary they belong to. </h4>
+<div class="outline-text-4" id="text-5.1.19">
 
 <p>Only load the dictionary if it's in the drill. (Question: Should it
 unload the dictionary on next drill?  Probably yes&hellip;)
@@ -722,9 +796,9 @@ unload the dictionary on next drill?  Probably yes&hellip;)
 
 </div>
 
-<div id="outline-container-5.1.9" class="outline-4">
-<h4 id="sec-5.1.9"><span class="section-number-4">5.1.9</span> <span class="todo TODO"> TODO</span> 彼処 かしこ finds あそこ </h4>
-<div class="outline-text-4" id="text-5.1.9">
+<div id="outline-container-5.1.20" class="outline-4">
+<h4 id="sec-5.1.20"><span class="section-number-4">5.1.20</span> <span class="todo TODO"> TODO</span> 彼処 かしこ finds あそこ </h4>
+<div class="outline-text-4" id="text-5.1.20">
 
 <p>When searching the tanaka corpus the reading should be taken into
 account if given.  Thus examples with the same kanji but different
@@ -735,25 +809,17 @@ readings should not be shown.
 
 </div>
 
-<div id="outline-container-5.1.10" class="outline-4">
-<h4 id="sec-5.1.10"><span class="section-number-4">5.1.10</span> <span class="todo TODO"> TODO</span> Alternate Language support (i.e., Chinese) </h4>
-<div class="outline-text-4" id="text-5.1.10">
+<div id="outline-container-5.1.21" class="outline-4">
+<h4 id="sec-5.1.21"><span class="section-number-4">5.1.21</span> <span class="todo TODO"> TODO</span> Allow undo </h4>
+<div class="outline-text-4" id="text-5.1.21">
 
 </div>
 
 </div>
 
-<div id="outline-container-5.1.11" class="outline-4">
-<h4 id="sec-5.1.11"><span class="section-number-4">5.1.11</span> <span class="todo TODO"> TODO</span> Allow undo </h4>
-<div class="outline-text-4" id="text-5.1.11">
-
-</div>
-
-</div>
-
-<div id="outline-container-5.1.12" class="outline-4">
-<h4 id="sec-5.1.12"><span class="section-number-4">5.1.12</span> <span class="todo TODO"> TODO</span> Insert Popup Before Item </h4>
-<div class="outline-text-4" id="text-5.1.12">
+<div id="outline-container-5.1.22" class="outline-4">
+<h4 id="sec-5.1.22"><span class="section-number-4">5.1.22</span> <span class="todo TODO"> TODO</span> Insert Popup Before Item </h4>
+<div class="outline-text-4" id="text-5.1.22">
 
 <p>If the user presses a key (TBD) while a popup is up, an item
 contiaining the information in the popup is added to the quiz
@@ -764,9 +830,9 @@ immediately before the current item.
 
 </div>
 
-<div id="outline-container-5.1.13" class="outline-4">
-<h4 id="sec-5.1.13"><span class="section-number-4">5.1.13</span> <span class="todo TODO"> TODO</span> Aggressive Search </h4>
-<div class="outline-text-4" id="text-5.1.13">
+<div id="outline-container-5.1.23" class="outline-4">
+<h4 id="sec-5.1.23"><span class="section-number-4">5.1.23</span> <span class="todo TODO"> TODO</span> Aggressive Search </h4>
+<div class="outline-text-4" id="text-5.1.23">
 
 <p>If a reading can't be found in the dictionary, seach 
 again taking off one character at a time from the end of the
@@ -777,17 +843,17 @@ reading.
 
 </div>
 
-<div id="outline-container-5.1.14" class="outline-4">
-<h4 id="sec-5.1.14"><span class="section-number-4">5.1.14</span> <span class="todo TODO"> TODO</span> Create a recent used menu for loading drills that you've used recently. </h4>
-<div class="outline-text-4" id="text-5.1.14">
+<div id="outline-container-5.1.24" class="outline-4">
+<h4 id="sec-5.1.24"><span class="section-number-4">5.1.24</span> <span class="todo TODO"> TODO</span> Create a recent used menu for loading drills that you've used recently. </h4>
+<div class="outline-text-4" id="text-5.1.24">
 
 </div>
 
 </div>
 
-<div id="outline-container-5.1.15" class="outline-4">
-<h4 id="sec-5.1.15"><span class="section-number-4">5.1.15</span> <span class="todo TODO"> TODO</span> One of the items in the working set had a potential schedule of 72 days </h4>
-<div class="outline-text-4" id="text-5.1.15">
+<div id="outline-container-5.1.25" class="outline-4">
+<h4 id="sec-5.1.25"><span class="section-number-4">5.1.25</span> <span class="todo TODO"> TODO</span> One of the items in the working set had a potential schedule of 72 days </h4>
+<div class="outline-text-4" id="text-5.1.25">
 
 
 
@@ -795,9 +861,9 @@ reading.
 
 </div>
 
-<div id="outline-container-5.1.16" class="outline-4">
-<h4 id="sec-5.1.16"><span class="section-number-4">5.1.16</span> <span class="todo TODO"> TODO</span> Time to learn after the first item is waaay too big (10798.7s) [1/2] </h4>
-<div class="outline-text-4" id="text-5.1.16">
+<div id="outline-container-5.1.26" class="outline-4">
+<h4 id="sec-5.1.26"><span class="section-number-4">5.1.26</span> <span class="todo TODO"> TODO</span> Time to learn after the first item is waaay too big (10798.7s) [1/2] </h4>
+<div class="outline-text-4" id="text-5.1.26">
 
 <ul>
 <li>
@@ -813,25 +879,25 @@ reading.
 
 </div>
 
-<div id="outline-container-5.1.17" class="outline-4">
-<h4 id="sec-5.1.17"><span class="section-number-4">5.1.17</span> <span class="todo TODO"> TODO</span> Full test coverage for all the model objects </h4>
-<div class="outline-text-4" id="text-5.1.17">
+<div id="outline-container-5.1.27" class="outline-4">
+<h4 id="sec-5.1.27"><span class="section-number-4">5.1.27</span> <span class="todo TODO"> TODO</span> Full test coverage for all the model objects </h4>
+<div class="outline-text-4" id="text-5.1.27">
 
 </div>
 
 </div>
 
-<div id="outline-container-5.1.18" class="outline-4">
-<h4 id="sec-5.1.18"><span class="section-number-4">5.1.18</span> <span class="todo TODO"> TODO</span> Full test coverage for all the contexts </h4>
-<div class="outline-text-4" id="text-5.1.18">
+<div id="outline-container-5.1.28" class="outline-4">
+<h4 id="sec-5.1.28"><span class="section-number-4">5.1.28</span> <span class="todo TODO"> TODO</span> Full test coverage for all the contexts </h4>
+<div class="outline-text-4" id="text-5.1.28">
 
 </div>
 
 </div>
 
-<div id="outline-container-5.1.19" class="outline-4">
-<h4 id="sec-5.1.19"><span class="section-number-4">5.1.19</span> <span class="todo TODO"> TODO</span> Don't steal focus when putting up windows that take no input. </h4>
-<div class="outline-text-4" id="text-5.1.19">
+<div id="outline-container-5.1.29" class="outline-4">
+<h4 id="sec-5.1.29"><span class="section-number-4">5.1.29</span> <span class="todo TODO"> TODO</span> Don't steal focus when putting up windows that take no input. </h4>
+<div class="outline-text-4" id="text-5.1.29">
 
 <p>Deferred from 0.3.3.  I tried to do it, but it never
 worked.  I suspect a race condition in GTK and it's not important
@@ -841,9 +907,9 @@ enough to kill myself over.
 
 </div>
 
-<div id="outline-container-5.1.20" class="outline-4">
-<h4 id="sec-5.1.20"><span class="section-number-4">5.1.20</span> <span class="todo TODO"> TODO</span> Allow user to set the formatting for each type of data. </h4>
-<div class="outline-text-4" id="text-5.1.20">
+<div id="outline-container-5.1.30" class="outline-4">
+<h4 id="sec-5.1.30"><span class="section-number-4">5.1.30</span> <span class="todo TODO"> TODO</span> Allow user to set the formatting for each type of data. </h4>
+<div class="outline-text-4" id="text-5.1.30">
 
 <p>Store the formatting in the drill.
 </p>
@@ -851,9 +917,9 @@ enough to kill myself over.
 
 </div>
 
-<div id="outline-container-5.1.21" class="outline-4">
-<h4 id="sec-5.1.21"><span class="section-number-4">5.1.21</span> <span class="todo TODO"> TODO</span> Rename the methods that take Vocabulary </h4>
-<div class="outline-text-4" id="text-5.1.21">
+<div id="outline-container-5.1.31" class="outline-4">
+<h4 id="sec-5.1.31"><span class="section-number-4">5.1.31</span> <span class="todo TODO"> TODO</span> Rename the methods that take Vocabulary </h4>
+<div class="outline-text-4" id="text-5.1.31">
 
 <p>(like Quiz#add()) to indicate that it's for Vocabulary (i.e.,
 Quiz#addVocab())
@@ -862,17 +928,9 @@ Quiz#addVocab())
 
 </div>
 
-<div id="outline-container-5.1.22" class="outline-4">
-<h4 id="sec-5.1.22"><span class="section-number-4">5.1.22</span> <span class="todo TODO"> TODO</span> Replace webgen with something else. </h4>
-<div class="outline-text-4" id="text-5.1.22">
-
-</div>
-
-</div>
-
-<div id="outline-container-5.1.23" class="outline-4">
-<h4 id="sec-5.1.23"><span class="section-number-4">5.1.23</span> <span class="todo TODO"> TODO</span> Create a keyboard only mode. </h4>
-<div class="outline-text-4" id="text-5.1.23">
+<div id="outline-container-5.1.32" class="outline-4">
+<h4 id="sec-5.1.32"><span class="section-number-4">5.1.32</span> <span class="todo TODO"> TODO</span> Create a keyboard only mode. </h4>
+<div class="outline-text-4" id="text-5.1.32">
 
 <p>Advanced users can probably just use the keyboard.  In this mode,
 Remove any UI that is surpulfluous.
@@ -881,9 +939,9 @@ Remove any UI that is surpulfluous.
 
 </div>
 
-<div id="outline-container-5.1.24" class="outline-4">
-<h4 id="sec-5.1.24"><span class="section-number-4">5.1.24</span> <span class="todo TODO"> TODO</span> Create a dictionary back end to allow it to use online dictionaries, </h4>
-<div class="outline-text-4" id="text-5.1.24">
+<div id="outline-container-5.1.33" class="outline-4">
+<h4 id="sec-5.1.33"><span class="section-number-4">5.1.33</span> <span class="todo TODO"> TODO</span> Create a dictionary back end to allow it to use online dictionaries, </h4>
+<div class="outline-text-4" id="text-5.1.33">
 
 <p>or dictionary servers (fantasdic? stardict?)
 </p>
@@ -891,25 +949,25 @@ Remove any UI that is surpulfluous.
 
 </div>
 
-<div id="outline-container-5.1.25" class="outline-4">
-<h4 id="sec-5.1.25"><span class="section-number-4">5.1.25</span> <span class="todo TODO"> TODO</span> Create Redhat packaging. </h4>
-<div class="outline-text-4" id="text-5.1.25">
+<div id="outline-container-5.1.34" class="outline-4">
+<h4 id="sec-5.1.34"><span class="section-number-4">5.1.34</span> <span class="todo TODO"> TODO</span> Create Redhat packaging. </h4>
+<div class="outline-text-4" id="text-5.1.34">
 
 </div>
 
 </div>
 
-<div id="outline-container-5.1.26" class="outline-4">
-<h4 id="sec-5.1.26"><span class="section-number-4">5.1.26</span> <span class="todo TODO"> TODO</span> Create OSX packaging. </h4>
-<div class="outline-text-4" id="text-5.1.26">
+<div id="outline-container-5.1.35" class="outline-4">
+<h4 id="sec-5.1.35"><span class="section-number-4">5.1.35</span> <span class="todo TODO"> TODO</span> Create OSX packaging. </h4>
+<div class="outline-text-4" id="text-5.1.35">
 
 </div>
 
 </div>
 
-<div id="outline-container-5.1.27" class="outline-4">
-<h4 id="sec-5.1.27"><span class="section-number-4">5.1.27</span> <span class="todo TODO"> TODO</span> Allow user to modify the global backoff. </h4>
-<div class="outline-text-4" id="text-5.1.27">
+<div id="outline-container-5.1.36" class="outline-4">
+<h4 id="sec-5.1.36"><span class="section-number-4">5.1.36</span> <span class="todo TODO"> TODO</span> Allow user to modify the global backoff. </h4>
+<div class="outline-text-4" id="text-5.1.36">
 
 <p>Allow the user to modify the global backoff from the options.  This
 must be saved with the drill.  When the backoff is changed, all the
@@ -929,7 +987,7 @@ duration), then reset it so that it has been waiting for 3.75 days
 <p class="author"> Author: Mike Charlton
 <a href="mailto:mike@Wrook">&lt;mike@Wrook&gt;</a>
 </p>
-<p class="date"> Date: 2011-07-15 13:57:35 JST</p>
+<p class="date"> Date: 2012-01-10 15:13:54 JST</p>
 <p class="creator">HTML generated by org-mode 6.33x in emacs 23</p>
 </div>
 </div>

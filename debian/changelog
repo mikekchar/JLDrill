@@ -1,3 +1,9 @@
+jldrill (0.5.2-4) unstable; urgency=low
+
+  * Add Chinese language support (mandarin with traditional characters)
+
+ -- Mike Charlton <mikekchar@gmail.com>  Tue, 10 Jan 2012 16:52:00 +0900
+
 jldrill (0.5.2-3) unstable; urgency=low
 
   * Add support for ruby 1.9
