@@ -20,9 +20,9 @@ module JLDrill::Gtk
         def run
             # GTK+ on windows doesn't have SVG, so if this fails read the PNG
             begin
-                icon = Gdk::Pixbuf.new(Config::resolveDataFile(Config::SVG_ICON_FILE))
+                icon = Gdk::Pixbuf.new(JLDrill::Config::resolveDataFile(JLDrill::Config::SVG_ICON_FILE))
             rescue
-                icon = Gdk::Pixbuf.new(Config::resolveDataFile(Config::PNG_ICON_FILE))
+                icon = Gdk::Pixbuf.new(JLDrill::Config::resolveDataFile(JLDrill::Config::PNG_ICON_FILE))
             end
             Gtk::AboutDialog.show(nil,
     			    :name => @about.name,
