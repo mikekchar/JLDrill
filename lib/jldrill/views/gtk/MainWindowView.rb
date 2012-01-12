@@ -3,6 +3,7 @@ require 'Context/Gtk/Widget'
 require 'Context/Views/Gtk/Widgets/MainWindow'
 require 'Context/Views/Gtk/Widgets/VBox'
 require 'jldrill/contexts/MainContext'
+require 'jldrill/model/Config'
 require 'gtk2'
 
 module JLDrill::Gtk
@@ -16,11 +17,9 @@ module JLDrill::Gtk
 			@mainWindow = Context::Gtk::MainWindow.new("JLDrill", self)
             # GTK+ on windows doesn't have SVG, so if this fails read the PNG
             begin
-                @icon = Gdk::Pixbuf.new(File.join(JLDrill::Config::DATA_DIR, 
-                                                  "jldrill-icon.svg"))
+                @icon = Gdk::Pixbuf.new(JLDrill::Config::resolveDataFile(JLDrill::Config::PNG_ICON_FILE))
             rescue
-                @icon = Gdk::Pixbuf.new(File.join(JLDrill::Config::DATA_DIR,
-                                                  "jldrill-icon.png"))
+                @icon = Gdk::Pixbuf.new(JLDrill::Config::resolveDataFile(JLDrill::Config::PNG_ICON_FILE))
             end
             @mainWindow.icon_list=([@icon])
 

@@ -18,8 +18,12 @@ module JLDrill::Gtk
 		end
 
         def run
-            iconFile = File.join(JLDrill::Config::DATA_DIR, "jldrill-icon.svg")
-            icon = Gdk::Pixbuf.new(iconFile)
+            # GTK+ on windows doesn't have SVG, so if this fails read the PNG
+            begin
+                icon = Gdk::Pixbuf.new(Config::resolveDataFile(Config::SVG_ICON_FILE))
+            rescue
+                icon = Gdk::Pixbuf.new(Config::resolveDataFile(Config::PNG_ICON_FILE))
+            end
             Gtk::AboutDialog.show(nil,
     			    :name => @about.name,
     			    :version => @about.version,

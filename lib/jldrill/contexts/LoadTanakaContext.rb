@@ -27,14 +27,13 @@ module JLDrill
             if !options.nil? && !options.tanaka.nil?
                 return options.tanaka
             else
-                return Config::TANAKA_NAME
+                return Config::TANAKA_FILE
             end
         end
 
         # Returns the filename of the dictionary including the path
         def getFilename(options)
-            return File.expand_path(dictionaryName(options), 
-                                    Config::TANAKA_DIR)
+            return Config::resolveDataFile(dictionaryName(options))
         end
 
         def loadTanaka(tanaka, filename)

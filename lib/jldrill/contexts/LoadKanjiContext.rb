@@ -14,9 +14,9 @@ module JLDrill
 		
 		def initialize(viewBridge)
 			super(viewBridge)
-		    @kanjiFile = Config::getDataDir + "/dict/rikaichan/kanji.dat"
-            @radicalsFile = Config::getDataDir + "/dict/rikaichan/radicals.dat"
-            @kanaFile = Config::getDataDir + "/dict/Kana/kana.dat"
+		    @kanjiFile = Config::resolveDataFile(Config::KANJI_FILE)
+            @radicalsFile = Config::resolveDataFile(Config::RADICAL_FILE)
+            @kanaFile = Config::resolveDataFile(Config::KANA_FILE)
             @loadFileContext = LoadFileContext.new(@viewBridge)
 		end
 

@@ -219,7 +219,7 @@ module JLDrill::Gtk
             if !options.dictionary.nil?
                 self.dictionaryName = options.dictionary
             else
-                self.dictionaryName = JLDrill::Config::DICTIONARY_NAME
+                self.dictionaryName = JLDrill::Config::DICTIONARY_FILE
             end
             self.language = options.language
             self.autoloadDic = options.autoloadDic
@@ -238,7 +238,7 @@ module JLDrill::Gtk
             @view.options.reviewMeaning = self.reviewMeaning
             @view.options.reviewReading = self.reviewReading
             @view.options.reviewKanji = self.reviewKanji
-            if self.dictionaryName != JLDrill::Config::DICTIONARY_NAME &&
+            if self.dictionaryName != JLDrill::Config::DICTIONARY_FILE &&
                 self.dictionaryName != ""
                 @view.options.dictionary = self.dictionaryName
             else

@@ -25,10 +25,21 @@ module JLDrill
             Config::DATA_DIR.should eql(File.expand_path("data/jldrill"))
         end
 
+        def should_resolve(filename)
+            Config::resolveDataFile(filename).should_not eql(nil)
+        end
+
         it "should resolve data files according to the load path" do
-            Config::resolveDataFile("dict/edict").should_not eql(nil)
-            Config::resolveDataFile("Tanaka/examples.utf").should_not eql(nil)
-            Config::resolveDataFile("dict/rikaichan/deinflect.dat").should_not eql(nil)
+            should_resolve(Config::QUIZ_DIR)
+            should_resolve(Config::SVG_ICON_FILE)
+            should_resolve(Config::PNG_ICON_FILE)
+            should_resolve(File.join(Config::DICTIONARY_DIR,
+                                     Config::DICTIONARY_FILE))
+            should_resolve(Config::KANJI_FILE)
+            should_resolve(Config::RADICAL_FILE)
+            should_resolve(Config::KANA_FILE)
+            should_resolve(Config::TANAKA_FILE)
+            should_resolve(Config::DEINFLECTION_FILE)
         end
     end
 end

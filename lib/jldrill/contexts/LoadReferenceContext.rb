@@ -26,19 +26,27 @@ module JLDrill
             if !options.nil? && !options.dictionary.nil?
                 return options.dictionary
             else
-                return Config::DICTIONARY_NAME
+                return Config::DICTIONARY_FILE
             end
         end
 
         # Returns the filename of the dictionary including the path
         def getFilename(options)
-            return File.expand_path(dictionaryName(options), 
-                                    Config::DICTIONARY_DIR)
+            dictFilename = File.join(Config::DICTIONARY_DIR, 
+                                     dictionaryName(options))
+            retVal = Config::resolveDataFile(dictFilename)
+
+            # Debian installs the edict dictionary in /usr/share/edict
+            # so it might not be in a dict directory.
+            if retVal.nil?
+                retVal = Config::resolveDataFile(dictionaryName(options))
+            end
+
+            return retVal
         end
 
         def getDeinflectionFilename
-            return File.expand_path(Config::DEINFLECTION_NAME,
-                                    Config::DEINFLECTION_DIR)
+            return Config::resolveDataFile(Config::DEINFLECTION_FILE)
         end
 
         def loadDeinflection(deinflect, filename)

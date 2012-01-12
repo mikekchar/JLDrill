@@ -129,11 +129,11 @@ module JLDrill::UserLoadsDictionary
             options = Story.mainContext.quiz.options
             context = Story.context
 
-            Story.context.dictionaryName(options).should be(JLDrill::Config::DICTIONARY_NAME)
-            options.dictionary = "tempDictionary"
-            Story.context.dictionaryName(options).should eql("tempDictionary")
+            Story.context.dictionaryName(options).should be(JLDrill::Config::DICTIONARY_FILE)
+            options.dictionary = "edict"
+            Story.context.dictionaryName(options).should eql("edict")
 
-            Story.context.getFilename(options).should eql(File.join(JLDrill::Config::DICTIONARY_DIR, "tempDictionary"))
+            Story.context.getFilename(options).should eql(File.join(JLDrill::Config::DATA_DIR, File.join(JLDrill::Config::DICTIONARY_DIR, "edict")))
         end
 
     end

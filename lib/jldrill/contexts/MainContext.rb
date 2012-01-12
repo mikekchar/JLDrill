@@ -2,6 +2,7 @@
 require 'Context/Context'
 require 'Context/Bridge'
 require 'Context/View'
+require 'jldrill/model/Config'
 require 'jldrill/model/Quiz/Quiz'
 require 'jldrill/model/items/JEDictionary'
 require 'jldrill/contexts/RunCommandContext'
@@ -55,7 +56,7 @@ module JLDrill
 			@setOptionsContext = SetOptionsContext.new(viewBridge)
 			@showStatisticsContext = ShowStatisticsContext.new(viewBridge)
 			@getFilenameContext = GetFilenameContext.new(viewBridge)
-			@getFilenameContext.directory = File.join(JLDrill::Config::DATA_DIR, "quiz")
+			@getFilenameContext.directory = Config::resolveDataFile(Config::QUIZ_DIR)
 			@addNewVocabularyContext = AddNewVocabularyContext.new(viewBridge)
 			@editVocabularyContext = EditVocabularyContext.new(viewBridge)
 			@displayQuizStatusContext = DisplayQuizStatusContext.new(viewBridge)

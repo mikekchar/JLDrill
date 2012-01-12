@@ -160,6 +160,11 @@ the task.
 	:Done: 1
 	:END:
 
+*** TODO Make sure to use File.join rather than "/" in all paths
+
+*** TODO Refactor Icon
+	Create a class for the icon so that the code is in one place
+
 *** TODO Replace Tanaka corpus with Tatoeba example sentences
 	Tatoeba is the replacesment for the Tanaka corpus upstream.
 	There are 3 CSV files now -- One for collocations, one

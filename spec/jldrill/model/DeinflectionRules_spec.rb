@@ -32,8 +32,7 @@ module JLDrill
 
     describe DeinflectionRulesFile do
         it "should load the file properly" do
-            filename = File.join(Config::DEINFLECTION_DIR, 
-                                 Config::DEINFLECTION_NAME)
+            filename = Config::resolveDataFile(Config::DEINFLECTION_FILE)
             file = DeinflectionRulesFile.new
             file.load(filename)
             file.parse

@@ -36,7 +36,7 @@ module JLDrill
         end
         DEBIAN_DATA_DIR = "/usr/share/jldrill"
 
-        def resolveDataFile(filename)
+        def Config::resolveDataFile(filename)
             retVal = nil
             loadPath = LoadPath.new
             loadPath.add(REPO_DATA_DIR)
@@ -46,11 +46,15 @@ module JLDrill
         end
 
         DATA_DIR = getDataDir
-        DICTIONARY_DIR = File.join(DATA_DIR, "dict")
-        DICTIONARY_NAME = "edict"
-		TANAKA_DIR = File.join(DATA_DIR, "Tanaka")
-		TANAKA_NAME = "examples.utf"
-		DEINFLECTION_DIR = File.join(DATA_DIR, "dict/rikaichan")
-		DEINFLECTION_NAME = "deinflect.dat"
+        QUIZ_DIR = "quiz"
+        SVG_ICON_FILE = "jldrill-icon.svg"
+        PNG_ICON_FILE = "jldrill-icon.png"
+        DICTIONARY_DIR = "dict"
+        DICTIONARY_FILE = "edict"
+        KANJI_FILE = "dict/rikaichan/kanji.dat"
+        RADICAL_FILE = "dict/rikaichan/radicals.dat"
+        KANA_FILE = "dict/Kana/kana.dat"
+		TANAKA_FILE = "Tanaka/examples.utf"
+		DEINFLECTION_FILE = "dict/rikaichan/deinflect.dat"
     end
 end

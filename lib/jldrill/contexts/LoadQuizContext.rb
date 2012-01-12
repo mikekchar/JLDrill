@@ -19,8 +19,7 @@ module JLDrill
             @loadFileContext = LoadFileContext.new(@viewBridge)
             @getFilenameContext = GetFilenameContext.new(@viewBridge)
             # Set the initial directory to the quiz Data dir
-			@getFilenameContext.directory = File.join(JLDrill::Config::DATA_DIR,
-                                                      "quiz")
+			@getFilenameContext.directory = Config::resolveDataFile(Config::QUIZ_DIR)
             @loadQuizFromEdictContext = LoadQuizFromEdictContext.new(@viewBridge)
             @filename = nil
 		end
