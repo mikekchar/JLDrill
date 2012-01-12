@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'rubygems'
+require 'jldrill/model/LoadPath'
 
 module JLDrill
     # Configuration data for JLDrill.  This is how JLDrill knows where
@@ -26,7 +27,24 @@ module JLDrill
                 File.join(repositoryDir, "data/jldrill")
             end
         end
-    
+ 
+        REPO_DATA_DIR = File.join(Config::repositoryDir, "data/jldrill")
+        if !Gem::datadir("jldrill").nil?
+            GEM_DATA_DIR = File.expand_path(Gem::datadir("jldrill"))
+        else
+            GEM_DATA_DIR = nil
+        end
+        DEBIAN_DATA_DIR = "/usr/share/jldrill"
+
+        def resolveDataFile(filename)
+            retVal = nil
+            loadPath = LoadPath.new
+            loadPath.add(REPO_DATA_DIR)
+            loadPath.add(GEM_DATA_DIR)
+            loadPath.add(DEBIAN_DATA_DIR)
+            return loadPath.find(filename)
+        end
+
         DATA_DIR = getDataDir
         DICTIONARY_DIR = File.join(DATA_DIR, "dict")
         DICTIONARY_NAME = "edict"

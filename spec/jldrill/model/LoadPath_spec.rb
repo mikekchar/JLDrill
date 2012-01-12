@@ -40,6 +40,13 @@ module JLDrill
             lp.find("file").should eql(File.join(firstDir, "file"))
             lp.find("file2").should eql(File.join(secondDir, "file2"))
         end
+
+        it "should not add a nil path" do
+            lp = LoadPath.new
+            lp.add(nil)
+            lp.empty?.should eql(true)
+            lp.find("bogus").should eql(nil)
+        end
     end
 end
 	

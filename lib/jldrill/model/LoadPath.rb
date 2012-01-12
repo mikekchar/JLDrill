@@ -28,8 +28,11 @@ module JLDrill
 
         # Add a path to the load path.
         # This path will be added to the end of the load path.
+        # A path equalling nil will not be added
         def add(path)
-            @loadPath.push(path)
+            if !path.nil?
+                @loadPath.push(path)
+            end
         end
 
         # Return a string representation of the load path.

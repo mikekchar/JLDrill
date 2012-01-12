@@ -25,7 +25,10 @@ module JLDrill
             Config::DATA_DIR.should eql(File.expand_path("data/jldrill"))
         end
 
-        it "should load files according to the load path" do
+        it "should resolve data files according to the load path" do
+            Config::resolveDataFile("dict/edict").should_not eql(nil)
+            Config::resolveDataFile("Tanaka/examples.utf").should_not eql(nil)
+            Config::resolveDataFile("dict/rikaichan/deinflect.dat").should_not eql(nil)
         end
     end
 end
