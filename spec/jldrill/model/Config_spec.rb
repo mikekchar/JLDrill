@@ -24,5 +24,8 @@ module JLDrill
             end
             Config::DATA_DIR.should eql(File.expand_path("data/jldrill"))
         end
+
+        it "should load files according to the load path" do
+        end
     end
 end
