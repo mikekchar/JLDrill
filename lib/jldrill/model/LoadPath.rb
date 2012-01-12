@@ -17,7 +17,13 @@ module JLDrill
         # Returns nil if no such file exists, or the path the the file
         # highest up on the load path.
         def find(filename)
-            return nil
+            retVal = @loadPath.find do |path|
+                File.exists?(File.join(path, filename))
+            end
+            if !retVal.nil?
+                retVal = File.join(retVal, filename)
+            end
+            return retVal
         end
 
         # Add a path to the load path.

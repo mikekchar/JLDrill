@@ -13,11 +13,19 @@ module JLDrill
 
         it "should be able to add a directory to the load path" do
             lp = LoadPath.new
-            lp.add(Config::DATA_DIR)
+            firstDir = File.join(Config::DATA_DIR, "tests/first")
+            lp.add(firstDir)
             lp.empty?().should eql(false)
-            lp.to_s.should eql(Config::DATA_DIR)
+            lp.to_s.should eql(firstDir)
+            lp.find("file").should eql(File.join(firstDir, "file"))
         end
 
+        it "should not find files that don't exist" do
+            lp = LoadPath.new
+            firstDir = File.join(Config::DATA_DIR, "tests/first")
+            lp.add(firstDir)
+            lp.find("bogus").should eql(nil)
+        end
     end
 end
 	
