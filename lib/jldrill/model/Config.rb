@@ -28,7 +28,8 @@ module JLDrill
                 File.join(repositoryDir, "data","jldrill")
             end
         end
- 
+
+        PERSONAL_DATA_DIR = File.expand_path(File.join("~",".jldrill")) 
         REPO_DATA_DIR = File.join(Config::repositoryDir, "data","jldrill")
         if !Gem::datadir("jldrill").nil?
             GEM_DATA_DIR = File.expand_path(Gem::datadir("jldrill"))
@@ -41,6 +42,7 @@ module JLDrill
         def Config::resolveDataFile(filename)
             retVal = nil
             loadPath = LoadPath.new
+            loadPath.add(PERSONAL_DATA_DIR)
             loadPath.add(REPO_DATA_DIR)
             loadPath.add(GEM_DATA_DIR)
             loadPath.add(DEBIAN_DATA_DIR)

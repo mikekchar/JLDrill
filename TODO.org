@@ -66,7 +66,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.5.2 |    16 |   11 |    68.8 |    0.06 |   0.08 |
+| * Version 0.5.2 |    16 |   12 |    75.0 |    0.07 |   0.08 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -178,14 +178,14 @@ the task.
 	:Done: 1
 	:END:
 
-*** TODO Add ~/.jldrill to the load path
+*** DONE Add ~/.jldrill to the load path
 	Add the .jldrill in the home directory (if it is set) to the
 	beginning of the load path.  This will allow the user to manually
 	override the dictionaries if they want.
 
 	:PROPERTIES:
 	:JellyBeans: 1
-	:Done: 0
+	:Done: 1
 	:END:
 
 *** TODO Replace Tanaka corpus with Tatoeba example sentences
