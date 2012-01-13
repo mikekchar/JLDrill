@@ -35,6 +35,7 @@ module JLDrill
             GEM_DATA_DIR = nil
         end
         DEBIAN_DATA_DIR = "/usr/share/jldrill"
+        DEBIAN_EDICT_DIR = "/usr/share/edict"
 
         def Config::resolveDataFile(filename)
             retVal = nil
@@ -42,6 +43,7 @@ module JLDrill
             loadPath.add(REPO_DATA_DIR)
             loadPath.add(GEM_DATA_DIR)
             loadPath.add(DEBIAN_DATA_DIR)
+            loadPath.add(DEBIAN_EDICT_DIR)
             return loadPath.find(filename)
         end
 

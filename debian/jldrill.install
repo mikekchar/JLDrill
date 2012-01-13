@@ -10,5 +10,4 @@ data/jldrill/Tanaka/examples.utf usr/share/jldrill/Tanaka
 data/jldrill/jldrill.desktop usr/share/applications
 data/jldrill/jldrill.desktop usr/share/app-install/desktop
 data/jldrill/jldrill-icon.svg usr/share/app-install/icons
-debian/Config.rb usr/lib/ruby/1.8/jldrill/model
 web/output/* usr/share/doc/jldrill/html
