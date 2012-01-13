@@ -14,7 +14,8 @@ module JLDrill
         # If the source has been installed by a package, then who knows
         # where this is...
         def Config::repositoryDir
-            File.expand_path(File.join(Config::configSrcDir, "../../.."))
+            File.expand_path(File.join(Config::configSrcDir, 
+                                       File.join("..","..","..")))
         end
 
         def Config::getDataDir
@@ -24,18 +25,18 @@ module JLDrill
             else
                 # Otherwise hope we are in a source repository and
                 # can find the data dir in the usual spot
-                File.join(repositoryDir, "data/jldrill")
+                File.join(repositoryDir, "data","jldrill")
             end
         end
  
-        REPO_DATA_DIR = File.join(Config::repositoryDir, "data/jldrill")
+        REPO_DATA_DIR = File.join(Config::repositoryDir, "data","jldrill")
         if !Gem::datadir("jldrill").nil?
             GEM_DATA_DIR = File.expand_path(Gem::datadir("jldrill"))
         else
             GEM_DATA_DIR = nil
         end
-        DEBIAN_DATA_DIR = "/usr/share/jldrill"
-        DEBIAN_EDICT_DIR = "/usr/share/edict"
+        DEBIAN_DATA_DIR = File.join("/","usr","share","jldrill")
+        DEBIAN_EDICT_DIR = File.join("/","usr","share","edict")
 
         def Config::resolveDataFile(filename)
             retVal = nil
@@ -53,10 +54,10 @@ module JLDrill
         PNG_ICON_FILE = "jldrill-icon.png"
         DICTIONARY_DIR = "dict"
         DICTIONARY_FILE = "edict"
-        KANJI_FILE = "dict/rikaichan/kanji.dat"
-        RADICAL_FILE = "dict/rikaichan/radicals.dat"
-        KANA_FILE = "dict/Kana/kana.dat"
-		TANAKA_FILE = "Tanaka/examples.utf"
-		DEINFLECTION_FILE = "dict/rikaichan/deinflect.dat"
+        KANJI_FILE = File.join("dict","rikaichan","kanji.dat")
+        RADICAL_FILE = File.join("dict","rikaichan","radicals.dat")
+        KANA_FILE = File.join("dict","Kana","kana.dat")
+		TANAKA_FILE = File.join("Tanaka","examples.utf")
+		DEINFLECTION_FILE = File.join("dict","rikaichan","deinflect.dat")
     end
 end
