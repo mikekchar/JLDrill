@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>JLDrill TODO List</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-01-12 09:46:27 JST"/>
+<meta name="generated" content="2012-01-13 14:56:55 JST"/>
 <meta name="author" content="Mike Charlton"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -90,9 +90,11 @@ lang="en" xml:lang="en">
 <li><a href="#sec-3.2.4">3.2.4 Move to Ruby 1.9 </a></li>
 <li><a href="#sec-3.2.5">3.2.5 Chinese Mode for Kanji Popup </a></li>
 <li><a href="#sec-3.2.6">3.2.6 Ability to load CC-CEDICT dictionary in Chinese mode </a></li>
-<li><a href="#sec-3.2.7">3.2.7 Add Load Path for dictionaries </a></li>
-<li><a href="#sec-3.2.8">3.2.8 Replace Tanaka corpus with Tatoeba example sentences </a></li>
-<li><a href="#sec-3.2.9">3.2.9 Read Chinese collocations from Tatoeba example sentence </a></li>
+<li><a href="#sec-3.2.7">3.2.7 Add Load Path for dictionaries [2/2] </a></li>
+<li><a href="#sec-3.2.8">3.2.8 Show busy cursor when initially loading file </a></li>
+<li><a href="#sec-3.2.9">3.2.9 Add ~/.jldrill to the load path </a></li>
+<li><a href="#sec-3.2.10">3.2.10 Replace Tanaka corpus with Tatoeba example sentences </a></li>
+<li><a href="#sec-3.2.11">3.2.11 Read Chinese collocations from Tatoeba example sentence </a></li>
 </ul></li>
 </ul>
 </li>
@@ -251,7 +253,7 @@ iteration to finish as scheduled.
 <tr><th scope="col">ITEM</th><th scope="col">Total</th><th scope="col">Done</th><th scope="col">Percent</th><th scope="col">Current</th><th scope="col">Needed</th></tr>
 </thead>
 <tbody>
-<tr><td>* Version 0.5.2</td><td>14</td><td>10</td><td>71.4</td><td>0.06</td><td>0.07</td></tr>
+<tr><td><span style="visibility:hidden;"></span>Version 0.5.2</td><td>16</td><td>11</td><td>68.8</td><td>0.06</td><td>0.08</td></tr>
 </tbody>
 </table>
 
@@ -368,7 +370,7 @@ and Edit Vocab windows.
 </div>
 
 <div id="outline-container-3.2.7" class="outline-4">
-<h4 id="sec-3.2.7"><span class="section-number-4">3.2.7</span> <span class="todo TODO"> TODO</span> Add Load Path for dictionaries </h4>
+<h4 id="sec-3.2.7"><span class="section-number-4">3.2.7</span> <span class="done DONE"> DONE</span> Add Load Path for dictionaries [2/2] </h4>
 <div class="outline-text-4" id="text-3.2.7">
 
 <p>Create a load path for the dictionaries that prioritizes
@@ -379,14 +381,54 @@ own edict dictionary if they don't want to use the old one
 in Debian.  This feature is necessary so that we don't have to
 jump through hoops to find the cedictionary in Debian.
 </p>
+<ul>
+<li>
+<b>[X]</b> Make sure to use File.join rather than "/" in all paths
+</li>
+<li>
+<b>[X]</b> Refactor Icon into it's own class to abstract load paths
 
+
+</li>
+</ul>
 </div>
 
 </div>
 
 <div id="outline-container-3.2.8" class="outline-4">
-<h4 id="sec-3.2.8"><span class="section-number-4">3.2.8</span> <span class="todo TODO"> TODO</span> Replace Tanaka corpus with Tatoeba example sentences </h4>
+<h4 id="sec-3.2.8"><span class="section-number-4">3.2.8</span> <span class="done DONE"> DONE</span> Show busy cursor when initially loading file </h4>
 <div class="outline-text-4" id="text-3.2.8">
+
+<p>There's a brief pause when the file load mechanism loads
+the file before it is parsed.  Switch the mouse cursor to the
+busy cursor and switch it back again when the file is finished
+loading. Calling this one finished even though the grab handle
+on the vpane for the ProblemDisplay doesn't show the correct
+cursor.  The entry areas in the ModifyVocabulary windows also
+don't work, but fixing it would mean rewriting the whole class,
+which is something I want to do at a later date.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3.2.9" class="outline-4">
+<h4 id="sec-3.2.9"><span class="section-number-4">3.2.9</span> <span class="todo TODO"> TODO</span> Add ~/.jldrill to the load path </h4>
+<div class="outline-text-4" id="text-3.2.9">
+
+<p>Add the .jldrill in the home directory (if it is set) to the
+beginning of the load path.  This will allow the user to manually
+override the dictionaries if they want.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3.2.10" class="outline-4">
+<h4 id="sec-3.2.10"><span class="section-number-4">3.2.10</span> <span class="todo TODO"> TODO</span> Replace Tanaka corpus with Tatoeba example sentences </h4>
+<div class="outline-text-4" id="text-3.2.10">
 
 <p>Tatoeba is the replacesment for the Tanaka corpus upstream.
 There are 3 CSV files now &ndash; One for collocations, one
@@ -399,9 +441,9 @@ in Japanese mode.
 
 </div>
 
-<div id="outline-container-3.2.9" class="outline-4">
-<h4 id="sec-3.2.9"><span class="section-number-4">3.2.9</span> <span class="todo TODO"> TODO</span> Read Chinese collocations from Tatoeba example sentence </h4>
-<div class="outline-text-4" id="text-3.2.9">
+<div id="outline-container-3.2.11" class="outline-4">
+<h4 id="sec-3.2.11"><span class="section-number-4">3.2.11</span> <span class="todo TODO"> TODO</span> Read Chinese collocations from Tatoeba example sentence </h4>
+<div class="outline-text-4" id="text-3.2.11">
 
 <p>In Chinese mode, read and select the Chinese collocations.
 </p>
@@ -1005,7 +1047,7 @@ duration), then reset it so that it has been waiting for 3.75 days
 <p class="author"> Author: Mike Charlton
 <a href="mailto:mike@Wrook">&lt;mike@Wrook&gt;</a>
 </p>
-<p class="date"> Date: 2012-01-12 09:46:27 JST</p>
+<p class="date"> Date: 2012-01-13 14:56:55 JST</p>
 <p class="creator">HTML generated by org-mode 6.33x in emacs 23</p>
 </div>
 </div>

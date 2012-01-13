@@ -66,7 +66,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.5.2 |    16 |   10 |    62.5 |    0.06 |   0.08 |
+| * Version 0.5.2 |    16 |   11 |    68.8 |    0.06 |   0.08 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -163,15 +163,19 @@ the task.
 	:Done: 1
 	:END:
 
-*** TODO Show busy cursor when initially loading file
+*** DONE Show busy cursor when initially loading file
 	There's a brief pause when the file load mechanism loads
 	the file before it is parsed.  Switch the mouse cursor to the
 	busy cursor and switch it back again when the file is finished
-	loading.
+	loading. Calling this one finished even though the grab handle
+	on the vpane for the ProblemDisplay doesn't show the correct
+	cursor.  The entry areas in the ModifyVocabulary windows also
+	don't work, but fixing it would mean rewriting the whole class,
+	which is something I want to do at a later date.
 
 	:PROPERTIES:
 	:JellyBeans: 1
-	:Done: 0
+	:Done: 1
 	:END:
 
 *** TODO Add ~/.jldrill to the load path
