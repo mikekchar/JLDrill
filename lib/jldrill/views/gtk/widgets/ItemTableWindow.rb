@@ -228,6 +228,15 @@ module JLDrill::Gtk
         def markPaste
             @vocabTable.pasteBefore
         end
+        
+        def showBusy(bool)
+            if bool
+                self.window.set_cursor(Gdk::Cursor.new(Gdk::Cursor::WATCH))
+            else
+                self.window.set_cursor(nil)
+            end
+            Gdk::flush()
+        end
 
     end
 end

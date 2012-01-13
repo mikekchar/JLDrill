@@ -53,6 +53,14 @@ module JLDrill
             self.exit
         end
 
+        def startLongEvent()
+            @parent.startLongEvent()
+        end
+
+        def stopLongEvent()
+            @parent.stopLongEvent()
+        end
+
         def enter(parent, kanji, radicals, kana)
             super(parent)
             @kanji = kanji

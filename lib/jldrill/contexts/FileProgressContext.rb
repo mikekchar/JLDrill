@@ -45,7 +45,9 @@ module JLDrill
             eof = false
             filename = getFilename()
             if !filename.nil? && !getFile.nil?
+                @parent.startLongEvent()
                 getFile.load(filename)
+                @parent.stopLongEvent()
                 @mainView.idle_add do
                     eof = getFile.parseChunk(getFile.stepSize)
                     @mainView.update(getFile.fraction)

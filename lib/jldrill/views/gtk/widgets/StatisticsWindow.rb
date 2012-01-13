@@ -202,5 +202,14 @@ module JLDrill::Gtk
         def updateForgottenRate(stats)
             @forgottenStats.updateRate(stats)
         end
+        
+        def showBusy(bool)
+            if bool
+                self.window.set_cursor(Gdk::Cursor.new(Gdk::Cursor::WATCH))
+            else
+                self.window.set_cursor(nil)
+            end
+            Gdk::flush()
+        end
     end
 end

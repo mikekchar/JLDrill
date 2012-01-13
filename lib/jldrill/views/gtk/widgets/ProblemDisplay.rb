@@ -172,5 +172,18 @@ module JLDrill::Gtk
             @context.expandWithSavePath(filename)
         end
         
+        def showBusy(bool)
+            if bool
+                @vpane.window.set_cursor(Gdk::Cursor.new(Gdk::Cursor::WATCH))
+                self.window.set_cursor(Gdk::Cursor.new(Gdk::Cursor::WATCH))
+            else
+                @vpane.window.set_cursor(nil)
+                self.window.set_cursor(nil)
+            end
+            Gdk::flush
+            @popupFactory.showBusy(bool)
+            @question.showBusy(bool)
+            @answer.showBusy(bool)
+        end
     end
 end

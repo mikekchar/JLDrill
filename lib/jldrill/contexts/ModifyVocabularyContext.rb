@@ -39,6 +39,13 @@ module JLDrill
                 # Please define in the concrete class
             end
 
+            # Show the busy cursor in the UI if bool is true.
+            # This happens during a long event where the user can't
+            # interact with the window
+            def showBusy(bool)
+                # Please define in the concrete class
+            end
+
             # resets the vocabulary variable and clears the UI
             def clearVocabulary
                 @vocabulary = Vocabulary.new
@@ -82,6 +89,8 @@ module JLDrill
                 if !@parent.reference.nil?
                     @parent.reference.publisher.subscribe(self, "edictLoad")
                 end
+                @parent.longEventPublisher.subscribe(self, "startLongEvent")
+                @parent.longEventPublisher.subscribe(self, "stopLongEvent")
                 update(@parent.quiz.currentProblem)
             end
 		end
@@ -98,6 +107,8 @@ module JLDrill
                 if !@parent.reference.nil?
                     @parent.reference.publisher.unsubscribe(self, "edictLoad")
                 end
+                @parent.longEventPublisher.unsubscribe(self, "startLongEvent")
+                @parent.longEventPublisher.unsubscribe(self, "stopLongEvent")
             end
 		    super
 		end
@@ -153,6 +164,14 @@ module JLDrill
             @mainView.updateSearch unless @mainView.nil?
         end
 
+        def startLongEventUpdated(source)
+            @mainView.showBusy(true)
+        end
+
+        def stopLongEventUpdated(source)
+            @mainView.showBusy(false)
+        end
+        
         def preview(item)
             @parent.previewItem(item)
         end

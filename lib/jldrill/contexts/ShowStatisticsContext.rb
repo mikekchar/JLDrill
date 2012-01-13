@@ -31,6 +31,13 @@ module JLDrill
                 # Please define in the concrete class
             end
 
+            # Show the busy cursor in the UI if bool is true.
+            # This happens during a long event where the user can't
+            # interact with the window
+            def showBusy(bool)
+                # Please define in the concrete class
+            end
+
             # Update the view with the statistics from the quiz
             def update(quiz)
                 @quiz = quiz
@@ -58,16 +65,29 @@ module JLDrill
     		    super(parent)
     		    @mainView.update(parent.quiz)
     		    @parent.quiz.publisher.subscribe(self, "newProblem")
+                @parent.longEventPublisher.subscribe(self, "startLongEvent")
+                @parent.longEventPublisher.subscribe(self, "stopLongEvent")
     		end
 		end
 		
 		def exit
 		    @parent.quiz.publisher.unsubscribe(self, "newProblem")
+            @parent.longEventPublisher.unsubscribe(self, "startLongEvent")
+            @parent.longEventPublisher.unsubscribe(self, "stopLongEvent")
 		    super
 		end
 		
 		def newProblemUpdated(problem)
 		    @mainView.update(@parent.quiz) unless @mainView.nil?
 		end
+        
+        def startLongEventUpdated(source)
+            @mainView.showBusy(true)
+        end
+
+        def stopLongEventUpdated(source)
+            @mainView.showBusy(false)
+        end
+
     end
 end

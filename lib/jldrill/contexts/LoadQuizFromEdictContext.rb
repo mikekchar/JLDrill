@@ -45,6 +45,14 @@ module JLDrill
             return !parent.nil? && !@quiz.nil? && !@edict.nil?
         end
 
+        def startLongEvent()
+            @parent.startLongEvent()
+        end
+
+        def stopLongEvent()
+            @parent.stopLongEvent()
+        end
+
         def enter(parent, quiz, edict)
             @quiz = quiz
             @edict = edict

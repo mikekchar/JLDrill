@@ -62,5 +62,11 @@ module JLDrill::Gtk
             pos = [x + origin[0], y + origin[1]]
             widget.translate_coordinates(@view.mainWindow, pos[0], pos[1])
         end
+        
+        def showBusy(bool)
+            if !@currentPopup.nil?
+                @currentPopup.showBusy(bool)
+            end
+        end
     end
 end

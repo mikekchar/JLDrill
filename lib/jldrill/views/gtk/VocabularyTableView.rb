@@ -41,6 +41,10 @@ module JLDrill::Gtk
         def removeItem(item)
             @itemTableWindow.removeItem(item)
         end
+        
+        def showBusy(bool)
+            @itemTableWindow.showBusy(bool)
+        end
     end
 end
 

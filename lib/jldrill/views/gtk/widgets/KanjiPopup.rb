@@ -48,5 +48,17 @@ module JLDrill::Gtk
         def close
             @popup.destroy                
         end
+        
+        def showBusy(bool)
+            # TextViews have a hidden subwindow that houses the cursor
+            subwindow = @contents.get_window(Gtk::TextView::WINDOW_TEXT)
+            if bool
+                subwindow.set_cursor(Gdk::Cursor.new(Gdk::Cursor::WATCH))
+            else
+                subwindow.set_cursor(nil)
+            end
+            Gdk::flush()
+            super(bool)
+        end
     end
 end

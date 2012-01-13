@@ -66,7 +66,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.5.2 |    14 |   10 |    71.4 |    0.06 |   0.07 |
+| * Version 0.5.2 |    16 |   10 |    62.5 |    0.06 |   0.08 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -146,7 +146,7 @@ the task.
 	:Done: 2
 	:END:
 
-*** TODO Add Load Path for dictionaries
+*** DONE Add Load Path for dictionaries [2/2]
 	Create a load path for the dictionaries that prioritizes
 	directories where the dictionaries might be.  Add /usr/share/edict
 	to the end of the load path and remove the special configuration
@@ -155,15 +155,34 @@ the task.
 	in Debian.  This feature is necessary so that we don't have to
 	jump through hoops to find the cedictionary in Debian.
 
+	- [X] Make sure to use File.join rather than "/" in all paths
+    - [X] Refactor Icon into it's own class to abstract load paths
+
 	:PROPERTIES:
 	:JellyBeans: 1
 	:Done: 1
 	:END:
 
-*** TODO Make sure to use File.join rather than "/" in all paths
+*** TODO Show busy cursor when initially loading file
+	There's a brief pause when the file load mechanism loads
+	the file before it is parsed.  Switch the mouse cursor to the
+	busy cursor and switch it back again when the file is finished
+	loading.
 
-*** TODO Refactor Icon
-	Create a class for the icon so that the code is in one place
+	:PROPERTIES:
+	:JellyBeans: 1
+	:Done: 0
+	:END:
+
+*** TODO Add ~/.jldrill to the load path
+	Add the .jldrill in the home directory (if it is set) to the
+	beginning of the load path.  This will allow the user to manually
+	override the dictionaries if they want.
+
+	:PROPERTIES:
+	:JellyBeans: 1
+	:Done: 0
+	:END:
 
 *** TODO Replace Tanaka corpus with Tatoeba example sentences
 	Tatoeba is the replacesment for the Tanaka corpus upstream.

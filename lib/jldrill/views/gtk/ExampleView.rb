@@ -42,5 +42,9 @@ module JLDrill::Gtk
 		    super(examples)
 		    @exampleWindow.updateContents(examples)
 		end
+
+        def showBusy(bool)
+            @exampleWindow.showBusy(bool)
+        end
     end   
 end

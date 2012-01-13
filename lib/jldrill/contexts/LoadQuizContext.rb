@@ -58,6 +58,14 @@ module JLDrill
             @loadFileContext.enter(self, quiz, filename)
         end
 
+        def startLongEvent()
+            @parent.startLongEvent()
+        end
+
+        def stopLongEvent()
+            @parent.stopLongEvent()
+        end
+
         def enter(parent, quiz, filename=nil)
             super(parent)
             if filename.nil?

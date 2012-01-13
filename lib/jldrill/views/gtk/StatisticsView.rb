@@ -37,5 +37,9 @@ module JLDrill::Gtk
 		    @statisticsWindow.updateForgottenAccuracy(quiz.strategy.forgottenStats)
 		    @statisticsWindow.updateForgottenRate(quiz.strategy.forgottenStats)
 		end
+        
+        def showBusy(bool)
+            @statisticsWindow.showBusy(bool)
+        end
     end   
 end

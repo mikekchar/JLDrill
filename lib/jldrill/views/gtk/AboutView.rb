@@ -2,6 +2,7 @@
 require 'Context/Gtk/Widget'
 require 'jldrill/contexts/ShowAboutContext'
 require 'jldrill/model/Config'
+require 'jldrill/views/gtk/widgets/Icon'
 require 'gtk2'
 
 module JLDrill::Gtk
@@ -18,12 +19,7 @@ module JLDrill::Gtk
 		end
 
         def run
-            # GTK+ on windows doesn't have SVG, so if this fails read the PNG
-            begin
-                icon = Gdk::Pixbuf.new(JLDrill::Config::resolveDataFile(JLDrill::Config::SVG_ICON_FILE))
-            rescue
-                icon = Gdk::Pixbuf.new(JLDrill::Config::resolveDataFile(JLDrill::Config::PNG_ICON_FILE))
-            end
+            icon = Icon.new
             Gtk::AboutDialog.show(nil,
     			    :name => @about.name,
     			    :version => @about.version,
@@ -31,7 +27,7 @@ module JLDrill::Gtk
     			    :license => @about.license,
     			    :comments => @about.comments,
                     :website => @about.website,
-                    :logo => icon,
+                    :logo => icon.icon,
     			    :authors => @about.authors)
         end
     end

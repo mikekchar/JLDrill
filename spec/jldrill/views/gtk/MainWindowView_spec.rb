@@ -38,8 +38,8 @@ module JLDrill::Gtk
         it "should have an icon" do
 		    @story.setup(JLDrill::Gtk)
 		    @story.start
-            @story.view.icon.should_not be(nil)
-            @story.view.mainWindow.icon.should be_equal(@story.view.icon)
+            @story.view.icon.icon.should_not be(nil)
+            @story.view.mainWindow.icon.should be_equal(@story.view.icon.icon)
             @story.shutdown
         end
 	end

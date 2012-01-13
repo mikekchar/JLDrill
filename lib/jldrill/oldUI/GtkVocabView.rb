@@ -198,8 +198,15 @@ module JLDrill::Gtk
         def setAcceptKanji(&block)
             @acceptKanjiBlock = block
         end
+
         def focusReading
             readingWidget.grab_focus
+        end
+        
+        def showBusy(bool)
+            # This remains unimplemented since I would have to rewrite
+            # the entire class to make it work.  I will postpone it until
+            # I rewrite the class.
         end
     end
 end

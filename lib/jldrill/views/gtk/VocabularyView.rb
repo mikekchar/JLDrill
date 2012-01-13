@@ -72,6 +72,9 @@ module JLDrill::Gtk
             @context.loadDictionary
         end
 	
+        def showBusy(bool)
+            @vocabularyWindow.showBusy(bool)
+        end
     end
     
 end

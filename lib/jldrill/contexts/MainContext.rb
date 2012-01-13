@@ -2,6 +2,7 @@
 require 'Context/Context'
 require 'Context/Bridge'
 require 'Context/View'
+require 'Context/Publisher'
 require 'jldrill/model/Config'
 require 'jldrill/model/Quiz/Quiz'
 require 'jldrill/model/items/JEDictionary'
@@ -45,7 +46,8 @@ module JLDrill
                     :loadQuizContext, :loadKanjiContext,
                     :appendFileContext,
 	                :reference, :quiz, :kanji, :radicals, :kana,
-                    :inTests, :tanaka, :deinflect
+                    :inTests, :tanaka, :deinflect,
+                    :longEventPublisher
 
 	    attr_writer :quiz, :inTests, :reference
 		
@@ -79,6 +81,8 @@ module JLDrill
             @inTests = false
 			@tanaka = Tanaka::Reference.new
             @deinflect = DeinflectionRulesFile.new
+
+            @longEventPublisher = Context::Publisher.new(self)
 		end
 
         class MainWindowView < Context::View
@@ -89,6 +93,13 @@ module JLDrill
             # Destroy the main window
             def destroy
                 # define in the concrete class
+            end
+
+            # Show the busy cursor in the UI if bool is true.
+            # This happens during a long event where the user can't
+            # interact with the window
+            def showBusy(bool)
+                # Please define in the concrete class
             end
 
             # This is a convenience method for the tests so that
@@ -391,5 +402,15 @@ module JLDrill
 		def showAbout
 		    @showAboutContext.enter(self) unless @showAboutContext.isEntered?
 		end
+
+        def startLongEvent()
+            @mainView.showBusy(true)
+            @longEventPublisher.update("startLongEvent")
+        end
+
+        def stopLongEvent()
+            @mainView.showBusy(false)
+            @longEventPublisher.update("stopLongEvent")
+        end
     end
 end

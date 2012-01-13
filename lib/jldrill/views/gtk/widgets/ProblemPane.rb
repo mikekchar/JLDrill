@@ -137,6 +137,19 @@ module JLDrill::Gtk
             winx, winy = @contents.buffer_to_window_coords(windowType, 0, size)
             return winy
         end
+        
+        def showBusy(bool)
+            # TextViews have a hidden subwindow that houses the cursor
+            subwindow = @contents.get_window(Gtk::TextView::WINDOW_TEXT)
+            if bool
+                self.window.set_cursor(Gdk::Cursor.new(Gdk::Cursor::WATCH))
+                subwindow.set_cursor(Gdk::Cursor.new(Gdk::Cursor::WATCH))
+            else
+                self.window.set_cursor(nil)
+                subwindow.set_cursor(nil)
+            end
+            Gdk::flush()
+        end
     end
 
     # The pane that displays the question for the problem
@@ -172,5 +185,6 @@ module JLDrill::Gtk
                 @isClear = false
             end
         end
+        
     end
 end

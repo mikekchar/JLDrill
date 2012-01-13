@@ -68,6 +68,10 @@ module JLDrill::Gtk
                 startTimer(problem.item.itemStats.timeLimit)
             end
         end
+        
+        def showBusy(bool)
+            @problemDisplay.showBusy(bool)
+        end
     end
     
 end

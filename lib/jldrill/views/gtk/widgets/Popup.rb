@@ -27,5 +27,14 @@ module JLDrill::Gtk
         def close
             @popup.destroy                
         end
+        
+        def showBusy(bool)
+            if bool
+                @popup.window.set_cursor(Gdk::Cursor.new(Gdk::Cursor::WATCH))
+            else
+                @popup.window.set_cursor(nil)
+            end
+            Gdk::flush()
+        end
     end
 end

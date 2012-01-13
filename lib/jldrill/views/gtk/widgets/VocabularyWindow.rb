@@ -193,5 +193,15 @@ module JLDrill::Gtk
                 @vocabView.focusReading
             end
         end
+        
+        def showBusy(bool)
+            @vocabView.showBusy(bool)
+            if bool
+                self.window.set_cursor(Gdk::Cursor.new(Gdk::Cursor::WATCH))
+            else
+                self.window.set_cursor(nil)
+            end
+            Gdk::flush()
+        end
     end
 end
