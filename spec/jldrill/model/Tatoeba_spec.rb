@@ -64,6 +64,19 @@ module JLDrill::Tatoeba
 
 			tatoeba.dataSize.should be(1265634)
 		end
+
+        it "should be able to read the links file from disk" do
+            links = LinkFile.new
+			links.load(File.join(JLDrill::Config::DATA_DIR, 
+                                  "tests/links.csv"))
+            links.parse
+
+            links.lines.should_not eql([])
+
+            links.dataSize.should be(100)
+
+            links.getLinksTo(1).size.should eql(40)
+        end
     end
 end
 

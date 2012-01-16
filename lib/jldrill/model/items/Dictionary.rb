@@ -58,7 +58,7 @@ module JLDrill
             super
         end
 
-        # Has the word in both the reading and kanji hashes so that
+        # Hash the word in both the reading and kanji hashes so that
         # we can find them quickly.
         def hashWord(word)
             # We will hash on the first character.

@@ -41,5 +41,38 @@ module JLDrill::Tatoeba
             return retVal
         end
     end
+    class LinkFile < JLDrill::DataFile
+        LINK_RE = /^(\d*)[\t](\d*)/
+        def initialize()
+            super
+            @links = []
+            @stepSize = 1000
+        end
+
+        def dataSize
+            @links.size
+        end
+
+        def parseEntry
+            if LINK_RE.match(@lines[@parsed])
+                index = $1.to_i
+                (@links[index] ||= []).push($2.to_i)
+            end
+            @parsed += 1
+        end
+
+        # Don't erase @lines because we need them later
+        def finishParsing
+            setLoaded(true)
+        end
+
+        def getLinksTo(index)
+            retVal = @links[index]
+            if retVal.nil?
+                retVal = []
+            end
+            return retVal
+        end
+    end
 end
 
