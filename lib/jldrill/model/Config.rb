@@ -60,6 +60,7 @@ module JLDrill
         RADICAL_FILE = File.join("dict","rikaichan","radicals.dat")
         KANA_FILE = File.join("dict","Kana","kana.dat")
 		TANAKA_FILE = File.join("Tanaka","examples.utf")
+        TATOEBA_SENTENCE_FILE = File.join("Tatoeba", "sentences.csv")
 		DEINFLECTION_FILE = File.join("dict","rikaichan","deinflect.dat")
     end
 end

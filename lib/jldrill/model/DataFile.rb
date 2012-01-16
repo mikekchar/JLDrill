@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'Context/Publisher'
+require 'kconv'
 
 module JLDrill
     # This class represents a data file in JLDrill.   This
