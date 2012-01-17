@@ -22,6 +22,7 @@ require 'jldrill/contexts/ShowAllVocabularyContext'
 require 'jldrill/contexts/LoadTanakaContext'
 require 'jldrill/contexts/LoadQuizContext'
 require 'jldrill/contexts/LoadKanjiContext'
+require 'jldrill/contexts/LoadTatoebaContext.rb'
 require 'jldrill/contexts/AppendFileContext'
 require 'jldrill/model/Acknowlegements'
 require 'jldrill/contexts/ShowAboutContext'
@@ -44,9 +45,9 @@ module JLDrill
                     :showAboutContext, :editVocabularyContext,
 					:loadTanakaContext, :showExamplesContext,
                     :loadQuizContext, :loadKanjiContext,
-                    :appendFileContext,
+                    :loadTatoebaContext, :appendFileContext,
 	                :reference, :quiz, :kanji, :radicals, :kana,
-                    :inTests, :tanaka, :deinflect,
+                    :inTests, :tanaka, :tatoebaDB, :deinflect,
                     :longEventPublisher
 
 	    attr_writer :quiz, :inTests, :reference
@@ -67,6 +68,7 @@ module JLDrill
 			@showAllVocabularyContext = ShowAllVocabularyContext.new(viewBridge)
 			@showAboutContext = ShowAboutContext.new(viewBridge)
 			@loadTanakaContext = LoadTanakaContext.new(viewBridge)
+            @loadTatoebaContext = LoadTatoebaContext.new(viewBridge)
 			@showExamplesContext = ShowExamplesContext.new(viewBridge)
             @loadQuizContext = LoadQuizContext.new(viewBridge)
             @loadKanjiContext = LoadKanjiContext.new(viewBridge)
@@ -80,6 +82,7 @@ module JLDrill
             @quiz.setNeedsSave(false)
             @inTests = false
 			@tanaka = Tanaka::Reference.new
+            @tatoebaDB = Tatoeba::Database.new
             @deinflect = DeinflectionRulesFile.new
 
             @longEventPublisher = Context::Publisher.new(self)
@@ -254,6 +257,21 @@ module JLDrill
                         @showExamplesContext.enter(self)
                     end
                     @loadTanakaContext.enter(self, @tanaka, @quiz.options)
+                end
+			end
+		end
+
+		def loadTatoeba
+			if @tatoebaDB.loaded?
+ #               if !@showExamplesContext.isEntered?
+ #                   @showExamplesContext.enter(self)
+ #               end
+			else
+                if !@loadTatoebaContext.isEntered?
+                    @loadTatoebaContext.onExit do
+ #                       @showExamplesContext.enter(self)
+                    end
+                    @loadTatoebaContext.enter(self, @tatoebaDB)
                 end
 			end
 		end

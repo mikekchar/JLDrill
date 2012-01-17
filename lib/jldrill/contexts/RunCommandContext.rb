@@ -74,7 +74,7 @@ module JLDrill
         end
 
 		def loadTanaka
-			@parent.loadTanaka
+			@parent.loadTatoeba
 		end
         
         def quit

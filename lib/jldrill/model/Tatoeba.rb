@@ -287,7 +287,20 @@ module JLDrill::Tatoeba
         def finishParsing
             setLoaded(true)
         end
+    end
 
+    # Represents the Tatoeba database
+    class Database
+        attr_reader :sentences, :japaneseIndeces
+    
+        def initialize()
+            @sentences = SentenceFile.new
+            @japaneseIndeces = JapaneseIndexFile.new
+        end
+
+        def loaded?
+            return false
+        end
     end
 end
 

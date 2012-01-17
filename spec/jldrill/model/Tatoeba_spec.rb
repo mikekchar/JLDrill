@@ -38,31 +38,31 @@ module JLDrill::Tatoeba
 32	cmn	你應該去睡覺了吧。
 33	cmn	我要走了。
 35	cmn	我不能活那種命。 ]
-            tatoeba = SentenceFile.new
-            tatoeba.dataSize.should be(0)
-			tatoeba.lines = file.split("\n")
-            tatoeba.loaded?.should be_false
-            tatoeba.parse
+            sentences = SentenceFile.new
+            sentences.dataSize.should be(0)
+			sentences.lines = file.split("\n")
+            sentences.loaded?.should be_false
+            sentences.parse
 
 			# It should not dispose of the lines after parsing because it needs them for searching
-			tatoeba.lines.should_not eql([])
-            tatoeba.loaded?.should be_true
+			sentences.lines.should_not eql([])
+            sentences.loaded?.should be_true
 
-            tatoeba.dataSize.should be(120142)
-            tatoeba.sentenceAt(1).should eql("我們試試看！")
-            tatoeba.sentenceAt(120138).should eql("Il y avait un petit nombre d'étrangers parmi les visiteurs du musée.")
-            tatoeba.sentenceAt(300).should eql("")
+            sentences.dataSize.should be(120142)
+            sentences.sentenceAt(1).should eql("我們試試看！")
+            sentences.sentenceAt(120138).should eql("Il y avait un petit nombre d'étrangers parmi les visiteurs du musée.")
+            sentences.sentenceAt(300).should eql("")
         end
         
         it "should be able to read the file from disk" do
-            tatoeba = SentenceFile.new
-			tatoeba.load(File.join(JLDrill::Config::DATA_DIR, 
+            sentences = SentenceFile.new
+			sentences.load(File.join(JLDrill::Config::DATA_DIR, 
                                   "tests/sentences.csv"))
-            tatoeba.parse
+            sentences.parse
 
-			tatoeba.lines.should_not eql([])
+			sentences.lines.should_not eql([])
 
-			tatoeba.dataSize.should be(1265634)
+			sentences.dataSize.should be(1265634)
 		end
 
         it "should be able to read the links file from disk" do
