@@ -87,6 +87,14 @@ module JLDrill::Tatoeba
             links.lines.should_not eql([])
 
             links.dataSize.should be(100)
+            suguni = links.search("直ぐに", "すぐに")
+            suguni.size.should be(2)
+            sentences = SentenceFile.new
+			sentences.load(File.join(JLDrill::Config::DATA_DIR, 
+                                  "tests/sentences.csv"))
+            sentences.parse
+            suguni[0].to_s(sentences).should eql("4709: 直ぐに{すぐに}\n\tすぐに戻ります。 \n\tI will be back soon.")
+
         end
     end
 end

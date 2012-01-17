@@ -151,7 +151,7 @@ module JLDrill::Tatoeba
         end
 
         def id
-            return japaneseIndex
+            return @japaneseIndex
         end
 
         def word_to_s
