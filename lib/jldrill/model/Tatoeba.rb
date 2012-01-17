@@ -112,7 +112,9 @@ module JLDrill::Tatoeba
 
         attr_reader :kanji, :reading, :sense, :actual, :checked, :sentences
 
-        def initialize(data, sentences)
+        def initialize(data, searchedWordData, sentences)
+            @sentences = sentences
+            
             @kanji = ""
             @reading = ""
             @sense = 0
@@ -120,12 +122,11 @@ module JLDrill::Tatoeba
             @checked = false
             @japaneseIndex = 0
             @englishIndex = 0
-            @sentences = sentences
 
             if INDEX_RE.match(data)
                 @japaneseIndex = $1.to_i
                 @englishIndex = $2.to_i 
-                parseWordData($3)
+                parseWordData(searchedWordData)
             end
         end
 
@@ -202,8 +203,9 @@ module JLDrill::Tatoeba
         def getSentences
             retVal = []
             if !@connections.nil?
+                wordData = getWordData
                 @connections.each_with_index do |connection, i|
-                    retVal.push(IndexSentence.new(@lines[connection], @sentences))
+                    retVal.push(IndexSentence.new(@lines[connection], wordData[i], @sentences))
                 end
             end
             return retVal
@@ -216,6 +218,14 @@ module JLDrill::Tatoeba
                 end
             end
             return ""
+        end
+
+        def getWordData
+            wordData = []
+            @connections.each_with_index do |connection, i|
+                wordData.push(findWord(@lines[connection]))
+            end
+            return wordData 
         end
     end
 

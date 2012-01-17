@@ -73,7 +73,7 @@ module JLDrill
             @parent.loadReference
         end
 
-		def loadTanaka
+		def loadTatoeba
 			@parent.loadTatoeba
 		end
         

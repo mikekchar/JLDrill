@@ -38,7 +38,7 @@ module JLDrill::Gtk
                         Proc.new{@context.loadReference} ],
 					["/File/Load Tanaka _Examples",
 						"<Item>",		   "<control>E", 	nil,
-						Proc.new{@context.loadTanaka} ],
+						Proc.new{@context.loadTatoeba} ],
                     ["/File/_Quit",
                         "<StockItem>",     "<control>Q",    Gtk::Stock::QUIT, 
                         Proc.new{@context.quit} ],
