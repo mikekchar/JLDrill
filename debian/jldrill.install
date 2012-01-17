@@ -6,7 +6,7 @@ data/jldrill/dict/Kana usr/share/jldrill/dict
 data/jldrill/dict/rikaichan usr/share/jldrill/dict
 data/jldrill/dict/cedict usr/share/jldrill/dict
 data/jldrill/jldrill-icon.* usr/share/jldrill
-data/jldrill/Tanaka/examples.utf usr/share/jldrill/Tanaka
+data/jldrill/Tatoeba/*.csv usr/share/jldrill/Tatoeba
 data/jldrill/jldrill.desktop usr/share/applications
 data/jldrill/jldrill.desktop usr/share/app-install/desktop
 data/jldrill/jldrill-icon.svg usr/share/app-install/icons

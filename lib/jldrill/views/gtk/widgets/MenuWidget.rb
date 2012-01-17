@@ -36,7 +36,7 @@ module JLDrill::Gtk
                     ["/File/Load Reference _Dictionary",
                         "<Item>",          "<control>D",    nil, 
                         Proc.new{@context.loadReference} ],
-					["/File/Load Tanaka _Examples",
+					["/File/Load Tatoeba _Examples",
 						"<Item>",		   "<control>E", 	nil,
 						Proc.new{@context.loadTatoeba} ],
                     ["/File/_Quit",
