@@ -107,7 +107,7 @@ module JLDrill::Tatoeba
     # Represents a sentence in the JapaneseIndeces file
     class IndexSentence
 
-        INDEX_RE = /^(\d*)[\n](\d*)[\n](.*)/
+        INDEX_RE = /^(\d*)[\t](\d*)[\t](.*)/
         WORD_RE = /^([^(\[{~]*)(\(([^)]*)\))?(\[([^\]]*)\])?(\{([^}]*)\})?(~)?/u
 
         attr_reader :kanji, :reading, :sense, :actual, :checked
@@ -222,7 +222,7 @@ module JLDrill::Tatoeba
         attr_reader :words
         attr_writer :words
 
-        INDEX_RE = /^(\d*)[\n](\d*)[\n](.*)/
+        INDEX_RE = /^(\d*)[\t](\d*)[\t](.*)/
         WORD_RE = /([^{(\[~]*(\([^)]*\))?)/u
 
 		def initialize()

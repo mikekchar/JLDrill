@@ -77,6 +77,17 @@ module JLDrill::Tatoeba
 
             links.getLinksTo(1).size.should eql(40)
         end
+        
+        it "should be able to read the Japanese Index file from disk" do
+            links = JapaneseIndexFile.new
+			links.load(File.join(JLDrill::Config::DATA_DIR, 
+                                  "tests/jpn_indices.csv"))
+            links.parse
+
+            links.lines.should_not eql([])
+
+            links.dataSize.should be(100)
+        end
     end
 end
 
