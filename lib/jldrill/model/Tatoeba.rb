@@ -110,9 +110,9 @@ module JLDrill::Tatoeba
         INDEX_RE = /^(\d*)[\t](\d*)[\t](.*)/
         WORD_RE = /^([^(\[{~]*)(\(([^)]*)\))?(\[([^\]]*)\])?(\{([^}]*)\})?(~)?/u
 
-        attr_reader :kanji, :reading, :sense, :actual, :checked
+        attr_reader :kanji, :reading, :sense, :actual, :checked, :sentences
 
-        def initialize(data)
+        def initialize(data, sentences)
             @kanji = ""
             @reading = ""
             @sense = 0
@@ -120,6 +120,7 @@ module JLDrill::Tatoeba
             @checked = false
             @japaneseIndex = 0
             @englishIndex = 0
+            @sentences = sentences
 
             if INDEX_RE.match(data)
                 @japaneseIndex = $1.to_i
@@ -142,12 +143,12 @@ module JLDrill::Tatoeba
             end
         end
 
-        def english(sentenceFile)
-            return sentenceFile.sentenceAt(@englishIndex)
+        def english()
+            return @sentences.sentenceAt(@englishIndex)
         end
 
-        def japanese(sentenceFile)
-            return sentenceFile.sentenceAt(@japaneseIndex)
+        def japanese()
+            return @sentences.sentenceAt(@japaneseIndex)
         end
 
         def id
@@ -171,16 +172,16 @@ module JLDrill::Tatoeba
             return retVal
         end
 
-        def japaneseTo_s(sentenceFile)
-            return "#{self.id}: " + word_to_s + "\n\t#{self.japanese(sentenceFile)}"
+        def japaneseTo_s()
+            return "#{self.id}: " + word_to_s + "\n\t#{self.japanese}"
         end
 
-        def englishTo_s(sentenceFile)
-            return "#{self.id}: " + "\n\t#{self.english(sentenceFile)}"
+        def englishTo_s()
+            return "#{self.id}: " + "\n\t#{self.english}"
         end
 
-        def to_s(sentenceFile)
-            return "#{self.id}: " + word_to_s + "\n\t#{self.japanese(sentenceFile)}\n\t#{self.english(sentenceFile)}"
+        def to_s()
+            return "#{self.id}: " + word_to_s + "\n\t#{self.japanese}\n\t#{self.english}"
         end
     end
 
@@ -188,20 +189,21 @@ module JLDrill::Tatoeba
     # It is composed of a list of sentences.
     class SearchResults
 
-        attr_reader :lines, :connections
+        attr_reader :lines, :connections, :sentences
         attr_writer :lines, :connections
 
-        def initialize(word, connections, lines)
+        def initialize(word, connections, lines, sentences)
             @word = word
             @lines = lines
             @connections = connections
+            @sentences = sentences
         end
 
         def getSentences
             retVal = []
             if !@connections.nil?
                 @connections.each_with_index do |connection, i|
-                    retVal.push(IndexSentence.new(@lines[connection]))
+                    retVal.push(IndexSentence.new(@lines[connection], @sentences))
                 end
             end
             return retVal
@@ -261,7 +263,7 @@ module JLDrill::Tatoeba
             @sentences
         end
 
-        def search(kanji, reading)
+        def search(kanji, reading, sentences)
             word = nil
             if !kanji.nil?
                 word = IndexWord.create(kanji, reading).to_s
@@ -280,7 +282,7 @@ module JLDrill::Tatoeba
                 connections = @words[word]
             end
 
-            return SearchResults.new(word, connections, @lines).getSentences
+            return SearchResults.new(word, connections, @lines, sentences).getSentences
         end
 
         # Don't erase @lines because we need them later
@@ -299,7 +301,11 @@ module JLDrill::Tatoeba
         end
 
         def loaded?
-            return false
+            return @japaneseIndeces.loaded?
+        end
+
+        def search(kanji, reading)
+            @japaneseIndeces.search(kanji, reading, @sentences)
         end
     end
 end

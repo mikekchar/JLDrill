@@ -263,13 +263,13 @@ module JLDrill
 
 		def loadTatoeba
 			if @tatoebaDB.loaded?
- #               if !@showExamplesContext.isEntered?
- #                   @showExamplesContext.enter(self)
- #               end
+                if !@showExamplesContext.isEntered?
+                    @showExamplesContext.enter(self)
+                end
 			else
                 if !@loadTatoebaContext.isEntered?
                     @loadTatoebaContext.onExit do
- #                       @showExamplesContext.enter(self)
+                        @showExamplesContext.enter(self)
                     end
                     @loadTatoebaContext.enter(self, @tatoebaDB)
                 end

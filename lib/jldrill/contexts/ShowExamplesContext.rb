@@ -66,7 +66,7 @@ module JLDrill
 		
 		def canDisplay?(parent)
 		    !parent.nil? && parent.class.public_method_defined?(:quiz) &&
-		        !parent.quiz.nil? && parent.tanaka.loaded?
+		        !parent.quiz.nil? && parent.tatoebaDB.loaded?
 		end
 	
 		def findExamples(problem)
@@ -74,7 +74,7 @@ module JLDrill
 			if !problem.nil?
 				vocab = problem.item.to_o
 				if !vocab.nil?
-					examples = @parent.tanaka.search(vocab.kanji, vocab.reading)
+					examples = @parent.tatoebaDB.search(vocab.kanji, vocab.reading)
 				end
 			end
 			return examples

@@ -79,21 +79,21 @@ module JLDrill::Tatoeba
         end
         
         it "should be able to read the Japanese Index file from disk" do
-            links = JapaneseIndexFile.new
-			links.load(File.join(JLDrill::Config::DATA_DIR, 
-                                  "tests/jpn_indices.csv"))
-            links.parse
-
-            links.lines.should_not eql([])
-
-            links.dataSize.should be(100)
-            suguni = links.search("直ぐに", "すぐに")
-            suguni.size.should be(2)
             sentences = SentenceFile.new
 			sentences.load(File.join(JLDrill::Config::DATA_DIR, 
                                   "tests/sentences.csv"))
             sentences.parse
-            suguni[0].to_s(sentences).should eql("4709: 直ぐに{すぐに}\n\tすぐに戻ります。 \n\tI will be back soon.")
+            japanese = JapaneseIndexFile.new
+			japanese.load(File.join(JLDrill::Config::DATA_DIR, 
+                                  "tests/jpn_indices.csv"))
+            japanese.parse
+
+            japanese.lines.should_not eql([])
+
+            japanese.dataSize.should be(100)
+            suguni = japanese.search("直ぐに", "すぐに", sentences)
+            suguni.size.should be(2)
+            suguni[0].to_s.should eql("4709: 直ぐに{すぐに}\n\tすぐに戻ります。 \n\tI will be back soon.")
 
         end
     end
