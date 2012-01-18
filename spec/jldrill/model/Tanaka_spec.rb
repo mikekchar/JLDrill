@@ -23,14 +23,14 @@ module JLDrill::Tanaka
             sentences.should_not be_nil
             sentences.should_not be_empty
             sentences.size.should be(1)
-            sentences[0].to_s.should eql("203: です\n\tなんですか？\n\tWhat is it?")
+            sentences[0].to_s.should eql("です\n\t203: なんですか？\n\tWhat is it?")
             sentences = tanaka.search("Fail", nil)
             sentences.should_not be_nil
             sentences.should be_empty
             sentences = tanaka.search("何", "なに")
             sentences.should_not be_empty
             sentences.size.should be(1)
-            sentences[0].to_s.should eql("203: 何{なん}\n\tなんですか？\n\tWhat is it?")            
+            sentences[0].to_s.should eql("何\n\t203: なんですか？\n\tWhat is it?")            
         end
 
         it "should be able to parse Words" do
@@ -70,10 +70,9 @@ module JLDrill::Tanaka
             tanaka.numWords.should eql(3)
             " 如何(どう)".start_with?(" 如何(どう)").should be_true
             s = tanaka.search("如何", "どう")
-            s[0].to_s.should eql("203: 如何(どう)[1]{どう}~\n\tどう為るの？\n\tWhat are you going to do?")
-            s[0].english.should eql("What are you going to do?")
-            s[0].japanese.should eql("どう為るの？")
-            s[0].id.should eql(203)
+            s[0].to_s.should eql("如何(どう)[1]~\n\t203: どう為るの？\n\tWhat are you going to do?")
+            s[0].nativeLanguage.should eql("What are you going to do?")
+            s[0].targetLanguage.should eql("203: どう為るの？")
         end
 
         it "should be able to parse multiple entries" do

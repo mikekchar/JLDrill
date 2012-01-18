@@ -212,7 +212,7 @@ module JLDrill::Tatoeba
         end
 
         def getConnections(kanji)
-            return chineseIndeces.collect do |index|
+            return @chineseIndeces.collect do |index|
                 @sentences.sentenceAt(index).match(kanji)
             end
         end

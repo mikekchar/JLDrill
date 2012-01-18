@@ -93,7 +93,7 @@ module JLDrill::Tatoeba
             japanese.dataSize.should be(100)
             suguni = japanese.search("直ぐに", "すぐに", sentences)
             suguni.size.should be(2)
-            suguni[0].to_s.should eql("4709: 直ぐに{すぐに}\n\tすぐに戻ります。 \n\tI will be back soon.")
+            suguni[0].to_s.should eql("直ぐに\n\t4709: すぐに戻ります。 \n\t1284: I will be back soon.")
 
         end
     end
