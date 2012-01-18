@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'jldrill/model/DataFile'
+require 'jldrill/model/ExampleSentence'
 
 module JLDrill::Tanaka
 
@@ -32,34 +33,16 @@ module JLDrill::Tanaka
         end
     end
 
-    class Sentence
+    class Sentence < JLDrill::ExampleSentence
 
         RE = /^A: ([^\t]*)\t(.*)#ID=(.*)$/u
-        WORD_RE = /^([^(\[{~]*)(\(([^)]*)\))?(\[([^\]]*)\])?(\{([^}]*)\})?(~)?/u
-
-        attr_reader :kanji, :reading, :sense, :actual, :checked
 
         def initialize(data, wordData)
             @data = data
-            @wordData = wordData
-            parseWordData
+            @key = JLDrill::VocabularyUsage.from_B_line(wordData)
         end
 
-        def parseWordData
-            if WORD_RE.match(@wordData)
-                @kanji = $1
-                @reading = $3
-                if !$5.nil?
-                    @sense = $5.to_i
-                else
-                    @sense = 0
-                end
-                @actual = $7
-                @checked = $8.eql?("~")
-            end
-        end
-
-        def english
+        def nativeLanguage()
             retVal = ""
             if RE.match(@data)
                 retVal = $2
@@ -67,49 +50,12 @@ module JLDrill::Tanaka
             return retVal
         end
 
-        def japanese
+        def targetLanguage
             retVal = ""
             if RE.match(@data)
-                retVal = $1
+                retVal = $3 + ": " + $1
             end
             return retVal
-        end
-
-        def id
-            retVal = ""
-            if RE.match(@data)
-                retVal = $3.to_i
-            end
-            return retVal
-        end
-
-        def word_to_s
-            retVal = @kanji.to_s
-            if !@reading.nil?
-                retVal += "(#{@reading})"
-            end
-            if @sense != 0
-                retVal += "[#{@sense.to_s}]"
-            end
-            if !@actual.nil?
-                retVal += "{#{@actual.to_s}}"
-            end
-            if @checked
-                retVal += "~"
-            end
-            return retVal
-        end
-
-        def japaneseTo_s
-            return "#{self.id}: " + word_to_s + "\n\t#{self.japanese}"
-        end
-
-        def englishTo_s
-            return "#{self.id}: " + "\n\t#{self.english}"
-        end
-
-        def to_s
-            return "#{self.id}: " + word_to_s + "\n\t#{self.japanese}\n\t#{self.english}"
         end
     end
 

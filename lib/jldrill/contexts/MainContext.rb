@@ -246,6 +246,14 @@ module JLDrill
             end
 		end
 
+        def exampleDB
+            if @tanaka.loaded?
+                return @tanaka
+            else
+                return @tatoebaDB
+            end
+        end
+
 		def loadTanaka
 			if @tanaka.loaded?
                 if !@showExamplesContext.isEntered?
