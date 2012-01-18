@@ -42,6 +42,14 @@ module JLDrill
             @loadFileContext.enter(self, @db.japaneseIndeces, @japaneseFile)
         end
 
+        def loadChinese
+            @db.createChineseIndeces()
+            @loadFileContext.onExit do
+                exitLoadTatoebaContext
+            end
+            @loadFileContext.enter(self, @db.chineseIndeces, "Chinese Indeces")
+        end
+
         def exitLoadTatoebaContext
             self.exit
         end

@@ -1,6 +1,6 @@
-
 # encoding: utf-8
 require 'jldrill/model/DataFile'
+require 'jldrill/model/ExampleSentence.rb'
 
 module JLDrill::Tatoeba
 
@@ -105,84 +105,30 @@ module JLDrill::Tatoeba
     end
 
     # Represents a sentence in the JapaneseIndeces file
-    class IndexSentence
+    class JapaneseExample < JLDrill::ExampleSentence
 
         INDEX_RE = /^(\d*)[\t](\d*)[\t](.*)/
-        WORD_RE = /^([^(\[{~]*)(\(([^)]*)\))?(\[([^\]]*)\])?(\{([^}]*)\})?(~)?/u
 
-        attr_reader :kanji, :reading, :sense, :actual, :checked, :sentences
-
-        def initialize(data, searchedWordData, sentences)
+        def initialize(data, vocabUsageData, sentences)
             @sentences = sentences
             
-            @kanji = ""
-            @reading = ""
-            @sense = 0
-            @actual = ""
-            @checked = false
-            @japaneseIndex = 0
-            @englishIndex = 0
-
             if INDEX_RE.match(data)
                 @japaneseIndex = $1.to_i
                 @englishIndex = $2.to_i 
-                parseWordData(searchedWordData)
+                @key = JLDrill::VocabularyUsage.from_B_line(vocabUsageData)
+            else
+                @japaneseIndex = 0
+                @englishIndex = 0
+                @key = JLDrill::VocabularyUsage.new()
             end
         end
 
-        def parseWordData(wordData)
-            if WORD_RE.match(wordData)
-                @kanji = $1
-                @reading = $3
-                if !$5.nil?
-                    @sense = $5.to_i
-                else
-                    @sense = 0
-                end
-                @actual = $7
-                @checked = $8.eql?("~")
-            end
+        def nativeLanguage()
+            return "#{@englishIndex}: #{@sentences.sentenceAt(@englishIndex)}"
         end
 
-        def english()
-            return @sentences.sentenceAt(@englishIndex)
-        end
-
-        def japanese()
-            return @sentences.sentenceAt(@japaneseIndex)
-        end
-
-        def id
-            return @japaneseIndex
-        end
-
-        def word_to_s
-            retVal = @kanji.to_s
-            if !@reading.nil?
-                retVal += "(#{@reading})"
-            end
-            if @sense != 0
-                retVal += "[#{@sense.to_s}]"
-            end
-            if !@actual.nil?
-                retVal += "{#{@actual.to_s}}"
-            end
-            if @checked
-                retVal += "~"
-            end
-            return retVal
-        end
-
-        def japaneseTo_s()
-            return "#{self.id}: " + word_to_s + "\n\t#{self.japanese}"
-        end
-
-        def englishTo_s()
-            return "#{self.id}: " + "\n\t#{self.english}"
-        end
-
-        def to_s()
-            return "#{self.id}: " + word_to_s + "\n\t#{self.japanese}\n\t#{self.english}"
+        def targetLanguage()
+            return "#{@japaneseIndex}: #{@sentences.sentenceAt(@japaneseIndex)}"
         end
     end
 
@@ -205,7 +151,7 @@ module JLDrill::Tatoeba
             if !@connections.nil?
                 wordData = getWordData
                 @connections.each_with_index do |connection, i|
-                    retVal.push(IndexSentence.new(@lines[connection], wordData[i], @sentences))
+                    retVal.push(JapaneseExample.new(@lines[connection], wordData[i], @sentences))
                 end
             end
             return retVal
@@ -226,6 +172,49 @@ module JLDrill::Tatoeba
                 wordData.push(findWord(@lines[connection]))
             end
             return wordData 
+        end
+    end
+
+    class ChineseIndexFile < JLDrill::DataFile
+
+        INDEX_RE = /^(\d*)[\t]cmn/
+
+        def initialize(sentences)
+            super()
+            @sentences = sentences
+            @file = "Chinese Indeces"
+            @chineseIndeces = []
+            @stepSize = 1000
+        end
+
+        # This isn't a real file, so we will overload the
+        # readLines method to simply point to the main
+        # sentences lines.
+        def readLines
+            @lines = @sentences.lines
+            @parsed = 0
+        end
+
+        def parseEntry
+            if INDEX_RE.match(@lines[@parsed])
+                @chineseIndeces.push($1.to_i)
+            end
+            @parsed += 1
+        end
+
+        def dataSize
+            @chineseIndeces.size
+        end
+
+        # Don't erase @lines because we need them later
+        def finishParsing
+            setLoaded(true)
+        end
+
+        def getConnections(kanji)
+            return chineseIndeces.collect do |index|
+                @sentences.sentenceAt(index).match(kanji)
+            end
         end
     end
 
@@ -303,14 +292,21 @@ module JLDrill::Tatoeba
 
     # Represents the Tatoeba database
     class Database
-        attr_reader :sentences, :japaneseIndeces
+        attr_reader :sentences, :japaneseIndeces, :chineseIndeces
     
         def initialize()
             @sentences = SentenceFile.new
             @japaneseIndeces = JapaneseIndexFile.new
+            @chineseIndeces = nil
         end
 
-        def loaded?
+        def createChineseIndeces()
+            if @sentences.loaded?
+                @chineseIndeces = ChineseIndexFile.new(@sentences)
+            end
+        end
+
+        def loaded?()
             return @japaneseIndeces.loaded?
         end
 

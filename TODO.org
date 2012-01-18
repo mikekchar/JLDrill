@@ -66,7 +66,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.5.2 |    16 |   12 |    75.0 |    0.07 |   0.08 |
+| * Version 0.5.2 |    16 |   14 |    87.5 |    0.08 |   0.08 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -188,7 +188,7 @@ the task.
 	:Done: 1
 	:END:
 
-*** TODO Replace Tanaka corpus with Tatoeba example sentences
+*** DONE Replace Tanaka corpus with Tatoeba example sentences
 	Tatoeba is the replacesment for the Tanaka corpus upstream.
 	There are 3 CSV files now -- One for collocations, one
 	for sentence type and one for the old Tanaka B line information.
@@ -197,7 +197,7 @@ the task.
 
 	:PROPERTIES:
 	:JellyBeans: 2
-	:Done: 0
+	:Done: 2
 	:END:
 
 *** TODO Read Chinese collocations from Tatoeba example sentence

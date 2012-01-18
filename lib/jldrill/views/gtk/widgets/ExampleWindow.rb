@@ -109,11 +109,11 @@ module JLDrill::Gtk
 
         def sortExamples(examples)
            return examples.sort do |x, y|
-               retVal = x.sense <=> y.sense
-               if y.checked && !x.checked
+               retVal = x.key.sense <=> y.key.sense
+               if y.key.checked && !x.key.checked
                    retVal = 1
                end
-               if x.checked && !y.checked
+               if x.key.checked && !y.key.checked
                    retVal = -1
                end
                retVal
@@ -121,7 +121,7 @@ module JLDrill::Gtk
         end
 
         def insertHeader(section, example)
-            if example.checked
+            if example.key.checked
                 if section == -2
                     section = -1
                     insert("Checked Examples\n", "h1")
@@ -132,8 +132,8 @@ module JLDrill::Gtk
                     insert("Unchecked Examples\n", "h1")
                     insertVSpace
                 end
-                if section != example.sense
-                    section = example.sense
+                if section != example.key.sense
+                    section = example.key.sense
                     if section != 0
                         insertVSpace
                         insert("Examples for sense ##{section}\n", "h2")
@@ -144,7 +144,7 @@ module JLDrill::Gtk
         end
 
         def getTag(example)
-            if (example.checked) 
+            if (example.key.checked) 
                 tag = "checked"
             else
                 tag = "normal"
@@ -157,7 +157,7 @@ module JLDrill::Gtk
                 section = -2
                 sortExamples(examples).each do |example|
                     section = insertHeader(section, example)
-                    insert(example.englishTo_s + "\n", getTag(example))
+                    insert(example.nativeOnly_to_s + "\n", getTag(example))
                     insertVSpace
                 end
             end
@@ -169,7 +169,7 @@ module JLDrill::Gtk
                 section = -2
                 sortExamples(examples).each do |example|
                     section = insertHeader(section, example)
-                    insert(example.japaneseTo_s + "\n", getTag(example))
+                    insert(example.targetOnly_to_s + "\n", getTag(example))
                     insertVSpace
                 end
             end
