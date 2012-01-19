@@ -104,49 +104,6 @@ module JLDrill::Tatoeba
         end
     end
 
-    # Represents the results of searching the Tatoeba reference library
-    # It is composed of a list of sentences.
-    class SearchResults
-
-        attr_reader :lines, :connections, :sentences
-        attr_writer :lines, :connections
-
-        def initialize(word, connections, lines, sentences)
-            @word = word
-            @lines = lines
-            @connections = connections
-            @sentences = sentences
-        end
-
-        def getSentences
-            retVal = []
-            if !@connections.nil?
-                wordData = getWordData
-                @connections.each_with_index do |connection, i|
-                    retVal.push(JapaneseExample.new(@lines[connection], wordData[i], @sentences))
-                end
-            end
-            return retVal
-        end
-
-        def findWord(connection)
-            connection.split(" ").each do |word|
-                if word.start_with?(@word)
-                    return word
-                end
-            end
-            return ""
-        end
-
-        def getWordData
-            wordData = []
-            @connections.each_with_index do |connection, i|
-                wordData.push(findWord(@lines[connection]))
-            end
-            return wordData 
-        end
-    end
-
     class ChineseIndexFile < JLDrill::DataFile
 
         INDEX_RE = /^(\d*)[\t]cmn/
@@ -194,29 +151,51 @@ module JLDrill::Tatoeba
 
         INDEX_RE = /^(\d*)[\t](\d*)[\t](.*)/
 
-		def initialize()
-            super
-            @sentences = 0
+        attr_reader :sentences
+
+		def initialize(sentences)
+            super()
+            @sentences = sentences
+            @numSentences = 0
             @usageMap = JLDrill::VocabularyUsage::Map.new
             @stepSize = 1000
 		end
 
         def parseEntry
             if INDEX_RE.match(@lines[@parsed])
-                @sentences += 1
+                @numSentences += 1
                 @usageMap.add_B_line($3, @parsed)
             end
             @parsed += 1
         end
 
         def dataSize
-            @sentences
+            @numSentences
         end
 
-        def search(kanji, reading, sentences)
+        # Find the VocabularyUsage data using the hash, UsageHash
+        # in the line at position, pos.  If it doesn't exist, return
+        # and empty string.
+        def findUsageData(usageHash, pos)
+            line = @lines[pos]
+            retVal = line.split(" ").find do |usageData|
+                usageData.start_with?(usageHash)
+            end
+            if retVal.nil?
+                retVal = ""
+            end
+            return retVal
+        end
+
+        def search(kanji, reading)
+            retVal = []
             result = @usageMap.search(kanji, reading)
-            return SearchResults.new(result.successfulHash, result.positions, 
-                                     @lines, sentences).getSentences
+            result.positions.each do |position|
+                data = @lines[position]
+                usageData = findUsageData(result.successfulHash, position)
+                retVal.push(JapaneseExample.new(data, usageData, @sentences))
+            end
+            return retVal
         end
 
         # Don't erase @lines because we need them later
@@ -231,7 +210,7 @@ module JLDrill::Tatoeba
     
         def initialize()
             @sentences = SentenceFile.new
-            @japaneseIndeces = JapaneseIndexFile.new
+            @japaneseIndeces = JapaneseIndexFile.new(@sentences)
             @chineseIndeces = nil
         end
 
@@ -246,7 +225,7 @@ module JLDrill::Tatoeba
         end
 
         def search(kanji, reading)
-            @japaneseIndeces.search(kanji, reading, @sentences)
+            @japaneseIndeces.search(kanji, reading)
         end
     end
 end

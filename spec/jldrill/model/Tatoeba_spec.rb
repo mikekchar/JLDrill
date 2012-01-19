@@ -83,7 +83,7 @@ module JLDrill::Tatoeba
 			sentences.load(File.join(JLDrill::Config::DATA_DIR, 
                                   "tests/sentences.csv"))
             sentences.parse
-            japanese = JapaneseIndexFile.new
+            japanese = JapaneseIndexFile.new(sentences)
 			japanese.load(File.join(JLDrill::Config::DATA_DIR, 
                                   "tests/jpn_indices.csv"))
             japanese.parse
@@ -91,7 +91,7 @@ module JLDrill::Tatoeba
             japanese.lines.should_not eql([])
 
             japanese.dataSize.should be(100)
-            suguni = japanese.search("直ぐに", "すぐに", sentences)
+            suguni = japanese.search("直ぐに", "すぐに")
             suguni.size.should be(2)
             suguni[0].to_s.should eql("直ぐに\n\t4709: すぐに戻ります。 \n\t1284: I will be back soon.")
 

@@ -27,7 +27,11 @@ module JLDrill
 
                 def initialize(successfulHash, positions)
                     @successfulHash = successfulHash
-                    @positions = positions
+                    if !positions.nil?
+                        @positions = positions
+                    else
+                        @positions = []
+                    end
                 end
             end
 
