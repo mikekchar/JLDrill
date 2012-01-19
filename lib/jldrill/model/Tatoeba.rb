@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'jldrill/model/DataFile'
+require 'jldrill/model/VocabularyUsage.rb'
 require 'jldrill/model/ExampleSentence.rb'
 
 module JLDrill::Tatoeba
@@ -72,35 +73,6 @@ module JLDrill::Tatoeba
                 retVal = []
             end
             return retVal
-        end
-    end
-
-    # Represents one of the words stored in the Japanese Indeces
-    class IndexWord
-        attr_reader :contents
-
-        def initialize(contents)
-            @contents = contents
-        end
-
-        def IndexWord.create(kanji, reading)
-            contents = kanji
-            if !reading.nil?
-                contents += "(#{reading})"
-            end
-            return IndexWord.new(contents)
-        end
-
-        def to_s
-            @contents
-        end
-
-        def eql?(word)
-            return @contents.eql?(word.contents)
-        end
-
-        def hash
-            @contents.hash
         end
     end
 
@@ -220,40 +192,19 @@ module JLDrill::Tatoeba
 
     class JapaneseIndexFile < JLDrill::DataFile
 
-        attr_reader :words
-        attr_writer :words
-
         INDEX_RE = /^(\d*)[\t](\d*)[\t](.*)/
-        WORD_RE = /([^{(\[~]*(\([^)]*\))?)/u
 
 		def initialize()
             super
             @sentences = 0
-            @words = {}
+            @usageMap = JLDrill::VocabularyUsage::Map.new
             @stepSize = 1000
 		end
-
-        def numSentences
-            dataSize
-        end
-
-        def numWords
-            return @words.keys.size
-        end
-
-        def addWord(word, pos)
-            if WORD_RE.match(word)
-                (@words[$1] ||= []).push(pos)
-            end
-        end
 
         def parseEntry
             if INDEX_RE.match(@lines[@parsed])
                 @sentences += 1
-                w = $3.split(' ')
-                w.each do |word|
-                    addWord(word, @parsed)
-                end
+                @usageMap.add_B_line($3, @parsed)
             end
             @parsed += 1
         end
@@ -263,25 +214,9 @@ module JLDrill::Tatoeba
         end
 
         def search(kanji, reading, sentences)
-            word = nil
-            if !kanji.nil?
-                word = IndexWord.create(kanji, reading).to_s
-                connections = @words[word]
-                if connections.nil?
-                    # The corpus only uses readings to disambiguate
-                    # kanji.  Most words don't have readings.  So
-                    # if we don't find anything, search again without
-                    # the reading.
-                    word = IndexWord.create(kanji, nil).to_s
-                    connections = @words[word]
-                end
-            else
-                # When there is no kanji, use the reading as the kanji
-                word = IndexWord.create(reading, nil).to_s
-                connections = @words[word]
-            end
-
-            return SearchResults.new(word, connections, @lines, sentences).getSentences
+            result = @usageMap.search(kanji, reading)
+            return SearchResults.new(result.successfulHash, result.positions, 
+                                     @lines, sentences).getSentences
         end
 
         # Don't erase @lines because we need them later
