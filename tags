@@ -17,6 +17,7 @@ AppendFileContext	lib/jldrill/contexts/AppendFileContext.rb	/^	class AppendFileC
 Bin	lib/jldrill/model/Bin.rb	/^    class Bin$/;"	c	class:JLDrill
 Bridge	lib/Context/Bridge.rb	/^	class Bridge$/;"	c	class:Context
 CEDictionary	lib/jldrill/model/items/CEDictionary.rb	/^	class CEDictionary < Dictionary$/;"	c	class:JLDrill
+ChineseIndexFile	lib/jldrill/model/Tatoeba.rb	/^    class ChineseIndexFile < JLDrill::DataFile$/;"	c	class:JLDrill
 CommandView	lib/jldrill/contexts/RunCommandContext.rb	/^        class CommandView < Context::View$/;"	c	class:JLDrill.RunCommandContext
 CommandView	lib/jldrill/views/gtk/CommandView.rb	/^    class CommandView < JLDrill::RunCommandContext::CommandView$/;"	c	class:JLDrill
 CommandView	lib/jldrill/views/gtk/widgets/MenuWidget.rb	/^    class CommandView < JLDrill::RunCommandContext::CommandView$/;"	c	class:JLDrill
@@ -25,6 +26,7 @@ CommandView	lib/jldrill/views/test/CommandView.rb	/^    class CommandView < JLDr
 Config	lib/jldrill/model/Config.rb	/^        def Config::configSrcDir$/;"	f	class:JLDrill.Config
 Config	lib/jldrill/model/Config.rb	/^        def Config::getDataDir$/;"	f	class:JLDrill.Config
 Config	lib/jldrill/model/Config.rb	/^        def Config::repositoryDir$/;"	f	class:JLDrill.Config
+Config	lib/jldrill/model/Config.rb	/^        def Config::resolveDataFile(filename)$/;"	f	class:JLDrill.Config
 Config	lib/jldrill/model/Config.rb	/^    module Config$/;"	m	class:JLDrill
 Contents	lib/jldrill/model/Contents.rb	/^    class Contents$/;"	c	class:JLDrill
 Context	lib/Context/Bridge.rb	/^module Context$/;"	m
@@ -45,6 +47,7 @@ Context	lib/Context/Widget.rb	/^module Context$/;"	m
 Context	lib/jldrill/spec/Fakes.rb	/^module Context::Gtk::Widget$/;"	m
 Counter	lib/jldrill/model/Quiz/Counter.rb	/^    class Counter$/;"	c	class:JLDrill
 DataFile	lib/jldrill/model/DataFile.rb	/^    class DataFile$/;"	c	class:JLDrill
+Database	lib/jldrill/model/Tatoeba.rb	/^    class Database$/;"	c
 Definition	lib/jldrill/model/items/edict/Definition.rb	/^    class Definition$/;"	c	class:JLDrill
 Deinflection	lib/jldrill/model/DeinflectionRules.rb	/^    module Deinflection$/;"	m	class:JLDrill
 DeinflectionRules	lib/jldrill/model/DeinflectionRules.rb	/^	class DeinflectionRules$/;"	c	class:JLDrill.Deinflection
@@ -56,6 +59,7 @@ Duration	lib/jldrill/model/Duration.rb	/^    class Duration$/;"	c	class:JLDrill
 DurationCounter	lib/jldrill/model/Quiz/Counter.rb	/^    class DurationCounter < Counter$/;"	c	class:JLDrill
 EditVocabularyContext	lib/jldrill/contexts/EditVocabularyContext.rb	/^	class EditVocabularyContext < ModifyVocabularyContext$/;"	c	class:JLDrill
 Equals	lib/jldrill/model/items/edict/ComparisonFunctors.rb	/^    class Equals$/;"	c	class:JLDrill.StartsWith
+ExampleSentence	lib/jldrill/model/ExampleSentence.rb	/^    class ExampleSentence$/;"	c	class:JLDrill
 ExampleView	lib/jldrill/contexts/ShowExamplesContext.rb	/^        class ExampleView < Context::View$/;"	c	class:JLDrill.ShowExamplesContext
 ExampleView	lib/jldrill/views/gtk/ExampleView.rb	/^	class ExampleView < JLDrill::ShowExamplesContext::ExampleView$/;"	c	class:JLDrill
 ExampleView	lib/jldrill/views/test/ExampleView.rb	/^	class ExampleView < JLDrill::ShowExamplesContext::ExampleView$/;"	c	class:JLDrill
@@ -75,6 +79,7 @@ Gtk	lib/jldrill/spec/storyFunctionality/Gtk.rb	/^	module Gtk$/;"	m	class:JLDrill
 GtkDisplayView	lib/jldrill/oldUI/GtkDisplayView.rb	/^    class GtkDisplayView < Gtk::Dialog$/;"	c	class:JLDrill
 GtkEnterFilename	lib/jldrill/oldUI/GtkEnterFilename.rb	/^    class GtkEnterFilename < Gtk::FileChooserDialog$/;"	c	class:JLDrill
 GtkVocabView	lib/jldrill/oldUI/GtkVocabView.rb	/^    class GtkVocabView < Gtk::VBox$/;"	c	class:JLDrill
+Icon	lib/jldrill/views/gtk/widgets/Icon.rb	/^    class Icon$/;"	c	class:JLDrill
 InfoView	lib/jldrill/contexts/ShowInfoContext.rb	/^        class InfoView < Context::View$/;"	c	class:JLDrill.ShowInfoContext
 InfoView	lib/jldrill/views/gtk/InfoView.rb	/^	class InfoView < JLDrill::ShowInfoContext::InfoView$/;"	c	class:JLDrill
 InfoView	lib/jldrill/views/test/InfoView.rb	/^	class InfoView < JLDrill::ShowInfoContext::InfoView$/;"	c	class:JLDrill
@@ -102,6 +107,7 @@ JLDrill	lib/jldrill/contexts/LoadQuizContext.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/contexts/LoadQuizFromEdictContext.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/contexts/LoadReferenceContext.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/contexts/LoadTanakaContext.rb	/^module JLDrill$/;"	m
+JLDrill	lib/jldrill/contexts/LoadTatoebaContext.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/contexts/MainContext.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/contexts/MergeQuizContext.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/contexts/ModifyVocabularyContext.rb	/^module JLDrill$/;"	m
@@ -124,8 +130,10 @@ JLDrill	lib/jldrill/model/Contents.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/model/DataFile.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/model/DeinflectionRules.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/model/Duration.rb	/^module JLDrill$/;"	m
+JLDrill	lib/jldrill/model/ExampleSentence.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/model/Item.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/model/ItemStatus.rb	/^module JLDrill$/;"	m
+JLDrill	lib/jldrill/model/LoadPath.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/model/Problem.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/model/ProblemStatus.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/model/Quiz/Counter.rb	/^module JLDrill$/;"	m
@@ -138,6 +146,8 @@ JLDrill	lib/jldrill/model/Quiz/Statistics.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/model/Quiz/Strategy.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/model/Quiz/Timer.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/model/Tanaka.rb	/^module JLDrill::Tanaka$/;"	m
+JLDrill	lib/jldrill/model/Tatoeba.rb	/^module JLDrill::Tatoeba$/;"	m
+JLDrill	lib/jldrill/model/VocabularyUsage.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/model/items/CEDictionary.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/model/items/Dictionary.rb	/^module JLDrill$/;"	m
 JLDrill	lib/jldrill/model/items/Field.rb	/^module JLDrill$/;"	m
@@ -183,6 +193,7 @@ JLDrill	lib/jldrill/views/gtk/VBoxView.rb	/^module JLDrill::Gtk$/;"	m
 JLDrill	lib/jldrill/views/gtk/VocabularyTableView.rb	/^module JLDrill::Gtk$/;"	m
 JLDrill	lib/jldrill/views/gtk/VocabularyView.rb	/^module JLDrill::Gtk$/;"	m
 JLDrill	lib/jldrill/views/gtk/widgets/ExampleWindow.rb	/^module JLDrill::Gtk$/;"	m
+JLDrill	lib/jldrill/views/gtk/widgets/Icon.rb	/^module JLDrill::Gtk$/;"	m
 JLDrill	lib/jldrill/views/gtk/widgets/InfoWindow.rb	/^module JLDrill::Gtk$/;"	m
 JLDrill	lib/jldrill/views/gtk/widgets/ItemTable.rb	/^module JLDrill::Gtk$/;"	m
 JLDrill	lib/jldrill/views/gtk/widgets/ItemTableWindow.rb	/^module JLDrill::Gtk$/;"	m
@@ -223,6 +234,8 @@ JLDrill	lib/jldrill/views/test/VBoxView.rb	/^module JLDrill::Test$/;"	m
 JLDrill	lib/jldrill/views/test/VocabularyTableView.rb	/^module JLDrill::Test$/;"	m
 JLDrill	lib/jldrill/views/test/VocabularyView.rb	/^module JLDrill::Test$/;"	m
 JWord	lib/jldrill/model/items/JWord.rb	/^	class JWord$/;"	c	class:JLDrill
+JapaneseExample	lib/jldrill/model/Tatoeba.rb	/^    class JapaneseExample < JLDrill::ExampleSentence$/;"	c	class:JLDrill
+JapaneseIndexFile	lib/jldrill/model/Tatoeba.rb	/^    class JapaneseIndexFile < JLDrill::DataFile$/;"	c	class:JLDrill
 Kana	lib/jldrill/model/moji/Kana.rb	/^	class Kana$/;"	c	class:JLDrill
 KanaFile	lib/jldrill/model/moji/Kana.rb	/^    class KanaFile < DataFile$/;"	c	class:JLDrill
 KanaList	lib/jldrill/model/moji/Kana.rb	/^	class KanaList < Array$/;"	c	class:JLDrill
@@ -234,13 +247,16 @@ KanjiPopupFactory	lib/jldrill/views/gtk/widgets/KanjiPopupFactory.rb	/^    class
 KanjiProblem	lib/jldrill/model/problems/KanjiProblem.rb	/^    class KanjiProblem < Problem$/;"	c	class:JLDrill
 Kernel	lib/Context/require_all.rb	/^module Kernel$/;"	m
 LevelStats	lib/jldrill/model/Quiz/LevelStats.rb	/^    class LevelStats$/;"	c	class:JLDrill
+LinkFile	lib/jldrill/model/Tatoeba.rb	/^    class LinkFile < JLDrill::DataFile$/;"	c	class:JLDrill
 ListField	lib/jldrill/model/items/ListField.rb	/^    class ListField < Field$/;"	c	class:JLDrill
 LoadFileContext	lib/jldrill/contexts/LoadFileContext.rb	/^	class LoadFileContext < FileProgressContext$/;"	c	class:JLDrill
 LoadKanjiContext	lib/jldrill/contexts/LoadKanjiContext.rb	/^	class LoadKanjiContext < Context::Context$/;"	c	class:JLDrill
+LoadPath	lib/jldrill/model/LoadPath.rb	/^    class LoadPath$/;"	c	class:JLDrill
 LoadQuizContext	lib/jldrill/contexts/LoadQuizContext.rb	/^	class LoadQuizContext < Context::Context$/;"	c	class:JLDrill
 LoadQuizFromEdictContext	lib/jldrill/contexts/LoadQuizFromEdictContext.rb	/^	class LoadQuizFromEdictContext < FileProgressContext$/;"	c	class:JLDrill
 LoadReferenceContext	lib/jldrill/contexts/LoadReferenceContext.rb	/^	class LoadReferenceContext < Context::Context$/;"	c	class:JLDrill
 LoadTanakaContext	lib/jldrill/contexts/LoadTanakaContext.rb	/^	class LoadTanakaContext < Context::Context$/;"	c	class:JLDrill
+LoadTatoebaContext	lib/jldrill/contexts/LoadTatoebaContext.rb	/^	class LoadTatoebaContext < Context::Context$/;"	c	class:JLDrill
 Log	lib/Context/Log.rb	/^         def Log::warning(system, message)$/;"	f	class:Context.Log
 Log	lib/Context/Log.rb	/^    class Log$/;"	c	class:Context
 MainContext	lib/jldrill/contexts/MainContext.rb	/^	class MainContext < Context::Context$/;"	c	class:JLDrill
@@ -248,6 +264,7 @@ MainWindow	lib/Context/Views/Gtk/Widgets/MainWindow.rb	/^    class MainWindow < 
 MainWindowView	lib/jldrill/contexts/MainContext.rb	/^        class MainWindowView < Context::View$/;"	c	class:JLDrill.MainContext
 MainWindowView	lib/jldrill/views/gtk/MainWindowView.rb	/^	class MainWindowView < JLDrill::MainContext::MainWindowView$/;"	c	class:JLDrill
 MainWindowView	lib/jldrill/views/test/MainWindowView.rb	/^    class MainWindowView < JLDrill::MainContext::MainWindowView$/;"	c	class:JLDrill
+Map	lib/jldrill/model/VocabularyUsage.rb	/^        class Map$/;"	c	class:JLDrill.VocabularyUsage
 Match	lib/jldrill/model/DeinflectionRules.rb	/^        class Match < Array$/;"	c	class:JLDrill.Deinflection
 Meaning	lib/jldrill/model/items/edict/Meaning.rb	/^    class Meaning$/;"	c	class:JLDrill
 MeaningProblem	lib/jldrill/model/problems/MeaningProblem.rb	/^    class MeaningProblem < Problem$/;"	c	class:JLDrill
@@ -304,11 +321,13 @@ SampleQuiz	lib/jldrill/spec/storyFunctionality/SampleQuiz.rb	/^    module Sample
 Scale	lib/jldrill/views/gtk/widgets/OptionsWindow.rb	/^        class Scale$/;"	c	class:JLDrill.OptionsWindow
 Schedule	lib/jldrill/model/Quiz/Schedule.rb	/^    class Schedule$/;"	c	class:JLDrill
 SearchDictionary	lib/jldrill/contexts/behaviour/SearchDictionary.rb	/^    module SearchDictionary$/;"	m	class:JLDrill
+SearchResult	lib/jldrill/model/VocabularyUsage.rb	/^            class SearchResult$/;"	c	class:JLDrill.VocabularyUsage.Map
 SearchResults	lib/jldrill/model/Tanaka.rb	/^    class SearchResults$/;"	c	class:JLDrill
 SearchTable	lib/jldrill/views/gtk/widgets/SearchTable.rb	/^    class SearchTable < WordTable$/;"	c	class:JLDrill
 Section	lib/jldrill/views/gtk/widgets/OptionsWindow.rb	/^        class Section$/;"	c	class:JLDrill.OptionsWindow
 SelectorWindow	lib/jldrill/views/gtk/widgets/SelectorWindow.rb	/^    class SelectorWindow < Gtk::FileChooserDialog$/;"	c	class:JLDrill
-Sentence	lib/jldrill/model/Tanaka.rb	/^    class Sentence$/;"	c	class:JLDrill
+Sentence	lib/jldrill/model/Tanaka.rb	/^    class Sentence < JLDrill::ExampleSentence$/;"	c	class:JLDrill
+SentenceFile	lib/jldrill/model/Tatoeba.rb	/^    class SentenceFile < JLDrill::DataFile$/;"	c	class:JLDrill
 SetOptionsContext	lib/jldrill/contexts/SetOptionsContext.rb	/^	class SetOptionsContext < Context::Context$/;"	c	class:JLDrill
 ShowAboutContext	lib/jldrill/contexts/ShowAboutContext.rb	/^	class ShowAboutContext < Context::Context$/;"	c	class:JLDrill
 ShowAllVocabularyContext	lib/jldrill/contexts/ShowAllVocabularyContext.rb	/^	class ShowAllVocabularyContext < Context::Context$/;"	c	class:JLDrill
@@ -342,6 +361,10 @@ VocabularyHintBox	lib/jldrill/views/gtk/widgets/VocabularyHintBox.rb	/^    class
 VocabularyTableView	lib/jldrill/contexts/ShowAllVocabularyContext.rb	/^        class VocabularyTableView < Context::View$/;"	c	class:JLDrill.ShowAllVocabularyContext
 VocabularyTableView	lib/jldrill/views/gtk/VocabularyTableView.rb	/^	class VocabularyTableView < JLDrill::ShowAllVocabularyContext::VocabularyTableView$/;"	c	class:JLDrill
 VocabularyTableView	lib/jldrill/views/test/VocabularyTableView.rb	/^	class VocabularyTableView < JLDrill::ShowAllVocabularyContext::VocabularyTableView$/;"	c	class:JLDrill
+VocabularyUsage	lib/jldrill/model/VocabularyUsage.rb	/^        def VocabularyUsage::from_B_line(data)$/;"	f	class:JLDrill.VocabularyUsage
+VocabularyUsage	lib/jldrill/model/VocabularyUsage.rb	/^        def VocabularyUsage::hashFromStrings(kanji, reading)$/;"	f	class:JLDrill.VocabularyUsage
+VocabularyUsage	lib/jldrill/model/VocabularyUsage.rb	/^        def VocabularyUsage::hashFrom_B_line(data)$/;"	f	class:JLDrill.VocabularyUsage
+VocabularyUsage	lib/jldrill/model/VocabularyUsage.rb	/^    class VocabularyUsage$/;"	c	class:JLDrill
 VocabularyView	lib/jldrill/contexts/ModifyVocabularyContext.rb	/^        class VocabularyView < Context::View$/;"	c	class:JLDrill.ModifyVocabularyContext
 VocabularyView	lib/jldrill/views/gtk/VocabularyView.rb	/^	class VocabularyView < JLDrill::ModifyVocabularyContext::VocabularyView$/;"	c	class:JLDrill
 VocabularyView	lib/jldrill/views/test/VocabularyView.rb	/^    class VocabularyView < JLDrill::ModifyVocabularyContext::VocabularyView$/;"	c	class:JLDrill
@@ -358,6 +381,8 @@ ack	lib/jldrill/contexts/RunCommandContext.rb	/^        def ack$/;"	f	class:JLDr
 action	lib/jldrill/contexts/ModifyVocabularyContext.rb	/^            def action$/;"	f	class:JLDrill.ModifyVocabularyContext.VocabularyView
 add	lib/jldrill/model/Contents.rb	/^        def add(vocab, bin)$/;"	f	class:JLDrill.Contents
 add	lib/jldrill/model/ItemStatus.rb	/^        def add(status)$/;"	f	class:JLDrill.ItemStatus
+add	lib/jldrill/model/LoadPath.rb	/^        def add(path)$/;"	f	class:JLDrill.LoadPath
+add	lib/jldrill/model/VocabularyUsage.rb	/^            def add(usageData, pos)$/;"	f	class:JLDrill.VocabularyUsage.Map
 add	lib/jldrill/views/gtk/widgets/OptionsWindow.rb	/^            def add(widget)$/;"	f	class:JLDrill.OptionsWindow.Section
 add	lib/jldrill/views/gtk/widgets/OptionsWindow.rb	/^            def add(widget, expand=true, fill=true, padding=0)$/;"	f	class:JLDrill.OptionsWindow.Scale
 addAllowed	lib/jldrill/model/ProblemStatus.rb	/^        def addAllowed(levels)$/;"	f	class:JLDrill.ProblemStatus
@@ -384,6 +409,7 @@ addView	lib/Context/Context.rb	/^		def addView(view)$/;"	f	class:Context.Context
 addView	lib/Context/View.rb	/^		def addView(view)$/;"	f	class:Context.View
 addVocabulary	lib/jldrill/contexts/AddNewVocabularyContext.rb	/^		def addVocabulary(vocab)$/;"	f	class:JLDrill.AddNewVocabularyContext
 addWord	lib/jldrill/model/Tanaka.rb	/^        def addWord(word, pos)$/;"	f	class:Reference
+add_B_line	lib/jldrill/model/VocabularyUsage.rb	/^            def add_B_line(b_line, pos)$/;"	f	class:JLDrill.VocabularyUsage.Map
 adjustSizeForAnswer	lib/jldrill/views/gtk/widgets/ProblemDisplay.rb	/^        def adjustSizeForAnswer$/;"	f	class:JLDrill.ProblemDisplay
 adjustSizeForQuestion	lib/jldrill/views/gtk/widgets/ProblemDisplay.rb	/^        def adjustSizeForQuestion$/;"	f	class:JLDrill.ProblemDisplay
 afterWidgetIsAdded	lib/Context/Gtk/Widget.rb	/^        def afterWidgetIsAdded(&block)$/;"	f	class:Context.Widget
@@ -520,6 +546,7 @@ create	lib/jldrill/model/items/edict/Meaning.rb	/^        def Meaning.create(str
 create	lib/jldrill/model/items/edict/Usage.rb	/^    	def Usage.create(string, index=0)$/;"	F	class:JLDrill.Usage
 create	lib/jldrill/model/problems/ProblemFactory.rb	/^        def ProblemFactory.create(level, item)$/;"	F	class:JLDrill.ProblemFactory
 createBox	lib/jldrill/oldUI/GtkVocabView.rb	/^        def createBox(label, value, &block)$/;"	f	class:kanji=.hint=.reading=.definitions=.markers=.createField
+createChineseIndeces	lib/jldrill/model/Tatoeba.rb	/^        def createChineseIndeces()$/;"	f	class:Database
 createDictionaryOptions	lib/jldrill/views/gtk/widgets/OptionsWindow.rb	/^        def createDictionaryOptions$/;"	f	class:JLDrill.OptionsWindow
 createField	lib/jldrill/oldUI/GtkVocabView.rb	/^        def createField(label, value, &block)$/;"	f	class:kanji=.hint=.reading=.definitions=.markers=
 createLines	lib/jldrill/model/DataFile.rb	/^        def createLines(buffer)$/;"	f	class:JLDrill.DataFile
@@ -547,6 +574,7 @@ createViews	lib/jldrill/contexts/LoadKanjiContext.rb	/^        def createViews$/
 createViews	lib/jldrill/contexts/LoadQuizContext.rb	/^        def createViews$/;"	f	class:JLDrill.LoadQuizContext
 createViews	lib/jldrill/contexts/LoadReferenceContext.rb	/^        def createViews$/;"	f	class:JLDrill.LoadReferenceContext
 createViews	lib/jldrill/contexts/LoadTanakaContext.rb	/^        def createViews$/;"	f	class:JLDrill.LoadTanakaContext
+createViews	lib/jldrill/contexts/LoadTatoebaContext.rb	/^        def createViews$/;"	f	class:JLDrill.LoadTatoebaContext
 createViews	lib/jldrill/contexts/MainContext.rb	/^		def createViews$/;"	f	class:JLDrill.MainContext
 createViews	lib/jldrill/contexts/ModifyVocabularyContext.rb	/^		def createViews$/;"	f	class:JLDrill.ModifyVocabularyContext
 createViews	lib/jldrill/contexts/PromptContext.rb	/^		def createViews$/;"	f	class:JLDrill.PromptContext
@@ -568,6 +596,10 @@ dataSize	lib/jldrill/model/DataFile.rb	/^        def dataSize$/;"	f	class:JLDril
 dataSize	lib/jldrill/model/DeinflectionRules.rb	/^        def dataSize$/;"	f	class:JLDrill.Deinflection.DeinflectionRules.DeinflectionRulesFile
 dataSize	lib/jldrill/model/Quiz/Quiz.rb	/^        def dataSize$/;"	f	class:JLDrill.Quiz
 dataSize	lib/jldrill/model/Tanaka.rb	/^        def dataSize$/;"	f	class:Reference
+dataSize	lib/jldrill/model/Tatoeba.rb	/^        def dataSize$/;"	f	class:JLDrill.ChineseIndexFile
+dataSize	lib/jldrill/model/Tatoeba.rb	/^        def dataSize$/;"	f	class:JLDrill.JapaneseIndexFile
+dataSize	lib/jldrill/model/Tatoeba.rb	/^        def dataSize$/;"	f	class:JLDrill.LinkFile
+dataSize	lib/jldrill/model/Tatoeba.rb	/^        def dataSize$/;"	f	class:JLDrill.SentenceFile
 dataSize	lib/jldrill/model/items/Dictionary.rb	/^        def dataSize$/;"	f	class:JLDrill.Dictionary
 dataSize	lib/jldrill/model/moji/Kana.rb	/^        def dataSize$/;"	f	class:JLDrill.KanaFile
 dataSize	lib/jldrill/model/moji/Kanji.rb	/^        def dataSize$/;"	f	class:JLDrill.KanjiFile
@@ -635,6 +667,7 @@ destroyViews	lib/jldrill/contexts/LoadKanjiContext.rb	/^        def destroyViews
 destroyViews	lib/jldrill/contexts/LoadQuizContext.rb	/^        def destroyViews$/;"	f	class:JLDrill.LoadQuizContext
 destroyViews	lib/jldrill/contexts/LoadReferenceContext.rb	/^        def destroyViews$/;"	f	class:JLDrill.LoadReferenceContext
 destroyViews	lib/jldrill/contexts/LoadTanakaContext.rb	/^        def destroyViews$/;"	f	class:JLDrill.LoadTanakaContext
+destroyViews	lib/jldrill/contexts/LoadTatoebaContext.rb	/^        def destroyViews$/;"	f	class:JLDrill.LoadTatoebaContext
 destroyViews	lib/jldrill/contexts/MainContext.rb	/^		def destroyViews$/;"	f	class:JLDrill.MainContext
 destroyViews	lib/jldrill/contexts/ModifyVocabularyContext.rb	/^        def destroyViews$/;"	f	class:JLDrill.ModifyVocabularyContext
 destroyViews	lib/jldrill/contexts/PromptContext.rb	/^        def destroyViews$/;"	f	class:JLDrill.PromptContext
@@ -698,8 +731,7 @@ emitDestroyEvent	lib/jldrill/views/gtk/StatisticsView.rb	/^		def emitDestroyEven
 emitDestroyEvent	lib/jldrill/views/gtk/VocabularyView.rb	/^		def emitDestroyEvent$/;"	f	class:JLDrill.VocabularyView
 empty?	lib/jldrill/model/Bin.rb	/^        def empty?$/;"	f	class:JLDrill.Bin
 empty?	lib/jldrill/model/Contents.rb	/^        def empty?$/;"	f	class:JLDrill.Contents
-english	lib/jldrill/model/Tanaka.rb	/^        def english$/;"	f	class:JLDrill.Sentence
-englishTo_s	lib/jldrill/model/Tanaka.rb	/^        def englishTo_s$/;"	f	class:JLDrill.Sentence
+empty?	lib/jldrill/model/LoadPath.rb	/^        def empty?()$/;"	f	class:JLDrill.LoadPath
 enter	lib/Context/Context.rb	/^		def enter(parent)$/;"	f	class:Context.Context
 enter	lib/Context/Gtk/App.rb	/^		def enter$/;"	f	class:Context.App
 enter	lib/jldrill/contexts/AppendFileContext.rb	/^        def enter(parent, quiz)$/;"	f	class:JLDrill.AppendFileContext
@@ -713,6 +745,7 @@ enter	lib/jldrill/contexts/LoadQuizContext.rb	/^        def enter(parent, quiz, 
 enter	lib/jldrill/contexts/LoadQuizFromEdictContext.rb	/^        def enter(parent, quiz, edict)$/;"	f	class:JLDrill.LoadQuizFromEdictContext
 enter	lib/jldrill/contexts/LoadReferenceContext.rb	/^        def enter(parent, reference, deinflect, options)$/;"	f	class:JLDrill.LoadReferenceContext
 enter	lib/jldrill/contexts/LoadTanakaContext.rb	/^        def enter(parent, tanaka, options)$/;"	f	class:JLDrill.LoadTanakaContext
+enter	lib/jldrill/contexts/LoadTatoebaContext.rb	/^        def enter(parent, tatoebaDatabase)$/;"	f	class:JLDrill.LoadTatoebaContext
 enter	lib/jldrill/contexts/MainContext.rb	/^		def enter(parent)$/;"	f	class:JLDrill.MainContext
 enter	lib/jldrill/contexts/MergeQuizContext.rb	/^        def enter(parent, quiz1, quiz2)$/;"	f	class:JLDrill.MergeQuizContext
 enter	lib/jldrill/contexts/ModifyVocabularyContext.rb	/^		def enter(parent)$/;"	f	class:JLDrill.ModifyVocabularyContext
@@ -739,6 +772,7 @@ eql?	lib/jldrill/model/moji/Radical.rb	/^		def eql?(radical)$/;"	f	class:JLDrill
 evalClass	lib/Context/Bridge.rb	/^		def evalClass(mod, symbol)$/;"	f	class:Context.Bridge
 evaluateAttribute	lib/jldrill/model/Problem.rb	/^        def evaluateAttribute(name)$/;"	f	class:JLDrill.Problem
 evaluateParts	lib/jldrill/model/Problem.rb	/^        def evaluateParts(parts)$/;"	f	class:JLDrill.Problem
+exampleDB	lib/jldrill/contexts/MainContext.rb	/^        def exampleDB$/;"	f	class:JLDrill.MainContext
 execute	lib/jldrill/views/gtk/widgets/InfoWindow.rb	/^        def execute(string)$/;"	f	class:JLDrill.InfoWindow
 execute	lib/jldrill/views/gtk/widgets/OptionsWindow.rb	/^        def execute$/;"	f	class:JLDrill.OptionsWindow
 execute	lib/jldrill/views/gtk/widgets/PromptWindow.rb	/^        def execute$/;"	f	class:JLDrill.PromptWindow
@@ -769,6 +803,7 @@ exitLoadQuizContext	lib/jldrill/contexts/LoadQuizContext.rb	/^        def exitLo
 exitLoadQuizFromEdictContext	lib/jldrill/contexts/LoadQuizFromEdictContext.rb	/^        def exitLoadQuizFromEdictContext$/;"	f	class:JLDrill.LoadQuizFromEdictContext
 exitLoadReferenceContext	lib/jldrill/contexts/LoadReferenceContext.rb	/^        def exitLoadReferenceContext$/;"	f	class:JLDrill.LoadReferenceContext
 exitLoadTanakaContext	lib/jldrill/contexts/LoadTanakaContext.rb	/^        def exitLoadTanakaContext$/;"	f	class:JLDrill.LoadTanakaContext
+exitLoadTatoebaContext	lib/jldrill/contexts/LoadTatoebaContext.rb	/^        def exitLoadTatoebaContext$/;"	f	class:JLDrill.LoadTatoebaContext
 exp	lib/jldrill/model/Quiz/ItemStats.rb	/^        def exp(number, places)$/;"	f	class:JLDrill.ItemStats
 expandWidgetHeight	lib/Context/Gtk/Widget.rb	/^        def expandWidgetHeight$/;"	f	class:Context.Widget
 expandWidgetHeight?	lib/Context/Gtk/Widget.rb	/^        def expandWidgetHeight?$/;"	f	class:Context.Widget
@@ -789,6 +824,7 @@ file	lib/jldrill/spec/SampleQuiz.rb	/^        def file$/;"	f	class:JLDrill
 file=	lib/jldrill/model/DataFile.rb	/^        def file=(filename)$/;"	f	class:JLDrill.DataFile
 fileHeader	lib/jldrill/model/Quiz/Quiz.rb	/^        def fileHeader$/;"	f	class:JLDrill.Quiz
 filename	lib/jldrill/views/gtk/FileProgress.rb	/^		def filename$/;"	f	class:JLDrill.FileProgress
+find	lib/jldrill/model/LoadPath.rb	/^        def find(filename)$/;"	f	class:JLDrill.LoadPath
 findAll	lib/jldrill/model/Bin.rb	/^        def findAll(&block)$/;"	f	class:JLDrill.Bin
 findAll	lib/jldrill/model/Contents.rb	/^        def findAll(&block)$/;"	f	class:JLDrill.Contents
 findBinWithKanji	lib/jldrill/model/items/Dictionary.rb	/^        def findBinWithKanji(kanji)$/;"	f	class:JLDrill.Dictionary
@@ -808,12 +844,17 @@ findSchedule	lib/jldrill/model/ProblemStatus.rb	/^        def findSchedule(type)
 findUnseen	lib/jldrill/model/Bin.rb	/^        def findUnseen(n)$/;"	f	class:JLDrill.Bin
 findUnseen	lib/jldrill/model/Contents.rb	/^        def findUnseen(n, range)$/;"	f	class:JLDrill.Contents
 findUnseen	lib/jldrill/model/Quiz/Strategy.rb	/^        def findUnseen(binNum)$/;"	f	class:JLDrill.Strategy
+findUsageData	lib/jldrill/model/Tatoeba.rb	/^        def findUsageData(usageHash, pos)$/;"	f	class:JLDrill.JapaneseIndexFile
 findWord	lib/jldrill/model/Tanaka.rb	/^        def findWord(connection)$/;"	f	class:JLDrill.SearchResults
 findWord	lib/jldrill/model/items/Dictionary.rb	/^        def findWord(string)$/;"	f	class:JLDrill.Dictionary
 findWordsThatStart	lib/jldrill/model/items/Dictionary.rb	/^        def findWordsThatStart(string)$/;"	f	class:JLDrill.Dictionary
 finishParsing	lib/jldrill/model/DataFile.rb	/^        def finishParsing$/;"	f	class:JLDrill.DataFile.parseChunk
 finishParsing	lib/jldrill/model/Quiz/Quiz.rb	/^        def finishParsing$/;"	f	class:JLDrill.Quiz
 finishParsing	lib/jldrill/model/Tanaka.rb	/^        def finishParsing$/;"	f	class:Reference
+finishParsing	lib/jldrill/model/Tatoeba.rb	/^        def finishParsing$/;"	f	class:JLDrill
+finishParsing	lib/jldrill/model/Tatoeba.rb	/^        def finishParsing$/;"	f	class:JLDrill.ChineseIndexFile
+finishParsing	lib/jldrill/model/Tatoeba.rb	/^        def finishParsing$/;"	f	class:JLDrill.LinkFile
+finishParsing	lib/jldrill/model/Tatoeba.rb	/^        def finishParsing$/;"	f	class:JLDrill.SentenceFile
 finishParsing	lib/jldrill/model/items/Dictionary.rb	/^        def finishParsing$/;"	f	class:JLDrill.Dictionary
 firstProblem	lib/jldrill/model/ProblemStatus.rb	/^        def firstProblem$/;"	f	class:JLDrill.ProblemStatus
 firstSchedule	lib/jldrill/model/ProblemStatus.rb	/^        def firstSchedule$/;"	f	class:JLDrill.ProblemStatus
@@ -837,6 +878,7 @@ fromString	lib/jldrill/model/moji/Kanji.rb	/^		def KanjiList.fromString(string)$
 fromString	lib/jldrill/model/moji/Radical.rb	/^		def RadicalList.fromString(string)$/;"	F	class:JLDrill.RadicalList
 getCandidates	lib/jldrill/views/gtk/widgets/VocabPopupFactory.rb	/^        def getCandidates(string)$/;"	f	class:JLDrill.VocabPopupFactory
 getCharAt	lib/jldrill/views/gtk/widgets/KanjiPopupFactory.rb	/^        def getCharAt(widget, window, x, y)$/;"	f	class:JLDrill.KanjiPopupFactory
+getConnections	lib/jldrill/model/Tatoeba.rb	/^        def getConnections(kanji)$/;"	f	class:JLDrill.ChineseIndexFile
 getContents	lib/jldrill/views/gtk/widgets/ItemTable.rb	/^        def getContents(item)$/;"	f	class:JLDrill.ItemTable
 getContents	lib/jldrill/views/gtk/widgets/SearchTable.rb	/^        def getContents(item)$/;"	f	class:JLDrill.SearchTable
 getContents	lib/jldrill/views/gtk/widgets/WordTable.rb	/^        def getContents(item)$/;"	f	class:JLDrill.WordTable
@@ -859,6 +901,7 @@ getJWord	lib/jldrill/model/items/CEDictionary.rb	/^        def getJWord(index)$/
 getJWord	lib/jldrill/model/items/JEDictionary.rb	/^        def getJWord(index)$/;"	f	class:JLDrill.JEDictionary
 getLevel	lib/jldrill/model/Quiz/Counter.rb	/^        def Counter.getLevel(item)$/;"	F	class:JLDrill.Counter
 getLevel	lib/jldrill/model/Quiz/Statistics.rb	/^        def getLevel(item)$/;"	f	class:JLDrill.Statistics
+getLinksTo	lib/jldrill/model/Tatoeba.rb	/^        def getLinksTo(index)$/;"	f	class:JLDrill.LinkFile
 getMarkup	lib/jldrill/views/gtk/widgets/VocabularyHintBox.rb	/^        def getMarkup(label, state)$/;"	f	class:JLDrill.VocabularyHintBox
 getMeaning	lib/jldrill/model/items/CEDictionary.rb	/^        def getMeaning(position)$/;"	f	class:JLDrill.CEDictionary
 getMeaning	lib/jldrill/model/items/Dictionary.rb	/^        def getMeaning(position)$/;"	f	class:JLDrill.Dictionary
@@ -946,7 +989,6 @@ hintRaw	lib/jldrill/model/items/Vocabulary.rb	/^        def hintRaw$/;"	f	class:
 hintWidget	lib/jldrill/oldUI/GtkVocabView.rb	/^        def hintWidget$/;"	f
 honourific=	lib/jldrill/views/gtk/widgets/VocabularyHintBox.rb	/^        def honourific=(state)$/;"	f	class:JLDrill.VocabularyHintBox
 humble=	lib/jldrill/views/gtk/widgets/VocabularyHintBox.rb	/^        def humble=(state)$/;"	f	class:JLDrill.VocabularyHintBox
-id	lib/jldrill/model/Tanaka.rb	/^        def id$/;"	f	class:JLDrill.Sentence
 idle_add	lib/jldrill/contexts/FileProgressContext.rb	/^            def idle_add(&block)$/;"	f	class:JLDrill.FileProgressContext.FileProgress
 idle_add	lib/jldrill/views/gtk/FileProgress.rb	/^		def idle_add(&block)$/;"	f	class:JLDrill.FileProgress
 idle_add	lib/jldrill/views/test/FileProgress.rb	/^        def idle_add(&block)$/;"	f	class:JLDrill.FileProgress
@@ -995,6 +1037,7 @@ initialize	lib/jldrill/contexts/LoadQuizContext.rb	/^		def initialize(viewBridge
 initialize	lib/jldrill/contexts/LoadQuizFromEdictContext.rb	/^		def initialize(viewBridge)$/;"	f	class:JLDrill.LoadQuizFromEdictContext
 initialize	lib/jldrill/contexts/LoadReferenceContext.rb	/^		def initialize(viewBridge)$/;"	f	class:JLDrill.LoadReferenceContext
 initialize	lib/jldrill/contexts/LoadTanakaContext.rb	/^		def initialize(viewBridge)$/;"	f	class:JLDrill.LoadTanakaContext
+initialize	lib/jldrill/contexts/LoadTatoebaContext.rb	/^		def initialize(viewBridge)$/;"	f	class:JLDrill.LoadTatoebaContext
 initialize	lib/jldrill/contexts/MainContext.rb	/^		def initialize(viewBridge)$/;"	f	class:JLDrill.MainContext
 initialize	lib/jldrill/contexts/MergeQuizContext.rb	/^		def initialize(viewBridge)$/;"	f	class:JLDrill.MergeQuizContext
 initialize	lib/jldrill/contexts/ModifyVocabularyContext.rb	/^            def initialize(context, name)$/;"	f	class:JLDrill.ModifyVocabularyContext.VocabularyView
@@ -1027,8 +1070,10 @@ initialize	lib/jldrill/model/DeinflectionRules.rb	/^            def initialize(t
 initialize	lib/jldrill/model/DeinflectionRules.rb	/^        def initialize$/;"	f	class:JLDrill.Deinflection.DeinflectionRules
 initialize	lib/jldrill/model/DeinflectionRules.rb	/^        def initialize$/;"	f	class:JLDrill.Deinflection.DeinflectionRules.DeinflectionRulesFile
 initialize	lib/jldrill/model/Duration.rb	/^        def initialize(seconds = -1)$/;"	f	class:JLDrill.Duration
+initialize	lib/jldrill/model/ExampleSentence.rb	/^        def initialize()$/;"	f	class:JLDrill.ExampleSentence
 initialize	lib/jldrill/model/Item.rb	/^        def initialize(item=nil)$/;"	f	class:JLDrill.Item
 initialize	lib/jldrill/model/ItemStatus.rb	/^        def initialize(item)$/;"	f	class:JLDrill.ItemStatus
+initialize	lib/jldrill/model/LoadPath.rb	/^        def initialize()$/;"	f	class:JLDrill.LoadPath
 initialize	lib/jldrill/model/Problem.rb	/^        def initialize(item)$/;"	f	class:JLDrill.Problem
 initialize	lib/jldrill/model/ProblemStatus.rb	/^        def initialize(item)$/;"	f	class:JLDrill.ProblemStatus
 initialize	lib/jldrill/model/Quiz/Counter.rb	/^        def initialize$/;"	f	class:JLDrill.Counter
@@ -1044,6 +1089,15 @@ initialize	lib/jldrill/model/Tanaka.rb	/^		def initialize()$/;"	f	class:Referenc
 initialize	lib/jldrill/model/Tanaka.rb	/^        def initialize(contents)$/;"	f	class:JLDrill.Word
 initialize	lib/jldrill/model/Tanaka.rb	/^        def initialize(data, wordData)$/;"	f	class:JLDrill.Sentence
 initialize	lib/jldrill/model/Tanaka.rb	/^        def initialize(word, connections, sentences)$/;"	f	class:JLDrill.SearchResults
+initialize	lib/jldrill/model/Tatoeba.rb	/^		def initialize(sentences)$/;"	f	class:JLDrill.JapaneseIndexFile
+initialize	lib/jldrill/model/Tatoeba.rb	/^        def initialize()$/;"	f	class:Database
+initialize	lib/jldrill/model/Tatoeba.rb	/^        def initialize()$/;"	f	class:JLDrill.LinkFile
+initialize	lib/jldrill/model/Tatoeba.rb	/^        def initialize()$/;"	f	class:JLDrill.SentenceFile
+initialize	lib/jldrill/model/Tatoeba.rb	/^        def initialize(data, vocabUsageData, sentences)$/;"	f	class:JLDrill.JapaneseExample
+initialize	lib/jldrill/model/Tatoeba.rb	/^        def initialize(sentences)$/;"	f	class:JLDrill.ChineseIndexFile
+initialize	lib/jldrill/model/VocabularyUsage.rb	/^                def initialize(successfulHash, positions)$/;"	f	class:JLDrill.VocabularyUsage.Map.SearchResult
+initialize	lib/jldrill/model/VocabularyUsage.rb	/^            def initialize$/;"	f	class:JLDrill.VocabularyUsage.Map
+initialize	lib/jldrill/model/VocabularyUsage.rb	/^        def initialize()$/;"	f	class:JLDrill.VocabularyUsage
 initialize	lib/jldrill/model/items/Dictionary.rb	/^        def initialize$/;"	f	class:JLDrill.Dictionary
 initialize	lib/jldrill/model/items/Field.rb	/^        def initialize(name)$/;"	f	class:JLDrill.Field
 initialize	lib/jldrill/model/items/JWord.rb	/^        def initialize$/;"	f	class:JLDrill.JWord
@@ -1087,6 +1141,7 @@ initialize	lib/jldrill/views/gtk/VBoxView.rb	/^        def initialize(context)$/
 initialize	lib/jldrill/views/gtk/VocabularyTableView.rb	/^		def initialize(context)$/;"	f	class:JLDrill.VocabularyTableView
 initialize	lib/jldrill/views/gtk/VocabularyView.rb	/^		def initialize(context, name)$/;"	f	class:JLDrill.VocabularyView
 initialize	lib/jldrill/views/gtk/widgets/ExampleWindow.rb	/^        def initialize(view)$/;"	f	class:JLDrill.ExampleWindow
+initialize	lib/jldrill/views/gtk/widgets/Icon.rb	/^        def initialize()$/;"	f	class:JLDrill.Icon
 initialize	lib/jldrill/views/gtk/widgets/InfoWindow.rb	/^        def initialize(view)$/;"	f	class:JLDrill.InfoWindow
 initialize	lib/jldrill/views/gtk/widgets/ItemTable.rb	/^        def initialize(itemList, &selectAction)$/;"	f	class:JLDrill.ItemTable
 initialize	lib/jldrill/views/gtk/widgets/ItemTableWindow.rb	/^        def initialize(view)$/;"	f	class:JLDrill.ItemTableWindow
@@ -1155,8 +1210,6 @@ itemAdded	lib/jldrill/model/Contents.rb	/^        def itemAdded(item)$/;"	f	clas
 itemAddedUpdated	lib/jldrill/contexts/ShowAllVocabularyContext.rb	/^        def itemAddedUpdated(item)$/;"	f	class:JLDrill.ShowAllVocabularyContext
 itemDeletedUpdated	lib/jldrill/contexts/ShowAllVocabularyContext.rb	/^        def itemDeletedUpdated(item)$/;"	f	class:JLDrill.ShowAllVocabularyContext
 itemStats	lib/jldrill/model/Item.rb	/^        def itemStats$/;"	f	class:JLDrill
-japanese	lib/jldrill/model/Tanaka.rb	/^        def japanese$/;"	f	class:JLDrill.Sentence
-japaneseTo_s	lib/jldrill/model/Tanaka.rb	/^        def japaneseTo_s$/;"	f	class:JLDrill.Sentence
 kanji	lib/jldrill/model/items/Vocabulary.rb	/^        def kanji$/;"	f	class:JLDrill.Vocabulary.numCommonChars
 kanji	lib/jldrill/oldUI/GtkVocabView.rb	/^        def kanji$/;"	f
 kanji	lib/jldrill/views/gtk/widgets/VocabularyWindow.rb	/^        def kanji$/;"	f	class:JLDrill.VocabularyWindow
@@ -1191,11 +1244,13 @@ levelString	lib/jldrill/model/Quiz/Counter.rb	/^        def levelString(level)$/
 load	lib/jldrill/model/DataFile.rb	/^		def load(file)$/;"	f	class:JLDrill.DataFile
 loadAsEdict	lib/jldrill/contexts/LoadQuizContext.rb	/^        def loadAsEdict(quiz, filename)$/;"	f	class:JLDrill.LoadQuizContext
 loadAsQuiz	lib/jldrill/contexts/LoadQuizContext.rb	/^        def loadAsQuiz(quiz, filename)$/;"	f	class:JLDrill.LoadQuizContext
+loadChinese	lib/jldrill/contexts/LoadTatoebaContext.rb	/^        def loadChinese$/;"	f	class:JLDrill.LoadTatoebaContext
 loadDeinflection	lib/jldrill/contexts/LoadReferenceContext.rb	/^        def loadDeinflection(deinflect, filename)$/;"	f	class:JLDrill.LoadReferenceContext
 loadDictionary	lib/jldrill/contexts/ModifyVocabularyContext.rb	/^        def loadDictionary$/;"	f	class:JLDrill.ModifyVocabularyContext
 loadDictionary	lib/jldrill/views/gtk/VocabularyView.rb	/^        def loadDictionary$/;"	f	class:JLDrill.VocabularyView
 loadFromDict	lib/jldrill/model/Quiz/Quiz.rb	/^        def loadFromDict(dict)$/;"	f	class:JLDrill.Quiz
 loadFromString	lib/jldrill/model/Quiz/Quiz.rb	/^        def loadFromString(file, string)$/;"	f	class:JLDrill.Quiz
+loadJapanese	lib/jldrill/contexts/LoadTatoebaContext.rb	/^        def loadJapanese$/;"	f	class:JLDrill.LoadTatoebaContext
 loadKana	lib/jldrill/contexts/LoadKanjiContext.rb	/^        def loadKana$/;"	f	class:JLDrill.LoadKanjiContext
 loadKanji	lib/jldrill/contexts/LoadKanjiContext.rb	/^        def loadKanji$/;"	f	class:JLDrill.LoadKanjiContext
 loadKanji	lib/jldrill/contexts/MainContext.rb	/^		def loadKanji$/;"	f	class:JLDrill.MainContext
@@ -1204,13 +1259,16 @@ loadRadicals	lib/jldrill/contexts/LoadKanjiContext.rb	/^        def loadRadicals
 loadReference	lib/jldrill/contexts/LoadReferenceContext.rb	/^        def loadReference(reference, deinflect, filename)$/;"	f	class:JLDrill.LoadReferenceContext
 loadReference	lib/jldrill/contexts/MainContext.rb	/^		def loadReference$/;"	f	class:JLDrill.MainContext
 loadReference	lib/jldrill/contexts/RunCommandContext.rb	/^        def loadReference$/;"	f	class:JLDrill.RunCommandContext
+loadSentences	lib/jldrill/contexts/LoadTatoebaContext.rb	/^        def loadSentences$/;"	f	class:JLDrill.LoadTatoebaContext
 loadTanaka	lib/jldrill/contexts/LoadTanakaContext.rb	/^        def loadTanaka(tanaka, filename)$/;"	f	class:JLDrill.LoadTanakaContext
 loadTanaka	lib/jldrill/contexts/MainContext.rb	/^		def loadTanaka$/;"	f	class:JLDrill.MainContext
-loadTanaka	lib/jldrill/contexts/RunCommandContext.rb	/^		def loadTanaka$/;"	f	class:JLDrill.RunCommandContext
+loadTatoeba	lib/jldrill/contexts/MainContext.rb	/^		def loadTatoeba$/;"	f	class:JLDrill.MainContext
+loadTatoeba	lib/jldrill/contexts/RunCommandContext.rb	/^		def loadTatoeba$/;"	f	class:JLDrill.RunCommandContext
 loadUpdated	lib/jldrill/contexts/DisplayProblemContext.rb	/^        def loadUpdated(quiz)$/;"	f	class:JLDrill.DisplayProblemContext
 loadUpdated	lib/jldrill/contexts/RunCommandContext.rb	/^        def loadUpdated(quiz)$/;"	f	class:JLDrill.RunCommandContext
 loadUpdated	lib/jldrill/contexts/ShowAllVocabularyContext.rb	/^		def loadUpdated(quiz)$/;"	f	class:JLDrill.ShowAllVocabularyContext
 loaded?	lib/jldrill/model/DataFile.rb	/^		def loaded?$/;"	f	class:JLDrill.DataFile
+loaded?	lib/jldrill/model/Tatoeba.rb	/^        def loaded?()$/;"	f	class:Database
 lookup	lib/jldrill/model/problems/ProblemFactory.rb	/^        def ProblemFactory.lookup(level)$/;"	F	class:JLDrill.ProblemFactory
 mainWindow	lib/jldrill/views/gtk/ExampleView.rb	/^        def mainWindow$/;"	f	class:JLDrill.ExampleView
 mainWindow	lib/jldrill/views/gtk/ItemHintView.rb	/^        def mainWindow$/;"	f	class:JLDrill.ItemHintView
@@ -1250,6 +1308,10 @@ name	lib/jldrill/model/ProblemStatus.rb	/^        def name$/;"	f	class:JLDrill.P
 name	lib/jldrill/model/problems/KanjiProblem.rb	/^        def name$/;"	f	class:JLDrill.KanjiProblem
 name	lib/jldrill/model/problems/MeaningProblem.rb	/^        def name$/;"	f	class:JLDrill.MeaningProblem
 name	lib/jldrill/model/problems/ReadingProblem.rb	/^        def name$/;"	f	class:JLDrill.ReadingProblem
+nativeLanguage	lib/jldrill/model/ExampleSentence.rb	/^        def nativeLanguage()$/;"	f	class:JLDrill.ExampleSentence
+nativeLanguage	lib/jldrill/model/Tanaka.rb	/^        def nativeLanguage()$/;"	f	class:JLDrill.Sentence
+nativeLanguage	lib/jldrill/model/Tatoeba.rb	/^        def nativeLanguage()$/;"	f	class:JLDrill.JapaneseExample
+nativeOnly_to_s	lib/jldrill/model/ExampleSentence.rb	/^        def nativeOnly_to_s()$/;"	f	class:JLDrill.ExampleSentence
 needsSave?	lib/jldrill/model/Quiz/Quiz.rb	/^        def needsSave?$/;"	f	class:JLDrill.Quiz
 newProblem	lib/jldrill/contexts/DisplayProblemContext.rb	/^                def newProblem(problem)$/;"	f	class:JLDrill.DisplayProblemContext.ProblemView.ItemHintView
 newProblem	lib/jldrill/contexts/DisplayProblemContext.rb	/^            def newProblem(problem)$/;"	f	class:JLDrill.DisplayProblemContext.ProblemView
@@ -1317,6 +1379,10 @@ parseCommandLineOptions	lib/jldrill/contexts/MainContext.rb	/^        def parseC
 parseEntry	lib/jldrill/model/DataFile.rb	/^        def parseEntry$/;"	f	class:JLDrill.DataFile
 parseEntry	lib/jldrill/model/Quiz/Quiz.rb	/^        def parseEntry$/;"	f	class:JLDrill.Quiz
 parseEntry	lib/jldrill/model/Tanaka.rb	/^        def parseEntry$/;"	f	class:Reference
+parseEntry	lib/jldrill/model/Tatoeba.rb	/^        def parseEntry$/;"	f	class:JLDrill.ChineseIndexFile
+parseEntry	lib/jldrill/model/Tatoeba.rb	/^        def parseEntry$/;"	f	class:JLDrill.JapaneseIndexFile
+parseEntry	lib/jldrill/model/Tatoeba.rb	/^        def parseEntry$/;"	f	class:JLDrill.LinkFile
+parseEntry	lib/jldrill/model/Tatoeba.rb	/^        def parseEntry$/;"	f	class:JLDrill.SentenceFile
 parseEntry	lib/jldrill/model/items/Dictionary.rb	/^        def parseEntry$/;"	f	class:JLDrill.Dictionary
 parseItem	lib/jldrill/model/Contents.rb	/^        def parseItem(line, bin)$/;"	f	class:JLDrill.Contents
 parseLine	lib/jldrill/model/Contents.rb	/^        def parseLine(line)$/;"	f	class:JLDrill.Contents
@@ -1328,7 +1394,6 @@ parseLines	lib/jldrill/model/Tanaka.rb	/^        def parseLines(aLine, bLine, po
 parsePart	lib/jldrill/model/Item.rb	/^        def parsePart(part)$/;"	f	class:JLDrill.Item
 parseSchedule	lib/jldrill/model/ProblemStatus.rb	/^        def parseSchedule(part)$/;"	f	class:JLDrill.ProblemStatus
 parseType	lib/jldrill/model/ProblemStatus.rb	/^        def parseType(part)$/;"	f	class:JLDrill.ProblemStatus
-parseWordData	lib/jldrill/model/Tanaka.rb	/^        def parseWordData$/;"	f	class:JLDrill.Sentence
 parser	lib/jldrill/model/DataFile.rb	/^        def parser$/;"	f	class:JLDrill.DataFile
 parser	lib/jldrill/model/DeinflectionRules.rb	/^        def parser$/;"	f	class:JLDrill.Deinflection.DeinflectionRules.DeinflectionRulesFile
 parser	lib/jldrill/model/moji/Kana.rb	/^        def parser$/;"	f	class:JLDrill.KanaFile
@@ -1390,6 +1455,7 @@ readFile	lib/jldrill/contexts/FileProgressContext.rb	/^        def readFile$/;"	
 readFile	lib/jldrill/contexts/LoadQuizFromEdictContext.rb	/^        def readFile$/;"	f	class:JLDrill.LoadQuizFromEdictContext
 readFile	lib/jldrill/contexts/MergeQuizContext.rb	/^        def readFile$/;"	f	class:JLDrill.MergeQuizContext
 readLines	lib/jldrill/model/DataFile.rb	/^        def readLines$/;"	f	class:JLDrill.DataFile
+readLines	lib/jldrill/model/Tatoeba.rb	/^        def readLines$/;"	f	class:JLDrill.ChineseIndexFile
 readLines	lib/jldrill/model/items/Dictionary.rb	/^        def readLines$/;"	f	class:JLDrill.Dictionary
 reading	lib/jldrill/model/items/Vocabulary.rb	/^        def reading$/;"	f	class:JLDrill.Vocabulary.numCommonChars
 reading	lib/jldrill/oldUI/GtkVocabView.rb	/^        def reading$/;"	f	class:kanji=.hint=
@@ -1510,6 +1576,9 @@ scheduled?	lib/jldrill/model/Quiz/Schedule.rb	/^        def scheduled?$/;"	f	cla
 search	lib/jldrill/contexts/ModifyVocabularyContext.rb	/^		def search(kanji, reading)$/;"	f	class:JLDrill.ModifyVocabularyContext
 search	lib/jldrill/contexts/behaviour/SearchDictionary.rb	/^        def search(string)$/;"	f	class:JLDrill.SearchDictionary
 search	lib/jldrill/model/Tanaka.rb	/^        def search(kanji, reading)$/;"	f	class:Reference
+search	lib/jldrill/model/Tatoeba.rb	/^        def search(kanji, reading)$/;"	f	class:Database
+search	lib/jldrill/model/Tatoeba.rb	/^        def search(kanji, reading)$/;"	f	class:JLDrill
+search	lib/jldrill/model/VocabularyUsage.rb	/^            def search(kanji, reading)$/;"	f	class:JLDrill.VocabularyUsage.Map
 search	lib/jldrill/views/gtk/VocabularyView.rb	/^        def search(kanji, reading)$/;"	f	class:JLDrill.VocabularyView
 search	lib/jldrill/views/gtk/widgets/VocabularyWindow.rb	/^        def search(kanji, reading)$/;"	f	class:JLDrill.VocabularyWindow
 search	lib/jldrill/views/gtk/widgets/WordTable.rb	/^        def search$/;"	f	class:JLDrill.WordTable
@@ -1534,6 +1603,7 @@ selectClosestMatch	lib/jldrill/views/gtk/widgets/VocabularyWindow.rb	/^        d
 selectClosestMatch	lib/jldrill/views/gtk/widgets/WordTable.rb	/^        def selectClosestMatch(vocab)$/;"	f	class:JLDrill.WordTable
 selectItem	lib/jldrill/views/gtk/widgets/WordTable.rb	/^        def selectItem(item)$/;"	f	class:JLDrill.WordTable
 selectPath	lib/jldrill/views/gtk/widgets/WordTable.rb	/^        def selectPath(path)$/;"	f	class:JLDrill.WordTable
+sentenceAt	lib/jldrill/model/Tatoeba.rb	/^        def sentenceAt(index)$/;"	f	class:JLDrill.SentenceFile
 set	lib/jldrill/views/gtk/widgets/OptionsWindow.rb	/^        def set(options)$/;"	f	class:JLDrill.OptionsWindow
 set	lib/jldrill/views/gtk/widgets/VocabularyHintBox.rb	/^        def set(vocab, differs=false)$/;"	f	class:JLDrill.VocabularyHintBox
 setAcceptKanji	lib/jldrill/oldUI/GtkVocabView.rb	/^        def setAcceptKanji(&block)$/;"	f	class:kanji=.hint=.reading=.definitions=.markers=.createField.createBox
@@ -1581,6 +1651,30 @@ showAnswer	lib/jldrill/contexts/ShowExamplesContext.rb	/^        def showAnswer(
 showAnswer	lib/jldrill/views/gtk/ProblemView.rb	/^		def showAnswer$/;"	f	class:JLDrill.ProblemView
 showAnswer	lib/jldrill/views/gtk/widgets/ProblemDisplay.rb	/^        def showAnswer$/;"	f	class:JLDrill.ProblemDisplay
 showAnswer	lib/jldrill/views/test/ProblemView.rb	/^        def showAnswer$/;"	f	class:JLDrill.ProblemView
+showBusy	lib/Context/Views/Gtk/Widgets/MainWindow.rb	/^        def showBusy(bool)$/;"	f	class:Context.MainWindow
+showBusy	lib/jldrill/contexts/DisplayProblemContext.rb	/^            def showBusy(bool)$/;"	f	class:JLDrill.DisplayProblemContext.ProblemView
+showBusy	lib/jldrill/contexts/MainContext.rb	/^            def showBusy(bool)$/;"	f	class:JLDrill.MainContext.MainWindowView
+showBusy	lib/jldrill/contexts/ModifyVocabularyContext.rb	/^            def showBusy(bool)$/;"	f	class:JLDrill.ModifyVocabularyContext.VocabularyView
+showBusy	lib/jldrill/contexts/ShowAllVocabularyContext.rb	/^            def showBusy(bool)$/;"	f	class:JLDrill.ShowAllVocabularyContext.VocabularyTableView
+showBusy	lib/jldrill/contexts/ShowExamplesContext.rb	/^            def showBusy(bool)$/;"	f	class:JLDrill.ShowExamplesContext.ExampleView
+showBusy	lib/jldrill/contexts/ShowStatisticsContext.rb	/^            def showBusy(bool)$/;"	f	class:JLDrill.ShowStatisticsContext.StatisticsView
+showBusy	lib/jldrill/oldUI/GtkVocabView.rb	/^        def showBusy(bool)$/;"	f	class:kanji=.hint=.reading=.definitions=.markers=.createField.createBox
+showBusy	lib/jldrill/views/gtk/ExampleView.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.ExampleView
+showBusy	lib/jldrill/views/gtk/MainWindowView.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.MainWindowView
+showBusy	lib/jldrill/views/gtk/ProblemView.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.ProblemView
+showBusy	lib/jldrill/views/gtk/StatisticsView.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.StatisticsView
+showBusy	lib/jldrill/views/gtk/VocabularyTableView.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.VocabularyTableView
+showBusy	lib/jldrill/views/gtk/VocabularyView.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.VocabularyView
+showBusy	lib/jldrill/views/gtk/widgets/ExampleWindow.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.ExampleWindow
+showBusy	lib/jldrill/views/gtk/widgets/ItemTableWindow.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.ItemTableWindow
+showBusy	lib/jldrill/views/gtk/widgets/KanjiPopup.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.KanjiPopup
+showBusy	lib/jldrill/views/gtk/widgets/Popup.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.Popup
+showBusy	lib/jldrill/views/gtk/widgets/PopupFactory.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.PopupFactory
+showBusy	lib/jldrill/views/gtk/widgets/ProblemDisplay.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.ProblemDisplay
+showBusy	lib/jldrill/views/gtk/widgets/ProblemPane.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.ProblemPane
+showBusy	lib/jldrill/views/gtk/widgets/StatisticsWindow.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.StatisticsWindow
+showBusy	lib/jldrill/views/gtk/widgets/VocabPopup.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.VocabPopup
+showBusy	lib/jldrill/views/gtk/widgets/VocabularyWindow.rb	/^        def showBusy(bool)$/;"	f	class:JLDrill.VocabularyWindow
 showQuizInfo	lib/jldrill/contexts/MainContext.rb	/^		def showQuizInfo$/;"	f	class:JLDrill.MainContext
 showStatistics	lib/jldrill/contexts/MainContext.rb	/^		def showStatistics$/;"	f	class:JLDrill.MainContext
 showingAnswer?	lib/jldrill/views/gtk/widgets/ProblemDisplay.rb	/^        def showingAnswer?$/;"	f	class:JLDrill.ProblemDisplay
@@ -1598,6 +1692,18 @@ start	lib/jldrill/model/DeinflectionRules.rb	/^            def Transform.start(s
 start	lib/jldrill/model/Quiz/Timer.rb	/^        def start$/;"	f	class:JLDrill.Timer
 start	lib/jldrill/spec/StoryMemento.rb	/^        def start$/;"	f	class:JLDrill.StoryMemento
 startGtk	lib/jldrill/spec/storyFunctionality/Gtk.rb	/^		def startGtk(&block)$/;"	f	class:JLDrill.Gtk
+startLongEvent	lib/jldrill/contexts/LoadKanjiContext.rb	/^        def startLongEvent()$/;"	f	class:JLDrill.LoadKanjiContext
+startLongEvent	lib/jldrill/contexts/LoadQuizContext.rb	/^        def startLongEvent()$/;"	f	class:JLDrill.LoadQuizContext
+startLongEvent	lib/jldrill/contexts/LoadQuizFromEdictContext.rb	/^        def startLongEvent()$/;"	f	class:JLDrill.LoadQuizFromEdictContext
+startLongEvent	lib/jldrill/contexts/LoadReferenceContext.rb	/^        def startLongEvent()$/;"	f	class:JLDrill.LoadReferenceContext
+startLongEvent	lib/jldrill/contexts/LoadTanakaContext.rb	/^        def startLongEvent()$/;"	f	class:JLDrill.LoadTanakaContext
+startLongEvent	lib/jldrill/contexts/LoadTatoebaContext.rb	/^        def startLongEvent()$/;"	f	class:JLDrill.LoadTatoebaContext
+startLongEvent	lib/jldrill/contexts/MainContext.rb	/^        def startLongEvent()$/;"	f	class:JLDrill.MainContext
+startLongEventUpdated	lib/jldrill/contexts/DisplayProblemContext.rb	/^        def startLongEventUpdated(source)$/;"	f	class:JLDrill.DisplayProblemContext
+startLongEventUpdated	lib/jldrill/contexts/ModifyVocabularyContext.rb	/^        def startLongEventUpdated(source)$/;"	f	class:JLDrill.ModifyVocabularyContext
+startLongEventUpdated	lib/jldrill/contexts/ShowAllVocabularyContext.rb	/^        def startLongEventUpdated(source)$/;"	f	class:JLDrill.ShowAllVocabularyContext
+startLongEventUpdated	lib/jldrill/contexts/ShowExamplesContext.rb	/^        def startLongEventUpdated(source)$/;"	f	class:JLDrill.ShowExamplesContext
+startLongEventUpdated	lib/jldrill/contexts/ShowStatisticsContext.rb	/^        def startLongEventUpdated(source)$/;"	f	class:JLDrill.ShowStatisticsContext
 startTimer	lib/jldrill/model/Quiz/Statistics.rb	/^        def startTimer(isReview)$/;"	f	class:JLDrill.Statistics
 startTimer	lib/jldrill/views/gtk/ProblemView.rb	/^        def startTimer(timeLimit)$/;"	f	class:JLDrill.ProblemView
 startsWith?	lib/jldrill/model/items/JWord.rb	/^        def startsWith?(key)$/;"	f	class:JLDrill.JWord
@@ -1612,6 +1718,18 @@ status	lib/jldrill/model/Quiz/Strategy.rb	/^        def status$/;"	f	class:JLDri
 stepName	lib/jldrill/spec/StoryMemento.rb	/^        def stepName(step)$/;"	f	class:JLDrill.StoryMemento
 stop	lib/jldrill/model/Quiz/Timer.rb	/^        def stop$/;"	f	class:JLDrill.Timer
 stop	lib/jldrill/views/gtk/FileProgress.rb	/^        def stop$/;"	f	class:JLDrill.FileProgress
+stopLongEvent	lib/jldrill/contexts/LoadKanjiContext.rb	/^        def stopLongEvent()$/;"	f	class:JLDrill.LoadKanjiContext
+stopLongEvent	lib/jldrill/contexts/LoadQuizContext.rb	/^        def stopLongEvent()$/;"	f	class:JLDrill.LoadQuizContext
+stopLongEvent	lib/jldrill/contexts/LoadQuizFromEdictContext.rb	/^        def stopLongEvent()$/;"	f	class:JLDrill.LoadQuizFromEdictContext
+stopLongEvent	lib/jldrill/contexts/LoadReferenceContext.rb	/^        def stopLongEvent()$/;"	f	class:JLDrill.LoadReferenceContext
+stopLongEvent	lib/jldrill/contexts/LoadTanakaContext.rb	/^        def stopLongEvent()$/;"	f	class:JLDrill.LoadTanakaContext
+stopLongEvent	lib/jldrill/contexts/LoadTatoebaContext.rb	/^        def stopLongEvent()$/;"	f	class:JLDrill.LoadTatoebaContext
+stopLongEvent	lib/jldrill/contexts/MainContext.rb	/^        def stopLongEvent()$/;"	f	class:JLDrill.MainContext
+stopLongEventUpdated	lib/jldrill/contexts/DisplayProblemContext.rb	/^        def stopLongEventUpdated(source)$/;"	f	class:JLDrill.DisplayProblemContext
+stopLongEventUpdated	lib/jldrill/contexts/ModifyVocabularyContext.rb	/^        def stopLongEventUpdated(source)$/;"	f	class:JLDrill.ModifyVocabularyContext
+stopLongEventUpdated	lib/jldrill/contexts/ShowAllVocabularyContext.rb	/^        def stopLongEventUpdated(source)$/;"	f	class:JLDrill.ShowAllVocabularyContext
+stopLongEventUpdated	lib/jldrill/contexts/ShowExamplesContext.rb	/^        def stopLongEventUpdated(source)$/;"	f	class:JLDrill.ShowExamplesContext
+stopLongEventUpdated	lib/jldrill/contexts/ShowStatisticsContext.rb	/^        def stopLongEventUpdated(source)$/;"	f	class:JLDrill.ShowStatisticsContext
 stopSearching	lib/jldrill/views/gtk/widgets/WordTable.rb	/^        def stopSearching$/;"	f	class:JLDrill.WordTable
 stopTimer	lib/jldrill/views/gtk/ProblemView.rb	/^        def stopTimer$/;"	f	class:JLDrill.ProblemView
 subscribe	lib/Context/Publisher.rb	/^        def subscribe(observer, stream)$/;"	f	class:Context.Publisher
@@ -1619,11 +1737,16 @@ subscribe	lib/jldrill/model/Quiz/Options.rb	/^        def subscribe(subscriber)$
 subscribe	lib/jldrill/model/Quiz/Quiz.rb	/^        def subscribe(subscriber)$/;"	f	class:JLDrill.Quiz
 swapWith	lib/jldrill/model/Item.rb	/^        def swapWith(item)$/;"	f	class:JLDrill
 symbolToS	lib/Context/Bridge.rb	/^		def symbolToS(mod, symbol)$/;"	f	class:Context.Bridge
+targetLanguage	lib/jldrill/model/ExampleSentence.rb	/^        def targetLanguage()$/;"	f	class:JLDrill.ExampleSentence
+targetLanguage	lib/jldrill/model/Tanaka.rb	/^        def targetLanguage$/;"	f	class:JLDrill.Sentence
+targetLanguage	lib/jldrill/model/Tatoeba.rb	/^        def targetLanguage()$/;"	f	class:JLDrill.JapaneseExample
+targetOnly_to_s	lib/jldrill/model/ExampleSentence.rb	/^        def targetOnly_to_s()$/;"	f	class:JLDrill.ExampleSentence
 text	lib/jldrill/views/gtk/widgets/ProblemPane.rb	/^        def text$/;"	f	class:JLDrill.ProblemPane
 toAbsPos	lib/jldrill/views/gtk/widgets/PopupFactory.rb	/^        def toAbsPos(widget, x, y)$/;"	f	class:JLDrill.PopupFactory
 toDays	lib/jldrill/model/Quiz/Counter.rb	/^        def toDays(seconds) $/;"	f	class:JLDrill.Counter
 toMeaning	lib/jldrill/model/items/JWord.rb	/^        def toMeaning$/;"	f	class:JLDrill.JWord
 toVocab	lib/jldrill/model/items/JWord.rb	/^        def toVocab$/;"	f	class:JLDrill.JWord
+to_B_line	lib/jldrill/model/VocabularyUsage.rb	/^        def to_B_line$/;"	f	class:JLDrill.VocabularyUsage
 to_edict	lib/jldrill/model/items/Vocabulary.rb	/^        def to_edict$/;"	f	class:JLDrill.Vocabulary.numCommonChars
 to_o	lib/jldrill/model/Item.rb	/^        def to_o$/;"	f	class:JLDrill
 to_s	lib/jldrill/model/Bin.rb	/^        def to_s$/;"	f	class:JLDrill.Bin.exists?.contain?
@@ -1633,8 +1756,10 @@ to_s	lib/jldrill/model/DeinflectionRules.rb	/^            def to_s$/;"	f	class:J
 to_s	lib/jldrill/model/DeinflectionRules.rb	/^            def to_s$/;"	f	class:JLDrill.Deinflection.Rule
 to_s	lib/jldrill/model/DeinflectionRules.rb	/^            def to_s$/;"	f	class:JLDrill.Deinflection.Transform
 to_s	lib/jldrill/model/Duration.rb	/^        def to_s$/;"	f	class:JLDrill.Duration
+to_s	lib/jldrill/model/ExampleSentence.rb	/^        def to_s()$/;"	f	class:JLDrill.ExampleSentence
 to_s	lib/jldrill/model/Item.rb	/^        def to_s$/;"	f	class:JLDrill
 to_s	lib/jldrill/model/ItemStatus.rb	/^        def to_s$/;"	f	class:JLDrill.ItemStatus
+to_s	lib/jldrill/model/LoadPath.rb	/^        def to_s$/;"	f	class:JLDrill.LoadPath
 to_s	lib/jldrill/model/Problem.rb	/^        def to_s$/;"	f	class:JLDrill.Problem
 to_s	lib/jldrill/model/ProblemStatus.rb	/^        def to_s$/;"	f	class:JLDrill.ProblemStatus
 to_s	lib/jldrill/model/Quiz/Counter.rb	/^        def to_s$/;"	f	class:JLDrill.Counter
@@ -1642,8 +1767,8 @@ to_s	lib/jldrill/model/Quiz/ItemStats.rb	/^        def to_s$/;"	f	class:JLDrill.
 to_s	lib/jldrill/model/Quiz/Options.rb	/^        def to_s$/;"	f	class:JLDrill.Options.status
 to_s	lib/jldrill/model/Quiz/Quiz.rb	/^        def to_s$/;"	f	class:JLDrill.Quiz.status
 to_s	lib/jldrill/model/Quiz/Schedule.rb	/^        def to_s$/;"	f	class:JLDrill.Schedule
-to_s	lib/jldrill/model/Tanaka.rb	/^        def to_s$/;"	f	class:JLDrill.Sentence
 to_s	lib/jldrill/model/Tanaka.rb	/^        def to_s$/;"	f	class:JLDrill.Word
+to_s	lib/jldrill/model/VocabularyUsage.rb	/^        def to_s$/;"	f	class:JLDrill.VocabularyUsage
 to_s	lib/jldrill/model/items/Field.rb	/^        def to_s$/;"	f	class:JLDrill.Field
 to_s	lib/jldrill/model/items/JWord.rb	/^        def to_s$/;"	f	class:JLDrill.JWord
 to_s	lib/jldrill/model/items/Vocabulary.rb	/^        def to_s$/;"	f	class:JLDrill.Vocabulary.numCommonChars
@@ -1771,7 +1896,6 @@ widgetWasRemovedFrom	lib/Context/Gtk/Widget.rb	/^		def widgetWasRemovedFrom(widg
 widgetWasRemovedFrom	lib/Context/Widget.rb	/^		def widgetWasRemovedFrom(widget)$/;"	f	class:Context.Widget
 withPinYinRadical_to_s	lib/jldrill/model/moji/Kanji.rb	/^        def withPinYinRadical_to_s(kanjilist, radicals)$/;"	f	class:JLDrill.Kanji
 withRadical_to_s	lib/jldrill/model/moji/Kanji.rb	/^		def withRadical_to_s(radicals)$/;"	f	class:JLDrill.Kanji
-word_to_s	lib/jldrill/model/Tanaka.rb	/^        def word_to_s$/;"	f	class:JLDrill.Sentence
 workingSetBins	lib/jldrill/model/Quiz/Strategy.rb	/^        def Strategy.workingSetBins$/;"	F	class:JLDrill.Strategy
 workingSetEmpty?	lib/jldrill/model/Quiz/Strategy.rb	/^        def workingSetEmpty?$/;"	f	class:JLDrill.Strategy
 workingSetFull?	lib/jldrill/model/Quiz/Strategy.rb	/^        def workingSetFull?$/;"	f	class:JLDrill.Strategy

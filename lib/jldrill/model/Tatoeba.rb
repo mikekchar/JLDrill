@@ -76,34 +76,6 @@ module JLDrill::Tatoeba
         end
     end
 
-    # Represents a sentence in the JapaneseIndeces file
-    class JapaneseExample < JLDrill::ExampleSentence
-
-        INDEX_RE = /^(\d*)[\t](\d*)[\t](.*)/
-
-        def initialize(data, vocabUsageData, sentences)
-            @sentences = sentences
-            
-            if INDEX_RE.match(data)
-                @japaneseIndex = $1.to_i
-                @englishIndex = $2.to_i 
-                @key = JLDrill::VocabularyUsage.from_B_line(vocabUsageData)
-            else
-                @japaneseIndex = 0
-                @englishIndex = 0
-                @key = JLDrill::VocabularyUsage.new()
-            end
-        end
-
-        def nativeLanguage()
-            return "#{@englishIndex}: #{@sentences.sentenceAt(@englishIndex)}"
-        end
-
-        def targetLanguage()
-            return "#{@japaneseIndex}: #{@sentences.sentenceAt(@japaneseIndex)}"
-        end
-    end
-
     class ChineseIndexFile < JLDrill::DataFile
 
         INDEX_RE = /^(\d*)[\t]cmn/
@@ -147,6 +119,28 @@ module JLDrill::Tatoeba
         end
     end
 
+    # Represents a sentence in the JapaneseIndeces file
+    class JapaneseExample < JLDrill::ExampleSentence
+
+        INDEX_RE = /^(\d*)[\t](\d*)[\t](.*)/
+
+        def initialize(japaneseIndex, englishIndex, usageData, sentences)
+            @sentences = sentences
+            
+            @japaneseIndex = japaneseIndex
+            @englishIndex = englishIndex
+            @key = JLDrill::VocabularyUsage.from_B_line(usageData)
+        end
+
+        def nativeLanguage()
+            return "#{@englishIndex}: #{@sentences.sentenceAt(@englishIndex)}"
+        end
+
+        def targetLanguage()
+            return "#{@japaneseIndex}: #{@sentences.sentenceAt(@japaneseIndex)}"
+        end
+    end
+
     class JapaneseIndexFile < JLDrill::DataFile
 
         INDEX_RE = /^(\d*)[\t](\d*)[\t](.*)/
@@ -173,12 +167,10 @@ module JLDrill::Tatoeba
             @numSentences
         end
 
-        # Find the VocabularyUsage data using the hash, UsageHash
-        # in the line at position, pos.  If it doesn't exist, return
-        # and empty string.
-        def findUsageData(usageHash, pos)
-            line = @lines[pos]
-            retVal = line.split(" ").find do |usageData|
+        # Find the usage data that matches the usageHash in the
+        # supplied B line.  If it doesn't exist, return empty string
+        def findUsageData(usageHash, b_line)
+            retVal = b_line.split(" ").find do |usageData|
                 usageData.start_with?(usageHash)
             end
             if retVal.nil?
@@ -187,13 +179,21 @@ module JLDrill::Tatoeba
             return retVal
         end
 
+        def parseDataOnLine(pos)
+            if INDEX_RE.match(@lines[pos])
+                return $1.to_i, $2.to_i, $3
+            else
+                return 0, 0, ""
+            end
+        end
+
         def search(kanji, reading)
             retVal = []
             result = @usageMap.search(kanji, reading)
             result.positions.each do |position|
-                data = @lines[position]
-                usageData = findUsageData(result.successfulHash, position)
-                retVal.push(JapaneseExample.new(data, usageData, @sentences))
+                jidx, eidx, b_line = parseDataOnLine(position)
+                usageData = findUsageData(result.successfulHash, b_line)
+                retVal.push(JapaneseExample.new(jidx, eidx, usageData, @sentences))
             end
             return retVal
         end
