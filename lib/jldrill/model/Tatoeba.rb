@@ -119,25 +119,25 @@ module JLDrill::Tatoeba
         end
     end
 
-    # Represents a sentence in the JapaneseIndeces file
-    class JapaneseExample < JLDrill::ExampleSentence
+    # Represents an Example sentence in the Tatoeba database
+    class TatoebaExample < JLDrill::ExampleSentence
 
         INDEX_RE = /^(\d*)[\t](\d*)[\t](.*)/
 
-        def initialize(japaneseIndex, englishIndex, usageData, sentences)
+        def initialize(targetIndex, nativeIndex, key, sentences)
             @sentences = sentences
             
-            @japaneseIndex = japaneseIndex
-            @englishIndex = englishIndex
-            @key = JLDrill::VocabularyUsage.from_B_line(usageData)
+            @targetIndex = targetIndex
+            @nativeIndex = nativeIndex
+            @key = key
         end
 
         def nativeLanguage()
-            return "#{@englishIndex}: #{@sentences.sentenceAt(@englishIndex)}"
+            return "#{@nativeIndex}: #{@sentences.sentenceAt(@nativeIndex)}"
         end
 
         def targetLanguage()
-            return "#{@japaneseIndex}: #{@sentences.sentenceAt(@japaneseIndex)}"
+            return "#{@targetIndex}: #{@sentences.sentenceAt(@targetIndex)}"
         end
     end
 
@@ -193,7 +193,8 @@ module JLDrill::Tatoeba
             result.positions.each do |position|
                 jidx, eidx, b_line = parseDataOnLine(position)
                 usageData = findUsageData(result.successfulHash, b_line)
-                retVal.push(JapaneseExample.new(jidx, eidx, usageData, @sentences))
+                usage = JLDrill::VocabularyUsage.from_B_line(usageData)
+                retVal.push(TatoebaExample.new(jidx, eidx, usage, @sentences))
             end
             return retVal
         end
