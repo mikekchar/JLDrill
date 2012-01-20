@@ -1,12 +1,13 @@
 # encoding: utf-8
 require 'jldrill/model/items/JEDictionary'
+require 'jldrill/model/Config'
 
 module JLDrill
 
     # A JEDictionary is a Japanese to English Dictionary.
     # It is composed of an array of entries from an EDict
-    # dictionary. These entries are parsed to create JWords.
-    # The JWords can then further parse the entries to
+    # dictionary. These entries are parsed to create DictionaryEntry.
+    # The DictionaryEntry can then further parse the entries to
     # create Meanings.
 	describe JEDictionary do
 	

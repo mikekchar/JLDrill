@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'jldrill/model/items/JWord'
+require 'jldrill/model/items/DictionaryEntry'
 require 'jldrill/model/DataFile'
 require "jldrill/model/items/Vocabulary"
 require "jldrill/model/items/edict/Meaning"
@@ -11,11 +11,11 @@ module JLDrill
 
     # A Dictionary.
     # It is composed of an array of entries from an EDict
-    # dictionary. These entries are parsed to create JWords.
-    # The JWords can then further parse the entries to
+    # dictionary. These entries are parsed to create DictionaryEntry.
+    # The DictionaryEntry can then further parse the entries to
     # create Meanings.
 	class Dictionary < DataFile
-        attr_reader :jWords
+        attr_reader :dictEntries
 
         def initialize
             super
@@ -32,7 +32,7 @@ module JLDrill
 
         # Reset the dictionary back to empty
         def reset
-            @jWords = []
+            @dictEntries = []
             @readingHash = {}
             @kanjiHash = {}
             super
@@ -40,7 +40,7 @@ module JLDrill
 
         # The number of items we have indexed in the dictionary.
         def dataSize
-            return @jWords.size
+            return @dictEntries.size
         end
 
         def length
@@ -62,20 +62,28 @@ module JLDrill
         # we can find them quickly.
         def hashWord(word)
             # We will hash on the first character.
-            (@readingHash[word.reading[0..hashSize - 1]] ||= []).push(word)
-            (@kanjiHash[word.kanji[0..hashSize - 1]] ||= []).push(word)
-        end
-
-        def parseLine(index)
-            word = getJWord(index)
-            if !word.nil?
-                @jWords[@jWords.size] = word
-                hashWord(word)
+            if !word.reading.empty?
+                (@readingHash[word.reading[0..hashSize - 1]] ||= []).push(word)
+            end
+            if !word.kanji.empty?
+                (@kanjiHash[word.kanji[0..hashSize - 1]] ||= []).push(word)
+            end
+            if !word.simplified.empty?
+                (@kanjiHash[word.simplified[0..hashSize - 1]] ||= []).push(word)
             end
         end
 
+        def parseLine(index)
+            word = getDictionaryEntry(index)
+            if !word.nil?
+                @dictEntries[@dictEntries.size] = word
+                hashWord(word)
+            end
+            return word
+        end
+
         def vocab(index)
-            word = @jWords[index]
+            word = @dictEntries[index]
             if !word.nil?
                 return word.toVocab
             else
@@ -84,7 +92,7 @@ module JLDrill
         end
 
         def eachVocab(&block)
-            @jWords.each do |word|
+            @dictEntries.each do |word|
                 block.call(word.toVocab)
             end
         end
@@ -133,35 +141,35 @@ module JLDrill
             return bin
         end
 
-        # Return all the JWords that have a reading starting with reading.
+        # Return all the DictionaryEntry that have a reading starting with reading.
         def findReadingsStartingWith(reading)
             bin = findBinWithReading(reading)
             if reading.size > hashSize 
                 return bin.find_all do |word|
-                    word.reading.start_with?(reading)
+                    word.readingStartsWith?(reading)
                 end
             else
                 return bin
             end
         end
 
-        # Return all the JWords that have kanji starting with kanji.
+        # Return all the DictionaryEntry that have kanji starting with kanji.
         def findKanjiStartingWith(kanji)
             bin = findBinWithKanji(kanji)
             if kanji.size > hashSize 
                 return bin.find_all do |word|
-                    word.kanji.start_with?(kanji)
+                    word.kanjiStartsWith?(kanji)
                 end
             else
                 return bin
             end
         end
 
-        # Return all the JWords that have the reading, reading.
+        # Return all the DictionaryEntry that have the reading, reading.
         def findReading(reading)
             relevance = reading.size
             return findBinWithReading(reading).find_all do |word|
-                if word.reading.eql?(reading)
+                if word.readingEql?(reading)
                     word.relevance = relevance
                     true
                 else
@@ -170,11 +178,11 @@ module JLDrill
             end
         end
 
-        # Return all the JWords that have the kanji, kanji.
+        # Return all the DictionaryEntry that have the kanji, kanji.
         def findKanji(kanji)
             relevance = kanji.size
             return findBinWithKanji(kanji).find_all do |word|
-                if word.kanji.eql?(kanji)
+                if word.kanjiEql?(kanji)
                     word.relevance = relevance
                     true
                 else
@@ -203,7 +211,7 @@ module JLDrill
         def findReadingsThatStart(reading)
             findBinWithReading(reading[0..hashSize - 1]).find_all do |word|
                 relevance = word.reading.size
-                if reading.start_with?(word.reading)
+                if word.keyStartsWithReading?(reading)
                     word.relevance = relevance
                     true
                 else
@@ -216,7 +224,7 @@ module JLDrill
         def findKanjiThatStart(kanji)
             findBinWithKanji(kanji[0..hashSize - 1]).find_all do |word|
                 relevance = word.kanji.size
-                if kanji.start_with?(word.kanji)
+                if word.keyStartsWithKanji?(kanji)
                     word.relevance = relevance
                     true
                 else

@@ -30,7 +30,7 @@ module JLDrill
 
         def loadSentences
             @loadFileContext.onExit do
-                loadJapanese
+                loadChinese
             end
             @loadFileContext.enter(self, @db.sentences, @sentencesFile)
         end
@@ -43,7 +43,6 @@ module JLDrill
         end
 
         def loadChinese
-            @db.createChineseIndeces()
             @loadFileContext.onExit do
                 exitLoadTatoebaContext
             end

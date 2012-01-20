@@ -5,7 +5,7 @@ require 'gtk2'
 module JLDrill::Gtk
     class VocabPopup < Popup
             
-        def initialize(char, jwords, mainWindow, x, y)
+        def initialize(char, entries, mainWindow, x, y)
             super(char, mainWindow, x, y)
             
             color = Gdk::Color.parse("lightblue1")
@@ -29,7 +29,7 @@ module JLDrill::Gtk
             spacer.modify_base(Gtk::STATE_NORMAL, color)
             @hbox.add(spacer)
 
-            if !jwords.empty?
+            if !entries.empty?
                 @contents = Gtk::TextView.new
                 @contents.wrap_mode = Gtk::TextTag::WRAP_WORD
                 @contents.editable = false
@@ -45,7 +45,7 @@ module JLDrill::Gtk
                 @buffer.create_tag("definition", 
                                    "size" => 8 * Pango::SCALE,
                                    "justification" => Gtk::JUSTIFY_LEFT)
-                jwords.each do |word|
+                entries.each do |word|
                     if !word.kanji.nil?
                         @buffer.insert(@buffer.end_iter, word.kanji, "japanese")
                         @buffer.insert(@buffer.end_iter, "    ", "japanese")

@@ -39,7 +39,7 @@ module JLDrill::Behaviour
 
         # Searches the dictionary for possible words in the string.
         # Attempts to deinflect the word and provide matches.
-        # Returns an array of JWords.
+        # Returns an array of DictionaryEntry.
         def search(string)
             matches = @parent.deinflect.match(string)
             retVal = matches.collect do |match|

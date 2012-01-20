@@ -1,13 +1,12 @@
 # encoding: utf-8
-require 'jldrill/model/items/JWord'
+require 'jldrill/model/items/DictionaryEntry'
 
 module JLDrill
 
-    # A JWord is a Japanese Word in a Japanese to English dictionary.
-	describe JWord do
+	describe DictionaryEntry do
 	
 		before(:each) do
-            @word = JWord.new
+            @word = DictionaryEntry.new
             # The word needs a reading to be valid
             @word.should_not be_valid
 		end

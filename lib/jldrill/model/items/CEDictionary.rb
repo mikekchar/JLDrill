@@ -2,22 +2,22 @@
 
 require 'jldrill/model/items/Dictionary'
 require "jldrill/model/items/Vocabulary"
-require 'jldrill/model/items/JWord'
+require 'jldrill/model/items/DictionaryEntry'
 require 'Context/Log'
 
 module JLDrill
 
     # A JEDictionary is a Japanese to English Dictionary.
     # It is composed of an array of entries from an EDict
-    # dictionary. These entries are parsed to create JWords.
-    # The JWords can then further parse the entries to
+    # dictionary. These entries are parsed to create DictionaryEntry.
+    # The DictionaryEntry can then further parse the entries to
     # create Meanings.
 	class CEDictionary < Dictionary
         attr_reader :jWords
 
         LINE_RE_TEXT = '^([^\[\s]*)\s+([^\[\s]*)\s+\[(.*)\]\s+\/(([^\/]*\/)+)'
         LINE_RE = Regexp.new(LINE_RE_TEXT, nil)
-        GET_JWORD_RE = Regexp.new('^([^\[\s]*)\s+([^\[\s]*)\s+\[(.*)\]\s+', nil)
+        GET_DE_RE = Regexp.new('^([^\[\s]*)\s+([^\[\s]*)\s+\[(.*)\]\s+', nil)
         FIRST_CHAR_RE = Regexp.new("^(.)", nil)
 
         def hashSize
@@ -50,11 +50,12 @@ module JLDrill
             return retVal                        
         end
 
-        def getJWord(index)
+        def getDictionaryEntry(index)
             retVal = nil
-            if lines[index] =~ GET_JWORD_RE
-                retVal = JWord.new
+            if lines[index] =~ GET_DE_RE
+                retVal = DictionaryEntry.new
                 retVal.kanji = $1
+                retVal.simplified = $2
                 retVal.reading = $3
                 retVal.dictionary = self
                 retVal.position = index

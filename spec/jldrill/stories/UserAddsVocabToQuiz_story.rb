@@ -243,12 +243,12 @@ module JLDrill::UserAddsVocabToQuiz
             Story.context.search(nil, "").should be_empty
 
             # It should find entries
-            jwords = Story.context.search("一生", nil) 
-            jwords.size.should eql(2)
+            entries = Story.context.search("一生", nil) 
+            entries.size.should eql(2)
 
-            jwords[0].toVocab.kanji.should eql("一生")
-            jwords[0].toVocab.reading.should eql("yi1 sheng1")
-            jwords[0].toVocab.definitions.to_s.should eql("all one's life, throughout one's life")
+            entries[0].toVocab.kanji.should eql("一生")
+            entries[0].toVocab.reading.should eql("yi1 sheng1")
+            entries[0].toVocab.definitions.to_s.should eql("all one's life, throughout one's life")
         end
     end
 end

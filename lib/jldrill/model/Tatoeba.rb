@@ -76,6 +76,28 @@ module JLDrill::Tatoeba
         end
     end
 
+    # Represents an Example sentence in the Tatoeba database
+    class TatoebaExample < JLDrill::ExampleSentence
+
+        INDEX_RE = /^(\d*)[\t](\d*)[\t](.*)/
+
+        def initialize(targetIndex, nativeIndex, key, sentences)
+            @sentences = sentences
+            
+            @targetIndex = targetIndex
+            @nativeIndex = nativeIndex
+            @key = key
+        end
+
+        def nativeLanguage()
+            return "#{@nativeIndex}: #{@sentences.sentenceAt(@nativeIndex)}"
+        end
+
+        def targetLanguage()
+            return "#{@targetIndex}: #{@sentences.sentenceAt(@targetIndex)}"
+        end
+    end
+
     class ChineseIndexFile < JLDrill::DataFile
 
         INDEX_RE = /^(\d*)[\t]cmn/
@@ -112,32 +134,22 @@ module JLDrill::Tatoeba
             setLoaded(true)
         end
 
-        def getConnections(kanji)
-            return @chineseIndeces.collect do |index|
+        # Return an array of positions in the sentence file
+        # that contain the given kanji
+        def getPositions(kanji)
+            return @chineseIndeces.find_all do |index|
                 @sentences.sentenceAt(index).match(kanji)
             end
         end
-    end
 
-    # Represents an Example sentence in the Tatoeba database
-    class TatoebaExample < JLDrill::ExampleSentence
-
-        INDEX_RE = /^(\d*)[\t](\d*)[\t](.*)/
-
-        def initialize(targetIndex, nativeIndex, key, sentences)
-            @sentences = sentences
-            
-            @targetIndex = targetIndex
-            @nativeIndex = nativeIndex
-            @key = key
-        end
-
-        def nativeLanguage()
-            return "#{@nativeIndex}: #{@sentences.sentenceAt(@nativeIndex)}"
-        end
-
-        def targetLanguage()
-            return "#{@targetIndex}: #{@sentences.sentenceAt(@targetIndex)}"
+        def search(kanji, reading)
+            retVal = []
+            positions = getPositions(kanji)
+            positions.each do |index|
+                usage = JLDrill::VocabularyUsage.from_B_line(kanji)
+                retVal.push(TatoebaExample.new(index, 0, usage, @sentences))
+            end
+            return retVal
         end
     end
 
@@ -212,21 +224,15 @@ module JLDrill::Tatoeba
         def initialize()
             @sentences = SentenceFile.new
             @japaneseIndeces = JapaneseIndexFile.new(@sentences)
-            @chineseIndeces = nil
-        end
-
-        def createChineseIndeces()
-            if @sentences.loaded?
-                @chineseIndeces = ChineseIndexFile.new(@sentences)
-            end
+            @chineseIndeces = ChineseIndexFile.new(@sentences)
         end
 
         def loaded?()
-            return @japaneseIndeces.loaded?
+            return @chineseIndeces.loaded?
         end
 
         def search(kanji, reading)
-            @japaneseIndeces.search(kanji, reading)
+            @chineseIndeces.search(kanji, reading)
         end
     end
 end

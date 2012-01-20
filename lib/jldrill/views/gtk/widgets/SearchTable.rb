@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'jldrill/model/items/JWord'
+require 'jldrill/model/items/DictionaryEntry'
 require 'jldrill/views/gtk/widgets/WordTable'
 
 module JLDrill::Gtk
@@ -12,7 +12,7 @@ module JLDrill::Gtk
             @reading = reading
             @kanji = kanji
             candidates = @container.search(kanji, reading)
-            super(candidates, JLDrill::JWord) do |item|
+            super(candidates, JLDrill::DictionaryEntry) do |item|
                 @container.searchActivated(item)
             end
         end

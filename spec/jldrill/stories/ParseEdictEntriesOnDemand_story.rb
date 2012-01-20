@@ -47,7 +47,7 @@ module JLDrill::ParseEdictEntriesOnDemand
             euc.length.should be(1)
             euc.vocab(0).should eql(ame)
             euc.length.should be(1)
-            euc.jWords[0].reading.should eql("あめ")
+            euc.dictEntries[0].reading.should eql("あめ")
             ameList = euc.findReadingsStartingWith("あめ")
             ameList.should_not be_nil
             ameList.size.should be(1)
