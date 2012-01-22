@@ -35,6 +35,7 @@ module JLDrill
             @dictEntries = []
             @readingHash = {}
             @kanjiHash = {}
+            @simplifiedHash = {}
             super
         end
 
@@ -68,8 +69,8 @@ module JLDrill
             if !word.kanji.empty?
                 (@kanjiHash[word.kanji[0..hashSize - 1]] ||= []).push(word)
             end
-            if !word.simplified.empty?
-                (@kanjiHash[word.simplified[0..hashSize - 1]] ||= []).push(word)
+            if !word.simplified.empty? && !word.kanji.eql?(word.simplified)
+                (@simplifiedHash[word.simplified[0..hashSize - 1]] ||= []).push(word)
             end
         end
 
@@ -125,6 +126,22 @@ module JLDrill
             return bin
         end
 
+        # Find the items that may have been hashed with this simplified kanji.
+        def findBinWithSimplified(kanji)
+            if kanji.size >= hashSize
+                bin = (@simplifiedHash[kanji[0..hashSize - 1]] ||= [])
+            else
+                keys = @simplifiedHash.keys.find_all do |key|
+                    key.start_with?(kanji)
+                end
+                bin = []
+                keys.each do |key|
+                    bin += @simplifiedHash[key]
+                end
+            end
+            return bin
+        end
+
         # Find the items that may have been hashed with this kanji.
         def findBinWithKanji(kanji)
             if kanji.size >= hashSize
@@ -138,10 +155,14 @@ module JLDrill
                     bin += @kanjiHash[key]
                 end
             end
+            if bin.empty?
+                bin = findBinWithSimplified(kanji)
+            end
             return bin
         end
 
-        # Return all the DictionaryEntry that have a reading starting with reading.
+        # Return all the DictionaryEntry that have a reading 
+        # starting with reading.
         def findReadingsStartingWith(reading)
             bin = findBinWithReading(reading)
             if reading.size > hashSize 
