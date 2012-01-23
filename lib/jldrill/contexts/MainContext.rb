@@ -283,7 +283,7 @@ module JLDrill
                             @showExamplesContext.newProblemUpdated(@quiz.currentProblem)
                         end
                     end
-                    @loadTatoebaContext.enter(self, @tatoebaDB, @quiz.options)
+                    @loadTatoebaContext.enter(self, @tatoebaDB)
                 end
 			end
 		end

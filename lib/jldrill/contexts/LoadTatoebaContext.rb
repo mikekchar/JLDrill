@@ -28,14 +28,15 @@ module JLDrill
             @mainView = nil
         end
 
-        def loadSentences(language)
+        def loadSentences()
             @loadFileContext.onExit do
-                loadLanguage(language)
+                loadLanguage()
             end
             @loadFileContext.enter(self, @db.sentences, @sentencesFile)
         end
 
-        def loadLanguage(language)
+        def loadLanguage()
+            language = @parent.quiz.options.language
             if language.eql?("Chinese")
                 loadChinese
             else
@@ -69,13 +70,13 @@ module JLDrill
             @parent.stopLongEvent()
         end
 
-        def enter(parent, tatoebaDatabase, options)
+        def enter(parent, tatoebaDatabase)
             super(parent)
             @db = tatoebaDatabase
             if !@db.sentences.loaded?
-                loadSentences(options.language)
+                loadSentences()
             else
-                loadLanguage(options.language)
+                loadLanguage()
             end
         end
     end		
