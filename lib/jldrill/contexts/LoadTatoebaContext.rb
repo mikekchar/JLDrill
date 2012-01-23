@@ -28,11 +28,19 @@ module JLDrill
             @mainView = nil
         end
 
-        def loadSentences
+        def loadSentences(language)
             @loadFileContext.onExit do
-                loadChinese
+                loadLanguage(language)
             end
             @loadFileContext.enter(self, @db.sentences, @sentencesFile)
+        end
+
+        def loadLanguage(language)
+            if language.eql?("Chinese")
+                loadChinese
+            else
+                loadJapanese
+            end
         end
 
         def loadJapanese
@@ -61,10 +69,14 @@ module JLDrill
             @parent.stopLongEvent()
         end
 
-        def enter(parent, tatoebaDatabase)
+        def enter(parent, tatoebaDatabase, options)
             super(parent)
             @db = tatoebaDatabase
-            loadSentences 
+            if !@db.sentences.loaded?
+                loadSentences(options.language)
+            else
+                loadLanguage(options.language)
+            end
         end
     end		
 end

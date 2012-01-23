@@ -80,7 +80,7 @@ Spec::Rake::SpecTask.new(:testSize) do |t|
 	t.spec_files = spec_files
 	t.rcov = true
 	t.rcov_opts = ["--exclude rspec", "--exclude rcov", "--exclude syntax",
-	    "--exclude /lib/Context/", "--exclude lib/jldrill/",
+	    "--exclude lib/Context/", "--exclude lib/jldrill/",
 	    "--exclude cairo", "--exclude pango", "--exclude gtk2", "--exclude atk",
 	    "--exclude glib", "--exclude gdk"]
 	t.spec_opts = spec_opts

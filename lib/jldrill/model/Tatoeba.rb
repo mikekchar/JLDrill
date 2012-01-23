@@ -227,12 +227,20 @@ module JLDrill::Tatoeba
             @chineseIndeces = ChineseIndexFile.new(@sentences)
         end
 
-        def loaded?()
-            return @chineseIndeces.loaded?
+        def indeces(options)
+            if options.language.eql?("Chinese")
+                return @chineseIndeces
+            else
+                return @japaneseIndeces
+            end
         end
 
-        def search(kanji, reading)
-            @chineseIndeces.search(kanji, reading)
+        def loaded?(options)
+            return indeces(options).loaded?
+        end
+
+        def search(kanji, reading, options)
+            indeces(options).search(kanji, reading)
         end
     end
 end

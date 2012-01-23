@@ -270,19 +270,27 @@ module JLDrill
 		end
 
 		def loadTatoeba
-			if @tatoebaDB.loaded?
+			if @tatoebaDB.loaded?(@quiz.options)
                 if !@showExamplesContext.isEntered?
                     @showExamplesContext.enter(self)
                 end
 			else
                 if !@loadTatoebaContext.isEntered?
                     @loadTatoebaContext.onExit do
-                        @showExamplesContext.enter(self)
+                        if !@showExamplesContext.isEntered?
+                            @showExamplesContext.enter(self)
+                        else
+                            @showExamplesContext.newProblemUpdated(@quiz.currentProblem)
+                        end
                     end
-                    @loadTatoebaContext.enter(self, @tatoebaDB)
+                    @loadTatoebaContext.enter(self, @tatoebaDB, @quiz.options)
                 end
 			end
 		end
+
+        def loadExamples
+            loadTatoeba
+        end
 
 		
 		def loadKanji

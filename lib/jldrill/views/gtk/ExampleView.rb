@@ -28,14 +28,14 @@ module JLDrill::Gtk
 			@exampleWindow.signal_emit("destroy")
 		end
 
-        def updateEnglishOnly(examples)
+        def updateNativeOnly(examples)
             super(examples)
-            @exampleWindow.updateEnglishOnly(examples)
+            @exampleWindow.updateNativeOnly(examples)
         end
 		
-        def updateJapaneseOnly(examples)
+        def updateTargetOnly(examples)
             super(examples)
-            @exampleWindow.updateJapaneseOnly(examples)
+            @exampleWindow.updateTargetOnly(examples)
         end
 		
 		def update(examples)

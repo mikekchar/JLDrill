@@ -73,8 +73,8 @@ module JLDrill
             @parent.loadReference
         end
 
-		def loadTatoeba
-			@parent.loadTatoeba
+		def loadExamples
+			@parent.loadExamples
 		end
         
         def quit

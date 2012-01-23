@@ -151,7 +151,7 @@ module JLDrill::Gtk
             end
         end
 
-        def updateEnglishOnly(examples)
+        def updateNativeOnly(examples)
             @contents.buffer.text = ""
             if !examples.nil?
                 section = -2
@@ -163,7 +163,7 @@ module JLDrill::Gtk
             end
         end
 
-        def updateJapaneseOnly(examples)
+        def updateTargetOnly(examples)
             @contents.buffer.text = ""
             if !examples.nil?
                 section = -2

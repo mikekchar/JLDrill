@@ -26,13 +26,13 @@ module JLDrill
                 # Please define in the concrete class
             end
 
-            # Update the examples in the UI showing only English
-            def updateEnglishOnly(examples)
+            # Update the examples in the UI showing only native language
+            def updateNativeOnly(examples)
                 # Please define in the concrete class
             end
 
-            # Update the examples in the UI showing only Japanese
-            def updateJapaneseOnly(examples)
+            # Update the examples in the UI showing only target language
+            def updateTargetOnly(examples)
                 # Please define in the concrete class
             end
 
@@ -66,7 +66,7 @@ module JLDrill
 		
 		def canDisplay?(parent)
 		    !parent.nil? && parent.class.public_method_defined?(:quiz) &&
-		        !parent.quiz.nil? && parent.exampleDB.loaded?
+		        !parent.quiz.nil? && parent.exampleDB.loaded?(parent.quiz.options)
 		end
 	
 		def findExamples(problem)
@@ -74,7 +74,9 @@ module JLDrill
 			if !problem.nil?
 				vocab = problem.item.to_o
 				if !vocab.nil?
-					examples = @parent.exampleDB.search(vocab.kanji, vocab.reading)
+					examples = @parent.exampleDB.search(vocab.kanji, 
+                                                        vocab.reading,
+                                                        @parent.quiz.options)
 				end
 			end
 			return examples
@@ -85,28 +87,37 @@ module JLDrill
     		    super(parent)
     		    @mainView.update(findExamples(@parent.quiz.currentProblem))
     		    @parent.quiz.publisher.subscribe(self, "newProblem")
+    		    @parent.quiz.publisher.subscribe(self, "load")
                 @parent.longEventPublisher.subscribe(self, "startLongEvent")
                 @parent.longEventPublisher.subscribe(self, "stopLongEvent")
+                newProblemUpdated(@parent.quiz.currentProblem)
     		end
 		end
 		
 		def exit
 		    @parent.quiz.publisher.unsubscribe(self, "newProblem")
+		    @parent.quiz.publisher.unsubscribe(self, "load")
             @parent.longEventPublisher.unsubscribe(self, "startLongEvent")
             @parent.longEventPublisher.unsubscribe(self, "stopLongEvent")
 		    super
 		end
 		
 		def newProblemUpdated(problem)
-            if !@mainView.nil?
+            if !@mainView.nil? && !problem.nil?
                 @examples = findExamples(problem)
                 if (problem.name.eql?("MeaningProblem"))
-                    @mainView.updateEnglishOnly(@examples)
+                    @mainView.updateNativeOnly(@examples)
                 else
-                    @mainView.updateJapaneseOnly(@examples)
+                    @mainView.updateTargetOnly(@examples)
                 end
             end
 		end
+
+        def loadUpdated(quiz)
+            # The language might have changed, so we might need to
+            # load a new index file
+            @parent.loadExamples
+        end
 
         def startLongEventUpdated(source)
             @mainView.showBusy(true)
