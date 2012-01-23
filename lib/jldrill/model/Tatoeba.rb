@@ -41,7 +41,17 @@ module JLDrill::Tatoeba
             end
             return retVal
         end
+
+        def dataAt(index)
+            retVal = ""
+            entry = @sentences[index]
+            if !entry.nil?
+                retVal = @lines[entry]
+            end
+            return retVal
+        end
     end
+
     class LinkFile < JLDrill::DataFile
         LINK_RE = /^(\d*)[\t](\d*)/
         def initialize()
@@ -100,27 +110,49 @@ module JLDrill::Tatoeba
 
     class ChineseIndexFile < JLDrill::DataFile
 
-        INDEX_RE = /^(\d*)[\t]cmn/
+        LINK_RE = /^(\d*)[\t](\d*)/
+        CHINESE_INDEX_RE = /^(\d*)[\t]cmn/
+        ENGLISH_INDEX_RE = /^(\d*)[\t]eng/
 
         def initialize(sentences)
             super()
             @sentences = sentences
-            @file = "Chinese Indeces"
             @chineseIndeces = []
-            @stepSize = 1000
-        end
-
-        # This isn't a real file, so we will overload the
-        # readLines method to simply point to the main
-        # sentences lines.
-        def readLines
-            @lines = @sentences.lines
-            @parsed = 0
+            @englishIndeces = []
+            @stepSize = 10000
+            @ruledOut = 0
         end
 
         def parseEntry
-            if INDEX_RE.match(@lines[@parsed])
-                @chineseIndeces.push($1.to_i)
+            if LINK_RE.match(@lines[@parsed])
+                cindex = $1.to_i
+                eindex = $2.to_i
+                # We are only intereste in Chinese sentences.  We'll
+                # first check the index on the left hand side.  If it is
+                # not Chinese, we will ignore all the rest of the entries
+                # with the same index (they are in order of the left hand side
+                # so we just have to keep track of the last one).  If it is
+                # Chinese, we will keep checking the right hand entry
+                # until we find English.  Then we will ignore all the rest
+                # of the entries.
+                if cindex != @ruledOut
+                    chinese = @sentences.dataAt(cindex)
+                    english = @sentences.dataAt(eindex)
+                    if CHINESE_INDEX_RE.match(chinese)
+                        if ENGLISH_INDEX_RE.match(english)
+                            @chineseIndeces.push(cindex)
+                            @englishIndeces.push(eindex)
+                            # We've found the English for this Chinese
+                            # sentence, so don't process the following ones
+                            # with the same index
+                            @ruledOut = cindex
+                        end
+                    else
+                        # It's not a Chinese sentences, so don't process
+                        # the following ones with the same index
+                        @ruledOut = cindex
+                    end
+                end
             end
             @parsed += 1
         end
@@ -134,20 +166,27 @@ module JLDrill::Tatoeba
             setLoaded(true)
         end
 
-        # Return an array of positions in the sentence file
-        # that contain the given kanji
+        def loaded?
+            retVal = super
+            return retVal
+        end
+
+        # Return an array of positions in the chineseIndeces for which
+        # the respective sentence contains the given kanji
         def getPositions(kanji)
-            return @chineseIndeces.find_all do |index|
-                @sentences.sentenceAt(index).match(kanji)
+            return (0..@chineseIndeces.size - 1).find_all do |i|
+                @sentences.sentenceAt(@chineseIndeces[i]).match(kanji)
             end
         end
 
         def search(kanji, reading)
             retVal = []
             positions = getPositions(kanji)
-            positions.each do |index|
+            positions.each do |i|
+                cindex = @chineseIndeces[i]
+                eindex = @englishIndeces[i]
                 usage = JLDrill::VocabularyUsage.from_B_line(kanji)
-                retVal.push(TatoebaExample.new(index, 0, usage, @sentences))
+                retVal.push(TatoebaExample.new(cindex, eindex, usage, @sentences))
             end
             return retVal
         end

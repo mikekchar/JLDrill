@@ -91,7 +91,9 @@ module JLDrill
                 @parent.longEventPublisher.subscribe(self, "startLongEvent")
                 @parent.longEventPublisher.subscribe(self, "stopLongEvent")
                 newProblemUpdated(@parent.quiz.currentProblem)
-    		end
+    		else
+                print "Can't Display\n"
+            end
 		end
 		
 		def exit

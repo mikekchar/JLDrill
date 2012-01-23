@@ -17,6 +17,7 @@ module JLDrill
 			super(viewBridge)
 		    @sentencesFile = Config::resolveDataFile(Config::TATOEBA_SENTENCE_FILE)
             @japaneseFile = Config::resolveDataFile(Config::TATOEBA_JAPANESE_FILE)
+            @linksFile = Config::resolveDataFile(Config::TATOEBA_LINKS_FILE)
             @loadFileContext = LoadFileContext.new(@viewBridge)
 		end
 
@@ -55,7 +56,7 @@ module JLDrill
             @loadFileContext.onExit do
                 exitLoadTatoebaContext
             end
-            @loadFileContext.enter(self, @db.chineseIndeces, "Chinese Indeces")
+            @loadFileContext.enter(self, @db.chineseIndeces, @linksFile)
         end
 
         def exitLoadTatoebaContext
