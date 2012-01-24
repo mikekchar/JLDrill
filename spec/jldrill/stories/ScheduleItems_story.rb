@@ -96,7 +96,7 @@ module JLDrill::ScheduleItems
         def scheduleShouldBe(item, days, range=10)
             gap = inDays(item.schedule.duration)
             # There's a random +- range variation in the schedule
-            gap.should be_close(days, days.to_f / range.to_f)
+            gap.should be_within(days.to_f / range.to_f).of(days)
         end
 
         it "should schedule difficulty 0 items 5 days from now" do
@@ -175,7 +175,7 @@ module JLDrill::ScheduleItems
             problemStatus = item.status.select("ProblemStatus")
             problemStatus.schedules.size.should be(1)
             meaningSchedule = item.schedule
-            inDays(meaningSchedule.duration).should be_close(5.0, 0.5)
+            inDays(meaningSchedule.duration).should be_within(0.5).of(5.0)
             item.hasKanji?.should be(true)
             kanjiSchedule = JLDrill::Schedule.new(@item)
             problemStatus.addScheduleType("KanjiProblem", kanjiSchedule)

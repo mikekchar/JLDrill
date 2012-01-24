@@ -1,14 +1,13 @@
 require 'rake'
 require 'rubygems'
-require 'rspec'
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
 # Debian forces the installation of a very old version of rdoc
 # in /usr/lib/ruby if you install rubygems.  So I need to override
 # it here.
 gem 'rdoc', ">= 2.2"
-require 'rake/rdoctask'
+require 'rdoc/task'
 require 'rake/testtask'
-require 'rake/gempackagetask'
+require 'rubygems/package_task'
 require 'webgen/webgentask'
 require './lib/jldrill/Version'
 require 'fileutils'
@@ -45,11 +44,8 @@ rubyforge_project = "jldrill"
 rubyforge_maintainer = "mikekchar@rubyforge.org"
 
 # Spec options
-spec_opts = ['-f html:test_results.html -f profile:profile.txt']
-spec_files = FileList[
-	'spec/**/*_spec.rb',
-	'spec/**/*_story.rb'
-]
+rspec_opts = ['-f h -o test_results.html']
+spec_pattern = 'spec/**/*_s*.rb'
 
 # Options for running the application
 ruby_opts = ["-KO", "-I./lib", "-rrubygems"]
@@ -57,33 +53,33 @@ ruby_opts = ["-KO", "-I./lib", "-rrubygems"]
 task :default => [:spec]
 
 desc "Run the tests (default).  Output goes to test_results.html"
-Spec::Rake::SpecTask.new(:spec) do |t, args|
-	t.spec_files = spec_files
+RSpec::Core::RakeTask.new(:spec) do |t, args|
+	t.pattern = spec_pattern
 	t.ruby_opts = ruby_opts
-    t.spec_opts = spec_opts
+    t.rspec_opts = rspec_opts
 end
 
 desc "Run the tests and find the code coverage.  Test results are in test_results.html.  Coverage is in coverage/index.html"
-Spec::Rake::SpecTask.new(:rcov) do |t|
-	t.spec_files = spec_files
+RSpec::Core::RakeTask.new(:rcov) do |t|
+	t.pattern = spec_pattern
 	t.rcov = true
 	t.rcov_opts = ["--exclude rspec", "--exclude rcov", "--exclude syntax",
 	    "--exclude _spec", "--exclude _story",
 	    "--exclude cairo", "--exclude pango", "--exclude gtk2", "--exclude atk",
 	    "--exclude glib", "--exclude gdk"]
-	t.spec_opts = spec_opts
+	t.rspec_opts = rspec_opts
 	t.ruby_opts = ruby_opts
 end
 
 desc "Runs rcov but excludes the source files instead of the test files.  This is how I determine how many lines of test code I have.  Output goes to coverage/index.html"
-Spec::Rake::SpecTask.new(:testSize) do |t|
-	t.spec_files = spec_files
+RSpec::Core::RakeTask.new(:testSize) do |t|
+	t.pattern = spec_pattern
 	t.rcov = true
 	t.rcov_opts = ["--exclude rspec", "--exclude rcov", "--exclude syntax",
 	    "--exclude lib/Context/", "--exclude lib/jldrill/",
 	    "--exclude cairo", "--exclude pango", "--exclude gtk2", "--exclude atk",
 	    "--exclude glib", "--exclude gdk"]
-	t.spec_opts = spec_opts
+	t.rspec_opts = rspec_opts
 	t.ruby_opts = ruby_opts
 end
 
@@ -173,7 +169,7 @@ webgen_task = Webgen::WebgenTask.new('web') do |site|
 end
 
 desc "Creates the gem files for jldrill.  Packages are placed in pkg and called jldrill-<version>.gem."
-package_task = Rake::GemPackageTask.new(gem_spec) do |pkg|
+package_task = Gem::PackageTask.new(gem_spec) do |pkg|
 	pkg.need_zip = false
 	pkg.need_tar = true
 end
