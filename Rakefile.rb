@@ -63,12 +63,9 @@ desc "Run the tests and find the code coverage.  Test results are in test_result
 RSpec::Core::RakeTask.new(:rcov) do |t|
 	t.pattern = spec_pattern
 	t.rcov = true
-	t.rcov_opts = ["--exclude rspec", "--exclude rcov", "--exclude syntax",
-	    "--exclude _spec", "--exclude _story",
-	    "--exclude cairo", "--exclude pango", "--exclude gtk2", "--exclude atk",
-	    "--exclude glib", "--exclude gdk"]
+	t.rcov_opts = ["--exclude rspec,rcov,syntax,_spec,_story,cairo,pango,gtk2,atk,glib,gdk"]
 	t.rspec_opts = rspec_opts
-	t.ruby_opts = ruby_opts
+	t.ruby_opts = ruby_opts + ["-rrspec"]
 end
 
 desc "Runs rcov but excludes the source files instead of the test files.  This is how I determine how many lines of test code I have.  Output goes to coverage/index.html"
@@ -181,8 +178,7 @@ task :publish => [:clean_web, :web] do
 end
 
 desc "Cleans everything for a pristine source directory."
-task :clean => [:clobber_package, :clobber_rcov, :clobber_rdoc, 
-                :clobber_web] do
+task :clean => [:clobber_package, :clobber_rdoc, :clobber_web] do
     FileUtils.rm_rf release_dir
 end
 
