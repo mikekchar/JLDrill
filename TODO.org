@@ -42,7 +42,7 @@ with traditional characters using CC-EDICT.
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2011-07-14 Thu>
-  :CurrentDate:  <2012-01-10 Tue>
+  :CurrentDate:  <2012-02-03 Fri>
   :EndDate: <2012-01-20 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -66,7 +66,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.5.2 |    16 |   14 |    87.5 |    0.08 |   0.08 |
+| * Version 0.5.2 |    16 |   16 |   100.0 |    0.08 |   0.08 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -200,12 +200,12 @@ the task.
 	:Done: 2
 	:END:
 
-*** TODO Read Chinese collocations from Tatoeba example sentence
+*** DONE Read Chinese collocations from Tatoeba example sentence
 	In Chinese mode, read and select the Chinese collocations.
 
 	:PROPERTIES:
 	:JellyBeans: 2
-	:Done: 0
+	:Done: 2
 	:END:
 
 
