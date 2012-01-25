@@ -10,13 +10,15 @@ Package: jldrill
 Architecture: all
 Depends: ruby, ruby-gnome2, ttf-kanjistrokeorders, edict, ${misc:Depends}
 Description: Japanese language drill program
- JLDrill is a program for helping people study and drill various aspects 
- of the Japanese language. Current features include a variety of drills
- (kana, and vocabulary) a kanji and dictionary reference tool
- inspired by the firefox plugin Rikaichan, kanji stroke order
- diagrams, and vocabulary collocations using the Tanaka corpus (a
- series of example sentences in English and Japanese).  JLDrill's
- drills use a spaced repetition algorithm which is unique to it.
- This algorithm helps with initial acquisition of vocabulary, automatically
- grades item difficulty and improves the ability to deal with inconsistent
- review schedules.
+  JLDrill is a program for helping people drill various aspects of the
+  Japanese and Chinese languages. Current features include a kana drill, a
+  vocabulary drill, a dictionary cross reference tool, a popup
+  reference with stroke order diagrams for kanji and traditional 
+  chinese characters, example sentences from the
+  Tatoeba database and the ability to do dictionary lookups (with
+  deinflection in Japanese) by hovering the mouse over a word in the quiz or
+  examples.
+  NEW IN 0.6.0! Mandarin language support using the CC-CEdict dictionary
+  and Tatoeba example sentences.  The popup kanji tool will display
+  readings for Mandarin Chinese.  Unfortunately, the stroke order font
+  only supports tranditional characters.

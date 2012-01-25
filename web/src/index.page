@@ -15,12 +15,12 @@ Welcome to JLDrill
   deinflection in Japanese) by hovering the mouse over a word in the quiz or
   examples.
 
-  NEW IN 0.5.2! Mandarin language support using the CC-CEdict dictionary
+  NEW IN 0.6.0! Mandarin language support using the CC-CEdict dictionary
   and Tatoeba example sentences.  The popup kanji tool will display
   readings for Mandarin Chinese.  Unfortunately, the stroke order font
   only supports tranditional characters.
 
-  The current version is 0.5.2.
+  The current version is 0.6.0.
   
 Screenshots
 ----------
@@ -28,10 +28,10 @@ Screenshots
 ![JLDrill screenshot #1](images/Screenshot.png "JLDrill screenshot #1")
 ![JLDrill screenshot #2](images/Screenshot2.png "JLDrill screenshot #2")
 
-What's New for 0.5.2
+What's New for 0.6.0
 --------------------
 
-  As seen above, the big feature for 0.5.2 is support for drilling
+  As seen above, the big feature for 0.6.0 is support for drilling
   Mandarin Chinese.  Both traditional and simplified characters are
   supported in the dictionary tool, but unfortunately the kanji
   popup mostly only supports traditional characters (if you search
@@ -84,9 +84,9 @@ JLDrill is Beta Software
 News
 ----
 
-Friday, Feburay 4 2012
+Friday, January 26 2012
 
-* Release 0.5.2.  Wow! Almost a year between minor releases!  Sorry about
+* Release 0.6.0.  Wow! Almost a year between releases!  Sorry about
 that.  I have been working on other projects in the meantime.  But it
 was time to give JLDrill a little bit of love.
 

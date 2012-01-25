@@ -10,7 +10,7 @@ Installation Instructions
 Download
 --------
 
-The current stable release of JLDrill is 0.5.1.  It can be obtained at
+The current stable release of JLDrill is 0.6.0.  It can be obtained at
 [JLDrill's RubyForge Project Page](http://rubyforge.org/projects/jldrill).
 
 There are 3 methods to run JLDrill
@@ -19,7 +19,7 @@ There are 3 methods to run JLDrill
 
 Please download and install the following files
 
-* [jldrill-0.5.1.deb](http://rubyforge.org/frs/download.php/74902/jldrill_0.5.1-7_all.deb)
+* [jldrill-0.6.0.deb](http://rubyforge.org/frs/download.php/74902/jldrill_0.6.0-1_all.deb)
 
 This is all you will need.
 
@@ -62,16 +62,19 @@ you should remove context with:
 If you wish to download the gems for jldrill by hand for some reason,
 they are located here.  Context is a library used by jldrill.
 
-* [jldrill-0.5.1.gem](http://rubyforge.org/frs/download.php/74901/jldrill-0.5.1.7.gem)
+* [jldrill-0.6.0.gem](http://rubyforge.org/frs/download.php/74901/jldrill-0.6.0.1.gem)
 
 ### In place execution
 
 JLDrill will also run directly from the development tree.  You can download
-the development tree from:
+the development tree from github:
 
-[jldrill-0.5.1](http://sakabatou.dyndns.org/devel/jldrill)
+[jldrill-0.6.0](https://github.com/mikekchar/JLDrill)
 
-From there the application can be run by navigating to the directory and running
+git is a source code management system.  If you are new to github, you
+can get help by pressing the help button at the top of the linked page.
+
+After you download the code the application can be run by navigating to the directory and running
 AppRun.  You may want to install the font listed above in the gem section
 (see below)
 

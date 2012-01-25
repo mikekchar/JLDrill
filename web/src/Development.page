@@ -7,7 +7,7 @@ sort_info: 35
 Development Version
 ===================
 
-**Latest Completed Development Version:** [jldrill-0.5.2](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5.2)
+**Latest Completed Development Version:** jldrill-0.5.2
 
 For details on development versions, see below.
 
@@ -23,13 +23,9 @@ you would like to get involved in doing development on JLDrill you
 can always get the latest code from the
 [JLDrill Git Repository](https://github.com/mikekchar/JLDrill).
 
-JLDrill used to be hosted on my server using BZR as the source code
-management system.  I have since decided that Github is more
-convenient, which is why I moved to git.  The old source repository
-is here (although it may be out of date).
-[JLDrill BZR Repository](http://sakabatou.dyndns.org/devel/jldrill/).
-
-[Development documentation](http://sakabatou.dyndns.org/devel/jldrill/doc/index.html) for this version including a TODO list is available.
+I used to host development builds on my webserver.  However, I
+am no longer doing so.  If you wish to view the development documentation,
+you will have to download the code from GitHub and build it yourself.
 
 After you get the development trees you will need to install the
 following gems:
@@ -56,30 +52,6 @@ Once you have done that, you should view the development documentation
 and TODO list for that version by looking at doc/index.html.  It will 
 also contain links to the user documentation for the specific version 
 you build.
-
-I am actively encouraging people to help in the development of
-JLDrill.  If you want to contribute, please send me patches,
-suggestions, etc.  There are a few areas I need specific help.
-
-* User interface design.  All suggestions are welcome.  Anyone who
-  wants to work in this area can do as much as they want.
-
-* Windows/OS X packaging.  Honestly, I don't want to do this at all.
-  Windows is hard for me to use and I don't even have a Mac.  So I would
-  be happy to hand this over to anyone who is keen.
-
-* Web page development/documentation.  I don't mind doing this, but
-  frankly I'm not that great at it.  And there is really more work than
-  I can do myself.
-
-* Content development.  The content that exists now is the content
-  that I am studying.  It would be better to have more (or better)
-  content.
-
-* Itch scratching.  If you like to code, I welcome any and all patches
-  of functionality.  But I have to insist on tests (even though I have
-  occasionally been lax in that area).  I'm happy to work with you on
-  tests if you have difficulty writing them, though.
 
 Development Versions
 --------------------
@@ -117,9 +89,9 @@ If you want to create a new release, please follow the
 Development Version History
 ---------------------------
 Current Development Version: None
-Latest Completed Development Version: [jldrill-0.5.2](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5.2)
+Latest Completed Development Version: jldrill-0.5.2
 
-Changes in [jldrill-0.5.2](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5.2)
+Changes in jldrill-0.5.2
 
 * Display statistics for forgotten items in a separate pane.  These are basically the same statistics as the review set, except for the forgotten set.
 * Show the appropriate examples when a question/answer is shown.  Basically, if the question is English, show only English. If the question is Japanese, show only Japanese.  When the answer is shown, show both.
@@ -133,7 +105,7 @@ Changes in [jldrill-0.5.2](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5
 * If the chinese character is simplified, when displaying it in the kanji popup, search for it's equivalent traditional character in the dictionary.  If found, display that information.
 * If the dictionary is loaded, do a dictionary search for the kanji character in the kanji popup.  This gives a little bit more idea of the meaning, especially for Chinese mode.
 
-Changes in [jldrill-0.5.1](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5.1)
+Changes in jldrill-0.5.1
 
 * Merge Context library with JLDrill code.  Now there is just one deb file
   and gem.
@@ -146,7 +118,7 @@ Changes in [jldrill-0.5.1](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5
   simply typing "gem install jldrill".  This also installs the GTK
   libraries.
 
-Changes in [jldrill-0.4.2](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.4.2)
+Changes in jldrill-0.4.2
 
 * Allow items to be saved if only the comment has changed.  When
   adding the items from the dictionary, don't overwrite the comment.
@@ -172,7 +144,7 @@ Changes in [jldrill-0.4.2](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.4
 * Fix crash when you press cancel when opening a file.
 * Massive refactoring of the UI code.
 
-Changes in [jldrill-0.4.1](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.4.1)
+Changes in jldrill-0.4.1
 
 * Options to allow users to choose what kind of problems they want to drill
   in the Review Set.  You can choose any or all of the 3 basic types of
@@ -226,7 +198,7 @@ Changes in [jldrill-0.4.1](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.4
 * Reorder the items in the new set when their order is changed in
   the All Vocabulary window.
 
-Changes in [jldrill-0.3.5](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.3.5)
+Changes in jldrill-0.3.5
 
 * Desktop entry added for GNOME.  This will result in an entry in the GNOME menu.
   Also updated the icon to SVG.
@@ -255,7 +227,7 @@ Changes in [jldrill-0.3.5](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.3
   Admittedly few people are likely to be using ROX-filer, but it's cool for
   those that do.
 
-Changes in [jldrill-0.3.4](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.3.4)
+Changes in jldrill-0.3.4
 
 * Add description for 々 in the kanji popup
 * Pressing Cancel when quitting used to leave you hung with no window.  Fixed.
@@ -285,7 +257,7 @@ Changes in [jldrill-0.3.4](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.3
   vocabulary list
 * Allow the user to create a new drill.
 
-Changes in [jldrill-0.3.3](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.3.3)
+Changes in jldrill-0.3.3
 
 * Improved development documentation.  Opening the index.html file in the doc 
   directory gets you started.
@@ -308,7 +280,7 @@ Changes in [jldrill-0.3.3](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.3
   properly (for difficult items I level 5 item may have only been around
   2 or 3 days).
 
-Changes in [jldrill-0.3.2](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.3.2)
+Changes in jldrill-0.3.2
 
 * Dramatically speed up reference dictionary loading time.
 * Reduce memory usage to some degree.
@@ -318,7 +290,7 @@ Changes in [jldrill-0.3.2](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.3
 * Do a reference check for the current problem once the dictionary has been loaded.
 * Automatically do a search in the add and edit windows once the dictionary has been loaded.
 
-Changes in [jldrill-0.3.1](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.3.1)
+Changes in jldrill-0.3.1
 
 * Add Rakefile tasks to build releases
   * publish -- Publish the web page to Rubyforge

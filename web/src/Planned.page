@@ -7,18 +7,24 @@ sort_info: 50
 Planned features
 ===========================
 
-I used to keep an overview of the planned features here, but it gets
-out of date too quickly.  If you wish to see the current TODO list,
-please look at the [development branch
-website](http://sakabatou.dyndns.org/devel/jldrill/TODO.html)
-
-The TODO list shows the current development in the development stream
-and also the list of features that I plan to implement in the future.
-That list is called the backlog.  If you have any ideas or if you
-have a preference for the order in which I tackle the backlog, please
-contact me.
-
-
-
-
-
+* Cache dictionary and examples databases for faster startup times
+* Ability to set global options for JLDrill
+* Ability to automatically update the dictionary and example files
+* Improved UI (especially errors and warnings)  
+* Better packaging (especially for Windows and OSX)
+* Inclusion in Linux distributions
+* Flexible content format similar to what Anki does
+* Undo for cases of mistaken clicks
+* Ability to manually set potential schedules for items or unlearn them
+* Ability add vocabulary that shows up in the dictionary popup
+* Reading mode: Similar to the examples window which facilitates reading arbitrary documents or webpages.
+* Semi-automatic headword addition: In reading mode semi-automatically add new vocabulary to a drill.
+* Headword tracking: Keep track of which vocabulary the user has read in reading mode and use the data to schedule reviews of vocabulary.
+* Slightly better search algorithm
+* Allow user to specify the formatting of vocabulary
+* In place editing of vocabulary (remove the ugly Add/Edit window)
+* MDF version (Put everything in a single window)
+* Keyboard only mode (no need to use the mouse)
+* TTS for multiple languages
+* No GUI mode (TTS only)
+* Allow users to tweak the internal scheduling settings
