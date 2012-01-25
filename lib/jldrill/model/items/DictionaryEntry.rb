@@ -36,6 +36,7 @@ module JLDrill
             if !@simplified.empty?
                 retVal += "/#{@simplified}"
             end
+            return retVal
         end
 
         def toVocab
