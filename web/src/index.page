@@ -7,14 +7,20 @@ Welcome to JLDrill
 ==================
 
   JLDrill is a program for helping people drill various aspects of the
-  Japanese language. Current features include a kana drill, a
-  vocabulary drill, a dictionary cross reference tool, a popup-kanji
-  reference with stroke order diagrams, example sentences from the
-  Tanaka corpus and the ability to do dictionary lookups (with
-  deinflection) by hovering the mouse over a word in the quiz or
+  Japanese and Chinese languages. Current features include a kana drill, a
+  vocabulary drill, a dictionary cross reference tool, a popup
+  reference with stroke order diagrams for kanji and traditional 
+  chinese characters, example sentences from the
+  Tatoeba database and the ability to do dictionary lookups (with
+  deinflection in Japanese) by hovering the mouse over a word in the quiz or
   examples.
 
-  The current version is 0.5.1.
+  NEW IN 0.5.2! Mandarin language support using the CC-CEdict dictionary
+  and Tatoeba example sentences.  The popup kanji tool will display
+  readings for Mandarin Chinese.  Unfortunately, the stroke order font
+  only supports tranditional characters.
+
+  The current version is 0.5.2.
   
 Screenshots
 ----------
@@ -22,31 +28,45 @@ Screenshots
 ![JLDrill screenshot #1](images/Screenshot.png "JLDrill screenshot #1")
 ![JLDrill screenshot #2](images/Screenshot2.png "JLDrill screenshot #2")
 
-What's New for 0.5.1
+What's New for 0.5.2
 --------------------
 
-  Version 0.5.1 is primarily a packaging release. Apart from
-  packaging there is one minor feature.  Sometime if you have
-  been away from studying for a long time you get into a situation
-  where you can't review all your items in a day or two.  In this
-  case, short term items suffer because it takes them a long time
-  to come to the front of the queue.  Version 0.5.1 allows you
-  to "forget" old items in a structured way.  You can set which
-  items to forget from the Options window.
-  
-  The main feature of this release is packaging.  JLDrill has
-  finally been added to the main gem repository.  This means that
-  you can install JLDrill on any machine with Ruby and Gnome
-  simply by typing "gem install jldrill".  The latest version
-  will be downloaded from the internet and installed.  On Windows,
-  Gnome will even be installed for you.  "gem update jldrill"
-  will also upgrade you to the latest version of jldrill.  For
-  most people this will be the simplest way to install JLDrill.
-  
-  Work has once again halted on a simplified Windows installer.
-  The current installation instructions are quite simple and I
-  haven't found anyone having problems.  If have problems installing
-  JLDrill, please contact me.
+  As seen above, the big feature for 0.5.2 is support for drilling
+  Mandarin Chinese.  Both traditional and simplified characters are
+  supported in the dictionary tool, but unfortunately the kanji
+  popup mostly only supports traditional characters (if you search
+  for a simplified character, it will give the the radical information
+  for the traditional equivalent).  The stroke order font also
+  only supports traditional characters (if you know of a similar
+  font for simplified characters, please contact me).
+
+  The other big feature for this release is Ruby 1.9 support.
+  As far as I know, it will work on any 1.9 version supported by
+  ruby-gtk.
+
+  I have also transitioned away from the Tanaka corpus as the source
+  of example sentences.  The project is now maintained by the
+  Tatoeba project and since I needed to use Tatoeba for Chinese
+  example sentences, it was a good time to switch.  There is no
+  loss of functionality, but because the database contains a lot
+  more information, loading is slower.  In the next release I will
+  try to rectify that problem.
+
+  The statistics window has been given a new tab for forgotten items.
+  If you are used to getting behind (like me), you might appreciate it.
+  Basically, the statistics in the forgotten tab work just like
+  the statistics for items in the review set, but for forgotten items.
+
+  One last major issue is the introduction of a folder for containing
+  your own personal dictionaries and such.  If you create a folder
+  called ".jldrill" in your home directory and put a file structure
+  the same as the distributed data directory (.jldrill/quiz for your
+  drill files, .jldrill/dict for dictionary files, etc), you can
+  overload the installed versions.  This is useful for having your
+  drill files show up right away when opening a file, for example.
+  It is also especially useful for overriding the very old edict
+  dictionary that is distributed with Debian based distributions
+  (just put a newer version of edict in .jldrill/dict).
 
 JLDrill is Beta Software   
 ------------------------
@@ -63,6 +83,12 @@ JLDrill is Beta Software
 
 News
 ----
+
+Friday, Feburay 4 2012
+
+* Release 0.5.2.  Wow! Almost a year between minor releases!  Sorry about
+that.  I have been working on other projects in the meantime.  But it
+was time to give JLDrill a little bit of love.
 
 Monday, May 23 2011
 

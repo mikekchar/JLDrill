@@ -11,7 +11,7 @@ Important Note:
 ---------------
 JLDrill is easiest to install on a GNU/Linux system using Debian
 based packages (for example Debian or Ubuntu).  If you have such a
-system, you can skip this section an move to the [Install](Install.html)
+system, you can skip this section and move to the [Install](Install.html)
  section.  Otherwise read on.
 
 What to Install
@@ -19,12 +19,10 @@ What to Install
 JLDrill is written in Ruby and uses GTK2 as it's GUI toolkit.  You
 will need to install the following before installing JLDrill.
 
-* Ruby 1.8 (Version 1.8.7 or higher)
+* Ruby 1.8 (Version 1.8.7 or higher) OR Ruby 1.9
 * rubygems
 * GTK+ 2.6 or higher
 * Ruby-Gnome2 0.16 or higher
-
-Note: Ruby 1.9 does *not* work!!
 
 JLDrill has been developed and tested on GNU/Linux (Ubuntu).
 It should work on any platform that supports Ruby, Gtk and Ruby-Gnome
@@ -33,24 +31,6 @@ It should work on any platform that supports Ruby, Gtk and Ruby-Gnome
 Installing the Requirements
 ---------------------------
 There are different requirements depending on the system you use.
-
-###Windows
-
-The installation of the requirements for Windows is not very complicated.
-Unfortunately they are rather large downloads and install a lot of things
-that you won't need just to run JLDrill.  If demand warrants, I will make
-a more streamlined package for Windows.  Please contact me if you are
-using JLDrill on Windows.
-
-The best place to get Ruby is the official Ruby website.  You must
-install
-[Ruby version 1.8.7](http://rubyforge.org/frs/download.php/72085/rubyinstaller-1.8.7-p302.exe).  Note that only version 1.8.7 or higher will work.
-Also, version 1.9.x will not work at the current time.
-
-You are now ready to install JLDrill.  For the next step you will
-need an internet connection, though.  Please see the
-[Download/Install](Install.html) section for details on obtaining and 
-installing JLDrill.
 
 ###GNU/Linux, BSD, Unix-like, etc
 
@@ -61,15 +41,6 @@ installing JLDrill from packages.  The first is using a debian package
 install.  If you are doing this then there is nothing you need to
 prepare.  The second option is install using gems.  If you are doing
 this then you must install Ruby and Ruby gems.
-
-Note: The Debian and Ubuntu package for rubygems puts the gems
-in /var/lib/gems/1.8.  In order to be able to run JLDrill you need to
-add /var/lib/gems/1.8/bin in your path.  I have added
-<pre>
-export PATH=$PATH:/var/lib/gems/1.8/bin
-export RUBYOPT=rubygems
-</pre>
-to the end of my .bashrc file.
 
 Note that the Debian packages and gem packages are not compatible.
 Specifically, if you install ruby-gnome2 from the Debian packages,
@@ -86,20 +57,53 @@ at the [RubyGems website](http://docs.rubygems.org/read/chapter/3).
 
 GTK+ 2.6 can be obtained at the [GTK+ website](http://www.gtk.org/)
 
-Finally, you will want to follow the
+Finally, you will probably want to follow the
 [Ruby-Gnome2 install guides](http://ruby-gnome2.sourceforge.jp/hiki.cgi?Install+Guide)
+
+However if you have a C complier (gcc) and all the development files for GTK+
+(libgtk2.0-dev on Debian based systems), the easiest way to install the
+ruby-gtk libraries is to use gem.  With an active internet connect,
+just type:
+
+gem install gtk
+
+as the root user (or use "sudo gem install gtk").
 
 Please see the Download/Install section for details on obtaining and
 installing JLDrill
 
+###Windows
+
+The installation of the requirements for Windows is not very complicated.
+Unfortunately they are rather large downloads and install a lot of things
+that you won't need just to run JLDrill.  If demand warrants, I will make
+a more streamlined package for Windows.  Please contact me if you are
+using JLDrill on Windows.
+
+The best place to get Ruby is the official Ruby website.  You must
+install
+[Ruby version 1.8.7](http://rubyforge.org/frs/download.php/72085/rubyinstaller-1.8.7-p302.exe).  Note that you must use verion 1.8.7 or higher.  1.9
+versions should also work.
+
+You are now ready to install JLDrill.  For the next step you will
+need an internet connection, though.  Please see the
+[Download/Install](Install.html) section for details on obtaining and 
+installing JLDrill.
+
+
 ###Mac OSX
-Unfortunately I don't have access to a Macintosh.  It should be
-possible to install JLDrill on a Macintosh using the gem packages,
-and tell me if it works.  Unfortunately JLDrill requires Ruby 1.8.7.
-From the Ruby website it seems that only 1.8.6 is officially
-supported, and 1.8.2 is included in Tiger.  This may mean that
-JLDrill is impossible to install at this time.  I will try to
-get more information some time.
+
+I've seen quite a few robot-sites proclaim JLDrill as software
+for the Macintosh.  I need to be very clear -- It is not officially
+supported on that platform because I don't have one.  Having said
+that, it should work.
+
+It should be possible to install JLDrill on a Macintosh using the gem
+packages, and tell me if it works.  Unfortunately JLDrill requires
+Ruby 1.8.7.  From the Ruby website it seems that only 1.8.6 is
+officially supported, and 1.8.2 is included in Tiger.  This may mean
+that JLDrill is impossible to install at this time.  I will try to get
+more information some time.
 
 Assuming you can get Ruby 1.8.7 installed, you must also install
 Gnome.  This is apparently available at [MacPorts](http://www.macports.org/)
@@ -111,6 +115,3 @@ in the process.
 
 If you manage to do this, please contact me so I can put better
 instructions here.
-
-
-

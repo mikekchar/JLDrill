@@ -7,7 +7,7 @@ sort_info: 35
 Development Version
 ===================
 
-**Latest Completed Development Version:**  [jldrill-0.5.1](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5.1)
+**Latest Completed Development Version:** [jldrill-0.5.2](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5.2)
 
 For details on development versions, see below.
 
@@ -39,8 +39,14 @@ following gems:
 * rcov
 * webgen
 
-Once you have everything installed you will be able to build everything
-using:
+Once you have everything installed you will be able to build the gem using:
+
+<pre>
+		rake gem
+</pre>
+
+If you have all the debian deb-helper scripts installed, you can build
+everying with:
 
 <pre>
 		rake update
@@ -110,9 +116,22 @@ If you want to create a new release, please follow the
 
 Development Version History
 ---------------------------
-Current Development Version: [jldrill-0.5.2](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5.2)
+Current Development Version: None
+Latest Completed Development Version: [jldrill-0.5.2](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5.2)
 
-Latest Completed Development Version: [jldrill-0.5.1](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5.1)
+Changes in [jldrill-0.5.2](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5.2)
+
+* Display statistics for forgotten items in a separate pane.  These are basically the same statistics as the review set, except for the forgotten set.
+* Show the appropriate examples when a question/answer is shown.  Basically, if the question is English, show only English. If the question is Japanese, show only Japanese.  When the answer is shown, show both.
+* Support Ruby 1.9
+* Chinese mode for drill.  If your drill is chinese, you can select the chinese option in the Options window.
+* CC-CEdict support.  Add the CC-CEdict library (called cedict in the data files).  If it is selected as the dictionary and chinese mode is turned on in the options, You will be able to search the chinese dictionary.
+* If Chinese mode is turned on, show Chinese readings in the Kanji popup.
+* Allow user to override datafiles by placing new versions in ~/jldrill
+* Replace the Tanaka corpus with the Tatoeba database
+* Allow loading of Chinese example sentences in the Tatoeba database (this is currently quite slow).
+* If the chinese character is simplified, when displaying it in the kanji popup, search for it's equivalent traditional character in the dictionary.  If found, display that information.
+* If the dictionary is loaded, do a dictionary search for the kanji character in the kanji popup.  This gives a little bit more idea of the meaning, especially for Chinese mode.
 
 Changes in [jldrill-0.5.1](http://sakabatou.dyndns.org/devel/jldrill/jldrill-0.5.1)
 

@@ -42,7 +42,9 @@ JLDrill as it is, but probably you will want to install the
 stroke order font for showing the stroke order of kanji
 characters.
 
-* [KanjiStrokeOrders.ttf](http://rubyforge.org/frs/download.php/48214/KanjiStrokeOrders.ttf)
+The main website for the font is at [nihilistorguk](http://sites.google.com/site/nihilistorguk/).  I recommend downloading the latest one there (it's the first link on the page).  If, for some reason, you have trouble getting to that page, you can also download an old version of the font here:
+
+* [Old version of KanjiStrokeOrders.ttf](http://rubyforge.org/frs/download.php/48214/KanjiStrokeOrders.ttf)
 
 If you are updating from a previous version of jldrill, you can
 type:

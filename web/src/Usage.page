@@ -467,6 +467,16 @@ Normally the dictionary won't load every time you run JLDrill.
 But if you want the dictionary to be loaded automatically
 for this drill, then you can select the "Autoload?" button.
 
+Finally there is a button to indicate that you want to be in Chinese
+mode.  If you check this button, you need to make sure that the
+dictionary you want to load is in the CC-CEdict format.  JLDrill
+distributes such a dictionary, called "cedict".  Please enter
+into the dictionary name when you select chinese mode.  While in
+Chinese mode, the popup kanji windows will display the Chinese
+readings for the character rather than the Japanese readings.  The
+Chinese example sentences will also be loaded instead of the Japanese
+example sentences.
+
 The next section is for the new set.  Here you can select
 whether or not you want new items to be selected in the order
 they appear in the quiz, or in random order.
@@ -772,10 +782,12 @@ a large version of the kanji for the most likely word.
 You can also hover over the words in the Example window if the
 reference dictionary is loaded (see below).
 
-**Tanaka Corpus**.  The Tanaka Corpus is a collection of Japanese
+**Example Sentences**.  JLDrill now uses the Tatoeba collocation
+database for displaying example sentences.  For Japanese, the core
+of the database comes from the Tanaka Corpus, a collection of Japanese
 sentences with English translations.  Most of the common words
 in the dictionary have example sentences in the Tanaka Corpus.
-To load the corpus press Ctrl-E (or select File/Load Tanaka Corpus from
+To load the corpus press Ctrl-E (or select File/Load Exampes DB from
 the menu).  It takes a while to load, but when it is finished,
 it opens up a new window.  Whenever you are reviewing a word that
 exists in the corpus, example sentences will be shown in the window.
@@ -790,12 +802,12 @@ Examples section, there will be one example for each sense of the
 word.  In the example, 甘える has two senses: 1) to behave like
 a spoiled child and 2) to depend on another's benevolence.  You can
 see there is one example for each of these senses in the Checked Examples
-section.
+section.  To make them easier to identify, Checked Examples are written
+with a light blue background.
 
 The examples are taken right out of the Tanaka Corpus with only
-a little bit of formatting.  The number on the left is the reference
-number for the example. Each example has a unique number.  After that
-you see the word as defined in the dictionary.  Often you will see
+a little bit of formatting.  At the top of each entry you will see
+an indication of the usage of the target vocabulary.  Often you will see
 a number in square brackets like \[1\] following the word.  This
 is the number of the sense for the example.  To find the definition,
 simply look at the meanings in the main JLDrill window.  After the
@@ -803,9 +815,10 @@ sense there is often a description of the exact text used.  In this
 case \{甘えた} and \{甘えて}.  Verbs, expecially, will be inflected so
 this allows you to find the word in the example more easily.  The
 last two lines of the example show the Japanese and English text
-for the example.
+for the example.  Each example sentence is preceeded by a number.  This
+is the identification number for the sentence in the Tatoeba database.
 
-The Tanaka corpus is a work in progress.  There are close to 200,000
+The Tatoeba project is a work in progress.  There are over 200,000
 sentences of varying quality.  In general, all of the Japanese is
 correct.  However, the English can sometimes be awkward or even
 completely unrelated to the Japanese.  So you must be careful.  All
@@ -1040,3 +1053,64 @@ warning.
 
 That's it.  Hope you find it useful. Please see the 
 [Planned Features page](Planned.html) to see what's coming up next.
+
+Overriding Default Files
+------------------------
+
+JLDrill doesn't currently have a means to set global options
+for the application (this is scheduled for the next release).
+However, you can now override the default datafiles with your
+own.  This is useful for loading your own custom dictionaries
+or simply so that your drill files show up by default when
+opening files, rather than the installed drill files.
+
+First you need to create a directory in your "home" directory
+called ".jldrill".  Your "home" directory is any directory
+that is pointed to by the environment variable called "HOME".
+Setting environment variables is outside the scope of this
+documentation, but you should be able to find appropriate
+documentation for your system.  Most systems other than Windows
+already set a home directory.
+
+In your .jldrill directory, you can add whatever default files
+that you want to override.  Here is a list:
+
+ **quiz**.  A directory called quiz in your .jldrill directory will
+be used as the default directories for your drills.  It is the
+first directory that will be opened whenever you open or save
+files.
+
+**dict**. A directory called dict in your .jldrill directory will
+be used as the default path for your dictionaries.  If you have
+a file called "edict" in that directory, it will be used as the
+default Japanese dictionary.  Both the edict and cedict dictionaries
+are updated far more frequently than I update JLDrill.  If you
+wish to use a new version, you can simply download it from the
+respective website and place it here.
+
+**dict/rikaichan**.  The rikaichan directory in dict contains the
+datafiles from rikaichan.  This includes the deinflect.dat file
+(for verb deinflection), the kanji.dat file (for kanji information)
+and the radicals.dat file (for radical information).  If you
+want to use the files from a version of rikaichan different than
+JLDrill already uses, you simply have to extract them from
+the rikaichan Firfox plugin and copy them to this directory.
+Instructions on how to do this are outside the scope of the
+documentation.
+
+**dict/Kana**.  The Kana directory in dict contains data files
+similar to the rikaichan ones for kanji, only for kana.  These
+files were made by me.  Feel free to take a copy from the
+installed location and update it with whatever information
+you want.  If you do so, please consider sending me your ideas
+(although you are not obligated to do so -- the Kana files
+are placed in the public domain).
+
+**Tatoeba**.  The Tatoeba directory in the .jldrill director
+contains files from the Tatoeba database.  The Tatoeba
+database is updated extreme frequently.  A new version is
+made every Tuesday night.  If you want to remain current,
+you might want to download the files from the download section
+of their website and place them here.  There are 4 files:
+jpn_indices.csv, links.csv, sentences.csv and tags.csv.
+Currently the tags.csv file is not being used. 
