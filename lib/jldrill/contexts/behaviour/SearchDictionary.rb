@@ -34,9 +34,11 @@ module JLDrill::Behaviour
                 else
                     retVal += kanji.withRadical_to_s(@parent.radicals.radicalList)
                 end
-                retVal += "\n\nDictionary Lookup:\n"
-                retVal += entries.join("\n")
-                retVal += "\n"
+                if !entries.empty?
+                    retVal += "\n\nDictionary Lookup:\n"
+                    retVal += entries.join("\n")
+                    retVal += "\n"
+                end
             else
                 kana = @parent.kana.kanaList.findChar(character)
                 if !kana.nil?
