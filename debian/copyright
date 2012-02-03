@@ -1,17 +1,14 @@
-This package was debianized by Mike Charlton <mikekchar@gmail.com> on
-Thu, 08 Oct 2009 13:53:51 +0900.
-
-It was downloaded from <http://sakabatou.dnsdojo.org/devel/jldrill/jldrill-0.4.0>
-
 Upstream Author(s):
 
     Mike Charlton <mikekchar@gmail.com>
 
 Copyright:
 
-    (C) 2005-2009 Mike Charlton
+    (c) 2005-2012 Mike Charlton
 
 License:
+
+    GPL Version 3.0, see `/usr/share/common-licenses/GPL-3'.
 
 JLDrill is licensed under version 3.0 of the GNU General Public
 License (GPL) Please see the COPYING File for more details. Previous
@@ -19,9 +16,6 @@ versions of JLDrill were released under version 2.0 of the GPL and you
 may choose that version if you wish. However version 3.0 represents a
 major improvement in clearing up ambiguous details, so I highly
 recommend choosing GPL 3.0 if you wish to extend this software.
-
-The Debian packaging is copyright 2009, Mike Charlton <mikekchar@gmail.com> and
-is licensed under the GPL, see `/usr/share/common-licenses/GPL-3'.
 
 The JLPT files are Copyright (C) 2001 Thierry Bézecourt
 
@@ -84,6 +78,12 @@ Dictionary Research and Development Group.  However, they have changed
 the format and added quite a few entries.  It is much easier to parse
 and more useful.  Also, they are using UTF characters instead of EUC
 characters meaning that many more of the proper radicals can be shown.
+
+Tatoeba
+
+The Tatoeba database is licensed under a Creative Commons Attribution 2.0
+license.  Information about the Tatoeba project can be found at
+http://tatoeba.org
 
 More licence information can be found in the data/jldrill/COPYING directory in JLDrill’s main distribution.
 

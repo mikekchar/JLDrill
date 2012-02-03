@@ -42,7 +42,7 @@ with traditional characters using CC-EDICT.
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2011-07-14 Thu>
-  :CurrentDate:  <2012-01-24 Fri>
+  :CurrentDate:  <2012-01-27 Fri>
   :EndDate: <2012-02-03 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -220,7 +220,14 @@ the task.
 	:Done: 1
 	:END:
 
-*** TODO Fix kanji listing in the edit search window
+*** DONE Fix kanji listing in the edit search window
+*** DONE Add Copyright information for Tatoeba database
+*** DONE Remove Tanaka data files from distribution
+*** DONE Fix Options picture
+*** TODO Document Forgotten statistics
+*** DONE Investigate Lintian failure (lintian bug???)
+  After investigating, I'm pretty sure it's a lintian bug.
+
 * Finished -- Version 5.1
 
 This is a packaging release.  However, I have added a single

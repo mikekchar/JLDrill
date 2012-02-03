@@ -19,7 +19,7 @@ There are 3 methods to run JLDrill
 
 Please download and install the following files
 
-* [jldrill-0.6.0.deb](http://rubyforge.org/frs/download.php/74902/jldrill_0.6.0-1_all.deb)
+* [jldrill-0.6.0.deb](http://rubyforge.org/frs/download.php/75803/jldrill_0.6.0-1_all.deb)
 
 This is all you will need.
 
@@ -62,7 +62,7 @@ you should remove context with:
 If you wish to download the gems for jldrill by hand for some reason,
 they are located here.  Context is a library used by jldrill.
 
-* [jldrill-0.6.0.gem](http://rubyforge.org/frs/download.php/74901/jldrill-0.6.0.1.gem)
+* [jldrill-0.6.0.gem](http://rubyforge.org/frs/download.php/75802/jldrill-0.6.0.1.gem)
 
 ### In place execution
 

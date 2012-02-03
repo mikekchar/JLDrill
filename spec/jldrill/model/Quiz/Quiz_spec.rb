@@ -16,7 +16,7 @@ module JLDrill
 		    @emptyQuiz.should_not be_nil
 		    
 		    @emptyQuiz.contents.should_not be_nil
-		    @emptyQuiz.contents.bins.length.should be(6)
+		    @emptyQuiz.contents.bins.length.should eql(6)
 		    @emptyQuiz.contents.bins[0].name.should eql("Unseen")
 		    @emptyQuiz.contents.bins[1].name.should eql("Poor")
 		    @emptyQuiz.contents.bins[2].name.should eql("Fair")
@@ -31,14 +31,14 @@ module JLDrill
 		    quiz.loadFromString("SampleQuiz", @sampleQuiz.file)
 		    quiz.file.should eql("SampleQuiz")
 		    quiz.name.should eql("Testfile")
-		    quiz.options.randomOrder.should be(true)
-		    quiz.options.promoteThresh.should be(4)
-		    quiz.options.introThresh.should be(17)
-		    quiz.contents.bins[0].length.should be(1)
-		    quiz.contents.bins[1].length.should be(0)
-		    quiz.contents.bins[2].length.should be(1)
-		    quiz.contents.bins[3].length.should be(0)
-		    quiz.contents.bins[4].length.should be(2)
+		    quiz.options.randomOrder.should eql(true)
+		    quiz.options.promoteThresh.should eql(4)
+		    quiz.options.introThresh.should eql(17)
+		    quiz.contents.bins[0].length.should eql(1)
+		    quiz.contents.bins[1].length.should eql(0)
+		    quiz.contents.bins[2].length.should eql(1)
+		    quiz.contents.bins[3].length.should eql(0)
+		    quiz.contents.bins[4].length.should eql(2)
 		end
 		
 		it "should save a file to a string" do
@@ -46,7 +46,7 @@ module JLDrill
 		end
 
         it "should be able to load files of the current version" do
-            Quiz.canLoad?(SampleQuiz::FileHeader).should be(true)
+            Quiz.canLoad?(SampleQuiz::FileHeader).should eql(true)
             @emptyQuiz.loadFromString("TestFile", @sampleQuiz.file)
             @emptyQuiz.saveToString.should eql(@sampleQuiz.file)
         end
@@ -69,11 +69,11 @@ module JLDrill
 	    
 	    it "should be able to reset the contents" do
 	        @quiz.resetContents
-	        @quiz.contents.bins[0].length.should be(3)
-	        @quiz.contents.bins[1].length.should be(1)
-	        @quiz.contents.bins[2].length.should be(0)
-	        @quiz.contents.bins[3].length.should be(0)
-	        @quiz.contents.bins[4].length.should be(0)
+	        @quiz.contents.bins[0].length.should eql(3)
+	        @quiz.contents.bins[1].length.should eql(1)
+	        @quiz.contents.bins[2].length.should eql(0)
+	        @quiz.contents.bins[3].length.should eql(0)
+	        @quiz.contents.bins[4].length.should eql(0)
             string = allVocabString(@quiz)
 	        string.should eql(@sampleQuiz.allResetVocab + "\n")
 	    end
@@ -90,17 +90,17 @@ module JLDrill
             @quiz.contents.bins[1][0].position.should be(0)
             # The rest will be in bin 0, numbered sequentially
             0.upto(2) do |i|
-                @quiz.contents.bins[0][i].position.should be(i + 1)
+                @quiz.contents.bins[0][i].position.should eql(i + 1)
             end
         end
 	    
 	    it "should be able to move an item from one bin to the other" do
 	        item = @quiz.contents.bins[0][0]
 	        @quiz.contents.moveToBin(item, 4)
-	        @quiz.contents.bins[0].length.should be(0)
-	        @quiz.contents.bins[4].length.should be(3)
+	        @quiz.contents.bins[0].length.should eql(0)
+	        @quiz.contents.bins[4].length.should eql(3)
 	        item.should be_equal(@quiz.contents.bins[4][2])
-	        item.bin.should be(4)
+	        item.bin.should eql(4)
 	    end
 	    
         def test_problem(question, problem)
@@ -114,10 +114,10 @@ module JLDrill
 	    def test_binOne(question)
             # bin 1 items will always be reading problems
             # because the level will always be 0
-            @quiz.currentProblem.item.schedule.level.should be(0)
+            @quiz.currentProblem.item.schedule.level.should eql(0)
             test_problem(question, 
                          ReadingProblem.new(@quiz.currentProblem.item))
-            @quiz.currentProblem.item.itemStats.consecutive.should be(0)
+            @quiz.currentProblem.item.itemStats.consecutive.should eql(0)
 	    end
 
         def test_level(question)
@@ -137,31 +137,31 @@ module JLDrill
                     test_problem(question, MeaningProblem.new(@quiz.currentProblem.item)) 
             else
 	             # This shouldn't ever happen.  Blow up.
-	             true.should be(false) 
+	             true.should eql(false) 
             end                
         end
         
 	    def test_binTwo(question)
             # The quiz depends on the level
             test_level(question)
-            @quiz.currentProblem.item.itemStats.consecutive.should be(0)
+            @quiz.currentProblem.item.itemStats.consecutive.should eql(0)
 	    end
 
 	    def test_binThree(question)
             # The quiz depends on the level
             test_level(question)
-            @quiz.currentProblem.item.itemStats.consecutive.should be(0)
+            @quiz.currentProblem.item.itemStats.consecutive.should eql(0)
 	    end
 
 	    def test_binFour(question)
 	        # Since it's random, this might not always be hit.  But
 	        # if this test fails, it's definitely a bug!
-	        @quiz.currentProblem.requestedLevel.should_not be(0)
+	        @quiz.currentProblem.requestedLevel.should_not eql(0)
 	        
             # The quiz depends on the level
             test_level(question)
             # Level 4 items have consecutive of at least one
-            @quiz.currentProblem.item.itemStats.consecutive.should_not be(0)
+            @quiz.currentProblem.item.itemStats.consecutive.should_not eql(0)
 	    end
 	    
 	    def test_drill
@@ -170,7 +170,7 @@ module JLDrill
             question = @quiz.currentDrill
 	        if (binZeroSize - 1) == @quiz.contents.bins[0].length
 	            # it was a bin 0 item which was promoted
-	            @quiz.currentProblem.item.bin.should be(1)
+	            @quiz.currentProblem.item.bin.should eql(1)
                 test_binOne(question)
 	        elsif @quiz.currentProblem.item.bin == 1
 	            test_binOne(question)
@@ -182,7 +182,7 @@ module JLDrill
 	            test_binFour(question)
 	        else
 	             # This shouldn't ever happen.  Blow up.
-	             true.should be(false) 
+	             true.should eql(false) 
 	        end 
 	    end
 
@@ -191,15 +191,15 @@ module JLDrill
             @quiz.correct
             bin = @quiz.currentProblem.item.bin
             if bin == 4
-                @quiz.currentProblem.item.itemStats.consecutive.should be(consecutive + 1)
+                @quiz.currentProblem.item.itemStats.consecutive.should eql(consecutive + 1)
             else
-                @quiz.currentProblem.item.itemStats.consecutive.should be(0)
+                @quiz.currentProblem.item.itemStats.consecutive.should eql(0)
             end
         end
 	    
         def test_incorrect
             @quiz.incorrect
-            @quiz.currentProblem.item.itemStats.consecutive.should be(0)
+            @quiz.currentProblem.item.itemStats.consecutive.should eql(0)
         end
 	    
 	    def test_initializeQuiz
@@ -216,11 +216,11 @@ module JLDrill
 	        # Non random should pick the first object in the first bin
 	        # item gets promoted to the first bin immediately
 	        item = @quiz.contents.bins[1][0]
-	        @quiz.contents.bins[0].length.should be(3)
-	        @quiz.contents.bins[1].length.should be(1)
+	        @quiz.contents.bins[0].length.should eql(3)
+	        @quiz.contents.bins[1].length.should eql(1)
             test_problem(@quiz.currentProblem.question, 
                          ReadingProblem.new(@quiz.currentProblem.item)) 
-	        @quiz.bin.should be(1)
+	        @quiz.bin.should eql(1)
 	        @quiz.currentProblem.item.should be_equal(item)
 
             # Threshold is 1, so a correct answer should promote
@@ -241,7 +241,7 @@ module JLDrill
                 test_drill
                 test_correct
             end
-            i.should be(12)
+            i.should eql(12)
         end
 
         it "should use the promote threshold when promoting" do
@@ -259,7 +259,7 @@ module JLDrill
                 test_drill
                 test_correct
             end
-            i.should be(24)
+            i.should eql(24)
         end
         
         it "should update the last reviewed status when the answer is made" do

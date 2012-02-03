@@ -162,7 +162,7 @@ module JLDrill
             if header =~ JLDRILL_CANLOAD_RE
                 if $1 != ""
                     if $1 =~ VERSION_RE
-                        if $1.to_i > 0 || $2.to_i < 6
+                        if $1.to_i > 0 || $2.to_i < 7
                             retVal = true
                         end
                     end

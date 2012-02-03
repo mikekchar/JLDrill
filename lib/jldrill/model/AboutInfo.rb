@@ -30,6 +30,11 @@ Copyright (C) 2005-2011  Mike Charlton
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+    Note: This license only covers the JLDrill software.  It doesn't
+    cover the information in the data directory.  For more information
+    on licenses for these files, please refer to the COPYING director
+    in the data directory.
 ]
         end
     end
