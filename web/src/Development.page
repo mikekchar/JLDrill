@@ -7,6 +7,7 @@ sort_info: 35
 Development Version
 ===================
 
+**Current Development Version:** jldrill-0.6.1
 **Latest Completed Development Version:** jldrill-0.5.2
 
 For details on development versions, see below.
@@ -88,7 +89,7 @@ If you want to create a new release, please follow the
 
 Development Version History
 ---------------------------
-Current Development Version: None
+Current Development Version: jldrill-0.6.1
 Latest Completed Development Version: jldrill-0.5.2
 
 Changes in jldrill-0.5.2

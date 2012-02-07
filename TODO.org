@@ -16,34 +16,20 @@ release.
 
 When the release is complete, delete the stories and start again.
 
-* The Upcoming Release is Version 0.6.0
+* The Upcoming Release is Version 0.7.0
 
-The upcoming stable release will be version 0.6.0.  As usual,
-it will be made up of the development releases (from 0.5.1 up).
+Version 0.7.0 will be a fun development release for me.
+I will do whatever I feel like.
 
-The rest of 0.6.0 will be devoted to drill functionality.  The idea
-is to get the multi-drill types done and to nail down the file
-format.  Additionally, some must-have UI (error messages and the
-like) will be implemented.
+* Version 0.6.1
 
-The development versions of 0.5.x will be undergoing a different
-process.  Instead of long development releases, the releases will
-be done in 1-2 weeks each.  Hopefully this will keep interest
-levels up.
-
-* Version 0.5.2
-
-0.5.2 originally meant to focus on UI imporovements, but
-I got sidetracked with other issues.  The main improvements
-are statistics for forgotten items, better display of examples,
-Ruby 1.9.1 compatibility, and ability to study Mandarin Chinese
-with traditional characters using CC-EDICT.
+Let's have fun!
   
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
-  :StartDate: <2011-07-14 Thu>
-  :CurrentDate:  <2012-01-27 Fri>
-  :EndDate: <2012-02-03 Fri>
+  :StartDate: <2011-02-07 Tue>
+  :CurrentDate:  <2012-02-07 Tue>
+  :EndDate: <2012-03-02 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -66,7 +52,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.5.2 |    17 |   17 |   100.0 |    0.09 |   0.08 |
+| * Version 0.6.1 |     1 |    0 |     0.0 |    0.00 |   0.00 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -77,239 +63,14 @@ the task.
 
 ** Current Items
 
-*** DONE Display statistics for forgotten items [2/2]
-	In the statistics window, display the statistics for the
-	forgotten set as well as the review set.  To be honest, I
-	don't really know how I want this to work, so this will
-	probably end up being a spike.
-
-	- [X] Create a tabbed interface for the statistics window
-    - [X] Make one tab show the statistics for the review set
-          and one for the forgotten set
+*** TODO To something fun
+	I like fun.
 
 	:PROPERTIES:
 	:JellyBeans: 1
-	:Done: 1
+	:Done: 0
 	:END:
 
-*** DONE Only show the examples when the answer is shown
-	Right now the colocations are shown when the new problem is
-	made.  Instead, show the colocations when the answer is shown
-	for the problem.  Before that a blank screen.
-
-	:PROPERTIES:
-	:JellyBeans: 1
-	:Done: 1
-	:END:
-
-*** DONE Show appropriate examples when the question is shown
-	When the question is shown, show the English side of the
-	examples when it is a meaning question, Japanese side of the
-	example when it is a Kanji question or reading question.  
-	Fill in the rest of	the details when the answer is shown.
-
-	:PROPERTIES:
-	:JellyBeans: 1
-	:Done: 1
-	:END:
-
-*** DONE Move to Ruby 1.9
-	Currently using Ruby 1.8.7 Move to Ruby 1.9.  This needs to 
-	be done before Debian moves over to Ruby 1.9 as its standard.
-
-	:PROPERTIES:
-	:JellyBeans: 3
-	:Done: 3
-	:END:
-
-*** DONE Chinese Mode for Kanji Popup
-	Create an option to go to Chinese mode that presents the
-	chinese readings rather than the Japanese readings for
-	the chinese characters.  Note that this only works for
-	traditional (not simplified) characters.
-
-	:PROPERTIES:
-	:JellyBeans: 1
-	:Done: 1
-	:END:
-
-*** DONE Ability to load CC-CEDICT dictionary in Chinese mode
-	If the Chinese mode option is set, use a Chinese dictionary
-	parser to read CC-CEDICT dictionaries.  In this mode, you
-	can hover over traditional (not simplified) characters
-	to look up chinese words using the dictionary popup.
-	You can also search for and add entries in Add Vocab
-	and Edit Vocab windows.
-
-	:PROPERTIES:
-	:JellyBeans: 2
-	:Done: 2
-	:END:
-
-*** DONE Add Load Path for dictionaries [2/2]
-	Create a load path for the dictionaries that prioritizes
-	directories where the dictionaries might be.  Add /usr/share/edict
-	to the end of the load path and remove the special configuration
-	for Debian. This will allow Debian users to install their
-	own edict dictionary if they don't want to use the old one
-	in Debian.  This feature is necessary so that we don't have to
-	jump through hoops to find the cedictionary in Debian.
-
-	- [X] Make sure to use File.join rather than "/" in all paths
-    - [X] Refactor Icon into it's own class to abstract load paths
-
-	:PROPERTIES:
-	:JellyBeans: 1
-	:Done: 1
-	:END:
-
-*** DONE Show busy cursor when initially loading file
-	There's a brief pause when the file load mechanism loads
-	the file before it is parsed.  Switch the mouse cursor to the
-	busy cursor and switch it back again when the file is finished
-	loading. Calling this one finished even though the grab handle
-	on the vpane for the ProblemDisplay doesn't show the correct
-	cursor.  The entry areas in the ModifyVocabulary windows also
-	don't work, but fixing it would mean rewriting the whole class,
-	which is something I want to do at a later date.
-
-	:PROPERTIES:
-	:JellyBeans: 1
-	:Done: 1
-	:END:
-
-*** DONE Add ~/.jldrill to the load path
-	Add the .jldrill in the home directory (if it is set) to the
-	beginning of the load path.  This will allow the user to manually
-	override the dictionaries if they want.
-
-	:PROPERTIES:
-	:JellyBeans: 1
-	:Done: 1
-	:END:
-
-*** DONE Replace Tanaka corpus with Tatoeba example sentences
-	Tatoeba is the replacesment for the Tanaka corpus upstream.
-	There are 3 CSV files now -- One for collocations, one
-	for sentence type and one for the old Tanaka B line information.
-	Read in the Japanese collocations and Tanaka B line information
-	in Japanese mode.
-
-	:PROPERTIES:
-	:JellyBeans: 2
-	:Done: 2
-	:END:
-
-*** DONE Read Chinese collocations from Tatoeba example sentence
-	In Chinese mode, read and select the Chinese collocations.
-
-	:PROPERTIES:
-	:JellyBeans: 2
-	:Done: 2
-	:END:
-
-*** DONE Search dictionary for tratitional equivalent of simplified kanji
-	When using the kanji popup, if you put the cursor over a simplified
-	charater, no information is brought to the front.  Search the
-	dictionary for words with the simplified character, if one is
-	found, use the traditional kanji stored in the word as the kanji
-	to search.
-
-	:PROPERTIES:
-	:JellyBeans: 1
-	:Done: 1
-	:END:
-
-*** DONE Fix kanji listing in the edit search window
-*** DONE Add Copyright information for Tatoeba database
-*** DONE Remove Tanaka data files from distribution
-*** DONE Fix Options picture
-*** TODO Document Forgotten statistics
-*** DONE Investigate Lintian failure (lintian bug???)
-  After investigating, I'm pretty sure it's a lintian bug.
-
-* Finished -- Version 5.1
-
-This is a packaging release.  However, I have added a single
-feature because I needed it for my own study.
-
-Unlike previous releases, 0.5.1 will be released as a stable release.
-For all platforms, installing ruby (with rubygems) and typing "gem
-install jldrill" will install jldrill and all its dependencies.  On
-On Linux, there will be a debian package.  Both gems and debian packages 
-will be submitted to the appropriate people so that it is easy to install.
-Unfortunately, unless I can get a Mac, there will be no Mac
-installation.
-
-*** DONE Forget items that are too old
-   Sometimes when you haven't used the app for a long time items
-   get very old.  Their reviewRate becomes large.  This is not
-   a problem in itself, but when you start to review items they
-   will have a short duration.  If the reviewRate is something like
-   10x, then it might take 50 days until we rereview a new item.
-   Therefore make a new set of items called Forgetten.  Review
-   Items that have a reviewRate higher than some threshold (4???)
-   are moved to the Forgetten set.  Forgetten set items work just like
-   the Review set items except that are introduced like New set
-   items.  So this means the user gets Review set items until they
-   get 90% right.  Then they get Forgetten set items.  Once an expired
-   set item is reviewed, it goes back into the Review set.  After
-   all the Forgetten set items are finished, then we go back to showing
-   New set items.  This gives priority to actively reviewed items
-   without losing the valuable sorting of old items.
-   There is an option for setting the threshold.  If the threshold
-   is 0 (default) then no items are forgotten.
-
-   :PROPERTIES:
-   :JellyBeans: 2
-   :Done: 2
-   :END:
-
-*** DONE Reorganize Options UI
-	The UI is ugly and disorganized for the Options window.
-	Organize the options so that they have a grouping that makes
-	sense and try to visually improve the look.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 1
-   :END:
-
-*** DONE Put Gem in official repository [5/5]
-    - [X] Make dependencies for gtk2
-    - [X] Push to official repositories
-    - [X] Test on Linux and Windows to make sure it installs properly
-    - [X] Update documentation for Windows install
-    - [X] Document potential problems with debian and gem coexistance.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 1
-   :END:
-
-*** DONE Update Dictionaries
-	Update the EDict and Tanaka corpus dictionaries to the
-	latest version.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 1
-   :END:
-
-*** DONE Switch between kanji and vocab popups
-	Make it so that you can switch between the kanji and vocab
-    popups without having to move the mouse in between.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 1
-   :END:
-
-*** DONE Improve Debian build
-	The Debian build system was not being done the "Debian way".
-	Modify it so that it it lintian clean and build a source
-	package.
-	
 * Backlog
 
 These items are ideas that may or may not make it into
