@@ -31,6 +31,10 @@ module JLDrill::Gtk
             end
         end
 
+        def clear
+            hintBox.clear
+        end
+
         def newProblem(problem)
             super(problem)
             update(problem)

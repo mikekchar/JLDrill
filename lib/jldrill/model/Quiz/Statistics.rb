@@ -86,12 +86,12 @@ module JLDrill
         end
 
         # Get the appropriate LevelStat object for this item
-        def getLevel(item)
-            return @levels[Counter.getLevel(item)]
+        def getLevel(item, threshold)
+            return @levels[Counter.getLevel(item, threshold)]
         end
 
-        def recordReviewRate(item)
-            @reviewRateSum += item.schedule.reviewRate
+        def recordReviewRate(item, threshold)
+            @reviewRateSum += item.schedule(threshold).reviewRate
         end
 
         def reviewBin
@@ -113,29 +113,29 @@ module JLDrill
         def currentReviewRate
             retVal = 1.0
             if size > 0
-                rate = reviewBin[0].schedule.reviewRate
+                rate = reviewBin[0].schedule(2).reviewRate
                retVal = ((rate * 100).round).to_f / 100
             end
             retVal
         end
 
-        def statsTable
+        def statsTable(threshold)
             dCounter = DurationCounter.new
 
             reviewBin.each do |item|
-                dCounter.count(item)
+                dCounter.count(item, threshold)
             end
             return dCounter
         end
         
-        def correct(item)
+        def correct(item, threshold)
             if item.bin != @binNumber
                 return
             end
             @correct += 1
             @reviewed += 1
-            recordReviewRate(item)
-            level = getLevel(item)
+            recordReviewRate(item, threshold)
+            level = getLevel(item, threshold)
             if !level.nil?
                 level.correct
             end
@@ -144,14 +144,14 @@ module JLDrill
             calculateConfidence(true)
         end
 
-        def incorrect(item)
+        def incorrect(item, threshold)
             if item.bin != @binNumber
                 return
             end
             @incorrect += 1
             @reviewed += 1
-            recordReviewRate(item)
-            level = getLevel(item)
+            recordReviewRate(item, threshold)
+            level = getLevel(item, threshold)
             if !level.nil?
                 level.incorrect
             end

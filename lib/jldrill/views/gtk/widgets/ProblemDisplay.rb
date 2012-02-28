@@ -93,6 +93,14 @@ module JLDrill::Gtk
                 @popupFactory.closePopup
             end
         end
+
+        def clear
+            @popupFactory.closePopup
+            @problem = nil
+            @question.clear(nil)
+            @answer.clear(nil)
+            adjustSizeForQuestion
+        end
         
         def newProblem(problem)
             @popupFactory.closePopup

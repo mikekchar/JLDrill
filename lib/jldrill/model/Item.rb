@@ -103,9 +103,9 @@ module JLDrill
         end
 
         # Return the schedule for the Spaced Repetition Drill
-        def schedule
+        def schedule(threshold)
             problemStatus = @status.select("ProblemStatus")
-            return problemStatus.firstSchedule
+            return problemStatus.firstSchedule(threshold)
         end
 
         # UpdateAll the schedules
@@ -135,11 +135,6 @@ module JLDrill
             problemStatus.setScores(value)     
         end
 
-        def setLevels(value)
-            problemStatus = @status.select("ProblemStatus")
-            problemStatus.setLevels(value)     
-        end
-
         def allCorrect
             problemStatus = @status.select("ProblemStatus")
             problemStatus.allCorrect     
@@ -150,9 +145,20 @@ module JLDrill
             problemStatus.allIncorrect     
         end
 
-        def problem
+        def allReset
             problemStatus = @status.select("ProblemStatus")
-            return problemStatus.firstProblem
+            problemStatus.resetAll
+            itemStats.reset
+        end
+
+        def problem(threshold)
+            problemStatus = @status.select("ProblemStatus")
+            return problemStatus.firstProblem(threshold)
+        end
+
+        def level(threshold)
+            problemStatus = @status.select("ProblemStatus")
+            return problemStatus.currentLevel(threshold)
         end
 
         def itemStats

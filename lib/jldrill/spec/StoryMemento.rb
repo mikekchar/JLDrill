@@ -31,6 +31,7 @@ module JLDrill
         def setup(type)
             @app = JLDrill::Fakes::App.new(type, JLDrill::MainContext)
             @mainContext = @app.mainContext
+            @mainContext.inTests = true
             @mainView = @mainContext.peekAtView
         end
 

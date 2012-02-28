@@ -14,8 +14,8 @@ module JLDrill
 	        @quiz = Quiz.new
 	        @sampleQuiz = SampleQuiz.new
 	        vocab = @sampleQuiz.sampleVocab
-	        item = @quiz.contents.add(vocab, 4)
-	        @quiz.currentProblem = ReadingProblem.new(item)
+	        item = @quiz.contents.add(vocab, Strategy.reviewSetBin)
+	        @quiz.currentProblem = ReadingProblem.new(item, item.schedule(2))
 	        @strategy = @quiz.strategy
 	    end
 	    
@@ -24,24 +24,24 @@ module JLDrill
 	        @strategy.status.should be_eql("     0%")
 	    end
 	    
-	    it "should increment the statistics if correct in bin 4" do
-	        @quiz.currentProblem.item.bin.should be(4)
-	        @strategy.reviewStats.accuracy.should be(0)
+	    it "should increment the statistics if correct in review Set" do
+	        @quiz.currentProblem.item.bin.should eql(Strategy.reviewSetBin)
+	        @strategy.reviewStats.accuracy.should eql(0)
 	        @strategy.correct(@quiz.currentProblem.item)
-	        @strategy.reviewStats.accuracy.should be(100)
+	        @strategy.reviewStats.accuracy.should eql(100)
 	    end
 
-	    it "should decrement the statistics if incorrect in bin 4" do
-	        @quiz.currentProblem.item.bin.should be(4)
-	        @strategy.reviewStats.accuracy.should be(0)
+	    it "should decrement the statistics if incorrect in review Set" do
+	        @quiz.currentProblem.item.bin.should eql(Strategy.reviewSetBin)
+	        @strategy.reviewStats.accuracy.should eql(0)
 	        @strategy.correct(@quiz.currentProblem.item)
-	        @strategy.reviewStats.accuracy.should be(100)
+	        @strategy.reviewStats.accuracy.should eql(100)
 	        @strategy.incorrect(@quiz.currentProblem.item)
-	        @strategy.reviewStats.accuracy.should be(50)	        
+	        @strategy.reviewStats.accuracy.should eql(50)	        
 	    end
 	    
 	    it "should use the contents from the quiz" do
-	        @strategy.contents.should be(@quiz.contents)
+	        @strategy.contents.should eql(@quiz.contents)
 	    end
 
         # Adds a sample vocabulary to a bin in a position and returns the item
@@ -54,208 +54,219 @@ module JLDrill
 	    
 	    it "should only pick unseen items" do
 	        1.upto(9) do |i|
-	            test_addItem(4, i)
+	            test_addItem(Strategy.reviewSetBin, i)
     	    end
-    	    @strategy.findUnseen(4).should be(0)
-    	    @quiz.contents.bins[4][0].schedule.seen = true
-    	    @strategy.findUnseen(4).should be(1)
-    	    @quiz.contents.bins[4][1].schedule.seen = true
-    	    @strategy.findUnseen(4).should be(2)
+    	    @strategy.findUnseenIndex(Strategy.reviewSetBin).should eql(0)
+    	    @quiz.contents.bins[Strategy.reviewSetBin][0].schedule(2).seen = true
+    	    @strategy.findUnseenIndex(Strategy.reviewSetBin).should eql(1)
+    	    @quiz.contents.bins[Strategy.reviewSetBin][1].schedule(2).seen = true
+    	    @strategy.findUnseenIndex(Strategy.reviewSetBin).should eql(2)
     	    0.upto(9) do |i|
-        	    @quiz.contents.bins[4][i].schedule.seen = true
+        	    @quiz.contents.bins[Strategy.reviewSetBin][i].schedule(2).seen = true
             end
             # When they are all seen, it should wrap
-    	    @strategy.findUnseen(4).should be(0)
+    	    @strategy.findUnseenIndex(Strategy.reviewSetBin).should eql(0)
     	    # And set all the rest to unseen
-    	    @quiz.contents.bins[4].contents[1..9].all? do |item|
-    	        item.schedule.seen == false
-    	    end.should be(true)
+    	    @quiz.contents.bins[Strategy.reviewSetBin].contents[1..9].all? do |item|
+    	        item.schedule(2).seen == false
+    	    end.should eql(true)
 	    end
 	    
-	    it "should demote bin 0 items to bin 0 and reset the level to 0" do
-	        # Demoting bin 0 items is non-sensical, but it should do
+	    it "should demote new set items to new set and reset the level to 0" do
+	        # Demoting new set items is non-sensical, but it should do
 	        # something sensible anyway.
-	        item = test_addItem(0, 1)
+	        item = test_addItem(Strategy.newSetBin, 1)
 	        @strategy.demote(item)
-	        item.bin.should be(0)
-	        item.schedule.level.should be(0)
+	        item.bin.should eql(Strategy.newSetBin)
+	        item.schedule(2).level.should eql(0)
 	    end
 
-	    it "should demote other items to bin 1 and reset the level to 0" do
-	        item = test_addItem(1, 1)
+	    it "should demote other items to the working set and reset the level to 0" do
+	        item = test_addItem(Strategy.workingSetBin, 1)
 	        @strategy.demote(item)
-	        item.bin.should be(1)
-	        item.schedule.level.should be(0)
+	        item.bin.should eql(Strategy.workingSetBin)
+	        item.schedule(2).level.should eql(0)
 
-	        item = test_addItem(2, 2)
-	        item.schedule.level = 1
+	        item = test_addItem(Strategy.workingSetBin, 2)
+	        item.schedule(2).level = 1
 	        @strategy.demote(item)
-	        item.bin.should be(1)
-	        item.schedule.level.should be(0)
+	        item.bin.should eql(Strategy.workingSetBin)
+	        item.schedule(2).level.should eql(0)
 
-	        item = test_addItem(3, 3)
-	        item.schedule.level = 2
+	        item = test_addItem(Strategy.workingSetBin, 3)
+	        item.schedule(2).level = 2
 	        @strategy.demote(item)
-	        item.bin.should be(1)
-	        item.schedule.level.should be(0)
+	        item.bin.should eql(Strategy.workingSetBin)
+	        item.schedule(2).level.should eql(0)
 
-	        item = test_addItem(4, 4)
-	        item.schedule.level = 2
+	        item = test_addItem(Strategy.reviewSetBin, 4)
+	        item.schedule(2).level = 2
 	        @strategy.demote(item)
-	        item.bin.should be(1)
-	        item.schedule.level.should be(0)
+	        item.bin.should eql(Strategy.workingSetBin)
+	        item.schedule(2).level.should eql(0)
 	    end
 	    
 	    it "should be able to create problems of the correct level" do
+            @quiz.options.promoteThresh = 1
+
 	        item1 = Item.new(@sampleQuiz.sampleVocab)
-	        item1.schedule.level = 0
-	        item1.bin = 1
+            item1.quiz = @quiz
+	        item1.bin = Strategy.workingSetBin
+            problemStatus = item1.status.select("ProblemStatus")
+            problemStatus.checkSchedules
+            problemStatus.findScheduleForLevel(1).should_not eql(nil)
+            item1.level(1).should eql(1)
+
 	        item2 = Item.new(@sampleQuiz.sampleVocab)
-	        item2.schedule.level = 1
-	        item2.bin = 2
-	        item3 = Item.new(@sampleQuiz.sampleVocab)
-	        item3.schedule.level = 2
-	        item3.bin = 3
+            item2.quiz = @quiz
+	        item2.bin = Strategy.workingSetBin
+            problemStatus = item2.status.select("ProblemStatus")
+            problemStatus.checkSchedules
+            problemStatus.findScheduleForLevel(2).should_not eql(nil)
+            @quiz.strategy.correct(item2)
+            item2.level(1).should eql(2)
+	        
+#            item3 = Item.new(@sampleQuiz.sampleVocab)
+#	        item3.bin = Strategy.workingSetBin
+#            item3.scheduleAll
+#            item1.setScores(0)
+#            item3.level(1).should eql(0)
             
             problem1 = @strategy.createProblem(item1)
             problem2 = @strategy.createProblem(item2)
-            problem3 = @strategy.createProblem(item3)
-            problem1.should be_a_kind_of(ReadingProblem)
-            problem2.should be_a_kind_of(KanjiProblem)
-            problem3.should be_a_kind_of(MeaningProblem)
+#            problem3 = @strategy.createProblem(item3)
+#            problem1.should be_a_kind_of(ReadingProblem)
+            problem1.should be_a_kind_of(KanjiProblem)
+            problem2.should be_a_kind_of(MeaningProblem)
 	    end
     
         it "should be able to tell if the working set is full" do
             @quiz.options.introThresh = 5
-            @strategy.workingSetFull?.should be(false)
-	        test_addItem(1, -1)
-            @strategy.workingSetFull?.should be(false)
-	        test_addItem(2, -1)
-            @strategy.workingSetFull?.should be(false)
-	        test_addItem(3, -1)
-            @strategy.workingSetFull?.should be(false)
-	        test_addItem(2, -1)
-            @strategy.workingSetFull?.should be(false)
+            @strategy.workingSetFull?.should eql(false)
+	        test_addItem(Strategy.workingSetBin, -1)
+            @strategy.workingSetFull?.should eql(false)
+	        test_addItem(Strategy.workingSetBin, -1)
+            @strategy.workingSetFull?.should eql(false)
+	        test_addItem(Strategy.workingSetBin, -1)
+            @strategy.workingSetFull?.should eql(false)
+	        test_addItem(Strategy.workingSetBin, -1)
+            @strategy.workingSetFull?.should eql(false)
             0.upto(10) do
-                test_addItem(0, -1)
-                test_addItem(4, -1)
+                test_addItem(Strategy.newSetBin, -1)
+                test_addItem(Strategy.reviewSetBin, -1)
     	    end
-            @strategy.workingSetFull?.should be(false)
-            test_addItem(1, -1)
-            @strategy.workingSetFull?.should be(true)
+            @strategy.workingSetFull?.should eql(false)
+            test_addItem(Strategy.workingSetBin, -1)
+            @strategy.workingSetFull?.should eql(true)
         end
         
         it "should be able to tell if the review set needs reviewing" do
             @quiz.options.introThresh = 5
             # There are only review set items.  So we should review.
-            @strategy.shouldReview?.should be(true)
+            @strategy.shouldReview?.should eql(true)
             
-            item = test_addItem(1, -1)
+            item = test_addItem(Strategy.workingSetBin, -1)
             # Now there is a working set item, and we don't have enough items
             # in the review set, so we should not review
-            @strategy.shouldReview?.should be(false)
+            @strategy.shouldReview?.should eql(false)
             # Make a total of 4 items in the review set
             0.upto(3) do
-                item = test_addItem(4, -1)
+                item = test_addItem(Strategy.reviewSetBin, -1)
             end
             # We have enough items, and we haven't learned the review items
             # to the required level, so we should review
-            @strategy.shouldReview?.should be(true)
+            @strategy.shouldReview?.should eql(true)
             0.upto(9) do
-                @strategy.reviewStats.correct(item)
+                @strategy.reviewStats.correct(item, 5)
             end
             # We don't start the countdown until we have reviewed 10 items
             # so we should continue to review
-            @strategy.shouldReview?.should be(true)
+            @strategy.shouldReview?.should eql(true)
             0.upto(9) do
-                @strategy.reviewStats.correct(item)
+                @strategy.reviewStats.correct(item, 5)
             end            
             # Now we know the items well enough, and we have reviewed
             # enough items, so we shouldn't review
-            @strategy.shouldReview?.should be(false)                        
+            @strategy.shouldReview?.should eql(false)                        
         end
 
         it "should not review if all the items in the review set are seen" do
             @quiz.options.introThresh = 5
             # There are only review set items.  So we should review.
-            @strategy.shouldReview?.should be(true)
+            @strategy.shouldReview?.should eql(true)
 
             # Set all the items in the review set to seen
-            @quiz.contents.bins[4].each do |item|
-                item.schedule.seen = true
+            @quiz.contents.bins[Strategy.reviewSetBin].each do |item|
+                item.schedule(5).seen = true
             end
-            @quiz.contents.bins[4].allSeen?.should be(true)
+            @strategy.allSeen?(@quiz.contents.bins[Strategy.reviewSetBin]).should eql(true)
 
             # Even though we've seen all the items in the Review set,
             # there are only review set items, so we should still review
-            @strategy.shouldReview?.should be(true)
+            @strategy.shouldReview?.should eql(true)
 
-            item = test_addItem(1, -1)
-            item.schedule.seen = true
+            item = test_addItem(Strategy.workingSetBin, -1)
+            item.schedule(5).seen = true
             # Now there is a working set item, and we don't have enough items
             # in the review set, so we should not review
-            @strategy.shouldReview?.should be(false)
+            @strategy.shouldReview?.should eql(false)
             # Make a total of 4 items in the review set
             0.upto(3) do
-                item = test_addItem(4, -1)
-                item.schedule.seen = true
+                item = test_addItem(Strategy.reviewSetBin, -1)
+                item.schedule(5).seen = true
             end
             # We have enough items, and we haven't learned the review items
             # to the required level, so we would ordinarily review
             # However, all the review set items are seen, so we won't
-            @strategy.shouldReview?.should be(false)
+            @strategy.shouldReview?.should eql(false)
         end
         
-        it "should increment the item's difficulty when an item is incorrect" do
-            item = test_addItem(4, -1)
+        it "should decrease the potential when an item is incorrect" do
+            item = test_addItem(Strategy.reviewSetBin, -1)
 	        @quiz.currentProblem = @strategy.createProblem(item)
-	        item.schedule.difficulty.should be(0)
+	        item.schedule(2).potential.should eql(432000)
 	        @strategy.incorrect(item)
-	        item.schedule.difficulty.should be(1)
+	        item.schedule(2).potential.should eql(345600)
         end
         
-        # Originally the difficulty counter would reset when the item was demoted
-        # from the 4th bin.  I decided this was a bad idea, so now it doesn't
-        # reset it.  If you want to change it back, make sure to think it out
-        # thoroughly so that we don't just go back and forth.
-        it "should not reset the difficulty when the item is demoted from the 4th bin" do
+        it "should decrease the potential 20% when demoted from the 4th bin" do
             @quiz.options.promoteThresh = 1
-            item = test_addItem(1, -1)
+            item = test_addItem(Strategy.workingSetBin, -1)
 	        @quiz.currentProblem = @strategy.createProblem(item)
 	        @strategy.incorrect(item)
 	        @strategy.incorrect(item)
 	        @strategy.incorrect(item)
-            item.bin.should be(1)	        
-	        item.schedule.difficulty.should be(3)
+            item.bin.should eql(Strategy.workingSetBin)	        
+	        item.schedule(1).potential.should eql(221184)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
-            item.bin.should be(4)	        
-	        item.schedule.difficulty.should be(3)
+            item.bin.should eql(Strategy.reviewSetBin)	        
+	        item.schedule(1).potential.should eql(221184)
 	        @strategy.incorrect(item)
-            item.bin.should be(1)	        	        
-	        item.schedule.difficulty.should be(4)        
+            item.bin.should eql(Strategy.workingSetBin)	        	        
+	        item.schedule(1).potential.should eql(176948)        
         end
         
         it "should reset the consecutive counter on an incorrect answer" do
             @quiz.options.promoteThresh = 1
-            item = test_addItem(1, -1)
+            item = test_addItem(Strategy.workingSetBin, -1)
 	        @quiz.currentProblem = @strategy.createProblem(item)
-            item.bin.should be(1)
+            item.bin.should eql(Strategy.workingSetBin)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
-	        @strategy.correct(item)
-            item.bin.should be(4)
+#	        @strategy.correct(item)
+            item.bin.should eql(Strategy.reviewSetBin)
             # we only increase consecutive in the review set
-            item.itemStats.consecutive.should be(1)
+            item.itemStats.consecutive.should eql(1)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
-            item.itemStats.consecutive.should be(4)
+            item.itemStats.consecutive.should eql(4)
 
             @strategy.incorrect(item)
-            item.bin.should be(1)
-            item.itemStats.consecutive.should be(0)
+            item.bin.should eql(Strategy.workingSetBin)
+            item.itemStats.consecutive.should eql(0)
         end
     end
 end

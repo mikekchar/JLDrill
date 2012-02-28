@@ -15,6 +15,10 @@ module JLDrill::Test
             @newProblem = false
 		end
 
+        def clear
+            # Nothing to do
+        end
+
 		def newProblem(problem)
             @newProblem = true
 		end	

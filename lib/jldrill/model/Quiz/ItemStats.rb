@@ -75,7 +75,7 @@ module JLDrill
         # The item was correctly remembered
         def correct
             @thinkingTimer.stop
-            if @item.bin == 4
+            if @item.bin == Strategy.reviewSetBin
                 @consecutive += 1
                 @timeLimit = @thinkingTimer.total
             end
@@ -112,7 +112,7 @@ module JLDrill
         end
 
         def inWorkingSet?
-            Strategy.workingSetBins.include?(@item.bin)
+            Strategy.workingSetBin.eql?(@item.bin)
         end
 
         def inReviewSet?

@@ -37,12 +37,12 @@ module JLDrill
             return low.seconds...high.seconds
         end
 
-        def Counter.getLevel(item)
+        def Counter.getLevel(item, threshold)
             level = 0
             found = false
             while (level <= 6) && !found
                 range = Counter.findRange(level)
-                if item.schedule.durationWithin?(range)
+                if item.schedule(threshold).durationWithin?(range)
                     found = true
                 else
                     level += 1
@@ -77,10 +77,10 @@ module JLDrill
     end
 
     class DurationCounter < Counter
-        def count(item)
+        def count(item, threshold)
             found = false
             0.upto(6) do |level|
-                if !found && item.schedule.durationWithin?(@ranges[level])
+                if !found && item.schedule(threshold).durationWithin?(@ranges[level])
                     @table[level] += 1
                     found = true
                 end

@@ -7,10 +7,10 @@ module JLDrill
 	describe Bin do
 	
 		before(:each) do
-        	@fileString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 3/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 4/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/]
+        	@fileString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 3/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 221184/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 4/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/Potential: 221184/]
             @strings = @fileString.split("\n")
             @strings.length.should be(4)
             @items = []
@@ -99,10 +99,10 @@ module JLDrill
 		end
 		
 		it "should output itself in save format" do
-		contentsString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 3/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 4/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/]
+		contentsString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 3/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 221184/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 4/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/Potential: 221184/]
 		    test_pushAll
 		    @bin.to_s.should eql("My name\n" + contentsString + "\n")
 		end
@@ -114,85 +114,10 @@ module JLDrill
 		    @bin.empty?.should be(false)
 		end
 		
-		it "should indicate if all the items in the bin have been seen" do
-		    bin = Bin.new("hi", 4)
-		    bin.empty?.should be(true)
-		    bin.allSeen?.should be(true)
-		    test_pushAll
-		    @bin.allSeen?.should be(false)
-		    @bin.each do |item|
-		        item.schedule.seen = true
-		    end
-		    @bin.allSeen?.should be(true)
-		end
-
-        it "should be able to find the first unseen item" do
-            bin = Bin.new("hi", 4)
-            bin.empty?.should be(true)
-            bin.firstUnseen.should be(-1)
-		    test_pushAll
-		    
-		    @bin.firstUnseen.should be(0)
-		    @bin.contents[0].schedule.seen = true
-		    @bin.contents[1].schedule.seen = true
-		    @bin.firstUnseen.should be(2)
-		    @bin.each do |item|
-		        item.schedule.seen = true
-		    end
-            @bin.firstUnseen.should be(-1)
-        end
-        
-        it "should be able to set all the items to unseen" do
-            # First test the corner case of an empty bin
-            bin = Bin.new("hi", 4)
-            bin.empty?.should be(true)
-            bin.firstUnseen.should be(-1)
-            bin.setUnseen
-            bin.empty?.should be(true)
-            bin.firstUnseen.should be(-1)
-            bin.allSeen?.should be(true)
-           
-		    test_pushAll
-            @bin.firstUnseen.should be(0)
-		    @bin.each do |item|
-		        item.schedule.seen = true
-		    end
-            @bin.firstUnseen.should be(-1)
-            @bin.setUnseen
-            @bin.firstUnseen.should be(0)
-        end
-        
-        it "should be able to count the number of unseen items" do
-            bin = Bin.new("hi", 4)
-            bin.empty?.should be(true)
-            bin.numUnseen.should be(0)
-
-		    test_pushAll
-		    total = 4
-            @bin.numUnseen.should be(total)
-            @bin.each do |item|
-                item.schedule.seen = true
-                total -= 1
-                @bin.numUnseen.should be(total)
-            end
-        end
-        
-        it "should be able to find the nth unseen item in the bin" do
-            bin = Bin.new("hi", 4)
-            bin.empty?.should be(true)
-            bin.findUnseen(0).should be_nil
-
-		    test_pushAll
-		    @bin[0].schedule.seen = true
-		    @bin[2].schedule.seen = true
-		    @bin.findUnseen(0).should eql(@bin[1])
-		    @bin.findUnseen(1).should eql(@bin[3])
-        end
-        
         it "should be able to tell if an item exists in the bin" do
             test_pushAll
             @bin.exists?(@bin[0]).should be(true)
-            @bin.contain?(Vocabulary.create("/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 3/")).should be(false)
+            @bin.contain?(Vocabulary.create("/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 221184/")).should be(false)
         end
 	end
 end

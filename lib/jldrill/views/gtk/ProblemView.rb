@@ -42,6 +42,11 @@ module JLDrill::Gtk
             end
         end
 
+        def clear
+            super()
+            @problemDisplay.clear
+        end
+
 		def newProblem(problem)
             super(problem)
 		    @problemDisplay.newProblem(problem)

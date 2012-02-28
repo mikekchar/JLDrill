@@ -11,24 +11,24 @@ module JLDrill
     
         def initialize(quiz)
             @quiz = quiz
-            @reviewStats = Statistics.new(quiz, 4)
-            @forgottenStats = Statistics.new(quiz, 5)
+            @reviewStats = Statistics.new(quiz, Strategy.reviewSetBin)
+            @forgottenStats = Statistics.new(quiz, Strategy.forgottenSetBin)
         end
         
         def Strategy.newSetBin
             return 0
         end
 
-        def Strategy.workingSetBins
-            return 1..3
+        def Strategy.workingSetBin
+            return 1
         end
 
         def Strategy.reviewSetBin
-            return 4
+            return 2
         end
 
         def Strategy.forgottenSetBin
-            return 5
+            return 3
         end
         
         # Returns a string showing the status of the quiz with this strategy
@@ -60,18 +60,18 @@ module JLDrill
             @quiz.contents.bins[Strategy.newSetBin]
         end
         
-        def workingSetEmpty?
-            contents.rangeEmpty?(Strategy.workingSetBins)
-        end
-        
         # Returns the number of items in the working set
         def workingSetSize
-            contents.bins[1].length + contents.bins[2].length + contents.bins[3].length
+            contents.bins[Strategy.workingSetBin].length
         end
         
         # Returns true if the working set is not full
         def workingSetFull?
              workingSetSize >= options.introThresh
+        end
+
+        def workingSet
+            return contents.bins[Strategy.workingSetBin]
         end
         
         def reviewSet
@@ -93,6 +93,7 @@ module JLDrill
 
         # Sort the items according to their schedule
         def reschedule
+            t = options.introThresh
             # Check for legacy files that may have Kanji 
             # problems schedules but no kanji
             reviewSet.each do |x|
@@ -100,29 +101,29 @@ module JLDrill
             end
             # Sort the review set
             reviewSet.sort! do |x,y|
-                x.schedule.reviewLoad <=> y.schedule.reviewLoad
+                x.schedule(t).reviewLoad <=> y.schedule(t).reviewLoad
             end
             # Move old items to the forgotten set
             while ((options.forgettingThresh != 0.0) &&
                    (!reviewSet.empty?) && 
-                   (reviewSet[0].schedule.reviewRate >= options.forgettingThresh.to_f))
+                   (reviewSet[0].schedule(t).reviewRate >= options.forgettingThresh.to_f))
                 contents.moveToBin(reviewSet[0], Strategy.forgottenSetBin)
             end
             # Sort the forgotten set
             forgottenSet.sort! do |x,y|
-                x.schedule.reviewLoad <=> y.schedule.reviewLoad
+                x.schedule(t).reviewLoad <=> y.schedule(t).reviewLoad
             end
             # If the user changes the settings then we may have to
             # unforget some items
             while ((!forgottenSet.empty?) &&
                   ((options.forgettingThresh == 0.0) ||
-                   (forgottenSet.last.schedule.reviewRate < 
+                   (forgottenSet.last.schedule(t).reviewRate < 
                         options.forgettingThresh.to_f)))
                 contents.moveToBin(forgottenSet.last, Strategy.reviewSetBin)
             end
             # Sort the review set again
             reviewSet.sort! do |x,y|
-                x.schedule.reviewLoad <=> y.schedule.reviewLoad
+                x.schedule(t).reviewLoad <=> y.schedule(t).reviewLoad
             end
             
         end
@@ -148,41 +149,98 @@ module JLDrill
         def shouldReview?
             # if we only have review set items, or we are in review mode
             # then return true
-            if  (newSet.empty? && workingSetEmpty?) || (options.reviewMode)
+            if  (newSet.empty? && workingSet.empty?) || (options.reviewMode)
                 return true
             end
             
             !reviewSetKnown? && (reviewSetSize >= options.introThresh) && 
-                !(reviewSet.allSeen?)
+                !(allSeen?(reviewSet))
+        end
+
+        # Returns the number of unseen items in the bin
+        def numUnseen(bin)
+            total = 0
+            t = options.promoteThresh
+            bin.each do |item|
+                total += 1 if !item.schedule(t).seen
+            end
+            total
+        end
+        
+        # Returns true if all the items in the bin have been seen
+        def allSeen?(bin)
+            t = options.promoteThresh
+            bin.all? do |item|
+                item.schedule(t).seen?
+            end
         end
         
         # Return the index of the first item in the bin that hasn't been
+        # seen yet.  Returns -1 if there are no unseen items
+        def firstUnseen(bin)
+            index = 0
+            t = options.promoteThresh
+            # find the first one that hasn't been seen yet
+            while (index < bin.length) && bin[index].schedule(t).seen?
+                index += 1
+            end
+            
+            if index >= bin.length
+                index = -1
+            end
+            index
+        end
+        
+        # Return the nth unseen item in the bin
+        def findNthUnseen(bin, n)
+            retVal = nil
+            t = options.promoteThresh
+            if n < numUnseen(bin)
+                i = 0
+                0.upto(n) do |m|
+                    while bin[i].schedule(t).seen
+                        i += 1
+                    end
+                    if m != n
+                        i += 1
+                    end
+                end
+                retVal = bin[i]
+            end
+            retVal
+        end
+
+        # Sets the schedule of each item in the bin to unseen
+        def setUnseen(bin)
+            t = options.promoteThresh
+            bin.each do |item|
+                item.schedule(t).seen = false
+            end
+        end
+        
+        
+        # Return the index of the first item in the bin that hasn't been
         # seen yet.  If they have all been seen, reset the bin
-        def findUnseen(binNum)
+        def findUnseenIndex(binNum)
             bin = contents.bins[binNum]
             if bin.empty?
                 return -1
             end
 
-            if bin.allSeen?
-                bin.setUnseen
+            if allSeen?(bin)
+                setUnseen(bin)
             end
-            bin.firstUnseen            
+            firstUnseen(bin)
         end
         
-        # Returns a random unseen item.  Return nil if the range is empty.
+        # Returns a random unseen item.
         # Resets the seen status if all the items are already seen.
-        def randomUnseen(range)
-            if contents.rangeEmpty?(range)
-                return nil
+        def randomUnseen(bin)
+            if allSeen?(contents.bins[bin])
+                setUnseen(contents.bins[bin])
             end
-            if contents.rangeAllSeen?(range)
-                range.to_a.each do |bin|
-                    contents.bins[bin].setUnseen
-                end
-            end
-            index = rand(contents.numUnseen(range))
-            item = contents.findUnseen(index, range)
+            index = rand(numUnseen(contents.bins[bin]))
+            item = findNthUnseen(contents.bins[bin], index)
             item
         end
         
@@ -191,7 +249,7 @@ module JLDrill
             if options.randomOrder
                 index = rand(newSet.length)
             else
-                index = findUnseen(Strategy.newSetBin)
+                index = findUnseenIndex(Strategy.newSetBin)
             end
             if !(index == -1)
                 item = newSet[index]
@@ -216,7 +274,7 @@ module JLDrill
         
         # Get an item from the Working Set
         def getWorkingItem
-            randomUnseen(Strategy.workingSetBins)
+            randomUnseen(Strategy.workingSetBin)
         end
 
         # Get an item to quiz
@@ -248,34 +306,25 @@ module JLDrill
             item.itemStats.createProblem
             @reviewStats.startTimer(item.bin == Strategy.reviewSetBin)
             @forgottenStats.startTimer(item.bin == Strategy.forgottenSetBin)
-            # Drill at the scheduled level in the review and forgotten sets 
-            if (item.bin == Strategy.reviewSetBin) ||
-                (item.bin == Strategy.forgottenSetBin) 
-                problem = item.problem
-            else
-                # Otherwise drill for the specific bin
-                level = item.bin - 1
-                problem = ProblemFactory.create(level, item)
-            end
-            return problem
+            t = options.promoteThresh
+            return item.problem(t)
         end
 
         # Promote the item to the next level/bin
         def promote(item)
             if !item.nil?
-                item.setScores(0)
-                if item.bin < 3
-                    item.setLevels(item.bin)
-                    contents.moveToBin(item, item.bin + 1)
-                else
-                    if item.bin == 3
+                if item.bin == Strategy.newSetBin
+                    item.setScores(0)
+                    contents.moveToBin(item, Strategy.workingSetBin)
+                else 
+                    if item.bin == Strategy.workingSetBin
                         # Newly promoted items
                         item.itemStats.consecutive = 1
                         @reviewStats.learned += 1
                         @forgottenStats.learned += 1
                         item.scheduleAll
                     end
-                    # Put the item at the back of the bin
+                    # Put the item at the back of the reviewSet
                     contents.bins[item.bin].delete(item)
                     reviewSet.push(item)
                 end
@@ -286,37 +335,34 @@ module JLDrill
         def demote(item)
             if !item.nil?
                 item.demoteAll
-                if (item.bin != 0)
-                    contents.moveToBin(item, 1)
+                if (item.bin != Strategy.newSetBin)
+                    contents.moveToBin(item, Strategy.workingSetBin)
                 else
-                	# Demoting bin 0 items is non-sensical, but it should do
+                	# Demoting New Set items is non-sensical, but it should do
 	                # something sensible anyway.
-                    contents.moveToBin(item, 0)
+                    contents.moveToBin(item, Strategy.newSetBin)
                 end
             end
         end
 
         # Mark the item as having been reviewed correctly
         def correct(item)
-            @reviewStats.correct(item)
-            @forgottenStats.correct(item)
+            t = options.promoteThresh
+            @reviewStats.correct(item, t)
+            @forgottenStats.correct(item, t)
             item.itemStats.correct
-            if ((item.bin == Strategy.reviewSetBin) ||
-                (item.bin == Strategy.forgottenSetBin))
-                item.schedule.correct
+            item.schedule(t).correct
+            if (item.bin != Strategy.workingSetBin) ||
+                (item.level(t) >= 3)
                 promote(item)
-            else
-                item.allCorrect
-                if(item.schedule.score >= options.promoteThresh)
-                    promote(item)
-                end
             end
         end
 
         # Mark the item as having been reviewed incorrectly
         def incorrect(item)
-            @reviewStats.incorrect(item)
-            @forgottenStats.incorrect(item)
+            t = options.promoteThresh
+            @reviewStats.incorrect(item, t)
+            @forgottenStats.incorrect(item, t)
             item.allIncorrect
             item.itemStats.incorrect
             demote(item)
@@ -326,9 +372,9 @@ module JLDrill
         # set without any further training.  If it is already
         # in the review set, simply mark it correct.
         def learn(item)
-            if item.bin <= 3
+            if item.bin <= Strategy.workingSetBin
                 item.setScores(options.promoteThresh)
-                contents.moveToBin(item, 3)
+                contents.moveToBin(item, Strategy.reviewSetBin)
             end
             correct(item)
         end

@@ -3,6 +3,9 @@ require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
 require 'jldrill/model/Quiz/Strategy'
 require 'jldrill/model/Quiz/Schedule'
+require 'jldrill/views/test/MainWindowView'
+require 'jldrill/views/test/VBoxView'
+require 'jldrill/views/test/FileProgress'
 require 'jldrill/views/test/CommandView'
 require 'jldrill/views/test/ProblemView'
 require 'jldrill/views/test/QuizStatusView'
@@ -59,9 +62,9 @@ module JLDrill::ScheduleItems
         end
 
         def promoteIntoReviewSet(item)
-            item.bin.should eql(JLDrill::Strategy.workingSetBins.begin)
+            item.bin.should eql(JLDrill::Strategy.workingSetBin)
 
-            JLDrill::Strategy.workingSetBins.each do
+            0.upto(1) do
                 item.itemStats.should_not be_inNewSet
                 item.itemStats.should be_inWorkingSet
                 quiz.correct
@@ -71,14 +74,14 @@ module JLDrill::ScheduleItems
         end
 
         def createAndPromote(item)
-            item.schedule.should_not be_scheduled
+            item.schedule(1).should_not be_scheduled
             quiz.createProblem(item)
-            item.schedule.should_not be_scheduled
+            item.schedule(1).should_not be_scheduled
             promoteIntoWorkingSet(item)
-            item.schedule.should_not be_scheduled
+            item.schedule(1).should_not be_scheduled
             promoteIntoReviewSet(item)
-            item.schedule.should be_scheduled
-            item.schedule.difficulty.should eql(0)
+            item.schedule(1).should be_scheduled
+            item.schedule(1).potential.should eql(432000)
         end
 
         def inDays(duration)
@@ -93,60 +96,64 @@ module JLDrill::ScheduleItems
             schedule.lastReviewed = Time::now() - inSeconds(days)
         end
 
-        def scheduleShouldBe(item, days, range=10)
-            gap = inDays(item.schedule.duration)
+        def scheduleShouldBe(schedule, days, range=10)
+            gap = inDays(schedule.duration)
             # There's a random +- range variation in the schedule
             gap.should be_within(days.to_f / range.to_f).of(days)
         end
 
-        it "should schedule difficulty 0 items 5 days from now" do
+        it "should schedule new items 5 days from now" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item, 5.0, 10)
+            scheduleShouldBe(item.schedule(1), 5.0, 10)
         end
 
         it "should schedule new items from now even if there are scheduled items" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item, 5.0, 10)
+            scheduleShouldBe(item.schedule(1), 5.0, 10)
 
             # Get a new item
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item, 5.0, 10)
+            scheduleShouldBe(item.schedule(1), 5.0, 10)
         end
 
 	it "should set a maximum of the duration * 2 + 25%" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item, 5.0, 10)
-            orig = item.schedule.duration
-            max = item.schedule.maxInterval
+            scheduleShouldBe(item.schedule(1), 5.0, 10)
+            orig = item.schedule(1).duration
+            max = item.schedule(1).maxInterval
             max.should eql(JLDrill::Schedule.backoff(orig.to_f * 1.25))
+
             # Make the item last reviewed 20 days ago
-            item.schedule.lastReviewed = setDaysAgoReviewed(item.schedule, 20.0)
-            item.schedule.calculateInterval.should eql(max)
-            item.schedule.correct
-            scheduleShouldBe(item, (max.to_f / 24 / 60 / 60), 10)
+            schedule = item.schedule(1)
+            schedule.lastReviewed = setDaysAgoReviewed(schedule, 20.0)
+            schedule.calculateInterval.should eql(max)
+            schedule.correct
+            scheduleShouldBe(schedule, (max.to_f / 24 / 60 / 60), 10)
         end
 
         it "should schedule a minimum of the last duration" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item, 5.0, 10)
-            orig = item.schedule.duration
+            schedule = item.schedule(1)
+            scheduleShouldBe(schedule, 5.0, 10)
+            orig = schedule.duration
             # Make the item last reviewed 1 day ago
-            item.schedule.lastReviewed = setDaysAgoReviewed(item.schedule, 1.0)
+            schedule.lastReviewed = setDaysAgoReviewed(schedule, 1.0)
+            schedule.elapsedTime.should eql(inSeconds(1.0))
 
-            newInterval = item.schedule.calculateInterval
+            newInterval = schedule.calculateInterval
             newInterval.should eql(orig)
 
-            item.schedule.correct
+            schedule.correct
             # The original schedule was 5 days +- 10%.  The new schedule
             # since it is going from now should be the same, but with
             # another +-10% variance.
             newInDays = inDays(newInterval)
-            scheduleShouldBe(item, newInDays, 10)
+            scheduleShouldBe(schedule, newInDays, 10)
         end
 
         it "should vary the backoff depending on the previous duration" do
@@ -171,41 +178,74 @@ module JLDrill::ScheduleItems
         it "should be able to sort the review set items according to schedule" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item, 5.0, 10)
+            schedule = item.schedule(1)
+            scheduleShouldBe(schedule, 5.0, 10)
             problemStatus = item.status.select("ProblemStatus")
-            problemStatus.schedules.size.should be(1)
-            meaningSchedule = item.schedule
-            inDays(meaningSchedule.duration).should be_within(0.5).of(5.0)
-            item.hasKanji?.should be(true)
-            kanjiSchedule = JLDrill::Schedule.new(@item)
-            problemStatus.addScheduleType("KanjiProblem", kanjiSchedule)
-            problemStatus.schedules.size.should be(2)
-            kanjiSchedule.duration.should eql(-1)
-            item.schedule.should be(meaningSchedule)
-            kanjiSchedule.duration = inSeconds(6.0)
-            kanjiSchedule.markReviewed
-            item.schedule.should be(meaningSchedule)
-            setDaysAgoReviewed(kanjiSchedule, 10.0)
-            item.schedule.should be(kanjiSchedule)
+            # By default a meaning and kanji problem schedule are created
+            # if the item has kanji (which is should)
+            item.hasKanji?.should eql(true)
+            problemStatus.schedules.size.should eql(2)
+
+            # Everything has been promoted so the current level
+            # should be 3 and there should be no associated schedule for it
+            problemStatus.currentLevel(1).should eql(3)
+            problemStatus.findScheduleForLevel(3).should eql(nil)
+
+            # Both of the schedules should be between 4.5 and 5.5 days
+            inDays(problemStatus.schedules[0].duration).should be_within(0.5).of(5.0)
+            inDays(problemStatus.schedules[1].duration).should be_within(0.5).of(5.0)
+
+            # Pretend we reviewed this a day ago so that the schedules will
+            # sort properly
+            setDaysAgoReviewed(problemStatus.schedules[0], 1.0)
+            setDaysAgoReviewed(problemStatus.schedules[1], 1.0)
+
+            schedule1 = problemStatus.firstSchedule(1)
+            index1 = problemStatus.schedules.find_index(schedule1)
+
+            # Make this one 6.0 days in duration so that the second schedule
+            # will be shorter than this one.
+            schedule1.duration = inSeconds(6.0)
+
+            schedule2 = problemStatus.firstSchedule(1)
+            index2 = problemStatus.schedules.find_index(schedule2)
+
+            # These should be different problem types
+            index2.should_not eql(index1)
 
             item2 = newSet[0]
             createAndPromote(item2)
-            scheduleShouldBe(item2, 5.0, 10)
+            scheduleShouldBe(item2.schedule(1), 5.0, 10)
 
+            # New items are always placed at the back of the reviewSet
             reviewSet[0].should be(item)
             reviewSet[1].should be(item2)
 
+            # Pretend we reviewed this an hour ago so that the schedules will
+            # sort properly (You have to do it twice to get both
+            # scheduled problem types)
+            setDaysAgoReviewed(item2.schedule(1), 1.0/24.0)
+            setDaysAgoReviewed(item2.schedule(1), 1.0/24.0)
+
+            # If we reschedule
             quiz.reschedule
 
+            # Both problem types in item were reviewed a day ago, but
+            # item2 has waited 0 time, so item will be prioritized over
+            # item2.
             reviewSet[0].should be(item)
             reviewSet[1].should be(item2)
 
-            setDaysAgoReviewed(item2.schedule, 50.0)
+            # Now we pretend that one of the problem types in item 2
+            # was reviewed 50 days ago and reschedule
+            setDaysAgoReviewed(item2.schedule(1), 50.0)
             quiz.reschedule
 
+            # Because one of the problem types has waited a
+            # very long time, item2 is sorted to the front.
             reviewSet[0].should be(item2)
             reviewSet[1].should be(item)
 
         end
-    end
+   end
 end

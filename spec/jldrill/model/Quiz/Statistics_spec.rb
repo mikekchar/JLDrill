@@ -26,9 +26,9 @@ module JLDrill
 	        item = Item.new
             item.bin = 4
 	        @statistics.accuracy.should be(0)
-	        @statistics.correct(item)
+	        @statistics.correct(item, 2)
 	        @statistics.accuracy.should be(100)
-	        @statistics.incorrect(item)
+	        @statistics.incorrect(item, 2)
 	        @statistics.accuracy.should be(50)
 	    end
 	    
@@ -37,7 +37,7 @@ module JLDrill
             item.bin = 4
 	        results = [30, 51, 65, 75, 82, 87, 90, 93]
 	        0.upto(7) do |i|
-    	        @statistics.correct(item)
+    	        @statistics.correct(item, 2)
     	        @statistics.estimate.should be(results[i])
     	    end
 	    end
@@ -46,14 +46,14 @@ module JLDrill
 	        item = Item.new
             item.bin = 4
 	        @statistics.lastTen.size.should be(0)
-	        @statistics.correct(item)
+	        @statistics.correct(item, 2)
 	        @statistics.lastTen.size.should be(1)
 	        @statistics.lastTen[0].should be(true)
-	        @statistics.incorrect(item)
+	        @statistics.incorrect(item, 2)
 	        @statistics.lastTen.size.should be(2)
 	        @statistics.lastTen[1].should be(false)
 	        0.upto(20) do
-	            @statistics.correct(item)
+	            @statistics.correct(item, 2)
 	        end
 	        @statistics.lastTen.size.should be(10)
 	    end
@@ -62,11 +62,11 @@ module JLDrill
 	        item = Item.new
             item.bin = 4
 	        @statistics.recentAccuracy.should be(0)
-	        @statistics.correct(item)
+	        @statistics.correct(item, 2)
 	        @statistics.recentAccuracy.should be(100)
-	        @statistics.incorrect(item)
+	        @statistics.incorrect(item, 2)
 	        @statistics.recentAccuracy.should be(50)
-	        @statistics.correct(item)
+	        @statistics.correct(item, 2)
 	        @statistics.recentAccuracy.should be(66)
 	    end
 	    
@@ -82,9 +82,9 @@ module JLDrill
 	        finished = false
 	        while (i < trials) && !finished do
 	            if test_Rand(percent)
-    	            @statistics.correct(item)
+    	            @statistics.correct(item, 2)
     	        else
-    	            @statistics.incorrect(item)
+    	            @statistics.incorrect(item, 2)
     	        end
     	        i += 1
     	        finished = (@statistics.confidence > requiredConfidence)

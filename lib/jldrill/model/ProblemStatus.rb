@@ -52,15 +52,33 @@ module JLDrill
             end
         end
 
-        # Returns the schedule that should be addressed first
-        def firstSchedule
-            retVal = @schedules.min do |x,y|
-                x.reviewLoad <=> y.reviewLoad
+        def findScheduleForLevel(level)
+            return findSchedule(ProblemFactory.lookup(level))
+        end
+
+        def currentLevel(threshold)
+            retVal = 3
+            2.downto(0) do |i|
+                s = findScheduleForLevel(i)
+                if !s.nil? && (s.score < threshold)
+                    retVal = i
+                end
             end
-            # If there is no schedule, then create a meaning problem schedule
-            if retVal.nil?
-                retVal = Schedule.new(@item)
-                addScheduleType("MeaningProblem", retVal)
+            return retVal
+        end
+
+        # Returns the schedule that should be addressed first
+        def firstSchedule(threshold)
+            retVal = findScheduleForLevel(currentLevel(threshold))
+            if retVal.nil? 
+                retVal = @schedules.min do |x,y|
+                    x.reviewLoad <=> y.reviewLoad
+                end
+                # If there is no schedule, then create a meaning problem schedule
+                if retVal.nil?
+                    retVal = Schedule.new(@item)
+                    addScheduleType("MeaningProblem", retVal)
+                end
             end
             return retVal
         end
@@ -79,8 +97,8 @@ module JLDrill
                 type = ProblemFactory.lookup(level)
                 if findSchedule(type).nil?
                     # If it can't find the correct type of schedule,
-                    # duplicate the first one it find and add it.
-                    addScheduleType(type, firstSchedule.clone)
+                    # duplicate the first one it finds and add it.
+                    addScheduleType(type, firstSchedule(2).clone)
                 end
             end 
         end
@@ -97,6 +115,12 @@ module JLDrill
         def scheduleAll
             @schedules.each do |schedule|
                 schedule.schedule
+            end
+        end
+
+        def resetAll
+            @schedules.each do |schedule|
+                schedule.reset
             end
         end
 
@@ -151,12 +175,6 @@ module JLDrill
             end
         end
 
-        def setLevels(value)
-            @schedules.each do |schedule|
-                schedule.level = value
-            end
-        end
-
         def allCorrect
             @schedules.each do |schedule|
                 schedule.correct
@@ -169,15 +187,15 @@ module JLDrill
             end            
         end
 
-        def firstProblem
+        def firstProblem(threshold)
             # Every time we make a problem we should check to make sure
             # that correct schedules have been build.  The user may have
             # changed the options.
             checkSchedules
-            sched = firstSchedule
+            sched = firstSchedule(threshold)
             index = @schedules.find_index(sched)
             level = ProblemFactory.parse(@types[index])
-            return ProblemFactory.create(level, @item)
+            return ProblemFactory.create(level, @item, sched)
         end
 
         def to_s

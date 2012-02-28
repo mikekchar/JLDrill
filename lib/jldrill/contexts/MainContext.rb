@@ -124,7 +124,7 @@ module JLDrill
 		end
 
         def parseCommandLineOptions
-            if ARGV.size == 1
+            if !@inTests && ARGV.size == 1
                 openFile(ARGV[0])
             end
         end

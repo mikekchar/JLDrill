@@ -3,6 +3,7 @@ require 'jldrill/model/Contents'
 require 'jldrill/model/Quiz/Quiz'
 require 'jldrill/model/items/Vocabulary'
 require 'jldrill/spec/SampleQuiz'
+require 'jldrill/model/Quiz/Strategy'
 
 module JLDrill
 
@@ -13,27 +14,20 @@ module JLDrill
 	        @quiz = @sampleQuiz.quiz
 	    end
 	    
-	    it "should indicate if a range of bins has contents" do
-	        quiz = Quiz.new
-	        item = Item.new(@sampleQuiz.sampleVocab)
-	        quiz.contents.addItem(item, 4)
-	        quiz.contents.rangeEmpty?(4..4).should be(false)
-        end
-                
         it "should add items to the last position if the position is set to -1" do
         	item = Item.new(@sampleQuiz.sampleVocab)
             item.position = -1
-	        @quiz.contents.bins[4].length.should be(2)
-	        @quiz.contents.addItem(item, 4)
-	        @quiz.contents.bins[4].length.should be(3)
+	        @quiz.contents.bins[Strategy.reviewSetBin].length.should be(2)
+	        @quiz.contents.addItem(item, Strategy.reviewSetBin)
+	        @quiz.contents.bins[Strategy.reviewSetBin].length.should be(3)
 	        # This is the 5th item counting from 0.  There are already 2
-	        # items in bin 4, so it should put it at the end.
-	        @quiz.contents.bins[4][2].position.should be(4)
+	        # items in the review bin, so it should put it at the end.
+	        @quiz.contents.bins[Strategy.reviewSetBin][2].position.should be(4)
 	    end
 	    
 	    it "should be able to print out the status" do
-            @quiz.contents.bins[4][1].schedule.scheduled?.should be(true)
-    	    @quiz.contents.status.should eql("New: 1 Review: 2 Working: 0, 1, 0")
+            @quiz.contents.bins[Strategy.reviewSetBin][1].schedule(2).scheduled?.should be(true)
+    	    @quiz.contents.status.should eql("New: 1 Review: 2 Working: 1")
 	    end
 	    
 	    def countSizes(sizes, range)
@@ -42,51 +36,6 @@ module JLDrill
 	            total += sizes[i]
 	        end
 	        total
-	    end
-	    
-	    it "should be able to count the unseen items in a range" do
-	        quiz = Quiz.new
-	        quiz.contents.numUnseen(0..4).should be(0)
-	        
-	        sizes = [0,0,0,0,0]
-	        0.upto(4) do |bin|
-	            1.upto(rand(10)) do |size| 
-                	item = Item.new(@sampleQuiz.sampleVocab)
-        	        quiz.contents.addItem(item, bin)
-        	        sizes[bin] = size
-        	    end
-    	    end
-    	    
-    	    quiz.contents.numUnseen(0..4).should be(countSizes(sizes, 0..4))
-    	    quiz.contents.numUnseen(0..0).should be(countSizes(sizes, 0..0))
-    	    quiz.contents.numUnseen(4..4).should be(countSizes(sizes, 4..4))
-    	    quiz.contents.numUnseen(2..3).should be(countSizes(sizes, 2..3))
-    	    quiz.contents.numUnseen(1..3).should be(countSizes(sizes, 1..3))
-	    end
-	    
-	    it "should be able to find the nth unseen item in the contents" do
-	        quiz = Quiz.new
-	        quiz.contents.numUnseen(0..4).should be(0)
-	        quiz.contents.findUnseen(4, 0..4).should be_nil
-
-	        0.upto(4) do |bin|
-	            1.upto(5) do |size| 
-                	item = Item.new(@sampleQuiz.sampleVocab)
-        	        quiz.contents.addItem(item, bin)
-        	    end
-    	    end
-    	    
-    	    quiz.contents.findUnseen(0, 0..0).should eql(quiz.contents.bins[0][0])
-    	    quiz.contents.findUnseen(0, 0..4).should eql(quiz.contents.bins[0][0])
-    	    quiz.contents.findUnseen(0, 4..4).should eql(quiz.contents.bins[4][0])
-    	    quiz.contents.findUnseen(4, 0..4).should eql(quiz.contents.bins[0][4])
-    	    quiz.contents.findUnseen(5, 0..4).should eql(quiz.contents.bins[1][0])
-    	    quiz.contents.findUnseen(4, 2..3).should eql(quiz.contents.bins[2][4])
-    	    quiz.contents.findUnseen(5, 2..3).should eql(quiz.contents.bins[3][0])
-    	    quiz.contents.findUnseen(12, 1..3).should eql(quiz.contents.bins[3][2])
-            quiz.contents.bins[1][3].schedule.seen = true
-    	    quiz.contents.findUnseen(12, 1..3).should eql(quiz.contents.bins[3][3])
-    	    quiz.contents.findUnseen(15, 1..3).should be_nil
 	    end
 	    
 	    it "should be able to add items to the contents only if they dont already exist" do
@@ -104,13 +53,15 @@ module JLDrill
 
             quiz2.loadFromString("testFile", @sampleQuiz.file)
             item = Item.new(@sampleQuiz.sampleVocab)
-            quiz2.contents.addItem(item, 2)
+            quiz2.contents.addItem(item, Strategy.reviewSetBin)
             quiz2.contents.length.should be(5)
-            quiz2.contents.bins[2][1].to_o.kanji.should eql(item.to_o.kanji)
+            quiz2.contents.bins[Strategy.reviewSetBin].length.should eql(3)
+            quiz2.contents.bins[Strategy.reviewSetBin][2].to_o.kanji.should eql(item.to_o.kanji)
 
 	        @quiz.contents.addContents(quiz2.contents)
 	        @quiz.contents.length.should be(5)
-            @quiz.contents.bins[2][1].to_o.kanji.should eql(item.to_o.kanji)
+            quiz2.contents.bins[Strategy.reviewSetBin].length.should eql(3)
+            @quiz.contents.bins[Strategy.reviewSetBin][2].to_o.kanji.should eql(item.to_o.kanji)
 	    end
     end
 end

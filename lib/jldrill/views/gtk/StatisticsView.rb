@@ -27,12 +27,13 @@ module JLDrill::Gtk
 		
 		def update(quiz)
 		    super(quiz)
-            reviewTable = quiz.strategy.reviewStats.statsTable
+            threshold = quiz.options.promoteThresh
+            reviewTable = quiz.strategy.reviewStats.statsTable(threshold)
 		    @statisticsWindow.updateReviewDuration(reviewTable)
 		    @statisticsWindow.updateReviewAccuracy(quiz.strategy.reviewStats)
 		    @statisticsWindow.updateReviewRate(quiz.strategy.reviewStats)
             
-            forgottenTable = quiz.strategy.forgottenStats.statsTable
+            forgottenTable = quiz.strategy.forgottenStats.statsTable(threshold)
 		    @statisticsWindow.updateForgottenDuration(forgottenTable)
 		    @statisticsWindow.updateForgottenAccuracy(quiz.strategy.forgottenStats)
 		    @statisticsWindow.updateForgottenRate(quiz.strategy.forgottenStats)

@@ -4,8 +4,8 @@ require 'jldrill/model/Problem'
 module JLDrill
     # Shows you the English and you guess the kanji and reading
     class MeaningProblem < Problem
-        def initialize(item)
-            super(item)
+        def initialize(item, schedule)
+            super(item, schedule)
             @level = 1
             @questionParts = ["definitions"]
             @answerParts = ["kanji", "reading", "hint"]
@@ -16,7 +16,7 @@ module JLDrill
         end
 
         def clone
-            value = MeaningProblem.new(item)
+            value = MeaningProblem.new(@item, @strategy)
             value.assign(self)
             return value
         end

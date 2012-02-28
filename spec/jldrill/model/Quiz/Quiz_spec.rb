@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'jldrill/model/Quiz/Quiz'
 require 'jldrill/spec/SampleQuiz'
+require 'jldrill/model/Quiz/Strategy'
 
 module JLDrill
 
@@ -16,14 +17,12 @@ module JLDrill
 		    @emptyQuiz.should_not be_nil
 		    
 		    @emptyQuiz.contents.should_not be_nil
-		    @emptyQuiz.contents.bins.length.should eql(6)
-		    @emptyQuiz.contents.bins[0].name.should eql("Unseen")
-		    @emptyQuiz.contents.bins[1].name.should eql("Poor")
-		    @emptyQuiz.contents.bins[2].name.should eql("Fair")
-		    @emptyQuiz.contents.bins[3].name.should eql("Good")
-		    @emptyQuiz.contents.bins[4].name.should eql("Excellent")
-            @emptyQuiz.contents.bins[5].name.should eql("Forgotten")
-		    @emptyQuiz.contents.to_s.should eql("Unseen\nPoor\nFair\nGood\nExcellent\nForgotten\n")
+		    @emptyQuiz.contents.bins.length.should eql(4)
+		    @emptyQuiz.contents.bins[0].name.should eql("New")
+		    @emptyQuiz.contents.bins[1].name.should eql("Working")
+		    @emptyQuiz.contents.bins[2].name.should eql("Review")
+            @emptyQuiz.contents.bins[3].name.should eql("Forgotten")
+		    @emptyQuiz.contents.to_s.should eql("New\nWorking\nReview\nForgotten\n")
 		end
 		
 		it "should load a file from memory" do
@@ -34,11 +33,10 @@ module JLDrill
 		    quiz.options.randomOrder.should eql(true)
 		    quiz.options.promoteThresh.should eql(4)
 		    quiz.options.introThresh.should eql(17)
-		    quiz.contents.bins[0].length.should eql(1)
-		    quiz.contents.bins[1].length.should eql(0)
-		    quiz.contents.bins[2].length.should eql(1)
-		    quiz.contents.bins[3].length.should eql(0)
-		    quiz.contents.bins[4].length.should eql(2)
+		    quiz.contents.bins[Strategy.newSetBin].length.should eql(1)
+		    quiz.contents.bins[Strategy.workingSetBin].length.should eql(1)
+		    quiz.contents.bins[Strategy.reviewSetBin].length.should eql(2)
+		    quiz.contents.bins[Strategy.forgottenSetBin].length.should eql(0)
 		end
 		
 		it "should save a file to a string" do
@@ -69,21 +67,20 @@ module JLDrill
 	    
 	    it "should be able to reset the contents" do
 	        @quiz.resetContents
-	        @quiz.contents.bins[0].length.should eql(3)
-	        @quiz.contents.bins[1].length.should eql(1)
-	        @quiz.contents.bins[2].length.should eql(0)
-	        @quiz.contents.bins[3].length.should eql(0)
-	        @quiz.contents.bins[4].length.should eql(0)
+	        @quiz.contents.bins[Strategy.newSetBin].length.should eql(3)
+	        @quiz.contents.bins[Strategy.workingSetBin].length.should eql(1)
+	        @quiz.contents.bins[Strategy.reviewSetBin].length.should eql(0)
+	        @quiz.contents.bins[Strategy.forgottenSetBin].length.should eql(0)
             string = allVocabString(@quiz)
 	        string.should eql(@sampleQuiz.allResetVocab + "\n")
 	    end
 
         it "should renumber the contents when resetting" do
             @quiz.resetContents
-            @quiz.contents.bins[0][0].position = 5
-            @quiz.contents.bins[0][1].position = 6
-            @quiz.contents.bins[0][2].position = 6
-            @quiz.contents.bins[1][0].position = 7
+            @quiz.contents.bins[Strategy.newSetBin][0].position = 5
+            @quiz.contents.bins[Strategy.newSetBin][1].position = 6
+            @quiz.contents.bins[Strategy.newSetBin][2].position = 6
+            @quiz.contents.bins[Strategy.workingSetBin][0].position = 7
             @quiz.options.randomOrder = false
             @quiz.resetContents
             # The first item will be drilled and therefore promoted to bin 1
@@ -95,12 +92,12 @@ module JLDrill
         end
 	    
 	    it "should be able to move an item from one bin to the other" do
-	        item = @quiz.contents.bins[0][0]
-	        @quiz.contents.moveToBin(item, 4)
-	        @quiz.contents.bins[0].length.should eql(0)
-	        @quiz.contents.bins[4].length.should eql(3)
-	        item.should be_equal(@quiz.contents.bins[4][2])
-	        item.bin.should eql(4)
+	        item = @quiz.contents.bins[Strategy.newSetBin][0]
+	        @quiz.contents.moveToBin(item, Strategy.reviewSetBin)
+	        @quiz.contents.bins[Strategy.newSetBin].length.should eql(0)
+	        @quiz.contents.bins[Strategy.reviewSetBin].length.should eql(3)
+	        item.should be_equal(@quiz.contents.bins[Strategy.reviewSetBin][2])
+	        item.bin.should eql(Strategy.reviewSetBin)
 	    end
 	    
         def test_problem(question, problem)
@@ -111,53 +108,36 @@ module JLDrill
 	        @quiz.answer.should eql(problem.answer)
         end
 
-	    def test_binOne(question)
-            # bin 1 items will always be reading problems
-            # because the level will always be 0
-            @quiz.currentProblem.item.schedule.level.should eql(0)
-            test_problem(question, 
-                         ReadingProblem.new(@quiz.currentProblem.item))
-            @quiz.currentProblem.item.itemStats.consecutive.should eql(0)
-	    end
-
         def test_level(question)
+            item = @quiz.currentProblem.item
+            schedule = item.schedule(@quiz.options.promoteThresh)
             case @quiz.currentProblem.requestedLevel
                 when 0
                     test_problem(question, 
-                                 ReadingProblem.new(@quiz.currentProblem.item)) 
+                                 ReadingProblem.new(item, schedule)) 
                 when 1
                     if(!@quiz.currentProblem.item.to_o.kanji.nil?)
                         test_problem(question, 
-                                     KanjiProblem.new(@quiz.currentProblem.item))
+                                     KanjiProblem.new(item, schedule))
                     else
                         test_problem(question, 
-                                     ReadingProblem.new(@quiz.currentProblem.item)) 
+                                     ReadingProblem.new(item, schedule)) 
                     end
                 when 2
-                    test_problem(question, MeaningProblem.new(@quiz.currentProblem.item)) 
+                    test_problem(question, MeaningProblem.new(item, schedule)) 
             else
 	             # This shouldn't ever happen.  Blow up.
 	             true.should eql(false) 
             end                
         end
-        
-	    def test_binTwo(question)
+       
+	    def test_workingSet(question)
             # The quiz depends on the level
             test_level(question)
             @quiz.currentProblem.item.itemStats.consecutive.should eql(0)
 	    end
 
-	    def test_binThree(question)
-            # The quiz depends on the level
-            test_level(question)
-            @quiz.currentProblem.item.itemStats.consecutive.should eql(0)
-	    end
-
-	    def test_binFour(question)
-	        # Since it's random, this might not always be hit.  But
-	        # if this test fails, it's definitely a bug!
-	        @quiz.currentProblem.requestedLevel.should_not eql(0)
-	        
+	    def test_reviewSet(question)
             # The quiz depends on the level
             test_level(question)
             # Level 4 items have consecutive of at least one
@@ -165,21 +145,17 @@ module JLDrill
 	    end
 	    
 	    def test_drill
-	        binZeroSize = @quiz.contents.bins[0].length
+	        newSetSize = @quiz.contents.bins[Strategy.newSetBin].length
 	        @quiz.drill
             question = @quiz.currentDrill
-	        if (binZeroSize - 1) == @quiz.contents.bins[0].length
+	        if (newSetSize - 1) == @quiz.contents.bins[Strategy.newSetBin].length
 	            # it was a bin 0 item which was promoted
-	            @quiz.currentProblem.item.bin.should eql(1)
-                test_binOne(question)
-	        elsif @quiz.currentProblem.item.bin == 1
-	            test_binOne(question)
-	        elsif @quiz.currentProblem.item.bin == 2
-	            test_binTwo(question)
-	        elsif @quiz.currentProblem.item.bin == 3
-	            test_binThree(question)
-	        elsif @quiz.currentProblem.item.bin == 4
-	            test_binFour(question)
+	            @quiz.currentProblem.item.bin.should eql(Strategy.workingSetBin)
+                test_workingSet(question)
+	        elsif @quiz.currentProblem.item.bin == Strategy.workingSetBin
+	            test_workingSet(question)
+	        elsif @quiz.currentProblem.item.bin == Strategy.reviewSetBin
+	            test_reviewSet(question)
 	        else
 	             # This shouldn't ever happen.  Blow up.
 	             true.should eql(false) 
@@ -190,7 +166,7 @@ module JLDrill
             consecutive = @quiz.currentProblem.item.itemStats.consecutive
             @quiz.correct
             bin = @quiz.currentProblem.item.bin
-            if bin == 4
+            if bin == Strategy.reviewSetBin
                 @quiz.currentProblem.item.itemStats.consecutive.should eql(consecutive + 1)
             else
                 @quiz.currentProblem.item.itemStats.consecutive.should eql(0)
@@ -215,33 +191,34 @@ module JLDrill
 	        test_initializeQuiz
 	        # Non random should pick the first object in the first bin
 	        # item gets promoted to the first bin immediately
-	        item = @quiz.contents.bins[1][0]
-	        @quiz.contents.bins[0].length.should eql(3)
-	        @quiz.contents.bins[1].length.should eql(1)
+	        item = @quiz.contents.bins[Strategy.workingSetBin][0]
+	        @quiz.contents.bins[Strategy.newSetBin].length.should eql(3)
+	        @quiz.contents.bins[Strategy.workingSetBin].length.should eql(1)
             test_problem(@quiz.currentProblem.question, 
-                         ReadingProblem.new(@quiz.currentProblem.item)) 
-	        @quiz.bin.should eql(1)
+                         KanjiProblem.new(@quiz.currentProblem.item, 
+                                           @quiz.currentProblem.item.schedule(@quiz.options.promoteThresh))) 
+	        @quiz.bin.should eql(Strategy.workingSetBin)
 	        @quiz.currentProblem.item.should be_equal(item)
 
             # Threshold is 1, so a correct answer should promote
             test_correct
         end
         
-        it "should eventually promote all items to bin 4" do
+        it "should eventually promote all items to review set" do
             test_initializeQuiz
             
-            # Because we don't test level 4 items until we get one working set 
+            # Because we don't test review set items until we get one working set 
             # of them, this should take exactly 12 iterations
             # However test_initializeQuiz now does a drill() so in the
             # first iteration we just need to do test_correct.
             test_correct
             i = 1
-            until (@quiz.contents.bins[4].length == 4) || (i > 12) do
+            until (@quiz.contents.bins[Strategy.reviewSetBin].length == 4) || (i > 12) do
                 i += 1
                 test_drill
                 test_correct
             end
-            i.should eql(12)
+            i.should eql(8)
         end
 
         it "should use the promote threshold when promoting" do
@@ -254,36 +231,45 @@ module JLDrill
             # first iteration we just need to do test_correct.
             test_correct
             i = 1
-            until (@quiz.contents.bins[4].length == 4) || (i > 24) do
+            until (@quiz.contents.bins[Strategy.reviewSetBin].length == 4) || (i > 24) do
                 i += 1
                 test_drill
                 test_correct
             end
-            i.should eql(24)
+            i.should eql(16)
         end
         
         it "should update the last reviewed status when the answer is made" do
             test_initializeQuiz
-            @quiz.currentProblem.item.schedule.lastReviewed.should be_nil
+            thresh = @quiz.options.promoteThresh
+            @quiz.currentProblem.item.schedule(thresh).lastReviewed.should be_nil
+            schedule1 = @quiz.currentProblem.item.schedule(thresh)
             test_correct
             test1 = @quiz.currentProblem.item
-            test1.schedule.lastReviewed.should_not be_nil
+            schedule1.lastReviewed.should_not be_nil
+
             # should get a new one
             test_drill
             test2 = @quiz.currentProblem.item
-            test2.schedule.lastReviewed.should be_nil
+            schedule2 = test2.schedule(thresh)
+            schedule2.lastReviewed.should be_nil
+
+            # Make it incorrect
             test_incorrect
-            @quiz.currentProblem.item.schedule.lastReviewed.should_not be_nil
+
+            schedule2.lastReviewed.should_not be_nil
+
             @quiz.resetContents
-            test1.schedule.lastReviewed.should be_nil
-            test2.schedule.lastReviewed.should be_nil
+            test1.schedule(thresh).lastReviewed.should be_nil
+            test2.schedule(thresh).lastReviewed.should be_nil
         end
         
-        it "should update the schedule correctly for bin 4 items" do
+        it "should update the schedule correctly for review set items" do
 	        @quiz.loadFromString("none", @sampleQuiz.file)
-	        item = @quiz.contents.bins[4][0]
+	        item = @quiz.contents.bins[Strategy.reviewSetBin][0]
 	        item.should_not be_nil
-            @quiz.currentProblem = MeaningProblem.new(item)
+            schedule = item.schedule(@quiz.options.promoteThresh)
+            @quiz.currentProblem = MeaningProblem.new(item, schedule)
             test_correct
             test_incorrect            
         end

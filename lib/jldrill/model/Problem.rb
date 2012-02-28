@@ -4,10 +4,10 @@ module JLDrill
     # Represents a single question/answer pair in a quiz
     class Problem
         attr_reader :item, :level, :requestedLevel,
-                    :questionParts, :answerParts
+                    :questionParts, :answerParts, :schedule
         attr_writer :requestedLevel
         
-        def initialize(item)
+        def initialize(item, schedule)
             @item = item
             @level = -1
             @requestedLevel = -1
@@ -16,6 +16,7 @@ module JLDrill
             @vocab = item.to_o
             @displayOnly = false
             @preview = false
+            @schedule = schedule
         end
 
         # Override in the concrete classes
@@ -80,7 +81,7 @@ module JLDrill
         def status
             retVal = "     "
             bin = @item.bin
-            if bin < 4
+            if bin < 2
                 if bin == 0
                     retVal += "New"
                 else
@@ -88,11 +89,11 @@ module JLDrill
                 end
             else
                 retVal += "+#{@item.itemStats.consecutive}"
-                if @item.schedule.reviewed?
-                    retVal += ", #{@item.schedule.reviewedDate}"
+                if @schedule.reviewed?
+                    retVal += ", #{@schedule.reviewedDate}"
                 end
             end
-            retVal += " --> #{@item.schedule.potentialScheduleInDays} days"
+            retVal += " --> #{@schedule.potentialScheduleInDays} days"
             return retVal
         end
 

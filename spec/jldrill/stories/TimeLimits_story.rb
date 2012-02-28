@@ -53,9 +53,9 @@ module JLDrill::ItemsHaveTimeLimits
         end
 
         def promoteIntoReviewSet(item)
-            item.bin.should eql(JLDrill::Strategy.workingSetBins.begin)
+            item.bin.should eql(JLDrill::Strategy.workingSetBin)
 
-            JLDrill::Strategy.workingSetBins.each do
+            0.upto(1) do
                 item.itemStats.should_not be_inNewSet
                 item.itemStats.should be_inWorkingSet
                 quiz.correct

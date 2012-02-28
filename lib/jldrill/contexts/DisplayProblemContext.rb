@@ -24,6 +24,10 @@ module JLDrill
                     super(context)
                 end
 
+                def clear
+                    # Should be overridden in the concrete class
+                end
+
                 def newProblem(problem)
                     # Should be overridden in the concrete class
                 end	
@@ -54,15 +58,21 @@ module JLDrill
                 self.removeView(@itemHints)
             end
 
+            # Clear the hints.  Used when there is no problem
+            def clear
+                @itemHints.clear
+                #define the rest in the concrete class
+            end
+
             # A new problem has been added
             def newProblem(problem)
-                itemHints.newProblem(problem)
+                @itemHints.newProblem(problem)
                 # Define the rest in the concrete class
             end	
 
             # The current problem has changed and needs updating
             def updateProblem(problem)
-                itemHints.updateProblem(problem)
+                @itemHints.updateProblem(problem)
                 # Define the rest in the concrete class
             end
 
@@ -130,10 +140,7 @@ module JLDrill
         end
 
         def loadUpdated(quiz)
-            # There isn't likely a new problem at this point, but this
-            # will clear the panes and update the status for the new
-            # quiz
-            newProblemUpdated(quiz.currentProblem)
+            @mainView.clear
         end
 
 		def newProblemUpdated(problem)

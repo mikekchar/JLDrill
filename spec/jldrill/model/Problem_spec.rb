@@ -79,7 +79,7 @@ module JLDrill
 		    @quiz = Quiz.new
 		    @vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item = @quiz.contents.add(@vocab, 0)
-		    @problem = Problem.new(@item)
+		    @problem = Problem.new(@item, @item.schedule(2))
         end
         
         it "should have a vocab associated with it" do
@@ -93,14 +93,14 @@ module JLDrill
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: /Score: 0/Level: 01/")
 		    @item1 = Item.new(@vocab1)
             @item1.quiz = @quiz
-		    @problem1 = Problem.new(@item1)
+		    @problem1 = Problem.new(@item1, @item.schedule(2))
             @problem1.should_not be_nil
             @problem1.evaluateAttribute("kanji").should eql("会う")
 
 		    @vocab2 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item2 = Item.new(@vocab2)
             @item2.quiz = @quiz
-		    @problem2 = Problem.new(@item2)
+		    @problem2 = Problem.new(@item2, @item.schedule(2))
             @problem2.should_not be_nil
             @problem2.evaluateAttribute("kanji").should eql("")
         end
@@ -109,14 +109,14 @@ module JLDrill
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item1 = Item.new(@vocab1)
             @item1.quiz = @quiz
-		    @problem1 = Problem.new(@item1)
+		    @problem1 = Problem.new(@item1, @item1.schedule(2))
             @problem1.should_not be_nil
             @problem1.evaluateAttribute("hint").should eql("No hints")
 
 		    @vocab2 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item2 = Item.new(@vocab2)
             @item2.quiz = @quiz
-		    @problem2 = Problem.new(@item2)
+		    @problem2 = Problem.new(@item2, @item2.schedule(2))
             @problem2.should_not be_nil
             @problem2.evaluateAttribute("hint").should eql("")
         end
@@ -125,7 +125,7 @@ module JLDrill
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item1 = Item.new(@vocab1)
             @item1.quiz = @quiz
-		    @problem1 = Problem.new(@item1)
+		    @problem1 = Problem.new(@item1, @item1.schedule(2))
             @problem1.should_not be_nil
             @problem1.evaluateAttribute("reading").should eql("あう")
         end
@@ -134,7 +134,7 @@ module JLDrill
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item1 = Item.new(@vocab1)
             @item1.quiz = @quiz
-		    @problem1 = Problem.new(@item1)
+		    @problem1 = Problem.new(@item1, @item1.schedule(2))
             @problem1.should_not be_nil
             @problem1.evaluateAttribute("definitions").should eql("to meet, to interview")
         end
@@ -143,7 +143,7 @@ module JLDrill
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item1 = Item.new(@vocab1)
             @item1.quiz = @quiz
-		    @problem1 = Problem.new(@item1)
+		    @problem1 = Problem.new(@item1, @item1.schedule(2))
             @problem1.should_not be_nil
             @problem1.evaluateAttribute("reading").should eql("")
         end
@@ -152,7 +152,7 @@ module JLDrill
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item1 = Item.new(@vocab1)
             @item1.quiz = @quiz
-		    @problem1 = Problem.new(@item1)
+		    @problem1 = Problem.new(@item1, @item1.schedule(2))
             @problem1.should_not be_nil
             @problem1.evaluateAttribute("definitions").should eql("")
         end
@@ -161,7 +161,7 @@ module JLDrill
 		    @vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item1 = Item.new(@vocab1)
             @item1.quiz = @quiz
-		    @problem1 = Problem.new(@item1)
+		    @problem1 = Problem.new(@item1, @item1.schedule(2))
 		    @vocab2 = Vocabulary.create("/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Position: 1/Score: 0/Level: 0/")
             @problem1.vocab = @vocab2
             @problem1.item.to_o.should eql(@vocab2)
@@ -170,35 +170,35 @@ module JLDrill
         it "should create a ReadingProblem for level 0" do
             vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    item1 = Item.new(vocab1)
-            problem1 = ProblemFactory.create(0, item1)
+            problem1 = ProblemFactory.create(0, item1, item1.schedule(2))
             problem1.should be_a_kind_of(ReadingProblem)
         end        
 
         it "should create a KanjiProblem for level 1" do
             vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 1/")
 		    item1 = Item.new(vocab1)
-            problem1 = ProblemFactory.create(1, item1)
+            problem1 = ProblemFactory.create(1, item1, item1.schedule(2))
             problem1.should be_a_kind_of(KanjiProblem)
         end        
 
         it "should create a MeaningProblem for level 2" do
             vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 2/")
 		    item1 = Item.new(vocab1)
-            problem1 = ProblemFactory.create(2, item1)
+            problem1 = ProblemFactory.create(2, item1, item1.schedule(2))
             problem1.should be_a_kind_of(MeaningProblem)
         end        
 
         it "should create a MeaningProblem for level 1 if there is no kanji" do
             vocab1 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 2/")
 		    item1 = Item.new(vocab1)
-            problem1 = ProblemFactory.create(1, item1)
+            problem1 = ProblemFactory.create(1, item1, item1.schedule(2))
             problem1.should be_a_kind_of(MeaningProblem)
         end        
 
         it "should create a ReadingProblem for unknown levels" do
             vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    item1 = Item.new(vocab1)
-            problem1 = ProblemFactory.create(-1, item1)
+            problem1 = ProblemFactory.create(-1, item1, item1.schedule(2))
             problem1.should be_a_kind_of(ReadingProblem)
         end        
         
@@ -212,19 +212,16 @@ module JLDrill
             i1 = createFakeItem(1)
             i2 = createFakeItem(2)
             i3 = createFakeItem(3)
-            i4 = createFakeItem(4)
             
-            problem1 = ProblemFactory.create(0, i1)
-            problem2 = ProblemFactory.create(0, i2)
-            problem3 = ProblemFactory.create(0, i3)
-            problem4 = ProblemFactory.create(0, i4)
+            problem1 = ProblemFactory.create(0, i1, i1.schedule(2))
+            problem2 = ProblemFactory.create(0, i2, i2.schedule(2))
+            problem3 = ProblemFactory.create(0, i3, i3.schedule(2))
 
             problem1.status.should eql("     1 --> 5.0 days")
-            problem2.status.should eql("     2 --> 5.0 days")
-            problem3.status.should eql("     3 --> 5.0 days")
-            problem4.status.should eql("     +0 --> 5.0 days")
-            problem4.item.schedule.markReviewed
-            problem4.status.should eql("     +0, Today --> 5.0 days")
+            problem2.status.should eql("     +0 --> 5.0 days")
+            problem3.status.should eql("     +0 --> 5.0 days")
+            problem2.item.schedule(2).markReviewed
+            problem2.status.should eql("     +0, Today --> 5.0 days")
         end
     end
 
@@ -234,7 +231,7 @@ module JLDrill
 		    @vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item = Item.new(@vocab)
             @item.quiz = @quiz
-		    @problem = ReadingProblem.new(@item)
+		    @problem = ReadingProblem.new(@item, @item.schedule(2))
             @problem.should_not be_nil
 		    @problem.level.should be(0)
             @problem.question.should eql("会う\nあう\nNo hints\n")
@@ -245,7 +242,7 @@ module JLDrill
 		    vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    item = Item.new(vocab)
             item.quiz = @quiz
-		    problem = ReadingProblem.new(item)
+		    problem = ReadingProblem.new(item, item.schedule(2))
             questionPane = QuestionReceiver.new(problem)
             
             questionPane.request
@@ -262,7 +259,7 @@ module JLDrill
 		    @vocab = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item = Item.new(@vocab)
             @item.quiz = @quiz
-		    @problem = ReadingProblem.new(@item)
+		    @problem = ReadingProblem.new(@item, @item.schedule(2))
             @problem.should_not be_nil
 		    @problem.level.should be(0)
             @problem.question.should eql("あう\n")
@@ -273,7 +270,7 @@ module JLDrill
 		    vocab = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    item = Item.new(vocab)
             item.quiz = @quiz
-		    problem = ReadingProblem.new(item)
+		    problem = ReadingProblem.new(item, item.schedule(2))
             questionPane = QuestionReceiver.new(problem)
             
             questionPane.request
@@ -292,7 +289,7 @@ module JLDrill
 		    @vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item = Item.new(@vocab)
             @item.quiz = @quiz
-		    @problem = KanjiProblem.new(@item)
+		    @problem = KanjiProblem.new(@item, @item.schedule(2))
             @problem.should_not be_nil
 		    @problem.level.should be(2)
             @problem.question.should eql("会う\n")
@@ -306,7 +303,7 @@ module JLDrill
 		    @vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item = Item.new(@vocab)
             @item.quiz = @quiz
-		    @problem = MeaningProblem.new(@item)
+		    @problem = MeaningProblem.new(@item, @item.schedule(2))
             @problem.should_not be_nil
 		    @problem.level.should be(1)
             @problem.question.should eql("to meet, to interview\n")

@@ -69,7 +69,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
         it "should display a problem when a file is loaded" do
             Story.setup(JLDrill::Test)
             Story.start
-            Story.view.should_receive(:newProblem).exactly(2).times
+            Story.view.should_receive(:newProblem)
             Story.loadQuiz
             Story.shutdown
         end
@@ -77,7 +77,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
         it "should refresh the display when the current vocab has been edited" do
             Story.setup(JLDrill::Test)
             Story.start
-            Story.view.should_receive(:newProblem).exactly(2).times
+            Story.view.should_receive(:newProblem)
             Story.view.should_receive(:updateProblem).exactly(1).times
             Story.loadQuiz
             Story.mainContext.quiz.currentProblem.should_not be_nil
@@ -88,12 +88,16 @@ module JLDrill::QuestionAndAnswerAreDisplayed
 #        it "should show the answer when the user says so"
         
         it "should display each of the items in the problem" do
+            # Note: receive() is called for each part of the problem/answer
+            # that is to be printed.  So it will be called once for each of
+            # kanji, reading and meaning. Wether it is in the problem
+            # are answer depends on the problem type
             Story.setup(JLDrill::Gtk)
             Story.start
-            Story.view.problemDisplay.question.should_receive(:receive).exactly(2).times
+            Story.view.problemDisplay.question.should_receive(:receive)
             # loadQuiz will also start a drill, triggering the display
             Story.loadQuiz
-            Story.view.problemDisplay.answer.should_receive(:receive)
+            Story.view.problemDisplay.answer.should_receive(:receive).exactly(2).times
             Story.view.showAnswer
             Story.shutdown
         end
@@ -129,7 +133,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
             Story.setup(JLDrill::Test)
             Story.start
             Story.view.itemHints.should_not be_nil
-            Story.view.itemHints.should_receive(:newProblem).exactly(2).times
+            Story.view.itemHints.should_receive(:newProblem)
             Story.loadQuiz
             Story.shutdown
         end

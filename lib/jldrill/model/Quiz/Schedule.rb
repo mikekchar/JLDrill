@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'jldrill/model/Duration'
+require 'jldrill/model/Quiz/Strategy'
 
 module JLDrill
 
@@ -17,19 +18,21 @@ module JLDrill
         LASTREVIEWED_RE = /^LastReviewed: (.*)/
         # Note: ScheduledTime is deprecated
         SCHEDULEDTIME_RE = /^ScheduledTime: (.*)/
+        # Note: Difficulty is deprecated
         DIFFICULTY_RE = /^Difficulty: (.*)/
+        POTENTIAL_RE = /^Potential: (.*)/
         DURATION_RE = /^Duration: (.*)/
-        
+       
         SECONDS_PER_DAY = 60 * 60 * 24
-        MAX_ADDITIONAL_TIME = 4 * SECONDS_PER_DAY
+        DEFAULT_POTENTIAL = 5 * SECONDS_PER_DAY
 
         # Note: ScheduledTime is deprecated
         attr_reader :name, :item, :score, :level, 
                     :lastReviewed, :scheduledTime,
-                    :seen, :numIncorrect
+                    :seen, :potential
         attr_writer :item, :score, :level,
                     :lastReviewed, :scheduledTime,
-                    :seen, :numIncorrect
+                    :seen, :potential
 
 
         def initialize(item)
@@ -40,7 +43,7 @@ module JLDrill
             # scheduledTime is deprecated
             @scheduledTime = nil
             @seen = false
-            @numIncorrect = 0
+            @potential = Schedule.defaultPotential
             @item = item
             @duration = Duration.new
         end
@@ -57,11 +60,15 @@ module JLDrill
                     @lastReviewed = Time.at($1.to_i)
                 when SCHEDULEDTIME_RE
                     # scheduledTime is deprecated
-                    if @item.bin == 4
+                    if @item.bin == Strategy.reviewSetBin
                         @scheduledTime = Time.at($1.to_i)
                     end
                 when DIFFICULTY_RE
-                    @numIncorrect = $1.to_i
+                    # Difficulty is deprecated convert to potential schedule
+                    @potential = (Schedule.difficultyScale($1.to_i) *
+                                  Schedule.defaultPotential).to_i 
+                when POTENTIAL_RE
+                    @potential = $1.to_i
                 when DURATION_RE
                     @duration = Duration.parse($1)
             else # Not something we understand
@@ -86,8 +93,12 @@ module JLDrill
             # scheduledTime is deprecated
             @scheduledTime = schedule.scheduledTime
             @seen = schedule.seen
-            @numIncorrect = schedule.numIncorrect
+            @potential = schedule.potential
             @duration.seconds = schedule.duration
+        end
+
+        def Schedule.defaultPotential
+            return DEFAULT_POTENTIAL
         end
 
         def duration=(seconds)
@@ -126,7 +137,7 @@ module JLDrill
             @scheduledTime = nil
             @score = 0
             @seen = false
-            @numIncorrect = 0
+            @potential = DEFAULT_POTENTIAL
             @duration = Duration.new
         end
         
@@ -144,42 +155,25 @@ module JLDrill
             ((interval.to_f / 10) - rand(interval.to_f / 5)).to_i 
         end
 
-        # This is the interval the item will have when it it first
-        # promoted into the Review Set.  
-        #
-        # It is a sliding scale based on difficulty.  If the user 
-        # has never gotten the item incorrect, then the interval 
-        # will be 5.0.  For each time the get it wrong, it moves 
-        # closer to 0.
-        def intervalFromDifficulty(diff)
-            if diff <= 5
-                SECONDS_PER_DAY +
-                    (MAX_ADDITIONAL_TIME * (1.0 - (diff.to_f / 5.0))).to_i
-            else
-                scale = diff - 5
-                current = 0.0
-                1.upto(scale) do |x|
-                    current = current + (1 - current).to_f / 10.0
-                end
-                (SECONDS_PER_DAY * (1.0 - current)).to_i
+        # This is used for old files.  It calculates the scale to
+        # multiply the potential scale with based on the difficulty.
+        # It drops geometrically 20% of the remaining
+        # amount for each level of difficulty.
+        def Schedule.difficultyScale(diff)
+            retVal = 1.0
+            0.upto(diff - 1) do
+                retVal = retVal - (0.2 * retVal)
             end
+            return retVal
         end
 
-        # Calculate the difficulty from the interval.  This is used
-        # to reset the difficulty of an item based on past performance.
-        def difficultyFromInterval(interval)
-            # to deal with corrupt files where the review times are screwed up
-            if interval <= 0
-                return 50
-            end
-            i = 0
-            while interval < intervalFromDifficulty(i)
-                i += 1
-            end
-
-            return i
+        # Reduce the potential scale by 20% of it's current value
+        # This should be called every time a question is guessed wrong
+        # in the working set
+        def reducePotential
+            @potential = @potential - (0.2 * @potential).to_i
         end
-      
+
         # Return the the new interval after backing off
         def Schedule.backoff(interval)
             sixMonths = Duration.new
@@ -203,15 +197,13 @@ module JLDrill
         # for the next review.
         #
         # Calculates the interval for the item.  For newly
-        # promoted items, the schedule will be the interval based on 
-        # difficulty.  
+        # promoted items, it will be the potential schedule
         # For the rest it is based on the actual amount of time since 
         # the last review. A reducing backoff algorithm computes the
         # multiple.
 	    # To avoid increasing the gap too much, a maximum of
 	    # twice the previous duration plus 25% is used.
         def calculateInterval
-            interval = intervalFromDifficulty(difficulty)
             # If it is scheduled, then that means it isn't 
             # a newly promoted item
             if scheduled?
@@ -225,23 +217,12 @@ module JLDrill
                 else
                     interval = @duration.seconds
                 end
+            else
+                interval = @potential 
             end
-            interval
+            return interval
         end
         
-        def recalculateDifficulty
-            # If it's scheduled, then it isn't a newly promoted item
-            # Set the difficulty based on how long the person was
-            # able to go since the last review.
-            if scheduled?
-                elapsed = elapsedTime
-                diff = difficultyFromInterval(elapsed)
-                if diff < @numIncorrect
-                    @numIncorrect = diff
-                end
-            end
-        end
-
         # Schedule the item for review
         def schedule(int = -1)
             if int < 0
@@ -265,15 +246,9 @@ module JLDrill
             @level = 0
         end
         
-        # Return the difficulty of the item.  Right now that is
-        # the number of times it was incorrect.
-        def difficulty
-            @numIncorrect
-        end
-        
         # Mark the item as incorrect.
         def incorrect
-            @numIncorrect += 1
+            reducePotential
             unschedule
             markReviewed
             @score = 0
@@ -281,8 +256,10 @@ module JLDrill
 
         # Mark the item as correct.
         def correct
-            if @item.bin == 4
-                recalculateDifficulty
+            if @item.bin == Strategy.reviewSetBin
+                if @potential < elapsedTime
+                    @potential = elapsedTime
+                end
                 schedule
             end
             markReviewed
@@ -401,7 +378,7 @@ module JLDrill
             if scheduled?
                 retVal += "/Duration: #{scheduleDuration.to_i}"
             end
-            retVal += "/Difficulty: #{difficulty}"
+            retVal += "/Potential: #{@potential}"
             retVal
         end
     end

@@ -52,7 +52,7 @@ iteration to finish as scheduled.
 #+BEGIN: columnview :maxlevel 1 :id local
 | ITEM            | Total | Done | Percent | Current | Needed |
 |-----------------+-------+------+---------+---------+--------|
-| * Version 0.6.1 |     1 |    0 |     0.0 |    0.00 |   0.00 |
+| * Version 0.6.1 |    13 |    1 |     7.7 |    0.00 |   0.03 |
 #+TBLFM: @2$4=($3/$2)*100;%.1f::@2$5=$3/($PROP_CurrentDate - $PROP_StartDate);%.2f::@2$6=$2/($PROP_EndDate - $PROP_StartDate);%.2f
 #+END
 
@@ -63,33 +63,47 @@ the task.
 
 ** Current Items
 
-*** TODO To something fun
-	I like fun.
+*** DONE Increase Interval for relearned items
+	New items start with a potential schedule of 5 days.
+	Reviewed items have a potential schedule equal to the
+	amount of time that passed since their last test.
+	Every time the user gets the item wrong the potential
+	schedule is decreased by 20% of it's current value.
 
-	:PROPERTIES:
-	:JellyBeans: 1
-	:Done: 0
-	:END:
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 1
+   :END:
 
-* Backlog
+*** TODO Remove levels from the working set
+	Remove the levels from the working set items.  Instead create
+	schedules for the working set items the same way that
+	they are created for the review set.  Sort the working set
+	by percentage of potential schedule waited after every 
+	insertion/schedule change.  The initial potential schedule
+	is 20 seconds +- 10% for each problem type.  When a problem
+	type has been successfully guessed the correct number of
+	times, it is given a review set schedule.  When all problem
+	types have been given review set schedules, the item is
+	promoted to the review set.  The schedules it had in the
+	working set are retained.  If the user gets a problem
+	type wrong, then ALL the problem types for the item have
+	their schedule set to 10 seconds +- 10%.
 
-These items are ideas that may or may not make it into
-an upcoming development version.  They are organized loosely
-by how important I think they are (the most important is
-first).  Simply being on this list is no guarantee that
-I will implement it.  However, items near the top are very
-likely to appear in the next release or two.  If you have
-feedback on this list, or its order, please email me.
+	- [ ] Make reading problems valid in working set
+    - [ ] Get rid of having to pass the threshold around
 
-** Items
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 0
+   :END:
 
-*** TODO Ability to switch between Japanese and Chinese mode
-	When when one of the dictionaries is loaded and you load a file
-	that uses the other language, the previous dictionary remains.
-	It should not use it in the other language.  If the new language
-	dictionary is set to autoload, it should autoload, replacing the
-	previous dictionary in memory.  However, if a new language dictionary
-	is not loaded, the previous dictionary should not be removed.
+*** TODO Modify promotion strategy
+	When learning/relearning, we actually want to try to
+	forget the item that we are learning in order to activate
+	the spacing effect.  We want to select a speed of review
+	such that we forget until we can't forget any longer.
+	The question is how to determine this speed.
 
 *** TODO Allow users to update their drills
    A user can update a drill by appending the new version to their drill.
@@ -106,12 +120,30 @@ feedback on this list, or its order, please email me.
    :Done: 0
    :END:
 
+*** TODO New Drill Splash Screen
+   Create a splash screen explaining that this is a new drill and
+   the system is in Preview mode.  Press N to start
+
+   :PROPERTIES:
+   :JellyBeans: 1
+   :Done: 0
+   :END:
+
 *** TODO Personalized Directories
 	Create a configuration directory that contains the users configuration
 	for JLDrill.
 
 	:PROPERTIES:
 	:JellyBeans: 2
+	:Done: 0
+	:END:
+
+*** TODO Global Options
+	Allow the user to set global options.  This will be saved in an
+	options file in the search path.
+
+	:PROPERTIES:
+	:JellyBeans: 1
 	:Done: 0
 	:END:
 
@@ -132,6 +164,27 @@ feedback on this list, or its order, please email me.
 	:JellyBeans: 2
 	:Done: 0
 	:END:
+
+*** TODO Ability to switch between Japanese and Chinese mode
+	When when one of the dictionaries is loaded and you load a file
+	that uses the other language, the previous dictionary remains.
+	It should not use it in the other language.  If the new language
+	dictionary is set to autoload, it should autoload, replacing the
+	previous dictionary in memory.  However, if a new language dictionary
+	is not loaded, the previous dictionary should not be removed.
+
+
+* Backlog
+
+These items are ideas that may or may not make it into
+an upcoming development version.  They are organized loosely
+by how important I think they are (the most important is
+first).  Simply being on this list is no guarantee that
+I will implement it.  However, items near the top are very
+likely to appear in the next release or two.  If you have
+feedback on this list, or its order, please email me.
+
+** Items
 
 *** TODO Need a mechanism for publishing warnings and errors.
    Warnings and errors must be displayed to the user in a
@@ -165,15 +218,6 @@ feedback on this list, or its order, please email me.
    show the first item in preview mode.  This allows the user to
    update the options, or to save the quiz before selecting the first
    problem.
-
-   :PROPERTIES:
-   :JellyBeans: 1
-   :Done: 0
-   :END:
-
-*** TODO New Drill Splash Screen
-   Create a splash screen explaining that this is a new drill and
-   the system is in Preview mode.  Press N to start
 
    :PROPERTIES:
    :JellyBeans: 1

@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'jldrill/model/Quiz/Quiz'
 require 'jldrill/model/items/Vocabulary'
 require 'jldrill/Version'
 
@@ -29,15 +30,13 @@ Review Meaning
 Review Kanji]
 
         FileVocab = %Q[
-Unseen
-/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 0/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
-Poor
-Fair
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
-Good
-Excellent
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 2/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/LastReviewed: 1230076403/Duration: 10/Difficulty: 0/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 3/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/LastReviewed: 1230076403/Duration: 10/Difficulty: 0/
+New
+/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 0/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
+Working
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
+Review
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 2/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/LastReviewed: 1230076403/Duration: 10/Potential: 432000/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 3/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/LastReviewed: 1230076403/Duration: 10/Potential: 432000/
 Forgotten
 ]
 #################################
@@ -46,12 +45,12 @@ Forgotten
 # that every item is unseen.
 
         ResetVocab = %Q[
-Unseen
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 3/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
-Poor
-/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 0/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/
+New
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 3/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
+Working
+/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 0/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
 ]
 
 # This is the result of allVocab joined with \n
@@ -62,7 +61,7 @@ Poor
 /Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj]
 
         # This is a new vocabulary to use for adding to the quiz
-        NewVocab = "/Kanji: 秋/Reading: あき/Definitions: autumn,fall/Markers: n-adv,P/Position: -1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Difficulty: 0/"
+        NewVocab = "/Kanji: 秋/Reading: あき/Definitions: autumn,fall/Markers: n-adv,P/Position: -1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/"
 
 
         FileString = FileHeader + FileInfo + FileOptions + FileVocab
@@ -128,7 +127,7 @@ Poor
         end
 
         def defaultSaveFile
-            FileHeader + FileInfo + FileDefaultOptions + ResetVocab + "Fair\nGood\nExcellent\nForgotten\n"
+            FileHeader + FileInfo + FileDefaultOptions + ResetVocab + "Review\nForgotten\n"
         end
     end
 end

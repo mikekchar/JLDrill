@@ -48,9 +48,9 @@ module JLDrill
         it "should output to save file format" do
             @status.to_s.should eql("")
             testParse("ReadingProblem")
-            @status.to_s.should eql("/ReadingProblem/Score: 5/Level: 0/Difficulty: 0")
+            @status.to_s.should eql("/ReadingProblem/Score: 5/Level: 0/Potential: 432000")
             testParse("KanjiProblem")
-            @status.to_s.should eql("/ReadingProblem/Score: 5/Level: 0/Difficulty: 0/KanjiProblem/Score: 5/Level: 0/Difficulty: 0")
+            @status.to_s.should eql("/ReadingProblem/Score: 5/Level: 0/Potential: 432000/KanjiProblem/Score: 5/Level: 0/Potential: 432000")
         end
 
         it "should be able to clone" do

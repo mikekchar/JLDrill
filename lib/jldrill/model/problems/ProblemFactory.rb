@@ -16,20 +16,20 @@ module JLDrill
             return PROBLEM_TYPES[level]
         end
 
-        def ProblemFactory.create(level, item)
+        def ProblemFactory.create(level, item, schedule)
             case level
                 when 0
-                    problem = ReadingProblem.new(item)
+                    problem = ReadingProblem.new(item, schedule)
                 when 1
                     if item.hasKanji?
-                        problem = KanjiProblem.new(item)
+                        problem = KanjiProblem.new(item, schedule)
                     else
-                        problem = MeaningProblem.new(item)
+                        problem = MeaningProblem.new(item, schedule)
                     end
                 when 2
-                    problem = MeaningProblem.new(item)
+                    problem = MeaningProblem.new(item, schedule)
                 else
-                   problem = ReadingProblem.new(item)
+                   problem = ReadingProblem.new(item, schedule)
              end
             problem.requestedLevel = level
             return problem

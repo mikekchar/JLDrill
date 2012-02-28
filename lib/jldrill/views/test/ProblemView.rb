@@ -13,6 +13,12 @@ module JLDrill::Test
             @answerShown = false
         end
 
+        # Clear the problem
+        def clear
+            @newProblem = false
+            @answerShown = false
+        end
+
         # A new problem has been added
         def newProblem(problem)
             super(problem)

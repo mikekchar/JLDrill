@@ -14,11 +14,9 @@ module JLDrill
             @quiz = quiz
             @bins = []
             @res = []
-            addBin("Unseen")
-            addBin("Poor")
-            addBin("Fair")
-            addBin("Good")
-            addBin("Excellent")
+            addBin("New", "Unseen")
+            addBin("Working", "Poor", "Fair", "Good")
+            addBin("Review", "Excellent")
             addBin("Forgotten")
             @binNum = 0
         end
@@ -33,9 +31,14 @@ module JLDrill
         end
         
         # Adds a new bin to the end of the contents
-        def addBin(name)
+        def addBin(name, *aliases)
             @bins.push(Bin.new(name, @bins.length))
-            @res.push(Regexp.new("^#{name}$",nil))
+            names = []
+            names.push(Regexp.new("^#{name}$",nil))
+            aliases.each do |a|
+                names.push(Regexp.new("^#{a}$", nil))
+            end
+            @res.push(names)
         end
         
         # Returns the number items in all the bins
@@ -55,7 +58,6 @@ module JLDrill
         def addItem(item, bin)
             item.bin = bin
             item.quiz = @quiz
-            item.schedule.score = 0
             if item.position == -1
                 item.position = length 
             end
@@ -171,10 +173,12 @@ module JLDrill
             else
                 # Bin names are less common so they are checked after
                 @bins.each do |bin|
-                    re = @res[bin.number]
-                    if line =~ re
-                        @binNum = bin.number
-                        parsed = true
+                    list = @res[bin.number]
+                    list.each do |re|
+                        if line =~ re
+                            @binNum = bin.number
+                            parsed = true
+                        end
                     end
                 end
             end
@@ -209,8 +213,7 @@ module JLDrill
                 @bins[i].contents = []
             end
             @bins[0].each do |item|
-                item.schedule.reset
-                item.itemStats.reset
+                item.allReset
             end
             saveNeeded
         end
@@ -291,33 +294,6 @@ module JLDrill
             !(range.begin < 0 || range.end > 5)
         end
         
-        # Returns the nth unseen item in the range of contents, or nil if there
-        # aren't any unseen items
-        def findUnseen(n, range)
-            total = numUnseen(range)
-            if n > total || !includesRange?(range)
-                return nil
-            end
-            
-            i = range.end
-            prev = total
-            while (prev = (prev - @bins[i].numUnseen)) > n
-                i -= 1 
-            end
-            
-            @bins[i].findUnseen(n - prev)
-        end
-
-        # Returns false if any of the bins in the range have
-        # unseen items in them
-        def rangeAllSeen?(range)
-            a = range.to_a
-            seen = a.all? do |bin|
-                @bins[bin].allSeen?
-            end
-            seen
-        end
-
         # Returns false if any of the bins in the range have
         # items in them
         def rangeEmpty?(range)
@@ -332,13 +308,11 @@ module JLDrill
         def status
             retVal = "New: #{@bins[0].length} "
             if (quiz.options.forgettingThresh != 0.0)
-                retVal += "Forgotten: #{@bins[5].length} "
+                retVal += "Forgotten: #{@bins[3].length} "
             end
-            retVal += "Review: #{@bins[4].length} "
-            retVal += "Working: #{@bins[1].length}, "
-            retVal += "#{@bins[2].length}, "
-            retVal += "#{@bins[3].length}"
-            retVal
+            retVal += "Review: #{@bins[2].length} "
+            retVal += "Working: #{@bins[1].length}"
+            return retVal
         end
         
         def to_s
