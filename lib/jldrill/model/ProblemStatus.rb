@@ -155,10 +155,10 @@ module JLDrill
             end
         end
 
-        def resetAll
+        def resetAll(threshold)
             # First check to make sure that there are the correct
             # schedules.
-            checkSchedules
+            checkSchedules(threshold)
             @schedules.each do |schedule|
                 schedule.reset
             end

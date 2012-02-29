@@ -120,9 +120,9 @@ module JLDrill
             problemStatus.demoteAll
         end
         
-        def resetSchedules
+        def resetSchedules(threshold)
             problemStatus = @status.select("ProblemStatus")
-            problemStatus.resetAll
+            problemStatus.resetAll(threshold)
         end
 
         def allSeen(value)
@@ -147,7 +147,11 @@ module JLDrill
 
         def allReset
             problemStatus = @status.select("ProblemStatus")
-            problemStatus.resetAll
+            # resetAll needs the promoteThresh from the options
+            # to get the schedules.  But I can't get access to
+            # the options here, so I'll just pass 2.  It doesn't
+            # actually matter anyway -- FIXME
+            problemStatus.resetAll(2)
             itemStats.reset
         end
 

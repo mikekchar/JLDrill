@@ -113,7 +113,7 @@ module JLDrill
             item1.quiz = @quiz
 	        item1.bin = Strategy.workingSetBin
             problemStatus = item1.status.select("ProblemStatus")
-            problemStatus.checkSchedules
+            problemStatus.checkSchedules(@quiz.options.promoteThresh)
             problemStatus.findScheduleForLevel(1).should_not eql(nil)
             item1.level(1).should eql(1)
 
@@ -121,7 +121,7 @@ module JLDrill
             item2.quiz = @quiz
 	        item2.bin = Strategy.workingSetBin
             problemStatus = item2.status.select("ProblemStatus")
-            problemStatus.checkSchedules
+            problemStatus.checkSchedules(@quiz.options.promoteThresh)
             problemStatus.findScheduleForLevel(2).should_not eql(nil)
             @quiz.strategy.correct(item2)
             item2.level(1).should eql(2)

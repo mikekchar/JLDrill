@@ -277,7 +277,7 @@ module JLDrill
                 item = newSet[index]
                 # Resetting the schedule to make up for the consequences
                 # of an old bug where reset drills weren't reset properly.
-                item.resetSchedules
+                item.resetSchedules(options.promoteThresh)
                 promote(item)
                 item
             else
