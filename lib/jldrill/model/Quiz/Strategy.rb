@@ -7,7 +7,7 @@ module JLDrill
     # Strategy for choosing, promoting and demoting items in
     # the quiz.
     class Strategy
-        attr_reader :reviewStats, :forgottenStats
+        attr_reader :quiz, :reviewStats, :forgottenStats
     
         def initialize(quiz)
             @quiz = quiz
@@ -91,41 +91,63 @@ module JLDrill
             forgottenSet.length
         end
 
-        # Sort the items according to their schedule
-        def reschedule
-            t = options.introThresh
-            # Check for legacy files that may have Kanji 
-            # problems schedules but no kanji
-            reviewSet.each do |x|
-                x.removeInvalidKanjiProblems
-            end
-            # Sort the review set
+        # Put the review set in the correct order according to
+        # what percentage of its potential schedule it has waited
+        def rescheduleReviewSet(t)
             reviewSet.sort! do |x,y|
                 x.schedule(t).reviewLoad <=> y.schedule(t).reviewLoad
             end
-            # Move old items to the forgotten set
-            while ((options.forgettingThresh != 0.0) &&
-                   (!reviewSet.empty?) && 
-                   (reviewSet[0].schedule(t).reviewRate >= options.forgettingThresh.to_f))
-                contents.moveToBin(reviewSet[0], Strategy.forgottenSetBin)
-            end
-            # Sort the forgotten set
+        end
+
+        # Put the forgotten set in the correct order according
+        # to what percentage of its potential schedule it has
+        # waited
+        def rescheduleForgottenSet(t)
             forgottenSet.sort! do |x,y|
                 x.schedule(t).reviewLoad <=> y.schedule(t).reviewLoad
             end
-            # If the user changes the settings then we may have to
-            # unforget some items
+        end
+
+        # If the user changes increases the forgetting threshold,
+        # some items need to be returned from the forgotten set
+        # to the review set
+        def unforgetItems(t)
             while ((!forgottenSet.empty?) &&
                   ((options.forgettingThresh == 0.0) ||
                    (forgottenSet.last.schedule(t).reviewRate < 
                         options.forgettingThresh.to_f)))
                 contents.moveToBin(forgottenSet.last, Strategy.reviewSetBin)
             end
-            # Sort the review set again
-            reviewSet.sort! do |x,y|
-                x.schedule(t).reviewLoad <=> y.schedule(t).reviewLoad
+        end
+
+        # If the user decreases the forgetting threshold,
+        # some items need to be moved from the review set to the
+        # forgotten set
+        def forgetItems(t)
+            while ((options.forgettingThresh != 0.0) &&
+                   (!reviewSet.empty?) && 
+                   (reviewSet[0].schedule(t).reviewRate >= options.forgettingThresh.to_f))
+                contents.moveToBin(reviewSet[0], Strategy.forgottenSetBin)
             end
-            
+        end
+
+        # Some legacy files had kanji problems scheduled, but no
+        # kanji data.  This removes those schedules
+        def removeInvalidKanjiProblems
+            reviewSet.each do |x|
+                x.removeInvalidKanjiProblems
+            end
+        end
+
+        # Sort the items according to their schedule
+        def reschedule
+            t = options.promoteThresh
+            removeInvalidKanjiProblems
+            rescheduleReviewSet(t)
+            forgetItems(t)
+            rescheduleForgottenSet(t)
+            unforgetItems(t)
+            rescheduleReviewSet(t)
         end
         
         # Returns true if the review set has been

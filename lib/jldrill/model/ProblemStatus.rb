@@ -69,8 +69,9 @@ module JLDrill
 
         # Returns the schedule that should be addressed first
         def firstSchedule(threshold)
+            f = currentLevel(threshold)
             retVal = findScheduleForLevel(currentLevel(threshold))
-            if retVal.nil? 
+            if retVal.nil?
                 retVal = @schedules.min do |x,y|
                     x.reviewLoad <=> y.reviewLoad
                 end
@@ -92,13 +93,13 @@ module JLDrill
             return sched
         end
 
-        def addAllowed(levels)
+        def addAllowed(threshold, levels)
             levels.each do |level|
                 type = ProblemFactory.lookup(level)
                 if findSchedule(type).nil?
                     # If it can't find the correct type of schedule,
                     # duplicate the first one it finds and add it.
-                    addScheduleType(type, firstSchedule(2).clone)
+                    addScheduleType(type, firstSchedule(threshold).clone)
                 end
             end 
         end
@@ -146,10 +147,10 @@ module JLDrill
 
         # Make sure the schedule types match with the allowed ones
         # for the quiz.  If not, push a new type on.
-        def checkSchedules
+        def checkSchedules(threshold)
             if !@item.nil? && !@item.quiz.nil?
                 levels = @item.quiz.options.allowedLevels
-                addAllowed(levels)
+                addAllowed(threshold, levels)
                 removeDisallowed(levels)
             end
         end
@@ -191,7 +192,7 @@ module JLDrill
             # Every time we make a problem we should check to make sure
             # that correct schedules have been build.  The user may have
             # changed the options.
-            checkSchedules
+            checkSchedules(threshold)
             sched = firstSchedule(threshold)
             index = @schedules.find_index(sched)
             level = ProblemFactory.parse(@types[index])
