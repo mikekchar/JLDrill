@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'jldrill/model/ProblemStatus'
+require 'jldrill/model/quiz/ProblemStatus'
 
 module JLDrill
 

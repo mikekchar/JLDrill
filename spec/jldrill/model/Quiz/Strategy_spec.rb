@@ -1,6 +1,6 @@
 # encoding: utf-8
 require 'jldrill/model/quiz/Strategy'
-require 'jldrill/model/Contents'
+require 'jldrill/model/quiz/Contents'
 require 'jldrill/model/items/Vocabulary'
 require 'jldrill/model/Problem'
 require 'jldrill/model/problems/ProblemFactory'

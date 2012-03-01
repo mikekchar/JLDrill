@@ -2,7 +2,7 @@
 require 'Context/Context'
 require 'Context/Bridge'
 require 'Context/View'
-require 'jldrill/model/AboutInfo'
+require 'jldrill/model/info/AboutInfo'
 
 module JLDrill
 

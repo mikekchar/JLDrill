@@ -2,7 +2,7 @@
 require 'jldrill/model/items/Vocabulary'
 require 'jldrill/model/Problem'
 require 'jldrill/model/quiz/Options'
-require 'jldrill/model/Contents'
+require 'jldrill/model/quiz/Contents'
 require 'jldrill/model/quiz/Strategy'
 require 'jldrill/model/DataFile'
 require 'Context/Publisher'

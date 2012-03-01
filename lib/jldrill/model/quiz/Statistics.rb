@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'jldrill/model/Item'
+require 'jldrill/model/Timer'
 require 'jldrill/model/ItemStatus'
-require 'jldrill/model/quiz/Timer'
 require 'jldrill/model/quiz/LevelStats'
 require 'jldrill/model/quiz/Counter'
 
