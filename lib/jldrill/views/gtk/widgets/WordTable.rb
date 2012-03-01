@@ -296,7 +296,7 @@ module JLDrill::Gtk
         def pasteBefore
             target = @table.selection.selected
             if !@mark.nil? && !target.nil?
-                @mark[0].insertBefore(target[0])
+                @mark[0].quiz.contents.insertBefore(@mark[0],target[0])
                 @listStore.move_before(@mark, target)
                 selectPath(@mark.path)
             end

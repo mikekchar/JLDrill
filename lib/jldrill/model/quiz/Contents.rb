@@ -62,7 +62,6 @@ module JLDrill
                 item.position = length 
             end
             @bins[bin].push(item)
-            item.container = self
             itemAdded(item)
             saveNeeded
         end
@@ -105,6 +104,33 @@ module JLDrill
             tempArray.each(&block)
         end
         
+        # Cange the position of item1 to be before item2.
+        # If both items are in the new set, actually move item2
+        # so that it is before item2.
+        def insertBefore(item1, item2)
+            target = item2.position
+            # This is clearly slow. It can be made slightly
+            # faster by only iterating over the relevant
+            # items, but I don't know if it's worth the effort
+            # since the majority of the cost is in creating the
+            # sorted array in the first place.
+            eachByPosition do |i|
+                if (i.position >= target) &&
+                        (i.position < item1.position)
+                    i.position += 1
+                end
+            end
+            item1.position = target
+
+            if !@quiz.nil?
+                # If they are both in the new set actually move the item
+                if (item1.bin == 0) && (item2.bin == 0)
+                    @quiz.contents.bins[item1.bin].moveBeforeItem(self, item2)
+                end
+                @quiz.setNeedsSave(true)
+            end
+        end
+
         # Get an array of all the items sorted by hash.
         # The array includes a binary search algorithm for finding
         # items.

@@ -17,7 +17,8 @@ module JLDrill
     #
     # Item also holds position information of the item in the drill
     #    * position is the original ordinal position of the item in the quiz
-    #    * bin is the number of the bin
+    #      A position of -1 means the position hasn't been assigned yet
+    #    * bin the number of the bin it is in
     #
     # Items stored here must implement the following:
     #    o to_s() -- returns a string representation of the object
@@ -27,8 +28,8 @@ module JLDrill
         POSITION_RE = /^Position: (.*)/
 
         attr_reader :itemType, :contents, :position, :bin, :status,
-                    :hash, :container, :quiz
-        attr_writer :position, :bin, :container, :quiz
+                    :hash, :quiz
+        attr_writer :position, :bin, :quiz
 
         def initialize(item=nil)
             @quiz = nil
@@ -43,7 +44,6 @@ module JLDrill
             end
             @position = -1
             @bin = 0
-            @container = nil
             @status = ItemStatus.new(self)
             @status.add(ProblemStatus.new(self))
             @status.add(ItemStats.new(self))
@@ -51,9 +51,6 @@ module JLDrill
         end
 
         # Create an item using the save string
-        # Note: We are passing bin to this method, since we no
-        # longer read it in.  Due to legacy issues, the item status
-        # needs to know what bin it is in when parsing.
         def Item.create(string)
             item = Item.new
             item.parse(string)
@@ -198,29 +195,6 @@ module JLDrill
             @position = item.position
             item.position = temp
            
-            if !@quiz.nil?
-                if (@bin == 0) && (item.bin == 0)
-                    @quiz.contents.bins[@bin].moveBeforeItem(self, item)
-                end
-                @quiz.setNeedsSave(true)
-            end
-        end
-
-        def insertBefore(item)
-            target = item.position
-            # This is clearly slow. It can be made slightly
-            # faster by only iterating over the relevant
-            # items, but I don't know if it's worth the effort
-            # since the majority of the cost is in creating the
-            # sorted array in the first place.
-            @container.eachByPosition do |i|
-                if (i.position >= target) &&
-                        (i.position < @position)
-                    i.position += 1
-                end
-            end
-            @position = target
-
             if !@quiz.nil?
                 if (@bin == 0) && (item.bin == 0)
                     @quiz.contents.bins[@bin].moveBeforeItem(self, item)
