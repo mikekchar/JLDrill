@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'jldrill/model/Duration'
+require 'jldrill/model/util/Duration'
 require 'jldrill/model/quiz/Strategy'
 
 module JLDrill

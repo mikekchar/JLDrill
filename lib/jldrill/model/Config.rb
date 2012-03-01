@@ -1,6 +1,6 @@
 # encoding: utf-8
 require 'rubygems'
-require 'jldrill/model/LoadPath'
+require 'jldrill/model/util/LoadPath'
 
 module JLDrill
     # Configuration data for JLDrill.  This is how JLDrill knows where

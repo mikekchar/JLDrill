@@ -1,6 +1,6 @@
 # encoding: utf-8
+require 'jldrill/model/util/DataFile'
 require 'jldrill/model/moji/Radical'
-require 'jldrill/model/DataFile'
 
 module JLDrill
 

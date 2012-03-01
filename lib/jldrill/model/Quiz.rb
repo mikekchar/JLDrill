@@ -4,7 +4,7 @@ require 'jldrill/model/Problem'
 require 'jldrill/model/quiz/Options'
 require 'jldrill/model/quiz/Contents'
 require 'jldrill/model/quiz/Strategy'
-require 'jldrill/model/DataFile'
+require 'jldrill/model/util/DataFile'
 require 'Context/Publisher'
 require 'jldrill/Version'
 

@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'jldrill/model/DataFile'
+require 'jldrill/model/util/DataFile'
 
 module JLDrill
     # Represents a japanese phonetic character (either hiragana or

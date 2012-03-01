@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'jldrill/model/LoadPath'
+require 'jldrill/model/util/LoadPath'
 require 'jldrill/model/Config'
 
 module JLDrill

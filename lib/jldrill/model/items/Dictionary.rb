@@ -1,7 +1,7 @@
 # encoding: utf-8
 
+require 'jldrill/model/util/DataFile'
 require 'jldrill/model/items/DictionaryEntry'
-require 'jldrill/model/DataFile'
 require "jldrill/model/items/Vocabulary"
 require "jldrill/model/items/edict/Meaning"
 require 'Context/Log'

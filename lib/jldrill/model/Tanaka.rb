@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'jldrill/model/DataFile'
+require 'jldrill/model/util/DataFile'
 require 'jldrill/model/ExampleSentence'
 
 module JLDrill::Tanaka
