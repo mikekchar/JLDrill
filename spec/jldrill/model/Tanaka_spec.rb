@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'jldrill/model/Tanaka'
+require 'jldrill/model/exampleDB/Tanaka'
 require 'jldrill/model/Config'
 
 module JLDrill::Tanaka

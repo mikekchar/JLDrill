@@ -30,7 +30,8 @@ require 'jldrill/contexts/ShowExamplesContext'
 require 'jldrill/model/moji/Radical'
 require 'jldrill/model/moji/Kanji'
 require 'jldrill/model/moji/Kana'
-require 'jldrill/model/Tanaka'
+require 'jldrill/model/exampleDB/Tanaka'
+require 'jldrill/model/exampleDB/Tatoeba'
 require 'jldrill/model/DeinflectionRules'
 
 module JLDrill

@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'jldrill/model/Tatoeba'
+require 'jldrill/model/exampleDB/Tatoeba'
 require 'jldrill/model/Config'
 
 module JLDrill::Tatoeba

@@ -3,7 +3,7 @@ require 'Context/Context'
 require 'Context/Bridge'
 require 'jldrill/model/Config'
 require 'jldrill/contexts/LoadFileContext'
-require 'jldrill/model/Tatoeba'
+require 'jldrill/model/exampleDB/Tatoeba'
 
 module JLDrill
 
