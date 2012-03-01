@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'jldrill/model/ItemStatus'
 require 'jldrill/model/ProblemStatus'
-require 'jldrill/model/Quiz/ItemStats'
+require 'jldrill/model/quiz/ItemStats'
 
 module JLDrill
 

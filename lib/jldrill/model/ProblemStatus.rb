@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'jldrill/model/Problem'
 require 'jldrill/model/problems/ProblemFactory'
-require 'jldrill/model/Quiz/Schedule'
+require 'jldrill/model/quiz/Schedule'
 
 module JLDrill
     # Keeps track of which problem types are being reviewed and

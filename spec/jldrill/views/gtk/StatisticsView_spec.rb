@@ -4,7 +4,7 @@ require 'jldrill/contexts/ShowStatisticsContext'
 require 'jldrill/views/gtk/StatisticsView'
 require 'jldrill/contexts/MainContext'
 require 'jldrill/views/gtk/MainWindowView'
-require 'jldrill/model/Quiz/Quiz'
+require 'jldrill/model/Quiz'
 
 
 module JLDrill::Gtk

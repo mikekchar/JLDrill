@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
-require 'jldrill/model/Quiz/Strategy'
-require 'jldrill/model/Quiz/Schedule'
+require 'jldrill/model/quiz/Strategy'
+require 'jldrill/model/quiz/Schedule'
 require 'jldrill/views/test/MainWindowView'
 require 'jldrill/views/test/VBoxView'
 require 'jldrill/views/test/FileProgress'

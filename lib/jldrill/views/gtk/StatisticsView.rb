@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'jldrill/views/gtk/widgets/StatisticsWindow'
 require 'jldrill/contexts/ShowStatisticsContext'
-require 'jldrill/model/Quiz/Quiz'
+require 'jldrill/model/Quiz'
 require 'gtk2'
 
 module JLDrill::Gtk

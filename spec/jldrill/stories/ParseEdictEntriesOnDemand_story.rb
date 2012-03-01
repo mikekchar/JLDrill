@@ -2,7 +2,7 @@
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/model/items/JEDictionary'
 require 'jldrill/model/Config'
-require 'jldrill/model/Quiz/Quiz'
+require 'jldrill/model/Quiz'
 
 module JLDrill::ParseEdictEntriesOnDemand
 

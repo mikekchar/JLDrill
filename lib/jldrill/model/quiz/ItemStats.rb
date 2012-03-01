@@ -1,6 +1,6 @@
 # encoding: utf-8
-require 'jldrill/model/Quiz/Strategy'
-require 'jldrill/model/Quiz/Timer'
+require 'jldrill/model/quiz/Strategy'
+require 'jldrill/model/quiz/Timer'
 
 module JLDrill
 

@@ -1,6 +1,6 @@
 # encoding: utf-8
-require 'jldrill/model/Quiz/Quiz'
-require 'jldrill/model/Quiz/Statistics'
+require 'jldrill/model/Quiz'
+require 'jldrill/model/quiz/Statistics'
 require 'jldrill/model/Item'
 
 module JLDrill

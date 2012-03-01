@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'jldrill/model/Quiz/Counter'
+require 'jldrill/model/quiz/Counter'
 
 module JLDrill
     describe Counter do

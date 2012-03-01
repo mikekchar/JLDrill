@@ -1,6 +1,6 @@
 # encoding: utf-8
 require 'Context/Gtk/Widget'
-require 'jldrill/model/Quiz/Counter'
+require 'jldrill/model/quiz/Counter'
 require 'gtk2'
 
 module JLDrill::Gtk

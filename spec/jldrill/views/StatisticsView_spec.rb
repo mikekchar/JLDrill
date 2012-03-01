@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'Context/Bridge'
 require 'jldrill/contexts/ShowStatisticsContext'
-require 'jldrill/model/Quiz/Quiz'
+require 'jldrill/model/Quiz'
 require 'jldrill/views/test/StatisticsView'
 
 

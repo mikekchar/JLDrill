@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'jldrill/model/Quiz/LevelStats'
+require 'jldrill/model/quiz/LevelStats'
 
 module JLDrill
     describe LevelStats do
