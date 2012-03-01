@@ -147,11 +147,7 @@ module JLDrill
 
         def allReset
             problemStatus = @status.select("ProblemStatus")
-            # resetAll needs the promoteThresh from the options
-            # to get the schedules.  But I can't get access to
-            # the options here, so I'll just pass 2.  It doesn't
-            # actually matter anyway -- FIXME
-            problemStatus.resetAll(2)
+            problemStatus.resetAll(@quiz.options.promoteThresh)
             itemStats.reset
         end
 
