@@ -231,7 +231,7 @@ module JLDrill::Gtk
                 prevIter = getPreviousIter
                 if !iter.nil? && !prevIter.nil? &&
                         !iter[0].nil? && !prevIter[0].nil?
-                    iter[0].swapWith(prevIter[0])
+                    iter[0].quiz.contents.swapWith(iter[0], prevIter[0])
                     @listStore.move_before(iter, prevIter)
                     selectPath(iter.path)
                 end
@@ -244,7 +244,7 @@ module JLDrill::Gtk
                 nextIter = getNextIter
                 if !iter.nil? && !nextIter.nil? &&
                         !iter[0].nil? && !nextIter[0].nil?
-                    iter[0].swapWith(nextIter[0])
+                    iter[0].quiz.contents.swapWith(iter[0], nextIter[0])
                     @listStore.move_after(iter, nextIter)
                     selectPath(iter.path)
                 end

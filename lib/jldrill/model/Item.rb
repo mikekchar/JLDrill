@@ -189,20 +189,6 @@ module JLDrill
             @hash = to_o.hash
         end
 
-        # swap the positions between two items
-        def swapWith(item)
-            temp = @position
-            @position = item.position
-            item.position = temp
-           
-            if !@quiz.nil?
-                if (@bin == 0) && (item.bin == 0)
-                    @quiz.contents.bins[@bin].moveBeforeItem(self, item)
-                end
-                @quiz.setNeedsSave(true)
-            end
-        end
-
         # Return the save format of the item
         def to_s
             retVal = to_o.to_s

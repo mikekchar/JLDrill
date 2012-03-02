@@ -104,7 +104,22 @@ module JLDrill
             tempArray.each(&block)
         end
         
-        # Cange the position of item1 to be before item2.
+        # swap the positions between two items
+        # If they are both in the new bin, actually swap them
+        def swapWith(item1, item2)
+            temp = item1.position
+            item1.position = item2.position
+            item2.position = temp
+           
+            if !@quiz.nil?
+                if (item1.bin == 0) && (item2.bin == 0)
+                    @quiz.contents.bins[item1.bin].moveBeforeItem(item1, item2)
+                end
+                @quiz.setNeedsSave(true)
+            end
+        end
+
+        # Change the position of item1 to be before item2.
         # If both items are in the new set, actually move item2
         # so that it is before item2.
         def insertBefore(item1, item2)
@@ -125,7 +140,7 @@ module JLDrill
             if !@quiz.nil?
                 # If they are both in the new set actually move the item
                 if (item1.bin == 0) && (item2.bin == 0)
-                    @quiz.contents.bins[item1.bin].moveBeforeItem(self, item2)
+                    @quiz.contents.bins[item1.bin].moveBeforeItem(item1, item2)
                 end
                 @quiz.setNeedsSave(true)
             end
