@@ -36,7 +36,11 @@ module JLDrill
         end
 
         def addScheduleType(type, schedule)
-            if (type != "KanjiProblem") || (@item.hasKanji?)
+            # Create a problem so we can tell if this kind of item
+            # can be created first.
+            problem = ProblemFactory.createKindOf(type, @item, schedule)
+            if (problem.valid?)
+                # If it's a valid problem, push the schedule
                 @schedules.push(schedule)
                 @types.push(type)
             end
@@ -46,9 +50,12 @@ module JLDrill
         # schedules for KanjiProblems that they don't have
         def removeInvalidKanjiProblems
             pos = @types.find_index("KanjiProblem")
-            if !pos.nil? && !@item.hasKanji?
-                @types.delete_at(pos)
-                @schedules.delete_at(pos)
+            if !pos.nil?
+                problem = ProblemFactory.createKindOf("KanjiProblem", @item, @schedules[pos])
+                if !problem.valid?
+                    @types.delete_at(pos)
+                    @schedules.delete_at(pos)
+                end
             end
         end
 
@@ -195,8 +202,8 @@ module JLDrill
             checkSchedules(threshold)
             sched = firstSchedule(threshold)
             index = @schedules.find_index(sched)
-            level = ProblemFactory.parse(@types[index])
-            return ProblemFactory.create(level, @item, sched)
+            type = @types[index]
+            return ProblemFactory.createKindOf(type, @item, sched)
         end
 
         def to_s

@@ -155,7 +155,7 @@ module JLDrill
             publishParts(@answerParts, target)
         end
 
-        # Currently always valid.
+        # Valid by default
         def valid?
             return true
         end

@@ -210,11 +210,6 @@ module JLDrill
             return @cache
         end
 
-        def hasKanji?
-            v = to_o
-            return !v.kanji.nil?
-        end
-
         # Returns true if the items contain the same object.
         # Note: Does *not* compare the status
         def eql?(item)

@@ -188,7 +188,6 @@ module JLDrill::ScheduleItems
             problemStatus = item.status.select("ProblemStatus")
             # By default a meaning and kanji problem schedule are created
             # if the item has kanji (which is should)
-            item.hasKanji?.should eql(true)
             problemStatus.schedules.size.should eql(2)
 
             # Everything has been promoted so the current level
