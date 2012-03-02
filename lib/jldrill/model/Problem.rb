@@ -68,7 +68,6 @@ module JLDrill
         def vocab=(vocab)
             @vocab.assign(vocab)
             @item.setContents(vocab.contentString)
-            @item.problemModified(self)
         end
 
         # Returns true if the current problem contains the vocabulary

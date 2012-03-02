@@ -102,6 +102,13 @@ module JLDrill
             end
         end
 
+        def modifyProblem(problem, vocab)
+            if !problem.nil?
+                problem.vocab = vocab
+                problemModified(problem)
+            end
+        end
+
         def setNeedsSave(bool)
             @needsSave = bool
             update

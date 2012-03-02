@@ -53,7 +53,7 @@ module JLDrill::EditProblem
             newItem = Story.quiz.currentProblem.item
             vocab = newItem.to_o
             vocab.kanji = ""
-            Story.quiz.currentProblem.vocab = vocab
+            Story.quiz.modifyProblem(Story.quiz.currentProblem, vocab)
             Story.quiz.currentProblem.should be_a_kind_of(JLDrill::MeaningProblem)
         end
     end

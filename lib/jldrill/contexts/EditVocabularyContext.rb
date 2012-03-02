@@ -26,8 +26,8 @@ module JLDrill
 		def doAction(vocab)
             if @originalProblem.contains?(vocab) ||
                 !@parent.quiz.exists?(vocab)
-                @originalProblem.vocab = vocab
                 @parent.quiz.setCurrentProblem(@originalProblem)
+                @parent.quiz.modifyProblem(@originalProblem, vocab)
                 close
             end
 		end

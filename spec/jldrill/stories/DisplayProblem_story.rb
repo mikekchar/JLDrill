@@ -80,8 +80,9 @@ module JLDrill::QuestionAndAnswerAreDisplayed
             Story.view.should_receive(:newProblem)
             Story.view.should_receive(:updateProblem).exactly(1).times
             Story.loadQuiz
-            Story.mainContext.quiz.currentProblem.should_not be_nil
-            Story.mainContext.quiz.currentProblem.vocab = Story.sampleQuiz.sampleVocab
+            problem = Story.mainContext.quiz.currentProblem
+            problem.should_not be_nil
+            Story.mainContext.quiz.modifyProblem(problem, Story.sampleQuiz.sampleVocab)
             Story.shutdown
         end
         
@@ -144,7 +145,7 @@ module JLDrill::QuestionAndAnswerAreDisplayed
             Story.view.itemHints.should_receive(:updateProblem).exactly(1).times
             Story.loadQuiz
             Story.mainContext.quiz.currentProblem.should_not be_nil
-            Story.mainContext.quiz.currentProblem.vocab = Story.sampleQuiz.sampleVocab
+            Story.mainContext.quiz.modifyProblem(Story.mainContext.quiz.currentProblem, Story.sampleQuiz.sampleVocab)
             Story.shutdown
         end
 

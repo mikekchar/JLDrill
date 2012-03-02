@@ -233,14 +233,5 @@ module JLDrill
                 false
             end
         end
-
-        # Indicate to the quiz that the problem has been modified
-        # This will be called by the problem itself whenever it
-        # has been modified.
-        def problemModified(problem)
-            if !@quiz.nil?
-                @quiz.problemModified(problem)
-            end
-        end
     end
 end
