@@ -40,7 +40,7 @@ module JLDrill
             # can be created first.
             problem = ProblemFactory.createKindOf(type, @item, schedule)
             if (!problem.nil? && 
-                # (problem.level == problem.requestedLevel) &&
+                (problem.level == problem.requestedLevel) &&
                 problem.valid?)
                 # If it's a valid problem, push the schedule
                 @schedules.push(schedule)

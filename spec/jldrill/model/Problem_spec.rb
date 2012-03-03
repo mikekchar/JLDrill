@@ -233,7 +233,7 @@ module JLDrill
             @item.quiz = @quiz
 		    @problem = ReadingProblem.new(@item, @item.schedule(2))
             @problem.should_not be_nil
-		    @problem.level.should be(0)
+		    @problem.level.should eql(0)
             @problem.question.should eql("会う\nあう\nNo hints\n")
             @problem.answer.should eql("to meet, to interview\n")
         end
@@ -246,12 +246,12 @@ module JLDrill
             questionPane = QuestionReceiver.new(problem)
             
             questionPane.request
-            questionPane.getMode().should be(ProblemReceiver::NORMAL_MODE)
-            questionPane.received?("kanji").should be(true)
+            questionPane.getMode().should eql(ProblemReceiver::NORMAL_MODE)
+            questionPane.received?("kanji").should eql(true)
             questionPane.value("kanji").should eql("会う")
-            questionPane.received?("reading").should be(true)
+            questionPane.received?("reading").should eql(true)
             questionPane.value("reading").should eql("あう")
-            questionPane.received?("hint").should be(true)
+            questionPane.received?("hint").should eql(true)
             questionPane.value("hint").should eql("No hints")
         end
 
@@ -261,7 +261,7 @@ module JLDrill
             @item.quiz = @quiz
 		    @problem = ReadingProblem.new(@item, @item.schedule(2))
             @problem.should_not be_nil
-		    @problem.level.should be(0)
+		    @problem.level.should eql(0)
             @problem.question.should eql("あう\n")
             @problem.answer.should eql("to meet, to interview\n")
         end
@@ -274,11 +274,11 @@ module JLDrill
             questionPane = QuestionReceiver.new(problem)
             
             questionPane.request
-            questionPane.getMode().should be(ProblemReceiver::NORMAL_MODE)
-            questionPane.received?("kanji").should be(true)
+            questionPane.getMode().should eql(ProblemReceiver::NORMAL_MODE)
+            questionPane.received?("kanji").should eql(true)
             questionPane.value("kanji").should eql("あう")
-            questionPane.received?("reading").should be(false)
-            questionPane.received?("hint").should be(false)
+            questionPane.received?("reading").should eql(false)
+            questionPane.received?("hint").should eql(false)
         end
 
     end
@@ -291,7 +291,7 @@ module JLDrill
             @item.quiz = @quiz
 		    @problem = KanjiProblem.new(@item, @item.schedule(2))
             @problem.should_not be_nil
-		    @problem.level.should be(2)
+		    @problem.level.should eql(1)
             @problem.question.should eql("会う\n")
             @problem.answer.should eql("あう\nto meet, to interview\nNo hints\n")
         end
@@ -305,7 +305,7 @@ module JLDrill
             @item.quiz = @quiz
 		    @problem = MeaningProblem.new(@item, @item.schedule(2))
             @problem.should_not be_nil
-		    @problem.level.should be(1)
+		    @problem.level.should eql(2)
             @problem.question.should eql("to meet, to interview\n")
             @problem.answer.should eql("会う\nあう\nNo hints\n")
         end

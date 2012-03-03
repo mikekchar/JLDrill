@@ -6,7 +6,7 @@ module JLDrill
     class MeaningProblem < Problem
         def initialize(item, schedule)
             super(item, schedule)
-            @level = 1
+            @level = 2
             @questionParts = ["definitions"]
             @answerParts = ["kanji", "reading", "hint"]
         end

@@ -7,7 +7,7 @@ module JLDrill
     class KanjiProblem < Problem
         def initialize(item, schedule)
             super(item, schedule)
-            @level = 2
+            @level = 1
             @questionParts = ["kanji"]
             @answerParts = ["reading", "definitions", "hint"]
         end
