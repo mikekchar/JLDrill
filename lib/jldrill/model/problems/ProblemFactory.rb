@@ -22,6 +22,7 @@ module JLDrill
             # but if it is invalid, go to the next one.  If all
             # else fails, make a reading problem (which is always
             # valid).
+            requestedLevel = level
             while (problem.nil?  || !problem.valid?) && level < 4
                 case level
                 when 0
@@ -33,7 +34,7 @@ module JLDrill
                 else
                     problem = ReadingProblem.new(item, schedule)
                 end
-                problem.requestedLevel = level
+                problem.requestedLevel = requestedLevel
                 level += 1
             end
             return problem

@@ -39,7 +39,9 @@ module JLDrill
             # Create a problem so we can tell if this kind of item
             # can be created first.
             problem = ProblemFactory.createKindOf(type, @item, schedule)
-            if (problem.valid?)
+            if (!problem.nil? && 
+                # (problem.level == problem.requestedLevel) &&
+                problem.valid?)
                 # If it's a valid problem, push the schedule
                 @schedules.push(schedule)
                 @types.push(type)
