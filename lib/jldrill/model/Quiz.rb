@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'jldrill/model/items/Vocabulary'
 require 'jldrill/model/Problem'
+require 'jldrill/model/quiz/QuizItem'
 require 'jldrill/model/quiz/Options'
 require 'jldrill/model/quiz/Contents'
 require 'jldrill/model/quiz/Strategy'
@@ -287,7 +288,7 @@ module JLDrill
         end
         
         def appendVocab(vocab)
-            item = Item.new(vocab)
+            item = QuizItem.new(self, vocab)
             @contents.addUniquely(item)
             return item
         end

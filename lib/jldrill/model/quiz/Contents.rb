@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'jldrill/model/Bin'
+require 'jldrill/model/quiz/QuizItem'
 
 module JLDrill
 
@@ -70,7 +71,7 @@ module JLDrill
         def add(vocab, bin)
             item = nil
             if !vocab.nil? && vocab.valid?
-                item = Item.new(vocab)
+                item = QuizItem.new(@quiz, vocab)
                 addItem(item, bin)
             end
             return item
@@ -201,7 +202,7 @@ module JLDrill
         # Add it to the contents in the specified bin.
         # Return the item that was added.
         def parseItem(line, bin)
-            item = Item.create(line)
+            item = QuizItem.create(@quiz, line)
             return addItem(item, bin)
         end
 
