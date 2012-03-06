@@ -79,14 +79,14 @@ module JLDrill::ScheduleItems
         end
 
         def createAndPromote(item)
-            item.schedule(thresh).should_not be_scheduled
+            item.schedule.should_not be_scheduled
             quiz.createProblem(item)
-            item.schedule(thresh).should_not be_scheduled
+            item.schedule.should_not be_scheduled
             promoteIntoWorkingSet(item)
-            item.schedule(thresh).should_not be_scheduled
+            item.schedule.should_not be_scheduled
             promoteIntoReviewSet(item)
-            item.schedule(thresh).should be_scheduled
-            item.schedule(thresh).potential.should eql(432000)
+            item.schedule.should be_scheduled
+            item.schedule.potential.should eql(432000)
         end
 
         def inDays(duration)
@@ -110,30 +110,30 @@ module JLDrill::ScheduleItems
         it "should schedule new items 5 days from now" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item.schedule(thresh), 5.0, 10)
+            scheduleShouldBe(item.schedule, 5.0, 10)
         end
 
         it "should schedule new items from now even if there are scheduled items" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item.schedule(thresh), 5.0, 10)
+            scheduleShouldBe(item.schedule, 5.0, 10)
 
             # Get a new item
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item.schedule(thresh), 5.0, 10)
+            scheduleShouldBe(item.schedule, 5.0, 10)
         end
 
         it "should set a maximum of the duration * 2 + 25%" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item.schedule(thresh), 5.0, 10)
-            orig = item.schedule(thresh).duration
-            max = item.schedule(thresh).maxInterval
+            scheduleShouldBe(item.schedule, 5.0, 10)
+            orig = item.schedule.duration
+            max = item.schedule.maxInterval
             max.should eql(JLDrill::Schedule.backoff(orig.to_f * 1.25))
 
             # Make the item last reviewed 20 days ago
-            schedule = item.schedule(thresh)
+            schedule = item.schedule
             schedule.lastReviewed = setDaysAgoReviewed(schedule, 20.0)
             schedule.calculateInterval.should eql(max)
             schedule.correct
@@ -143,7 +143,7 @@ module JLDrill::ScheduleItems
         it "should schedule a minimum of the last duration" do
             item = newSet[0]
             createAndPromote(item)
-            schedule = item.schedule(thresh)
+            schedule = item.schedule
             scheduleShouldBe(schedule, 5.0, 10)
             orig = schedule.duration
             # Make the item last reviewed 1 day ago
@@ -183,7 +183,7 @@ module JLDrill::ScheduleItems
         it "should be able to sort the review set items according to schedule" do
             item = newSet[0]
             createAndPromote(item)
-            schedule = item.schedule(thresh)
+            schedule = item.schedule
             scheduleShouldBe(schedule, 5.0, 10)
             problemStatus = item.status.select("ProblemStatus")
             # By default a meaning and kanji problem schedule are created
@@ -192,7 +192,7 @@ module JLDrill::ScheduleItems
 
             # Everything has been promoted so the current level
             # should be 3 and there should be no associated schedule for it
-            problemStatus.currentLevel(thresh).should eql(3)
+            problemStatus.currentLevel.should eql(3)
             problemStatus.findScheduleForLevel(3).should eql(nil)
 
             # Both of the schedules should be between 4.5 and 5.5 days
@@ -204,14 +204,14 @@ module JLDrill::ScheduleItems
             setDaysAgoReviewed(problemStatus.schedules[0], 1.0)
             setDaysAgoReviewed(problemStatus.schedules[1], 1.0)
 
-            schedule1 = problemStatus.firstSchedule(thresh)
+            schedule1 = problemStatus.firstSchedule
             index1 = problemStatus.schedules.find_index(schedule1)
 
             # Make this one 6.0 days in duration so that the second schedule
             # will be shorter than this one.
             schedule1.duration = inSeconds(6.0)
 
-            schedule2 = problemStatus.firstSchedule(thresh)
+            schedule2 = problemStatus.firstSchedule
             index2 = problemStatus.schedules.find_index(schedule2)
 
             # These should be different problem types
@@ -219,7 +219,7 @@ module JLDrill::ScheduleItems
 
             item2 = newSet[0]
             createAndPromote(item2)
-            scheduleShouldBe(item2.schedule(thresh), 5.0, 10)
+            scheduleShouldBe(item2.schedule, 5.0, 10)
 
             # New items are always placed at the back of the reviewSet
             reviewSet[0].should be(item)
@@ -228,8 +228,8 @@ module JLDrill::ScheduleItems
             # Pretend we reviewed this an hour ago so that the schedules will
             # sort properly (You have to do it twice to get both
             # scheduled problem types)
-            setDaysAgoReviewed(item2.schedule(thresh), 1.0/24.0)
-            setDaysAgoReviewed(item2.schedule(thresh), 1.0/24.0)
+            setDaysAgoReviewed(item2.schedule, 1.0/24.0)
+            setDaysAgoReviewed(item2.schedule, 1.0/24.0)
 
             # If we reschedule
             quiz.strategy.quiz.should be(quiz)
@@ -245,7 +245,7 @@ module JLDrill::ScheduleItems
 
             # Now we pretend that one of the problem types in item 2
             # was reviewed 50 days ago and reschedule
-            setDaysAgoReviewed(item2.schedule(thresh), 50.0)
+            setDaysAgoReviewed(item2.schedule, 50.0)
             quiz.reschedule
 
             # Because one of the problem types has waited a

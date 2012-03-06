@@ -20,8 +20,8 @@ module JLDrill
         def testDuration(item, counter, days,level,count)
             d = JLDrill::Duration.new
             d.days = days
-            item.schedule(2).duration = d.seconds
-            counter.count(item, 2)
+            item.schedule.duration = d.seconds
+            counter.count(item)
             counter.table[level].should eql(count)
         end
 
@@ -29,7 +29,7 @@ module JLDrill
             quiz = JLDrill::Quiz.new
             counter = JLDrill::DurationCounter.new
             item = JLDrill::QuizItem.new(quiz, nil)
-            item.schedule(2).schedule
+            item.schedule.schedule
             testDuration(item, counter, 3, 0, 1)
             testDuration(item, counter, 8, 1, 1)
             testDuration(item, counter, 17, 2, 1)

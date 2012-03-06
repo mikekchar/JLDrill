@@ -26,7 +26,7 @@ module JLDrill
 	    end
 	    
 	    it "should be able to print out the status" do
-            @quiz.contents.bins[Strategy.reviewSetBin][1].schedule(2).scheduled?.should be(true)
+            @quiz.contents.bins[Strategy.reviewSetBin][1].schedule.scheduled?.should be(true)
     	    @quiz.contents.status.should eql("New: 1 Review: 2 Working: 1")
 	    end
 	    

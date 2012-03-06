@@ -13,12 +13,13 @@ module JLDrill
         CONSECUTIVE_RE = /^Consecutive: (.*)/
         TIMELIMIT_RE = /^TimeLimit: (.*)/
 
-        attr_reader :name, :item, :consecutive, :thinkingTimer, :timeLimit
+        attr_reader :name, :quiz, :item, :consecutive, :thinkingTimer, :timeLimit
         attr_writer :item, :consecutive, :thinkingTimer, :timeLimit
 
         # Create a new ItemStats for this item
-        def initialize(item)
+        def initialize(quiz, item)
             @name = "ItemStats"
+            @quiz = quiz
             @item = item
             @thinkingTimer = Timer.new
             reset
@@ -40,13 +41,14 @@ module JLDrill
 
         # Create a clone of the ItemStats and return it
         def clone
-            retVal = ItemStats.new(@item)
+            retVal = ItemStats.new(@quiz, @item)
             retVal.assign(self)
             return retVal
         end
 
         # Assign this item's stats to be the same as the one passed in
         def assign(itemStats)
+            @quiz = itemStats.quiz
             @consecutive = itemStats.consecutive
             @thinkingTimer.assign(itemStats.thinkingTimer)
             @timeLimit = itemStats.timeLimit

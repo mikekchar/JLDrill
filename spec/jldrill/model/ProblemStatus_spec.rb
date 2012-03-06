@@ -9,7 +9,7 @@ module JLDrill
 		    @quiz = Quiz.new
 		    @vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
 		    @item = @quiz.contents.add(@vocab, 0)
-		    @status = ProblemStatus.new(@item)
+		    @status = ProblemStatus.new(@quiz, @item)
         end
         
         it "should react sanely when empty" do

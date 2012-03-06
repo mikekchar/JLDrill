@@ -110,7 +110,7 @@ module JLDrill
 
         def test_level(question)
             item = @quiz.currentProblem.item
-            schedule = item.schedule(@quiz.options.promoteThresh)
+            schedule = item.schedule
             case @quiz.currentProblem.requestedLevel
                 when 0
                     test_problem(question, 
@@ -196,7 +196,7 @@ module JLDrill
 	        @quiz.contents.bins[Strategy.workingSetBin].length.should eql(1)
             test_problem(@quiz.currentProblem.question, 
                          KanjiProblem.new(@quiz.currentProblem.item, 
-                                           @quiz.currentProblem.item.schedule(@quiz.options.promoteThresh))) 
+                                           @quiz.currentProblem.item.schedule)) 
 	        @quiz.bin.should eql(Strategy.workingSetBin)
 	        @quiz.currentProblem.item.should be_equal(item)
 
@@ -241,9 +241,8 @@ module JLDrill
         
         it "should update the last reviewed status when the answer is made" do
             test_initializeQuiz
-            thresh = @quiz.options.promoteThresh
-            @quiz.currentProblem.item.schedule(thresh).lastReviewed.should be_nil
-            schedule1 = @quiz.currentProblem.item.schedule(thresh)
+            @quiz.currentProblem.item.schedule.lastReviewed.should be_nil
+            schedule1 = @quiz.currentProblem.item.schedule
             test_correct
             test1 = @quiz.currentProblem.item
             schedule1.lastReviewed.should_not be_nil
@@ -251,7 +250,7 @@ module JLDrill
             # should get a new one
             test_drill
             test2 = @quiz.currentProblem.item
-            schedule2 = test2.schedule(thresh)
+            schedule2 = test2.schedule
             schedule2.lastReviewed.should be_nil
 
             # Make it incorrect
@@ -260,15 +259,15 @@ module JLDrill
             schedule2.lastReviewed.should_not be_nil
 
             @quiz.resetContents
-            test1.schedule(thresh).lastReviewed.should be_nil
-            test2.schedule(thresh).lastReviewed.should be_nil
+            test1.schedule.lastReviewed.should be_nil
+            test2.schedule.lastReviewed.should be_nil
         end
         
         it "should update the schedule correctly for review set items" do
 	        @quiz.loadFromString("none", @sampleQuiz.file)
 	        item = @quiz.contents.bins[Strategy.reviewSetBin][0]
 	        item.should_not be_nil
-            schedule = item.schedule(@quiz.options.promoteThresh)
+            schedule = item.schedule
             @quiz.currentProblem = MeaningProblem.new(item, schedule)
             test_correct
             test_incorrect            

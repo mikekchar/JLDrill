@@ -8,8 +8,8 @@ module JLDrill
         def initialize(quiz, item)
             super(item)
             @quiz = quiz
-            @status.add(ProblemStatus.new(self))
-            @status.add(ItemStats.new(self))
+            @status.add(ProblemStatus.new(@quiz, self))
+            @status.add(ItemStats.new(@quiz, self))
         end
 
         def QuizItem.create(quiz, string)
@@ -23,73 +23,65 @@ module JLDrill
             item.assign(self)
             return item
         end
+
+        def problemStatus
+            return @status.select("ProblemStatus")
+        end
         
+        def itemStats
+            return @status.select("ItemStats")
+        end
+
         def removeInvalidKanjiProblems
-            problemStatus = @status.select("ProblemStatus")
-            problemStatus.removeInvalidKanjiProblems
+            return problemStatus.removeInvalidKanjiProblems
         end
 
         # Return the schedule for the Spaced Repetition Drill
-        def schedule(threshold)
-            problemStatus = @status.select("ProblemStatus")
-            return problemStatus.firstSchedule(threshold)
+        def schedule
+            return problemStatus.firstSchedule
         end
 
         # UpdateAll the schedules
         def scheduleAll
-            problemStatus = @status.select("ProblemStatus")
             problemStatus.scheduleAll
         end
 
         # Demote all the schedules
         def demoteAll
-            problemStatus = @status.select("ProblemStatus")
             problemStatus.demoteAll
         end
         
-        def resetSchedules(threshold)
-            problemStatus = @status.select("ProblemStatus")
-            problemStatus.resetAll(threshold)
+        def resetSchedules
+            problemStatus.resetAll
         end
 
         def allSeen(value)
-            problemStatus = @status.select("ProblemStatus")
             problemStatus.allSeen(value)
         end
 
         def setScores(value)
-            problemStatus = @status.select("ProblemStatus")
             problemStatus.setScores(value)     
         end
 
         def allCorrect
-            problemStatus = @status.select("ProblemStatus")
             problemStatus.allCorrect     
         end
 
         def allIncorrect
-            problemStatus = @status.select("ProblemStatus")
             problemStatus.allIncorrect     
         end
 
         def allReset
-            problemStatus = @status.select("ProblemStatus")
-            problemStatus.resetAll(@quiz.options.promoteThresh)
+            problemStatus.resetAll
             itemStats.reset
         end
 
-        def problem(threshold)
-            problemStatus = @status.select("ProblemStatus")
-            return problemStatus.firstProblem(threshold)
+        def problem
+            return problemStatus.firstProblem
         end
 
-        def level(threshold)
-            problemStatus = @status.select("ProblemStatus")
-            return problemStatus.currentLevel(threshold)
-        end
-
-        def itemStats
-            return @status.select("ItemStats")
+        def level
+            return problemStatus.currentLevel
         end
 
     end

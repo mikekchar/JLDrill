@@ -91,7 +91,7 @@ the task.
 	their schedule set to 10 seconds +- 10%.
 
 	- [ ] Make reading problems valid in working set
-    - [ ] Get rid of having to pass the threshold around
+    - [X] Get rid of having to pass the threshold around
 
    :PROPERTIES:
    :JellyBeans: 2
