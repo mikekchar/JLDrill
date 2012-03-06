@@ -114,17 +114,17 @@ module JLDrill
             case @quiz.currentProblem.requestedLevel
                 when 0
                     test_problem(question, 
-                                 ReadingProblem.new(item, schedule)) 
+                                 ReadingProblem.new(item)) 
                 when 1
                     if(!@quiz.currentProblem.item.to_o.kanji.nil?)
                         test_problem(question, 
-                                     KanjiProblem.new(item, schedule))
+                                     KanjiProblem.new(item))
                     else
                         test_problem(question, 
-                                     ReadingProblem.new(item, schedule)) 
+                                     ReadingProblem.new(item)) 
                     end
                 when 2
-                    test_problem(question, MeaningProblem.new(item, schedule)) 
+                    test_problem(question, MeaningProblem.new(item)) 
             else
 	             # This shouldn't ever happen.  Blow up.
 	             true.should eql(false) 
@@ -195,8 +195,7 @@ module JLDrill
 	        @quiz.contents.bins[Strategy.newSetBin].length.should eql(3)
 	        @quiz.contents.bins[Strategy.workingSetBin].length.should eql(1)
             test_problem(@quiz.currentProblem.question, 
-                         KanjiProblem.new(@quiz.currentProblem.item, 
-                                           @quiz.currentProblem.item.schedule)) 
+                         KanjiProblem.new(@quiz.currentProblem.item)) 
 	        @quiz.bin.should eql(Strategy.workingSetBin)
 	        @quiz.currentProblem.item.should be_equal(item)
 
@@ -268,7 +267,7 @@ module JLDrill
 	        item = @quiz.contents.bins[Strategy.reviewSetBin][0]
 	        item.should_not be_nil
             schedule = item.schedule
-            @quiz.currentProblem = MeaningProblem.new(item, schedule)
+            @quiz.currentProblem = MeaningProblem.new(item)
             test_correct
             test_incorrect            
         end

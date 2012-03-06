@@ -5,8 +5,8 @@ module JLDrill
     # The first kind of Problem shown.  It lets you read it in Japanese and
     # guess the English
     class ReadingProblem < Problem
-        def initialize(item, schedule)
-            super(item, schedule)
+        def initialize(item)
+            super(item)
             @level = 0
             @questionParts = ["kanji", "reading", "hint"]
             @answerParts = ["definitions"]
@@ -17,7 +17,7 @@ module JLDrill
         end
 
         def clone
-            value = ReadingProblem.new(@item, @schedule)
+            value = ReadingProblem.new(@item)
             value.assign(self)
             return value
         end

@@ -91,6 +91,8 @@ the task.
 	their schedule set to 10 seconds +- 10%.
 
 	- [X] Make status look the same as it did before the change
+    - [ ] status means the problem and stats status in the item
+          but the UI output string in every other object
 	- [ ] Review set only seems to pick Kanji problems uness there
 		  is no kanji.
 	- [ ] Make reading problems valid in working set

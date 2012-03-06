@@ -148,6 +148,10 @@ module JLDrill
             end
         end
 
+        def infoStatus
+            return "     "
+        end
+
         # Returns true if the item contains the object.
         def contain?(object)
             if object.hash == @hash

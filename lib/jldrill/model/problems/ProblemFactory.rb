@@ -16,7 +16,7 @@ module JLDrill
             return PROBLEM_TYPES[level]
         end
 
-        def ProblemFactory.create(level, item, schedule)
+        def ProblemFactory.create(level, item)
             problem = nil
             # Try to make the problem at the requested level
             # but if it is invalid, go to the next one.  If all
@@ -26,13 +26,13 @@ module JLDrill
             while (problem.nil?  || !problem.valid?) && level < 4
                 case level
                 when 0
-                    problem = ReadingProblem.new(item, schedule)
+                    problem = ReadingProblem.new(item)
                 when 1
-                    problem = KanjiProblem.new(item, schedule)
+                    problem = KanjiProblem.new(item)
                 when 2
-                    problem = MeaningProblem.new(item, schedule)
+                    problem = MeaningProblem.new(item)
                 else
-                    problem = ReadingProblem.new(item, schedule)
+                    problem = ReadingProblem.new(item)
                 end
                 problem.requestedLevel = requestedLevel
                 level += 1
@@ -40,9 +40,9 @@ module JLDrill
             return problem
         end
 
-        def ProblemFactory.createKindOf(type, item, schedule)
+        def ProblemFactory.createKindOf(type, item)
             level = ProblemFactory.parse(type)
-            return ProblemFactory.create(level, item, schedule)
+            return ProblemFactory.create(level, item)
         end
     end
 end

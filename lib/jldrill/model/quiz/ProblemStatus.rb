@@ -40,7 +40,7 @@ module JLDrill
         def addScheduleType(type, schedule)
             # Create a problem so we can tell if this kind of item
             # can be created first.
-            problem = ProblemFactory.createKindOf(type, @item, schedule)
+            problem = ProblemFactory.createKindOf(type, @item)
             if (!problem.nil? && 
                 (problem.level == problem.requestedLevel) &&
                 problem.valid?)
@@ -55,7 +55,7 @@ module JLDrill
         def removeInvalidKanjiProblems
             pos = @types.find_index("KanjiProblem")
             if !pos.nil?
-                problem = ProblemFactory.createKindOf("KanjiProblem", @item, @schedules[pos])
+                problem = ProblemFactory.createKindOf("KanjiProblem", @item)
                 if !problem.valid?
                     @types.delete_at(pos)
                     @schedules.delete_at(pos)
@@ -206,7 +206,7 @@ module JLDrill
             sched = firstSchedule
             index = @schedules.find_index(sched)
             type = @types[index]
-            return ProblemFactory.createKindOf(type, @item, sched)
+            return ProblemFactory.createKindOf(type, @item)
         end
 
         def to_s

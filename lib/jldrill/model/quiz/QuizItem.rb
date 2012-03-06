@@ -84,6 +84,23 @@ module JLDrill
             return problemStatus.currentLevel
         end
 
+        def infoStatus
+            retVal = super()
+            if @bin < 2
+                if bin == 0
+                    retVal += "New"
+                else
+                    retVal += "#{problemStatus.currentLevel + 1}"
+                end
+            else
+                retVal += "+#{itemStats.consecutive}"
+                if problemStatus.firstSchedule.reviewed?
+                    retVal += ", #{problemStatus.firstSchedule.reviewedDate}"
+                end
+            end
+            retVal += " --> #{problemStatus.firstSchedule.potentialScheduleInDays} days"
+            return retVal
+        end
     end
 end
 

@@ -4,10 +4,10 @@ module JLDrill
     # Represents a single question/answer pair in a quiz
     class Problem
         attr_reader :item, :level, :requestedLevel,
-                    :questionParts, :answerParts, :schedule
+                    :questionParts, :answerParts
         attr_writer :requestedLevel
         
-        def initialize(item, schedule)
+        def initialize(item)
             @item = item
             @level = -1
             @requestedLevel = -1
@@ -16,7 +16,6 @@ module JLDrill
             @vocab = item.to_o
             @displayOnly = false
             @preview = false
-            @schedule = schedule
         end
 
         # Override in the concrete classes
@@ -76,24 +75,9 @@ module JLDrill
             return @vocab.eql?(vocab)
         end
 
-        # Return a string showing what bin this problem is from
+        # Returns the status of the item that this problem is showing
         def status
-            retVal = "     "
-            bin = @item.bin
-            if bin < 2
-                if bin == 0
-                    retVal += "New"
-                else
-                    retVal += "#{@item.problemStatus.currentLevel + 1}"
-                end
-            else
-                retVal += "+#{@item.itemStats.consecutive}"
-                if @schedule.reviewed?
-                    retVal += ", #{@schedule.reviewedDate}"
-                end
-            end
-            retVal += " --> #{@schedule.potentialScheduleInDays} days"
-            return retVal
+            return @item.infoStatus
         end
 
         def evaluateAttribute(name)
