@@ -1,7 +1,5 @@
 # encoding: utf-8
 require 'jldrill/model/ItemStatus'
-require 'jldrill/model/quiz/ProblemStatus'
-require 'jldrill/model/quiz/ItemStats'
 
 module JLDrill
 
@@ -45,8 +43,6 @@ module JLDrill
             @position = -1
             @bin = 0
             @status = ItemStatus.new(self)
-            @status.add(ProblemStatus.new(self))
-            @status.add(ItemStats.new(self))
             @cache = nil
         end
 
@@ -92,74 +88,6 @@ module JLDrill
             item = Item.new
             item.assign(self)
             return item
-        end
-
-        def removeInvalidKanjiProblems
-            problemStatus = @status.select("ProblemStatus")
-            problemStatus.removeInvalidKanjiProblems
-        end
-
-        # Return the schedule for the Spaced Repetition Drill
-        def schedule(threshold)
-            problemStatus = @status.select("ProblemStatus")
-            return problemStatus.firstSchedule(threshold)
-        end
-
-        # UpdateAll the schedules
-        def scheduleAll
-            problemStatus = @status.select("ProblemStatus")
-            problemStatus.scheduleAll
-        end
-
-        # Demote all the schedules
-        def demoteAll
-            problemStatus = @status.select("ProblemStatus")
-            problemStatus.demoteAll
-        end
-        
-        def resetSchedules(threshold)
-            problemStatus = @status.select("ProblemStatus")
-            problemStatus.resetAll(threshold)
-        end
-
-        def allSeen(value)
-            problemStatus = @status.select("ProblemStatus")
-            problemStatus.allSeen(value)
-        end
-
-        def setScores(value)
-            problemStatus = @status.select("ProblemStatus")
-            problemStatus.setScores(value)     
-        end
-
-        def allCorrect
-            problemStatus = @status.select("ProblemStatus")
-            problemStatus.allCorrect     
-        end
-
-        def allIncorrect
-            problemStatus = @status.select("ProblemStatus")
-            problemStatus.allIncorrect     
-        end
-
-        def allReset
-            problemStatus = @status.select("ProblemStatus")
-            problemStatus.resetAll(@quiz.options.promoteThresh)
-            itemStats.reset
-        end
-
-        def problem(threshold)
-            problemStatus = @status.select("ProblemStatus")
-            return problemStatus.firstProblem(threshold)
-        end
-
-        def level(threshold)
-            problemStatus = @status.select("ProblemStatus")
-            return problemStatus.currentLevel(threshold)
-        end
-
-        def itemStats
-            return @status.select("ItemStats")
         end
 
         # Assign the contents of item to this item

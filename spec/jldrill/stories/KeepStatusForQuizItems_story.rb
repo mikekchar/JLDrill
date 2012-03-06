@@ -13,11 +13,12 @@ module JLDrill
 /Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
 /Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 3/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
 /Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 4/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/Potential: 111076/]
+            @quiz = Quiz.new
             @strings = @fileString.split("\n")
             @strings.length.should be(4)
             @items = []
             0.upto(@strings.length - 1) do |i|
-                 @items.push(Item.create(@strings[i]))
+                 @items.push(QuizItem.create(@quiz, @strings[i]))
             end
 		end
 		
@@ -43,7 +44,7 @@ module JLDrill
         it "should be able to parse the information in the file" do
             @items[1].to_s.should eql(@strings[1] + "\n")
             time = @items[1].schedule(2).markReviewed
-            newItem = Item.create(@items[1].to_s)
+            newItem = QuizItem.create(@quiz, @items[1].to_s)
             newItem.schedule(2).lastReviewed.to_i.should eql(@items[1].schedule(2).lastReviewed.to_i)
         end
         
@@ -110,7 +111,7 @@ module JLDrill
         it "should be able to parse the schedule information in the file" do
             @items[3].to_s.should eql(@strings[3] + "\n")
             time = @items[3].schedule(2).schedule
-            newItem = Item.create(@items[3].to_s)
+            newItem = QuizItem.create(@quiz, @items[3].to_s)
             # Since we aren't using
             # a bin here, we'll cheat and set the bin number manually.
             newItem.bin = 4

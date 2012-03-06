@@ -8,7 +8,8 @@ module JLDrill
 	describe Statistics do
 	
 	    before(:each) do
-	        @statistics = Statistics.new(Quiz.new, 4)
+            @quiz = Quiz.new()
+	        @statistics = Statistics.new(@quiz, 4)
 	    end
 	    
 	    it "should start with an estimate of 0" do
@@ -23,7 +24,7 @@ module JLDrill
 	    end
 	    
 	    it "should set the accuracy correctly" do
-	        item = Item.new
+	        item = QuizItem.new(@quiz, nil)
             item.bin = 4
 	        @statistics.accuracy.should be(0)
 	        @statistics.correct(item, 2)
@@ -33,7 +34,7 @@ module JLDrill
 	    end
 	    
 	    it "should slowly move the estimate towards 100" do
-	        item = Item.new
+	        item = QuizItem.new(@quiz, nil)
             item.bin = 4
 	        results = [30, 51, 65, 75, 82, 87, 90, 93]
 	        0.upto(7) do |i|
@@ -43,7 +44,7 @@ module JLDrill
 	    end
 	    
 	    it "should keep track of the last ten responses" do
-	        item = Item.new
+	        item = QuizItem.new(@quiz, nil)
             item.bin = 4
 	        @statistics.lastTen.size.should be(0)
 	        @statistics.correct(item, 2)
@@ -59,7 +60,7 @@ module JLDrill
 	    end
 	    
 	    it "should keep track of the recent (up to 10 items) accuracy" do
-	        item = Item.new
+	        item = QuizItem.new(@quiz, nil)
             item.bin = 4
 	        @statistics.recentAccuracy.should be(0)
 	        @statistics.correct(item, 2)
@@ -75,7 +76,7 @@ module JLDrill
 	    end
 	    
 	    def test_numTrials(percent, requiredConfidence, trials)
-	        item = Item.new
+	        item = QuizItem.new(@quiz, nil)
             item.bin = 4
 	        @statistics.resetConfidence
 	        i = 0

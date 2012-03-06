@@ -7,6 +7,7 @@ module JLDrill
 	describe Bin do
 	
 		before(:each) do
+            @quiz = Quiz.new()
         	@fileString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
 /Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
 /Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 3/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 221184/
@@ -15,7 +16,7 @@ module JLDrill
             @strings.length.should be(4)
             @items = []
             0.upto(@strings.length - 1) do |i|
-                 @items.push(Item.create(@strings[i]))
+                 @items.push(QuizItem.create(@quiz, @strings[i]))
             end
 
 		    @bin = Bin.new("My name", 42)

@@ -46,7 +46,7 @@ module JLDrill
 
         # Adds a sample vocabulary to a bin in a position and returns the item
         def test_addItem(bin, position)
-            item = Item.new(@sampleQuiz.sampleVocab)
+            item = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
             item.position = position
             @quiz.contents.addItem(item, bin)
             return item
@@ -109,16 +109,14 @@ module JLDrill
 	    it "should be able to create problems of the correct level" do
             @quiz.options.promoteThresh = 1
 
-	        item1 = Item.new(@sampleQuiz.sampleVocab)
-            item1.quiz = @quiz
+	        item1 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
 	        item1.bin = Strategy.workingSetBin
             problemStatus = item1.status.select("ProblemStatus")
             problemStatus.checkSchedules(@quiz.options.promoteThresh)
             problemStatus.findScheduleForLevel(1).should_not eql(nil)
             item1.level(1).should eql(1)
 
-	        item2 = Item.new(@sampleQuiz.sampleVocab)
-            item2.quiz = @quiz
+	        item2 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
 	        item2.bin = Strategy.workingSetBin
             problemStatus = item2.status.select("ProblemStatus")
             problemStatus.checkSchedules(@quiz.options.promoteThresh)
@@ -126,8 +124,7 @@ module JLDrill
             @quiz.strategy.correct(item2)
             item2.level(1).should eql(2)
 	        
-#            item3 = Item.new(@sampleQuiz.sampleVocab)
-#	        item3.bin = Strategy.workingSetBin
+#            item3 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
 #            item3.scheduleAll
 #            item1.setScores(0)
 #            item3.level(1).should eql(0)

@@ -27,6 +27,14 @@ module JLDrill
             self.exit
         end
 
+        def startLongEvent()
+            @parent.startLongEvent()
+        end
+
+        def stopLongEvent()
+            @parent.stopLongEvent()
+        end
+
         def enter(parent, quiz)
             super(parent)
             newQuiz = Quiz.new

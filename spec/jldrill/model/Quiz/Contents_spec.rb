@@ -15,7 +15,7 @@ module JLDrill
 	    end
 	    
         it "should add items to the last position if the position is set to -1" do
-        	item = Item.new(@sampleQuiz.sampleVocab)
+        	item = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
             item.position = -1
 	        @quiz.contents.bins[Strategy.reviewSetBin].length.should be(2)
 	        @quiz.contents.addItem(item, Strategy.reviewSetBin)
@@ -39,12 +39,12 @@ module JLDrill
 	    end
 	    
 	    it "should be able to add items to the contents only if they dont already exist" do
-            item = Item.new(@sampleQuiz.sampleVocab)
+            item = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
             @quiz.contents.addUniquely(item).should be(true)
             item.position.should be(4)
 
             # We just added this one
-            existingItem = Item.new(@sampleQuiz.sampleVocab)
+            existingItem = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
             @quiz.contents.addUniquely(existingItem).should be(false)
 	    end
 	    
@@ -52,7 +52,7 @@ module JLDrill
 	        quiz2 = Quiz.new
 
             quiz2.loadFromString("testFile", @sampleQuiz.file)
-            item = Item.new(@sampleQuiz.sampleVocab)
+            item = QuizItem.new(quiz2, @sampleQuiz.sampleVocab)
             quiz2.contents.addItem(item, Strategy.reviewSetBin)
             quiz2.contents.length.should be(5)
             quiz2.contents.bins[Strategy.reviewSetBin].length.should eql(3)

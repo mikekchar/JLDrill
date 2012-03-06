@@ -121,7 +121,7 @@ module JLDrill::ItemsHaveTimeLimits
             item = newSet[0]
             item.itemStats.timeLimit = 123.987654321
             itemString = item.to_s
-            newItem = JLDrill::Item.create(itemString)
+            newItem = JLDrill::QuizItem.create(@quiz, itemString)
             newItem.itemStats.timeLimit.should eql(123.988)
         end
     end

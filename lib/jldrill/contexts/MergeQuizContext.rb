@@ -19,6 +19,10 @@ module JLDrill
             return "Merging #{@quiz1.name} with #{@quiz2.name} data"
         end
 
+        def exitMergeQuizContext
+            self.exit
+        end
+
         def readFile
             size = @quiz2.length
             pos = 0
@@ -35,6 +39,9 @@ module JLDrill
                     end
                     pos += 1
                     @mainView.update(pos.to_f / size.to_f)
+                end
+                if pos >= size
+                    exitMergeQuizContext
                 end
                 pos >= size
             end

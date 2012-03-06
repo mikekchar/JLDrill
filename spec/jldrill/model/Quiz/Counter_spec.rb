@@ -26,8 +26,9 @@ module JLDrill
         end
 
         it "should count properly" do 
+            quiz = JLDrill::Quiz.new
             counter = JLDrill::DurationCounter.new
-            item = Item.new
+            item = JLDrill::QuizItem.new(quiz, nil)
             item.schedule(2).schedule
             testDuration(item, counter, 3, 0, 1)
             testDuration(item, counter, 8, 1, 1)

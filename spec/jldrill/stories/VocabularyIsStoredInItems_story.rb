@@ -8,6 +8,7 @@ module JLDrill::VocabularyIsStoredInItems
     Story = JLDrill::StoryMemento.new("Vocabulary Is Stored In Items")
     def Story.setup(type)
         super(type)
+        @quiz = JLDrill::Quiz.new()
     end
 
 ###########################################
@@ -15,7 +16,7 @@ module JLDrill::VocabularyIsStoredInItems
     describe Story.stepName("Items can hold Vocabulary") do
         it "should be able to create an Item from a Vocabulary" do
             vocabString = "/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 2/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/Potential: 432000/\n"
-            item = JLDrill::Item.create(vocabString)
+            item = JLDrill::QuizItem.create(@quiz, vocabString)
             item.to_s.should eql(vocabString)
         end
 
@@ -32,9 +33,9 @@ module JLDrill::VocabularyIsStoredInItems
             vocab1.should eql(vocab2)
             vocab1.should_not eql(vocab3)
 
-            item1 = JLDrill::Item.new(vocab1)
-            item2 = JLDrill::Item.new(vocab2)
-            item3 = JLDrill::Item.new(vocab3)
+            item1 = JLDrill::QuizItem.new(@quiz, vocab1)
+            item2 = JLDrill::QuizItem.new(@quiz, vocab2)
+            item3 = JLDrill::QuizItem.new(@quiz, vocab3)
 
             item1.should eql(item2)
             item1.should_not eql(item3)
