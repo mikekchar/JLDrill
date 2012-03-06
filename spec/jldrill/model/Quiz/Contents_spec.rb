@@ -27,7 +27,7 @@ module JLDrill
 	    
 	    it "should be able to print out the status" do
             @quiz.contents.bins[Strategy.reviewSetBin][1].schedule.scheduled?.should be(true)
-    	    @quiz.contents.status.should eql("New: 1 Review: 2 Working: 1")
+    	    @quiz.contents.status.should eql("New: 1 Review: 2 Working: 0, 0, 1")
 	    end
 	    
 	    def countSizes(sizes, range)

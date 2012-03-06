@@ -345,6 +345,17 @@ module JLDrill
             end
             !hasItems
         end
+
+        # Return the number of items in the bin that are of level, level
+        def numLevel(bin, level)
+            retVal = 0
+            @bins[bin].each do |item|
+                if (item.problemStatus.currentLevel == level)
+                    retVal += 1
+                end
+            end
+            return retVal
+        end
         
         # Return a string containing the length of all the bins
         def status
@@ -353,7 +364,7 @@ module JLDrill
                 retVal += "Forgotten: #{@bins[3].length} "
             end
             retVal += "Review: #{@bins[2].length} "
-            retVal += "Working: #{@bins[1].length}"
+            retVal += "Working: #{self.numLevel(1,0)}, #{self.numLevel(1,1)}, #{self.numLevel(1,2)}"
             return retVal
         end
         

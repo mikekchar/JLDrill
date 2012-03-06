@@ -80,7 +80,6 @@ module JLDrill
 
         # Returns the schedule that should be addressed first
         def firstSchedule
-            f = currentLevel
             retVal = findScheduleForLevel(currentLevel)
             if retVal.nil?
                 retVal = @schedules.min do |x,y|

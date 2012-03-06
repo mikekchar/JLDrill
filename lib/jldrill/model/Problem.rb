@@ -84,7 +84,7 @@ module JLDrill
                 if bin == 0
                     retVal += "New"
                 else
-                    retVal += bin.to_s
+                    retVal += "#{@item.problemStatus.currentLevel + 1}"
                 end
             else
                 retVal += "+#{@item.itemStats.consecutive}"

@@ -208,7 +208,7 @@ module JLDrill
             problem2 = ProblemFactory.create(0, i2, i2.schedule)
             problem3 = ProblemFactory.create(0, i3, i3.schedule)
 
-            problem1.status.should eql("     1 --> 5.0 days")
+            problem1.status.should eql("     3 --> 5.0 days")
             problem2.status.should eql("     +0 --> 5.0 days")
             problem3.status.should eql("     +0 --> 5.0 days")
             problem2.item.schedule.markReviewed

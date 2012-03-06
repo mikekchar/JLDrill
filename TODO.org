@@ -90,6 +90,9 @@ the task.
 	type wrong, then ALL the problem types for the item have
 	their schedule set to 10 seconds +- 10%.
 
+	- [X] Make status look the same as it did before the change
+	- [ ] Review set only seems to pick Kanji problems uness there
+		  is no kanji.
 	- [ ] Make reading problems valid in working set
     - [X] Get rid of having to pass the threshold around
 
