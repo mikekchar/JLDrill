@@ -28,7 +28,7 @@ Let's have fun!
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2011-02-07 Tue>
-  :CurrentDate:  <2012-02-07 Tue>
+  :CurrentDate:  <2012-03-13 Tue>
   :EndDate: <2012-03-02 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
@@ -93,8 +93,9 @@ the task.
 	- [X] Make status look the same as it did before the change
     - [ ] status means the problem and stats status in the item
           but the UI output string in every other object
-	- [ ] Review set only seems to pick Kanji problems uness there
-		  is no kanji.
+	- [X] Review set only seems to pick Kanji problems uness there
+		  is no kanji. The score in the schedules wasn't set in
+		  old files.
 	- [ ] Make reading problems valid in working set
     - [X] Get rid of having to pass the threshold around
 

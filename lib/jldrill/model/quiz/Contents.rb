@@ -203,6 +203,11 @@ module JLDrill
         # Return the item that was added.
         def parseItem(line, bin)
             item = QuizItem.create(@quiz, line)
+            # Fix for legacy files where score isn't
+            # set properly in the schedules
+            if bin >= Strategy.reviewSetBin
+                item.level = 3
+            end
             return addItem(item, bin)
         end
 

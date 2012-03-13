@@ -84,6 +84,10 @@ module JLDrill
             return problemStatus.currentLevel
         end
 
+        def level=(level)
+            problemStatus.currentLevel = level
+        end
+
         def infoStatus
             retVal = super()
             if @bin < 2

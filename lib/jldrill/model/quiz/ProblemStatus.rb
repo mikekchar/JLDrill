@@ -78,6 +78,24 @@ module JLDrill
             return retVal
         end
 
+        def currentLevel=(level)
+            # Set the scores for the schedules up to the desired
+            # level to the promotion threshold.
+            0.upto(level-1) do |i|
+                s = findScheduleForLevel(i)
+                if !s.nil? && (s.score < @quiz.options.promoteThresh)
+                    s.score = @quiz.options.promoteThresh
+                end
+            end
+            # Set the rest to 0
+            (level).upto(2) do |i|
+                s = findScheduleForLevel(i)
+                if !s.nil?
+                    s.score = 0
+                end
+            end
+        end
+
         # Returns the schedule that should be addressed first
         def firstSchedule
             retVal = findScheduleForLevel(currentLevel)
