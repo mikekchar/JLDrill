@@ -213,6 +213,19 @@ module JLDrill::UserChangesOptions
            schedules[0].duration.should eql(d1)
            schedules[1].duration.should eql(d1)
            schedules[2].duration.should eql(d2)
+           
+           Story.quiz.options.reviewReading = false
+           Story.quiz.options.reviewReading.should be_false
+           Story.quiz.options.reviewKanji.should be_true
+           Story.quiz.options.reviewMeaning.should be_true
+
+            schedules = item.schedules.sort do |x, y|
+                x.duration <=> y.duration
+            end
+            schedules.size.should eql(2)
+           schedules[0].duration.should eql(d1)
+           schedules[1].duration.should eql(d2)
+
         end
     end
 
