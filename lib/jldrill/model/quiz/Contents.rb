@@ -363,6 +363,17 @@ module JLDrill
             end
             return retVal
         end
+
+        # Go through each of the bins and make sure the schedules
+        # are set correctly for each item.  It is usually done when the
+        # options change.
+        def updateSchedules
+            @bins.each do |bin|
+                bin.each do |item|
+                    item.updateSchedules
+                end
+            end
+        end
         
         # Return a string containing the length of all the bins
         def status

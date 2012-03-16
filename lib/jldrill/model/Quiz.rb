@@ -32,6 +32,7 @@ module JLDrill
             @name = ""
             @info = ""
             @options = Options.new(self)
+            @options.subscribe(self)
             @contents = Contents.new(self)
             @strategy = Strategy.new(self)
             @currentProblem = nil
@@ -39,6 +40,10 @@ module JLDrill
             @last = nil
             update
             super
+        end
+
+        def optionsUpdated(options)
+            @contents.updateSchedules
         end
 
         def length
@@ -221,6 +226,9 @@ module JLDrill
         end
 
         def finishParsing
+            # Indicate to the options that we have finished loading
+            # and that any other changes are due to the user.
+            @options.optionsFinishedLoading
             # Need to sort the new set to deal with older files that
             # may not be sorted.
             @strategy.newSet.sort! do |x, y|

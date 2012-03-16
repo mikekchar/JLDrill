@@ -32,7 +32,6 @@ module JLDrill
 			@dictionary = nil
             @language = "Japanese"
 			@tanaka = nil
-            @reviewOptionsSet = false
             @autoloadDic = false
             @forgettingThresh = 0.0
             defaultReviewOptions
@@ -46,7 +45,7 @@ module JLDrill
             retVal.reviewMode = @reviewMode
             retVal.dictionary = @dictionary
             retVal.language = @language
-            setReviewOptions(@reviewOptionsSet)
+            retVal.reviewOptionsSet = @reviewOptionsSet
             retVal.reviewMeaning = @reviewMeaning
             retVal.reviewKanji = @reviewKanji
             retVal.reviewReading = @reviewReading
@@ -100,7 +99,7 @@ module JLDrill
             self.introThresh = options.introThresh
             self.dictionary = options.dictionary
             self.language = options.language
-            setReviewOptions(options.reviewOptionsSet)
+            @reviewOptionsSet = options.reviewOptionsSet
             self.reviewMeaning = options.reviewMeaning
             self.reviewKanji = options.reviewKanji
             self.reviewReading = options.reviewReading
@@ -165,29 +164,34 @@ module JLDrill
             @reviewMeaning = false
             @reviewKanji = false
             @reviewReading = false
-            saveNeeded
         end
 
         def defaultReviewOptions
             @reviewMeaning = true
             @reviewKanji = true
             @reviewReading = false
-            saveNeeded
+            @reviewOptionsSet = false
         end
 
-        def setReviewOptions(value)
-            if (value == true) 
-                if (@reviewOptionsSet == false)
-                    clearReviewOptions
-                end
-            else
-                defaultReviewOptions
+        # If none of the review options are set, then the options
+        # will remain at the default.  But if one of the items is set, then
+        # they are all cleared.
+        def initializeReviewOptions
+            if (@reviewOptionsSet == false)
+                clearReviewOptions
             end
-            @reviewOptionsSet = value
+            @reviewOptionsSet = true
+        end
+
+        # Once the options have finished loading we keep the default
+        # as if it had been set by hand.  This needs to be called by
+        # the quiz after the file has finished loading
+        def optionsFinishedLoading
+            @reviewOptionsSet = true
         end
         
         def reviewMeaning=(value)
-            setReviewOptions(true)
+            initializeReviewOptions
             if @reviewMeaning != value
                 @reviewMeaning = value
                 saveNeeded
@@ -195,7 +199,7 @@ module JLDrill
         end
 
         def reviewKanji=(value)
-            setReviewOptions(true)
+            initializeReviewOptions
             if @reviewKanji != value
                 @reviewKanji = value
                 saveNeeded
@@ -203,7 +207,7 @@ module JLDrill
         end
 
         def reviewReading=(value)
-            setReviewOptions(true)
+            initializeReviewOptions
             if @reviewReading != value
                 @reviewReading = value
                 saveNeeded

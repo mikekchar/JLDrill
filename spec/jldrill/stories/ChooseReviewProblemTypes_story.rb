@@ -9,6 +9,7 @@ require 'jldrill/views/test/CommandView'
 require 'jldrill/views/test/ProblemView'
 require 'jldrill/views/test/QuizStatusView'
 require 'jldrill/views/test/ItemHintView'
+require 'jldrill/views/test/MainWindowView'
 
 module JLDrill::UserChoosesReviewProblemTypes
 
@@ -34,7 +35,7 @@ module JLDrill::UserChoosesReviewProblemTypes
         before(:each) do
             Story.setup(JLDrill::Test)
             Story.start
-            Story.quiz.options.reviewOptionsSet.should eql(false)
+            Story.quiz.options.reviewOptionsSet.should eql(true)
 			Story.quiz.options.reviewMeaning.should eql(true)
             Story.quiz.options.reviewKanji.should eql(true)
             Story.quiz.options.reviewReading.should eql(false)
@@ -90,23 +91,17 @@ module JLDrill::UserChoosesReviewProblemTypes
             # ReviewMeaning
             Story.quiz.options.reviewMeaning = false
             Story.quiz.needsSave.should eql(true)
-            Story.quiz.options.setReviewOptions(false)
             Story.quiz.setNeedsSave(false)
-            Story.quiz.needsSave.should eql(false)
 
             # ReviewKanji
             Story.quiz.options.reviewKanji = false
             Story.quiz.needsSave.should eql(true)
-            Story.quiz.options.setReviewOptions(false)
             Story.quiz.setNeedsSave(false)
-            Story.quiz.needsSave.should eql(false)
 
             # ReviewReading
             Story.quiz.options.reviewReading = true
             Story.quiz.needsSave.should eql(true)
-            Story.quiz.options.setReviewOptions(false)
             Story.quiz.setNeedsSave(false)
-            Story.quiz.needsSave.should eql(false)
         end
 
         # For legacy reasons, if the review options haven't been
@@ -114,38 +109,44 @@ module JLDrill::UserChoosesReviewProblemTypes
         # But if any of the review options are set, then it
         # should only do the ones that are set
         it "should know if the review options have been set" do
-            # It should initially be false
+            # The file has been loaded, so the reviewOptions are already set
+            Story.quiz.options.reviewOptionsSet.should eql(true)
+
+            # This will set it up to a pre-load state
+            Story.quiz.options.defaultReviewOptions
             Story.quiz.options.reviewOptionsSet.should eql(false)
+
             Story.quiz.options.reviewMeaning = false
             Story.quiz.options.reviewOptionsSet.should eql(true)
 
             # We'll set it so that we can keep testing
-            Story.quiz.options.setReviewOptions(false)
+            Story.quiz.options.defaultReviewOptions
             Story.quiz.options.reviewMeaning = true
             Story.quiz.options.reviewOptionsSet.should eql(true)
 
             # We'll set it so that we can keep testing
-            Story.quiz.options.setReviewOptions(false)
+            Story.quiz.options.defaultReviewOptions
             Story.quiz.options.reviewKanji = false
             Story.quiz.options.reviewOptionsSet.should eql(true)
 
             # We'll set it so that we can keep testing
-            Story.quiz.options.setReviewOptions(false)
+            Story.quiz.options.defaultReviewOptions
             Story.quiz.options.reviewKanji = true
             Story.quiz.options.reviewOptionsSet.should eql(true)
 
             # We'll set it so that we can keep testing
-            Story.quiz.options.setReviewOptions(false)
+            Story.quiz.options.defaultReviewOptions
             Story.quiz.options.reviewReading = false
             Story.quiz.options.reviewOptionsSet.should eql(true)
 
             # We'll set it so that we can keep testing
-            Story.quiz.options.setReviewOptions(false)
+            Story.quiz.options.defaultReviewOptions
             Story.quiz.options.reviewReading = true
             Story.quiz.options.reviewOptionsSet.should eql(true)
         end
 
         it "should clear the review defaults when the reviewOptions are set" do
+            Story.quiz.options.defaultReviewOptions
             # These are the defaults
             Story.quiz.options.reviewMeaning.should eql(true)
             Story.quiz.options.reviewKanji.should eql(true)
@@ -159,29 +160,39 @@ module JLDrill::UserChoosesReviewProblemTypes
         end
 
         it "should create a list of allowed levels" do
+            Story.quiz.options.defaultReviewOptions
             # It should default to meaning and kanji levels
             Story.quiz.options.allowedLevels.should eql([1,2])
 
             # This should reset all the options to false
             Story.quiz.options.reviewMeaning = false
-            # And ironically, this should cause it to use the default
-            # of meaning and kanji levels
-            Story.quiz.options.allowedLevels.should eql([1,2])
+            # But since you can't have a drill with no levels, it
+            # defaults to 1 and 2
+            Story.quiz.options.allowedLevels.should eql([1, 2])
 
-            # Only Meaning
+            Story.quiz.options.defaultReviewOptions
+
+            # During loading time, if one item is set then only
+            # that item is set, not the defaults.
             Story.quiz.options.reviewMeaning = true            
             Story.quiz.options.allowedLevels.should eql([2])
 
+            Story.quiz.options.defaultReviewOptions
+            
             # Only Kanji
             Story.quiz.options.reviewMeaning = false
             Story.quiz.options.reviewKanji = true
             Story.quiz.options.allowedLevels.should eql([1])
 
+            Story.quiz.options.defaultReviewOptions
+            
             # Only Reading
             Story.quiz.options.reviewKanji = false
             Story.quiz.options.reviewReading = true
             Story.quiz.options.allowedLevels.should eql([0])
 
+            Story.quiz.options.defaultReviewOptions
+            
             # Kanji and Reading
             Story.quiz.options.reviewKanji = true
             Story.quiz.options.reviewReading = true

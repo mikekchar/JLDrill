@@ -166,6 +166,54 @@ module JLDrill::UserChangesOptions
             newOptions.assign(Story.quiz.options)
             newOptions.to_s.should be_eql(optionsString)
         end	    
+
+        it "should add and remove problem schedule types when options change" do
+            item = Story.quiz.contents.bins[JLDrill::Strategy.workingSetBin][0]
+            item.should_not be_nil
+            item.level = 3
+            Story.quiz.strategy.promote(item) 
+
+            # Sort the schedules by duration so that I can keep track
+            # of which one is which.
+            schedules = item.schedules.sort do |x, y|
+                x.duration <=> y.duration
+            end
+            schedules.size.should eql(2)
+
+            # Adjust the schedules so that 10 seconds has passed.
+            # Otherwise the results can depend on whether or not the clock
+            # has ticked over.
+            rt = Time::at(Time::now.to_i - 10)
+
+            schedules[0].should be_scheduled
+            schedules[0].lastReviewed = rt
+            d1 = schedules[0].duration
+            schedules[1].should be_scheduled
+            schedules[1].lastReviewed = rt
+            d2 = schedules[1].duration
+
+           Story.quiz.options.reviewKanji.should be_true
+           Story.quiz.options.reviewMeaning.should be_true
+           Story.quiz.options.reviewReading.should be_false
+           Story.quiz.options.reviewReading = true
+           Story.quiz.options.reviewReading.should be_true
+           Story.quiz.options.reviewKanji.should be_true
+           Story.quiz.options.reviewMeaning.should be_true
+
+           # When adding the new schedule it uses information
+           # from the schedule with the lowest reviewLoad.  Since
+           # no time has passed since we scheduled, this will be
+           # the one with the shortest duration.  Hence, there will
+           # be two items with the lowest duration and one with the
+           # higher duration.
+            schedules = item.schedules.sort do |x, y|
+                x.duration <=> y.duration
+            end
+           schedules.size.should eql(3)
+           schedules[0].duration.should eql(d1)
+           schedules[1].duration.should eql(d1)
+           schedules[2].duration.should eql(d2)
+        end
     end
 
     describe Story.stepName("Options view can modify options") do
