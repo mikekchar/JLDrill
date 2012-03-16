@@ -95,7 +95,17 @@ module JLDrill
         # what percentage of its potential schedule it has waited
         def rescheduleReviewSet
             reviewSet.sort! do |x,y|
-                x.schedule.reviewLoad <=> y.schedule.reviewLoad
+                # Schedule should never be nil except in the tests,
+                # but just in case
+                if !x.schedule.nil?
+                    if !y.schedule.nil?
+                        x.schedule.reviewLoad <=> y.schedule.reviewLoad
+                    else
+                        -1
+                    end
+                else
+                    1
+                end
             end
         end
 
@@ -104,8 +114,31 @@ module JLDrill
         # waited
         def rescheduleForgottenSet
             forgottenSet.sort! do |x,y|
-                x.schedule.reviewLoad <=> y.schedule.reviewLoad
+                # Schedule should never be nil except in the tests,
+                # but just in case
+                if !x.schedule.nil?
+                    if !y.schedule.nil?
+                        x.schedule.reviewLoad <=> y.schedule.reviewLoad
+                    else
+                        -1
+                    end
+                else
+                    1
+                end
             end
+        end
+
+        # returns true if the review rate of an item is below
+        # the forgetting threshold in the options
+        def reviewRateUnderThreshold(item)
+            retVal = false
+            # The schedule should only be nil in the tests, but if it
+            # is, this will return false
+            if !item.schedule.nil?
+                retVal = item.schedule.reviewRate < 
+                options.forgettingThresh.to_f
+            end
+            return retVal
         end
 
         # If the user changes increases the forgetting threshold,
@@ -114,8 +147,7 @@ module JLDrill
         def unforgetItems
             while ((!forgottenSet.empty?) &&
                   ((options.forgettingThresh == 0.0) ||
-                   (forgottenSet.last.schedule.reviewRate < 
-                        options.forgettingThresh.to_f)))
+                   reviewRateUnderThreshold(forgottenSet.last)))
                 contents.moveToBin(forgottenSet.last, Strategy.reviewSetBin)
             end
         end
@@ -126,7 +158,7 @@ module JLDrill
         def forgetItems
             while ((options.forgettingThresh != 0.0) &&
                    (!reviewSet.empty?) && 
-                   (reviewSet[0].schedule.reviewRate >= options.forgettingThresh.to_f))
+                   !reviewRateUnderThreshold(reviewSet[0]))
                 contents.moveToBin(reviewSet[0], Strategy.forgottenSetBin)
             end
         end
@@ -178,11 +210,21 @@ module JLDrill
                 !(allSeen?(reviewSet))
         end
 
+        # Returns true if the item has been seen before.  If the
+        # item has no schedule set, then it hasn't been seen before.
+        def seen?(item)
+            retVal = false
+            if !item.schedule.nil?
+                retVal = item.schedule.seen
+            end
+            return retVal
+        end
+
         # Returns the number of unseen items in the bin
         def numUnseen(bin)
             total = 0
             bin.each do |item|
-                total += 1 if !item.schedule.seen
+                total += 1 if !seen?(item)
             end
             total
         end
@@ -190,7 +232,7 @@ module JLDrill
         # Returns true if all the items in the bin have been seen
         def allSeen?(bin)
             bin.all? do |item|
-                item.schedule.seen?
+                seen?(item)
             end
         end
         
@@ -199,7 +241,7 @@ module JLDrill
         def firstUnseen(bin)
             index = 0
             # find the first one that hasn't been seen yet
-            while (index < bin.length) && bin[index].schedule.seen?
+            while (index < bin.length) && seen?(bin[index])
                 index += 1
             end
             
@@ -215,7 +257,7 @@ module JLDrill
             if n < numUnseen(bin)
                 i = 0
                 0.upto(n) do |m|
-                    while bin[i].schedule.seen
+                    while seen?(bin[i])
                         i += 1
                     end
                     if m != n
@@ -230,7 +272,9 @@ module JLDrill
         # Sets the schedule of each item in the bin to unseen
         def setUnseen(bin)
             bin.each do |item|
-                item.schedule.seen = false
+                if !item.schedule.nil?
+                    item.schedule.seen = false
+                end
             end
         end
         
@@ -269,9 +313,6 @@ module JLDrill
             end
             if !(index == -1)
                 item = newSet[index]
-                # Resetting the schedule to make up for the consequences
-                # of an old bug where reset drills weren't reset properly.
-                item.resetSchedules
                 promote(item)
                 item
             else
@@ -329,8 +370,8 @@ module JLDrill
         def promote(item)
             if !item.nil?
                 if item.bin == Strategy.newSetBin
-                    item.setScores(0)
                     contents.moveToBin(item, Strategy.workingSetBin)
+                    item.setScores(0)
                 else 
                     if item.bin == Strategy.workingSetBin
                         # Newly promoted items
@@ -340,8 +381,7 @@ module JLDrill
                         item.scheduleAll
                     end
                     # Put the item at the back of the reviewSet
-                    contents.bins[item.bin].delete(item)
-                    reviewSet.push(item)
+                    contents.moveToBin(item, Strategy.reviewSetBin)
                 end
             end
         end
@@ -365,7 +405,7 @@ module JLDrill
             @reviewStats.correct(item)
             @forgottenStats.correct(item)
             item.itemStats.correct
-            item.schedule.correct
+            item.schedule.correct unless item.schedule.nil?
             if (item.bin != Strategy.workingSetBin) ||
                 (item.level >= 3)
                 promote(item)
@@ -386,7 +426,6 @@ module JLDrill
         # in the review set, simply mark it correct.
         def learn(item)
             if item.bin <= Strategy.workingSetBin
-                item.setScores
                 contents.moveToBin(item, Strategy.reviewSetBin)
             end
             correct(item)

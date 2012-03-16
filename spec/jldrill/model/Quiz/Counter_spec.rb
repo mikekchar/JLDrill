@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'jldrill/model/quiz/Counter'
+require 'jldrill/spec/SampleQuiz.rb'
 
 module JLDrill
     describe Counter do
@@ -26,10 +27,11 @@ module JLDrill
         end
 
         it "should count properly" do 
-            quiz = JLDrill::Quiz.new
+            quiz = JLDrill::SampleQuiz.new.resetQuiz
             counter = JLDrill::DurationCounter.new
-            item = JLDrill::QuizItem.new(quiz, nil)
-            item.schedule.schedule
+            item = quiz.contents.bins[Strategy.workingSetBin][0]
+            item.level = 3
+            quiz.strategy.promote(item)
             testDuration(item, counter, 3, 0, 1)
             testDuration(item, counter, 8, 1, 1)
             testDuration(item, counter, 17, 2, 1)

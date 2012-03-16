@@ -55,14 +55,21 @@ module JLDrill
             length
         end
 
-        # Add an item to a bin
-        def addItem(item, bin)
+        # Push an item to the back of a bin.  This should only be
+        # called by local member functions
+        def pushItem(item, bin)
             item.bin = bin
             item.quiz = @quiz
             if item.position == -1
                 item.position = length 
             end
             @bins[bin].push(item)
+            item.updateSchedules
+        end
+
+        # Add an item to a bin
+        def addItem(item, bin)
+            pushItem(item, bin)
             itemAdded(item)
             saveNeeded
         end
@@ -203,11 +210,6 @@ module JLDrill
         # Return the item that was added.
         def parseItem(line, bin)
             item = QuizItem.create(@quiz, line)
-            # Fix for legacy files where score isn't
-            # set properly in the schedules
-            if bin >= Strategy.reviewSetBin
-                item.level = 3
-            end
             return addItem(item, bin)
         end
 
@@ -269,7 +271,7 @@ module JLDrill
         def moveToBin(item, bin)
             if !item.nil?
                 @bins[item.bin].delete(item)
-                @bins[bin].push(item)
+                pushItem(item, bin)
                 saveNeeded
             end
         end

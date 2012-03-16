@@ -92,13 +92,13 @@ module JLDrill::QuestionAndAnswerAreDisplayed
             # Note: receive() is called for each part of the problem/answer
             # that is to be printed.  So it will be called once for each of
             # kanji, reading and meaning. Wether it is in the problem
-            # are answer depends on the problem type
+            # or answer depends on the problem type
             Story.setup(JLDrill::Gtk)
             Story.start
-            Story.view.problemDisplay.question.should_receive(:receive)
+            Story.view.problemDisplay.question.should_receive(:receive).exactly(2).times
             # loadQuiz will also start a drill, triggering the display
             Story.loadQuiz
-            Story.view.problemDisplay.answer.should_receive(:receive).exactly(2).times
+            Story.view.problemDisplay.answer.should_receive(:receive)
             Story.view.showAnswer
             Story.shutdown
         end

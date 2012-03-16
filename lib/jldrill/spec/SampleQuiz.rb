@@ -31,26 +31,27 @@ Review Kanji]
 
         FileVocab = %Q[
 New
-/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 0/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
+/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 0/Consecutive: 0/
 Working
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 1/Consecutive: 0/ReadingProblem/Score: 0/Level: 0/Potential: 432000/KanjiProblem/Score: 0/Level: 1/Potential: 432000/MeaningProblem/Score: 0/Level: 2/Potential: 432000/
 Review
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 2/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/LastReviewed: 1230076403/Duration: 10/Potential: 432000/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 3/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/LastReviewed: 1230076403/Duration: 10/Potential: 432000/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 2/Consecutive: 1/KanjiProblem/Score: 4/Level: 1/LastReviewed: 1230076403/Potential: 432000/MeaningProblem/Score: 4/Level: 2/LastReviewed: 1230076403/Duration: 10/Potential: 432000/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 3/Consecutive: 1/KanjiProblem/Score: 4/Level: 1/LastReviewed: 1230076403/Potential: 432000/MeaningProblem/Score: 4/Level: 2/LastReviewed: 1230076403/Duration: 10/Potential: 432000/
 Forgotten
 ]
 #################################
 
 # The following is the same vocabulary but with the quiz reset so 
-# that every item is unseen.
+# that every item is unseen.  Note that 会う is moved to the working
+# set because resetting the contents drills the first item.
 
         ResetVocab = %Q[
 New
-/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 3/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
+/Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 1/Consecutive: 0/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 2/Consecutive: 0/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 3/Consecutive: 0/
 Working
-/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 0/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
+/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 0/Consecutive: 0/ReadingProblem/Score: 0/Level: 0/Potential: 432000/KanjiProblem/Score: 0/Level: 1/Potential: 432000/MeaningProblem/Score: 0/Level: 2/Potential: 432000/
 ]
 
 # This is the result of allVocab joined with \n

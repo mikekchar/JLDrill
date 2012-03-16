@@ -78,7 +78,7 @@ module JLDrill
 	        item = test_addItem(Strategy.newSetBin, 1)
 	        @strategy.demote(item)
 	        item.bin.should eql(Strategy.newSetBin)
-	        item.schedule.level.should eql(0)
+	        item.schedule.should be_nil
 	    end
 
 	    it "should demote other items to the working set and reset the level to 0" do
@@ -113,28 +113,32 @@ module JLDrill
 	        item1.bin = Strategy.workingSetBin
             problemStatus = item1.status.select("ProblemStatus")
             problemStatus.checkSchedules
-            problemStatus.findScheduleForLevel(1).should_not eql(nil)
-            item1.level.should eql(1)
+            problemStatus.findScheduleForLevel(0).should_not eql(nil)
+            item1.level.should eql(0)
 
 	        item2 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
 	        item2.bin = Strategy.workingSetBin
             problemStatus = item2.status.select("ProblemStatus")
             problemStatus.checkSchedules
-            problemStatus.findScheduleForLevel(2).should_not eql(nil)
+            problemStatus.findScheduleForLevel(1).should_not eql(nil)
             @quiz.strategy.correct(item2)
-            item2.level.should eql(2)
+            item2.level.should eql(1)
 	        
-#            item3 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
-#            item3.scheduleAll
-#            item1.setScores(0)
-#            item3.level.should eql(0)
+	        item3 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
+	        item3.bin = Strategy.workingSetBin
+            problemStatus = item3.status.select("ProblemStatus")
+            problemStatus.checkSchedules
+            problemStatus.findScheduleForLevel(2).should_not eql(nil)
+            @quiz.strategy.correct(item3)
+            @quiz.strategy.correct(item3)
+            item3.level.should eql(2)
             
             problem1 = @strategy.createProblem(item1)
             problem2 = @strategy.createProblem(item2)
-#            problem3 = @strategy.createProblem(item3)
-#            problem1.should be_a_kind_of(ReadingProblem)
-            problem1.should be_a_kind_of(KanjiProblem)
-            problem2.should be_a_kind_of(MeaningProblem)
+            problem3 = @strategy.createProblem(item3)
+            problem1.should be_a_kind_of(ReadingProblem)
+            problem2.should be_a_kind_of(KanjiProblem)
+            problem3.should be_a_kind_of(MeaningProblem)
 	    end
     
         it "should be able to tell if the working set is full" do
@@ -252,7 +256,7 @@ module JLDrill
             item.bin.should eql(Strategy.workingSetBin)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
-#	        @strategy.correct(item)
+	        @strategy.correct(item)
             item.bin.should eql(Strategy.reviewSetBin)
             # we only increase consecutive in the review set
             item.itemStats.consecutive.should eql(1)

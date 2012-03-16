@@ -91,12 +91,14 @@ the task.
 	their schedule set to 10 seconds +- 10%.
 
 	- [X] Make status look the same as it did before the change
+    - [ ] Make sure new schedules are injected when the options
+          change to allow new items.
     - [ ] status means the problem and stats status in the item
           but the UI output string in every other object
 	- [X] Review set only seems to pick Kanji problems uness there
 		  is no kanji. The score in the schedules wasn't set in
 		  old files.
-	- [ ] Make reading problems valid in working set
+	- [X] Make reading problems valid in working set
     - [X] Get rid of having to pass the threshold around
 
    :PROPERTIES:

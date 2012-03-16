@@ -41,6 +41,10 @@ module JLDrill
             return problemStatus.firstSchedule
         end
 
+        def schedules
+            return problemStatus.schedules
+        end
+
         # UpdateAll the schedules
         def scheduleAll
             problemStatus.scheduleAll
@@ -53,6 +57,10 @@ module JLDrill
         
         def resetSchedules
             problemStatus.resetAll
+        end
+
+        def updateSchedules
+            problemStatus.checkSchedules
         end
 
         def allSeen(value)
@@ -90,7 +98,7 @@ module JLDrill
 
         def infoStatus
             retVal = super()
-            if @bin < 2
+            if @bin < Strategy.reviewSetBin
                 if bin == 0
                     retVal += "New"
                 else
@@ -98,11 +106,14 @@ module JLDrill
                 end
             else
                 retVal += "+#{itemStats.consecutive}"
-                if problemStatus.firstSchedule.reviewed?
+                if !problemStatus.firstSchedule.nil? &&
+                    problemStatus.firstSchedule.reviewed?
                     retVal += ", #{problemStatus.firstSchedule.reviewedDate}"
                 end
             end
-            retVal += " --> #{problemStatus.firstSchedule.potentialScheduleInDays} days"
+            if !problemStatus.firstSchedule.nil?
+                retVal += " --> #{problemStatus.firstSchedule.potentialScheduleInDays} days"
+            end
             return retVal
         end
     end

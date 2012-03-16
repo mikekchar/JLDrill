@@ -2,73 +2,69 @@
 require 'jldrill/model/Quiz'
 require 'jldrill/model/quiz/Statistics'
 require 'jldrill/model/Item'
+require 'jldrill/spec/SampleQuiz'
 
 module JLDrill
 
 	describe Statistics do
 	
 	    before(:each) do
-            @quiz = Quiz.new()
-	        @statistics = Statistics.new(@quiz, 4)
+            @quiz = SampleQuiz.new().resetQuiz
+	        @statistics = Statistics.new(@quiz, Strategy.reviewSetBin)
+            @item = @quiz.contents.bins[Strategy.workingSetBin][0]
+            @item.level = 3
+            @quiz.strategy.promote(@item)
 	    end
 	    
 	    it "should start with an estimate of 0" do
-	        @statistics.estimate.should be(0)
-	        @statistics.accuracy.should be(0)
+	        @statistics.estimate.should eql(0)
+	        @statistics.accuracy.should eql(0)
 	    end
 	    
 	    it "should have an accuracy of 100 if all are correct" do
 	        @statistics.correct = 42
 	        @statistics.incorrect = 0
-	        @statistics.accuracy.should be(100)
+	        @statistics.accuracy.should eql(100)
 	    end
-	    
+
 	    it "should set the accuracy correctly" do
-	        item = QuizItem.new(@quiz, nil)
-            item.bin = 4
-	        @statistics.accuracy.should be(0)
-	        @statistics.correct(item)
-	        @statistics.accuracy.should be(100)
-	        @statistics.incorrect(item)
-	        @statistics.accuracy.should be(50)
+	        @statistics.accuracy.should eql(0)
+	        @statistics.correct(@item)
+	        @statistics.accuracy.should eql(100)
+	        @statistics.incorrect(@item)
+	        @statistics.accuracy.should eql(50)
 	    end
 	    
 	    it "should slowly move the estimate towards 100" do
-	        item = QuizItem.new(@quiz, nil)
-            item.bin = 4
 	        results = [30, 51, 65, 75, 82, 87, 90, 93]
 	        0.upto(7) do |i|
-    	        @statistics.correct(item)
-    	        @statistics.estimate.should be(results[i])
+    	        @statistics.correct(@item)
+    	        @statistics.estimate.should eql(results[i])
     	    end
 	    end
 	    
 	    it "should keep track of the last ten responses" do
-	        item = QuizItem.new(@quiz, nil)
-            item.bin = 4
-	        @statistics.lastTen.size.should be(0)
-	        @statistics.correct(item)
-	        @statistics.lastTen.size.should be(1)
-	        @statistics.lastTen[0].should be(true)
-	        @statistics.incorrect(item)
-	        @statistics.lastTen.size.should be(2)
-	        @statistics.lastTen[1].should be(false)
+	        @statistics.lastTen.size.should eql(0)
+	        @statistics.correct(@item)
+	        @statistics.lastTen.size.should eql(1)
+	        @statistics.lastTen[0].should eql(true)
+	        @statistics.incorrect(@item)
+	        @statistics.lastTen.size.should eql(2)
+	        @statistics.lastTen[1].should eql(false)
 	        0.upto(20) do
-	            @statistics.correct(item)
+	            @statistics.correct(@item)
 	        end
-	        @statistics.lastTen.size.should be(10)
+	        @statistics.lastTen.size.should eql(10)
 	    end
 	    
 	    it "should keep track of the recent (up to 10 items) accuracy" do
-	        item = QuizItem.new(@quiz, nil)
-            item.bin = 4
-	        @statistics.recentAccuracy.should be(0)
-	        @statistics.correct(item)
-	        @statistics.recentAccuracy.should be(100)
-	        @statistics.incorrect(item)
-	        @statistics.recentAccuracy.should be(50)
-	        @statistics.correct(item)
-	        @statistics.recentAccuracy.should be(66)
+	        @statistics.recentAccuracy.should eql(0)
+	        @statistics.correct(@item)
+	        @statistics.recentAccuracy.should eql(100)
+	        @statistics.incorrect(@item)
+	        @statistics.recentAccuracy.should eql(50)
+	        @statistics.correct(@item)
+	        @statistics.recentAccuracy.should eql(66)
 	    end
 	    
 	    def test_Rand(percent)
@@ -76,16 +72,14 @@ module JLDrill
 	    end
 	    
 	    def test_numTrials(percent, requiredConfidence, trials)
-	        item = QuizItem.new(@quiz, nil)
-            item.bin = 4
 	        @statistics.resetConfidence
 	        i = 0
 	        finished = false
 	        while (i < trials) && !finished do
 	            if test_Rand(percent)
-    	            @statistics.correct(item)
+    	            @statistics.correct(@item)
     	        else
-    	            @statistics.incorrect(item)
+    	            @statistics.incorrect(@item)
     	        end
     	        i += 1
     	        finished = (@statistics.confidence > requiredConfidence)
@@ -121,12 +115,12 @@ module JLDrill
         #
         # So as far as I'm concerned, the algorithm is working well.
 	    it "should calculate the confidence that the probability is > 90" do
-	        (@statistics.confidence > 0).should be(true)
+	        (@statistics.confidence > 0).should eql(true)
 	        rc = 0.90  # Required Confidence
 	        tt = 50    # Total trials
 	        # These fail from time to time, so only enable them when you
 	        # want to test that the distribution is correct
-#	        test_averageTrials(0, rc, tt).should be(50)
+#	        test_averageTrials(0, rc, tt).should eql(50)
 #	        test_averageTrials(10, rc, tt).should be_close(50, 3)
 #	        test_averageTrials(20, rc, tt).should be_close(50, 3)
 #	        test_averageTrials(30, rc, tt).should be_close(50, 3)

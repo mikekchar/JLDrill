@@ -97,6 +97,14 @@ module JLDrill
             @duration.seconds = schedule.duration
         end
 
+        def setSameReviewAs(schedule)
+            @lastReviewed = schedule.lastReviewed
+            # scheduledTime is deprecated
+            @scheduledTime = schedule.scheduledTime
+            @potential = schedule.potential
+            @duration.seconds = schedule.duration
+        end
+
         def Schedule.defaultPotential
             return DEFAULT_POTENTIAL
         end

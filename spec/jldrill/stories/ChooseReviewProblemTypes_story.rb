@@ -53,6 +53,7 @@ module JLDrill::UserChoosesReviewProblemTypes
         it "should store the default options" do
             # Even though no options have been changed they should be written
             # to the output file.
+            Story.quiz.resetContents
             saveString = Story.quiz.saveToString
             saveString.should eql(Story.sampleQuiz.defaultSaveFile)
         end

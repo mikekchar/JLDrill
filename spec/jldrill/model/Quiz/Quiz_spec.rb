@@ -195,7 +195,7 @@ module JLDrill
 	        @quiz.contents.bins[Strategy.newSetBin].length.should eql(3)
 	        @quiz.contents.bins[Strategy.workingSetBin].length.should eql(1)
             test_problem(@quiz.currentProblem.question, 
-                         KanjiProblem.new(@quiz.currentProblem.item)) 
+                         ReadingProblem.new(@quiz.currentProblem.item)) 
 	        @quiz.bin.should eql(Strategy.workingSetBin)
 	        @quiz.currentProblem.item.should be_equal(item)
 
@@ -217,7 +217,7 @@ module JLDrill
                 test_drill
                 test_correct
             end
-            i.should eql(8)
+            i.should eql(12)
         end
 
         it "should use the promote threshold when promoting" do
@@ -235,7 +235,7 @@ module JLDrill
                 test_drill
                 test_correct
             end
-            i.should eql(16)
+            i.should eql(24)
         end
         
         it "should update the last reviewed status when the answer is made" do
@@ -257,9 +257,14 @@ module JLDrill
 
             schedule2.lastReviewed.should_not be_nil
 
+            # After a reset, test1 is the first item so it will be
+            # moved to the working set.  As such it will have a schedule.
+            # The lastReviewed should be set to nil.
+            # test2, on the other hand, is in the new set so it shouldn't
+            # have a schedule at all.
             @quiz.resetContents
             test1.schedule.lastReviewed.should be_nil
-            test2.schedule.lastReviewed.should be_nil
+            test2.schedule.should be_nil
         end
         
         it "should update the schedule correctly for review set items" do

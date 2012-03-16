@@ -38,11 +38,6 @@ module JLDrill::ScheduleItems
             Story.mainContext.quiz
         end
 
-        def thresh
-            quiz.options.promoteThresh.should eql(1)
-            return quiz.options.promoteThresh
-        end
-
         def newSet
             quiz.strategy.newSet
         end
@@ -62,14 +57,14 @@ module JLDrill::ScheduleItems
 
         def promoteIntoWorkingSet(item)
             item.itemStats.should be_inNewSet
-            drillCorrectly(item)
+            quiz.strategy.promote(item)
             item.itemStats.should be_inWorkingSet
         end
 
         def promoteIntoReviewSet(item)
             item.bin.should eql(JLDrill::Strategy.workingSetBin)
 
-            0.upto(thresh) do
+            0.upto(2) do
                 item.itemStats.should_not be_inNewSet
                 item.itemStats.should be_inWorkingSet
                 quiz.correct
@@ -79,14 +74,40 @@ module JLDrill::ScheduleItems
         end
 
         def createAndPromote(item)
-            item.schedule.should_not be_scheduled
+            # Items in the new set do not have schedules
+            item.schedule.should be_nil
+
+            # Creating a Problem in the new set it kind of strange,
+            # but if we do it, it should work and it shouldn't
+            # screw up the schedules
             quiz.createProblem(item)
-            item.schedule.should_not be_scheduled
+            item.schedule.should be_nil
+
+            # Promoting in the working set creates schedules
+            # for the problems, but it doesn't actually schedule them.
+            # The promotion criteria for working set items is the score.
             promoteIntoWorkingSet(item)
-            item.schedule.should_not be_scheduled
+            # Items in the working set have schedules for all 3 proplem types
+            item.schedules.size.should eql(3)
+            item.schedules.each do |schedule|
+                schedule.should_not be_scheduled
+                schedule.score.should eql(0)
+            end
+            # The schedule method should pick one of these
+            item.schedule.should_not be_nil
+
+            # Once it is promoted into the review set, the schedules
+            # should actually be scheduled.  Since we didn't get anything
+            # wrong, the potential time should be 5 days.
             promoteIntoReviewSet(item)
-            item.schedule.should be_scheduled
-            item.schedule.potential.should eql(432000)
+            # When the item is promoted to the review set, only the allowed
+            # problem types (Kanji and Meaning by default) keep their schedules
+            item.schedules.size.should eql(2)
+            item.schedules.each do |schedule|
+                schedule.should be_scheduled
+                schedule.potential.should eql(432000)
+            end
+            item.schedule.should_not be_nil
         end
 
         def inDays(duration)
@@ -186,8 +207,9 @@ module JLDrill::ScheduleItems
             schedule = item.schedule
             scheduleShouldBe(schedule, 5.0, 10)
             problemStatus = item.status.select("ProblemStatus")
-            # By default a meaning and kanji problem schedule are created
-            # if the item has kanji (which is should)
+            # By default a meaning and kanji problem schedule 
+            # are created if the item has kanji (which is should)
+            # Note: A reading problem schedule is *not* present by default!
             problemStatus.schedules.size.should eql(2)
 
             # Everything has been promoted so the current level

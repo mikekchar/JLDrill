@@ -45,6 +45,7 @@ module JLDrill
                 (problem.level == problem.requestedLevel) &&
                 problem.valid?)
                 # If it's a valid problem, push the schedule
+                schedule.level = problem.level
                 @schedules.push(schedule)
                 @types.push(type)
             end
@@ -103,11 +104,6 @@ module JLDrill
                 retVal = @schedules.min do |x,y|
                     x.reviewLoad <=> y.reviewLoad
                 end
-                # If there is no schedule, then create a meaning problem schedule
-                if retVal.nil?
-                    retVal = Schedule.new(@item)
-                    addScheduleType("MeaningProblem", retVal)
-                end
             end
             return retVal
         end
@@ -127,7 +123,12 @@ module JLDrill
                 if findSchedule(type).nil?
                     # If it can't find the correct type of schedule,
                     # duplicate the first one it finds and add it.
-                    addScheduleType(type, firstSchedule.clone)
+                    schedule = Schedule.new(@item)
+                    fs = firstSchedule
+                    if !fs.nil?
+                        schedule.setSameReviewAs(fs)
+                    end
+                    addScheduleType(type, schedule)
                 end
             end 
         end
@@ -144,12 +145,6 @@ module JLDrill
         def scheduleAll
             @schedules.each do |schedule|
                 schedule.schedule
-            end
-        end
-
-        def resetAll
-            @schedules.each do |schedule|
-                schedule.reset
             end
         end
 
@@ -177,19 +172,24 @@ module JLDrill
         # for the quiz.  If not, push a new type on.
         def checkSchedules
             if !@item.nil? && !@item.quiz.nil?
-                levels = @quiz.options.allowedLevels
+                if @item.bin == Strategy.newSetBin
+                    levels = []
+                elsif @item.bin == Strategy.workingSetBin
+                    levels = [0, 1, 2]
+                else
+                    levels = @quiz.options.allowedLevels
+                end
                 addAllowed(levels)
                 removeDisallowed(levels)
+                if @item.bin >= Strategy.reviewSetBin
+                    @item.level = 3
+                end
             end
         end
 
         def resetAll
-            # First check to make sure that there are the correct
-            # schedules.
-            checkSchedules
-            @schedules.each do |schedule|
-                schedule.reset
-            end
+            @schedules = []
+            @types = []
         end
 
         def allSeen(value)
@@ -222,8 +222,15 @@ module JLDrill
             # changed the options.
             checkSchedules
             sched = firstSchedule
-            index = @schedules.find_index(sched)
-            type = @types[index]
+            if sched.nil?
+                # If you try to create a problem with a new set item, there
+                # isn't a schedule yet, so we will just make a Meaning problem.
+                # I don't know why anyone would do this, but just in case.
+                type = "MeaningProblem"
+            else
+                index = @schedules.find_index(sched)
+                type = @types[index]
+            end
             return ProblemFactory.createKindOf(type, @item)
         end
 
