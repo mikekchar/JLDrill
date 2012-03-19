@@ -28,8 +28,8 @@ Let's have fun!
   :PROPERTIES:
   :COLUMNS: %40ITEM %JellyBeans(Total){+} %Done(Done){+} %Percent(Percent) %CurrentVelocity(Current) %NeededVelocity(Needed)
   :StartDate: <2011-02-07 Tue>
-  :CurrentDate:  <2012-03-13 Tue>
-  :EndDate: <2012-03-02 Fri>
+  :CurrentDate:  <2012-03-16 Fri>
+  :EndDate: <2012-03-23 Fri>
   :PERCENT: 0
   :CurrentVelocity: 0
   :NeededVelocity: 0
@@ -114,6 +114,11 @@ the task.
 	the spacing effect.  We want to select a speed of review
 	such that we forget until we can't forget any longer.
 	The question is how to determine this speed.
+
+   :PROPERTIES:
+   :JellyBeans: 2
+   :Done: 0
+   :END:
 
 *** TODO Allow users to update their drills
    A user can update a drill by appending the new version to their drill.

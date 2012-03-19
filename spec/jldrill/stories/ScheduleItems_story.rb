@@ -100,9 +100,6 @@ module JLDrill::ScheduleItems
             # should actually be scheduled.  Since we didn't get anything
             # wrong, the potential time should be 5 days.
             promoteIntoReviewSet(item)
-            # When the item is promoted to the review set, only the allowed
-            # problem types (Kanji and Meaning by default) keep their schedules
-            item.schedules.size.should eql(2)
             item.schedules.each do |schedule|
                 schedule.should be_scheduled
                 schedule.potential.should eql(432000)
@@ -200,6 +197,37 @@ module JLDrill::ScheduleItems
             twoHundredDays.days=200
             JLDrill::Schedule.backoff(twoHundredDays.seconds).should eql(twoHundredDays.seconds)
         end 
+
+        it "should set the potential schedule of failed items to the time elapsed" do
+            quiz.options.reviewKanji = false
+            item = newSet[0]
+
+            createAndPromote(item)
+            item.schedules.size.should eql(1)
+
+            schedule = item.schedule
+            scheduleShouldBe(schedule, 5.0, 10)
+            orig = schedule.potential
+
+            # Make the item last reviewed 10 day ago
+            schedule.lastReviewed = setDaysAgoReviewed(schedule, 10.0)
+            schedule.elapsedTime.should eql(inSeconds(10.0))
+
+            quiz.strategy.correct(item)
+            second = item.schedule.potential
+
+            schedule.lastReviewed = setDaysAgoReviewed(schedule, 10.0)
+            quiz.strategy.correct(item)
+            third = item.schedule.potential
+
+            # Make the item incorrect.  It will be moved to the working set
+            quiz.strategy.incorrect(item)
+
+            item.schedules.size.should eql(3)
+            item.schedules.each do |s|
+                s.potential.should eql((second - (second *0.2)).to_i)
+            end
+        end
 
         it "should be able to sort the review set items according to schedule" do
             item = newSet[0]

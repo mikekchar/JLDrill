@@ -210,9 +210,23 @@ module JLDrill
             end
         end
 
+        # Returns the minumum for the potentials in all
+        # the schedules
+        def minimumPotential
+            minSchedule = @schedules.min do |x,y|
+                x.potential <=> y.potential
+            end
+            if !minSchedule.nil?
+                return minSchedule.potential
+            else
+                return Schedule.defaultPotential
+            end
+        end
+
         def allIncorrect
+            targetPotential = minimumPotential()
             @schedules.each do |schedule|
-                schedule.incorrect
+                schedule.incorrect(targetPotential)
             end            
         end
 

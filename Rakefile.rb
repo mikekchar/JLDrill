@@ -57,6 +57,7 @@ RSpec::Core::RakeTask.new(:spec) do |t, args|
 	t.pattern = spec_pattern
 	t.ruby_opts = ruby_opts
     t.rspec_opts = rspec_opts
+    t.verbose = false
 end
 
 desc "Run the tests and find the code coverage.  Test results are in test_results.html.  Coverage is in coverage/index.html"
@@ -66,6 +67,7 @@ RSpec::Core::RakeTask.new(:rcov) do |t|
 	t.rcov_opts = ["--exclude rspec,rcov,syntax,_spec,_story,cairo,pango,gtk2,atk,glib,gdk"]
 	t.rspec_opts = rspec_opts
 	t.ruby_opts = ruby_opts + ["-rrspec"]
+    t.verbose = false
 end
 
 desc "Runs rcov but excludes the source files instead of the test files.  This is how I determine how many lines of test code I have.  Output goes to coverage/index.html"
@@ -78,12 +80,14 @@ RSpec::Core::RakeTask.new(:testSize) do |t|
 	    "--exclude glib", "--exclude gdk"]
 	t.rspec_opts = rspec_opts
 	t.ruby_opts = ruby_opts
+    t.verbose = false
 end
 
 desc "Run the application that's in the development directory (rather than one that might be installed somewhere else)."
 Rake::TestTask.new(:run) do |t|
 	t.test_files = FileList['bin/jldrill']
 	t.ruby_opts = ruby_opts
+    t.verbose = false
 end
 
 desc "Build the RDOC development documentation. output goes to doc/index.html"

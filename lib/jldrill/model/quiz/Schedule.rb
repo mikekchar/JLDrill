@@ -175,11 +175,11 @@ module JLDrill
             return retVal
         end
 
-        # Reduce the potential scale by 20% of it's current value
+        # Reduce the potential scale by 20% of it's target value
         # This should be called every time a question is guessed wrong
         # in the working set
-        def reducePotential
-            @potential = @potential - (0.2 * @potential).to_i
+        def reducePotential(targetPotential)
+            @potential = targetPotential - (0.2 * targetPotential).to_i
         end
 
         # Return the the new interval after backing off
@@ -255,8 +255,8 @@ module JLDrill
         end
         
         # Mark the item as incorrect.
-        def incorrect
-            reducePotential
+        def incorrect(targetPotential)
+            reducePotential(targetPotential)
             unschedule
             markReviewed
             @score = 0
@@ -264,7 +264,7 @@ module JLDrill
 
         # Mark the item as correct.
         def correct
-            if @item.bin == Strategy.reviewSetBin
+            if @item.bin > Strategy.workingSetBin
                 if @potential < elapsedTime
                     @potential = elapsedTime
                 end

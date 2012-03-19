@@ -230,23 +230,33 @@ module JLDrill
 	        item.schedule.potential.should eql(345600)
         end
         
-        it "should decrease the potential 20% when demoted from the 4th bin" do
+        it "should decrease the potential 20% when demoted from the review set bin" do
             @quiz.options.promoteThresh = 1
             item = test_addItem(Strategy.workingSetBin, -1)
 	        @quiz.currentProblem = @strategy.createProblem(item)
+            pot1 = Schedule.defaultPotential
+            item.schedule.potential.should eql(pot1)
 	        @strategy.incorrect(item)
+            pot2 = pot1 - (0.2 * pot1).to_int
+            item.schedule.potential.should eql(pot2)
 	        @strategy.incorrect(item)
+            pot3 = pot2 - (0.2 * pot2).to_int
+            item.schedule.potential.should eql(pot3)
 	        @strategy.incorrect(item)
-            item.bin.should eql(Strategy.workingSetBin)	        
-	        item.schedule.potential.should eql(221184)
+            pot4 = pot3 - (0.2 * pot3).to_int
+            item.schedule.potential.should eql(pot4)
+            item.bin.should eql(Strategy.workingSetBin)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
-            item.bin.should eql(Strategy.reviewSetBin)	        
-	        item.schedule.potential.should eql(221184)
+            item.bin.should eql(Strategy.reviewSetBin)
+            # The potential doesn't change until it has been correct
+            # in the review set once.
+	        item.schedule.potential.should eql(pot4)
 	        @strategy.incorrect(item)
             item.bin.should eql(Strategy.workingSetBin)	        	        
-	        item.schedule.potential.should eql(176948)        
+            pot5 = pot4 - (0.2 * pot4).to_int
+            item.schedule.potential.should eql(pot5)
         end
         
         it "should reset the consecutive counter on an incorrect answer" do
