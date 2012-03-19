@@ -16,6 +16,11 @@ module JLDrill
             return @contents.length
         end
 
+        # Returns the number of items in the bin
+        def size()
+            return @contents.size
+        end
+
         # Returns the item at the index specified
         def [](index)
             item = @contents[index]

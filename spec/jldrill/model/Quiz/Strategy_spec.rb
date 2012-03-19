@@ -250,13 +250,14 @@ module JLDrill
 	        @strategy.correct(item)
 	        @strategy.correct(item)
             item.bin.should eql(Strategy.reviewSetBin)
-            # The potential doesn't change until it has been correct
-            # in the review set once.
-	        item.schedule.potential.should eql(pot4)
+            pot5 = item.schedule.duration
+            # The potential is set to the duration of the schedule
+            # when the item is promoted.
+	        item.schedule.potential.should eql(pot5)
 	        @strategy.incorrect(item)
             item.bin.should eql(Strategy.workingSetBin)	        	        
-            pot5 = pot4 - (0.2 * pot4).to_int
-            item.schedule.potential.should eql(pot5)
+            pot6 = pot5 - (0.2 * pot5).to_int
+            item.schedule.potential.should eql(pot6)
         end
         
         it "should reset the consecutive counter on an incorrect answer" do

@@ -210,23 +210,13 @@ module JLDrill
             end
         end
 
-        # Returns the minumum for the potentials in all
-        # the schedules
-        def minimumPotential
-            minSchedule = @schedules.min do |x,y|
-                x.potential <=> y.potential
-            end
-            if !minSchedule.nil?
-                return minSchedule.potential
-            else
-                return Schedule.defaultPotential
-            end
-        end
-
         def allIncorrect
-            targetPotential = minimumPotential()
-            @schedules.each do |schedule|
-                schedule.incorrect(targetPotential)
+            fs = firstSchedule
+            if !fs.nil?
+                targetPotential = fs.potential
+                @schedules.each do |schedule|
+                    schedule.incorrect(targetPotential)
+                end
             end            
         end
 
@@ -238,9 +228,9 @@ module JLDrill
             sched = firstSchedule
             if sched.nil?
                 # If you try to create a problem with a new set item, there
-                # isn't a schedule yet, so we will just make a Meaning problem.
+                # isn't a schedule yet, so we will just make a Reading problem.
                 # I don't know why anyone would do this, but just in case.
-                type = "MeaningProblem"
+                type = "ReadingProblem"
             else
                 index = @schedules.find_index(sched)
                 type = @types[index]

@@ -35,8 +35,8 @@ New
 Working
 /Kanji: 青い/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 1/Consecutive: 0/ReadingProblem/Score: 0/Level: 0/Potential: 432000/KanjiProblem/Score: 0/Level: 1/Potential: 432000/MeaningProblem/Score: 0/Level: 2/Potential: 432000/
 Review
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 2/Consecutive: 1/KanjiProblem/Score: 4/Level: 1/LastReviewed: 1230076403/Potential: 432000/MeaningProblem/Score: 4/Level: 2/LastReviewed: 1230076403/Duration: 10/Potential: 432000/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 3/Consecutive: 1/KanjiProblem/Score: 4/Level: 1/LastReviewed: 1230076403/Potential: 432000/MeaningProblem/Score: 4/Level: 2/LastReviewed: 1230076403/Duration: 10/Potential: 432000/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 2/Consecutive: 1/KanjiProblem/Score: 4/Level: 1/LastReviewed: 1230076403/Potential: 432000/MeaningProblem/Score: 4/Level: 2/LastReviewed: 1230076403/Duration: 10/Potential: 10/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 3/Consecutive: 1/KanjiProblem/Score: 4/Level: 1/LastReviewed: 1230076403/Potential: 432000/MeaningProblem/Score: 4/Level: 2/LastReviewed: 1230076403/Duration: 10/Potential: 10/
 Forgotten
 ]
 #################################

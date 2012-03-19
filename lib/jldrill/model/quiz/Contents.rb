@@ -209,7 +209,7 @@ module JLDrill
         # Add it to the contents in the specified bin.
         # Return the item that was added.
         def parseItem(line, bin)
-            item = QuizItem.create(@quiz, line)
+            item = QuizItem.create(@quiz, line, bin)
             return addItem(item, bin)
         end
 
@@ -308,15 +308,12 @@ module JLDrill
             @bins.reverse_each do |bin|
                 bin.reverse_each do |item|
                     obj = item.to_o
-                    print "#{item.position}: #{item.to_o.reading}..."
                     duplicates = self.findAll do |candidate|
                         ((item != candidate) && (obj == candidate.to_o))
                     end
                     duplicates.each do |dup|
-                        print "   #{dup.position}"
                         self.delete(dup)
                     end
-                    print "\n"
                 end
             end
         end

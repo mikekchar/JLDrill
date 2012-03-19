@@ -64,13 +64,29 @@ module JLDrill
                         @scheduledTime = Time.at($1.to_i)
                     end
                 when DIFFICULTY_RE
-                    # Difficulty is deprecated convert to potential schedule
-                    @potential = (Schedule.difficultyScale($1.to_i) *
-                                  Schedule.defaultPotential).to_i 
+                    # Difficulty is deprecated
+                    if @item.bin == Strategy.workingSetBin
+                        @potential = (Schedule.difficultyScale($1.to_i) *
+                            Schedule.defaultPotential).to_i 
+                    end
                 when POTENTIAL_RE
-                    @potential = $1.to_i
+                    # Only set the potential in the working set bin.
+                    # This is to take care of some legacy files with
+                    # an incorrect setting
+                    if @item.bin == Strategy.workingSetBin
+                        @potential = $1.to_i
+                    end
                 when DURATION_RE
-                    @duration = Duration.parse($1)
+                    # Only scheduled items have durations and items should
+                    # only be scheduled in the review and forgotten set.
+                    # Furthermore, while the potential is saved, it is
+                    # the same as the duration and some legacy files have
+                    # the potential saved incorrectly.
+                    if @item.bin > Strategy.workingSetBin
+                        @duration = Duration.parse($1)
+                        # Fix for some legacy files
+                        @potential = @duration.seconds
+                    end
             else # Not something we understand
                 parsed = false
             end
@@ -239,6 +255,7 @@ module JLDrill
             else
                 @duration.seconds = int
             end
+            @potential = @duration.seconds
             return @duration.seconds
         end
         
@@ -265,9 +282,6 @@ module JLDrill
         # Mark the item as correct.
         def correct
             if @item.bin > Strategy.workingSetBin
-                if @potential < elapsedTime
-                    @potential = elapsedTime
-                end
                 schedule
             end
             markReviewed

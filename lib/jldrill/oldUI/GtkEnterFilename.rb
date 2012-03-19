@@ -16,10 +16,6 @@ module JLDrill::Gtk
                   [Gtk::Stock::SAVE, Gtk::Dialog::RESPONSE_ACCEPT])
             @resp = Gtk::Dialog::RESPONSE_CANCEL
             self.current_folder = "/home/mike/Desktop"
-            print self.filename
-            print "\n"
-            print self.current_folder
-            print "\n"
         end
         
         def run

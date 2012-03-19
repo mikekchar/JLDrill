@@ -98,11 +98,13 @@ module JLDrill::ScheduleItems
 
             # Once it is promoted into the review set, the schedules
             # should actually be scheduled.  Since we didn't get anything
-            # wrong, the potential time should be 5 days.
+            # wrong, the duration should be 5 days +- 10%.  The
+            # potential should be set to the duration.
             promoteIntoReviewSet(item)
             item.schedules.each do |schedule|
                 schedule.should be_scheduled
-                schedule.potential.should eql(432000)
+                scheduleShouldBe(schedule, 5, 10)
+                schedule.potential.should eql(schedule.duration)
             end
             item.schedule.should_not be_nil
         end
@@ -225,7 +227,7 @@ module JLDrill::ScheduleItems
 
             item.schedules.size.should eql(3)
             item.schedules.each do |s|
-                s.potential.should eql((second - (second *0.2)).to_i)
+                s.potential.should eql(third - (third *0.2).to_i)
             end
         end
 

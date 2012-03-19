@@ -16,7 +16,7 @@ module JLDrill::VocabularyIsStoredInItems
     describe Story.stepName("Items can hold Vocabulary") do
         it "should be able to create an Item from a Vocabulary" do
             vocabString = "/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 2/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/Potential: 432000/\n"
-            item = JLDrill::QuizItem.create(@quiz, vocabString)
+            item = JLDrill::QuizItem.create(@quiz, vocabString, JLDrill::Strategy.reviewSetBin)
             item.to_s.should eql(vocabString)
         end
 

@@ -12,14 +12,18 @@ module JLDrill
             @status.add(ItemStats.new(@quiz, self))
         end
 
-        def QuizItem.create(quiz, string)
+        # Create a Quiz item from the save string.  To get around
+        # some problems with legacy files (specifically schedules)
+        # we need to know what bin this will be going into.
+        def QuizItem.create(quiz, string, bin)
             item = QuizItem.new(quiz, nil)
+            item.bin = bin
             item.parse(string)
             return item
         end
 
         def clone
-            item = QuizItem.create(@quiz, @contents)
+            item = QuizItem.create(@quiz, @contents, @bin)
             item.assign(self)
             return item
         end

@@ -2,6 +2,7 @@
 require 'jldrill/model/Bin'
 require 'jldrill/model/Item'
 require 'jldrill/model/ItemStatus'
+require 'jldrill/model/Quiz'
 require 'jldrill/model/quiz/Schedule'
 
 module JLDrill
@@ -12,13 +13,13 @@ module JLDrill
         	@fileString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
 /Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
 /Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 3/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 4/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/Potential: 111076/]
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 4/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/Potential: 432000/]
             @quiz = Quiz.new
             @strings = @fileString.split("\n")
             @strings.length.should be(4)
             @items = []
             0.upto(@strings.length - 1) do |i|
-                 @items.push(QuizItem.create(@quiz, @strings[i]))
+                 @items.push(QuizItem.create(@quiz, @strings[i], Strategy.reviewSetBin))
             end
 		end
 		
@@ -44,7 +45,7 @@ module JLDrill
         it "should be able to parse the information in the file" do
             @items[1].to_s.should eql(@strings[1] + "\n")
             time = @items[1].schedule.markReviewed
-            newItem = QuizItem.create(@quiz, @items[1].to_s)
+            newItem = QuizItem.create(@quiz, @items[1].to_s, Strategy.reviewSetBin)
             newItem.schedule.lastReviewed.to_i.should eql(@items[1].schedule.lastReviewed.to_i)
         end
         
@@ -105,13 +106,15 @@ module JLDrill
             @items[1].to_s.should eql(@strings[1] + "\n")
             time = @items[1].schedule.schedule
             duration = @items[1].schedule.duration
-            @items[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Duration: " + duration.to_s + "/Potential: 432000/\n")
+            # Note potential should be the same as duration for scheduled
+            # items
+            @items[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Duration: " + duration.to_s + "/Potential: " + duration.to_s + "/\n")
         end
 
         it "should be able to parse the schedule information in the file" do
             @items[3].to_s.should eql(@strings[3] + "\n")
             time = @items[3].schedule.schedule
-            newItem = QuizItem.create(@quiz, @items[3].to_s)
+            newItem = QuizItem.create(@quiz, @items[3].to_s, Strategy.reviewSetBin)
             # Since we aren't using
             # a bin here, we'll cheat and set the bin number manually.
             newItem.bin = 4
