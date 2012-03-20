@@ -220,6 +220,52 @@ module JLDrill::Version_0_6_1
             end
         end
 
+        it "should set the potential of added schedules to be the same as the one with the lowest reviewLoad" do
+            item = Story.newSet[0]
+
+            # Promote into the working set without any incorrect
+            Story.promoteIntoWorkingSet(item)
+            Story.promoteIntoReviewSet(item)
+
+            # There should be a kanji and meaning problem schedule.
+            # The duration should be 5 days +- 10%
+            item.schedules.size.should eql(2)
+            item.schedules.each do |schedule|
+                schedule.potential.should eql(schedule.duration)
+                scheduleShouldBeAroundXSeconds(schedule, Story.daysInSeconds(5.0), 10)
+            end
+
+            # Keep track of the two schedules for later
+            s1 = item.schedules[0]
+            s2 = item.schedules[1]
+
+            # We will make it so that s1 has waited longer than s2
+            Story.setDaysAgoReviewed(s1, 10.0)
+            Story.setDaysAgoReviewed(s2, 5.0)
+
+            # Since it has waited a longer percentage of it's schedule,
+            # s1 will be the one chosen.
+            item.schedule.should be(s1)
+
+            # Setting the options to include reading problems should
+            # automatically add a schedule for the reading problem.
+            Story.quiz.options.reviewReading = true
+            item.schedules.size.should eql(3)
+
+            # This new schedule should be the same as s1 (which has waited
+            # the longest).  If we sort by reviewLoad, the first two
+            # items should have the same potential as s1 (one of them
+            # is s1, the other is the readingProblem schedule).  The last
+            # one will be s2
+            sortedSchedules = item.schedules.sort do |x,y|
+                x.reviewLoad <=> y.reviewLoad
+            end
+            sortedSchedules[0].potential.should eql(s1.potential)
+            sortedSchedules[1].potential.should eql(s1.potential)
+            sortedSchedules[2].potential.should eql(s2.potential)
+
+        end
+
         it "should work around problems with legacy files" do
             # In this file the original bin names are used
             # The first item is in Unseen (New set), but it has a Meaning Problem
