@@ -165,6 +165,61 @@ module JLDrill::Version_0_6_1
             end
         end
 
+        it "should set the potential of items demoted to the working set to 20% less than their current potential" do
+            item = Story.newSet[0]
+
+            # Promote into the working set without any incorrect
+            Story.promoteIntoWorkingSet(item)
+            Story.promoteIntoReviewSet(item)
+
+            # There should be a kanji and meaning problem schedule.
+            # The duration should be 5 days +- 10%
+            item.schedules.size.should eql(2)
+            item.schedules.each do |schedule|
+                schedule.potential.should eql(schedule.duration)
+                scheduleShouldBeAroundXSeconds(schedule, Story.daysInSeconds(5.0), 10)
+            end
+
+            # Keep track of the two schedules for later
+            s1 = item.schedules[0]
+            s2 = item.schedules[1]
+
+            # We will make it so that s1 has waited longer than s2
+            Story.setDaysAgoReviewed(s1, 10.0)
+            Story.setDaysAgoReviewed(s2, 5.0)
+
+            # Since it has waited a longer percentage of it's schedule,
+            # s1 will be the one chosen.
+            item.schedule.should be(s1)
+            # Keep track of what the new inerval is supposed to be
+            interval = s1.calculateInterval
+
+            # We'll review it as being correct.  This will create a new
+            # schedule and set the potential.
+            Story.quiz.strategy.correct(item)
+            scheduleShouldBeAroundXSeconds(s1, interval, 10)
+            s1.potential.should eql(s1.duration)
+            targetPotential = s1.potential
+
+            # s1 was just reviewed, so the next one to be reviewed will be s2
+            item.schedule.should be(s2)
+            # We'll make s1 wait again so that it comes back to the top.
+            Story.setDaysAgoReviewed(s1, 20.0)
+            item.schedule.should be(s1)
+
+            # Make the item incorrect.  It will be moved to the working set
+            Story.quiz.strategy.incorrect(item)
+            item.itemStats.should be_inWorkingSet
+            # We took note of the potential for the s1, so after getting it
+            # wrong, the potential is decreased by 20% of its value.
+            targetPotential = targetPotential - (targetPotential.to_f * 0.2).to_i
+
+            item.schedules.size.should eql(3)
+            item.schedules.each do |s|
+                s.potential.should eql(targetPotential)
+            end
+        end
+
         it "should work around problems with legacy files" do
             # In this file the original bin names are used
             # The first item is in Unseen (New set), but it has a Meaning Problem

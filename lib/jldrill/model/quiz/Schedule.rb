@@ -369,8 +369,10 @@ module JLDrill
         # of the actual time between review vs. scheduled time.
         # Values greater than 1 mean it is taking longer than expected,
         # values less than 1 mean it is taking less time than expected.
+        # Note: The duration should never be set to 0, but if it is, this
+        # will return 0.000001
         def reviewRate
-            retVal = 1.0
+            retVal = 0.000001
             dur = scheduleDuration
             if dur != 0
                 retVal = elapsedTime.to_f / dur.to_f
@@ -381,8 +383,9 @@ module JLDrill
         # This is simply 1/reviewRate.  It is used to sort the
         # schedules since we want the smalled reviewRates at the
         # end of the list.
+        # Note: It sets the reviewLoad to 1000000 if no time has elapsed.
         def reviewLoad
-            retVal = 1.0
+            retVal = 1000000.0
             sched = scheduleDuration.to_f
             time = elapsedTime.to_f
             if time != 0.0
