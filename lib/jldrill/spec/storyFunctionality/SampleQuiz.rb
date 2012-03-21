@@ -36,8 +36,16 @@ module JLDrill::StoryFunctionality
             quiz.strategy.newSet
         end
 
+        def workingSet
+            quiz.strategy.workingSet
+        end
+
         def reviewSet
             quiz.strategy.reviewSet
+        end
+
+        def forgottenSet
+            quiz.strategy.forgottenSet
         end
 
         def currentItem

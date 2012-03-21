@@ -213,6 +213,19 @@ module JLDrill
             return addItem(item, bin)
         end
 
+        def binNumFromName(name)
+            retVal = -1
+            @bins.each do |bin|
+                list = @res[bin.number]
+                list.each do |re|
+                    if name =~ re
+                        retVal = bin.number
+                    end
+                end
+            end
+            return retVal
+        end
+
         def parseLine(line)
             parsed = false
             # Line items are the most common, so they are checked first
@@ -221,14 +234,10 @@ module JLDrill
                     parsed = true
             else
                 # Bin names are less common so they are checked after
-                @bins.each do |bin|
-                    list = @res[bin.number]
-                    list.each do |re|
-                        if line =~ re
-                            @binNum = bin.number
-                            parsed = true
-                        end
-                    end
+                num = binNumFromName(line)
+                if num != -1 
+                   @binNum = num 
+                   parsed = true
                 end
             end
             parsed
