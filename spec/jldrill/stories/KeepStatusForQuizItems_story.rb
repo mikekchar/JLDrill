@@ -10,10 +10,10 @@ module JLDrill
 	describe ItemStatus do
 	
 		before(:each) do
-        	@fileString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
-/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
-/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 3/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
-/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 4/Consecutive: 1/MeaningProblem/Score: 0/Level: 0/Potential: 432000/]
+        	@fileString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Potential: 432000/
+/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Potential: 432000/
+/Kanji: 赤い/Reading: あかい/Definitions: red/Markers: adj,P/Position: 3/Consecutive: 0/MeaningProblem/Score: 0/Potential: 432000/
+/Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 4/Consecutive: 1/MeaningProblem/Score: 0/Potential: 432000/]
             @quiz = Quiz.new
             @strings = @fileString.split("\n")
             @strings.length.should be(4)
@@ -39,7 +39,7 @@ module JLDrill
         it "should be able to write the last reviewed time to file" do
             @items[1].to_s.should eql(@strings[1] + "\n")
             time = @items[1].schedule.markReviewed
-            @items[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/LastReviewed: " + time.to_i.to_s + "/Potential: 432000/\n")
+            @items[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/LastReviewed: " + time.to_i.to_s + "/Potential: 432000/\n")
         end
         
         it "should be able to parse the information in the file" do
@@ -52,7 +52,7 @@ module JLDrill
         it "should be able to write consecutive to file" do
             @items[1].to_s.should eql(@strings[1] + "\n")
             @items[1].itemStats.consecutive = 2
-            @items[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 2/MeaningProblem/Score: 0/Level: 0/Potential: 432000/\n")
+            @items[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 2/MeaningProblem/Score: 0/Potential: 432000/\n")
         end
 
         # There's a +- 10% variation in scheduling, so the actual
@@ -108,7 +108,7 @@ module JLDrill
             duration = @items[1].schedule.duration
             # Note potential should be the same as duration for scheduled
             # items
-            @items[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Duration: " + duration.to_s + "/Potential: " + duration.to_s + "/\n")
+            @items[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Duration: " + duration.to_s + "/Potential: " + duration.to_s + "/\n")
         end
 
         it "should be able to parse the schedule information in the file" do

@@ -264,8 +264,8 @@ module JLDrill::Version_0_6_1
 
             it "should work around problems with legacy files" do
                 # In this file the original bin names are used
-                # The first item is in Unseen (New set), but it has a Meaning Problem
-                # schedule
+                # The first item is in Unseen (New set), but it 
+                # has a Meaning Problem schedule
                 # The second item is in Poor (first working set), 
                 # but it only has a Meaning Problem
                 # The third item is in Fair (second working set).
@@ -276,6 +276,8 @@ module JLDrill::Version_0_6_1
                 # The fifth item is in Excellent (review set).  
                 # It has Kanji and Meaning problems with difficulty set, 
                 # and scores set to 0.
+                # Note: All schedules have Level which is deprecated.  It
+                # should still parse with no difficulty
                 fileString = %Q[
 Unseen
 /Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/

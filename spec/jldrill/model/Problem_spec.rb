@@ -78,7 +78,7 @@ module JLDrill
 	
 		before(:each) do
 		    @quiz = Quiz.new
-		    @vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    @vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    @item = @quiz.contents.add(@vocab, 0)
 		    @problem = Problem.new(@item)
         end
@@ -91,13 +91,13 @@ module JLDrill
         end
         
         it "should give a string representation of the Kanji if it's there" do
-		    @vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: /Score: 0/Level: 01/")
+		    @vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: /Score: 0/")
 		    @item1 = QuizItem.new(@quiz, @vocab1)
 		    @problem1 = Problem.new(@item1)
             @problem1.should_not be_nil
             @problem1.evaluateAttribute("kanji").should eql("会う")
 
-		    @vocab2 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    @vocab2 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    @item2 = QuizItem.new(@quiz, @vocab2)
 		    @problem2 = Problem.new(@item2)
             @problem2.should_not be_nil
@@ -105,13 +105,13 @@ module JLDrill
         end
 
         it "should give a string representation of the Hint if it's there" do
-		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    @item1 = QuizItem.new(@quiz, @vocab1)
 		    @problem1 = Problem.new(@item1)
             @problem1.should_not be_nil
             @problem1.evaluateAttribute("hint").should eql("No hints")
 
-		    @vocab2 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    @vocab2 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    @item2 = QuizItem.new(@quiz, @vocab2)
 		    @problem2 = Problem.new(@item2)
             @problem2.should_not be_nil
@@ -119,7 +119,7 @@ module JLDrill
         end
 
         it "should give a string representation of the Reading" do
-		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    @item1 = QuizItem.new(@quiz, @vocab1)
 		    @problem1 = Problem.new(@item1)
             @problem1.should_not be_nil
@@ -127,7 +127,7 @@ module JLDrill
         end
 
         it "should give a string representation of the Definitions" do
-		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    @item1 = QuizItem.new(@quiz, @vocab1)
 		    @problem1 = Problem.new(@item1)
             @problem1.should_not be_nil
@@ -135,7 +135,7 @@ module JLDrill
         end
         
         it "should have and empty string if the reading isn't set" do
-		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    @item1 = QuizItem.new(@quiz, @vocab1)
 		    @problem1 = Problem.new(@item1)
             @problem1.should_not be_nil
@@ -143,7 +143,7 @@ module JLDrill
         end
 
         it "should have and empty string if the definitions aren't set" do
-		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    @vocab1 = Vocabulary.create("/Kanji: 会う/Hint: No hints/Markers: v5u,P/Position: 1/Score: 0/")
 		    @item1 = QuizItem.new(@quiz, @vocab1)
 		    @problem1 = Problem.new(@item1)
             @problem1.should_not be_nil
@@ -151,51 +151,51 @@ module JLDrill
         end
         
         it "should be able to assign a vocab" do
-		    @vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    @vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    @item1 = QuizItem.new(@quiz, @vocab1)
 		    @problem1 = Problem.new(@item1)
-		    @vocab2 = Vocabulary.create("/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Position: 1/Score: 0/Level: 0/")
+		    @vocab2 = Vocabulary.create("/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Position: 1/Score: 0/")
             @problem1.vocab = @vocab2
             @problem1.item.to_o.should eql(@vocab2)
         end
 
         it "should create a ReadingProblem for level 0" do
-            vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+            vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    item1 = QuizItem.new(@quiz, vocab1)
             problem1 = ProblemFactory.create(0, item1)
             problem1.should be_a_kind_of(ReadingProblem)
         end        
 
         it "should create a KanjiProblem for level 1" do
-            vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 1/")
+            vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    item1 = QuizItem.new(@quiz, vocab1)
             problem1 = ProblemFactory.create(1, item1)
             problem1.should be_a_kind_of(KanjiProblem)
         end        
 
         it "should create a MeaningProblem for level 2" do
-            vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 2/")
+            vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    item1 = QuizItem.new(@quiz, vocab1)
             problem1 = ProblemFactory.create(2, item1)
             problem1.should be_a_kind_of(MeaningProblem)
         end        
 
         it "should create a MeaningProblem for level 1 if there is no kanji" do
-            vocab1 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 2/")
+            vocab1 = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    item1 = QuizItem.new(@quiz, vocab1)
             problem1 = ProblemFactory.create(1, item1)
             problem1.should be_a_kind_of(MeaningProblem)
         end        
 
         it "should create a ReadingProblem for unknown levels" do
-            vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+            vocab1 = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    item1 = QuizItem.new(@quiz, vocab1)
             problem1 = ProblemFactory.create(-1, item1)
             problem1.should be_a_kind_of(ReadingProblem)
         end        
         
         def createFakeItem(bin)
-            item = QuizItem.create(@quiz, "/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 0/Score: 0/Level: 0/", bin)
+            item = QuizItem.create(@quiz, "/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 0/Score: 0/", bin)
             # We need to add the item to the actual bin or else the schedules
             # won't be created
             @quiz.contents.addItem(item, bin)
@@ -222,7 +222,7 @@ module JLDrill
 	describe ReadingProblem do
 	
         it "should have a question of kanji, reading and hint and answer of definitions" do
-		    @vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    @vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    @item = QuizItem.new(@quiz, @vocab)
 		    @problem = ReadingProblem.new(@item)
             @problem.should_not be_nil
@@ -232,7 +232,7 @@ module JLDrill
         end
 
         it "should publish the correct items" do
-		    vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    item = QuizItem.new(@quiz, vocab)
 		    problem = ReadingProblem.new(item)
             questionPane = QuestionReceiver.new(problem)
@@ -248,7 +248,7 @@ module JLDrill
         end
 
         it "should use the reading as kanji if there is no kanji" do
-		    @vocab = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    @vocab = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    @item = QuizItem.new(@quiz, @vocab)
 		    @problem = ReadingProblem.new(@item)
             @problem.should_not be_nil
@@ -258,7 +258,7 @@ module JLDrill
         end
 
         it "should publish the reading as kanji if there is no kanji" do
-		    vocab = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    vocab = Vocabulary.create("/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    item = QuizItem.new(@quiz, vocab)
 		    problem = ReadingProblem.new(item)
             questionPane = QuestionReceiver.new(problem)
@@ -276,7 +276,7 @@ module JLDrill
 	describe KanjiProblem do
 	
         it "should have a question of kanji and answer of reading, definitions and hint" do
-		    @vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    @vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    @item = QuizItem.new(@quiz, @vocab)
 		    @problem = KanjiProblem.new(@item)
             @problem.should_not be_nil
@@ -289,7 +289,7 @@ module JLDrill
 	describe MeaningProblem do
 	
         it "should have a question of definitions and answer of kanji, readings and hint" do
-		    @vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    @vocab = Vocabulary.create("/Kanji: 会う/Hint: No hints/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    @item = QuizItem.new(@quiz, @vocab)
 		    @problem = MeaningProblem.new(@item)
             @problem.should_not be_nil

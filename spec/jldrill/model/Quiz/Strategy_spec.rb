@@ -72,7 +72,7 @@ module JLDrill
     	    end.should eql(true)
 	    end
 	    
-	    it "should demote new set items to new set and reset the level to 0" do
+	    it "should demote new set items to new set" do
 	        # Demoting new set items is non-sensical, but it should do
 	        # something sensible anyway.
 	        item = test_addItem(Strategy.newSetBin, 1)
@@ -81,29 +81,22 @@ module JLDrill
 	        item.schedule.should be_nil
 	    end
 
-	    it "should demote other items to the working set and reset the level to 0" do
+	    it "should demote other items to the working set" do
 	        item = test_addItem(Strategy.workingSetBin, 1)
 	        @strategy.demote(item)
 	        item.bin.should eql(Strategy.workingSetBin)
-	        item.schedule.level.should eql(0)
 
 	        item = test_addItem(Strategy.workingSetBin, 2)
-	        item.schedule.level = 1
 	        @strategy.demote(item)
 	        item.bin.should eql(Strategy.workingSetBin)
-	        item.schedule.level.should eql(0)
 
 	        item = test_addItem(Strategy.workingSetBin, 3)
-	        item.schedule.level = 2
 	        @strategy.demote(item)
 	        item.bin.should eql(Strategy.workingSetBin)
-	        item.schedule.level.should eql(0)
 
 	        item = test_addItem(Strategy.reviewSetBin, 4)
-	        item.schedule.level = 2
 	        @strategy.demote(item)
 	        item.bin.should eql(Strategy.workingSetBin)
-	        item.schedule.level.should eql(0)
 	    end
 	    
 	    it "should be able to create problems of the correct level" do
@@ -114,7 +107,7 @@ module JLDrill
             problemStatus = item1.status.select("ProblemStatus")
             problemStatus.checkSchedules
             problemStatus.findScheduleForLevel(0).should_not eql(nil)
-            item1.level.should eql(0)
+            item1.schedule.problemType.should eql("ReadingProblem")
 
 	        item2 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
 	        item2.bin = Strategy.workingSetBin
@@ -122,7 +115,7 @@ module JLDrill
             problemStatus.checkSchedules
             problemStatus.findScheduleForLevel(1).should_not eql(nil)
             @quiz.strategy.correct(item2)
-            item2.level.should eql(1)
+            item2.schedule.problemType.should eql("KanjiProblem")
 	        
 	        item3 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
 	        item3.bin = Strategy.workingSetBin
@@ -131,7 +124,7 @@ module JLDrill
             problemStatus.findScheduleForLevel(2).should_not eql(nil)
             @quiz.strategy.correct(item3)
             @quiz.strategy.correct(item3)
-            item3.level.should eql(2)
+            item3.schedule.problemType.should eql("MeaningProblem")
             
             problem1 = @strategy.createProblem(item1)
             problem2 = @strategy.createProblem(item2)

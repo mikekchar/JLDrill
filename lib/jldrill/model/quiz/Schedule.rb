@@ -26,11 +26,10 @@ module JLDrill
         DEFAULT_POTENTIAL = 5 * SECONDS_PER_DAY
 
         # Note: scheduledTime is deprecated
-        # Note: level is deprecated
-        attr_reader :name, :item, :score, :level, 
+        attr_reader :name, :item, :score,
                     :lastReviewed, :scheduledTime,
                     :seen, :potential, :problemType
-        attr_writer :item, :score, :level,
+        attr_writer :item, :score,
                     :lastReviewed, :scheduledTime,
                     :seen, :potential
 
@@ -39,7 +38,6 @@ module JLDrill
             @name = "Schedule"
             @problemType = problemType
             @score = 0
-            @level = 0
             @lastReviewed = nil
             # scheduledTime is deprecated
             @scheduledTime = nil
@@ -66,7 +64,7 @@ module JLDrill
                 when SCORE_RE 
                     @score = $1.to_i
                 when LEVEL_RE
-                    @level = $1.to_i
+                    # Level is deprecated
                 when LASTREVIEWED_RE
                     @lastReviewed = Time.at($1.to_i)
                 when SCHEDULEDTIME_RE
@@ -120,7 +118,6 @@ module JLDrill
         # Note: Doesn't assign the item
         def assign(schedule)
             @score = schedule.score
-            @level = schedule.level
             @lastReviewed = schedule.lastReviewed
             # scheduledTime is deprecated
             @scheduledTime = schedule.scheduledTime
@@ -286,7 +283,6 @@ module JLDrill
         def demote
             unschedule
             @score = 0
-            @level = 0
         end
         
         # Mark the item as incorrect.
@@ -415,7 +411,7 @@ module JLDrill
         # Outputs the item schedule in save format.
         def to_s
             retVal = "/#{@problemType}"
-            retVal += "/Score: #{@score}" + "/Level: #{@level}"
+            retVal += "/Score: #{@score}"
             if reviewed?
                 retVal += "/LastReviewed: #{@lastReviewed.to_i}"
             end

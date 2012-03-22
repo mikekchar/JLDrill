@@ -8,7 +8,7 @@ module JLDrill
 	
 		before(:each) do
 		    @quiz = Quiz.new
-		    @vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/Level: 0/")
+		    @vocab = Vocabulary.create("/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Score: 0/")
 		    @item = @quiz.contents.add(@vocab, 0)
 		    @status = ProblemStatus.new(@quiz, @item)
         end
@@ -42,9 +42,9 @@ module JLDrill
         it "should output to save file format" do
             @status.to_s.should eql("")
             testParse("ReadingProblem")
-            @status.to_s.should eql("/ReadingProblem/Score: 5/Level: 0/Potential: 432000")
+            @status.to_s.should eql("/ReadingProblem/Score: 5/Potential: 432000")
             testParse("KanjiProblem")
-            @status.to_s.should eql("/ReadingProblem/Score: 5/Level: 0/Potential: 432000/KanjiProblem/Score: 5/Level: 0/Potential: 432000")
+            @status.to_s.should eql("/ReadingProblem/Score: 5/Potential: 432000/KanjiProblem/Score: 5/Potential: 432000")
         end
 
         it "should be able to clone" do

@@ -41,7 +41,6 @@ module JLDrill
                 (problem.level == problem.requestedLevel) &&
                 problem.valid?)
                 # If it's a valid problem, push the schedule
-                schedule.level = problem.level
                 @schedules.push(schedule)
             end
         end
