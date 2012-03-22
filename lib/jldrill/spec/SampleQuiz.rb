@@ -63,6 +63,7 @@ Working
 
         # This is a new vocabulary to use for adding to the quiz
         NewVocab = "/Kanji: 秋/Reading: あき/Definitions: autumn,fall/Markers: n-adv,P/Position: -1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/"
+        NoKanjiVocab = "/Reading: すっかり/Definitions: all,completely,thoroughly/Markers: adv,adv-to,P/Position: -1/Consecutive:0/"
 
 
         FileString = FileHeader + FileInfo + FileOptions + FileVocab
@@ -125,6 +126,10 @@ Working
         
         def sampleVocab
             Vocabulary::create(NewVocab)
+        end
+
+        def noKanjiVocab
+            Vocabulary::create(NoKanjiVocab)
         end
 
         def defaultSaveFile

@@ -119,5 +119,74 @@ module JLDrill::Version_0_6_1
                 Story.quiz.contents.binNumFromName("Forgotten").should eql(JLDrill::Strategy.forgottenSetBin)
             end
         end
+        
+        describe Story.stepName("Promoting new items") do
+            before(:each) do
+                Story.setup(JLDrill::Test)
+                Story.start
+                Story.quiz.options.promoteThresh = 1
+                Story.newSet.length.should_not eql(0)
+                Story.newSet[0].should_not be_nil
+            end
+
+            after(:each) do
+                Story.shutdown
+            end
+
+            it "should not have schedules on new items" do
+                item = Story.newSet[0]
+                item.itemStats.should be_inNewSet
+                item.schedules.size.should eql(0)
+                item.schedule.should be_nil
+            end
+
+            it "should be able to create a MeaningProblem for new set items" do
+                # It's kind of nonsensical to create a Problem for a new set
+                # item, but if we do, it shouldn't add a schedule.
+                item = Story.newSet[0]
+                Story.quiz.createProblem(item)
+                Story.quiz.currentProblem.should be_a_kind_of(JLDrill::ReadingProblem)
+
+                item.schedules.size.should eql(0)
+                item.schedule.should be_nil
+            end
+
+            it "should create schedules for items promoted into the working set" do
+                item = Story.newSet[0]
+                Story.promoteIntoWorkingSet(item)
+                item.itemStats.should be_inWorkingSet
+
+                # Items in the working set have schedules for all 3 proplem types
+                item.schedules.size.should eql(3)
+
+                item.schedules.each do |schedule|
+                    schedule.should_not be_scheduled
+                    schedule.score.should eql(0)
+                    schedule.potential.should eql(Story.daysInSeconds(5))
+                end
+
+                # We should have a ReadingProblem scheduled first
+                item.schedule.should_not be_nil
+                Story.quiz.createProblem(item)
+                Story.quiz.currentProblem.should be_a_kind_of(JLDrill::ReadingProblem)
+            end
+
+            it "should not create Kanji problem schedules for items with no Kanji" do
+                item = Story.newNoKanjiItem
+                Story.quiz.contents.addItem(item, JLDrill::Strategy.newSetBin)
+                Story.promoteIntoWorkingSet(item)
+                
+                # It doesn't have kanji so there should be only 2 schedules
+                item.schedules.size.should eql(2)
+
+                item.schedules.each do |schedule|
+                    schedule.should_not be_scheduled
+                    schedule.score.should eql(0)
+                    schedule.potential.should eql(Story.daysInSeconds(5))
+                end
+            end
+
+        end
+
     end
 end

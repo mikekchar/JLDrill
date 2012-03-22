@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
+require 'jldrill/model/quiz/QuizItem'
 
 # Sample quiz functionality.  Used as a mixin within a StoryMemento
 module JLDrill::StoryFunctionality
@@ -74,6 +75,16 @@ module JLDrill::StoryFunctionality
             0.upto(2) do
                drillCorrectly(item)
             end
+        end
+
+        # Create a new item.  Note that it isn't added to any bins
+        def newSampleItem
+            JLDrill::QuizItem.new(quiz, @sampleQuiz.sampleVocab)
+        end
+
+        # Create a new item with no Kanji.  Note that it isn't added to any bin.
+        def newNoKanjiItem
+            JLDrill::QuizItem.new(quiz, @sampleQuiz.noKanjiVocab)
         end
 
         # Return a float containing the number of days for the given
