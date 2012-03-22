@@ -29,10 +29,19 @@ module JLDrill::StoryFunctionality
             end
         end
 
+        def loadStringQuiz(title, string)
+            @sampleQuiz = JLDrill::SampleQuiz.new
+            @mainContext.quiz.loadFromString(title, 
+                                                @sampleQuiz.header + 
+                                                @sampleQuiz.info +
+                                                string)
+        end
+
+
         def quiz
             @mainContext.quiz
         end
-        
+
         def newSet
             quiz.strategy.newSet
         end

@@ -36,7 +36,6 @@ module JLDrill::Version_0_6_1
 
             def setup(type)
                 super(type)
-                hasResetQuiz
             end
         end
 
@@ -50,9 +49,6 @@ module JLDrill::Version_0_6_1
             before(:each) do
                 Story.setup(JLDrill::Test)
                 Story.start
-                Story.quiz.options.promoteThresh = 1
-                Story.newSet.length.should_not eql(0)
-                Story.newSet[0].should_not be_nil
             end
 
             after(:each) do
@@ -79,28 +75,26 @@ module JLDrill::Version_0_6_1
 Unseen
 /Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
 Poor
-/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Level: 0/Potential: 432000/
+/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 1/Level: 0/Potential: 432000/
 Fair
-/Kanji: 流離う/Hint: ゾロは賞金首をかぎまわり海をさすらう男だ。/Reading: さすらう/Definitions: to wander,to roam/Markers: v5u,vi/Position: 183/Consecutive: 0/MeaningProblem/Score: 1/Level: 0/LastReviewed: 1329703440/Difficulty: 6/KanjiProblem/Score: 1/Level: 0/LastReviewed: 1329703440/Difficulty: 6/
+/Kanji: 流離う/Hint: ゾロは賞金首をかぎまわり海をさすらう男だ。/Reading: さすらう/Definitions: to wander,to roam/Markers: v5u,vi/Position: 183/Consecutive: 0/MeaningProblem/Score: 1/Level: 1/LastReviewed: 1329703440/Difficulty: 6/KanjiProblem/Score: 1/Level: 1/LastReviewed: 1329703440/Difficulty: 6/
 Good
 Excellent
 /Kanji: 明い/Reading: あかるい/Definitions: bright,cheerful/Markers: adj/Position: 4/Consecutive: 1/MeaningProblem/Score: 0/Level: 2/LastReviewed: 1329441982/Duration: 352516/Difficulty: 1/KanjiProblem/Score: 0/Level: 2/LastReviewed: 1329441982/Duration: 336171/Difficulty: 1/
 Forgotten
                 ]
-                quiz = JLDrill::Quiz.new
-                quiz.loadFromString("LegacyQuiz", Story.sampleQuiz.header + 
-                                    Story.sampleQuiz.info +
-                                    fileString)
+                Story.quiz.options.promoteThresh = 2
+                Story.loadStringQuiz("LegacyQuiz", fileString)
 
-                quiz.contents.bins[JLDrill::Strategy.newSetBin].size.should be(1)
-                quiz.contents.bins[JLDrill::Strategy.workingSetBin].size.should be(2)
-                quiz.contents.bins[JLDrill::Strategy.reviewSetBin].size.should be(1)
-                quiz.contents.bins[JLDrill::Strategy.forgottenSetBin].size.should be(0)
+                Story.quiz.contents.bins[JLDrill::Strategy.newSetBin].size.should be(1)
+                Story.quiz.contents.bins[JLDrill::Strategy.workingSetBin].size.should be(2)
+                Story.quiz.contents.bins[JLDrill::Strategy.reviewSetBin].size.should be(1)
+                Story.quiz.contents.bins[JLDrill::Strategy.forgottenSetBin].size.should be(0)
 
-                newItem = quiz.contents.bins[JLDrill::Strategy.newSetBin][0]
-                w1Item = quiz.contents.bins[JLDrill::Strategy.workingSetBin][0]
-                w2Item = quiz.contents.bins[JLDrill::Strategy.workingSetBin][1]
-                reviewItem = quiz.contents.bins[JLDrill::Strategy.reviewSetBin][0]
+                newItem = Story.quiz.contents.bins[JLDrill::Strategy.newSetBin][0]
+                w1Item = Story.quiz.contents.bins[JLDrill::Strategy.workingSetBin][0]
+                w2Item = Story.quiz.contents.bins[JLDrill::Strategy.workingSetBin][1]
+                reviewItem = Story.quiz.contents.bins[JLDrill::Strategy.reviewSetBin][0]
 
                 # New set items should have no schedule even if they exist in the
                 # file
@@ -115,10 +109,17 @@ Forgotten
                 # w1 has a potential, use it
                 w1Item.schedules.each do |schedule|
                     schedule.potential.should eql(432000)
+                    # There is only a meaning problem scheduled, so at level
+                    # 0 its score is zeroed.
+                    schedule.score.should eql(0)
                 end
 
                 # w2 has difficulty set, so the potential should be based on
                 # it.
+                s = w2Item.problemStatus.schedulesInTypeOrder
+                s[0].score.should eql(Story.quiz.options.promoteThresh)
+                s[2].score.should eql(0)
+                s[1].score.should eql(1)
                 w2Item.schedules.each do |schedule|
                     schedule.potential.should eql((JLDrill::Schedule.difficultyScale(6) * JLDrill::Schedule.defaultPotential).to_i)
                 end
@@ -128,7 +129,7 @@ Forgotten
                 reviewItem.schedules.each do |schedule|
                     schedule.should be_scheduled
                     schedule.potential.should eql(schedule.duration)
-                    schedule.score.should eql(quiz.options.promoteThresh)
+                    schedule.score.should eql(Story.quiz.options.promoteThresh)
                 end
             end
         end

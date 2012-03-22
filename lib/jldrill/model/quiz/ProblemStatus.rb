@@ -120,6 +120,13 @@ module JLDrill
                     if !fs.nil?
                         schedule.setSameReviewAs(fs)
                     end
+                    if @schedules.all? do |s|
+                        s.score == 0
+                    end
+                        schedule.score = 0
+                    elsif currentLevel() > level
+                        schedule.score = @item.quiz.options.promoteThresh
+                    end
                     addSchedule(schedule)
                 end
             end 
@@ -260,10 +267,8 @@ module JLDrill
             if !type.nil?
                 # Create a Schedule object for parsing.
                 sched = Schedule.new(@item, type)
-                if sched.parse(part)
-                    @schedules.push(sched)
-                    retVal = true
-                end
+                @schedules.push(sched)
+                retVal = true
             elsif currentlyParsing() != -1
                 retVal = @schedules[currentlyParsing()].parse(part)
             end

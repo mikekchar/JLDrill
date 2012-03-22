@@ -65,6 +65,21 @@ module JLDrill
                     @score = $1.to_i
                 when LEVEL_RE
                     # Level is deprecated
+                    # Use the level in Legacy files to determine what
+                    # the scores should really be
+                    if @item.bin == Strategy.workingSetBin
+                       case ProblemFactory.parse(@problemType) <=> $1.to_i
+                       when -1
+                           # The level is beyond this problem type
+                           @score = @item.quiz.options.promoteThresh 
+                       when 0
+                           # This problem type is the correct level
+                           # Leave the score as it is
+                       when 1
+                           # The level is below this problem type
+                           @score = 0
+                       end
+                    end
                 when LASTREVIEWED_RE
                     @lastReviewed = Time.at($1.to_i)
                 when SCHEDULEDTIME_RE
@@ -97,12 +112,7 @@ module JLDrill
                         @potential = @duration.seconds
                     end
             else 
-                type = Schedule.parseProblemType(string)
-                if !type.nil?
-                    @problemType = type
-                else
-                    retVal = false
-                end
+                retVal = false
             end
             return retVal
         end
