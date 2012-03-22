@@ -1,19 +1,18 @@
 # encoding: utf-8
 require 'jldrill/model/util/Duration'
+require 'jldrill/model/problems/ProblemFactory'
 require 'jldrill/model/quiz/Strategy'
 
 module JLDrill
 
-    # Calculates and stores the Schedule information for an item
+    # Calculates and stores the Schedule information for a problem
     # in the Spaced Repetition Drill.
     # * score is the number of times the item has been successfully
     #   drilled in the current bin.
-    # * level is 0 if meaning has not been introduced 
-    #            1 if kanji has not been introduced, 
-    #            2 otherwise
     class Schedule
 
         SCORE_RE = /^Score: (.*)/
+        # level is deprecated
         LEVEL_RE = /^Level: (.*)/
         LASTREVIEWED_RE = /^LastReviewed: (.*)/
         # Note: ScheduledTime is deprecated
@@ -26,17 +25,19 @@ module JLDrill
         SECONDS_PER_DAY = 60 * 60 * 24
         DEFAULT_POTENTIAL = 5 * SECONDS_PER_DAY
 
-        # Note: ScheduledTime is deprecated
+        # Note: scheduledTime is deprecated
+        # Note: level is deprecated
         attr_reader :name, :item, :score, :level, 
                     :lastReviewed, :scheduledTime,
-                    :seen, :potential
+                    :seen, :potential, :problemType
         attr_writer :item, :score, :level,
                     :lastReviewed, :scheduledTime,
                     :seen, :potential
 
 
-        def initialize(item)
+        def initialize(item, problemType)
             @name = "Schedule"
+            @problemType = problemType
             @score = 0
             @level = 0
             @lastReviewed = nil
@@ -48,9 +49,19 @@ module JLDrill
             @duration = Duration.new
         end
 
+        # Parse the problem type
+        def Schedule.parseProblemType(string)
+            retVal = nil
+            if !ProblemFactory.parse(string).nil?
+                retVal = string
+            end
+            return retVal
+        end
+
         # Parses a single part of the Schedule information
+        # Returns true if the string was successfully parsed
         def parse(string)
-            parsed = true
+            retVal = true
             case string
                 when SCORE_RE 
                     @score = $1.to_i
@@ -87,15 +98,20 @@ module JLDrill
                         # Fix for some legacy files
                         @potential = @duration.seconds
                     end
-            else # Not something we understand
-                parsed = false
+            else 
+                type = Schedule.parseProblemType(string)
+                if !type.nil?
+                    @problemType = type
+                else
+                    retVal = false
+                end
             end
-            parsed
+            return retVal
         end
 
         # Create a clone of this schedule
         def clone
-            retVal = Schedule.new(@item)
+            retVal = Schedule.new(@item, @problemType)
             retVal.assign(self)
             return retVal
         end
@@ -111,6 +127,7 @@ module JLDrill
             @seen = schedule.seen
             @potential = schedule.potential
             @duration.seconds = schedule.duration
+            @problemType = schedule.problemType
         end
 
         def setSameReviewAs(schedule)
@@ -155,6 +172,7 @@ module JLDrill
         end
            
         # Resets the schedule  
+        # Note: It doesn't change the problem type
         def reset
             @lastReviewed = nil
             # scheduledTime is deprecated
@@ -396,7 +414,8 @@ module JLDrill
         
         # Outputs the item schedule in save format.
         def to_s
-            retVal = "/Score: #{@score}" + "/Level: #{@level}"
+            retVal = "/#{@problemType}"
+            retVal += "/Score: #{@score}" + "/Level: #{@level}"
             if reviewed?
                 retVal += "/LastReviewed: #{@lastReviewed.to_i}"
             end

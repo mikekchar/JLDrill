@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'jldrill/model/Problem'
 require 'jldrill/model/problems/ProblemFactory'
+require 'jldrill/model/Quiz'
 
 module JLDrill
 
@@ -195,6 +196,9 @@ module JLDrill
         
         def createFakeItem(bin)
             item = QuizItem.create(@quiz, "/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 0/Score: 0/Level: 0/", bin)
+            # We need to add the item to the actual bin or else the schedules
+            # won't be created
+            @quiz.contents.addItem(item, bin)
             return item
         end
 
@@ -207,7 +211,7 @@ module JLDrill
             problem2 = ProblemFactory.create(0, i2)
             problem3 = ProblemFactory.create(0, i3)
 
-            problem1.status.should eql("     3 --> 5.0 days")
+            problem1.status.should eql("     1 --> 5.0 days")
             problem2.status.should eql("     +0 --> 5.0 days")
             problem3.status.should eql("     +0 --> 5.0 days")
             problem2.item.schedule.markReviewed

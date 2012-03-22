@@ -7,13 +7,12 @@ module JLDrill
     # Keeps track of which problem types are being reviewed and
     # their schedules
     class ProblemStatus
-        attr_reader :item, :quiz, :types, :schedules
+        attr_reader :item, :quiz, :schedules
         attr_writer :item
 
         def initialize(quiz, item)
             @quiz = quiz
             @item = item
-            @types = []
             @schedules = []
         end
 
@@ -29,36 +28,33 @@ module JLDrill
 
         def assign(value)
             @quiz = value.quiz
-            value.types.each do |type|
-                @types.push(type)
-            end
             value.schedules.each do |schedule|
                 @schedules.push(schedule.clone)
             end
         end
 
-        def addScheduleType(type, schedule)
+        def addSchedule(schedule)
             # Create a problem so we can tell if this kind of item
             # can be created first.
-            problem = ProblemFactory.createKindOf(type, @item)
+            problem = ProblemFactory.createKindOf(schedule.problemType, @item)
             if (!problem.nil? && 
                 (problem.level == problem.requestedLevel) &&
                 problem.valid?)
                 # If it's a valid problem, push the schedule
                 schedule.level = problem.level
                 @schedules.push(schedule)
-                @types.push(type)
             end
         end
 
         # This is here for legacy files that might have added
         # schedules for KanjiProblems that they don't have
         def removeInvalidKanjiProblems
-            pos = @types.find_index("KanjiProblem")
+            pos = @schedules.find_index do |schedule|
+                schedule.problemType == "KanjiProblem"
+            end
             if !pos.nil?
                 problem = ProblemFactory.createKindOf("KanjiProblem", @item)
                 if !problem.valid?
-                    @types.delete_at(pos)
                     @schedules.delete_at(pos)
                 end
             end
@@ -109,12 +105,9 @@ module JLDrill
         end
 
         def findSchedule(type)
-            sched = nil
-            index = @types.find_index(type)
-            if !index.nil?
-                sched = @schedules[index]
+            return @schedules.find do |schedule|
+                schedule.problemType == type
             end
-            return sched
         end
 
         def addAllowed(levels)
@@ -123,12 +116,12 @@ module JLDrill
                 if findSchedule(type).nil?
                     # If it can't find the correct type of schedule,
                     # duplicate the first one it finds and add it.
-                    schedule = Schedule.new(@item)
+                    schedule = Schedule.new(@item, type)
                     fs = firstSchedule
                     if !fs.nil?
                         schedule.setSameReviewAs(fs)
                     end
-                    addScheduleType(type, schedule)
+                    addSchedule(schedule)
                 end
             end 
         end
@@ -158,13 +151,17 @@ module JLDrill
         end
 
         def removeDisallowed(levels)
-            @types.each_index do |i|
-                if disallowed?(@types[i], levels)
-                    @schedules.delete_at(i)
+            indices = []
+            @schedules.each_index do |i|
+                if disallowed?(@schedules[i].problemType, levels)
+                    indices.push(i)
                 end
             end
-            @types.delete_if do |type|
-                disallowed?(type, levels)
+            indices.sort! do |x, y|
+                y <=> x
+            end
+            indices.each do |i|
+                @schedules.delete_at(i)
             end
         end
 
@@ -189,7 +186,6 @@ module JLDrill
 
         def resetAll
             @schedules = []
-            @types = []
         end
 
         def allSeen(value)
@@ -232,57 +228,40 @@ module JLDrill
                 # I don't know why anyone would do this, but just in case.
                 type = "ReadingProblem"
             else
-                index = @schedules.find_index(sched)
-                type = @types[index]
+                type = sched.problemType
             end
             return ProblemFactory.createKindOf(type, @item)
         end
 
         def to_s
             retVal = ""
-            0.upto(@types.size - 1) do |i|
-                retVal += "/" + @types[i]
-                if i < @schedules.size
-                    retVal += @schedules[i].to_s
-                end
+            # Sort them by problem level so that the files are consistent
+            s = @schedules.sort do |x, y|
+                ProblemFactory.parse(x.problemType) <=> 
+                ProblemFactory.parse(y.problemType)
+            end
+            0.upto(s.size - 1) do |i|
+                retVal += s[i].to_s
             end
             return retVal
         end
 
         def currentlyParsing
-            @types.size - 1
-        end
-
-        def parseType(part)
-            retVal = false
-            if !ProblemFactory.parse(part).nil?
-                @types.push(part)
-                @schedules.push(Schedule.new(@item))
-                retVal = true
-            end
-            return retVal
-        end
-
-        def parseSchedule(part)
-            retVal = false
-            if currentlyParsing == -1
-                # Create a temporary schedule
-                sched = Schedule.new(@item)
-                if sched.parse(part)
-                    @types.push("MeaningProblem")
-                    @schedules.push(sched)
-                    retVal = true
-                end
-            else
-                retVal = @schedules[currentlyParsing].parse(part)
-            end
-            return retVal
+            @schedules.size - 1
         end
 
         def parse(part)
-            retVal = parseType(part)
-            if !retVal
-                retVal = parseSchedule(part)
+            retVal = false
+            type = Schedule.parseProblemType(part)
+            if !type.nil?
+                # Create a Schedule object for parsing.
+                sched = Schedule.new(@item, type)
+                if sched.parse(part)
+                    @schedules.push(sched)
+                    retVal = true
+                end
+            elsif currentlyParsing() != -1
+                retVal = @schedules[currentlyParsing()].parse(part)
             end
             return retVal
         end

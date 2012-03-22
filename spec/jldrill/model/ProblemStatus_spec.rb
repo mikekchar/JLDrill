@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'jldrill/model/quiz/ProblemStatus'
+require 'jldrill/model/Quiz'
 
 module JLDrill
 
@@ -18,18 +19,11 @@ module JLDrill
             clone.currentlyParsing.should eql(-1)
         end
 
-        it "should create a meaning problem if is starts parsing a schedule without a problem type" do
-            @status.currentlyParsing.should eql(-1)
-            @status.parse("Score: 0").should be(true)
-            @status.currentlyParsing.should eql(0)
-            @status.types[0].should eql("MeaningProblem")
-        end
-
         def testParse(type)
             current = @status.currentlyParsing
             @status.parse(type).should be(true)
             @status.currentlyParsing.should eql(current + 1)
-            @status.types[current + 1].should eql(type)
+            @status.schedules[current + 1].problemType.should eql(type)
             @status.schedules[current + 1].should_not be_nil
             @status.schedules[current + 1].score.should be(0)
             @status.parse("Score: 5").should be(true)
