@@ -47,31 +47,6 @@ module JLDrill::Version_0_6_1
         # problem followed by the number that will be a Kanji Problem and then
         # the number that will be a Meaning problem.  In essence it displays
         # the count in the working set exactly the way it used to.
-        #
-        # When the user loads an old file with the old bin names, "Unseen" items
-        # will go into the "New" bin. Any schedules on the items will be ignored.
-        # Items in the "Poor", "Fair" and "Good" bins will be put into the 
-        # "Working" bin.  If there is a schedule on the item, the difficulty is
-        # used to determine the potential, (see IncreasePotentialInterval_story.rb)
-        # If a schedule for a problem type is missing it will be added.  See
-        # below for how to deal with the score.  Items in the "Excellent" bin
-        # will be placed in the "Review" bin.  If a schedule is missing, it will
-        # be added, using the same schedule data as the schedule with the lowest
-        # reviewLoad (i.e., the next schedule to be drilled).  If the score
-        # of any schedule is less than or equal to the promotion threshold in
-        # the options, it will be set greater than the threshold.
-        #
-        # For items in the working set, we will not try to remember what
-        # problem it was scheduled to review when reading in old files.
-        # It will screw up the code for very little user benefit.  Instead,
-        # we will identify the lowest problem type that has a score below
-        # the promotion threshold.  Set the score for any higher problem
-        # type to zero.  Because the reading problem schedule wasn't set,
-        # this will likely clear the scores for every schedule.
-        #
-        # Now that I actually write this out, I realized how much work
-        # it actually is.  But there's no way to refactor it without
-        # doing it all.  I should have tackled this problem a lot earlier.
         class MyStory< JLDrill::StoryMemento
             include JLDrill::StoryFunctionality::SampleQuiz
 
