@@ -232,13 +232,18 @@ module JLDrill
             return ProblemFactory.createKindOf(type, @item)
         end
 
-        def to_s
-            retVal = ""
-            # Sort them by problem level so that the files are consistent
-            s = @schedules.sort do |x, y|
+        # Return a list of schedules ordered by problem type
+        def schedulesInTypeOrder
+            return @schedules.sort do |x, y|
                 ProblemFactory.parse(x.problemType) <=> 
                 ProblemFactory.parse(y.problemType)
             end
+        end
+
+        def to_s
+            retVal = ""
+            # Sort them by problem level so that the files are consistent
+            s = schedulesInTypeOrder
             0.upto(s.size - 1) do |i|
                 retVal += s[i].to_s
             end

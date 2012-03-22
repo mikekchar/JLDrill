@@ -36,7 +36,7 @@ module JLDrill::Version_0_6_1
         # the schedule is increased by one.  When selecting a problem, JLDrill
         # will select the lowest schedule for which the score is less than
         # the Promotion Threshold in the options.  If all of the schedules
-        # have scores exceeding the threshold, the item is promoted into the
+        # have scores equal to the threshold, the item is promoted into the
         # Review set.
         #
         # If the user gets a problem incorrect, the scores for all the
@@ -186,6 +186,109 @@ module JLDrill::Version_0_6_1
                 end
             end
 
+            it "present the schedules in the correct order" do
+                Story.quiz.options.promoteThresh = 2
+                item = Story.newSet[0]
+                Story.promoteIntoWorkingSet(item)
+                item.schedules.size.should eql(3)
+                s = item.problemStatus.schedulesInTypeOrder
+                readingSchedule = s[0]
+                readingSchedule.problemType.should eql("ReadingProblem")
+                kanjiSchedule = s[1]
+                kanjiSchedule.problemType.should eql("KanjiProblem")
+                meaningSchedule = s[2]
+                meaningSchedule.problemType.should eql("MeaningProblem")
+
+                # I should start with the reading problem
+                item.schedule.should be(readingSchedule)
+                item.problem.should be_a_kind_of(JLDrill::ReadingProblem)
+                readingSchedule.score.should eql(0)
+
+                Story.drillCorrectly(item)
+                readingSchedule.score.should eql(1)
+                
+                # The promotion threshold is 2 so we should still 
+                # be in the same place
+                item.schedule.should be(readingSchedule)
+                item.problem.should be_a_kind_of(JLDrill::ReadingProblem)
+
+                Story.drillCorrectly(item)
+                readingSchedule.score.should eql(2)
+
+                # We are at the promotion threshold so we go to the
+                # next schedule
+                item.schedule.should be(kanjiSchedule)
+                item.problem.should be_a_kind_of(JLDrill::KanjiProblem)
+                
+                Story.drillCorrectly(item)
+                Story.drillCorrectly(item)
+                kanjiSchedule.score.should eql(2)
+                
+                # We are at the promotion threshold so we go to the
+                # next schedule
+                item.schedule.should be(meaningSchedule)
+                item.problem.should be_a_kind_of(JLDrill::MeaningProblem)
+                
+                Story.drillCorrectly(item)
+                Story.drillCorrectly(item)
+
+                # They should all have score equal to the promotion threshold
+                readingSchedule.score.should eql(2)
+                kanjiSchedule.score.should eql(2)
+                meaningSchedule.score.should eql(2)
+
+                item.itemStats.should be_inReviewSet
+            end
+
+            def drillCorrectlyXTimes(item, x)
+                1.upto(x) do
+                    Story.drillCorrectly(item)
+                end
+            end
+
+            def allScoresShouldBeZero(item)
+                item.schedules.each do |schedule|
+                    schedule.score.should eql(0)
+                end
+            end
+
+            it "should reset the scores to zero when incorrect" do
+                Story.quiz.options.promoteThresh = 2
+                item = Story.newSet[0]
+                Story.promoteIntoWorkingSet(item)
+                
+                s = item.problemStatus.schedulesInTypeOrder
+                readingSchedule = s[0]
+                kanjiSchedule = s[1]
+                meaningSchedule = s[2]
+
+                drillCorrectlyXTimes(item, 1)
+                readingSchedule.score.should eql(1)
+                Story.drillIncorrectly(item)
+                allScoresShouldBeZero(item)
+
+                drillCorrectlyXTimes(item, 3)
+                readingSchedule.score.should eql(2)
+                kanjiSchedule.score.should eql(1)
+                Story.drillIncorrectly(item)
+                allScoresShouldBeZero(item)
+
+                drillCorrectlyXTimes(item, 5)
+                readingSchedule.score.should eql(2)
+                kanjiSchedule.score.should eql(2)
+                meaningSchedule.score.should eql(1)
+                Story.drillIncorrectly(item)
+                allScoresShouldBeZero(item)
+
+                drillCorrectlyXTimes(item, 6)
+                readingSchedule.score.should eql(2)
+                kanjiSchedule.score.should eql(2)
+                meaningSchedule.score.should eql(2)
+                item.itemStats.should be_inReviewSet
+                Story.drillIncorrectly(item)
+                item.itemStats.should be_inWorkingSet
+                allScoresShouldBeZero(item)
+            end
         end
 
     end
