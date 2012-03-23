@@ -380,15 +380,33 @@ module JLDrill
                 end
             end
         end
+
+        def newStatus
+            return "New: #{@bins[0].length} "
+        end
+
+        def forgottenStatus
+            retVal = ""
+            if (quiz.options.forgettingThresh != 0.0)
+                retVal = "Forgotten: #{@bins[3].length} "
+            end
+            return retVal
+        end
+
+        def reviewStatus
+            return "Review: #{@bins[2].length} "
+        end
+
+        def workingStatus
+            return "Working: #{self.numLevel(1,0)}, #{self.numLevel(1,1)}, #{self.numLevel(1,2)}"
+        end
         
         # Return a string containing the length of all the bins
         def status
-            retVal = "New: #{@bins[0].length} "
-            if (quiz.options.forgettingThresh != 0.0)
-                retVal += "Forgotten: #{@bins[3].length} "
-            end
-            retVal += "Review: #{@bins[2].length} "
-            retVal += "Working: #{self.numLevel(1,0)}, #{self.numLevel(1,1)}, #{self.numLevel(1,2)}"
+            retVal = newStatus()
+            retVal += forgottenStatus()
+            retVal += reviewStatus()
+            retVal += workingStatus()
             return retVal
         end
         

@@ -76,27 +76,26 @@ the task.
    :END:
 
 *** TODO Remove levels from the working set
-	Remove the levels from the working set items.  Instead create
-	schedules for the working set items the same way that
-	they are created for the review set.  Sort the working set
-	by percentage of potential schedule waited after every 
-	insertion/schedule change.  The initial potential schedule
-	is 20 seconds +- 10% for each problem type.  When a problem
-	type has been successfully guessed the correct number of
-	times, it is given a review set schedule.  When all problem
-	types have been given review set schedules, the item is
-	promoted to the review set.  The schedules it had in the
-	working set are retained.  If the user gets a problem
-	type wrong, then ALL the problem types for the item have
-	their schedule set to 10 seconds +- 10%.
+    Remove the levels from the working set items.  Instead create
+    schedules for the working set items the same way that they are
+    created for the review set.  Sort the working set by percentage of
+    potential schedule waited after every insertion/schedule change.
+    The initial potential schedule is 20 seconds +- 10% for each
+    problem type.  When a problem type has been successfully guessed
+    the correct number of times, it is given a review set schedule.
+    When all problem types have been given review set schedules, the
+    item is promoted to the review set.  The schedules it had in the
+    working set are retained.  If the user gets a problem type wrong,
+    then ALL the problem types for the item have their schedule set to
+    10 seconds +- 10%.
 
     - [X] Get rid of having to pass the threshold around
-	- [X] Make reading problems valid in working set
-	- [X] Make status look the same as it did before the change
-	- [X] Review set only seems to pick Kanji problems uness there
-		  is no kanji. The score in the schedules wasn't set in
-		  old files.
-    - [ ] On reading the file, set the level to the lowest one
+    - [X] Make reading problems valid in working set
+    - [X] Make status look the same as it did before the change
+    - [X] Review set only seems to pick Kanji problems uness there
+          is no kanji. The score in the schedules wasn't set in
+          old files.
+    - [X] On reading the file, set the level to the lowest one
           where the score isn't full
     - [X] Make sure new schedules are injected when the options
           change to allow new items.

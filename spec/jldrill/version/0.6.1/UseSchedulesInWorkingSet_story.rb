@@ -279,7 +279,44 @@ module JLDrill::Version_0_6_1
                 Story.shutdown
             end
 
-            it "should display the counts in the woring set according to problem type" do
+            # Kind of long to type and makes the tests hard to read,
+            # so let's make a shorter version
+            def workingStatus
+                Story.quiz.contents.workingStatus
+            end
+
+            it "should display the counts in the working set according to problem type" do
+                Story.quiz.options.promoteThresh = 1
+                # We start with on item in the working set
+                workingStatus().should eql("Working: 1, 0, 0")
+                # Let's keep track of it and make 9 more
+                items = [Story.workingSet[0]]
+                1.upto(9) do
+                    items.push(Story.newSampleItem())
+                end
+                1.upto(9) do |i|
+                    Story.quiz.contents.addItem(items[i], 
+                                                JLDrill::Strategy.workingSetBin)
+                    workingStatus().should eql("Working: #{i+1}, 0, 0")
+                end
+
+                # We'll promote them to the kanji problem
+                0.upto(9) do |i|
+                    Story.drillCorrectly(items[i])
+                    workingStatus().should eql("Working: #{9-i}, #{i+1}, 0")
+                end
+                
+                # We'll promote them to the meaning problem
+                0.upto(9) do |i|
+                    Story.drillCorrectly(items[i])
+                    workingStatus().should eql("Working: 0, #{9-i}, #{i+1}")
+                end
+
+                # Finally promote them to review Set
+                0.upto(9) do |i|
+                    Story.drillCorrectly(items[i])
+                    workingStatus().should eql("Working: 0, 0, #{9-i}")
+                end
             end
         end
 
