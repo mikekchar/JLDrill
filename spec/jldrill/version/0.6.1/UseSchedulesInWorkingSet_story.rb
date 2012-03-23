@@ -266,5 +266,22 @@ module JLDrill::Version_0_6_1
             end
         end
 
+        describe Story.stepName("Display Quiz Status") do
+            before(:each) do
+                Story.setup(JLDrill::Test)
+                Story.start
+                Story.quiz.options.promoteThresh = 1
+                Story.newSet.length.should_not eql(0)
+                Story.newSet[0].should_not be_nil
+            end
+
+            after(:each) do
+                Story.shutdown
+            end
+
+            it "should display the counts in the woring set according to problem type" do
+            end
+        end
+
     end
 end
