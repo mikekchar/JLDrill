@@ -9,7 +9,8 @@ module JLDrill
         attr_reader :publisher, :randomOrder, :promoteThresh, :introThresh,
                     :reviewMode, :dictionary, :language, :reviewMeaning, 
                     :reviewKanji, :reviewReading, :reviewOptionsSet,
-                    :autoloadDic, :tanaka, :forgettingThresh
+                    :autoloadDic, :tanaka, :forgettingThresh,
+                    :interleavedWorkingSet
 
         RANDOM_ORDER_RE = /^Random Order/
         PROMOTE_THRESH_RE = /^Promotion Threshold: (.*)/
@@ -21,6 +22,7 @@ module JLDrill
         REVIEW_READING_RE = /^Review Reading/
         AUTOLOAD_DIC_RE = /^Autoload Dictionary/
         FORGETTING_THRESH_RE = /^Forgetting Threshold: (.*)/
+        INTERLEAVED_WORKING_SET_RE = /^Interleaved Working Set/
 
         def initialize(quiz)
             @quiz = quiz
@@ -34,6 +36,7 @@ module JLDrill
 			@tanaka = nil
             @autoloadDic = false
             @forgettingThresh = 0.0
+            @interleavedWorkingSet = false
             defaultReviewOptions
         end
         
@@ -51,6 +54,7 @@ module JLDrill
             retVal.reviewReading = @reviewReading
             retVal.autoloadDic = @autoloadDic
             retVal.forgettingThresh = @forgettingThresh
+            retVal.interleavedWorkingSet = @interleavedWorkingSet
             retVal
         end
         
@@ -66,7 +70,8 @@ module JLDrill
             options.reviewKanji == @reviewKanji &&
             options.autoloadDic == @autoloadDic &&
             options.reviewReading == @reviewReading &&
-            options.forgettingThresh == @forgettingThresh
+            options.forgettingThresh == @forgettingThresh &&
+            options.interleavedWorkingSet == @interleavedWorkingSet
         end
 
         def subscribe(subscriber)
@@ -217,6 +222,13 @@ module JLDrill
         def forgettingThresh=(value)
             if @forgettingThresh != value
                 @forgettingThresh = value
+                saveNeeded
+            end
+        end
+
+        def interleavedWorkingSet=(value)
+            if @interleavedWorkingSet != value
+                @interleavedWorkingSet = value
                 saveNeeded
             end
         end
