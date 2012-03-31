@@ -133,16 +133,17 @@ module JLDrill::Version_0_6_1
                 # The option defaults to false
                 Story.quiz.options.interleavedWorkingSet.should be_false
 
+                newOptions = Story.quiz.options.clone()
+                newOptions.should eql(Story.quiz.options)
+
                 # Setting it to true should mean that the quiz needs
                 # to be saved
                 Story.quiz.options.interleavedWorkingSet = true
                 Story.quiz.needsSave.should be_true
 
-                newOptions = JLDrill::Options.new(JLDrill::Quiz.new())
                 newOptions.should_not eql(Story.quiz.options)
                 newOptions.interleavedWorkingSet = true
                 newOptions.should eql(Story.quiz.options)
-
             end
         end
     end

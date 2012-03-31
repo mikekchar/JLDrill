@@ -12,6 +12,8 @@ module JLDrill
                     :autoloadDic, :tanaka, :forgettingThresh,
                     :interleavedWorkingSet
 
+        attr_writer :reviewOptionsSet
+
         RANDOM_ORDER_RE = /^Random Order/
         PROMOTE_THRESH_RE = /^Promotion Threshold: (.*)/
         INTRO_THRESH_RE = /^Introduction Threshold: (.*)/
@@ -55,11 +57,11 @@ module JLDrill
             retVal.autoloadDic = @autoloadDic
             retVal.forgettingThresh = @forgettingThresh
             retVal.interleavedWorkingSet = @interleavedWorkingSet
-            retVal
+            return retVal
         end
         
         def eql?(options)
-            options.randomOrder == @randomOrder &&
+            return options.randomOrder == @randomOrder &&
             options.promoteThresh == @promoteThresh &&
             options.introThresh == @introThresh &&
             options.reviewMode == @reviewMode &&
