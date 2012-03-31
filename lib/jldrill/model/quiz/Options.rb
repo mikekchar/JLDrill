@@ -112,6 +112,7 @@ module JLDrill
             self.reviewReading = options.reviewReading
             self.autoloadDic = options.autoloadDic
             self.forgettingThresh = options.forgettingThresh
+            self.interleavedWorkingSet = options.interleavedWorkingSet
             if !@quiz.nil?
                 @quiz.recreateProblem
             end
@@ -280,6 +281,8 @@ module JLDrill
                     self.autoloadDic = true
                 when FORGETTING_THRESH_RE
                     self.forgettingThresh = $1.to_f
+                when INTERLEAVED_WORKING_SET_RE
+                    self.interleavedWorkingSet = true
                 else
                     parsed = false
             end
@@ -321,6 +324,9 @@ module JLDrill
             end
             if(@forgettingThresh != 0)
                 retVal += "Forgetting Threshold: #{@forgettingThresh}\n"
+            end
+            if(@interleavedWorkingSet)
+                retVal += "Interleaved Working Set\n"
             end
             retVal
         end

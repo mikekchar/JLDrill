@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'jldrill/spec/storyFunctionality/SampleQuiz.rb'
+require 'jldrill/spec/storyFunctionality/Gtk'
 require 'jldrill/model/quiz/Strategy'
 require 'jldrill/model/quiz/Schedule'
 require 'jldrill/model/quiz/Options'
@@ -96,11 +97,19 @@ module JLDrill::Version_0_6_1
         # level (from 0 up to promoteThresh - 1).
         class MyStory< JLDrill::StoryMemento
             include JLDrill::StoryFunctionality::SampleQuiz
+            include JLDrill::StoryFunctionality::Gtk
 
             def setup(type)
                 super(type)
                 hasResetQuiz
             end
+
+            # Set the current context and view to the setOptionsContext
+            def setOptions
+                @context = @mainContext.setOptionsContext
+                @view = @context.peekAtView
+            end
+
         end
 
         Story = MyStory.new("Sort Working Set Items By Schedule")
@@ -144,6 +153,42 @@ module JLDrill::Version_0_6_1
                 newOptions.should_not eql(Story.quiz.options)
                 newOptions.interleavedWorkingSet = true
                 newOptions.should eql(Story.quiz.options)
+
+                Story.quiz.options.to_s.should eql("Random Order\nPromotion Threshold: 2\nIntroduction Threshold: 10\nReview Meaning\nReview Kanji\nInterleaved Working Set\n")
+
+                # Make sure we can read in the option
+                no2 = JLDrill::Options.new(JLDrill::Quiz.new())
+                no2.interleavedWorkingSet.should be_false
+                no2.parseLine("Interleaved Working Set").should be_true
+                no2.interleavedWorkingSet.should be_true
+            end
+        end
+
+        describe Story.stepName("Can set the option using Options view") do
+            before(:each) do
+                Story.setup(JLDrill::Gtk)
+                Story.start
+                Story.setOptions
+            end
+
+            after(:each) do
+                Story.shutdown
+            end
+        
+            def setValueAndTest(valueString, default, target)
+                modelString = "Story.mainContext.quiz.options." + valueString
+                setUIString = "Story.view.optionsWindow." + 
+                    valueString + " = " + target.to_s 
+                eval(modelString).should eql(default)
+                Story.pressOKAfterEntry(Story.view.optionsWindow) do
+                    eval(setUIString)
+                end
+                Story.context.enter(Story.mainContext)
+                eval(modelString).should eql(eval("#{target}"))
+            end
+
+            it "should be able to set the InterLeaved Working Set option" do
+                setValueAndTest("interleavedWorkingSet", false, true)
             end
         end
     end

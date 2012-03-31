@@ -96,8 +96,10 @@ module JLDrill::Gtk
             @introThresh = size.scale
             promote = Scale.new("Promote After", 1, 5, 1)
             @promoteThresh = promote.scale
+            @interleavedWorkingSet = Gtk::CheckButton.new("Interleaved?")
             retVal.add(size.box)
             retVal.add(promote.box)
+            retVal.add(@interleavedWorkingSet)
             return retVal
         end
        
@@ -209,6 +211,14 @@ module JLDrill::Gtk
             @forgettingThresh.value.to_f
         end
 
+        def interleavedWorkingSet=(value)
+            @interleavedWorkingSet.active = value
+        end
+
+        def interleavedWorkingSet
+            @interleavedWorkingSet.active?
+        end
+
         def set(options)
             self.randomOrder = options.randomOrder
             self.promoteThresh = options.promoteThresh
@@ -224,6 +234,7 @@ module JLDrill::Gtk
             self.language = options.language
             self.autoloadDic = options.autoloadDic
             self.forgettingThresh = options.forgettingThresh
+            self.interleavedWorkingSet = options.interleavedWorkingSet
         end
         
         def updateFromViewData
@@ -247,6 +258,7 @@ module JLDrill::Gtk
             @view.options.language = self.language
             @view.options.autoloadDic = self.autoloadDic
             @view.options.forgettingThresh = self.forgettingThresh
+            @view.options.interleavedWorkingSet = self.interleavedWorkingSet
         end
         
         def execute

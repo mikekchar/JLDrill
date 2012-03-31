@@ -3,6 +3,7 @@ require 'Context/Context'
 require 'Context/Bridge'
 require 'Context/View'
 require 'jldrill/contexts/GetFilenameContext'
+require 'jldrill/model/quiz/Options'
 
 module JLDrill
 
