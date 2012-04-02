@@ -24,6 +24,7 @@ module JLDrill
        
         SECONDS_PER_DAY = 60 * 60 * 24
         DEFAULT_POTENTIAL = 5 * SECONDS_PER_DAY
+        INITIAL_WORKING_SET_INTERVAL = 60
 
         # Note: scheduledTime is deprecated
         attr_reader :name, :item, :score,
@@ -149,6 +150,10 @@ module JLDrill
             return DEFAULT_POTENTIAL
         end
 
+        def Schedule.initialWorkingSetInterval
+            return INITIAL_WORKING_SET_INTERVAL
+        end
+
         def duration=(seconds)
             @duration.seconds = seconds
         end
@@ -259,7 +264,7 @@ module JLDrill
                 elapsed = elapsedTime
                 if Schedule.backoff(elapsed) > @duration.seconds
                     interval = Schedule.backoff(elapsed) 
-                    max = maxInterval
+                    max = maxInterval()
                     if (interval > max) && (max > 0)
                         interval = max
                     end
@@ -267,7 +272,12 @@ module JLDrill
                     interval = @duration.seconds
                 end
             else
-                interval = @potential 
+                if (@item.bin == Strategy.workingSetBin) &&
+                    (@item.quiz.options.interleavedWorkingSet)
+                    interval = Schedule.initialWorkingSetInterval
+                else
+                    interval = @potential
+                end 
             end
             return interval
         end

@@ -372,6 +372,9 @@ module JLDrill
                 if item.bin == Strategy.newSetBin
                     contents.moveToBin(item, Strategy.workingSetBin)
                     item.setScores(0)
+                    if options.interleavedWorkingSet
+                        item.scheduleAll
+                    end
                 else 
                     if item.bin == Strategy.workingSetBin
                         # Newly promoted items

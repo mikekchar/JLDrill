@@ -71,7 +71,9 @@ module JLDrill::Version_0_6_1
 
             def scheduleShouldBeAroundXSeconds(schedule, seconds, variation=10)
                 # There's a random +- range variation in the schedule
-                schedule.duration.should be_within(seconds.to_f / variation.to_f).of(seconds)
+                # Adding 1 to the tolerance because be_within is not inclusive
+                # and I want it to be
+                schedule.duration.should be_within((seconds.to_f / variation.to_f).to_i + 1).of(seconds)
             end
 
             # Drills the item incorrectly x times and returns the expected
@@ -144,7 +146,9 @@ module JLDrill::Version_0_6_1
 
             def scheduleShouldBeAroundXSeconds(schedule, seconds, variation=10)
                 # There's a random +- range variation in the schedule
-                schedule.duration.should be_within(seconds.to_f / variation.to_f).of(seconds)
+                # Adding 1 to the tolerance because be_within is not inclusive and
+                # I want it to be
+                schedule.duration.should be_within((seconds.to_f / variation.to_f).to_i + 1).of(seconds)
             end
 
             it "should set the potential of items demoted to the working set to 20% less than their current potential" do

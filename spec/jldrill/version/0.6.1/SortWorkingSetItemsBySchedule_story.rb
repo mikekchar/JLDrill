@@ -65,14 +65,14 @@ module JLDrill::Version_0_6_1
         #
         # When an item is moved to the working set, the schedules for
         # the appropriate problems are created as usual.  Each schedule
-        # is scheduled with a duration of 10 seconds +- 10%.  The
-        # main schedule for the item is the one with the highest
-        # reviewLoad (i.e., the schedule that has waited the longest as
-        # a proportion of its duration).  However, any schedule with
-        # a score equal to or greater than the promoteThresh will
-        # not be selected.  Items in the working set are chosen based
-        # on the reviewLoad of their main schedule. The item that has
-        # waited the longest as a proportion of its duration is chosen.
+        # is scheduled with a duration of 60 seconds +- 10%. 
+        # The main schedule in an item is the one with the lowest score.
+        # If more than one schedule has the lowest score, the one with
+        # the highest reviewLoad is chosen (the one which has waited the
+        # longest as a proportion of its duration) Items in the working 
+        # set are chosen based on the reviewLoad of their main schedule. 
+        # The item that has waited the longest as a proportion of its 
+        # duration is chosen.
         #
         # When a problem is drilled correctly, the schedule's score is
         # increased by one.  The item is rescheduled using the normal
@@ -86,7 +86,7 @@ module JLDrill::Version_0_6_1
         #
         # If the item is drilled incorrectly in the working set, *all*
         # of the schedules will have their scores set to zero and
-        # will be rescheduled for a duration of 10 seconds +- 10%
+        # will be rescheduled for a duration of 60 seconds +- 10%
         #
         # With the interleaved working set option turned on, the
         # concept of "Level" for the item is a bit different.  An item
@@ -190,6 +190,71 @@ module JLDrill::Version_0_6_1
             it "should be able to set the InterLeaved Working Set option" do
                 setValueAndTest("interleavedWorkingSet", false, true)
             end
+        end
+        describe Story.stepName("Interleaved working set items") do
+            before(:each) do
+                Story.setup(JLDrill::Test)
+                Story.start
+                Story.quiz.options.promoteThresh = 2
+                Story.quiz.options.introThresh = 10
+                Story.quiz.options.interleavedWorkingSet = true
+                Story.newSet.length.should_not eql(0)
+                Story.newSet[0].should_not be_nil
+            end
+
+            after(:each) do
+                Story.shutdown
+            end
+
+            def scheduleShouldBeAroundXSeconds(schedule, seconds, variation=10)
+                # There's a random +- range variation in the schedule
+                # Adding +1 to the tolerance because be_within is not inclusive
+                # and I want it to be
+                schedule.duration.should be_within((seconds.to_f / variation.to_f).to_i + 1).of(seconds)
+            end
+
+            it "should schedule working set items" do
+                item = Story.newSet[0]
+                item.should_not be_nil
+                item.schedules.size.should eql(0)
+                Story.quiz.strategy.promote(item) 
+                item.itemStats.should be_inWorkingSet
+                item.schedules.size.should eql(3)
+                initial = JLDrill::Schedule.initialWorkingSetInterval
+                initial.should eql(60)
+                item.schedules.each do |schedule|
+                    schedule.should be_scheduled
+                    scheduleShouldBeAroundXSeconds(schedule, initial)
+                end
+            end
+
+            it "should schedule items in the working set when the options change"
+
+            it "should unschedule items in the working set when the options change"
+
+            # The main schedule criteria is:
+            #     schedules with the lowest score are picked first
+            #     if there is more than one schedule with the same score
+            #         the schedule with the highest reviewLoad is picked
+            it "should choose the main schedule based on reviewLoad and score"
+
+            # The highest reviewLoad should be chosen
+            it "should choose the next item to be quized based on reviewLoad"
+
+            # It uses the normal backoff schedule.  The score for the schedule
+            # is increased by one.  The potential is not changed.
+            it "should reschedule the problem for items guessed correctly"
+
+            # The schedule durations are all set to 60 seconds and the scores are
+            # set to 0.  The potential schedule is reduced by 20% of its value.
+            it "should reset the schedule and scores for all schedules when incorrect"
+
+            # The status lines shows N number of "levels" 
+            # (from 0 to promoteThresh - 1).  An item is "Level 0" if any of its
+            # schedules has a score of 0.  An item is "Level 1" if any of its 
+            # schedules has a score of 1.  Etc.  The status line shows the number of
+            # items in each level in the working set.
+            it "should show the status of the items in the working set"
         end
     end
 end

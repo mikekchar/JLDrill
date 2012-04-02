@@ -124,7 +124,9 @@ module JLDrill::ScheduleItems
         def scheduleShouldBe(schedule, days, range=10)
             gap = inDays(schedule.duration)
             # There's a random +- range variation in the schedule
-            gap.should be_within(days.to_f / range.to_f).of(days)
+            # Adding 0.0001 to the tolerance because be_within is not
+            # inclusive and I want it to be.
+            gap.should be_within((days.to_f / range.to_f) + 0.0001).of(days)
         end
 
         it "should schedule new items 5 days from now" do
@@ -248,8 +250,10 @@ module JLDrill::ScheduleItems
             problemStatus.findScheduleForLevel(3).should eql(nil)
 
             # Both of the schedules should be between 4.5 and 5.5 days
-            inDays(problemStatus.schedules[0].duration).should be_within(0.5).of(5.0)
-            inDays(problemStatus.schedules[1].duration).should be_within(0.5).of(5.0)
+            # Adding 0.0001 to the tolerance because be_within is not inclusive
+            # and I want it to be
+            inDays(problemStatus.schedules[0].duration).should be_within(0.5001).of(5.0)
+            inDays(problemStatus.schedules[1].duration).should be_within(0.5001).of(5.0)
 
             # Pretend we reviewed this a day ago so that the schedules will
             # sort properly
