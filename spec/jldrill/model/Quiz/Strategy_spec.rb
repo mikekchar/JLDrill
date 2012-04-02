@@ -57,18 +57,18 @@ module JLDrill
 	            test_addItem(Strategy.reviewSetBin, i)
     	    end
     	    @strategy.findUnseenIndex(Strategy.reviewSetBin).should eql(0)
-    	    @quiz.contents.bins[Strategy.reviewSetBin][0].schedule.seen = true
+    	    @quiz.contents.bins[Strategy.reviewSetBin][0].firstSchedule.seen = true
     	    @strategy.findUnseenIndex(Strategy.reviewSetBin).should eql(1)
-    	    @quiz.contents.bins[Strategy.reviewSetBin][1].schedule.seen = true
+    	    @quiz.contents.bins[Strategy.reviewSetBin][1].firstSchedule.seen = true
     	    @strategy.findUnseenIndex(Strategy.reviewSetBin).should eql(2)
     	    0.upto(9) do |i|
-        	    @quiz.contents.bins[Strategy.reviewSetBin][i].schedule.seen = true
+        	    @quiz.contents.bins[Strategy.reviewSetBin][i].firstSchedule.seen = true
             end
             # When they are all seen, it should wrap
     	    @strategy.findUnseenIndex(Strategy.reviewSetBin).should eql(0)
     	    # And set all the rest to unseen
     	    @quiz.contents.bins[Strategy.reviewSetBin].contents[1..9].all? do |item|
-    	        item.schedule.seen == false
+    	        item.firstSchedule.seen == false
     	    end.should eql(true)
 	    end
 	    
@@ -78,7 +78,7 @@ module JLDrill
 	        item = test_addItem(Strategy.newSetBin, 1)
 	        @strategy.demote(item)
 	        item.bin.should eql(Strategy.newSetBin)
-	        item.schedule.should be_nil
+	        item.firstSchedule.should be_nil
 	    end
 
 	    it "should demote other items to the working set" do
@@ -107,7 +107,7 @@ module JLDrill
             problemStatus = item1.status.select("ProblemStatus")
             problemStatus.checkSchedules
             problemStatus.findScheduleForLevel(0).should_not eql(nil)
-            item1.schedule.problemType.should eql("ReadingProblem")
+            item1.firstSchedule.problemType.should eql("ReadingProblem")
 
 	        item2 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
 	        item2.bin = Strategy.workingSetBin
@@ -115,7 +115,7 @@ module JLDrill
             problemStatus.checkSchedules
             problemStatus.findScheduleForLevel(1).should_not eql(nil)
             @quiz.strategy.correct(item2)
-            item2.schedule.problemType.should eql("KanjiProblem")
+            item2.firstSchedule.problemType.should eql("KanjiProblem")
 	        
 	        item3 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
 	        item3.bin = Strategy.workingSetBin
@@ -124,7 +124,7 @@ module JLDrill
             problemStatus.findScheduleForLevel(2).should_not eql(nil)
             @quiz.strategy.correct(item3)
             @quiz.strategy.correct(item3)
-            item3.schedule.problemType.should eql("MeaningProblem")
+            item3.firstSchedule.problemType.should eql("MeaningProblem")
             
             problem1 = @strategy.createProblem(item1)
             problem2 = @strategy.createProblem(item2)
@@ -191,7 +191,7 @@ module JLDrill
 
             # Set all the items in the review set to seen
             @quiz.contents.bins[Strategy.reviewSetBin].each do |item|
-                item.schedule.seen = true
+                item.firstSchedule.seen = true
             end
             @strategy.allSeen?(@quiz.contents.bins[Strategy.reviewSetBin]).should eql(true)
 
@@ -200,14 +200,14 @@ module JLDrill
             @strategy.shouldReview?.should eql(true)
 
             item = test_addItem(Strategy.workingSetBin, -1)
-            item.schedule.seen = true
+            item.firstSchedule.seen = true
             # Now there is a working set item, and we don't have enough items
             # in the review set, so we should not review
             @strategy.shouldReview?.should eql(false)
             # Make a total of 4 items in the review set
             0.upto(3) do
                 item = test_addItem(Strategy.reviewSetBin, -1)
-                item.schedule.seen = true
+                item.firstSchedule.seen = true
             end
             # We have enough items, and we haven't learned the review items
             # to the required level, so we would ordinarily review
@@ -218,9 +218,9 @@ module JLDrill
         it "should decrease the potential when an item is incorrect" do
             item = test_addItem(Strategy.reviewSetBin, -1)
 	        @quiz.currentProblem = @strategy.createProblem(item)
-	        item.schedule.potential.should eql(432000)
+	        item.firstSchedule.potential.should eql(432000)
 	        @strategy.incorrect(item)
-	        item.schedule.potential.should eql(345600)
+	        item.firstSchedule.potential.should eql(345600)
         end
         
         it "should decrease the potential 20% when demoted from the review set bin" do
@@ -228,29 +228,29 @@ module JLDrill
             item = test_addItem(Strategy.workingSetBin, -1)
 	        @quiz.currentProblem = @strategy.createProblem(item)
             pot1 = Schedule.defaultPotential
-            item.schedule.potential.should eql(pot1)
+            item.firstSchedule.potential.should eql(pot1)
 	        @strategy.incorrect(item)
             pot2 = pot1 - (0.2 * pot1).to_int
-            item.schedule.potential.should eql(pot2)
+            item.firstSchedule.potential.should eql(pot2)
 	        @strategy.incorrect(item)
             pot3 = pot2 - (0.2 * pot2).to_int
-            item.schedule.potential.should eql(pot3)
+            item.firstSchedule.potential.should eql(pot3)
 	        @strategy.incorrect(item)
             pot4 = pot3 - (0.2 * pot3).to_int
-            item.schedule.potential.should eql(pot4)
+            item.firstSchedule.potential.should eql(pot4)
             item.bin.should eql(Strategy.workingSetBin)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
 	        @strategy.correct(item)
             item.bin.should eql(Strategy.reviewSetBin)
-            pot5 = item.schedule.duration
+            pot5 = item.firstSchedule.duration
             # The potential is set to the duration of the schedule
             # when the item is promoted.
-	        item.schedule.potential.should eql(pot5)
+	        item.firstSchedule.potential.should eql(pot5)
 	        @strategy.incorrect(item)
             item.bin.should eql(Strategy.workingSetBin)	        	        
             pot6 = pot5 - (0.2 * pot5).to_int
-            item.schedule.potential.should eql(pot6)
+            item.firstSchedule.potential.should eql(pot6)
         end
         
         it "should reset the consecutive counter on an incorrect answer" do

@@ -40,8 +40,9 @@ module JLDrill
             return problemStatus.removeInvalidKanjiProblems
         end
 
-        # Return the schedule for the Spaced Repetition Drill
-        def schedule
+        # Return the schedule for the item that is the highest priority
+        # according to the strategy
+        def firstSchedule
             return problemStatus.firstSchedule
         end
 

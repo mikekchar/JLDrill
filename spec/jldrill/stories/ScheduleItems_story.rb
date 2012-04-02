@@ -75,13 +75,13 @@ module JLDrill::ScheduleItems
 
         def createAndPromote(item)
             # Items in the new set do not have schedules
-            item.schedule.should be_nil
+            item.firstSchedule.should be_nil
 
             # Creating a Problem in the new set it kind of strange,
             # but if we do it, it should work and it shouldn't
             # screw up the schedules
             quiz.createProblem(item)
-            item.schedule.should be_nil
+            item.firstSchedule.should be_nil
 
             # Promoting in the working set creates schedules
             # for the problems, but it doesn't actually schedule them.
@@ -94,7 +94,7 @@ module JLDrill::ScheduleItems
                 schedule.score.should eql(0)
             end
             # The schedule method should pick one of these
-            item.schedule.should_not be_nil
+            item.firstSchedule.should_not be_nil
 
             # Once it is promoted into the review set, the schedules
             # should actually be scheduled.  Since we didn't get anything
@@ -106,7 +106,7 @@ module JLDrill::ScheduleItems
                 scheduleShouldBe(schedule, 5, 10)
                 schedule.potential.should eql(schedule.duration)
             end
-            item.schedule.should_not be_nil
+            item.firstSchedule.should_not be_nil
         end
 
         def inDays(duration)
@@ -132,30 +132,30 @@ module JLDrill::ScheduleItems
         it "should schedule new items 5 days from now" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item.schedule, 5.0, 10)
+            scheduleShouldBe(item.firstSchedule, 5.0, 10)
         end
 
         it "should schedule new items from now even if there are scheduled items" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item.schedule, 5.0, 10)
+            scheduleShouldBe(item.firstSchedule, 5.0, 10)
 
             # Get a new item
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item.schedule, 5.0, 10)
+            scheduleShouldBe(item.firstSchedule, 5.0, 10)
         end
 
         it "should set a maximum of the duration * 2 + 25%" do
             item = newSet[0]
             createAndPromote(item)
-            scheduleShouldBe(item.schedule, 5.0, 10)
-            orig = item.schedule.duration
-            max = item.schedule.maxInterval
+            scheduleShouldBe(item.firstSchedule, 5.0, 10)
+            orig = item.firstSchedule.duration
+            max = item.firstSchedule.maxInterval
             max.should eql(JLDrill::Schedule.backoff(orig.to_f * 1.25))
 
             # Make the item last reviewed 20 days ago
-            schedule = item.schedule
+            schedule = item.firstSchedule
             schedule.lastReviewed = setDaysAgoReviewed(schedule, 20.0)
             schedule.calculateInterval.should eql(max)
             schedule.correct
@@ -165,7 +165,7 @@ module JLDrill::ScheduleItems
         it "should schedule a minimum of the last duration" do
             item = newSet[0]
             createAndPromote(item)
-            schedule = item.schedule
+            schedule = item.firstSchedule
             scheduleShouldBe(schedule, 5.0, 10)
             orig = schedule.duration
             # Make the item last reviewed 1 day ago
@@ -209,7 +209,7 @@ module JLDrill::ScheduleItems
             createAndPromote(item)
             item.schedules.size.should eql(1)
 
-            schedule = item.schedule
+            schedule = item.firstSchedule
             scheduleShouldBe(schedule, 5.0, 10)
             orig = schedule.potential
 
@@ -218,11 +218,11 @@ module JLDrill::ScheduleItems
             schedule.elapsedTime.should eql(inSeconds(10.0))
 
             quiz.strategy.correct(item)
-            second = item.schedule.potential
+            second = item.firstSchedule.potential
 
             schedule.lastReviewed = setDaysAgoReviewed(schedule, 10.0)
             quiz.strategy.correct(item)
-            third = item.schedule.potential
+            third = item.firstSchedule.potential
 
             # Make the item incorrect.  It will be moved to the working set
             quiz.strategy.incorrect(item)
@@ -236,7 +236,7 @@ module JLDrill::ScheduleItems
         it "should be able to sort the review set items according to schedule" do
             item = newSet[0]
             createAndPromote(item)
-            schedule = item.schedule
+            schedule = item.firstSchedule
             scheduleShouldBe(schedule, 5.0, 10)
             problemStatus = item.status.select("ProblemStatus")
             # By default a meaning and kanji problem schedule 
@@ -275,7 +275,7 @@ module JLDrill::ScheduleItems
 
             item2 = newSet[0]
             createAndPromote(item2)
-            scheduleShouldBe(item2.schedule, 5.0, 10)
+            scheduleShouldBe(item2.firstSchedule, 5.0, 10)
 
             # New items are always placed at the back of the reviewSet
             reviewSet[0].should be(item)
@@ -284,8 +284,8 @@ module JLDrill::ScheduleItems
             # Pretend we reviewed this an hour ago so that the schedules will
             # sort properly (You have to do it twice to get both
             # scheduled problem types)
-            setDaysAgoReviewed(item2.schedule, 1.0/24.0)
-            setDaysAgoReviewed(item2.schedule, 1.0/24.0)
+            setDaysAgoReviewed(item2.firstSchedule, 1.0/24.0)
+            setDaysAgoReviewed(item2.firstSchedule, 1.0/24.0)
 
             # If we reschedule
             quiz.strategy.quiz.should be(quiz)
@@ -301,7 +301,7 @@ module JLDrill::ScheduleItems
 
             # Now we pretend that one of the problem types in item 2
             # was reviewed 50 days ago and reschedule
-            setDaysAgoReviewed(item2.schedule, 50.0)
+            setDaysAgoReviewed(item2.firstSchedule, 50.0)
             quiz.reschedule
 
             # Because one of the problem types has waited a

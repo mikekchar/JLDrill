@@ -98,7 +98,7 @@ Forgotten
 
                 # New set items should have no schedule even if they exist in the
                 # file
-                newItem.schedule.should be_nil
+                newItem.firstSchedule.should be_nil
                 newItem.schedules.size.should eql(0)
 
                 # Even if the file only has 2 schedules for the working set items,

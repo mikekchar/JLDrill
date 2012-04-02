@@ -79,7 +79,7 @@ module JLDrill::Version_0_6_1
             # Drills the item incorrectly x times and returns the expected
             # potential schedule
             def drillIncorrectlyXTimes(item, x)
-                potential = item.schedule.potential
+                potential = item.firstSchedule.potential
                 0.upto(x) do
                     Story.drillIncorrectly(item)
                     potential = potential - (0.2 * potential.to_f).to_int
@@ -95,7 +95,7 @@ module JLDrill::Version_0_6_1
                 item = Story.newSet[0]
                 Story.promoteIntoWorkingSet(item)
                 item.itemStats.should be_inWorkingSet
-                potential = item.schedule.potential
+                potential = item.firstSchedule.potential
                 potential.should eql(Story.daysInSeconds(5))
 
                 # Drill incorrectly 5 times and check that the
@@ -176,7 +176,7 @@ module JLDrill::Version_0_6_1
 
                 # Since it has waited a longer percentage of it's schedule,
                 # s1 will be the one chosen.
-                item.schedule.should be(s1)
+                item.firstSchedule.should be(s1)
                 # Keep track of what the new inerval is supposed to be
                 interval = s1.calculateInterval
 
@@ -188,10 +188,10 @@ module JLDrill::Version_0_6_1
                 targetPotential = s1.potential
 
                 # s1 was just reviewed, so the next one to be reviewed will be s2
-                item.schedule.should be(s2)
+                item.firstSchedule.should be(s2)
                 # We'll make s1 wait again so that it comes back to the top.
                 Story.setDaysAgoReviewed(s1, 20.0)
-                item.schedule.should be(s1)
+                item.firstSchedule.should be(s1)
 
                 # Make the item incorrect.  It will be moved to the working set
                 Story.quiz.strategy.incorrect(item)
@@ -231,7 +231,7 @@ module JLDrill::Version_0_6_1
 
                 # Since it has waited a longer percentage of it's schedule,
                 # s1 will be the one chosen.
-                item.schedule.should be(s1)
+                item.firstSchedule.should be(s1)
 
                 # Setting the options to include reading problems should
                 # automatically add a schedule for the reading problem.

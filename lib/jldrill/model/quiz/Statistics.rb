@@ -91,7 +91,7 @@ module JLDrill
         end
 
         def recordReviewRate(item)
-            @reviewRateSum += item.schedule.reviewRate
+            @reviewRateSum += item.firstSchedule.reviewRate
         end
 
         def reviewBin
@@ -113,7 +113,7 @@ module JLDrill
         def currentReviewRate
             retVal = 1.0
             if size > 0
-                rate = reviewBin[0].schedule.reviewRate
+                rate = reviewBin[0].firstSchedule.reviewRate
                retVal = ((rate * 100).round).to_f / 100
             end
             retVal

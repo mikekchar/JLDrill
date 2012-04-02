@@ -95,11 +95,13 @@ module JLDrill
         # what percentage of its potential schedule it has waited
         def rescheduleReviewSet
             reviewSet.sort! do |x,y|
+                xSchedule = x.firstSchedule
+                ySchedule = y.firstSchedule
                 # Schedule should never be nil except in the tests,
                 # but just in case
-                if !x.schedule.nil?
-                    if !y.schedule.nil?
-                        x.schedule.reviewLoad <=> y.schedule.reviewLoad
+                if !xSchedule.nil?
+                    if !ySchedule.nil?
+                        xSchedule.reviewLoad <=> ySchedule.reviewLoad
                     else
                         -1
                     end
@@ -134,8 +136,8 @@ module JLDrill
             retVal = false
             # The schedule should only be nil in the tests, but if it
             # is, this will return false
-            if !item.schedule.nil?
-                retVal = item.schedule.reviewRate < 
+            if !item.firstSchedule.nil?
+                retVal = item.firstSchedule.reviewRate < 
                 options.forgettingThresh.to_f
             end
             return retVal
@@ -214,8 +216,8 @@ module JLDrill
         # item has no schedule set, then it hasn't been seen before.
         def seen?(item)
             retVal = false
-            if !item.schedule.nil?
-                retVal = item.schedule.seen
+            if !item.firstSchedule.nil?
+                retVal = item.firstSchedule.seen
             end
             return retVal
         end
@@ -272,8 +274,8 @@ module JLDrill
         # Sets the schedule of each item in the bin to unseen
         def setUnseen(bin)
             bin.each do |item|
-                if !item.schedule.nil?
-                    item.schedule.seen = false
+                if !item.firstSchedule.nil?
+                    item.firstSchedule.seen = false
                 end
             end
         end
@@ -408,7 +410,7 @@ module JLDrill
             @reviewStats.correct(item)
             @forgottenStats.correct(item)
             item.itemStats.correct
-            item.schedule.correct unless item.schedule.nil?
+            item.firstSchedule.correct unless item.firstSchedule.nil?
             if (item.bin != Strategy.workingSetBin) ||
                 (item.level >= 3)
                 promote(item)

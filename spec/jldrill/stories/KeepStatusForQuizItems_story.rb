@@ -30,23 +30,23 @@ module JLDrill
 		end
 		
 		it "should be able to set a lastReviewed time on the object" do
-		    @items[3].schedule.reviewed?.should be(false)
-		    time = @items[3].schedule.markReviewed
+		    @items[3].firstSchedule.reviewed?.should be(false)
+		    time = @items[3].firstSchedule.markReviewed
 		    time.should_not be_nil
-		    @items[3].schedule.reviewed?.should be(true)
+		    @items[3].firstSchedule.reviewed?.should be(true)
 		end
     
         it "should be able to write the last reviewed time to file" do
             @items[1].to_s.should eql(@strings[1] + "\n")
-            time = @items[1].schedule.markReviewed
+            time = @items[1].firstSchedule.markReviewed
             @items[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/LastReviewed: " + time.to_i.to_s + "/Potential: 432000/\n")
         end
         
         it "should be able to parse the information in the file" do
             @items[1].to_s.should eql(@strings[1] + "\n")
-            time = @items[1].schedule.markReviewed
+            time = @items[1].firstSchedule.markReviewed
             newItem = QuizItem.create(@quiz, @items[1].to_s, Strategy.reviewSetBin)
-            newItem.schedule.lastReviewed.to_i.should eql(@items[1].schedule.lastReviewed.to_i)
+            newItem.firstSchedule.lastReviewed.to_i.should eql(@items[1].firstSchedule.lastReviewed.to_i)
         end
         
         it "should be able to write consecutive to file" do
@@ -64,48 +64,48 @@ module JLDrill
         end
 
         it "should schedule new items to maximum value by default" do
-		    @items[1].schedule.scheduled?.should be(false)
-		    time = @items[1].schedule.schedule
+		    @items[1].firstSchedule.scheduled?.should be(false)
+		    time = @items[1].firstSchedule.schedule
 		    time.should_not be_nil
-		    @items[1].schedule.scheduled?.should be(true)
-		    actual = @items[1].schedule.duration
+		    @items[1].firstSchedule.scheduled?.should be(true)
+		    actual = @items[1].firstSchedule.duration
 		    expected = days(5)
 		    should_be_plus_minus_ten_percent(actual, expected)
         end
         
         it "should schedule old items to based on their elapsed time" do
             # Set reviewed time to 3 days ago
-            @items[3].schedule.lastReviewed = Time::now - (days(3) - 1)
-            @items[3].schedule.duration = days(3)
-		    @items[3].schedule.scheduled?.should be(true)
-		    time = @items[3].schedule.schedule
+            @items[3].firstSchedule.lastReviewed = Time::now - (days(3) - 1)
+            @items[3].firstSchedule.duration = days(3)
+		    @items[3].firstSchedule.scheduled?.should be(true)
+		    time = @items[3].firstSchedule.schedule
 		    time.should_not be_nil
-		    @items[3].schedule.scheduled?.should be(true)
+		    @items[3].firstSchedule.scheduled?.should be(true)
 		    # Should be scheduled based on actual duration
-		    actual = @items[3].schedule.duration
+		    actual = @items[3].firstSchedule.duration
 		    expected = Schedule.backoff(days(3))
 		    should_be_plus_minus_ten_percent(actual, expected)
         end
         
         it "should set a minimum schedule based on difficulty" do
             # Set reviewed time to 1 day ago
-            @items[3].schedule.lastReviewed = Time::now - days(1)
-		    @items[3].schedule.scheduled?.should be(false)
-		    @items[3].schedule.potential = Schedule.defaultPotential
-		    time = @items[3].schedule.schedule
+            @items[3].firstSchedule.lastReviewed = Time::now - days(1)
+		    @items[3].firstSchedule.scheduled?.should be(false)
+		    @items[3].firstSchedule.potential = Schedule.defaultPotential
+		    time = @items[3].firstSchedule.schedule
 		    time.should_not be_nil
-		    @items[3].schedule.scheduled?.should be(true)
+		    @items[3].firstSchedule.scheduled?.should be(true)
 		    # Instead of 2 days it will be 5 because that is the minumum for
 		    # an item that has no incorrect.
-		    actual = @items[3].schedule.duration
+		    actual = @items[3].firstSchedule.duration
 		    expected = days(5)
 		    should_be_plus_minus_ten_percent(actual, expected)
         end
 
         it "should be able to write duration to file" do
             @items[1].to_s.should eql(@strings[1] + "\n")
-            time = @items[1].schedule.schedule
-            duration = @items[1].schedule.duration
+            time = @items[1].firstSchedule.schedule
+            duration = @items[1].firstSchedule.duration
             # Note potential should be the same as duration for scheduled
             # items
             @items[1].to_s.should eql("/Kanji: 青い/Hint: Obvious/Reading: あおい/Definitions: blue,pale,green,unripe,inexperienced/Markers: adj,P/Position: 2/Consecutive: 0/MeaningProblem/Score: 0/Duration: " + duration.to_s + "/Potential: " + duration.to_s + "/\n")
@@ -113,21 +113,21 @@ module JLDrill
 
         it "should be able to parse the schedule information in the file" do
             @items[3].to_s.should eql(@strings[3] + "\n")
-            time = @items[3].schedule.schedule
+            time = @items[3].firstSchedule.schedule
             newItem = QuizItem.create(@quiz, @items[3].to_s, Strategy.reviewSetBin)
             # Since we aren't using
             # a bin here, we'll cheat and set the bin number manually.
             newItem.bin = 4
-            newItem.schedule.duration.should eql(time.to_i)
+            newItem.firstSchedule.duration.should eql(time.to_i)
         end
         
         it "should be able to clear the schedule" do
-		    @items[1].schedule.scheduled?.should be(false)
-		    time = @items[1].schedule.schedule
+		    @items[1].firstSchedule.scheduled?.should be(false)
+		    time = @items[1].firstSchedule.schedule
 		    time.should_not be_nil
-		    @items[1].schedule.scheduled?.should be(true)
-		    @items[1].schedule.unschedule
-		    @items[1].schedule.scheduled?.should be(false)
+		    @items[1].firstSchedule.scheduled?.should be(true)
+		    @items[1].firstSchedule.unschedule
+		    @items[1].firstSchedule.scheduled?.should be(false)
         end
 
         def days(n)
@@ -135,20 +135,20 @@ module JLDrill
         end
         
         it "should be able to tell if an item has duration in a range" do
-            @items[1].schedule.schedule(0)
-            @items[1].schedule.durationWithin?(0...5).should be(true)
-            @items[1].schedule.durationWithin?(1...5).should be(false)
+            @items[1].firstSchedule.schedule(0)
+            @items[1].firstSchedule.durationWithin?(0...5).should be(true)
+            @items[1].firstSchedule.durationWithin?(1...5).should be(false)
 
-            @items[1].schedule.schedule(1)
-            @items[1].schedule.durationWithin?(0...5).should be(true)
-            @items[1].schedule.durationWithin?(0...1).should be(false)
+            @items[1].firstSchedule.schedule(1)
+            @items[1].firstSchedule.durationWithin?(0...5).should be(true)
+            @items[1].firstSchedule.durationWithin?(0...1).should be(false)
         end
         
         it "should be able to show the reviewed date" do
-            @items[3].schedule.lastReviewed = Time::now
-            @items[3].schedule.reviewedDate.should eql("Today")
-            @items[3].schedule.lastReviewed = Time::now - days(1)
-            @items[3].schedule.reviewedDate.should eql("Yesterday")
+            @items[3].firstSchedule.lastReviewed = Time::now
+            @items[3].firstSchedule.reviewedDate.should eql("Today")
+            @items[3].firstSchedule.lastReviewed = Time::now - days(1)
+            @items[3].firstSchedule.reviewedDate.should eql("Yesterday")
         end
 	end
 

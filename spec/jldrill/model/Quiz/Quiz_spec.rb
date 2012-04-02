@@ -110,7 +110,7 @@ module JLDrill
 
         def test_level(question)
             item = @quiz.currentProblem.item
-            schedule = item.schedule
+            schedule = item.firstSchedule
             case @quiz.currentProblem.requestedLevel
                 when 0
                     test_problem(question, 
@@ -240,8 +240,8 @@ module JLDrill
         
         it "should update the last reviewed status when the answer is made" do
             test_initializeQuiz
-            @quiz.currentProblem.item.schedule.lastReviewed.should be_nil
-            schedule1 = @quiz.currentProblem.item.schedule
+            @quiz.currentProblem.item.firstSchedule.lastReviewed.should be_nil
+            schedule1 = @quiz.currentProblem.item.firstSchedule
             test_correct
             test1 = @quiz.currentProblem.item
             schedule1.lastReviewed.should_not be_nil
@@ -249,7 +249,7 @@ module JLDrill
             # should get a new one
             test_drill
             test2 = @quiz.currentProblem.item
-            schedule2 = test2.schedule
+            schedule2 = test2.firstSchedule
             schedule2.lastReviewed.should be_nil
 
             # Make it incorrect
@@ -263,15 +263,15 @@ module JLDrill
             # test2, on the other hand, is in the new set so it shouldn't
             # have a schedule at all.
             @quiz.resetContents
-            test1.schedule.lastReviewed.should be_nil
-            test2.schedule.should be_nil
+            test1.firstSchedule.lastReviewed.should be_nil
+            test2.firstSchedule.should be_nil
         end
         
         it "should update the schedule correctly for review set items" do
 	        @quiz.loadFromString("none", @sampleQuiz.file)
 	        item = @quiz.contents.bins[Strategy.reviewSetBin][0]
 	        item.should_not be_nil
-            schedule = item.schedule
+            schedule = item.firstSchedule
             @quiz.currentProblem = MeaningProblem.new(item)
             test_correct
             test_incorrect            

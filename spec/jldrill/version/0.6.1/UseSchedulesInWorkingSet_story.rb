@@ -112,7 +112,7 @@ module JLDrill::Version_0_6_1
                 item = Story.newSet[0]
                 item.itemStats.should be_inNewSet
                 item.schedules.size.should eql(0)
-                item.schedule.should be_nil
+                item.firstSchedule.should be_nil
             end
 
             it "should be able to create a MeaningProblem for new set items" do
@@ -123,7 +123,7 @@ module JLDrill::Version_0_6_1
                 Story.quiz.currentProblem.should be_a_kind_of(JLDrill::ReadingProblem)
 
                 item.schedules.size.should eql(0)
-                item.schedule.should be_nil
+                item.firstSchedule.should be_nil
             end
 
             it "should create schedules for items promoted into the working set" do
@@ -141,7 +141,7 @@ module JLDrill::Version_0_6_1
                 end
 
                 # We should have a ReadingProblem scheduled first
-                item.schedule.should_not be_nil
+                item.firstSchedule.should_not be_nil
                 Story.quiz.createProblem(item)
                 Story.quiz.currentProblem.should be_a_kind_of(JLDrill::ReadingProblem)
             end
@@ -175,7 +175,7 @@ module JLDrill::Version_0_6_1
                 meaningSchedule.problemType.should eql("MeaningProblem")
 
                 # I should start with the reading problem
-                item.schedule.should be(readingSchedule)
+                item.firstSchedule.should be(readingSchedule)
                 item.problem.should be_a_kind_of(JLDrill::ReadingProblem)
                 readingSchedule.score.should eql(0)
 
@@ -184,7 +184,7 @@ module JLDrill::Version_0_6_1
                 
                 # The promotion threshold is 2 so we should still 
                 # be in the same place
-                item.schedule.should be(readingSchedule)
+                item.firstSchedule.should be(readingSchedule)
                 item.problem.should be_a_kind_of(JLDrill::ReadingProblem)
 
                 Story.drillCorrectly(item)
@@ -192,7 +192,7 @@ module JLDrill::Version_0_6_1
 
                 # We are at the promotion threshold so we go to the
                 # next schedule
-                item.schedule.should be(kanjiSchedule)
+                item.firstSchedule.should be(kanjiSchedule)
                 item.problem.should be_a_kind_of(JLDrill::KanjiProblem)
                 
                 Story.drillCorrectly(item)
@@ -201,7 +201,7 @@ module JLDrill::Version_0_6_1
                 
                 # We are at the promotion threshold so we go to the
                 # next schedule
-                item.schedule.should be(meaningSchedule)
+                item.firstSchedule.should be(meaningSchedule)
                 item.problem.should be_a_kind_of(JLDrill::MeaningProblem)
                 
                 Story.drillCorrectly(item)
