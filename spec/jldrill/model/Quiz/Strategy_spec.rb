@@ -52,26 +52,6 @@ module JLDrill
             return item
         end
 	    
-	    it "should only pick unseen items" do
-	        1.upto(9) do |i|
-	            test_addItem(Strategy.reviewSetBin, i)
-    	    end
-    	    @strategy.findUnseenIndex(Strategy.reviewSetBin).should eql(0)
-    	    @quiz.contents.bins[Strategy.reviewSetBin][0].firstSchedule.seen = true
-    	    @strategy.findUnseenIndex(Strategy.reviewSetBin).should eql(1)
-    	    @quiz.contents.bins[Strategy.reviewSetBin][1].firstSchedule.seen = true
-    	    @strategy.findUnseenIndex(Strategy.reviewSetBin).should eql(2)
-    	    0.upto(9) do |i|
-        	    @quiz.contents.bins[Strategy.reviewSetBin][i].firstSchedule.seen = true
-            end
-            # When they are all seen, it should wrap
-    	    @strategy.findUnseenIndex(Strategy.reviewSetBin).should eql(0)
-    	    # And set all the rest to unseen
-    	    @quiz.contents.bins[Strategy.reviewSetBin].contents[1..9].all? do |item|
-    	        item.firstSchedule.seen == false
-    	    end.should eql(true)
-	    end
-	    
 	    it "should demote new set items to new set" do
 	        # Demoting new set items is non-sensical, but it should do
 	        # something sensible anyway.
@@ -193,7 +173,7 @@ module JLDrill
             @quiz.contents.bins[Strategy.reviewSetBin].each do |item|
                 item.firstSchedule.seen = true
             end
-            @strategy.allSeen?(@quiz.contents.bins[Strategy.reviewSetBin]).should eql(true)
+            @quiz.contents.bins[Strategy.reviewSetBin].should be_allSeen
 
             # Even though we've seen all the items in the Review set,
             # there are only review set items, so we should still review

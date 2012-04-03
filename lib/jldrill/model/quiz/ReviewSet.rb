@@ -34,5 +34,14 @@ module JLDrill
         def promotionBin
             return @number
         end
+        
+        # Some legacy files had kanji problems scheduled, but no
+        # kanji data.  This removes those schedules
+        def removeInvalidKanjiProblems
+            self.each do |x|
+                x.removeInvalidKanjiProblems
+            end
+        end
+
     end
 end

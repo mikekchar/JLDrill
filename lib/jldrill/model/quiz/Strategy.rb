@@ -90,26 +90,13 @@ module JLDrill
             forgottenSet.length
         end
 
-        # returns true if the review rate of an item is below
-        # the forgetting threshold in the options
-        def reviewRateUnderThreshold(item)
-            retVal = false
-            # The schedule should only be nil in the tests, but if it
-            # is, this will return false
-            if !item.firstSchedule.nil?
-                retVal = item.firstSchedule.reviewRate < 
-                options.forgettingThresh.to_f
-            end
-            return retVal
-        end
-
         # If the user changes increases the forgetting threshold,
         # some items need to be returned from the forgotten set
         # to the review set
         def unforgetItems
             while ((!forgottenSet.empty?) &&
                   ((options.forgettingThresh == 0.0) ||
-                   reviewRateUnderThreshold(forgottenSet.last)))
+                   forgottenSet.last.reviewRateUnderThreshold()))
                 contents.moveToBin(forgottenSet.last, Strategy.reviewSetBin)
             end
         end
@@ -120,22 +107,14 @@ module JLDrill
         def forgetItems
             while ((options.forgettingThresh != 0.0) &&
                    (!reviewSet.empty?) && 
-                   !reviewRateUnderThreshold(reviewSet[0]))
+                   !reviewSet[0].reviewRateUnderThreshold())
                 contents.moveToBin(reviewSet[0], Strategy.forgottenSetBin)
-            end
-        end
-
-        # Some legacy files had kanji problems scheduled, but no
-        # kanji data.  This removes those schedules
-        def removeInvalidKanjiProblems
-            reviewSet.each do |x|
-                x.removeInvalidKanjiProblems
             end
         end
 
         # Sort the items according to their schedule
         def reschedule
-            removeInvalidKanjiProblems
+            reviewSet.removeInvalidKanjiProblems
             reviewSet.reschedule
             forgetItems
             forgottenSet.reschedule
@@ -172,100 +151,6 @@ module JLDrill
                 !(reviewSet.allSeen?)
         end
 
-        # Returns true if the item has been seen before.  If the
-        # item has no schedule set, then it hasn't been seen before.
-        def seen?(item)
-            retVal = false
-            if !item.firstSchedule.nil?
-                retVal = item.firstSchedule.seen
-            end
-            return retVal
-        end
-
-        # Returns the number of unseen items in the bin
-        def numUnseen(bin)
-            total = 0
-            bin.each do |item|
-                total += 1 if !seen?(item)
-            end
-            total
-        end
-        
-        # Returns true if all the items in the bin have been seen
-        def allSeen?(bin)
-            bin.all? do |item|
-                seen?(item)
-            end
-        end
-        
-        # Return the index of the first item in the bin that hasn't been
-        # seen yet.  Returns -1 if there are no unseen items
-        def firstUnseen(bin)
-            index = 0
-            # find the first one that hasn't been seen yet
-            while (index < bin.length) && seen?(bin[index])
-                index += 1
-            end
-            
-            if index >= bin.length
-                index = -1
-            end
-            index
-        end
-        
-        # Return the nth unseen item in the bin
-        def findNthUnseen(bin, n)
-            retVal = nil
-            if n < numUnseen(bin)
-                i = 0
-                0.upto(n) do |m|
-                    while seen?(bin[i])
-                        i += 1
-                    end
-                    if m != n
-                        i += 1
-                    end
-                end
-                retVal = bin[i]
-            end
-            retVal
-        end
-
-        # Sets the schedule of each item in the bin to unseen
-        def setUnseen(bin)
-            bin.each do |item|
-                if !item.firstSchedule.nil?
-                    item.firstSchedule.seen = false
-                end
-            end
-        end
-        
-        
-        # Return the index of the first item in the bin that hasn't been
-        # seen yet.  If they have all been seen, reset the bin
-        def findUnseenIndex(binNum)
-            bin = contents.bins[binNum]
-            if bin.empty?
-                return -1
-            end
-
-            if allSeen?(bin)
-                setUnseen(bin)
-            end
-            firstUnseen(bin)
-        end
-        
-        # Returns a random unseen item.
-        # Resets the seen status if all the items are already seen.
-        def randomUnseen(bin)
-            if allSeen?(contents.bins[bin])
-                setUnseen(contents.bins[bin])
-            end
-            index = rand(numUnseen(contents.bins[bin]))
-            item = findNthUnseen(contents.bins[bin], index)
-            item
-        end
-        
         # Get an item from the New Set
         # Note: It promotes that item to the working set in the process
         def getNewItem

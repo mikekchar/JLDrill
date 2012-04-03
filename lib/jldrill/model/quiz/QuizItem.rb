@@ -28,6 +28,10 @@ module JLDrill
             return item
         end
 
+        def options
+            return @quiz.options
+        end
+
         def problemStatus
             return @status.select("ProblemStatus")
         end
@@ -101,6 +105,16 @@ module JLDrill
 
         def problem
             return problemStatus.firstProblem
+        end
+
+        # returns true if the review rate of an item is below
+        # the forgetting threshold in the options
+        def reviewRateUnderThreshold
+            retVal = false
+            if !firstSchedule.nil?
+                retVal = firstSchedule.reviewRate < options.forgettingThresh.to_f
+            end
+            return retVal
         end
 
         def level
