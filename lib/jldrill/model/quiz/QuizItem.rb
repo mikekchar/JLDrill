@@ -68,8 +68,18 @@ module JLDrill
             problemStatus.checkSchedules
         end
 
-        def allSeen(value)
-            problemStatus.allSeen(value)
+        # Returns true if the item has been seen before.  If the
+        # item has no schedule set, then it hasn't been seen before.
+        def seen?
+            retVal = false
+            if !firstSchedule.nil?
+                retVal = firstSchedule.seen
+            end
+            return retVal
+        end
+
+        def setAllSeen(value)
+            problemStatus.setAllSeen(value)
         end
 
         def setScores(value)

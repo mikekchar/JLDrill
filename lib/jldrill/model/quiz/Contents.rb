@@ -2,6 +2,9 @@
 require 'jldrill/model/Bin'
 require 'jldrill/model/quiz/QuizItem'
 require 'jldrill/model/quiz/NewSet'
+require 'jldrill/model/quiz/WorkingSet'
+require 'jldrill/model/quiz/ReviewSet'
+require 'jldrill/model/quiz/ForgottenSet'
 
 module JLDrill
 
@@ -16,9 +19,9 @@ module JLDrill
             @quiz = quiz
             @bins = []
             @bins.push(NewSet.new(@quiz, 0))
-            addBin("Working", "Poor", "Fair", "Good")
-            addBin("Review", "Excellent")
-            addBin("Forgotten")
+            @bins.push(WorkingSet.new(@quiz, 1))
+            @bins.push(ReviewSet.new(@quiz, 2))
+            @bins.push(ForgottenSet.new(@quiz, 3))
             @binNum = 0
         end
 

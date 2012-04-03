@@ -194,7 +194,7 @@ module JLDrill
             @schedules = []
         end
 
-        def allSeen(value)
+        def setAllSeen(value)
             @schedules.each do |schedule|
                 schedule.seen = value
             end

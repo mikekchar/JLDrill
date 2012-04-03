@@ -62,12 +62,11 @@ module JLDrill
         
         # Returns the number of items in the working set
         def workingSetSize
-            contents.bins[Strategy.workingSetBin].length
+            workingSet.length
         end
         
-        # Returns true if the working set is not full
         def workingSetFull?
-             workingSetSize >= options.introThresh
+             workingSet.full?
         end
 
         def workingSet
@@ -89,45 +88,6 @@ module JLDrill
 
         def forgottenSetSize
             forgottenSet.length
-        end
-
-        # Put the review set in the correct order according to
-        # what percentage of its potential schedule it has waited
-        def rescheduleReviewSet
-            reviewSet.sort! do |x,y|
-                xSchedule = x.firstSchedule
-                ySchedule = y.firstSchedule
-                # Schedule should never be nil except in the tests,
-                # but just in case
-                if !xSchedule.nil?
-                    if !ySchedule.nil?
-                        xSchedule.reviewLoad <=> ySchedule.reviewLoad
-                    else
-                        -1
-                    end
-                else
-                    1
-                end
-            end
-        end
-
-        # Put the forgotten set in the correct order according
-        # to what percentage of its potential schedule it has
-        # waited
-        def rescheduleForgottenSet
-            forgottenSet.sort! do |x,y|
-                # Schedule should never be nil except in the tests,
-                # but just in case
-                if !x.schedule.nil?
-                    if !y.schedule.nil?
-                        x.schedule.reviewLoad <=> y.schedule.reviewLoad
-                    else
-                        -1
-                    end
-                else
-                    1
-                end
-            end
         end
 
         # returns true if the review rate of an item is below
@@ -176,11 +136,11 @@ module JLDrill
         # Sort the items according to their schedule
         def reschedule
             removeInvalidKanjiProblems
-            rescheduleReviewSet
+            reviewSet.reschedule
             forgetItems
-            rescheduleForgottenSet
+            forgottenSet.reschedule
             unforgetItems
-            rescheduleReviewSet
+            reviewSet.reschedule
         end
         
         # Returns true if the review set has been
@@ -209,7 +169,7 @@ module JLDrill
             end
             
             !reviewSetKnown? && (reviewSetSize >= options.introThresh) && 
-                !(allSeen?(reviewSet))
+                !(reviewSet.allSeen?)
         end
 
         # Returns true if the item has been seen before.  If the
@@ -307,6 +267,7 @@ module JLDrill
         end
         
         # Get an item from the New Set
+        # Note: It promotes that item to the working set in the process
         def getNewItem
             item = newSet.selectItem()
             if !item.nil?
@@ -315,20 +276,20 @@ module JLDrill
             return item
         end
         
+        # Get an item from the Working Set
+        def getWorkingItem
+            return workingSet.selectItem()
+        end
+
         # Get an item from the Review Set
         def getReviewItem
-            reviewSet[0]
+            return reviewSet.selectItem()
         end
 
         def getForgottenItem
-            forgottenSet[0]
+            return forgottenSet.selectItem()
         end
         
-        # Get an item from the Working Set
-        def getWorkingItem
-            randomUnseen(Strategy.workingSetBin)
-        end
-
         # Get an item to quiz
         def getItem
             item = nil
@@ -349,7 +310,7 @@ module JLDrill
             # Usually we get a working item if the above is not true
             item = getWorkingItem if item.nil?
 
-            item.allSeen(true)
+            item.setAllSeen(true)
             return item
         end
 
@@ -370,10 +331,9 @@ module JLDrill
                 else 
                     if item.bin == Strategy.workingSetBin
                         # Newly promoted items
-                        item.itemStats.consecutive = 1
                         @reviewStats.learned += 1
                         @forgottenStats.learned += 1
-                        item.scheduleAll
+                        workingSet.promoteItem(item)
                     end
                     # Put the item at the back of the reviewSet
                     contents.moveToBin(item, Strategy.reviewSetBin)
