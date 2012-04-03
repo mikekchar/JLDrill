@@ -283,13 +283,9 @@ module JLDrill
         end
         
         # Schedule the item for review
-        def schedule(int = -1)
-            if int < 0
-                interval = calculateInterval
-                @duration.seconds = interval + randomVariation(interval)
-            else
-                @duration.seconds = int
-            end
+        def schedule
+            interval = calculateInterval
+            @duration.seconds = interval + randomVariation(interval)
             @potential = @duration.seconds
             return @duration.seconds
         end
@@ -316,9 +312,9 @@ module JLDrill
         # Mark the item as correct.
         def correct
             if @item.bin > Strategy.workingSetBin
-                schedule
+                schedule()
             end
-            markReviewed
+            markReviewed()
             @score += 1
         end
 

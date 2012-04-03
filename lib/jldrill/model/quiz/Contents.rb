@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'jldrill/model/Bin'
 require 'jldrill/model/quiz/QuizItem'
+require 'jldrill/model/quiz/NewSet'
 
 module JLDrill
 
@@ -14,8 +15,7 @@ module JLDrill
         def initialize(quiz)
             @quiz = quiz
             @bins = []
-            @res = []
-            addBin("New", "Unseen")
+            @bins.push(NewSet.new(@quiz, 0))
             addBin("Working", "Poor", "Fair", "Good")
             addBin("Review", "Excellent")
             addBin("Forgotten")
@@ -33,13 +33,9 @@ module JLDrill
         
         # Adds a new bin to the end of the contents
         def addBin(name, *aliases)
-            @bins.push(Bin.new(name, @bins.length))
-            names = []
-            names.push(Regexp.new("^#{name}$",nil))
-            aliases.each do |a|
-                names.push(Regexp.new("^#{a}$", nil))
-            end
-            @res.push(names)
+            bin = Bin.new(name, @bins.length)
+            bin.addAliases(aliases)
+            @bins.push(bin)
         end
         
         # Returns the number items in all the bins
@@ -215,14 +211,10 @@ module JLDrill
 
         def binNumFromName(name)
             retVal = -1
-            @bins.each do |bin|
-                list = @res[bin.number]
-                list.each do |re|
-                    if name =~ re
-                        retVal = bin.number
-                    end
-                end
+            myBin = @bins.find do |bin|
+                bin.isCalled?(name)
             end
+            retVal = myBin.number unless myBin.nil?
             return retVal
         end
 

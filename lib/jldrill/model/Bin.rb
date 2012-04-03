@@ -9,6 +9,28 @@ module JLDrill
             @name = name
             @number = number
             @contents = []
+            @nameRegExps = []
+            addAlias(@name)
+        end
+
+        # Add a name that this bin might be called when parsing a file
+        def addAlias(name)
+            @nameRegExps.push(Regexp.new("^#{name}$", nil))
+        end
+
+        # add an array of aliases
+        def addAliases(aliasList)
+            aliasList.each do |name|
+                addAlias(name)
+            end
+        end
+
+        # Returns true if the bin is named or has an alias for
+        # the string passed
+        def isCalled?(name)
+            return @nameRegExps.any? do |re|
+                re.match(name)
+            end
         end
 
         # Returns the number of items in the bin

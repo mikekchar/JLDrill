@@ -134,16 +134,6 @@ module JLDrill
             return 60 * 60 * 24 * n
         end
         
-        it "should be able to tell if an item has duration in a range" do
-            @items[1].firstSchedule.schedule(0)
-            @items[1].firstSchedule.durationWithin?(0...5).should be(true)
-            @items[1].firstSchedule.durationWithin?(1...5).should be(false)
-
-            @items[1].firstSchedule.schedule(1)
-            @items[1].firstSchedule.durationWithin?(0...5).should be(true)
-            @items[1].firstSchedule.durationWithin?(0...1).should be(false)
-        end
-        
         it "should be able to show the reviewed date" do
             @items[3].firstSchedule.lastReviewed = Time::now
             @items[3].firstSchedule.reviewedDate.should eql("Today")

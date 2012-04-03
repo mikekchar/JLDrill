@@ -308,18 +308,11 @@ module JLDrill
         
         # Get an item from the New Set
         def getNewItem
-            if options.randomOrder
-                index = rand(newSet.length)
-            else
-                index = findUnseenIndex(Strategy.newSetBin)
-            end
-            if !(index == -1)
-                item = newSet[index]
+            item = newSet.selectItem()
+            if !item.nil?
                 promote(item)
-                item
-            else
-                nil
             end
+            return item
         end
         
         # Get an item from the Review Set
@@ -372,11 +365,8 @@ module JLDrill
         def promote(item)
             if !item.nil?
                 if item.bin == Strategy.newSetBin
-                    contents.moveToBin(item, Strategy.workingSetBin)
-                    item.setScores(0)
-                    if options.interleavedWorkingSet
-                        item.scheduleAll
-                    end
+                    contents.moveToBin(item, newSet.promotionBin())
+                    newSet.promoteItem(item)
                 else 
                     if item.bin == Strategy.workingSetBin
                         # Newly promoted items
