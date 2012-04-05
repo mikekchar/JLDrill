@@ -55,14 +55,10 @@ module JLDrill
         # Returns an array of all the items that should be forgotten
         def forgottenItems
             retVal = []
-            # We need to make sure all the items are in the right order
-            reschedule
             if !empty? && (options.forgettingThresh != 0.0)
-                i = 0
-                while (i < length) && !(@contents[i].reviewRateUnderThreshold())
-                    retVal.push(@contents[i])
-                    i += 1
-                end
+                retVal = @contents.partition do |item|
+                    !item.reviewRateUnderThreshold()
+                end[0]
             end
             return retVal
         end

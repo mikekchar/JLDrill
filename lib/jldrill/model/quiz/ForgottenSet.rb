@@ -39,14 +39,10 @@ module JLDrill
         # Note: Assumes the set has been rescheduled recently
         def rememberedItems
             retVal = []
-            # We need to make sure the items are in the right order
-            reschedule
             if !empty? && (options.forgettingThresh != 0.0)
-                i = length - 1
-                while (i >= 0) && @contents[i].reviewRateUnderThreshold()
-                    retVal.push(@contents[i])
-                    i -= 1
-                end
+                retVal = @contents.partition do |item|
+                    item.reviewRateUnderThreshold()
+                end[0]
             end
             return retVal
         end
