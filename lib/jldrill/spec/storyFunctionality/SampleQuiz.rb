@@ -37,7 +37,6 @@ module JLDrill::StoryFunctionality
                                                 string)
         end
 
-
         def quiz
             @mainContext.quiz
         end
@@ -81,7 +80,7 @@ module JLDrill::StoryFunctionality
 
         # Promote a working set item to the review set
         def promoteIntoReviewSet(item)
-            0.upto(2) do
+            0.upto(quiz.options.promoteThresh * 2) do
                drillCorrectly(item)
             end
         end

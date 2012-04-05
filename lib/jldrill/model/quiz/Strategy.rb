@@ -7,12 +7,10 @@ module JLDrill
     # Strategy for choosing, promoting and demoting items in
     # the quiz.
     class Strategy
-        attr_reader :quiz, :reviewStats, :forgottenStats
+        attr_reader :quiz
     
         def initialize(quiz)
             @quiz = quiz
-            @reviewStats = Statistics.new(quiz, Strategy.reviewSetBin)
-            @forgottenStats = Statistics.new(quiz, Strategy.forgottenSetBin)
         end
         
         def Strategy.newSetBin
@@ -30,13 +28,13 @@ module JLDrill
         def Strategy.forgottenSetBin
             return 3
         end
-        
+
         # Returns a string showing the status of the quiz with this strategy
         def status
             if shouldReview?
-                retVal = "     #{@reviewStats.recentAccuracy}%"
-                if @reviewStats.inTargetZone?
-                    retVal += " - #{(10 - @reviewStats.timesInTargetZone)}"
+                retVal = "     #{reviewStats.recentAccuracy}%"
+                if reviewStats.inTargetZone?
+                    retVal += " - #{(10 - reviewStats.timesInTargetZone)}"
                 end
             elsif !forgottenSet.empty?
                 retVal = " Forgotten Items"
@@ -77,6 +75,10 @@ module JLDrill
             @quiz.contents.bins[Strategy.reviewSetBin]
         end
 
+        def reviewStats
+            reviewSet.stats
+        end
+        
         # Returns the number of items in the review set
         def reviewSetSize
             reviewSet.length
@@ -86,18 +88,21 @@ module JLDrill
             @quiz.contents.bins[Strategy.forgottenSetBin]
         end
 
+        def forgottenStats
+            forgottenSet.stats
+        end
+        
         def forgottenSetSize
             forgottenSet.length
         end
 
-        # If the user changes increases the forgetting threshold,
+        # If the user increases the forgetting threshold,
         # some items need to be returned from the forgotten set
         # to the review set
-        def unforgetItems
-            while ((!forgottenSet.empty?) &&
-                  ((options.forgettingThresh == 0.0) ||
-                   forgottenSet.last.reviewRateUnderThreshold()))
-                contents.moveToBin(forgottenSet.last, Strategy.reviewSetBin)
+        def rememberItems
+            items = forgottenSet.rememberedItems()
+            items.each do |item|
+                contents.moveToBin(item, Strategy.reviewSetBin)
             end
         end
 
@@ -105,33 +110,18 @@ module JLDrill
         # some items need to be moved from the review set to the
         # forgotten set
         def forgetItems
-            while ((options.forgettingThresh != 0.0) &&
-                   (!reviewSet.empty?) && 
-                   !reviewSet[0].reviewRateUnderThreshold())
-                contents.moveToBin(reviewSet[0], Strategy.forgottenSetBin)
+            items = reviewSet.forgottenItems()
+            items.each do |item|
+                contents.moveToBin(item, Strategy.forgottenSetBin)
             end
         end
 
         # Sort the items according to their schedule
         def reschedule
             reviewSet.removeInvalidKanjiProblems
-            reviewSet.reschedule
             forgetItems
-            forgottenSet.reschedule
-            unforgetItems
+            rememberItems
             reviewSet.reschedule
-        end
-        
-        # Returns true if the review set has been
-        # reviewed enough that it is considered to be
-        # known.  This happens when we have reviewed
-        # ten items while in the target zone.
-        # The target zone occurs when in the last 10
-        # items, we have a 90% success rate or when
-        # we have a 90% confidence that the the items
-        # have a 90% chance of success.
-        def reviewSetKnown?
-            !(10 - @reviewStats.timesInTargetZone > 0)        
         end
         
         # Returns true if at least one working set full of
@@ -145,10 +135,9 @@ module JLDrill
             # then return true
             if  (newSet.empty? && workingSet.empty?) || (options.reviewMode)
                 return true
+            else
+                return reviewSet.shouldReview?
             end
-            
-            !reviewSetKnown? && (reviewSetSize >= options.introThresh) && 
-                !(reviewSet.allSeen?)
         end
 
         # Get an item from the New Set
@@ -202,8 +191,8 @@ module JLDrill
         # Create a problem for the given item at the correct level
         def createProblem(item)
             item.itemStats.createProblem
-            @reviewStats.startTimer(item.bin == Strategy.reviewSetBin)
-            @forgottenStats.startTimer(item.bin == Strategy.forgottenSetBin)
+            reviewStats.startTimer(item.bin == Strategy.reviewSetBin)
+            forgottenStats.startTimer(item.bin == Strategy.forgottenSetBin)
             return item.problem
         end
 
@@ -216,8 +205,8 @@ module JLDrill
                 else 
                     if item.bin == Strategy.workingSetBin
                         # Newly promoted items
-                        @reviewStats.learned += 1
-                        @forgottenStats.learned += 1
+                        reviewStats.learned += 1
+                        forgottenStats.learned += 1
                         workingSet.promoteItem(item)
                     end
                     # Put the item at the back of the reviewSet
@@ -242,8 +231,8 @@ module JLDrill
 
         # Mark the item as having been reviewed correctly
         def correct(item)
-            @reviewStats.correct(item)
-            @forgottenStats.correct(item)
+            reviewStats.correct(item)
+            forgottenStats.correct(item)
             item.itemStats.correct
             item.firstSchedule.correct unless item.firstSchedule.nil?
             if (item.bin != Strategy.workingSetBin) ||
@@ -254,8 +243,8 @@ module JLDrill
 
         # Mark the item as having been reviewed incorrectly
         def incorrect(item)
-            @reviewStats.incorrect(item)
-            @forgottenStats.incorrect(item)
+            reviewStats.incorrect(item)
+            forgottenStats.incorrect(item)
             item.allIncorrect
             item.itemStats.incorrect
             demote(item)
