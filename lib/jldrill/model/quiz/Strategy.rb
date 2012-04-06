@@ -1,5 +1,4 @@
 # encoding: utf-8
-require 'jldrill/model/quiz/Statistics'
 require 'jldrill/model/problems/ProblemFactory'
 
 module JLDrill
@@ -32,16 +31,12 @@ module JLDrill
         # Returns a string showing the status of the quiz with this strategy
         def status
             if shouldReview?
-                retVal = "     #{reviewStats.recentAccuracy}%"
-                if reviewStats.inTargetZone?
-                    retVal += " - #{(10 - reviewStats.timesInTargetZone)}"
-                end
+                return @quiz.contents.stats.reviewStatus
             elsif !forgottenSet.empty?
-                retVal = " Forgotten Items"
+                return " Forgotten Items"
             else
-                retVal = "     New Items"
+                return "     New Items"
             end
-            retVal
         end
 
         # Returns the contents for the quiz
@@ -75,10 +70,6 @@ module JLDrill
             @quiz.contents.bins[Strategy.reviewSetBin]
         end
 
-        def reviewStats
-            reviewSet.stats
-        end
-        
         # Returns the number of items in the review set
         def reviewSetSize
             reviewSet.length
@@ -88,10 +79,6 @@ module JLDrill
             @quiz.contents.bins[Strategy.forgottenSetBin]
         end
 
-        def forgottenStats
-            forgottenSet.stats
-        end
-        
         def forgottenSetSize
             forgottenSet.length
         end
@@ -150,49 +137,32 @@ module JLDrill
             return item
         end
         
-        # Get an item from the Working Set
-        def getWorkingItem
-            return workingSet.selectItem()
-        end
-
-        # Get an item from the Review Set
-        def getReviewItem
-            return reviewSet.selectItem()
-        end
-
-        def getForgottenItem
-            return forgottenSet.selectItem()
-        end
-        
         # Get an item to quiz
         def getItem
             item = nil
-            if contents.empty?
-                return nil
-            end
 
             if !workingSetFull?
                 if shouldReview?
-                    item = getReviewItem
+                    item = reviewSet.selectItem()
                 elsif !forgottenSet.empty?
-                    item = getForgottenItem
+                    item = forgottenSet.selectItem()
                 elsif !newSet.empty?
                     item = getNewItem
                 end
             end
 
             # Usually we get a working item if the above is not true
-            item = getWorkingItem if item.nil?
+            item = workingSet.selectItem() if item.nil?
 
-            item.setAllSeen(true)
+            item.setAllSeen(true) if !item.nil?
             return item
         end
 
         # Create a problem for the given item at the correct level
         def createProblem(item)
+            contents.newProblemFor(item)
+
             item.itemStats.createProblem
-            reviewStats.startTimer(item.bin == Strategy.reviewSetBin)
-            forgottenStats.startTimer(item.bin == Strategy.forgottenSetBin)
             return item.problem
         end
 
@@ -204,9 +174,6 @@ module JLDrill
                     newSet.promoteItem(item)
                 else 
                     if item.bin == Strategy.workingSetBin
-                        # Newly promoted items
-                        reviewStats.learned += 1
-                        forgottenStats.learned += 1
                         workingSet.promoteItem(item)
                     end
                     # Put the item at the back of the reviewSet
@@ -231,8 +198,7 @@ module JLDrill
 
         # Mark the item as having been reviewed correctly
         def correct(item)
-            reviewStats.correct(item)
-            forgottenStats.correct(item)
+            contents.bins[item.bin].stats.correct(item)
             item.itemStats.correct
             item.firstSchedule.correct unless item.firstSchedule.nil?
             if (item.bin != Strategy.workingSetBin) ||
@@ -243,21 +209,19 @@ module JLDrill
 
         # Mark the item as having been reviewed incorrectly
         def incorrect(item)
-            reviewStats.incorrect(item)
-            forgottenStats.incorrect(item)
+            contents.bins[item.bin].stats.incorrect(item)
             item.allIncorrect
             item.itemStats.incorrect
             demote(item)
         end
 
-        # Promote the item from the working set into the review
-        # set without any further training.  If it is already
-        # in the review set, simply mark it correct.
+        # Mark the item correct, and if it is in the working set, promote
+        # it to the review set
         def learn(item)
-            if item.bin <= Strategy.workingSetBin
-                contents.moveToBin(item, Strategy.reviewSetBin)
-            end
             correct(item)
+            if item.bin <= Strategy.workingSetBin
+                promote(item)
+            end
         end
     end
 end

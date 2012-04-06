@@ -3,7 +3,6 @@ require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
 require 'jldrill/model/quiz/Strategy'
 require 'jldrill/model/quiz/Schedule'
-require 'jldrill/model/quiz/Statistics'
 
 module JLDrill::KeepsStatistics
 	Story = JLDrill::StoryMemento.new("JLDrill Keeps Statistics Story")

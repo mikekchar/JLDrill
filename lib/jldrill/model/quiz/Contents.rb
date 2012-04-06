@@ -5,6 +5,7 @@ require 'jldrill/model/quiz/NewSet'
 require 'jldrill/model/quiz/WorkingSet'
 require 'jldrill/model/quiz/ReviewSet'
 require 'jldrill/model/quiz/ForgottenSet'
+require 'jldrill/model/quiz/ContentStats'
 
 module JLDrill
 
@@ -13,16 +14,41 @@ module JLDrill
 
         LINE_START_RE =  /^\//
 
-        attr_reader :quiz, :bins
+        attr_reader :quiz, :bins, :stats,
+                    :newSetBin, :workingSetBin, :reviewSetBin, :forgottenSetBin
     
         def initialize(quiz)
             @quiz = quiz
             @bins = []
-            @bins.push(NewSet.new(@quiz, 0))
-            @bins.push(WorkingSet.new(@quiz, 1))
-            @bins.push(ReviewSet.new(@quiz, 2))
-            @bins.push(ForgottenSet.new(@quiz, 3))
+            @newSetBin = addSetType(NewSet)
+            @workingSetBin = addSetType(WorkingSet)
+            @reviewSetBin = addSetType(ReviewSet)
+            @forgottenSetBin = addSetType(ForgottenSet)
+            @stats = ContentStats.new(self)
             @binNum = 0
+        end
+
+        # Adds a set to the bins array and returns its position
+        def addSetType(setType)
+            binNumber = @bins.size
+            @bins.push(setType.new(@quiz, binNumber))
+            return binNumber
+        end
+
+        def newSet
+            return @bins[@newSetBin]
+        end
+
+        def workingSet
+            return @bins[@workingSetBin]
+        end
+
+        def reviewSet
+            return @bins[@reviewSetBin]
+        end
+
+        def forgottenSet
+            return @bins[@forgottenSetBin]
         end
 
         # Returns true if the contents have been changed but not saved
@@ -373,6 +399,13 @@ module JLDrill
                 bin.each do |item|
                     item.updateSchedules
                 end
+            end
+        end
+
+        # Notify each bin that a new problem has been created
+        def newProblemFor(item)
+            @bins.each do |bin|
+                bin.newProblemFor(item)
             end
         end
 

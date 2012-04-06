@@ -42,7 +42,8 @@ module JLDrill
             found = false
             while (level <= 6) && !found
                 range = Counter.findRange(level)
-                if item.firstSchedule.durationWithin?(range)
+                if !item.firstSchedule.nil? &&
+                    item.firstSchedule.durationWithin?(range)
                     found = true
                 else
                     level += 1

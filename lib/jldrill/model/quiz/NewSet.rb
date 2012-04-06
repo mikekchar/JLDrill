@@ -25,6 +25,7 @@ module JLDrill
 
         # Do what is necessary to an item for promotion from this bin
         def promoteItem(item)
+            super(item)
             item.setScores(0)
             if options.interleavedWorkingSet
                 item.scheduleAll

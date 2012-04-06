@@ -19,27 +19,6 @@ module JLDrill
 	        @strategy = @quiz.strategy
 	    end
 	    
-	    it "should be able to return the status" do
-	        @strategy.status.should_not be_nil
-	        @strategy.status.should be_eql("     0%")
-	    end
-	    
-	    it "should increment the statistics if correct in review Set" do
-	        @quiz.currentProblem.item.bin.should eql(Strategy.reviewSetBin)
-	        @strategy.reviewStats.accuracy.should eql(0)
-	        @strategy.correct(@quiz.currentProblem.item)
-	        @strategy.reviewStats.accuracy.should eql(100)
-	    end
-
-	    it "should decrement the statistics if incorrect in review Set" do
-	        @quiz.currentProblem.item.bin.should eql(Strategy.reviewSetBin)
-	        @strategy.reviewStats.accuracy.should eql(0)
-	        @strategy.correct(@quiz.currentProblem.item)
-	        @strategy.reviewStats.accuracy.should eql(100)
-	        @strategy.incorrect(@quiz.currentProblem.item)
-	        @strategy.reviewStats.accuracy.should eql(50)	        
-	    end
-	    
 	    it "should use the contents from the quiz" do
 	        @strategy.contents.should eql(@quiz.contents)
 	    end
@@ -151,13 +130,13 @@ module JLDrill
             # to the required level, so we should review
             @strategy.shouldReview?.should eql(true)
             0.upto(9) do
-                @strategy.reviewStats.correct(item)
+                @strategy.reviewSet.stats.correct(item)
             end
             # We don't start the countdown until we have reviewed 10 items
             # so we should continue to review
             @strategy.shouldReview?.should eql(true)
             0.upto(9) do
-                @strategy.reviewStats.correct(item)
+                @strategy.reviewSet.stats.correct(item)
             end            
             # Now we know the items well enough, and we have reviewed
             # enough items, so we shouldn't review

@@ -21,6 +21,7 @@ module JLDrill
 
         # Do what is necessary to an item for promotion from this bin
         def promoteItem(item)
+            super(item)
             item.itemStats.consecutive = 1
             item.scheduleAll
         end

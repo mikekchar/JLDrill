@@ -27,15 +27,15 @@ module JLDrill::Gtk
 		
 		def update(quiz)
 		    super(quiz)
-            reviewTable = quiz.strategy.reviewStats.statsTable
+            reviewTable = quiz.contents.reviewSet.scheduleTable
 		    @statisticsWindow.updateReviewDuration(reviewTable)
-		    @statisticsWindow.updateReviewAccuracy(quiz.strategy.reviewStats)
-		    @statisticsWindow.updateReviewRate(quiz.strategy.reviewStats)
+		    @statisticsWindow.updateReviewAccuracy(quiz.contents.reviewSet.stats)
+		    @statisticsWindow.updateReviewRate(quiz.contents.stats)
             
-            forgottenTable = quiz.strategy.forgottenStats.statsTable
+            forgottenTable = quiz.contents.forgottenSet.scheduleTable
 		    @statisticsWindow.updateForgottenDuration(forgottenTable)
-		    @statisticsWindow.updateForgottenAccuracy(quiz.strategy.forgottenStats)
-		    @statisticsWindow.updateForgottenRate(quiz.strategy.forgottenStats)
+		    @statisticsWindow.updateForgottenAccuracy(quiz.contents.forgottenSet.stats)
+		    @statisticsWindow.updateForgottenRate(quiz.contents.stats)
 		end
         
         def showBusy(bool)

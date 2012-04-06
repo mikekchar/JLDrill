@@ -1,15 +1,18 @@
 # encoding: utf-8
 require 'jldrill/model/Bin'
 require 'jldrill/model/quiz/QuizItem'
+require 'jldrill/model/quiz/SetStats'
 
 module JLDrill
 
     # Where all the items are stored
     class QuizSet < Bin
+        attr_reader :stats
 
         def initialize(quiz, name, number)
             super(name, number)
             @quiz = quiz
+            @stats = SetStats.new(quiz, number)
         end
        
         # Just a shortcut for getting access to the options 
@@ -76,8 +79,7 @@ module JLDrill
 
         # Do what is necessary to an item for promotion from this bin
         def promoteItem(item)
-            item.itemStats.consecutive = 1
-            item.scheduleAll
+            @stats.promote(item)
         end
 
         # Return the number of the bin that items from this bin should be promoted to
@@ -88,6 +90,26 @@ module JLDrill
         # Return the number of the bin that items from this bin should be demoted to
         def demotionBin
             return @number - 1
+        end
+
+        # Things that should be done when a new problem has been created
+        def newProblemFor(item)
+            if item.bin == @number
+                @stats.startTimer
+            else
+                @stats.stopTimer
+            end
+        end
+
+        # Return a table containing the number of items that are scheduled for each
+        # duration level
+        def scheduleTable
+            dCounter = DurationCounter.new
+
+            @contents.each do |item|
+                dCounter.count(item)
+            end
+            return dCounter
         end
     end
 end

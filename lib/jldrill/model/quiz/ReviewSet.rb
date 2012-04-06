@@ -5,12 +5,10 @@ module JLDrill
 
     # Where all the items are stored
     class ReviewSet < QuizSet
-        attr_reader :stats
 
         def initialize(quiz, number)
             super(quiz, "Review", number)
             addAlias("Excellent")
-            @stats = Statistics.new(quiz, number)
         end
 
         # Put the review set in the correct order according to
@@ -75,6 +73,11 @@ module JLDrill
                 x.removeInvalidKanjiProblems
             end
         end
+
+        def promoteItem(item)
+            # You can't promote from the review set.  Do nothing
+        end
+
 
     end
 end

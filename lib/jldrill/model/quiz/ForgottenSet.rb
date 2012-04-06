@@ -5,11 +5,9 @@ module JLDrill
 
     # Where all the items are stored
     class ForgottenSet < QuizSet
-        attr_reader :stats
 
         def initialize(quiz, number)
             super(quiz, "Forgotten", number)
-            @stats = Statistics.new(quiz, number)
         end
 
         # Put the forgotten set in the correct order according
@@ -53,8 +51,12 @@ module JLDrill
         end
         
         # Demoted items should go to the working bin
-        def promotionBin
+        def demotionBin
             return @number - 2
+        end
+
+        def promoteItem
+            # You can't promote from the forgotten set.  Do nothing.
         end
     end
 end

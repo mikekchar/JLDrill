@@ -117,15 +117,26 @@ module JLDrill::Gtk
             end
         end
         
-        def updateRate(stats)
-            @rateTable.values[0][0].text = stats.reviewed.to_s 
-            @rateTable.values[1][0].text = stats.learned.to_s
-            @rateTable.values[2][0].text = stats.reviewPace.to_s + "s "
-            @rateTable.values[3][0].text = stats.learnPace.to_s + "s "
-            @rateTable.values[4][0].text = stats.accuracy.to_s + "% "
-            @rateTable.values[5][0].text = stats.learnTimePercent.to_s + "% "
-            @rateTable.values[6][0].text = stats.currentReviewRate.to_s + "x "
-            @rateTable.values[7][0].text = stats.averageReviewRate.to_s + "x "
+        def updateReviewRate(contentStats)
+            @rateTable.values[0][0].text = contentStats.reviewSetItemsViewed.to_s 
+            @rateTable.values[1][0].text = contentStats.workingSetItemsLearned.to_s
+            @rateTable.values[2][0].text = contentStats.reviewSetReviewPace.to_s + "s "
+            @rateTable.values[3][0].text = contentStats.workingSetLearnedPace.to_s + "s "
+            @rateTable.values[4][0].text = contentStats.reviewAccuracy.to_s + "% "
+            @rateTable.values[5][0].text = contentStats.learnTimePercent.to_s + "% "
+            @rateTable.values[6][0].text = contentStats.reviewSetRate.to_s + "x "
+            @rateTable.values[7][0].text = contentStats.averageReviewSetRate.to_s + "x "
+        end
+        
+        def updateForgottenRate(contentStats)
+            @rateTable.values[0][0].text = contentStats.forgottenSetItemsViewed.to_s 
+            @rateTable.values[1][0].text = contentStats.workingSetItemsLearned.to_s
+            @rateTable.values[2][0].text = contentStats.forgottenSetReviewPace.to_s + "s "
+            @rateTable.values[3][0].text = contentStats.workingSetLearnedPace.to_s + "s "
+            @rateTable.values[4][0].text = contentStats.forgottenAccuracy.to_s + "% "
+            @rateTable.values[5][0].text = contentStats.learnTimePercent.to_s + "% "
+            @rateTable.values[6][0].text = contentStats.forgottenSetRate.to_s + "x "
+            @rateTable.values[7][0].text = contentStats.averageForgottenSetRate.to_s + "x "
         end
     end
 
@@ -188,7 +199,7 @@ module JLDrill::Gtk
         end
 
         def updateReviewRate(stats)
-            @reviewStats.updateRate(stats)
+            @reviewStats.updateReviewRate(stats)
         end
         
         def updateForgottenDuration(counter)
@@ -200,7 +211,7 @@ module JLDrill::Gtk
         end
 
         def updateForgottenRate(stats)
-            @forgottenStats.updateRate(stats)
+            @forgottenStats.updateForgottenRate(stats)
         end
         
         def showBusy(bool)
