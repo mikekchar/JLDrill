@@ -77,7 +77,7 @@ module JLDrill
         # The item was correctly remembered
         def correct
             @thinkingTimer.stop
-            if @item.bin == Strategy.reviewSetBin
+            if @item.inReviewSet?
                 @consecutive += 1
                 @timeLimit = @thinkingTimer.total
             end
@@ -94,7 +94,6 @@ module JLDrill
             retVal
         end
 
-
         def round(number, places)
             mult = exp(10, places)
             (number * mult).round.to_f / mult
@@ -108,18 +107,5 @@ module JLDrill
             end
             retVal
         end
-
-        def inNewSet?
-            @item.bin == Strategy.newSetBin
-        end
-
-        def inWorkingSet?
-            Strategy.workingSetBin.eql?(@item.bin)
-        end
-
-        def inReviewSet?
-            @item.bin == Strategy.reviewSetBin
-        end
-
     end
 end

@@ -94,7 +94,7 @@ module JLDrill::Version_0_6_1
             it "should decrease the the potential of all schedules in the working set when incorrect" do
                 item = Story.newSet[0]
                 Story.promoteIntoWorkingSet(item)
-                item.itemStats.should be_inWorkingSet
+                item.should be_inWorkingSet
                 potential = item.firstSchedule.potential
                 potential.should eql(Story.daysInSeconds(5))
 
@@ -119,7 +119,7 @@ module JLDrill::Version_0_6_1
                 Story.promoteIntoWorkingSet(item)
                 potential = drillIncorrectlyXTimes(item, 5)
                 Story.promoteIntoReviewSet(item)
-                item.itemStats.should be_inReviewSet
+                item.should be_inReviewSet
 
                 # The default schedules in the review set are Kanji and Meaning only
                 item.schedules.size.should eql(2)
@@ -195,7 +195,7 @@ module JLDrill::Version_0_6_1
 
                 # Make the item incorrect.  It will be moved to the working set
                 Story.quiz.strategy.incorrect(item)
-                item.itemStats.should be_inWorkingSet
+                item.should be_inWorkingSet
                 # We took note of the potential for the s1, so after getting it
                 # wrong, the potential is decreased by 20% of its value.
                 targetPotential = targetPotential - (targetPotential.to_f * 0.2).to_i

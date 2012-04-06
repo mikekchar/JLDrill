@@ -83,15 +83,15 @@ module JLDrill::Version_0_6_1
             end
 
             it "should still accept the old names" do
-                Story.quiz.contents.binNumFromName("New").should eql(JLDrill::Strategy.newSetBin)
-                Story.quiz.contents.binNumFromName("Unseen").should eql(JLDrill::Strategy.newSetBin)
-                Story.quiz.contents.binNumFromName("Working").should eql(JLDrill::Strategy.workingSetBin)
-                Story.quiz.contents.binNumFromName("Poor").should eql(JLDrill::Strategy.workingSetBin)
-                Story.quiz.contents.binNumFromName("Fair").should eql(JLDrill::Strategy.workingSetBin)
-                Story.quiz.contents.binNumFromName("Good").should eql(JLDrill::Strategy.workingSetBin)
-                Story.quiz.contents.binNumFromName("Review").should eql(JLDrill::Strategy.reviewSetBin)
-                Story.quiz.contents.binNumFromName("Excellent").should eql(JLDrill::Strategy.reviewSetBin)
-                Story.quiz.contents.binNumFromName("Forgotten").should eql(JLDrill::Strategy.forgottenSetBin)
+                Story.quiz.contents.binNumFromName("New").should eql(Story.quiz.contents.newSetBin)
+                Story.quiz.contents.binNumFromName("Unseen").should eql(Story.quiz.contents.newSetBin)
+                Story.quiz.contents.binNumFromName("Working").should eql(Story.quiz.contents.workingSetBin)
+                Story.quiz.contents.binNumFromName("Poor").should eql(Story.quiz.contents.workingSetBin)
+                Story.quiz.contents.binNumFromName("Fair").should eql(Story.quiz.contents.workingSetBin)
+                Story.quiz.contents.binNumFromName("Good").should eql(Story.quiz.contents.workingSetBin)
+                Story.quiz.contents.binNumFromName("Review").should eql(Story.quiz.contents.reviewSetBin)
+                Story.quiz.contents.binNumFromName("Excellent").should eql(Story.quiz.contents.reviewSetBin)
+                Story.quiz.contents.binNumFromName("Forgotten").should eql(Story.quiz.contents.forgottenSetBin)
             end
         end
         
@@ -110,7 +110,7 @@ module JLDrill::Version_0_6_1
 
             it "should not have schedules on new items" do
                 item = Story.newSet[0]
-                item.itemStats.should be_inNewSet
+                item.should be_inNewSet
                 item.schedules.size.should eql(0)
                 item.firstSchedule.should be_nil
             end
@@ -129,7 +129,7 @@ module JLDrill::Version_0_6_1
             it "should create schedules for items promoted into the working set" do
                 item = Story.newSet[0]
                 Story.promoteIntoWorkingSet(item)
-                item.itemStats.should be_inWorkingSet
+                item.should be_inWorkingSet
 
                 # Items in the working set have schedules for all 3 proplem types
                 item.schedules.size.should eql(3)
@@ -148,7 +148,7 @@ module JLDrill::Version_0_6_1
 
             it "should not create Kanji problem schedules for items with no Kanji" do
                 item = Story.newNoKanjiItem
-                Story.quiz.contents.addItem(item, JLDrill::Strategy.newSetBin)
+                Story.quiz.contents.addItem(item, Story.quiz.contents.newSetBin)
                 Story.promoteIntoWorkingSet(item)
                 
                 # It doesn't have kanji so there should be only 2 schedules
@@ -212,7 +212,7 @@ module JLDrill::Version_0_6_1
                 kanjiSchedule.score.should eql(2)
                 meaningSchedule.score.should eql(2)
 
-                item.itemStats.should be_inReviewSet
+                item.should be_inReviewSet
             end
 
             def drillCorrectlyXTimes(item, x)
@@ -259,9 +259,9 @@ module JLDrill::Version_0_6_1
                 readingSchedule.score.should eql(2)
                 kanjiSchedule.score.should eql(2)
                 meaningSchedule.score.should eql(2)
-                item.itemStats.should be_inReviewSet
+                item.should be_inReviewSet
                 Story.drillIncorrectly(item)
-                item.itemStats.should be_inWorkingSet
+                item.should be_inWorkingSet
                 allScoresShouldBeZero(item)
             end
         end
@@ -296,7 +296,7 @@ module JLDrill::Version_0_6_1
                 end
                 1.upto(9) do |i|
                     Story.quiz.contents.addItem(items[i], 
-                                                JLDrill::Strategy.workingSetBin)
+                                                Story.quiz.contents.workingSetBin)
                     workingStatus().should eql("Working: #{i+1}, 0, 0")
                 end
 

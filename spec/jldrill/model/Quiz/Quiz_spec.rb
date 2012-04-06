@@ -33,10 +33,10 @@ module JLDrill
 		    quiz.options.randomOrder.should eql(true)
 		    quiz.options.promoteThresh.should eql(4)
 		    quiz.options.introThresh.should eql(17)
-		    quiz.contents.bins[Strategy.newSetBin].length.should eql(1)
-		    quiz.contents.bins[Strategy.workingSetBin].length.should eql(1)
-		    quiz.contents.bins[Strategy.reviewSetBin].length.should eql(2)
-		    quiz.contents.bins[Strategy.forgottenSetBin].length.should eql(0)
+		    quiz.contents.newSet.length.should eql(1)
+		    quiz.contents.workingSet.length.should eql(1)
+		    quiz.contents.reviewSet.length.should eql(2)
+		    quiz.contents.forgottenSet.length.should eql(0)
 		end
 		
 		it "should save a file to a string" do
@@ -67,20 +67,20 @@ module JLDrill
 	    
 	    it "should be able to reset the contents" do
 	        @quiz.resetContents
-	        @quiz.contents.bins[Strategy.newSetBin].length.should eql(3)
-	        @quiz.contents.bins[Strategy.workingSetBin].length.should eql(1)
-	        @quiz.contents.bins[Strategy.reviewSetBin].length.should eql(0)
-	        @quiz.contents.bins[Strategy.forgottenSetBin].length.should eql(0)
+	        @quiz.contents.newSet.length.should eql(3)
+	        @quiz.contents.workingSet.length.should eql(1)
+	        @quiz.contents.reviewSet.length.should eql(0)
+	        @quiz.contents.forgottenSet.length.should eql(0)
             string = allVocabString(@quiz)
 	        string.should eql(@sampleQuiz.allResetVocab + "\n")
 	    end
 
         it "should renumber the contents when resetting" do
             @quiz.resetContents
-            @quiz.contents.bins[Strategy.newSetBin][0].position = 5
-            @quiz.contents.bins[Strategy.newSetBin][1].position = 6
-            @quiz.contents.bins[Strategy.newSetBin][2].position = 6
-            @quiz.contents.bins[Strategy.workingSetBin][0].position = 7
+            @quiz.contents.newSet[0].position = 5
+            @quiz.contents.newSet[1].position = 6
+            @quiz.contents.newSet[2].position = 6
+            @quiz.contents.workingSet[0].position = 7
             @quiz.options.randomOrder = false
             @quiz.resetContents
             # The first item will be drilled and therefore promoted to bin 1
@@ -92,12 +92,12 @@ module JLDrill
         end
 	    
 	    it "should be able to move an item from one bin to the other" do
-	        item = @quiz.contents.bins[Strategy.newSetBin][0]
-	        @quiz.contents.moveToBin(item, Strategy.reviewSetBin)
-	        @quiz.contents.bins[Strategy.newSetBin].length.should eql(0)
-	        @quiz.contents.bins[Strategy.reviewSetBin].length.should eql(3)
-	        item.should be_equal(@quiz.contents.bins[Strategy.reviewSetBin][2])
-	        item.bin.should eql(Strategy.reviewSetBin)
+	        item = @quiz.contents.newSet[0]
+	        @quiz.contents.moveToReviewSet(item)
+	        @quiz.contents.newSet.length.should eql(0)
+	        @quiz.contents.reviewSet.length.should eql(3)
+	        item.should be_equal(@quiz.contents.reviewSet[2])
+	        item.should be_inReviewSet
 	    end
 	    
         def test_problem(question, problem)
@@ -145,16 +145,16 @@ module JLDrill
 	    end
 	    
 	    def test_drill
-	        newSetSize = @quiz.contents.bins[Strategy.newSetBin].length
+	        newSetSize = @quiz.contents.newSet.length
 	        @quiz.drill
             question = @quiz.currentDrill
-	        if (newSetSize - 1) == @quiz.contents.bins[Strategy.newSetBin].length
+	        if (newSetSize - 1) == @quiz.contents.newSet.length
 	            # it was a bin 0 item which was promoted
-	            @quiz.currentProblem.item.bin.should eql(Strategy.workingSetBin)
+	            @quiz.currentProblem.item.should be_inWorkingSet
                 test_workingSet(question)
-	        elsif @quiz.currentProblem.item.bin == Strategy.workingSetBin
+	        elsif @quiz.currentProblem.item.inWorkingSet?
 	            test_workingSet(question)
-	        elsif @quiz.currentProblem.item.bin == Strategy.reviewSetBin
+	        elsif @quiz.currentProblem.item.inReviewSet?
 	            test_reviewSet(question)
 	        else
 	             # This shouldn't ever happen.  Blow up.
@@ -165,8 +165,7 @@ module JLDrill
         def test_correct
             consecutive = @quiz.currentProblem.item.itemStats.consecutive
             @quiz.correct
-            bin = @quiz.currentProblem.item.bin
-            if bin == Strategy.reviewSetBin
+            if @quiz.currentProblem.item.inReviewSet?
                 @quiz.currentProblem.item.itemStats.consecutive.should eql(consecutive + 1)
             else
                 @quiz.currentProblem.item.itemStats.consecutive.should eql(0)
@@ -191,12 +190,12 @@ module JLDrill
 	        test_initializeQuiz
 	        # Non random should pick the first object in the first bin
 	        # item gets promoted to the first bin immediately
-	        item = @quiz.contents.bins[Strategy.workingSetBin][0]
-	        @quiz.contents.bins[Strategy.newSetBin].length.should eql(3)
-	        @quiz.contents.bins[Strategy.workingSetBin].length.should eql(1)
+	        item = @quiz.contents.workingSet[0]
+	        @quiz.contents.newSet.length.should eql(3)
+	        @quiz.contents.workingSet.length.should eql(1)
             test_problem(@quiz.currentProblem.question, 
                          ReadingProblem.new(@quiz.currentProblem.item)) 
-	        @quiz.bin.should eql(Strategy.workingSetBin)
+	        @quiz.bin.should eql(@quiz.contents.workingSetBin)
 	        @quiz.currentProblem.item.should be_equal(item)
 
             # Threshold is 1, so a correct answer should promote
@@ -212,7 +211,7 @@ module JLDrill
             # first iteration we just need to do test_correct.
             test_correct
             i = 1
-            until (@quiz.contents.bins[Strategy.reviewSetBin].length == 4) || (i > 12) do
+            until (@quiz.contents.reviewSet.length == 4) || (i > 12) do
                 i += 1
                 test_drill
                 test_correct
@@ -230,7 +229,7 @@ module JLDrill
             # first iteration we just need to do test_correct.
             test_correct
             i = 1
-            until (@quiz.contents.bins[Strategy.reviewSetBin].length == 4) || (i > 24) do
+            until (@quiz.contents.reviewSet.length == 4) || (i > 24) do
                 i += 1
                 test_drill
                 test_correct
@@ -269,7 +268,7 @@ module JLDrill
         
         it "should update the schedule correctly for review set items" do
 	        @quiz.loadFromString("none", @sampleQuiz.file)
-	        item = @quiz.contents.bins[Strategy.reviewSetBin][0]
+	        item = @quiz.contents.reviewSet[0]
 	        item.should_not be_nil
             schedule = item.firstSchedule
             @quiz.currentProblem = MeaningProblem.new(item)

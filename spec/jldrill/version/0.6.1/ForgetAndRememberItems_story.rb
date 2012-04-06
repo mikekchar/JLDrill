@@ -58,7 +58,7 @@ module JLDrill::Version_0_6_1
                 0.upto(9) do
                     item = Story.newSampleItem
                     Story.sampleItems.push(item)
-                    Story.quiz.contents.addItem(item, JLDrill::Strategy.reviewSetBin)
+                    Story.quiz.contents.addItem(item, Story.quiz.contents.reviewSetBin)
                 end
             end
 

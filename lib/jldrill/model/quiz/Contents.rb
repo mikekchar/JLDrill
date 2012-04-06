@@ -306,6 +306,22 @@ module JLDrill
             end
         end
 
+        def moveToNewSet(item)
+            moveToBin(item, newSetBin)
+        end
+
+        def moveToWorkingSet(item)
+            moveToBin(item, workingSetBin)
+        end
+
+        def moveToReviewSet(item)
+            moveToBin(item, reviewSetBin)
+        end
+
+        def moveToForgottenSet(item)
+            moveToBin(item, forgottenSetBin)
+        end
+
         # Renumber the positions of the items
         def repositionItems
             # allItems renumbers the positions as a side-effect.

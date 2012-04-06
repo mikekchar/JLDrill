@@ -168,7 +168,7 @@ module JLDrill::UserChangesOptions
         end	    
 
         it "should add and remove problem schedule types when options change" do
-            item = Story.quiz.contents.bins[JLDrill::Strategy.workingSetBin][0]
+            item = Story.quiz.contents.workingSet[0]
             item.should_not be_nil
             item.level = 3
             Story.quiz.strategy.promote(item) 

@@ -231,7 +231,7 @@ module JLDrill
             @options.optionsFinishedLoading
             # Need to sort the new set to deal with older files that
             # may not be sorted.
-            @strategy.newSet.sort! do |x, y|
+            @contents.newSet.sort! do |x, y|
                 x.position <=> y.position
             end
             # Resort the review set according to schedule

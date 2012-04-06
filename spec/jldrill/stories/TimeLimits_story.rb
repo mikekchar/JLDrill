@@ -34,7 +34,7 @@ module JLDrill::ItemsHaveTimeLimits
         end
 
         def newSet
-            quiz.strategy.newSet
+            quiz.contents.newSet
         end
 
         def currentItem
@@ -47,21 +47,21 @@ module JLDrill::ItemsHaveTimeLimits
         end
 
         def promoteIntoWorkingSet(item)
-            item.itemStats.should be_inNewSet
+            item.should be_inNewSet
             drillCorrectly(item)
-            item.itemStats.should be_inWorkingSet
+            item.should be_inWorkingSet
         end
 
         def promoteIntoReviewSet(item)
-            item.bin.should eql(JLDrill::Strategy.workingSetBin)
+            item.should be_inWorkingSet
 
             0.upto(2) do
-                item.itemStats.should_not be_inNewSet
-                item.itemStats.should be_inWorkingSet
+                item.should_not be_inNewSet
+                item.should be_inWorkingSet
                 quiz.correct
             end
 
-            item.itemStats.should be_inReviewSet
+            item.should be_inReviewSet
         end
 
         it "should start the thinkingTimer when a new problem is created" do
@@ -121,7 +121,7 @@ module JLDrill::ItemsHaveTimeLimits
             item = newSet[0]
             item.itemStats.timeLimit = 123.987654321
             itemString = item.to_s
-            newItem = JLDrill::QuizItem.create(@quiz, itemString, JLDrill::Strategy.newSetBin)
+            newItem = JLDrill::QuizItem.create(quiz, itemString, quiz.contents.newSetBin)
             newItem.itemStats.timeLimit.should eql(123.988)
         end
     end

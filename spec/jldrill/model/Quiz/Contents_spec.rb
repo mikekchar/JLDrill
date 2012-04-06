@@ -17,12 +17,12 @@ module JLDrill
         it "should add items to the last position if the position is set to -1" do
         	item = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
             item.position = -1
-	        @quiz.contents.bins[Strategy.reviewSetBin].length.should eql(2)
-	        @quiz.contents.addItem(item, Strategy.reviewSetBin)
-	        @quiz.contents.bins[Strategy.reviewSetBin].length.should eql(3)
+	        @quiz.contents.reviewSet.length.should eql(2)
+	        @quiz.contents.addItem(item, @quiz.contents.reviewSetBin)
+	        @quiz.contents.reviewSet.length.should eql(3)
 	        # This is the 5th item counting from 0.  There are already 2
 	        # items in the review bin, so it should put it at the end.
-	        @quiz.contents.bins[Strategy.reviewSetBin][2].position.should eql(4)
+	        @quiz.contents.reviewSet[2].position.should eql(4)
 	    end
 	    
 	    it "should be able to print out the status" do
@@ -52,15 +52,15 @@ module JLDrill
 
             quiz2.loadFromString("testFile", @sampleQuiz.file)
             item = QuizItem.new(quiz2, @sampleQuiz.sampleVocab)
-            quiz2.contents.addItem(item, Strategy.reviewSetBin)
+            quiz2.contents.addItem(item, quiz2.contents.reviewSetBin)
             quiz2.contents.length.should eql(5)
-            quiz2.contents.bins[Strategy.reviewSetBin].length.should eql(3)
-            quiz2.contents.bins[Strategy.reviewSetBin][2].to_o.kanji.should eql(item.to_o.kanji)
+            quiz2.contents.reviewSet.length.should eql(3)
+            quiz2.contents.reviewSet[2].to_o.kanji.should eql(item.to_o.kanji)
 
 	        @quiz.contents.addContents(quiz2.contents)
 	        @quiz.contents.length.should eql(5)
-            quiz2.contents.bins[Strategy.reviewSetBin].length.should eql(3)
-            @quiz.contents.bins[Strategy.reviewSetBin][2].to_o.kanji.should eql(item.to_o.kanji)
+            @quiz.contents.reviewSet.length.should eql(3)
+            @quiz.contents.reviewSet[2].to_o.kanji.should eql(item.to_o.kanji)
 	    end
     end
 end

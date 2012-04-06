@@ -175,16 +175,16 @@ module JLDrill
         # for the quiz.  If not, push a new type on.
         def checkSchedules
             if !@item.nil? && !@item.quiz.nil?
-                if @item.bin == Strategy.newSetBin
+                if @item.inNewSet?
                     levels = []
-                elsif @item.bin == Strategy.workingSetBin
+                elsif @item.inWorkingSet?
                     levels = [0, 1, 2]
                 else
                     levels = @quiz.options.allowedLevels
                 end
                 addAllowed(levels)
                 removeDisallowed(levels)
-                if @item.bin >= Strategy.reviewSetBin
+                if @item.notNewOrWorking?
                     @item.level = 3
                 end
             end

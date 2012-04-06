@@ -40,6 +40,26 @@ module JLDrill
             return @status.select("ItemStats")
         end
 
+        def inNewSet?
+            return @bin == @quiz.contents.newSetBin
+        end
+
+        def inWorkingSet?
+            return @bin == @quiz.contents.workingSetBin
+        end
+
+        def inReviewSet?
+            return @bin == @quiz.contents.reviewSetBin
+        end
+
+        def inForgottenSet?
+            return @bin == @quiz.contents.forgottenSetBin
+        end
+
+        def notNewOrWorking?
+            return @bin > @quiz.contents.workingSetBin
+        end
+
         def removeInvalidKanjiProblems
             return problemStatus.removeInvalidKanjiProblems
         end
@@ -127,12 +147,10 @@ module JLDrill
 
         def infoStatus
             retVal = super()
-            if @bin < Strategy.reviewSetBin
-                if bin == 0
-                    retVal += "New"
-                else
-                    retVal += "#{problemStatus.currentLevel + 1}"
-                end
+            if inNewSet?
+                retVal += "New"
+            elsif inWorkingSet?
+                retVal += "#{problemStatus.currentLevel + 1}"
             else
                 retVal += "+#{itemStats.consecutive}"
                 if !problemStatus.firstSchedule.nil? &&

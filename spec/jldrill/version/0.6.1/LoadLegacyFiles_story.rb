@@ -86,15 +86,15 @@ Forgotten
                 Story.quiz.options.promoteThresh = 2
                 Story.loadStringQuiz("LegacyQuiz", fileString)
 
-                Story.quiz.contents.bins[JLDrill::Strategy.newSetBin].size.should be(1)
-                Story.quiz.contents.bins[JLDrill::Strategy.workingSetBin].size.should be(2)
-                Story.quiz.contents.bins[JLDrill::Strategy.reviewSetBin].size.should be(1)
-                Story.quiz.contents.bins[JLDrill::Strategy.forgottenSetBin].size.should be(0)
+                Story.quiz.contents.newSet.size.should be(1)
+                Story.quiz.contents.workingSet.size.should be(2)
+                Story.quiz.contents.reviewSet.size.should be(1)
+                Story.quiz.contents.forgottenSet.size.should be(0)
 
-                newItem = Story.quiz.contents.bins[JLDrill::Strategy.newSetBin][0]
-                w1Item = Story.quiz.contents.bins[JLDrill::Strategy.workingSetBin][0]
-                w2Item = Story.quiz.contents.bins[JLDrill::Strategy.workingSetBin][1]
-                reviewItem = Story.quiz.contents.bins[JLDrill::Strategy.reviewSetBin][0]
+                newItem = Story.quiz.contents.newSet[0]
+                w1Item = Story.quiz.contents.workingSet[0]
+                w2Item = Story.quiz.contents.workingSet[1]
+                reviewItem = Story.quiz.contents.reviewSet[0]
 
                 # New set items should have no schedule even if they exist in the
                 # file

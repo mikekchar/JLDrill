@@ -12,27 +12,11 @@ module JLDrill
             @quiz = quiz
         end
         
-        def Strategy.newSetBin
-            return 0
-        end
-
-        def Strategy.workingSetBin
-            return 1
-        end
-
-        def Strategy.reviewSetBin
-            return 2
-        end
-
-        def Strategy.forgottenSetBin
-            return 3
-        end
-
         # Returns a string showing the status of the quiz with this strategy
         def status
             if shouldReview?
                 return @quiz.contents.stats.reviewStatus
-            elsif !forgottenSet.empty?
+            elsif !contents.forgottenSet.empty?
                 return " Forgotten Items"
             else
                 return "     New Items"
@@ -49,47 +33,13 @@ module JLDrill
             @quiz.options
         end
 
-        def newSet
-            @quiz.contents.bins[Strategy.newSetBin]
-        end
-        
-        # Returns the number of items in the working set
-        def workingSetSize
-            workingSet.length
-        end
-        
-        def workingSetFull?
-             workingSet.full?
-        end
-
-        def workingSet
-            return contents.bins[Strategy.workingSetBin]
-        end
-        
-        def reviewSet
-            @quiz.contents.bins[Strategy.reviewSetBin]
-        end
-
-        # Returns the number of items in the review set
-        def reviewSetSize
-            reviewSet.length
-        end
-
-        def forgottenSet
-            @quiz.contents.bins[Strategy.forgottenSetBin]
-        end
-
-        def forgottenSetSize
-            forgottenSet.length
-        end
-
         # If the user increases the forgetting threshold,
         # some items need to be returned from the forgotten set
         # to the review set
         def rememberItems
-            items = forgottenSet.rememberedItems()
+            items = contents.forgottenSet.rememberedItems()
             items.each do |item|
-                contents.moveToBin(item, Strategy.reviewSetBin)
+                contents.moveToReviewSet(item)
             end
         end
 
@@ -97,18 +47,18 @@ module JLDrill
         # some items need to be moved from the review set to the
         # forgotten set
         def forgetItems
-            items = reviewSet.forgottenItems()
+            items = contents.reviewSet.forgottenItems()
             items.each do |item|
-                contents.moveToBin(item, Strategy.forgottenSetBin)
+                contents.moveToForgottenSet(item)
             end
         end
 
         # Sort the items according to their schedule
         def reschedule
-            reviewSet.removeInvalidKanjiProblems
+            contents.reviewSet.removeInvalidKanjiProblems
             forgetItems
             rememberItems
-            reviewSet.reschedule
+            contents.reviewSet.reschedule
         end
         
         # Returns true if at least one working set full of
@@ -120,17 +70,18 @@ module JLDrill
         def shouldReview?
             # if we only have review set items, or we are in review mode
             # then return true
-            if  (newSet.empty? && workingSet.empty?) || (options.reviewMode)
+            if  (contents.newSet.empty? && contents.workingSet.empty?) || 
+                (options.reviewMode)
                 return true
             else
-                return reviewSet.shouldReview?
+                return contents.reviewSet.shouldReview?
             end
         end
 
         # Get an item from the New Set
         # Note: It promotes that item to the working set in the process
         def getNewItem
-            item = newSet.selectItem()
+            item = contents.newSet.selectItem()
             if !item.nil?
                 promote(item)
             end
@@ -141,18 +92,18 @@ module JLDrill
         def getItem
             item = nil
 
-            if !workingSetFull?
+            if !contents.workingSet.full?
                 if shouldReview?
-                    item = reviewSet.selectItem()
-                elsif !forgottenSet.empty?
-                    item = forgottenSet.selectItem()
-                elsif !newSet.empty?
+                    item = contents.reviewSet.selectItem()
+                elsif !contents.forgottenSet.empty?
+                    item = contents.forgottenSet.selectItem()
+                elsif !contents.newSet.empty?
                     item = getNewItem
                 end
             end
 
             # Usually we get a working item if the above is not true
-            item = workingSet.selectItem() if item.nil?
+            item = contents.workingSet.selectItem() if item.nil?
 
             item.setAllSeen(true) if !item.nil?
             return item
@@ -169,15 +120,15 @@ module JLDrill
         # Promote the item to the next level/bin
         def promote(item)
             if !item.nil?
-                if item.bin == Strategy.newSetBin
-                    contents.moveToBin(item, newSet.promotionBin())
-                    newSet.promoteItem(item)
+                if item.inNewSet?
+                    contents.moveToWorkingSet(item)
+                    contents.newSet.promoteItem(item)
                 else 
-                    if item.bin == Strategy.workingSetBin
-                        workingSet.promoteItem(item)
+                    if item.inWorkingSet?
+                        contents.workingSet.promoteItem(item)
                     end
                     # Put the item at the back of the reviewSet
-                    contents.moveToBin(item, Strategy.reviewSetBin)
+                    contents.moveToReviewSet(item)
                 end
             end
         end
@@ -186,12 +137,11 @@ module JLDrill
         def demote(item)
             if !item.nil?
                 item.demoteAll
-                if (item.bin != Strategy.newSetBin)
-                    contents.moveToBin(item, Strategy.workingSetBin)
+                if !item.inNewSet?
+                    contents.moveToWorkingSet(item)
                 else
-                	# Demoting New Set items is non-sensical, but it should do
-	                # something sensible anyway.
-                    contents.moveToBin(item, Strategy.newSetBin)
+                	# Demoting New Set items is non-sensical
+	                # Do Nothing
                 end
             end
         end
@@ -201,8 +151,7 @@ module JLDrill
             contents.bins[item.bin].stats.correct(item)
             item.itemStats.correct
             item.firstSchedule.correct unless item.firstSchedule.nil?
-            if (item.bin != Strategy.workingSetBin) ||
-                (item.level >= 3)
+            if !item.inWorkingSet? || (item.level >= 3)
                 promote(item)
             end
         end
@@ -219,7 +168,7 @@ module JLDrill
         # it to the review set
         def learn(item)
             correct(item)
-            if item.bin <= Strategy.workingSetBin
+            if item.inNewSet? || item.inWorkingSet?
                 promote(item)
             end
         end

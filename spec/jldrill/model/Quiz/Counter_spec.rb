@@ -29,7 +29,7 @@ module JLDrill
         it "should count properly" do 
             quiz = JLDrill::SampleQuiz.new.resetQuiz
             counter = JLDrill::DurationCounter.new
-            item = quiz.contents.bins[Strategy.workingSetBin][0]
+            item = quiz.contents.workingSet[0]
             item.level = 3
             quiz.strategy.promote(item)
             testDuration(item, counter, 3, 0, 1)

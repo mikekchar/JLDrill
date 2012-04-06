@@ -218,7 +218,7 @@ module JLDrill::Version_0_6_1
                 item.should_not be_nil
                 item.schedules.size.should eql(0)
                 Story.quiz.strategy.promote(item) 
-                item.itemStats.should be_inWorkingSet
+                item.should be_inWorkingSet
                 item.schedules.size.should eql(3)
                 initial = JLDrill::Schedule.initialWorkingSetInterval
                 initial.should eql(60)

@@ -19,7 +19,7 @@ module JLDrill
             @strings.length.should be(4)
             @items = []
             0.upto(@strings.length - 1) do |i|
-                 @items.push(QuizItem.create(@quiz, @strings[i], Strategy.reviewSetBin))
+                 @items.push(QuizItem.create(@quiz, @strings[i], @quiz.contents.reviewSetBin))
             end
 		end
 		
@@ -45,7 +45,7 @@ module JLDrill
         it "should be able to parse the information in the file" do
             @items[1].to_s.should eql(@strings[1] + "\n")
             time = @items[1].firstSchedule.markReviewed
-            newItem = QuizItem.create(@quiz, @items[1].to_s, Strategy.reviewSetBin)
+            newItem = QuizItem.create(@quiz, @items[1].to_s, @quiz.contents.reviewSetBin)
             newItem.firstSchedule.lastReviewed.to_i.should eql(@items[1].firstSchedule.lastReviewed.to_i)
         end
         
@@ -114,7 +114,7 @@ module JLDrill
         it "should be able to parse the schedule information in the file" do
             @items[3].to_s.should eql(@strings[3] + "\n")
             time = @items[3].firstSchedule.schedule
-            newItem = QuizItem.create(@quiz, @items[3].to_s, Strategy.reviewSetBin)
+            newItem = QuizItem.create(@quiz, @items[3].to_s, @quiz.contents.reviewSetBin)
             # Since we aren't using
             # a bin here, we'll cheat and set the bin number manually.
             newItem.bin = 4

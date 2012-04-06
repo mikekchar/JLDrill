@@ -68,7 +68,7 @@ module JLDrill
                     # Level is deprecated
                     # Use the level in Legacy files to determine what
                     # the scores should really be
-                    if @item.bin == Strategy.workingSetBin
+                    if @item.inWorkingSet?
                        case ProblemFactory.parse(@problemType) <=> $1.to_i
                        when -1
                            # The level is beyond this problem type
@@ -85,12 +85,12 @@ module JLDrill
                     @lastReviewed = Time.at($1.to_i)
                 when SCHEDULEDTIME_RE
                     # scheduledTime is deprecated
-                    if @item.bin == Strategy.reviewSetBin
+                    if @item.inReviewSet
                         @scheduledTime = Time.at($1.to_i)
                     end
                 when DIFFICULTY_RE
                     # Difficulty is deprecated
-                    if @item.bin == Strategy.workingSetBin
+                    if @item.inWorkingSet?
                         @potential = (Schedule.difficultyScale($1.to_i) *
                             Schedule.defaultPotential).to_i 
                     end
@@ -98,7 +98,7 @@ module JLDrill
                     # Only set the potential in the working set bin.
                     # This is to take care of some legacy files with
                     # an incorrect setting
-                    if @item.bin == Strategy.workingSetBin
+                    if @item.inWorkingSet?
                         @potential = $1.to_i
                     end
                 when DURATION_RE
@@ -107,7 +107,7 @@ module JLDrill
                     # Furthermore, while the potential is saved, it is
                     # the same as the duration and some legacy files have
                     # the potential saved incorrectly.
-                    if @item.bin > Strategy.workingSetBin
+                    if @item.notNewOrWorking?
                         @duration = Duration.parse($1)
                         # Fix for some legacy files
                         @potential = @duration.seconds
@@ -272,7 +272,7 @@ module JLDrill
                     interval = @duration.seconds
                 end
             else
-                if (@item.bin == Strategy.workingSetBin) &&
+                if (@item.inWorkingSet?) &&
                     (@item.quiz.options.interleavedWorkingSet)
                     interval = Schedule.initialWorkingSetInterval
                 else
@@ -311,7 +311,7 @@ module JLDrill
 
         # Mark the item as correct.
         def correct
-            if @item.bin > Strategy.workingSetBin
+            if @item.notNewOrWorking?
                 schedule()
             end
             markReviewed()
