@@ -65,7 +65,6 @@ module JLDrill
         end
 
         # Return the schedule for the item that is the highest priority
-        # according to the strategy
         def firstSchedule
             return problemStatus.firstSchedule
         end

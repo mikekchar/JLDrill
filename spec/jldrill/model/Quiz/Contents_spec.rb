@@ -3,7 +3,6 @@ require 'jldrill/model/Quiz'
 require 'jldrill/model/quiz/Contents'
 require 'jldrill/model/items/Vocabulary'
 require 'jldrill/spec/SampleQuiz'
-require 'jldrill/model/quiz/Strategy'
 
 module JLDrill
 

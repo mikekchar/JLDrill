@@ -28,6 +28,10 @@ module JLDrill
             @binNum = 0
         end
 
+        def options
+            @quiz.options
+        end
+
         # Adds a set to the bins array and returns its position
         def addSetType(setType)
             binNumber = @bins.size
@@ -403,10 +407,76 @@ module JLDrill
             forgottenSet.reschedule
         end
         
+        # Returns true if at least one working set full of
+        # items have been promoted to the review set, and
+        # the review set is not known to the required
+        # level.
+        # Note: if the new set and the working set are
+        # both empty, this will always return true.
+        def shouldReview?
+            # if we only have review set items, or we are in review mode
+            # then return true
+            if  (newSet.empty? && workingSet.empty?) || options.reviewMode
+                return true
+            else
+                return reviewSet.shouldReview?
+            end
+        end
+
+        # Get an item from the New Set
+        # Note: It promotes that item to the working set in the process
+        def getNewItem
+            item = newSet.selectItem()
+            if !item.nil?
+                item.promote
+            end
+            return item
+        end
+        
+        # Get an item to quiz
+        def getItem
+            item = nil
+
+            if !workingSet.full?
+                if shouldReview?
+                    item = reviewSet.selectItem()
+                elsif !forgottenSet.empty?
+                    item = forgottenSet.selectItem()
+                elsif !newSet.empty?
+                    item = getNewItem
+                end
+            end
+
+            # Usually we get a working item if the above is not true
+            item = workingSet.selectItem() if item.nil?
+
+            item.setAllSeen(true) if !item.nil?
+            return item
+        end
+
         # Notify each bin that a new problem has been created
         def newProblemFor(item)
             @bins.each do |bin|
                 bin.newProblemFor(item)
+            end
+        end
+
+        # Create a problem for the given item at the correct level
+        def createProblem(item)
+            newProblemFor(item)
+
+            item.itemStats.createProblem
+            return item.problem
+        end
+
+        # Returns a string showing the status kinds of items we are selecting
+        def selectionStatus
+            if shouldReview?
+                return @stats.reviewStatus
+            elsif !forgottenSet.empty?
+                return " Forgotten Items"
+            else
+                return "     New Items"
             end
         end
 
@@ -416,7 +486,7 @@ module JLDrill
 
         def forgottenStatus
             retVal = ""
-            if (quiz.options.forgettingThresh != 0.0)
+            if (options.forgettingThresh != 0.0)
                 retVal = "Forgotten: #{@bins[3].length} "
             end
             return retVal

@@ -4,7 +4,6 @@ require 'jldrill/model/Problem'
 require 'jldrill/model/quiz/QuizItem'
 require 'jldrill/model/quiz/Options'
 require 'jldrill/model/quiz/Contents'
-require 'jldrill/model/quiz/Strategy'
 require 'jldrill/model/util/DataFile'
 require 'Context/Publisher'
 require 'jldrill/Version'
@@ -18,8 +17,7 @@ module JLDrill
         JLDRILL_CANLOAD_RE = /^(\d+\.\d+\.\d+)?-?LDRILL-SAVE/
 
         attr_reader :needsSave, :info, :name, 
-                    :contents, :options, :currentProblem,
-                    :strategy
+                    :contents, :options, :currentProblem
         attr_writer :info, :name, :currentProblem
 
         def initialize()
@@ -34,7 +32,6 @@ module JLDrill
             @options = Options.new(self)
             @options.subscribe(self)
             @contents = Contents.new(self)
-            @strategy = Strategy.new(self)
             @currentProblem = nil
             @needsSave = false
             @last = nil
@@ -307,7 +304,7 @@ module JLDrill
             if !@currentProblem.nil?
                 retVal += @currentProblem.status + " "
             end
-            retVal += @strategy.status
+            retVal += @contents.selectionStatus
             return retVal
         end
 
@@ -373,19 +370,19 @@ module JLDrill
         
         # Creates a problem to be quizzed
         def createProblem(item)
-            setCurrentProblem(@strategy.createProblem(item))
+            setCurrentProblem(@contents.createProblem(item))
         end
 
         # Creates a problem to be displayed only
         def displayProblem(item)
-            problem = @strategy.createProblem(item)
+            problem = @contents.createProblem(item)
             problem.setDisplayOnly(true)
             setCurrentProblem(problem)
         end
 
         # Creates a preview for a problem
         def previewProblem(item)
-            problem = @strategy.createProblem(item)
+            problem = @contents.createProblem(item)
             problem.setDisplayOnly(true)
             problem.setPreview(true)
             setCurrentProblem(problem)
@@ -396,7 +393,7 @@ module JLDrill
         end
 
         def drill()
-            item = @strategy.getItem
+            item = @contents.getItem
             if !item.nil?
                 createProblem(item)
             end

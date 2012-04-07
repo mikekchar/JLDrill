@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
-require 'jldrill/model/quiz/Strategy'
 require 'jldrill/model/quiz/Schedule'
 require 'jldrill/views/test/MainWindowView'
 require 'jldrill/views/test/VBoxView'
@@ -288,7 +287,6 @@ module JLDrill::ScheduleItems
             setDaysAgoReviewed(item2.firstSchedule, 1.0/24.0)
 
             # If we reschedule
-            quiz.options.promoteThresh.should eql(quiz.strategy.options.promoteThresh)
             quiz.reschedule
 
             # Both problem types in item were reviewed a day ago, but

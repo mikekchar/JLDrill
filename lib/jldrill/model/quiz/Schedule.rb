@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'jldrill/model/util/Duration'
 require 'jldrill/model/problems/ProblemFactory'
-require 'jldrill/model/quiz/Strategy'
 
 module JLDrill
 

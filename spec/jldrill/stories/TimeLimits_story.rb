@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
-require 'jldrill/model/quiz/Strategy'
 require 'jldrill/views/test/MainWindowView'
 require 'jldrill/views/test/CommandView'
 require 'jldrill/views/test/ProblemView'

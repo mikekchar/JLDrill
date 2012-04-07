@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'jldrill/spec/storyFunctionality/SampleQuiz.rb'
 require 'jldrill/spec/storyFunctionality/Gtk'
-require 'jldrill/model/quiz/Strategy'
 require 'jldrill/model/quiz/Schedule'
 require 'jldrill/model/quiz/Options'
 require 'jldrill/contexts/MainContext'

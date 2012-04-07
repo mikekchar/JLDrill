@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'jldrill/model/Quiz'
 require 'jldrill/spec/SampleQuiz'
-require 'jldrill/model/quiz/Strategy'
 
 module JLDrill
 

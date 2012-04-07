@@ -1,5 +1,4 @@
 # encoding: utf-8
-require 'jldrill/model/quiz/Strategy'
 require 'jldrill/model/quiz/Contents'
 require 'jldrill/model/items/Vocabulary'
 require 'jldrill/model/Problem'
@@ -8,7 +7,7 @@ require 'jldrill/spec/SampleQuiz'
 
 module JLDrill
 
-	describe Strategy do
+	describe "Selection Strategy" do
 	
 	    before(:each) do
 	        @quiz = Quiz.new
@@ -16,13 +15,8 @@ module JLDrill
 	        vocab = @sampleQuiz.sampleVocab
 	        item = @quiz.contents.add(vocab, @quiz.contents.reviewSetBin)
 	        @quiz.currentProblem = ReadingProblem.new(item)
-	        @strategy = @quiz.strategy
 	    end
 	    
-	    it "should use the contents from the quiz" do
-	        @strategy.contents.should eql(@quiz.contents)
-	    end
-
         # Adds a sample vocabulary to a bin in a position and returns the item
         def test_addItem(bin, position)
             item = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
@@ -85,9 +79,9 @@ module JLDrill
             item3.correct()
             item3.firstSchedule.problemType.should eql("MeaningProblem")
             
-            problem1 = @strategy.createProblem(item1)
-            problem2 = @strategy.createProblem(item2)
-            problem3 = @strategy.createProblem(item3)
+            problem1 = @quiz.contents.createProblem(item1)
+            problem2 = @quiz.contents.createProblem(item2)
+            problem3 = @quiz.contents.createProblem(item3)
             problem1.should be_a_kind_of(ReadingProblem)
             problem2.should be_a_kind_of(KanjiProblem)
             problem3.should be_a_kind_of(MeaningProblem)
@@ -116,37 +110,37 @@ module JLDrill
         it "should be able to tell if the review set needs reviewing" do
             @quiz.options.introThresh = 5
             # There are only review set items.  So we should review.
-            @strategy.shouldReview?.should eql(true)
+            @quiz.contents.shouldReview?.should eql(true)
             
             item = test_addItem(@quiz.contents.workingSetBin, -1)
             # Now there is a working set item, and we don't have enough items
             # in the review set, so we should not review
-            @strategy.shouldReview?.should eql(false)
+            @quiz.contents.shouldReview?.should eql(false)
             # Make a total of 4 items in the review set
             0.upto(3) do
                 item = test_addItem(@quiz.contents.reviewSetBin, -1)
             end
             # We have enough items, and we haven't learned the review items
             # to the required level, so we should review
-            @strategy.shouldReview?.should eql(true)
+            @quiz.contents.shouldReview?.should eql(true)
             0.upto(9) do
                 @quiz.contents.reviewSet.stats.correct(item)
             end
             # We don't start the countdown until we have reviewed 10 items
             # so we should continue to review
-            @strategy.shouldReview?.should eql(true)
+            @quiz.contents.shouldReview?.should eql(true)
             0.upto(9) do
                 @quiz.contents.reviewSet.stats.correct(item)
             end            
             # Now we know the items well enough, and we have reviewed
             # enough items, so we shouldn't review
-            @strategy.shouldReview?.should eql(false)                        
+            @quiz.contents.shouldReview?.should eql(false)                        
         end
 
         it "should not review if all the items in the review set are seen" do
             @quiz.options.introThresh = 5
             # There are only review set items.  So we should review.
-            @strategy.shouldReview?.should eql(true)
+            @quiz.contents.shouldReview?.should eql(true)
 
             # Set all the items in the review set to seen
             @quiz.contents.reviewSet.each do |item|
@@ -156,13 +150,13 @@ module JLDrill
 
             # Even though we've seen all the items in the Review set,
             # there are only review set items, so we should still review
-            @strategy.shouldReview?.should eql(true)
+            @quiz.contents.shouldReview?.should eql(true)
 
             item = test_addItem(@quiz.contents.workingSetBin, -1)
             item.firstSchedule.seen = true
             # Now there is a working set item, and we don't have enough items
             # in the review set, so we should not review
-            @strategy.shouldReview?.should eql(false)
+            @quiz.contents.shouldReview?.should eql(false)
             # Make a total of 4 items in the review set
             0.upto(3) do
                 item = test_addItem(@quiz.contents.reviewSetBin, -1)
@@ -171,12 +165,12 @@ module JLDrill
             # We have enough items, and we haven't learned the review items
             # to the required level, so we would ordinarily review
             # However, all the review set items are seen, so we won't
-            @strategy.shouldReview?.should eql(false)
+            @quiz.contents.shouldReview?.should eql(false)
         end
         
         it "should decrease the potential when an item is incorrect" do
             item = test_addItem(@quiz.contents.reviewSetBin, -1)
-	        @quiz.currentProblem = @strategy.createProblem(item)
+	        @quiz.currentProblem = @quiz.contents.createProblem(item)
 	        item.firstSchedule.potential.should eql(432000)
 	        item.incorrect()
 	        item.firstSchedule.potential.should eql(345600)
@@ -185,7 +179,7 @@ module JLDrill
         it "should decrease the potential 20% when demoted from the review set bin" do
             @quiz.options.promoteThresh = 1
             item = test_addItem(@quiz.contents.workingSetBin, -1)
-	        @quiz.currentProblem = @strategy.createProblem(item)
+	        @quiz.currentProblem = @quiz.contents.createProblem(item)
             pot1 = Schedule.defaultPotential
             item.firstSchedule.potential.should eql(pot1)
 	        item.incorrect()
@@ -215,7 +209,7 @@ module JLDrill
         it "should reset the consecutive counter on an incorrect answer" do
             @quiz.options.promoteThresh = 1
             item = test_addItem(@quiz.contents.workingSetBin, -1)
-	        @quiz.currentProblem = @strategy.createProblem(item)
+	        @quiz.currentProblem = @quiz.contents.createProblem(item)
             item.should be_inWorkingSet
 	        item.correct()
 	        item.correct()

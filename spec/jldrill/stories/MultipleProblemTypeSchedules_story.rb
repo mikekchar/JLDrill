@@ -39,7 +39,7 @@ module JLDrill::MultipleProblemTypeSchedules
 
         it "The problem types should have names" do
             # Doesn't matter what item we're working with
-            item = Story.quiz.strategy.getItem
+            item = Story.quiz.contents.getItem
             # make sure it has kanji in it
             vocab = item.to_o
             vocab.kanji = "blah"
@@ -54,7 +54,7 @@ module JLDrill::MultipleProblemTypeSchedules
 
         it "should be able to clone each of the problems" do
             # Doesn't matter what item we're working with
-            item = Story.quiz.strategy.getItem
+            item = Story.quiz.contents.getItem
             # make sure it has kanji in it
             vocab = item.to_o
             vocab.kanji = "blah"
@@ -72,7 +72,7 @@ module JLDrill::MultipleProblemTypeSchedules
 
         it "should print the name for to_s" do
             # Doesn't matter what item we're working with
-            item = Story.quiz.strategy.getItem
+            item = Story.quiz.contents.getItem
             # make sure it has kanji in it
             vocab = item.to_o
             vocab.kanji = "blah"
