@@ -370,19 +370,19 @@ module JLDrill
         
         # Creates a problem to be quizzed
         def createProblem(item)
-            setCurrentProblem(@contents.createProblem(item))
+            setCurrentProblem(item.createProblem())
         end
 
         # Creates a problem to be displayed only
         def displayProblem(item)
-            problem = @contents.createProblem(item)
+            problem = item.createProblem()
             problem.setDisplayOnly(true)
             setCurrentProblem(problem)
         end
 
         # Creates a preview for a problem
         def previewProblem(item)
-            problem = @contents.createProblem(item)
+            problem = item.createProblem()
             problem.setDisplayOnly(true)
             problem.setPreview(true)
             setCurrentProblem(problem)

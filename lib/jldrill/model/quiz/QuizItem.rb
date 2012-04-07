@@ -126,6 +126,12 @@ module JLDrill
             return problemStatus.firstProblem
         end
 
+        def createProblem
+            @quiz.contents.newProblemFor(self)
+            itemStats.createProblem
+            return problem
+        end
+
         def correct
             itemStats.correct
             firstSchedule.correct unless firstSchedule.nil?

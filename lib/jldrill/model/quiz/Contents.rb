@@ -461,14 +461,6 @@ module JLDrill
             end
         end
 
-        # Create a problem for the given item at the correct level
-        def createProblem(item)
-            newProblemFor(item)
-
-            item.itemStats.createProblem
-            return item.problem
-        end
-
         # Returns a string showing the status kinds of items we are selecting
         def selectionStatus
             if shouldReview?

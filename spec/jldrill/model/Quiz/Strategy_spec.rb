@@ -79,9 +79,9 @@ module JLDrill
             item3.correct()
             item3.firstSchedule.problemType.should eql("MeaningProblem")
             
-            problem1 = @quiz.contents.createProblem(item1)
-            problem2 = @quiz.contents.createProblem(item2)
-            problem3 = @quiz.contents.createProblem(item3)
+            problem1 = item1.createProblem
+            problem2 = item2.createProblem
+            problem3 = item3.createProblem
             problem1.should be_a_kind_of(ReadingProblem)
             problem2.should be_a_kind_of(KanjiProblem)
             problem3.should be_a_kind_of(MeaningProblem)
@@ -170,7 +170,7 @@ module JLDrill
         
         it "should decrease the potential when an item is incorrect" do
             item = test_addItem(@quiz.contents.reviewSetBin, -1)
-	        @quiz.currentProblem = @quiz.contents.createProblem(item)
+	        @quiz.currentProblem = item.createProblem()
 	        item.firstSchedule.potential.should eql(432000)
 	        item.incorrect()
 	        item.firstSchedule.potential.should eql(345600)
@@ -179,7 +179,7 @@ module JLDrill
         it "should decrease the potential 20% when demoted from the review set bin" do
             @quiz.options.promoteThresh = 1
             item = test_addItem(@quiz.contents.workingSetBin, -1)
-	        @quiz.currentProblem = @quiz.contents.createProblem(item)
+	        @quiz.currentProblem = item.createProblem()
             pot1 = Schedule.defaultPotential
             item.firstSchedule.potential.should eql(pot1)
 	        item.incorrect()
@@ -209,7 +209,7 @@ module JLDrill
         it "should reset the consecutive counter on an incorrect answer" do
             @quiz.options.promoteThresh = 1
             item = test_addItem(@quiz.contents.workingSetBin, -1)
-	        @quiz.currentProblem = @quiz.contents.createProblem(item)
+	        @quiz.currentProblem = item.createProblem()
             item.should be_inWorkingSet
 	        item.correct()
 	        item.correct()
