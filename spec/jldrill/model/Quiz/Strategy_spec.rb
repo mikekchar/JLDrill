@@ -35,26 +35,26 @@ module JLDrill
 	        # Demoting new set items is non-sensical, but it should do
 	        # something sensible anyway.
 	        item = test_addItem(@quiz.contents.newSetBin, 1)
-	        @strategy.demote(item)
+	        item.demote()
 	        item.should be_inNewSet
 	        item.firstSchedule.should be_nil
 	    end
 
 	    it "should demote other items to the working set" do
 	        item = test_addItem(@quiz.contents.workingSetBin, 1)
-	        @strategy.demote(item)
+	        item.demote()
 	        item.should be_inWorkingSet
 
 	        item = test_addItem(@quiz.contents.workingSetBin, 2)
-	        @strategy.demote(item)
+	        item.demote()
 	        item.should be_inWorkingSet
 
 	        item = test_addItem(@quiz.contents.workingSetBin, 3)
-	        @strategy.demote(item)
+	        item.demote()
 	        item.should be_inWorkingSet
 
 	        item = test_addItem(@quiz.contents.reviewSetBin, 4)
-	        @strategy.demote(item)
+	        item.demote()
 	        item.should be_inWorkingSet
 	    end
 	    
@@ -73,7 +73,7 @@ module JLDrill
             problemStatus = item2.status.select("ProblemStatus")
             problemStatus.checkSchedules
             problemStatus.findScheduleForLevel(1).should_not eql(nil)
-            @quiz.strategy.correct(item2)
+            item2.correct()
             item2.firstSchedule.problemType.should eql("KanjiProblem")
 	        
 	        item3 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
@@ -81,8 +81,8 @@ module JLDrill
             problemStatus = item3.status.select("ProblemStatus")
             problemStatus.checkSchedules
             problemStatus.findScheduleForLevel(2).should_not eql(nil)
-            @quiz.strategy.correct(item3)
-            @quiz.strategy.correct(item3)
+            item3.correct()
+            item3.correct()
             item3.firstSchedule.problemType.should eql("MeaningProblem")
             
             problem1 = @strategy.createProblem(item1)
@@ -178,7 +178,7 @@ module JLDrill
             item = test_addItem(@quiz.contents.reviewSetBin, -1)
 	        @quiz.currentProblem = @strategy.createProblem(item)
 	        item.firstSchedule.potential.should eql(432000)
-	        @strategy.incorrect(item)
+	        item.incorrect()
 	        item.firstSchedule.potential.should eql(345600)
         end
         
@@ -188,25 +188,25 @@ module JLDrill
 	        @quiz.currentProblem = @strategy.createProblem(item)
             pot1 = Schedule.defaultPotential
             item.firstSchedule.potential.should eql(pot1)
-	        @strategy.incorrect(item)
+	        item.incorrect()
             pot2 = pot1 - (0.2 * pot1).to_int
             item.firstSchedule.potential.should eql(pot2)
-	        @strategy.incorrect(item)
+	        item.incorrect()
             pot3 = pot2 - (0.2 * pot2).to_int
             item.firstSchedule.potential.should eql(pot3)
-	        @strategy.incorrect(item)
+	        item.incorrect()
             pot4 = pot3 - (0.2 * pot3).to_int
             item.firstSchedule.potential.should eql(pot4)
             item.should be_inWorkingSet
-	        @strategy.correct(item)
-	        @strategy.correct(item)
-	        @strategy.correct(item)
+	        item.correct()
+	        item.correct()
+	        item.correct()
             item.should be_inReviewSet
             pot5 = item.firstSchedule.duration
             # The potential is set to the duration of the schedule
             # when the item is promoted.
 	        item.firstSchedule.potential.should eql(pot5)
-	        @strategy.incorrect(item)
+	        item.incorrect()
             item.should be_inWorkingSet
             pot6 = pot5 - (0.2 * pot5).to_int
             item.firstSchedule.potential.should eql(pot6)
@@ -217,18 +217,18 @@ module JLDrill
             item = test_addItem(@quiz.contents.workingSetBin, -1)
 	        @quiz.currentProblem = @strategy.createProblem(item)
             item.should be_inWorkingSet
-	        @strategy.correct(item)
-	        @strategy.correct(item)
-	        @strategy.correct(item)
+	        item.correct()
+	        item.correct()
+	        item.correct()
             item.should be_inReviewSet
             # we only increase consecutive in the review set
             item.itemStats.consecutive.should eql(1)
-	        @strategy.correct(item)
-	        @strategy.correct(item)
-	        @strategy.correct(item)
+	        item.correct()
+	        item.correct()
+	        item.correct()
             item.itemStats.consecutive.should eql(4)
 
-            @strategy.incorrect(item)
+            item.incorrect()
             item.should be_inWorkingSet
             item.itemStats.consecutive.should eql(0)
         end

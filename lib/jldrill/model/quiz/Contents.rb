@@ -372,30 +372,6 @@ module JLDrill
             retVal
         end
         
-        # Returns the number of unseen items in the range of bins
-        def numUnseen(range)
-            total = 0
-            range.each do |i|
-                total += @bins[i].numUnseen
-            end
-            total
-        end
-        
-        # returns true if there are bins in the specified range
-        def includesRange?(range)
-            !(range.begin < 0 || range.end > 5)
-        end
-        
-        # Returns false if any of the bins in the range have
-        # items in them
-        def rangeEmpty?(range)
-            a = range.to_a
-            hasItems = a.any? do |bin|
-                !@bins[bin].empty?
-            end
-            !hasItems
-        end
-
         # Return the number of items in the bin that are of level, level
         def numLevel(bin, level)
             retVal = 0
@@ -418,6 +394,15 @@ module JLDrill
             end
         end
 
+        # Sort the items according to their schedule
+        def reschedule
+            reviewSet.removeInvalidKanjiProblems
+            reviewSet.forgetItems
+            forgottenSet.rememberItems
+            reviewSet.reschedule
+            forgottenSet.reschedule
+        end
+        
         # Notify each bin that a new problem has been created
         def newProblemFor(item)
             @bins.each do |bin|

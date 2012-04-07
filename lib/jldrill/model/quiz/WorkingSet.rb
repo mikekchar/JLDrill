@@ -19,11 +19,28 @@ module JLDrill
             selectRandomUnseenItem
         end
 
+        def correct(item)
+            @stats.correct(item)
+            if item.level >= 3
+                item.promote()
+            end
+        end
+
+        def incorrect(item)
+            super(item)
+        end
+
+        def learn(item)
+            item.setScores(options.promoteThresh)
+            item.promote()
+        end
+
         # Do what is necessary to an item for promotion from this bin
-        def promoteItem(item)
+        def promote(item)
             super(item)
             item.itemStats.consecutive = 1
             item.scheduleAll
+            @quiz.contents.moveToReviewSet(item)
         end
     end
 end

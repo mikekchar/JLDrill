@@ -127,6 +127,32 @@ module JLDrill
             return problemStatus.firstProblem
         end
 
+        def correct
+            itemStats.correct
+            firstSchedule.correct unless firstSchedule.nil?
+            @quiz.contents.bins[@bin].correct(self)
+        end
+
+        def incorrect
+            allIncorrect
+            itemStats.incorrect
+            @quiz.contents.bins[@bin].incorrect(self)
+        end
+
+        def learn
+            correct
+            @quiz.contents.bins[@bin].learn(self)
+        end
+
+        def promote
+            @quiz.contents.bins[@bin].promote(self)
+        end
+
+        def demote
+            demoteAll
+            @quiz.contents.bins[@bin].demote(self)
+        end
+
         # returns true if the review rate of an item is below
         # the forgetting threshold in the options
         def reviewRateUnderThreshold

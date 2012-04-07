@@ -90,13 +90,13 @@ module JLDrill::Version_0_6_1
 
                 # At 0.0, no items are forgotten
                 Story.quiz.options.forgettingThresh = 0.0
-                Story.quiz.strategy.reschedule
+                Story.quiz.reschedule
                 Story.reviewSet.length.should eql(10)
                 Story.forgottenSet.length.should eql(0)
 
                 10.downto(1) do |i|
                     Story.quiz.options.forgettingThresh = i.to_f
-                    Story.quiz.strategy.reschedule
+                    Story.quiz.reschedule
                     Story.reviewSet.length.should eql(i)
                     Story.forgottenSet.length.should eql(10 - i)
                 end
@@ -104,14 +104,14 @@ module JLDrill::Version_0_6_1
                 # Now let's try to remember them again 
                 2.upto(10) do |i|
                     Story.quiz.options.forgettingThresh = i.to_f
-                    Story.quiz.strategy.reschedule
+                    Story.quiz.reschedule
                     Story.reviewSet.length.should eql(i)
                     Story.forgottenSet.length.should eql(10 - i)
                 end
 
                 # At 0.0, no items are forgotten
                 Story.quiz.options.forgettingThresh = 0.0
-                Story.quiz.strategy.reschedule
+                Story.quiz.reschedule
                 Story.reviewSet.length.should eql(10)
                 Story.forgottenSet.length.should eql(0)
             end

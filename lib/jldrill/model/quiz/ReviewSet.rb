@@ -60,12 +60,16 @@ module JLDrill
             end
             return retVal
         end
-        
-        # If an item gets promoted for some reason, it should stay in the review set
-        def promotionBin
-            return @number
+
+        # If the user decreases the forgetting threshold,
+        # some items need to be moved from the review set to the
+        # forgotten set
+        def forgetItems
+            forgottenItems().each do |item|
+                @quiz.contents.moveToForgottenSet(item)
+            end
         end
-        
+
         # Some legacy files had kanji problems scheduled, but no
         # kanji data.  This removes those schedules
         def removeInvalidKanjiProblems
@@ -74,10 +78,22 @@ module JLDrill
             end
         end
 
-        def promoteItem(item)
-            # You can't promote from the review set.  Do nothing
+        def correct(item)
+            super(item)
+            # Move the item to the back of the set
+            @quiz.contents.moveToReviewSet(item)
         end
 
+        def incorrect(item)
+            super(item)
+        end
 
+        def learn(item)
+            # You can't learn from the review set. Do nothing
+        end
+
+        def promote(item)
+            # You can't promote from the review set.  Do nothing
+        end
     end
 end

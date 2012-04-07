@@ -2,6 +2,7 @@
 require 'jldrill/spec/StoryMemento'
 require 'jldrill/spec/SampleQuiz'
 require 'jldrill/model/quiz/Strategy'
+require 'jldrill/views/test/MainWindowView'
 require 'jldrill/views/test/CommandView'
 require 'jldrill/views/test/ProblemView'
 require 'jldrill/views/test/QuizStatusView'
@@ -48,7 +49,7 @@ module JLDrill::ItemsHaveTimeLimits
 
         def promoteIntoWorkingSet(item)
             item.should be_inNewSet
-            drillCorrectly(item)
+            item.promote()
             item.should be_inWorkingSet
         end
 

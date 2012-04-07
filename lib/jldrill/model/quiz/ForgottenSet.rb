@@ -45,18 +45,32 @@ module JLDrill
             return retVal
         end
         
-        # If an item gets promoted for some reason, it should go the review set
-        def promotionBin
-            return @number - 1
-        end
-        
-        # Demoted items should go to the working bin
-        def demotionBin
-            return @number - 2
+        # If the user increases the forgetting threshold,
+        # some items need to be returned from the forgotten set
+        # to the review set
+        def rememberItems
+            rememberedItems().each do |item|
+                @quiz.contents.moveToReviewSet(item)
+            end
         end
 
-        def promoteItem
-            # You can't promote from the forgotten set.  Do nothing.
+        def correct(item)
+            super(item)
+            item.itemStats.consecutive += 1
+            # Move the item to the back of the set
+            @quiz.contents.moveToReviewSet(item)
+        end
+
+        def incorrect(item)
+            super(item)
+        end
+
+        def learn(item)
+            # You can't learn from the review set. Do nothing
+        end
+
+        def promote(item)
+            # You can't promote from the review set.  Do nothing
         end
     end
 end

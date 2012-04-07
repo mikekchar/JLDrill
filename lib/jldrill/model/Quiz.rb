@@ -285,9 +285,8 @@ module JLDrill
             end
         end
 
-        # Sort the items in the ReviewSet according to their schedule
         def reschedule
-            @strategy.reschedule
+            @contents.reschedule
         end
 
         # Returns true if the vocabulary already exists in the Quiz
@@ -337,7 +336,7 @@ module JLDrill
             if !@currentProblem.nil?
                 item = @currentProblem.item
                 if !item.nil?
-                    @strategy.incorrect(item)
+                    item.incorrect
                     setNeedsSave(true)
                 end
             end
@@ -347,7 +346,7 @@ module JLDrill
             if !@currentProblem.nil?
                 item = @currentProblem.item
                 if !item.nil?
-                    @strategy.correct(item)
+                    item.correct
                     setNeedsSave(true)
                 end
             end
@@ -360,7 +359,7 @@ module JLDrill
             if !@currentProblem.nil?
                 item = @currentProblem.item
                 if !item.nil?
-                    @strategy.learn(item)
+                    item.learn
                     setNeedsSave(true)
                 end
             end

@@ -33,34 +33,6 @@ module JLDrill
             @quiz.options
         end
 
-        # If the user increases the forgetting threshold,
-        # some items need to be returned from the forgotten set
-        # to the review set
-        def rememberItems
-            items = contents.forgottenSet.rememberedItems()
-            items.each do |item|
-                contents.moveToReviewSet(item)
-            end
-        end
-
-        # If the user decreases the forgetting threshold,
-        # some items need to be moved from the review set to the
-        # forgotten set
-        def forgetItems
-            items = contents.reviewSet.forgottenItems()
-            items.each do |item|
-                contents.moveToForgottenSet(item)
-            end
-        end
-
-        # Sort the items according to their schedule
-        def reschedule
-            contents.reviewSet.removeInvalidKanjiProblems
-            forgetItems
-            rememberItems
-            contents.reviewSet.reschedule
-        end
-        
         # Returns true if at least one working set full of
         # items have been promoted to the review set, and
         # the review set is not known to the required
@@ -83,7 +55,7 @@ module JLDrill
         def getNewItem
             item = contents.newSet.selectItem()
             if !item.nil?
-                promote(item)
+                item.promote
             end
             return item
         end
@@ -117,60 +89,5 @@ module JLDrill
             return item.problem
         end
 
-        # Promote the item to the next level/bin
-        def promote(item)
-            if !item.nil?
-                if item.inNewSet?
-                    contents.moveToWorkingSet(item)
-                    contents.newSet.promoteItem(item)
-                else 
-                    if item.inWorkingSet?
-                        contents.workingSet.promoteItem(item)
-                    end
-                    # Put the item at the back of the reviewSet
-                    contents.moveToReviewSet(item)
-                end
-            end
-        end
-
-        # Demote the item
-        def demote(item)
-            if !item.nil?
-                item.demoteAll
-                if !item.inNewSet?
-                    contents.moveToWorkingSet(item)
-                else
-                	# Demoting New Set items is non-sensical
-	                # Do Nothing
-                end
-            end
-        end
-
-        # Mark the item as having been reviewed correctly
-        def correct(item)
-            contents.bins[item.bin].stats.correct(item)
-            item.itemStats.correct
-            item.firstSchedule.correct unless item.firstSchedule.nil?
-            if !item.inWorkingSet? || (item.level >= 3)
-                promote(item)
-            end
-        end
-
-        # Mark the item as having been reviewed incorrectly
-        def incorrect(item)
-            contents.bins[item.bin].stats.incorrect(item)
-            item.allIncorrect
-            item.itemStats.incorrect
-            demote(item)
-        end
-
-        # Mark the item correct, and if it is in the working set, promote
-        # it to the review set
-        def learn(item)
-            correct(item)
-            if item.inNewSet? || item.inWorkingSet?
-                promote(item)
-            end
-        end
     end
 end

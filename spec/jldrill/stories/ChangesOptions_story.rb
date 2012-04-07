@@ -171,7 +171,7 @@ module JLDrill::UserChangesOptions
             item = Story.quiz.contents.workingSet[0]
             item.should_not be_nil
             item.level = 3
-            Story.quiz.strategy.promote(item) 
+            item.promote()
 
             # Sort the schedules by duration so that I can keep track
             # of which one is which.

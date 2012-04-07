@@ -182,7 +182,7 @@ module JLDrill::Version_0_6_1
 
                 # We'll review it as being correct.  This will create a new
                 # schedule and set the potential.
-                Story.quiz.strategy.correct(item)
+                item.correct()
                 scheduleShouldBeAroundXSeconds(s1, interval, 10)
                 s1.potential.should eql(s1.duration)
                 targetPotential = s1.potential
@@ -194,7 +194,7 @@ module JLDrill::Version_0_6_1
                 item.firstSchedule.should be(s1)
 
                 # Make the item incorrect.  It will be moved to the working set
-                Story.quiz.strategy.incorrect(item)
+                item.incorrect()
                 item.should be_inWorkingSet
                 # We took note of the potential for the s1, so after getting it
                 # wrong, the potential is decreased by 20% of its value.

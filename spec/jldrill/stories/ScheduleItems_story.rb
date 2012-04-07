@@ -57,7 +57,7 @@ module JLDrill::ScheduleItems
 
         def promoteIntoWorkingSet(item)
             item.should be_inNewSet
-            quiz.strategy.promote(item)
+            item.promote()
             item.should be_inWorkingSet
         end
 
@@ -217,15 +217,15 @@ module JLDrill::ScheduleItems
             schedule.lastReviewed = setDaysAgoReviewed(schedule, 10.0)
             schedule.elapsedTime.should eql(inSeconds(10.0))
 
-            quiz.strategy.correct(item)
+            item.correct()
             second = item.firstSchedule.potential
 
             schedule.lastReviewed = setDaysAgoReviewed(schedule, 10.0)
-            quiz.strategy.correct(item)
+            item.correct()
             third = item.firstSchedule.potential
 
             # Make the item incorrect.  It will be moved to the working set
-            quiz.strategy.incorrect(item)
+            item.incorrect()
 
             item.schedules.size.should eql(3)
             item.schedules.each do |s|
@@ -288,8 +288,6 @@ module JLDrill::ScheduleItems
             setDaysAgoReviewed(item2.firstSchedule, 1.0/24.0)
 
             # If we reschedule
-            quiz.strategy.quiz.should be(quiz)
-            quiz.options.should be quiz.strategy.options
             quiz.options.promoteThresh.should eql(quiz.strategy.options.promoteThresh)
             quiz.reschedule
 

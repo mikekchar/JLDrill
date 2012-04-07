@@ -77,19 +77,26 @@ module JLDrill
             return @contents[0]
         end
 
+        def correct(item)
+            @stats.correct(item)
+        end
+
+        def incorrect(item)
+            @stats.incorrect(item)
+            item.demote()
+        end
+
+        def learn(item)
+            # Do nothing by default
+        end
+
         # Do what is necessary to an item for promotion from this bin
-        def promoteItem(item)
+        def promote(item)
             @stats.promote(item)
         end
 
-        # Return the number of the bin that items from this bin should be promoted to
-        def promotionBin
-            return @number + 1
-        end
-
-        # Return the number of the bin that items from this bin should be demoted to
-        def demotionBin
-            return @number - 1
+        def demote(item)
+            @quiz.contents.moveToWorkingSet(item)
         end
 
         # Things that should be done when a new problem has been created
