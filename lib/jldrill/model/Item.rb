@@ -1,5 +1,4 @@
 # encoding: utf-8
-require 'jldrill/model/ItemStatus'
 
 module JLDrill
 
@@ -8,7 +7,6 @@ module JLDrill
     #
     #    o The class of the underlying object
     #    o A string containing the object
-    #    o The ItemStatus of the object
     #
     # The string representation of the object can be obtain through to_s().
     # The object representation of the object can be obtained through to_o().
@@ -25,7 +23,7 @@ module JLDrill
 
         POSITION_RE = /^Position: (.*)/
 
-        attr_reader :itemType, :contents, :position, :bin, :status,
+        attr_reader :itemType, :contents, :position, :bin, 
                     :hash, :quiz
         attr_writer :position, :bin, :quiz
 
@@ -42,7 +40,6 @@ module JLDrill
             end
             @position = -1
             @bin = 0
-            @status = ItemStatus.new(self)
             @cache = nil
         end
 
@@ -66,12 +63,9 @@ module JLDrill
             return parsed
         end
 
-        # Parse a whole line which includes status information
         def parseLine(line)
             line.split("/").each do |part|
-                if !parsePart(part)
-                    @status.parse(part)
-                end
+                parsePart(part)
             end
         end
 
@@ -96,7 +90,6 @@ module JLDrill
             setContents(item.contents)
             @position = item.position
             @bin = item.bin
-            @status.assign(item.status)
             @hash = item.hash
             @cache = nil
         end
@@ -106,24 +99,19 @@ module JLDrill
             @itemType = aType
         end
 
-        # set the ItemStatus
-        def setStatus(status)
-            parseLine(status.to_s)
-        end
-
         # set the contents of the item
         def setContents(contents)
             @contents = contents
             @hash = to_o.hash
         end
 
+        def content_to_s
+            return to_o.to_s + "/Position: #{@position}"
+        end
+
         # Return the save format of the item
         def to_s
-            retVal = to_o.to_s
-            retVal += "/Position: #{@position}"
-            retVal += @status.to_s 
-            retVal += "/\n"
-            return retVal
+            return content_to_s + "/\n"
         end
 
         # Create the object in the item and return it
@@ -139,7 +127,6 @@ module JLDrill
         end
 
         # Returns true if the items contain the same object.
-        # Note: Does *not* compare the status
         def eql?(item)
             if item.hash == @hash
                 self.to_o.eql?(item.to_o)

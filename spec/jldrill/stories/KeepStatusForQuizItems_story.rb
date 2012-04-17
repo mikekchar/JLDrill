@@ -1,13 +1,12 @@
 # encoding: utf-8
 require 'jldrill/model/Bin'
 require 'jldrill/model/Item'
-require 'jldrill/model/ItemStatus'
 require 'jldrill/model/Quiz'
 require 'jldrill/model/quiz/Schedule'
 
 module JLDrill
 
-	describe ItemStatus do
+	describe "Scheduling Plans" do
 	
 		before(:each) do
         	@fileString = %Q[/Kanji: 会う/Reading: あう/Definitions: to meet,to interview/Markers: v5u,P/Position: 1/Consecutive: 0/MeaningProblem/Score: 0/Potential: 432000/

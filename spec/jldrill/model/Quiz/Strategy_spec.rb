@@ -57,14 +57,14 @@ module JLDrill
 
 	        item1 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
 	        item1.bin = @quiz.contents.workingSetBin
-            problemStatus = item1.status.select("ProblemStatus")
+            problemStatus = item1.problemStatus
             problemStatus.checkSchedules
             problemStatus.findScheduleForLevel(0).should_not eql(nil)
             item1.firstSchedule.problemType.should eql("ReadingProblem")
 
 	        item2 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
 	        item2.bin = @quiz.contents.workingSetBin
-            problemStatus = item2.status.select("ProblemStatus")
+            problemStatus = item2.problemStatus
             problemStatus.checkSchedules
             problemStatus.findScheduleForLevel(1).should_not eql(nil)
             item2.correct()
@@ -72,7 +72,7 @@ module JLDrill
 	        
 	        item3 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
 	        item3.bin = @quiz.contents.workingSetBin
-            problemStatus = item3.status.select("ProblemStatus")
+            problemStatus = item3.problemStatus
             problemStatus.checkSchedules
             problemStatus.findScheduleForLevel(2).should_not eql(nil)
             item3.correct()

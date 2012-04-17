@@ -237,7 +237,7 @@ module JLDrill::ScheduleItems
             createAndPromote(item)
             schedule = item.firstSchedule
             scheduleShouldBe(schedule, 5.0, 10)
-            problemStatus = item.status.select("ProblemStatus")
+            problemStatus = item.problemStatus
             # By default a meaning and kanji problem schedule 
             # are created if the item has kanji (which is should)
             # Note: A reading problem schedule is *not* present by default!

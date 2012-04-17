@@ -5,11 +5,15 @@ require 'jldrill/model/quiz/ItemStats'
 
 module JLDrill
     class QuizItem < Item
+
+        attr_reader :problemStatus, :itemStats
+        attr_writer :problemStatus, :itemStats
+
         def initialize(quiz, item)
             super(item)
             @quiz = quiz
-            @status.add(ProblemStatus.new(@quiz, self))
-            @status.add(ItemStats.new(@quiz, self))
+            @problemStatus = ProblemStatus.new(@quiz, self)
+            @itemStats = ItemStats.new(@quiz, self)
         end
 
         # Create a Quiz item from the save string.  To get around
@@ -22,22 +26,33 @@ module JLDrill
             return item
         end
 
+        def assign(item)
+            super(item)
+            item.problemStatus = item.problemStatus.clone
+            item.problemStatus.item = self
+            item.itemStats = item.itemStats.clone
+            item.itemStats.item = self
+        end
+
         def clone
             item = QuizItem.create(@quiz, @contents, @bin)
             item.assign(self)
             return item
         end
 
-        def options
-            return @quiz.options
+        def parsePart(part)
+            parsed = super(part)
+            if !parsed
+                parsed = @problemStatus.parse(part)
+                if !parsed
+                    parsed = @itemStats.parse(part)
+                end
+            end
+            return parsed
         end
 
-        def problemStatus
-            return @status.select("ProblemStatus")
-        end
-        
-        def itemStats
-            return @status.select("ItemStats")
+        def options
+            return @quiz.options
         end
 
         def inNewSet?
@@ -193,6 +208,10 @@ module JLDrill
                 retVal += " --> #{problemStatus.firstSchedule.potentialScheduleInDays} days"
             end
             return retVal
+        end
+
+        def content_to_s
+            return super() + @itemStats.to_s + @problemStatus.to_s 
         end
     end
 end
