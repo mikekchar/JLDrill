@@ -135,7 +135,7 @@ module JLDrill
             end
         end
 
-        def infoStatus
+        def status
             return "     "
         end
 

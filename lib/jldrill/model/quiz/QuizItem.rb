@@ -191,7 +191,7 @@ module JLDrill
             problemStatus.currentLevel = level
         end
 
-        def infoStatus
+        def status
             retVal = super()
             if inNewSet?
                 retVal += "New"

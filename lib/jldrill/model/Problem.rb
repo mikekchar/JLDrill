@@ -77,7 +77,7 @@ module JLDrill
 
         # Returns the status of the item that this problem is showing
         def status
-            return @item.infoStatus
+            return @item.status
         end
 
         def evaluateAttribute(name)
