@@ -170,12 +170,12 @@ module JLDrill::UserChangesOptions
         it "should add and remove problem schedule types when options change" do
             item = Story.quiz.contents.workingSet[0]
             item.should_not be_nil
-            item.level = 3
-            item.promote()
+            item.state.level = 3
+            item.state.promote()
 
             # Sort the schedules by duration so that I can keep track
             # of which one is which.
-            schedules = item.schedules.sort do |x, y|
+            schedules = item.state.schedules.sort do |x, y|
                 x.duration <=> y.duration
             end
             schedules.size.should eql(2)
@@ -206,7 +206,7 @@ module JLDrill::UserChangesOptions
            # the one with the shortest duration.  Hence, there will
            # be two items with the lowest duration and one with the
            # higher duration.
-            schedules = item.schedules.sort do |x, y|
+            schedules = item.state.schedules.sort do |x, y|
                 x.duration <=> y.duration
             end
            schedules.size.should eql(3)
@@ -219,7 +219,7 @@ module JLDrill::UserChangesOptions
            Story.quiz.options.reviewKanji.should be_true
            Story.quiz.options.reviewMeaning.should be_true
 
-            schedules = item.schedules.sort do |x, y|
+            schedules = item.state.schedules.sort do |x, y|
                 x.duration <=> y.duration
             end
             schedules.size.should eql(2)

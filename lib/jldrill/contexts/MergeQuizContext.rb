@@ -34,8 +34,8 @@ module JLDrill
                 while (pos < limit)
                     item = appendedItems[pos]
                     if !sortedItems.binarySearch(item)
-                        item.position = -1
-                        @quiz1.contents.addItem(item, item.bin)
+                        item.state.reposition(-1)
+                        @quiz1.contents.addItem(item, item.state.bin)
                     end
                     pos += 1
                     @mainView.update(pos.to_f / size.to_f)

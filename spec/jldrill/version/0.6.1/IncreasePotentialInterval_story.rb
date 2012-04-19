@@ -78,11 +78,11 @@ module JLDrill::Version_0_6_1
             # Drills the item incorrectly x times and returns the expected
             # potential schedule
             def drillIncorrectlyXTimes(item, x)
-                potential = item.firstSchedule.potential
+                potential = item.state.currentSchedule.potential
                 0.upto(x) do
                     Story.drillIncorrectly(item)
                     potential = potential - (0.2 * potential.to_f).to_int
-                    item.schedules.each do |schedule|
+                    item.state.schedules.each do |schedule|
                         schedule.score.should eql(0)
                         schedule.potential.should eql(potential)
                     end
@@ -93,8 +93,8 @@ module JLDrill::Version_0_6_1
             it "should decrease the the potential of all schedules in the working set when incorrect" do
                 item = Story.newSet[0]
                 Story.promoteIntoWorkingSet(item)
-                item.should be_inWorkingSet
-                potential = item.firstSchedule.potential
+                item.state.should be_inWorkingSet
+                potential = item.state.currentSchedule.potential
                 potential.should eql(Story.daysInSeconds(5))
 
                 # Drill incorrectly 5 times and check that the
@@ -108,7 +108,7 @@ module JLDrill::Version_0_6_1
                 potential = drillIncorrectlyXTimes(item, 5)
 
                 Story.drillCorrectly(item)
-                item.schedules.each do |schedule|
+                item.state.schedules.each do |schedule|
                     schedule.potential.should eql(potential)
                 end
             end
@@ -118,11 +118,11 @@ module JLDrill::Version_0_6_1
                 Story.promoteIntoWorkingSet(item)
                 potential = drillIncorrectlyXTimes(item, 5)
                 Story.promoteIntoReviewSet(item)
-                item.should be_inReviewSet
+                item.state.should be_inReviewSet
 
                 # The default schedules in the review set are Kanji and Meaning only
-                item.schedules.size.should eql(2)
-                item.schedules.each do |schedule|
+                item.state.schedules.size.should eql(2)
+                item.state.schedules.each do |schedule|
                     # Schedule duration should be +- 10% of the potential
                     scheduleShouldBeAroundXSeconds(schedule, potential, 10)
                     schedule.potential.should eql(schedule.duration)
@@ -159,15 +159,15 @@ module JLDrill::Version_0_6_1
 
                 # There should be a kanji and meaning problem schedule.
                 # The duration should be 5 days +- 10%
-                item.schedules.size.should eql(2)
-                item.schedules.each do |schedule|
+                item.state.schedules.size.should eql(2)
+                item.state.schedules.each do |schedule|
                     schedule.potential.should eql(schedule.duration)
                     scheduleShouldBeAroundXSeconds(schedule, Story.daysInSeconds(5.0), 10)
                 end
 
                 # Keep track of the two schedules for later
-                s1 = item.schedules[0]
-                s2 = item.schedules[1]
+                s1 = item.state.schedules[0]
+                s2 = item.state.schedules[1]
 
                 # We will make it so that s1 has waited longer than s2
                 Story.setDaysAgoReviewed(s1, 10.0)
@@ -175,32 +175,32 @@ module JLDrill::Version_0_6_1
 
                 # Since it has waited a longer percentage of it's schedule,
                 # s1 will be the one chosen.
-                item.firstSchedule.should be(s1)
+                item.state.currentSchedule.should be(s1)
                 # Keep track of what the new inerval is supposed to be
                 interval = s1.calculateInterval
 
                 # We'll review it as being correct.  This will create a new
                 # schedule and set the potential.
-                item.correct()
+                item.state.correct()
                 scheduleShouldBeAroundXSeconds(s1, interval, 10)
                 s1.potential.should eql(s1.duration)
                 targetPotential = s1.potential
 
                 # s1 was just reviewed, so the next one to be reviewed will be s2
-                item.firstSchedule.should be(s2)
+                item.state.currentSchedule.should be(s2)
                 # We'll make s1 wait again so that it comes back to the top.
                 Story.setDaysAgoReviewed(s1, 20.0)
-                item.firstSchedule.should be(s1)
+                item.state.currentSchedule.should be(s1)
 
                 # Make the item incorrect.  It will be moved to the working set
-                item.incorrect()
-                item.should be_inWorkingSet
+                item.state.incorrect()
+                item.state.should be_inWorkingSet
                 # We took note of the potential for the s1, so after getting it
                 # wrong, the potential is decreased by 20% of its value.
                 targetPotential = targetPotential - (targetPotential.to_f * 0.2).to_i
 
-                item.schedules.size.should eql(3)
-                item.schedules.each do |s|
+                item.state.schedules.size.should eql(3)
+                item.state.schedules.each do |s|
                     s.potential.should eql(targetPotential)
                 end
             end
@@ -214,15 +214,15 @@ module JLDrill::Version_0_6_1
 
                 # There should be a kanji and meaning problem schedule.
                 # The duration should be 5 days +- 10%
-                item.schedules.size.should eql(2)
-                item.schedules.each do |schedule|
+                item.state.schedules.size.should eql(2)
+                item.state.schedules.each do |schedule|
                     schedule.potential.should eql(schedule.duration)
                     scheduleShouldBeAroundXSeconds(schedule, Story.daysInSeconds(5.0), 10)
                 end
 
                 # Keep track of the two schedules for later
-                s1 = item.schedules[0]
-                s2 = item.schedules[1]
+                s1 = item.state.schedules[0]
+                s2 = item.state.schedules[1]
 
                 # We will make it so that s1 has waited longer than s2
                 Story.setDaysAgoReviewed(s1, 10.0)
@@ -230,19 +230,19 @@ module JLDrill::Version_0_6_1
 
                 # Since it has waited a longer percentage of it's schedule,
                 # s1 will be the one chosen.
-                item.firstSchedule.should be(s1)
+                item.state.currentSchedule.should be(s1)
 
                 # Setting the options to include reading problems should
                 # automatically add a schedule for the reading problem.
                 Story.quiz.options.reviewReading = true
-                item.schedules.size.should eql(3)
+                item.state.schedules.size.should eql(3)
 
                 # This new schedule should be the same as s1 (which has waited
                 # the longest).  If we sort by reviewLoad, the first two
                 # items should have the same potential as s1 (one of them
                 # is s1, the other is the readingProblem schedule).  The last
                 # one will be s2
-                sortedSchedules = item.schedules.sort do |x,y|
+                sortedSchedules = item.state.schedules.sort do |x,y|
                     x.reviewLoad <=> y.reviewLoad
                 end
                 sortedSchedules[0].potential.should eql(s1.potential)

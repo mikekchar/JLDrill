@@ -122,7 +122,7 @@ module JLDrill::UserAddsVocabToQuiz
             Story.addVocab
             Story.mainContext.quiz.size.should be(1)
             Story.mainContext.quiz.contents.bins[0][0].should_not be_nil
-            Story.mainContext.quiz.contents.bins[0][0].position.should be(0)
+            Story.mainContext.quiz.contents.bins[0][0].state.position.should be(0)
             Story.shutdown            
         end
         

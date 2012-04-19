@@ -20,7 +20,7 @@ module JLDrill
         # Adds a sample vocabulary to a bin in a position and returns the item
         def test_addItem(bin, position)
             item = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
-            item.position = position
+            item.state.reposition(position)
             @quiz.contents.addItem(item, bin)
             return item
         end
@@ -29,59 +29,59 @@ module JLDrill
 	        # Demoting new set items is non-sensical, but it should do
 	        # something sensible anyway.
 	        item = test_addItem(@quiz.contents.newSetBin, 1)
-	        item.demote()
-	        item.should be_inNewSet
-	        item.firstSchedule.should be_nil
+	        item.state.demote()
+	        item.state.should be_inNewSet
+	        item.state.currentSchedule.should be_nil
 	    end
 
 	    it "should demote other items to the working set" do
 	        item = test_addItem(@quiz.contents.workingSetBin, 1)
-	        item.demote()
-	        item.should be_inWorkingSet
+	        item.state.demote()
+	        item.state.should be_inWorkingSet
 
 	        item = test_addItem(@quiz.contents.workingSetBin, 2)
-	        item.demote()
-	        item.should be_inWorkingSet
+	        item.state.demote()
+	        item.state.should be_inWorkingSet
 
 	        item = test_addItem(@quiz.contents.workingSetBin, 3)
-	        item.demote()
-	        item.should be_inWorkingSet
+	        item.state.demote()
+	        item.state.should be_inWorkingSet
 
 	        item = test_addItem(@quiz.contents.reviewSetBin, 4)
-	        item.demote()
-	        item.should be_inWorkingSet
+	        item.state.demote()
+	        item.state.should be_inWorkingSet
 	    end
 	    
 	    it "should be able to create problems of the correct level" do
             @quiz.options.promoteThresh = 1
 
 	        item1 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
-	        item1.bin = @quiz.contents.workingSetBin
-            problemStatus = item1.problemStatus
+	        item1.state.moveTo(@quiz.contents.workingSetBin)
+            problemStatus = item1.state.problemStatus
             problemStatus.checkSchedules
             problemStatus.findScheduleForLevel(0).should_not eql(nil)
-            item1.firstSchedule.problemType.should eql("ReadingProblem")
+            item1.state.currentSchedule.problemType.should eql("ReadingProblem")
 
 	        item2 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
-	        item2.bin = @quiz.contents.workingSetBin
-            problemStatus = item2.problemStatus
+	        item2.state.moveTo(@quiz.contents.workingSetBin)
+            problemStatus = item2.state.problemStatus
             problemStatus.checkSchedules
             problemStatus.findScheduleForLevel(1).should_not eql(nil)
-            item2.correct()
-            item2.firstSchedule.problemType.should eql("KanjiProblem")
+            item2.state.correct()
+            item2.state.currentSchedule.problemType.should eql("KanjiProblem")
 	        
 	        item3 = QuizItem.new(@quiz, @sampleQuiz.sampleVocab)
-	        item3.bin = @quiz.contents.workingSetBin
-            problemStatus = item3.problemStatus
+	        item3.state.moveTo(@quiz.contents.workingSetBin)
+            problemStatus = item3.state.problemStatus
             problemStatus.checkSchedules
             problemStatus.findScheduleForLevel(2).should_not eql(nil)
-            item3.correct()
-            item3.correct()
-            item3.firstSchedule.problemType.should eql("MeaningProblem")
+            item3.state.correct()
+            item3.state.correct()
+            item3.state.currentSchedule.problemType.should eql("MeaningProblem")
             
-            problem1 = item1.createProblem
-            problem2 = item2.createProblem
-            problem3 = item3.createProblem
+            problem1 = item1.state.createProblem
+            problem2 = item2.state.createProblem
+            problem3 = item3.state.createProblem
             problem1.should be_a_kind_of(ReadingProblem)
             problem2.should be_a_kind_of(KanjiProblem)
             problem3.should be_a_kind_of(MeaningProblem)
@@ -144,7 +144,7 @@ module JLDrill
 
             # Set all the items in the review set to seen
             @quiz.contents.reviewSet.each do |item|
-                item.firstSchedule.seen = true
+                item.state.currentSchedule.seen = true
             end
             @quiz.contents.reviewSet.should be_allSeen
 
@@ -153,14 +153,14 @@ module JLDrill
             @quiz.contents.shouldReview?.should eql(true)
 
             item = test_addItem(@quiz.contents.workingSetBin, -1)
-            item.firstSchedule.seen = true
+            item.state.currentSchedule.seen = true
             # Now there is a working set item, and we don't have enough items
             # in the review set, so we should not review
             @quiz.contents.shouldReview?.should eql(false)
             # Make a total of 4 items in the review set
             0.upto(3) do
                 item = test_addItem(@quiz.contents.reviewSetBin, -1)
-                item.firstSchedule.seen = true
+                item.state.currentSchedule.seen = true
             end
             # We have enough items, and we haven't learned the review items
             # to the required level, so we would ordinarily review
@@ -170,61 +170,61 @@ module JLDrill
         
         it "should decrease the potential when an item is incorrect" do
             item = test_addItem(@quiz.contents.reviewSetBin, -1)
-	        @quiz.currentProblem = item.createProblem()
-	        item.firstSchedule.potential.should eql(432000)
-	        item.incorrect()
-	        item.firstSchedule.potential.should eql(345600)
+	        @quiz.currentProblem = item.state.createProblem()
+	        item.state.currentSchedule.potential.should eql(432000)
+	        item.state.incorrect()
+	        item.state.currentSchedule.potential.should eql(345600)
         end
         
         it "should decrease the potential 20% when demoted from the review set bin" do
             @quiz.options.promoteThresh = 1
             item = test_addItem(@quiz.contents.workingSetBin, -1)
-	        @quiz.currentProblem = item.createProblem()
+	        @quiz.currentProblem = item.state.createProblem()
             pot1 = Schedule.defaultPotential
-            item.firstSchedule.potential.should eql(pot1)
-	        item.incorrect()
+            item.state.currentSchedule.potential.should eql(pot1)
+	        item.state.incorrect()
             pot2 = pot1 - (0.2 * pot1).to_int
-            item.firstSchedule.potential.should eql(pot2)
-	        item.incorrect()
+            item.state.currentSchedule.potential.should eql(pot2)
+	        item.state.incorrect()
             pot3 = pot2 - (0.2 * pot2).to_int
-            item.firstSchedule.potential.should eql(pot3)
-	        item.incorrect()
+            item.state.currentSchedule.potential.should eql(pot3)
+	        item.state.incorrect()
             pot4 = pot3 - (0.2 * pot3).to_int
-            item.firstSchedule.potential.should eql(pot4)
-            item.should be_inWorkingSet
-	        item.correct()
-	        item.correct()
-	        item.correct()
-            item.should be_inReviewSet
-            pot5 = item.firstSchedule.duration
+            item.state.currentSchedule.potential.should eql(pot4)
+            item.state.should be_inWorkingSet
+	        item.state.correct()
+	        item.state.correct()
+	        item.state.correct()
+            item.state.should be_inReviewSet
+            pot5 = item.state.currentSchedule.duration
             # The potential is set to the duration of the schedule
             # when the item is promoted.
-	        item.firstSchedule.potential.should eql(pot5)
-	        item.incorrect()
-            item.should be_inWorkingSet
+	        item.state.currentSchedule.potential.should eql(pot5)
+	        item.state.incorrect()
+            item.state.should be_inWorkingSet
             pot6 = pot5 - (0.2 * pot5).to_int
-            item.firstSchedule.potential.should eql(pot6)
+            item.state.currentSchedule.potential.should eql(pot6)
         end
         
         it "should reset the consecutive counter on an incorrect answer" do
             @quiz.options.promoteThresh = 1
             item = test_addItem(@quiz.contents.workingSetBin, -1)
-	        @quiz.currentProblem = item.createProblem()
-            item.should be_inWorkingSet
-	        item.correct()
-	        item.correct()
-	        item.correct()
-            item.should be_inReviewSet
+	        @quiz.currentProblem = item.state.createProblem()
+            item.state.should be_inWorkingSet
+	        item.state.correct()
+	        item.state.correct()
+	        item.state.correct()
+            item.state.should be_inReviewSet
             # we only increase consecutive in the review set
-            item.itemStats.consecutive.should eql(1)
-	        item.correct()
-	        item.correct()
-	        item.correct()
-            item.itemStats.consecutive.should eql(4)
+            item.state.itemStats.consecutive.should eql(1)
+	        item.state.correct()
+	        item.state.correct()
+	        item.state.correct()
+            item.state.itemStats.consecutive.should eql(4)
 
-            item.incorrect()
-            item.should be_inWorkingSet
-            item.itemStats.consecutive.should eql(0)
+            item.state.incorrect()
+            item.state.should be_inWorkingSet
+            item.state.itemStats.consecutive.should eql(0)
         end
     end
 end

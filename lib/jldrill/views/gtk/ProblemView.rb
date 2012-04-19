@@ -52,7 +52,7 @@ module JLDrill::Gtk
 		    @problemDisplay.newProblem(problem)
             stopTimer
             if !problem.nil?
-                startTimer(problem.item.itemStats.timeLimit)
+                startTimer(problem.item.state.itemStats.timeLimit)
             end
 		end
 		
@@ -70,7 +70,7 @@ module JLDrill::Gtk
             @problemDisplay.updateProblem(problem)
             stopTimer
             if !problem.nil?
-                startTimer(problem.item.itemStats.timeLimit)
+                startTimer(problem.item.state.itemStats.timeLimit)
             end
         end
         

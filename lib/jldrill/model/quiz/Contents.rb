@@ -87,13 +87,13 @@ module JLDrill
         # Push an item to the back of a bin.  This should only be
         # called by local member functions
         def pushItem(item, bin)
-            item.bin = bin
             item.quiz = @quiz
-            if item.position == -1
-                item.position = length 
+            item.state.quiz = @quiz
+            if item.state.position == -1
+                item.state.reposition(length())
             end
             @bins[bin].push(item)
-            item.updateSchedules
+            item.state.updateSchedules
         end
 
         # Add an item to a bin
@@ -125,8 +125,8 @@ module JLDrill
         # also sets it's position to the end contents.
         def addUniquely(item)
             if !exists?(item.to_o)
-                item.position = -1
-                addItem(item, item.bin)
+                item.state.reposition(-1)
+                addItem(item, item.state.bin)
                 true
             else
                 false
@@ -144,9 +144,9 @@ module JLDrill
         # swap the positions between two items
         # If they are both in the new bin, actually swap them
         def swapWith(item1, item2)
-            temp = item1.position
-            item1.position = item2.position
-            item2.position = temp
+            temp = item1.state.position
+            item1.state.position = item2.state.position
+            item2.state.position = temp
            
             if !@quiz.nil?
                 if (item1.bin == 0) && (item2.bin == 0)
@@ -160,19 +160,19 @@ module JLDrill
         # If both items are in the new set, actually move item2
         # so that it is before item2.
         def insertBefore(item1, item2)
-            target = item2.position
+            target = item2.state.position
             # This is clearly slow. It can be made slightly
             # faster by only iterating over the relevant
             # items, but I don't know if it's worth the effort
             # since the majority of the cost is in creating the
             # sorted array in the first place.
             eachByPosition do |i|
-                if (i.position >= target) &&
-                        (i.position < item1.position)
-                    i.position += 1
+                if (i.state.position >= target) &&
+                        (i.state.position < item1.state.position)
+                    i.state.position += 1
                 end
             end
-            item1.position = target
+            item1.state.position = target
 
             if !@quiz.nil?
                 # If they are both in the new set actually move the item
@@ -226,8 +226,8 @@ module JLDrill
             contents.eachByPosition do |item|
                 if !tempArray.binarySearch(item)
                     newItem = item.clone
-                    newItem.position = -1
-                    self.addItem(newItem, newItem.bin)
+                    newItem.state.reposition(-1)
+                    self.addItem(newItem, newItem.state.bin)
                     lastItem = newItem
                 end
             end
@@ -278,12 +278,12 @@ module JLDrill
                 items += bin.contents
             end
             items.sort! do |x,y| 
-                x.position <=> y.position
+                x.state.position <=> y.state.position
             end
             # Renumber the positions in case they are out of whack
             i = 0
             items.each do |item|
-                item.position = i
+                item.state.reposition(i)
                 i += 1
             end
             return items
@@ -296,7 +296,7 @@ module JLDrill
                 @bins[i].contents = []
             end
             @bins[0].each do |item|
-                item.allReset
+                item.state.allReset
             end
             saveNeeded
         end
@@ -304,7 +304,7 @@ module JLDrill
         # Move the specified item to the specified bin
         def moveToBin(item, bin)
             if !item.nil?
-                @bins[item.bin].delete(item)
+                @bins[item.state.bin].delete(item)
                 pushItem(item, bin)
                 saveNeeded
             end
@@ -337,7 +337,7 @@ module JLDrill
         # Delete the specified item
         def delete(item)
             if !item.nil?
-                @bins[item.bin].delete(item)
+                @bins[item.state.bin].delete(item)
                 repositionItems
                 saveNeeded
             end
@@ -380,7 +380,7 @@ module JLDrill
         def numLevel(bin, level)
             retVal = 0
             @bins[bin].each do |item|
-                if (item.problemStatus.currentLevel == level)
+                if (item.state.level == level)
                     retVal += 1
                 end
             end
@@ -393,7 +393,7 @@ module JLDrill
         def updateSchedules
             @bins.each do |bin|
                 bin.each do |item|
-                    item.updateSchedules
+                    item.state.updateSchedules
                 end
             end
         end
@@ -428,7 +428,7 @@ module JLDrill
         def getNewItem
             item = newSet.selectItem()
             if !item.nil?
-                item.promote
+                item.state.promote
             end
             return item
         end
@@ -450,7 +450,7 @@ module JLDrill
             # Usually we get a working item if the above is not true
             item = workingSet.selectItem() if item.nil?
 
-            item.setAllSeen(true) if !item.nil?
+            item.state.setAllSeen(true) if !item.nil?
             return item
         end
 

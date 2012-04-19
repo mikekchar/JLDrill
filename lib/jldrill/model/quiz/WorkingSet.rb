@@ -21,8 +21,8 @@ module JLDrill
 
         def correct(item)
             @stats.correct(item)
-            if item.level >= 3
-                item.promote()
+            if item.state.level >= 3
+                item.state.promote()
             end
         end
 
@@ -31,15 +31,15 @@ module JLDrill
         end
 
         def learn(item)
-            item.setScores(options.promoteThresh)
-            item.promote()
+            item.state.setScores(options.promoteThresh)
+            item.state.promote()
         end
 
         # Do what is necessary to an item for promotion from this bin
         def promote(item)
             super(item)
-            item.itemStats.consecutive = 1
-            item.scheduleAll
+            item.state.itemStats.consecutive = 1
+            item.state.scheduleAll
             @quiz.contents.moveToReviewSet(item)
         end
     end

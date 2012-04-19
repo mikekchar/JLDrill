@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require "jldrill/model/ItemState"
+
 module JLDrill
 
     # Holds an item for the quiz.  For memory and performance purposes 
@@ -11,21 +13,13 @@ module JLDrill
     # The string representation of the object can be obtain through to_s().
     # The object representation of the object can be obtained through to_o().
     #
-    # Item also holds position information of the item in the drill
-    #    * position is the original ordinal position of the item in the quiz
-    #      A position of -1 means the position hasn't been assigned yet
-    #    * bin the number of the bin it is in
-    #
     # Items stored here must implement the following:
     #    o to_s() -- returns a string representation of the object
     #    o create() -- accepts a string and creates the object
     class Item
 
-        POSITION_RE = /^Position: (.*)/
-
-        attr_reader :itemType, :contents, :position, :bin, 
-                    :hash, :quiz
-        attr_writer :position, :bin, :quiz
+        attr_reader :itemType, :contents, :hash, :quiz, :state
+        attr_writer :quiz, :state
 
         def initialize(item=nil)
             @quiz = nil
@@ -38,9 +32,8 @@ module JLDrill
                 @contents = item.to_s
                 @hash = item.hash
             end
-            @position = -1
-            @bin = 0
             @cache = nil
+            @state = ItemState.new(self)
         end
 
         # Create an item using the save string
@@ -50,22 +43,9 @@ module JLDrill
             return item
         end
 
-        def parsePart(part)
-            parsed = true
-
-            case part
-            when POSITION_RE 
-                @position = $1.to_i
-            else # Not something we understand
-                parsed = false
-            end
-
-            return parsed
-        end
-
         def parseLine(line)
             line.split("/").each do |part|
-                parsePart(part)
+                @state.parsePart(part)
             end
         end
 
@@ -77,21 +57,20 @@ module JLDrill
             @hash = self.to_o.hash
         end
 
+        # Assign the contents of item to this item
+        def assign(item)
+            setType(item.itemType)
+            setContents(item.contents)
+            @hash = item.hash
+            @state = item.state.clone()
+            @cache = nil
+        end
+
         # Create a copy of this item
         def clone
             item = Item.new
             item.assign(self)
             return item
-        end
-
-        # Assign the contents of item to this item
-        def assign(item)
-            setType(item.itemType)
-            setContents(item.contents)
-            @position = item.position
-            @bin = item.bin
-            @hash = item.hash
-            @cache = nil
         end
 
         # Set the type of the item
@@ -106,7 +85,7 @@ module JLDrill
         end
 
         def content_to_s
-            return to_o.to_s + "/Position: #{@position}"
+            return to_o.to_s + @state.to_s
         end
 
         # Return the save format of the item
@@ -136,7 +115,7 @@ module JLDrill
         end
 
         def status
-            return "     "
+            return @state.status
         end
 
         # Returns true if the item contains the object.

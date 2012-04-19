@@ -109,9 +109,9 @@ module JLDrill::Version_0_6_1
 
             it "should not have schedules on new items" do
                 item = Story.newSet[0]
-                item.should be_inNewSet
-                item.schedules.size.should eql(0)
-                item.firstSchedule.should be_nil
+                item.state.should be_inNewSet
+                item.state.schedules.size.should eql(0)
+                item.state.currentSchedule.should be_nil
             end
 
             it "should be able to create a MeaningProblem for new set items" do
@@ -121,26 +121,26 @@ module JLDrill::Version_0_6_1
                 Story.quiz.createProblem(item)
                 Story.quiz.currentProblem.should be_a_kind_of(JLDrill::ReadingProblem)
 
-                item.schedules.size.should eql(0)
-                item.firstSchedule.should be_nil
+                item.state.schedules.size.should eql(0)
+                item.state.currentSchedule.should be_nil
             end
 
             it "should create schedules for items promoted into the working set" do
                 item = Story.newSet[0]
                 Story.promoteIntoWorkingSet(item)
-                item.should be_inWorkingSet
+                item.state.should be_inWorkingSet
 
                 # Items in the working set have schedules for all 3 proplem types
-                item.schedules.size.should eql(3)
+                item.state.schedules.size.should eql(3)
 
-                item.schedules.each do |schedule|
+                item.state.schedules.each do |schedule|
                     schedule.should_not be_scheduled
                     schedule.score.should eql(0)
                     schedule.potential.should eql(Story.daysInSeconds(5))
                 end
 
                 # We should have a ReadingProblem scheduled first
-                item.firstSchedule.should_not be_nil
+                item.state.currentSchedule.should_not be_nil
                 Story.quiz.createProblem(item)
                 Story.quiz.currentProblem.should be_a_kind_of(JLDrill::ReadingProblem)
             end
@@ -151,9 +151,9 @@ module JLDrill::Version_0_6_1
                 Story.promoteIntoWorkingSet(item)
                 
                 # It doesn't have kanji so there should be only 2 schedules
-                item.schedules.size.should eql(2)
+                item.state.schedules.size.should eql(2)
 
-                item.schedules.each do |schedule|
+                item.state.schedules.each do |schedule|
                     schedule.should_not be_scheduled
                     schedule.score.should eql(0)
                     schedule.potential.should eql(Story.daysInSeconds(5))
@@ -164,8 +164,8 @@ module JLDrill::Version_0_6_1
                 Story.quiz.options.promoteThresh = 2
                 item = Story.newSet[0]
                 Story.promoteIntoWorkingSet(item)
-                item.schedules.size.should eql(3)
-                s = item.problemStatus.schedulesInTypeOrder
+                item.state.schedules.size.should eql(3)
+                s = item.state.problemStatus.schedulesInTypeOrder
                 readingSchedule = s[0]
                 readingSchedule.problemType.should eql("ReadingProblem")
                 kanjiSchedule = s[1]
@@ -174,8 +174,8 @@ module JLDrill::Version_0_6_1
                 meaningSchedule.problemType.should eql("MeaningProblem")
 
                 # I should start with the reading problem
-                item.firstSchedule.should be(readingSchedule)
-                item.problem.should be_a_kind_of(JLDrill::ReadingProblem)
+                item.state.currentSchedule.should be(readingSchedule)
+                item.state.currentProblem.should be_a_kind_of(JLDrill::ReadingProblem)
                 readingSchedule.score.should eql(0)
 
                 Story.drillCorrectly(item)
@@ -183,16 +183,16 @@ module JLDrill::Version_0_6_1
                 
                 # The promotion threshold is 2 so we should still 
                 # be in the same place
-                item.firstSchedule.should be(readingSchedule)
-                item.problem.should be_a_kind_of(JLDrill::ReadingProblem)
+                item.state.currentSchedule.should be(readingSchedule)
+                item.state.currentProblem.should be_a_kind_of(JLDrill::ReadingProblem)
 
                 Story.drillCorrectly(item)
                 readingSchedule.score.should eql(2)
 
                 # We are at the promotion threshold so we go to the
                 # next schedule
-                item.firstSchedule.should be(kanjiSchedule)
-                item.problem.should be_a_kind_of(JLDrill::KanjiProblem)
+                item.state.currentSchedule.should be(kanjiSchedule)
+                item.state.currentProblem.should be_a_kind_of(JLDrill::KanjiProblem)
                 
                 Story.drillCorrectly(item)
                 Story.drillCorrectly(item)
@@ -200,8 +200,8 @@ module JLDrill::Version_0_6_1
                 
                 # We are at the promotion threshold so we go to the
                 # next schedule
-                item.firstSchedule.should be(meaningSchedule)
-                item.problem.should be_a_kind_of(JLDrill::MeaningProblem)
+                item.state.currentSchedule.should be(meaningSchedule)
+                item.state.currentProblem.should be_a_kind_of(JLDrill::MeaningProblem)
                 
                 Story.drillCorrectly(item)
                 Story.drillCorrectly(item)
@@ -211,7 +211,7 @@ module JLDrill::Version_0_6_1
                 kanjiSchedule.score.should eql(2)
                 meaningSchedule.score.should eql(2)
 
-                item.should be_inReviewSet
+                item.state.should be_inReviewSet
             end
 
             def drillCorrectlyXTimes(item, x)
@@ -221,7 +221,7 @@ module JLDrill::Version_0_6_1
             end
 
             def allScoresShouldBeZero(item)
-                item.schedules.each do |schedule|
+                item.state.schedules.each do |schedule|
                     schedule.score.should eql(0)
                 end
             end
@@ -231,7 +231,7 @@ module JLDrill::Version_0_6_1
                 item = Story.newSet[0]
                 Story.promoteIntoWorkingSet(item)
                 
-                s = item.problemStatus.schedulesInTypeOrder
+                s = item.state.problemStatus.schedulesInTypeOrder
                 readingSchedule = s[0]
                 kanjiSchedule = s[1]
                 meaningSchedule = s[2]
@@ -258,9 +258,9 @@ module JLDrill::Version_0_6_1
                 readingSchedule.score.should eql(2)
                 kanjiSchedule.score.should eql(2)
                 meaningSchedule.score.should eql(2)
-                item.should be_inReviewSet
+                item.state.should be_inReviewSet
                 Story.drillIncorrectly(item)
-                item.should be_inWorkingSet
+                item.state.should be_inWorkingSet
                 allScoresShouldBeZero(item)
             end
         end

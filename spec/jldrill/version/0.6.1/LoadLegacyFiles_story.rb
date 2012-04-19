@@ -97,16 +97,16 @@ Forgotten
 
                 # New set items should have no schedule even if they exist in the
                 # file
-                newItem.firstSchedule.should be_nil
-                newItem.schedules.size.should eql(0)
+                newItem.state.currentSchedule.should be_nil
+                newItem.state.schedules.size.should eql(0)
 
                 # Even if the file only has 2 schedules for the working set items,
                 # the missing one will be created.
-                w1Item.schedules.size.should eql(3)
-                w2Item.schedules.size.should eql(3)
+                w1Item.state.schedules.size.should eql(3)
+                w2Item.state.schedules.size.should eql(3)
 
                 # w1 has a potential, use it
-                w1Item.schedules.each do |schedule|
+                w1Item.state.schedules.each do |schedule|
                     schedule.potential.should eql(432000)
                     # There is only a meaning problem scheduled, so at level
                     # 0 its score is zeroed.
@@ -115,17 +115,17 @@ Forgotten
 
                 # w2 has difficulty set, so the potential should be based on
                 # it.
-                s = w2Item.problemStatus.schedulesInTypeOrder
+                s = w2Item.state.problemStatus.schedulesInTypeOrder
                 s[0].score.should eql(Story.quiz.options.promoteThresh)
                 s[2].score.should eql(0)
                 s[1].score.should eql(1)
-                w2Item.schedules.each do |schedule|
+                w2Item.state.schedules.each do |schedule|
                     schedule.potential.should eql((JLDrill::Schedule.difficultyScale(6) * JLDrill::Schedule.defaultPotential).to_i)
                 end
 
                 # Only Kanji and Meaning items scheduled by default
-                reviewItem.schedules.size.should eql(2)
-                reviewItem.schedules.each do |schedule|
+                reviewItem.state.schedules.size.should eql(2)
+                reviewItem.state.schedules.each do |schedule|
                     schedule.should be_scheduled
                     schedule.potential.should eql(schedule.duration)
                     schedule.score.should eql(Story.quiz.options.promoteThresh)

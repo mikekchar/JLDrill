@@ -2,7 +2,7 @@
 require 'Context/Gtk/Widget'
 require 'jldrill/oldUI/GtkVocabView'
 require 'jldrill/views/gtk/widgets/SearchTable'
-require 'jldrill/model/Item.rb'
+require 'jldrill/model/Item'
 require 'gtk2'
 
 

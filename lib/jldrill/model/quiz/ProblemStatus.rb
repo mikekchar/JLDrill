@@ -125,7 +125,7 @@ module JLDrill
                     end
                         schedule.score = 0
                     elsif currentLevel() > level
-                        schedule.score = @item.quiz.options.promoteThresh
+                        schedule.score = @item.state.quiz.options.promoteThresh
                     end
                     addSchedule(schedule)
                 end
@@ -175,17 +175,17 @@ module JLDrill
         # for the quiz.  If not, push a new type on.
         def checkSchedules
             if !@item.nil? && !@item.quiz.nil?
-                if @item.inNewSet?
+                if @item.state.inNewSet?
                     levels = []
-                elsif @item.inWorkingSet?
+                elsif @item.state.inWorkingSet?
                     levels = [0, 1, 2]
                 else
                     levels = @quiz.options.allowedLevels
                 end
                 addAllowed(levels)
                 removeDisallowed(levels)
-                if @item.notNewOrWorking?
-                    @item.level = 3
+                if @item.state.notNewOrWorking?
+                    @item.state.level = 3
                 end
             end
         end

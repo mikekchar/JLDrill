@@ -54,7 +54,7 @@ module JLDrill
         def bin
             retVal = nil
             if !@currentProblem.nil?
-                retVal = @currentProblem.item.bin
+                retVal = @currentProblem.item.state.bin
             end
             retVal
         end
@@ -229,7 +229,7 @@ module JLDrill
             # Need to sort the new set to deal with older files that
             # may not be sorted.
             @contents.newSet.sort! do |x, y|
-                x.position <=> y.position
+                x.state.position <=> y.state.position
             end
             # Resort the review set according to schedule
             reschedule
@@ -333,7 +333,7 @@ module JLDrill
             if !@currentProblem.nil?
                 item = @currentProblem.item
                 if !item.nil?
-                    item.incorrect
+                    item.state.incorrect
                     setNeedsSave(true)
                 end
             end
@@ -343,7 +343,7 @@ module JLDrill
             if !@currentProblem.nil?
                 item = @currentProblem.item
                 if !item.nil?
-                    item.correct
+                    item.state.correct
                     setNeedsSave(true)
                 end
             end
@@ -356,7 +356,7 @@ module JLDrill
             if !@currentProblem.nil?
                 item = @currentProblem.item
                 if !item.nil?
-                    item.learn
+                    item..state.learn
                     setNeedsSave(true)
                 end
             end
@@ -370,19 +370,19 @@ module JLDrill
         
         # Creates a problem to be quizzed
         def createProblem(item)
-            setCurrentProblem(item.createProblem())
+            setCurrentProblem(item.state.createProblem())
         end
 
         # Creates a problem to be displayed only
         def displayProblem(item)
-            problem = item.createProblem()
+            problem = item.state.createProblem()
             problem.setDisplayOnly(true)
             setCurrentProblem(problem)
         end
 
         # Creates a preview for a problem
         def previewProblem(item)
-            problem = item.createProblem()
+            problem = item.state.createProblem()
             problem.setDisplayOnly(true)
             problem.setPreview(true)
             setCurrentProblem(problem)

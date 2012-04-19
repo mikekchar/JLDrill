@@ -113,10 +113,6 @@ module JLDrill::Version_0_6_1
 
         Story = MyStory.new("Sort Working Set Items By Schedule")
 
-        def Story.setup(type)
-            super(type)
-        end
-        
         describe Story.stepName("Adding Interleaved Working Set Option") do
             before(:each) do
                 Story.setup(JLDrill::Test)
@@ -215,13 +211,13 @@ module JLDrill::Version_0_6_1
             it "should schedule working set items" do
                 item = Story.newSet[0]
                 item.should_not be_nil
-                item.schedules.size.should eql(0)
-                item.promote()
-                item.should be_inWorkingSet
-                item.schedules.size.should eql(3)
+                item.state.schedules.size.should eql(0)
+                item.state.promote()
+                item.state.should be_inWorkingSet
+                item.state.schedules.size.should eql(3)
                 initial = JLDrill::Schedule.initialWorkingSetInterval
                 initial.should eql(60)
-                item.schedules.each do |schedule|
+                item.state.schedules.each do |schedule|
                     schedule.should be_scheduled
                     scheduleShouldBeAroundXSeconds(schedule, initial)
                 end

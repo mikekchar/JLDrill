@@ -33,7 +33,7 @@ module JLDrill
 		    @bin[pos].should be_nil
 		    @bin.length.should be(pos)
 		    @bin.push(item)
-		    item.bin.should be(@bin.number)
+		    item.state.bin.should be(@bin.number)
 		    @bin.length.should be(pos + 1)
 		    @bin[pos].should_not be_nil
 		    @bin[pos].should equal(item)
@@ -94,7 +94,7 @@ module JLDrill
 		    test_push(@items.length - 1, @items[0])
 		    test_isOriginal?.should be(false)
 		    @bin.sort! do |x, y|
-		        x.position <=> y.position
+		        x.state.position <=> y.state.position
 		    end
 		    test_isOriginal?.should be(true)
 		end

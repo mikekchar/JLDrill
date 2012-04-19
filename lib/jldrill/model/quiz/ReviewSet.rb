@@ -15,8 +15,8 @@ module JLDrill
         # what percentage of its potential schedule it has waited
         def reschedule
             self.sort! do |x,y|
-                xSchedule = x.firstSchedule
-                ySchedule = y.firstSchedule
+                xSchedule = x.state.currentSchedule
+                ySchedule = y.state.currentSchedule
                 # Schedule should never be nil except in the tests,
                 # but just in case
                 if !xSchedule.nil?
@@ -55,7 +55,7 @@ module JLDrill
             retVal = []
             if !empty? && (options.forgettingThresh != 0.0)
                 retVal = @contents.partition do |item|
-                    !item.reviewRateUnderThreshold()
+                    !item.state.reviewRateUnderThreshold?
                 end[0]
             end
             return retVal
@@ -74,7 +74,7 @@ module JLDrill
         # kanji data.  This removes those schedules
         def removeInvalidKanjiProblems
             self.each do |x|
-                x.removeInvalidKanjiProblems
+                x.state.removeInvalidKanjiProblems
             end
         end
 

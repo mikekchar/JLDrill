@@ -23,14 +23,14 @@ module JLDrill
         # Returns true if all the items in the bin have been seen
         def allSeen?
             self.all? do |item|
-                item.seen?
+                item.state.seen?
             end
         end
         
         # Sets the schedule of each item in the bin to unseen
         def setUnseen
             self.each do |item|
-                item.setAllSeen(false)
+                item.state.setAllSeen(false)
             end
         end
         
@@ -38,7 +38,7 @@ module JLDrill
         def numUnseen
             total = 0
             self.each do |item|
-                total += 1 if !item.seen?
+                total += 1 if !item.state.seen?
             end
             total
         end
@@ -49,7 +49,7 @@ module JLDrill
             if n < numUnseen
                 i = 0
                 0.upto(n) do |m|
-                    while @contents[i].seen?
+                    while @contents[i].state.seen?
                         i += 1
                     end
                     if m != n
@@ -83,7 +83,7 @@ module JLDrill
 
         def incorrect(item)
             @stats.incorrect(item)
-            item.demote()
+            item.state.demote()
         end
 
         def learn(item)
@@ -101,7 +101,7 @@ module JLDrill
 
         # Things that should be done when a new problem has been created
         def newProblemFor(item)
-            if item.bin == @number
+            if item.state.bin == @number
                 @stats.startTimer
             else
                 @stats.stopTimer

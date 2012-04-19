@@ -61,18 +61,18 @@ module JLDrill
         # Pushes a item to the end of the bin
         # Also sets the bin number of the item
         def push(item)
-            item.bin = @number
+            item.state.moveTo(@number)
             @contents.push(item)
         end
 
         # Insert an item before the index indicated
         def insertAt(index, item)
+            item.state.moveTo(@number)
             if index >= @contents.size
                 @contents.push(item)
             else
                 @contents.insert(index, item)
             end
-            item.bin = @number
         end
 
         def moveBeforeItem(moveItem, beforeItem)
@@ -145,7 +145,7 @@ module JLDrill
         def contents=(array)
             @contents = array
             self.each do |item|
-                item.bin = @number
+                item.state.moveTo(@number)
             end
         end
    

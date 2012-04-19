@@ -15,8 +15,8 @@ module JLDrill
         # waited
         def reschedule
             self.sort! do |x,y|
-                xSchedule = x.firstSchedule
-                ySchedule = y.firstSchedule
+                xSchedule = x.state.currentSchedule
+                ySchedule = y.state.currentSchedule
                 # Schedule should never be nil except in the tests,
                 # but just in case
                 if !xSchedule.nil?
@@ -39,7 +39,7 @@ module JLDrill
             retVal = []
             if !empty? && (options.forgettingThresh != 0.0)
                 retVal = @contents.partition do |item|
-                    item.reviewRateUnderThreshold()
+                    item.state.reviewRateUnderThreshold?
                 end[0]
             end
             return retVal
@@ -56,7 +56,7 @@ module JLDrill
 
         def correct(item)
             super(item)
-            item.itemStats.consecutive += 1
+            item.state.itemStats.consecutive += 1
             # Move the item to the back of the set
             @quiz.contents.moveToReviewSet(item)
         end

@@ -153,15 +153,15 @@ module JLDrill::Gtk
         # Selects the row with the given item if it exists
         def selectItem(item)
             if !item.nil? && (item.position != -1)
-                path = Gtk::TreePath.new(item.position.to_s)
+                path = Gtk::TreePath.new(item.state.position.to_s)
                 selectPath(path)
             end
         end
 
         # Updates the item in the tree and selects the row
         def updateItem(item)
-            if !item.nil? && (item.position != -1)
-                path = Gtk::TreePath.new(item.position.to_s)
+            if !item.nil? && (item.state.position != -1)
+                path = Gtk::TreePath.new(item.state.position.to_s)
                 iter = @listStore.get_iter(path)
                 setItem(iter, item)
                 selectPath(path)
@@ -178,8 +178,8 @@ module JLDrill::Gtk
         end
 
         def removeItem(item)
-            if !item.nil? && (item.position != -1)
-                path = Gtk::TreePath.new(item.position.to_s)
+            if !item.nil? && (item.state.position != -1)
+                path = Gtk::TreePath.new(item.state.position.to_s)
                 iter = @listStore.get_iter(path)
                 if !iter.nil?
                     @listStore.remove(iter)

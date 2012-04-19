@@ -34,7 +34,7 @@ module JLDrill::Version_0_6_1
             end
 
             def scheduleFor1Day(item)
-                item.schedules.each do |schedule|
+                item.state.schedules.each do |schedule|
                     schedule.potential = daysInSeconds(1)
                     schedule.duration = daysInSeconds(1)
                     score = quiz.options.promoteThresh
@@ -81,7 +81,7 @@ module JLDrill::Version_0_6_1
                 # above which items should be moved to the forgotten set.
                 
                 Story.sampleItems.each_index do |i|
-                    Story.sampleItems[i].schedules.each do |schedule|
+                    Story.sampleItems[i].state.schedules.each do |schedule|
                         Story.setDaysAgoReviewed(schedule, i)
                         schedule.reviewRate.should eql(i.to_f)
                     end

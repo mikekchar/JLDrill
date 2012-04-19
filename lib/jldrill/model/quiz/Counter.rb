@@ -42,8 +42,8 @@ module JLDrill
             found = false
             while (level <= 6) && !found
                 range = Counter.findRange(level)
-                if !item.firstSchedule.nil? &&
-                    item.firstSchedule.durationWithin?(range)
+                if !item.state.currentSchedule.nil? &&
+                    item.state.currentSchedule.durationWithin?(range)
                     found = true
                 else
                     level += 1
@@ -81,7 +81,7 @@ module JLDrill
         def count(item)
             found = false
             0.upto(6) do |level|
-                if !found && item.firstSchedule.durationWithin?(@ranges[level])
+                if !found && item.state.currentSchedule.durationWithin?(@ranges[level])
                     @table[level] += 1
                     found = true
                 end

@@ -76,7 +76,7 @@ module JLDrill
         # The item was correctly remembered
         def correct
             @thinkingTimer.stop
-            if @item.inReviewSet?
+            if @item.state.inReviewSet?
                 @consecutive += 1
                 @timeLimit = @thinkingTimer.total
             end

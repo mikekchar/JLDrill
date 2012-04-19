@@ -76,17 +76,17 @@ module JLDrill
 
         it "should renumber the contents when resetting" do
             @quiz.resetContents
-            @quiz.contents.newSet[0].position = 5
-            @quiz.contents.newSet[1].position = 6
-            @quiz.contents.newSet[2].position = 6
-            @quiz.contents.workingSet[0].position = 7
+            @quiz.contents.newSet[0].state.reposition(5)
+            @quiz.contents.newSet[1].state.reposition(6)
+            @quiz.contents.newSet[2].state.reposition(6)
+            @quiz.contents.workingSet[0].state.reposition(7)
             @quiz.options.randomOrder = false
             @quiz.resetContents
             # The first item will be drilled and therefore promoted to bin 1
-            @quiz.contents.bins[1][0].position.should be(0)
+            @quiz.contents.bins[1][0].state.position.should be(0)
             # The rest will be in bin 0, numbered sequentially
             0.upto(2) do |i|
-                @quiz.contents.bins[0][i].position.should eql(i + 1)
+                @quiz.contents.bins[0][i].state.position.should eql(i + 1)
             end
         end
 	    
@@ -96,7 +96,7 @@ module JLDrill
 	        @quiz.contents.newSet.length.should eql(0)
 	        @quiz.contents.reviewSet.length.should eql(3)
 	        item.should be_equal(@quiz.contents.reviewSet[2])
-	        item.should be_inReviewSet
+	        item.state.should be_inReviewSet
 	    end
 	    
         def test_problem(question, problem)
@@ -109,7 +109,7 @@ module JLDrill
 
         def test_level(question)
             item = @quiz.currentProblem.item
-            schedule = item.firstSchedule
+            schedule = item.state.currentSchedule
             case @quiz.currentProblem.requestedLevel
                 when 0
                     test_problem(question, 
@@ -133,14 +133,14 @@ module JLDrill
 	    def test_workingSet(question)
             # The quiz depends on the level
             test_level(question)
-            @quiz.currentProblem.item.itemStats.consecutive.should eql(0)
+            @quiz.currentProblem.item.state.itemStats.consecutive.should eql(0)
 	    end
 
 	    def test_reviewSet(question)
             # The quiz depends on the level
             test_level(question)
             # Level 4 items have consecutive of at least one
-            @quiz.currentProblem.item.itemStats.consecutive.should_not eql(0)
+            @quiz.currentProblem.item.state.itemStats.consecutive.should_not eql(0)
 	    end
 	    
 	    def test_drill
@@ -149,11 +149,11 @@ module JLDrill
             question = @quiz.currentDrill
 	        if (newSetSize - 1) == @quiz.contents.newSet.length
 	            # it was a bin 0 item which was promoted
-	            @quiz.currentProblem.item.should be_inWorkingSet
+	            @quiz.currentProblem.item.state.should be_inWorkingSet
                 test_workingSet(question)
-	        elsif @quiz.currentProblem.item.inWorkingSet?
+	        elsif @quiz.currentProblem.item.state.inWorkingSet?
 	            test_workingSet(question)
-	        elsif @quiz.currentProblem.item.inReviewSet?
+	        elsif @quiz.currentProblem.item.state.inReviewSet?
 	            test_reviewSet(question)
 	        else
 	             # This shouldn't ever happen.  Blow up.
@@ -162,18 +162,18 @@ module JLDrill
 	    end
 
         def test_correct
-            consecutive = @quiz.currentProblem.item.itemStats.consecutive
+            consecutive = @quiz.currentProblem.item.state.itemStats.consecutive
             @quiz.correct
-            if @quiz.currentProblem.item.inReviewSet?
-                @quiz.currentProblem.item.itemStats.consecutive.should eql(consecutive + 1)
+            if @quiz.currentProblem.item.state.inReviewSet?
+                @quiz.currentProblem.item.state.itemStats.consecutive.should eql(consecutive + 1)
             else
-                @quiz.currentProblem.item.itemStats.consecutive.should eql(0)
+                @quiz.currentProblem.item.state.itemStats.consecutive.should eql(0)
             end
         end
 	    
         def test_incorrect
             @quiz.incorrect
-            @quiz.currentProblem.item.itemStats.consecutive.should eql(0)
+            @quiz.currentProblem.item.state.itemStats.consecutive.should eql(0)
         end
 	    
 	    def test_initializeQuiz
@@ -238,8 +238,8 @@ module JLDrill
         
         it "should update the last reviewed status when the answer is made" do
             test_initializeQuiz
-            @quiz.currentProblem.item.firstSchedule.lastReviewed.should be_nil
-            schedule1 = @quiz.currentProblem.item.firstSchedule
+            @quiz.currentProblem.item.state.currentSchedule.lastReviewed.should be_nil
+            schedule1 = @quiz.currentProblem.item.state.currentSchedule
             test_correct
             test1 = @quiz.currentProblem.item
             schedule1.lastReviewed.should_not be_nil
@@ -247,7 +247,7 @@ module JLDrill
             # should get a new one
             test_drill
             test2 = @quiz.currentProblem.item
-            schedule2 = test2.firstSchedule
+            schedule2 = test2.state.currentSchedule
             schedule2.lastReviewed.should be_nil
 
             # Make it incorrect
@@ -261,15 +261,15 @@ module JLDrill
             # test2, on the other hand, is in the new set so it shouldn't
             # have a schedule at all.
             @quiz.resetContents
-            test1.firstSchedule.lastReviewed.should be_nil
-            test2.firstSchedule.should be_nil
+            test1.state.currentSchedule.lastReviewed.should be_nil
+            test2.state.currentSchedule.should be_nil
         end
         
         it "should update the schedule correctly for review set items" do
 	        @quiz.loadFromString("none", @sampleQuiz.file)
 	        item = @quiz.contents.reviewSet[0]
 	        item.should_not be_nil
-            schedule = item.firstSchedule
+            schedule = item.state.currentSchedule
             @quiz.currentProblem = MeaningProblem.new(item)
             test_correct
             test_incorrect            

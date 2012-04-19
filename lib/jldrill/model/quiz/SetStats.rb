@@ -77,8 +77,8 @@ module JLDrill
 
         # Adds the reviewRate for this item to the total sum
         def recordReviewRate(item)
-            if !item.firstSchedule.nil?
-                @reviewRateSum += item.firstSchedule.reviewRate
+            if !item.state.currentSchedule.nil?
+                @reviewRateSum += item.state.currentSchedule.reviewRate
             end
         end
 
@@ -99,15 +99,15 @@ module JLDrill
         # The review rate of the highest scheduled item in the bin
         def currentReviewRate
             retVal = 1.0
-            if !reviewBin.empty? && !reviewBin[0].firstSchedule.nil?
-                retVal = roundToTwoDecimals(reviewBin[0].firstSchedule.reviewRate)
+            if !reviewBin.empty? && !reviewBin[0].state.currentSchedule.nil?
+                retVal = roundToTwoDecimals(reviewBin[0].state.currentSchedule.reviewRate)
             end
             retVal
         end
 
         # Record the statistics necessary when an item is correct
         def correct(item)
-            if item.bin != @binNumber
+            if item.state.bin != @binNumber
                 return
             end
             @correct += 1
@@ -122,7 +122,7 @@ module JLDrill
 
         # Record the statistics necessary when the item is incorrect
         def incorrect(item)
-            if item.bin != @binNumber
+            if item.state.bin != @binNumber
                 return
             end
             @incorrect += 1
