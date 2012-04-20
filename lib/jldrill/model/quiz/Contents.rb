@@ -145,12 +145,12 @@ module JLDrill
         # If they are both in the new bin, actually swap them
         def swapWith(item1, item2)
             temp = item1.state.position
-            item1.state.position = item2.state.position
-            item2.state.position = temp
+            item1.state.reposition(item2.state.position)
+            item2.state.reposition(temp)
            
             if !@quiz.nil?
-                if (item1.bin == 0) && (item2.bin == 0)
-                    @quiz.contents.bins[item1.bin].moveBeforeItem(item1, item2)
+                if (item1.state.bin == 0) && (item2.state.bin == 0)
+                    @quiz.contents.bins[item1.state.bin].moveBeforeItem(item1, item2)
                 end
                 @quiz.setNeedsSave(true)
             end
@@ -169,15 +169,15 @@ module JLDrill
             eachByPosition do |i|
                 if (i.state.position >= target) &&
                         (i.state.position < item1.state.position)
-                    i.state.position += 1
+                    i.state.reposition(i.state.position + 1)
                 end
             end
-            item1.state.position = target
+            item1.state.reposition(target)
 
             if !@quiz.nil?
                 # If they are both in the new set actually move the item
-                if (item1.bin == 0) && (item2.bin == 0)
-                    @quiz.contents.bins[item1.bin].moveBeforeItem(item1, item2)
+                if (item1.state.bin == 0) && (item2.state.bin == 0)
+                    @quiz.contents.bins[item1.state.bin].moveBeforeItem(item1, item2)
                 end
                 @quiz.setNeedsSave(true)
             end
