@@ -382,7 +382,7 @@ module JLDrill
 
         # Creates a preview for a problem
         def previewProblem(item)
-            problem = item.state.createProblem()
+            problem = item.state.currentProblem()
             problem.setDisplayOnly(true)
             problem.setPreview(true)
             setCurrentProblem(problem)

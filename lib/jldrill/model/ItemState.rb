@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'jldrill/model/problems/ProblemFactory'
+
 module JLDrill
 
     # Represents the state of the item in the Quiz.  This is an abstract
@@ -82,9 +84,17 @@ module JLDrill
         end
 
         # Creates an appropriate problem for the item based on it's
-        # current state.
+        # current state.  For items that are not in a quiz, just
+        # create a reading problem.
         def currentProblem
-            return nil
+            return ProblemFactory.createKindOf("ReadingProblem", @item)
+        end
+
+        # The timeLimit is the number of seconds the user has to guess
+        # the answer before the problem expires.  Items that are not
+        # in a quiz have no time limit.
+        def timeLimit
+            return 0.0
         end
 
         # Returns a string containing the save file representation of 

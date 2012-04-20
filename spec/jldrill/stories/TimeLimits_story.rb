@@ -53,7 +53,7 @@ module JLDrill::ItemsHaveTimeLimits
         it "should not have time limits on New Set Items" do
             item = Story.newSet[0]
             Story.quiz.createProblem(item)
-            item.state.itemStats.timeLimit.should eql(0.0)
+            item.state.timeLimit.should eql(0.0)
         end
 
         it "should not have time limits on Working Set Items" do
@@ -61,7 +61,7 @@ module JLDrill::ItemsHaveTimeLimits
             Story.quiz.createProblem(item)
             Story.promoteIntoWorkingSet(item)
             item.state.should be_inWorkingSet
-            item.state.itemStats.timeLimit.should eql(0.0)
+            item.state.timeLimit.should eql(0.0)
         end
 
         it "should not have time limits on newly promoted Review Set Items" do
@@ -71,7 +71,7 @@ module JLDrill::ItemsHaveTimeLimits
             item.state.should be_inWorkingSet
             Story.promoteIntoReviewSet(item)
             item.state.should be_inReviewSet
-            item.state.itemStats.timeLimit.should eql(0.0)
+            item.state.timeLimit.should eql(0.0)
         end
 
         it "should add a time limit after the first review" do
@@ -82,7 +82,7 @@ module JLDrill::ItemsHaveTimeLimits
             Story.promoteIntoReviewSet(item)
             item.state.should be_inReviewSet
             Story.drillCorrectly(item)
-            item.state.itemStats.timeLimit.should_not eql(0.0)
+            item.state.timeLimit.should_not eql(0.0)
         end
 
         it "should be able to round the time limit to 3 decimals" do
@@ -96,7 +96,7 @@ module JLDrill::ItemsHaveTimeLimits
             item.state.itemStats.timeLimit = 123.987654321
             itemString = item.to_s
             newItem = JLDrill::QuizItem.create(Story.quiz, itemString, Story.quiz.contents.newSetBin)
-            newItem.state.itemStats.timeLimit.should eql(123.988)
+            newItem.state.timeLimit.should eql(123.988)
         end
     end
 end

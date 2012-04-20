@@ -3,6 +3,7 @@
 require "jldrill/model/ItemState.rb"
 require 'jldrill/model/quiz/ProblemStatus'
 require 'jldrill/model/quiz/ItemStats'
+require 'jldrill/model/problems/ProblemFactory'
 
 module JLDrill
 
@@ -253,6 +254,12 @@ module JLDrill
                 retVal += " --> #{self.currentSchedule.potentialScheduleInDays} days"
             end
             return retVal
+        end
+
+        # The timeLimit is the number of seconds the user has to guess
+        # the answer before the problem expires.
+        def timeLimit
+            return itemStats.timeLimit
         end
 
         # Returns a string containing the save file representation of 

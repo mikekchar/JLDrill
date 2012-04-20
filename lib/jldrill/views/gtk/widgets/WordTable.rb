@@ -152,7 +152,7 @@ module JLDrill::Gtk
 
         # Selects the row with the given item if it exists
         def selectItem(item)
-            if !item.nil? && (item.position != -1)
+            if !item.nil? && (item.state.position != -1)
                 path = Gtk::TreePath.new(item.state.position.to_s)
                 selectPath(path)
             end
