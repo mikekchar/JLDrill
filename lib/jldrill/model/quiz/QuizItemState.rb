@@ -93,16 +93,6 @@ module JLDrill
             @problemStatus.setScores(value)     
         end
 
-        # Indicate that all of the problem types for the item were correct
-        def allCorrect
-            @problemStatus.allCorrect     
-        end
-
-        # Indicate that all of the problem types were incorrect
-        def allIncorrect
-            @problemStatus.allIncorrect     
-        end
-
         # Reset the state to seem as if the item has never been used before.
         def allReset
             @problemStatus.resetAll
@@ -125,9 +115,9 @@ module JLDrill
 
         # Indicate that the item was incorrect
         def incorrect
-            allIncorrect
             @itemStats.incorrect
             @quiz.contents.bins[@bin].incorrect(@item)
+            @problemStatus.allIncorrect
         end
 
         # Promote the item at the request of the user

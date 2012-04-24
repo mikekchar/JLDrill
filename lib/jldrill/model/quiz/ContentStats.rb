@@ -10,11 +10,11 @@ module JLDrill
 
         # Returns the accuracy of items reviewed in the review set
         def reviewAccuracy
-            return @contents.reviewSet.stats.recentAccuracy
+            return @contents.reviewSet.stats.accuracy
         end
 
         def forgottenAccuracy
-            return @contents.forgottenSet.stats.recentAccuracy
+            return @contents.forgottenSet.stats.accuracy
         end
 
         def forgottenSetRate
@@ -38,9 +38,16 @@ module JLDrill
             return 10 - @contents.reviewSet.stats.timesInTargetZone
         end
 
-        # Returns a string showing the status when reviewing items in the review set
+        # Returns the percentage of items in the review set guessed 
+        # correctly in the last 10 guesses
+        def recentReviewAccuracy
+            return @contents.reviewSet.stats.recentAccuracy
+        end
+
+        # Returns a string showing the status when reviewing items 
+        # in the review set
         def reviewStatus
-            retVal = "     #{self.reviewAccuracy}%"
+            retVal = "     #{self.recentReviewAccuracy}%"
             if @contents.reviewSet.stats.inTargetZone?
                 retVal += " - #{self.reviewsLeft}"
             end

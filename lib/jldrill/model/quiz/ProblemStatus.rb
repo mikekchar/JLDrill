@@ -206,12 +206,6 @@ module JLDrill
             end
         end
 
-        def allCorrect
-            @schedules.each do |schedule|
-                schedule.correct
-            end
-        end
-
         def allIncorrect
             fs = firstSchedule
             if !fs.nil?
