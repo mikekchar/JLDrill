@@ -84,14 +84,6 @@ module JLDrill
             @quiz.contents.moveToReviewSet(item)
         end
 
-        def incorrect(item)
-            super(item)
-        end
-
-        def learn(item)
-            # You can't learn from the review set. Do nothing
-        end
-
         def promote(item)
             # You can't promote from the review set.  Do nothing
         end

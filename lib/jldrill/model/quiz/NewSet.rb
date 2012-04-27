@@ -20,7 +20,10 @@ module JLDrill
             else
                 index = 0
             end
-            return @contents[index]
+            item = @contents[index]
+            # Promote the item to the working set before returning it
+            item.state.promote
+            return item
         end
 
         def correct(item)
@@ -34,7 +37,6 @@ module JLDrill
         def learn(item)
             super(item)
             @stats.promote(item)
-            item.state.setScores(options.promoteThresh)
             @quiz.contents.moveToReviewSet(item)
         end
 

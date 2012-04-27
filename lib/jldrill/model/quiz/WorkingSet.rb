@@ -20,18 +20,14 @@ module JLDrill
         end
 
         def correct(item)
-            @stats.correct(item)
+            super(item)
             if item.state.level >= 3
                 item.state.promote()
             end
         end
 
-        def incorrect(item)
-            super(item)
-        end
-
         def learn(item)
-            item.state.setScores(options.promoteThresh)
+            super(item)
             item.state.promote()
         end
 

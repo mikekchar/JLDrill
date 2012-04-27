@@ -356,7 +356,7 @@ module JLDrill
             if !@currentProblem.nil?
                 item = @currentProblem.item
                 if !item.nil?
-                    item..state.learn
+                    item.state.learn
                     setNeedsSave(true)
                 end
             end
@@ -392,8 +392,12 @@ module JLDrill
             createProblem(@currentProblem.item) unless @currentProblem.nil?
         end
 
+        def getItem()
+            return @contents.getItem
+        end
+
         def drill()
-            item = @contents.getItem
+            item = getItem()
             if !item.nil?
                 createProblem(item)
             end

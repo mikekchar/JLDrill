@@ -423,34 +423,33 @@ module JLDrill
             end
         end
 
-        # Get an item from the New Set
-        # Note: It promotes that item to the working set in the process
-        def getNewItem
-            item = newSet.selectItem()
-            if !item.nil?
-                item.state.promote
+        # Return the bin that the next item should be selected from
+        def selectSet
+            # Generally we want the working set
+            retVal = workingSet
+
+            # But if the workingSet isn't full grab one from a different set
+            if !workingSet.full?
+                if shouldReview?
+                    retVal = reviewSet
+                elsif !forgottenSet.empty?
+                    retVal = forgottenSet
+                elsif !newSet.empty?
+                    retVal = newSet
+                end
             end
-            return item
+            return retVal
         end
-        
+
         # Get an item to quiz
         def getItem
             item = nil
 
-            if !workingSet.full?
-                if shouldReview?
-                    item = reviewSet.selectItem()
-                elsif !forgottenSet.empty?
-                    item = forgottenSet.selectItem()
-                elsif !newSet.empty?
-                    item = getNewItem
-                end
+            set = selectSet()
+            if !set.empty?
+                item = set.selectItem()
             end
 
-            # Usually we get a working item if the above is not true
-            item = workingSet.selectItem() if item.nil?
-
-            item.state.setAllSeen(true) if !item.nil?
             return item
         end
 

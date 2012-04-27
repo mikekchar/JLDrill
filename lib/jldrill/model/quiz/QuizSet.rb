@@ -79,15 +79,21 @@ module JLDrill
 
         def correct(item)
             @stats.correct(item)
+            item.state.setAllSeen(true)
         end
 
         def incorrect(item)
             @stats.incorrect(item)
             item.state.demote()
+            # This has to be last because when the item is demoted, it
+            # may add a schedule for a new problem type, which will not 
+            # be seen
+            item.state.setAllSeen(true)
         end
 
         def learn(item)
-            # Do nothing by default
+            item.state.setAllSeen(true)
+            item.state.setScores(options.promoteThresh)
         end
 
         # Do what is necessary to an item for promotion from this bin

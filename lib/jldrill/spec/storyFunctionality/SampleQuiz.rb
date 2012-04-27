@@ -73,6 +73,12 @@ module JLDrill::StoryFunctionality
             quiz.incorrect
         end
 
+        # Create a problem for the item and learn it
+        def learn(item)
+            quiz.createProblem(item)
+            quiz.learn
+        end
+
         # Promote a new set item to the working set
         def promoteIntoWorkingSet(item)
             item.state.promote()

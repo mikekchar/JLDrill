@@ -57,16 +57,15 @@ module JLDrill
         def correct(item)
             super(item)
             item.state.itemStats.consecutive += 1
-            # Move the item to the back of the set
+            # Move the item to the back of the review set
             @quiz.contents.moveToReviewSet(item)
         end
 
-        def incorrect(item)
-            super(item)
-        end
-
         def learn(item)
-            # You can't learn from the review set. Do nothing
+            super(item)
+            item.state.itemStats.consecutive += 1
+            # Move the item to the back of the review set
+            @quiz.contents.moveToReviewSet(item)
         end
 
         def promote(item)
