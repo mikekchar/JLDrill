@@ -91,6 +91,11 @@ module JLDrill::StoryFunctionality
             end
         end
 
+        # Forget an item, moving it to the forgotten set
+        def forget(item)
+            quiz.contents.moveToForgottenSet(item)
+        end
+
         # Create a new item.  Note that it isn't added to any bins
         def newSampleItem
             JLDrill::QuizItem.new(quiz, @sampleQuiz.sampleVocab)
