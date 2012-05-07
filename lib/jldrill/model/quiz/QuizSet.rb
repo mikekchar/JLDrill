@@ -107,11 +107,7 @@ module JLDrill
 
         # Things that should be done when a new problem has been created
         def newProblemFor(item)
-            if item.state.bin == @number
-                @stats.startTimer
-            else
-                @stats.stopTimer
-            end
+            # Nothing to be done here.  Override in the concrete class
         end
 
         # Return a table containing the number of items that are scheduled for each

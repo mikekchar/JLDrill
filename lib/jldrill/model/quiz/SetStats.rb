@@ -27,7 +27,7 @@ module JLDrill
             @promoted = 0
             @reviewed = 0
             @reviewRateSum = 0
-            @reviewTimer = Timer.new
+            @thinkingTime = 0.0
         end
 
         # Returns the percentage of items in the last 10 that were correct
@@ -82,6 +82,11 @@ module JLDrill
             end
         end
 
+        # Adds the thinking time for this item to the total sum
+        def recordThinkingTime(item)
+            @thinkingTime += item.state.itemStats.thinkingTimer.total
+        end
+
         # Returns the bin that this object is measuring
         def reviewBin
             return @quiz.contents.bins[@binNumber]
@@ -113,6 +118,7 @@ module JLDrill
             @correct += 1
             @reviewed += 1
             recordReviewRate(item)
+            recordThinkingTime(item)
             level = getLevel(item)
             if !level.nil?
                 level.correct
@@ -128,6 +134,7 @@ module JLDrill
             @incorrect += 1
             @reviewed += 1
             recordReviewRate(item)
+            recordThinkingTime(item)
             level = getLevel(item)
             if !level.nil?
                 level.incorrect
@@ -158,21 +165,6 @@ module JLDrill
             @correct + @incorrect
         end
        
-        # Start the timer indicating that we are reviewing an item for this bin 
-        def startTimer
-            @reviewTimer.start
-        end
-
-        # Stop the timer indicating that we are reviewing an item for this bin
-        def stopTimer
-            @reviewTimer.stop
-        end
-
-        # The total amount of time we have spent reviewing items in this bin
-        def reviewTime
-            @reviewTimer.total
-        end
-        
         def roundToOneDecimal(value)
             value = value * 10.0
             value = value.round
@@ -190,7 +182,7 @@ module JLDrill
         # Amount of time spent reviewing per item reviewed in this bin
         def reviewPace
             if @reviewed > 0
-                return roundToOneDecimal(reviewTime.to_f / @reviewed.to_f)
+                return roundToOneDecimal(@thinkingTime / @reviewed.to_f)
             else
                 return 0.0
             end
@@ -200,7 +192,7 @@ module JLDrill
         # the bin.
         def promotionPace
             if @promoted > 0
-                return roundToOneDecimal(reviewTime.to_f / @promoted.to_f)
+                return roundToOneDecimal(@thinkingTime / @promoted.to_f)
             else
                 return 0.0
             end

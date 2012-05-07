@@ -10,7 +10,7 @@ require 'jldrill/views/test/QuizStatusView'
 require 'jldrill/views/test/ItemHintView'
 
 module JLDrill::Version_0_6_1
-    module KeepsStatistics
+    module ConsecutiveCorrect
         # I have basically rewritten the statistics code so I've
         # moved the tests here.  
         #
@@ -24,20 +24,8 @@ module JLDrill::Version_0_6_1
         # was shown.  If the item is demoted to the working set, the
         # "consecutive" counter is set to 0. Guessing the item correctly
         # in the working set does not increment the "consecutive" counter.
-        # Items in the forgotten set still increment the "consecurtive"
+        # Items in the forgotten set still increment the "consecutive"
         # counter whent the item is guessed correctly.
-        #
-        # Each item also keeps track of the amount of thinking time used
-        # in either the review set or forgotten set.  The timer is started
-        # from 0 when a problem is created for the item.  The timer is stopped
-        # when the item is set correct, incorrect or learned.  If a new
-        # item is selected from the quiz without setting the item to
-        # correc, incorrect or learned, the thinking time is not changed.
-        # The item only keeps track of of the thinking time for the last
-        # time the item was quized in the review set or forgotten set.
-        # The item does not start the timer for working set items.  If the
-        # item is demoted to the working set, the previous thinking time
-        # is set to zero.
         #
         # JLDrill also keeps track of general statistics for the contents.
         # Both the review and forgotten sets track the ratio of correct
@@ -75,13 +63,14 @@ module JLDrill::Version_0_6_1
             end
         end
 
-        Story = MyStory.new("JLDrill Keeps Statistics Story")
+        Story = MyStory.new("Consecutive Correct")
 
-        describe Story.stepName("Item Statistics") do
+        describe Story.stepName("Keeps track of consecutively correct items") do
             before(:each) do
                 Story.setup(JLDrill::Test)
                 Story.start
                 Story.quiz.options.promoteThresh = 1
+                Story.quiz.options.randomOrder = false
                 Story.newSet.length.should_not eql(0)
                 Story.newSet[0].should_not be_nil
                 @item = Story.newSet[0]
@@ -147,6 +136,8 @@ module JLDrill::Version_0_6_1
                 @item.state.itemStats.consecutive.should eql(1)
 
                 Story.quiz.resetContents()
+
+                @item.state.position.should eql(1)
                 @item.state.should be_inNewSet()
                 @item.state.itemStats.consecutive.should eql(0)
             end

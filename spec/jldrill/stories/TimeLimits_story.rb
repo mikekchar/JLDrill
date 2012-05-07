@@ -33,23 +33,6 @@ module JLDrill::ItemsHaveTimeLimits
             Story.shutdown
         end
 
-        it "should start the thinkingTimer when a new problem is created" do
-            item = Story.newSet[0]
-            item.state.itemStats.thinkingTimer.should_receive(:start)
-            Story.quiz.createProblem(item)
-        end
-
-        it "should stop the thinkingTimer when a problem is answered" do
-            item = Story.newSet[0]
-            # Note: It's 3 times because Timer.start() that is called
-            #       from createProblem() calls stop just in case the
-            #       timer was already started.
-            item.state.itemStats.thinkingTimer.should_receive(:stop).exactly(3).times
-            Story.quiz.createProblem(item)
-            Story.quiz.correct
-            Story.quiz.incorrect
-        end
-
         it "should not have time limits on New Set Items" do
             item = Story.newSet[0]
             Story.quiz.createProblem(item)

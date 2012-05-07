@@ -60,22 +60,34 @@ module JLDrill
             @timeLimit = 0.0
         end
 
+        def startTimer
+            if !@item.state.inNewSet?
+                @thinkingTimer.reset
+                @thinkingTimer.start
+            end
+        end
+
+        def stopTimer
+            if @thinkingTimer.running?
+                @thinkingTimer.stop
+            end
+        end
+
         # The item is being used to create a problem
         def createProblem
-            @thinkingTimer.reset
-            @thinkingTimer.start
+            startTimer
         end
 
         # The item was not correctly remembered
         def incorrect
-            @thinkingTimer.stop
+            stopTimer
             @consecutive = 0
             @timeLimit = 0.0
         end
 
         # The item was correctly remembered
         def correct
-            @thinkingTimer.stop
+            stopTimer
             if @item.state.inReviewSet?
                 @consecutive += 1
                 @timeLimit = @thinkingTimer.total

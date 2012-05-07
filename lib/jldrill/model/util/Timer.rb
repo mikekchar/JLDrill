@@ -1,7 +1,7 @@
 # encoding: utf-8
 module JLDrill
     class Timer
-        attr_reader :total, :startedAt
+        attr_reader :startedAt
         
         def initialize
             reset
@@ -30,6 +30,14 @@ module JLDrill
             if running?
                 @total += Time.now.to_f - @startedAt.to_f
                 @startedAt = nil
+            end
+        end
+
+        def total
+            if running?
+                return Time.now.to_f - @startedAt.to_f
+            else
+                return @total
             end
         end
     end
