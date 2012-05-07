@@ -453,13 +453,6 @@ module JLDrill
             return item
         end
 
-        # Notify each bin that a new problem has been created
-        def newProblemFor(item)
-            @bins.each do |bin|
-                bin.newProblemFor(item)
-            end
-        end
-
         # Returns a string showing the status kinds of items we are selecting
         def selectionStatus
             if shouldReview?

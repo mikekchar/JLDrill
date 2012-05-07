@@ -101,7 +101,6 @@ module JLDrill
 
         # Create a new problem
         def createProblem
-            @quiz.contents.newProblemFor(@item)
             @itemStats.createProblem()
             return currentProblem()
         end
@@ -116,8 +115,8 @@ module JLDrill
         # Indicate that the item was incorrect
         def incorrect
             @itemStats.incorrect
-            @quiz.contents.bins[@bin].incorrect(@item)
             @problemStatus.allIncorrect
+            @quiz.contents.bins[@bin].incorrect(@item)
         end
 
         # Promote the item at the request of the user
