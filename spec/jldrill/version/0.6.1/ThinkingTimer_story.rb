@@ -19,9 +19,6 @@ module JLDrill::Version_0_6_1
         # correct, incorrect or learned, the thinking time is not changed.
         # The item only keeps track of of the thinking time for the last
         # time the item was quized in the review set or forgotten set.
-        # The item does not start the timer for working set items.  If the
-        # item is demoted to the working set, the previous thinking time
-        # is set to zero.
         #
         class MyStory < JLDrill::StoryMemento
             include JLDrill::StoryFunctionality::SampleQuiz
@@ -39,6 +36,7 @@ module JLDrill::Version_0_6_1
                 Story.setup(JLDrill::Test)
                 Story.start
                 Story.quiz.options.promoteThresh = 1
+                Story.quiz.options.randomOrder = false
                 Story.newSet.length.should_not eql(0)
                 Story.newSet[0].should_not be_nil
                 @item = Story.newSet[0]

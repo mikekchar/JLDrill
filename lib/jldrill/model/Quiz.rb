@@ -51,14 +51,6 @@ module JLDrill
             length
         end
         
-        def bin
-            retVal = nil
-            if !@currentProblem.nil?
-                retVal = @currentProblem.item.state.bin
-            end
-            retVal
-        end
-
         def subscribe(subscriber)
             @publisher.subscribe(subscriber, "quiz")
         end

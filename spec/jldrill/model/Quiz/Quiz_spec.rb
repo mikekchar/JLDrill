@@ -194,7 +194,6 @@ module JLDrill
 	        @quiz.contents.workingSet.length.should eql(1)
             test_problem(@quiz.currentProblem.question, 
                          ReadingProblem.new(@quiz.currentProblem.item)) 
-	        @quiz.bin.should eql(@quiz.contents.workingSetBin)
 	        @quiz.currentProblem.item.should be_equal(item)
 
             # Threshold is 1, so a correct answer should promote

@@ -110,8 +110,8 @@ module JLDrill
             # Nothing to be done here.  Override in the concrete class
         end
 
-        # Return a table containing the number of items that are scheduled for each
-        # duration level
+        # Return a table containing the number of items that are 
+        # scheduled for each duration level
         def scheduleTable
             dCounter = DurationCounter.new
 

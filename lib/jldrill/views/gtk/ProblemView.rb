@@ -34,6 +34,7 @@ module JLDrill::Gtk
 
         def startTimer(timeLimit)
             if timeLimit != 0.0 && @timeoutID.nil?
+                # The GTK timeout is in milliseconds.
                 @timeoutID = Gtk.timeout_add((timeLimit * 1000).to_i) do
                     @timeoutID = nil
                     expire
