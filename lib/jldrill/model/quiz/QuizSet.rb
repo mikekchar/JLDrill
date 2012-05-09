@@ -83,8 +83,8 @@ module JLDrill
         end
 
         def incorrect(item)
-            item.state.setAllSeen(true)
             @stats.incorrect(item)
+            item.state.setAllSeen(true)
             demote(item)
         end
 
@@ -101,6 +101,8 @@ module JLDrill
         def demote(item)
             item.state.demoteAll
             @quiz.contents.moveToWorkingSet(item)
+            # Moving to the working set may add a new schedule.  Make sure
+            # it is seen.
             item.state.setAllSeen(true)
         end
 
