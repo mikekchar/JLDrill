@@ -31,7 +31,7 @@ module JLDrill
             counter = JLDrill::DurationCounter.new
             item = quiz.contents.workingSet[0]
             item.state.level = 3
-            item.state.promote()
+            quiz.contents.workingSet.promote(item)
             testDuration(item, counter, 3, 0, 1)
             testDuration(item, counter, 8, 1, 1)
             testDuration(item, counter, 17, 2, 1)

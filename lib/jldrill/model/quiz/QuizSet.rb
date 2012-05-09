@@ -83,12 +83,9 @@ module JLDrill
         end
 
         def incorrect(item)
-            @stats.incorrect(item)
-            item.state.demote()
-            # This has to be last because when the item is demoted, it
-            # may add a schedule for a new problem type, which will not 
-            # be seen
             item.state.setAllSeen(true)
+            @stats.incorrect(item)
+            demote(item)
         end
 
         def learn(item)
@@ -102,7 +99,9 @@ module JLDrill
         end
 
         def demote(item)
+            item.state.demoteAll
             @quiz.contents.moveToWorkingSet(item)
+            item.state.setAllSeen(true)
         end
 
         # Return a table containing the number of items that are 

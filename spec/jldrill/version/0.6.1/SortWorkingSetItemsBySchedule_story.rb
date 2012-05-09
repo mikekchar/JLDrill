@@ -212,7 +212,7 @@ module JLDrill::Version_0_6_1
                 item = Story.newSet[0]
                 item.should_not be_nil
                 item.state.schedules.size.should eql(0)
-                item.state.promote()
+                Story.promoteIntoWorkingSet(item)
                 item.state.should be_inWorkingSet
                 item.state.schedules.size.should eql(3)
                 initial = JLDrill::Schedule.initialWorkingSetInterval

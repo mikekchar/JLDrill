@@ -125,17 +125,6 @@ module JLDrill
             @quiz.contents.bins[@bin].learn(@item)
         end
 
-        # Promote the item
-        def promote
-            @quiz.contents.bins[@bin].promote(@item)
-        end
-
-        # demote the item
-        def demote
-            demoteAll
-            @quiz.contents.bins[@bin].demote(@item)
-        end
-
         # Set the level of the item to a specific one. 0 means that
         # none of the problem types have been completed.  1 means that
         # Reading Problems have been completed. 2 means that Kanji

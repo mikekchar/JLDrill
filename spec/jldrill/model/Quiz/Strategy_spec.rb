@@ -29,26 +29,22 @@ module JLDrill
 	        # Demoting new set items is non-sensical, but it should do
 	        # something sensible anyway.
 	        item = test_addItem(@quiz.contents.newSetBin, 1)
-	        item.state.demote()
+	        @quiz.contents.newSet.demote(item)
 	        item.state.should be_inNewSet
 	        item.state.currentSchedule.should be_nil
 	    end
 
 	    it "should demote other items to the working set" do
 	        item = test_addItem(@quiz.contents.workingSetBin, 1)
-	        item.state.demote()
+	        @quiz.contents.workingSet.demote(item)
 	        item.state.should be_inWorkingSet
 
-	        item = test_addItem(@quiz.contents.workingSetBin, 2)
-	        item.state.demote()
+	        item = test_addItem(@quiz.contents.reviewSetBin, 2)
+	        @quiz.contents.reviewSet.demote(item)
 	        item.state.should be_inWorkingSet
 
-	        item = test_addItem(@quiz.contents.workingSetBin, 3)
-	        item.state.demote()
-	        item.state.should be_inWorkingSet
-
-	        item = test_addItem(@quiz.contents.reviewSetBin, 4)
-	        item.state.demote()
+	        item = test_addItem(@quiz.contents.forgottenSetBin, 3)
+	        @quiz.contents.forgottenSet.demote(item)
 	        item.state.should be_inWorkingSet
 	    end
 	    

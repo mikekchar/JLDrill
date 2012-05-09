@@ -22,13 +22,13 @@ module JLDrill
         def correct(item)
             super(item)
             if item.state.level >= 3
-                item.state.promote()
+                promote(item)
             end
         end
 
         def learn(item)
             super(item)
-            item.state.promote()
+            promote(item)
         end
 
         # Do what is necessary to an item for promotion from this bin
@@ -37,6 +37,10 @@ module JLDrill
             item.state.itemStats.consecutive = 1
             item.state.scheduleAll
             @quiz.contents.moveToReviewSet(item)
+        end
+
+        def demote(item)
+            # The item is already in the working set.  Do nothing.
         end
     end
 end

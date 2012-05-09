@@ -22,16 +22,8 @@ module JLDrill
             end
             item = @contents[index]
             # Promote the item to the working set before returning it
-            item.state.promote
+            promote(item)
             return item
-        end
-
-        def correct(item)
-            super(item)
-        end
-
-        def incorrect(item)
-            super(item)
         end
 
         def learn(item)

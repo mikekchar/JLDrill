@@ -81,7 +81,7 @@ module JLDrill::StoryFunctionality
 
         # Promote a new set item to the working set
         def promoteIntoWorkingSet(item)
-            item.state.promote()
+            quiz.contents.newSet.promote(item)
         end
 
         # Promote a working set item to the review set

@@ -51,6 +51,11 @@ module JLDrill
         # The caller should clone the state from the item, modify it
         # using one of these methods and then set the state of the item
         # using the new state.
+       
+        # Return a problem for the current item 
+        def createProblem
+            return currentProblem()
+        end
         
         # The current problem for the item was drilled and was incorrect
         def incorrect

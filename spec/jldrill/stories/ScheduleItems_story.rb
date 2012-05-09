@@ -56,7 +56,7 @@ module JLDrill::ScheduleItems
 
         def promoteIntoWorkingSet(item)
             item.state.should be_inNewSet
-            item.state.promote()
+            quiz.contents.newSet.promote(item)
             item.state.should be_inWorkingSet
         end
 
