@@ -325,7 +325,7 @@ module JLDrill
             if !@currentProblem.nil?
                 item = @currentProblem.item
                 if !item.nil?
-                    item.state.incorrect
+                    item.incorrect
                     setNeedsSave(true)
                 end
             end
@@ -335,7 +335,7 @@ module JLDrill
             if !@currentProblem.nil?
                 item = @currentProblem.item
                 if !item.nil?
-                    item.state.correct
+                    item.correct
                     setNeedsSave(true)
                 end
             end
@@ -348,7 +348,7 @@ module JLDrill
             if !@currentProblem.nil?
                 item = @currentProblem.item
                 if !item.nil?
-                    item.state.learn
+                    item.learn
                     setNeedsSave(true)
                 end
             end
@@ -362,19 +362,19 @@ module JLDrill
         
         # Creates a problem to be quizzed
         def createProblem(item)
-            setCurrentProblem(item.state.createProblem())
+            setCurrentProblem(item.createProblem())
         end
 
         # Creates a problem to be displayed only
         def displayProblem(item)
-            problem = item.state.createProblem()
+            problem = item.createProblem()
             problem.setDisplayOnly(true)
             setCurrentProblem(problem)
         end
 
         # Creates a preview for a problem
         def previewProblem(item)
-            problem = item.state.currentProblem()
+            problem = item.currentProblem()
             problem.setDisplayOnly(true)
             problem.setPreview(true)
             setCurrentProblem(problem)

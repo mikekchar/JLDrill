@@ -126,5 +126,22 @@ module JLDrill
                 false
             end
         end
+
+        # Quiz methods
+        def createProblem
+            return @state.createProblem
+        end
+
+        def incorrect
+            return @state.incorrect
+        end
+
+        def correct
+            return @state.correct
+        end
+
+        def learn
+            return @state.learn
+        end
     end
 end
