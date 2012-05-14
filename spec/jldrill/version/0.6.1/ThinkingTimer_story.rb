@@ -141,6 +141,32 @@ module JLDrill::Version_0_6_1
                 Story.workingSet.stats.thinkingTime.to_i.should eql(3)
             end
 
+            it "should report pace" do
+                Story.thinkForXSeconds(1.0)
+                Story.promoteIntoWorkingSet(@item)
+                Story.promoteIntoReviewSet(@item)
+
+                # Now drill in the review set
+                Story.drillCorrectly(@item)
+                Story.drillIncorrectly(@item)
+
+                # Now drill in the forgotten set
+                Story.promoteIntoReviewSet(@item)
+                Story.forget(@item)
+                Story.drillCorrectly(@item)
+                Story.forget(@item)
+                Story.drillIncorrectly(@item)
+
+                Story.workingSet.stats.thinkingTime.to_i.should eql(6)
+                Story.reviewSet.stats.thinkingTime.to_i.should eql(2)
+                Story.forgottenSet.stats.thinkingTime.to_i.should eql(2)
+
+                contentStats = Story.quiz.contents.stats
+                contentStats.forgottenSetReviewPace.to_i.should eql(1)
+                contentStats.reviewSetReviewPace.to_i.should eql(1)
+                contentStats.workingSetLearnedPace.to_i.should eql(3)
+                contentStats.learnTimePercent.to_i.should eql(60)
+            end
         end
     end
 end

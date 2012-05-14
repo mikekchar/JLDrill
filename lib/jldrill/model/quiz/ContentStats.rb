@@ -79,9 +79,10 @@ module JLDrill
         end
        
         # Percentage of time spent learning compared to time spent reviewing
-        # review set items.
+        # review set and forgotten set items.
         def learnTimePercent
-            total = workingSetLearnedPace + reviewSetReviewPace
+            total = workingSetLearnedPace + 
+                reviewSetReviewPace + forgottenSetReviewPace
             if total > 0
                 return ((workingSetLearnedPace * 100) / total).to_i
             else
