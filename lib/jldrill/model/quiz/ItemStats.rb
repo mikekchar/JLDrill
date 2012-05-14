@@ -73,6 +73,10 @@ module JLDrill
             end
         end
 
+        def thinking?
+            return @thinkingTimer.running?
+        end
+
         # The item is being used to create a problem
         def createProblem
             startTimer

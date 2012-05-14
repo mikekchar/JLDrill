@@ -75,6 +75,72 @@ module JLDrill::Version_0_6_1
                 @item.state.itemStats.thinkingTimer.should_receive(:start)
                 Story.quiz.createProblem(@item)
             end
+
+            # Note: Truncating times to an int because, while running the
+            # tests, a very small amount of time will elapse causing the
+            # tests to fail.
+            it "should keep track of the time reviewing working set items" do
+                Story.thinkForXSeconds(1.0)
+                Story.promoteIntoWorkingSet(@item)
+                Story.workingSet.stats.thinkingTime.to_i.should eql(0)
+                Story.drillCorrectly(@item)
+                Story.workingSet.stats.thinkingTime.to_i.should eql(1)
+                Story.drillIncorrectly(@item)
+                Story.workingSet.stats.thinkingTime.to_i.should eql(2)
+                Story.promoteIntoReviewSet(@item)
+                # It takes three correct answers to promote the item.
+                # Each corect answer thinks for 1 second.
+                Story.workingSet.stats.thinkingTime.to_i.should eql(5)
+                # It shouldn't affect the reviewSet even though an
+                # item was promoted into it.
+                Story.reviewSet.stats.thinkingTime.to_i.should eql(0)
+            end
+
+            it "should keep track of the time reviewing Review set items" do
+                Story.thinkForXSeconds(1.0)
+                Story.promoteIntoWorkingSet(@item)
+                Story.promoteIntoReviewSet(@item)
+
+                # Up to now the working set collects the time
+                Story.workingSet.stats.thinkingTime.to_i.should eql(3)
+                Story.reviewSet.stats.thinkingTime.to_i.should eql(0)
+
+                # Now drill in the review set
+                Story.drillCorrectly(@item)
+                Story.reviewSet.stats.thinkingTime.to_i.should eql(1)
+                Story.drillIncorrectly(@item)
+                Story.reviewSet.stats.thinkingTime.to_i.should eql(2)
+
+                # The working set timer shouldn't change even though
+                # the item is returned to the working set
+                Story.workingSet.stats.thinkingTime.to_i.should eql(3)
+            end
+
+            it "should keep track of the time reviewing Forgotten set items" do
+                Story.thinkForXSeconds(1.0)
+                Story.promoteIntoWorkingSet(@item)
+                Story.promoteIntoReviewSet(@item)
+
+                # Up to now the working set collects the time
+                Story.workingSet.stats.thinkingTime.to_i.should eql(3)
+                Story.reviewSet.stats.thinkingTime.to_i.should eql(0)
+
+                Story.forget(@item)
+                Story.forgottenSet.stats.thinkingTime.to_i.should eql(0)
+
+                Story.drillCorrectly(@item)
+                Story.forgottenSet.stats.thinkingTime.to_i.should eql(1)
+                
+                # It's been moved back to the review set
+                Story.forget(@item)
+                Story.drillIncorrectly(@item)
+                Story.forgottenSet.stats.thinkingTime.to_i.should eql(2)
+
+                # The other sets shouldn't have changed
+                Story.reviewSet.stats.thinkingTime.to_i.should eql(0)
+                Story.workingSet.stats.thinkingTime.to_i.should eql(3)
+            end
+
         end
     end
 end

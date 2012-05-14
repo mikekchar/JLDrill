@@ -61,21 +61,39 @@ module JLDrill::StoryFunctionality
             quiz.currentProblem.item
         end
 
+        # By default think for X seconds when answering questions
+        def thinkForXSeconds(x)
+            @thinkingTime = x
+        end
+
+        # Think about the item for the number of seconds indicated in
+        # @thinkingTime.  If you have never set thinkForXSeconds,
+        # it won't think at all.
+        def thinkAbout(item)
+            if !@thinkingTime.nil? && @thinkingTime > 0.0
+                thinkingTimer = item.state.itemStats.thinkingTimer
+                thinkingTimer.startedXSecondsAgo(@thinkingTime)
+            end
+        end
+
         # Create a problem for the item and set it as correct
         def drillCorrectly(item)
             quiz.createProblem(item)
+            thinkAbout(item)
             quiz.correct
         end
 
         # Create a problem for the item and set it as correct
         def drillIncorrectly(item)
             quiz.createProblem(item)
+            thinkAbout(item)
             quiz.incorrect
         end
 
         # Create a problem for the item and learn it
         def learn(item)
             quiz.createProblem(item)
+            thinkAbout(item)
             quiz.learn
         end
 

@@ -9,7 +9,8 @@ module JLDrill
     # Statistics for a set in the quiz
     class SetStats
     
-        attr_reader :lastTen, :levels, :timesInTargetZone, :promoted, :reviewed
+        attr_reader :lastTen, :levels, :timesInTargetZone, 
+            :promoted, :reviewed, :thinkingTime
         
         SECONDS_PER_DAY = 60 * 60 * 24
         

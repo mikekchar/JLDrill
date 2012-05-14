@@ -22,6 +22,13 @@ module JLDrill
             @startedAt = Time.now
         end
 
+        def startedXSecondsAgo(seconds)
+            if !running?
+                start
+            end
+            @startedAt -= seconds
+        end
+
         def running?
             !@startedAt.nil?
         end
