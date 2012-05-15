@@ -61,7 +61,7 @@ RSpec::Core::RakeTask.new(:spec) do |t, args|
 end
 
 desc "Run the tests and find the code coverage.  Test results are in test_results.html.  Coverage is in coverage/index.html"
-RSpec::Core::RakeTask.new(:rcov) do |t|
+RSpec::Core::RakeTask.new(:rcov) do |t, args|
 	t.pattern = spec_pattern
 	t.rcov = true
 	t.rcov_opts = ["--require rspec --exclude rspec,rcov,syntax,_spec,_story,cairo,pango,gtk2,atk,glib,gdk"]
@@ -71,13 +71,10 @@ RSpec::Core::RakeTask.new(:rcov) do |t|
 end
 
 desc "Runs rcov but excludes the source files instead of the test files.  This is how I determine how many lines of test code I have.  Output goes to coverage/index.html"
-RSpec::Core::RakeTask.new(:testSize) do |t|
+RSpec::Core::RakeTask.new(:testSize) do |t, args|
 	t.pattern = spec_pattern
 	t.rcov = true
-	t.rcov_opts = ["--exclude rspec", "--exclude rcov", "--exclude syntax",
-	    "--exclude lib/Context/", "--exclude lib/jldrill/",
-	    "--exclude cairo", "--exclude pango", "--exclude gtk2", "--exclude atk",
-	    "--exclude glib", "--exclude gdk"]
+	t.rcov_opts = ["--require rspec --exclude rspec,rcov,syntax,lib/Context/,lib/jldrill/,cairo,pango,gtk2,atk,glib,gdk"]
 	t.rspec_opts = rspec_opts
 	t.ruby_opts = ruby_opts
     t.verbose = false
