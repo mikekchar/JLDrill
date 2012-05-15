@@ -17,8 +17,6 @@ module JLDrill::Version_0_6_1
         # when the item is set correct, incorrect or learned.  If a new
         # item is selected from the quiz without setting the item to
         # correct, incorrect or learned, the thinking time is not changed.
-        # The item only keeps track of of the thinking time for the last
-        # time the item was quized in the review set or forgotten set.
         #
         class MyStory < JLDrill::StoryMemento
             include JLDrill::StoryFunctionality::SampleQuiz
