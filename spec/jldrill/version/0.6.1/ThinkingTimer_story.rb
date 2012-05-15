@@ -167,6 +167,19 @@ module JLDrill::Version_0_6_1
                 contentStats.workingSetLearnedPace.to_i.should eql(3)
                 contentStats.learnTimePercent.to_i.should eql(60)
             end
+
+            it "should not record time if a new problem is chosen" do
+                Story.thinkForXSeconds(1.0)
+                Story.promoteIntoWorkingSet(@item)
+                Story.quiz.createProblem(@item)
+                Story.thinkAbout(@item)
+                Story.thinkAbout(@item)
+                Story.thinkAbout(@item)
+                @item.state.itemStats.thinkingTimer.total.to_i.should eql(3)
+                Story.quiz.createProblem(@item)
+                @item.state.itemStats.thinkingTimer.total.to_i.should eql(0)
+                Story.workingSet.stats.thinkingTime.to_i.should eql(0)
+            end
         end
     end
 end
