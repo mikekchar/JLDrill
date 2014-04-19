@@ -1,17 +1,12 @@
 require 'rake'
 require 'rubygems'
 require 'rspec/core/rake_task'
-# Debian forces the installation of a very old version of rdoc
-# in /usr/lib/ruby if you install rubygems.  So I need to override
-# it here.
-gem 'rdoc', ">= 2.2"
 require 'rdoc/task'
 require 'rake/testtask'
 require 'rubygems/package_task'
 require 'webgen/task'
 require './lib/jldrill/Version'
 require 'fileutils'
-require 'simplecov'
 
 #======================== Setup ================================
 
@@ -45,7 +40,7 @@ rubyforge_project = "jldrill"
 rubyforge_maintainer = "mikekchar@rubyforge.org"
 
 # Spec options
-rspec_opts = ['-f h -o test_results.html']
+rspec_opts = ['-f h -o test_results.html --require ./spec/simplecov_helper.rb']
 spec_pattern = 'spec/**/*_s*.rb'
 
 # Options for running the application
@@ -62,8 +57,8 @@ RSpec::Core::RakeTask.new(:spec) do |t, args|
 end
 
 desc "Run the tests and find the code coverage.  Test results are in test_results.html.  Coverage is in coverage/index.html"
-RSpec::Core::RakeTask.new(:rcov) do |t, args|
-  SimpleCov.start
+RSpec::Core::RakeTask.new(:cov) do |t, args|
+  ENV['COVERAGE'] = 'true'
 	t.pattern = spec_pattern
 	t.rspec_opts = rspec_opts
 	t.ruby_opts = ruby_opts
