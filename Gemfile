@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+gem 'gtk2'
+gem 'rake'
+gem 'rspec'
+gem 'simplecov'
+gem 'webgen'
+gem 'rdoc'

@@ -8,9 +8,10 @@ gem 'rdoc', ">= 2.2"
 require 'rdoc/task'
 require 'rake/testtask'
 require 'rubygems/package_task'
-require 'webgen/webgentask'
+require 'webgen/task'
 require './lib/jldrill/Version'
 require 'fileutils'
+require 'simplecov'
 
 #======================== Setup ================================
 
@@ -62,19 +63,8 @@ end
 
 desc "Run the tests and find the code coverage.  Test results are in test_results.html.  Coverage is in coverage/index.html"
 RSpec::Core::RakeTask.new(:rcov) do |t, args|
+  SimpleCov.start
 	t.pattern = spec_pattern
-	t.rcov = true
-	t.rcov_opts = ["--require rspec --exclude rspec,rcov,syntax,_spec,_story,cairo,pango,gtk2,atk,glib,gdk"]
-	t.rspec_opts = rspec_opts
-	t.ruby_opts = ruby_opts
-    t.verbose = false
-end
-
-desc "Runs rcov but excludes the source files instead of the test files.  This is how I determine how many lines of test code I have.  Output goes to coverage/index.html"
-RSpec::Core::RakeTask.new(:testSize) do |t, args|
-	t.pattern = spec_pattern
-	t.rcov = true
-	t.rcov_opts = ["--require rspec --exclude rspec,rcov,syntax,lib/Context/,lib/jldrill/,cairo,pango,gtk2,atk,glib,gdk"]
 	t.rspec_opts = rspec_opts
 	t.ruby_opts = ruby_opts
     t.verbose = false
@@ -160,7 +150,7 @@ task :clean_web do
 end
 
 desc "Create the web html files.  Files are placed in web/output"
-webgen_task = Webgen::WebgenTask.new('web') do |site|
+webgen_task = Webgen::Task.new('web') do |site|
     site.clobber_outdir = true
     site.config_block = lambda do |config|
         config['sources'] = [['/', "Webgen::Source::FileSystem", 'web/src']]
