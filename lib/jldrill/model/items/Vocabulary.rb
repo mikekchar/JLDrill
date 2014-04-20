@@ -16,7 +16,7 @@ module JLDrill
         MARKERS_RE = /^Markers: (.*)/
         QUOTE_RE = /["]/
         RETURN_RE = /[\n]/
-        TO_A_RE = Regexp.new("",nil,'u')
+        TO_A_RE = Regexp.new("",nil)
 
         Headings = [["kanji", "Kanji", 90],
                     ["reading", "Reading", 130],

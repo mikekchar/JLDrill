@@ -44,7 +44,7 @@ module JLDrill
             @main.mainView.should_not_receive(:addView)
             # 3 cases: No parent context, parent doesn't have quiz, parent's quiz is nil
             @context.enter(nil)
-            @context.enter(Context::Context.new(mock("ViewBridge")))
+            @context.enter(Context::Context.new(double("ViewBridge")))
             @main.quiz = nil
             @context.enter(@main)
         end

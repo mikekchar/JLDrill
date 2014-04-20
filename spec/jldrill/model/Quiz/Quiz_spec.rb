@@ -275,14 +275,14 @@ module JLDrill
         end
 
         it "should notify subscribers of updates" do
-            subscriber = mock("Subscriber")
+            subscriber = double("Subscriber")
             @quiz.subscribe(subscriber)
             subscriber.should_receive(:quizUpdated)
             @quiz.update
         end
         
         it "should notify subscribers when a new problem has been created" do
-            subscriber = mock("Subscriber")
+            subscriber = double("Subscriber")
             @quiz.publisher.subscribe(subscriber, "newProblem")
             subscriber.should_receive(:newProblemUpdated)
             test_initializeQuiz

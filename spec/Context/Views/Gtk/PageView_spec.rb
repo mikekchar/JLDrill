@@ -38,14 +38,14 @@ module Context::Gtk
 		end
 				
 		it "should add widgets from another view when added" do
-			newContext = mock("Context::Context")
+			newContext = double("Context::Context")
 			newView = FakeView.new(newContext)
 			@view.getWidget().should_receive(:gtkAddWidget).with(newView.getWidget)
 			@view.addView(newView)
 		end
 
         it "should remove widgets from another view when removed" do
-			oldContext = mock("Context::MainContext")
+			oldContext = double("Context::MainContext")
 			oldView = FakeView.new(oldContext)
             @view.addView(oldView)
 			@view.getWidget().should_receive(:gtkRemoveWidget).with(oldView.getWidget)
