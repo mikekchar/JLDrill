@@ -40,7 +40,7 @@ rubyforge_project = "jldrill"
 rubyforge_maintainer = "mikekchar@rubyforge.org"
 
 # Spec options
-rspec_opts = ['-f h -o test_results.html --require ./spec/simplecov_helper.rb']
+rspec_opts = ['--require ./spec/simplecov_helper.rb']
 spec_pattern = 'spec/**/*_s*.rb'
 
 # Options for running the application
