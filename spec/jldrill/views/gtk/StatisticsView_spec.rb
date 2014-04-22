@@ -3,8 +3,13 @@ require 'Context/Bridge'
 require 'jldrill/contexts/ShowStatisticsContext'
 require 'jldrill/views/gtk/StatisticsView'
 require 'jldrill/contexts/MainContext'
+require 'jldrill/views/gtk/CommandView'
+require 'jldrill/views/gtk/ProblemView'
+require 'jldrill/views/gtk/ItemHintView'
 require 'jldrill/views/gtk/MainWindowView'
+require 'jldrill/views/gtk/QuizStatusView'
 require 'jldrill/model/Quiz'
+require 'jldrill/spec/StoryMemento'
 
 
 module JLDrill::Gtk

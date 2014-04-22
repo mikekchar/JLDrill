@@ -1,6 +1,10 @@
 # encoding: utf-8
 require 'Context/Bridge'
 require 'jldrill/contexts/MainContext'
+require 'jldrill/views/gtk/CommandView'
+require 'jldrill/views/gtk/ProblemView'
+require 'jldrill/views/gtk/ItemHintView'
+require 'jldrill/views/gtk/QuizStatusView'
 require 'jldrill/views/gtk/MainWindowView'
 require 'jldrill/views/gtk/OptionsView'
 require 'jldrill/spec/StoryMemento'
