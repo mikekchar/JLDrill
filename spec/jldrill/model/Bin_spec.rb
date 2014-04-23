@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'jldrill/model/Bin'
 require 'jldrill/model/items/Vocabulary'
+require 'jldrill/model/Quiz'
 
 module JLDrill
 
@@ -119,6 +120,69 @@ module JLDrill
       test_pushAll
       @bin.exists?(@bin[0]).should be(true)
       @bin.contain?(Vocabulary.create("/Kanji: 雨/Reading: あめ/Definitions: rain/Markers: n,P/Position: 1/Consecutive: 0/")).should be(false)
+    end
+  end
+
+  describe "New Bin specs" do
+    describe "Names" do
+      it "should have a name and number" do
+        bin = Bin.new("bin-name", 5)
+        expect(bin.number).to eq(5)
+        expect(bin.isCalled?("bin-name")).to be_true
+        expect(bin.isCalled?("Frank")).to be_false
+      end
+
+      it "has a variety of aliases" do
+        bin = Bin.new("bin-name", 5)
+        bin.addAliases(["Tom", "Dick", "Harry"])
+        expect(bin.isCalled?("bin-name")).to be_true
+        expect(bin.isCalled?("Tom")).to be_true
+        expect(bin.isCalled?("Dick")).to be_true
+        expect(bin.isCalled?("Harry")).to be_true
+        expect(bin.isCalled?("Frank")).to be_false
+      end
+    end
+
+    context "An empty bin" do
+      subject(:bin) do
+        Bin.new("bin-name", 5)
+      end
+
+      let(:item) do
+        Item.new()
+      end
+
+      it "has a size/length of 0" do
+        expect(bin.length).to eq(0)
+        expect(bin.size).to eq(0)
+      end
+
+      it "returns nil for items that don't exist" do
+        expect(bin[5]).to be_nil
+      end
+
+      it "has a nil last values" do
+        expect(bin.last).to be_nil
+      end
+
+      it "pushes items" do
+        bin.push(item)
+        expect(bin.size).to eq(1)
+        expect(bin[0]).to be(item)
+        expect(bin.last).to be(item)
+      end
+
+      it "inserts items at position 0" do
+        bin.insertAt(0, item)
+        expect(bin[0]).to be(item)
+        expect(bin.last).to be(item)
+      end
+
+      it "inserts it even with wrong position" do
+        bin.insertAt(10, item)
+        expect(bin[0]).to be(item)
+        expect(bin.last).to be(item)
+      end
     end
   end
 end
