@@ -170,6 +170,7 @@ module JLDrill
       end
 
       it "pushes items" do
+        expect(item1.state).to receive(:moveTo).with(5)
         bin.push(item1)
         expect(bin.size).to eq(1)
         expect(bin[0]).to be(item1)
@@ -177,12 +178,14 @@ module JLDrill
       end
 
       it "inserts items at position 0" do
+        expect(item1.state).to receive(:moveTo).with(5)
         bin.insertAt(0, item1)
         expect(bin[0]).to be(item1)
         expect(bin.last).to be(item1)
       end
 
       it "inserts it even with wrong position" do
+        expect(item1.state).to receive(:moveTo).with(5)
         bin.insertAt(10, item1)
         expect(bin[0]).to be(item1)
         expect(bin.last).to be(item1)
@@ -194,6 +197,7 @@ module JLDrill
       end
 
       it "will insertBefore nothing" do
+        expect(item1.state).to receive(:moveTo).with(5)
         bin.insertBefore(item1) do
           true
         end
@@ -253,6 +257,47 @@ module JLDrill
       it "outputs only the bin name from to_s" do
         expect(bin.to_s).to eq("bin-name\n")
       end
+    end
+
+    context "bin with contents" do
+      subject(:bin) do
+        Bin.new("bin-name", 5).tap do |b|
+          b.contents = [item1, item2]
+        end
+      end
+
+      let(:item1) do
+        Item.new()
+      end
+
+      let(:item2) do
+        Item.new()
+      end
+
+      let(:item3) do
+        Item.new()
+      end
+
+      it "has a size/length of 2" do
+        expect(bin.length).to eq(2)
+        expect(bin.size).to eq(2)
+      end
+
+      it "can push an item to the end" do
+        expect(item3.state).to receive(:moveTo).with(5)
+        bin.push(item3)
+        expect(bin.length).to eq(3)
+        expect(bin.last).to be(item3)
+      end
+
+      it "can index into the bin" do
+        bin.push(item3)
+        expect(bin[0]).to be(item1)
+        expect(bin[1]).to be(item2)
+        expect(bin[2]).to be(item3)
+        expect(bin[3]).to be_nil
+      end
+
     end
   end
 end
