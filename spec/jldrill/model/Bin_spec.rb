@@ -148,7 +148,11 @@ module JLDrill
         Bin.new("bin-name", 5)
       end
 
-      let(:item) do
+      let(:item1) do
+        Item.new()
+      end
+
+      let(:item2) do
         Item.new()
       end
 
@@ -166,22 +170,88 @@ module JLDrill
       end
 
       it "pushes items" do
-        bin.push(item)
+        bin.push(item1)
         expect(bin.size).to eq(1)
-        expect(bin[0]).to be(item)
-        expect(bin.last).to be(item)
+        expect(bin[0]).to be(item1)
+        expect(bin.last).to be(item1)
       end
 
       it "inserts items at position 0" do
-        bin.insertAt(0, item)
-        expect(bin[0]).to be(item)
-        expect(bin.last).to be(item)
+        bin.insertAt(0, item1)
+        expect(bin[0]).to be(item1)
+        expect(bin.last).to be(item1)
       end
 
       it "inserts it even with wrong position" do
-        bin.insertAt(10, item)
-        expect(bin[0]).to be(item)
-        expect(bin.last).to be(item)
+        bin.insertAt(10, item1)
+        expect(bin[0]).to be(item1)
+        expect(bin.last).to be(item1)
+      end
+
+      it "does not try to move items that aren't there" do
+        bin.moveBeforeItem(item1, item2)
+        expect(bin.length).to eq(0)
+      end
+
+      it "will insertBefore nothing" do
+        bin.insertBefore(item1) do
+          true
+        end
+        expect(bin[0]).to be(item1)
+        expect(bin.last).to be(item1)
+      end
+
+      it "does not delete nonexistant items" do
+        bin.delete(item1)
+        expect(bin.length).to eq(0)
+      end
+
+      it "does nothing on each" do
+        bin.each do
+          expect(true).to be_false
+        end
+      end
+
+      it "does nothing on reverse_each" do
+        bin.each do
+          expect(true).to be_false
+        end
+      end
+
+      it "always returns true from all?" do
+        expect(bin.all? { true }).to be_true
+        expect(bin.all? { false }).to be_true
+      end
+
+      it "sorts nothing" do
+        expect(bin.sort!.size).to eq(0)
+      end
+
+      it "returns empty array from findAll" do
+        expect(bin.findAll { true }).to eq([])
+      end
+
+      it "can assign contents" do
+        bin.contents = [item1, item2]
+        expect(bin.length).to eq(2)
+        expect(bin[0]).to be(item1)
+        expect(bin[1]).to be(item2)
+      end
+
+      it "knows when it is empty" do
+        expect(bin).to be_empty
+      end
+
+      it "doesn't find nonexistant items" do
+        expect(bin.exists?(item1)).to be_false
+      end
+
+      it "doesn't find nonexistant objects" do
+        expect(bin.contain?(1)).to be_false
+      end
+
+      it "outputs only the bin name from to_s" do
+        expect(bin.to_s).to eq("bin-name\n")
       end
     end
   end
