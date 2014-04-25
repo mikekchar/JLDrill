@@ -298,6 +298,64 @@ module JLDrill
         expect(bin[3]).to be_nil
       end
 
+      it "can insert before the first place" do
+        expect(item3.state).to receive(:moveTo).with(5)
+        bin.insertAt(0, item3)
+        expect(bin[0]).to be(item3)
+        expect(bin[1]).to be(item1)
+        expect(bin[2]).to be(item2)
+        expect(bin[3]).to be_nil
+      end
+
+      it "can insert before the second place" do
+        expect(item3.state).to receive(:moveTo).with(5)
+        bin.insertAt(1, item3)
+        expect(bin[0]).to be(item1)
+        expect(bin[1]).to be(item3)
+        expect(bin[2]).to be(item2)
+        expect(bin[3]).to be_nil
+      end
+
+      it "can insert at the end" do
+        expect(item3.state).to receive(:moveTo).with(5)
+        bin.insertAt(3, item3)
+        expect(bin[0]).to be(item1)
+        expect(bin[1]).to be(item2)
+        expect(bin[2]).to be(item3)
+        expect(bin[3]).to be_nil
+      end
+
+      it "can insert before the first item" do
+        expect(item3.state).to receive(:moveTo).with(5)
+        bin.moveBeforeItem(item3, item1)
+        expect(bin[0]).to be(item3)
+        expect(bin[1]).to be(item1)
+        expect(bin[2]).to be(item2)
+        expect(bin[3]).to be_nil
+      end
+
+      it "can insert before the second item" do
+        expect(item3.state).to receive(:moveTo).with(5)
+        bin.moveBeforeItem(item3, item2)
+        expect(bin[0]).to be(item1)
+        expect(bin[1]).to be(item3)
+        expect(bin[2]).to be(item2)
+        expect(bin[3]).to be_nil
+      end
+
+      it "can move items that are already in the bin" do
+        bin.moveBeforeItem(item1, item2)
+        expect(bin[0]).to be(item2)
+        expect(bin[1]).to be(item1)
+        expect(bin[2]).to be_nil
+      end
+
+      it "can not insert before items that aren't in the bin" do
+        bin.moveBeforeItem(item1, item3)
+        expect(bin[0]).to be(item1)
+        expect(bin[1]).to be(item2)
+        expect(bin[2]).to be_nil
+      end
     end
   end
 end
