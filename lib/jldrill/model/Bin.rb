@@ -66,7 +66,7 @@ module JLDrill
         end
 
         # Insert an item before the index indicated
-        def insertAt(index, item)
+        def insert(index, item)
             item.state.moveTo(@number)
             if index >= @contents.size
                 @contents.push(item)
@@ -79,7 +79,7 @@ module JLDrill
             index = @contents.find_index(beforeItem)
             if !index.nil?
                 delete(moveItem)
-                insertAt(index, moveItem)
+                insert(index, moveItem)
             end
         end
 
@@ -92,7 +92,7 @@ module JLDrill
             while(!contents[i].nil? && !block.call(i))
                 i += 1
             end
-            insertAt(i, item)
+            insert(i, item)
         end
         
         def delete(item)
@@ -130,7 +130,7 @@ module JLDrill
         end
 
         # Returns an array of items for which block returns true
-        def findAll(&block)
+        def find_all(&block)
             retVal = []
             @contents.each do |item|
                 if block.call(item)

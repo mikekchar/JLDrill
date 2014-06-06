@@ -179,14 +179,14 @@ module JLDrill
 
       it "inserts items at position 0" do
         expect(item1.state).to receive(:moveTo).with(5)
-        bin.insertAt(0, item1)
+        bin.insert(0, item1)
         expect(bin[0]).to be(item1)
         expect(bin.last).to be(item1)
       end
 
       it "inserts it even with wrong position" do
         expect(item1.state).to receive(:moveTo).with(5)
-        bin.insertAt(10, item1)
+        bin.insert(10, item1)
         expect(bin[0]).to be(item1)
         expect(bin.last).to be(item1)
       end
@@ -231,8 +231,8 @@ module JLDrill
         expect(bin.sort!.size).to eq(0)
       end
 
-      it "returns empty array from findAll" do
-        expect(bin.findAll { true }).to eq([])
+      it "returns empty array from find_all" do
+        expect(bin.find_all { true }).to eq([])
       end
 
       it "can assign contents" do
@@ -300,7 +300,7 @@ module JLDrill
 
       it "can insert before the first place" do
         expect(item3.state).to receive(:moveTo).with(5)
-        bin.insertAt(0, item3)
+        bin.insert(0, item3)
         expect(bin[0]).to be(item3)
         expect(bin[1]).to be(item1)
         expect(bin[2]).to be(item2)
@@ -309,7 +309,7 @@ module JLDrill
 
       it "can insert before the second place" do
         expect(item3.state).to receive(:moveTo).with(5)
-        bin.insertAt(1, item3)
+        bin.insert(1, item3)
         expect(bin[0]).to be(item1)
         expect(bin[1]).to be(item3)
         expect(bin[2]).to be(item2)
@@ -318,7 +318,7 @@ module JLDrill
 
       it "can insert at the end" do
         expect(item3.state).to receive(:moveTo).with(5)
-        bin.insertAt(3, item3)
+        bin.insert(3, item3)
         expect(bin[0]).to be(item1)
         expect(bin[1]).to be(item2)
         expect(bin[2]).to be(item3)

@@ -344,10 +344,10 @@ module JLDrill
         end
 
         # Returns a list of items for which block returns true
-        def findAll(&block)
+        def find_all(&block)
             retVal = []
             @bins.each do |bin|
-                retVal += bin.findAll(&block)
+                retVal += bin.find_all(&block)
             end
             return retVal
         end
@@ -358,7 +358,7 @@ module JLDrill
             @bins.reverse_each do |bin|
                 bin.reverse_each do |item|
                     obj = item.to_o
-                    duplicates = self.findAll do |candidate|
+                    duplicates = self.find_all do |candidate|
                         ((item != candidate) && (obj == candidate.to_o))
                     end
                     duplicates.each do |dup|
