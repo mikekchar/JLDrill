@@ -20,7 +20,7 @@ module JLDrill
             else
                 index = 0
             end
-            item = @contents[index]
+            item = self[index]
             # Promote the item to the working set before returning it
             promote(item)
             return item

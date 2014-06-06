@@ -49,14 +49,14 @@ module JLDrill
             if n < numUnseen
                 i = 0
                 0.upto(n) do |m|
-                    while @contents[i].state.seen?
+                    while self[i].state.seen?
                         i += 1
                     end
                     if m != n
                         i += 1
                     end
                 end
-                retVal = @contents[i]
+                retVal = self[i]
             end
             retVal
         end
@@ -74,7 +74,7 @@ module JLDrill
         
         # Select an item for drilling from the set
         def selectItem
-            return @contents[0]
+            return self[0]
         end
 
         def correct(item)
@@ -111,7 +111,7 @@ module JLDrill
         def scheduleTable
             dCounter = DurationCounter.new
 
-            @contents.each do |item|
+            self.each do |item|
                 dCounter.count(item)
             end
             return dCounter
