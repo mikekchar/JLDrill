@@ -189,7 +189,7 @@ module JLDrill
         def getSortedItems
             items = []
             bins.each do |bin|
-                items += bin.contents
+                items += bin.copy_contents
             end
             items = allItems.sort! do |x, y|
                 x.hash <=> y.hash
@@ -275,7 +275,7 @@ module JLDrill
         def allItems
             items = []
             bins.each do |bin|
-                items += bin.contents
+                items += bin.copy_contents
             end
             items.sort! do |x,y| 
                 x.state.position <=> y.state.position
@@ -291,9 +291,9 @@ module JLDrill
 
         # Reset the contents back to their original order and schedule
         def reset
-            @bins[0].contents = allItems
+            @bins[0].replace(allItems)
             1.upto(@bins.length - 1) do |i|
-                @bins[i].contents = []
+                @bins[i].clear
             end
             @bins[0].each do |item|
                 item.state.allReset

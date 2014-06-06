@@ -235,13 +235,6 @@ module JLDrill
         expect(bin.find_all { true }).to eq([])
       end
 
-      it "can assign contents" do
-        bin.contents = [item1, item2]
-        expect(bin.length).to eq(2)
-        expect(bin[0]).to be(item1)
-        expect(bin[1]).to be(item2)
-      end
-
       it "knows when it is empty" do
         expect(bin).to be_empty
       end
@@ -262,7 +255,8 @@ module JLDrill
     context "bin with contents" do
       subject(:bin) do
         Bin.new("bin-name", 5).tap do |b|
-          b.contents = [item1, item2]
+          b.push(item1)
+          b.push(item2)
         end
       end
 

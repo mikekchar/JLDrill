@@ -2,7 +2,7 @@
 module JLDrill
     # Holds a group of items that are at the same level.
     class Bin
-        attr_reader :name, :number, :contents
+        attr_reader :name, :number
 
         # Create a new bin and call it name
         def initialize(name, number)
@@ -89,7 +89,7 @@ module JLDrill
         # the end
         def insertBefore(item, &block)
             i = 0
-            while(!contents[i].nil? && !block.call(i))
+            while(!@contents[i].nil? && !block.call(i))
                 i += 1
             end
             insert(i, item)
@@ -142,11 +142,20 @@ module JLDrill
 
         # Set the contents array to the value specified.  Also set the bin
         # number correctly
-        def contents=(array)
+        def replace(array)
             @contents = array
             self.each do |item|
                 item.state.moveTo(@number)
             end
+            @contents
+        end
+
+        def clear
+          @contents.clear
+        end
+
+        def copy_contents
+          @contents
         end
    
         # Returns true if the bin is empty
