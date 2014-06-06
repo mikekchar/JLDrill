@@ -38,7 +38,7 @@ module JLDrill
         def rememberedItems
             retVal = []
             if !empty? && (options.forgettingThresh != 0.0)
-                retVal = @contents.partition do |item|
+                retVal = self.partition do |item|
                     item.state.reviewRateUnderThreshold?
                 end[0]
             end
