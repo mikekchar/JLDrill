@@ -196,15 +196,6 @@ module JLDrill
         expect(bin.length).to eq(0)
       end
 
-      it "will insertBefore nothing" do
-        expect(item1.state).to receive(:moveTo).with(5)
-        bin.insertBefore(item1) do
-          true
-        end
-        expect(bin[0]).to be(item1)
-        expect(bin.last).to be(item1)
-      end
-
       it "does not delete nonexistant items" do
         bin.delete(item1)
         expect(bin.length).to eq(0)

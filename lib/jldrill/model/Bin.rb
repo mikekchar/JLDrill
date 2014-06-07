@@ -58,18 +58,6 @@ module JLDrill
       end
     end
 
-    # Inserts an item before the one where
-    # the block evaluates true.  If the block
-    # never evaluates true, put the item at
-    # the end
-    def insertBefore(item, &block)
-      i = 0
-      while(!self[i].nil? && !block.call(i))
-        i += 1
-      end
-      insert(i, item)
-    end
-
     # Set the contents array to the value specified.  Also set the bin
     # number correctly
     def replace(array)
