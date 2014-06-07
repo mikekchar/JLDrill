@@ -27,12 +27,13 @@ module JLDrill
                 @itemType = nil
                 @contents = ""
                 @hash = "".hash
+                @cache = nil
             else
                 @itemType = item.class
                 @contents = item.to_s
                 @hash = item.hash
+                @cache = item
             end
-            @cache = nil
             @state = ItemState.new(self)
         end
 

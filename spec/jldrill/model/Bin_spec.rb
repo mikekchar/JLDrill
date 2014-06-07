@@ -65,15 +65,15 @@ module JLDrill
       end
 
       let(:item1) do
-        Item.new()
+        Item.new("item1")
       end
 
       let(:item2) do
-        Item.new()
+        Item.new("item2")
       end
 
       let(:item3) do
-        Item.new()
+        Item.new("item3")
       end
 
       it "can push an item to the end" do
@@ -140,6 +140,26 @@ module JLDrill
         expect(bin[0]).to be(item1)
         expect(bin[1]).to be(item2)
         expect(bin[2]).to be_nil
+      end
+
+      it "finds items items" do
+        expect(bin.exists?(item2)).to be_true
+      end
+
+      it "doesn't find nonexistant items" do
+        expect(bin.exists?(item3)).to be_false
+      end
+
+      it "finds objects" do
+        expect(bin.contain?("item2")).to be_true
+      end
+
+      it "doesn't find nonexistant objects" do
+        expect(bin.contain?("item3")).to be_false
+      end
+
+      it "outputs the bin name and all of the items from t_s" do
+        expect(bin.to_s).to eq("bin-name\nitem1/Position: -1/\nitem2/Position: -1/\n")
       end
     end
   end
