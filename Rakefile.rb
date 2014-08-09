@@ -44,7 +44,7 @@ rspec_opts = ['--require ./spec/simplecov_helper.rb']
 spec_pattern = 'spec/**/*_s*.rb'
 
 # Options for running the application
-ruby_opts = ["-KO", "-I./lib", "-rrubygems"]
+ruby_opts = ["-KO", "-I./lib"]
 
 task :default => [:spec]
 
@@ -62,14 +62,12 @@ RSpec::Core::RakeTask.new(:cov) do |t, args|
 	t.pattern = spec_pattern
 	t.rspec_opts = rspec_opts
 	t.ruby_opts = ruby_opts
-    t.verbose = false
+  t.verbose = false
 end
 
 desc "Run the application that's in the development directory (rather than one that might be installed somewhere else)."
-Rake::TestTask.new(:run) do |t|
-	t.test_files = FileList['bin/jldrill']
-	t.ruby_opts = ruby_opts
-    t.verbose = false
+task(:run) do |t|
+  exec("bundle exec ruby -I./lib -KO bin/jldrill")
 end
 
 desc "Build the RDOC development documentation. output goes to doc/index.html"
