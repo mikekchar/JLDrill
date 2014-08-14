@@ -115,8 +115,8 @@ module JLDrill
         # Indicate that the item was incorrect
         def incorrect
             @itemStats.incorrect
-            @problemStatus.allIncorrect
             @quiz.contents.bins[@bin].incorrect(@item)
+            @problemStatus.allIncorrect
         end
 
         # Promote the item at the request of the user
