@@ -4,8 +4,8 @@ require 'gtk2'
 
 module JLDrill::Gtk
     class OptionsWindow < Gtk::Dialog
-		include Context::Gtk::Widget
-        
+        include Context::Gtk::Widget
+
         def initialize(view)
             @view = view
             super("Drill Options", nil,
@@ -17,7 +17,7 @@ module JLDrill::Gtk
             @newSetOptions = createNewSetOptions
             @workingSetOptions = createWorkingSetOptions
             @reviewSetOptions = createReviewSetOptions
-            
+
             self.vbox.add(@dictionaryOptions.box)
             self.vbox.add(@newSetOptions.box)
             self.vbox.add(@workingSetOptions.box)
@@ -30,7 +30,7 @@ module JLDrill::Gtk
 
             def initialize(label, first, last, step)
                 @box = Gtk::HBox.new()
-                @label = Gtk::Label.new(label + ": ") 
+                @label = Gtk::Label.new(label + ": ")
                 @scale = Gtk::HScale.new(first, last, step)
                 @box.pack_start(@label, false)
                 @box.pack_start(@scale, true)
@@ -102,7 +102,7 @@ module JLDrill::Gtk
             retVal.add(@interleavedWorkingSet)
             return retVal
         end
-       
+
         def createDictionaryOptions
             retVal = Section.new("Dictionary")
             options = Gtk::HBox.new()
@@ -119,6 +119,8 @@ module JLDrill::Gtk
             retVal.add(@autoloadDic)
             @chinese = Gtk::CheckButton.new("Chinese")
             retVal.add(@chinese)
+            @tagalog = Gtk::CheckButton.new("Tagalog")
+            retVal.add(@tagalog)
 
             return retVal
         end
@@ -126,7 +128,7 @@ module JLDrill::Gtk
         def randomOrder=(value)
             @randomOrder.active = value
         end
-        
+
         def randomOrder
             @randomOrder.active?
         end
@@ -134,7 +136,7 @@ module JLDrill::Gtk
         def reviewMeaning=(value)
             @reviewMeaning.active = value
         end
-        
+
         def reviewMeaning
             @reviewMeaning.active?
         end
@@ -142,15 +144,15 @@ module JLDrill::Gtk
         def reviewKanji=(value)
             @reviewKanji.active = value
         end
-        
+
         def reviewKanji
             @reviewKanji.active?
         end
-        
+
         def reviewReading=(value)
             @reviewReading.active = value
         end
-        
+
         def reviewReading
             @reviewReading.active?
         end
@@ -158,15 +160,15 @@ module JLDrill::Gtk
         def promoteThresh=(value)
             @promoteThresh.value = value
         end
-        
+
         def promoteThresh
             @promoteThresh.value.to_i
         end
-        
+
         def introThresh=(value)
             @introThresh.value = value
         end
-        
+
         def introThresh
             @introThresh.value.to_i
         end
@@ -180,16 +182,15 @@ module JLDrill::Gtk
         end
 
         def language=(value)
-            if (value == "Chinese")
-                @chinese.active = true
-            else
-                @chinese.active = false
-            end
+            @chinese.active = (value == "Chinese")
+            @tagalog.active = (value == "Tagalog")
         end
 
         def language
             if (@chinese.active?)
                 return "Chinese"
+            elsif (@tagalog.active?)
+                return "Tagalog"
             else
                 return "Japanese"
             end
@@ -202,7 +203,7 @@ module JLDrill::Gtk
         def autoloadDic
             @autoloadDic.active?
         end
-        
+
         def forgettingThresh=(value)
             @forgettingThresh.value = value
         end
@@ -236,11 +237,11 @@ module JLDrill::Gtk
             self.forgettingThresh = options.forgettingThresh
             self.interleavedWorkingSet = options.interleavedWorkingSet
         end
-        
+
         def updateFromViewData
             set(@view.options)
         end
-        
+
         def setViewData
             @view.optionsSet = true
             @view.options.randomOrder = self.randomOrder
@@ -260,7 +261,7 @@ module JLDrill::Gtk
             @view.options.forgettingThresh = self.forgettingThresh
             @view.options.interleavedWorkingSet = self.interleavedWorkingSet
         end
-        
+
         def execute
             if run == Gtk::Dialog::RESPONSE_ACCEPT
                 setViewData

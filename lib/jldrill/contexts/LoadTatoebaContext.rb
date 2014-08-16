@@ -17,6 +17,7 @@ module JLDrill
             super(viewBridge)
             @sentencesFile = Config::resolveDataFile(Config::TATOEBA_SENTENCE_FILE)
             @japaneseFile = Config::resolveDataFile(Config::TATOEBA_JAPANESE_FILE)
+            @tagalogFile = Config::resolveDataFile(Config::TATOEBA_TAGALOG_FILE)
             @linksFile = Config::resolveDataFile(Config::TATOEBA_LINKS_FILE)
             @loadFileContext = LoadFileContext.new(@viewBridge)
         end
@@ -38,8 +39,11 @@ module JLDrill
 
         def loadLanguage()
             language = @parent.quiz.options.language
-            if language.eql?("Chinese")
+            case language
+            when "Chinese"
                 loadChinese
+            when "Tagalog"
+                loadTagalog
             else
                 loadJapanese
             end
@@ -57,6 +61,13 @@ module JLDrill
                 exitLoadTatoebaContext
             end
             @loadFileContext.enter(self, @db.chineseIndeces, @linksFile)
+        end
+
+        def loadTagalog
+            @loadFileContext.onExit do
+                exitLoadTatoebaContext
+            end
+            @loadFileContext.enter(self, @db.tagalogIndeces, @tagalogFile)
         end
 
         def exitLoadTatoebaContext

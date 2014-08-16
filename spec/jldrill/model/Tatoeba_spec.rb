@@ -96,5 +96,25 @@ module JLDrill::Tatoeba
             suguni[0].to_s.should eql("直ぐに\n\t4709: すぐに戻ります。 \n\t1284: I will be back soon.")
 
         end
+
+        it "should be able to read the Tagalog Index file from disk" do
+            sentences = SentenceFile.new
+            sentences.load(
+                File.join(JLDrill::Config::DATA_DIR, "tests/sentences.csv")
+            )
+            sentences.parse
+            tagalog = TagalogIndexFile.new(sentences)
+            tagalog.load(
+                File.join(
+                    JLDrill::Config::DATA_DIR,
+                    "tests/tgl_indices.csv",
+                )
+            )
+            tagalog.parse
+
+            tagalog.lines.should_not eql([])
+
+            tagalog.dataSize.should be(1)
+        end
     end
 end

@@ -256,19 +256,94 @@ module JLDrill::Tatoeba
         end
     end
 
+    class TagalogIndexFile < JLDrill::DataFile
+
+        LINK_RE = /^(\d*)[\t](\d*)/
+        TAGALOG_INDEX_RE = /^(\d*)[\t]tgl/
+        ENGLISH_INDEX_RE = /^(\d*)[\t]eng/
+
+        def initialize(sentences)
+            super()
+            @sentences = sentences
+            @tagalogIndeces = []
+            @englishIndeces = []
+            @stepSize = 10000
+            @ruledOut = 0
+        end
+
+        def parseEntry
+            if LINK_RE.match(@lines[@parsed])
+                tindex = $1.to_i
+                eindex = $2.to_i
+                if tindex != @ruledOut
+                    tagalog = @sentences.dataAt(tindex)
+                    english = @sentences.dataAt(eindex)
+                    if TAGALOG_INDEX_RE.match(tagalog)
+                        if ENGLISH_INDEX_RE.match(english)
+                            @tagalogIndeces.push(tindex)
+                            @englishIndeces.push(eindex)
+                            @ruledOut = tindex
+                        end
+                    else
+                        @ruledOut = tindex
+                    end
+                end
+            end
+            @parsed += 1
+        end
+
+        def dataSize
+            @tagalogIndeces.size
+        end
+
+        def finishParsing
+            setLoaded(true)
+        end
+
+        def loaded?
+            retVal = super
+            return retVal
+        end
+
+        def getPositions(kanji)
+            return (0..@tagalogIndeces.size - 1).find_all do |i|
+                # As Tagalog doesn't use Kanji, this won't work for the
+                # moment.
+                @sentences.sentenceAt(@tagalogIndeces[i]).match("")
+            end
+        end
+
+        def search(kanji, reading)
+            retVal = []
+            positions = getPositions(kanji)
+            positions.each do |i|
+                tindex = @tagalogIndeces[i]
+                eindex = @englishIndeces[i]
+                usage = JLDrill::VocabularyUsage.from_B_line(kanji)
+                retVal.push(TatoebaExample.new(tindex, eindex, usage, @sentences))
+            end
+            return retVal
+        end
+    end
+
     # Represents the Tatoeba database
     class Database
-        attr_reader :sentences, :japaneseIndeces, :chineseIndeces
+        attr_reader :sentences, :japaneseIndeces, :chineseIndeces,
+            :tagalogIndeces
 
         def initialize()
             @sentences = SentenceFile.new
             @japaneseIndeces = JapaneseIndexFile.new(@sentences)
             @chineseIndeces = ChineseIndexFile.new(@sentences)
+            @tagalogIndeces = TagalogIndexFile.new(@sentences)
         end
 
         def indeces(options)
-            if options.language.eql?("Chinese")
+            case options.language
+            when "Chinese"
                 return @chineseIndeces
+            when "Tagalog"
+                return @tagalogIndeces
             else
                 return @japaneseIndeces
             end

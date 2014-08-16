@@ -63,6 +63,7 @@ module JLDrill
         TATOEBA_SENTENCE_FILE = File.join("Tatoeba", "sentences.csv")
         TATOEBA_LINKS_FILE = File.join("Tatoeba", "links.csv")
         TATOEBA_JAPANESE_FILE = File.join("Tatoeba", "jpn_indices.csv")
+        TATOEBA_TAGALOG_FILE = File.join("Tatoeba", "tgl_indices.csv")
         DEINFLECTION_FILE = File.join("dict","rikaichan","deinflect.dat")
     end
 end
