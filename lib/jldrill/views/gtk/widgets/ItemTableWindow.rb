@@ -92,11 +92,11 @@ module JLDrill::Gtk
                 # Request that the destroy signal be sent
                 false
             end
-            
+
             signal_connect('destroy') do
                 self.close
             end
-            
+
             @exitButton.signal_connect('clicked') do
                 self.close
             end
@@ -202,9 +202,11 @@ module JLDrill::Gtk
         end
 
         def preview
-            item = @vocabTable.getSelectedItem
-            if !item.nil?
-                @context.preview(item)
+            if !@vocabTable.nil?
+                item = @vocabTable.getSelectedItem
+                if !item.nil?
+                  @context.preview(item)
+                end
             end
         end
 
@@ -228,7 +230,7 @@ module JLDrill::Gtk
         def markPaste
             @vocabTable.pasteBefore
         end
-        
+
         def showBusy(bool)
             if bool
                 self.window.set_cursor(Gdk::Cursor.new(Gdk::Cursor::WATCH))
