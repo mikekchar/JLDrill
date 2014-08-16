@@ -36,58 +36,58 @@ require 'jldrill/model/DeinflectionRules'
 
 module JLDrill
 
-	class MainContext < Context::Context
-	
-	    attr_reader :loadReferenceContext, :setOptionsContext, 
-	                :showStatisticsContext, :getFilenameContext,
-	                :addNewVocabularyContext, :displayQuizStatusContext,
-	                :displayProblemContext, :runCommandContext,
-	                :showInfoContext, :showAllVocabularyContext,
+    class MainContext < Context::Context
+
+        attr_reader :loadReferenceContext, :setOptionsContext,
+                    :showStatisticsContext, :getFilenameContext,
+                    :addNewVocabularyContext, :displayQuizStatusContext,
+                    :displayProblemContext, :runCommandContext,
+                    :showInfoContext, :showAllVocabularyContext,
                     :showAboutContext, :editVocabularyContext,
-					:loadTanakaContext, :showExamplesContext,
+                    :loadTanakaContext, :showExamplesContext,
                     :loadQuizContext, :loadKanjiContext,
                     :loadTatoebaContext, :appendFileContext,
-	                :reference, :quiz, :kanji, :radicals, :kana,
+                    :reference, :quiz, :kanji, :radicals, :kana,
                     :inTests, :tanaka, :tatoebaDB, :deinflect,
                     :longEventPublisher
 
-	    attr_writer :quiz, :inTests, :reference
-		
-		def initialize(viewBridge)
-			super(viewBridge)
-			@runCommandContext = RunCommandContext.new(viewBridge)
-			@loadReferenceContext = LoadReferenceContext.new(viewBridge)
-			@setOptionsContext = SetOptionsContext.new(viewBridge)
-			@showStatisticsContext = ShowStatisticsContext.new(viewBridge)
-			@getFilenameContext = GetFilenameContext.new(viewBridge)
-			@getFilenameContext.directory = Config::resolveDataFile(Config::QUIZ_DIR)
-			@addNewVocabularyContext = AddNewVocabularyContext.new(viewBridge)
-			@editVocabularyContext = EditVocabularyContext.new(viewBridge)
-			@displayQuizStatusContext = DisplayQuizStatusContext.new(viewBridge)
-			@displayProblemContext = DisplayProblemContext.new(viewBridge)
-			@showInfoContext = ShowInfoContext.new(viewBridge)
-			@showAllVocabularyContext = ShowAllVocabularyContext.new(viewBridge)
-			@showAboutContext = ShowAboutContext.new(viewBridge)
-			@loadTanakaContext = LoadTanakaContext.new(viewBridge)
+        attr_writer :quiz, :inTests, :reference
+
+        def initialize(viewBridge)
+            super(viewBridge)
+            @runCommandContext = RunCommandContext.new(viewBridge)
+            @loadReferenceContext = LoadReferenceContext.new(viewBridge)
+            @setOptionsContext = SetOptionsContext.new(viewBridge)
+            @showStatisticsContext = ShowStatisticsContext.new(viewBridge)
+            @getFilenameContext = GetFilenameContext.new(viewBridge)
+            @getFilenameContext.directory = Config::resolveDataFile(Config::QUIZ_DIR)
+            @addNewVocabularyContext = AddNewVocabularyContext.new(viewBridge)
+            @editVocabularyContext = EditVocabularyContext.new(viewBridge)
+            @displayQuizStatusContext = DisplayQuizStatusContext.new(viewBridge)
+            @displayProblemContext = DisplayProblemContext.new(viewBridge)
+            @showInfoContext = ShowInfoContext.new(viewBridge)
+            @showAllVocabularyContext = ShowAllVocabularyContext.new(viewBridge)
+            @showAboutContext = ShowAboutContext.new(viewBridge)
+            @loadTanakaContext = LoadTanakaContext.new(viewBridge)
             @loadTatoebaContext = LoadTatoebaContext.new(viewBridge)
-			@showExamplesContext = ShowExamplesContext.new(viewBridge)
+            @showExamplesContext = ShowExamplesContext.new(viewBridge)
             @loadQuizContext = LoadQuizContext.new(viewBridge)
             @loadKanjiContext = LoadKanjiContext.new(viewBridge)
             @appendFileContext = AppendFileContext.new(viewBridge)
-			@reference = JEDictionary.new
-			@kanji = KanjiFile.new
-			@radicals = RadicalFile.new
+            @reference = JEDictionary.new
+            @kanji = KanjiFile.new
+            @radicals = RadicalFile.new
             @kana = KanaFile.new
-			@quiz = Quiz.new
+            @quiz = Quiz.new
             # The quiz doesn't need to be saved
             @quiz.setNeedsSave(false)
             @inTests = false
-			@tanaka = Tanaka::Reference.new
+            @tanaka = Tanaka::Reference.new
             @tatoebaDB = Tatoeba::Database.new
             @deinflect = DeinflectionRulesFile.new
 
             @longEventPublisher = Context::Publisher.new(self)
-		end
+        end
 
         class MainWindowView < Context::View
             def inititalize(context)
@@ -112,17 +112,17 @@ module JLDrill
                 context.exit
             end
         end
-		
-		def createViews
-			@mainWindowView = @viewBridge.MainWindowView.new(self)
-			@mainView = @mainWindowView		    
-		end
-		
-		def destroyViews
-		    @mainWindowView.destroy unless @mainWindowView.nil?
-		    @mainWindowView = nil
-		    @mainView = nil
-		end
+
+        def createViews
+            @mainWindowView = @viewBridge.MainWindowView.new(self)
+            @mainView = @mainWindowView
+        end
+
+        def destroyViews
+            @mainWindowView.destroy unless @mainWindowView.nil?
+            @mainWindowView = nil
+            @mainView = nil
+        end
 
         def parseCommandLineOptions
             if !@inTests && ARGV.size == 1
@@ -130,53 +130,53 @@ module JLDrill
             end
         end
 
-		def enter(parent)
-			super(parent)
-			@runCommandContext.enter(self)
-			@displayProblemContext.enter(self)
-			@displayQuizStatusContext.enter(self)
+        def enter(parent)
+            super(parent)
+            @runCommandContext.enter(self)
+            @displayProblemContext.enter(self)
+            @displayQuizStatusContext.enter(self)
             parseCommandLineOptions
             @quiz.options.subscribe(self)
             loadKanji unless @inTests
-		end
-				
-		def exit
-			@runCommandContext.exit
-		    @displayQuizStatusContext.exit 
-		    @displayProblemContext.exit 
+        end
+
+        def exit
+            @runCommandContext.exit
+            @displayQuizStatusContext.exit
+            @displayProblemContext.exit
             @quiz.options.unsubscribe(self)
-			@parent.exit
-			super
-		end
+            @parent.exit
+            super
+        end
 
         def optionsUpdated(options)
             if options.autoloadDic
                 loadReference
             end
         end
-		
+
         def save
-		    if @quiz.file.empty?
-		        saveAs
-		    else
-    		    if !@quiz.save
+            if @quiz.file.empty?
+                saveAs
+            else
+                if !@quiz.save
                     print "Error: Can't save.  Try again.\n"
                     saveAs
                 end
-    		end
-		end
-		
-		def saveAs
-		    filename = @getFilenameContext.enter(self, GetFilenameContext::SAVE)
-		    if !filename.nil?
-		        @quiz.file = filename
-		        while !@quiz.save
+            end
+        end
+
+        def saveAs
+            filename = @getFilenameContext.enter(self, GetFilenameContext::SAVE)
+            if !filename.nil?
+                @quiz.file = filename
+                while !@quiz.save
                     print "Error: Can't save.  Try again.\n"
                 end
-		    end
-		end
+            end
+        end
 
-		def openFile(filename = nil)
+        def openFile(filename = nil)
             if !@loadQuizContext.isEntered?
                 @loadQuizContext.onExit do
                     @quiz.options.subscribe(self)
@@ -185,9 +185,9 @@ module JLDrill
                 end
                 @loadQuizContext.enter(self, @quiz, filename)
             end
-		end
-		
-		def appendFile
+        end
+
+        def appendFile
             if !@appendFileContext.isEntered?
                 @appendFileContext.onExit do
                     if quiz.currentProblem.nil?
@@ -196,25 +196,25 @@ module JLDrill
                 end
                 @appendFileContext.enter(self, @quiz)
             end
-		end
-		
-		def promptForSaveAnd(&block)
-		    if @quiz.needsSave?
-		        promptForSave = PromptForSaveContext.new(@viewBridge) 
+        end
+
+        def promptForSaveAnd(&block)
+            if @quiz.needsSave?
+                promptForSave = PromptForSaveContext.new(@viewBridge)
                 result = promptForSave.enter(self)
-		        if result == promptForSave.yes
+                if result == promptForSave.yes
                     save
-		            block.call
+                    block.call
                 elsif result == promptForSave.no
                     block.call
                 else
                     # Cancel... Do nothing
-		        end
-		    else
-		        block.call
-		    end
-		end
-		
+                end
+            else
+                block.call
+            end
+        end
+
         def createNew
             promptForSaveAnd do
                 @quiz.reset
@@ -228,24 +228,24 @@ module JLDrill
             end
         end
 
-		def open
-		    promptForSaveAnd do
-		        openFile
-		    end
-		end
-		
-		def quit
-		    promptForSaveAnd do
-		        exit
-		    end
-		end
-		
-		def loadReference
+        def open
+            promptForSaveAnd do
+                openFile
+            end
+        end
+
+        def quit
+            promptForSaveAnd do
+                exit
+            end
+        end
+
+        def loadReference
             if !@loadReferenceContext.isEntered?
-                @loadReferenceContext.enter(self, @reference, @deinflect, 
+                @loadReferenceContext.enter(self, @reference, @deinflect,
                                             @quiz.options)
             end
-		end
+        end
 
         def exampleDB
             if @tanaka.loaded?
@@ -255,27 +255,27 @@ module JLDrill
             end
         end
 
-		def loadTanaka
-			if @tanaka.loaded?
+        def loadTanaka
+            if @tanaka.loaded?
                 if !@showExamplesContext.isEntered?
                     @showExamplesContext.enter(self)
                 end
-			else
+            else
                 if !@loadTanakaContext.isEntered?
                     @loadTanakaContext.onExit do
                         @showExamplesContext.enter(self)
                     end
                     @loadTanakaContext.enter(self, @tanaka, @quiz.options)
                 end
-			end
-		end
+            end
+        end
 
-		def loadTatoeba
-			if @tatoebaDB.loaded?(@quiz.options)
+        def loadTatoeba
+            if @tatoebaDB.loaded?(@quiz.options)
                 if !@showExamplesContext.isEntered?
                     @showExamplesContext.enter(self)
                 end
-			else
+            else
                 if !@loadTatoebaContext.isEntered?
                     @loadTatoebaContext.onExit do
                         if !@showExamplesContext.isEntered?
@@ -286,47 +286,47 @@ module JLDrill
                     end
                     @loadTatoebaContext.enter(self, @tatoebaDB)
                 end
-			end
-		end
+            end
+        end
 
         def loadExamples
             loadTatoeba
         end
 
-		
-		def loadKanji
+
+        def loadKanji
             if !@loadKanjiContext.isEntered?
                 @loadKanjiContext.enter(self, @kanji, @radicals, @kana)
             end
-		end
-		
-		def setOptions
-		    @setOptionsContext.enter(self) unless @setOptionsContext.isEntered?
-		end
-		
-		def showStatistics
-		    @showStatisticsContext.enter(self) unless @showStatisticsContext.isEntered?
-		end
-		
-		def setReviewMode(bool)
-		    @quiz.options.reviewMode = bool unless @quiz.nil?
-		end
-		
-		def addNewVocabulary
-		    @addNewVocabularyContext.enter(self) unless @addNewVocabularyContext.isEntered?
-		end
-		
-		def editVocabulary
-		    if !@quiz.currentProblem.nil? &&
+        end
+
+        def setOptions
+            @setOptionsContext.enter(self) unless @setOptionsContext.isEntered?
+        end
+
+        def showStatistics
+            @showStatisticsContext.enter(self) unless @showStatisticsContext.isEntered?
+        end
+
+        def setReviewMode(bool)
+            @quiz.options.reviewMode = bool unless @quiz.nil?
+        end
+
+        def addNewVocabulary
+            @addNewVocabularyContext.enter(self) unless @addNewVocabularyContext.isEntered?
+        end
+
+        def editVocabulary
+            if !@quiz.currentProblem.nil? &&
                     !@quiz.currentProblem.preview?
                 # Always show the answer before editing the problem
                 showAnswer
-    		    @editVocabularyContext.enter(self) unless @editVocabularyContext.isEntered?
-    		end
-		end
+                @editVocabularyContext.enter(self) unless @editVocabularyContext.isEntered?
+            end
+        end
 
         def deleteVocabulary
-		    if !@quiz.currentProblem.nil? &&
+            if !@quiz.currentProblem.nil? &&
                     !@quiz.currentProblem.preview?
                 # Always show the answer before deleting an item
                 showAnswer
@@ -342,7 +342,7 @@ module JLDrill
         # Display the problem if it isn't the current one
         def displayItem(item)
             if !item.nil?
-                if @quiz.currentProblem.nil? || 
+                if @quiz.currentProblem.nil? ||
                         !@quiz.currentProblem.item.eql?(item)
                     @quiz.displayProblem(item)
                     showAnswer
@@ -353,14 +353,14 @@ module JLDrill
         # Preview an item that doesn't currently exist in the quiz
         def previewItem(item)
             if !item.nil?
-                if @quiz.currentProblem.nil? || 
+                if @quiz.currentProblem.nil? ||
                         !@quiz.currentProblem.item.eql?(item)
                     @quiz.previewProblem(item)
                     showAnswer
                 end
             end
         end
-        
+
         def editItem(item)
             if !item.nil?
                 displayItem(item)
@@ -375,35 +375,35 @@ module JLDrill
             end
         end
 
-		def updateQuizStatus
-		    @displayQuizStatusContext.quizUpdated(@quiz) if @displayQuizStatusContext.isEntered?
-		end
-		
-		def showAnswer
+        def updateQuizStatus
+            @displayQuizStatusContext.quizUpdated(@quiz) if @displayQuizStatusContext.isEntered?
+        end
+
+        def showAnswer
             if !@quiz.currentProblem.nil?
                 @displayProblemContext.showAnswer if @displayProblemContext.isEntered?
                 @showExamplesContext.showAnswer if @showExamplesContext.isEntered?
             end
-		end
-		
+        end
+
         # Get a new problem in the drill without answering the current problem
         def drill
             @quiz.drill
         end
 
-		def correct
+        def correct
             if !@quiz.currentProblem.nil? && !@quiz.currentProblem.displayOnly?
                 @quiz.correct
                 @quiz.drill
             end
-		end
-		
-		def incorrect
+        end
+
+        def incorrect
             if !@quiz.currentProblem.nil? && !@quiz.currentProblem.displayOnly?
                 @quiz.incorrect
                 @quiz.drill
             end
-		end
+        end
 
         def learn
             if !@quiz.currentProblem.nil? && !@quiz.currentProblem.displayOnly?
@@ -417,26 +417,26 @@ module JLDrill
                 @quiz.contents.removeDuplicates
             end
         end
-		
-		def reset
-		    @quiz.resetContents
-		end
-		
-		def showQuizInfo
-		    @showInfoContext.enter(self, @quiz.info) unless @showInfoContext.isEntered?
-		end
 
-		def showAcknowlegements
-		    @showInfoContext.enter(self, Acknowlegements) unless @showInfoContext.isEntered?
-		end
-		
-		def showAllVocabulary
-		    @showAllVocabularyContext.enter(self) unless @showAllVocabularyContext.isEntered?
-		end
+        def reset
+            @quiz.resetContents
+        end
 
-		def showAbout
-		    @showAboutContext.enter(self) unless @showAboutContext.isEntered?
-		end
+        def showQuizInfo
+            @showInfoContext.enter(self, @quiz.info) unless @showInfoContext.isEntered?
+        end
+
+        def showAcknowlegements
+            @showInfoContext.enter(self, Acknowlegements) unless @showInfoContext.isEntered?
+        end
+
+        def showAllVocabulary
+            @showAllVocabularyContext.enter(self) unless @showAllVocabularyContext.isEntered?
+        end
+
+        def showAbout
+            @showAboutContext.enter(self) unless @showAboutContext.isEntered?
+        end
 
         def startLongEvent()
             @mainView.showBusy(true)

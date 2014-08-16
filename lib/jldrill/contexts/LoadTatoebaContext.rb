@@ -8,18 +8,18 @@ require 'jldrill/model/exampleDB/Tatoeba'
 module JLDrill
 
     # Load the kanji, radicals and kana files one after another.
-	class LoadTatoebaContext < Context::Context
+    class LoadTatoebaContext < Context::Context
 
         attr_reader :sentencesFile, :japaneseFile
         attr_writer :sentencesFile, :japaneseFile
-		
-		def initialize(viewBridge)
-			super(viewBridge)
-		    @sentencesFile = Config::resolveDataFile(Config::TATOEBA_SENTENCE_FILE)
+
+        def initialize(viewBridge)
+            super(viewBridge)
+            @sentencesFile = Config::resolveDataFile(Config::TATOEBA_SENTENCE_FILE)
             @japaneseFile = Config::resolveDataFile(Config::TATOEBA_JAPANESE_FILE)
             @linksFile = Config::resolveDataFile(Config::TATOEBA_LINKS_FILE)
             @loadFileContext = LoadFileContext.new(@viewBridge)
-		end
+        end
 
         def createViews
             @mainView =  @viewBridge.VBoxView.new(self)
@@ -80,6 +80,5 @@ module JLDrill
                 loadLanguage()
             end
         end
-    end		
+    end
 end
-

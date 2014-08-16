@@ -14,7 +14,7 @@ module JLDrill
         # If the source has been installed by a package, then who knows
         # where this is...
         def Config::repositoryDir
-            File.expand_path(File.join(Config::configSrcDir, 
+            File.expand_path(File.join(Config::configSrcDir,
                                        File.join("..","..","..")))
         end
 
@@ -29,7 +29,7 @@ module JLDrill
             end
         end
 
-        PERSONAL_DATA_DIR = File.expand_path(File.join("~",".jldrill")) 
+        PERSONAL_DATA_DIR = File.expand_path(File.join("~",".jldrill"))
         REPO_DATA_DIR = File.join(Config::repositoryDir, "data","jldrill")
         if !Gem::datadir("jldrill").nil?
             GEM_DATA_DIR = File.expand_path(Gem::datadir("jldrill"))
@@ -59,10 +59,10 @@ module JLDrill
         KANJI_FILE = File.join("dict","rikaichan","kanji.dat")
         RADICAL_FILE = File.join("dict","rikaichan","radicals.dat")
         KANA_FILE = File.join("dict","Kana","kana.dat")
-		TANAKA_FILE = File.join("Tanaka","examples.utf")
+        TANAKA_FILE = File.join("Tanaka","examples.utf")
         TATOEBA_SENTENCE_FILE = File.join("Tatoeba", "sentences.csv")
         TATOEBA_LINKS_FILE = File.join("Tatoeba", "links.csv")
         TATOEBA_JAPANESE_FILE = File.join("Tatoeba", "jpn_indices.csv")
-		DEINFLECTION_FILE = File.join("dict","rikaichan","deinflect.dat")
+        DEINFLECTION_FILE = File.join("dict","rikaichan","deinflect.dat")
     end
 end

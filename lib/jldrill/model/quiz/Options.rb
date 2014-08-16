@@ -7,7 +7,7 @@ module JLDrill
     # Options for the standard quiz.
     class Options
         attr_reader :publisher, :randomOrder, :promoteThresh, :introThresh,
-                    :reviewMode, :dictionary, :language, :reviewMeaning, 
+                    :reviewMode, :dictionary, :language, :reviewMeaning,
                     :reviewKanji, :reviewReading, :reviewOptionsSet,
                     :autoloadDic, :tanaka, :forgettingThresh,
                     :interleavedWorkingSet
@@ -33,15 +33,15 @@ module JLDrill
             @promoteThresh = 2
             @introThresh = 10
             @reviewMode = false
-			@dictionary = nil
+            @dictionary = nil
             @language = "Japanese"
-			@tanaka = nil
+            @tanaka = nil
             @autoloadDic = false
             @forgettingThresh = 0.0
             @interleavedWorkingSet = false
             defaultReviewOptions
         end
-        
+
         def clone
             retVal = Options.new(@quiz)
             retVal.randomOrder = @randomOrder
@@ -59,7 +59,7 @@ module JLDrill
             retVal.interleavedWorkingSet = @interleavedWorkingSet
             return retVal
         end
-        
+
         def eql?(options)
             return options.randomOrder == @randomOrder &&
             options.promoteThresh == @promoteThresh &&
@@ -87,17 +87,17 @@ module JLDrill
         def update
             @publisher.update("options")
         end
-            
+
         def saveNeeded
             @quiz.setNeedsSave(true) unless @quiz.nil?
             update
         end
-        
+
         def modifiedButNoSaveNeeded
             @quiz.update unless @quiz.nil?
             update
         end
-        
+
         # Assigns all the options from one to the other, but
         # does *keeps the same quiz*
         def assign(options)
@@ -117,7 +117,7 @@ module JLDrill
                 @quiz.recreateProblem
             end
         end
-        
+
         def randomOrder=(value)
             if @randomOrder != value
                 @randomOrder = value
@@ -139,27 +139,27 @@ module JLDrill
             end
         end
 
-        # Note: Review Mode isn't saved so no save needed    
+        # Note: Review Mode isn't saved so no save needed
         def reviewMode=(value)
             if @reviewMode != value
                 @reviewMode = value
                 modifiedButNoSaveNeeded
             end
         end
-    	
-		def dictionary=(value)
-			if @dictionary != value
-				@dictionary = value
-				saveNeeded
-			end
-		end
 
-		def language=(value)
-			if @language != value
-				@language = value
-				saveNeeded
-			end
-		end
+        def dictionary=(value)
+            if @dictionary != value
+                @dictionary = value
+                saveNeeded
+            end
+        end
+
+        def language=(value)
+            if @language != value
+                @language = value
+                saveNeeded
+            end
+        end
 
         def autoloadDic=(value)
             if @autoloadDic != value
@@ -197,7 +197,7 @@ module JLDrill
         def optionsFinishedLoading
             @reviewOptionsSet = true
         end
-        
+
         def reviewMeaning=(value)
             initializeReviewOptions
             if @reviewMeaning != value
@@ -265,12 +265,12 @@ module JLDrill
                     self.randomOrder = true
                 when PROMOTE_THRESH_RE
                     self.promoteThresh = $1.to_i
-                when INTRO_THRESH_RE 
+                when INTRO_THRESH_RE
                     self.introThresh = $1.to_i
-				when DICTIONARY_RE
-					self.dictionary = $1
-				when LANGUAGE_RE
-					self.language = $1
+                when DICTIONARY_RE
+                    self.dictionary = $1
+                when LANGUAGE_RE
+                    self.language = $1
                 when REVIEW_MEANING_RE
                     self.reviewMeaning = $1.to_i
                 when REVIEW_KANJI_RE
@@ -288,7 +288,7 @@ module JLDrill
             end
             parsed
         end
-        
+
         # Return a string showing the current state of the options
         def status
             retVal = ""
@@ -296,7 +296,7 @@ module JLDrill
             retVal += "(#{@promoteThresh},#{@introThresh})"
             retVal
         end
-        
+
         def to_s
             retVal = ""
             if(@randomOrder)
@@ -304,9 +304,9 @@ module JLDrill
             end
             retVal += "Promotion Threshold: #{@promoteThresh}\n"
             retVal += "Introduction Threshold: #{@introThresh}\n"
-			if(!@dictionary.nil?)
-				retVal += "Dictionary: #{@dictionary}\n"
-			end
+            if(!@dictionary.nil?)
+                retVal += "Dictionary: #{@dictionary}\n"
+            end
             if(@language != "Japanese")
                 retVal += "Language: #{@language}\n"
             end
@@ -332,4 +332,3 @@ module JLDrill
         end
     end
 end
-

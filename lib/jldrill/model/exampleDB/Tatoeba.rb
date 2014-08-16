@@ -93,7 +93,7 @@ module JLDrill::Tatoeba
 
         def initialize(targetIndex, nativeIndex, key, sentences)
             @sentences = sentences
-            
+
             @targetIndex = targetIndex
             @nativeIndex = nativeIndex
             @key = key
@@ -198,13 +198,13 @@ module JLDrill::Tatoeba
 
         attr_reader :sentences
 
-		def initialize(sentences)
+        def initialize(sentences)
             super()
             @sentences = sentences
             @numSentences = 0
             @usageMap = JLDrill::VocabularyUsage::Map.new
             @stepSize = 1000
-		end
+        end
 
         def parseEntry
             if INDEX_RE.match(@lines[@parsed])
@@ -259,7 +259,7 @@ module JLDrill::Tatoeba
     # Represents the Tatoeba database
     class Database
         attr_reader :sentences, :japaneseIndeces, :chineseIndeces
-    
+
         def initialize()
             @sentences = SentenceFile.new
             @japaneseIndeces = JapaneseIndexFile.new(@sentences)
@@ -283,4 +283,3 @@ module JLDrill::Tatoeba
         end
     end
 end
-

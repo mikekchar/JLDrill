@@ -40,12 +40,12 @@ module JLDrill::Tatoeba
 35	cmn	我不能活那種命。 ]
             sentences = SentenceFile.new
             sentences.dataSize.should be(0)
-			sentences.lines = file.split("\n")
+            sentences.lines = file.split("\n")
             sentences.loaded?.should be_false
             sentences.parse
 
-			# It should not dispose of the lines after parsing because it needs them for searching
-			sentences.lines.should_not eql([])
+            # It should not dispose of the lines after parsing because it needs them for searching
+            sentences.lines.should_not eql([])
             sentences.loaded?.should be_true
 
             sentences.dataSize.should be(120142)
@@ -53,21 +53,21 @@ module JLDrill::Tatoeba
             sentences.sentenceAt(120138).should eql("Il y avait un petit nombre d'étrangers parmi les visiteurs du musée.")
             sentences.sentenceAt(300).should eql("")
         end
-        
+
         it "should be able to read the file from disk" do
             sentences = SentenceFile.new
-			sentences.load(File.join(JLDrill::Config::DATA_DIR, 
+            sentences.load(File.join(JLDrill::Config::DATA_DIR,
                                   "tests/sentences.csv"))
             sentences.parse
 
-			sentences.lines.should_not eql([])
+            sentences.lines.should_not eql([])
 
-			sentences.dataSize.should be(1265634)
-		end
+            sentences.dataSize.should be(1265634)
+        end
 
         it "should be able to read the links file from disk" do
             links = LinkFile.new
-			links.load(File.join(JLDrill::Config::DATA_DIR, 
+            links.load(File.join(JLDrill::Config::DATA_DIR,
                                   "tests/links.csv"))
             links.parse
 
@@ -77,14 +77,14 @@ module JLDrill::Tatoeba
 
             links.getLinksTo(1).size.should eql(40)
         end
-        
+
         it "should be able to read the Japanese Index file from disk" do
             sentences = SentenceFile.new
-			sentences.load(File.join(JLDrill::Config::DATA_DIR, 
+            sentences.load(File.join(JLDrill::Config::DATA_DIR,
                                   "tests/sentences.csv"))
             sentences.parse
             japanese = JapaneseIndexFile.new(sentences)
-			japanese.load(File.join(JLDrill::Config::DATA_DIR, 
+            japanese.load(File.join(JLDrill::Config::DATA_DIR,
                                   "tests/jpn_indices.csv"))
             japanese.parse
 
@@ -98,5 +98,3 @@ module JLDrill::Tatoeba
         end
     end
 end
-
-
