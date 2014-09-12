@@ -108,8 +108,8 @@ module JLDrill
         # Indicate that the item was correct
         def correct
             @itemStats.correct
-            @quiz.contents.bins[@bin].correct(@item)
             currentSchedule.correct unless currentSchedule.nil?
+            @quiz.contents.bins[@bin].correct(@item)
         end
 
         # Indicate that the item was incorrect
