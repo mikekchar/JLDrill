@@ -1,42 +1,48 @@
-= JLDrill - Japanese Language Drill program
+#JLDrill - Japanese Language Drill program
 
 JLDrill is a program for helping people drill aspects of the
-Japanese language using spaced repetition. 
+Japanese language using spaced repetition.
 
-== Features
-* spaced repetition   
-* a dictionary cross reference tool 
-* pop-up kanji reference (inspired by rikaichan for Firefox)
-* ability to import EDICT format files (EUC or UTF8 encoded) as a drill
-* The Tanaka corpus example sentences can be shown for vocabulary
-* A popup dictionary lookup tool with deinflection (again inspired
-  by rikaichan for Firefox)
+Note: JLDrill is an *old* project and has suffered from
+bitrot.  It still works, but requires some understanding of
+how to build ruby projects.  I'm hoping to find some time
+to clean it up a bit over time.  You can consider it
+alpha quality, but it is fairly feature rich if you can figure
+out how to install and run it.
+
+##Features
+  * spaced repetition   
+  * a dictionary cross reference tool 
+  * pop-up kanji reference (inspired by rikaichan for Firefox)
+  * ability to import EDICT format files (EUC or UTF8 encoded) as a drill
+  * The Tanaka corpus example sentences can be shown for vocabulary
+  * A popup dictionary lookup tool with deinflection (again inspired
+    by rikaichan for Firefox)
 
 Current drills include:
-* a kana drill
-* JLPT vocabulary drills (These are the old 1, 2, 3, 4 lists NOT the new
-  N1, N2, N3, N4, N5 lists)
+  * a kana drill
+  * JLPT vocabulary drills (These are the old 1, 2, 3, 4 lists NOT the new
+    N1, N2, N3, N4, N5 lists)
 
-== User Documentation
-Complete user documentation including installation instructions
-for GNU/Linux and Windows is available. The currently released 
-stable version will always be available at:
-
+##User Documentation
+Complete user documentation including installation instructions is
+available in the project.  JLDrill used to be hosted on rubyforge
+and the last released version (many years ago) is still there
+as of this writing:
 http://jldrill.rubyforge.org
 
-The version of this package is jldrill-0.5.1.
-JLDrill is considered to be beta quality, but
-it is hoped to be useful for end users. Bug reports and
-suggestions are welcome.
-The location for the documentation for this release is depends on
-where you are viewing this.
+##Building
+More instructions will come later, but for the moment, I recommend
+installing rbenv or another ruby version manager.  To install:
 
-{Installed Gem}[link://../../../gems/jldrill-0.5.1/web/output/index.html]
-|
-{Source Repository}[link://../web/output/index.html]
+```
+gem install bundler
+bundle install
+```
 
+To run: `./AppRun`
 
-== License
+##License
 
 JLDrill is copyright (C) 2005-2008 Mike Charlton.  It is licensed
 under version 3.0 of the GNU General Public License (GPL) Please see
@@ -49,28 +55,7 @@ if you wish to extend this software.
 License information for the various support files (dictionary, drills,
 etc.) are located in the data/jldrill/COPYING directory.
 
-== Development Documentation
-
-Documentation on how to build and contribute to JLDrill is available:
-
-{Installed Gem}[link://../../../gems/jldrill-0.5.1/web/output/Development.html]
-|
-{Source Repository}[link://../web/output/Development.html]
-
-If you have installed from a development tree and have built the tests, then
-the results and test code coverage will be available here:
-
-Installed gem:
-{Test results}[link://../../../gems/jldrill-0.5.1/test_results.html]
-|
-{Code coverage}[link://../../../gems/jldrill-0.5.1/coverage/index.html]
-
-Source repository:
-{Test results}[link://../test_results.html]
-|
-{Code coverage}[link://../coverage/index.html]
-  
-== TODO
+##TODO
 
 The TODO file is maintained in an Emacs Org mode file.  Org mode
 is a mode of emacs that allows you to easily organize data.
@@ -78,14 +63,10 @@ The original file is text based and is easily readable and
 editable with any editor.  But to publish the html file you need
 Emacs.  The current published HTML file is here.
 
-{Installed Gem}[link://../../../gems/jldrill-0.5.1/TODO.html]
-|
-{Source Repository}[link://../TODO.html]
-
-== Getting Involved
+##Getting Involved
 
 While I have built JLDrill on the work of others, as an entity on its
-own, I have been the sole contributor.  There are many reasons for this,
+own, I have mostly been the sole contributor.  There are many reasons for this,
 but regardless I am very enthusiastic about receiving any kind of
 contribution from other people.  Even if you can't write software, there
 are many ways you can contribute.  I want to encourage this as much as
