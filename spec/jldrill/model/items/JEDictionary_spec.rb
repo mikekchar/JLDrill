@@ -49,17 +49,17 @@ module JLDrill
 
             # Should be able to find an item
             vocab = Vocabulary.create("/Kanji: 青い/Reading: あおい/Definitions: (1) blue,green,(2) pale,(3) unripe,inexperienced/Markers: adj-i,P")
-            @dict.include?(vocab).should be_true
+            @dict.include?(vocab).should be true
             # One character words should work as well
             vocab = Vocabulary.create("/Kanji: 目/Reading: め/Definitions: (1) eye,eyeball,(2) eyesight,(3) look,(4) experience,(5) viewpoint,(6) ordinal number suffix,(7) somewhat,-ish/Markers: n,suf,suf,P")
-            @dict.include?(vocab).should be_true
+            @dict.include?(vocab).should be true
 
             # Should not find things that aren't there
             vocab = Vocabulary.create("/Kanji: 青い/Reading: あおい/Definitions: (1) blue,green,(3) unripe,inexperienced/Markers: adj-i,P")
-            @dict.include?(vocab).should be_false
+            @dict.include?(vocab).should be false
             # One character words should work as well
             vocab = Vocabulary.create("/Kanji: 目/Reading: め/Definitions: (1) eye,eyeball,(2) eyesight,(3) look,(4) viewpoint,(6) ordinal number suffix,(7) somewhat,-ish/Markers: n,suf,suf,P")
-            @dict.include?(vocab).should be_false
+            @dict.include?(vocab).should be false
 
             # Should be able to find words that are at the start of a string
             @dict.findReadingsThatStart("めをさます").size.should eql(3)

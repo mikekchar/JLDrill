@@ -218,7 +218,7 @@ module JLDrill::UserAddsVocabToQuiz
             Story.context.search(nil, "").should be_empty
 
             # It should find entries
-            Story.context.search(nil, "あめ").should have_at_least(1).item
+            (Story.context.search(nil, "あめ").length > 0).should be(true)
         end
 
         it "can load the and search the Chinese dictionary from this context" do

@@ -132,10 +132,10 @@ module JLDrill::Version_0_6_1
                 # first new item has been promoted to the working set.
                 # Let's pretend we've saved it.
                 Story.quiz.setNeedsSave(false)
-                Story.quiz.needsSave.should be_false
+                Story.quiz.needsSave.should be false
 
                 # The option defaults to false
-                Story.quiz.options.interleavedWorkingSet.should be_false
+                Story.quiz.options.interleavedWorkingSet.should be false
 
                 newOptions = Story.quiz.options.clone()
                 newOptions.should eql(Story.quiz.options)
@@ -143,7 +143,7 @@ module JLDrill::Version_0_6_1
                 # Setting it to true should mean that the quiz needs
                 # to be saved
                 Story.quiz.options.interleavedWorkingSet = true
-                Story.quiz.needsSave.should be_true
+                Story.quiz.needsSave.should be true
 
                 newOptions.should_not eql(Story.quiz.options)
                 newOptions.interleavedWorkingSet = true
@@ -153,9 +153,9 @@ module JLDrill::Version_0_6_1
 
                 # Make sure we can read in the option
                 no2 = JLDrill::Options.new(JLDrill::Quiz.new())
-                no2.interleavedWorkingSet.should be_false
-                no2.parseLine("Interleaved Working Set").should be_true
-                no2.interleavedWorkingSet.should be_true
+                no2.interleavedWorkingSet.should be false
+                no2.parseLine("Interleaved Working Set").should be true
+                no2.interleavedWorkingSet.should be true
             end
         end
 

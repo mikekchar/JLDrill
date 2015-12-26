@@ -68,7 +68,7 @@ module JLDrill::Tanaka
             tanaka.parseLines(a, b, 0)
             tanaka.numSentences.should eql(1)
             tanaka.numWords.should eql(3)
-            " 如何(どう)".start_with?(" 如何(どう)").should be_true
+            " 如何(どう)".start_with?(" 如何(どう)").should be true
             s = tanaka.search("如何", "どう")
             s[0].to_s.should eql("如何(どう)[1]~\n\t203: どう為るの？\n\tWhat are you going to do?")
             s[0].nativeLanguage.should eql("What are you going to do?")
@@ -100,7 +100,7 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
 
 			# It should not dispose of the lines after parsing because it needs them for searching
 			tanaka.lines.should_not eql([])
-            tanaka.loaded?.should be_true
+            tanaka.loaded?.should be true
 
             tanaka.numSentences.should be(8)
             tanaka.numWords.should be(52)
@@ -136,7 +136,7 @@ B: 才[01]{歳}~ 乃{の} 時(とき)[01] スクーナー~ 船[01] で 地中海
 			# Read to the EOF
 			tanaka.parseChunk(1000).should eql(true)
 
-            tanaka.loaded?.should be_true
+            tanaka.loaded?.should be true
 			tanaka.lines.should_not eql([])
 
 			tanaka.numSentences.should eql(100)

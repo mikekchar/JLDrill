@@ -8,23 +8,23 @@ module JLDrill
         it "should create an invalid duration with no argument" do
             duration = Duration.new
             duration.seconds.should eql(-1)
-            duration.valid?.should be_false
+            duration.valid?.should be false
         end
 
         it "should create a duration of the required length" do
             duration = Duration.new(52)
             duration.seconds.should eql(52)
-            duration.valid?.should be_true
+            duration.valid?.should be true
         end
 
         it "should parse a duration from a string" do
             duration = Duration.parse("126")
             duration.seconds.should eql(126)
             duration = Duration.parse("abcd")
-            duration.valid?.should be_false
+            duration.valid?.should be false
             duration = Duration.parse("0")
             duration.seconds.should eql(0)
-            duration.valid?.should be_true
+            duration.valid?.should be true
         end
 
         it "should output the duration in days" do

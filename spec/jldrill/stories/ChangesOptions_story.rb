@@ -192,13 +192,13 @@ module JLDrill::UserChangesOptions
             schedules[1].lastReviewed = rt
             d2 = schedules[1].duration
 
-           Story.quiz.options.reviewKanji.should be_true
-           Story.quiz.options.reviewMeaning.should be_true
-           Story.quiz.options.reviewReading.should be_false
+           Story.quiz.options.reviewKanji.should be true
+           Story.quiz.options.reviewMeaning.should be true
+           Story.quiz.options.reviewReading.should be false
            Story.quiz.options.reviewReading = true
-           Story.quiz.options.reviewReading.should be_true
-           Story.quiz.options.reviewKanji.should be_true
-           Story.quiz.options.reviewMeaning.should be_true
+           Story.quiz.options.reviewReading.should be true
+           Story.quiz.options.reviewKanji.should be true
+           Story.quiz.options.reviewMeaning.should be true
 
            # When adding the new schedule it uses information
            # from the schedule with the lowest reviewLoad.  Since
@@ -215,9 +215,9 @@ module JLDrill::UserChangesOptions
            schedules[2].duration.should eql(d2)
            
            Story.quiz.options.reviewReading = false
-           Story.quiz.options.reviewReading.should be_false
-           Story.quiz.options.reviewKanji.should be_true
-           Story.quiz.options.reviewMeaning.should be_true
+           Story.quiz.options.reviewReading.should be false
+           Story.quiz.options.reviewKanji.should be true
+           Story.quiz.options.reviewMeaning.should be true
 
             schedules = item.state.schedules.sort do |x, y|
                 x.duration <=> y.duration

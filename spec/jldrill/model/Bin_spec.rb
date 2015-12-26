@@ -10,18 +10,18 @@ module JLDrill
       it "should have a name and number" do
         bin = Bin.new("bin-name", 5)
         expect(bin.number).to eq(5)
-        expect(bin.isCalled?("bin-name")).to be_true
-        expect(bin.isCalled?("Frank")).to be_false
+        expect(bin.isCalled?("bin-name")).to be true
+        expect(bin.isCalled?("Frank")).to be false
       end
 
       it "has a variety of aliases" do
         bin = Bin.new("bin-name", 5)
         bin.addAliases(["Tom", "Dick", "Harry"])
-        expect(bin.isCalled?("bin-name")).to be_true
-        expect(bin.isCalled?("Tom")).to be_true
-        expect(bin.isCalled?("Dick")).to be_true
-        expect(bin.isCalled?("Harry")).to be_true
-        expect(bin.isCalled?("Frank")).to be_false
+        expect(bin.isCalled?("bin-name")).to be true
+        expect(bin.isCalled?("Tom")).to be true
+        expect(bin.isCalled?("Dick")).to be true
+        expect(bin.isCalled?("Harry")).to be true
+        expect(bin.isCalled?("Frank")).to be false
       end
     end
 
@@ -44,11 +44,11 @@ module JLDrill
       end
 
       it "doesn't find nonexistant items" do
-        expect(bin.exists?(item1)).to be_false
+        expect(bin.exists?(item1)).to be false
       end
 
       it "doesn't find nonexistant objects" do
-        expect(bin.contain?(1)).to be_false
+        expect(bin.contain?(1)).to be false
       end
 
       it "outputs only the bin name from to_s" do
@@ -143,19 +143,19 @@ module JLDrill
       end
 
       it "finds items items" do
-        expect(bin.exists?(item2)).to be_true
+        expect(bin.exists?(item2)).to be true
       end
 
       it "doesn't find nonexistant items" do
-        expect(bin.exists?(item3)).to be_false
+        expect(bin.exists?(item3)).to be false
       end
 
       it "finds objects" do
-        expect(bin.contain?("item2")).to be_true
+        expect(bin.contain?("item2")).to be true
       end
 
       it "doesn't find nonexistant objects" do
-        expect(bin.contain?("item3")).to be_false
+        expect(bin.contain?("item3")).to be false
       end
 
       it "outputs the bin name and all of the items from t_s" do

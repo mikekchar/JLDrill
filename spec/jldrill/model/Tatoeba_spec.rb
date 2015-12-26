@@ -41,12 +41,12 @@ module JLDrill::Tatoeba
             sentences = SentenceFile.new
             sentences.dataSize.should be(0)
 			sentences.lines = file.split("\n")
-            sentences.loaded?.should be_false
+            sentences.loaded?.should be false
             sentences.parse
 
 			# It should not dispose of the lines after parsing because it needs them for searching
 			sentences.lines.should_not eql([])
-            sentences.loaded?.should be_true
+            sentences.loaded?.should be true
 
             sentences.dataSize.should be(120142)
             sentences.sentenceAt(1).should eql("我們試試看！")

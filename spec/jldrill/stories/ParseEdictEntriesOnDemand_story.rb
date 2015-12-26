@@ -28,7 +28,7 @@ module JLDrill::ParseEdictEntriesOnDemand
             ameList.size.should be(1)
             ame = ameList[0]
             ame.toVocab.should eql(utf.vocab(0))
-            utf.include?(ame.toVocab).should be_true
+            utf.include?(ame.toVocab).should be true
         end
 
         it "should be able to find an entry in an EUC edict file" do
