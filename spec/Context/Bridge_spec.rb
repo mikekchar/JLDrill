@@ -32,9 +32,9 @@ module Context::Spec::BridgeStory
 		it "should reference classes in the namespace provided" do
 			bridge = Context::Bridge.new([Special, Other::Special])
 			
-			bridge.Fun.should be(Special::Fun)
-			bridge.In.should be(Other::Special::In)
-			bridge.Sun.should_not be(Excluded::Sun)
+			expect(bridge.Fun).to be(Special::Fun)
+			expect(bridge.In).to be(Other::Special::In)
+			expect(bridge.Sun).to_not be(Excluded::Sun)
 		end
 	end
 end
