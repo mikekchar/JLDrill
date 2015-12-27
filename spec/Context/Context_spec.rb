@@ -50,29 +50,29 @@ module Context::Spec::ContextStory
         end
 		
         it "should not have a parent set on creation" do
-            @context.parent.should be_nil
+            expect(@context.parent).to be_nil
         end
 		
         it "should set the parent on entry" do
             @parent.createViews
-            @parent.should_receive(:addView)
+            expect(@parent).to receive(:addView)
             @context.enter(@parent)
-            @context.parent.should equal(@parent)
+            expect(@context.parent).to equal(@parent)
         end
 		
         it "should add new views to the main view" do
             newContext = TestContext.new(@bridge)
             newContext.createViews
             @context.createViews
-            @context.mainView.should_receive(:addView).with(newContext.mainView)
+            expect(@context.mainView).to receive(:addView).with(newContext.mainView)
             
             @context.addView(newContext.mainView)
         end
         
         it "should remove views on exit" do
             @parent.createViews
-            @parent.mainView.should_receive(:removeView).with(@context.peekAtView)
-            @parent.should_receive(:addView)
+            expect(@parent.mainView).to receive(:removeView).with(@context.peekAtView)
+            expect(@parent).to receive(:addView)
             @context.enter(@parent)
             @context.exit
         end
