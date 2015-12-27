@@ -4,11 +4,8 @@ JLDrill is a program for helping people drill aspects of the
 Japanese language using spaced repetition.
 
 Note: JLDrill is an *old* project and has suffered from
-bitrot.  It still works, but requires some understanding of
-how to build ruby projects.  I'm hoping to find some time
-to clean it up a bit over time.  You can consider it
-alpha quality, but it is fairly feature rich if you can figure
-out how to install and run it.
+bitrot.  It no longer works properly.  I hope I will find
+time to bring it back to the living...
 
 ##Features
   * spaced repetition   
