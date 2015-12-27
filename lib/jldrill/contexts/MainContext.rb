@@ -167,7 +167,7 @@ module JLDrill
     end
 
     def saveAs
-      filename = @getFilenameContext.enter(self)
+      filename = @getFilenameContext.enter(self, GetFilenameContext::SAVE)
       if !filename.nil?
         @quiz.file = filename
         while !@quiz.save
